@@ -249,6 +249,7 @@ Das Portal ist **kein CMS und kein Website-Baukasten**. Es verwaltet strukturier
 
 | Funktion | Kunde | SARTU | Aufwand | Baukasten-Risiko | Wann |
 |---|---|---|---|---|---|
+| **Geführte Einführung beim ersten Login** (§9a) | hoch | **hoch** (spart Support = Marge) | niedrig | keins | **Start-Pflicht** (Stufe 0: ein Bildschirm) |
 | Cockpit „genau ein nächster Schritt" | hoch | hoch | mittel | keins | **Start-Pflicht** |
 | Angebot ansehen/annehmen (Scope, Preis) | hoch | hoch | mittel | keins | **Start-Pflicht** |
 | Rechnungen + Mollie-Zahlung + Status | hoch | hoch | hoch | keins | **Start-Pflicht** |
@@ -286,6 +287,99 @@ Diese Funktionen heben das Portal über ein normales Kundenportal, **ohne** Word
 **Selbstpflege-Prinzip (ersetzt Änderungsminuten):** Der Kunde bearbeitet **typisierte Datensätze** (`BusinessHours`, `ContactPoint`, `Location`, `Person`, `JobPosting`, `ProjectReference`, `SocialLink`, `PagePublicationState`, `MediaReplacement`) – **nicht** Layout, Farben, Schriften, Komponenten, URLs, Navigation, SEO-Felder, Formulare, Code oder freien Text. Jede Änderung läuft über **Vorschau → Validierung → Version → Bearbeiter**. Öffnungszeit-Änderung aktualisiert nach Freigabe sichtbare Zeiten + Footer + `LocalBusiness`-Schema. Seiten werden **nie hart gelöscht** (raus aus Navigation/Sitemap, interner Redirect oder Archivstatus, reaktivierbar).
 
 **Bewusste Nicht-Funktionen:** kein Drag-and-drop, keine freie Layout-/Farb-/Schriftwahl, keine Plugins/Themes/freien Integrationen, keine freie URL-/Navigationsbearbeitung, kein Quellcodezugriff, keine harte Seitenlöschung.
+
+---
+
+## 9a. Erstkontakt im Portal — geführte Einführung
+
+**Warum das kein Nice-to-have ist:** Die Zielgruppe ist nicht technikaffin und loggt sich selten ein. Ohne Einführung entstehen genau die Rückfragen („Wo ist mein Passwort?", „Muss ich die Seite jetzt selbst bauen?", „Was soll ich hier machen?"), die Supportzeit kosten — und Supportzeit ist im Festpreismodell direkt Marge. **Die Einführung ist Margenschutz, nicht Kosmetik.**
+
+### 9a.1 Zwei Momente, nicht einer
+
+| Moment | Situation | Was erklärt werden muss |
+|---|---|---|
+| **A — Erster Login** | Kunde sieht zum ersten Mal das Angebot und soll es annehmen und bezahlen | Wo bin ich? Was tue ich hier? Was muss ich *nicht* tun? Wie melde ich mich wieder an? |
+| **B — Nach der ersten Zahlung** | Aufgabenbereich wird freigeschaltet, das Portal verändert seinen Charakter | Was steht jetzt an, wie lange dauert es, was passiert mit meinen Angaben? |
+
+Moment A ist der wichtigere: Dort entscheidet sich ein Kauf. Reibung an dieser Stelle kostet Aufträge.
+
+### 9a.2 Willkommensstrecke (Moment A) — drei Bildschirme, fertige Texte
+
+Erscheint **einmalig** nach dem ersten Login, vor dem Cockpit. Überspringbar, jederzeit erneut aufrufbar.
+
+**Bildschirm 1 — Wo Sie hier sind**
+> ### Willkommen bei SARTU, {Vorname}.
+> Das ist Ihr Projektportal. Hier läuft alles zu Ihrer Website an einem Ort: Angebot, Zahlung, offene Aufgaben, Vorschau und später kleine Änderungen.
+> Keine E-Mail-Suche, keine verlorenen Anhänge, kein Rätselraten, wie weit das Projekt ist.
+
+Buttons: `Weiter` · Textlink `Überspringen`
+
+**Bildschirm 2 — Was Sie hier tun (und was nicht)**
+Zwei Spalten nebeneinander (mobil untereinander):
+
+| **Das machen Sie hier** | **Das müssen Sie nicht** |
+|---|---|
+| Angebot ansehen und annehmen | Technik verstehen |
+| Rechnungen bezahlen | Seiten selbst bauen |
+| Fragen zu Ihrem Betrieb beantworten | Webtexte schreiben |
+| Bilder und Unterlagen hochladen | Wissen, wie viele Seiten Sie brauchen |
+| Vorschau ansehen und freigeben | Irgendetwas installieren |
+| Später Öffnungszeiten und Kontaktdaten ändern | Sich um Updates oder Sicherheit kümmern |
+
+> Struktur, Design, Technik und die Suchmaschinen-Grundlage übernehmen wir. Sie liefern die Fakten aus Ihrem Betrieb — den Rest machen wir.
+
+Buttons: `Weiter` · `Zurück`
+
+**Bildschirm 3 — So geht es weiter**
+> ### Sie sehen immer genau einen nächsten Schritt.
+> Oben im Portal steht, was gerade von Ihnen gebraucht wird. Mehr müssen Sie nicht im Blick behalten — wir melden uns, wenn etwas ansteht.
+>
+> **Anmelden ohne Passwort.** Sie bekommen jedes Mal einen Link per E-Mail. Es gibt kein Passwort, das verloren gehen kann.
+>
+> **Wenn etwas unklar ist**, nutzen Sie „Hilfe". Wir antworten schriftlich — meist am selben oder nächsten Werktag.
+
+Button: `Portal öffnen`
+
+**Der Hinweis zum passwortlosen Login ist Pflicht.** Kunden erwarten ein Passwort; ohne Erklärung entsteht der Eindruck, etwas sei kaputt oder unsicher.
+
+### 9a.3 Kurzeinführung nach der ersten Zahlung (Moment B)
+
+Kein zweiter Rundgang — **ein** Hinweisfeld über der neuen Aufgabenliste:
+
+> ### Ihre Aufgaben stehen bereit.
+> Wir haben vorausgefüllt, was wir schon über Ihr Unternehmen wissen. Sie bestätigen es oder korrigieren es — das ist meist in **{15–25} Minuten** erledigt.
+> Sie müssen nicht alles auf einmal machen. Ihr Stand wird automatisch gespeichert.
+
+Die Minutenangabe kommt aus dem Paket (Start/Wachstum/Platzhirsch) und ist als Spanne zu nennen, nie als Zusage.
+
+### 9a.4 Erklärung dauerhaft statt Rundgang
+
+**Entscheidung: keine klassische Tooltip-Tour.** Begründung: Kunden loggen sich selten ein und haben eine einmalige Tour beim zweiten Besuch vergessen. Tour-Overlays veralten außerdem bei jeder UI-Änderung. Stattdessen:
+
+1. **Erklärender Leerzustand pro Modul.** Jedes Modul erklärt sich, solange es leer ist — z. B. Rechnungen: *„Hier erscheinen Ihre Rechnungen. Sie können direkt im Portal bezahlen; eine Kopie geht zusätzlich per E-Mail an Sie."*
+2. **Einzeilige Erklärung an ungewöhnlichen Feldern** („Warum wir das brauchen") — bereits im Onboarding-Konzept verankert, gilt hier gleichermaßen.
+3. **Ersthilfe je Modul, einmalig eingeblendet**, danach über das Fragezeichen dauerhaft abrufbar.
+4. **Klartext-Status statt interner Codes:** `Wir prüfen` · `Ihre Freigabe fehlt` · `Bereit zur Veröffentlichung` — nie `qa_failed` oder `customer_preview`.
+
+### 9a.5 Regeln
+
+- **Überspringbar** — jederzeit, ohne Nachteil.
+- **Wiederaufrufbar** unter Hilfe → „Einführung erneut ansehen".
+- **Maximal drei Bildschirme.** Wird es länger, ist die Oberfläche zu kompliziert — dann wird die Oberfläche vereinfacht, nicht die Einführung verlängert.
+- **Kein Pflichtvideo**, keine Gamification, keine Fortschrittsabzeichen. Die Zielgruppe will fertig werden, nicht spielen.
+- **Mobil vollwertig** — viele Kunden öffnen den Link vom Handy. Ein Bildschirm pro Ansicht, Buttons in Daumenreichweite.
+- **Barrierefrei:** Tastaturbedienung, Fokusfalle im Dialog, `Esc` schließt, `prefers-reduced-motion` respektiert.
+- **Kein Zwang zur Vollständigkeit:** Wer direkt „Portal öffnen" klickt, darf alles trotzdem bedienen.
+
+### 9a.6 Stufenzuordnung und Messung
+
+| Stufe | Umfang |
+|---|---|
+| **Stufe 0** | **Ein** Willkommensbildschirm (Inhalt von Bildschirm 1 + 2 zusammengefasst) + erklärende Leerzustände. Reicht für die ersten Kunden. |
+| **Stufe 1** | Vollständige Willkommensstrecke, Kurzeinführung nach Zahlung, Ersthilfe je Modul, Wiederaufruf |
+| **Stufe 2** | Optional kurze Erklärvideos (max. 60 Sekunden) für Vorschau-Freigabe und Selbstpflege — nur, wenn die Praxis zeigt, dass Text nicht reicht |
+
+**Messung:** Erfasst wird, welche Fragen trotz Einführung im Support ankommen. Jede wiederkehrende Frage ist ein Auftrag, die Einführung oder die Oberfläche zu verbessern — **nicht**, mehr Text hinzuzufügen.
 
 ---
 
@@ -552,6 +646,7 @@ Geschäftsseitig verbindlich bleibt:
 | Muss sichtbar/klickbar sein | Mechanik dahinter darf sein |
 |---|---|
 | Login (oder mind. geschützter, nicht ratbarer Projektlink) | einfache Auth, manuell angelegte Konten |
+| **Willkommensbildschirm beim ersten Login** (§9a) | statisch, ein Bildschirm — Inhalt fest, nicht personalisiert |
 | **Cockpit mit genau einem nächsten Schritt** | Status manuell gesetzt |
 | Angebot mit Scope, Preis, Zahlungsplan + digitale **Annahme** | PDF/Ansicht + protokollierte Zustimmung |
 | Rechnung + Zahlungsstatus mit **Mollie-Zahlungslink** | Link manuell erzeugt, kein Abo-Automatismus |
