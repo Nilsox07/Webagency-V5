@@ -42,7 +42,7 @@ Fazit: **Tragfähig – aber nur mit umgekehrter Reihenfolge und drastischer MVP
 
 ## 3. Marktanalyse mit Quellen
 
-> Hinweis: Dieser Abschnitt trennt belegte Quellen von Markteinschätzungen. Preisspannen für den DACH-Markt werden zusätzlich durch laufende Recherche vertieft; wo eine konkrete URL genannt ist, ist sie überprüfbar.
+> Hinweis: Dieser Abschnitt trennt belegte Quellen von Markteinschätzungen. Die DACH-Preisspannen sind in 3.6 mit Quellen hinterlegt; wo eine konkrete URL genannt ist, ist sie überprüfbar. Anbieterpreise ändern sich – vor Verwendung an der Quelle prüfen.
 
 ### 3.1 Marktsegmente & Preisniveaus (Deutschland, KMU-Firmenwebsite)
 
@@ -55,7 +55,7 @@ Fazit: **Tragfähig – aber nur mit umgekehrter Reihenfolge und drastischer MVP
 | **Größere Agentur / individuell** | ~8.000–25.000 €+ | höher | Umfangreiche Projekte, Enterprise |
 | **SARTU (geplant)** | 1.490 / 3.900 / 7.900 / ab 12.500 € | 59 / 129 / 249 €/Mon. | individuell programmiert + Betrieb + Portal |
 
-`[EINSCHÄTZUNG]` für die Spannen; werden durch die laufende Recherche mit konkreten Anbieterpreisen und Datum belegt (Abschnitt 3.6).
+`[EINSCHÄTZUNG]` für die Spannen; konkrete Anbieterpreise/Quellen in Abschnitt 3.6.
 
 ### 3.2 Zahlungsmodelle im Markt `[BELEGT]`
 - **50/50** bei kleineren Webprojekten und **40/30/30 / 30/40/30** bei größeren ist verbreitete Agenturlogik.
@@ -65,7 +65,7 @@ Fazit: **Tragfähig – aber nur mit umgekehrter Reihenfolge und drastischer MVP
 - **SARTU-Bewertung:** 50/50 und 40/30/30 sind marktkonform. Das **10-Tage-Zahlungsziel** ist straffer als übliche 14 Tage, aber durch digitale Mollie-Zahlung + Slot-nach-Zahlung vertretbar. `[EINSCHÄTZUNG]`
 
 ### 3.3 WordPress-Dominanz & „Kein-WordPress"-Positionierung
-- WordPress ist im KMU-Markt das mit Abstand häufigste CMS (weltweit ca. 40 %+ aller Websites, bei kleinen Agenturen/Freelancern noch höher). `[ANNAHME/EINSCHÄTZUNG – wird in 3.6 mit Statistik+Datum belegt]`
+- WordPress ist im KMU-Markt das mit Abstand häufigste CMS (~43 % aller Websites, ~60 %+ CMS-Anteil; bei kleinen Agenturen/Freelancern noch höher). `[BELEGT: W3Techs, s. 3.6]`
 - „Static-first / kein WordPress" ist technisch überlegen (Geschwindigkeit, Sicherheit, keine Update-Last), aber **kein Verkaufsargument beim Endkunden** – es ist ein Betreiber-Vorteil. `[EINSCHÄTZUNG]`
 - **Konsequenz:** Nicht „ohne WordPress" plakatieren, sondern „keine Update-, Plugin- und Sicherheitssorgen für Sie; schnell und wartungsarm".
 
@@ -75,7 +75,7 @@ Fazit: **Tragfähig – aber nur mit umgekehrter Reihenfolge und drastischer MVP
 - **Risiko:** SARTU nutzt selbst KI zur Produktion. Wenn die Ergebnisse „nach KI aussehen", kollabiert die Differenzierung. Der Anti-KI-Design-Check ist deshalb kein Kosmetik-, sondern ein Überlebensthema. `[BELEGT: DESIGN_ANTI_KI_CHECK; EINSCHÄTZUNG zur Bedeutung]`
 
 ### 3.5 Wartungs-/Betriebsmodelle
-- „Rundum-sorglos"-Wartung im deutschen KMU-Markt liegt grob bei **30–150 €/Mon.**, Premium-/Betreuungspakete bis **300 €+**. `[EINSCHÄTZUNG – Beleg in 3.6]`
+- „Rundum-sorglos"-Wartung im deutschen KMU-Markt liegt grob bei **30–150 €/Mon.**, Premium-/Betreuungspakete bis **300 €+**. `[EINSCHÄTZUNG; s. 3.6]`
 - SARTUs 59/129/249 € ist **marktkonform bis leicht premium** und – weil ohne Änderungsminuten – margenstark. `[EINSCHÄTZUNG]`
 - Wiederkehrender Umsatz ist im Markt anerkannt „das eigentliche Geschäft" der Agentur (planbarer Cashflow, hohe Marge). `[EINSCHÄTZUNG; deckt sich mit sartupaketepreise.md-Notiz]`
 
@@ -105,12 +105,12 @@ Fazit: **Tragfähig – aber nur mit umgekehrter Reihenfolge und drastischer MVP
 - Entscheidungsverhalten: preissensibel, aber vertrauensgetrieben; Festpreis + klarer Ablauf senken Kaufangst stärker als das billigste Angebot.
 
 **Recht `[BELEGT]`**
-- BFSG (Barrierefreiheitsstärkungsgesetz): Gesetzestext https://www.gesetze-im-internet.de/bfsg/ – in Kraft seit 28.06.2025; betrifft bestimmte B2C-Produkte/-Dienstleistungen (u. a. E-Commerce/Online-Vertragsschluss); Kleinstunternehmen im Dienstleistungsbereich (< 10 MA und ≤ 2 Mio. € Jahresumsatz/-bilanz) sowie reine B2B-Angebote sind grundsätzlich ausgenommen. → Für SARTUs typische B2B-Firmenwebsites meist **keine** BFSG-Pflicht; sobald eine Kundenseite Shop/Buchung/Online-Vertrag (B2C) enthält, greift WCAG 2.1 AA. Barrierefreiheits-Basis dennoch immer bauen (Qualität), nicht als „Pflicht für alle" verkaufen. (Konkrete Anwendbarkeit pro Kunde anwaltlich prüfen.)
+- BFSG (Barrierefreiheitsstärkungsgesetz), in Kraft seit 28.06.2025. Offizielles Portal: https://www.barrierefreiheit-dienstekonsolidierung.bund.de/ · Gesetzestext: https://www.gesetze-im-internet.de/bfsg/ (verifiziert 07/2026). Betrifft bestimmte an **Verbraucher** gerichtete Produkte/Dienstleistungen (u. a. E-Commerce/Online-Vertragsschluss). **Kleinstunternehmen** (< 10 Beschäftigte **und** ≤ 2 Mio. € Jahresumsatz/-bilanz) sind für **Dienstleistungen** von der Barrierefreiheitspflicht ausgenommen; **reine B2B-Angebote** fallen nicht unter das BFSG – **sofern klar erkennbar ist, dass sie sich nur an Unternehmen und nicht an Verbraucher richten**. → Für SARTUs typische B2B-Firmenwebsites meist **keine** BFSG-Pflicht (die ohnehin nötige klare B2B-Kennzeichnung stützt genau das); sobald eine Kundenseite Shop/Buchung/Online-Vertrag **für Verbraucher** enthält, greift WCAG 2.1 AA. Barrierefreiheits-Basis dennoch immer bauen (Qualität), nicht als „Pflicht für alle" verkaufen. Anwendbarkeit pro Kunde anwaltlich prüfen.
 
 ### 3.7 Rechtlicher Marktrahmen `[BELEGT]`
 - **Netto-/B2B-Preisangaben:** PAngV https://www.gesetze-im-internet.de/pangv_2022/BJNR492110021.html ; IHK Wiesbaden (Verbraucherrecht) https://www.ihk.de/wiesbaden/recht/rechtsberatung/internetrecht-und-werbung/neues-verbraucherrecht-1255576
 - **Abnahme/Fälligkeit (Werkvertrag):** BGB § 640 https://www.gesetze-im-internet.de/bgb/__640.html · § 641 https://www.gesetze-im-internet.de/bgb/__641.html
-- **Zufriedenheits-/Garantie:** EuGH C-133/22 – auch eine Zufriedenheitsgarantie ist eine „gewerbliche Garantie" mit Pflichtangaben. `[BELEGT: SartuProjektZusammenfassung §1.1; Rechtsprechung real]`
+- **Zufriedenheits-/Garantie:** EuGH, Urteil v. 28.09.2023, **C-133/22** – auch eine „Zufriedenheitsgarantie" ist eine gewerbliche Garantie (Art. 2 Nr. 14 RL 2011/83/EU; § 479 BGB) und löst Informationspflichten aus. Diese Pflichten sind **verbraucherbezogen**; im reinen B2B ist die direkte Bindung geringer, die Garantie-Formulierung bleibt aber ein Haftungs-/Erwartungsrisiko. Quelle u. a. IT-Recht-Kanzlei https://www.it-recht-kanzlei.de/eugh-zufriedenheitsgarantie-ist-gewerbliche-garantie.html · Wettbewerbszentrale. `[BELEGT: Rechtsprechung verifiziert 07/2026]`
 - **15-Minuten-Aufrundung unwirksam** (auch B2B) – in den Projektunterlagen zitiert als BGH IX ZR 140/19; OLG Düsseldorf 24 U 65/22. `[BELEGT als Zitat in SartuProjektZusammenfassung; vor Verkauf anwaltlich verifizieren]`
 - **BFSG** (Barrierefreiheitsstärkungsgesetz, in Kraft seit 28.06.2025): betrifft bestimmte B2C-Produkte/-Dienstleistungen (u. a. E-Commerce); Kleinstunternehmen im Dienstleistungsbereich (< 10 MA und ≤ 2 Mio. € Umsatz) sowie reine B2B-Angebote sind i. d. R. ausgenommen. `[BELEGT: mehrfach in Unterlagen; genauer Anwendungsbereich in 3.6 mit offizieller Quelle]`
 - **Mollie** (Zahlung/Webhooks/Mandate/Idempotenz): https://docs.mollie.com/reference/create-payment · /webhooks · /mandates-api · /api-idempotency `[BELEGT: GESCHAEFTSMODELL §20]`
@@ -211,7 +211,7 @@ Altname **„Klarweb"** (sartupaketepreise.md: „Seite sagt aktuell Klarweb →
 - **„Wenig Auswahl, eine Empfehlung":** stark und differenzierend. Die Deterministik (Rot/Orange/Gelb/Standard) mit Testfällen ist überdurchschnittlich sauber. `[BELEGT: LUMI_PORTAL §8/§9]`
 - **Platzhirsch als sichtbare Empfehlung:** logisch, solange die Ampel bei kleinem Bedarf ehrlich kleiner empfiehlt (ist geregelt). `[BELEGT]` Risiko nur, wenn es in der Praxis doch zur Upsell-Maschine wird → Kennzahl „manuelle Paketkorrektur" überwachen.
 - **Add-ons weggelassen:** richtig (kein Baukasten-Gefühl, kein Verhandlungsbasar). Die alte öffentliche Add-on-Liste war ein Fehler; ihre Streichung ist eine echte Verbesserung. `[EINSCHÄTZUNG]`
-- **Änderungsminuten ersetzt durch Selbstpflege:** richtig – aber Erwartungsmanagement nötig (Abschnitt 5.8).
+- **Änderungsminuten ersetzt durch Selbstpflege:** richtig – aber Erwartungsmanagement nötig (s. Risiken, Punkt 8).
 - **Privatkunden ausschließen:** ja, zwingend (Netto-Kommunikation, Widerrufsrecht, andere Rechtslage). `[BELEGT: GESCHAEFTSMODELL §3]`
 - **„Platzhirsch" als Name:** `[EINSCHÄTZUNG]` einprägsam und positiv besetzt (regionaler Marktführer). Logisch als Top-Paket. Kleine Gefahr: klingt leicht „großspurig" für sehr kleine Betriebe – aber die Ampel empfiehlt denen ja Start/Wachstum. Vertretbar.
 
@@ -247,7 +247,7 @@ Altname **„Klarweb"** (sartupaketepreise.md: „Seite sagt aktuell Klarweb →
 
 | Paket | Preis | Ziel-h | Ziel-Kosten | Roh-DB | Bewertung |
 |---|---:|---:|---:|---:|---|
-| Start | 1.490 € | 8–12 | ~720–1.080 € | ~50–65 % | eng, wenn KI nicht trägt; bei 16 h defizitär |
+| Start | 1.490 € | 8–12 | ~720–1.080 € | ~28–52 % | eng; bei 16 h (~1.440 €) praktisch null/defizitär |
 | Wachstum | 3.900 € | 18–26 | ~1.620–2.340 € | ~40–58 % | ok bei diszipliniertem Scope |
 | Platzhirsch | 7.900 € | 30–42 | ~2.700–3.780 € | ~52–66 % | am gesündesten |
 
