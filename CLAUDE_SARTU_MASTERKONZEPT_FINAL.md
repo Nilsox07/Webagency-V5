@@ -429,13 +429,15 @@ Siehe `CLAUDE_SARTU_WEBSITE_KONZEPT_FINAL.md`, Abschnitte 4–6.
 
 | Stufe | Umfang | Bedingung |
 |---|---|---|
-| 0 | *nichts* | Startregion ist **nicht** entschieden → keine Ortsseite, kein `LocalBusiness`, kein GBP |
-| 1 | **1 Haupt-Ortsseite** `/webdesign-{startort}` + **1 Region-Hub** `/webdesign-region-{region}` | Standort entschieden, echte NAP-Daten vorhanden |
-| 2 | **10–20 priorisierte Ortsseiten** | je einzeln durch das Gate unten |
-| 3 | **Branche × Region** statt Kleinstadtseiten, z. B. `/website-handwerker-{region}` | erst nach Search-Console-/SEA-Daten |
-| 4 | weiterer Ausbau | nur für Orte mit belegten Impressionen oder Leads |
+| 1 | **Region-Hub** `/webdesign-region-dresden` + **2–3 Tier-1-Orte** (Pirna, Radeberg, Bischofswerda, Neustadt i. Sa., Sebnitz) + Heimatanker `/webdesign-stolpen` | echte NAP-Daten, GBP als Service-Area-Business |
+| 2 | **`/webdesign-dresden`** | erst wenn Referenzen und Bewertungen vorliegen — härtester Wettbewerb |
+| 3 | weitere Tier-2-Orte (Bautzen, Kamenz, Heidenau, Freital, Dippoldiswalde) | je einzeln durch das Gate unten |
+| 4 | **Branche × Region** statt Kleinstadtseiten, z. B. `/website-handwerker-region-dresden` | erst nach Search-Console-/SEA-Daten |
+| 5 | weiterer Ausbau | nur für Orte mit belegten Impressionen oder Leads |
 
-**Priorisierung der 10–20 Orte** (nicht nach Einwohnerzahl): Hauptstandort · echte Nachbarstädte im Einzugsgebiet · wirtschaftlich relevante Orte mit passendem Betriebsbesatz · Orte mit belegtem Suchvolumen oder SEA-Signal · Orte, für die konkrete Beispiele, Referenzen oder echte lokale Recherche vorliegen.
+**Warum Dresden erst in Stufe 2:** Dort ist der Wettbewerb am härtesten und die Erfolgswahrscheinlichkeit ohne Referenzen am geringsten. Im Umland ist der Wettbewerb dünn, die Betriebsdichte in der Zielgruppe hoch und der Ortsbezug echt — dort entstehen die ersten Rankings und die ersten Referenzen, die Dresden später erst möglich machen.
+
+**Priorisierung weiterer Orte** (nicht nach Einwohnerzahl): echte Nachbarstädte im Einzugsgebiet · wirtschaftlich relevante Orte mit passendem Betriebsbesatz · Orte mit belegtem Suchvolumen oder SEA-Signal · Orte, für die konkrete Beispiele, Referenzen oder echte lokale Recherche vorliegen.
 
 **Programmatic ja — aber mit `noindex`-Stufe:** Weitere Orte dürfen als Entwurf generiert werden (`draft → noindex_preview → ready_for_review → indexable → retire_or_merge`). Sie gehen **nie automatisch** auf `index`.
 
@@ -578,23 +580,54 @@ Geschäftsseitig verbindlich bleibt:
 
 ### A. Startregion statt „deutschlandweit"
 
-> ### ⛔ BLOCKIERENDE ENTSCHEIDUNG: Startregion ist **nicht** entschieden
+> ### ✅ ENTSCHIEDEN: Sitz Stolpen, Markt Region Dresden / Ostsachsen
 >
-> Frühere Unterlagen nennen Dresden/Sachsen, andere Entwürfe einen abweichenden Standort. **Solange der echte Unternehmensstandort/Startmarkt nicht bestätigt ist, gilt keine Region als gesetzt.**
->
-> **Blockiert, bis entschieden ist** (nichts davon vorher bauen):
-> - Ortsseiten (`/webdesign-{ort}`) und regionale Hubs
-> - `LocalBusiness`-Schema
-> - Google-Unternehmensprofil
-> - lokale SEA-Kampagnen und lokale Keyword-Struktur
-> - NAP-Daten in Impressum/Footer
-> - lokale Referenzkunden-Ansprache und Website-Texte wie „Webdesign {Ort}"
->
-> **Es gibt keinen Dresden-/Sachsen-Default.** Alle früheren Ortsnennungen in den Quelldateien sind bis zur Bestätigung als **Platzhalter** zu behandeln und aus Texten fernzuhalten.
+> **Unternehmenssitz:** Stolpen (Landkreis Sächsische Schweiz-Osterzgebirge), ca. 25 km östlich von Dresden.
+> **Startmarkt:** Region Dresden und das umliegende Ostsachsen. Damit sind Ortsseiten, `LocalBusiness`, Google-Unternehmensprofil, lokale Keywords und NAP-Daten **freigegeben** — jeweils unter den Regeln in §16a.
 
-„Deutschlandweit" ist keine Startstrategie, sondern eine diffuse Fläche. **Eine** Kernregion wählen (welche, ist offen – s. o.), dort lokal sichtbar und referenzierbar werden, erst danach ausweiten. Alle Ortsseiten, das Google-Unternehmensprofil und der Outreach folgen dann dieser einen Region.
+**Die entscheidende strategische Weichenstellung: nicht Dresden-Zentrum, sondern Dresden + Umland.**
 
-**Google-Unternehmensprofil (GBP):** nur anlegen, wenn die Voraussetzungen **regelkonform** erfüllt sind. Bei Betrieben ohne Kundenverkehr am Standort ist ein **Service-Area-Business** korrekt – dann muss die Adresse laut Google-Richtlinie **verborgen** werden ([Google-Richtlinie](https://support.google.com/business/answer/3038177)). Keine Fake-/Briefkastenadresse – das riskiert Profilsperrung und widerspricht der eigenen Anti-Fake-Regel.
+| | Dresden-Stadt | Umland / Landkreise |
+|---|---|---|
+| Suchvolumen | hoch | gering bis mittel |
+| Wettbewerb | **sehr hoch** (viele etablierte Agenturen) | **dünn** |
+| Deine Glaubwürdigkeit | eine von vielen | **echter Ortsbezug** |
+| Betriebsdichte Zielgruppe | Dienstleister, Kanzleien | **Handwerk, Praxen, lokale Betriebe** |
+| Websitequalität im Bestand | überwiegend ordentlich | **oft veraltet oder keine** |
+
+**Konsequenz:** Dresden ist der **Volumen-Anker** (dort wird gesucht), das Umland ist der **Gewinn-Markt** (dort ist wenig Wettbewerb und du bist glaubwürdig lokal). Ein Dresdner Agenturmitarbeiter fährt nicht gern nach Neustadt oder Sebnitz — du bist von dort.
+
+**Ortsstruktur (konkret, unter dem Gate aus §16a):**
+- **Region-Hub:** `/webdesign-region-dresden` — Dach für die gesamte Region
+- **Anker:** `/webdesign-dresden` — höchstes Volumen, härtester Wettbewerb, langfristiges Ziel
+- **Tier 1 (echte Nähe, Wirtschaftskraft, dünner Wettbewerb):** Pirna · Radeberg · Bischofswerda · Neustadt in Sachsen · Sebnitz
+- **Tier 2 (später, datengetrieben):** Bautzen · Kamenz · Heidenau · Freital · Dippoldiswalde
+- **Stolpen selbst:** eigene Seite als Vertrauens- und Heimatanker, **nicht** als Traffic-Quelle (zu kleines Volumen)
+
+Reihenfolge: Region-Hub und 2–3 Tier-1-Orte zuerst — **nicht** Dresden. Dresden kommt, wenn Referenzen und Bewertungen stehen.
+
+### 23a.1 Kein Büro, kein Problem — aber drei Dinge müssen sauber sein
+
+Die berechtigte Sorge: *„Ich kann Kunden schlecht ins Kinderzimmer einladen."* Dazu drei Punkte — einer davon ist wirklich zu klären, zwei sind unkritischer als sie wirken.
+
+**1. Kundentermine — unkritisch.** Niemand besucht eine Webagentur; es gibt dort nichts zu sehen. In dieser Zielgruppe gilt die umgekehrte Richtung: **man fährt zum Betrieb des Kunden**, so wie Handwerker es untereinander auch tun. Das ist der Normalfall, nicht die Ausnahme.
+Verbindliche Terminregel:
+- Standard: **kein Termin nötig** (Kern-USP, ohnehin so konzipiert)
+- Auf Wunsch: **Video** oder **beim Kunden vor Ort**
+- **Nie** am eigenen Wohnsitz — muss nicht erklärt, nur nicht angeboten werden
+- Für seltene neutrale Treffen: Coworking-Tagesplatz in Dresden, Räume von Kammer/IHK oder ein Café. Kein eigenes Büro anmieten, solange es keinen wirtschaftlichen Anlass gibt.
+
+**Ein Vor-Ort-Termin beim Kunden ist sogar ein Produktvorteil:** Das Konzept verlangt **echte Betriebsbilder statt Stockfotos**. Wer 30 km entfernt sitzt, kann diese Bilder selbst machen — eine Agentur aus Berlin kann das nicht. Das ist ein echter Wettbewerbsvorteil, kein Nachteil.
+
+**2. Impressum — das ist der Punkt, der wirklich sauber sein muss.** Das Impressum verlangt eine **ladungsfähige Anschrift**; für Einzelunternehmer ohne Geschäftsräume ist das die **Wohnanschrift**. Es gibt dafür keine bequeme Umgehung:
+- **Standardlösung:** Wohnanschrift ins Impressum. Rechtlich sauber, bei kleinen Dienstleistern völlig üblich und **kein** Glaubwürdigkeitsproblem.
+- Alternativen (kosten Geld, vorher rechtlich prüfen): Coworking-Space mit echter Geschäftsadresse oder ein Anbieter für ladungsfähige Anschriften — nur, wenn die Adresse tatsächlich ladungsfähig ist.
+- **Nicht** akzeptabel: erfundene Adresse, reine Briefkastenadresse ohne echte Erreichbarkeit, fremde Firmenadresse. Das widerspricht der eigenen Anti-Fake-Regel und ist abmahnfähig.
+
+**3. Google-Unternehmensprofil — als Service-Area-Business.** Da keine Kunden am Standort bedient werden, ist das GBP als **Service-Area-Business** anzulegen und die **Adresse zu verbergen** ([Google-Richtlinie](https://support.google.com/business/answer/3038177)). Als Einzugsgebiet werden Dresden und die Umland-Orte hinterlegt.
+*Ehrliche Einordnung:* Ein SAB mit verborgener Adresse rankt im lokalen Bereich in der Regel schwächer als ein Betrieb mit verifizierter, sichtbarer Adresse mitten in Dresden. Das ist ein realer Nachteil — aber kein Blocker, und **Bewertungen** wiegen ihn teilweise auf. Eine Fake-Adresse in Dresden wäre der falsche Ausweg: Profilsperrung ist ein reales Risiko.
+
+**Was daraus für die Außendarstellung folgt:** SARTU wirbt mit *„aus der Region Dresden"*, nicht mit einer Dresdner Innenstadtadresse. Ehrlich, überprüfbar, und für Handwerksbetriebe im Umland eher sympathisch als nachteilig.
 
 ### B. Pilot-Outreach (die ersten Kunden kommen nicht über SEO)
 
@@ -659,7 +692,7 @@ Daraus folgt: Die Website muss beim Launch nicht ranken, sondern **abschließen*
 | Kanal | Wirkung ab | Aufwand | Bewertung |
 |---|---|---|---|
 | **Multiplikatoren** (23b.3) | Woche 2–8 | mittel | **höchster Hebel**, im Konzept bisher gar nicht vorhanden |
-| **Bestandsübernahme** (23b.4) | Monat 1–6 | mittel | löst Umsatz **und** Referenzproblem gleichzeitig |
+| **Verwaiste Bestandskunden** (23b.4) | Monat 1–6 | mittel | akuter Bedarf — aber **nur als Neubau**, keine Übernahme fremder Systeme |
 | **Trigger-Events** (23b.5) | Woche 4+ | mittel | sehr effizient, weil Bedarf bereits existiert |
 | **Google Ads** | Tag 1 | gering, kostet Geld | einziger sofort kaufbarer Kanal mit Kaufabsicht |
 | **Netzwerk / Direktansprache** | Woche 1 | hoch | rechtlich gestaffelt (§23a) |
@@ -686,18 +719,17 @@ Menschen, die mit der Zielgruppe reden, **genau wenn** eine Website gebraucht wi
 
 **Portalzugang für Multiplikatoren (Produktidee, Stufe 2):** Ein Multiplikator will keine Websites verkaufen — er will wissen, dass sein Mandant gut versorgt ist. Ein schlanker Lesezugang („Ihre empfohlenen Betriebe und deren Projektstatus") macht die Empfehlung für ihn kontrollierbar und bindet ihn. Kostet fast nichts, weil Rollen und Status ohnehin existieren.
 
-### 23b.4 Bestandsübernahme — Umsatz und Referenzen in einem Zug
+### 23b.4 Verwaiste Bestandskunden — aber nur als Neubau
 
-**Die Idee:** Freelancer und Kleinstagenturen hören auf — Ruhestand, Festanstellung, Branchenwechsel. Ihre Bestandskunden haben laufende Websites und plötzlich niemanden mehr. Diese Kunden haben **akuten Bedarf, bestehende Zahlungsbereitschaft für Betrieb und keine Alternative**.
+**Entschieden: SARTU übernimmt keine fremden Websites in den Betrieb.** Fremdsysteme (meist WordPress) bedeuten genau die Update-, Plugin- und Sicherheitsarbeit, die das Modell vermeidet — der Aufwand ist zu groß und die Marge kippt. Außerdem widerspräche es dem öffentlichen Versprechen „kein WordPress".
 
-**Warum das für SARTU besonders passt:** Das Geschäftsmodell ist auf **laufenden Betrieb** ausgelegt — genau das, was diese Kunden brauchen. Und es löst gleichzeitig das Kaltstart-Referenzproblem.
+**Was trotzdem nutzbar bleibt:** Wenn ein Freelancer oder eine Kleinagentur aufhört, stehen deren Kunden ohne Ansprechpartner da. Das ist ein **Trigger-Event** (siehe 23b.5), kein Übernahmegeschäft. Die Ansprache lautet nicht „wir übernehmen Ihre Seite", sondern:
 
-**Vorgehen:** In der Startregion gezielt nach Freelancern und Zwei-Personen-Agenturen suchen, die erkennbar auslaufen (keine neuen Projekte, veraltete Portfolios, Jobwechsel bei LinkedIn/Xing). Angebot: geordnete Übergabe des Bestands, faire Ablöse oder Umsatzbeteiligung, der Abgebende verliert kein Gesicht bei seinen Kunden.
+> Ihr bisheriger Dienstleister hört auf. Statt eine alte Website weiterzuschleppen, bekommen Sie eine neue zum Festpreis — und wir betreiben sie danach dauerhaft.
 
-**Wichtig — zwei Risiken, die vorher geklärt sein müssen:**
+**Vorteil dieser Variante:** Der Kunde hat akuten Bedarf und bestehende Zahlungsbereitschaft, aber SARTU liefert das **eigene** Produkt statt fremder Altlasten. Der abgebende Dienstleister kann seine Kunden geordnet weiterempfehlen, ohne sie im Stich zu lassen — das ist auch für ihn gesichtswahrend.
 
-1. **Margenrisiko.** Übernommene Websites sind meist WordPress. SARTU übernimmt zunächst nur den **Betrieb**, nicht die Technik, und migriert erst, wenn es sich rechnet. Dafür braucht es eine eigene, klar kalkulierte Betriebsstufe für Fremdsysteme — bewusst **nicht** Schutz S/M/L, sonst verwässert das Kernprodukt. Ohne diese Stufe fällt genau die Update- und Plugin-Arbeit an, die das Modell eigentlich vermeidet.
-2. **Positionierungsrisiko.** SARTU wirbt öffentlich mit „kein WordPress". Gleichzeitig fremde WordPress-Seiten zu betreiben, ist erklärungsbedürftig. Saubere Sprachregelung: *„Wir bauen ohne WordPress. Bestehende Websites übernehmen wir im Betrieb, damit Sie nicht ohne Ansprechpartner dastehen — und lösen sie ab, wenn es sinnvoll ist."* Diese Übernahmen werden **nicht** als Referenzarbeiten dargestellt.
+**Regel:** Keine Ausnahme, kein „nur diese eine alte Seite mitbetreuen". Wer nur Betrieb ohne Neubau will, ist kein SARTU-Kunde.
 
 ### 23b.5 Trigger-Events statt Dauerwerbung
 
@@ -761,7 +793,7 @@ Kostet ~15 Minuten, positioniert SARTU als ehrlichen Fachmann und funktioniert n
 |---|---|---|
 | **Monat 1–2** | Standort entscheiden · 5 Multiplikatoren ansprechen · Google Ads klein starten · Website live | Multiplikator-Gespräche, erste Anfragen |
 | **Monat 2–4** | 2–3 Pilotkunden liefern · Bewertungen einsammeln · Google-Unternehmensprofil aufbauen | abgeschlossene Projekte, Bewertungen |
-| **Monat 4–6** | Case Studies veröffentlichen · Bestandsübernahme prüfen · Schnellcheck live | Referenzen, laufende Betriebsverträge (MRR) |
+| **Monat 4–6** | Case Studies veröffentlichen · aussteigende Dienstleister als Trigger nutzen · Schnellcheck live | Referenzen, laufende Betriebsverträge (MRR) |
 | **Monat 6–9** | Branchen-Spirale in Branche 1 · SEA nach echten Daten optimieren | Kunden je Branche, Kosten je Anfrage |
 | **Monat 9–12** | Lokales SEO ernsthaft (Region-Hub, Ortsseiten mit Gate) · Long-Tail-Content ausbauen | Search-Console-Impressionen, organische Anfragen |
 
@@ -796,7 +828,7 @@ Kostet ~15 Minuten, positioniert SARTU als ehrlichen Fachmann und funktioniert n
 1. **Supabase-Prototyp behalten oder migrieren?** Der Juni-Stand (Supabase Frankfurt: Auth/PostgreSQL/Storage, RLS, live getestet) erfüllt „PostgreSQL + Identität + Storage in DE/EU" bereits. **Empfehlung:** für Stufe 0/1 **behalten** (schneller live, Sicherheit aus RLS), Ziel-Node-Control-Plane erst ab Stufe 2, wenn Queues/Worker/Agentenjobs wirklich gebraucht werden. **Nicht** parallel zwei Portale pflegen.
 2. **Buchhaltung: lexoffice oder sevDesk?** (API-Anbindung, GoBD/E-Rechnung). Kaufmännische Entscheidung, vor Stufe 1.
 3. **Typografie final:** reine Grotesk (Inter/Instrument Sans) vs. Grotesk + dezente editorial Serif für H1. Empfehlung: mit Grotesk starten, Serif optional testen.
-4. **⛔ Startregion & echte NAP (BLOCKIEREND):** Welcher Standort/Startmarkt gilt wirklich? Öffentliche Geschäftsanschrift vorhanden (für `LocalBusiness`/Impressum/GBP) oder nur Kontaktanschrift (→ Service-Area-Business mit verborgener Adresse)? **Ohne diese Entscheidung dürfen Ortsseiten, `LocalBusiness`, GBP, lokale SEA und NAP-Texte nicht gebaut werden** (s. Abschnitt 23a).
+4. ~~Startregion~~ **entschieden:** Sitz Stolpen, Markt Region Dresden/Ostsachsen, GBP als Service-Area-Business mit verborgener Adresse (s. §23a). **Verbleibende Teilfrage:** Wohnanschrift im Impressum (Standard, kostenlos) **oder** Coworking-/Geschäftsadresse in Dresden (kostet, muss ladungsfähig sein)?
 5. **Solo vs. kleines Team – ehrliche Selbstdarstellung** und daraus abgeleitete **Kapazität/Projekte-pro-Monat** (bestimmt, ob der Portal-Vollausbau realistisch neben der Produktion läuft oder Hilfe/Outsourcing braucht).
 6. **AGB/Garantie:** ob überhaupt eine (sauber formulierte) Zufriedenheitszusage als Verkaufsargument gewünscht ist – sonst weglassen.
 7. **Designrichtung final:** eine der drei Varianten aus `CLAUDE_SARTU_WEBSITE_KONZEPT_FINAL.md` – oder eigenes Layout vs. neu recherchierte Template-Basis.

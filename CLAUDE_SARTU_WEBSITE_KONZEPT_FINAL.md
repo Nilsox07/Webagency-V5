@@ -157,7 +157,7 @@ Die Farb-/Stilfrage ist eine **Marken-, keine Sachentscheidung**. Deshalb hier d
 *Regeln:* Ergebnis ehrlich, keine Angstmache, keine erfundenen Sicherheitswarnungen, keine Note, die jede Seite schlecht aussehen lässt, **kein** automatischer E-Mail-Versand an ungeprüfte Adressen. Ergebnisseite `noindex`, Werkzeugseite `index`.
 *Warum es sich lohnt:* echter Lead-Magnet, teilbar und verlinkbar — Multiplikatoren können ein nützliches Werkzeug weitergeben, eine Leistungsseite nicht.
 
-> **⛔ Ortsseiten sind blockiert**, bis der echte Standort/Startmarkt entschieden ist (s. Masterkonzept §23a). Kein Dresden-/Sachsen-Default, kein `LocalBusiness`, kein Google-Unternehmensprofil und keine lokale SEA-Struktur vorher. Auch `/webdesign-{ort}`-Platzhalter nicht anlegen.
+> **✅ Standort entschieden:** Sitz Stolpen, Markt **Region Dresden / Ostsachsen**. Ortsseiten sind damit freigegeben — aber **in dieser Reihenfolge** (Masterkonzept §16a): erst `/webdesign-region-dresden` + 2–3 Umland-Orte (Pirna, Radeberg, Bischofswerda, Neustadt i. Sa., Sebnitz) + Heimatanker `/webdesign-stolpen`, **danach** erst `/webdesign-dresden`. Jede Seite muss einzeln das Indexierungs-Gate bestehen. `LocalBusiness` nur als Service-Area-Business ohne sichtbare Adresse.
 
 ---
 
@@ -248,7 +248,8 @@ Aufbau: Einstieg mit Trust-Hinweisen (3 Min., Preis vor Kontaktdaten, kein Pflic
 
 ## 9. SEO-/GEO-Struktur der SARTU-Website
 
-**Zielbegriffe (generisch – lokal erst nach Standortentscheidung):** Webdesign Agentur · Website erstellen lassen · Firmenwebsite erstellen lassen · Webdesign zum Festpreis · Webdesign ohne WordPress · Website für Handwerker · Website Wartung. **`Webdesign {Startort}` erst, wenn die Startregion final entschieden ist** (s. Abschnitt 4 und Masterkonzept §23a).
+**Zielbegriffe generisch:** Webdesign Agentur · Website erstellen lassen · Firmenwebsite erstellen lassen · Webdesign zum Festpreis · Webdesign ohne WordPress · Website für Handwerker · Website Wartung.
+**Zielbegriffe lokal (freigegeben):** Webdesign Region Dresden · Webdesign Pirna / Radeberg / Bischofswerda / Neustadt / Sebnitz · später Webdesign Dresden. Reihenfolge und Gate: Masterkonzept §16a.
 
 **Pro Seite:** genau eine H1 · eindeutiger Title + Description · Canonical auf finale URL · bewusstes index/noindex · Breadcrumb + `BreadcrumbList` · sprechende URL (Bindestriche, keine Umlaute) · Antwort-zuerst-Absatz oben.
 **Global:** `Organization` + `WebSite` JSON-LD; `LocalBusiness` **nur** bei berechtigtem Standort; `Service` auf Leistungsseiten; `FAQPage` nur für sichtbare Fragen; `Article` auf Ratgebern; `DefinedTerm` im Lexikon.
@@ -356,7 +357,7 @@ Die Umsetzung gilt erst als fertig, wenn:
 2. **Eigenes Layout (empfohlen) oder neu recherchierte Template-Basis?**
 3. **Schrift final** – editorial Serif für H1 ja/nein; konkrete Schriftwahl (self-hosted).
 4. **Logo-Favorit** aus den Boards (Empfehlung: „geschnittener Beam"/T-02 oder „Portal-S"/S-02, Rostrot als Markendetail).
-5. **⛔ Startregion (blockierend)** für Ortsbegriffe, `LocalBusiness`, Google-Unternehmensprofil und lokale SEA.
+5. ~~Startregion~~ **entschieden:** Sitz Stolpen, Markt Region Dresden/Ostsachsen; GBP als Service-Area-Business ohne sichtbare Adresse. Verbleibende Teilfrage: Wohnanschrift im Impressum oder ladungsfähige Coworking-Adresse.
 6. **`/agb` zum Launch:** Empfehlung – **nur** live und verlinkt, wenn der Text anwaltlich final ist. Sonst **gar nicht** verlinken (nicht in Navigation, nicht im Footer) und `noindex`. **Launch-Pflicht sind nur Impressum und Datenschutz.**
 
 ---

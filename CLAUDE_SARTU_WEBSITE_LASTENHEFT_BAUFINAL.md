@@ -9,16 +9,22 @@
 
 ---
 
-## 0. Zwei Dinge, die vor Baubeginn entschieden sein müssen
+## 0. Eine Entscheidung fehlt noch
 
-| # | Entscheidung | Blockiert |
-|---|---|---|
-| 1 | **Designrichtung** (Werkplan / Kontor / Signal) | Farb- und Typo-Tokens, alle Komponenten |
-| 2 | **Startregion / echter Standort** | Impressum-NAP, `LocalBusiness`, Ortsseiten, GBP, lokale Keywords |
+| # | Entscheidung | Status | Blockiert |
+|---|---|---|---|
+| 1 | **Designrichtung** (Werkplan / Kontor / Signal) | ⛔ **offen** | Farb- und Typo-Tokens, alle Komponenten |
+| 2 | ~~Startregion / Standort~~ | ✅ **entschieden** | – |
 
-**Alles andere in diesem Dokument ist entschieden.** Copy, Struktur, Felder, Verhalten und Reihenfolge sind final und können ohne weitere Klärung umgesetzt werden. Wo die Designrichtung eine Rolle spielt, steht „**[Token]**" statt eines konkreten Farbwerts.
+**Zu 2 (entschieden):** Sitz **Stolpen**, Markt **Region Dresden / Ostsachsen**.
+- Impressum: **ladungsfähige Anschrift Pflicht** — Wohnanschrift ist der Standardfall (verbleibende Teilfrage: Wohnanschrift oder ladungsfähige Coworking-Adresse, s. Masterkonzept §23a.1).
+- `LocalBusiness` **nur** als Service-Area-Business **ohne sichtbare Adresse**.
+- Ortsseiten sind freigegeben, aber **nicht zum Launch**: erst Region-Hub + Umland (Pirna, Radeberg, Bischofswerda, Neustadt i. Sa., Sebnitz), **danach** Dresden. Reihenfolge und Gate: Masterkonzept §16a.
+- Auf der Website heißt es **„aus der Region Dresden"** — keine Dresdner Innenstadtadresse behaupten.
 
-**Regel für den Umgang mit Punkt 2:** Bis zur Standortentscheidung wird **keine** Ortsangabe in Texten verwendet, **kein** `LocalBusiness`-Schema ausgeliefert und **keine** Ortsseite angelegt. Impressum-Felder bleiben bis zum Go-live als klar markierte Platzhalter im nicht-öffentlichen Stand.
+**Alles andere in diesem Dokument ist entschieden.** Copy, Struktur, Felder, Verhalten und Reihenfolge sind final. Wo die Designrichtung eine Rolle spielt, steht „**[Token]**" statt eines konkreten Farbwerts.
+
+**Terminregel für alle Texte:** Standard ist **kein Termin**. Auf Wunsch **Video oder beim Kunden vor Ort** — nie am Unternehmenssitz. Auf der Website wird kein Besuchstermin angeboten und keine Besuchsadresse suggeriert.
 
 ---
 
