@@ -308,6 +308,36 @@ Diese Funktionen heben das Portal über ein normales Kundenportal, **ohne** Word
 
 **Realismus-Hinweis (wichtig):** Vollautonome Website-Erzeugung aus Spec ist der **fragilste** Teil. In Stufe 0/1 gilt: **KI assistiert, Mensch baut/prüft** aus dem Designsystem. Erst wenn das Designsystem stabil, komponentenreich und getestet ist, lohnt echte Orchestrierung. Die internen Std-Obergrenzen (Start 16 h, Wachstum 32 h, Platzhirsch 50 h) sind nur mit starkem Designsystem haltbar.
 
+### 10a. Arbeitsverteilung Codex ↔ Claude Code (verbindlich)
+
+Die frühere Formulierung „Codex `exec` primär oder Claude Code headless" war zu dünn — sie beschreibt einen Adapter, aber keine Arbeitsteilung. Die beiden Werkzeuge sind **nicht austauschbar**, und zwei Werkzeuge, die dieselbe Datei final schreiben, erzeugen widersprüchliche Code- und Designentscheidungen.
+
+> **Eiserne Regel: Pro Repository schreibt genau ein Werkzeug final.** Das jeweils andere liefert Entwurf, Review oder Gegencheck — nie parallel denselben Produktionsstand.
+
+| Aufgabe | Führt | Zweite Stimme | Begründung |
+|---|---|---|---|
+| Strategie, Geschäftsmodell, Positionierung | **Claude Code** | Codex prüft auf Umsetzbarkeit | Bewertung, Abwägung, Gegenargumente |
+| Marktanalyse, Wettbewerb, Preislogik | **Claude Code** | – | Recherche + kritische Einordnung |
+| SEO-/GEO-Strategie, Keyword-/Cluster-Planung | **Claude Code** | Codex setzt technisch um | Strategie vor Implementierung |
+| Designrichtung, Art-Direction, Designsystem-Entwurf | **Claude Code** | Codex baut Tokens/Komponenten | Alternativen und Bewertung |
+| Copy und Textvarianten | **Claude Code** | Mensch gibt frei | Sprache, Tonalität, Einwandbehandlung |
+| Konzeptkritik, Gegenreview, Risikoprüfung | **Claude Code** | – | ausdrücklich als zweite Stimme |
+| **SARTU-Website (Frontend, Build)** | **Codex** | Claude Code reviewt Diff | Dateien, Repo, Tests, Screenshots |
+| **Portal-Frontend** | **Codex** | Claude Code reviewt UX/Copy | dito |
+| **Portal-Backend, Rollen, Audit** | **Codex** | Claude Code reviewt Sicherheitslogik | reproduzierbare Implementierung |
+| **Mollie, Webhooks, Idempotenz** | **Codex** | Claude Code reviewt Fehlerfälle | Testbarkeit, echte Testkonten |
+| **Rechnungen, E-Rechnung, Buchhaltungsanbindung** | **Codex** | Mensch prüft Zahlen | Zahlen dürfen nie halluziniert werden |
+| **Domains, DNS, INWX-Adapter** | **Codex** | Mensch führt kritische Aktion aus | Live-Aktionen bleiben menschlich freigegeben |
+| **QA-Gates, Tests, Screenshots** | **Codex** | – | lokal ausführbar, reproduzierbar |
+| **Deployment, Rollback** | **Codex** | Mensch gibt frei | Produktion ist Freigabeschritt |
+| **Kundenwebsite-Produktion** (ab Stufe 2) | **Codex** | Claude Code als Entwurfsquelle für Struktur/Text | ein Repo, ein schreibendes Werkzeug |
+
+**Konsequenzen:**
+- Claude Code headless bleibt ein **optionaler** Adapter, **kein gleichwertiger Produktionsstandard** — erst nach 2–3 realen Projekten und erfolgreichem Test in echten Kundenrepos.
+- Der Produktionsadapter wird **nicht vor** diesen 2–3 Projekten automatisiert.
+- **Im Kundenvertrag wird nie ein Modell oder Anbieter garantiert.** Verkauft wird das Ergebnis, nicht „gebaut mit X".
+- Wechselt die Führung für ein Repo, wird das dokumentiert (Datum, Grund) — kein stiller Wechsel mitten im Projekt.
+
 ---
 
 ## 11. Adminportal
@@ -383,7 +413,69 @@ Siehe `CLAUDE_SARTU_WEBSITE_KONZEPT_FINAL.md`, Abschnitte 4–6.
 
 **SEO-/GEO-Flottenzentrale (Admin):** Datenquellen (eigener Crawler, Search Console API, Performance/Uptime, Portalfakten, Conversion-Events nach Einwilligung). Prüfgruppen `critical/warning/opportunity/information`. **Automatisch reparierbar** (deterministisch): Sitemap neu erzeugen, interne Links nach Deaktivierung anpassen, technische Canonical-/Robots-/Metadatenverletzungen gegen feste Regeln, strukturierte Daten aus bestätigten Fakten, defekte Bildableitungen. **Nur als Entwurf** (Freigabe nötig): neue/geänderte Texte, neue Orts-/Leistungs-/Ratgeberseiten, Aussagen zu Preis/Qualifikation/Gesundheit/Recht/Ergebnis, Wettbewerbsvergleiche.
 
-**Ortsseiten für Kundenwebsites** nur mit echtem lokalem Nutzen (Publikationsgate: eigene Inhalte, ≥ 5 nicht austauschbare Abschnitte, kein Duplicate-Title, kein `LocalBusiness` ohne echten Standort, redaktionelle Freigabe). Keine Doorway-Massenseiten.
+**Ortsseiten** — für SARTU **und** für Kundenwebsites gilt ausschließlich das Indexierungs-Gate in §16a. Keine Doorway-Massenseiten.
+
+### 16a. Programmatic Local SEO — was geht und was die Domain verbrennt
+
+> **Geprüfte Idee:** „Für jeden Ort mit mehr als 5.000 Einwohnern eine eigene Local-Landingpage bauen." **Bewertung: nicht umsetzen.** Begründung unten.
+
+**Warum das riskant ist (belegt):** Googles Spam-Richtlinien definieren *Doorway Abuse* wörtlich als „*Having multiple domain names or pages targeted at specific regions or cities that funnel users to one page*" — also exakt das beschriebene Muster. *Scaled Content Abuse* ist definiert als „*many pages are generated for the primary purpose of manipulating search rankings and not helping users*" und gilt ausdrücklich **auch dann, wenn KI die Seiten erzeugt**. Quelle: [Google Spam Policies](https://developers.google.com/search/docs/essentials/spam-policies), [Core Update & Spam Policies 03/2024](https://developers.google.com/search/blog/2024/03/core-update-spam-policies) (geprüft 25.07.2026).
+
+**Verschärfend im konkreten Fall:** Webdesign ist keine ortsgebundene Leistung. Bei Dachdecker, Zahnarzt oder Restaurant rechtfertigt die physische Nähe eine Ortsseite. Bei einer remote arbeitenden Webagentur ist der lokale Mehrwert **erst zu beweisen** — genau deshalb steht eine solche Seite unter höherem Rechtfertigungsdruck, nicht unter geringerem.
+
+**Warum „Google merkt das nicht" die falsche Annahme ist:** Bewertet werden Muster — Seitenähnlichkeit, Nutzwert, interne Struktur, Indexierungsverhalten. Es geht nicht um exakte Duplikate. Und **20 % Indexierungsquote ist kein Erfolg**: 80 % ignorierte Seiten belasten Crawlbudget, verwässern interne Linkkraft und drücken das Qualitätsurteil über die gesamte Domain.
+
+#### Stattdessen: gestufte, datengetriebene Struktur
+
+| Stufe | Umfang | Bedingung |
+|---|---|---|
+| 0 | *nichts* | Startregion ist **nicht** entschieden → keine Ortsseite, kein `LocalBusiness`, kein GBP |
+| 1 | **1 Haupt-Ortsseite** `/webdesign-{startort}` + **1 Region-Hub** `/webdesign-region-{region}` | Standort entschieden, echte NAP-Daten vorhanden |
+| 2 | **10–20 priorisierte Ortsseiten** | je einzeln durch das Gate unten |
+| 3 | **Branche × Region** statt Kleinstadtseiten, z. B. `/website-handwerker-{region}` | erst nach Search-Console-/SEA-Daten |
+| 4 | weiterer Ausbau | nur für Orte mit belegten Impressionen oder Leads |
+
+**Priorisierung der 10–20 Orte** (nicht nach Einwohnerzahl): Hauptstandort · echte Nachbarstädte im Einzugsgebiet · wirtschaftlich relevante Orte mit passendem Betriebsbesatz · Orte mit belegtem Suchvolumen oder SEA-Signal · Orte, für die konkrete Beispiele, Referenzen oder echte lokale Recherche vorliegen.
+
+**Programmatic ja — aber mit `noindex`-Stufe:** Weitere Orte dürfen als Entwurf generiert werden (`draft → noindex_preview → ready_for_review → indexable → retire_or_merge`). Sie gehen **nie automatisch** auf `index`.
+
+#### Indexierungs-Gate (alle Punkte müssen erfüllt sein)
+
+- [ ] eigene Suchintention, eigener Title und eigene H1 — **nicht** nur der getauschte Ortsname
+- [ ] mindestens **5 echte lokale Abschnitte**, die auf keiner anderen Ortsseite so stehen
+- [ ] konkreter Bezug zur lokalen Betriebs-/Branchenstruktur (welche Betriebe gibt es dort wirklich?)
+- [ ] sinnvolle Nachbarorte/Einzugsgebiet benannt
+- [ ] echte lokale FAQ (Fragen, die jemand aus diesem Ort tatsächlich stellt)
+- [ ] interne Links vom Region-Hub, von Leistungsseiten und passenden Ratgebern
+- [ ] **keine** erfundene Nähe, **keine** Fake-Referenz, **keine** behauptete lokale Erfahrung
+- [ ] `LocalBusiness` **nur** bei berechtigtem Standort — sonst weglassen
+- [ ] Prüffrage: *Wäre diese Seite für einen echten Interessenten aus diesem Ort nützlich, auch ohne Google?* Nein → nicht indexieren.
+
+**Gilt gleichermaßen für Kundenwebsites.** Das Gate ist Teil des Produkts, nicht nur der eigenen Seite — es schützt Kunden vor Abstrafung und SARTU vor Haftungsdiskussionen.
+
+### 16b. SEO-/GEO-Taktiken: was SARTU nutzt und was nicht
+
+| Taktik | Einstufung | Regel |
+|---|---|---|
+| Suchintention je Seite, Antwort-zuerst-Aufbau | **Whitehat** | Standard in jedem Projekt |
+| Saubere Technik: Canonicals, Sitemap, Robots, Statuscodes, Redirects | **Whitehat** | Standard |
+| Strukturierte Daten passend zu sichtbaren Inhalten | **Whitehat** | Standard |
+| Core Web Vitals / Performance | **Whitehat** | Standard — trägt zum Sucherfolg bei, ist aber kein alleiniger Rankinghebel |
+| Interne Verlinkung mit beschreibenden Ankertexten | **Whitehat** | Standard |
+| Konsistente Unternehmensdaten (NAP), gepflegtes Unternehmensprofil | **Whitehat** | Standard, sobald Standort feststeht |
+| Echte Inhalte zu echten Kundenfragen (Ratgeber, Lexikon, FAQ) | **Whitehat** | Standard, kuratiert statt Masse |
+| Digitale PR, echte Erwähnungen, Branchenverzeichnisse mit Prüfung | **Whitehat** | erlaubt, wenn redaktionell verdient |
+| `llms.txt` anlegen | **Whitehat, aber wirkungslos** | anlegen ja — **nie** als Rankingfaktor bewerben |
+| Viele Orts-/Varianten-Seiten „leicht abgewandelt" | **Greyhat → real riskant** | **verboten** (Doorway/Scaled Content, s. 16a) |
+| Programmatic Pages ohne Qualitätsgate | **Greyhat → riskant** | nur mit `noindex`-Stufe und Freigabe |
+| Gastbeiträge primär für Links, Linktausch, gekaufte Links | **Blackhat** | **verboten** (Link Spam) |
+| Keyword-Dichte-Optimierung, Keyword-Stuffing | **Blackhat** | **verboten** |
+| Cloaking, Text nur für Crawler, versteckter Text | **Blackhat** | **verboten** |
+| Fake-Bewertungen, Fake-Erwähnungen, erfundene Referenzen | **Blackhat + wettbewerbsrechtlich riskant** | **verboten** |
+| „GEO-Hacks", Spezial-Markup für KI-Antworten | **wirkungslos** | Google nennt **kein** Spezial-Schema für AI Features; gute SEO bleibt die Grundlage |
+| Seiten für jede denkbare Suchvariante | **Blackhat-nah** | Google warnt ausdrücklich davor |
+
+**Leitsatz:** Schnellere Sichtbarkeit wird über **Fokus** erkauft (wenige starke Seiten, klare Entitäten, echte Antworten), nicht über Menge. Jede Taktik, die nur funktioniert, solange sie unentdeckt bleibt, ist für ein Geschäftsmodell mit laufendem Betrieb ein Eigentor: Der Schaden trifft später die Kunden — und damit den wiederkehrenden Umsatz.
 
 ---
 

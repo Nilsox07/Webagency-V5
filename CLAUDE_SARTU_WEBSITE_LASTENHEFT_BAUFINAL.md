@@ -27,8 +27,11 @@
 - **Ausgabe:** statische Website (Astro o. gleichwertig), FTP-/CDN-deploybar.
 - **PHP/Node zur Laufzeit nicht erforderlich.** Ausnahme: Formularversand (siehe §9) läuft über einen schlanken Endpunkt oder einen Formulardienst; die Entscheidung darf den Rest nicht beeinflussen.
 - **Kein** externes CDN für Schriften, CSS oder JS. Schriften self-hosted als WOFF2, `font-display: swap`.
-- **JavaScript sparsam:** nur Navigation (mobil), FAQ-Akkordeon, Lumi-Formularlogik. Die Seite muss **ohne JS grundlegend nutzbar** bleiben (Inhalte lesbar, Links funktionieren, Kontaktformular absendbar).
-- **Ziele:** LCP < 2,5 s · INP < 200 ms · CLS < 0,1 · mobil zuerst entwickelt.
+- **JavaScript budgetiert statt verboten:** **≤ 75 KB gzip auf der Startseite, ≤ 40 KB auf Unterseiten.** Pflichtfunktionen: mobile Navigation, FAQ-Akkordeon, Bedarfsscheck-Logik. Darüber hinaus sind **maximal zwei bewusste Markenmomente pro Seite** erlaubt (Motion-Strategie siehe `CLAUDE_SARTU_WEBSITE_KONZEPT_FINAL.md` §10a).
+- Die Seite muss **ohne JS grundlegend nutzbar** bleiben: Inhalte lesbar, Links funktionieren, Kontaktformular absendbar. **Kein Inhalt darf erst durch eine Scroll-Animation sichtbar werden.**
+- **`prefers-reduced-motion: reduce` ist Pflicht:** alle nicht-essenziellen Bewegungen aus, Inhalte sofort sichtbar.
+- **Bibliotheken:** CSS zuerst. Erlaubt bei Bedarf: Lenis (~3 KB), GSAP + ScrollTrigger (~34 KB, seit 04/2025 vollständig kostenlos inkl. SplitText/MorphSVG), Motion (~3–18 KB, primär fürs Portal). **Nicht erlaubt:** Vanta.js, Three.js als Deko, Barba.js.
+- **Ziele:** LCP < 2,5 s · INP < 200 ms · CLS < 0,1 · mobil zuerst entwickelt. **Animationen dürfen CLS nicht verschlechtern.**
 - **`html lang="de"`**, semantische Landmarks (`header`, `nav`, `main`, `footer`), sichtbarer Fokus, Skip-Link „Zum Inhalt springen".
 - **Breakpoints:** ≤ 599 px mobil · 600–1023 px Tablet · ≥ 1024 px Desktop. Maximale Inhaltsbreite 1200–1320 px, Fließtext max. 68 Zeichen.
 - **Radius:** 0–8 px je nach Designrichtung, aber **einheitlich**. Keine „Karten in Karten". Keine Schlagschatten als Standard.
@@ -594,7 +597,11 @@ Die Website ist fertig, wenn **alle** Punkte erfüllt sind:
 - [ ] Keine toten internen Links; Sitemap enthält nur 200er-URLs; robots.txt korrekt.
 - [ ] Alle Bilder mit Alt-Text, festen Maßen, WebP und `srcset`; Hero nicht lazy.
 - [ ] CWV im Zielbereich (LCP < 2,5 s, INP < 200 ms, CLS < 0,1) auf Mobil gemessen.
-- [ ] Seite ohne JavaScript grundlegend nutzbar.
+- [ ] Seite ohne JavaScript grundlegend nutzbar; kein Inhalt erscheint erst durch Scroll-Animation.
+- [ ] **JS-Budget eingehalten:** ≤ 75 KB gzip Startseite, ≤ 40 KB Unterseiten (gemessen, nicht geschätzt).
+- [ ] **`prefers-reduced-motion` getestet:** alle nicht-essenziellen Bewegungen aus, Inhalte sofort sichtbar.
+- [ ] Maximal zwei bewusste Markenmomente pro Seite; keine Animation über Text oder CTA.
+- [ ] Keine Ortsseite ohne bestandenes Indexierungs-Gate (Masterkonzept §16a).
 
 **Bedienung**
 - [ ] Mobil und Desktop geprüft; kein horizontales Scrollen des Seitenkörpers.

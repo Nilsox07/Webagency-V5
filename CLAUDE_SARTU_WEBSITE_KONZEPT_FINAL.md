@@ -256,6 +256,20 @@ Aufbau: Einstieg mit Trust-Hinweisen (3 Min., Preis vor Kontaktdaten, kein Pflic
 
 **Interne Verlinkung:** jede kommerzielle Seite → `/briefing` + `/preise`; jeder Ratgeber → mind. eine kommerzielle Seite; Lexikon → Leistungen + verwandte Begriffe. Ankertexte beschreibend, nie „hier"/„mehr". **Kein** Footer-Ortsverzeichnis.
 
+### Rollenverteilung der Seitentypen (verhindert Kannibalisierung)
+
+Auch wenn später Ortsseiten dazukommen: **die Startseite bleibt die wichtigste URL der Domain.** Sie trägt Markenvertrauen, sammelt die meiste interne Linkkraft und konvertiert am besten. Sie wird deshalb **nicht** auf einzelne Städte optimiert, sondern auf die Hauptkategorie.
+
+| Seitentyp | Suchintention | Optimiert auf |
+|---|---|---|
+| **Startseite** | Marke + Kategorie | „Webdesign Agentur", „Firmenwebsite erstellen lassen", „Webdesign Festpreis" — natürlich im Text, **nicht** gestopft |
+| **Leistungsseiten** | kommerziell, themenspezifisch | „Website-Texte schreiben lassen", „Website ohne WordPress", „Website Wartung" |
+| **Region-Hub / Ortsseiten** | lokal | „Webdesign {Ort}" — erst nach Standortentscheidung und Gate |
+| **Ratgeber** | informationsgetrieben | Fragen („Was kostet …", „Wie läuft … ab") |
+| **Lexikon** | Definition / Entität | Begriffe, GEO-Sichtbarkeit |
+
+**Regel:** Die Startseite enthält die wichtigsten Kategoriebegriffe **einmal natürlich** in H1, Lead und Leistungslandkarte — keine Aufzählungslisten von Keyword-Varianten, keine Städtelisten. Konkurriert eine Ortsseite mit der Startseite um denselben Begriff, gewinnt die Startseite und die Ortsseite wird spitzer geschnitten.
+
 ---
 
 ## 10. Öffentliches Website-Designsystem (Tokens & Komponenten)
@@ -264,7 +278,54 @@ Aufbau: Einstieg mit Trust-Hinweisen (3 Min., Preis vor Kontaktdaten, kein Pflic
 
 **Komponenten (Launch-Set):** Header + mobile Navigation · Hero mit Produktbild · Trust-Zeile · Breite Service-Zeile mit Tags · Paketkarte (empfohlen/kompakt) · Erstjahres-/Vergleichstabelle · Prozess-Timeline · Portal-Screenshot-Rahmen mit „Musteransicht"-Badge · Zwei-Listen-Block (`Im Portal` / `Nicht im Portal`) · FAQ-Akkordeon · CTA-Band · Footer (5 Spalten) · Formularfelder + Fehlerzustände · Breadcrumb · 404.
 
-**Verboten im System:** Karten in Karten · pillenförmige Standard-Buttons · Farbverläufe/Leuchtflecken · mehr als ein Akzentton pro Sektion · Animationen über dezente Übergänge hinaus.
+**Verboten im System:** Karten in Karten · pillenförmige Standard-Buttons · Farbverläufe/Leuchtflecken · mehr als ein Akzentton pro Sektion.
+
+---
+
+## 10a. Motion- und Library-Strategie
+
+> **Korrektur:** Die frühere Regel „keine Animationen über dezente Übergänge hinaus" war zu streng. Eine Website, die sich beim Scrollen tot anfühlt, wirkt eher nach Standard-Baukasten — und genau davon soll SARTU sich abheben. Bewegung ist erlaubt und erwünscht, **aber budgetiert**.
+
+**Grundsatz: wenige, erkennbare Markenmomente statt überall ein bisschen Effekt.** Hochwertig entsteht durch stabile Typografie, starke Layoutkomposition und Ladegeschwindigkeit — Motion setzt Akzente, sie ersetzt keine Gestaltung.
+
+### Motion-Budget (verbindlich)
+
+| Regel | Wert |
+|---|---|
+| JS gesamt Startseite | **≤ 75 KB gzip** |
+| JS gesamt Unterseiten | **≤ 40 KB gzip** |
+| Bewusste Markenmomente pro Seite | **maximal 2** |
+| Animationsdauer UI | 120–250 ms |
+| Animationsdauer Editorial-Moment | ≤ 800 ms |
+| `prefers-reduced-motion: reduce` | **Pflicht** — alle nicht-essenziellen Bewegungen aus, Inhalte sofort sichtbar |
+| Layoutverschiebung durch Animation | **verboten** (CLS bleibt < 0,1) |
+| Inhalt, der erst durch Scroll-Animation sichtbar wird | **verboten** ohne JS-Fallback (Inhalt muss ohne JS lesbar sein) |
+| Animation über Text/CTA | **verboten** |
+
+### Library-Bewertung
+
+Größenangaben sind Größenordnungen (gzip) und vor Einsatz zu messen.
+
+| Library | SARTU-Website | Portal | Kundenwebsites | Bewertung |
+|---|---|---|---|---|
+| **CSS-Transitions/Animations** | **Standard** | **Standard** | **Standard** | Erste Wahl. 0 KB. Deckt 80 % ab. |
+| **View Transitions API** (nativ) | ja, vorsichtig | – | ja | 0 KB, in Astro eingebaut. Nur wenn Routing, Fokus und Analytics sauber bleiben. |
+| **Lenis** (~3 KB) | ja, gezielt | **nein** | nur Platzhirsch/Sonder | Sanftes Scrollen. Kein Scroll-Hijacking-Gefühl, Reduced-Motion respektieren. Im Portal stört es die Bedienung. |
+| **GSAP + ScrollTrigger** (~34 KB) | ja, für die 1–2 Markenmomente | **nein** | Platzhirsch optional | Seit April 2025 **vollständig kostenlos, auch kommerziell — inkl. SplitText/MorphSVG/DrawSVG** ([Webflow](https://webflow.com/blog/gsap-becomes-free), [GSAP-Lizenz](https://gsap.com/community/standard-license/), geprüft 25.07.2026). Damit entfällt das frühere Lizenzrisiko. |
+| **Motion (motion.dev)** (~3–18 KB) | optional | **ja, erste Wahl** | Start/Wachstum subtil | Ideal für UI-Zustände, Modals, Microinteractions. Mini-Variante bevorzugen. |
+| **Rive** (~100 KB+ Runtime) | nur für **einen** Marken-/Logomoment | nein | nur Sonderprojekt | Optional, nie Pflicht. Nur wenn die Animation eine echte Idee trägt. |
+| **Barba.js** (~7 KB) | nein | nein | nein | Durch View Transitions weitgehend überholt. |
+| **Vanta.js** | **nein** | nein | nur Sonderprojekt mit echter Art-Direction | Zieht three.js nach (~150 KB+) und sieht nach Template-Demo aus — macht die Marke billiger, nicht teurer. |
+| **Three.js / OGL** | nein | nein | nur Sonderprojekt | Kein Deko-3D. Nur bei selbst entwickelter Idee mit Zweck. |
+
+### Wo Motion bei SARTU tatsächlich eingesetzt wird
+
+1. **Hero-Einstieg** — eine ruhige, gestaffelte Einblendung von Eyebrow → H1 → Lead → Buttons (CSS, ~0 KB). Ohne JS ist alles sofort sichtbar.
+2. **Ein Markenmoment** — z. B. die Portal-Statuskarte, deren „nächster Schritt" beim Scrollen einmal einrastet, oder eine Maßlinie, die sich zeichnet (Richtung Werkplan). GSAP nur, wenn CSS es nicht trägt.
+3. **UI-Feedback** — Hover, Fokus, Akkordeon, Menü-Overlay (CSS).
+4. **Sonst nichts.** Kein Parallax auf jedem Bild, keine Zähler, keine schwebenden Elemente, keine Partikel.
+
+**Accessibility-Pflicht:** `prefers-reduced-motion` wird respektiert; Fokus bleibt sichtbar und darf nicht weganimiert werden; keine Bewegung, die Lesen erschwert; kein Autoplay mit Bewegung über 5 Sekunden.
 
 ---
 
