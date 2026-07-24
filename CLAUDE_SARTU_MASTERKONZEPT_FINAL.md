@@ -9,7 +9,7 @@
 
 ## 0. Wichtigste Korrektur vorab (bitte zuerst lesen)
 
-Das kanonische Sartu-Modell ist **positionierungsseitig stark** und marktfähig. Die größte Gefahr ist **nicht** die Preis- oder Angebotslogik, sondern der Anspruch, das **komplette Control-Plane-Portal** (Lumi, Angebote, Mollie-Abo, INWX-Domainlebenszyklus, KI-Produktions-Orchestrierung, QA-Gates, Deployments, Rollback, SEO-/GEO-Flotte, Admin-Finanzen) **vollständig vor dem ersten Standardverkauf** zu bauen.
+Das kanonische SARTU-Modell ist **positionierungsseitig stark** und marktfähig. Die größte Gefahr ist **nicht** die Preis- oder Angebotslogik, sondern der Anspruch, das **komplette Control-Plane-Portal** (Lumi, Angebote, Mollie-Abo, INWX-Domainlebenszyklus, KI-Produktions-Orchestrierung, QA-Gates, Deployments, Rollback, SEO-/GEO-Flotte, Admin-Finanzen) **vollständig vor dem ersten Standardverkauf** zu bauen.
 
 Für ein Ein-Personen-/Kleinstteam ist das ein zweites Produktunternehmen und ein Launch-Blocker. **Dieses Masterkonzept dreht die Reihenfolge um:**
 
@@ -28,7 +28,7 @@ Alles Weitere in diesem Dokument ist mit dieser Stufung kompatibel.
 
 ## 1. Finales Geschäftsmodell
 
-**Kurzform:** Sartu ist eine **produktisierte B2B-Webdesign-Agentur** für regionale kleine und mittlere Unternehmen. Der Kunde beschreibt sein Geschäft; Sartu **empfiehlt eine Lösung, nennt einen Gesamtfestpreis, plant, textet, programmiert und betreibt** die Website. Der Kunde trifft Geschäftsentscheidungen, Sartu trifft Design-, Struktur-, Technik-, Paket- und Anbieterentscheidungen.
+**Kurzform:** SARTU ist eine **produktisierte B2B-Webdesign-Agentur** für regionale kleine und mittlere Unternehmen. Der Kunde beschreibt sein Geschäft; SARTU **empfiehlt eine Lösung, nennt einen Gesamtfestpreis, plant, textet, programmiert und betreibt** die Website. Der Kunde trifft Geschäftsentscheidungen, SARTU trifft Design-, Struktur-, Technik-, Paket- und Anbieterentscheidungen.
 
 **Vier wirtschaftliche Hebel (unverändert übernommen, weil richtig):**
 1. Wiederverwendbares, versioniertes **Designsystem** statt jedes Projekt neu erfinden.
@@ -40,14 +40,14 @@ Alles Weitere in diesem Dokument ist mit dieser Stufung kompatibel.
 - **Einmal:** Website-Erstellung (Festpreis pro Paket).
 - **Wiederkehrend:** „Rundum-Schutz" (Betrieb/Hosting/Pflege) – der eigentliche Deckungsbeitrags-Motor.
 
-**Leitentscheidung:** *Der Kunde entscheidet, was sein Unternehmen erreichen soll. Sartu entscheidet, wie die Website das erreicht.*
+**Leitentscheidung:** *Der Kunde entscheidet, was sein Unternehmen erreichen soll. SARTU entscheidet, wie die Website das erreicht.*
 
 ---
 
 ## 2. Finale Positionierung
 
 **Öffentliches Kernversprechen (Hero):**
-> Individuell programmierte Firmenwebsites zum Festpreis. Sartu plant, textet, programmiert und betreibt Ihre Website. Sie beantworten nur die Fragen zu Ihrem Unternehmen; Struktur, Design, Technik und SEO-/GEO-Basis übernehmen wir.
+> Individuell programmierte Firmenwebsites zum Festpreis. SARTU plant, textet, programmiert und betreibt Ihre Website. Sie beantworten nur die Fragen zu Ihrem Unternehmen; Struktur, Design, Technik und SEO-/GEO-Basis übernehmen wir.
 
 **USP in vier Worten:** *Festpreis. Portal. Kein WordPress. SEO-/GEO-Basis ab Start.*
 
@@ -93,7 +93,7 @@ Alles Weitere in diesem Dokument ist mit dieser Stufung kompatibel.
 
 **Darstellung:** Platzhirsch ist **sichtbar die Empfehlung** (größte Fläche, Badge „Empfehlung"), Start/Wachstum kleiner ohne gleichstarke CTA. **Ein** Hauptbutton: `Bedarf prüfen lassen`. Keine `auswählen`-Buttons, keine Extra-Checkboxen.
 
-**In jedem Paket enthalten:** Bedarfsprüfung + begründete Empfehlung, strategische Sitemap, individuelles Design im Sartu-Designsystem, KI-gestützte (menschlich geprüfte) Programmierung ohne WordPress, responsive + Barrierefreiheits-Basis + Performance, Website-Texte aus bestätigten Fakten, SEO-/GEO-Startsystem, Kontaktweg/Formular, technische Einbindung freigegebener Rechtstexte + Consent, Vorschau + gebündeltes Feedback + Korrekturrunden, Domainprüfung/-verbindung/Launch, Portalzugang.
+**In jedem Paket enthalten:** Bedarfsprüfung + begründete Empfehlung, strategische Sitemap, individuelles Design im SARTU-Designsystem, KI-gestützte (menschlich geprüfte) Programmierung ohne WordPress, responsive + Barrierefreiheits-Basis + Performance, Website-Texte aus bestätigten Fakten, SEO-/GEO-Startsystem, Kontaktweg/Formular, technische Einbindung freigegebener Rechtstexte + Consent, Vorschau + gebündeltes Feedback + Korrekturrunden, Domainprüfung/-verbindung/Launch, Portalzugang.
 
 **Platzhirsch zusätzlich bedarfsgerecht:** Team-/Karrierebereich, Projekt-/Referenz-/Neuigkeitenstruktur, stärkere lokale Struktur, **genau ein** Conversion-Modul (qualifiziertes Anfrageformular *oder* einfache Ein-Kalender-Buchung *oder* einfaches Bewerbungsformular).
 
@@ -117,7 +117,8 @@ Der häufigste Kommunikationsfehler wäre, die Website als „wartungsarm" zu be
 - **Sagen:** „**Keine Wartung für Sie.** SARTU betreibt Ihre Website laufend."
 - **Kernunterschied:** Die Website ist wartungsarm **für den Kunden** – nicht wartungsfrei und nicht kostenlos zu betreiben.
 
-**Der Schutz bezahlt:** Betrieb, Verantwortung, Verfügbarkeit, Hosting, SSL, Backups, Monitoring, technische Pflege, technische Suchgesundheit, Formular- und Zahlungsprüfung, Versionsstand, Portalzugang und Reaktionsbereitschaft.
+**Der Schutz bezahlt:** Betrieb, Verantwortung, Verfügbarkeit, Hosting, SSL, Backups, Monitoring, technische Pflege, technische Suchgesundheit, **Formularprüfung**, Versionsstand, Portalzugang (inkl. Sichtbarkeit von SARTU-Rechnungs- und Zahlungsstatus) und Reaktionsbereitschaft.
+*Klarstellung:* „Zahlungsprüfung" meint **den SARTU-Rechnungs-/Mollie-Status im Portal** – **nicht** Zahlungs- oder Shopfunktionen auf der Kundenwebsite. Solche Funktionen gibt es nur in Sonderprojekten und sind dort gesondert beauftragt.
 **Der Schutz bezahlt nicht:** unbegrenzte Design-/Content-Flatrate, SEO-Redaktion, beliebige neue Seiten, neue Ziele, individuelle Sonderfunktionen.
 
 **Website-Formulierung (empfohlen):**
@@ -137,17 +138,27 @@ So kauft der Kunde **Entlastung und Verantwortung** – nicht „Wartungsaufwand
 
 - **Zahlungsziel 10 Kalendertage.** Produktionsslot **erst nach erster Zahlung** verbindlich. Alle Meilensteine vor dem Onlinegang bezahlt.
 - **Schlusszahlung** ist an **Abnahme/Fertigstellung** gekoppelt, nicht an einen frei verschiebbaren Onlinegang.
-- **Mollie** (Zahlungsdienstleister, **nicht** Buchhaltung): Sartu-System erzeugt Rechnung + Forderung; Kunde startet den Mollie-Checkout im Portal. **Zahlungswahrheit** = serverseitig authentifiziert abgerufener Status nach Webhook, **niemals** der Browser-Redirect. Webhooks idempotent, eindeutige Idempotency Keys, jede Zahlung gegen interne Rechnung/Betrag/Währung/Metadaten geprüft.
+- **Mollie** (Zahlungsdienstleister, **nicht** Buchhaltung): SARTU-System erzeugt Rechnung + Forderung; Kunde startet den Mollie-Checkout im Portal. **Zahlungswahrheit** = serverseitig authentifiziert abgerufener Status nach Webhook, **niemals** der Browser-Redirect. Webhooks idempotent, eindeutige Idempotency Keys, jede Zahlung gegen interne Rechnung/Betrag/Währung/Metadaten geprüft.
 - **Schutz-Abo:** Beim ersten wiederkehrungsfähigen Bezahlvorgang bestätigt der Kunde das **Mandat** ausdrücklich; danach monatlicher Voraus-Einzug. Start des Schutzes = produktiver Betrieb (Sonderregel bei kundenverschuldeter Onlinegang-Verzögerung: spätestens 14 Kalendertage nach betriebsfertiger Bereitstellung, nach Hinweis – Formulierung anwaltlich mit AGB abstimmen).
 - **Buchhaltung nicht selbst bauen:** Rechnungen deterministisch über lexoffice **oder** sevDesk (Entscheidung offen, s. Abschnitt 25); Mollie nur für Zahlungslinks/Abo. Rechnungszahlen dürfen nie von KI erzeugt werden.
+
+### E-Rechnung (B2B-Pflichtthema, nicht optional)
+
+Seit **01.01.2025** gelten für **inländische B2B-Umsätze** neue E-Rechnungsregeln mit Übergangsfristen ([BMF-FAQ](https://www.bundesfinanzministerium.de/Content/DE/FAQ/e-rechnung.html)). Da SARTU ausschließlich B2B verkauft, ist das kein Randthema:
+
+- **Empfangen können ist sofort Pflicht:** SARTU muss strukturierte E-Rechnungen (XRechnung/ZUGFeRD nach EN 16931) **entgegennehmen und revisionssicher archivieren** können – auch wenn selbst noch anders ausgestellt wird.
+- **Ausstellen:** je nach Umsatz und Übergangsfrist wird die strukturierte Ausstellung verpflichtend. Die Rechnungsstellung muss darauf vorbereitet sein.
+- **Auswahlkriterium für lexoffice/sevDesk:** Das Tool wird **nur** gewählt, wenn es **XRechnung/ZUGFeRD/EN 16931** sowie GoBD-konforme Archivierung, Storno/Gutschrift, korrekte USt-Behandlung und einen sauberen Mollie-Abgleich beherrscht.
+- **Verboten:** selbstgebaute PDFs als alleinige Buchhaltung; PDF allein ist **keine** E-Rechnung.
+- Rechnungsarchiv, Aufbewahrungsfristen und Nummernkreise laufen im Buchhaltungstool, nicht im Portal. Das Portal zeigt nur Status und Zahlungslink.
 
 ---
 
 ## 6. Domain-, Hosting- und E-Mail-Regelung
 
-**Grundsatz:** Der Kunde entscheidet den **Domainnamen** und bleibt **Domaininhaber**. Sartu entscheidet und verwaltet die **technische Infrastruktur** (Registrar, DNS, Deployment).
+**Grundsatz:** Der Kunde entscheidet den **Domainnamen** und bleibt **Domaininhaber**. SARTU entscheidet und verwaltet die **technische Infrastruktur** (Registrar, DNS, Deployment).
 
-**Neue Domain:** Kunde nennt Wunschname oder bittet um Vorschläge → Sartu zeigt **max. 3** geprüfte, markennahe Vorschläge (bevorzugt `.de`) → Portal prüft Verfügbarkeit/Preis über **INWX** (Reseller-/JSON-RPC-API, hinter Provider-Adapter) → Kunde bestätigt genau einen Namen + Inhaberdaten → **letzte** Echtzeitprüfung → Registrierung **erst nach erster Zahlung** und mit **kundeneigenem Inhaberkontakt** (kein pauschaler Sartu-Registrant außer OT&E). Eine normale Domain bis **30 € netto/Jahr** ist bei Sartu-Verwaltung im Schutz enthalten; Premiumdomains/Sonderendungen ausgeschlossen (→ Alternativvorschläge).
+**Neue Domain:** Kunde nennt Wunschname oder bittet um Vorschläge → SARTU zeigt **max. 3** geprüfte, markennahe Vorschläge (bevorzugt `.de`) → Portal prüft Verfügbarkeit/Preis über **INWX** (Reseller-/JSON-RPC-API, hinter Provider-Adapter) → Kunde bestätigt genau einen Namen + Inhaberdaten → **letzte** Echtzeitprüfung → Registrierung **erst nach erster Zahlung** und mit **kundeneigenem Inhaberkontakt** (kein pauschaler SARTU-Registrant außer OT&E). Eine normale Domain bis **30 € netto/Jahr** ist bei SARTU-Verwaltung im Schutz enthalten; Premiumdomains/Sonderendungen ausgeschlossen (→ Alternativvorschläge).
 
 **Vorhandene Domain:** Transfer bevorzugt, wenn ohne Betriebsrisiko möglich; sonst nur DNS anbinden. **Vor jeder Änderung** A/AAAA/CNAME/MX/SPF/DKIM/DMARC + Subdomains/Verifizierungsrecords dokumentieren (Snapshot + Rollbackplan). **Bestehende E-Mail darf durch den Launch nie ausfallen.**
 
@@ -165,18 +176,28 @@ Diese Fälle **müssen** vor dem ersten Verkauf in Vertrag/AGB **und** im Portal
 |---|---|
 | **Kündigung des Schutzes** | Domain bleibt Eigentum des Kunden. SARTU stellt auf Anforderung **Auth-Code/AuthInfo** + dokumentierte DNS-Übergabe bereit (einmalig, innerhalb einer definierten Frist, z. B. 10 Werktage nach letzter erfüllter Zahlung). |
 | **Wer zahlt Verlängerung nach Kündigung?** | Ab Vertragsende trägt der Kunde die Domainkosten selbst. SARTU verlängert **nicht** stillschweigend weiter; Kunde wird rechtzeitig auf den Transfer hingewiesen. |
-| **Zahlungsverzug vor Verlängerung** | Klare Eskalation: Hinweis → Mahnung → **keine** automatische Verlängerung auf SARTU-Kosten. Kein „stiller" Domainverlust: Ablaufdatum und Konsequenz werden im Portal sichtbar angezeigt. |
-| **Erinnerungen vor Ablauf** | Mindestens **zwei** dokumentierte Hinweise (z. B. 30 und 7 Tage vor Ablauf) im Portal + per E-Mail. |
+| **Erinnerungen vor Ablauf** | Mindestens **drei** dokumentierte Hinweise (z. B. 60, 30 und 7 Tage vor Ablauf) im Portal **und** per E-Mail. Ablaufdatum ist im Portal dauerhaft sichtbar. |
 | **Premiumdomain / fehlgeschlagener Transfer / Redemption** | Fremdkosten trägt der Kunde und werden **vorher** ausgewiesen. Redemption-/Wiederherstellungsgebühren sind nie in der 30-€-Pauschale enthalten. |
 | **Kunde hat keinen Zugriff auf Altdomain/-E-Mail** | Kein Blindflug: Projekt läuft auf Vorschau-/Übergangsdomain weiter; Launch-Gate bleibt zu, bis Inhaberschaft/Zugriff nachgewiesen ist. Aufwand für Recherche/Recovery ist **nicht** im Festpreis enthalten. |
-| **Betriebsende ohne Transfer** | Nach dokumentierter Frist und Hinweisen darf SARTU die Verwaltung beenden; Verantwortung geht an den Kunden über (keine Löschung ohne Ankündigung).
+| **Betriebsende ohne Transfer** | Nach dokumentierter Frist und Hinweisen darf SARTU die Verwaltung beenden; Verantwortung geht an den Kunden über – **keine Löschung und kein Ablaufenlassen ohne vorherige Ankündigung**. |
+
+#### Domain-Schutzregel (Zahlungsverzug ≠ Domainverlust)
+
+Ein Domainablauf ist **nicht** wie „Support pausiert": Website, E-Mail, Marke, Google-Signale und Kundenvertrauen können gleichzeitig ausfallen. Weil SARTU technischer Verwalter ist, entsteht daraus Eskalations- und Haftungspotenzial. Deshalb wird die **Domainverlängerung ausdrücklich aus dem normalen Zahlungsverzugs-Prozess herausgelöst**:
+
+1. **Domainverlust wird nie als Druckmittel eingesetzt.** Offene Rechnungen werden über den normalen Mahnweg verfolgt – nicht über die Domain.
+2. **Bei laufendem Schutzvertrag** verlängert SARTU eine ablaufende Domain zur **Schadensvermeidung** und berechnet die Fremdkosten nach, statt sie auslaufen zu lassen.
+3. **Vor jedem Ablauf** mindestens drei dokumentierte Hinweise (60/30/7 Tage) mit klarer Konsequenz.
+4. **Bei Kündigung oder kündigungsnahem Status** wird **rechtzeitig vor Ablauf** aktiv Auth-Code und Transfer angeboten, damit der Kunde selbst übernehmen kann.
+5. **Keine Verlängerung auf SARTU-Kosten** nach beendetem Vertrag – aber dann muss der Übergabeweg nachweislich offen gestanden haben.
+6. Diese Regel gehört **wortgleich in Vertrag/AGB und Portal** und ist anwaltlich zu prüfen.
 
 ---
 
 ## 7. Kundenablauf (Ende zu Ende)
 
 1. **Lumi-Bedarfsscheck** (5 Themen, ~3 Min., Preis vor Kontaktdaten).
-2. **Sartu-Prüfung** (Standardfall Ziel 10–15 Min., höchstens eine gebündelte Rückfrage).
+2. **SARTU-Prüfung** (Standardfall Ziel 10–15 Min., höchstens eine gebündelte Rückfrage).
 3. **Geprüftes Festpreisangebot** im Portal (Empfehlung, Sitemap, Scope, Ausschlüsse, Preis, Betrieb, Zahlungsplan, Terminrahmen; 14 Tage gültig).
 4. **Annahme** (Rechnungsdaten, B2B-Bestätigung, Scope-Bestätigung, eindeutig kostenpflichtiger Button).
 5. **Erste Zahlung** (Mollie) → danach Slot + Domainregistrierung.
@@ -204,7 +225,7 @@ Lumi ist **kein** Konfigurator und **keine** Paketwahl. Es sammelt vor den Konta
 
 **Deterministische Ampel (Regelwerk entscheidet, KI formuliert nur):**
 - **Rot → Sonderprojekt:** Shop/Zahlung, Login/Rollen, individuelle Schnittstelle, komplexe Mehr-Ressourcen-Buchung, mehrere Marken/Domains, sensible Uploads, formaler Spezialaudit.
-- **Orange → Sartu-Prüfung + kurzes Fachmodul:** mehrere Sprachen, mehrere Standorte einer Marke, unklare Buchung, > 1 Conversionpfad, knappe Frist, Freitext nennt Sonderfunktion ohne Auswahl.
+- **Orange → SARTU-Prüfung + kurzes Fachmodul:** mehrere Sprachen, mehrere Standorte einer Marke, unklare Buchung, > 1 Conversionpfad, knappe Frist, Freitext nennt Sonderfunktion ohne Auswahl.
 - **Gelb → eine Rückfrage:** Widersprüche, „unklar" an paketentscheidender Stelle, Altwebsite unerreichbar/komplex, Domain/Rechte ungeklärt.
 - **Standard:** Start / Wachstum / Platzhirsch nach notwendigem Umfang (nicht nach höherem Umsatz). **Platzhirsch** bei ≥ 2 starken Signalen (mehrere Leistungen, mehrere Regionen, Recruiting, Projekte, lokale Auffindbarkeit + mehrere Suchthemen, zentraler Conversionweg); bei besonders starkem Einzelsignal begründet möglich, **nie** nur weil es das Hauptprodukt ist.
 
@@ -212,9 +233,9 @@ Lumi ist **kein** Konfigurator und **keine** Paketwahl. Es sammelt vor den Konta
 
 **Kurze Fachmodule vor Angebot** (nur das betroffene): Buchung · Shop/Zahlung · Login · Schnittstelle · Standorte/Marken · Sprache/Barrierefreiheit (je 3–4 Fragen).
 
-**Was der Kunde beantwortet vs. was Sartu selbst recherchiert:**
+**Was der Kunde beantwortet vs. was SARTU selbst recherchiert:**
 - **Kunde (nur echte Geschäftsfakten):** Angebot/Leistungen/Kontakt/Öffnungszeiten, Zielgruppe/Einzugsgebiet, echte Belege/Team/Projekte, Bild-/Nutzungsrechte, Domaininhaber/E-Mail-Nutzung, freigegebene Rechtstexte, finale Fakten-/Design-/Textfreigabe.
-- **Sartu recherchiert/entscheidet selbst:** Branche aus Beschreibung/Altwebsite ableiten, vorhandene Inhalte extrahieren, Relaunch-/Domainrisiken erkennen, Paketempfehlung + Sitemap, Suchintentionen + Informationshierarchie, Farbrollen/Typografie/Layout/Komponenten, Technik/Hosting/Registrar/Deployment/Monitoring, konkrete SEO-Metadaten + strukturierte Daten. **KI darf keine Fakten, Referenzen, Rechts- oder Fachaussagen erfinden.**
+- **SARTU recherchiert/entscheidet selbst:** Branche aus Beschreibung/Altwebsite ableiten, vorhandene Inhalte extrahieren, Relaunch-/Domainrisiken erkennen, Paketempfehlung + Sitemap, Suchintentionen + Informationshierarchie, Farbrollen/Typografie/Layout/Komponenten, Technik/Hosting/Registrar/Deployment/Monitoring, konkrete SEO-Metadaten + strukturierte Daten. **KI darf keine Fakten, Referenzen, Rechts- oder Fachaussagen erfinden.**
 
 ---
 
@@ -224,9 +245,9 @@ Das Portal ist **kein CMS und kein Website-Baukasten**. Es verwaltet strukturier
 
 **Kundenportal-Navigation (8 Punkte):** Übersicht · Angebot & Vertrag · Projekt · Inhalte · Anfragen · Sichtbarkeit · Rechnungen · Hilfe. (Domain, Briefing, Vorschau, Launch erscheinen kontextuell im Projekt.)
 
-**Funktionsbewertung** (Nutzen Kunde / Nutzen Sartu / Aufwand / Baukasten-Risiko / Start-Pflicht). Nur bewertete Kernfunktionen, keine Spielereien:
+**Funktionsbewertung** (Nutzen Kunde / Nutzen SARTU / Aufwand / Baukasten-Risiko / Start-Pflicht). Nur bewertete Kernfunktionen, keine Spielereien:
 
-| Funktion | Kunde | Sartu | Aufwand | Baukasten-Risiko | Wann |
+| Funktion | Kunde | SARTU | Aufwand | Baukasten-Risiko | Wann |
 |---|---|---|---|---|---|
 | Cockpit „genau ein nächster Schritt" | hoch | hoch | mittel | keins | **Start-Pflicht** |
 | Angebot ansehen/annehmen (Scope, Preis) | hoch | hoch | mittel | keins | **Start-Pflicht** |
@@ -270,9 +291,9 @@ Diese Funktionen heben das Portal über ein normales Kundenportal, **ohne** Word
 
 ## 10. KI-/Automatisierungslogik
 
-**Drei-Produkt-Architektur:** (1) Sartu-Vertriebswebsite, (2) Sartu-Control-Plane (Portal), (3) Kundenseiten (getrennte, versionierte Codeprojekte).
+**Drei-Produkt-Architektur:** (1) SARTU-Vertriebswebsite, (2) SARTU-Control-Plane (Portal), (3) Kundenseiten (getrennte, versionierte Codeprojekte).
 
-**Kundenseiten-Tech:** **static-first (Astro empfohlen)**, 1 Repository pro Kunde, gemeinsamer versionierter **Sartu-Starter** + versioniertes **Designsystem-Paket**. Strukturierte Inhalte statt freiem HTML. Formulare/Dynamik über eng begrenzte Portal-APIs. Jede Produktion reproduzierbar, testbar, **exportierbar, rückrollbar**. Der Kundenstand muss **auch nach Vertragsende baubar** sein (notwendige Komponenten eingefroren/vendort; Master-Designsystem/Generatoren/Prompts bleiben intern).
+**Kundenseiten-Tech:** **static-first (Astro empfohlen)**, 1 Repository pro Kunde, gemeinsamer versionierter **SARTU-Starter** + versioniertes **Designsystem-Paket**. Strukturierte Inhalte statt freiem HTML. Formulare/Dynamik über eng begrenzte Portal-APIs. Jede Produktion reproduzierbar, testbar, **exportierbar, rückrollbar**. Der Kundenstand muss **auch nach Vertragsende baubar** sein (notwendige Komponenten eingefroren/vendort; Master-Designsystem/Generatoren/Prompts bleiben intern).
 
 **Produktionspipeline (Zielbild, ab Ausbaustufe 2/3):**
 1. Portal friert **versionierte Spezifikation** ein (`site-spec.json`, `business.json`, `services.json`, `proof.json`, `content-plan.json`, `brand.json`, `legal.json`, `seo.json`, `design-manifest.json`, `acceptance.json` – jeweils mit Schema-Version, Projekt-ID, Quelle, Freigabestatus).
@@ -283,7 +304,7 @@ Diese Funktionen heben das Portal über ein normales Kundenportal, **ohne** Word
 6. **Menschliche Pflichtprüfung** (passt es zum Unternehmen statt nur zum Template? Botschaft in Sekunden klar? Aussagen = bestätigte Quellen? Platzhirsch sichtbar hochwertiger? keine internen Notizen/Prompts veröffentlicht?).
 7. Adminfreigabe → versionierte Kundenvorschau → Abnahme → **separater** Produktions-Launch → versioniert, rückrollbar.
 
-**Harte Sicherheitsgrenzen:** kein Agentenlauf im öffentlichen Webrequest; ephemerer Container pro Job; Schreibzugriff nur auf das eine Kundenrepo + Artefaktordner; **keine** Mollie-/Registrar-/Portal-/Produktions-Zugangsdaten im Agentencontainer; Netzwerk standardmäßig gesperrt (Allowlist); kurzlebige Git-Credentials nur für den Job-Branch; Laufzeit-/Kosten-/Turn-Limit + Abbruch; **Kundenfreitext & externe Websites = nicht vertrauenswürdige Eingaben**. **Kritische Aktionen (Zahlung, Domainregistrierung, DNS, Produktion) führen nur autorisierte Sartu-Dienste/Menschen aus, nie der Agent.**
+**Harte Sicherheitsgrenzen:** kein Agentenlauf im öffentlichen Webrequest; ephemerer Container pro Job; Schreibzugriff nur auf das eine Kundenrepo + Artefaktordner; **keine** Mollie-/Registrar-/Portal-/Produktions-Zugangsdaten im Agentencontainer; Netzwerk standardmäßig gesperrt (Allowlist); kurzlebige Git-Credentials nur für den Job-Branch; Laufzeit-/Kosten-/Turn-Limit + Abbruch; **Kundenfreitext & externe Websites = nicht vertrauenswürdige Eingaben**. **Kritische Aktionen (Zahlung, Domainregistrierung, DNS, Produktion) führen nur autorisierte SARTU-Dienste/Menschen aus, nie der Agent.**
 
 **Realismus-Hinweis (wichtig):** Vollautonome Website-Erzeugung aus Spec ist der **fragilste** Teil. In Stufe 0/1 gilt: **KI assistiert, Mensch baut/prüft** aus dem Designsystem. Erst wenn das Designsystem stabil, komponentenreich und getestet ist, lohnt echte Orchestrierung. Die internen Std-Obergrenzen (Start 16 h, Wachstum 32 h, Platzhirsch 50 h) sind nur mit starkem Designsystem haltbar.
 
@@ -302,12 +323,14 @@ Diese Funktionen heben das Portal über ein normales Kundenportal, **ohne** Word
 ## 12. Zentrales Datenmodell (grobe Skizze)
 
 - **Identität:** `organizations`, `users`, `memberships`, `roles`, `consents`, `audit_events`
-- **Vertrieb:** `leads`, `lumi_assessments`, `recommendations`, `clarifications`, `offers`, `offer_versions`, `acceptances`
+- **Vertrieb:** `leads`, `lumi_assessments`, `offer_recommendations`, `clarifications`, `offers`, `offer_versions`, `acceptances`
 - **Finanzen:** `invoices`, `invoice_lines`, `payments`, `mandates`, `subscriptions`, `refunds`, `webhook_events`
 - **Domain:** `domains`, `domain_contacts`, `domain_quotes`, `registrations`, `transfers`, `dns_snapshots`, `dns_change_sets`
 - **Projekt/Inhalt:** `projects`, `brief_versions`, `tasks`, `project_records`, `assets`, `asset_rights`, `feedback_threads`, `approvals`, `content_records`, `page_states`
 - **Website-Produktion:** `sites`, `repositories`, `site_versions`, `design_system_versions`, `agent_jobs`, `qa_runs`, `previews`, `deployments`, `rollbacks`
-- **Betrieb/Wachstum:** `form_submissions`, `support_cases`, `uptime_events`, `search_properties`, `search_metrics`, `seo_issues`, `seo_patches`, `recommendations`
+- **Betrieb/Wachstum:** `form_submissions`, `support_cases`, `uptime_events`, `search_properties`, `search_metrics`, `seo_issues`, `seo_patches`, `growth_recommendations`
+
+> Hinweis: Vertriebs- und Wachstumsempfehlungen sind **getrennte Tabellen** (`offer_recommendations` vs. `growth_recommendations`) – gleiche Bezeichnung für zwei Fachobjekte wäre im Datenmodell eine Fehlerquelle.
 
 Alle fachlich wichtigen Statuswechsel erzeugen ein **Audit-Ereignis**. Jobstatus: `queued → preparing → running → validating → admin_review → customer_preview → approved → deploying → live` (+ Fehlerzustände `needs_input`, `qa_failed`, `agent_failed`, `deployment_failed`, `rolled_back`, `cancelled`).
 
@@ -329,64 +352,30 @@ Ein früher geäußerter Wunsch war „am Ende alles per FTP hochladen". Das mus
 
 ---
 
-## 13. Website-Struktur (Sitemap in Tiers)
+## 13. Eigene SARTU-Website – ausgelagert (Autoritätsregel)
 
-> **Launch-Schnitt (nach Review verkleinert): lieber 15 sehr gute Seiten als 60 mittelmäßige.** Google warnt ausdrücklich davor, Content für jede Suchvariante zu erzeugen. Ausbau danach alle 1–2 Wochen gezielt.
+> **Für die eigene SARTU-Verkaufswebsite gilt ausschließlich `CLAUDE_SARTU_WEBSITE_KONZEPT_FINAL.md`.**
+> Dort stehen verbindlich: Sitemap, Startseiten-Dramaturgie, Seitenkonzepte, Leistungsseiten, Ratgeber-/Lexikon-Startumfang, Content-Cluster, Bild- und Screenshotliste, Designrichtungen, Website-Designsystem, Trust/FAQ und Abnahmekriterien.
+>
+> Dieses Masterkonzept regelt **nur noch**: Geschäftsmodell, Angebot/Preise, Zahlung, Domain/Hosting/E-Mail, Portal, KI-/Produktionslogik, Technik, Recht, Markteintritt und Ausbaustufen. Die früheren Website-Detailabschnitte wurden hier **entfernt**, weil zwei Dateien nicht dieselbe Sache regeln dürfen.
 
-**Kernseiten (Launch):** `/` · `/leistungen` · `/preise` · `/ablauf` · `/briefing` (Lumi) · `/kontakt` · `/ueber-uns` · `/impressum` · `/datenschutz` · `/agb` (Platzhalter bis anwaltlich final, dann indexierbar). Hubs `/ratgeber` + `/lexikon` starten klein (s. u.).
-
-**Leistungsseiten – Launch nur 5:** `/leistung-webdesign` · `/leistung-texte` · `/leistung-seo-lokal` (SEO/GEO **und** lokale Sichtbarkeit zusammengefasst) · `/leistung-wartung` (Rundum-Schutz) · `/leistung-portal`.
-**Nachgelagert (Stufe 2):** `/leistung-domain-launch` und die Trennung von `/leistung-seo` ↔ `/leistung-lokales-seo`, sobald genug eigener Inhalt existiert.
-
-**Kommerzielle Hubs (nach Launch):** `/website-erstellen-lassen` · `/firmenwebsite-erstellen-lassen` · `/webdesign-agentur` · `/website-relaunch` · `/webdesign-ohne-wordpress`.
-
-**Branchen-Hubs (nur mit echtem Branchentext):** `/webdesign-handwerker` · `/webdesign-praxen` · `/webdesign-kanzleien` · `/webdesign-gastronomie` · `/webdesign-dienstleister`.
-
-**Orts-/Regionsseiten (nur mit Qualitätsgate):** Region-Hub `/webdesign-sachsen`; Tier-1 `/webdesign-dresden`, `/webdesign-leipzig`; Tier-2 `/webdesign-chemnitz`; Region `/webdesign-lausitz`. **Keine sitewide Footer-Ortsliste**, keine Doorway-Massenseiten.
-
-**Ortsseiten-Publikationsgate (auf `index` erst wenn):** Sartu bedient die Region realistisch · Ort kommerziell relevant · klare Suchintention · ≥ 5 ortsspezifische, nicht austauschbare Abschnitte (≥ ~800–1200 Wörter echter Inhalt) · keine Duplicate Titles/Descriptions · Schema behauptet keine falsche Niederlassung · sinnvolle interne Links · redaktionelle Freigabe. Status-Stufen: `draft → noindex_preview → ready_for_review → indexable → retire_or_merge`.
+**Nur zur Orientierung (nicht maßgeblich):** Launch = Kernseiten (`/`, `/leistungen`, `/preise`, `/ablauf`, `/briefing`, `/ueber-uns`, `/kontakt`, Pflichtseiten) + **5** Leistungsseiten + **3** Ratgeber + **10–15** Lexikonbegriffe. Kommerzielle Hubs, Branchen-Hubs, Ortsseiten und ein Lexikonausbau auf 40–60 Begriffe sind **Stufe 2** – erst nach Search-Console-Daten.
 
 ---
 
-## 14. Startseitenstruktur (`/`)
+## 14.–15. (verschoben) Startseite und Leistungsseiten
 
-Dunkler, ruhiger Produkt-Hero (kein Stockfoto, kein KI-Gradient). Am unteren Rand ist bereits der nächste helle Abschnitt sichtbar.
-
-1. **Hero** (Deep Ink, zweispaltig): Eyebrow `Webdesign-Agentur für Firmenwebsites` · H1 `Individuell programmierte Firmenwebsites zum Festpreis.` · Lead (Sartu plant/textet/programmiert/betreibt …) · Primär `Bedarf prüfen lassen` · Sekundär `Preise ansehen` · Netto-Hinweis. **Rechte Spalte = echtes/ nachgebautes Portal-Mockup** (Statuskarte „Nächster Schritt: Domain bestätigen", Aufgabenliste, Mini-Preisbox „Platzhirsch – 7.900 € netto", Leiste `Festpreis · 40/30/30 · Schutz L`; Badge **„Musteransicht"**, solange nicht produktionsreif). Trust-Zeile: `Kein WordPress · Texte inklusive · Portal statt E-Mail-Chaos · SEO-/GEO-Basis ab Launch`.
-2. **Problem & Entlastung** (Paper): „Eine Website darf nicht Ihr zweiter Job werden." + 3 Boxen: `Sie liefern Fakten` / `Sartu entscheidet` / `Das Portal führt`.
-3. **Platzhirsch als Hauptangebot** (Mist): „Drei Website-Ergebnisse. Eine klare Empfehlung." Platzhirsch groß (Badge, Preis, Erstjahr, Signale, CTA `Bedarf prüfen lassen`); Start/Wachstum kompakt (Button `Einschätzen lassen`, **nicht** „auswählen"); Sonderprojekt als schmaler Hinweis.
-4. **Leistungslandkarte** (8 breite Service-Zeilen mit Tags, **keine** Kachelwand, **kein** „ab X €/dazubuchen"): Strategie & Struktur · Webdesign & Code · Texte · SEO-/GEO-Basis · Lokale Sichtbarkeit · Domain & Launch · Portal & Freigaben · Rundum-Schutz.
-5. **Portal als USP** (Screenshot + `Im Portal` / `Nicht im Portal`-Listen).
-6. **SEO/GEO eingebaut** (3 Spalten: Menschen verstehen / Suchmaschinen crawlen / KI-Sucherlebnisse einordnen + Garantie-Disclaimer).
-7. **Ablauf** (6-Schritt-Timeline).
-8. **Lumi-Einstieg** (Chips: Branche/Region/Ziel/Domainstatus/Umfangssignale/Sonderfunktion).
-9. **FAQ** (8 Pflichtfragen; `FAQPage`-Schema nur für sichtbare Fragen).
-10. **Abschluss-CTA** (`Bedarf prüfen lassen` / `Preise ansehen` + Unverbindlichkeits-/Netto-Hinweis).
+Siehe `CLAUDE_SARTU_WEBSITE_KONZEPT_FINAL.md`, Abschnitte 4–6.
 
 ---
 
-## 15. Leistungsseitenstruktur
+## 16. SEO-/GEO-Strategie (Produktleistung für Kundenwebsites)
 
-**Gemeinsames GEO-Template pro Leistungsseite** (Antwort-zuerst, für Menschen + KI): `Kurz gesagt` (1 Absatz mit Kernaussage + Preisanker) → `Für wen passt das?` → `Was ist enthalten?` → `Was ist nicht enthalten?` → `Was kostet es?` (aus zentralem Preisstand) → `Wie läuft es ab?` → `Welche Entscheidung nimmt Sartu ab?` → `FAQ` → CTA. Genau **eine H1**, `Service`-Schema, `FAQPage` nur bei sichtbaren Fragen, Breadcrumb.
-
-**Launch: 5 Leistungsseiten (H1 + Kernaussage):**
-1. `/leistung-webdesign` – „Webdesign für Firmenwebsites, die nicht wie Baukasten aussehen." (individuell programmiert ab 1.490 € netto; kein WordPress).
-2. `/leistung-texte` – „Website-Texte aus Stichpunkten, Fakten und echten Belegen." (Sartu erfindet keine Belege; Rechtstexte nicht enthalten).
-3. `/leistung-seo-lokal` – „Gefunden werden – lokal und in KI-Suchen." (SEO-/GEO-Basis **und** lokale Sichtbarkeit zusammengefasst; keine Doorways, echte NAP; Pflichttext: keine Ranking-/KI-Nennungsgarantie).
-4. `/leistung-wartung` – „Rundum-Schutz: keine Wartung für Sie." (Betrieb/Verantwortung, keine Content-/Design-Flatrate, keine Änderungsminuten – **nicht** „wartungsarm").
-5. `/leistung-portal` – „Ein Projektportal für Freigaben und kleine Pflege, kein Website-Baukasten." (`Im Portal` / `Nicht im Portal`).
-
-**Nachgelagert (Stufe 2, sobald eigener Inhalt existiert):** `/leistung-domain-launch` („Domain, E-Mail und Launch ohne Technikstress" – Kunde bleibt Inhaber, bestehende E-Mail geschützt) sowie die Aufteilung von `/leistung-seo-lokal` in `/leistung-seo` + `/leistung-lokales-seo`.
-
-**`/leistungen` (Übersicht):** H1 „Website, Texte, Sichtbarkeit und Betrieb als ein klares System." + Antwortmodul (kein Extra-Baukasten) + Leistungslandkarte (10 Zeilen) + „Was Sie nicht entscheiden müssen" + Tiefe je Paket (Tabelle) + Portal-Brücke + FAQ (`Kann ich einzelne Leistungen dazubuchen?` → im Erstangebot nein).
-
----
-
-## 16. SEO-/GEO-Strategie
+> Dieser Abschnitt beschreibt, **was der Kunde kauft**. Die SEO-/GEO-Struktur der *eigenen* SARTU-Website steht in der Website-Datei, Abschnitt 9.
 
 **Grundhaltung (belegt durch Google-Doku):** GEO ist **kein** magischer Zusatz und **kein** Spezial-Schema. Gute KI-Sichtbarkeit = Fortsetzung guter SEO: crawlbare, hilfreiche, konsistente, entitätsklare Inhalte. **Keine** Garantie auf Rankings/Anfragen/Umsatz/KI-Nennungen. `llms.txt` wird angelegt, aber **nicht** als Rankingfaktor beworben.
 
-**SEO-/GEO-Startsystem (im Websitepreis, ab Launch):** Suchintention + Thema je Seite · Antwort-zuerst-Texte aus bestätigten Fakten · sprechende URLs (Bindestriche, keine Umlaute) · genau eine H1, saubere Überschriften · interne Links als echte Links · Title/Description/Canonical/OG/Robots · Breadcrumb + `BreadcrumbList` · `Organization`+`WebSite` global, `Service`/`FAQPage`/`Article`/`DefinedTerm` seitenweise (nur bei sichtbarer Entsprechung) · XML-Sitemap, robots.txt, 404, Redirect-Plan · echte NAP, `LocalBusiness` **nur** bei berechtigtem Standort · Performance (CWV: LCP < 2,5 s, INP < 200 ms, CLS < 0,1; AVIF/WebP + srcset, Hero nicht lazy + `fetchpriority=high`, self-hosted WOFF2 `font-display:swap`) · Bild-SEO (echte Bilder, sinnvolle Alt-Texte, sprechende Dateinamen) · Search Console + Bing Webmaster + Sitemap einreichen, IndexNow optional.
+**SEO-/GEO-Startsystem (im Websitepreis, ab Launch):** Suchintention + Thema je Seite · Antwort-zuerst-Texte aus bestätigten Fakten · sprechende URLs (Bindestriche, keine Umlaute) · genau eine H1, saubere Überschriften · interne Links als echte Links · Title/Description/Canonical/OG/Robots · Breadcrumb + `BreadcrumbList` · `Organization`+`WebSite` global, `Service`/`FAQPage`/`Article`/`DefinedTerm` seitenweise (nur bei sichtbarer Entsprechung) · XML-Sitemap, robots.txt, 404, Redirect-Plan · echte NAP, `LocalBusiness` **nur** bei berechtigtem Standort · Performance (CWV: LCP < 2,5 s, INP < 200 ms, CLS < 0,1; AVIF/WebP + srcset, Hero nicht lazy + `fetchpriority=high`, self-hosted WOFF2 `font-display:swap`) · Bild-SEO · Search Console + Bing Webmaster + Sitemap einreichen, IndexNow optional.
 
 **Laufender Schutz (in Schutz S/M/L):** technische Suchgesundheit – Erreichbarkeit, Crawlbarkeit, Sitemap, Links, Canonicals, Schema aus bestätigten Fakten, technische Regressionen. **Kein** stillschweigender Content-Auftrag.
 
@@ -394,79 +383,42 @@ Dunkler, ruhiger Produkt-Hero (kein Stockfoto, kein KI-Gradient). Am unteren Ran
 
 **SEO-/GEO-Flottenzentrale (Admin):** Datenquellen (eigener Crawler, Search Console API, Performance/Uptime, Portalfakten, Conversion-Events nach Einwilligung). Prüfgruppen `critical/warning/opportunity/information`. **Automatisch reparierbar** (deterministisch): Sitemap neu erzeugen, interne Links nach Deaktivierung anpassen, technische Canonical-/Robots-/Metadatenverletzungen gegen feste Regeln, strukturierte Daten aus bestätigten Fakten, defekte Bildableitungen. **Nur als Entwurf** (Freigabe nötig): neue/geänderte Texte, neue Orts-/Leistungs-/Ratgeberseiten, Aussagen zu Preis/Qualifikation/Gesundheit/Recht/Ergebnis, Wettbewerbsvergleiche.
 
----
-
-## 17. Lexikon- und Ratgeber-Konzept
-
-**Ratgeber (`/ratgeber`)** – Informationssuchen abholen, in kommerzielle Seiten führen. Jeder Artikel: H1 mit Suchintention · **Kurzantwort sofort oben** · Update-Datum · Autor/Prüfhinweis · Beispiele · Tabellen/Entscheidungslogik · interne Links · CTA zu Lumi/Leistung · `Article`-Schema. **Startartikel (3–6):** Was kostet eine Firmenwebsite? (→ `/preise`) · Website erstellen lassen – Ablauf (→ `/ablauf`) · One-Pager oder mehrseitig? · Website ohne WordPress (→ `/leistung-webdesign`) · Lokales SEO für Unternehmen · Domainwechsel ohne E-Mail-Ausfall. **Nicht:** tägliche KI-Artikel ohne eigene Perspektive, Themen außerhalb der Zielgruppe, erfundene Statistiken, erzwungene Wortzahl.
-
-**Lexikon (`/lexikon`)** – kuratierter Begriffs-Hub für Entitäten-/GEO-Aufbau, **kein** SEO-Begriffsfriedhof. **Start 40–60 Begriffe** (nicht 300). Hub: Suchfeld · alphabetische Navigation · Kategorien (Website & Struktur / SEO & GEO / Technik & Performance / Domain & E-Mail / Portal & Projekt / Betrieb & Sicherheit) · Begriffsliste · CTA. **Begriffseite (8 Teile):** H1 = Begriff · Kurzdefinition (2–3 Sätze) · Warum wichtig für Firmenwebsites? · Beispiel aus Sartu-Sicht · Typischer Fehler · Wie Sartu damit umgeht · Verwandte Begriffe · Link zur passenden Leistungsseite. Schema `DefinedTerm`/`DefinedTermSet`, sonst `Article`/`WebPage`. **Startbegriffe** u. a.: Firmenwebsite, One-Pager, Landingpage, Relaunch, SEO, GEO, Local SEO, Suchintention, Title Tag, Meta Description, Canonical, Sitemap, robots.txt, noindex, 301, Core Web Vitals, LCP/INP/CLS, Lazy Loading, Schema.org, LocalBusiness, FAQPage, Breadcrumb, Domain, DNS, Registrar, MX/SPF/DKIM/DMARC, Hosting, SSL, Backup, Monitoring, WordPress, CMS, statische Website, Designsystem, Briefing, Abnahme, Korrekturrunde, Festpreis, Scope.
+**Ortsseiten für Kundenwebsites** nur mit echtem lokalem Nutzen (Publikationsgate: eigene Inhalte, ≥ 5 nicht austauschbare Abschnitte, kein Duplicate-Title, kein `LocalBusiness` ohne echten Standort, redaktionelle Freigabe). Keine Doorway-Massenseiten.
 
 ---
 
-## 18. Content-Cluster (interne Verlinkung)
+## 17.–19. (verschoben) Ratgeber, Lexikon, Content-Cluster, Bild-/Screenshotkonzept
 
-**Cluster 1 – Kaufabsicht (Money):** `/preise`, `/leistung-*`, kommerzielle Hubs, Orts-/Branchen-Hubs. Ziel-Keywords: „Website erstellen lassen", „Firmenwebsite … Festpreis", „Webdesign ohne WordPress", „Webdesign {Ort}".
-**Cluster 2 – Beratung (Ratgeber):** Kosten, Ablauf, One-Pager-vs-mehrseitig, ohne-WordPress, lokales SEO, Domainwechsel → verlinken **immer** auf ≥ 1 Money-Seite.
-**Cluster 3 – Entität/Definition (Lexikon):** verlinkt auf Leistungen + verwandte Begriffe + passende Ratgeber.
-**Cluster 4 – Vertrauen/Marke:** `/ueber-uns`, `/ablauf`, `/leistung-portal`, echte Referenzen (sobald vorhanden).
+Siehe `CLAUDE_SARTU_WEBSITE_KONZEPT_FINAL.md`, Abschnitte 7 und 9.
+**Korrigierter Startumfang: 3 Ratgeber und 10–15 Lexikonbegriffe.** Die früher genannten 40–60 Begriffe bzw. 3–6 Ratgeber gelten **nicht** mehr für den Launch, sondern sind Stufe 2.
 
-**Verlinkungsregeln:** jede kommerzielle Seite → `/briefing` + `/preise`; jede Leistung → passende Ratgeber-/Lexikonseiten; Ratgeber → ≥ 1 kommerzielle Seite; Startseite verlinkt **max. 3–5** wichtigste Orte/Regionen (über Region-Hubs), **kein** Footer-Ortsverzeichnis. Gute Ankertexte (`Website-Pakete ansehen`), keine `hier/mehr/klicken`, keine Keyword-Ketten.
+**Weiterhin im Master gültig – Bildprinzip für Kundenwebsites:** echte Betriebs-, Team-, Projekt- und Produktbilder haben Vorrang; gezielt lizenzierte Bilder nur, wenn reale Motive fehlen; KI-Bilder nie als Dokumentation des Unternehmens. Keine austauschbaren Handschlag-/Laptop-/Callcenter-Stockbilder. Bildrechte und zulässige Verwendung werden **pro Datei im Portal bestätigt**.
 
 ---
 
-## 19. Bild- und Screenshot-Konzept
+## 20. Designprinzipien (Kundenwebsites)
 
-**Grundsatz:** Bilder machen Sartu **glaubwürdiger**, nicht dekorativ. Prioritätsreihenfolge: 1) echte **Portal-Screens** · 2) echte **Muster-Kundenseiten** · 3) echtes Foto von Nils/Arbeitsplatz · 4) neutrale lizenzierte Fotos nur wenn konkret hilfreich · 5) KI-Bilder nur für neutrale abstrakte Motive, **nie** als Kundenbeweis. **Verboten:** austauschbare Handschlag-/Laptop-/Callcenter-Stockbilder, dunkle weichgezeichnete Atmosphärenbilder, Fake-Logowolken, Fake-KPI-Dashboards, Gradient-Orbs.
+> Die **Markenpalette, Typografie und Designrichtung der SARTU-Website** sind ausgelagert: `CLAUDE_SARTU_WEBSITE_KONZEPT_FINAL.md`, Abschnitt 3 (drei bewertete Richtungen zur finalen Entscheidung) und Abschnitt 10 (Website-Designsystem).
 
-**Benötigte Portal-Screens (als `Musteransicht` markiert bis produktionsreif):** `sartu-portal-cockpit-muster.webp` (Hero) · `-briefing-` · `-domain-` · `-vorschau-feedback-` · `-zahlung-` · `-pflege-`. Leistungen: Systemdiagramm/UI-Modul statt Stockfoto. Ablauf: Portal-Timeline. Über uns: echtes Foto von Nils (kein Fake-Teamfoto; Platzhalter nie als echtes Foto tarnen). Ratgeber: einfache Diagramme/Tabellen/Checklisten.
+Für die **Kundenwebsites** (das verkaufte Produkt) gilt das versionierte SARTU-Designsystem:
 
-**Bildregeln:** WebP/AVIF, responsive Quellen, feste `width`/`height`, Hero nicht lazy, restliche lazy, keine Textinfo nur im Bild, echter Alt-Text.
+**Unveränderliche Grundlagen:** 4-/8-Pixel-Abstandslogik · stabile Container und responsive Raster · Radius 0–8 px · klare Fokus-/Hoverzustände · semantisches HTML · barrierearme Formulare und Navigation · Bildkomponenten mit festen Seitenverhältnissen und responsiven Quellen · begrenztes JavaScript-/Animationsbudget · keine überlappenden Texte, Layoutsprünge oder abgeschnittenen Bedienelemente.
 
----
+**Variable Tokens (SARTU entscheidet, nicht der Kunde):** Markenfarben als **Rollen** statt Hexwerte in Komponenten · eine Hauptschrift, optional eine Akzentschrift · Inhaltsdichte `compact`/`balanced`/`editorial` · Formcharakter `precise`/`human`/`bold` · Bildverhältnisse und Inhaltsrhythmus passend zur Branche · Bewegungsintensität `none`/`subtle`/`expressive`.
 
-## 20. Designprinzipien (aufgelöste Entscheidung)
-
-**Was „schön" bei Sartu heißt:** klare visuelle Hierarchie, konsequentes Raster, ruhige Typografie, wenige gezielte Farben, Bilder nur wo sie den Prozess erklären, konkrete Angebotslogik statt generischer Benefits, Portal als Arbeitswerkzeug statt Marketinggrafik.
-
-> **Status nach Codex-Review:** Die folgende Palette ist **eine begründete Arbeitsentscheidung, keine finale Markenfestlegung**. Design ist eine Marken-/Geschmacksfrage, die nicht per Dekret gehört. Drei ausgearbeitete, bewertete Designrichtungen (inkl. der vom Review favorisierten Beige/Schwarz/Rostrot-Welt) stehen in **`CLAUDE_SARTU_WEBSITE_KONZEPT_FINAL.md`** – dort wird final entschieden. Unstrittig in allen Varianten: **kein Neon-Grün, keine generische shadcn-Weißgrau-Optik ohne Markenkante.**
-
-**Farb-Entscheidung (Arbeitsstand, Widerspruch der Quelldateien aufgelöst):** Es gibt **eine** Markenpalette und **eine** funktionale Portal-Palette.
-
-| Rolle | Wert | Verwendung |
-|---|---|---|
-| Ink (Marke) | `#14181D` | Text, dunkle Flächen, Navigation |
-| Deep Ink | `#0E1216` | Hero-Hintergrund |
-| Paper / Ivory | `#FFFFFF` / `#F6F4EF` | Hauptflächen (warmes Ivory statt kaltes Weiß = editorial) |
-| Mist | `#F3F6F4` | ruhige Bänder, Tabellenwechsel |
-| Line | `#D8DFDC` | Linien/Felder |
-| **Sartu Teal** | `#0B7F73` | **Markenfarbe**, aktive Zustände, wichtige Akzente |
-| **Oxide / Rostrot** | `#B55E2D` | **Signatur-Akzent** (der „Prozessschnitt" aus dem Logo), sparsam |
-| Signal Blue | `#2F6FED` | Links/Info (nur Portal-UI) |
-| Amber | `#A8660A` | Hinweis/Handlungsbedarf (Portal-UI) |
-| Red | `#B63A3A` | Fehler/kritisch (Portal-UI) |
-
-**Bewusst verworfen:** das **Neon-Signal-Grün `#A8E000`** (widerspricht der Anti-KI-/Editorial-Haltung, wirkt generisch-SaaS) und **Navy + Lime** (Altstand). CTA-Akzent = **Oxide/Rostrot** (Markenanker aus dem Logo) auf ruhigem Grund, nicht Neongrün. Keine Verläufe, Leuchtflecken oder dekorativen Orbs.
-
-**Logo:** Wortmarke „SARTU" mit einem erinnerbaren Detail (Favoriten aus den Boards: **T-02 „geschnittener Beam"** oder **S-02 „konstruiertes Portal-S"** – schlicht, abstrakt, favicon-tauglich; roter „Prozessschnitt" als wiederkehrendes Markendetail/Pattern). Ohne brauchbares Kundenlogo → hochwertige typografische Wortmarke (keine erzwungene Logoentwicklung im Standard).
-
-**Typografie:** klare Grotesk für UI/Fließtext (Empfehlung: **Inter** oder **Instrument Sans**, self-hosted), H1 kräftig aber nicht aufgeblasen, tabellarische Ziffern für Preise, keine negative Laufweite, Fließtext ~18 px Desktop / ~16 px mobil. Editorial-Charakter primär über **Raster, Weißraum und Ivory**, nicht über verspielte Display-Schriften. (Optional dezente editorial Serif nur für H1 – s. offene Entscheidung 25.)
-
-**Form:** Radius 6–8 px, Buttons rechteckig (nicht pillenförmig als Standard), Karten nur für Pakete/FAQ/Portalmodule/wiederholte Datensätze, Abschnitte als volle Bänder, Icons aus einer Bibliothek (Lucide), keine „Karten in Karten".
-
-**Technische Basis:** Website = **static-first** (Astro o. gleichwertig), Portal = echte App-Umgebung. Die **Design- und Basisentscheidung** (eigenes Layout vs. neu recherchierte Template-Basis) wird frei getroffen – siehe `CLAUDE_SARTU_WEBSITE_KONZEPT_FINAL.md` Abschnitt 3. Die früheren Template-Kandidaten sind **keine** Vorgabe.
+**Varianten statt Einheitswebsite:** pro wichtiger Komponente wenige getestete Varianten (z. B. drei Hero-Kompositionen, drei Leistungsdarstellungen, zwei Navigationsmuster). Der Agent darf nur freigegebene Varianten kombinieren; neue Varianten durchlaufen Designsystem-Review, Dokumentation, Tests und Versionierung – sie werden **nie** heimlich in einem Kundenrepository erfunden.
 
 ---
 
 ## 21. Trust-Elemente
 
-- **Festpreis + Erstjahreswert** transparent (senkt Kaufangst).
-- **Portal-Screens** als Produktbeweis (der stärkste ehrliche Beweis am Start).
-- **Klartext-Grenzen:** „Was ist enthalten / nicht enthalten / was entscheidet Sartu" auf jeder Leistungsseite.
-- **Ehrliche Disclaimer:** keine Ranking-/KI-Nennungs-/Umsatzgarantie, „Sartu leistet keine Rechtsberatung", „KI wird genutzt, Ergebnisse werden geprüft".
-- **Echte Referenzen/Case Studies**, sobald 2–3 Projekte live sind (→ Kaltstart-Priorität, s. Abschnitt 24). **Keine** Fake-Referenzen/-Bewertungen/-Logos/-Adressen.
-- **Verantwortlichkeit:** echtes Foto/Name (Nils), klare Haltung auf `/ueber-uns`.
-- **FAQ** als Einwandbehandlung (Paket selbst wählen? Texte? warum keine Add-ons? Domain/E-Mail? später selbst ändern? SEO enthalten? warum kein WordPress? Rankinggarantie?).
+> Die Trust-/FAQ-/Einwandbehandlung der SARTU-Website steht in der Website-Datei, Abschnitt 8.
+
+Geschäftsseitig verbindlich bleibt:
+
+- **Keine** Fake-Referenzen, Fake-Bewertungen, Fake-Logos, Fake-Adressen, Fake-Teamfotos – auf SARTU- **und** Kundenwebsites.
+- **Ehrliche Disclaimer:** keine Ranking-/KI-Nennungs-/Umsatzgarantie; „SARTU leistet keine Rechtsberatung"; „KI wird genutzt, Ergebnisse werden geprüft".
+- **Echte Referenzen/Case Studies**, sobald 2–3 Projekte live sind – Bild-/Namensrechte **vor** Projektstart schriftlich klären (s. Abschnitt 23a).
 
 **Ehrlichkeitsregel Solo/Team:** solange faktisch Ein-Personen-/Gründer-geführt, **nicht** „großes Team" behaupten. „Gründer-geführt, kleines Team, klare Verantwortung" ist glaubwürdiger und rechtlich sauberer als ein Fake-Teamfoto.
 
@@ -485,7 +437,7 @@ Dunkler, ruhiger Produkt-Hero (kein Stockfoto, kein KI-Gradient). Am unteren Ran
 - **Keine Garantie** auf Rankings, Anfragen, Umsätze, KI-Nennungen, vollständige Rechtskonformität. **Zufriedenheits-/Geld-zurück-Garantie** aus Altmaterial **nicht** übernehmen, solange nicht sauber formuliert (EuGH C-133/22: auch Zufriedenheitsgarantie = gewerbliche Garantie mit Pflichtangaben).
 - **BFSG (seit 28.06.2025):** reine B2B-Firmen-/Visitenkarten-Websites und Kleinstunternehmen (Dienstleistungen: < 10 MA und ≤ 2 Mio. € Umsatz) sind i. d. R. **nicht** verpflichtet; sobald Shop/Buchung/Online-Vertragsschluss (B2C) dabei ist, **greift** WCAG 2.1 AA. → Barrierefreiheits-**Basis** immer bauen (Qualität), BFSG-Pflicht **fallweise** prüfen, **nicht** pauschal als „Pflicht für alle" verkaufen. (Rechtsstand vor Verkauf verifizieren.)
 - **§ 312k BGB Kündigungsbutton** betrifft Verbraucher – bei reinem B2B-Abo grundsätzlich entschärft, dennoch faire Kündigung/Laufzeit sauber regeln.
-- **Rechte/Export:** nach vollständiger Zahlung Nutzungsrechte am konkreten Website-Stand + Sartu-Texten + kundenspezifischem Design; Domaininhaber = Kunde; dokumentiert **baubarer** Export ohne Abhängigkeit vom privaten Sartu-Master; **Exportweg vor erstem Verkauf praktisch testen** (sonst nicht mit „problemlosem Umzug" werben).
+- **Rechte/Export:** nach vollständiger Zahlung Nutzungsrechte am konkreten Website-Stand + SARTU-Texten + kundenspezifischem Design; Domaininhaber = Kunde; dokumentiert **baubarer** Export ohne Abhängigkeit vom privaten SARTU-Master; **Exportweg vor erstem Verkauf praktisch testen** (sonst nicht mit „problemlosem Umzug" werben).
 
 **Scope-Creep-Verhinderung:** Empfehlung + Sitemap stehen vor Auftrag fest; Standardpreis wird nicht mit „notwendigen Extras" aufgeweicht; Feedback wird gebündelt (parallele E-Mail/Telefon/Messenger zählen nicht als eigene Kanäle); neue Ziele werden getrennt vom Mangel behandelt (ein Folge-Festpreisprojekt); Selbstpflege ersetzt Änderungsminuten; Agentenjobs haben Kosten-/Zeit-/Werkzeuggrenzen.
 
@@ -534,9 +486,23 @@ Dunkler, ruhiger Produkt-Hero (kein Stockfoto, kein KI-Gradient). Am unteren Ran
 
 ### A. Startregion statt „deutschlandweit"
 
-„Deutschlandweit" ist keine Startstrategie, sondern eine diffuse Fläche. **Eine** Kernregion wählen (naheliegend: Dresden, sekundär Leipzig/Chemnitz/Sachsen), dort lokal sichtbar und referenzierbar werden, erst danach ausweiten. Alle Ortsseiten, das Google-Unternehmensprofil und der Outreach folgen dieser einen Region.
+> ### ⛔ BLOCKIERENDE ENTSCHEIDUNG: Startregion ist **nicht** entschieden
+>
+> Frühere Unterlagen nennen Dresden/Sachsen, andere Entwürfe einen abweichenden Standort. **Solange der echte Unternehmensstandort/Startmarkt nicht bestätigt ist, gilt keine Region als gesetzt.**
+>
+> **Blockiert, bis entschieden ist** (nichts davon vorher bauen):
+> - Ortsseiten (`/webdesign-{ort}`) und regionale Hubs
+> - `LocalBusiness`-Schema
+> - Google-Unternehmensprofil
+> - lokale SEA-Kampagnen und lokale Keyword-Struktur
+> - NAP-Daten in Impressum/Footer
+> - lokale Referenzkunden-Ansprache und Website-Texte wie „Webdesign {Ort}"
+>
+> **Es gibt keinen Dresden-/Sachsen-Default.** Alle früheren Ortsnennungen in den Quelldateien sind bis zur Bestätigung als **Platzhalter** zu behandeln und aus Texten fernzuhalten.
 
-**Google-Unternehmensprofil (GBP):** nur anlegen, wenn die Voraussetzungen **regelkonform** erfüllt sind (echte Adresse oder korrekt definiertes Service-Area-Business). Keine Fake-/Briefkastenadresse – das riskiert Profilsperrung und widerspricht der eigenen Anti-Fake-Regel.
+„Deutschlandweit" ist keine Startstrategie, sondern eine diffuse Fläche. **Eine** Kernregion wählen (welche, ist offen – s. o.), dort lokal sichtbar und referenzierbar werden, erst danach ausweiten. Alle Ortsseiten, das Google-Unternehmensprofil und der Outreach folgen dann dieser einen Region.
+
+**Google-Unternehmensprofil (GBP):** nur anlegen, wenn die Voraussetzungen **regelkonform** erfüllt sind. Bei Betrieben ohne Kundenverkehr am Standort ist ein **Service-Area-Business** korrekt – dann muss die Adresse laut Google-Richtlinie **verborgen** werden ([Google-Richtlinie](https://support.google.com/business/answer/3038177)). Keine Fake-/Briefkastenadresse – das riskiert Profilsperrung und widerspricht der eigenen Anti-Fake-Regel.
 
 ### B. Pilot-Outreach (die ersten Kunden kommen nicht über SEO)
 
@@ -544,7 +510,15 @@ SEO und Content wirken erst nach Monaten. Die ersten 2–3 Kunden kommen über *
 
 1. **Zielkundenliste: 30–50 konkrete Betriebe** in der Startregion (Handwerk, Praxen, Kanzleien, lokale Dienstleister) mit sichtbar schwacher/veralteter/nicht mobiler Website.
 2. Pro Kontakt ein **konkreter Aufhänger** (nicht „Ich mache Websites"), z. B.: veraltete Inhalte, fehlende mobile Darstellung, kein Impressum/Datenschutz, langsame Ladezeit, kein Google-Profil.
-3. **Kanäle:** persönliche Ansprache/Netzwerk > Empfehlung > telefonisch/E-Mail (werberechtliche Grenzen bei Kaltakquise beachten: B2B-E-Mail-Werbung ohne Einwilligung ist riskant → besser Anruf/Netzwerk/Empfehlung).
+3. **Kanäle – verbindliche Reihenfolge nach Rechtsrisiko** (Werberecht in DE ist auch im B2B streng; vgl. [IHK Stuttgart](https://www.ihk.de/stuttgart/fuer-unternehmen/recht-und-steuern/wettbewerbsrecht/richtig-werben/was-ist-erlaubt-684868), [IHK München](https://www.ihk-muenchen.de/ratgeber/recht/werbung-fairer-wettbewerb/marketing-per-email-telefon-brief-etc/)):
+   1. **Netzwerk und Empfehlungen** (risikoärmster und wirksamster Kanal)
+   2. **persönliche Kontakte** / bestehende Geschäftsbeziehungen
+   3. **Google Ads / eingehende Suchanfragen** (Interessent meldet sich selbst)
+   4. **postalische Anschreiben** (Brief ist deutlich risikoärmer als E-Mail/Telefon)
+   5. **LinkedIn/Xing sehr zurückhaltend** – individuell, **nie** automatisiert oder in Serie
+   6. **Telefon nur bei konkretem sachlichem Anlass** und dokumentiertem Geschäftsbezug (mutmaßliche Einwilligung) – **kein** Streuanruf
+   7. **Keine kalten Massen-E-Mails.** B2B-Werbe-E-Mail ohne Einwilligung ist in Deutschland grundsätzlich unzulässig und abmahnfähig.
+   > Die Zielkundenliste ist eine **Rechercheliste für passende Ansprache**, kein Verteiler für Massenwerbung.
 4. **Angebots-Skript für Gründerkunden:** Ausgangslage benennen → SARTU-Ablauf in 3 Sätzen → Festpreis + Erstjahr → Pilotkondition + Gegenleistung → nächster Schritt (Bedarfsscheck).
 
 ### C. Kaltstart-Pricing: Preise oben halten, Pilotslots verdeckt
@@ -577,7 +551,7 @@ Angesprochene Betriebe → Antwortquote → gestartete Bedarfsschecks → versen
 
 **A. Fundament klären (diese Woche):**
 1. **Einen** Preis-/Scope-Stand als Single Source of Truth festlegen (`pricing.json`/`prices.js`) und `sartupaketepreise.md` + `sartulastenheftwebsite.md` in `konzepte/_archiv/` verschieben (als **veraltet** markieren) – gegen Wiederverwendung.
-2. Stack-Entscheidung dokumentieren: Website **Astro**, Portal **Next.js/shadcn**, Control-Plane **Node/PostgreSQL**; Umgang mit dem Supabase-Prototyp entscheiden (behalten als PG-Backend vs. migrieren – s. 25).
+2. Stack-Entscheidung dokumentieren: Website **static-first**; **Portal: echte App-Umgebung, Framework final offen** (shadcn/ui-Komponenten optional als Baustein – **kein** `dashboard-01`-Template als Vorgabe); Control-Plane **Node/PostgreSQL**; Umgang mit dem Supabase-Prototyp entscheiden (behalten als PG-Backend vs. migrieren – s. 25).
 3. **Eine** Palette + Ansprache („Sie") + Logo-Favorit fixieren; verbotene Wörter-/Anti-KI-Regeln als Lint/QA-Check.
 
 **B. Website launchen (2–4 Wochen):**
@@ -600,7 +574,7 @@ Angesprochene Betriebe → Antwortquote → gestartete Bedarfsschecks → versen
 1. **Supabase-Prototyp behalten oder migrieren?** Der Juni-Stand (Supabase Frankfurt: Auth/PostgreSQL/Storage, RLS, live getestet) erfüllt „PostgreSQL + Identität + Storage in DE/EU" bereits. **Empfehlung:** für Stufe 0/1 **behalten** (schneller live, Sicherheit aus RLS), Ziel-Node-Control-Plane erst ab Stufe 2, wenn Queues/Worker/Agentenjobs wirklich gebraucht werden. **Nicht** parallel zwei Portale pflegen.
 2. **Buchhaltung: lexoffice oder sevDesk?** (API-Anbindung, GoBD/E-Rechnung). Kaufmännische Entscheidung, vor Stufe 1.
 3. **Typografie final:** reine Grotesk (Inter/Instrument Sans) vs. Grotesk + dezente editorial Serif für H1. Empfehlung: mit Grotesk starten, Serif optional testen.
-4. **Startregion & echte NAP:** Dresden/Sachsen bestätigt? Öffentliche Geschäftsanschrift vorhanden (für `LocalBusiness`/Impressum/Google-Unternehmensprofil) oder nur Kontaktanschrift (→ Service-Area-Business)?
+4. **⛔ Startregion & echte NAP (BLOCKIEREND):** Welcher Standort/Startmarkt gilt wirklich? Öffentliche Geschäftsanschrift vorhanden (für `LocalBusiness`/Impressum/GBP) oder nur Kontaktanschrift (→ Service-Area-Business mit verborgener Adresse)? **Ohne diese Entscheidung dürfen Ortsseiten, `LocalBusiness`, GBP, lokale SEA und NAP-Texte nicht gebaut werden** (s. Abschnitt 23a).
 5. **Solo vs. kleines Team – ehrliche Selbstdarstellung** und daraus abgeleitete **Kapazität/Projekte-pro-Monat** (bestimmt, ob der Portal-Vollausbau realistisch neben der Produktion läuft oder Hilfe/Outsourcing braucht).
 6. **AGB/Garantie:** ob überhaupt eine (sauber formulierte) Zufriedenheitszusage als Verkaufsargument gewünscht ist – sonst weglassen.
 7. **Designrichtung final:** eine der drei Varianten aus `CLAUDE_SARTU_WEBSITE_KONZEPT_FINAL.md` – oder eigenes Layout vs. neu recherchierte Template-Basis.

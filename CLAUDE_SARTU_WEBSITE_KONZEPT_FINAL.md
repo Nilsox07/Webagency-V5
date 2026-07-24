@@ -48,6 +48,7 @@ Die Website muss den Besucher durch **eine mentale Reise** führen. Jede Seite u
 **Vier Beweiszeilen (Trust-Zeile im Hero):** `Festpreis vorab` · `Texte inklusive` · `Portal statt E-Mail-Chaos` · `SEO-/GEO-Basis ab Launch`
 
 **Sprachregeln (verbindlich):**
+- **Markenschreibweise: `SARTU`** – in Wortmarke/Logo **und** im Fließtext. Die kurze Marke wirkt in Versalien grafisch stärker; gemischtes „Sartu" wird nicht mehr verwendet.
 - **„Sie"** durchgängig (B2B, Nettopreise, Preisniveau).
 - **Nie** „wartungsarm", „wartungsfrei", „kaum Wartung" → entwertet den Rundum-Schutz. Stattdessen: **„keine Wartung für Sie – SARTU übernimmt Betrieb und Verantwortung."**
 - „Kein WordPress" **nie als Headline**, immer als enttechnisierter Beweis: *„Ohne WordPress-Wartungsstress: keine Plugin-Updates, kein Baukasten, keine Sicherheitsbaustelle bei Ihnen."*
@@ -137,13 +138,16 @@ Die Farb-/Stilfrage ist eine **Marken-, keine Sachentscheidung**. Deshalb hier d
 | `/briefing` | Lumi-Bedarfsscheck | Empfehlung prüfen lassen |
 | `/ueber-uns` | Vertrauen, Haltung, Verantwortlichkeit | Bedarf prüfen lassen |
 | `/kontakt` | Rückfragen (nicht Hauptweg) | Rückfrage senden |
-| `/impressum`, `/datenschutz`, `/agb` | Pflichtseiten | – |
+| `/impressum`, `/datenschutz` | **Launch-Pflichtseiten** | – |
+| `/agb` | **nur wenn anwaltlich final** – sonst nicht verlinken + `noindex` | – |
 
 **Leistungsseiten (Launch: 5):** `/leistung-webdesign` · `/leistung-texte` · `/leistung-seo-lokal` · `/leistung-wartung` · `/leistung-portal`
 **Wissen (Launch klein):** `/ratgeber` mit **3** Artikeln · `/lexikon` mit **10–15** Begriffen
 **Systemseiten:** 404, Danke-/Bestätigungsseiten (`noindex`)
 
-**Nach Launch (Stufe 2, nur mit echtem Inhalt):** `/leistung-domain-launch`, Trennung SEO ↔ lokales SEO, kommerzielle Hubs (`/website-erstellen-lassen`, `/webdesign-ohne-wordpress`, `/website-relaunch`), Branchen-Hubs, Ortsseiten (nur nach Publikationsgate), Referenzen/Case Studies.
+**Nach Launch (Stufe 2, nur mit echtem Inhalt):** `/leistung-domain-launch`, Trennung SEO ↔ lokales SEO, kommerzielle Hubs (`/website-erstellen-lassen`, `/webdesign-ohne-wordpress`, `/website-relaunch`), Branchen-Hubs, Lexikonausbau auf 40–60 Begriffe, Referenzen/Case Studies.
+
+> **⛔ Ortsseiten sind blockiert**, bis der echte Standort/Startmarkt entschieden ist (s. Masterkonzept §23a). Kein Dresden-/Sachsen-Default, kein `LocalBusiness`, kein Google-Unternehmensprofil und keine lokale SEA-Struktur vorher. Auch `/webdesign-{ort}`-Platzhalter nicht anlegen.
 
 ---
 
@@ -234,7 +238,7 @@ Aufbau: Einstieg mit Trust-Hinweisen (3 Min., Preis vor Kontaktdaten, kein Pflic
 
 ## 9. SEO-/GEO-Struktur der SARTU-Website
 
-**Zielbegriffe (Startregion + generisch):** Webdesign Agentur · Website erstellen lassen · Firmenwebsite erstellen lassen · Webdesign zum Festpreis · Webdesign ohne WordPress · Website für Handwerker · Website Wartung · Webdesign {Startort}.
+**Zielbegriffe (generisch – lokal erst nach Standortentscheidung):** Webdesign Agentur · Website erstellen lassen · Firmenwebsite erstellen lassen · Webdesign zum Festpreis · Webdesign ohne WordPress · Website für Handwerker · Website Wartung. **`Webdesign {Startort}` erst, wenn die Startregion final entschieden ist** (s. Abschnitt 4 und Masterkonzept §23a).
 
 **Pro Seite:** genau eine H1 · eindeutiger Title + Description · Canonical auf finale URL · bewusstes index/noindex · Breadcrumb + `BreadcrumbList` · sprechende URL (Bindestriche, keine Umlaute) · Antwort-zuerst-Absatz oben.
 **Global:** `Organization` + `WebSite` JSON-LD; `LocalBusiness` **nur** bei berechtigtem Standort; `Service` auf Leistungsseiten; `FAQPage` nur für sichtbare Fragen; `Article` auf Ratgebern; `DefinedTerm` im Lexikon.
@@ -281,8 +285,8 @@ Die Umsetzung gilt erst als fertig, wenn:
 2. **Eigenes Layout (empfohlen) oder neu recherchierte Template-Basis?**
 3. **Schrift final** – editorial Serif für H1 ja/nein; konkrete Schriftwahl (self-hosted).
 4. **Logo-Favorit** aus den Boards (Empfehlung: „geschnittener Beam"/T-02 oder „Portal-S"/S-02, Rostrot als Markendetail).
-5. **Startregion** für Ortsbegriffe und Google-Unternehmensprofil.
-6. **Wird `/agb` zum Launch verlinkt** (nur mit finalem Rechtstext) oder zurückgehalten?
+5. **⛔ Startregion (blockierend)** für Ortsbegriffe, `LocalBusiness`, Google-Unternehmensprofil und lokale SEA.
+6. **`/agb` zum Launch:** Empfehlung – **nur** live und verlinkt, wenn der Text anwaltlich final ist. Sonst **gar nicht** verlinken (nicht in Navigation, nicht im Footer) und `noindex`. **Launch-Pflicht sind nur Impressum und Datenschutz.**
 
 ---
 

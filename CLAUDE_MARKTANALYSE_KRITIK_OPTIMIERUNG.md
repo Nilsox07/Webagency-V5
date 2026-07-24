@@ -168,7 +168,7 @@ WEBSITE_KONZEPT/DESIGN: „helle Oberflächen"; ELEMENTPLAN Prüfrunde 2 + WEBSE
 `SartuProjektZusammenfassung §1.2` ändert Website-Wording bewusst **„Solo → Team"**; `WEBSEITENKONZEPT §18.1` will ein **echtes Foto von Nils** (Einzelperson); `GESCHAEFTSMODELL §2` sagt „kleines Team". → Ehrlichkeits- **und** Kapazitätsfrage. „Team" behaupten, wo faktisch eine Person arbeitet, ist ein Vertrauens- und ggf. Wettbewerbsrechtsrisiko. Kapazität/Projekte-pro-Monat hängen direkt daran (s. Unit Economics).
 
 ### 4.9 Markenname-/Repo-Churn `[BELEGT]`
-Altname **„Klarweb"** (sartupaketepreise.md: „Seite sagt aktuell Klarweb → auf Sartu ändern"), Vorschau `webagency-v3.vercel.app`, Repo `Webagency-V5`, geplante Domain `sartu.de`. Mehrere Rebuilds signalisieren Konzept-Churn – Energie floss in Umbauten statt Verkauf. `[EINSCHÄTZUNG]`
+Altname **„Klarweb"** (sartupaketepreise.md: „Seite sagt aktuell Klarweb → auf SARTU ändern"), Vorschau `webagency-v3.vercel.app`, Repo `Webagency-V5`, geplante Domain `sartu.de`. Mehrere Rebuilds signalisieren Konzept-Churn – Energie floss in Umbauten statt Verkauf. `[EINSCHÄTZUNG]`
 
 ---
 
@@ -182,14 +182,15 @@ Altname **„Klarweb"** (sartupaketepreise.md: „Seite sagt aktuell Klarweb →
 6. **Rechtliche Baustellen** (vor Verkauf zwingend): Abnahmefiktion/Mitwirkung, **AVV mit KI-Subunternehmern** (OpenAI/Anthropic), Domain-Datenschutz, Garantie-Formulierung (EuGH C-133/22), RDG bei Rechtstexten, BFSG-Anwendbarkeit. `[BELEGT: mehrere Dateien]`
 7. **Mollie-Abo/Mandat-Komplexität** (SEPA-Mandat, Idempotenz, Fehlschlag/Erstattung/Mahnung) muss E2E getestet sein, bevor wiederkehrend eingezogen wird. `[BELEGT: DESIGNSYSTEM §14]`
 8. **Scope-Creep über „Selbstpflege".** Kunden erwarten evtl. mehr als typisierte Datensätze („nur den einen Satz ändern"). Ohne klare Erwartung droht Support-Last. `[EINSCHÄTZUNG]`
-9. **Content-Last mit Qualitätsgate.** 7 Leistungsseiten + Hubs + Branchen + Ortsseiten (je ≥ 5 nicht-austauschbare Abschnitte) + 40–60 Lexikonbegriffe + Ratgeber = hoher, kaum automatisierbarer Redaktionsaufwand. `[BELEGT: WEBSITE_KONZEPT, WEBSEITENKONZEPT]`
+9. **Content-Last mit Qualitätsgate.** Der **Quellstand** plante 7 Leistungsseiten + Hubs + Branchen + Ortsseiten (je ≥ 5 nicht-austauschbare Abschnitte) + 40–60 Lexikonbegriffe + Ratgeber = hoher, kaum automatisierbarer Redaktionsaufwand. `[BELEGT: WEBSITE_KONZEPT, WEBSEITENKONZEPT]` → **Entschärft:** Launch jetzt 5 Leistungsseiten / 3 Ratgeber / 10–15 Begriffe, Rest Stufe 2.
 10. **Export-Versprechen ungetestet.** „Problemloser Umzug" darf nicht beworben werden, bevor der baubare Export praktisch getestet ist. `[BELEGT: GESCHAEFTSMODELL §16]`
 
 ---
 
 ## 6. Fehlende Bestandteile
 
-- **Vertriebs-/Lead-Gen-Plan** (wie entstehen Anfragen: Local SEO, Google-Unternehmensprofil, gezielte SEA, Netzwerk/Empfehlung, Kaltakquise?). Komplett fehlend. `[EINSCHÄTZUNG]`
+- **Vertriebs-/Lead-Gen-Plan** – **ergänzt** in Masterkonzept §23a (Startregion, Zielkundenliste, rechtlich gestaffelte Kanäle, Pilotslots, SEA-Testkriterien, KPIs). `[erledigt]`
+- **Lokale Wettbewerbsanalyse fehlt weiterhin:** 5–10 echte Anbieter in der Startregion mit Preisen (falls sichtbar), Positionierung, WordPress-/Baukasten-/Festpreis-/Portal-/SEO-Angebot, Referenzlage – und was SARTU dagegen konkret sagt. **Erst lösbar, wenn die Startregion entschieden ist** (blockierend, s. Masterkonzept §23a). `[EINSCHÄTZUNG]`
 - **Echte Referenzen/Case-Study-Strategie** für den Kaltstart. `[EINSCHÄTZUNG]`
 - **Ausfall-/Vertretungskonzept** (Krankheit, Urlaub) für Betrieb und SLA. `[EINSCHÄTZUNG]`
 - **Finale Schriftwahl** – in keiner Datei festgelegt. `[BELEGT: fehlt]`
@@ -240,7 +241,7 @@ Altname **„Klarweb"** (sartupaketepreise.md: „Seite sagt aktuell Klarweb →
 - **Grundhaltung:** vorbildlich – „GEO = gute SEO", keine Garantien, `llms.txt` ehrlich als Nicht-Rankingfaktor, korrekte Google-Quellen. `[BELEGT: WEBSEITENKONZEPT §2]`
 - **SEO ab Launch enthalten:** richtig und verkaufsstark; späterer Ausbau datenbasiert statt pauschalem Neuschreiben. `[BELEGT]`
 - **Ortsseiten-Gate:** sehr gut (verhindert Doorway-Abstrafung). `[BELEGT: WEBSITE_KONZEPT]`
-- **Lexikon/Ratgeber:** sinnvoll für Entitäten/GEO, aber **Aufwands- und Qualitätsrisiko** (Gefahr „Textfriedhof"). Der Start mit 40–60 kuratierten Begriffen statt 300 ist die richtige Bremse. `[BELEGT; EINSCHÄTZUNG zum Aufwand]`
+- **Lexikon/Ratgeber:** sinnvoll für Entitäten/GEO, aber **Aufwands- und Qualitätsrisiko** (Gefahr „Textfriedhof"). Die Quelldateien wollten 40–60 Begriffe zum Start – **das ist für den Launch immer noch zu viel.** Verbindlich sind jetzt **3 Ratgeber und 10–15 Lexikonbegriffe**; 40–60 Begriffe sind Stufe 2 nach Search-Console-Daten. `[EINSCHÄTZUNG]`
 - **Admin-SEO-Flotte:** technisch stark; die Grenze „deterministische Technik automatisch, Inhalt nur als Entwurf" ist genau richtig. `[BELEGT: DESIGNSYSTEM §12]`
 - **Kritik:** Der laufende Content-Aufwand (Ratgeber, Lexikon, Ortsseiten mit echtem Inhalt) ist der versteckte Dauer-Zeitfresser und konkurriert mit der Produktion. `[EINSCHÄTZUNG]`
 
@@ -272,7 +273,7 @@ Altname **„Klarweb"** (sartupaketepreise.md: „Seite sagt aktuell Klarweb →
 
 1. **Reihenfolge umdrehen: verkaufen vor Vollausbau.** 2–3 Referenzkunden manuell (KI-assistiert) liefern; Minimal-Portal genügt. `[→ Masterkonzept §23]`
 2. **Eine Wahrheitsquelle erzwingen.** `pricing.json`/`prices.js` + Diff-Test; `sartupaketepreise.md` und `sartulastenheftwebsite.md` als **veraltet** nach `konzepte/_archiv/`.
-3. **Stack festnageln:** Website Astro, Portal Next.js/shadcn, Backend PostgreSQL; Supabase-Stand für Stufe 0/1 behalten, Node-Control-Plane erst ab Stufe 2.
+3. **Stack festnageln:** Website static-first; **Portal: echte App-Umgebung, Framework offen** (shadcn/ui-Komponenten optional, **kein** `dashboard-01`-Template); Backend PostgreSQL; Supabase-Stand für Stufe 0/1 behalten, Node-Control-Plane erst ab Stufe 2.
 4. **Design vereinheitlichen:** eine Palette (Ink/Ivory/Teal + Oxide/Rostrot-Akzent), **Neon-Grün streichen**, „Sie" durchziehen, Schrift + Logo-Favorit fixieren.
 5. **USP umformulieren:** „kein WordPress" → „keine Update-/Plugin-/Sicherheitssorgen **für Sie**; Betrieb inklusive". **Nie „wartungsarm"** (entwertet den Schutz). Portal + Festpreis als Haupt-USP.
 6. **Start-Paket schärfen** gegen Gratis-Wettbewerb (Ergebnis + Betrieb betonen) oder Wachstum als eigentlichen Einstieg framen.
