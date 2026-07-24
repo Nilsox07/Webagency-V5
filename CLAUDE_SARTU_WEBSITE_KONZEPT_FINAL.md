@@ -157,7 +157,8 @@ Die Farb-/Stilfrage ist eine **Marken-, keine Sachentscheidung**. Deshalb hier d
 *Regeln:* Ergebnis ehrlich, keine Angstmache, keine erfundenen Sicherheitswarnungen, keine Note, die jede Seite schlecht aussehen lässt, **kein** automatischer E-Mail-Versand an ungeprüfte Adressen. Ergebnisseite `noindex`, Werkzeugseite `index`.
 *Warum es sich lohnt:* echter Lead-Magnet, teilbar und verlinkbar — Multiplikatoren können ein nützliches Werkzeug weitergeben, eine Leistungsseite nicht.
 
-> **✅ Standort entschieden:** Sitz Stolpen, Markt **Region Dresden / Ostsachsen**. Ortsseiten sind damit freigegeben — aber **in dieser Reihenfolge** (Masterkonzept §16a): erst `/webdesign-region-dresden` + 2–3 Umland-Orte (Pirna, Radeberg, Bischofswerda, Neustadt i. Sa., Sebnitz) + Heimatanker `/webdesign-stolpen`, **danach** erst `/webdesign-dresden`. Jede Seite muss einzeln das Indexierungs-Gate bestehen. `LocalBusiness` nur als Service-Area-Business ohne sichtbare Adresse.
+> **✅ Standort entschieden:** Wohnsitz Stolpen, **Geschäftsadresse Dresden**, Markt **Region Dresden / Ostsachsen**. Ortsseiten sind damit freigegeben — aber **in dieser Reihenfolge** (Masterkonzept §16a): erst `/webdesign-region-dresden` + 2–3 Umland-Orte (Pirna, Radeberg, Bischofswerda, Neustadt i. Sa., Sebnitz) + Heimatanker `/webdesign-stolpen`, **danach** erst `/webdesign-dresden`. Jede Seite muss einzeln das Indexierungs-Gate bestehen.
+> `LocalBusiness` mit sichtbarer Dresdner Adresse ist zulässig, **sofern** die Adresse ein tatsächlich genutztes Büro ist (§23a.1) — sonst Service-Area-Business ohne sichtbare Adresse. Das **Google-Unternehmensprofil** läuft unabhängig von den Ortsseiten und wird sofort aufgesetzt.
 
 ---
 
@@ -357,7 +358,7 @@ Die Umsetzung gilt erst als fertig, wenn:
 2. **Eigenes Layout (empfohlen) oder neu recherchierte Template-Basis?**
 3. **Schrift final** – editorial Serif für H1 ja/nein; konkrete Schriftwahl (self-hosted).
 4. **Logo-Favorit** aus den Boards (Empfehlung: „geschnittener Beam"/T-02 oder „Portal-S"/S-02, Rostrot als Markendetail).
-5. ~~Startregion~~ **entschieden:** Sitz Stolpen, Markt Region Dresden/Ostsachsen; GBP als Service-Area-Business ohne sichtbare Adresse. Verbleibende Teilfrage: Wohnanschrift im Impressum oder ladungsfähige Coworking-Adresse.
+5. ~~Startregion und Adresse~~ **entschieden:** Wohnsitz Stolpen, Geschäftsadresse Dresden, Markt Region Dresden/Ostsachsen. Verbleibende Teilfrage betrifft nur die Form des Google-Profils (echtes Büro → sichtbare Adresse, reine Postadresse → Service-Area-Business), s. Masterkonzept §23a.1.
 6. **`/agb` zum Launch:** Empfehlung – **nur** live und verlinkt, wenn der Text anwaltlich final ist. Sonst **gar nicht** verlinken (nicht in Navigation, nicht im Footer) und `noindex`. **Launch-Pflicht sind nur Impressum und Datenschutz.**
 
 ---

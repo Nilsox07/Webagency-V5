@@ -429,8 +429,9 @@ Siehe `CLAUDE_SARTU_WEBSITE_KONZEPT_FINAL.md`, Abschnitte 4–6.
 
 | Stufe | Umfang | Bedingung |
 |---|---|---|
-| 1 | **Region-Hub** `/webdesign-region-dresden` + **2–3 Tier-1-Orte** (Pirna, Radeberg, Bischofswerda, Neustadt i. Sa., Sebnitz) + Heimatanker `/webdesign-stolpen` | echte NAP-Daten, GBP als Service-Area-Business |
-| 2 | **`/webdesign-dresden`** | erst wenn Referenzen und Bewertungen vorliegen — härtester Wettbewerb |
+| 0 | **Google-Unternehmensprofil** mit Dresdner Geschäftsadresse | sofort — sofern die Adresse die Eignungsregel erfüllt (§23a.1). Schnellster lokaler Hebel, unabhängig von Ortsseiten |
+| 1 | **Region-Hub** `/webdesign-region-dresden` + **2–3 Tier-1-Orte** (Pirna, Radeberg, Bischofswerda, Neustadt i. Sa., Sebnitz) + Heimatanker `/webdesign-stolpen` | echte NAP-Daten, konsistent zu Impressum und GBP |
+| 2 | **`/webdesign-dresden`** | erst wenn Referenzen und Bewertungen vorliegen — organisch härtester Wettbewerb (das Local Pack läuft bereits über Stufe 0) |
 | 3 | weitere Tier-2-Orte (Bautzen, Kamenz, Heidenau, Freital, Dippoldiswalde) | je einzeln durch das Gate unten |
 | 4 | **Branche × Region** statt Kleinstadtseiten, z. B. `/website-handwerker-region-dresden` | erst nach Search-Console-/SEA-Daten |
 | 5 | weiterer Ausbau | nur für Orte mit belegten Impressionen oder Leads |
@@ -606,28 +607,41 @@ Geschäftsseitig verbindlich bleibt:
 
 Reihenfolge: Region-Hub und 2–3 Tier-1-Orte zuerst — **nicht** Dresden. Dresden kommt, wenn Referenzen und Bewertungen stehen.
 
-### 23a.1 Kein Büro, kein Problem — aber drei Dinge müssen sauber sein
+### 23a.1 Geschäftsadresse Dresden — was das löst und worauf zu achten ist
 
-Die berechtigte Sorge: *„Ich kann Kunden schlecht ins Kinderzimmer einladen."* Dazu drei Punkte — einer davon ist wirklich zu klären, zwei sind unkritischer als sie wirken.
+**Stand:** Es wird eine **Geschäftsadresse in Dresden** geben (Wohnsitz Stolpen). Damit sind zwei frühere Sorgen erledigt und eine neue Frage entsteht.
 
-**1. Kundentermine — unkritisch.** Niemand besucht eine Webagentur; es gibt dort nichts zu sehen. In dieser Zielgruppe gilt die umgekehrte Richtung: **man fährt zum Betrieb des Kunden**, so wie Handwerker es untereinander auch tun. Das ist der Normalfall, nicht die Ausnahme.
-Verbindliche Terminregel:
-- Standard: **kein Termin nötig** (Kern-USP, ohnehin so konzipiert)
-- Auf Wunsch: **Video** oder **beim Kunden vor Ort**
-- **Nie** am eigenen Wohnsitz — muss nicht erklärt, nur nicht angeboten werden
-- Für seltene neutrale Treffen: Coworking-Tagesplatz in Dresden, Räume von Kammer/IHK oder ein Café. Kein eigenes Büro anmieten, solange es keinen wirtschaftlichen Anlass gibt.
+**Erledigt: Impressum.** Die Geschäftsadresse Dresden ist die **ladungsfähige Anschrift** im Impressum. Die Wohnanschrift muss nicht veröffentlicht werden. *(Die exakte Anschrift wird beim Go-live ins Impressum eingesetzt — nicht in Konzeptdateien.)*
 
-**Ein Vor-Ort-Termin beim Kunden ist sogar ein Produktvorteil:** Das Konzept verlangt **echte Betriebsbilder statt Stockfotos**. Wer 30 km entfernt sitzt, kann diese Bilder selbst machen — eine Agentur aus Berlin kann das nicht. Das ist ein echter Wettbewerbsvorteil, kein Nachteil.
+**Erledigt: die Kinderzimmer-Frage.** Ein Kundentermin am Wohnsitz steht nicht mehr zur Debatte. Unabhängig davon bleibt die Terminregel bestehen, weil sie ein Kern-USP ist:
+- Standard: **kein Termin nötig**
+- Auf Wunsch: **Video**, **beim Kunden vor Ort** oder **in Dresden**
+- Auf der Website wird **kein** Besuchstermin beworben — die Adresse steht im Impressum, nicht als Einladung
 
-**2. Impressum — das ist der Punkt, der wirklich sauber sein muss.** Das Impressum verlangt eine **ladungsfähige Anschrift**; für Einzelunternehmer ohne Geschäftsräume ist das die **Wohnanschrift**. Es gibt dafür keine bequeme Umgehung:
-- **Standardlösung:** Wohnanschrift ins Impressum. Rechtlich sauber, bei kleinen Dienstleistern völlig üblich und **kein** Glaubwürdigkeitsproblem.
-- Alternativen (kosten Geld, vorher rechtlich prüfen): Coworking-Space mit echter Geschäftsadresse oder ein Anbieter für ladungsfähige Anschriften — nur, wenn die Adresse tatsächlich ladungsfähig ist.
-- **Nicht** akzeptabel: erfundene Adresse, reine Briefkastenadresse ohne echte Erreichbarkeit, fremde Firmenadresse. Das widerspricht der eigenen Anti-Fake-Regel und ist abmahnfähig.
+**Nach wie vor ein Produktvorteil:** Das Konzept verlangt **echte Betriebsbilder statt Stockfotos**. Ein Termin beim Kunden im Umland ist von Stolpen aus problemlos machbar — eine Agentur aus Berlin kann das nicht liefern.
 
-**3. Google-Unternehmensprofil — als Service-Area-Business.** Da keine Kunden am Standort bedient werden, ist das GBP als **Service-Area-Business** anzulegen und die **Adresse zu verbergen** ([Google-Richtlinie](https://support.google.com/business/answer/3038177)). Als Einzugsgebiet werden Dresden und die Umland-Orte hinterlegt.
-*Ehrliche Einordnung:* Ein SAB mit verborgener Adresse rankt im lokalen Bereich in der Regel schwächer als ein Betrieb mit verifizierter, sichtbarer Adresse mitten in Dresden. Das ist ein realer Nachteil — aber kein Blocker, und **Bewertungen** wiegen ihn teilweise auf. Eine Fake-Adresse in Dresden wäre der falsche Ausweg: Profilsperrung ist ein reales Risiko.
+#### ⚠️ Die entscheidende Frage: Was für eine Adresse ist es?
 
-**Was daraus für die Außendarstellung folgt:** SARTU wirbt mit *„aus der Region Dresden"*, nicht mit einer Dresdner Innenstadtadresse. Ehrlich, überprüfbar, und für Handwerksbetriebe im Umland eher sympathisch als nachteilig.
+Davon hängt ab, ob ein **Google-Unternehmensprofil mit sichtbarer Dresdner Adresse** zulässig ist. Googles Kernregel lautet wörtlich: *„To qualify for a Business Profile, a business must make in-person contact with customers during its stated hours."* Postfächer und Mailadressen an entfernten Standorten sind ausdrücklich ausgeschlossen ([Eignungsrichtlinie](https://support.google.com/business/answer/13763036), geprüft 25.07.2026).
+
+| Art der Adresse | Impressum | Google-Unternehmensprofil |
+|---|---|---|
+| **Eigenes/gemietetes Büro, in dem tatsächlich gearbeitet wird und Kunden empfangen werden können** | ✅ | ✅ **Sichtbare Adresse zulässig** — der stärkste Fall |
+| **Coworking mit fester, tatsächlich genutzter Fläche** | ✅ | ⚠️ Grauzone — nur bei echter Präsenz; mehrere Firmen unter einer Adresse sind ein Risikosignal |
+| **Virtuelles Büro / reine Postadresse ohne Anwesenheit** | ✅ (wenn ladungsfähig) | ❌ **Nicht zulässig** — Sperrrisiko. Dann GBP als Service-Area-Business ohne sichtbare Adresse, bezogen auf den echten Arbeitsort |
+
+**Regel:** Die Adresse im GBP muss die Realität abbilden. Eine Dresdner Adresse im Profil zu führen, an der niemand erreichbar ist, riskiert die **Sperrung des Profils** — und trifft damit genau den Kanal, der lokal am meisten bringt.
+
+#### Was ein echtes Dresdner Büro strategisch ändert
+
+Wichtige Unterscheidung, die oft vermischt wird:
+
+- **Local Pack (Kartenergebnisse)** — hängt stark an einem verifizierten Profil, echter Adresse, Kategorie und **Bewertungen**. Mit echter Dresdner Adresse ist das **deutlich schneller gewinnbar** als organisches Ranking.
+- **Organisches Ranking für „Webdesign Dresden"** — bleibt hart umkämpft und braucht Zeit, unabhängig von der Adresse.
+
+**Konsequenz für die Reihenfolge:** Google-Unternehmensprofil **sofort** aufsetzen und mit Bewertungen füttern (schnellster lokaler Hebel). Die **Ortsseiten** starten trotzdem im Umland, weil dort organisch weniger Widerstand ist. Beides parallel — sie konkurrieren nicht miteinander.
+
+**Außendarstellung:** Dresdner Geschäftsadresse im Impressum und in strukturierten Daten; in Texten weiterhin **„Region Dresden"**, weil das den tatsächlichen Einzugsbereich beschreibt und im Umland glaubwürdiger ist als reine Stadt-Rhetorik.
 
 ### B. Pilot-Outreach (die ersten Kunden kommen nicht über SEO)
 
@@ -828,7 +842,7 @@ Kostet ~15 Minuten, positioniert SARTU als ehrlichen Fachmann und funktioniert n
 1. **Supabase-Prototyp behalten oder migrieren?** Der Juni-Stand (Supabase Frankfurt: Auth/PostgreSQL/Storage, RLS, live getestet) erfüllt „PostgreSQL + Identität + Storage in DE/EU" bereits. **Empfehlung:** für Stufe 0/1 **behalten** (schneller live, Sicherheit aus RLS), Ziel-Node-Control-Plane erst ab Stufe 2, wenn Queues/Worker/Agentenjobs wirklich gebraucht werden. **Nicht** parallel zwei Portale pflegen.
 2. **Buchhaltung: lexoffice oder sevDesk?** (API-Anbindung, GoBD/E-Rechnung). Kaufmännische Entscheidung, vor Stufe 1.
 3. **Typografie final:** reine Grotesk (Inter/Instrument Sans) vs. Grotesk + dezente editorial Serif für H1. Empfehlung: mit Grotesk starten, Serif optional testen.
-4. ~~Startregion~~ **entschieden:** Sitz Stolpen, Markt Region Dresden/Ostsachsen, GBP als Service-Area-Business mit verborgener Adresse (s. §23a). **Verbleibende Teilfrage:** Wohnanschrift im Impressum (Standard, kostenlos) **oder** Coworking-/Geschäftsadresse in Dresden (kostet, muss ladungsfähig sein)?
+4. ~~Startregion und Adresse~~ **entschieden:** Wohnsitz Stolpen, **Geschäftsadresse Dresden**, Markt Region Dresden/Ostsachsen. Impressum-Frage damit erledigt. **Verbleibende Teilfrage (bestimmt nur die GBP-Form):** Ist die Dresdner Adresse ein tatsächlich genutztes Büro mit Kundenkontaktmöglichkeit (→ sichtbare Adresse im Google-Profil) oder eine reine Postadresse (→ Service-Area-Business ohne sichtbare Adresse)? Siehe §23a.1.
 5. **Solo vs. kleines Team – ehrliche Selbstdarstellung** und daraus abgeleitete **Kapazität/Projekte-pro-Monat** (bestimmt, ob der Portal-Vollausbau realistisch neben der Produktion läuft oder Hilfe/Outsourcing braucht).
 6. **AGB/Garantie:** ob überhaupt eine (sauber formulierte) Zufriedenheitszusage als Verkaufsargument gewünscht ist – sonst weglassen.
 7. **Designrichtung final:** eine der drei Varianten aus `CLAUDE_SARTU_WEBSITE_KONZEPT_FINAL.md` – oder eigenes Layout vs. neu recherchierte Template-Basis.

@@ -16,15 +16,16 @@
 | 1 | **Designrichtung** (Werkplan / Kontor / Signal) | ⛔ **offen** | Farb- und Typo-Tokens, alle Komponenten |
 | 2 | ~~Startregion / Standort~~ | ✅ **entschieden** | – |
 
-**Zu 2 (entschieden):** Sitz **Stolpen**, Markt **Region Dresden / Ostsachsen**.
-- Impressum: **ladungsfähige Anschrift Pflicht** — Wohnanschrift ist der Standardfall (verbleibende Teilfrage: Wohnanschrift oder ladungsfähige Coworking-Adresse, s. Masterkonzept §23a.1).
-- `LocalBusiness` **nur** als Service-Area-Business **ohne sichtbare Adresse**.
-- Ortsseiten sind freigegeben, aber **nicht zum Launch**: erst Region-Hub + Umland (Pirna, Radeberg, Bischofswerda, Neustadt i. Sa., Sebnitz), **danach** Dresden. Reihenfolge und Gate: Masterkonzept §16a.
-- Auf der Website heißt es **„aus der Region Dresden"** — keine Dresdner Innenstadtadresse behaupten.
+**Zu 2 (entschieden):** Wohnsitz **Stolpen**, **Geschäftsadresse Dresden**, Markt **Region Dresden / Ostsachsen**.
+- **Impressum:** Dresdner Geschäftsadresse als ladungsfähige Anschrift. Exakte Anschrift wird beim Go-live eingesetzt — **keine Platzhalter live**.
+- **NAP-Konsistenz:** Impressum, Footer, strukturierte Daten und Google-Unternehmensprofil müssen **identisch** sein.
+- **`LocalBusiness`:** zulässig mit sichtbarer Dresdner Adresse, **sofern** die Adresse ein tatsächlich genutztes Büro ist. Bei reiner Postadresse stattdessen Service-Area-Business ohne sichtbare Adresse (Masterkonzept §23a.1).
+- **Ortsseiten** sind freigegeben, aber **nicht zum Launch**: erst Region-Hub + Umland (Pirna, Radeberg, Bischofswerda, Neustadt i. Sa., Sebnitz), **danach** Dresden. Reihenfolge und Gate: Masterkonzept §16a.
+- **Sprachregelung in Texten:** „Region Dresden" — beschreibt den echten Einzugsbereich und wirkt im Umland glaubwürdiger als reine Stadt-Rhetorik.
 
 **Alles andere in diesem Dokument ist entschieden.** Copy, Struktur, Felder, Verhalten und Reihenfolge sind final. Wo die Designrichtung eine Rolle spielt, steht „**[Token]**" statt eines konkreten Farbwerts.
 
-**Terminregel für alle Texte:** Standard ist **kein Termin**. Auf Wunsch **Video oder beim Kunden vor Ort** — nie am Unternehmenssitz. Auf der Website wird kein Besuchstermin angeboten und keine Besuchsadresse suggeriert.
+**Terminregel für alle Texte:** Standard ist **kein Termin**. Auf Wunsch Video, beim Kunden vor Ort oder in Dresden. Auf der Website wird **kein Besuchstermin beworben** — die Adresse steht im Impressum, nicht als Einladung.
 
 ---
 
