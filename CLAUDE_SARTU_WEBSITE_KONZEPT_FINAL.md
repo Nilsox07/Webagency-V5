@@ -153,6 +153,10 @@ Die Farb-/Stilfrage ist eine **Marken-, keine Sachentscheidung**. Deshalb hier d
 
 **Nach Launch (Stufe 2, nur mit echtem Inhalt):** `/leistung-domain-launch`, Trennung SEO ↔ lokales SEO, kommerzielle Hubs (`/website-erstellen-lassen`, `/webdesign-ohne-wordpress`, `/website-relaunch`), Branchen-Hubs, Lexikonausbau auf 40–60 Begriffe, Referenzen/Case Studies.
 
+**`/website-check` — Schnellcheck (Stufe 2, sobald der Crawler steht):** Öffentliches Werkzeug: Adresse eingeben, Prüfung von Ladezeit mobil, Mobildarstellung, SSL, Impressum, Metadaten und maschinenlesbaren Kontaktdaten. Nutzt **dieselbe** Technik wie die QA-Gates und die SEO-Flottenzentrale (Masterkonzept §23b.6) — doppelte Verwendung, einmal gebaut.
+*Regeln:* Ergebnis ehrlich, keine Angstmache, keine erfundenen Sicherheitswarnungen, keine Note, die jede Seite schlecht aussehen lässt, **kein** automatischer E-Mail-Versand an ungeprüfte Adressen. Ergebnisseite `noindex`, Werkzeugseite `index`.
+*Warum es sich lohnt:* echter Lead-Magnet, teilbar und verlinkbar — Multiplikatoren können ein nützliches Werkzeug weitergeben, eine Leistungsseite nicht.
+
 > **⛔ Ortsseiten sind blockiert**, bis der echte Standort/Startmarkt entschieden ist (s. Masterkonzept §23a). Kein Dresden-/Sachsen-Default, kein `LocalBusiness`, kein Google-Unternehmensprofil und keine lokale SEA-Struktur vorher. Auch `/webdesign-{ort}`-Platzhalter nicht anlegen.
 
 ---

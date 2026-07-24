@@ -189,7 +189,8 @@ Altname **„Klarweb"** (sartupaketepreise.md: „Seite sagt aktuell Klarweb →
 
 ## 6. Fehlende Bestandteile
 
-- **Vertriebs-/Lead-Gen-Plan** – **ergänzt** in Masterkonzept §23a (Startregion, Zielkundenliste, rechtlich gestaffelte Kanäle, Pilotslots, SEA-Testkriterien, KPIs). `[erledigt]`
+- **Vertriebs-/Lead-Gen-Plan** – **ergänzt** in Masterkonzept §23a (Markteintritt) und **§23b (Kanalstrategie)**: Rollenklärung „Website = Conversion, nicht Akquise" beim Start, Multiplikatoren-Netzwerk, Bestandsübernahme von aussteigenden Freelancern, Trigger-Events, Website-Schnellcheck als Doppelnutzung der QA-Technik, Branchen-Spirale, Bewertungen als Portal-Feature, 12-Monats-Sequenz. `[erledigt]`
+- **Realitätscheck SEO** `[EINSCHÄTZUNG]`: Für Head-Terms („Webdesign Agentur", „Website erstellen lassen") ist eine neue Domain auf Jahre chancenlos. Gewinnbar sind ausschließlich (a) lokale Suche **nach** Standortentscheidung, (b) enge Nischenbegriffe („Firmenwebsite Festpreis", „Website ohne WordPress"), (c) informationelles Long-Tail. Wer den Launch für SEO verzögert, verliert Zeit ohne Gegenwert.
 - **Lokale Wettbewerbsanalyse fehlt weiterhin:** 5–10 echte Anbieter in der Startregion mit Preisen (falls sichtbar), Positionierung, WordPress-/Baukasten-/Festpreis-/Portal-/SEO-Angebot, Referenzlage – und was SARTU dagegen konkret sagt. **Erst lösbar, wenn die Startregion entschieden ist** (blockierend, s. Masterkonzept §23a). `[EINSCHÄTZUNG]`
 - **Echte Referenzen/Case-Study-Strategie** für den Kaltstart. `[EINSCHÄTZUNG]`
 - **Ausfall-/Vertretungskonzept** (Krankheit, Urlaub) für Betrieb und SLA. `[EINSCHÄTZUNG]`

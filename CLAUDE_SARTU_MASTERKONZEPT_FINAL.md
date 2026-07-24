@@ -639,6 +639,136 @@ Angesprochene Betriebe → Antwortquote → gestartete Bedarfsschecks → versen
 
 ---
 
+## 23b. Kanalstrategie — wie SARTU tatsächlich an Kunden kommt
+
+> **Ehrliche Grundlage:** Für „Webdesign Agentur" oder „Website erstellen lassen" wird eine neue Domain auf absehbare Zeit **nicht ranken**. Das sind die umkämpftesten kommerziellen Begriffe der Branche. Die ersten Kunden kommen bei **keiner** kleinen Agentur über Google-Rankings — auch bei den etablierten Wettbewerbern nicht.
+
+### 23b.1 Rollenklärung: Was die Website beim Start leistet
+
+Das Konzept behandelt die Website implizit als Kundengewinnungs-Maschine. Beim Start ist sie das nicht.
+
+| | Job der Website |
+|---|---|
+| **Monat 1–9** | **Conversion und Glaubwürdigkeit.** Wenn jemand von SARTU *hört* — Empfehlung, Anzeige, Multiplikator, Gespräch — macht die Website daraus einen Auftrag. |
+| **ab Monat 9–18** | **zusätzlich Akquise**, über Long-Tail und lokale Suche. |
+
+Daraus folgt: Die Website muss beim Launch nicht ranken, sondern **abschließen**. Genau dafür ist sie konzipiert (Festpreis sichtbar, Ablauf klar, Portal als Beweis, keine Rückfragen nötig). Kein Grund, den Launch für SEO zu verzögern.
+
+### 23b.2 Kanäle nach Hebelwirkung
+
+| Kanal | Wirkung ab | Aufwand | Bewertung |
+|---|---|---|---|
+| **Multiplikatoren** (23b.3) | Woche 2–8 | mittel | **höchster Hebel**, im Konzept bisher gar nicht vorhanden |
+| **Bestandsübernahme** (23b.4) | Monat 1–6 | mittel | löst Umsatz **und** Referenzproblem gleichzeitig |
+| **Trigger-Events** (23b.5) | Woche 4+ | mittel | sehr effizient, weil Bedarf bereits existiert |
+| **Google Ads** | Tag 1 | gering, kostet Geld | einziger sofort kaufbarer Kanal mit Kaufabsicht |
+| **Netzwerk / Direktansprache** | Woche 1 | hoch | rechtlich gestaffelt (§23a) |
+| **Google-Unternehmensprofil + Bewertungen** | Monat 2+ | gering | Hebel sind **Bewertungen**, nicht die Website |
+| **SEO / Content** | Monat 9–18 | hoch, dauerhaft | richtig jetzt zu starten, falsch sich darauf zu verlassen |
+| **GEO / KI-Antworten** | unbestimmt | gering (fällt nebenbei an) | billige Wette, **kein** planbarer Kanal |
+
+### 23b.3 Multiplikatoren — der unterschätzte Hauptkanal
+
+Menschen, die mit der Zielgruppe reden, **genau wenn** eine Website gebraucht wird, und die selbst keine bauen:
+
+| Multiplikator | Warum er der richtige Moment ist |
+|---|---|
+| Steuerberater, Buchhaltungsbüros | sprechen mit jedem Betrieb und jedem Gründer, kennen die Zahlen |
+| Gründungs-/Unternehmensberater, IHK, Handwerkskammer | begleiten Gründung und Betriebsübernahme |
+| IT-Dienstleister und Systemhäuser | haben die Kunden, machen aber kein Web |
+| Werbetechniker, Druckereien, Fahrzeugbeschrifter | liefern Schild, Flyer, Beschriftung — Website fehlt regelmäßig |
+| Fotografen für Unternehmensbilder | perfekte Vorstufe: erst Bilder, dann Website |
+| Andere Agenturen und Freelancer | lehnen Kleinprojekte ab oder sind ausgelastet |
+
+**Ziel: 5 verlässliche Multiplikatoren.** Fünf gute schlagen ein Jahr SEO.
+
+**Modell:** Gegenseitigkeit vor Provision. Empfehlung gegen Empfehlung ist unbürokratisch und rechtlich unkritisch. **Provisionen an Steuerberater vorher berufsrechtlich prüfen lassen** — dort gelten Einschränkungen.
+
+**Portalzugang für Multiplikatoren (Produktidee, Stufe 2):** Ein Multiplikator will keine Websites verkaufen — er will wissen, dass sein Mandant gut versorgt ist. Ein schlanker Lesezugang („Ihre empfohlenen Betriebe und deren Projektstatus") macht die Empfehlung für ihn kontrollierbar und bindet ihn. Kostet fast nichts, weil Rollen und Status ohnehin existieren.
+
+### 23b.4 Bestandsübernahme — Umsatz und Referenzen in einem Zug
+
+**Die Idee:** Freelancer und Kleinstagenturen hören auf — Ruhestand, Festanstellung, Branchenwechsel. Ihre Bestandskunden haben laufende Websites und plötzlich niemanden mehr. Diese Kunden haben **akuten Bedarf, bestehende Zahlungsbereitschaft für Betrieb und keine Alternative**.
+
+**Warum das für SARTU besonders passt:** Das Geschäftsmodell ist auf **laufenden Betrieb** ausgelegt — genau das, was diese Kunden brauchen. Und es löst gleichzeitig das Kaltstart-Referenzproblem.
+
+**Vorgehen:** In der Startregion gezielt nach Freelancern und Zwei-Personen-Agenturen suchen, die erkennbar auslaufen (keine neuen Projekte, veraltete Portfolios, Jobwechsel bei LinkedIn/Xing). Angebot: geordnete Übergabe des Bestands, faire Ablöse oder Umsatzbeteiligung, der Abgebende verliert kein Gesicht bei seinen Kunden.
+
+**Wichtig — zwei Risiken, die vorher geklärt sein müssen:**
+
+1. **Margenrisiko.** Übernommene Websites sind meist WordPress. SARTU übernimmt zunächst nur den **Betrieb**, nicht die Technik, und migriert erst, wenn es sich rechnet. Dafür braucht es eine eigene, klar kalkulierte Betriebsstufe für Fremdsysteme — bewusst **nicht** Schutz S/M/L, sonst verwässert das Kernprodukt. Ohne diese Stufe fällt genau die Update- und Plugin-Arbeit an, die das Modell eigentlich vermeidet.
+2. **Positionierungsrisiko.** SARTU wirbt öffentlich mit „kein WordPress". Gleichzeitig fremde WordPress-Seiten zu betreiben, ist erklärungsbedürftig. Saubere Sprachregelung: *„Wir bauen ohne WordPress. Bestehende Websites übernehmen wir im Betrieb, damit Sie nicht ohne Ansprechpartner dastehen — und lösen sie ab, wenn es sinnvoll ist."* Diese Übernahmen werden **nicht** als Referenzarbeiten dargestellt.
+
+### 23b.5 Trigger-Events statt Dauerwerbung
+
+Werbung an alle ist teuer. Ansprache im richtigen Moment ist billig. Auslöser, bei denen fast immer eine Website gebraucht wird:
+
+- **Betriebsnachfolge / Übergabe** (Handwerk steht massenhaft davor) — neue Inhaberdaten, oft neuer Auftritt
+- **Neugründung nach Meisterprüfung** — Handwerkskammern, Meisterfeiern
+- **Handelsregister-Neueintragungen** (öffentlich einsehbar)
+- **Umzug oder zweiter Standort** — Adresse und Google-Profil müssen ohnehin angefasst werden
+- **Firmenjubiläum**, Rebranding, Namensänderung
+- **Der bisherige Dienstleister ist weg** (siehe 23b.4)
+- **Akuter Schmerz:** gehackte oder offline gegangene WordPress-Seite, gesperrtes Google-Profil
+
+Ansprache immer mit **konkretem Anlass**, in der rechtlich gestaffelten Reihenfolge aus §23a — Post und persönliche Ansprache sind hier klar im Vorteil.
+
+### 23b.6 Website-Schnellcheck — dasselbe Werkzeug zweimal nutzen
+
+**Die stärkste strukturelle Idee.** SARTU baut für die eigenen QA-Gates und die SEO-Flottenzentrale ohnehin einen Crawler, der Ladezeit, Mobilfreundlichkeit, Metadaten, SSL, Impressum, strukturierte Daten und Erreichbarkeit prüft. **Dieselbe Technik ist ein Akquise-Werkzeug.**
+
+**Zwei Verwendungen, ein Werkzeug:**
+
+1. **Öffentlich auf der Website:** „Website-Schnellcheck — Adresse eingeben, in 30 Sekunden sehen, was Besucher und Google sehen." Prüft: Ladezeit mobil, Mobildarstellung, SSL, Impressum vorhanden, Metadaten, ob Öffnungszeiten und Telefonnummer maschinenlesbar sind.
+   → Das ist ein echter **Lead-Magnet**: nützlich, teilbar, verlinkbar, und er qualifiziert Interessenten selbst vor. Ein Steuerberater oder eine Kammer kann so etwas weiterleiten — eine Leistungsseite nicht.
+2. **Als Gesprächsanlass:** Ein konkreter Befund („Ihre Seite lädt auf dem Handy 6 Sekunden, das Impressum fehlt") ist ein sachlicher Anlass — kein Werbespam.
+
+**Regeln:** Ergebnis ehrlich und ohne Angstmache. Keine erfundenen „Sicherheitswarnungen". Keine Note, die jede Seite schlecht aussehen lässt — das durchschauen Unternehmer sofort. Kein automatischer E-Mail-Versand an ungeprüfte Adressen.
+
+### 23b.7 Branchen-Spirale statt Streuung
+
+Nicht breit akquirieren, sondern **eine Branche nach der anderen aufrollen**:
+
+1. Erster Kunde in einer Branche → wird Referenz.
+2. Der nächste Betrieb derselben Branche ist deutlich leichter zu gewinnen: gleiche Sprache, gleiche Einwände, vergleichbare Referenz.
+3. **Nebeneffekt direkt auf die Marge:** Struktur, Texte, Designsystem-Varianten und Fragen wiederholen sich → die Stundenzahl pro Projekt sinkt. Genau der Hebel, den die Unit Economics brauchen (§11 der Marktanalyse).
+
+Eine Branche sollte 3–5 Referenzen haben, bevor die nächste angefangen wird. Kandidaten mit stabilem Bedarf und wenig Sonderlogik: Sanitär/Heizung, Elektro, Dachdecker, Physiotherapie, Steuerkanzleien.
+
+### 23b.8 Bewertungen als Produktfeature, nicht als Marketing-Aufgabe
+
+Für lokale Sichtbarkeit sind **Bewertungen** der Hebel, nicht die Website. Der Fehler wäre, Wochen nach Launch eine Bitte per Mail zu schicken.
+
+**Richtig:** Der Abnahme-Moment im Portal ist der Punkt höchster Zufriedenheit. Genau dort erscheint **genau einmal** die Bitte um eine Bewertung — mit direktem Link. Das ist ein Portal-Feature (Stufe 1), kein Marketing-Task. Bei Pilotkunden ist die Bewertung ohnehin Teil der vereinbarten Gegenleistung (§23a).
+
+### 23b.9 „Zweitmeinung" als niedrigschwelliger Einstieg
+
+Wer bereits ein Agenturangebot vorliegen hat, ist maximal kaufbereit — und maximal verunsichert. Angebot: **„Sie haben ein Angebot vorliegen? Wir sagen Ihnen, ob Umfang und Preis stimmen."**
+
+Kostet ~15 Minuten, positioniert SARTU als ehrlichen Fachmann und funktioniert nur, weil SARTU **echte Festpreise** hat und deshalb vergleichen kann. Regel: ehrlich bleiben — wenn das fremde Angebot gut ist, sagt man das. Genau das erzeugt die Empfehlung.
+
+### 23b.10 Was ausdrücklich NICHT getan wird
+
+- **Keine sitewide Footer-Backlinks von Kundenwebsites** („Website von SARTU" auf jeder Seite jedes Kunden). Das ist der naheliegendste Gedanke und zugleich ein **Link-Spam-Risiko** — es schadet perspektivisch beiden Seiten. Zulässige Variante: ein Eintrag auf einer echten Referenzseite bei SARTU, und höchstens ein dezenter, nicht sitewide gesetzter Hinweis mit `rel="nofollow"` — nur mit Zustimmung des Kunden.
+- Keine gekauften Links, keine Linktausch-Netzwerke, keine Verzeichnis-Massen-Einträge.
+- Keine Fake-Bewertungen und keine Bewertungsanreize, die gegen Plattformregeln verstoßen.
+- Keine Angstmache mit Recht (BFSG, DSGVO) als Verkaufshebel.
+- Keine kalten Massen-E-Mails (§23a).
+
+### 23b.11 Sequenz über zwölf Monate
+
+| Zeitraum | Schwerpunkt | Messgröße |
+|---|---|---|
+| **Monat 1–2** | Standort entscheiden · 5 Multiplikatoren ansprechen · Google Ads klein starten · Website live | Multiplikator-Gespräche, erste Anfragen |
+| **Monat 2–4** | 2–3 Pilotkunden liefern · Bewertungen einsammeln · Google-Unternehmensprofil aufbauen | abgeschlossene Projekte, Bewertungen |
+| **Monat 4–6** | Case Studies veröffentlichen · Bestandsübernahme prüfen · Schnellcheck live | Referenzen, laufende Betriebsverträge (MRR) |
+| **Monat 6–9** | Branchen-Spirale in Branche 1 · SEA nach echten Daten optimieren | Kunden je Branche, Kosten je Anfrage |
+| **Monat 9–12** | Lokales SEO ernsthaft (Region-Hub, Ortsseiten mit Gate) · Long-Tail-Content ausbauen | Search-Console-Impressionen, organische Anfragen |
+
+**Kernkennzahl über allem:** Anzahl aktiver Betriebsverträge (wiederkehrender Umsatz) — nicht Website-Besucher.
+
+---
+
 ## 24. Konkrete nächste Umsetzungsschritte
 
 **A. Fundament klären (diese Woche):**
