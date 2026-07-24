@@ -3,7 +3,13 @@
 **Erstellt von:** Claude (Opus) · **Stand:** 24.07.2026
 **Zweck:** Dieses Dokument beschreibt die **eigene SARTU-Verkaufswebsite** – nicht die Kundenwebsites, die SARTU verkauft. Es ist als **finales Website-Lastenheft** gedacht: Wer es liest, kann die Website bauen.
 
-**Gilt zusammen mit:** `CLAUDE_SARTU_MASTERKONZEPT_FINAL.md` (Geschäftsmodell, Preise, Portal) und `CLAUDE_MARKTANALYSE_KRITIK_OPTIMIERUNG.md` (Begründungen).
+**Gilt zusammen mit:**
+- `CLAUDE_SARTU_MASTERKONZEPT_FINAL.md` – Geschäftsmodell, Preise, Portal
+- `CLAUDE_MARKTANALYSE_KRITIK_OPTIMIERUNG.md` – Begründungen
+- **`CLAUDE_SARTU_WEBSITE_LASTENHEFT_BAUFINAL.md`** – umsetzungsreifes Briefing mit finaler Copy, Feldlabels, Fehlermeldungen, Bildmaßen und Abnahmekriterien
+- **`design/SARTU_DESIGNRICHTUNGEN.html`** – die drei Designrichtungen als gerendertes Mockup (Hero, Preise, Portal)
+
+> **Hinweis zu Abschnitt 3:** Die dort beschriebenen Richtungen A/B/C wurden nach dem Codex-Review durch **drei radikal neue Richtungen** ersetzt („Werkplan", „Kontor", „Signal") – siehe `design/SARTU_DESIGNRICHTUNGEN.html`. Grund: A/B/C blieben zu nah an der alten Farbwelt, und ausgerechnet die Kombination Ivory + Serif + Rostrot ist das derzeit häufigste KI-Design-Muster.
 
 ---
 
