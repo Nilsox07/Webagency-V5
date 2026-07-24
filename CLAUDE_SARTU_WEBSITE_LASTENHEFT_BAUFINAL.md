@@ -9,12 +9,14 @@
 
 ---
 
-## 0. Eine Entscheidung fehlt noch
+## 0. Baufrei — keine blockierende Entscheidung mehr offen
 
-| # | Entscheidung | Status | Blockiert |
-|---|---|---|---|
-| 1 | **Designrichtung** (Werkplan / Kontor / Signal) | ⛔ **offen** | Farb- und Typo-Tokens, alle Komponenten |
-| 2 | ~~Startregion / Standort~~ | ✅ **entschieden** | – |
+| # | Entscheidung | Status |
+|---|---|---|
+| 1 | **Designrichtung** | ✅ **entschieden: „Werkplan"** — Tokens in `design/sartu-tokens.css`, Referenz `design/SARTU_DESIGNSYSTEM.html` |
+| 2 | **Startregion / Standort** | ✅ **entschieden** — Wohnsitz Stolpen, Geschäftsadresse Dresden, Markt Region Dresden / Ostsachsen |
+
+**Damit ist dieses Lastenheft vollständig umsetzbar.** Die einzige verbleibende Teilfrage betrifft nicht den Bau, sondern die Form des Google-Unternehmensprofils (echtes Büro → sichtbare Adresse, reine Postadresse → Service-Area-Business, s. Masterkonzept §23a.1).
 
 **Zu 2 (entschieden):** Wohnsitz **Stolpen**, **Geschäftsadresse Dresden**, Markt **Region Dresden / Ostsachsen**.
 - **Impressum:** Dresdner Geschäftsadresse als ladungsfähige Anschrift. Exakte Anschrift wird beim Go-live eingesetzt — **keine Platzhalter live**.
@@ -40,8 +42,10 @@
 - **Bibliotheken:** CSS zuerst. Erlaubt bei Bedarf: Lenis (~3 KB), GSAP + ScrollTrigger (~34 KB, seit 04/2025 vollständig kostenlos inkl. SplitText/MorphSVG), Motion (~3–18 KB, primär fürs Portal). **Nicht erlaubt:** Vanta.js, Three.js als Deko, Barba.js.
 - **Ziele:** LCP < 2,5 s · INP < 200 ms · CLS < 0,1 · mobil zuerst entwickelt. **Animationen dürfen CLS nicht verschlechtern.**
 - **`html lang="de"`**, semantische Landmarks (`header`, `nav`, `main`, `footer`), sichtbarer Fokus, Skip-Link „Zum Inhalt springen".
-- **Breakpoints:** ≤ 599 px mobil · 600–1023 px Tablet · ≥ 1024 px Desktop. Maximale Inhaltsbreite 1200–1320 px, Fließtext max. 68 Zeichen.
-- **Radius:** 0–8 px je nach Designrichtung, aber **einheitlich**. Keine „Karten in Karten". Keine Schlagschatten als Standard.
+- **Breakpoints:** ≤ 599 px mobil · 600–1023 px Tablet · ≥ 1024 px Desktop. Maximale Inhaltsbreite 1280 px, Fließtext max. 68 Zeichen.
+- **Designsystem:** verbindlich `design/sartu-tokens.css` (Richtung **„Werkplan"**), Referenz `design/SARTU_DESIGNSYSTEM.html`. Komponenten nutzen **ausschließlich Tokens**, nie rohe Farbwerte.
+- **Radius:** **0 px**, Eingabefelder und Buttons **2 px** — einheitlich. Keine „Karten in Karten". **Erhöhung durch Linie statt Schatten**; Schatten nur bei Modalen.
+- **Schriften:** IBM Plex Sans Condensed (Überschriften), IBM Plex Sans (Fließtext), IBM Plex Mono (Zahlen, Maße, Labels) — self-hosted WOFF2.
 
 ---
 

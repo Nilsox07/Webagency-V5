@@ -9,7 +9,19 @@
 - **`CLAUDE_SARTU_WEBSITE_LASTENHEFT_BAUFINAL.md`** – umsetzungsreifes Briefing mit finaler Copy, Feldlabels, Fehlermeldungen, Bildmaßen und Abnahmekriterien
 - **`design/SARTU_DESIGNRICHTUNGEN.html`** – die drei Designrichtungen als gerendertes Mockup (Hero, Preise, Portal)
 
-> **Hinweis zu Abschnitt 3:** Die dort beschriebenen Richtungen A/B/C wurden nach dem Codex-Review durch **drei radikal neue Richtungen** ersetzt („Werkplan", „Kontor", „Signal") – siehe `design/SARTU_DESIGNRICHTUNGEN.html`. Grund: A/B/C blieben zu nah an der alten Farbwelt, und ausgerechnet die Kombination Ivory + Serif + Rostrot ist das derzeit häufigste KI-Design-Muster.
+> ## ✅ Designrichtung entschieden: **„Werkplan"**
+>
+> Abschnitt 3 dieses Dokuments ist damit **historisch**. Die dort beschriebenen Richtungen A/B/C wurden nach dem Codex-Review durch drei radikal neue ersetzt („Werkplan", „Kontor", „Signal", siehe `design/SARTU_DESIGNRICHTUNGEN.html`) — Grund: A/B/C blieben zu nah an der alten Farbwelt, und ausgerechnet Ivory + Serif + Rostrot ist das derzeit häufigste KI-Design-Muster.
+>
+> **Gewählt und ausgearbeitet ist Richtung 01 „Werkplan"** (technisches Aufmaß: warmes Zeichenpapier, Graphit, Rotstift als einziger Signalakzent), mit der Typo-Kraft aus Richtung 03.
+>
+> **Verbindliche Quellen ab jetzt:**
+> - **`design/sartu-tokens.css`** — einzige Quelle für Farben, Typografie, Abstände, Radien, Motion
+> - **`design/SARTU_DESIGNSYSTEM.html`** — gerenderte Komponenten-Referenz und Abnahmegrundlage
+>
+> **Warum Werkplan:** passt zur Zielgruppe (Handwerk, Bau, lokale Dienstleistung im Umland von Dresden), funktioniert **ohne Hochglanzfotos** — beim Start ohne Referenzbilder ein realer Vorteil — und überträgt sich als Rastersystem auf jede Kundenbranche.
+>
+> **Die Entscheidung bleibt umkehrbar:** Komponenten greifen ausschließlich auf Tokens zu. Ein Wechsel zu „Kontor" oder „Signal" wäre ein Token-Tausch, kein Umbau.
 
 ---
 
@@ -280,7 +292,11 @@ Auch wenn später Ortsseiten dazukommen: **die Startseite bleibt die wichtigste 
 
 ## 10. Öffentliches Website-Designsystem (Tokens & Komponenten)
 
-**Tokens (Richtung A):** Farben `ink`, `ivory`, `sand`, `line`, `rust` (Akzent/CTA), Status `success/warning/error` (nur UI) · Abstände auf 4/8-px-Logik · Radius 6–8 px · Fließtext 18 px Desktop / 16 px mobil · max. Inhaltsbreite 1.200–1.320 px · Fokuszustände sichtbar · Kontrast ≥ 4,5:1.
+**Tokens — ausgelagert und verbindlich:** `design/sartu-tokens.css`. Kurzfassung: warme Papier-Neutrale (`paper-0/1/2`), Graphit-Text (`ink`, `ink-2`, `ink-3`), `line` für Rahmen und Maßlinien, **`signal` (#B4261E, Rotstift)** als einziger Markenakzent, Statusfarben nur im Portal · Abstände 4/8-Logik · **Radius 0 px, Felder und Buttons 2 px** (eine technische Zeichnung hat scharfe Kanten) · Fließtext 17 px Desktop / 16 px mobil · max. Inhaltsbreite 1280 px · Zeilenlänge ≤ 68 Zeichen · Fokus immer sichtbar · Kontrast ≥ 4,5:1 · **Erhöhung durch Linie statt Schatten**.
+
+**Schriften:** **IBM Plex**, self-hosted als WOFF2 mit `font-display: swap` — *Sans Condensed* (Überschriften), *Sans* (Fließtext), *Mono* (Zahlen, Maße, Labels). Als Technikschrift entworfen, offene Lizenz, drei Rollen aus einer Familie. Bewusst **nicht Inter** — das ist die Standardwahl generischer Layouts.
+
+**Kein Dunkelmodus für die Website.** Die Marke ist auf helles Zeichenpapier festgelegt; ein dunkles Aufmaß widerspricht der Bildidee. Für das Portal ist er ab Stufe 2 möglich, die Tokens sind vorbereitet.
 
 **Komponenten (Launch-Set):** Header + mobile Navigation · Hero mit Produktbild · Trust-Zeile · Breite Service-Zeile mit Tags · Paketkarte (empfohlen/kompakt) · Erstjahres-/Vergleichstabelle · Prozess-Timeline · Portal-Screenshot-Rahmen mit „Musteransicht"-Badge · Zwei-Listen-Block (`Im Portal` / `Nicht im Portal`) · FAQ-Akkordeon · CTA-Band · Footer (5 Spalten) · Formularfelder + Fehlerzustände · Breadcrumb · 404.
 
@@ -352,12 +368,12 @@ Die Umsetzung gilt erst als fertig, wenn:
 
 ---
 
-## 12. Offene Entscheidungen zu diesem Dokument
+## 12. Entscheidungen — Stand
 
-1. **Designrichtung A, B oder C?** (Empfehlung: A für Website, B-Farblogik im Portal-Inneren.)
-2. **Eigenes Layout (empfohlen) oder neu recherchierte Template-Basis?**
-3. **Schrift final** – editorial Serif für H1 ja/nein; konkrete Schriftwahl (self-hosted).
-4. **Logo-Favorit** aus den Boards (Empfehlung: „geschnittener Beam"/T-02 oder „Portal-S"/S-02, Rostrot als Markendetail).
+1. ~~Designrichtung~~ ✅ **„Werkplan"** (technisches Aufmaß), ausgearbeitet in `design/sartu-tokens.css` + `design/SARTU_DESIGNSYSTEM.html`.
+2. ~~Eigenes Layout oder Template~~ ✅ **eigenes Layout/Designsystem** — eine erkennbar Template-basierte eigene Website wäre ein Glaubwürdigkeitsbruch bei „individuell programmiert".
+3. ~~Schrift~~ ✅ **IBM Plex** (Sans Condensed / Sans / Mono), self-hosted. Keine editorial Serif — die Kondensschrift trägt den Charakter.
+4. **Logo-Favorit** — noch offen, blockiert den Bau aber nicht. Empfehlung passend zu Werkplan: **T-02 „geschnittener Beam"** oder **S-02 „konstruiertes Portal-S"**, jeweils mit dem Rotstift-Schnitt als wiederkehrendem Markendetail. Bis dahin trägt die typografische Wortmarke `SARTU` in IBM Plex Sans Condensed.
 5. ~~Startregion und Adresse~~ **entschieden:** Wohnsitz Stolpen, Geschäftsadresse Dresden, Markt Region Dresden/Ostsachsen. Verbleibende Teilfrage betrifft nur die Form des Google-Profils (echtes Büro → sichtbare Adresse, reine Postadresse → Service-Area-Business), s. Masterkonzept §23a.1.
 6. **`/agb` zum Launch:** Empfehlung – **nur** live und verlinkt, wenn der Text anwaltlich final ist. Sonst **gar nicht** verlinken (nicht in Navigation, nicht im Footer) und `noindex`. **Launch-Pflicht sind nur Impressum und Datenschutz.**
 

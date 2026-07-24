@@ -1,0 +1,433 @@
+<title>SARTU Designsystem — Werkplan</title>
+
+<style>
+/* ===== Seiten-Chrome (theme-aware, gehört NICHT zur Marke) ===== */
+:root{
+  --pg-bg:#FBFAF7; --pg-fg:#1A1917; --pg-mut:#6E6A62; --pg-line:#DAD6CD; --pg-card:#FFFFFF;
+}
+@media (prefers-color-scheme: dark){
+  :root{ --pg-bg:#131211; --pg-fg:#E9E7E1; --pg-mut:#918D84; --pg-line:#2C2A27; --pg-card:#1B1A18; }
+}
+:root[data-theme="dark"]{ --pg-bg:#131211; --pg-fg:#E9E7E1; --pg-mut:#918D84; --pg-line:#2C2A27; --pg-card:#1B1A18; }
+:root[data-theme="light"]{ --pg-bg:#FBFAF7; --pg-fg:#1A1917; --pg-mut:#6E6A62; --pg-line:#DAD6CD; --pg-card:#FFFFFF; }
+
+/* ===== SARTU-Marken-Tokens (Quelle: design/sartu-tokens.css) ===== */
+.sartu{
+  --c-paper-0:#F2F0EA; --c-paper-1:#E6E4DE; --c-paper-2:#DBD8D1;
+  --c-line-soft:#C9C5BB; --c-line:#B4B0A6;
+  --c-ink:#1C1B19; --c-ink-2:#3A3833; --c-ink-3:#6E6A62; --c-ink-deep:#12110F; --c-on-dark:#E6E4DE;
+  --c-signal:#B4261E; --c-signal-hover:#96201A; --c-signal-tint:#F5E4E2; --c-on-signal:#FFFFFF;
+  --c-success:#2F6B4F; --c-success-tint:#E3EFE8;
+  --c-warning:#A8660A; --c-warning-tint:#F7ECDC;
+  --c-info:#3A5A8C; --c-info-tint:#E4EAF3;
+  --f-display:"Arial Narrow","Helvetica Neue Condensed","Franklin Gothic Medium",Arial,sans-serif;
+  --f-body:system-ui,-apple-system,"Segoe UI",Arial,sans-serif;
+  --f-mono:ui-monospace,"Cascadia Mono",Consolas,"Courier New",monospace;
+  --ls-label:.14em;
+  --r-1:2px;
+}
+
+*{box-sizing:border-box;}
+body{
+  margin:0; background:var(--pg-bg); color:var(--pg-fg);
+  font-family:system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;
+  line-height:1.55; -webkit-font-smoothing:antialiased;
+}
+.wrap{max-width:1120px; margin:0 auto; padding:0 22px;}
+.mono{font-family:ui-monospace,"Cascadia Mono",Consolas,"Courier New",monospace;}
+
+/* ===== Kopf ===== */
+.head{padding:64px 0 34px; border-bottom:1px solid var(--pg-line);}
+.eyebrow{
+  font-family:ui-monospace,Consolas,"Courier New",monospace; font-size:11px;
+  letter-spacing:.16em; text-transform:uppercase; color:var(--pg-mut); margin:0 0 16px;
+}
+.head h1{font-size:clamp(29px,4.2vw,46px); line-height:1.06; letter-spacing:-.02em; margin:0 0 16px; max-width:18ch; font-weight:650;}
+.head p{margin:0 0 12px; max-width:66ch; color:var(--pg-mut); font-size:16px;}
+.head p strong{color:var(--pg-fg); font-weight:600;}
+
+.callout{
+  margin-top:24px; padding:16px 18px; background:var(--pg-card);
+  border:1px solid var(--pg-line); border-left:3px solid #B4261E; max-width:74ch; font-size:14.5px;
+}
+.callout strong{display:block; margin-bottom:6px;}
+.callout p{margin:0; color:var(--pg-mut); font-size:14.5px;}
+
+/* ===== Abschnitte ===== */
+section{padding:52px 0 0;}
+.sec-title{
+  display:flex; align-items:baseline; gap:12px; margin:0 0 6px;
+  font-size:12px; letter-spacing:.15em; text-transform:uppercase; color:var(--pg-mut);
+  font-family:ui-monospace,Consolas,"Courier New",monospace;
+}
+.sec-title::after{content:""; flex:1; height:1px; background:var(--pg-line);}
+h2.sec{font-size:clamp(21px,2.6vw,28px); margin:0 0 8px; letter-spacing:-.015em; font-weight:650;}
+.sec-lead{color:var(--pg-mut); max-width:64ch; margin:0 0 22px; font-size:15px;}
+
+/* ===== Demo-Bühne: hier gilt die Markenwelt ===== */
+.stage{
+  background:var(--c-paper-1); color:var(--c-ink);
+  border:1px solid var(--pg-line); padding:30px;
+  font-family:var(--f-body);
+}
+.stage + .stage{margin-top:16px;}
+.stage h3,.stage h4{font-family:var(--f-display); font-weight:700; letter-spacing:-.01em; margin:0;}
+
+/* Token-Raster */
+.swatches{display:grid; grid-template-columns:repeat(auto-fill,minmax(168px,1fr)); gap:14px;}
+.sw{border:1px solid var(--pg-line); background:var(--pg-card);}
+.sw .chip{height:62px;}
+.sw .meta{padding:9px 11px; font-size:11.5px;}
+.sw .nm{font-weight:600; display:block; margin-bottom:2px;}
+.sw .hex{font-family:ui-monospace,Consolas,monospace; color:var(--pg-mut); font-size:11px;}
+.sw .use{color:var(--pg-mut); display:block; margin-top:4px; font-size:11px; line-height:1.4;}
+
+/* Typskala */
+.type-row{display:flex; align-items:baseline; gap:18px; padding:13px 0; border-bottom:1px solid var(--c-line-soft); flex-wrap:wrap;}
+.type-row:last-child{border-bottom:0;}
+.type-tag{
+  font-family:var(--f-mono); font-size:11px; letter-spacing:var(--ls-label);
+  text-transform:uppercase; color:var(--c-ink-3); flex:none; width:118px;
+}
+.t-h1{font-family:var(--f-display); font-size:clamp(34px,5vw,56px); line-height:1.04; font-weight:700; letter-spacing:-.01em;}
+.t-h2{font-family:var(--f-display); font-size:clamp(26px,3.2vw,37px); line-height:1.06; font-weight:700;}
+.t-h3{font-family:var(--f-display); font-size:27px; line-height:1.18; font-weight:700;}
+.t-lead{font-size:19px; line-height:1.55; color:var(--c-ink-2);}
+.t-body{font-size:17px; line-height:1.6;}
+.t-small{font-size:14px; color:var(--c-ink-3);}
+.t-label{font-family:var(--f-mono); font-size:13px; letter-spacing:var(--ls-label); text-transform:uppercase; color:var(--c-ink-3);}
+
+/* Buttons */
+.btnrow{display:flex; gap:12px; flex-wrap:wrap; align-items:center;}
+.btn{
+  font-family:var(--f-body); font-size:14.5px; font-weight:700; letter-spacing:.02em;
+  padding:13px 24px; border:1px solid transparent; border-radius:var(--r-1);
+  cursor:pointer; transition:background 140ms cubic-bezier(.2,0,0,1), color 140ms;
+}
+.btn-primary{background:var(--c-signal); color:var(--c-on-signal); border-color:var(--c-signal);}
+.btn-primary:hover{background:var(--c-signal-hover); border-color:var(--c-signal-hover);}
+.btn-secondary{background:var(--c-ink); color:var(--c-paper-1); border-color:var(--c-ink);}
+.btn-secondary:hover{background:var(--c-ink-deep);}
+.btn-ghost{background:transparent; color:var(--c-ink); border-color:var(--c-line);}
+.btn-ghost:hover{border-color:var(--c-ink);}
+.btn:disabled{opacity:.45; cursor:not-allowed;}
+.btn:focus-visible{outline:2px solid var(--c-ink); outline-offset:2px;}
+
+/* Formular */
+.field{max-width:420px; margin-bottom:18px;}
+.field label{display:block; font-size:14px; font-weight:600; margin-bottom:6px;}
+.field .hint{font-size:13px; color:var(--c-ink-3); margin:0 0 7px;}
+.field input, .field textarea{
+  width:100%; font-family:var(--f-body); font-size:16px; padding:11px 13px;
+  background:var(--c-paper-0); border:1px solid var(--c-line); border-radius:var(--r-1); color:var(--c-ink);
+}
+.field input:focus{outline:2px solid var(--c-ink); outline-offset:2px; border-color:var(--c-ink);}
+.field.err input{border-color:var(--c-signal); border-width:2px;}
+.field .msg{display:flex; gap:7px; font-size:13.5px; color:var(--c-signal); margin-top:6px; font-weight:600;}
+
+/* Status-Pillen */
+.pills{display:flex; gap:9px; flex-wrap:wrap;}
+.pill{
+  font-family:var(--f-mono); font-size:11.5px; letter-spacing:.08em; text-transform:uppercase;
+  padding:5px 10px; border-radius:var(--r-1); font-weight:500;
+}
+.p-wait{background:var(--c-info-tint); color:var(--c-info);}
+.p-you{background:var(--c-signal-tint); color:var(--c-signal);}
+.p-ok{background:var(--c-success-tint); color:var(--c-success);}
+.p-warn{background:var(--c-warning-tint); color:var(--c-warning);}
+
+/* Service-Zeile */
+.srow{display:grid; grid-template-columns:minmax(0,1fr) auto; gap:20px; align-items:start; padding:20px 0; border-bottom:1px solid var(--c-line-soft);}
+.srow:last-child{border-bottom:0;}
+.srow h4{font-size:20px; margin:0 0 5px;}
+.srow p{margin:0; font-size:15px; color:var(--c-ink-2); max-width:56ch;}
+.tags{display:flex; gap:7px; flex-wrap:wrap; margin-top:9px;}
+.tag{font-family:var(--f-mono); font-size:11px; letter-spacing:.07em; text-transform:uppercase; color:var(--c-ink-3); border:1px solid var(--c-line); padding:3px 8px;}
+
+/* Preistabelle */
+table.price{width:100%; border-collapse:collapse;}
+table.price th{
+  text-align:left; font-family:var(--f-mono); font-size:11px; letter-spacing:var(--ls-label);
+  text-transform:uppercase; color:var(--c-ink-3); font-weight:500;
+  padding:0 14px 10px 0; border-bottom:2px solid var(--c-ink);
+}
+table.price td{padding:16px 14px 16px 0; border-bottom:1px solid var(--c-line-soft); vertical-align:top;}
+table.price tr.rec td{background:var(--c-paper-2);}
+table.price .nm{font-family:var(--f-display); font-size:21px; font-weight:700;}
+table.price .de{font-size:13.5px; color:var(--c-ink-3); margin-top:3px;}
+table.price .num{font-family:var(--f-mono); font-size:17px; font-variant-numeric:tabular-nums; white-space:nowrap;}
+.recflag{
+  display:inline-block; background:var(--c-signal); color:#fff; font-family:var(--f-mono);
+  font-size:10px; letter-spacing:.16em; text-transform:uppercase; padding:3px 8px; margin-bottom:7px;
+}
+
+/* Portal-Karte */
+.pcard{background:var(--c-paper-0); border:1px solid var(--c-line); padding:20px;}
+.pcard .top{display:flex; align-items:center; gap:10px; margin-bottom:16px;}
+.pcard .top h4{font-size:19px;}
+.tasks{list-style:none; margin:0; padding:0;}
+.tasks li{display:flex; align-items:center; gap:12px; padding:11px 0; border-bottom:1px dotted var(--c-line); font-size:15px;}
+.tasks li:last-child{border-bottom:0;}
+.tasks .st{flex:none; width:96px;}
+.dimline{display:flex; align-items:center; gap:9px; margin-bottom:14px;}
+.dimline::before,.dimline::after{content:""; height:1px; background:var(--c-signal); flex:1;}
+.dimline span{font-family:var(--f-mono); font-size:10.5px; letter-spacing:var(--ls-label); text-transform:uppercase; color:var(--c-signal);}
+
+/* Schrittleiste */
+.steps{display:flex; border:1px solid var(--c-line); background:var(--c-paper-0); flex-wrap:wrap;}
+.steps div{flex:1 1 96px; padding:11px 10px; font-family:var(--f-mono); font-size:10.5px; letter-spacing:.1em; text-transform:uppercase; color:var(--c-ink-3); border-right:1px solid var(--c-line); text-align:center;}
+.steps div:last-child{border-right:0;}
+.steps div.on{background:var(--c-signal); color:#fff;}
+
+/* FAQ */
+details.faq{border-bottom:1px solid var(--c-line-soft); padding:14px 0;}
+details.faq summary{cursor:pointer; font-family:var(--f-display); font-size:19px; font-weight:700; list-style:none; display:flex; justify-content:space-between; gap:14px;}
+details.faq summary::-webkit-details-marker{display:none;}
+details.faq summary::after{content:"+"; font-family:var(--f-mono); color:var(--c-signal); flex:none;}
+details.faq[open] summary::after{content:"–";}
+details.faq p{margin:10px 0 0; font-size:15.5px; color:var(--c-ink-2);}
+details.faq summary:focus-visible{outline:2px solid var(--c-ink); outline-offset:3px;}
+
+/* CTA-Band */
+.cta{background:var(--c-ink-deep); color:var(--c-on-dark); padding:34px 30px;}
+.cta h3{font-size:clamp(22px,3vw,31px); margin:0 0 10px; color:var(--c-on-dark);}
+.cta p{margin:0 0 20px; color:#B9B5AC; font-size:15.5px;}
+.cta .note{font-family:var(--f-mono); font-size:11px; letter-spacing:.1em; text-transform:uppercase; color:#8A867E; margin-top:16px;}
+
+/* Do / Don't */
+.dd{display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:16px;}
+.dd > div{border:1px solid var(--pg-line); background:var(--pg-card); padding:18px 20px;}
+.dd h4{margin:0 0 10px; font-size:14px; letter-spacing:.03em;}
+.dd ul{margin:0; padding-left:18px; font-size:14.5px; color:var(--pg-mut);}
+.dd li{margin-bottom:6px;}
+.dd .ok h4{color:#2F6B4F;}
+.dd .no h4{color:#B4261E;}
+
+table.spec{width:100%; border-collapse:collapse; font-size:14.5px;}
+table.spec th, table.spec td{text-align:left; padding:11px 14px; border-bottom:1px solid var(--pg-line);}
+table.spec thead th{font-family:ui-monospace,Consolas,monospace; font-size:11px; letter-spacing:.13em; text-transform:uppercase; color:var(--pg-mut);}
+.tblwrap{overflow-x:auto; border:1px solid var(--pg-line); background:var(--pg-card);}
+
+footer.pf{margin-top:58px; padding:24px 0 56px; border-top:1px solid var(--pg-line); color:var(--pg-mut); font-size:13px;}
+
+@media (max-width:640px){
+  .srow{grid-template-columns:minmax(0,1fr);}
+  .type-tag{width:auto;}
+}
+</style>
+
+<div class="wrap">
+
+  <header class="head">
+    <p class="eyebrow">SARTU · Designsystem · Richtung 01 „Werkplan" · 25.07.2026</p>
+    <h1>Vom Entwurf zum Bausatz.</h1>
+    <p>Die gewählte Richtung als benutzbare Bausteine: Farben, Typografie, Abstände und alle Komponenten, die das Website-Lastenheft verlangt. <strong>Verbindliche Quelle ist <code>design/sartu-tokens.css</code></strong> — diese Seite zeigt nur, wie die Tokens wirken.</p>
+    <p>Komponenten greifen ausschließlich auf Tokens zu, nie auf rohe Farbwerte. Dadurch bleibt die Richtungsentscheidung <strong>umkehrbar</strong>: Ein Wechsel zu „Kontor" oder „Signal" wäre ein Token-Tausch, kein Umbau.</p>
+
+    <div class="callout">
+      <strong>Warum Werkplan gewonnen hat</strong>
+      <p>Die Zielgruppe ist überwiegend Handwerk, Bau und lokale Dienstleistung im Umland von Dresden. Die Aufmaß-Anmutung sagt genau das, was das Geschäftsmodell verspricht: nachgemessen, festgelegt, kein Nachverhandeln. Sie funktioniert außerdem ohne Hochglanzfotos — beim Start ohne Referenzbilder ein echter Vorteil — und überträgt sich als Rastersystem auf jede Kundenbranche.</p>
+    </div>
+  </header>
+
+  <!-- FARBE -->
+  <section>
+    <p class="sec-title">01 — Farbe</p>
+    <h2 class="sec">Papier, Graphit, Rotstift</h2>
+    <p class="sec-lead">Die Neutralen sind warm gebrochen, nicht neutralgrau — das ist der Unterschied zwischen „gewählt" und „übrig geblieben". Der Rotstift ist Marke <em>und</em> Aufmerksamkeitsfarbe und markiert pro Ansicht genau eine Sache.</p>
+
+    <div class="swatches">
+      <div class="sw"><div class="chip" style="background:#F2F0EA;border-bottom:1px solid #DAD6CD"></div><div class="meta"><span class="nm">paper-0</span><span class="hex">#F2F0EA</span><span class="use">Karten, Eingabefelder</span></div></div>
+      <div class="sw"><div class="chip" style="background:#E6E4DE"></div><div class="meta"><span class="nm">paper-1</span><span class="hex">#E6E4DE</span><span class="use">Grundfläche (Zeichenpapier)</span></div></div>
+      <div class="sw"><div class="chip" style="background:#DBD8D1"></div><div class="meta"><span class="nm">paper-2</span><span class="hex">#DBD8D1</span><span class="use">abgesetzte Bänder, Empfehlungszeile</span></div></div>
+      <div class="sw"><div class="chip" style="background:#B4B0A6"></div><div class="meta"><span class="nm">line</span><span class="hex">#B4B0A6</span><span class="use">Rahmen, Maßlinien</span></div></div>
+      <div class="sw"><div class="chip" style="background:#1C1B19"></div><div class="meta"><span class="nm">ink</span><span class="hex">#1C1B19</span><span class="use">Text, Überschriften</span></div></div>
+      <div class="sw"><div class="chip" style="background:#6E6A62"></div><div class="meta"><span class="nm">ink-3</span><span class="hex">#6E6A62</span><span class="use">Labels, Hilfetext</span></div></div>
+      <div class="sw"><div class="chip" style="background:#B4261E"></div><div class="meta"><span class="nm">signal</span><span class="hex">#B4261E</span><span class="use">Marke, aktueller Schritt, CTA</span></div></div>
+      <div class="sw"><div class="chip" style="background:#12110F"></div><div class="meta"><span class="nm">ink-deep</span><span class="hex">#12110F</span><span class="use">dunkles CTA-Band</span></div></div>
+      <div class="sw"><div class="chip" style="background:#2F6B4F"></div><div class="meta"><span class="nm">success</span><span class="hex">#2F6B4F</span><span class="use">nur Portal-Status</span></div></div>
+      <div class="sw"><div class="chip" style="background:#A8660A"></div><div class="meta"><span class="nm">warning</span><span class="hex">#A8660A</span><span class="use">nur Portal-Status</span></div></div>
+      <div class="sw"><div class="chip" style="background:#3A5A8C"></div><div class="meta"><span class="nm">info</span><span class="hex">#3A5A8C</span><span class="use">nur Portal-Status</span></div></div>
+    </div>
+  </section>
+
+  <!-- TYPOGRAFIE -->
+  <section>
+    <p class="sec-title">02 — Typografie</p>
+    <h2 class="sec">Eine Familie, drei Rollen</h2>
+    <p class="sec-lead"><strong>IBM Plex</strong> in Produktion, self-hosted als WOFF2: <em>Sans Condensed</em> für Überschriften, <em>Sans</em> für Fließtext, <em>Mono</em> für Zahlen, Maße und Labels. Als Technikschrift entworfen, offene Lizenz — und bewusst <strong>nicht Inter</strong>, weil das die Standardwahl generischer Layouts ist. <em>Diese Vorschau nutzt Systemschriften als Annäherung.</em></p>
+
+    <div class="stage sartu">
+      <div class="type-row"><span class="type-tag">H1 · Condensed</span><span class="t-h1">Firmenwebsites zum Festpreis</span></div>
+      <div class="type-row"><span class="type-tag">H2 · Condensed</span><span class="t-h2">Sie wählen kein Paket</span></div>
+      <div class="type-row"><span class="type-tag">H3 · Condensed</span><span class="t-h3">Ihr Projekt bleibt an einem Ort</span></div>
+      <div class="type-row"><span class="type-tag">Lead · 19px</span><span class="t-lead">SARTU plant, textet, programmiert und betreibt Ihre Website.</span></div>
+      <div class="type-row"><span class="type-tag">Fließtext · 17px</span><span class="t-body">Sie beantworten nur die Fragen zu Ihrem Unternehmen — Struktur, Design und Technik übernehmen wir.</span></div>
+      <div class="type-row"><span class="type-tag">Klein · 14px</span><span class="t-small">Alle Preise netto zzgl. gesetzlicher Umsatzsteuer.</span></div>
+      <div class="type-row"><span class="type-tag">Label · Mono</span><span class="t-label">Nächster Schritt</span></div>
+      <div class="type-row"><span class="type-tag">Zahlen · Mono</span><span class="t-body mono" style="font-variant-numeric:tabular-nums">7.900,00 € · 249,00 €/Mon. · 40 / 30 / 30</span></div>
+    </div>
+  </section>
+
+  <!-- KOMPONENTEN -->
+  <section>
+    <p class="sec-title">03 — Komponenten</p>
+    <h2 class="sec">Bausteine aus dem Lastenheft</h2>
+    <p class="sec-lead">Jede Komponente, die die Startseite und die Leistungsseiten brauchen — in der Markenwelt gerendert.</p>
+
+    <div class="stage sartu">
+      <p class="t-label" style="margin:0 0 14px">Buttons</p>
+      <div class="btnrow">
+        <button class="btn btn-primary">Bedarf prüfen lassen</button>
+        <button class="btn btn-secondary">Preise ansehen</button>
+        <button class="btn btn-ghost">Einschätzen lassen</button>
+        <button class="btn btn-ghost" disabled>Nicht verfügbar</button>
+      </div>
+      <p class="t-small" style="margin-top:14px">Der Rotstift ist der einzige primäre Handlungsakzent. Pro Ansicht genau ein primärer Button.</p>
+    </div>
+
+    <div class="stage sartu">
+      <p class="t-label" style="margin:0 0 16px">Formularfeld · Normal und Fehler</p>
+      <div class="field">
+        <label for="d1">Wo arbeiten Sie hauptsächlich?</label>
+        <p class="hint">Ort oder Postleitzahl genügt.</p>
+        <input id="d1" type="text" value="01833 Stolpen">
+      </div>
+      <div class="field err">
+        <label for="d2">Geschäftliche E-Mail-Adresse</label>
+        <input id="d2" type="text" value="max.mustermann" aria-invalid="true" aria-describedby="d2e">
+        <p class="msg" id="d2e"><span aria-hidden="true">✕</span> Bitte geben Sie eine gültige E-Mail-Adresse an, z. B. name@firma.de</p>
+      </div>
+      <p class="t-small" style="margin:0">Fehler stehen <strong>am Feld</strong>, nie als Sammelmeldung oben. Der Fehlerzustand nutzt Rahmenstärke <em>und</em> Farbe — nicht Farbe allein.</p>
+    </div>
+
+    <div class="stage sartu">
+      <p class="t-label" style="margin:0 0 14px">Statusanzeigen · Klartext statt Systemcodes</p>
+      <div class="pills">
+        <span class="pill p-wait">Wir prüfen</span>
+        <span class="pill p-you">Ihre Freigabe fehlt</span>
+        <span class="pill p-ok">Bereit zur Veröffentlichung</span>
+        <span class="pill p-warn">Zahlung offen</span>
+      </div>
+    </div>
+
+    <div class="stage sartu">
+      <p class="t-label" style="margin:0 0 8px">Leistungszeile · breite Zeilen statt Kachelwand</p>
+      <div class="srow">
+        <div>
+          <h4>Webdesign und Programmierung</h4>
+          <p>Individuell aus unserem Designsystem programmiert, ohne WordPress und ohne Baukasten.</p>
+          <div class="tags"><span class="tag">kein WordPress</span><span class="tag">responsive</span><span class="tag">schnell</span></div>
+        </div>
+      </div>
+      <div class="srow">
+        <div>
+          <h4>Domain und Launch</h4>
+          <p>Wir prüfen, verbinden und schalten live — Ihre bestehende E-Mail bleibt dabei erreichbar.</p>
+          <div class="tags"><span class="tag">DNS</span><span class="tag">E-Mail-Schutz</span><span class="tag">Weiterleitungen</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="stage sartu">
+      <p class="t-label" style="margin:0 0 16px">Preisbereich</p>
+      <table class="price">
+        <thead><tr><th>Lösung</th><th>Einmalig netto</th><th>Betrieb</th><th>Erstes Jahr</th></tr></thead>
+        <tbody>
+          <tr><td><div class="nm">Start</div><div class="de">Ein fokussierter One-Pager</div></td><td class="num">1.490 €</td><td class="num">59 €</td><td class="num">2.198 €</td></tr>
+          <tr><td><div class="nm">Wachstum</div><div class="de">Firmenwebsite, bis 8 Seiten</div></td><td class="num">3.900 €</td><td class="num">129 €</td><td class="num">5.448 €</td></tr>
+          <tr class="rec"><td><span class="recflag">Empfehlung</span><div class="nm">Platzhirsch</div><div class="de">Vertriebs-, Vertrauens- und Recruiting-System, bis 16 Seiten</div></td><td class="num">7.900 €</td><td class="num">249 €</td><td class="num">10.888 €</td></tr>
+        </tbody>
+      </table>
+      <p class="t-label" style="margin-top:16px">Alle Preise netto zzgl. USt. · Ausschließlich für Unternehmer</p>
+    </div>
+
+    <div class="stage sartu">
+      <p class="t-label" style="margin:0 0 16px">Portal · Statuskarte und Aufgaben</p>
+      <div class="steps" style="margin-bottom:20px">
+        <div>Angebot</div><div>Zahlung</div><div class="on">Briefing</div><div>Vorschau</div><div>Launch</div>
+      </div>
+      <div class="pcard">
+        <div class="dimline"><span>Nächster Schritt</span></div>
+        <div class="top"><h4>Domain bestätigen</h4></div>
+        <ul class="tasks">
+          <li><span class="st"><span class="pill p-ok">erledigt</span></span> Unternehmensdaten bestätigt</li>
+          <li><span class="st"><span class="pill p-you">offen</span></span> Leistungsfakten ergänzen</li>
+          <li><span class="st"><span class="pill p-wait">bereit</span></span> Domainvorschläge ansehen</li>
+        </ul>
+      </div>
+      <p class="t-small" style="margin-top:12px">Die Maßlinie markiert genau eine Sache: den aktuellen Schritt. Sie ist das wiederkehrende Werkplan-Detail.</p>
+    </div>
+
+    <div class="stage sartu">
+      <p class="t-label" style="margin:0 0 10px">FAQ</p>
+      <details class="faq" open><summary>Muss ich mir selbst ein Paket aussuchen?</summary><p>Nein. Sie beschreiben Ihr Unternehmen und Ihr Ziel; wir empfehlen genau eine Lösung und begründen sie. Wenn eine kleinere Lösung reicht, empfehlen wir die kleinere.</p></details>
+      <details class="faq"><summary>Schreiben Sie die Texte?</summary><p>Ja. Sie liefern Fakten, Stichpunkte und vorhandene Unterlagen — wir schreiben daraus die Website-Texte.</p></details>
+    </div>
+
+    <div class="stage sartu" style="padding:0">
+      <div class="cta">
+        <h3>Wenige Angaben reichen für den ersten Schritt.</h3>
+        <p>Sie beschreiben Ihr Unternehmen, Ihr Ziel und Ihren Domainstatus. Danach sehen Sie eine vorläufige Empfehlung mit Preis.</p>
+        <div class="btnrow">
+          <button class="btn btn-primary">Bedarf prüfen lassen</button>
+          <button class="btn btn-ghost" style="color:#E6E4DE;border-color:#4A4741">Preise ansehen</button>
+        </div>
+        <p class="note">Unverbindlich bis zum geprüften Angebot</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- REGELN -->
+  <section>
+    <p class="sec-title">04 — Regeln</p>
+    <h2 class="sec">Raster, Bewegung, Grenzen</h2>
+
+    <div class="tblwrap" style="margin-bottom:20px">
+      <table class="spec">
+        <thead><tr><th>Größe</th><th>Wert</th><th>Anwendung</th></tr></thead>
+        <tbody>
+          <tr><td>Abstandsraster</td><td>4 / 8 / 12 / 16 / 24 / 32 / 48 / 64 / 96 px</td><td>ausschließlich diese Stufen</td></tr>
+          <tr><td>Inhaltsbreite</td><td>max. 1280 px</td><td>Seitencontainer</td></tr>
+          <tr><td>Zeilenlänge</td><td>max. 68 Zeichen</td><td>Fließtext</td></tr>
+          <tr><td>Radius</td><td>0 px, Felder/Buttons 2 px</td><td>technische Zeichnung hat scharfe Kanten</td></tr>
+          <tr><td>Erhöhung</td><td>Linie statt Schatten</td><td>Schatten nur bei Modalen</td></tr>
+          <tr><td>Fokus</td><td>2 px Kontur, 2 px Abstand</td><td>immer sichtbar, nie entfernt</td></tr>
+          <tr><td>JS-Budget</td><td>≤ 75 KB Startseite · ≤ 40 KB Unterseiten</td><td>gemessen, nicht geschätzt</td></tr>
+          <tr><td>Markenmomente</td><td>max. 2 pro Seite</td><td>Bewegung mit Absicht</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="dd">
+      <div class="ok">
+        <h4>So ja</h4>
+        <ul>
+          <li>Ein primärer Button pro Ansicht, im Rotstift</li>
+          <li>Zahlen immer in Mono mit gleicher Ziffernbreite</li>
+          <li>Trennung durch Linie und Fläche</li>
+          <li>Mono-Versallabels als wiederkehrendes Detail</li>
+          <li>Große Überschriften auf ruhigem Raster</li>
+          <li>Leerzustände, die sich selbst erklären</li>
+        </ul>
+      </div>
+      <div class="no">
+        <h4>So nicht</h4>
+        <ul>
+          <li>Rotstift als Flächenfarbe oder für mehrere Elemente gleichzeitig</li>
+          <li>Karten in Karten, weiche Schlagschatten</li>
+          <li>Farbverläufe, Leuchtflächen, schwebende Dashboards</li>
+          <li>Pillenförmige Standardbuttons</li>
+          <li>Stockfotos mit Handschlag oder Laptop</li>
+          <li>Status nur über Farbe (immer zusätzlich Text)</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <footer class="pf">
+    Verbindliche Token-Quelle: <code>design/sartu-tokens.css</code>. Diese Seite ist Referenz und Abnahmegrundlage, kein Produktionscode.
+    Produktionsschriften IBM Plex (Sans Condensed / Sans / Mono), self-hosted, <code>font-display: swap</code>.
+    Die Marke ist bewusst auf helles Papier festgelegt — kein Dunkelmodus für die Website; fürs Portal ab Stufe 2 vorbereitet.
+  </footer>
+</div>

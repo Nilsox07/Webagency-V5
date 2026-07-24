@@ -1,0 +1,230 @@
+/* ============================================================
+   SARTU — Design-Tokens
+   Richtung: "Werkplan" (technisches Aufmaß)
+   Stand: 25.07.2026
+   ------------------------------------------------------------
+   Diese Datei ist die EINZIGE Quelle für Farben, Typografie,
+   Abstände, Radien und Motion. Komponenten greifen ausschließlich
+   auf Tokens zu — nie auf rohe Hex-Werte.
+
+   Ein Wechsel der Designrichtung ist dadurch ein Token-Tausch,
+   kein Umbau. Das hält die Entscheidung umkehrbar.
+   ============================================================ */
+
+:root {
+
+  /* ---------- 1. Farbe: Grundflächen (warm gebrochen, nicht neutralgrau) ---------- */
+  --c-paper-0:      #F2F0EA;  /* hellste Fläche, Karten auf Grund */
+  --c-paper-1:      #E6E4DE;  /* Grundfläche der Seite (Zeichenpapier) */
+  --c-paper-2:      #DBD8D1;  /* abgesetzte Bänder, Tabellenwechsel */
+
+  /* ---------- 2. Farbe: Linien ---------- */
+  --c-line-soft:    #C9C5BB;  /* dezente Trennung, Tabellenzeilen */
+  --c-line:         #B4B0A6;  /* Standard-Rahmen und Maßlinien */
+
+  /* ---------- 3. Farbe: Text ---------- */
+  --c-ink:          #1C1B19;  /* Haupttext, Überschriften (Graphit) */
+  --c-ink-2:        #3A3833;  /* Fließtext-Sekundär, Leads */
+  --c-ink-3:        #6E6A62;  /* Labels, Hilfetexte, Meta */
+  --c-ink-deep:     #12110F;  /* dunkle Flächen, Invertierung */
+  --c-on-dark:      #E6E4DE;  /* Text auf dunkler Fläche */
+
+  /* ---------- 4. Farbe: Marke / Signal (Rotstift) ----------
+     Der Rotstift ist Markenzeichen UND Aufmerksamkeitsfarbe.
+     Er markiert genau eine Sache pro Ansicht: den aktuellen Schritt. */
+  --c-signal:       #B4261E;
+  --c-signal-hover: #96201A;
+  --c-signal-tint:  #F5E4E2;  /* sehr helle Fläche für Hinweisboxen */
+  --c-on-signal:    #FFFFFF;
+
+  /* ---------- 5. Farbe: Semantik (primär im Portal) ----------
+     Getrennt vom Markenakzent, damit Status nicht mit Marke konkurriert.
+     Ausnahme: "Achtung/Kritisch" nutzt bewusst den Rotstift. */
+  --c-success:      #2F6B4F;
+  --c-success-tint: #E3EFE8;
+  --c-warning:      #A8660A;
+  --c-warning-tint: #F7ECDC;
+  --c-critical:     var(--c-signal);
+  --c-critical-tint:var(--c-signal-tint);
+  --c-info:         #3A5A8C;
+  --c-info-tint:    #E4EAF3;
+
+  /* ---------- 6. Fokus (Barrierefreiheit, nie entfernen) ---------- */
+  --c-focus:        #1C1B19;
+  --focus-ring:     2px solid var(--c-focus);
+  --focus-offset:   2px;
+
+  /* ---------- 7. Typografie ----------
+     Produktion: IBM Plex, self-hosted als WOFF2, font-display: swap.
+     Begründung: als Technik-/Ingenieurschrift entworfen, drei Schnitte
+     aus einer Familie, offene Lizenz (OFL). Bewusst NICHT Inter —
+     das ist die Standardwahl generischer KI-Layouts. */
+  --f-display: "IBM Plex Sans Condensed", "Arial Narrow", "Franklin Gothic Medium", Arial, sans-serif;
+  --f-body:    "IBM Plex Sans", system-ui, -apple-system, "Segoe UI", Arial, sans-serif;
+  --f-mono:    "IBM Plex Mono", ui-monospace, "Cascadia Mono", Consolas, "Courier New", monospace;
+
+  /* Typskala (Verhältnis ~1.25, mobil über clamp abgefangen) */
+  --t-label:  0.8125rem;  /* 13px — Mono-Labels, Meta */
+  --t-small:  0.875rem;   /* 14px — Hilfetext */
+  --t-body:   1.0625rem;  /* 17px — Fließtext Desktop */
+  --t-lead:   1.1875rem;  /* 19px — Lead-Absatz */
+  --t-h4:     1.375rem;   /* 22px */
+  --t-h3:     1.75rem;    /* 28px */
+  --t-h2:     clamp(1.75rem, 3.2vw, 2.4375rem);   /* 28 → 39px */
+  --t-h1:     clamp(2.25rem, 5.4vw, 3.75rem);     /* 36 → 60px */
+
+  --lh-tight: 1.04;   /* H1/H2 — Kondensschrift verträgt engen Satz */
+  --lh-head:  1.18;   /* H3/H4 */
+  --lh-body:  1.6;    /* Fließtext */
+
+  --ls-display: -0.01em;  /* leicht negativ nur bei großen Graden */
+  --ls-label:    0.14em;  /* Mono-Versallabels */
+
+  --fw-regular: 400;
+  --fw-medium:  500;
+  --fw-bold:    700;
+
+  /* ---------- 8. Abstände (4/8-Logik) ---------- */
+  --s-1:  0.25rem;  /*  4px */
+  --s-2:  0.5rem;   /*  8px */
+  --s-3:  0.75rem;  /* 12px */
+  --s-4:  1rem;     /* 16px */
+  --s-5:  1.5rem;   /* 24px */
+  --s-6:  2rem;     /* 32px */
+  --s-7:  3rem;     /* 48px */
+  --s-8:  4rem;     /* 64px */
+  --s-9:  6rem;     /* 96px */
+  --s-10: 8rem;     /* 128px */
+
+  /* ---------- 9. Layout ---------- */
+  --w-content: 1280px;  /* maximale Inhaltsbreite */
+  --w-text:    68ch;    /* maximale Zeilenlänge Fließtext */
+  --gutter:    1.25rem; /* mobiler Seitenrand */
+  --gutter-lg: 2.5rem;  /* Seitenrand ab Desktop */
+
+  /* ---------- 10. Radius ----------
+     Werkplan ist eine technische Zeichnung: Kanten sind scharf.
+     Bewusst enger gefasst als der allgemeine Rahmen (0–8px). */
+  --r-0: 0;
+  --r-1: 2px;   /* Eingabefelder, Buttons */
+  --r-2: 4px;   /* Maximum — nur für Modale/Bilder */
+
+  /* ---------- 11. Erhöhung ----------
+     Keine weichen Schlagschatten. Tiefe entsteht durch Linie und Fläche. */
+  --elev-line:  1px solid var(--c-line);
+  --elev-modal: 0 8px 28px rgba(18, 17, 15, 0.18);
+
+  /* ---------- 12. Motion (siehe Website-Konzept §10a) ---------- */
+  --m-ui:       140ms;  /* Hover, Fokus, kleine Zustände */
+  --m-panel:    220ms;  /* Akkordeon, Menü */
+  --m-editorial: 620ms; /* die max. zwei Markenmomente je Seite */
+  --m-ease:     cubic-bezier(0.2, 0, 0, 1);
+}
+
+/* ============================================================
+   Reduzierte Bewegung — verbindlich, nicht optional
+   ============================================================ */
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --m-ui: 0ms;
+    --m-panel: 0ms;
+    --m-editorial: 0ms;
+  }
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* ============================================================
+   Dunkelmodus
+   ------------------------------------------------------------
+   Die Marke ist bewusst auf helles Zeichenpapier festgelegt —
+   ein dunkles Aufmaß widerspricht der Bildidee. Für die
+   Marketing-Website daher KEIN Dunkelmodus.
+   Für das Portal ist er ab Stufe 2 möglich; die Tokens unten
+   sind vorbereitet, aber standardmäßig nicht aktiv.
+   Aktivierung nur über [data-theme="dark"] am Wurzelelement.
+   ============================================================ */
+:root[data-theme="dark"] {
+  --c-paper-0:   #1F1E1B;
+  --c-paper-1:   #171614;
+  --c-paper-2:   #232220;
+  --c-line-soft: #302E2A;
+  --c-line:      #403D38;
+  --c-ink:       #E6E4DE;
+  --c-ink-2:     #C4C1B9;
+  --c-ink-3:     #8E8A81;
+  --c-on-dark:   #E6E4DE;
+  --c-signal:      #E0574D;
+  --c-signal-hover:#EC6C62;
+  --c-signal-tint: #2E1E1C;
+  --c-focus:     #E6E4DE;
+  --c-success-tint:#1B2A22;
+  --c-warning-tint:#2C2114;
+  --c-info-tint:   #1A2130;
+}
+
+/* ============================================================
+   Basis — minimal, damit Komponenten sauber aufsetzen
+   ============================================================ */
+*, *::before, *::after { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: var(--c-paper-1);
+  color: var(--c-ink);
+  font-family: var(--f-body);
+  font-size: var(--t-body);
+  line-height: var(--lh-body);
+  -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3, h4 {
+  font-family: var(--f-display);
+  font-weight: var(--fw-bold);
+  letter-spacing: var(--ls-display);
+  text-wrap: balance;
+  margin: 0;
+}
+
+h1 { font-size: var(--t-h1); line-height: var(--lh-tight); }
+h2 { font-size: var(--t-h2); line-height: var(--lh-tight); }
+h3 { font-size: var(--t-h3); line-height: var(--lh-head); }
+h4 { font-size: var(--t-h4); line-height: var(--lh-head); }
+
+p { margin: 0; max-width: var(--w-text); }
+
+/* Zahlen laufen in Tabellen und Preisen immer auf gleicher Breite */
+.num, td.num, .price { font-variant-numeric: tabular-nums; }
+
+/* Mono-Versallabel — das wiederkehrende Werkplan-Detail */
+.label {
+  font-family: var(--f-mono);
+  font-size: var(--t-label);
+  letter-spacing: var(--ls-label);
+  text-transform: uppercase;
+  color: var(--c-ink-3);
+}
+
+/* Fokus ist sichtbar. Immer. */
+:where(a, button, input, select, textarea, [tabindex]):focus-visible {
+  outline: var(--focus-ring);
+  outline-offset: var(--focus-offset);
+}
+
+/* Skip-Link */
+.skip-link {
+  position: absolute;
+  left: -9999px;
+}
+.skip-link:focus {
+  left: var(--s-4);
+  top: var(--s-4);
+  z-index: 100;
+  background: var(--c-ink);
+  color: var(--c-paper-1);
+  padding: var(--s-3) var(--s-4);
+}
