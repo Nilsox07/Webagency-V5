@@ -13,10 +13,14 @@ Das kanonische Sartu-Modell ist **positionierungsseitig stark** und marktfähig.
 
 Für ein Ein-Personen-/Kleinstteam ist das ein zweites Produktunternehmen und ein Launch-Blocker. **Dieses Masterkonzept dreht die Reihenfolge um:**
 
-1. **Zuerst verkaufen und liefern** (2–3 echte Referenzkunden, Website manuell + KI-assistiert, minimales Portal).
+1. **Zuerst verkaufen und liefern** (2–3 echte Referenzkunden, Website manuell + KI-assistiert, **sichtbares** Portal).
 2. **Dann härten** (Angebot/Annahme, Mollie-Abo, strukturierte Selbstpflege).
 3. **Dann teilautomatisieren** (Spec → assistierter Build → QA).
 4. **Dann skalieren** (Provider-Adapter, Rollback, programmatische Ortsseiten).
+
+> **Wichtige Präzisierung (nach Codex-Review):** Gestuft wird die **Automatisierungstiefe**, *nicht* die Sichtbarkeit des Portals. Wenn „Portal statt E-Mail-Chaos" der USP ist, darf Stufe 0 **keine** unsichtbare Upload-Hülle sein. Es braucht ab Launch eine **echte, klickbare Portal-Erfahrung** – die Mechanik dahinter darf manuell sein.
+>
+> **Formel: sichtbares Portal sofort, tiefe Automatisierung später.**
 
 Alles Weitere in diesem Dokument ist mit dieser Stufung kompatibel.
 
@@ -48,7 +52,7 @@ Alles Weitere in diesem Dokument ist mit dieser Stufung kompatibel.
 **USP in vier Worten:** *Festpreis. Portal. Kein WordPress. SEO-/GEO-Basis ab Start.*
 
 **Ehrliche Einordnung des USP (wichtig für die Kommunikation):**
-- „Kein WordPress" ist **kein Kundennutzen an sich** – Kunden interessiert kein CMS. Es ist ein **Beleg** für „keine Update-/Plugin-/Sicherheitslast bei Ihnen" und „schnell & wartungsarm". → Immer als *Entlastung*, nie als Technik-Feature verkaufen.
+- „Kein WordPress" ist **kein primärer Kaufgrund** – Kunden interessiert kein CMS. Aber „nie wieder Plugin-Updates, gehackte Seite, Agenturabhängigkeit" ist ein **realer Schmerz**. → Nicht als Headline, sondern als **Beweis direkt unter dem Hauptnutzen**, enttechnisiert: *„Ohne WordPress-Wartungsstress: keine Plugin-Updates, kein Baukasten, keine Sicherheitsbaustelle bei Ihnen."* **Nie „wartungsarm/wartungsfrei"** (entwertet den Rundum-Schutz, s. Abschnitt 4).
 - „Festpreis" ist der stärkste externe USP (senkt Kaufangst).
 - „Portal" ist der eigentliche **Differenzierer** gegenüber Freelancern/kleinen Agenturen: geführter Prozess statt E-Mail-Chaos.
 - „KI-gestützt" wird **transparent im Produktionsabschnitt** genannt, aber **nicht** zum Hauptnutzen gemacht (KI-Optik = Vertrauensrisiko). Der Kunde kauft Ergebnis, Verantwortung, Einfachheit.
@@ -105,6 +109,22 @@ Alles Weitere in diesem Dokument ist mit dieser Stufung kompatibel.
 
 Erstlaufzeit 12 Monate ab produktivem Betrieb, danach 30 Tage zum Monatsende kündbar, monatlich im Voraus. **Reaktionszeit ≠ Fertigstellungszeit.** Statt Änderungsminuten pflegt der Kunde definierte Geschäftsdaten selbst (s. Abschnitt 8).
 
+### Wie der Rundum-Schutz kommuniziert wird (kritisch!)
+
+Der häufigste Kommunikationsfehler wäre, die Website als „wartungsarm" zu bewerben – dann fragt der Kunde sofort: *„Warum zahle ich dann 59/129/249 € im Monat?"* Das entwertet die wichtigste Umsatzquelle.
+
+- **Nicht sagen:** „Unsere Websites brauchen kaum Wartung." · „wartungsfrei" · „wartungsarm".
+- **Sagen:** „**Keine Wartung für Sie.** SARTU betreibt Ihre Website laufend."
+- **Kernunterschied:** Die Website ist wartungsarm **für den Kunden** – nicht wartungsfrei und nicht kostenlos zu betreiben.
+
+**Der Schutz bezahlt:** Betrieb, Verantwortung, Verfügbarkeit, Hosting, SSL, Backups, Monitoring, technische Pflege, technische Suchgesundheit, Formular- und Zahlungsprüfung, Versionsstand, Portalzugang und Reaktionsbereitschaft.
+**Der Schutz bezahlt nicht:** unbegrenzte Design-/Content-Flatrate, SEO-Redaktion, beliebige neue Seiten, neue Ziele, individuelle Sonderfunktionen.
+
+**Website-Formulierung (empfohlen):**
+> Ohne WordPress-Wartungsstress für Sie. SARTU betreibt Ihre Website laufend: Hosting, SSL, Backups, Monitoring, technische Suchgesundheit, Formularprüfung, Versionen und Portalzugang sind im Rundum-Schutz enthalten.
+
+So kauft der Kunde **Entlastung und Verantwortung** – nicht „Wartungsaufwand".
+
 ---
 
 ## 5. Zahlungsmodell
@@ -136,6 +156,20 @@ Erstlaufzeit 12 Monate ab produktivem Betrieb, danach 30 Tage zum Monatsende kü
 **Hosting (Kundenseiten):** statische Auslieferung (s. Abschnitt 10) über Managed Hosting in **DE/EU**. Der Kunde wählt kein Hosting.
 
 **Kundenfragen (nur diese):** 1) Domain vorhanden? 2) Wenn ja: welche + wer hat Zugriff? 3) E-Mail mit dieser Domain? 4) Wenn neu: Wunschname oder Vorschläge? 5) Finalen Namen + Inhaberdaten bestätigen.
+
+### Vertragsende, Zahlungsverzug und Domain-Übergabe (Pflichtregeln)
+
+Diese Fälle **müssen** vor dem ersten Verkauf in Vertrag/AGB **und** im Portal geregelt sein – sonst entstehen später schwere Support- und Haftungsfälle:
+
+| Fall | Regel (Vorschlag, anwaltlich zu prüfen) |
+|---|---|
+| **Kündigung des Schutzes** | Domain bleibt Eigentum des Kunden. SARTU stellt auf Anforderung **Auth-Code/AuthInfo** + dokumentierte DNS-Übergabe bereit (einmalig, innerhalb einer definierten Frist, z. B. 10 Werktage nach letzter erfüllter Zahlung). |
+| **Wer zahlt Verlängerung nach Kündigung?** | Ab Vertragsende trägt der Kunde die Domainkosten selbst. SARTU verlängert **nicht** stillschweigend weiter; Kunde wird rechtzeitig auf den Transfer hingewiesen. |
+| **Zahlungsverzug vor Verlängerung** | Klare Eskalation: Hinweis → Mahnung → **keine** automatische Verlängerung auf SARTU-Kosten. Kein „stiller" Domainverlust: Ablaufdatum und Konsequenz werden im Portal sichtbar angezeigt. |
+| **Erinnerungen vor Ablauf** | Mindestens **zwei** dokumentierte Hinweise (z. B. 30 und 7 Tage vor Ablauf) im Portal + per E-Mail. |
+| **Premiumdomain / fehlgeschlagener Transfer / Redemption** | Fremdkosten trägt der Kunde und werden **vorher** ausgewiesen. Redemption-/Wiederherstellungsgebühren sind nie in der 30-€-Pauschale enthalten. |
+| **Kunde hat keinen Zugriff auf Altdomain/-E-Mail** | Kein Blindflug: Projekt läuft auf Vorschau-/Übergangsdomain weiter; Launch-Gate bleibt zu, bis Inhaberschaft/Zugriff nachgewiesen ist. Aufwand für Recherche/Recovery ist **nicht** im Festpreis enthalten. |
+| **Betriebsende ohne Transfer** | Nach dokumentierter Frist und Hinweisen darf SARTU die Verwaltung beenden; Verantwortung geht an den Kunden über (keine Löschung ohne Ankündigung).
 
 ---
 
@@ -211,6 +245,23 @@ Das Portal ist **kein CMS und kein Website-Baukasten**. Es verwaltet strukturier
 | Support/Störung/Änderungsanfrage | hoch | hoch | niedrig | keins | Stufe 1 |
 | Saisonale Hinweise (z. B. Feiertagszeiten anpassen) | niedrig | mittel | niedrig | keins | Stufe 3 / später |
 
+### Portal-Innovationen, die SARTU wirklich unterscheidbar machen
+
+Diese Funktionen heben das Portal über ein normales Kundenportal, **ohne** WordPress-artig zu werden (kein freier Editor, alles typisiert + freigabepflichtig):
+
+| Idee | Was es tut | Nutzen Kunde / SARTU | Wann |
+|---|---|---|---|
+| **Website-Aktualitätsradar** | Öffnungszeiten, Team, Leistungen, Preise, Jobs, Referenzen, Rechtstexte mit „zuletzt bestätigt am" | hoch / hoch (verhindert veraltete Fakten, erzeugt Pflegeanlässe) | Stufe 2 |
+| **Proof Locker** | Kunde hinterlegt Meisterbrief, Zertifikate, echte Projektbilder, Freigaben, Pressestimmen | hoch / **sehr hoch** (Trust-Content ohne Nachfragen) | Stufe 1–2 |
+| **Local Visibility Board** | Google-Unternehmensprofil, NAP-Konsistenz, Bewertungen, regionale Suchthemen, technische Suchgesundheit | hoch / hoch | Stufe 2 |
+| **Saisonkalender** | Feiertage, Betriebsurlaub, Sommer-/Winterleistungen, Recruiting-Saison | mittel / mittel | Stufe 2–3 |
+| **Change Preview** | zeigt vor Freigabe, **wo** eine Pflegeänderung wirkt: Seite, Footer, Schema, Kontaktkarte | hoch / hoch (verhindert Angst vor Änderungen) | Stufe 2 |
+| **Ein-Folgeangebot-Logik** | sammelt Wünsche und macht daraus **genau eine** begründete Empfehlung statt Add-on-Liste | mittel / **hoch** (Scope-Schutz + Umsatz) | Stufe 2 |
+| **Lead-Qualitätsansicht** | Anfragen nach Thema/Qualität/Quelle sortiert statt nur gezählt | hoch / mittel | Stufe 2 |
+| **Referenzgenerator** | nach erfolgreichem Projekt: „Daraus können wir eine Referenzseite machen" inkl. Freigabeworkflow | mittel / **sehr hoch** (löst das Kaltstart-Referenzproblem dauerhaft) | Stufe 1–2 |
+| **Competitor Watch light** | monatlicher Hinweis „3 Wettbewerber haben neue Stellen/Leistungen/Standortseiten" – kein aggressives Scraping | mittel / mittel | Stufe 3 |
+| **Aussagen-Verfallsdatum** | „Diese Aussage wurde seit 180 Tagen nicht bestätigt" – als Qualitätscheck, nicht als Panikmache | mittel / hoch | Stufe 2–3 |
+
 **Selbstpflege-Prinzip (ersetzt Änderungsminuten):** Der Kunde bearbeitet **typisierte Datensätze** (`BusinessHours`, `ContactPoint`, `Location`, `Person`, `JobPosting`, `ProjectReference`, `SocialLink`, `PagePublicationState`, `MediaReplacement`) – **nicht** Layout, Farben, Schriften, Komponenten, URLs, Navigation, SEO-Felder, Formulare, Code oder freien Text. Jede Änderung läuft über **Vorschau → Validierung → Version → Bearbeiter**. Öffnungszeit-Änderung aktualisiert nach Freigabe sichtbare Zeiten + Footer + `LocalBusiness`-Schema. Seiten werden **nie hart gelöscht** (raus aus Navigation/Sitemap, interner Redirect oder Archivstatus, reaktivierbar).
 
 **Bewusste Nicht-Funktionen:** kein Drag-and-drop, keine freie Layout-/Farb-/Schriftwahl, keine Plugins/Themes/freien Integrationen, keine freie URL-/Navigationsbearbeitung, kein Quellcodezugriff, keine harte Seitenlöschung.
@@ -260,15 +311,32 @@ Das Portal ist **kein CMS und kein Website-Baukasten**. Es verwaltet strukturier
 
 Alle fachlich wichtigen Statuswechsel erzeugen ein **Audit-Ereignis**. Jobstatus: `queued → preparing → running → validating → admin_review → customer_preview → approved → deploying → live` (+ Fehlerzustände `needs_input`, `qa_failed`, `agent_failed`, `deployment_failed`, `rolled_back`, `cancelled`).
 
-**Tech-Stack-Entscheidung (aufgelöst):** Control-Plane = **Node + PostgreSQL + Redis (Queue/Locks) + S3-kompatibler Objektspeicher DE/EU**, Portal-UI **Next.js + shadcn/ui** (`dashboard-01`, MIT). Kundenseiten = **Astro** static (Basis: eigener Umbau oder **ScrewFast (MIT)**; **nicht** Folex Lite wegen Redistribution-Lizenz). → Die **Supabase/Vercel-Variante** (Juni-Prototyp) und der **PHP-/Flat-File-Ansatz** (`lastenheft_webseite.md`) sind **abgelöst**; Supabase ist als Postgres+Auth+Storage-DE höchstens Übergangslösung (s. Datei 1 / Abschnitt 25).
+**Tech-Stack-Entscheidung (aufgelöst):** Control-Plane = **Node + PostgreSQL + Redis (Queue/Locks) + S3-kompatibler Objektspeicher DE/EU**. Kundenseiten = **static-first** (Astro o. gleichwertig) aus versioniertem Designsystem. Der **PHP-/Flat-File-Ansatz** (`lastenheft_webseite.md`) ist abgelöst; **Supabase** (Postgres+Auth+Storage, Frankfurt) ist als Stufe-0/1-Basis zulässig (s. Abschnitt 25).
+
+> **Template-Altlasten bewusst verworfen:** Folex Lite, ScrewFast, AstroWind, Studio Admin, Tailwind-Studio, Lume und shadcn-`dashboard-01` waren **Recherche-/Prototypenstände, keine Vorgabe**. Die Design-/Basisentscheidung wird frei und neu getroffen – siehe `CLAUDE_SARTU_WEBSITE_KONZEPT_FINAL.md`.
+
+### Deployment-Realität: was per FTP geht und was nicht
+
+Ein früher geäußerter Wunsch war „am Ende alles per FTP hochladen". Das muss klar getrennt werden, sonst entstehen unhaltbare Versprechen:
+
+| Baustein | Deployment | Begründung |
+|---|---|---|
+| **SARTU-Marketingwebsite** | statisch baubar → **FTP/CDN möglich** | reines HTML/CSS/JS-Ergebnis |
+| **Kundenseiten** | static-first, **aber** Formulare/Leads brauchen ein Backend (Portal-API) | statische Auslieferung + eng begrenzte API |
+| **SARTU-Portal** | **kein FTP/Shared-Hosting** – braucht echte App-Umgebung: HTTPS, Backend, Datenbank, Sessions/Auth, Mollie-**Webhooks**, Worker/Queues, später Agentenjobs | Webhooks und Hintergrundprozesse sind auf reinem FTP-Webspace nicht sinnvoll betreibbar |
+
+**Konsequenz:** Wird „nur FTP" zur harten Vorgabe, muss das Portal drastisch vereinfacht werden – und mehrere Versprechen (Mollie-Abo, Lead-Inbox, Vorschau/Freigabe-Workflow, Agentenjobs) fallen weg. Empfehlung: Website FTP-fähig halten, Portal auf einer echten App-Plattform betreiben.
 
 ---
 
 ## 13. Website-Struktur (Sitemap in Tiers)
 
-**Kernseiten (Launch):** `/` · `/leistungen` · `/preise` · `/ablauf` · `/briefing` (Lumi) · `/kontakt` · `/ueber-uns` · `/ratgeber` · `/lexikon` · `/impressum` · `/datenschutz` · `/agb` (Platzhalter bis anwaltlich final, dann indexierbar).
+> **Launch-Schnitt (nach Review verkleinert): lieber 15 sehr gute Seiten als 60 mittelmäßige.** Google warnt ausdrücklich davor, Content für jede Suchvariante zu erzeugen. Ausbau danach alle 1–2 Wochen gezielt.
 
-**Leistungsseiten (7, Launch):** `/leistung-webdesign` · `/leistung-texte` · `/leistung-seo` · `/leistung-lokales-seo` · `/leistung-wartung` · `/leistung-domain-launch` · `/leistung-portal`.
+**Kernseiten (Launch):** `/` · `/leistungen` · `/preise` · `/ablauf` · `/briefing` (Lumi) · `/kontakt` · `/ueber-uns` · `/impressum` · `/datenschutz` · `/agb` (Platzhalter bis anwaltlich final, dann indexierbar). Hubs `/ratgeber` + `/lexikon` starten klein (s. u.).
+
+**Leistungsseiten – Launch nur 5:** `/leistung-webdesign` · `/leistung-texte` · `/leistung-seo-lokal` (SEO/GEO **und** lokale Sichtbarkeit zusammengefasst) · `/leistung-wartung` (Rundum-Schutz) · `/leistung-portal`.
+**Nachgelagert (Stufe 2):** `/leistung-domain-launch` und die Trennung von `/leistung-seo` ↔ `/leistung-lokales-seo`, sobald genug eigener Inhalt existiert.
 
 **Kommerzielle Hubs (nach Launch):** `/website-erstellen-lassen` · `/firmenwebsite-erstellen-lassen` · `/webdesign-agentur` · `/website-relaunch` · `/webdesign-ohne-wordpress`.
 
@@ -301,14 +369,14 @@ Dunkler, ruhiger Produkt-Hero (kein Stockfoto, kein KI-Gradient). Am unteren Ran
 
 **Gemeinsames GEO-Template pro Leistungsseite** (Antwort-zuerst, für Menschen + KI): `Kurz gesagt` (1 Absatz mit Kernaussage + Preisanker) → `Für wen passt das?` → `Was ist enthalten?` → `Was ist nicht enthalten?` → `Was kostet es?` (aus zentralem Preisstand) → `Wie läuft es ab?` → `Welche Entscheidung nimmt Sartu ab?` → `FAQ` → CTA. Genau **eine H1**, `Service`-Schema, `FAQPage` nur bei sichtbaren Fragen, Breadcrumb.
 
-**Die 7 Leistungsseiten (H1 + Kernaussage):**
+**Launch: 5 Leistungsseiten (H1 + Kernaussage):**
 1. `/leistung-webdesign` – „Webdesign für Firmenwebsites, die nicht wie Baukasten aussehen." (individuell programmiert ab 1.490 € netto; kein WordPress).
 2. `/leistung-texte` – „Website-Texte aus Stichpunkten, Fakten und echten Belegen." (Sartu erfindet keine Belege; Rechtstexte nicht enthalten).
-3. `/leistung-seo` – „SEO-/GEO-Basis für Firmenwebsites, die gefunden und verstanden werden." (Pflichttext: keine Ranking-/KI-Nennungsgarantie).
-4. `/leistung-lokales-seo` – „Lokale Sichtbarkeit ohne dünne Ortsseiten." (keine Doorways, echte NAP).
-5. `/leistung-wartung` – „Rundum-Schutz für Ihre Website, ohne WordPress-Wartungsstress." (Betrieb, keine Content-/Design-Flatrate, keine Änderungsminuten).
-6. `/leistung-domain-launch` – „Domain, E-Mail und Launch ohne Technikstress." (Kunde bleibt Inhaber; bestehende E-Mail wird geschützt).
-7. `/leistung-portal` – „Ein Projektportal für Freigaben und kleine Pflege, kein Website-Baukasten." (`Im Portal` / `Nicht im Portal`).
+3. `/leistung-seo-lokal` – „Gefunden werden – lokal und in KI-Suchen." (SEO-/GEO-Basis **und** lokale Sichtbarkeit zusammengefasst; keine Doorways, echte NAP; Pflichttext: keine Ranking-/KI-Nennungsgarantie).
+4. `/leistung-wartung` – „Rundum-Schutz: keine Wartung für Sie." (Betrieb/Verantwortung, keine Content-/Design-Flatrate, keine Änderungsminuten – **nicht** „wartungsarm").
+5. `/leistung-portal` – „Ein Projektportal für Freigaben und kleine Pflege, kein Website-Baukasten." (`Im Portal` / `Nicht im Portal`).
+
+**Nachgelagert (Stufe 2, sobald eigener Inhalt existiert):** `/leistung-domain-launch` („Domain, E-Mail und Launch ohne Technikstress" – Kunde bleibt Inhaber, bestehende E-Mail geschützt) sowie die Aufteilung von `/leistung-seo-lokal` in `/leistung-seo` + `/leistung-lokales-seo`.
 
 **`/leistungen` (Übersicht):** H1 „Website, Texte, Sichtbarkeit und Betrieb als ein klares System." + Antwortmodul (kein Extra-Baukasten) + Leistungslandkarte (10 Zeilen) + „Was Sie nicht entscheiden müssen" + Tiefe je Paket (Tabelle) + Portal-Brücke + FAQ (`Kann ich einzelne Leistungen dazubuchen?` → im Erstangebot nein).
 
@@ -361,7 +429,9 @@ Dunkler, ruhiger Produkt-Hero (kein Stockfoto, kein KI-Gradient). Am unteren Ran
 
 **Was „schön" bei Sartu heißt:** klare visuelle Hierarchie, konsequentes Raster, ruhige Typografie, wenige gezielte Farben, Bilder nur wo sie den Prozess erklären, konkrete Angebotslogik statt generischer Benefits, Portal als Arbeitswerkzeug statt Marketinggrafik.
 
-**Farb-Entscheidung (Widerspruch aufgelöst):** Es gibt **eine** Markenpalette und **eine** funktionale Portal-Palette.
+> **Status nach Codex-Review:** Die folgende Palette ist **eine begründete Arbeitsentscheidung, keine finale Markenfestlegung**. Design ist eine Marken-/Geschmacksfrage, die nicht per Dekret gehört. Drei ausgearbeitete, bewertete Designrichtungen (inkl. der vom Review favorisierten Beige/Schwarz/Rostrot-Welt) stehen in **`CLAUDE_SARTU_WEBSITE_KONZEPT_FINAL.md`** – dort wird final entschieden. Unstrittig in allen Varianten: **kein Neon-Grün, keine generische shadcn-Weißgrau-Optik ohne Markenkante.**
+
+**Farb-Entscheidung (Arbeitsstand, Widerspruch der Quelldateien aufgelöst):** Es gibt **eine** Markenpalette und **eine** funktionale Portal-Palette.
 
 | Rolle | Wert | Verwendung |
 |---|---|---|
@@ -384,7 +454,7 @@ Dunkler, ruhiger Produkt-Hero (kein Stockfoto, kein KI-Gradient). Am unteren Ran
 
 **Form:** Radius 6–8 px, Buttons rechteckig (nicht pillenförmig als Standard), Karten nur für Pakete/FAQ/Portalmodule/wiederholte Datensätze, Abschnitte als volle Bänder, Icons aus einer Bibliothek (Lucide), keine „Karten in Karten".
 
-**Template-Basis:** Website = **Astro**, eigener Umbau **oder ScrewFast (MIT)** (nicht Folex Lite – Lizenz). Portal = **Next.js + shadcn/ui `dashboard-01` (MIT)**. Kein Tailwind-Studio-Klon.
+**Technische Basis:** Website = **static-first** (Astro o. gleichwertig), Portal = echte App-Umgebung. Die **Design- und Basisentscheidung** (eigenes Layout vs. neu recherchierte Template-Basis) wird frei getroffen – siehe `CLAUDE_SARTU_WEBSITE_KONZEPT_FINAL.md` Abschnitt 3. Die früheren Template-Kandidaten sind **keine** Vorgabe.
 
 ---
 
@@ -425,11 +495,28 @@ Dunkler, ruhiger Produkt-Hero (kein Stockfoto, kein KI-Gradient). Am unteren Ran
 
 > Kernprinzip: **Nachfrage und Lieferfähigkeit zuerst beweisen, Automatisierung zuletzt.** Das kanonische „alles vor Marktstart" wird als **Zielbild** beibehalten, aber in liefernde Stufen zerlegt.
 
-**Stufe 0 – Manuell liefern & Referenzen erzeugen (jetzt, Wochen, nicht Monate):**
-- Öffentliche Website (Kernseiten + 7 Leistungsseiten + Ratgeber-Start + Lexikon-Start) auf Astro, launchfähig.
-- **Minimal-Portal:** Anfrage-Inbox (Lumi-Payload), Projektstatus/Timeline, Datei-Upload, Vorschau-Link, Rechnung + **Mollie-Zahlungslink** (Zahlungslinks reichen, noch kein Abo-Automatismus). *(Der bereits gebaute Supabase-Stufe-1-Stand kann diese Rolle übergangsweise erfüllen – s. offene Entscheidung.)*
+**Stufe 0 – Sichtbares Portal + manuell liefern & Referenzen erzeugen (jetzt, Wochen, nicht Monate):**
+- Öffentliche Website (Kernseiten + **5** Leistungsseiten + 3 Ratgeber + 10–15 Lexikonbegriffe) auf statischem Stack, launchfähig.
 - Produktion **manuell + KI-assistiert** (Mensch baut aus Designsystem). Domain/DNS via INWX **manuell**. Buchhaltung via lexoffice/sevDesk.
 - **Ziel: 2–3 echte Referenzkunden** live → echte Case Studies + echte Portal-Screens (die die Website ohnehin braucht).
+
+**Stufe-0-Portal – verbindlicher Sichtbarkeitsumfang (nicht verhandelbar, weil USP):**
+
+| Muss sichtbar/klickbar sein | Mechanik dahinter darf sein |
+|---|---|
+| Login (oder mind. geschützter, nicht ratbarer Projektlink) | einfache Auth, manuell angelegte Konten |
+| **Cockpit mit genau einem nächsten Schritt** | Status manuell gesetzt |
+| Angebot mit Scope, Preis, Zahlungsplan + digitale **Annahme** | PDF/Ansicht + protokollierte Zustimmung |
+| Rechnung + Zahlungsstatus mit **Mollie-Zahlungslink** | Link manuell erzeugt, kein Abo-Automatismus |
+| Material-/Faktenaufgaben (Aufgabenliste + Upload) | Aufgaben manuell aus Vorlage erzeugt |
+| **Vorschau-Link + gebündeltes Feedback** | Preview manuell deployed |
+| **Freigabe/Abnahme** mit Zeitstempel | manuell bestätigt, aber protokolliert |
+| Domain-/E-Mail-Status | manuell gepflegter Statuswert |
+| **Mindestens eine echte Pflegefunktion nach Launch** (Öffnungszeiten *oder* Kontaktdaten) | Änderung löst manuellen Rebuild aus |
+
+**Ausdrücklich NICHT in Stufe 0:** automatische Domainregistrierung, Mollie-Abo-Automatik, KI-Agenten-Orchestrierung, SEO-Flotte, Rollback-Automation, automatische Builds aus dem Portal.
+
+**Regel für Screenshots:** Portal-Screens für die Website stammen aus **dieser echten UI** – niemals aus gezeichneten Fake-Dashboards. Bis ein echtes Kundenprojekt gezeigt werden darf, werden sie als „Musteransicht" gekennzeichnet.
 
 **Stufe 1 – Portal härten:** Angebot/Annahme im Portal, **Mollie-Abo/Mandat** für Schutz (E2E getestet), adaptives Onboarding, Lead-Inbox, strukturierte Selbstpflege (Öffnungszeiten/Kontakt/Seitenstatus), Support, Audit-Log, Admin-2FA, Mandantentrennung. Migration/Konsolidierung auf den Ziel-Stack (Node/PG).
 
@@ -441,6 +528,51 @@ Dunkler, ruhiger Produkt-Hero (kein Stockfoto, kein KI-Gradient). Am unteren Ran
 
 ---
 
+## 23a. Markteintritt, Nachfrage und Kaltstart-Pricing
+
+> Diese Lücke war der schwerwiegendste Mangel des bisherigen Konzepts: Es beschreibt lückenlos, wie eine Anfrage **verarbeitet** wird – aber nicht, wie sie **entsteht**.
+
+### A. Startregion statt „deutschlandweit"
+
+„Deutschlandweit" ist keine Startstrategie, sondern eine diffuse Fläche. **Eine** Kernregion wählen (naheliegend: Dresden, sekundär Leipzig/Chemnitz/Sachsen), dort lokal sichtbar und referenzierbar werden, erst danach ausweiten. Alle Ortsseiten, das Google-Unternehmensprofil und der Outreach folgen dieser einen Region.
+
+**Google-Unternehmensprofil (GBP):** nur anlegen, wenn die Voraussetzungen **regelkonform** erfüllt sind (echte Adresse oder korrekt definiertes Service-Area-Business). Keine Fake-/Briefkastenadresse – das riskiert Profilsperrung und widerspricht der eigenen Anti-Fake-Regel.
+
+### B. Pilot-Outreach (die ersten Kunden kommen nicht über SEO)
+
+SEO und Content wirken erst nach Monaten. Die ersten 2–3 Kunden kommen über **Direktansprache**:
+
+1. **Zielkundenliste: 30–50 konkrete Betriebe** in der Startregion (Handwerk, Praxen, Kanzleien, lokale Dienstleister) mit sichtbar schwacher/veralteter/nicht mobiler Website.
+2. Pro Kontakt ein **konkreter Aufhänger** (nicht „Ich mache Websites"), z. B.: veraltete Inhalte, fehlende mobile Darstellung, kein Impressum/Datenschutz, langsame Ladezeit, kein Google-Profil.
+3. **Kanäle:** persönliche Ansprache/Netzwerk > Empfehlung > telefonisch/E-Mail (werberechtliche Grenzen bei Kaltakquise beachten: B2B-E-Mail-Werbung ohne Einwilligung ist riskant → besser Anruf/Netzwerk/Empfehlung).
+4. **Angebots-Skript für Gründerkunden:** Ausgangslage benennen → SARTU-Ablauf in 3 Sätzen → Festpreis + Erstjahr → Pilotkondition + Gegenleistung → nächster Schritt (Bedarfsscheck).
+
+### C. Kaltstart-Pricing: Preise oben halten, Pilotslots verdeckt
+
+**Regel: Öffentliche Preise NICHT senken.** Ein Rückfall auf alte Niedrigpreise würde SARTU dauerhaft billig ankern und einen späteren Preissprung fast unmöglich machen (Interessenten vergleichen dich gegen dich selbst).
+
+- **Öffentlich:** 1.490 / 3.900 / 7.900 / ab 12.500 € netto – unverändert.
+- **Verdeckt im Direktvertrieb:** 2–3 **„Gründer-/Referenzslots"**, nicht prominent auf der Website.
+- **Rabatt nur gegen echte Gegenleistung:** Case Study mit Namen, Testimonial, Screenshot-/Bildfreigabe, Google-Bewertung, zugesagte schnelle Mitwirkung.
+- **Beispiel Platzhirsch:** öffentlich 7.900 € → Pilot **5.900–6.500 €** *oder* – besser – **7.900 € mit Zusatzwert** (z. B. zusätzliche Referenzseite, verlängerte Erstbetreuung) statt sichtbarem Rabatt. Zusatzwert schützt den Preisanker stärker als ein Nachlass.
+- **Schriftlich festhalten:** Pilotkondition ist einmalig und an die Gegenleistung gebunden (sonst Erwartung auf Dauerrabatt).
+
+### D. Case-Study-Template (ab dem ersten Projekt mitdenken)
+
+Jedes Pilotprojekt erzeugt eine Referenzseite nach festem Muster: **Ausgangslage** → **Ziel** → **Ablauf im Portal** → **Ergebnis** (konkret, ohne erfundene Zahlen) → **echter Screenshot** → **Kundenzitat** → CTA. Bild-/Namensrechte werden **vor** Projektstart schriftlich geklärt.
+
+### E. Bezahlte Sichtbarkeit: klein testen, hart messen
+
+- **SEA-Test** auf enge, kaufnahe Begriffe in der Startregion („website erstellen lassen {Ort}", „webdesign {Ort}", „firmenwebsite {Branche}").
+- **Definiertes Testbudget** und feste Abbruchkriterien **vorher** festlegen (z. B. Kosten pro qualifizierter Anfrage; Abbruch, wenn nach X Anfragen keine in ein Angebot mündet).
+- Erfolg wird an **qualifizierten Anfragen** gemessen, nicht an Klicks.
+
+### F. Kennzahlen für den Markteintritt
+
+Angesprochene Betriebe → Antwortquote → gestartete Bedarfsschecks → versendete Angebote → **Annahmequote** → Median-Produktionsstunden → Anzahl aktiver Schutzverträge (MRR). Diese sechs Zahlen entscheiden, ob skaliert oder nachjustiert wird.
+
+---
+
 ## 24. Konkrete nächste Umsetzungsschritte
 
 **A. Fundament klären (diese Woche):**
@@ -449,15 +581,15 @@ Dunkler, ruhiger Produkt-Hero (kein Stockfoto, kein KI-Gradient). Am unteren Ran
 3. **Eine** Palette + Ansprache („Sie") + Logo-Favorit fixieren; verbotene Wörter-/Anti-KI-Regeln als Lint/QA-Check.
 
 **B. Website launchen (2–4 Wochen):**
-4. Astro-Basis aufsetzen (ScrewFast/eigener Umbau), globales Layout + Design-Tokens + `sartu-web-v1`-Komponenten.
-5. Kernseiten + 7 Leistungsseiten (GEO-Template) + 3–6 Ratgeber + 20–40 Lexikonbegriffe bauen; **echte** NAP/Impressum (nach Kanzlei), sitemap/robots/llms.txt/OG, Search Console + Bing.
-6. Portal-Screens als **Musteransicht** produzieren (aus dem echten Minimal-Portal, nicht Fake).
-7. ENDKONTROLLE-Profil **SARTU-PUBLIC** vollständig grün (keine Add-on-/Minuten-/Alt-Preis-Reste, keine Privatkunden-Formulierungen).
+4. **Designrichtung final wählen** (3 Varianten in `CLAUDE_SARTU_WEBSITE_KONZEPT_FINAL.md`), dann Basis aufsetzen: eigenes Layout **oder** neu begründete Template-Basis; globales Layout + Design-Tokens + Komponenten.
+5. Kernseiten + **5** Leistungsseiten (GEO-Template) + **3** Ratgeber + **10–15** Lexikonbegriffe bauen; **echte** NAP/Impressum (nach Kanzlei), sitemap/robots/llms.txt/OG, Search Console + Bing.
+6. Portal-Screens als **Musteransicht** produzieren – aus der **echten** Stufe-0-UI, nie als gezeichnetes Fake-Dashboard.
+7. ENDKONTROLLE-Profil **SARTU-PUBLIC** vollständig grün (keine Add-on-/Minuten-/Alt-Preis-Reste, keine Privatkunden-Formulierungen, kein „wartungsarm").
 
 **C. Verkaufen & liefern (parallel/danach):**
-8. Minimal-Portal live (Anfrage → Angebot → Mollie-Zahlungslink → Upload/Vorschau).
-9. **Lead-Gen-Plan** (fehlt bisher!): Local SEO + Google-Unternehmensprofil + gezielte SEA auf „Website erstellen lassen {Ort}" + Empfehlungen/Netzwerk. Das Modell erzeugt keine Nachfrage von selbst.
-10. 2–3 Referenzkunden manuell durch den vollen Prozess führen → Case Studies + Screens.
+8. **Stufe-0-Portal live** im verbindlichen Sichtbarkeitsumfang (Abschnitt 23): Login/geschützter Zugang, Cockpit mit einem nächsten Schritt, Angebot + Annahme, Rechnung + Mollie-Link, Aufgaben/Upload, Vorschau + Feedback, Freigabe, Domainstatus, **eine** echte Pflegefunktion.
+9. **Markteintritt aktiv starten** (Abschnitt 23a): Startregion fixieren, GBP regelkonform anlegen, Zielkundenliste 30–50 Betriebe, Pilot-Outreach, SEA-Test mit Abbruchkriterien.
+10. 2–3 **Referenzkunden mit Case-Study-Rechten** (Pilotkondition gegen Gegenleistung) durch den vollen Prozess führen → Case Studies + echte Screens.
 
 **D. Vor „echten" Standardkunden (Zielbild-Gates):** Mollie E2E (Zahlung/Mandat/Wiederholung/Fehlschlag/Erstattung), INWX OT&E (Registrierung/Transfer/DNS-Snapshot/Übergabe), Export + Rollback praktisch getestet, AGB/AVV/Datenschutz/KI-Verarbeitung anwaltlich, ein Musterkunde Ende-zu-Ende.
 
@@ -468,9 +600,13 @@ Dunkler, ruhiger Produkt-Hero (kein Stockfoto, kein KI-Gradient). Am unteren Ran
 1. **Supabase-Prototyp behalten oder migrieren?** Der Juni-Stand (Supabase Frankfurt: Auth/PostgreSQL/Storage, RLS, live getestet) erfüllt „PostgreSQL + Identität + Storage in DE/EU" bereits. **Empfehlung:** für Stufe 0/1 **behalten** (schneller live, Sicherheit aus RLS), Ziel-Node-Control-Plane erst ab Stufe 2, wenn Queues/Worker/Agentenjobs wirklich gebraucht werden. **Nicht** parallel zwei Portale pflegen.
 2. **Buchhaltung: lexoffice oder sevDesk?** (API-Anbindung, GoBD/E-Rechnung). Kaufmännische Entscheidung, vor Stufe 1.
 3. **Typografie final:** reine Grotesk (Inter/Instrument Sans) vs. Grotesk + dezente editorial Serif für H1. Empfehlung: mit Grotesk starten, Serif optional testen.
-4. **Startregion & echte NAP:** Dresden/Sachsen bestätigt? Öffentliche Geschäftsanschrift vorhanden (für `LocalBusiness`/Impressum) oder nur Kontaktanschrift?
+4. **Startregion & echte NAP:** Dresden/Sachsen bestätigt? Öffentliche Geschäftsanschrift vorhanden (für `LocalBusiness`/Impressum/Google-Unternehmensprofil) oder nur Kontaktanschrift (→ Service-Area-Business)?
 5. **Solo vs. kleines Team – ehrliche Selbstdarstellung** und daraus abgeleitete **Kapazität/Projekte-pro-Monat** (bestimmt, ob der Portal-Vollausbau realistisch neben der Produktion läuft oder Hilfe/Outsourcing braucht).
 6. **AGB/Garantie:** ob überhaupt eine (sauber formulierte) Zufriedenheitszusage als Verkaufsargument gewünscht ist – sonst weglassen.
+7. **Designrichtung final:** eine der drei Varianten aus `CLAUDE_SARTU_WEBSITE_KONZEPT_FINAL.md` – oder eigenes Layout vs. neu recherchierte Template-Basis.
+8. **Pilotkonditionen:** Werden 2–3 verdeckte Referenzslots angeboten – als Rabatt (5.900–6.500 € statt 7.900 €) oder als Zusatzwert zum vollen Preis?
+9. **Portal-Betriebsumgebung:** Supabase/Vercel für Stufe 0/1 zulässig, oder muss es von Anfang an auf eigenem Server laufen? (Bestimmt Tempo **und** ob „nur FTP" endgültig ausgeschlossen ist.)
+10. **Eigenes finales Website-Lastenheft** vor dem Bau erstellen (empfohlen: ja – `CLAUDE_SARTU_WEBSITE_KONZEPT_FINAL.md` ist die Grundlage dafür).
 
 ---
 

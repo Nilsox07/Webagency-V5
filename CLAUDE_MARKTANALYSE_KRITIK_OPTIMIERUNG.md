@@ -65,9 +65,9 @@ Fazit: **Tragfähig – aber nur mit umgekehrter Reihenfolge und drastischer MVP
 - **SARTU-Bewertung:** 50/50 und 40/30/30 sind marktkonform. Das **10-Tage-Zahlungsziel** ist straffer als übliche 14 Tage, aber durch digitale Mollie-Zahlung + Slot-nach-Zahlung vertretbar. `[EINSCHÄTZUNG]`
 
 ### 3.3 WordPress-Dominanz & „Kein-WordPress"-Positionierung
-- WordPress ist im KMU-Markt das mit Abstand häufigste CMS (~43 % aller Websites, ~60 %+ CMS-Anteil; bei kleinen Agenturen/Freelancern noch höher). `[BELEGT: W3Techs, s. 3.6]`
-- „Static-first / kein WordPress" ist technisch überlegen (Geschwindigkeit, Sicherheit, keine Update-Last), aber **kein Verkaufsargument beim Endkunden** – es ist ein Betreiber-Vorteil. `[EINSCHÄTZUNG]`
-- **Konsequenz:** Nicht „ohne WordPress" plakatieren, sondern „keine Update-, Plugin- und Sicherheitssorgen für Sie; schnell und wartungsarm".
+- WordPress ist im KMU-Markt das mit Abstand häufigste CMS (**41,2 % aller Websites / 59,1 % CMS-Marktanteil**, W3Techs 24.07.2026; bei kleinen Agenturen/Freelancern noch höher). `[BELEGT: W3Techs, s. 3.6]`
+- „Static-first / kein WordPress" ist technisch überlegen (Geschwindigkeit, Sicherheit, keine Update-Last), **kein primärer Endkunden-Kaufgrund** – aber „nie wieder Plugins, Updates, gehackte Seite, Agenturabhängigkeit" ist für viele Unternehmer ein **realer Schmerz**. Also nicht streichen, sondern **enttechnisieren** und als Beweis unter den Hauptnutzen stellen. `[EINSCHÄTZUNG]`
+- **Konsequenz (korrigiert):** Nicht „ohne WordPress" plakatieren; Entlastung verkaufen: „keine Plugin-Updates, kein Baukasten, keine Sicherheitsbaustelle bei Ihnen". **Wichtig – nicht „wartungsarm"/„wartungsfrei" sagen**: das entwertet den monatlichen Rundum-Schutz (der Kunde fragt sofort „warum zahle ich dann 59/129/249 €?"). Korrekt: **„keine Wartung *für Sie* – SARTU übernimmt Betrieb, Sicherheit, Backups, Monitoring, technische Suchgesundheit, Formular- und Versionsstand"** (s. Masterkonzept, Schutz-Framing).
 
 ### 3.4 KI-Website-Builder als Wettbewerb & Bedrohung
 - KI-Builder senken den Marktpreis für „irgendeine Website" gegen ~0 €. Das drückt v. a. auf das **Start-Paket (1.490 €)**. `[EINSCHÄTZUNG]`
@@ -84,21 +84,28 @@ Fazit: **Tragfähig – aber nur mit umgekehrter Reihenfolge und drastischer MVP
 > Preise ändern sich; Anbieterpreise sind mit „Stand 2026, ca." zu lesen und vor Verwendung an der jeweiligen Preisseite zu verifizieren.
 
 **CMS-/WordPress-Verteilung `[BELEGT]`**
-- WordPress liegt seit Jahren bei ~43 % **aller** Websites und ~60 %+ **Marktanteil unter den CMS**. Quelle: W3Techs, https://w3techs.com/technologies/overview/content_management (laufend aktualisiert, zit. 07/2026).
-- Bedeutung: Der Zielmarkt ist WordPress-gesättigt. „Ohne WordPress" ist eine **Betreiber-Entlastung**, kein Endkunden-Kaufgrund → entsprechend kommunizieren.
+- WordPress: **41,2 % aller Websites, 59,1 % CMS-Marktanteil**. Quelle: W3Techs, https://w3techs.com/technologies/overview/content_management (Stand 24.07.2026).
+- Bedeutung: Der Zielmarkt ist WordPress-gesättigt. „Ohne WordPress" ist eine **Betreiber-Entlastung**, kein Endkunden-Kaufgrund → als Schmerz-Lösung („nie wieder Update-/Plugin-/Sicherheitsstress"), nicht als Technik-Feature kommunizieren.
 
 **Baukästen & KI-Builder (Monatsabo, ca. 2026) `[EINSCHÄTZUNG]`**
 - Wix (inkl. AI/ADI) ~10–30 €/Mon.: https://de.wix.com/ · Squarespace ~16–49 €/Mon.: https://www.squarespace.com/pricing · Jimdo (inkl. „Dolphin"-KI) ~9–39 €/Mon.: https://www.jimdo.com/de/ · IONOS MyWebsite ~1–45 €/Mon.: https://www.ionos.de/ · GoDaddy Airo / Hostinger (KI) ab ~2,99 €/Mon.: https://www.hostinger.de/ · Durable/10Web/Framer/Webflow ~5–40 $/€ pro Monat.
 - Muster: KI-Builder erzeugen in Minuten ein Grundgerüst zum Quasi-Nulltarif, aber **generisch, ohne Strategie/echte Texte/Betrieb/Verantwortung**. Das drückt Preis-Erwartungen v. a. beim Start-Segment und macht SARTUs Anti-KI-Optik + „echtes Ergebnis + Betrieb" zur Kern-Differenzierung.
+
+**Agentur-/Website-Preise (DE, belegt) `[BELEGT]`**
+- Wyreframe (2026): **Basis-Websites 2.500–5.000 €**, **individuelle Business-Websites 8.000–15.000 €**. https://www.wyreframe.de/blog/was-kostet-eine-website (zit. 24.07.2026)
+- Für-Gründer: **One-Pager 500–2.000 €**, **Firmenwebsite 2.000–20.000 €**. https://www.fuer-gruender.de/wissen/unternehmen-gruenden/website-erstellen/erstellen-lassen/ (zit. 24.07.2026)
+- → SARTU (1.490/3.900/7.900) liegt **im Marktkorridor**, Wachstum/Platzhirsch sogar eher moderat für „individuell programmiert + Betrieb + Portal". **Nicht** unrealistisch – der Engpass ist der Kaltstart ohne Referenzen, nicht der Preis.
 
 **Freelancer & Festpreisangebote (DACH) `[EINSCHÄTZUNG/BELEGT-nah]`**
 - IT-/Web-Freelancer-Durchschnittsstundensatz laut Preisindex ~90–100 €/h (gesamt IT); Webdesign speziell für KMU oft ~50–90 €/h. Quelle: freelancermap Preisindex, https://www.freelancermap.de/preisindex (laufend, zit. 07/2026).
 - Festpreis-Firmenwebsites von Freelancern/kleinen Agenturen typischerweise ~800–4.000 €; „Website mieten/Abo" (monatlich statt einmalig) existiert, ist aber wegen Bindung/Gesamtkosten umstritten.
 - SARTU-Einordnung: liegt bewusst **über** dem Freelancer-Preis, verkauft aber Prozess (Portal), Betrieb und „eine Verantwortung" statt Bus-Faktor-1-Freelancer.
 
-**Wartungs-/Betriebsmodelle (DE) `[EINSCHÄTZUNG]`**
-- KMU-Wartung grob 30–150 €/Mon.; „Rundum-sorglos"/Betreuung bis 300 €+; enthalten meist Hosting, SSL, Backups, Updates/Security, Monitoring, begrenztes Änderungskontingent. SARTUs 59/129/249 € ist marktkonform bis leicht premium, ohne Änderungsminuten margenstark.
-- Belege für 50/50- und 40/30/30-Zahlungslogik + Preisspannen: conceptum.at, xezmet.at, rheinspace.de, wyreframe.de, adfera.de (Projektunterlagen §20, zit. 07/2026).
+**Wartungs-/Betriebsmodelle (DE) `[BELEGT/EINSCHÄTZUNG]`**
+- Unicorn Factory: **technische Wartung 30–300 €/Mon.**, inhaltliche Wartung deutlich höher. https://www.unicorn-factory.net/website-monatliche-kosten/ (zit. 24.07.2026)
+- Marktbeispiel Medienhaus Gersone: **Wartungsvertrag 129 €/Mon. zzgl. USt. mit 60 Min. Pflege**. https://www.medienhaus-gersoene.de/service/homepage-website-pflege (zit. 24.07.2026)
+- → SARTUs **59/129/249 €** ist marktkonform bis leicht premium; **ohne Änderungsminuten** margenstark – aber genau deshalb muss der Nutzen als *Entlastung/Verantwortung* verkauft werden, nicht als „Wartung" (s. „wartungsarm"-Korrektur oben).
+- Belege für 50/50- und 40/30/30-Zahlungslogik: conceptum.at, xezmet.at, rheinspace.de, adfera.de (Projektunterlagen §20, zit. 07/2026).
 
 **B2B-/Handwerks-Erwartungen `[EINSCHÄTZUNG]`**
 - Erwartet werden: schnelle mobile Darstellung, klarer Kontaktweg, lokale Auffindbarkeit (Google-Unternehmensprofil), Vertrauenssignale (Referenzen/Jahre/Qualifikationen), Ladezeit. Lokale Suche („… in der Nähe") ist für regionale Betriebe der wichtigste Sichtbarkeitskanal → Local SEO + Google-Unternehmensprofil sind Pflicht, nicht Kür.
@@ -251,6 +258,7 @@ Altname **„Klarweb"** (sartupaketepreise.md: „Seite sagt aktuell Klarweb →
 | Wachstum | 3.900 € | 18–26 | ~1.620–2.340 € | ~40–58 % | ok bei diszipliniertem Scope |
 | Platzhirsch | 7.900 € | 30–42 | ~2.700–3.780 € | ~52–66 % | am gesündesten |
 
+- **Vollkosten-Realität:** Der Stundenwert ~90 € ist ein **Boden**, nicht die Vollkosten. Nicht fakturierbare Zeit kommt obendrauf: Akquise/Vertrieb, Angebotsprüfung, Korrektur-Kommunikation, Portal-/Tooling-Pflege, Admin/Buchhaltung, Support nach Launch, Krankheits-/Urlaubspuffer und **fehlgeschlagene KI-Versuche**. Realistische Steuergrenzen (Voll-Stunden inkl. allem): **Start ≤ 8–10 h, Wachstum ≤ 20–24 h, Platzhirsch ≤ 38–45 h** – enger als die internen harten Caps (16/32/50). Werden sie gerissen, ist nicht der Preis das Problem, sondern Scope, Designsystem-Reife und Content-Prozess. `[EINSCHÄTZUNG]`
 - Die **≤ 40 %-Kostenmarke** ist nur bei **niedrigem Stundenbedarf** haltbar – also nur mit **starkem, wiederverwendbarem Designsystem** und ehrlich zeitsparender KI. Ohne das kippt v. a. Start ins Minus. `[EINSCHÄTZUNG]`
 - **Wiederkehrender Umsatz ist der eigentliche Wert:** z. B. 20 aktive Kunden × Ø 140 € ≈ **2.800 €/Mon.** nahezu Marge (Hosting statisch ~5–15 €/Kunde, Backups/Monitoring gering). `[EINSCHÄTZUNG]`
 - **Break-even hängt am Portal-Bauaufwand**, nicht an den Websitepreisen. Der Portal-Eigenbau (hunderte Stunden) ist die eigentliche Investition. → Genau deshalb Stufung. `[EINSCHÄTZUNG]`
@@ -266,12 +274,12 @@ Altname **„Klarweb"** (sartupaketepreise.md: „Seite sagt aktuell Klarweb →
 2. **Eine Wahrheitsquelle erzwingen.** `pricing.json`/`prices.js` + Diff-Test; `sartupaketepreise.md` und `sartulastenheftwebsite.md` als **veraltet** nach `konzepte/_archiv/`.
 3. **Stack festnageln:** Website Astro, Portal Next.js/shadcn, Backend PostgreSQL; Supabase-Stand für Stufe 0/1 behalten, Node-Control-Plane erst ab Stufe 2.
 4. **Design vereinheitlichen:** eine Palette (Ink/Ivory/Teal + Oxide/Rostrot-Akzent), **Neon-Grün streichen**, „Sie" durchziehen, Schrift + Logo-Favorit fixieren.
-5. **USP umformulieren:** „kein WordPress" → „keine Update-/Plugin-/Sicherheitssorgen; schnell, wartungsarm; Betrieb inklusive". Portal + Festpreis als Haupt-USP.
+5. **USP umformulieren:** „kein WordPress" → „keine Update-/Plugin-/Sicherheitssorgen **für Sie**; Betrieb inklusive". **Nie „wartungsarm"** (entwertet den Schutz). Portal + Festpreis als Haupt-USP.
 6. **Start-Paket schärfen** gegen Gratis-Wettbewerb (Ergebnis + Betrieb betonen) oder Wachstum als eigentlichen Einstieg framen.
 7. **Lead-Gen-Plan ergänzen** (Local SEO, Google-Unternehmensprofil, gezielte SEA „Website erstellen lassen {Ort}", Empfehlungen). Ohne Nachfrage kein Geschäft.
 8. **KI realistisch einordnen:** Stufe 0/1 assistierend, nicht orchestriert; Std-Caps erst mit reifem Designsystem als bindend behandeln.
 9. **Solo/Team ehrlich** darstellen; Ausfall-/Vertretungskonzept definieren; SLA erst versprechen, wenn haltbar.
-10. **Content gestaffelt:** Launch mit Kernseiten + 7 Leistungsseiten + 3–6 Ratgeber + 20–40 Lexikonbegriffe; Ortsseiten/Branchen erst nach Search-Console-Daten.
+10. **Content gestaffelt (nach Review verkleinert):** Launch mit Kernseiten + **5** Leistungsseiten + **3** Ratgeber + **10–15** Lexikonbegriffen; Ortsseiten/Branchen/weitere Leistungsseiten erst nach Search-Console-Daten. Lieber 15 sehr gute als 60 mittelmäßige Seiten.
 11. **Recht vor Verkauf** bündeln (AGB/AVV inkl. KI-Subunternehmer/Abnahme/BFSG-Prüfung/Garantie-Wording) – ein Kanzlei-Paket, nicht stückweise.
 12. **Export + Mollie-Abo + INWX-Lifecycle praktisch testen**, bevor damit geworben/eingezogen wird.
 
@@ -287,12 +295,48 @@ Altname **„Klarweb"** (sartupaketepreise.md: „Seite sagt aktuell Klarweb →
 
 **SO starten (empfohlen):**
 1. **Fundament (1 Woche):** eine Preis-/Scope-Quelle, ein Stack, eine Palette, „Sie", Logo/Schrift – fixieren; Altdateien archivieren.
-2. **Website (2–4 Wochen):** Astro-Kernwebsite (Kernseiten + 7 Leistungsseiten + Ratgeber-/Lexikon-Start), ENDKONTROLLE-Profil SARTU-PUBLIC grün, echte Rechtstexte/NAP, Portal-Screens als „Musteransicht".
-3. **Minimal-Portal + Verkauf (parallel):** Anfrage → Angebot → Mollie-Zahlungslink → Upload/Vorschau; **Lead-Gen aktiv**; 2–3 Referenzkunden manuell liefern.
+2. **Website (2–4 Wochen):** statische Kernwebsite (Kernseiten + **5** Leistungsseiten + 3 Ratgeber + 10–15 Lexikonbegriffe) auf **frei entschiedener** Design-/Technikbasis (s. `CLAUDE_SARTU_WEBSITE_KONZEPT_FINAL.md`), ENDKONTROLLE-Profil SARTU-PUBLIC grün, echte Rechtstexte/NAP, Portal-Screens aus echter UI als „Musteransicht".
+3. **Sichtbares Stufe-0-Portal + Verkauf (parallel):** Login/geschützter Zugang, Cockpit mit einem nächsten Schritt, Angebot + Annahme, Rechnung + Mollie-Link, Aufgaben/Upload, Vorschau + Feedback, Freigabe, Domainstatus, **eine** echte Pflegefunktion; **Markteintritt aktiv** (Startregion, Zielkundenliste, Pilotslots); 2–3 Referenzkunden manuell liefern.
 4. **Härten & automatisieren (danach, datengetrieben):** Mollie-Abo, adaptives Onboarding, strukturierte Selbstpflege; dann teilautomatisierte Produktion + SEO-Flotte; zuletzt volle Orchestrierung + programmatische Ortsseiten.
 
 **Gesamturteil:** Das Konzept ist **gut genug, um damit ein echtes Geschäft zu starten** – aber nur mit umgekehrter Reihenfolge (Kunden vor Perfektion), einer erzwungenen Wahrheitsquelle und einem verschlankten MVP. Die Positionierung ist ein Asset; der geplante Erstumfang ist das Risiko. Wird der Umfang gestaffelt und die Nachfrage aktiv erzeugt, ist SARTU marktfähig und margenstark. Wird weiter „erst das perfekte System" gebaut, ist das wahrscheinlichste Ergebnis: viel Technik, wenige Kunden.
 
 ---
 
-*Die konkrete, widerspruchsbereinigte Bauvorlage steht in `CLAUDE_SARTU_MASTERKONZEPT_FINAL.md`.*
+## 14. Nachtrag: Antwort auf das Codex-Review (24.07.2026)
+
+Ein Gegen-Review von Codex hat mehrere berechtigte Lücken aufgedeckt. Nachfolgend transparent, was ich **übernehme**, was ich **präzisiere** und wo ich **widerspreche**.
+
+### 14.1 Übernommen (Review hatte recht)
+
+| Finding | Konsequenz |
+|---|---|
+| **„Wartungsarm" entwertet die Schutzgebühr** | Schwerster inhaltlicher Fehler meinerseits. Korrigiert in 3.3 + Masterkonzept: **nie** „wartungsarm/wartungsfrei"; korrekt ist „keine Wartung **für Sie** – SARTU übernimmt Betrieb & Verantwortung". |
+| **Stufe-0-Portal war zu dünn** | Richtig. Wenn Portal der USP ist, darf Stufe 0 keine Upload-Hülle sein. Neu: **sichtbares Portal sofort, tiefe Automatisierung später** (Masterkonzept §23 überarbeitet, inkl. verbindlicher Stufe-0-Funktionsliste). |
+| **Nachfrageplan zu grob** | Richtig. „Local SEO + GBP + SEA" ist kein Plan. Neu: konkreter Markteintritt (Startregion, 30–50 Zielkunden, Referenzslots, Case-Study-Template, SEA-Testkriterien) im Masterkonzept. |
+| **Kaltstart-Pricing fehlte** | Richtig und wichtig. Neu: öffentliche Preise **premium halten**, erste Kunden über **verdeckte Pilot-/Referenzslots** (Rabatt nur gegen Case Study/Testimonial/Screenshot-Freigabe). |
+| **Unit Economics zu freundlich** | Richtig. Vollkosten (Akquise, Admin, Support, KI-Fehlversuche, Ausfallpuffer) ergänzt; engere Steuergrenzen 8–10 / 20–24 / 38–45 h. |
+| **Domain-Ende ungeregelt** | Echte Lücke: Kündigung, Zahlungsverzug, Auth-Code, Renewal, Redemption, fehlender Alt-Zugriff. Neu im Masterkonzept §6. |
+| **Launch-Content noch zu groß** | Zugestimmt: 5 statt 7 Leistungsseiten, 3 Ratgeber, 10–15 Lexikonbegriffe zum Start. |
+| **FTP vs. Portal unklar** | Zugestimmt: explizit trennen – Website statisch/FTP-fähig, Portal braucht echte App-Umgebung. |
+| **Template-Altlasten** | Zugestimmt: Folex/ScrewFast/AstroWind/Studio/shadcn waren Recherchestände, keine Vorgabe. Freie Entscheidung im neuen Website-Konzept. |
+| **Marktzahlen zu grob** | Konkrete Belege ergänzt (Wyreframe, Für-Gründer, Unicorn Factory, Medienhaus Gersone, W3Techs 41,2 %/59,1 %). |
+| **Portal-Innovation zu konservativ** | Zugestimmt: Aktualitätsradar, Proof Locker, Local Visibility Board, Saisonkalender, Change Preview, Referenzgenerator etc. aufgenommen. |
+| **Dateiablage** | Formal: Die Dateien liegen hier im Repo (`konzepte/` + Root) – das ist der arbeitsfähige „Sammelordner" dieses Projekts. Lokal müssen sie in den Sammelordner kopiert werden. |
+
+### 14.2 Präzisiert (im Kern einig, aber differenzierter)
+
+- **„Kein WordPress" abgewertet?** Teilweise berechtigt. Meine Aussage war: kein *primärer* Kaufgrund. Das Review ergänzt zu Recht, dass „nie wieder Plugin-/Update-/Hack-Stress" ein realer Schmerz ist. Korrekte Linie: **nicht Headline, aber starker Beweis direkt unter dem Hauptnutzen** – enttechnisiert formuliert. Übernommen.
+- **„Musteransicht"-Screenshots:** Einig. Meine Vorgabe war nie Fake-Grafik – Screens müssen aus **echter UI** stammen und nur solange als „Musteransicht" gekennzeichnet werden, wie sie kein echtes Kundenprojekt zeigen. Präzisiert.
+- **BFSG:** Einig, kein Widerspruch. Meine Formulierung war bereits „meist keine Pflicht, pro Projekt prüfen, Basis immer bauen" – **keine** pauschale Entwarnung. Bleibt so.
+
+### 14.3 Widerspruch / Einordnung
+
+1. **„Claude minimalisiert zu stark" – nur teilweise korrekt.** Meine Stufung betraf ausdrücklich die **Automatisierungstiefe** (KI-Orchestrierung, Mollie-Abo-Automatik, Domain-Lifecycle, SEO-Flotte, Rollback), nicht die *Sichtbarkeit* des Portals. Der Review hat aber recht, dass das im Text zu schwach stand und als „unsichtbares Hilfsportal" gelesen werden konnte. → Formulierung korrigiert, Sache unverändert: **Oberfläche früh echt, Automatik spät.**
+2. **Zeitvorteil gegenüber Agenturen (P2):** Zustimmung mit Warnung – die genannten Belege (Kickoff ≥ 3 h o. ä.) taugen **nicht** als Beweis für einen SARTU-Zeitvorteil. Solche Vergleiche erst mit **eigenen Daten nach 5–10 Projekten**; vorher nur qualitativ formulieren. Ich rate ausdrücklich von jeder Prozentangabe ab.
+3. **Design-Richtung:** Ich hatte Ink/Ivory/Teal + Oxide entschieden, das Review will Beige/Schwarz/Rostrot als Markenwelt. Das ist eine **Geschmacks- und Markenentscheidung, keine Sachfrage** – deshalb löse ich sie nicht per Dekret, sondern liefere **drei bewertete Designrichtungen** zur Auswahl (siehe `CLAUDE_SARTU_WEBSITE_KONZEPT_FINAL.md`).
+
+---
+
+*Die konkrete, widerspruchsbereinigte Bauvorlage steht in `CLAUDE_SARTU_MASTERKONZEPT_FINAL.md`.
+Das eigenständige Website-/Design-Konzept steht in `CLAUDE_SARTU_WEBSITE_KONZEPT_FINAL.md`.*
