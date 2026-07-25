@@ -33,8 +33,15 @@ völlig verschiedenen Gründen.**
 | Zeit bis Wirkung | **4–12 Wochen** | 12–24 Monate für eine neue Domain |
 | Vorteil für Neue | **ja** — Alter zählt kaum | nein — Alter zählt stark |
 
-**Das Kartenergebnis ist der einzige Kanal im ganzen Marketing, in dem „neu" kein Nachteil ist.**
-Ein verifiziertes Profil mit 15–20 echten Bewertungen kann eine zehn Jahre alte Agentur schlagen.
+**Das Kartenergebnis ist der Kanal, in dem ein neues Unternehmen die besten Chancen hat**, weil dort
+Nähe und Bewertungen stärker wiegen als Domainalter und Verlinkung.
+
+> **Interne Einschätzung, keine belegte Zahl:** Ein verifiziertes Profil mit einer zweistelligen Zahl
+> echter Bewertungen kann einen deutlich älteren Wettbewerber überholen. Das ist die gängige
+> Erfahrung und deckt sich mit Googles eigener Beschreibung der Rankingfaktoren (Relevanz, Entfernung,
+> Bekanntheit) — es ist aber **keine Garantie und keine Zahl, die auf die Website gehört**.
+> **Nichts aus dieser Datei ist Kundenkopie.** Aussagen über erwartbare Rankings dürfen weder auf der
+> Website noch im Angebot stehen (Website-Lastenheft §2, Verbotsliste).
 
 Ortsseiten erben davon **nichts**. Sie ranken über dieselbe Mechanik wie jede andere Seite. Wer
 Ortsseiten baut, um den Local-Pack-Effekt zu bekommen, baut das Falsche.
@@ -138,16 +145,27 @@ Wer „Was ist ein CMS?" sucht, ist es meistens nicht.
 
 ### 3.2 Leistungsseiten (5)
 
-| Zielbegriff | URL | Intention |
-|---|---|---|
-| Webdesign ohne WordPress · individuelle Website programmieren lassen | `/leistungen/webdesign` | kommerziell |
-| Website für Handwerksbetriebe · Handwerker Website | `/leistungen/website-handwerk` | branchenbezogen |
-| Website für Praxen · Praxiswebsite erstellen lassen | `/leistungen/website-praxis` | branchenbezogen |
-| SEO Grundlagen Firmenwebsite · lokal gefunden werden | `/leistungen/seo-geo` | kommerziell |
-| Website Betreuung · Website Wartung Kosten | `/leistungen/betrieb` | kommerziell |
+**Verbindlich ist die Liste im Website-Lastenheft §11** — Pfade, H1 und „Kurz gesagt" stehen dort
+fertig. Diese Tabelle ordnet ihnen nur die Suchintention zu und erfindet **keine** neuen Seiten.
 
-Der **Kern-USP** der Marke — Festpreis, ein Ansprechpartner, Kundenbereich — gehört auf **jede**
-dieser Seiten in den Abschnitt „Welche Entscheidung wir Ihnen abnehmen", nicht nur auf die Startseite.
+| Zielbegriff (Cluster) | URL | Intention | Anmerkung |
+|---|---|---|---|
+| Webdesign ohne WordPress · individuelle Website programmieren lassen | `/leistung-webdesign` | kommerziell | stärkste Leistungsseite |
+| Website-Texte schreiben lassen · Texte für Firmenwebsite | `/leistung-texte` | kommerziell | eigenständige Nachfrage, oft unterschätzt |
+| lokal gefunden werden · SEO Grundlagen Firmenwebsite | `/leistung-seo-lokal` | kommerziell | **ohne Ortsnamen**, solange der Standort offen ist |
+| Website Betreuung · Website Wartung Kosten | `/leistung-wartung` | kommerziell | verweist auf die Transparenzseite zum Betrieb (§3.4) |
+| — **kein Zielbegriff** | `/leistung-portal` | Beweis, nicht Ranking | Niemand sucht nach „Projektportal Webdesign". Diese Seite existiert als **Beweisseite** für den USP und als Ziel interner Links — sie wird nicht auf Suchbegriffe optimiert |
+
+> **`/leistung-portal` ist bewusst keine Rankingseite.** Sie zu optimieren wäre verschwendete Mühe;
+> sie wegzulassen wäre falsch, weil der Kundenbereich das einzige echte Unterscheidungsmerkmal ist.
+> Sie lebt von internen Links, den echten Screenshots und der Startseite.
+
+**Branchenseiten** (`Website für Handwerksbetriebe`, `Website für Praxen`) sind **Stufe 2**, nicht
+Launch. Sie sind ein starker deutschlandweiter Hebel ohne Grenzaufwand je Markt (§0.3) — aber der
+Launch-Umfang steht fest, und sie kämen sonst zu den fünf Leistungsseiten hinzu statt an ihre Stelle.
+
+Der **Kern-USP** — Festpreis, ein Ansprechpartner, Kundenbereich — gehört auf **jede** dieser Seiten
+in den Abschnitt „Welche Entscheidung wir Ihnen abnehmen", nicht nur auf die Startseite.
 
 ### 3.3 Vergleichs- und Ratgeberseiten
 
@@ -193,20 +211,40 @@ Zielgruppe. Wer Preise sucht und endlich welche findet, bleibt.
 | Seite | Was an nachprüfbaren Angaben hinein muss |
 |---|---|
 | `/preise` | alle vier Pakete: Einmalpreis, Seitenzahl, Wortumfang, Korrekturrunden, Betriebspauschale, Erstjahreswert, Mindestlaufzeit, Zahlungsplan |
-| `/ratgeber/was-kostet-eine-firmenwebsite` | Spannen für Baukasten, Freelancer, Agentur, SARTU — jeweils **mit** dem, was darin enthalten ist. Laufende Kosten getrennt ausgewiesen |
+| `/ratgeber/was-kostet-eine-firmenwebsite` | **SARTUs Zahlen konkret.** Fremde Anbieterarten nur als **Kostenbestandteile**, nicht als Preisspannen — s. Regel unten |
 | `/ratgeber/was-nicht-enthalten-ist` | die vollständige Ausschlussliste im Klartext, samt Begründung, warum SARTU sie **nicht** als Zusatzoption verkauft |
 | `/ratgeber/wie-lange-dauert-eine-website` | Lieferkorridore je Paket in Werktagen, ab wann sie laufen, was passiert, wenn Angaben fehlen |
 | `/ratgeber/website-festpreis-erkennen` | die konkreten Fragen, die ein seriöses Angebot beantwortet — mit SARTUs eigenen Antworten daneben |
 | `/ratgeber/was-eine-korrekturrunde-ist` | die Definition, die sonst niemand schreibt: was zählt, was nicht, was eine zusätzliche Runde kostet |
 | `/ratgeber/was-der-betrieb-kostet` | was in 59/129/249 € enthalten ist, was nicht, was bei Vertragsende mit Domain und Website passiert |
 
-**Regel für alle Transparenzseiten:** Jede Zahl muss aus dem eigenen Angebot stammen und stimmen.
-**Keine** Marktdurchschnitte, **keine** Studien, **keine** Wettbewerberpreise — die wären erfunden
-oder veraltet und würden genau das Vertrauen zerstören, das diese Seiten aufbauen sollen.
+#### Die Zahlenregel — hier wird es leicht widersprüchlich, deshalb genau
+
+**Eigene Zahlen: Pflicht.** Preise, Umfangsgrenzen, Korrekturrunden, Lieferkorridore, Betriebskosten.
+Sie stammen aus dem Masterkonzept, stimmen und sind überprüfbar. Das ist der ganze Hebel.
+
+**Fremde Preise: nicht.** Weder Marktdurchschnitte noch Studien noch Wettbewerberpreise. Grund:
+Ich habe keine belastbaren Zahlen für den deutschen Markt 2026, geschätzte wären erfunden, und eine
+falsche Zahl auf der Seite, die Ehrlichkeit verkauft, zerstört genau das, wofür sie da ist.
+
+**Wie „Was kostet eine Firmenwebsite?" trotzdem funktioniert — über Kostenbestandteile statt
+Preisspannen:**
+
+| Statt | Besser |
+|---|---|
+| „Eine Agentur kostet 5.000–15.000 €" | „Bei einer Agentur zahlen Sie typischerweise nach Aufwand. Fragen Sie nach: Wie viele Seiten? Wie viele Korrekturrunden? Was kostet eine zusätzliche?" |
+| „Ein Baukasten kostet ab 12 €/Monat" | „Beim Baukasten ist die Software günstig — die Arbeit machen Sie. Rechnen Sie Ihre eigenen Stunden mit ein." |
+| „Freelancer verlangen 60–90 €/Stunde" | „Beim Freelancer entscheidet der Stundensatz **und** die Stundenzahl. Ohne Festpreis kennen Sie am Anfang nur die Hälfte der Rechnung." |
+
+Der Artikel beantwortet damit **was den Preis bestimmt** statt **was andere verlangen** — und ist
+damit nützlicher, haltbarer und rechtlich unproblematisch. SARTUs eigene Zahlen stehen konkret
+daneben und sind die einzigen echten auf der Seite. Genau dieser Kontrast ist die Wirkung.
+
+**Wenn später belastbare Marktzahlen vorliegen** — eine datierte Branchenerhebung, eigene Daten aus
+verlorenen Angeboten — dürfen sie ergänzt werden, **mit Quelle und Datum**. Vorher nicht.
 
 Über fremde Anbieter wird nur in **Kategorien** gesprochen („Baukasten", „Freelancer", „Agentur"),
-nie mit Namen und nie mit konkreten Preisen. Namentliche Preisvergleiche sind rechtlich riskant und
-ohne belastbare Datengrundlage nicht haltbar.
+nie mit Namen. Namentliche Vergleiche sind ohne belastbare Datengrundlage rechtlich riskant.
 
 #### Was diese Seiten zitierfähig macht
 
@@ -247,7 +285,7 @@ Suchmaschinenoptimierung, Content-Management-System, SSL. **Nicht** jeden Fachbe
 | Erfundene Studien, Prozentzahlen oder Fallzahlen | die Verbotsliste im Website-Lastenheft §2 gilt hier genauso |
 | Optimierung auf `Webdesignagentur`, `Webagentur`, `Webdesign` | Verzeichnisse und alte Domains besetzen die Plätze; überwiegend Recherche- statt Kaufabsicht (§0.2) |
 | Preise oder Namen von Wettbewerbern nennen | ohne belastbare Datengrundlage rechtlich riskant und schnell veraltet (§3.4) |
-| Ortsseiten ohne Referenz aus diesem Ort | ohne echten lokalen Beleg ist die Seite austauschbar — genau das Merkmal, das Google prüft (§4.1) |
+| Ortsseiten ohne den Beleg, den ihre Entfernungsstufe verlangt | ohne Beleg ist die Seite austauschbar — genau das Merkmal, an dem Doorway-Inhalte erkannt werden (§4.1) |
 | `llms.txt` als Rankingmaßnahme | Google sagt ausdrücklich, es helfe weder Ranking noch Sichtbarkeit in der Google-Suche |
 
 **Zur Klarstellung bei `llms.txt`:** Die Datei anzulegen ist harmlos und für Nicht-Google-Systeme
@@ -256,38 +294,60 @@ Kunden als solche verkauft werden.
 
 ---
 
-### 4.1 Wann eine Ortsseite doch entsteht — der einzige Auslöser
+### 4.1 Wann eine Ortsseite entsteht — die Beweisleiter
 
-Ortsseiten sind nicht verboten, sie haben nur eine **Bedingung**: einen **echten Kunden aus diesem
-Ort**, dessen Projekt als Fallstudie gezeigt werden darf.
+Frühere Fassungen dieser Datei verlangten für **jede** Ortsseite eine Fallstudie aus diesem Ort.
+Das war zu streng und stand im Widerspruch zu Masterkonzept §16a, das Region-Hub und zwei bis drei
+Umlandorte zuerst vorsieht. Beides zusammen war nicht baubar.
 
-**Warum genau das:** Eine Fallstudie mit Namen, Bildern, Ausgangslage und Ergebnis ist der einzige
-Inhalt, den kein Wettbewerber kopieren und keine KI erfinden kann. Sie macht die Seite
-unaustauschbar — und Austauschbarkeit ist exakt das Merkmal, an dem Google Doorway- und
-Massen-Inhalte erkennt.
+**Aufgelöst über die Entfernung:** Je weiter ein Ort vom Arbeitsort entfernt ist, desto mehr Beweis
+braucht die Seite. Das ist keine Willkür — es spiegelt, wie glaubwürdig die Seite für einen Leser
+überhaupt sein **kann**.
 
-**Ablauf, wenn ein Kunde in Ort X gewonnen wurde:**
+| Stufe | Was | Was reicht als Beleg | Wann |
+|---|---|---|---|
+| **1** | **Standortseite** `[HAUPTORT]` | echte Adresse und verifiziertes Unternehmensprofil | sobald der Standort entschieden ist |
+| **2** | **Region-Hub** `/webdesign-region-[STARTREGION]` | echter Einzugsbereich, den man tatsächlich bedient | zusammen mit Stufe 1 |
+| **3** | **2–4 Umlandorte** (Tier 1) | **echte lokale Recherche** + plausibler Servicebezug + bestandenes Gate unten | nach Stufe 1–2 |
+| **4** | **weitere Orte in der Region** | zusätzlich **ein belegtes Signal**: Search-Console-Impressionen, eine Anfrage von dort oder ein SEA-Klick | datengetrieben |
+| **5** | **Orte außerhalb des bedienbaren Umkreises** | **Fallstudie eines echten Kunden aus dem Ort**, schriftlich freigegeben | selten, dafür stark |
+| **—** | **alle übrigen Gemeinden** | nichts — bleiben Kandidat oder interner Entwurf mit `noindex` | dauerhaft |
 
-1. Projekt fertigstellen, Ergebnis dokumentieren
-2. **Schriftliche Freigabe** des Kunden für Name, Bilder und Nennung einholen — ohne die passiert nichts
-3. Seite bauen: Fallstudie im Zentrum, dazu Leistung, Ablauf, Preisanker, drei bis fünf echte Fragen
-4. Ehrlich einordnen: wo SARTU sitzt und wie der Ort betreut wird. **Nie** „Ihre Agentur vor Ort in X", wenn dort kein Standort ist — das ist nicht nur ein Google-Risiko, sondern **irreführende Werbung** und damit abmahnfähig
-5. Nach 6 Monaten prüfen: Impressionen, Klicks, Anfragen. Ohne Wirkung wird die Fallstudie in den Regional-Hub überführt und die Einzelseite umgeleitet
+**Warum Stufe 5 so streng ist:** Für einen Ort 300 km entfernt ist jede Aussage über lokale Nähe
+entweder unwahr oder belanglos. Nur eine echte Fallstudie macht die Seite dort unaustauschbar — und
+Austauschbarkeit ist genau das Merkmal, an dem Doorway- und Massen-Inhalte erkannt werden.
 
-**Erwartete Menge:** über zwei bis drei Jahre etwa 20–40 Seiten — jede stark, jede belegt, alle im
-tatsächlich bedienbaren Umkreis. Das ist keine Einschränkung, sondern die einzige Variante, die
-funktioniert.
+**Warum Stufe 3 milder ist:** Im tatsächlich bedienbaren Umkreis ist der Ortsbezug real. Man kann
+hinfahren, kennt die Gegend, kann echte Betriebe benennen. Das reicht als Substanz — es muss nur
+**geschrieben** und nicht behauptet werden.
 
-**Die Pflegeobergrenze ist eine harte Zahl.** Jede veröffentlichte Ortsseite muss dauerhaft geprüft
-werden (§7). Bei einem Prüfzyklus von sechs Monaten und realistisch 30 bearbeitbaren Seiten im Monat
-liegt die Obergrenze bei etwa **180 Seiten** — dann ist die gesamte Kapazität in der Pflege
-gebunden. Seiten darüber hinaus bedeuten: Pflege aufgeben. Ein Bestand ungepflegter, dünner Seiten
-ist genau das, was Qualitätssysteme abstrafen.
+#### Gate für jede Ortsseite ab Stufe 3
 
-**Der Ortsdatensatz bleibt trotzdem wertvoll** — aber als **Vertriebswerkzeug**: Wo sitzen Betriebe
-in erreichbarer Entfernung, die direkt angesprochen werden können? Das ist der Kanal, der die ersten
-Kunden bringt (Masterkonzept §23b). Dafür ist eine Gemeindeliste das richtige Werkzeug — als
-Seitengenerator ist sie es nicht.
+Alle Punkte müssen erfüllt sein, sonst bleibt es bei einer Erwähnung im Region-Hub:
+
+1. **Eigene Suchintention** — der Ort wird tatsächlich mit Webdesign-Begriffen gesucht, oder es gibt reale Akquise dort
+2. **Ehrliche Einordnung** — wo SARTU sitzt und wie der Ort betreut wird. **Nie** „Ihre Agentur vor Ort in X", wenn dort kein Standort ist. Das ist nicht nur ein Google-Risiko, sondern **irreführende Werbung** und abmahnfähig
+3. **Mindestens fünf ortsspezifische Abschnitte**, die auf einer anderen Ortsseite so nicht stehen könnten — lokale Ausgangslage, passende Betriebstypen, regionale Besonderheit, konkreter Ablauf, eigene Fragen
+4. **Kein Doorway-Verhalten** — die Seite bietet eigenständigen Nutzen. Der Handlungsaufruf zum Bedarfsscheck ist erlaubt und erwünscht; verboten ist eine Seite, die **außer** dem Handlungsaufruf nichts bietet
+5. **Technisch sauber** — eigener Canonical, Breadcrumb, `Service` mit `areaServed`, **kein** `LocalBusiness` ohne echten Standort dort
+6. **Menschliche Freigabe** — mit einer Frage: *Würde diese Seite existieren, wenn es Google nicht gäbe?* Bei Nein ist es ein Doorway, unabhängig davon, wer den Text geschrieben hat
+
+> **Zur Klarstellung:** Google stuft Scaled Content Abuse nach **Zweck und Nutzen** ein, nicht nach
+> Autorschaft. „Ein Mensch hat es geschrieben" ist **kein** Schutz. Handgeschriebene dünne Ortsseiten
+> sind genauso ein Verstoß wie generierte. Der Schutz liegt allein im Nutzen.
+
+#### Die Pflegeobergrenze ist eine harte Zahl
+
+Jede veröffentlichte Ortsseite muss dauerhaft geprüft werden (§7). Bei einem Prüfzyklus von sechs
+Monaten und realistisch 30 bearbeitbaren Seiten im Monat liegt die Obergrenze bei etwa **180 Seiten**
+— dann ist die gesamte Kapazität in der Pflege gebunden und es kommt nichts Neues mehr dazu.
+
+**Realistische Erwartung:** über zwei bis drei Jahre 20–40 Seiten. Jede belegt, jede im bedienbaren
+Umkreis. Das ist keine Einschränkung, sondern die einzige Variante, die trägt.
+
+**Der Ortsdatensatz bleibt wertvoll** — als **Vertriebswerkzeug**: Wo sitzen Betriebe in erreichbarer
+Entfernung, die direkt angesprochen werden können? Das ist der Kanal, der die ersten Kunden bringt
+(Masterkonzept §23b). Als Seitengenerator taugt er nicht.
 
 ---
 
@@ -348,7 +408,7 @@ Nach Wirkung sortiert, nicht nach Aufwand:
 | 3 | `/briefing` | ohne Bedarfsscheck gibt es keine Anfrage |
 | 4 | `/ablauf` | erklärt den Kundenbereich — hier entsteht der Unterschied zum Wettbewerb |
 | 5 | `/ratgeber/was-kostet-eine-firmenwebsite` | **stärkste Transparenzseite**, höchste Kaufabsicht, KI-zitierfähig |
-| 6 | `/leistungen/webdesign` | Hauptleistung |
+| 6 | `/leistung-webdesign` | Hauptleistung |
 | 7 | `/ratgeber/agentur-freelancer-baukasten` | trifft die Entscheidungssituation direkt |
 | 8 | `/ueber-uns` mit echtem Foto | bei einer unbekannten Einzelperson entscheidend |
 | 9 | `/kontakt` | Pflicht |

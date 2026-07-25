@@ -13,14 +13,24 @@
 
 ---
 
-## 0. Baufrei — keine blockierende Entscheidung mehr offen
+## 0. Standortneutral baufertig — mit zwei Gates
 
 | # | Entscheidung | Status |
 |---|---|---|
 | 1 | **Designrichtung** | **offen — wird recherchiert**, nicht vorgegeben. Vorgehen: `CLAUDE_SARTU_DESIGN_BRIEFING_AUSFUEHRUNG.md`. Struktur, Copy und Anforderungen in diesem Dokument sind davon unabhängig und vollständig. |
 | 2 | **Startregion / Standort** | ⏸ **offen** — siehe `SARTU_ENTSCHEIDUNGEN_OFFEN.md` §1. Blockiert **nicht** den Bau, blockiert die lokale Ebene |
 
-**Damit ist dieses Lastenheft vollständig umsetzbar.** Die einzige verbleibende Teilfrage betrifft nicht den Bau, sondern die Form des Google-Unternehmensprofils (echtes Büro → sichtbare Adresse, reine Postadresse → Service-Area-Business, s. Masterkonzept §23a.1).
+**Was das heißt:** Alle Seiten, Texte, Felder und Abnahmekriterien in diesem Dokument sind vollständig und **standortneutral umsetzbar**. Gesperrt sind nur zwei Dinge:
+
+| Gate | Blockiert | Blockiert **nicht** |
+|---|---|---|
+| **Designrichtung** | den Vollausbau über die 2–3 Startseitenvarianten hinaus | Struktur, Copy, Bedarfsscheck, SEO-Grundlage |
+| **Standort** | die lokale Ebene: Ortsseiten, `LocalBusiness`, Unternehmensprofil, Ortsnamen in Titeln | den gesamten übrigen Bau |
+
+**Nicht baufrei ist der lokale Launch** — und mit ihm der schnellste Kundenkanal überhaupt
+(`SARTU_SEO_GEO_KEYWORDSTRATEGIE.md` §0.4). Die Form des Unternehmensprofils hängt an der Art der
+Adresse: echtes Büro → sichtbare Adresse, reine Postadresse → Service-Area ohne sichtbare Adresse
+(Masterkonzept §23a.1).
 
 **Zu 2 (offen):** Die Startregion ist **nicht entschieden**. Werte und Sperren stehen in
 `SARTU_ENTSCHEIDUNGEN_OFFEN.md` §1.
@@ -103,7 +113,7 @@ Frühere Designentwürfe unter `design/_verworfen/` sind **nicht** zu verwenden 
 **Was dieses Lastenheft weiterhin verbindlich vorgibt** (Anforderungen, keine Gestaltung):
 
 - **Struktur und Inhalt** jeder Seite: Sektionsreihenfolge, Copy, Überschriften, Feldlabels, Fehlermeldungen (§3 ff.)
-- **Leistung:** ≤ 75 KB gzip JS Startseite, ≤ 40 KB Unterseiten; LCP < 2,5 s · INP < 200 ms · CLS < 0,1
+- **Leistung:** ≤ 75 KB gzip JS Startseite, ≤ 40 KB Unterseiten; **vor Livegang im Labor** LCP < 2,5 s · TBT < 200 ms · CLS < 0,1. **Echtes INP** ist ein Felddatenwert und wird erst nach dem Livegang gemessen (§17a)
 - **Barrierefreiheit:** Kontrast ≥ 4,5:1, sichtbarer Fokus, volle Tastaturbedienung, Skip-Link, `prefers-reduced-motion` wirksam, Zustände nie allein über Farbe
 - **Ohne JavaScript nutzbar** — kein Inhalt erscheint erst durch eine Scroll-Animation
 - **Bewegung budgetiert:** höchstens zwei bewusste Markenmomente pro Seite, keine Animation über Text oder CTA
@@ -632,23 +642,23 @@ Gliederung: Warum WordPress so verbreitet ist → Was daran im Alltag Arbeit mac
 **Begriffsseite (8 Teile, verbindlich):** H1 = Begriff · Kurzdefinition (2–3 Sätze) · Warum es für Firmenwebsites wichtig ist · Beispiel · Typischer Fehler · Wie SARTU damit umgeht · Verwandte Begriffe (2–4) · Link zur passenden Leistungsseite.
 **Umfang:** 250–400 Wörter · **Schema:** `DefinedTerm` (Fallback `Article`) · `BreadcrumbList`
 
-| # | Begriff | URL | Verlinkt auf |
+| # | Begriff | URL | Verweist auf |
 |---|---|---|---|
-| 1 | Backup | `/lexikon/backup` | `/leistung-wartung` |
-| 2 | Canonical | `/lexikon/canonical` | `/leistung-seo-lokal` |
-| 3 | Core Web Vitals | `/lexikon/core-web-vitals` | `/leistung-webdesign` |
-| 4 | DNS | `/lexikon/dns` | `/leistung-wartung` |
-| 5 | Domain | `/lexikon/domain` | `/leistung-wartung` |
-| 6 | Festpreis | `/lexikon/festpreis` | `/preise` |
-| 7 | Firmenwebsite | `/lexikon/firmenwebsite` | `/leistung-webdesign` |
+| 1 | Firmenwebsite | `/lexikon/firmenwebsite` | `/leistung-webdesign` |
+| 2 | Festpreis | `/lexikon/festpreis` | `/preise` |
+| 3 | Hosting | `/lexikon/hosting` | `/leistung-wartung` |
+| 4 | Domain | `/lexikon/domain` | `/leistung-wartung` |
+| 5 | Relaunch | `/lexikon/relaunch` | `/leistung-webdesign` |
+| 6 | Barrierefreiheit | `/lexikon/barrierefreiheit` | `/leistung-webdesign` |
+| 7 | Local SEO | `/lexikon/local-seo` | `/leistung-seo-lokal` |
 | 8 | GEO (KI-Suche) | `/lexikon/geo-ki-suche` | `/leistung-seo-lokal` |
-| 9 | Hosting | `/lexikon/hosting` | `/leistung-wartung` |
-| 10 | Local SEO | `/lexikon/local-seo` | `/leistung-seo-lokal` |
-| 11 | One-Pager | `/lexikon/one-pager` | `/preise` |
-| 12 | Relaunch | `/lexikon/relaunch` | `/leistung-webdesign` |
-| 13 | Schema.org | `/lexikon/schema-org` | `/leistung-seo-lokal` |
-| 14 | Suchintention | `/lexikon/suchintention` | `/leistung-seo-lokal` |
-| 15 | Weiterleitung (301) | `/lexikon/weiterleitung-301` | `/leistung-seo-lokal` |
+
+**Auswahlregel:** nur Begriffe, die in einem echten Verkaufsgespräch vorkommen und bei denen ein
+Missverständnis Geld kostet. **Nicht** jeder Fachbegriff, den es gibt.
+
+**Stufe 2 nach Search-Console-Daten** (nicht zum Launch): Backup · Canonical · Core Web Vitals ·
+DNS · One-Pager · Schema.org · Suchintention · Weiterleitung (301) · SEO · CMS · SSL · Sitemap.
+
 
 Ausbau auf 40–60 Begriffe erst in Stufe 2, gesteuert über Search-Console-Daten.
 
@@ -724,7 +734,7 @@ Alle Platzhalter tragen **eine** einheitliche, suchbare Markierung: `[[PLATZHALT
 | `/ablauf` | index | Breadcrumb | 0.8 |
 | `/briefing` (Einstiegsseite) | index | Breadcrumb | 0.7 |
 | `/briefing/1` … `/briefing/n` (Schritte) | **noindex** | – | – |
-| `/leistungen/*` (5) | index | Service, Breadcrumb | 0.7 |
+| `/leistung-*` (5, s. §11) | index | Service, Breadcrumb | 0.7 |
 | `/ratgeber` + 3 Transparenzseiten (§11a) | index | Article, Breadcrumb | **0.9** |
 | `/ratgeber` + 2 Vergleichsartikel (§12) | index | Article, Breadcrumb | 0.7 |
 | `/ueber-uns` | index | Person oder Organization, Breadcrumb | 0.6 |

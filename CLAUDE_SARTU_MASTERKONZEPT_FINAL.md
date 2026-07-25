@@ -561,6 +561,11 @@ Siehe `CLAUDE_SARTU_WEBSITE_KONZEPT_FINAL.md`, Abschnitte 4–6.
 
 **Priorisierung weiterer Orte** (nicht nach Einwohnerzahl): echte Nachbarstädte im Einzugsgebiet · wirtschaftlich relevante Orte mit passendem Betriebsbesatz · Orte mit belegtem Suchvolumen oder SEA-Signal · Orte, für die konkrete Beispiele, Referenzen oder echte lokale Recherche vorliegen.
 
+> **Beweisleiter statt Einheitsregel:** Wie viel Beleg eine Ortsseite braucht, hängt von ihrer
+> Entfernung zum Arbeitsort ab — echte lokale Recherche im Umland, ein belegtes Datensignal weiter
+> draußen, eine freigegebene Fallstudie außerhalb des bedienbaren Umkreises. Vollständig in
+> `SARTU_SEO_GEO_KEYWORDSTRATEGIE.md` §4.1, dort steht auch die Pflegeobergrenze von rund 180 Seiten.
+
 **Programmatic ja — aber mit `noindex`-Stufe:** Weitere Orte dürfen als Entwurf generiert werden (`draft → noindex_preview → ready_for_review → indexable → retire_or_merge`). Sie gehen **nie automatisch** auf `index`.
 
 #### Indexierungs-Gate (alle Punkte müssen erfüllt sein)

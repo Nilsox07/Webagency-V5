@@ -100,10 +100,10 @@ Die visuelle Richtung wird **nicht in diesem Konzept festgelegt**. Frühere Entw
 | `/agb` | **nur wenn anwaltlich final** – sonst nicht verlinken + `noindex` | – |
 
 **Leistungsseiten (Launch: 5):** `/leistung-webdesign` · `/leistung-texte` · `/leistung-seo-lokal` · `/leistung-wartung` · `/leistung-portal`
-**Wissen (Launch klein):** `/ratgeber` mit **3** Artikeln · `/lexikon` mit **10–15** Begriffen
+**Wissen (Launch klein):** `/ratgeber` mit **3 Transparenzseiten + 2 Vergleichsartikeln** · `/lexikon` mit **8** Begriffen
 **Systemseiten:** 404, Danke-/Bestätigungsseiten (`noindex`)
 
-**Nach Launch (Stufe 2, nur mit echtem Inhalt):** `/leistung-domain-launch`, Trennung SEO ↔ lokales SEO, kommerzielle Hubs (`/website-erstellen-lassen`, `/webdesign-ohne-wordpress`, `/website-relaunch`), Branchen-Hubs, Lexikonausbau auf 40–60 Begriffe, Referenzen/Case Studies.
+**Nach Launch (Stufe 2, nur mit echtem Inhalt):** `/leistung-domain-launch`, Trennung SEO ↔ lokales SEO, kommerzielle Hubs (`/website-erstellen-lassen`, `/webdesign-ohne-wordpress`, `/website-relaunch`), Branchen-Hubs (`/website-handwerk`, `/website-praxis` — starker deutschlandweiter Hebel, s. `SARTU_SEO_GEO_KEYWORDSTRATEGIE.md` §3.2), Lexikonausbau, Referenzen/Case Studies.
 
 **`/website-check` — Schnellcheck (Stufe 2, sobald der Crawler steht):** Öffentliches Werkzeug: Adresse eingeben, Prüfung von Ladezeit mobil, Mobildarstellung, SSL, Impressum, Metadaten und maschinenlesbaren Kontaktdaten. Nutzt **dieselbe** Technik wie die QA-Gates und die SEO-Flottenzentrale (Masterkonzept §23b.6) — doppelte Verwendung, einmal gebaut.
 *Regeln:* Ergebnis ehrlich, keine Angstmache, keine erfundenen Sicherheitswarnungen, keine Note, die jede Seite schlecht aussehen lässt, **kein** automatischer E-Mail-Versand an ungeprüfte Adressen. Ergebnisseite `noindex`, Werkzeugseite `index`.
@@ -209,8 +209,15 @@ Aufbau: Einstieg mit Trust-Hinweisen (3 Min., Preis vor Kontaktdaten, kein Pflic
 **Dateien:** `/sitemap.xml`, `/robots.txt`, `/llms.txt` (ohne Ranking-Behauptung), `/favicon.ico`, OG-Bild. Search Console + Bing Webmaster einrichten, Sitemap einreichen.
 **Performance:** LCP < 2,5 s · INP < 200 ms · CLS < 0,1; wenig JavaScript; Fonts self-hosted (`font-display: swap`); statische Auslieferung.
 
-**Ratgeber (Launch: 3):** „Was kostet eine Firmenwebsite?" (→ `/preise`) · „Website erstellen lassen – so läuft es ab" (→ `/ablauf`) · „Firmenwebsite ohne WordPress" (→ `/leistung-webdesign`).
-**Lexikon (Launch: 10–15):** Firmenwebsite · One-Pager · Relaunch · SEO · GEO · Local SEO · Suchintention · Canonical · Core Web Vitals · Schema.org · Domain · DNS · Hosting · Backup · Festpreis. Struktur je Begriff: Definition → Warum wichtig → Beispiel aus SARTU-Sicht → typischer Fehler → wie SARTU damit umgeht → verwandte Begriffe → Link zur Leistungsseite.
+**Ratgeber (Launch: 5 Seiten unter `/ratgeber`)** — maßgeblich ist Website-Lastenheft §11a und §12:
+
+**Drei Transparenzseiten** (§11a) — der stärkste Sichtbarkeitshebel, weil sie echte Zahlen nennen,
+die der Markt zurückhält: „Was kostet eine Firmenwebsite?" · „Was nicht enthalten ist" ·
+„Was der Betrieb kostet".
+
+**Zwei Vergleichsartikel** (§12): „Agentur, Freelancer oder Baukasten?" · „Firmenwebsite ohne
+WordPress" (→ `/leistung-webdesign`).
+**Lexikon (Launch: 8):** Firmenwebsite · Festpreis · Hosting · Domain · Relaunch · Barrierefreiheit · Local SEO · GEO (KI-Suche). Weitere Begriffe sind Stufe 2 (Lastenheft §13). Struktur je Begriff: Definition → Warum wichtig → Beispiel aus SARTU-Sicht → typischer Fehler → wie SARTU damit umgeht → verwandte Begriffe → Link zur Leistungsseite.
 
 **Interne Verlinkung:** jede kommerzielle Seite → `/briefing` + `/preise`; jeder Ratgeber → mind. eine kommerzielle Seite; Lexikon → Leistungen + verwandte Begriffe. Ankertexte beschreibend, nie „hier"/„mehr". **Kein** Footer-Ortsverzeichnis.
 
