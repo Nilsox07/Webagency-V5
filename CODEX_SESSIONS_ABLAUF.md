@@ -103,10 +103,19 @@ Rechtstexte · echte Fotos · die Freigabe eigener Texte. Alles davon steht in
 > **Schritt 4 — Kleinster lauffähiger Stand.** Projektgerüst nach Portal-Lastenheft §1.3, eine
 > Migration, eine Seite, ein Test. Berichten.
 >
-> **Schritt 5 — Designvarianten.** Nach `CLAUDE_SARTU_DESIGN_BRIEFING_AUSFUEHRUNG.md`:
-> recherchieren, gegen die Prüfliste in §4 prüfen, **2–3 klickbare Startseitenvarianten** mit den
-> **echten** Texten aus Website-Lastenheft §5 bauen — als echte PHP-Seiten im Projekt, nicht als
-> lose HTML-Dateien. Vorlegen mit Herkunftsliste, Lizenzen, gemessenen KB und Laborwerten.
+> **Schritt 5 — Designvarianten nach dem Copy-/Port-Verfahren.** Lies
+> `CLAUDE_SARTU_DESIGN_BRIEFING_AUSFUEHRUNG.md` §2.1 und §3.1 vollständig. Das ist **kein**
+> „entwirf etwas Schönes": Wähle je Variante **1–3 sehr gute, sauber lizenzierte Quellen** und
+> **übernimm deren konkreten Aufbau** — Markup, CSS-Ansatz, Zustände, Interaktionslogik. Angepasst
+> werden Farben, Schriften, Abstände, Texte. Utility-Klassen übersetzt du in **eigenes CSS mit
+> zentralen Variablen**, weil es keinen Build-Schritt gibt. React-Verhalten baust du als kleines
+> eigenes JavaScript-Modul nach.
+> Grenze nach Ebene: Bausteine dürfen sehr nah sein, Sektionen übernimmst du in der Mechanik und
+> setzt sie neu zusammen, ganze Seitengerüste nie.
+> Ergebnis: **2–3 klickbare Startseitenvarianten** mit den **echten** Texten aus Website-Lastenheft
+> §5, als echte PHP-Seiten im Projekt.
+> Vorlegen mit: gewählten Quellen und Begründung, **Lizenzstufe je Quelle** (§2.1), Herkunftsliste
+> je Komponente, gemessenen KB gzip, Laborwerten.
 >
 > **Dann anhalten.** Der Mensch entscheidet die Designrichtung. Baue keine weiteren Seiten.
 >

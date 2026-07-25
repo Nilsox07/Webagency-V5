@@ -25,18 +25,68 @@ Frühere Designentwürfe liegen unter `design/_verworfen/` und sind **nicht** zu
 
 ---
 
+> **Merksatz für dieses Dokument:** Nicht „mach mir etwas Schönes", sondern **„such dir wenige sehr
+> gute, sauber lizenzierte Quellen, übernimm ihren Aufbau und mach ihn zu unserem"**. Das Ergebnis
+> ist eine kuratierte Code-Collage, kein KI-Neuentwurf.
+
+---
+
 ## 2. Unverhandelbarer Rahmen
 
 Das sind Geschäfts- und Rechtsanforderungen, keine Geschmacksfragen. Sie gelten für **jeden** Vorschlag.
 
-### 2.1 Lizenz — der kritischste Punkt
+### 2.1 Lizenz — der kritischste Punkt, und er hat **zwei Stufen**
 
-SARTU **verkauft Websites an Kunden weiter**. Was du einsetzt, muss das erlauben.
+Das ist der Abschnitt, der über Rechtssicherheit entscheidet. Er wird oft zu einfach gedacht.
 
-- Jede Schrift, Komponente, Bibliothek und jedes Icon-Set braucht eine Lizenz, die **kommerzielle Nutzung und Weitergabe im Kundenprojekt** erlaubt.
-- **Prüfe die Lizenzdatei im Repository selbst.** Verlasse dich nicht auf die Beschreibung auf einer Website.
-- Ausgeschlossen: alles, was Weiterverkauf oder Weitergabe an Dritte untersagt; „kostenlos für persönliche Nutzung"; Templates mit „single site license".
-- Notiere zu jedem eingesetzten Teil: **Name, Version, Lizenztyp, Fundstelle**. Diese Liste gehört zur Abgabe.
+**Der Unterschied, auf den es ankommt:**
+
+| | **SARTUs eigene Website und Kundenbereich** | **SARTU-Starter für Kundenseiten** |
+|---|---|---|
+| Was es ist | ein Projekt für SARTU selbst | ein wiederverwendbarer Bausatz |
+| Lizenzanforderung | kommerzielle Nutzung erlaubt | kommerzielle Nutzung **und Weitergabe im Bausatz** erlaubt |
+| Zulässig | MIT, Apache-2.0, CC0 — **und** gekaufte Lizenzen wie Tailwind Plus | **nur** MIT, Apache-2.0, CC0 und Vergleichbares |
+| Verboten | „nur persönliche Nutzung", „single site license" | zusätzlich: **jede gekaufte Komponentenlizenz** |
+
+**Warum die zweite Spalte enger ist — ein konkretes Beispiel.** Die Tailwind-Plus-Lizenz erlaubt
+ausdrücklich Kundenprojekte („create unlimited End Products for unlimited Clients"), verbietet aber
+genauso ausdrücklich:
+
+> *„Creating a theme, template, or project starter kit using the components, templates, or
+> libraries and making it available either for sale or for free."*
+
+Ein SARTU-Starter, aus dem Kundenseiten entstehen, **ist** ein Starter-Kit. Für SARTUs eigene
+Website wären diese Komponenten zulässig, im Starter nicht. Dasselbe gilt für Flowbite Pro, Preline
+Pro und jede andere gekaufte Sammlung.
+*(Lizenztext geprüft am 25.07.2026: https://tailwindcss.com/plus/license)*
+
+**Regel, die daraus folgt:** Wenn du nicht **sicher** weißt, in welche Spalte ein Teil gehört,
+nimm die rechte. Was im Starter zulässig ist, ist überall zulässig. Umgekehrt gilt das nicht.
+
+### Prüfung je Teil — ohne Ausnahme
+
+- **Lies die Lizenzdatei im Repository selbst.** Nicht die Beschreibung auf der Website, nicht die
+  Zusammenfassung auf einer Vergleichsseite
+- Bei zwei Stufen (kostenlos + kostenpflichtig) prüfen, **welche** Komponenten in welcher Stufe sind.
+  Flowbite und Preline haben freie und gekaufte Teile, die auf derselben Seite nebeneinanderstehen
+- Ausgeschlossen: „kostenlos für persönliche Nutzung", „single site license", alles ohne
+  auffindbare Lizenz
+
+### Herkunftsliste — Pflichtabgabe
+
+Für **jedes** übernommene Teil, auf Komponentenebene und nicht pauschal:
+
+| Spalte | Inhalt |
+|---|---|
+| Komponente | wofür sie bei SARTU eingesetzt wird |
+| Quelle | Projekt, genaue Fundstelle, Datum des Abrufs |
+| Version oder Commit | damit später nachvollziehbar ist, welcher Stand |
+| Lizenz | Typ und wo die Lizenzdatei liegt |
+| Stufe | „nur SARTU-eigen" oder „auch im Kundenstarter zulässig" |
+| Was geändert wurde | in einem Satz |
+
+Diese Liste ist Teil der Abgabe. Ein Teil ohne Zeile in der Liste gilt als nicht eingesetzt und wird
+entfernt.
 
 ### 2.2 Technik und Leistung
 
@@ -59,6 +109,12 @@ SARTU **verkauft Websites an Kunden weiter**. Was du einsetzt, muss das erlauben
 
 SARTU verkauft „individuell programmiert, kein Baukasten". Die eigene Website darf deshalb **nicht erkennbar aus einem Template** stammen — und aus demselben Grund **kein fremdes Komponentensystem als Laufzeitabhängigkeit** mitbringen. Wer „ohne Baukasten" verkauft und dabei erkennbar einen zusammensteckt, verliert das Argument.
 
+> **Das ist kein Widerspruch zum Übernehmen von Code (§3.1).** Der Unterschied liegt in der Ebene
+> und im Ergebnis: Bausteine dürfen nah übernommen werden, weil sie niemand wiedererkennt. Was
+> erkannt wird — Hero-Layouts, auffällige Preisblöcke, ganze Seitengerüste — wird neu zusammengesetzt.
+> **Der Prüfstein ist nicht, wie der Code entstanden ist, sondern ob ein Fachkundiger die Quelle
+> ansieht.** Kann er es, ist es zu nah.
+
 Nicht verwenden:
 - sichtbare Template-Handschrift (bekannte Hero-Layouts, unveränderte Beispielsektionen)
 - Farbverläufe, Leuchtflächen, schwebende Dashboard-Karten mit Schlagschatten
@@ -78,31 +134,84 @@ Alle Texte, Preise und Portal-Ansichten stammen aus dem Lastenheft. Portal-Scree
 
 Prüfe jede Quelle selbst auf Aktualität — Projekte veralten, Lizenzen ändern sich.
 
-### 3.1 Komponenten und Grundgerüst
+### 3.1 Komponenten — **übernehmen und portieren, nicht neu erfinden**
 
-> **Die wichtigste Unterscheidung in diesem Abschnitt:** Fast alle bekannten Komponentensysteme
-> setzen React, Vue oder einen Build-Schritt voraus. Das ist hier **kein Zielsystem** (§2.2).
-> Sie bleiben trotzdem wertvoll — als **Referenz**, nicht als Abhängigkeit.
+> **Das ist der wichtigste Abschnitt dieses Dokuments. Er wurde bewusst verschärft.**
+>
+> Eine frühere Fassung sagte: fremde Systeme nur als „Inspiration" lesen, dann selbst bauen. Das
+> war der falsche Auftrag. **Wer eine KI bittet, „etwas Schönes selbst zu bauen", bekommt den
+> Durchschnitt** — mittige Abstände, generische Karten, austauschbare Hierarchie. Genau der Look,
+> den SARTU nicht haben darf.
+>
+> **Der neue Auftrag lautet: kuratierte Code-Collage.** Suche wenige, sehr gute, sauber lizenzierte
+> Quellen. Übernimm ihren **konkreten** Aufbau — Markup, CSS-Ansatz, Zustände, Interaktionslogik.
+> Passe an, was zur Marke gehört. Erfinde nicht neu, was jemand mit mehr Geschmack schon gelöst hat.
 
-| Rolle | Was | Was du davon nimmst |
+#### Warum das besser ist
+
+In einer guten Komponente steckt Arbeit, die man ihr nicht ansieht: wie groß der Abstand zwischen
+Beschriftung und Feld ist, wie ein Fehlerzustand aussieht, wie der Fokusring bei dunklem Hintergrund
+funktioniert, wann eine Tabelle auf dem Handy umbricht. Diese Entscheidungen sind **das eigentliche
+Design**. Eine KI, die frei baut, trifft sie im Mittel — und Mittelmaß ist erkennbar.
+
+#### So wählst du aus
+
+**1 bis 3 Quellen, nicht zehn.** Mehr Quellen heißt nicht mehr Qualität, sondern weniger Einheit.
+Wähle Quellen, die zueinander passen, und begründe die Wahl in einem Absatz.
+
+| Art | Was du davon übernimmst | Beispiele zum Prüfen |
 |---|---|---|
-| **Referenz für Barrierefreiheit und Interaktion** | Radix Primitives · Headless UI · Ark UI · React Aria | **Verhalten und ARIA-Muster:** Welche Rollen, welche Tastaturwege, welche Zustände? Lies die Dokumentation und den Quelltext. **Nicht** den Code einbinden |
-| **Referenz für Optik und Aufbau** | shadcn/ui · Preline · Flowbite · daisyUI · HyperUI · Park UI · Astro-Themes | **Ideen zu Abständen, Hierarchie, Zustandsdarstellung.** Nie ein komplettes Layout übernehmen (§2.4) |
-| **Direkt einsetzbar** | Open Props · moderne CSS-Resets · natives HTML | **Ja** — reines CSS ohne Abhängigkeit |
+| **Reines HTML + CSS** — der Idealfall | alles: Markup, CSS, Zustände | HyperUI · daisyUI · Open Props · Pico · reine CSS-Sammlungen |
+| **Kopierbare Komponenten** (Code zum Einfügen, nicht als Abhängigkeit) | Markup und CSS, Verhalten nachgebaut | shadcn/ui (React → portieren) · Flowbite (freie Teile) · Preline (freie Teile) |
+| **Verhaltensvorlagen** (React, nicht direkt nutzbar) | die **Interaktionslogik**: Rollen, Tastaturwege, Zustände, Fokusführung | Radix Primitives · Headless UI · Ark UI · React Aria |
+| **Echte Seiten im Netz** | einzelne gelöste Details, nie ganze Layouts | siehe §3.5 |
 
-**Was tatsächlich gebaut wird:** semantisches HTML in PHP-Views (Layouts, Partials, Komponenten aus
-`/app/views`), CSS mit zentralen Variablen, und kleine eigene JavaScript-Module dort, wo sie nötig
-sind. Nichts davon braucht einen Übersetzungsvorgang.
+**Bei jeder Quelle zuerst die Lizenzstufe nach §2.1 bestimmen** — bevor du auch nur eine Zeile
+übernimmst. Ein Teil, das nur in Spalte 1 zulässig ist, darf nie in den Kundenstarter wandern.
 
-**Warum das kein Rückschritt ist:** Die genannten Systeme sind vor allem deshalb wertvoll, weil sie
-**Barrierefreiheit richtig gelöst** haben — eine Dialog-Komponente mit korrekter Fokusfalle, ein
-Akkordeon mit richtigen ARIA-Attributen. Dieses Wissen ist übertragbar; der Code ist es nicht.
-Ein Akkordeon in 30 Zeilen HTML und CSS ist genauso barrierefrei wie eines aus einer Bibliothek —
-wenn man weiß, worauf es ankommt. Genau dafür liest du sie.
+#### Wie nah du übernehmen darfst — nach Ebene gestaffelt
 
-**Regel:** Findet sich für ein Interaktionsmuster keine vertretbare eigene Umsetzung, ist das ein
-Hinweis, dass das Muster für diese Website zu kompliziert ist — nicht, dass eine Bibliothek
-dazukommen muss.
+Das ist die Grenze zwischen „hochwertig kuratiert" und „erkennbar aus einem Template" (§2.4):
+
+| Ebene | Wie nah | Warum |
+|---|---|---|
+| **Bausteine** — Schaltfläche, Eingabefeld, Tabelle, Akkordeon, Dialog, Karte, Hinweis, Fußzeilenzeile | **sehr nah, praktisch übernehmen** | Niemand erkennt ein gut gebautes Eingabefeld wieder. Hier steckt Handwerk, kein Wiedererkennungswert |
+| **Sektionen** — Hero, Preisblock, Merkmalsraster, Zitatbereich | **Mechanik übernehmen, Anordnung neu zusammensetzen** | Ein bekanntes Hero-Layout **wird** erkannt. Übernimm das Rasterverhalten, die Umbruchpunkte, die Zustände — aber nicht die Komposition |
+| **Ganze Seiten** | **nie** | Das ist der Template-Look, den SARTU verkaufsseitig ausschließt |
+
+**Faustregel:** Je unsichtbarer ein Teil, desto näher darfst du. Je stärker ein Teil den ersten
+Eindruck prägt, desto mehr muss es deins werden.
+
+#### Der Portierungsschritt — und warum er das Problem nebenbei löst
+
+Fast alle guten Quellen sind **Tailwind-basiert**. Dieses Projekt hat **keinen Build-Schritt**
+(§2.2). Daraus folgt zwingend:
+
+**Utility-Klassen werden in eigenes CSS übersetzt**, mit den zentralen Variablen des Projekts.
+Nicht die gesamte Tailwind-Datei ausliefern, nicht heimlich einen Übersetzungsschritt einführen,
+nicht Klassennamen wie `px-4 py-2 rounded-lg` ins Markup schreiben.
+
+> **Das ist Arbeit — aber es ist genau die richtige Arbeit.** Beim Übersetzen von Utility-Klassen in
+> eigenes CSS mit eigener Abstandsskala kann eine erkennbare Fremdsektion gar nicht unverändert
+> durchrutschen. Der Portierungsschritt **ist** der Entfremdungsschritt. Zwei Probleme, eine Lösung.
+
+**Bei React-Komponenten** (Radix, Headless UI, React Aria): Das Markup und die ARIA-Attribute
+übernimmst du, das Verhalten schreibst du als kleines eigenes JavaScript-Modul nach. Lies dazu deren
+Quelltext — dort steht, welche Tasten welchen Zustand ändern und wohin der Fokus wandert. Das ist
+kein Neuerfinden, das ist Übersetzen.
+
+#### Was angepasst wird — und was nicht
+
+| Anpassen | Unverändert lassen |
+|---|---|
+| Farben, Schriften, Schriftgrößen | Zugänglichkeitsmerkmale: Rollen, `aria-*`, Fokusreihenfolge |
+| Abstände auf die eigene Skala | Tastaturverhalten |
+| Radien, Rahmen, Schattenverzicht | Umbruchlogik, die nachweislich funktioniert |
+| Texte — immer die echten aus dem Lastenheft | Zustandsabdeckung: Leerzustand, Fehler, Ladezustand |
+| Anordnung auf Sektionsebene | |
+
+**Verändere nie etwas an der Zugänglichkeit, um es hübscher zu machen.** Wenn ein Fokusring stört,
+gestalte ihn um — entferne ihn nicht.
 
 ### 3.2 Bewegung
 
@@ -166,7 +275,11 @@ Für **jedes** Teil, das du übernehmen willst:
 - [ ] **Gepflegt** — letzte Änderung nachvollziehbar aktuell, keine offenen Sicherheitsprobleme
 - [ ] **Größe** gemessen und im Budget
 - [ ] **Barrierefrei** — Tastatur, Fokus, ARIA belegt, nicht nur behauptet
-- [ ] **Passt technisch** — läuft **ohne Build-Schritt** und **ohne Framework-Laufzeit**. Erzwingt es React, Vue, einen Bundler oder einen Paketmanager zur Laufzeit: **nicht einsetzen**, nur als Referenz lesen (§3.1)
+- [ ] **Lizenzstufe bestimmt** (§2.1): nur SARTU-eigen, oder auch im Kundenstarter zulässig? Im Zweifel die engere Stufe
+- [ ] **Passt technisch** — läuft **ohne Build-Schritt** und **ohne Framework-Laufzeit**. Erzwingt es React, Vue, einen Bundler oder einen Paketmanager zur Laufzeit: nicht direkt einbinden, sondern nach §3.1 portieren
+- [ ] **Utility-Klassen sind übersetzt** — kein `px-4 py-2` im ausgelieferten Markup, sondern eigenes CSS mit den zentralen Variablen
+- [ ] **Ebene geprüft** (§3.1): Baustein → darf nah sein · Sektion → Mechanik ja, Komposition neu · ganze Seite → nie
+- [ ] **In der Herkunftsliste eingetragen** mit Quelle, Version, Lizenz, Stufe und Änderung
 - [ ] **Umgestaltbar** — Farben, Schriften und Abstände über Variablen änderbar
 - [ ] **Nicht wiedererkennbar** — man sieht dem Ergebnis die Herkunft nicht an
 - [ ] **Ohne externe Verbindungen** zur Laufzeit
@@ -191,15 +304,22 @@ Der häufigste Fehler ist, korrekte Komponenten zusammenzusetzen und trotzdem ei
 
 **Wenn eine Stelle leer wirkt, ist die Antwort fast nie „noch ein Element", sondern:** größerer Typ-Kontrast, mehr Weißraum oder ein Inhalt, der wirklich hingehört.
 
-**Entscheidungsreihenfolge beim Bauen einer Komponente:**
+**Entscheidungsreihenfolge beim Bauen einer Komponente — bewusst mit „übernehmen" zuerst:**
 
-1. **Natives HTML/CSS** — reicht in den allermeisten Fällen (`<details>`, `<dialog>`, `<input>`-Typen)
-2. **Eigene PHP-Komponente in `/app/views/components`** — semantisches HTML, ARIA-Muster aus der Referenzlektüre (§3.1), CSS mit zentralen Variablen
-3. **Kleines eigenes JavaScript-Modul**, nur wo das Verhalten es wirklich verlangt
+1. **Gibt es das nativ?** `<details>`, `<dialog>`, passende `<input>`-Typen. Dann das — es ist
+   zugänglich, klein und wartungsfrei
+2. **Gibt es eine gute, sauber lizenzierte Vorlage?** Dann **übernehmen und portieren** nach §3.1 —
+   Markup und CSS-Ansatz mit, Utility-Klassen in eigenes CSS übersetzt, Verhalten aus der
+   Verhaltensvorlage nachgebaut
+3. **Selbst bauen** — erst wenn 1 und 2 nichts hergeben, und immer für alles SARTU-Eigene
+   (Preistabelle, Bedarfsscheck, Vorschau- und Freigabeansichten)
 
-**Nie:** ein komplettes Template-Layout übernehmen. **Nie:** ein Komponentensystem als
-Laufzeitabhängigkeit einbinden (§3.1). Jede Komponente entsteht **einmal** und wird von öffentlichen
-Seiten und Kundenbereich gemeinsam genutzt — kein zweites Set für den eingeloggten Bereich.
+**Der Unterschied zu früher liegt in Schritt 2.** Er stand vorher nicht drin, und das war der Fehler:
+Wer direkt zu „selbst bauen" springt, baut Durchschnitt.
+
+**Nie:** ein komplettes Seitengerüst übernehmen. **Nie:** ein Komponentensystem als
+Laufzeitabhängigkeit einbinden. Jede Komponente entsteht **einmal** und wird von öffentlichen Seiten
+und Kundenbereich gemeinsam genutzt — kein zweites Set für den eingeloggten Bereich.
 
 ---
 
@@ -223,6 +343,7 @@ Seiten und Kundenbereich gemeinsam genutzt — kein zweites Set für den eingelo
 Je Vorschlag:
 
 1. **Ein Satz zur Haltung** — wie wirkt dieser Vorschlag und auf wen zielt er?
+1a. **Welche 1–3 Quellen** du gewählt hast und **warum diese** — mit Lizenzstufe je Quelle (§2.1)
 2. **Herkunftsliste:** jedes eingesetzte Teil mit Name, Version, **Lizenz** und Fundstelle.
 3. **Messwerte:** JS in KB gzip, CSS in KB, LCP und CLS mobil im Labor (TBT statt INP, §2.2).
 4. **Prüfliste aus Abschnitt 4**, abgehakt.
