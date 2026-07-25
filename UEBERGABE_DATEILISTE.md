@@ -18,8 +18,9 @@ merkt es, bevor gebaut wird.
 | 2 | `CLAUDE_SARTU_PORTAL_LASTENHEFT_BAUFINAL.md` | **Hauptdokument** — Stack, Datenmodell, jeder Screen, jeder Text, 59 Testfälle | **Abbruch.** Nicht baubar |
 | 3 | `CLAUDE_SARTU_DESIGN_BRIEFING_AUSFUEHRUNG.md` | Vorgehen für die visuelle Ebene | Abbruch |
 | 4 | `CLAUDE_SARTU_MASTERKONZEPT_FINAL.md` | Nachschlagewerk + verbindliche Arbeitsverteilung §10a | Abbruch |
-| 5 | `CLAUDE_SARTU_WEBSITE_LASTENHEFT_BAUFINAL.md` | nur §2 Sprachregeln | Melden, mit Rest fortfahren |
-| 6 | `konzepte/` (20 Dateien) | historische Quellen, **veraltete Preise** | Melden, mit Rest fortfahren |
+| 5 | `SARTU_ENTSCHEIDUNGEN_OFFEN.md` | **alle Platzhalter und Sperren** — Standort, Rechtstexte, Design, Betriebsumgebung | **Abbruch.** Sonst werden Werte erfunden |
+| 6 | `CLAUDE_SARTU_WEBSITE_LASTENHEFT_BAUFINAL.md` | nur §2 Sprachregeln | Melden, mit Rest fortfahren |
+| 7 | `konzepte/` (20 Dateien) | historische Quellen, **veraltete Preise und abgelöste Stacks** | Melden, mit Rest fortfahren |
 
 ## Für den Websiteauftrag
 
@@ -30,7 +31,9 @@ merkt es, bevor gebaut wird.
 | 3 | `CLAUDE_SARTU_DESIGN_BRIEFING_AUSFUEHRUNG.md` | Vorgehen für die visuelle Ebene | Abbruch |
 | 4 | `CLAUDE_SARTU_WEBSITE_KONZEPT_FINAL.md` | Architektur und Begründungen | Melden, mit Rest fortfahren |
 | 5 | `CLAUDE_SARTU_MASTERKONZEPT_FINAL.md` | Geschäftsmodell, Preise, §10a, §16a | Abbruch |
-| 6 | `CLAUDE_SARTU_PORTAL_LASTENHEFT_BAUFINAL.md` | nur Abschnitt 4b — die Schnittstelle | Melden; Formularversand kapseln (Website-Lastenheft §9.5b) |
+| 6 | `CLAUDE_SARTU_PORTAL_LASTENHEFT_BAUFINAL.md` | **§1 Stack, Struktur, Hosting** + §4b Anfrageeingang | **Abbruch.** Ohne §1 ist die Architektur unbekannt |
+| 7 | `SARTU_SEO_GEO_KEYWORDSTRATEGIE.md` | welche Seite welche Suchintention bedient, Baureihenfolge | **Abbruch.** Sonst entstehen Texte ohne Zielrichtung |
+| 8 | `SARTU_ENTSCHEIDUNGEN_OFFEN.md` | alle Platzhalter und Sperren | **Abbruch** |
 
 ## Nicht übergeben
 
@@ -47,7 +50,7 @@ Codex führt **zuerst** diesen Ablauf aus und meldet das Ergebnis:
 
 1. Alle Dateien der zutreffenden Liste auf Vorhandensein prüfen
 2. Bei jedem Hauptdokument zusätzlich prüfen: enthält es die erwarteten Abschnitte?
-   - Portal-Lastenheft: `## 0.` bis `## 18.` — insbesondere `## 4b.` und `## 16.`
+   - Portal-Lastenheft: `## 0.` bis `## 18.` — insbesondere `## 1.` (Stack), `## 4b.` und `## 16.`
    - Website-Lastenheft: `## 0.` bis `## 17a.` — insbesondere `## 9.` und `## 14a.`
 3. **Fehlt eine Datei mit „Abbruch": nicht anfangen.** Melden, welche Datei fehlt, und auf
    Nachlieferung warten. Nicht rekonstruieren, nicht aus dem Zusammenhang erraten,
@@ -59,3 +62,34 @@ Codex führt **zuerst** diesen Ablauf aus und meldet das Ergebnis:
 
 **Ergebnis der Startprüfung gehört als erster Absatz in den Bericht** — mit der Anzahl gefundener
 Dateien und der Bestätigung, dass das Hauptdokument vollständig ist.
+
+---
+
+## Zwei harte Gates vor dem Bau
+
+Diese beiden Punkte werden häufig übersprungen, weil die Lastenhefte so vollständig wirken. Genau
+deshalb stehen sie hier noch einmal:
+
+### Gate 1 — `IMPLEMENTATION_PLAN.md` vor der ersten Codezeile
+
+Kein Produktionscode, bevor der Plan vorliegt und vorgelegt wurde. Inhalt: Bestand, Umgang mit
+vorhandenen Prototypen (je mit Begründung), Zielstruktur, Modulgrenzen, Datenmodellquelle,
+Reihenfolge, Risiken, Testplan, offene Entscheidungen. Danach der **kleinste lauffähige Stand**,
+dann Bericht. Details in beiden Aufträgen, Abschnitt 0b.
+
+### Gate 2 — Designentscheidung vor dem Vollausbau
+
+Nach dem Design-Briefing entstehen **2–3 klickbare Startseitenvarianten mit echten Texten**. Dann
+**anhalten**. Der Mensch entscheidet die Richtung. Erst danach werden weitere Seiten ausgebaut.
+
+Wer nach dem Briefing durchbaut, hat das Gate verletzt — und im Zweifel Dutzende Seiten in einer
+Richtung gebaut, die verworfen wird.
+
+---
+
+## Architektur in einem Satz
+
+**Ein PHP-Projekt, ein Repository, eine Domain:** öffentliche Seiten unter `/`, Kundenbereich unter
+`/portal/`, interner Bereich unter `/admin/`, Serverfunktionen unter `/api/`. Verbindlich ist
+Portal-Lastenheft §1. **Kein** Node, **kein** Supabase, **kein** SPA-Framework, **kein** WordPress —
+frühere Fassungen nannten das, es ist überholt.

@@ -25,7 +25,7 @@ Ein **sichtbares, klickbares Portal**, das den kompletten Kundenprozess vom Ange
 
 | Muss sichtbar und bedienbar sein | Mechanik dahinter darf sein |
 |---|---|
-| **Anfrageeingang von der Website** (§4b) | ein Endpunkt, Admin wandelt bewusst in Kunde um |
+| **Anfrageeingang aus dem Bedarfsscheck** (§4b) | direkter Aufruf im selben Programm, Admin wandelt bewusst in Kunde um |
 | Anmeldung ohne Passwort (Magic Link) | einfache Auth, Konten manuell angelegt |
 | Willkommensstrecke beim ersten Login — **drei Bildschirme** | statisch, Inhalt fest |
 | Cockpit mit **genau einem** nächsten Schritt | Status vom Admin gesetzt |
@@ -54,7 +54,7 @@ Adminansicht. Das war widersprüchlich. Die Grenze verläuft so:
 
 | **Wird gebaut** (nötig, sonst geht keine Anfrage ein) | **Wird nicht gebaut** (das wäre ein Vertriebssystem) |
 |---|---|
-| Ein Endpunkt, der Anfragen der eigenen SARTU-Website annimmt (§4b) | Annahme von Anfragen aus **Kundenwebsites** — das ist die „Lead-Inbox" der Stufe 1 |
+| Annahme der Bedarfsschecks der eigenen SARTU-Website (§4b) | Annahme von Anfragen aus **Kundenwebsites** — das ist die „Lead-Inbox" der Stufe 1, samt Endpunkt unter `/api/` |
 | Liste, Detailansicht, Status `neu` / `in_pruefung` / `angebot_erstellt` / `abgelehnt` | Pipeline-, Kanban- oder Trichteransichten |
 | Notizfeld, Umwandlung in Kunde per Klick | Bewertung, Punktevergabe, Priorisierungslogik |
 | Export und Löschung je Datensatz (Betroffenenrechte) | Nachfassketten, Erinnerungen, Kampagnen, Serienmails |
@@ -64,6 +64,33 @@ Adminansicht. Das war widersprüchlich. Die Grenze verläuft so:
 **Merksatz:** Eine **Liste mit vier Zuständen und einem Umwandlungsknopf** — mehr nicht. Sobald etwas
 automatisch nachfasst, bewertet oder verteilt, ist die Grenze überschritten.
 
+### 0.3b Keine toten Menüpunkte, keine „kommt bald"-Bereiche
+
+Was in Stufe 0 nicht existiert, ist in der Oberfläche **nicht sichtbar** — auch nicht ausgegraut,
+auch nicht mit Hinweis. Ein Kundenbereich mit halben Funktionen wirkt unfertig und beschädigt genau
+das Argument, für das er gebaut wird.
+
+| Verboten | Warum |
+|---|---|
+| Menüpunkte ohne Funktion | signalisiert Baustelle |
+| „Demnächst verfügbar", „in Kürze" | der Kunde fragt sich, wofür er zahlt |
+| ausgegraute Schaltflächen für Stufe-1-Funktionen | dito |
+| leere Bereiche ohne erklärenden Text | wirkt kaputt, nicht leer |
+
+**Stattdessen:** Jeder leere Bereich hat einen **erklärenden Leerzustand**, der sagt, was dort
+erscheinen wird und wann — bezogen auf das Projekt des Kunden, nicht auf den Ausbaustand von SARTU.
+Beispiel: `Sobald die erste Fassung bereitsteht, finden Sie hier den Vorschau-Link.` — nicht
+`Vorschau-Funktion in Vorbereitung.`
+
+**Technisch:** Funktionen späterer Stufen werden über **Schalter in der Konfiguration** geführt
+(`FEATURE_*` in der `.env`, Vorgabe **aus**). Ist ein Schalter aus, existiert weder Route noch
+Menüpunkt noch Datenbankfeld-Anzeige. **Nicht** über auskommentierten Code, **nicht** über
+versteckte Menüpunkte.
+
+**Datenbank:** Felder für spätere Stufen werden **nicht** auf Vorrat angelegt. Eine Migration
+später ist billiger als ein Datenmodell voller unbenutzter Spalten, bei denen niemand mehr weiß,
+ob sie befüllt sind.
+
 ### 0.4 Portal-Screenshots
 
 Die Website braucht Screenshots aus **dieser echten Oberfläche**. Deshalb muss das Portal mit **realistischen Musterdaten** befüllbar sein (Seed). Keine gezeichneten Fake-Dashboards. Musterdaten enthalten **keine** echten Personennamen und **keine** realistischen Rechnungsnummern.
@@ -72,30 +99,145 @@ Die Website braucht Screenshots aus **dieser echten Oberfläche**. Deshalb muss 
 
 ## 1. Technischer Rahmen
 
-**Stack — entschieden, nicht zur Diskussion** (Quelle: `konzepte/sartuportalCLAUDE.md`, bewusst langweilig und dauerhaft betreibbar):
+### 1.1 Zielarchitektur — ein PHP-Projekt, vier Bereiche
+
+**SARTU ist eine Website mit geschütztem Kundenbereich, keine App.** Das gilt technisch **und**
+sprachlich. Öffentliche Seiten, Kundenbereich, Adminbereich und Serverfunktionen liegen in
+**einem** modularen PHP-Projekt, in **einem** Repository, unter **einer** Domain.
+
+```
+/                     öffentliche SARTU-Website
+/portal/              Kundenbereich (Login erforderlich)
+/admin/               interner SARTU-Bereich (Login + Zweifaktor)
+/api/                 eng begrenzte Serverfunktionen
+```
+
+**Warum ein Projekt und nicht zwei:** Der Kundenbereich ist keine zweite Anwendung, sondern der
+eingeloggte Teil derselben Website. Zwei getrennte Projekte hätten zwei Deployments, zwei
+Betriebsumgebungen, zwei Abhängigkeitsstände und eine Schnittstelle mit gemeinsamem Geheimnis
+erzwungen — für einen Betrieb, der von **einer Person** gepflegt wird, ist das die teurere Lösung
+ohne Gegenwert.
+
+> **Wichtige Folge — der Anfrageeingang wird einfacher.** Weil Bedarfsscheck und Anfrageliste im
+> selben Programm liegen, gibt es **keinen** Aufruf über das Netz, **kein** gemeinsames Geheimnis
+> und **keine** Tokenprüfung. Das Formular ruft direkt den Anfragedienst auf. Alle inhaltlichen
+> Schutzmaßnahmen bleiben (§4b) — nur der Übertragungsweg entfällt. Ein Geheimnis, das man nicht
+> braucht, ist eine Angriffsfläche, die man sich spart.
+
+### 1.2 Stack — entschieden, nicht zur Diskussion
 
 | Bereich | Festlegung |
 |---|---|
-| Laufzeit | **Node 22 LTS** |
-| Server | **Fastify 5** |
-| Ansichten | **EJS**, Server-Side Rendering, minimales Browser-JS |
-| Datenbank | **PostgreSQL 16+** |
-| Passwort-Hashing (nur Admin) | **Argon2id** |
-| Verschlüsselung sensibler Felder | **AES-256-GCM** |
-| Migrationen | einfache, nummerierte SQL-Dateien mit Migrationstabelle |
-| Tests | Node Test Runner; DB-Tests gegen **echtes PostgreSQL** (kein In-Memory-Ersatz in CI) |
-| Hosting | Hetzner (Deutschland) hinter Reverse Proxy, HTTPS erzwungen |
+| Sprache | **PHP 8.3 oder 8.4** |
+| Aufbau | **serverseitig gerendert**, eigene schlanke Struktur |
+| Datenbank | **MySQL 8 / MariaDB 10.6+** — bewusst, damit klassisches Hosting möglich bleibt |
+| Datenbankzugriff | **PDO mit vorbereiteten Anweisungen**, ausnahmslos. Nie Zeichenketten zusammensetzen |
+| Passwort-Hashing (nur Admin) | `password_hash()` mit **Argon2id** |
+| Verschlüsselung sensibler Felder | **AES-256-GCM** über `sodium_*` |
+| Fremdbibliotheken | **Composer**, aber sparsam: Mailversand, Mollie-Bibliothek (erst Stufe 1), Umgebungsvariablen, TOTP. Sonst nichts |
+| Migrationen | nummerierte SQL-Dateien mit Migrationstabelle |
+| Tests | **PHPUnit**, Datenbanktests gegen **echtes MySQL/MariaDB** (kein Ersatz im Speicher) |
+| Auslieferung | ein Verzeichnis per SFTP/Git, `public/` ist das einzige öffentlich erreichbare Verzeichnis |
 
-**Verboten:** React, Next.js, jedes SPA-Framework, Build-Pipelines für das Frontend, externe CDNs, Tailwind-CDN, Client-seitiges Routing.
+**Verboten:** WordPress oder ein anderes CMS als Unterbau · Laravel, Symfony oder ein
+vergleichbares Vollframework · React, Vue, Next oder ein anderes SPA-Framework · Node oder Fastify
+als Zielsystem · Supabase oder ein vergleichbarer Backend-Dienst · Build-Pipelines fürs Frontend ·
+externe CDNs · clientseitiges Routing.
 
-**Erlaubt an Browser-JS:** Formular-Verbesserungen, Datei-Upload-Fortschritt, Akkordeon, Bestätigungsdialoge. **Das Portal muss ohne JavaScript vollständig bedienbar bleiben** — jede Aktion ist ein normales Formular mit `POST`.
+> **Zu verworfenen Vorgängerständen:** Frühere Fassungen nannten Node 22 mit Fastify und EJS,
+> andere einen Supabase-Prototyp. **Beides ist keine Zielarchitektur mehr.** Vorhandene Prototypen
+> dürfen als **fachliche oder visuelle Referenz** dienen — Ablauf, Felder, Texte. Ihr Code wird
+> **nicht** übernommen. Was daraus verwendet wird, steht begründet in `IMPLEMENTATION_PLAN.md`.
 
-**Umgebungen:** `local` (Entwicklung, Seed-Daten) · `production`. Konfiguration ausschließlich über Umgebungsvariablen; `.env.example` gehört ins Repository, `.env` **niemals**.
+**Warum kein Vollframework:** Der Umfang ist überschaubar und die Struktur unten gibt die Ordnung
+vor. Ein Vollframework bringt Konventionen, Aktualisierungszwang und Einarbeitungsaufwand für einen
+Betrieb, der lange von einer Person gepflegt wird. Wächst das Projekt deutlich, ist der Wechsel eine
+bewusste spätere Entscheidung — kein Grund, jetzt vorzubauen.
 
-**Erforderliche Umgebungsvariablen:**
-`DATABASE_URL` · `SESSION_SECRET` · `ENC_KEY` (32 Byte, base64) · `SMTP_HOST` `SMTP_PORT` `SMTP_USER` `SMTP_PASS` `MAIL_FROM` · `ADMIN_NOTIFY_EMAIL` (interne Meldungen) · `BASE_URL` · `ADMIN_TOTP_ISSUER` · `UPLOAD_DIR` · `INTAKE_TOKEN` (Anfrageeingang, §4b) · `NODE_ENV`
+### 1.3 Verzeichnisstruktur (verbindlich)
 
----
+```
+/app
+  bootstrap.php          Start: Autoload, Konfiguration, Sitzung, Fehlerbehandlung
+  /helpers               kleine, zustandslose Funktionen (Formatierung, Sicherheit, SEO, Formulare)
+  /data                  Datenzugriff, eine Datei je Tabelle, ausschliesslich PDO
+  /services              Fachlogik (Angebot, Rechnung, Anfrage, Korrekturrunde, Freigabe)
+  /views
+    /layouts             Grundgerueste: oeffentlich, portal, admin
+    /partials            Kopf, Fuss, Navigation, Meldungen
+    /components          wiederverwendbare Bausteine (Karte, Tabelle, Formularfeld, Status)
+    /pages               eine Datei je Seite
+/public                  EINZIGES oeffentlich erreichbares Verzeichnis
+  index.php              Einstieg fuer alles
+  /assets                CSS, JS, Bilder, Schriften — alle selbst gehostet
+/portal                  Routen des Kundenbereichs
+/admin                   Routen des Adminbereichs
+/api                     eng begrenzte Serverfunktionen
+/storage                 Uploads — AUSSERHALB von /public, nie direkt erreichbar
+/migrations              nummerierte SQL-Dateien
+/tests                   PHPUnit
+```
+
+**Regeln:**
+- **Nur `/public` ist erreichbar.** Der Webserver zeigt dorthin. Liegt `/app` im Netz, ist das ein Sicherheitsfehler, kein Schönheitsfehler
+- Eine Seite besteht aus **Layout + Partials + Komponenten**. Kein Kopieren von Markup zwischen Seiten
+- Fachlogik gehört in `/app/services`, **nie** in eine Ansichtsdatei
+- Datenbankzugriff **ausschließlich** über `/app/data`. Kein SQL in Seiten, Diensten oder Ansichten
+- Kunden- und Adminzugriff nutzen **getrennte** Datenzugriffswege (§3 Regel 2a)
+
+### 1.4 Anforderungen an die Betriebsumgebung
+
+Der konkrete Anbieter ist offen (`SARTU_ENTSCHEIDUNGEN_OFFEN.md` §4). Er **muss** liefern:
+
+| Muss | Warum |
+|---|---|
+| PHP 8.3+ mit `pdo_mysql`, `sodium`, `mbstring`, `intl`, `fileinfo`, `openssl` | Grundfunktionen und Verschlüsselung |
+| MySQL 8 / MariaDB 10.6+ mit eigenem Benutzer je Umgebung | Datenhaltung, Trennung Test/Produktion |
+| **HTTPS erzwungen**, eigenes Zertifikat, HSTS möglich | Sitzungen und Anmeldung |
+| **Schreibbares Verzeichnis außerhalb des Webroots** | Uploads dürfen nicht direkt abrufbar sein |
+| **Zeitgesteuerte Aufgaben** (Cron), mindestens täglich | IP-Löschung nach 30 Tagen, Löschfristen, Überfälligkeitsprüfung |
+| **Zuverlässiger Mailversand** über SMTP mit eigener Domain, SPF/DKIM/DMARC | Anmeldelinks. Kommen sie nicht an, funktioniert nichts |
+| Automatische Sicherung von Datenbank **und** Upload-Verzeichnis, Wiederherstellung getestet | Kundendaten |
+| Serverstandort Deutschland oder EU | Datenschutz |
+
+**Wenn ein Punkt fehlt, ist der Tarif ungeeignet — das ist keine Verhandlungssache.** Besonders
+Cron und verlässlicher Mailversand fehlen bei einfachen Paketen häufig. **Vor** der Umsetzung
+praktisch prüfen: eine Testmail an eine Fremdadresse (kommt sie im Posteingang an, nicht im Spam?)
+und ein Cronlauf, der eine Datei schreibt.
+
+**Spätestens für Stufe 1** (Mollie-Rückrufe, Domainprozesse) braucht es eine Umgebung mit stabilen
+eingehenden Aufrufen und längeren Laufzeiten. Wird das mit einem einfachen Paket knapp, ist der
+Wechsel auf einen kleinen eigenen Server der Normalfall, kein Scheitern.
+
+### 1.5 Umgebungen und Konfiguration
+
+**Umgebungen:** `local` (Entwicklung, Seed-Daten) · `staging` · `production`.
+
+Konfiguration ausschließlich über Umgebungsvariablen bzw. eine `.env` **außerhalb** von `/public`.
+`.env.example` gehört ins Repository, `.env` **niemals**.
+
+**Erforderliche Werte:**
+`DB_HOST` `DB_NAME` `DB_USER` `DB_PASS` · `SESSION_SECRET` · `ENC_KEY` (32 Byte, base64) ·
+`SMTP_HOST` `SMTP_PORT` `SMTP_USER` `SMTP_PASS` `MAIL_FROM` · `ADMIN_NOTIFY_EMAIL` ·
+`BASE_URL` · `ADMIN_TOTP_ISSUER` · `STORAGE_DIR` · `APP_ENV`
+
+**Kein `INTAKE_TOKEN` mehr.** Er war nur nötig, solange Website und Kundenbereich getrennte
+Anwendungen waren (§1.1).
+
+### 1.6 Was der Kunde erlebt — und wie darüber gesprochen wird
+
+Der Kunde soll **nicht** denken „ich muss noch ein Werkzeug lernen", sondern:
+
+> Ich melde mich bei SARTU an und sehe, was als Nächstes ansteht.
+
+| Nach außen verwenden | Nach außen **nie** verwenden |
+|---|---|
+| Kundenbereich · Ihr Bereich · Anmeldung · Ihr Projekt | App · Software · SaaS · Plattform · Tool |
+| „Sie melden sich an und sehen Ihr Projekt" | Dashboard · Control-Plane · System · Instanz |
+
+Intern darf ein Begriff wie „Adminbereich" stehen. **Kundensichtbare** Oberflächentexte, E-Mails und
+Website-Copy halten sich an die linke Spalte. Der USP ist nicht die Software, sondern **dass der
+Kunde nichts suchen muss**.
 
 ## 2. Rollen und Rechte
 
@@ -113,7 +255,7 @@ Es gibt **keine** Selbstregistrierung. Admin legt Organisation und Benutzer an; 
 ## 3. Eiserne Sicherheitsregeln (nicht verhandelbar)
 
 1. **Mandantentrennung ist heilig.** Jede Abfrage im **Kundenbereich** filtert nach `organization_id` **aus der Session** — niemals aus einem Request-Parameter, Formularfeld oder URL-Segment. Kunde A darf unter keinen Umständen Daten von Kunde B sehen.
-   Der Test `test/tenant-isolation.test.js` ist **unantastbar**: nie löschen, nie abschwächen, um grün zu werden.
+   Der Test `tests/TenantIsolationTest.php` ist **unantastbar**: nie löschen, nie abschwächen, um grün zu werden.
 2. **Objektzugriff immer doppelt prüfen:** Existiert das Objekt **und** gehört es zur Session-Organisation? Sonst **404**, nicht 403 (keine Existenz preisgeben).
 2a. **Getrennte Datenzugriffswege für Kunde und Admin.** Regel 1 lässt sich nur einhalten, wenn ein Admin nicht durch dieselbe Tür geht — Admins haben bewusst **keine** eigene `organization_id`. Deshalb gilt:
    - Es gibt **zwei** getrennte Zugriffsschichten. Die Kundenschicht nimmt die Organisation **ausschließlich** aus der Session und hat **keinen** Parameter, mit dem sich das umgehen ließe. Ein fehlender Session-Wert ist ein **Fehler**, kein „alles anzeigen".
@@ -378,125 +520,119 @@ Rechnungen manuell an. **Prüfregel:** Die Summe der eingetragenen Beträge muss
 
 ---
 
-## 4b. Schnittstelle zur öffentlichen Website — Anfrageeingang („Formular-Endpunkte")
+## 4b. Anfrageeingang vom Bedarfsscheck
 
-> **Ohne diesen Abschnitt bricht der Gesamtprozess.** Die Website erzeugt Anfragen, das Portal muss
-> sie annehmen — sonst landet der Bedarfsscheck im Nichts.
+> **Ohne diesen Abschnitt bricht der Gesamtprozess.** Der Bedarfsscheck erzeugt Anfragen, sie müssen
+> ankommen und geprüft werden können.
 
-### 4b.1 Wer ruft wen auf — und warum kein Browser-Geheimnis existiert
+### 4b.1 Wo die Anfrage entsteht — und warum es kein Geheimnis braucht
+
+Bedarfsscheck und Anfrageliste liegen im **selben** PHP-Projekt (§1.1). Der Ablauf ist deshalb:
 
 ```
 Browser des Interessenten
-        │  normales Formular-POST an die eigene Website-Domain
+        │  normales Formular-POST an die eigene Domain
         ▼
-Formularannahme der Website  (kleiner Serverteil, gleiche Domain)
-        │  POST /api/anfragen   +  Header X-Sartu-Token
-        ▼
-SARTU-Portal  →  legt genau einen Datensatz in `leads` an
+Formularannahme  →  AnfrageService::anlegen()  →  Tabelle `leads`
 ```
 
-**Eiserne Regel: `INTAKE_TOKEN` darf niemals im Browser ankommen.** Alles, was an den Browser
-ausgeliefert wird — HTML, JavaScript, JSON, Netzwerkantworten — ist öffentlich lesbar. Der Token
-lebt ausschließlich auf dem Server der Website.
+**Kein Netzaufruf, kein gemeinsames Geheimnis, keine Tokenprüfung.** Frühere Fassungen sahen einen
+Header `X-Sartu-Token` mit `INTAKE_TOKEN` vor — das war richtig, solange Website und Kundenbereich
+getrennte Anwendungen waren. In einem Projekt wäre es Zeremonie: ein Geheimnis, das nichts schützt,
+aber verwaltet, übertragen und irgendwann versehentlich ausgeliefert werden kann.
 
-Daraus folgt:
-- Der Browser sendet **nie** direkt an `/api/anfragen`
-- Der Browser sieht den Header `X-Sartu-Token` **nie**
-- `/api/anfragen` ist **kein** öffentliches Formularziel, sondern eine **Server-zu-Server-Schnittstelle**
-- Wäre die Website rein statisch ohne jeden Serverteil, wäre dieser Endpunkt **nicht** sicher benutzbar. Deshalb ist die Formularannahme der Website ausdrücklich Teil des Website-Auftrags
+**Alle inhaltlichen Schutzmaßnahmen bleiben unverändert** (4b.3) — sie schützen vor Spam und
+Missbrauch, nicht vor einem fremden Aufrufer. Nur der Übertragungsweg entfällt.
 
-**Was der Token leistet und was nicht:** Er verhindert, dass Fremde ohne Weiteres Datensätze in die
-Anfrageliste schreiben. Er ist **keine** Benutzerauthentifizierung und ersetzt weder Prüfung des
-Inhalts noch Rate-Limit noch Spamabwehr. Die Prüfungen unten gelten unabhängig davon.
+**Die Fachlogik liegt trotzdem in einem eigenen Dienst** (`/app/services/AnfrageService.php`), nicht
+im Formularcode. Grund: In Stufe 1 sollen auch **Kundenwebsites** Anfragen abliefern können. Dann
+kommt ein dünner Endpunkt unter `/api/` davor — mit Token, Rate-Limit je Absender und
+Herkunftsprüfung. Der Dienst selbst bleibt gleich. **In Stufe 0 gibt es diesen Endpunkt nicht**, auch
+nicht vorbereitend (§0.3).
 
-### 4b.2 Endpunkt `POST /api/anfragen`
+### 4b.2 Formularannahme `POST /briefing/absenden`
 
 | Punkt | Festlegung |
 |---|---|
-| Methode und Pfad | `POST /api/anfragen` |
-| Inhaltstyp | `application/json; charset=utf-8` |
-| Erreichbarkeit | **einziger** Pfad ohne Session. Alles andere unter `/api/` existiert nicht |
-| Absicherung | Header `X-Sartu-Token` = `INTAKE_TOKEN`, Vergleich **zeitkonstant** (kein `==` auf Zeichenketten) |
-| Rate-Limit | **10 Anfragen je Absender-IP und Stunde**, zusätzlich **60 je Stunde gesamt** als Notbremse |
-| Größe | Rumpf maximal **64 KB**, sonst `413` |
-| Zeitüberschreitung | 10 Sekunden |
+| Methode und Pfad | `POST /briefing/absenden` — normales Formular, gleiche Domain |
+| CSRF | Pflicht, wie bei jedem `POST` (§3 Regel 3) |
+| Rate-Limit | **10 abgeschickte Bedarfsschecks je IP und Stunde**, zusätzlich **60 je Stunde gesamt** |
+| Größe | maximal **64 KB** Formulardaten |
+| Nach Erfolg | Weiterleitung (`303`) auf die Danke-Seite. **Nie** ein erneut absendbares Formular anzeigen |
 
-**Nutzdaten — vollständiges Schema.** Unbekannte Felder werden **mitgespeichert**, nicht abgewiesen
-(die Website darf den Bedarfsscheck erweitern, ohne dass das Portal bricht).
+**Felder — vollständige Liste.** Der Bedarfsscheck darf erweitert werden; unbekannte Felder landen
+unverändert in `payload`, statt abgewiesen zu werden.
 
 | Feld | Typ | Pflicht | Prüfung |
 |---|---|---|---|
-| `submission_id` | Zeichenkette, UUID | ja | **Doppeleinreichung**, s. 4b.3 |
-| `submitted_at` | Zeitstempel ISO 8601 | ja | darf nicht mehr als 24 h in der Vergangenheit oder 5 min in der Zukunft liegen |
-| `first_name` | Zeichenkette ≤ 100 | ja | nicht leer nach Trimmen |
-| `last_name` | Zeichenkette ≤ 100 | ja | nicht leer nach Trimmen |
-| `company` | Zeichenkette ≤ 200 | ja | nicht leer nach Trimmen |
-| `email` | Zeichenkette ≤ 254 | ja | Formatprüfung, wird kleingeschrieben gespeichert |
-| `phone` | Zeichenkette ≤ 50 | nein | wie eingegeben speichern |
+| `submission_id` | UUID | ja | entsteht beim **Start** des Bedarfsschecks, bleibt über alle Schritte gleich |
+| `form_started_at` | Zeitstempel | ja | Zeitregel, s. 4b.3 |
+| `first_name` | Text ≤ 100 | ja | nicht leer nach Trimmen |
+| `last_name` | Text ≤ 100 | ja | nicht leer nach Trimmen |
+| `company` | Text ≤ 200 | ja | nicht leer nach Trimmen |
+| `email` | Text ≤ 254 | ja | Formatprüfung, kleingeschrieben gespeichert |
+| `phone` | Text ≤ 50 | nein | wie eingegeben speichern |
 | `preferred_contact` | `email` \| `portal` | ja | nur diese zwei Werte |
-| `b2b_confirmed` | Wahrheitswert | ja | muss `true` sein, sonst `422` |
-| `privacy_confirmed` | Wahrheitswert | ja | muss `true` sein, sonst `422` |
-| `recommended_package` | `start` \| `wachstum` \| `platzhirsch` \| `sonderprojekt` \| `unklar` | nein | |
-| `flag` | `standard` \| `gelb` \| `orange` \| `rot` | nein | Vorgabe `standard` |
-| `answers` | Objekt | ja | Frage-Antwort-Paare des Bedarfsschecks, unverändert nach `payload` |
-| `form_started_at` | Zeitstempel | nein | Zeitregel, s. 4b.3 |
-| `hp_website` | Zeichenkette | nein | **Honigtopf** — gefüllt ⇒ verwerfen |
+| `b2b_confirmed` | Wahrheitswert | ja | muss `true` sein |
+| `privacy_confirmed` | Wahrheitswert | ja | muss `true` sein |
+| `recommended_package` | `start` \| `wachstum` \| `platzhirsch` \| `sonderprojekt` \| `unklar` | nein | **serverseitig** berechnet, nicht aus dem Formular übernommen |
+| `flag` | `standard` \| `gelb` \| `orange` \| `rot` | nein | ebenfalls serverseitig |
+| `answers` | Feld-Wert-Paare | ja | unverändert nach `payload` |
+| `hp_website` | Text | nein | **Honigtopf** — gefüllt ⇒ verwerfen |
 
-**Antworten:**
+> **Wichtig:** Empfehlung und Ampelkennzeichen werden **serverseitig** berechnet, nie aus dem
+> abgeschickten Formular übernommen. Sonst könnte jemand die Empfehlung von außen setzen.
 
-| Lage | Status | Rumpf | Nebenwirkung |
-|---|---|---|---|
-| Angenommen | `201` | `{"ok":true}` | `lead` angelegt, E-Mail an SARTU, Audit-Ereignis |
-| Bereits bekannte `submission_id` | `200` | `{"ok":true}` | **keine** — bewusst gleiche Erfolgsantwort |
-| Honigtopf gefüllt oder Zeitregel verletzt | `201` | `{"ok":true}` | **keine** — der Absender merkt nichts |
-| Token fehlt oder falsch | `401` | `{"ok":false}` | Zählwerk, kein Grund genannt |
-| Schema- oder Pflichtfeldfehler | `422` | `{"ok":false,"fields":["email"]}` | nur **Feldnamen**, nie Werte |
-| Rumpf zu groß | `413` | `{"ok":false}` | |
-| Rate-Limit erreicht | `429` | `{"ok":false}` | Header `Retry-After` |
-| Serverfehler | `500` | `{"ok":false}` | Interne Kennung ins Log, **nicht** in die Antwort |
+**Verhalten:**
 
-**Niemals** zurückgeben: interne Kennungen, Datenbankfehler, Stapelüberwachung, ob eine E-Mail-Adresse
-bereits bekannt ist.
+| Lage | Reaktion |
+|---|---|
+| Angenommen | `lead` angelegt, E-Mail an SARTU, Weiterleitung auf die Danke-Seite |
+| Bereits bekannte `submission_id` | **keine** Anlage, trotzdem Weiterleitung auf die Danke-Seite |
+| Honigtopf gefüllt oder Zeitregel verletzt | **keine** Anlage, trotzdem Danke-Seite — der Absender merkt nichts |
+| Pflichtfeld fehlt oder ungültig | Schritt erneut anzeigen, Meldung **am Feld**, Angaben bleiben erhalten |
+| Rate-Limit erreicht | Hinweis mit Kontaktalternative, **keine** technischen Details |
+| Serverfehler | Angaben bleiben erhalten, allgemeine Meldung, interne Kennung ins Protokoll |
+
+Fehlermeldungen nennen **nie** Datenbankfehler, interne Kennungen oder ob eine E-Mail-Adresse bereits
+bekannt ist.
 
 ### 4b.3 Spamabwehr und Doppeleinreichung
 
 1. **Honigtopf** `hp_website` — für Menschen unsichtbar, aber **nicht** über `display:none` allein
    (Vorlesesoftware muss es überspringen: `aria-hidden="true"` **und** `tabindex="-1"`). Gefüllt ⇒
-   stillschweigend verwerfen mit Erfolgsantwort
-2. **Zeitregel** — liegt zwischen `form_started_at` und `submitted_at` weniger als **3 Sekunden**,
+   stillschweigend verwerfen, Danke-Seite trotzdem zeigen
+2. **Zeitregel** — liegt zwischen `form_started_at` und dem Absenden weniger als **3 Sekunden**,
    stillschweigend verwerfen. Menschen brauchen für den Bedarfsscheck Minuten
-3. **Doppeleinreichung** — `submission_id` ist in `leads` **eindeutig**. Zweiter Aufruf mit derselben
-   Kennung liefert `200` und ändert nichts. Das deckt Doppelklick, Neuladen und Wiederholversuche der
-   Website nach Zeitüberschreitung ab
+3. **Doppeleinreichung** — `submission_id` ist in `leads` **eindeutig**. Ein zweiter Versuch mit
+   derselben Kennung ändert nichts. Das deckt Doppelklick, Neuladen und die Zurück-Taste ab
 4. **Kein Rätselbild und kein Fremddienst in Stufe 0.** Turnstile, hCaptcha und Vergleichbares sind
-   Fremdverbindungen mit eigener Datenschutzfolge. Erst nachrüsten, wenn Spam **messbar** auftritt,
+   externe Verbindungen mit eigener Datenschutzfolge. Erst nachrüsten, wenn Spam **messbar** auftritt,
    und dann mit dokumentierter Rechtsgrundlage
 
 ### 4b.4 Datenschutz und Aufbewahrung
 
-- **Datensparsamkeit:** gespeichert wird ausschließlich, was gesendet wurde. Das Portal reichert
-  **nichts** an — kein Standortnachschlagen, keine Anreicherung aus Fremdquellen, keine Bewertung
-- **`source_ip`** wird gespeichert, weil sie für Missbrauchsabwehr und als Nachweis der Einwilligung
-  gebraucht wird. Sie wird **nach 30 Tagen geleert** (Feld auf `NULL`), der Rest des Datensatzes bleibt
-- **Protokolle:** Anfragen werden protokolliert mit Zeitpunkt, Status, gekürzter IP (letztes Oktett
-  entfernt) und `submission_id`. **Nie** mit Name, E-Mail, Telefonnummer oder Antworttexten
+- **Datensparsamkeit:** gespeichert wird ausschließlich, was der Kunde eingegeben hat. **Keine**
+  Anreicherung aus Fremdquellen, kein Standortnachschlagen, keine Bewertung
+- **`source_ip`** wird gespeichert (Missbrauchsabwehr, Nachweis der Einwilligung) und **nach 30 Tagen
+  geleert** — der übrige Datensatz bleibt. Umsetzung über die tägliche zeitgesteuerte Aufgabe (§1.4)
+- **Protokolle:** Zeitpunkt, Ergebnis, gekürzte IP (letztes Oktett entfernt), `submission_id`.
+  **Nie** Name, E-Mail, Telefonnummer oder Antworttexte
 - **Löschfrist:** abgelehnte Anfragen werden **nach 6 Monaten** gelöscht, umgewandelte bleiben als
-  Teil der Kundenakte. Der Adminbereich zeigt bei jeder Anfrage das Löschdatum
-- **Auskunft und Löschung auf Verlangen:** `/admin/anfragen` hat je Datensatz die Aktionen
-  `Datensatz exportieren` (JSON, alles was gespeichert ist) und `Endgültig löschen` (echtes `DELETE`,
-  **Ausnahme** von der Archivierungsregel in §3, Regel 13, weil Betroffenenrechte vorgehen — der Löschvorgang
-  selbst wird im Audit-Log vermerkt, ohne die gelöschten Inhalte)
-- Die Einwilligung selbst kommt von der Website. Das Portal **prüft nur**, dass
-  `privacy_confirmed = true` ankommt, und **speichert**, wann sie erklärt wurde
+  Teil der Kundenakte. Das Löschdatum ist im Adminbereich sichtbar
+- **Betroffenenrechte:** je Datensatz `Datensatz exportieren` (alles, was gespeichert ist) und
+  `Endgültig löschen` (echtes `DELETE`, **Ausnahme** von der Archivierungsregel in §3, Regel 13 —
+  der Löschvorgang wird protokolliert, **ohne** die gelöschten Inhalte)
+- Die Einwilligung erklärt der Interessent im Bedarfsscheck. Gespeichert wird, **dass** und **wann**
 
 ### 4b.5 Adminbereich `/admin/anfragen`
 
-**Das ist bewusst eine Liste, kein Vertriebssystem.** Zur Abgrenzung siehe §0.3.
+**Das ist bewusst eine Liste, kein Vertriebssystem.** Zur Abgrenzung siehe §0.3a.
 
 Liste: Eingangsdatum · Firma · Name · empfohlene Lösung · Ampelkennzeichen · Status · Löschdatum.
-Filter nach Status. Sortierung nach Eingang, neueste zuerst.
+Filter nach Status, Sortierung nach Eingang, neueste zuerst.
 
-Detailansicht: **alle** Antworten in Klartext als Frage → Antwort, nicht als rohes JSON.
+Detailansicht: **alle** Antworten in Klartext als Frage → Antwort, nicht als Rohdaten.
 
 Aktionen:
 - `In Kunde und Projekt umwandeln` → legt `organizations`, `users` (Rolle `kunde`) und `projects` an,
@@ -507,12 +643,13 @@ Aktionen:
 - `Datensatz exportieren` · `Endgültig löschen` (§4b.4)
 
 **Regel:** Anfrage ≠ Kunde. Ein Zugang entsteht ausschließlich durch diesen bewussten Klick — nie
-automatisch, nie durch den Endpunkt.
+automatisch.
 
-### 4b.6 Kontaktformular der Website
+### 4b.6 Kontaktformular
 
-Das allgemeine Kontaktformular läuft **nicht** über diesen Endpunkt. Es versendet ausschließlich eine
-E-Mail an SARTU und erzeugt keinen Datensatz im Portal.
+Das allgemeine Kontaktformular ist **nicht** der Bedarfsscheck. Es versendet ausschließlich eine
+E-Mail an SARTU und erzeugt **keinen** Datensatz. Honigtopf, Zeitregel und Rate-Limit gelten dort
+gleichermaßen.
 
 ---
 
@@ -1124,7 +1261,7 @@ Es gelten die Sprachregeln aus `CLAUDE_SARTU_WEBSITE_LASTENHEFT_BAUFINAL.md` §2
 
 ## 16. Testfälle (Pflicht, müssen automatisiert laufen)
 
-**Mandantentrennung — `test/tenant-isolation.test.js` (unantastbar):**
+**Mandantentrennung — `tests/TenantIsolationTest.php` (unantastbar):**
 1. Kunde A ruft Projekt von Kunde B auf → **404**
 2. Kunde A ruft Rechnung, Aufgabe, Datei, Angebot von B auf → jeweils **404**
 3. Kunde A sendet `POST` mit fremder `project_id` → **404**, keine Änderung
@@ -1163,18 +1300,18 @@ Es gelten die Sprachregeln aus `CLAUDE_SARTU_WEBSITE_LASTENHEFT_BAUFINAL.md` §2
 28. `protection_started_on` wird beim Wechsel auf `live` gesetzt, `protection_min_term_until` liegt 12 Monate später (§5.7)
 
 **Anfrageeingang (§4b):**
-29. `POST /api/anfragen` ohne gültigen `X-Sartu-Token` → **401**, kein Datensatz, kein Grund in der Antwort
-30. Gültige Anfrage erzeugt **nur** einen `lead` — keine `organizations`, `users` oder `projects`
-31. Rate-Limit greift ab der 11. Anfrage je IP und Stunde, Antwort `429` mit `Retry-After`
-32. Ausgefülltes Honigtopffeld liefert `201` und erzeugt **keinen** Datensatz
-33. Absenden unter 3 Sekunden nach `form_started_at` liefert `201` und erzeugt **keinen** Datensatz
-34. **Dieselbe `submission_id` zweimal** → beim zweiten Mal `200`, weiterhin genau **ein** Datensatz
-35. `b2b_confirmed = false` oder `privacy_confirmed = false` → `422`, kein Datensatz
-36. Rumpf über 64 KB → `413`
-37. Fehlerantwort enthält **niemals** Feldwerte, interne Kennungen oder Datenbankmeldungen
+29. Abgeschickter Bedarfsscheck erzeugt **nur** einen `lead` — keine `organizations`, `users` oder `projects`
+30. `POST /briefing/absenden` ohne CSRF-Feld wird abgelehnt
+31. Rate-Limit greift ab dem 11. abgeschickten Bedarfsscheck je IP und Stunde
+32. Ausgefülltes Honigtopffeld führt zur Danke-Seite und erzeugt **keinen** Datensatz
+33. Absenden unter 3 Sekunden nach `form_started_at` führt zur Danke-Seite und erzeugt **keinen** Datensatz
+34. **Dieselbe `submission_id` zweimal** → weiterhin genau **ein** Datensatz, trotzdem Danke-Seite
+35. `b2b_confirmed = false` oder `privacy_confirmed = false` → Schritt erneut anzeigen, kein Datensatz
+36. Formulardaten über 64 KB werden abgewiesen
+37. Keine Fehlermeldung nennt Feldwerte, interne Kennungen oder Datenbankmeldungen
 38. Unbekanntes Zusatzfeld wird in `payload` gespeichert und **nicht** abgewiesen
-39. `source_ip` ist nach 30 Tagen geleert, der übrige Datensatz unverändert
-40. `Endgültig löschen` entfernt den Datensatz wirklich und hinterlässt ein Audit-Ereignis **ohne** die gelöschten Inhalte
+39. **Empfehlung und Ampelkennzeichen werden serverseitig gesetzt** — ein manipuliertes Formularfeld ändert sie nicht
+40. `source_ip` ist nach 30 Tagen geleert, der übrige Datensatz unverändert; `Endgültig löschen` entfernt den Datensatz und hinterlässt ein Audit-Ereignis **ohne** die gelöschten Inhalte
 
 **Sicherheit:**
 41. `POST` ohne CSRF-Token wird abgelehnt
@@ -1185,8 +1322,8 @@ Es gelten die Sprachregeln aus `CLAUDE_SARTU_WEBSITE_LASTENHEFT_BAUFINAL.md` §2
 46. Unerlaubter Dateityp wird abgelehnt
 47. Sicherheitsheader sind in allen Antworten gesetzt
 48. Datenbankbedingung greift: Kunde ohne `organization_id` und Admin **mit** `organization_id` lassen sich nicht anlegen
-49. **`INTAKE_TOKEN` kommt in keiner ausgelieferten Antwort und keiner Ansicht vor** — geprüft per Volltextsuche über alle gerenderten Seiten
-50. Der Tokenvergleich in §4b ist **zeitkonstant** — im Code nachgewiesen, nicht nur behauptet
+49. **Kein Verzeichnis außer `/public` ist über den Webserver erreichbar** — `/app`, `/storage`, `/migrations` und `.env` liefern 403 oder 404
+50. Jede Datenbankabfrage nutzt **vorbereitete Anweisungen** — im Code nachgewiesen, keine zusammengesetzten SQL-Zeichenketten
 
 **Protokollierung:**
 51. Manuelles Setzen auf `bezahlt` ohne Grundlagentext scheitert
@@ -1210,13 +1347,16 @@ Es gelten die Sprachregeln aus `CLAUDE_SARTU_WEBSITE_LASTENHEFT_BAUFINAL.md` §2
 - [ ] Alle Statuswerte zeigen dem Kunden Klartext, nirgends interne Codes
 - [ ] Formate aus §4a eingehalten: deutsche Datums- und Geldformate, Europe/Berlin, 19 % USt., Beträge als Cent gespeichert, keine leeren Werte als `null` sichtbar
 - [ ] Alle 59 Testfälle aus §16 laufen automatisiert und grün
-- [ ] `test/tenant-isolation.test.js` vorhanden, vollständig, nicht abgeschwächt
+- [ ] `tests/TenantIsolationTest.php` vorhanden, vollständig, nicht abgeschwächt
 - [ ] Kunden- und Adminzugriff laufen über **getrennte** Datenzugriffsschichten (§3 Regel 2a); kein gemeinsamer Codepfad lässt den Organisationsfilter weg
 - [ ] Rechenregeln greifen: Erstjahreswert, Zahlungsplan `custom`, Ratensumme (§4)
 - [ ] Korrekturrunden werden gezählt und angezeigt; nichts wird automatisch gesperrt oder berechnet (§5.6a)
 - [ ] Faktenfreigabe und Abnahme erzeugen je einen `approvals`-Eintrag mit Name, Zeitpunkt, IP und Audit-Ereignis — nachträglich nicht änderbar
-- [ ] `POST /api/anfragen` funktioniert, ist mit Token, Rate-Limit, Honigtopf, Zeitregel und `submission_id` geschützt und legt **nur** einen `lead` an (§4b)
-- [ ] **`INTAKE_TOKEN` erscheint in keiner Antwort, keiner Ansicht und keinem Protokolleintrag**; der Vergleich ist zeitkonstant
+- [ ] Bedarfsscheck-Annahme funktioniert, ist mit CSRF, Rate-Limit, Honigtopf, Zeitregel und `submission_id` geschützt und legt **nur** einen `lead` an (§4b)
+- [ ] Empfehlung und Ampelkennzeichen entstehen **serverseitig**, nicht aus dem Formular
+- [ ] **Nur `/public` ist über den Webserver erreichbar**; `/app`, `/storage`, `/migrations`, `.env` sind es nicht — praktisch geprüft
+- [ ] Datenbankzugriff ausschließlich über `/app/data` mit vorbereiteten Anweisungen; kein SQL in Ansichten oder Diensten
+- [ ] Zeitgesteuerte Aufgabe läuft und erledigt IP-Löschung, Löschfristen und Überfälligkeitsprüfung (§1.4)
 - [ ] Anfrageliste bleibt innerhalb der Grenze aus §0.3a — keine Bewertung, kein Nachfassen, keine Zuweisung
 - [ ] Aufbewahrung und Betroffenenrechte umgesetzt: IP-Löschung nach 30 Tagen, Löschdatum sichtbar, Export und endgültige Löschung je Datensatz (§4b.4)
 - [ ] Jede manuelle Änderung an Geld oder Fristen verlangt einen Grundlagentext und erzeugt ein vollständiges Audit-Ereignis (§12)
@@ -1241,6 +1381,7 @@ Es gelten die Sprachregeln aus `CLAUDE_SARTU_WEBSITE_LASTENHEFT_BAUFINAL.md` §2
 4. **Messwerte**: Antwortzeiten der Kernseiten, Seitengröße
 5. **Offene-Punkte-Liste**: alles, was bewusst nicht gebaut wurde (§0.3), plus alles, was du melden musst
 6. **Screenshot-Satz** aus der echten Oberfläche für die Website: Cockpit, Angebot, Aufgaben, Vorschau mit Rundenanzeige, Rechnungen, Öffnungszeiten — mit Musterdaten, je einmal Desktop und Mobil
-7. **Schnittstellenbeschreibung** für die Website: das genaue Format von `POST /api/anfragen`, ein funktionierendes Beispiel und der Hinweis, dass `INTAKE_TOKEN` **nicht** im Repository steht
+7. **`IMPLEMENTATION_SUMMARY.md`**: gebaute Struktur, Abweichungen vom Plan mit Begründung, offene Punkte
+8. **`MIGRATION_NOTES.md`**, falls aus einem Prototyp etwas übernommen wurde: was, warum, was verworfen
 
 **Arbeite nicht ins Blaue:** Fehlt eine Information oder widerspricht sich etwas, melde es, statt zu raten. Baue **nichts** aus §0.3 „nicht in Stufe 0", auch nicht „schon mal vorbereitet".

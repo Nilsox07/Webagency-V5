@@ -9,7 +9,7 @@
 
 ## 0. Wichtigste Korrektur vorab (bitte zuerst lesen)
 
-Das kanonische SARTU-Modell ist **positionierungsseitig stark** und marktfähig. Die größte Gefahr ist **nicht** die Preis- oder Angebotslogik, sondern der Anspruch, das **komplette Control-Plane-Portal** (Lumi, Angebote, Mollie-Abo, INWX-Domainlebenszyklus, KI-Produktions-Orchestrierung, QA-Gates, Deployments, Rollback, SEO-/GEO-Flotte, Admin-Finanzen) **vollständig vor dem ersten Standardverkauf** zu bauen.
+Das kanonische SARTU-Modell ist **positionierungsseitig stark** und marktfähig. Die größte Gefahr ist **nicht** die Preis- oder Angebotslogik, sondern der Anspruch, den **kompletten Kundenbereich mit voller Automatisierung** (Lumi, Angebote, Mollie-Abo, INWX-Domainlebenszyklus, KI-Produktions-Orchestrierung, QA-Gates, Deployments, Rollback, SEO-/GEO-Flotte, Admin-Finanzen) **vollständig vor dem ersten Standardverkauf** zu bauen.
 
 Für ein Ein-Personen-/Kleinstteam ist das ein zweites Produktunternehmen und ein Launch-Blocker. **Dieses Masterkonzept dreht die Reihenfolge um:**
 
@@ -385,9 +385,15 @@ Die Minutenangabe kommt aus dem Paket (Start/Wachstum/Platzhirsch) und ist als S
 
 ## 10. KI-/Automatisierungslogik
 
-**Drei-Produkt-Architektur:** (1) SARTU-Vertriebswebsite, (2) SARTU-Control-Plane (Portal), (3) Kundenseiten (getrennte, versionierte Codeprojekte).
+**Zwei Codebasen, drei Produkte:**
+1. **SARTU-Website** — öffentliche Seiten **und** Kundenbereich in **einem** PHP-Projekt (`/`, `/portal/`, `/admin/`, `/api/`)
+2. **Kundenseiten** — je ein eigenes, versioniertes PHP-Projekt pro Kunde
 
-**Kundenseiten-Tech:** **static-first (Astro empfohlen)**, 1 Repository pro Kunde, gemeinsamer versionierter **SARTU-Starter** + versioniertes **Designsystem-Paket**. Strukturierte Inhalte statt freiem HTML. Formulare/Dynamik über eng begrenzte Portal-APIs. Jede Produktion reproduzierbar, testbar, **exportierbar, rückrollbar**. Der Kundenstand muss **auch nach Vertragsende baubar** sein (notwendige Komponenten eingefroren/vendort; Master-Designsystem/Generatoren/Prompts bleiben intern).
+> **Sprachregel:** Intern darf „Steuerungsebene" oder „Adminbereich" stehen. **Kundensichtbar** heißt es
+> **Kundenbereich** — nie App, Software, SaaS, Plattform, Dashboard oder Control-Plane. Der Kunde soll
+> denken „ich melde mich an und sehe mein Projekt", nicht „ich muss ein Werkzeug lernen".
+
+**Kundenseiten-Tech:** **PHP, serverseitig gerendert, öffentliche Seiten cachebar** — dieselbe Bauweise wie SARTUs eigene Website. 1 Repository pro Kunde, gemeinsamer versionierter **SARTU-Starter** + versionierte **Designwerte**. Strukturierte Inhalte statt freiem HTML. Formulare/Dynamik über eng begrenzte Portal-APIs. Jede Produktion reproduzierbar, testbar, **exportierbar, rückrollbar**. Der Kundenstand muss **auch nach Vertragsende baubar** sein (notwendige Komponenten eingefroren/vendort; Master-Designsystem/Generatoren/Prompts bleiben intern).
 
 **Produktionspipeline (Zielbild, ab Ausbaustufe 2/3):**
 1. Portal friert **versionierte Spezifikation** ein (`site-spec.json`, `business.json`, `services.json`, `proof.json`, `content-plan.json`, `brand.json`, `legal.json`, `seo.json`, `design-manifest.json`, `acceptance.json` – jeweils mit Schema-Version, Projekt-ID, Quelle, Freigabestatus).
@@ -458,23 +464,41 @@ Die frühere Formulierung „Codex `exec` primär oder Claude Code headless" war
 
 Alle fachlich wichtigen Statuswechsel erzeugen ein **Audit-Ereignis**. Jobstatus: `queued → preparing → running → validating → admin_review → customer_preview → approved → deploying → live` (+ Fehlerzustände `needs_input`, `qa_failed`, `agent_failed`, `deployment_failed`, `rolled_back`, `cancelled`).
 
-**Tech-Stack-Entscheidung (aufgelöst):** Control-Plane = **Node + PostgreSQL + Redis (Queue/Locks) + S3-kompatibler Objektspeicher DE/EU**. Kundenseiten = **static-first** (Astro o. gleichwertig) aus versioniertem Designsystem. Der **PHP-/Flat-File-Ansatz** (`lastenheft_webseite.md`) ist abgelöst; **Supabase** (Postgres+Auth+Storage, Frankfurt) ist als Stufe-0/1-Basis zulässig (s. Abschnitt 25).
+**Tech-Stack-Entscheidung (final, ersetzt alle früheren Stände):** **Ein modulares PHP-Projekt** — öffentliche Seiten unter `/`, Kundenbereich unter `/portal/`, interner Bereich unter `/admin/`, Serverfunktionen unter `/api/`. PHP 8.3+, MySQL/MariaDB, serverseitig gerendert, kein Vollframework, kein SPA. Verbindlich: `CLAUDE_SARTU_PORTAL_LASTENHEFT_BAUFINAL.md` §1.
+
+> **Abgelöst und nicht mehr gültig:** Node + Fastify + EJS · PostgreSQL als Zielsystem · Redis · Supabase als Stufe-0/1-Basis · Astro für die Kundenseiten · shadcn/ui. Diese Stände stammen aus früheren Fassungen und aus Prototypen. Sie dürfen als **fachliche Referenz** dienen, sind aber **keine Zielarchitektur**.
+>
+> **Warum PHP:** SARTU ist eine Website mit geschütztem Kundenbereich, keine App. Ein Projekt statt zwei bedeutet ein Deployment, eine Betriebsumgebung, ein Abhängigkeitsstand und **keine** Schnittstelle mit gemeinsamem Geheimnis. Für einen Betrieb, der von einer Person gepflegt wird, ist das die belastbarere Lösung. Der Preis: bei Mollie-Rückrufen und Domainprozessen (Stufe 1+) braucht es eine Umgebung mit stabilen eingehenden Aufrufen — ein einfaches Hosting-Paket reicht dafür meist nicht (Portal-Lastenheft §1.4).
 
 > **Template-Altlasten bewusst verworfen:** Folex Lite, ScrewFast, AstroWind, Studio Admin, Tailwind-Studio, Lume und shadcn-`dashboard-01` waren **Recherche-/Prototypenstände, keine Vorgabe**. Die Design-/Basisentscheidung wird frei und neu getroffen – siehe `CLAUDE_SARTU_WEBSITE_KONZEPT_FINAL.md`.
 
 ### Deployment-Realität: was per FTP geht und was nicht
 
-Ein früher geäußerter Wunsch war „am Ende alles per FTP hochladen". Das muss klar getrennt werden, sonst entstehen unhaltbare Versprechen:
+Ein früher geäußerter Wunsch war „am Ende alles per FTP hochladen". Das ist **teilweise erfüllbar** —
+aber nur mit einer Klarstellung, die vorher gefehlt hat.
 
-| Baustein | Deployment | Begründung |
+**Was „nur FTP" nicht heißt:** reines HTML. Sobald es eine Anmeldung, Uploads, Rechnungen, einen
+Bedarfsscheck mit Schritten und einen Adminbereich gibt, braucht es serverseitige Logik. Das ist
+keine Frage des Geschmacks, sondern des Funktionsumfangs.
+
+**Was „nur FTP" heißen kann:** Das gesamte Projekt liegt als PHP-Dateien auf dem Server und wird per
+SFTP oder Git dorthin gebracht. **Kein** Build-Schritt, **kein** Paketmanager auf dem Server,
+**keine** Container, **kein** eigener Prozess, der laufen muss. Genau das leistet die
+PHP-Architektur (Portal-Lastenheft §1) — und das war der eigentliche Kern des Wunsches.
+
+| Baustein | Realistisch | Warum |
 |---|---|---|
-| **SARTU-Marketingwebsite** | statisch baubar → **FTP/CDN möglich** | reines HTML/CSS/JS-Ergebnis |
-| **Kundenseiten** | static-first, **aber** Formulare/Leads brauchen ein Backend (Portal-API) | statische Auslieferung + eng begrenzte API |
-| **SARTU-Portal** | **kein FTP/Shared-Hosting** – braucht echte App-Umgebung: HTTPS, Backend, Datenbank, Sessions/Auth, Mollie-**Webhooks**, Worker/Queues, später Agentenjobs | Webhooks und Hintergrundprozesse sind auf reinem FTP-Webspace nicht sinnvoll betreibbar |
+| **Öffentliche Seiten** | ja, cachebar bis hin zu vorgenerierten Dateien | hängen an keiner Sitzung |
+| **Kundenbereich, Adminbereich, Bedarfsscheck** | ja **auf PHP-Hosting mit Datenbank** | serverseitig gerendert, kein Build, kein Dauerprozess |
+| **Zeitgesteuerte Aufgaben** (Löschfristen, Überfälligkeit) | nur, wenn der Tarif Cron bietet | fehlt bei einfachen Paketen häufig |
+| **Zuverlässiger Mailversand** | nur mit eigener Domain und SPF/DKIM/DMARC | Anmeldelinks im Spam = das Produkt funktioniert nicht |
+| **Mollie-Rückrufe, Domainprozesse** (Stufe 1+) | **auf einfachem Shared-Hosting meist zu schwach** | brauchen stabile eingehende Aufrufe und längere Laufzeiten |
 
-**Konsequenz:** Wird „nur FTP" zur harten Vorgabe, muss das Portal drastisch vereinfacht werden – und mehrere Versprechen (Mollie-Abo, Lead-Inbox, Vorschau/Freigabe-Workflow, Agentenjobs) fallen weg. Empfehlung: Website FTP-fähig halten, Portal auf einer echten App-Plattform betreiben.
-
----
+**Konsequenz:** Stufe 0 ist auf gutem PHP-Hosting betreibbar — vorausgesetzt, Cron und Mailversand
+funktionieren wirklich (**vorher praktisch prüfen**, nicht der Anbieterbeschreibung glauben). Für
+Stufe 1 ist der Wechsel auf einen kleinen eigenen Server der Normalfall, kein Scheitern. Die
+Architektur bleibt dabei **dieselbe** — es ändert sich nur, wo sie läuft. Genau deshalb ist PHP hier
+die belastbarere Wahl: Der Umzug ist ein Kopiervorgang, keine Neuentwicklung.
 
 ## 13. Eigene SARTU-Website – ausgelagert (Autoritätsregel)
 
@@ -525,14 +549,15 @@ Siehe `CLAUDE_SARTU_WEBSITE_KONZEPT_FINAL.md`, Abschnitte 4–6.
 
 | Stufe | Umfang | Bedingung |
 |---|---|---|
-| 0 | **Google-Unternehmensprofil** mit Dresdner Geschäftsadresse | sofort — sofern die Adresse die Eignungsregel erfüllt (§23a.1). Schnellster lokaler Hebel, unabhängig von Ortsseiten |
-| 1 | **Region-Hub** `/webdesign-region-dresden` + **2–3 Tier-1-Orte** (Pirna, Radeberg, Bischofswerda, Neustadt i. Sa., Sebnitz) + Heimatanker `/webdesign-stolpen` | echte NAP-Daten, konsistent zu Impressum und GBP |
-| 2 | **`/webdesign-dresden`** | erst wenn Referenzen und Bewertungen vorliegen — organisch härtester Wettbewerb (das Local Pack läuft bereits über Stufe 0) |
-| 3 | weitere Tier-2-Orte (Bautzen, Kamenz, Heidenau, Freital, Dippoldiswalde) | je einzeln durch das Gate unten |
-| 4 | **Branche × Region** statt Kleinstadtseiten, z. B. `/website-handwerker-region-dresden` | erst nach Search-Console-/SEA-Daten |
+| **–** | **Nichts davon**, solange `[GESCHAEFTSADRESSE_STATUS]` in `SARTU_ENTSCHEIDUNGEN_OFFEN.md` auf `offen` steht | **aktueller Stand.** Keine Ortsseite, kein Unternehmensprofil, keine Ortsnamen in Titeln |
+| 0 | **Google-Unternehmensprofil** mit `[HAUPTORT]`-Geschäftsadresse | erst nach Standortentscheidung **und** nur, wenn die Adresse die Eignungsregel erfüllt (§23a.1). Dann schnellster lokaler Hebel, unabhängig von Ortsseiten |
+| 1 | **Region-Hub** `/webdesign-region-[STARTREGION]` + **2–3 Tier-1-Orte** aus dem Umland + Heimatanker `/webdesign-[HEIMATORT]` | echte NAP-Daten, konsistent zu Impressum und Unternehmensprofil |
+| 2 | **`/webdesign-[HAUPTORT]`** | erst wenn Referenzen und Bewertungen vorliegen — organisch härtester Wettbewerb (das Local Pack läuft bereits über Stufe 0) |
+| 3 | weitere Tier-2-Orte | je einzeln durch das Gate unten |
+| 4 | **Branche × Region** statt Kleinstadtseiten, z. B. `/website-handwerker-region-[STARTREGION]` | erst nach Search-Console-/SEA-Daten |
 | 5 | weiterer Ausbau | nur für Orte mit belegten Impressionen oder Leads |
 
-**Warum Dresden erst in Stufe 2:** Dort ist der Wettbewerb am härtesten und die Erfolgswahrscheinlichkeit ohne Referenzen am geringsten. Im Umland ist der Wettbewerb dünn, die Betriebsdichte in der Zielgruppe hoch und der Ortsbezug echt — dort entstehen die ersten Rankings und die ersten Referenzen, die Dresden später erst möglich machen.
+**Warum der Hauptort erst in Stufe 2:** Dort ist der Wettbewerb am härtesten und die Erfolgswahrscheinlichkeit ohne Referenzen am geringsten. Im Umland ist der Wettbewerb dünn, die Betriebsdichte in der Zielgruppe hoch und der Ortsbezug echt — dort entstehen die ersten Rankings und die ersten Referenzen, die den Hauptort später erst möglich machen. **Diese Reihenfolge gilt für jede Region** und ist der Grund, warum die Strategie ohne Standortentscheidung vollständig formulierbar ist.
 
 **Priorisierung weiterer Orte** (nicht nach Einwohnerzahl): echte Nachbarstädte im Einzugsgebiet · wirtschaftlich relevante Orte mit passendem Betriebsbesatz · Orte mit belegtem Suchvolumen oder SEA-Signal · Orte, für die konkrete Beispiele, Referenzen oder echte lokale Recherche vorliegen.
 
@@ -662,7 +687,7 @@ Geschäftsseitig verbindlich bleibt:
 
 **Regel für Screenshots:** Portal-Screens für die Website stammen aus **dieser echten UI** – niemals aus gezeichneten Fake-Dashboards. Bis ein echtes Kundenprojekt gezeigt werden darf, werden sie als „Musteransicht" gekennzeichnet.
 
-**Stufe 1 – Portal härten:** Angebot/Annahme im Portal, **Mollie-Abo/Mandat** für Schutz (E2E getestet), adaptives Onboarding, Lead-Inbox, strukturierte Selbstpflege (Öffnungszeiten/Kontakt/Seitenstatus), Support, Audit-Log, Admin-2FA, Mandantentrennung. Migration/Konsolidierung auf den Ziel-Stack (Node/PG).
+**Stufe 1 – Portal härten:** Angebot/Annahme im Portal, **Mollie-Abo/Mandat** für Schutz (E2E getestet), adaptives Onboarding, Lead-Inbox, strukturierte Selbstpflege (Öffnungszeiten/Kontakt/Seitenstatus), Support, Audit-Log, Admin-2FA, Mandantentrennung. Konsolidierung auf die Zielarchitektur aus Portal-Lastenheft §1.
 
 **Stufe 2 – Produktion teilautomatisieren:** versionierte Spec → **assistierter** Build → automatische QA-Gates → Adminfreigabe → versionierte Vorschau/Deployment/Rollback. Selbstpflege Team/Stellen/Projekte. SEO-/GEO-Flotte (technische Checks + Patch-Entwürfe). INWX-Lifecycle im Portal.
 
@@ -678,67 +703,94 @@ Geschäftsseitig verbindlich bleibt:
 
 ### A. Startregion statt „deutschlandweit"
 
-> ### ✅ ENTSCHIEDEN: Sitz Stolpen, Markt Region Dresden / Ostsachsen
+> ### ⏸ OFFEN: Startregion und Geschäftsadresse
 >
-> **Unternehmenssitz:** Stolpen (Landkreis Sächsische Schweiz-Osterzgebirge), ca. 25 km östlich von Dresden.
-> **Startmarkt:** Region Dresden und das umliegende Ostsachsen. Damit sind Ortsseiten, `LocalBusiness`, Google-Unternehmensprofil, lokale Keywords und NAP-Daten **freigegeben** — jeweils unter den Regeln in §16a.
+> Die konkrete Region ist **nicht entschieden**. Werte und Sperren stehen in
+> `SARTU_ENTSCHEIDUNGEN_OFFEN.md`, Abschnitt 1. Solange dort `offen` steht, gilt:
+> **keine** Ortsseiten, **kein** `LocalBusiness`, **kein** Unternehmensprofil, **keine** Ortsnamen
+> in Titeln, H1 oder URLs.
+>
+> **Das blockiert den Bau nicht.** Die Website entsteht standortneutral und vollständig; die lokale
+> Ebene ist eine spätere Ergänzung, kein Fundament.
 
-**Die entscheidende strategische Weichenstellung: nicht Dresden-Zentrum, sondern Dresden + Umland.**
+**Die strategische Weichenstellung gilt unabhängig davon, welche Region es wird: nicht Kernstadt, sondern Kernstadt + Umland.**
 
-| | Dresden-Stadt | Umland / Landkreise |
+| | `[HAUPTORT]` (Kernstadt) | Umland / Landkreise |
 |---|---|---|
 | Suchvolumen | hoch | gering bis mittel |
 | Wettbewerb | **sehr hoch** (viele etablierte Agenturen) | **dünn** |
-| Deine Glaubwürdigkeit | eine von vielen | **echter Ortsbezug** |
+| Eigene Glaubwürdigkeit | eine von vielen | **echter Ortsbezug**, wenn man von dort kommt |
 | Betriebsdichte Zielgruppe | Dienstleister, Kanzleien | **Handwerk, Praxen, lokale Betriebe** |
 | Websitequalität im Bestand | überwiegend ordentlich | **oft veraltet oder keine** |
 
-**Konsequenz:** Dresden ist der **Volumen-Anker** (dort wird gesucht), das Umland ist der **Gewinn-Markt** (dort ist wenig Wettbewerb und du bist glaubwürdig lokal). Ein Dresdner Agenturmitarbeiter fährt nicht gern nach Neustadt oder Sebnitz — du bist von dort.
+**Konsequenz:** Die Kernstadt ist der **Volumen-Anker** (dort wird gesucht), das Umland ist der
+**Gewinn-Markt** (dünner Wettbewerb, glaubwürdige Nähe). Ein Agenturmitarbeiter aus der Großstadt
+fährt ungern 30 km aufs Land — wer von dort kommt, hat genau dort den Vorteil.
 
-**Ortsstruktur (konkret, unter dem Gate aus §16a):**
-- **Region-Hub:** `/webdesign-region-dresden` — Dach für die gesamte Region
-- **Anker:** `/webdesign-dresden` — höchstes Volumen, härtester Wettbewerb, langfristiges Ziel
-- **Tier 1 (echte Nähe, Wirtschaftskraft, dünner Wettbewerb):** Pirna · Radeberg · Bischofswerda · Neustadt in Sachsen · Sebnitz
-- **Tier 2 (später, datengetrieben):** Bautzen · Kamenz · Heidenau · Freital · Dippoldiswalde
-- **Stolpen selbst:** eigene Seite als Vertrauens- und Heimatanker, **nicht** als Traffic-Quelle (zu kleines Volumen)
+**Ortsstruktur, sobald entschieden** (unter dem Gate aus §16a):
+- **Region-Hub:** `/webdesign-region-[STARTREGION]` — Dach für die gesamte Region
+- **Anker:** `/webdesign-[HAUPTORT]` — höchstes Volumen, härtester Wettbewerb, langfristiges Ziel
+- **Tier 1:** 3–5 Orte im Umland mit echter Nähe, Wirtschaftskraft und dünnem Wettbewerb
+- **Tier 2:** später, datengetrieben
+- **`[HEIMATORT]`:** eigene Seite als Vertrauens- und Heimatanker, **nicht** als Traffic-Quelle
 
-Reihenfolge: Region-Hub und 2–3 Tier-1-Orte zuerst — **nicht** Dresden. Dresden kommt, wenn Referenzen und Bewertungen stehen.
+Reihenfolge: Region-Hub und 2–3 Tier-1-Orte zuerst — **nicht** die Kernstadt. Die kommt, wenn
+Referenzen und Bewertungen stehen.
 
-### 23a.1 Geschäftsadresse Dresden — was das löst und worauf zu achten ist
+**Auswahlkriterien für Tier-1-Orte** (nicht nach Einwohnerzahl): echte Nachbarschaft zum Arbeitsort ·
+wirtschaftlich relevanter Betriebsbesatz in der Zielgruppe · belegtes Suchvolumen oder SEA-Signal ·
+Orte, für die konkrete Beispiele oder echte lokale Recherche vorliegen.
 
-**Stand:** Es wird eine **Geschäftsadresse in Dresden** geben (Wohnsitz Stolpen). Damit sind zwei frühere Sorgen erledigt und eine neue Frage entsteht.
+### 23a.1 Geschäftsadresse — welche Form welche Folgen hat
 
-**Erledigt: Impressum.** Die Geschäftsadresse Dresden ist die **ladungsfähige Anschrift** im Impressum. Die Wohnanschrift muss nicht veröffentlicht werden. *(Die exakte Anschrift wird beim Go-live ins Impressum eingesetzt — nicht in Konzeptdateien.)*
+**Diese Entscheidung ist offen.** Sie ist trotzdem hier beschrieben, weil sie die
+**Google-Profil-Form** bestimmt und deshalb vor dem lokalen Launch fallen muss — nicht vor dem Bau.
 
-**Erledigt: die Kinderzimmer-Frage.** Ein Kundentermin am Wohnsitz steht nicht mehr zur Debatte. Unabhängig davon bleibt die Terminregel bestehen, weil sie ein Kern-USP ist:
+**Impressum:** Es braucht eine **ladungsfähige Anschrift**. Eine Geschäftsadresse erlaubt es, die
+Wohnanschrift nicht zu veröffentlichen. *(Die exakte Anschrift wird beim Go-live ins Impressum
+eingesetzt — nie in Konzeptdateien.)*
+
+**Kundentermine — unabhängig von der Adresse ein USP:**
 - Standard: **kein Termin nötig**
-- Auf Wunsch: **Video**, **beim Kunden vor Ort** oder **in Dresden**
-- Auf der Website wird **kein** Besuchstermin beworben — die Adresse steht im Impressum, nicht als Einladung
+- Auf Wunsch: **Video** oder **beim Kunden vor Ort**
+- Auf der Website wird **kein** Besuchstermin beworben — eine Adresse im Impressum ist keine Einladung
 
-**Nach wie vor ein Produktvorteil:** Das Konzept verlangt **echte Betriebsbilder statt Stockfotos**. Ein Termin beim Kunden im Umland ist von Stolpen aus problemlos machbar — eine Agentur aus Berlin kann das nicht liefern.
+**Produktvorteil, der bleibt:** Das Konzept verlangt **echte Betriebsbilder statt Stockfotos**. Ein
+Termin beim Kunden im Umland ist von einem Standort in der Region machbar — eine Agentur aus einer
+anderen Großstadt kann das nicht liefern.
 
-#### ⚠️ Die entscheidende Frage: Was für eine Adresse ist es?
+#### ⚠️ Was für eine Adresse es ist, entscheidet über das Google-Profil
 
-Davon hängt ab, ob ein **Google-Unternehmensprofil mit sichtbarer Dresdner Adresse** zulässig ist. Googles Kernregel lautet wörtlich: *„To qualify for a Business Profile, a business must make in-person contact with customers during its stated hours."* Postfächer und Mailadressen an entfernten Standorten sind ausdrücklich ausgeschlossen ([Eignungsrichtlinie](https://support.google.com/business/answer/13763036), geprüft 25.07.2026).
+Googles Kernregel lautet wörtlich: *„To qualify for a Business Profile, a business must make
+in-person contact with customers during its stated hours."* Postfächer und Mailadressen an entfernten
+Standorten sind ausdrücklich ausgeschlossen
+([Eignungsrichtlinie](https://support.google.com/business/answer/13763036), geprüft 25.07.2026).
 
 | Art der Adresse | Impressum | Google-Unternehmensprofil |
 |---|---|---|
-| **Eigenes/gemietetes Büro, in dem tatsächlich gearbeitet wird und Kunden empfangen werden können** | ✅ | ✅ **Sichtbare Adresse zulässig** — der stärkste Fall |
-| **Coworking mit fester, tatsächlich genutzter Fläche** | ✅ | ⚠️ Grauzone — nur bei echter Präsenz; mehrere Firmen unter einer Adresse sind ein Risikosignal |
-| **Virtuelles Büro / reine Postadresse ohne Anwesenheit** | ✅ (wenn ladungsfähig) | ❌ **Nicht zulässig** — Sperrrisiko. Dann GBP als Service-Area-Business ohne sichtbare Adresse, bezogen auf den echten Arbeitsort |
+| **Eigenes/gemietetes Büro**, in dem tatsächlich gearbeitet wird und Kunden empfangen werden können | ✅ | ✅ **Sichtbare Adresse zulässig** — der stärkste Fall |
+| **Coworking** mit fester, tatsächlich genutzter Fläche | ✅ | ⚠️ Grauzone — nur bei echter Präsenz; mehrere Firmen unter einer Adresse sind ein Risikosignal |
+| **Virtuelles Büro / reine Postadresse** ohne Anwesenheit | ✅ (wenn ladungsfähig) | ❌ **Nicht zulässig** — Sperrrisiko. Dann Service-Area-Business ohne sichtbare Adresse, bezogen auf den echten Arbeitsort |
 
-**Regel:** Die Adresse im GBP muss die Realität abbilden. Eine Dresdner Adresse im Profil zu führen, an der niemand erreichbar ist, riskiert die **Sperrung des Profils** — und trifft damit genau den Kanal, der lokal am meisten bringt.
+**Regel:** Die Adresse im Profil muss die Realität abbilden. Eine Adresse zu führen, an der niemand
+erreichbar ist, riskiert die **Sperrung des Profils** — und trifft damit genau den Kanal, der lokal
+am meisten bringt.
 
-#### Was ein echtes Dresdner Büro strategisch ändert
+#### Zwei Hebel, die oft vermischt werden
 
-Wichtige Unterscheidung, die oft vermischt wird:
+- **Local Pack (Kartenergebnisse)** — hängt an einem verifizierten Profil, echter Adresse, Kategorie
+  und **Bewertungen**. Mit echter Adresse in der Kernstadt **deutlich schneller gewinnbar** als
+  organisches Ranking.
+- **Organisches Ranking für „Webdesign `[HAUPTORT]`"** — bleibt hart umkämpft und braucht Zeit,
+  unabhängig von der Adresse.
 
-- **Local Pack (Kartenergebnisse)** — hängt stark an einem verifizierten Profil, echter Adresse, Kategorie und **Bewertungen**. Mit echter Dresdner Adresse ist das **deutlich schneller gewinnbar** als organisches Ranking.
-- **Organisches Ranking für „Webdesign Dresden"** — bleibt hart umkämpft und braucht Zeit, unabhängig von der Adresse.
+**Konsequenz für die Reihenfolge, sobald entschieden:** Unternehmensprofil **sofort** aufsetzen und
+mit Bewertungen füttern. Die **Ortsseiten** starten trotzdem im Umland, weil dort organisch weniger
+Widerstand ist. Beides parallel — sie konkurrieren nicht.
 
-**Konsequenz für die Reihenfolge:** Google-Unternehmensprofil **sofort** aufsetzen und mit Bewertungen füttern (schnellster lokaler Hebel). Die **Ortsseiten** starten trotzdem im Umland, weil dort organisch weniger Widerstand ist. Beides parallel — sie konkurrieren nicht miteinander.
-
-**Außendarstellung:** Dresdner Geschäftsadresse im Impressum und in strukturierten Daten; in Texten weiterhin **„Region Dresden"**, weil das den tatsächlichen Einzugsbereich beschreibt und im Umland glaubwürdiger ist als reine Stadt-Rhetorik.
+**Außendarstellung:** Geschäftsadresse im Impressum und in strukturierten Daten; in Texten
+„Region `[STARTREGION]`", weil das den tatsächlichen Einzugsbereich beschreibt und im Umland
+glaubwürdiger ist als reine Stadt-Rhetorik.
 
 ### B. Pilot-Outreach (die ersten Kunden kommen nicht über SEO)
 
@@ -916,7 +968,7 @@ Kostet ~15 Minuten, positioniert SARTU als ehrlichen Fachmann und funktioniert n
 
 **A. Fundament klären (diese Woche):**
 1. **Einen** Preis-/Scope-Stand als Single Source of Truth festlegen (`pricing.json`/`prices.js`) und `sartupaketepreise.md` + `sartulastenheftwebsite.md` in `konzepte/_archiv/` verschieben (als **veraltet** markieren) – gegen Wiederverwendung.
-2. Stack-Entscheidung dokumentieren: Website **static-first**; **Portal: echte App-Umgebung, Framework final offen** (shadcn/ui-Komponenten optional als Baustein – **kein** `dashboard-01`-Template als Vorgabe); Control-Plane **Node/PostgreSQL**; Umgang mit dem Supabase-Prototyp entscheiden (behalten als PG-Backend vs. migrieren – s. 25).
+2. ~~Stack-Entscheidung~~ **entschieden:** ein modulares PHP-Projekt mit `/portal/` und `/admin/`, MySQL/MariaDB, serverseitig gerendert. Verbindlich: Portal-Lastenheft §1. Offen bleibt nur der konkrete Hosting-Anbieter (`SARTU_ENTSCHEIDUNGEN_OFFEN.md` §4).
 3. **Eine** Palette + Ansprache („Sie") + Logo-Favorit fixieren; verbotene Wörter-/Anti-KI-Regeln als Lint/QA-Check.
 
 **B. Website launchen (2–4 Wochen):**
@@ -936,15 +988,15 @@ Kostet ~15 Minuten, positioniert SARTU als ehrlichen Fachmann und funktioniert n
 
 ## 25. Offene Entscheidungen (nur die wirklich nötigen)
 
-1. **Supabase-Prototyp behalten oder migrieren?** Der Juni-Stand (Supabase Frankfurt: Auth/PostgreSQL/Storage, RLS, live getestet) erfüllt „PostgreSQL + Identität + Storage in DE/EU" bereits. **Empfehlung:** für Stufe 0/1 **behalten** (schneller live, Sicherheit aus RLS), Ziel-Node-Control-Plane erst ab Stufe 2, wenn Queues/Worker/Agentenjobs wirklich gebraucht werden. **Nicht** parallel zwei Portale pflegen.
+1. ~~Supabase-Prototyp behalten oder migrieren?~~ **Entschieden: neu bauen in PHP.** Der Prototyp darf als **fachliche und visuelle Referenz** dienen — Ablauf, Felder, Texte, was sich als umständlich erwiesen hat. Sein **Code** wird nicht übernommen. Was daraus verwendet wird, steht begründet in `IMPLEMENTATION_PLAN.md` und `MIGRATION_NOTES.md`. **Nicht** parallel zwei Portale pflegen.
 2. **Buchhaltung: lexoffice oder sevDesk?** (API-Anbindung, GoBD/E-Rechnung). Kaufmännische Entscheidung, vor Stufe 1.
 3. **Typografie final:** reine Grotesk (Inter/Instrument Sans) vs. Grotesk + dezente editorial Serif für H1. Empfehlung: mit Grotesk starten, Serif optional testen.
-4. ~~Startregion und Adresse~~ **entschieden:** Wohnsitz Stolpen, **Geschäftsadresse Dresden**, Markt Region Dresden/Ostsachsen. Impressum-Frage damit erledigt. **Verbleibende Teilfrage (bestimmt nur die GBP-Form):** Ist die Dresdner Adresse ein tatsächlich genutztes Büro mit Kundenkontaktmöglichkeit (→ sichtbare Adresse im Google-Profil) oder eine reine Postadresse (→ Service-Area-Business ohne sichtbare Adresse)? Siehe §23a.1.
+4. **Startregion und Geschäftsadresse — offen.** Bestimmt Ortsseiten, `LocalBusiness`, Unternehmensprofil, lokale Keywords und die Impressumsanschrift. Werte und Sperren in `SARTU_ENTSCHEIDUNGEN_OFFEN.md` §1, Folgen in §23a.1. **Blockiert den Bau nicht**, blockiert den lokalen Launch.
 5. **Solo vs. kleines Team – ehrliche Selbstdarstellung** und daraus abgeleitete **Kapazität/Projekte-pro-Monat** (bestimmt, ob der Portal-Vollausbau realistisch neben der Produktion läuft oder Hilfe/Outsourcing braucht).
 6. **AGB/Garantie:** ob überhaupt eine (sauber formulierte) Zufriedenheitszusage als Verkaufsargument gewünscht ist – sonst weglassen.
 7. **Designrichtung final:** eine der drei Varianten aus `CLAUDE_SARTU_WEBSITE_KONZEPT_FINAL.md` – oder eigenes Layout vs. neu recherchierte Template-Basis.
 8. **Pilotkonditionen:** Werden 2–3 verdeckte Referenzslots angeboten – als Rabatt (5.900–6.500 € statt 7.900 €) oder als Zusatzwert zum vollen Preis?
-9. **Portal-Betriebsumgebung:** Supabase/Vercel für Stufe 0/1 zulässig, oder muss es von Anfang an auf eigenem Server laufen? (Bestimmt Tempo **und** ob „nur FTP" endgültig ausgeschlossen ist.)
+9. **Hosting-Anbieter und Tarif:** offen (`SARTU_ENTSCHEIDUNGEN_OFFEN.md` §4). Die Anforderungen stehen fest (Portal-Lastenheft §1.4). **Vor** der Umsetzung praktisch prüfen: Kommt eine Testmail im Posteingang an, nicht im Spam? Läuft ein Cronjob? Fehlt eines von beidem, ist der Tarif ungeeignet.
 10. **Eigenes finales Website-Lastenheft** vor dem Bau erstellen (empfohlen: ja – `CLAUDE_SARTU_WEBSITE_KONZEPT_FINAL.md` ist die Grundlage dafür).
 
 ---

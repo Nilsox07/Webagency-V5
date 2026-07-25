@@ -19,31 +19,112 @@ Das Ergebnis der Startprüfung ist der **erste Absatz** deines ersten Berichts.
 
 ---
 
+## 0b. Pflicht vor der ersten Codezeile: `IMPLEMENTATION_PLAN.md`
+
+**Du schreibst keinen Produktionscode, bevor diese Datei existiert und vorgelegt wurde.** Gute
+Lastenhefte verleiten dazu, sofort loszubauen — und dann steht die Struktur fest, bevor jemand sie
+geprüft hat.
+
+Die Datei enthält:
+
+| Abschnitt | Inhalt |
+|---|---|
+| **Bestand** | Was liegt bereits im Repository? Was davon ist Prototyp, was Altstand, was brauchbar? |
+| **Prototypen** | Was übernimmst du, was verwirfst du — **je mit Begründung**. Fremder Code wird nie still übernommen |
+| **Zielstruktur** | Konkrete Verzeichnisse und Dateien nach Portal-Lastenheft §1.3, auf dein Vorhaben angewendet |
+| **Modulgrenzen** | Was gehört in `helpers`, `data`, `services`, `views`? Wo verläuft die Grenze zwischen Kunden- und Adminzugriff? |
+| **Datenmodellquelle** | Welche Tabellen aus §4, in welcher Reihenfolge migriert |
+| **Reihenfolge** | Welcher lauffähige Zwischenstand entsteht wann |
+| **Risiken** | Was kann schiefgehen, woran merkst du es |
+| **Testplan** | Welche Tests wann, wie die Datenbanktests laufen |
+| **Offene Entscheidungen** | Was du **nicht** allein entscheidest |
+
+**Danach baust du den kleinsten lauffähigen Stand** — Grundgerüst, eine Migration, eine Seite, ein
+Test — und berichtest. Erst dann geht es weiter.
+
+**Am Ende** lieferst du `IMPLEMENTATION_SUMMARY.md` (was gebaut wurde, Abweichungen vom Plan mit
+Begründung, offene Punkte) und, falls aus einem Prototyp etwas übernommen wurde,
+`MIGRATION_NOTES.md`.
+
+---
+
+## 0c. Zielarchitektur — ein PHP-Projekt
+
+**SARTU ist eine Website mit geschütztem Kundenbereich, keine App.** Ein Repository, eine Domain,
+ein Deployment:
+
+```
+/                     öffentliche SARTU-Website
+/portal/              Kundenbereich (Login)
+/admin/               interner Bereich (Login + Zweifaktor)
+/api/                 eng begrenzte Serverfunktionen
+```
+
+Verbindlich: `CLAUDE_SARTU_PORTAL_LASTENHEFT_BAUFINAL.md` **§1** — Stack, Verzeichnisstruktur,
+Hosting-Anforderungen.
+
+**PHP 8.3+, serverseitig gerendert, MySQL/MariaDB, PDO mit vorbereiteten Anweisungen.**
+**Kein** WordPress · **kein** Laravel/Symfony · **kein** React/Vue/Next · **kein** Node oder Fastify
+als Zielsystem · **kein** Supabase · **kein** Build-Schritt fürs Frontend · **keine** externen CDNs.
+
+> **Zu älteren Ständen:** Frühere Fassungen nannten Node/Fastify/EJS oder einen Supabase-Prototyp.
+> **Das ist keine Zielarchitektur mehr.** Vorhandene Prototypen dürfen als fachliche oder visuelle
+> Referenz dienen — Ablauf, Felder, Texte. Ihr **Code** wird nicht übernommen. Was du daraus
+> verwendest, steht begründet in `IMPLEMENTATION_PLAN.md`.
+
+**Sprachregel nach außen:** Kundenbereich, Ihr Bereich, Anmeldung. **Nie** App, Software, SaaS,
+Plattform, Dashboard, Control-Plane. Der Kunde soll denken „ich melde mich an und sehe mein Projekt",
+nicht „ich muss ein Werkzeug lernen".
+
+---
+
+## 0e. Gate: Designentscheidung vor dem Vollausbau
+
+Nach dem Design-Briefing entstehen **2–3 klickbare Startseitenvarianten mit echten Texten**. Dann
+**anhalten**. Der Mensch entscheidet die Richtung. Erst danach werden weitere Seiten ausgebaut.
+
+Wer nach dem Briefing durchbaut, hat das Gate verletzt — und im Zweifel Dutzende Seiten in einer
+Richtung gebaut, die verworfen wird. Das Gate gilt auch dann, wenn der Mensch „komplett durchbauen"
+gesagt hat: Es ist eine Entscheidung, die nur er treffen kann.
+
+---
+
+## 0d. Standort ist offen — und das ist kein Hindernis
+
+`SARTU_ENTSCHEIDUNGEN_OFFEN.md` §1 steht auf `offen`. Solange das so ist:
+
+**Gesperrt:** Ortsseiten · `LocalBusiness` in strukturierten Daten · Google-Unternehmensprofil ·
+Ortsnamen in Title, H1, Meta, URL oder Fließtext · NAP-Aussagen · Service-Area.
+
+**Nicht gesperrt:** alles andere. Strukturierte Daten nutzen `Organization` **ohne** Adressfeld.
+
+**Kein Platzhalter wird durch einen erfundenen Wert ersetzt.** Findest du irgendwo einen konkreten
+Ortsnamen in den Vorgaben: **melden**, nicht übernehmen.
+
+---
+
 ## 1. Was du baust
 
 Das **SARTU-Kunden- und Adminportal** in der **Stufe-0-Ausbaustufe**: eine vollständig sichtbare und bedienbare Oberfläche für den gesamten Kundenprozess vom Angebot bis zur ersten Pflege — mit bewusst **manueller Mechanik** dahinter.
 
-**Nicht** die öffentliche SARTU-Website. Das ist ein eigenes Projekt mit eigenem Auftrag (`CODEX_AUFTRAG_WEBSITE.md`).
+Das ist der **eingeloggte Teil** derselben Website: `/portal/` und `/admin/`. Die öffentlichen Seiten haben einen eigenen Auftrag (`CODEX_AUFTRAG_WEBSITE.md`) — **aber dasselbe Repository und dasselbe Projekt** (§0c).
 
 ---
 
-## 1a. Verhältnis zum Website-Projekt
+## 1a. Verhältnis zum Website-Auftrag
 
-**Dieses Projekt kommt zuerst.** Die Website braucht am Ende **echte** Screenshots aus dieser Oberfläche (Abschnitt 7) — gezeichnete Attrappen sind ausgeschlossen. Das Portal ist der Beweis für das, womit SARTU wirbt.
+**Ein Projekt, zwei Arbeitspakete.** Öffentliche Seiten und Kundenbereich teilen sich Repository,
+Verzeichnisstruktur, Layouts, Partials, Komponenten, Hilfsfunktionen und Datenbank. Sie werden
+getrennt **beauftragt**, weil das die Arbeit ordnet — nicht, weil es getrennte Systeme wären.
 
-**Das heißt nicht, dass die Website warten muss.** Sie darf parallel gebaut und in einer Staging-Umgebung fertiggestellt werden. Was sie nicht darf: **live gehen**, solange sie Portal-Screens als Produktbeweis zeigt, die es nicht gibt.
+**Reihenfolge:** Dieses Arbeitspaket kommt zuerst. Die öffentlichen Seiten brauchen am Ende **echte**
+Screenshots aus dieser Oberfläche (Abschnitt 7a); gezeichnete Attrappen sind ausgeschlossen. Die
+öffentlichen Seiten dürfen trotzdem parallel entstehen — gesperrt ist nur der **Livegang**.
 
-| Was geteilt wird | Was nicht geteilt wird |
-|---|---|
-| Die **Designentscheidung** — sie wird einmal getroffen und gilt für beide. Ablage als reine Wertedatei (`sartu-design-tokens.json`: Farben, Schriftgrößen, Abstände, Radien) plus einer kurzen Begründung. Jedes Projekt **kopiert** diese Datei und versioniert sie bei sich | Laufzeitcode. Kein gemeinsames Paket, keine Abhängigkeit zwischen den Repositories, kein geteiltes Komponenten-Modul |
-| Die Sprachregeln aus Website-Lastenheft §2 | Build-Werkzeuge, Frameworks, Bibliotheken |
-| Die Schnittstelle `POST /api/anfragen` (unten) | alles Übrige |
-
-Ein gemeinsames Paket wäre für zwei Projekte, die ein Mensch pflegt, mehr Aufwand als Nutzen: Jede Änderung erzwingt Versionssprünge in beiden. Eine kopierte Wertedatei genügt — bei Abweichung gewinnt die Fassung im Portal, weil dort die Designentscheidung sichtbar umgesetzt wird.
-
-**Die Schnittstelle zur Website baust du**, mitsamt Missbrauchsschutz und Adminansicht. Maßgeblich ist der Abschnitt **„4b. Schnittstelle zur öffentlichen Website — Anfrageeingang"** im Lastenheft. Lies ihn vollständig, bevor du damit anfängst — besonders **4b.1**, weil dort steht, warum kein Geheimnis im Browser liegen darf.
-
----
+**Was daraus folgt:**
+- Das Grundgerüst (`/app/bootstrap.php`, Layouts, Hilfsfunktionen, Datenbankschicht) baust **du**. Das Website-Arbeitspaket setzt darauf auf
+- Die Designentscheidung gilt für beide. Kunden- und Adminbereich müssen sich **sichtbar** von den öffentlichen Seiten absetzen — mit denselben Variablen, nicht mit einem zweiten Designsystem
+- **Es gibt keine Schnittstelle über das Netz zwischen beiden.** Der Bedarfsscheck ruft direkt den Anfragedienst auf (Lastenheft §4b.1). Kein Token, kein gemeinsames Geheimnis
 
 ## 2. Lesereihenfolge und Rangfolge
 
@@ -54,8 +135,9 @@ Bei Widersprüchen gilt die **niedrigere Nummer**:
 3. **`CLAUDE_SARTU_DESIGN_BRIEFING_AUSFUEHRUNG.md`** — wie die visuelle Ebene entsteht (Farben und Schriften sind **nicht** vorgegeben)
 4. **`CLAUDE_SARTU_MASTERKONZEPT_FINAL.md`** im Übrigen — nur nachschlagen: Portalvision, Einführungskonzept, Stufenmodell, Datenmodell
 5. `CLAUDE_SARTU_WEBSITE_LASTENHEFT_BAUFINAL.md` — nur §2 (Sprachregeln), die auch hier gelten
-6. `konzepte/` — historische Quellen. **Nur nachschlagen**, enthält veraltete Preise und abgelöste Modelle
-7. `design/_verworfen/` — **ignorieren**
+6. **`SARTU_ENTSCHEIDUNGEN_OFFEN.md`** — alle Platzhalter und Sperren
+7. `konzepte/` — historische Quellen. **Nur nachschlagen**, enthält veraltete Preise und abgelöste Modelle
+8. `design/_verworfen/` — **ignorieren**
 
 > **Zu Abschnittsverweisen:** Im Lastenheft stehen Paragraphenzeichen wie `§4b`. Sie sind eine
 > Abkürzung, kein Beweis. Maßgeblich ist immer die **Überschrift**. Findest du einen Verweis nicht,
@@ -84,8 +166,8 @@ Daraus folgt:
 **Baue in dieser Reihenfolge.**
 
 ### Etappe 1 — Fundament
-Projektgerüst, Datenbankmigrationen, Datenmodell aus §4, Session- und Sicherheitsgrundlage aus §3, Testaufbau gegen echtes PostgreSQL.
-**Abschluss:** `test/tenant-isolation.test.js` existiert und ist grün.
+Projektgerüst nach §1.3, Datenbankmigrationen, Datenmodell aus §4, Sitzungs- und Sicherheitsgrundlage aus §3, Testaufbau gegen echtes MySQL/MariaDB.
+**Abschluss:** `tests/TenantIsolationTest.php` existiert und ist grün.
 
 ### Etappe 2 — Anmeldung und Erstkontakt
 Magic-Link-Anmeldung (§6), Willkommensstrecke (§7, drei Bildschirme), Abmeldung, Fehlerseiten.
@@ -94,7 +176,7 @@ Magic-Link-Anmeldung (§6), Willkommensstrecke (§7, drei Bildschirme), Abmeldun
 Alle Screens aus §8 in der dort genannten Reihenfolge, mit allen Texten und Leerzuständen.
 
 ### Etappe 4 — Adminportal und Anfrageeingang
-Alle Screens aus §9 inklusive Aufgabenvorlagen, dazu der Endpunkt und die Anfrageliste aus §4b.
+Alle Screens aus §9 inklusive Aufgabenvorlagen, dazu die Bedarfsscheck-Annahme und die Anfrageliste aus §4b.
 
 ### Etappe 5 — E-Mails, Uploads, Abnahme
 Alle Vorlagen aus §10, Uploadregeln aus §11, Testfälle aus §16 vollständig, Definition of Done aus §17.
@@ -117,7 +199,7 @@ Alle Vorlagen aus §10, Uploadregeln aus §11, Testfälle aus §16 vollständig,
 
 **Du entscheidest:** Ordnerstruktur, Modulschnitt, Hilfsfunktionen, Migrationswerkzeug, Testaufbau, wie du die Server-Templates und deren Bausteine organisierst.
 
-**Vorgegeben und nicht zu ändern:** Stack (§1 — dort ist EJS als Ansichtsschicht festgelegt; hältst du das für falsch, melde es, bevor du etwas anderes nimmst), Datenmodell (§4), Statuswerte und Kundentexte (§5), alle Oberflächentexte (§6–§9), E-Mail-Texte (§10), Sicherheitsregeln (§3), Umfangsgrenze (§0.2, §0.3 und §0.3a).
+**Vorgegeben und nicht zu ändern:** Stack und Verzeichnisstruktur (§1.2 und §1.3), Datenmodell (§4), Statuswerte und Kundentexte (§5), alle Oberflächentexte (§6–§9), E-Mail-Texte (§10), Sicherheitsregeln (§3), Umfangsgrenze (§0.2, §0.3 und §0.3a).
 
 **Nicht vorgegeben:** Farben, Schriften, Formen. Dafür gilt das Design-Briefing — Kunden- und Adminbereich müssen visuell unterscheidbar sein. Halte alle visuellen Werte als **zentrale Variablen**, damit ein späterer Wechsel ein Variablentausch bleibt.
 
@@ -145,7 +227,7 @@ Alle Vorlagen aus §10, Uploadregeln aus §11, Testfälle aus §16 vollständig,
 Diese vier Punkte entscheiden über Brauchbarkeit und Haftung:
 
 1. **Mandantentrennung** (§3, Regeln 1, 2 und 2a). Kundenabfragen filtern nach `organization_id` aus der **Session**. Admin- und Kundenzugriff laufen über **getrennte** Zugriffsschichten — nie über einen gemeinsamen Codepfad, der den Filter bei Admins weglässt. Der Isolationstest ist unantastbar.
-2. **Kein Geheimnis im Browser** (§4b.1). `INTAKE_TOKEN` lebt ausschließlich serverseitig. Der Endpunkt ist eine Server-zu-Server-Schnittstelle, kein öffentliches Formularziel. Ein Token, der im ausgelieferten Quelltext landet, ist kein Schutz, sondern eine offene Tür — und dieser Fehler ist von außen sofort sichtbar.
+2. **Nur `/public` ist erreichbar** (§1.3). Der Webserver zeigt auf `/public`. Liegen `/app`, `/storage`, `/migrations` oder `.env` im Netz, ist das eine Datenpanne, kein Schönheitsfehler — praktisch prüfen, nicht annehmen.
 3. **Klartext statt Systemcodes** (§5). Der Kunde sieht nie `qa_failed` oder `angebot_offen`, sondern „Ihre Freigabe fehlt" und „Angebot liegt vor".
 4. **Ohne JavaScript bedienbar.** Jede Aktion ist ein normales Formular mit `POST`.
 
@@ -166,7 +248,9 @@ Vollständig nach §18 des Lastenhefts:
    - Barrierefreiheits-Momentaufnahme je Kernscreen: Kontrastwerte, Tastaturweg, Fokusreihenfolge, Beschriftungen
 5. **Offene-Punkte-Liste**
 6. **Screenshot-Satz aus der echten Oberfläche** (Abschnitt 7a)
-7. **Schnittstellenbeschreibung** für das Website-Projekt: Nutzdatenschema, ein vollständiges Beispiel, alle Antwortcodes, der ausdrückliche Hinweis, dass `INTAKE_TOKEN` nicht im Repository steht
+7. **`IMPLEMENTATION_SUMMARY.md`**: gebaute Struktur, Abweichungen vom Plan mit Begründung, offene Punkte
+8. **`MIGRATION_NOTES.md`**, falls aus einem Prototyp etwas übernommen wurde: was, warum, was verworfen
+9. **Kurzbeschreibung des Anfragedienstes** für das Website-Arbeitspaket: Signatur von `AnfrageService::anlegen()`, erwartete Felder, Rückgabe im Erfolgs- und Fehlerfall
 
 ### 7a. Screenshots — was gilt und was nicht
 

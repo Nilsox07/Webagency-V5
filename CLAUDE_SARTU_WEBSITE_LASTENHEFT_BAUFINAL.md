@@ -18,43 +18,57 @@
 | # | Entscheidung | Status |
 |---|---|---|
 | 1 | **Designrichtung** | **offen — wird recherchiert**, nicht vorgegeben. Vorgehen: `CLAUDE_SARTU_DESIGN_BRIEFING_AUSFUEHRUNG.md`. Struktur, Copy und Anforderungen in diesem Dokument sind davon unabhängig und vollständig. |
-| 2 | **Startregion / Standort** | ✅ **entschieden** — Wohnsitz Stolpen, Geschäftsadresse Dresden, Markt Region Dresden / Ostsachsen |
+| 2 | **Startregion / Standort** | ⏸ **offen** — siehe `SARTU_ENTSCHEIDUNGEN_OFFEN.md` §1. Blockiert **nicht** den Bau, blockiert die lokale Ebene |
 
 **Damit ist dieses Lastenheft vollständig umsetzbar.** Die einzige verbleibende Teilfrage betrifft nicht den Bau, sondern die Form des Google-Unternehmensprofils (echtes Büro → sichtbare Adresse, reine Postadresse → Service-Area-Business, s. Masterkonzept §23a.1).
 
-**Zu 2 (entschieden):** Wohnsitz **Stolpen**, **Geschäftsadresse Dresden**, Markt **Region Dresden / Ostsachsen**.
-- **Impressum:** Dresdner Geschäftsadresse als ladungsfähige Anschrift. Exakte Anschrift wird beim Go-live eingesetzt — **keine Platzhalter live**.
-- **NAP-Konsistenz:** Impressum, Footer, strukturierte Daten und Google-Unternehmensprofil müssen **identisch** sein.
-- **`LocalBusiness`:** zulässig mit sichtbarer Dresdner Adresse, **sofern** die Adresse ein tatsächlich genutztes Büro ist. Bei reiner Postadresse stattdessen Service-Area-Business ohne sichtbare Adresse (Masterkonzept §23a.1).
-- **Ortsseiten** sind freigegeben, aber **nicht zum Launch**: erst Region-Hub + Umland (Pirna, Radeberg, Bischofswerda, Neustadt i. Sa., Sebnitz), **danach** Dresden. Reihenfolge und Gate: Masterkonzept §16a.
-- **Sprachregelung in Texten:** „Region Dresden" — beschreibt den echten Einzugsbereich und wirkt im Umland glaubwürdiger als reine Stadt-Rhetorik.
+**Zu 2 (offen):** Die Startregion ist **nicht entschieden**. Werte und Sperren stehen in
+`SARTU_ENTSCHEIDUNGEN_OFFEN.md` §1.
 
-**Alles andere in diesem Dokument ist entschieden.** Copy, Struktur, Felder, Verhalten und Reihenfolge sind final. Wo die Designrichtung eine Rolle spielt, steht „**[Token]**" statt eines konkreten Farbwerts.
+**Was das bedeutet — Sperren, solange `[GESCHAEFTSADRESSE_STATUS]` auf `offen` steht:**
+- **Kein** `LocalBusiness` in strukturierten Daten. Stattdessen `Organization` **ohne** Adressfeld
+- **Kein** Google-Unternehmensprofil, auch nicht vorbereitend
+- **Keine** Ortsseiten im Produktivbau, auch nicht unverlinkt
+- **Keine** Ortsnamen in Title, H1, Meta-Description, URL oder Fließtext
+- **Keine** NAP-Aussage — es gibt noch keine Anschrift
 
-**Terminregel für alle Texte:** Standard ist **kein Termin**. Auf Wunsch Video, beim Kunden vor Ort oder in Dresden. Auf der Website wird **kein Besuchstermin beworben** — die Adresse steht im Impressum, nicht als Einladung.
+**Was trotzdem vollständig gebaut wird:** alles andere. Startseite, Preise, Bedarfsscheck, Ablauf,
+fünf Leistungsseiten, Ratgeber, Lexikon, Kundenbereich, SEO-Grundlage. Die lokale Ebene ist eine
+spätere Ergänzung, kein Fundament — deshalb ist dieses Lastenheft **standortneutral baufertig**.
+
+**Sprachregelung bis zur Entscheidung:** überregional formulieren. Zulässig sind Aussagen über die
+Arbeitsweise („persönlich erreichbar", „auf Wunsch beim Kunden vor Ort"), **nicht** über Orte.
+
+**Terminregel für alle Texte:** Standard ist **kein Termin**. Auf Wunsch Video oder beim Kunden vor
+Ort. Auf der Website wird **kein Besuchstermin beworben** — eine Adresse im Impressum ist keine
+Einladung.
 
 ---
 
 ## 1. Technischer Rahmen
 
-- **Ausgabe:** statische Website (Astro o. gleichwertig), FTP-/CDN-deploybar.
-- **Ein kleiner eigener Serverteil ist Pflicht** — nicht optional. Er nimmt beide Formulare entgegen und spricht mit dem Portal (§9.5a). Grund: Der Zugangsschlüssel zum Portal darf niemals im Browser liegen, und der Bedarfsscheck braucht einen Weg ohne JavaScript. Alle **Inhaltsseiten** bleiben davon unberührt und werden weiterhin statisch ausgeliefert.
-- **Kein** externes CDN für Schriften, CSS oder JS. Schriften self-hosted als WOFF2, `font-display: swap`.
+> **SARTU ist ein Projekt, nicht zwei.** Öffentliche Website, Kundenbereich (`/portal/`),
+> Adminbereich (`/admin/`) und Serverfunktionen (`/api/`) liegen in **einem** modularen PHP-Projekt
+> unter **einer** Domain. Die verbindliche Architektur, Verzeichnisstruktur und
+> Hosting-Anforderung stehen in `CLAUDE_SARTU_PORTAL_LASTENHEFT_BAUFINAL.md` §1 — dieser Abschnitt
+> ergänzt nur, was die **öffentlichen Seiten** betrifft.
+
+- **PHP 8.3+, serverseitig gerendert.** Kein CMS, kein Vollframework, kein SPA-Framework, kein Node als Zielsystem, kein Build-Schritt fürs Frontend
+- **Öffentliche Seiten sind cachebar:** Sie hängen nicht an einer Sitzung und dürfen als statische Antwort ausgeliefert werden (Server- oder Dateicache). Wo Inhalte fest sind, dürfen sie beim Ausrollen als HTML vorgeneriert werden
+- **Kein** externes CDN für Schriften, CSS oder JS. Schriften selbst gehostet als WOFF2, `font-display: swap`
+- **JavaScript budgetiert statt verboten:** **≤ 75 KB gzip auf der Startseite, ≤ 40 KB auf Unterseiten.** Pflichtfunktionen: mobile Navigation, FAQ-Akkordeon, Komfort im Bedarfsscheck. Darüber hinaus **maximal zwei bewusste Markenmomente pro Seite**
+- **Ohne JavaScript vollständig nutzbar:** Inhalte lesbar, Links funktionieren, **beide Formulare absendbar**, Bedarfsscheck vollständig durchlaufbar (§9.5a). **Kein Inhalt darf erst durch eine Scroll-Animation sichtbar werden**
+- **`prefers-reduced-motion: reduce` ist Pflicht:** alle nicht-essenziellen Bewegungen aus, Inhalte sofort sichtbar
+- **Bibliotheken:** CSS zuerst. Erlaubt bei Bedarf: Lenis (~3 KB), GSAP + ScrollTrigger (~34 KB, seit 04/2025 vollständig kostenlos inkl. SplitText/MorphSVG). **Nicht erlaubt:** Vanta.js, Three.js als Deko, Barba.js
+- **Ziele (Labormessung):** LCP < 2,5 s · TBT < 200 ms · CLS < 0,1 · mobil zuerst entwickelt. **Animationen dürfen CLS nicht verschlechtern**
+- **`html lang="de"`**, semantische Landmarks (`header`, `nav`, `main`, `footer`), sichtbarer Fokus, Skip-Link „Zum Inhalt springen"
+- **Breakpoints:** ≤ 599 px mobil · 600–1023 px Tablet · ≥ 1024 px Desktop. Maximale Inhaltsbreite 1280 px, Fließtext max. 68 Zeichen
+- **Designsystem:** Farben, Schriften und Radien werden nach `CLAUDE_SARTU_DESIGN_BRIEFING_AUSFUEHRUNG.md` recherchiert und vorgelegt. Verbindlich ist nur: **alle Werte als zentrale Variablen**, Komponenten nutzen **nie** rohe Farbwerte, Radius **einheitlich**, keine „Karten in Karten"
+- **Wiederverwendung ist Pflicht:** Layouts, Partials und Komponenten aus `/app/views` werden von öffentlichen Seiten und Kundenbereich **gemeinsam** genutzt. Kein kopiertes Markup zwischen Seiten
 
 > **Was „keine externen Verbindungen" bedeutet — und was nicht.**
-> **Verboten sind Fremdanbieter zur Laufzeit:** Schrift-, Skript- und Stil-CDNs, Analyse- und Tracking-Dienste, eingebettete Karten, Videoportale, Schriftartendienste, Chat-Widgets, Werbe- und Rätselbild-Dienste, externe Bildhoster. Kein Netzwerkaufruf des Browsers darf eine fremde Domain treffen.
-> **Erlaubt und vorgesehen ist die eigene Infrastruktur:** der Formularendpunkt auf derselben Domain und dessen serverseitiger Aufruf des SARTU-Portals. Das ist keine Fremdverbindung, sondern das Produkt selbst.
-- **JavaScript budgetiert statt verboten:** **≤ 75 KB gzip auf der Startseite, ≤ 40 KB auf Unterseiten.** Pflichtfunktionen: mobile Navigation, FAQ-Akkordeon, Bedarfsscheck-Logik. Darüber hinaus sind **maximal zwei bewusste Markenmomente pro Seite** erlaubt (Motion-Strategie siehe `CLAUDE_SARTU_WEBSITE_KONZEPT_FINAL.md` §10a).
-- Die Seite muss **ohne JS grundlegend nutzbar** bleiben: Inhalte lesbar, Links funktionieren, Kontaktformular absendbar. **Kein Inhalt darf erst durch eine Scroll-Animation sichtbar werden.**
-- **`prefers-reduced-motion: reduce` ist Pflicht:** alle nicht-essenziellen Bewegungen aus, Inhalte sofort sichtbar.
-- **Bibliotheken:** CSS zuerst. Erlaubt bei Bedarf: Lenis (~3 KB), GSAP + ScrollTrigger (~34 KB, seit 04/2025 vollständig kostenlos inkl. SplitText/MorphSVG), Motion (~3–18 KB, primär fürs Portal). **Nicht erlaubt:** Vanta.js, Three.js als Deko, Barba.js.
-- **Ziele:** LCP < 2,5 s · INP < 200 ms · CLS < 0,1 · mobil zuerst entwickelt. **Animationen dürfen CLS nicht verschlechtern.**
-- **`html lang="de"`**, semantische Landmarks (`header`, `nav`, `main`, `footer`), sichtbarer Fokus, Skip-Link „Zum Inhalt springen".
-- **Breakpoints:** ≤ 599 px mobil · 600–1023 px Tablet · ≥ 1024 px Desktop. Maximale Inhaltsbreite 1280 px, Fließtext max. 68 Zeichen.
-- **Designsystem:** Farben, Schriften und Radien werden nach `CLAUDE_SARTU_DESIGN_BRIEFING_AUSFUEHRUNG.md` recherchiert und vorgelegt. Verbindlich ist nur: **alle Werte als zentrale Variablen**, Komponenten nutzen **nie** rohe Farbwerte, Radius **einheitlich** über die ganze Seite, keine „Karten in Karten".
-- **Schriften:** selbst gehostet als WOFF2, `font-display: swap`, Zahlen mit `tabular-nums`. Konkrete Wahl nach Design-Briefing §3.3.
-
----
+> **Verboten sind Fremdanbieter zur Laufzeit:** Schrift-, Skript- und Stil-CDNs, Analyse- und Tracking-Dienste, eingebettete Karten, Videoportale, Chat-Widgets, Werbe- und Rätselbild-Dienste, externe Bildhoster. Kein Netzwerkaufruf des Browsers darf eine fremde Domain treffen.
+> **Kein Sonderfall mehr sind die Formulare:** Sie laufen im selben Programm. Es gibt **kein** gemeinsames Geheimnis und **keinen** Aufruf über das Netz (Portal-Lastenheft §4b.1).
 
 ## 2. Globale Sprach- und Inhaltsregeln
 
@@ -470,26 +484,27 @@ Der Bedarfsscheck ist der einzige Weg zu einem Angebot. Er darf an abgeschaltete
 
 ### 9.5b Wohin die Anfrage geht (verbindlich)
 
-Der Bedarfsscheck ist der **einzige** Punkt, an dem die Website mit dem Portal spricht. Maßgeblich ist `CLAUDE_SARTU_PORTAL_LASTENHEFT_BAUFINAL.md`, Abschnitt **„4b. Schnittstelle zur öffentlichen Website — Anfrageeingang"**. Bei Abweichungen gilt dort.
+Maßgeblich ist `CLAUDE_SARTU_PORTAL_LASTENHEFT_BAUFINAL.md`, Abschnitt **„4b. Anfrageeingang vom
+Bedarfsscheck"**. Bei Abweichungen gilt dort.
 
 | Punkt | Festlegung |
 |---|---|
-| **Ziel** | `POST {PORTAL_BASE_URL}/api/anfragen` |
-| **Wer sendet** | **der Server der Website**, niemals der Browser. Der Browser sendet an die eigene Domain |
-| **Warum** | Alles, was der Browser sieht, ist öffentlich. Ein Zugangsschlüssel im Browser wäre kein Schutz, sondern eine offene Tür |
-| **Zugangsschlüssel** | Header `X-Sartu-Token`, Wert aus der Umgebungsvariablen `INTAKE_TOKEN`. **Nie** im Repository, **nie** im ausgelieferten Quelltext, **nie** in einer Fehlermeldung |
-| **Inhalt** | vollständige Nutzdaten nach dem Schema in Portal-§4b.2 — inklusive `submission_id` (vom Server erzeugte UUID), `submitted_at`, `form_started_at` und Honigtopffeld |
-| **Doppelabsenden** | Die `submission_id` entsteht beim **Start** des Bedarfsschecks und bleibt über alle Schritte gleich. Doppelklick, Neuladen und Wiederholversuche erzeugen dadurch keinen zweiten Datensatz |
-| **Erfolg** | Weiterleitung (`303`) auf die Danke-Seite §9.6 — nie ein erneut absendbares Formular anzeigen |
-| **Fehler** | Angaben bleiben erhalten, Meldung: `Wir konnten Ihre Anfrage gerade nicht übermitteln. Bitte versuchen Sie es in einem Moment erneut oder schreiben Sie uns an {E-Mail}.` **Keine** technischen Details, **kein** Statuscode, **keine** Zielangabe |
-| **Wiederholung** | bei Zeitüberschreitung **einmal** nachsenden, danach aufgeben — die `submission_id` verhindert Doppelanlage |
-| **Zusätzlich** | Benachrichtigungs-E-Mail an SARTU, damit eine Anfrage auch dann ankommt, wenn das Portal nicht erreichbar ist |
+| **Ziel** | `POST /briefing/absenden` — eigene Domain, normales Formular |
+| **Weg** | Formularannahme → `AnfrageService::anlegen()` → Tabelle `leads`. **Kein** Netzaufruf, **kein** gemeinsames Geheimnis, **keine** Tokenprüfung (ein Projekt, §1) |
+| **CSRF** | Pflicht |
+| **`submission_id`** | entsteht beim **Start** des Bedarfsschecks und bleibt über alle Schritte gleich. Doppelklick, Neuladen und Zurück-Taste erzeugen dadurch keinen zweiten Datensatz |
+| **Empfehlung und Ampel** | **serverseitig** berechnet, **nie** aus dem abgeschickten Formular übernommen — sonst könnte sie von außen gesetzt werden |
+| **Erfolg** | Weiterleitung (`303`) auf die Danke-Seite §9.6. Nie ein erneut absendbares Formular anzeigen |
+| **Fehler** | Angaben bleiben erhalten, Meldung **am Feld**. Bei Serverfehler: `Wir konnten Ihre Anfrage gerade nicht speichern. Bitte versuchen Sie es in einem Moment erneut oder schreiben Sie uns an {E-Mail}.` **Keine** technischen Details |
+| **Zusätzlich** | Benachrichtigungs-E-Mail an SARTU |
 
-**Spamabwehr auf der Website:** Honigtopffeld `hp_website` (unsichtbar, `aria-hidden="true"` und `tabindex="-1"`), Zeitregel (Absenden unter 3 Sekunden wird verworfen), serverseitige Prüfung aller Felder. **Kein** Rätselbild und **kein** Fremddienst zum Start — beides wäre eine externe Verbindung mit eigener Datenschutzfolge und kommt erst, wenn Spam messbar auftritt.
+**Spamabwehr:** Honigtopffeld `hp_website` (unsichtbar, `aria-hidden="true"` und `tabindex="-1"`),
+Zeitregel (Absenden unter 3 Sekunden wird stillschweigend verworfen, Danke-Seite erscheint trotzdem),
+serverseitige Prüfung aller Felder, Rate-Limit 10 je IP und Stunde. **Kein** Rätselbild und **kein**
+Fremddienst zum Start — beides wäre eine externe Verbindung mit eigener Datenschutzfolge.
 
-**Wenn das Portal noch nicht existiert:** Der Versand ist **eine** klar benannte Funktion, die zunächst nur die Benachrichtigungs-E-Mail verschickt und die Anfrage lokal ablegt. Der Umbau auf den Endpunkt ist dann ein Eingriff an genau einer Stelle. Als offenen Punkt melden.
-
-> **Das allgemeine Kontaktformular** (§11) läuft **nicht** hierüber. Es verschickt ausschließlich eine E-Mail.
+> **Das allgemeine Kontaktformular** (§11) erzeugt **keinen** Datensatz. Es versendet ausschließlich
+> eine E-Mail. Honigtopf, Zeitregel und Rate-Limit gelten dort gleichermaßen.
 
 ### 9.6 Danke-Seite (`noindex`)
 
@@ -625,7 +640,8 @@ eine dieser Bedingungen zutrifft:**
 3. Eine Seite mit `noindex` steht in der `sitemap.xml`
 4. Ein Bildplatz für Portal-Screenshots ist noch leer oder trägt die Markierung `[[SCREENSHOT-FEHLT]]`
 5. Eine Zeichenkette aus der Verbotsliste §2 kommt im ausgelieferten Text vor
-6. `INTAKE_TOKEN` ist leer oder taucht irgendwo im Ausgabeverzeichnis auf
+6. Eine Datei außerhalb von `/public` ist über den Webserver erreichbar
+7. Ein Ortsname erscheint in Title, H1 oder URL, obwohl `SARTU_ENTSCHEIDUNGEN_OFFEN.md` §1 auf `offen` steht
 
 **Fehlermeldung im Bau** (Beispiel, muss die Ursache benennen):
 ```
@@ -694,7 +710,7 @@ Die Website ist fertig, wenn **alle** Punkte erfüllt sind:
 - [ ] Preishinweis „netto zzgl. USt. · ausschließlich für Unternehmer" auf jeder preisführenden Seite.
 - [ ] Platzhirsch ist sichtbar die Empfehlung; kein Paket direkt kaufbar; keine Add-on-Liste; keine Änderungsminuten.
 - [ ] Keine Fake-Referenzen, -Logos, -Bewertungen, -Adressen; Portal-Screens als „Musteransicht" markiert.
-- [ ] Keine Ortsangabe, kein `LocalBusiness`, keine Ortsseite (bis Standortentscheidung).
+- [ ] Keine Ortsangabe, kein `LocalBusiness`, keine Ortsseite, keine Ortsnamen in Title/H1/URL — solange `SARTU_ENTSCHEIDUNGEN_OFFEN.md` §1 auf `offen` steht. Strukturierte Daten nutzen `Organization` **ohne** Adressfeld.
 
 **Technik und SEO**
 - [ ] Jede Seite: Status 200, genau eine H1, eigener Title und Description, Canonical auf sich selbst, Breadcrumb.
@@ -716,8 +732,9 @@ Die Website ist fertig, wenn **alle** Punkte erfüllt sind:
 
 **Formulare und Schnittstelle**
 - [ ] Bedarfsscheck **vollständig ohne JavaScript** durchlaufbar (§9.5a) — mit abgeschaltetem JS getestet, nicht nur behauptet.
-- [ ] `INTAKE_TOKEN` kommt in **keiner** ausgelieferten Datei vor — per Volltextsuche über das gesamte Ausgabeverzeichnis geprüft.
-- [ ] Doppelklick und Neuladen auf der letzten Seite erzeugen **keinen** zweiten Datensatz (`submission_id`, §9.5b).
+- [ ] Doppelklick, Neuladen und Zurück-Taste erzeugen **keinen** zweiten Datensatz (`submission_id`, §9.5b).
+- [ ] Empfehlung und Ampelkennzeichen entstehen **serverseitig**; ein manipuliertes Formularfeld ändert sie nicht.
+- [ ] **Nur `/public` ist über den Webserver erreichbar** — `/app`, `/storage`, `.env` liefern 403 oder 404.
 - [ ] Honigtopf und Zeitregel greifen; ein gefülltes Honigtopffeld erzeugt trotzdem die normale Danke-Seite.
 - [ ] Kein Netzwerkaufruf des Browsers geht an eine **fremde** Domain — im Netzwerkprotokoll geprüft.
 

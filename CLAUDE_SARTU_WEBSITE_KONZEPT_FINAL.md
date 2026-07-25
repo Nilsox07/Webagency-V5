@@ -109,7 +109,7 @@ Die visuelle Richtung wird **nicht in diesem Konzept festgelegt**. Frühere Entw
 *Regeln:* Ergebnis ehrlich, keine Angstmache, keine erfundenen Sicherheitswarnungen, keine Note, die jede Seite schlecht aussehen lässt, **kein** automatischer E-Mail-Versand an ungeprüfte Adressen. Ergebnisseite `noindex`, Werkzeugseite `index`.
 *Warum es sich lohnt:* echter Lead-Magnet, teilbar und verlinkbar — Multiplikatoren können ein nützliches Werkzeug weitergeben, eine Leistungsseite nicht.
 
-> **✅ Standort entschieden:** Wohnsitz Stolpen, **Geschäftsadresse Dresden**, Markt **Region Dresden / Ostsachsen**. Ortsseiten sind damit freigegeben — aber **in dieser Reihenfolge** (Masterkonzept §16a): erst `/webdesign-region-dresden` + 2–3 Umland-Orte (Pirna, Radeberg, Bischofswerda, Neustadt i. Sa., Sebnitz) + Heimatanker `/webdesign-stolpen`, **danach** erst `/webdesign-dresden`. Jede Seite muss einzeln das Indexierungs-Gate bestehen.
+> **⏸ Standort offen:** Die Startregion ist **nicht entschieden** (`SARTU_ENTSCHEIDUNGEN_OFFEN.md` §1). Bis dahin: **keine** Ortsseiten, **kein** `LocalBusiness`, **keine** Ortsnamen in Titeln oder URLs. Sobald entschieden, gilt die Reihenfolge aus Masterkonzept §16a: erst `/webdesign-region-[STARTREGION]` + 2–3 Umland-Orte + Heimatanker, **danach** erst `/webdesign-[HAUPTORT]`. Jede Seite muss einzeln das Indexierungs-Gate bestehen.
 > `LocalBusiness` mit sichtbarer Dresdner Adresse ist zulässig, **sofern** die Adresse ein tatsächlich genutztes Büro ist (§23a.1) — sonst Service-Area-Business ohne sichtbare Adresse. Das **Google-Unternehmensprofil** läuft unabhängig von den Ortsseiten und wird sofort aufgesetzt.
 
 ---
@@ -202,7 +202,7 @@ Aufbau: Einstieg mit Trust-Hinweisen (3 Min., Preis vor Kontaktdaten, kein Pflic
 ## 9. SEO-/GEO-Struktur der SARTU-Website
 
 **Zielbegriffe generisch:** Webdesign Agentur · Website erstellen lassen · Firmenwebsite erstellen lassen · Webdesign zum Festpreis · Webdesign ohne WordPress · Website für Handwerker · Website Wartung.
-**Zielbegriffe lokal (freigegeben):** Webdesign Region Dresden · Webdesign Pirna / Radeberg / Bischofswerda / Neustadt / Sebnitz · später Webdesign Dresden. Reihenfolge und Gate: Masterkonzept §16a.
+**Zielbegriffe lokal (gesperrt, bis der Standort entschieden ist):** `Webdesign Region [STARTREGION]` · `Webdesign [UMLAND_ORT_1..4]` · später `Webdesign [HAUPTORT]`. Reihenfolge und Gate: Masterkonzept §16a. **Zum Launch werden keine lokalen Begriffe bespielt** — die Rankinghebel zum Start sind kommerzielle, vergleichende und problemorientierte Suchintentionen (`SARTU_SEO_GEO_KEYWORDSTRATEGIE.md`).
 
 **Pro Seite:** genau eine H1 · eindeutiger Title + Description · Canonical auf finale URL · bewusstes index/noindex · Breadcrumb + `BreadcrumbList` · sprechende URL (Bindestriche, keine Umlaute) · Antwort-zuerst-Absatz oben.
 **Global:** `Organization` + `WebSite` JSON-LD; `LocalBusiness` **nur** bei berechtigtem Standort; `Service` auf Leistungsseiten; `FAQPage` nur für sichtbare Fragen; `Article` auf Ratgebern; `DefinedTerm` im Lexikon.

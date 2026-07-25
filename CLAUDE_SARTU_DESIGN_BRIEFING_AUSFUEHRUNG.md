@@ -122,7 +122,7 @@ Lucide · Phosphor · Tabler · Remix Icon · Heroicons. **Ein** Set für die ge
 
 Schau dir **reale Seiten** an, nicht nur Design-Galerien:
 
-- **Marktrealität:** deutsche Agentur-, Handwerks-, Kanzlei- und Praxisseiten in der Region Dresden. Was wirkt dort seriös, was billig? Wogegen muss SARTU sich absetzen?
+- **Marktrealität:** deutsche Agentur-, Handwerks-, Kanzlei- und Praxisseiten im ländlichen und kleinstädtischen Raum. Was wirkt dort seriös, was billig? Wogegen muss SARTU sich absetzen?
 - **Qualitätsniveau:** Awwwards, Godly, Land-book, SiteInspire, Minimal Gallery, Httpster.
 - **Oberflächenmuster:** Mobbin, UI Sources.
 

@@ -17,33 +17,119 @@ Das Ergebnis der Startprüfung ist der **erste Absatz** deines ersten Berichts.
 
 ---
 
-## 1. Was du baust
+## 0b. Pflicht vor der ersten Codezeile: `IMPLEMENTATION_PLAN.md`
 
-Die **öffentliche SARTU-Website** (Marketing- und Verkaufsseite). **Nicht** das Kundenportal — das ist ein eigenes Projekt mit eigenem Auftrag (`CODEX_AUFTRAG_PORTAL.md`).
+**Du schreibst keinen Produktionscode, bevor diese Datei existiert und vorgelegt wurde.** Gute
+Lastenhefte verleiten dazu, sofort loszubauen — und dann steht die Struktur fest, bevor jemand sie
+geprüft hat.
+
+Die Datei enthält:
+
+| Abschnitt | Inhalt |
+|---|---|
+| **Bestand** | Was liegt bereits im Repository? Was davon ist Prototyp, was Altstand, was brauchbar? |
+| **Prototypen** | Was übernimmst du, was verwirfst du — **je mit Begründung**. Fremder Code wird nie still übernommen |
+| **Zielstruktur** | Konkrete Verzeichnisse und Dateien nach Portal-Lastenheft §1.3, auf dein Vorhaben angewendet |
+| **Modulgrenzen** | Was gehört in `helpers`, `data`, `services`, `views`? Wo verläuft die Grenze zwischen Kunden- und Adminzugriff? |
+| **Datenmodellquelle** | Welche Tabellen aus §4, in welcher Reihenfolge migriert |
+| **Reihenfolge** | Welcher lauffähige Zwischenstand entsteht wann |
+| **Risiken** | Was kann schiefgehen, woran merkst du es |
+| **Testplan** | Welche Tests wann, wie die Datenbanktests laufen |
+| **Offene Entscheidungen** | Was du **nicht** allein entscheidest |
+
+**Danach baust du den kleinsten lauffähigen Stand** — Grundgerüst, eine Migration, eine Seite, ein
+Test — und berichtest. Erst dann geht es weiter.
+
+**Am Ende** lieferst du `IMPLEMENTATION_SUMMARY.md` (was gebaut wurde, Abweichungen vom Plan mit
+Begründung, offene Punkte) und, falls aus einem Prototyp etwas übernommen wurde,
+`MIGRATION_NOTES.md`.
 
 ---
 
-## 1a. Verhältnis zum Portal-Projekt
+## 0c. Zielarchitektur — ein PHP-Projekt
 
-**Das Portal wird zuerst fertig**, weil diese Website echte Screenshots daraus als Produktbeweis braucht. Das heißt aber **nicht**, dass du warten musst.
+**SARTU ist eine Website mit geschütztem Kundenbereich, keine App.** Ein Repository, eine Domain,
+ein Deployment:
 
-| Darfst du jederzeit | Erst wenn das Portal steht |
+```
+/                     öffentliche SARTU-Website
+/portal/              Kundenbereich (Login)
+/admin/               interner Bereich (Login + Zweifaktor)
+/api/                 eng begrenzte Serverfunktionen
+```
+
+Verbindlich: `CLAUDE_SARTU_PORTAL_LASTENHEFT_BAUFINAL.md` **§1** — Stack, Verzeichnisstruktur,
+Hosting-Anforderungen.
+
+**PHP 8.3+, serverseitig gerendert, MySQL/MariaDB, PDO mit vorbereiteten Anweisungen.**
+**Kein** WordPress · **kein** Laravel/Symfony · **kein** React/Vue/Next · **kein** Node oder Fastify
+als Zielsystem · **kein** Supabase · **kein** Build-Schritt fürs Frontend · **keine** externen CDNs.
+
+> **Zu älteren Ständen:** Frühere Fassungen nannten Node/Fastify/EJS oder einen Supabase-Prototyp.
+> **Das ist keine Zielarchitektur mehr.** Vorhandene Prototypen dürfen als fachliche oder visuelle
+> Referenz dienen — Ablauf, Felder, Texte. Ihr **Code** wird nicht übernommen. Was du daraus
+> verwendest, steht begründet in `IMPLEMENTATION_PLAN.md`.
+
+**Sprachregel nach außen:** Kundenbereich, Ihr Bereich, Anmeldung. **Nie** App, Software, SaaS,
+Plattform, Dashboard, Control-Plane. Der Kunde soll denken „ich melde mich an und sehe mein Projekt",
+nicht „ich muss ein Werkzeug lernen".
+
+---
+
+## 0e. Gate: Designentscheidung vor dem Vollausbau
+
+Nach dem Design-Briefing entstehen **2–3 klickbare Startseitenvarianten mit echten Texten**. Dann
+**anhalten**. Der Mensch entscheidet die Richtung. Erst danach werden weitere Seiten ausgebaut.
+
+Wer nach dem Briefing durchbaut, hat das Gate verletzt — und im Zweifel Dutzende Seiten in einer
+Richtung gebaut, die verworfen wird. Das Gate gilt auch dann, wenn der Mensch „komplett durchbauen"
+gesagt hat: Es ist eine Entscheidung, die nur er treffen kann.
+
+---
+
+## 0d. Standort ist offen — und das ist kein Hindernis
+
+`SARTU_ENTSCHEIDUNGEN_OFFEN.md` §1 steht auf `offen`. Solange das so ist:
+
+**Gesperrt:** Ortsseiten · `LocalBusiness` in strukturierten Daten · Google-Unternehmensprofil ·
+Ortsnamen in Title, H1, Meta, URL oder Fließtext · NAP-Aussagen · Service-Area.
+
+**Nicht gesperrt:** alles andere. Strukturierte Daten nutzen `Organization` **ohne** Adressfeld.
+
+**Kein Platzhalter wird durch einen erfundenen Wert ersetzt.** Findest du irgendwo einen konkreten
+Ortsnamen in den Vorgaben: **melden**, nicht übernehmen.
+
+---
+
+## 1. Was du baust
+
+Die **öffentlichen Seiten** der SARTU-Website. Der Kundenbereich (`/portal/`, `/admin/`) hat einen eigenen Auftrag (`CODEX_AUFTRAG_PORTAL.md`) — **aber dasselbe Repository und dasselbe Projekt** (§0c).
+
+---
+
+## 1a. Verhältnis zum Kundenbereich-Auftrag
+
+**Ein Projekt, zwei Arbeitspakete.** Öffentliche Seiten und Kundenbereich teilen sich Repository,
+Verzeichnisstruktur, Layouts, Partials, Komponenten, Hilfsfunktionen und Datenbank.
+
+**Das Grundgerüst kommt aus dem anderen Arbeitspaket** (`/app/bootstrap.php`, Layouts,
+Hilfsfunktionen, Datenbankschicht). Existiert es noch nicht, baust du es nach Portal-Lastenheft §1.3
+— **in derselben Struktur**, damit es später zusammenpasst. Das gehört in deinen
+`IMPLEMENTATION_PLAN.md`.
+
+| Darfst du jederzeit | Erst wenn der Kundenbereich steht |
 |---|---|
-| Struktur, Seiten, Navigation, alle Texte | echte Portal-Screenshots einsetzen |
+| Struktur, Seiten, Navigation, alle Texte | echte Screenshots des Kundenbereichs einsetzen |
 | Bedarfsscheck vollständig, inklusive Fassung ohne JavaScript | **Livegang** |
 | SEO-Grundlage, Sitemap, strukturierte Daten | |
 | Designvarianten und Entscheidung | |
-| Vollständige Staging-Umgebung, klickbar und abnehmbar | |
 
-**Die Sperre ist der Livegang, nicht der Bau.** Eine Website, die mit einem Portal wirbt und dafür eine erfundene Oberfläche zeigt, macht eine Falschaussage über das eigene Produkt. Reservierte Bildflächen mit korrekten Maßen ja — ein Bild, das eine Oberfläche behauptet, nein.
+**Die Sperre ist der Livegang, nicht der Bau.** Eine Website, die mit einem Kundenbereich wirbt und
+dafür eine erfundene Oberfläche zeigt, macht eine Falschaussage über das eigene Produkt. Reservierte
+Bildflächen mit korrekten Maßen ja — ein Bild, das eine Oberfläche behauptet, nein.
 
-| Was geteilt wird | Was nicht geteilt wird |
-|---|---|
-| Die **Designentscheidung** — einmal getroffen, gilt für beide. Ablage als reine Wertedatei (`sartu-design-tokens.json`: Farben, Schriftgrößen, Abstände, Radien) plus kurzer Begründung. Jedes Projekt **kopiert** sie und versioniert sie bei sich | Laufzeitcode. Kein gemeinsames Paket, keine Abhängigkeit zwischen den Repositories |
-| Die Sprachregeln aus Lastenheft §2 | Build-Werkzeuge, Frameworks, Bibliotheken |
-| Die Schnittstelle `POST /api/anfragen` | alles Übrige |
-
-Ein gemeinsames Paket wäre für zwei Projekte, die ein Mensch pflegt, mehr Aufwand als Nutzen. Bei Abweichung gewinnt die Fassung im Portal.
+**Es gibt keine Schnittstelle über das Netz.** Der Bedarfsscheck ruft direkt den Anfragedienst im
+selben Programm auf (Portal-Lastenheft §4b.1). Kein Token, kein gemeinsames Geheimnis.
 
 ---
 
@@ -54,11 +140,13 @@ Lies in dieser Reihenfolge. Bei Widersprüchen gilt die **niedrigere Nummer**:
 1. **`CLAUDE_SARTU_WEBSITE_LASTENHEFT_BAUFINAL.md`** — dein Hauptdokument: Struktur, fertige Texte, Feldlabels, Fehlermeldungen, Bildliste, SEO-Tabelle, Abnahmekriterien
 2. **`CLAUDE_SARTU_MASTERKONZEPT_FINAL.md`, Abschnitt „10a. Arbeitsverteilung Codex ↔ Claude Code"** — **verbindlich**, siehe Abschnitt 2a
 3. **`CLAUDE_SARTU_DESIGN_BRIEFING_AUSFUEHRUNG.md`** — wie du die visuelle Ebene recherchierst, prüfst und vorlegst
-4. **`CLAUDE_SARTU_PORTAL_LASTENHEFT_BAUFINAL.md`, Abschnitt „4b. Schnittstelle zur öffentlichen Website"** — maßgeblich für den Formularversand
+4. **`CLAUDE_SARTU_PORTAL_LASTENHEFT_BAUFINAL.md`** — §1 (Stack, Struktur, Hosting) und Abschnitt „4b. Anfrageeingang vom Bedarfsscheck". **Beide verbindlich**
 5. **`CLAUDE_SARTU_WEBSITE_KONZEPT_FINAL.md`** — Begründungen und Architektur, wenn etwas unklar ist
 6. **`CLAUDE_SARTU_MASTERKONZEPT_FINAL.md`** im Übrigen — Geschäftsmodell, Preise, Recht. Nur nachschlagen
-7. `konzepte/` — historische Quelldateien. **Nur zum Nachschlagen.** Enthalten veraltete Preise und abgelöste Modelle
-8. `design/_verworfen/` — **ignorieren.** Verworfene Entwürfe, keine Vorgabe, auch nicht als Anregung
+7. **`SARTU_SEO_GEO_KEYWORDSTRATEGIE.md`** — welche Seite welche Suchintention bedient, in welcher Reihenfolge gebaut wird
+8. **`SARTU_ENTSCHEIDUNGEN_OFFEN.md`** — alle Platzhalter und Sperren
+9. `konzepte/` — historische Quelldateien. **Nur zum Nachschlagen.** Enthalten veraltete Preise und abgelöste Modelle
+10. `design/_verworfen/` — **ignorieren.** Verworfene Entwürfe, keine Vorgabe, auch nicht als Anregung
 
 > **Zu Abschnittsverweisen:** Paragraphenzeichen wie `§9.5b` sind eine Abkürzung, kein Beweis.
 > Maßgeblich ist die **Überschrift**. Findest du einen Verweis nicht, suche nach dem Thema — und
@@ -78,20 +166,25 @@ Verbindlich nach `CLAUDE_SARTU_MASTERKONZEPT_FINAL.md`, Abschnitt „10a. Arbeit
 
 ## 3. Technischer Rahmen
 
-- **Astro** (oder gleichwertig static-first), Inhaltsseiten statisch ausgeliefert
-- **Ein kleiner eigener Serverteil ist Pflicht**, nicht optional: Er nimmt beide Formulare entgegen und spricht serverseitig mit dem Portal. Grund steht in Abschnitt 5a
+Verbindlich ist Portal-Lastenheft **§1** (Stack, Struktur, Hosting) und Website-Lastenheft **§1**
+(was die öffentlichen Seiten betrifft). Kurz:
+
+- **PHP 8.3+, serverseitig gerendert.** Kein CMS, kein Vollframework, kein SPA, kein Build-Schritt
+- **Öffentliche Seiten sind cachebar** — sie hängen an keiner Sitzung und dürfen als statische Antwort ausgeliefert werden
 - **JS-Budget:** ≤ 75 KB gzip Startseite, ≤ 40 KB Unterseiten. Gemessen, nicht geschätzt
-- **Bedarfsscheck ohne JavaScript vollwertig bedienbar** (Lastenheft §9.5a) — das ist eine Grundfassung, keine Notlösung
+- **Bedarfsscheck ohne JavaScript vollwertig bedienbar** (Lastenheft §9.5a) — Grundfassung, keine Notlösung
 - Alle Farben, Schriften und Abstände als **zentrale Variablen**
-- Repository-Struktur wählst du sinnvoll und dokumentierst sie in einer `README.md`
+- **Wiederverwendung ist Pflicht:** Layouts, Partials und Komponenten aus `/app/views` werden von öffentlichen Seiten und Kundenbereich gemeinsam genutzt. Kein kopiertes Markup
 
 ### Was „keine externen Verbindungen" bedeutet
 
-**Verboten — Fremdanbieter zur Laufzeit:** Schrift-, Skript- und Stil-CDNs · Analyse und Tracking · eingebettete Karten · Videoportale · Chat-Widgets · Werbe- und Rätselbild-Dienste · externe Bildhoster. **Kein** Netzwerkaufruf des Browsers darf eine fremde Domain treffen — das wird im Netzwerkprotokoll geprüft.
+**Verboten — Fremdanbieter zur Laufzeit:** Schrift-, Skript- und Stil-CDNs · Analyse und Tracking ·
+eingebettete Karten · Videoportale · Chat-Widgets · Werbe- und Rätselbild-Dienste · externe
+Bildhoster. **Kein** Netzwerkaufruf des Browsers darf eine fremde Domain treffen — im
+Netzwerkprotokoll geprüft.
 
-**Erlaubt und ausdrücklich vorgesehen — eigene Infrastruktur:** der Formularendpunkt auf derselben Domain und dessen serverseitiger Aufruf des SARTU-Portals. Das ist keine Fremdverbindung, sondern das Produkt selbst.
-
----
+**Formulare sind kein Sonderfall mehr:** Sie laufen im selben Programm. Kein Geheimnis, kein
+Netzaufruf.
 
 ## 4. Ablauf in zwei Phasen — nicht durchbauen
 
@@ -144,26 +237,34 @@ Die Texte sind **Vorgabe, nicht Vorschlag** — du formulierst sie nicht still u
 
 ---
 
-## 5a. Formularversand — der gefährlichste Punkt dieses Auftrags
+## 5a. Formularversand
 
-**`INTAKE_TOKEN` darf niemals im Browser ankommen.** Alles, was ausgeliefert wird — HTML, JavaScript, JSON, Netzwerkantworten — ist öffentlich lesbar. Ein „geheimer" Wert im Frontend ist kein Schutz, sondern eine offene Tür, und jeder findet ihn in Sekunden.
+Bedarfsscheck und Anfrageliste liegen im **selben** Programm. Der Ablauf ist deshalb schlicht:
 
-**Richtiger Weg:**
 ```
-Browser  ──POST──▶  eigener Serverteil (gleiche Domain)  ──POST + Token──▶  Portal
+Browser  ──normales Formular-POST──▶  /briefing/absenden  ──▶  AnfrageService  ──▶  Tabelle `leads`
 ```
 
-- Der Browser sendet an die **eigene** Domain, per normalem Formular (auch ohne JavaScript)
-- Der Serverteil prüft, ergänzt `submission_id`, `submitted_at`, `form_started_at` und ruft das Portal auf
-- Der Token kommt aus einer Umgebungsvariablen und steht **nie** im Repository, **nie** im Ausgabeverzeichnis, **nie** in einer Fehlermeldung
+**Kein Token, kein gemeinsames Geheimnis, kein Netzaufruf.** Frühere Fassungen sahen einen
+`INTAKE_TOKEN` vor — das war richtig, solange es zwei getrennte Anwendungen waren. In einem Projekt
+wäre es ein Geheimnis, das nichts schützt, aber irgendwann versehentlich ausgeliefert wird.
 
-**Spamabwehr:** Honigtopffeld (unsichtbar, `aria-hidden="true"` und `tabindex="-1"`), Zeitregel (Absenden unter 3 Sekunden verwerfen), serverseitige Prüfung aller Felder, Ratenbegrenzung. **Kein** Rätselbild und **kein** Fremddienst zum Start — beides wäre eine externe Verbindung mit eigener Datenschutzfolge und kommt erst, wenn Spam messbar auftritt.
+**Was bleibt — alle inhaltlichen Schutzmaßnahmen:**
+- **CSRF-Feld** bei jedem `POST`
+- **Honigtopf** `hp_website` (unsichtbar, `aria-hidden="true"` und `tabindex="-1"`)
+- **Zeitregel:** Absenden unter 3 Sekunden wird stillschweigend verworfen — Danke-Seite erscheint trotzdem
+- **Rate-Limit:** 10 abgeschickte Bedarfsschecks je IP und Stunde
+- **Serverseitige Prüfung** aller Felder
+- **`submission_id`** entsteht beim **Start** des Bedarfsschecks und bleibt über alle Schritte gleich → Doppelklick, Neuladen und Zurück-Taste erzeugen keinen zweiten Datensatz
+- Nach Erfolg **Weiterleitung** (`303`) auf die Danke-Seite, nie ein erneut absendbares Formular
 
-**Doppelabsenden:** Die `submission_id` entsteht beim **Start** des Bedarfsschecks und bleibt über alle Schritte gleich. Nach Erfolg wird auf die Danke-Seite **weitergeleitet** (`303`), nie ein erneut absendbares Formular gezeigt.
+**Wichtig:** Empfehlung und Ampelkennzeichen werden **serverseitig** berechnet, **nie** aus dem
+abgeschickten Formular übernommen — sonst könnte jemand die Empfehlung von außen setzen.
 
-Vollständige Festlegung: Lastenheft §9.5b und Portal-Lastenheft Abschnitt 4b.
+**Kein** Rätselbild und **kein** Fremddienst zum Start. Beides wäre eine externe Verbindung mit
+eigener Datenschutzfolge und kommt erst, wenn Spam messbar auftritt.
 
----
+Vollständige Festlegung: Website-Lastenheft §9.5b und Portal-Lastenheft §4b.
 
 ## 6. Was du NICHT erfindest — hier Platzhalter setzen und melden
 
@@ -172,8 +273,8 @@ Alle Platzhalter tragen **eine** einheitliche, suchbare Markierung: `[[PLATZHALT
 | Fehlt | Regel |
 |---|---|
 | **Impressum, Datenschutz, AGB** | kommen von einer Kanzlei. Nicht selbst formulieren. Seiten anlegen, Inhalt als `[[PLATZHALTER]]`, **nicht** live schalten |
-| **Echte Anschrift, Telefon, E-Mail** | steht bewusst in keinem Dokument. Platzhalter setzen und in der README auflisten |
-| **Portal-Screenshots** | müssen aus **echter** Oberfläche stammen. Bildflächen mit korrekten Maßen anlegen, Markierung `[[SCREENSHOT-FEHLT]]`, im Übergabebericht melden. Ein leerer Bildplatz ist **keine** „Musteransicht" — die Kennzeichnung kommt erst mit dem echten Bild |
+| **Echte Anschrift, Telefon, E-Mail** | offen, siehe `SARTU_ENTSCHEIDUNGEN_OFFEN.md`. Platzhalter setzen und in der README auflisten |
+| **Screenshots des Kundenbereichs** | müssen aus **echter** Oberfläche stammen. Bildflächen mit korrekten Maßen anlegen, Markierung `[[SCREENSHOT-FEHLT]]`, im Übergabebericht melden. Ein leerer Bildplatz ist **keine** „Musteransicht" — die Kennzeichnung kommt erst mit dem echten Bild |
 | **Foto für `/ueber-uns`** | echtes Foto, kein Platzhalter, der wie ein Foto wirkt |
 | **Logo** | bis zur Entscheidung reine Wortmarke in der gewählten Schrift (gültige Lösung, kein Provisorium) |
 | **Referenzen, Bewertungen, Kundenlogos** | existieren nicht. **Niemals** erfinden, auch nicht als Beispiel |
@@ -196,7 +297,7 @@ Die Definition of Done steht in **Lastenheft §17**. Sie gilt vollständig. Beso
 - JS-Budget gemessen eingehalten
 - `prefers-reduced-motion` getestet
 - **Bedarfsscheck mit abgeschaltetem JavaScript vollständig durchlaufen** — getestet, nicht behauptet
-- **`INTAKE_TOKEN` kommt in keiner ausgelieferten Datei vor** — Volltextsuche über das gesamte Ausgabeverzeichnis
+- **Nur `/public` ist über den Webserver erreichbar** — `/app`, `/storage`, `.env` liefern 403 oder 404, praktisch geprüft
 - **Kein Netzwerkaufruf an eine fremde Domain** — im Netzwerkprotokoll geprüft
 - **Startsperre nachgewiesen (§14a):** Der Produktivbau bricht bei einem Platzhalter in Impressum oder Datenschutz nachweislich ab — einmal absichtlich provoziert und belegt
 - Kontrast ≥ 4,5:1, Tastaturbedienung vollständig, Fokus sichtbar
