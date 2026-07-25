@@ -43,7 +43,7 @@ SARTU **verkauft Websites an Kunden weiter**. Was du einsetzt, muss das erlauben
 - Statisch ausgeliefert (Astro oder gleichwertig), FTP-/CDN-fähig.
 - **Kein externes CDN** für Schriften, CSS, JS oder Icons — alles selbst gehostet (Datenschutz, Tempo, Ausfallsicherheit).
 - **JS-Budget: ≤ 75 KB gzip Startseite, ≤ 40 KB Unterseiten.** Gemessen, nicht geschätzt.
-- Ziele: LCP < 2,5 s · INP < 200 ms · CLS < 0,1, gemessen mobil.
+- Ziele **im Labor, vor Livegang**: LCP < 2,5 s · TBT < 200 ms · CLS < 0,1, gemessen mobil. **Echtes INP** gibt es erst aus Felddaten nach dem Livegang — in Phase 1 also nicht behaupten.
 - Die Seite muss **ohne JavaScript** grundlegend nutzbar bleiben.
 
 ### 2.3 Barrierefreiheit

@@ -306,12 +306,27 @@ braucht die Seite. Das ist keine Willkür — es spiegelt, wie glaubwürdig die 
 
 | Stufe | Was | Was reicht als Beleg | Wann |
 |---|---|---|---|
-| **1** | **Standortseite** `[HAUPTORT]` | echte Adresse und verifiziertes Unternehmensprofil | sobald der Standort entschieden ist |
-| **2** | **Region-Hub** `/webdesign-region-[STARTREGION]` | echter Einzugsbereich, den man tatsächlich bedient | zusammen mit Stufe 1 |
-| **3** | **2–4 Umlandorte** (Tier 1) | **echte lokale Recherche** + plausibler Servicebezug + bestandenes Gate unten | nach Stufe 1–2 |
-| **4** | **weitere Orte in der Region** | zusätzlich **ein belegtes Signal**: Search-Console-Impressionen, eine Anfrage von dort oder ein SEA-Klick | datengetrieben |
-| **5** | **Orte außerhalb des bedienbaren Umkreises** | **Fallstudie eines echten Kunden aus dem Ort**, schriftlich freigegeben | selten, dafür stark |
+| **1** | **Standortdaten und Unternehmensprofil** — **keine** Website-Seite: echte Anschrift im Impressum, `LocalBusiness` nur bei berechtigtem Standort, verifiziertes Google-Profil | Eignungsprüfung nach Masterkonzept §23a.1 bestanden | direkt nach der Standortentscheidung |
+| **2** | **Region-Hub** `/webdesign-region-[STARTREGION]` | echter Einzugsbereich, den man tatsächlich bedient | als **erste** Website-Seite mit Ortsbezug |
+| **3** | **2–4 Umlandorte** (Tier 1) | **echte lokale Recherche** + plausibler Servicebezug + bestandenes Gate unten | nach Stufe 2 |
+| **4** | **`/webdesign-[HAUPTORT]`** — die organische Seite für die Kernstadt | Referenzen und Bewertungen liegen vor | **später**, s. Kasten unten |
+| **5** | **weitere Orte in der Region** | zusätzlich **ein belegtes Signal**: Search-Console-Impressionen, eine Anfrage von dort oder ein SEA-Klick | datengetrieben |
+| **6** | **Orte außerhalb des bedienbaren Umkreises** | **Fallstudie eines echten Kunden aus dem Ort**, schriftlich freigegeben | selten, dafür stark |
 | **—** | **alle übrigen Gemeinden** | nichts — bleiben Kandidat oder interner Entwurf mit `noindex` | dauerhaft |
+
+> **Der häufigste Denkfehler: Unternehmensprofil und Hauptort-Seite sind nicht dasselbe.**
+>
+> | | Google-Unternehmensprofil | `/webdesign-[HAUPTORT]` |
+> |---|---|---|
+> | Wo sichtbar | Kartenergebnis | organische Trefferliste |
+> | Rankt über | Nähe, Relevanz, **Bewertungen** | Domainautorität, Inhalt, Verlinkung |
+> | Wettbewerb | die Anbieter im Umkreis | jede Agentur der Stadt, oft seit Jahren |
+> | Wann sinnvoll | **sofort** nach der Standortentscheidung | **zuletzt**, wenn Referenzen und Bewertungen stehen |
+>
+> Die Kernstadt ist organisch der **härteste** Wettbewerb überhaupt. Dort früh anzutreten kostet
+> Arbeit ohne Ergebnis. Über das Kartenergebnis ist dieselbe Stadt dagegen von Anfang an erreichbar —
+> deshalb Stufe 1 sofort und Stufe 4 spät. Das ist kein Widerspruch, sondern der Grund für die
+> Trennung (§0.1).
 
 **Warum Stufe 5 so streng ist:** Für einen Ort 300 km entfernt ist jede Aussage über lokale Nähe
 entweder unwahr oder belanglos. Nur eine echte Fallstudie macht die Seite dort unaustauschbar — und
@@ -415,7 +430,7 @@ Nach Wirkung sortiert, nicht nach Aufwand:
 | 10 | `/ratgeber/was-nicht-enthalten-ist` | einzigartig — das schreibt sonst niemand |
 | 11 | `/ratgeber/was-der-betrieb-kostet` | beantwortet die zweithäufigste Rückfrage |
 | 12 | die übrigen vier Leistungsseiten | |
-| 13 | restliche Transparenz- und Ratgeberseiten, acht Lexikonbegriffe | Themenabdeckung, langsamster Hebel |
+| 13 | `/ratgeber/webdesign-ohne-wordpress` und die acht Lexikonbegriffe | letzte Launch-Wissensseite plus Themenabdeckung, langsamster Hebel |
 
 **Regel:** Lieber acht sehr gute Seiten live als zwanzig mittelmäßige. Die restlichen entstehen nach
 den ersten Search-Console-Daten — dann weiß man, wonach tatsächlich gesucht wird.

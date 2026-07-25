@@ -587,7 +587,7 @@ Agentur schreibt „Preis auf Anfrage" — SARTU nennt Zahlen. Das ist die Lück
 
 | URL | Kern | Was nachprüfbar drinstehen muss |
 |---|---|---|
-| `/ratgeber/was-kostet-eine-firmenwebsite` | die häufigste Frage im Markt | Spannen je Anbieterart **mit Leistungsumfang**, laufende Kosten getrennt, SARTUs Zahlen konkret |
+| `/ratgeber/was-kostet-eine-firmenwebsite` | die häufigste Frage im Markt | **SARTUs Zahlen konkret.** Fremde Anbieterarten nur als **Kostenbestandteile und Entscheidungslogik** — keine Markt-, Wettbewerber- oder Preisspannen. Laufende Kosten getrennt ausweisen |
 | `/ratgeber/was-nicht-enthalten-ist` | schreibt sonst niemand | vollständige Ausschlussliste im Klartext, plus Begründung, warum es keine Zusatzoptionen gibt |
 | `/ratgeber/was-der-betrieb-kostet` | zweithäufigste Rückfrage | was in 59/129/249 € enthalten ist, was nicht, was bei Vertragsende mit Domain und Website passiert |
 
@@ -620,13 +620,13 @@ Eine veraltete Preisangabe ist schlimmer als keine — sie wird zitiert und dann
 **1. `/ratgeber/agentur-freelancer-baukasten`**
 H1: `Website erstellen lassen: Agentur, Freelancer oder Baukasten?` · Title: `Agentur, Freelancer oder Baukasten? Der ehrliche Vergleich | SARTU`
 Kurzantwort: Ein Baukasten lohnt sich, wenn Sie selbst pflegen wollen und wenig Anspruch an Struktur haben. Ein Freelancer ist günstig, aber ein Ausfallrisiko. Eine Agentur liefert Verlässlichkeit — meist ohne Festpreis und mit mehr Terminen, als Ihnen lieb ist.
-Gliederung: Die vier Anbieterarten in einer Tabelle (Preisrahmen, Zeitaufwand für Sie, Risiko, Pflege danach) → Wann ein Baukasten wirklich reicht → Was am Freelancer-Modell schiefgehen kann → Warum Agenturen selten Festpreise nennen → **Für wen SARTU nicht passt** → Entscheidungshilfe in fünf Fragen → CTA `/preise`.
-**Pflicht:** ehrlich bleiben. Wenn ein Baukasten für einen Fall reicht, steht das so da. Genau das macht die Seite glaubwürdig.
+Gliederung: Die vier Anbieterarten in einer Tabelle (**wie sich die Kosten zusammensetzen** — nicht welche Beträge andere verlangen —, Zeitaufwand für Sie, Risiko, Pflege danach) → Wann ein Baukasten wirklich reicht → Was am Freelancer-Modell schiefgehen kann → Warum Agenturen selten Festpreise nennen → **Für wen SARTU nicht passt** → Entscheidungshilfe in fünf Fragen → CTA `/preise`.
+**Pflicht:** ehrlich bleiben, und **keine fremden Preise erfinden**. Die Spalte beschreibt, *woraus* der Preis bei der jeweiligen Anbieterart entsteht (Stundensatz × Stunden, Softwaregebühr + Eigenleistung, Festpreis), nicht *wie hoch* er ist. SARTUs eigene Zahlen stehen konkret daneben — sie sind die einzigen belegten auf der Seite. Wenn ein Baukasten für einen Fall reicht, steht das so da. Genau das macht die Seite glaubwürdig.
 
 **2. `/ratgeber/webdesign-ohne-wordpress`**
 H1: `Firmenwebsite ohne WordPress: Wann sich das lohnt` · Title: `Firmenwebsite ohne WordPress — Vorteile und Grenzen | SARTU`
 Kurzantwort: Ohne WordPress entfallen Plugin-Updates, Sicherheitslücken und Kompatibilitätsprobleme. Der Preis dafür ist weniger Selbstbedienung — Inhalte ändert nicht mehr jeder selbst.
-Gliederung: Warum WordPress so verbreitet ist → Was daran im Alltag Arbeit macht → Alternativen (Baukasten, statisch, individuell) → **Was man dabei aufgibt** → Für wen sich was eignet (Entscheidungstabelle) → Wie SARTU es löst → CTA `/leistungen/webdesign`.
+Gliederung: Warum WordPress so verbreitet ist → Was daran im Alltag Arbeit macht → Alternativen (Baukasten, statisch, individuell) → **Was man dabei aufgibt** → Für wen sich was eignet (Entscheidungstabelle) → Wie SARTU es löst → CTA `/leistung-webdesign`.
 
 **Nach dem Launch** (Reihenfolge in `SARTU_SEO_GEO_KEYWORDSTRATEGIE.md` §6):
 `agentur-auswaehlen-kriterien` · `relaunch-sinnvoll` · `website-handwerker-fehler` · `bfsg-firmenwebsite`.

@@ -110,7 +110,8 @@ Die visuelle Richtung wird **nicht in diesem Konzept festgelegt**. Frühere Entw
 *Warum es sich lohnt:* echter Lead-Magnet, teilbar und verlinkbar — Multiplikatoren können ein nützliches Werkzeug weitergeben, eine Leistungsseite nicht.
 
 > **⏸ Standort offen:** Die Startregion ist **nicht entschieden** (`SARTU_ENTSCHEIDUNGEN_OFFEN.md` §1). Bis dahin: **keine** Ortsseiten, **kein** `LocalBusiness`, **keine** Ortsnamen in Titeln oder URLs. Sobald entschieden, gilt die Reihenfolge aus Masterkonzept §16a: erst `/webdesign-region-[STARTREGION]` + 2–3 Umland-Orte + Heimatanker, **danach** erst `/webdesign-[HAUPTORT]`. Jede Seite muss einzeln das Indexierungs-Gate bestehen.
-> `LocalBusiness` mit sichtbarer Dresdner Adresse ist zulässig, **sofern** die Adresse ein tatsächlich genutztes Büro ist (§23a.1) — sonst Service-Area-Business ohne sichtbare Adresse. Das **Google-Unternehmensprofil** läuft unabhängig von den Ortsseiten und wird sofort aufgesetzt.
+> `LocalBusiness` mit **sichtbarer Adresse** ist nur zulässig, wenn die Adresse tatsächlich genutzt wird und die Eignungsregel aus Masterkonzept §23a.1 erfüllt — sonst Service-Area-Business ohne sichtbare Adresse.
+> Das **Google-Unternehmensprofil** läuft unabhängig von den Ortsseiten und wird **direkt nach Standortentscheidung und Eignungsprüfung** aufgesetzt — nicht vorher. Es ist der schnellste Kundenkanal überhaupt (`SARTU_SEO_GEO_KEYWORDSTRATEGIE.md` §0.4).
 
 ---
 
@@ -207,7 +208,7 @@ Aufbau: Einstieg mit Trust-Hinweisen (3 Min., Preis vor Kontaktdaten, kein Pflic
 **Pro Seite:** genau eine H1 · eindeutiger Title + Description · Canonical auf finale URL · bewusstes index/noindex · Breadcrumb + `BreadcrumbList` · sprechende URL (Bindestriche, keine Umlaute) · Antwort-zuerst-Absatz oben.
 **Global:** `Organization` + `WebSite` JSON-LD; `LocalBusiness` **nur** bei berechtigtem Standort; `Service` auf Leistungsseiten; `FAQPage` optional und nur bei sichtbaren Fragen (keine Rich Results mehr); `Article` auf Ratgebern; `DefinedTerm` im Lexikon.
 **Dateien:** `/sitemap.xml`, `/robots.txt`, `/llms.txt` (ohne Ranking-Behauptung), `/favicon.ico`, OG-Bild. Search Console + Bing Webmaster einrichten, Sitemap einreichen.
-**Performance:** LCP < 2,5 s · INP < 200 ms · CLS < 0,1; wenig JavaScript; Fonts self-hosted (`font-display: swap`); statische Auslieferung.
+**Performance — vor Livegang im Labor:** LCP < 2,5 s · **TBT** < 200 ms · CLS < 0,1. **Echtes INP** ist ein Felddatenwert und wird erst nach dem Livegang beobachtet (Lastenheft §17a). Wenig JavaScript; Fonts self-hosted (`font-display: swap`); statische Auslieferung.
 
 **Ratgeber (Launch: 5 Seiten unter `/ratgeber`)** — maßgeblich ist Website-Lastenheft §11a und §12:
 
@@ -243,7 +244,7 @@ Tokens, Komponentenauswahl, Bibliotheken und Bewegungsdetails stehen in **`CLAUD
 
 Verbindlich bleiben hier nur die Anforderungen:
 
-- **Leistung:** ≤ 75 KB gzip JS Startseite, ≤ 40 KB Unterseiten · LCP < 2,5 s · INP < 200 ms · CLS < 0,1
+- **Leistung:** ≤ 75 KB gzip JS Startseite, ≤ 40 KB Unterseiten · **vor Livegang im Labor** LCP < 2,5 s · TBT < 200 ms · CLS < 0,1 · **echtes INP** erst als Feldmessung nach Livegang
 - **Barrierefreiheit:** Kontrast ≥ 4,5:1, sichtbarer Fokus, volle Tastaturbedienung, Skip-Link, `prefers-reduced-motion` wirksam, Zustände nie allein über Farbe
 - **Ohne JavaScript nutzbar**, kein Inhalt erscheint erst durch Scroll
 - **Bewegung budgetiert:** höchstens zwei bewusste Markenmomente pro Seite, keine Animation über Text oder CTA
