@@ -1,0 +1,403 @@
+<title>SARTU — Live-Vorschau und Logo</title>
+
+<style>
+:root{
+  --paper-0:#F2F0EA; --paper-1:#E6E4DE; --paper-2:#DBD8D1;
+  --line-soft:#C9C5BB; --line:#B4B0A6;
+  --ink:#1C1B19; --ink-2:#3A3833; --ink-3:#6E6A62; --ink-deep:#12110F; --on-dark:#E6E4DE;
+  --signal:#B4261E; --signal-hover:#96201A;
+  --f-disp:"Arial Narrow","Helvetica Neue Condensed","Franklin Gothic Medium",Arial,sans-serif;
+  --f-body:system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;
+  --f-mono:ui-monospace,"Cascadia Mono",Consolas,"Courier New",monospace;
+}
+*{box-sizing:border-box;}
+body{margin:0;background:var(--paper-1);color:var(--ink);font-family:var(--f-body);-webkit-font-smoothing:antialiased;}
+
+/* Zeichenpapier: feines Raster + Korn */
+.paper{
+  position:relative;
+  background-color:var(--paper-1);
+  background-image:
+    repeating-linear-gradient(0deg, rgba(28,27,25,.045) 0 1px, transparent 1px 32px),
+    repeating-linear-gradient(90deg, rgba(28,27,25,.045) 0 1px, transparent 1px 32px);
+}
+.paper::before{
+  content:"";position:absolute;inset:0;pointer-events:none;opacity:.28;mix-blend-mode:multiply;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)' opacity='.5'/%3E%3C/svg%3E");
+}
+.inner{position:relative;max-width:1240px;margin:0 auto;padding:0 28px;}
+.mono{font-family:var(--f-mono);}
+.lbl{font-family:var(--f-mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-3);}
+
+/* ---------- Rahmen-Passermarken ---------- */
+.frame{position:relative;}
+.frame::before,.frame::after{
+  content:"";position:absolute;width:14px;height:14px;pointer-events:none;
+  border-color:var(--line);border-style:solid;
+}
+.frame::before{top:0;left:0;border-width:1px 0 0 1px;}
+.frame::after{bottom:0;right:0;border-width:0 1px 1px 0;}
+
+/* ---------- Kopfzeile ---------- */
+header.site{border-bottom:1px solid var(--line);position:relative;z-index:5;}
+.nav{display:flex;align-items:center;justify-content:space-between;gap:24px;padding:20px 0;}
+.nav ul{display:flex;gap:26px;list-style:none;margin:0;padding:0;}
+.nav a{color:var(--ink-2);text-decoration:none;font-size:14.5px;position:relative;padding:3px 0;}
+.nav a::after{content:"";position:absolute;left:0;right:100%;bottom:0;height:1.5px;background:var(--signal);transition:right .22s cubic-bezier(.2,0,0,1);}
+.nav a:hover::after{right:0;}
+.nav-r{display:flex;align-items:center;gap:18px;}
+
+/* Wortmarke mit Maßlinie */
+.brand{display:inline-flex;flex-direction:column;gap:5px;text-decoration:none;color:var(--ink);}
+.brand .wm{font-family:var(--f-disp);font-weight:700;font-size:27px;letter-spacing:.14em;line-height:1;}
+.brand .rule{display:block;height:5px;}
+
+/* ---------- Buttons ---------- */
+.btn{display:inline-block;font-size:14.5px;font-weight:700;padding:14px 26px;border:1px solid transparent;border-radius:2px;cursor:pointer;text-decoration:none;transition:background .14s,color .14s,transform .14s;}
+.btn-p{background:var(--signal);color:#fff;border-color:var(--signal);}
+.btn-p:hover{background:var(--signal-hover);}
+.btn-s{background:transparent;color:var(--ink);border-color:var(--line);}
+.btn-s:hover{border-color:var(--ink);}
+.btn:active{transform:translateY(1px);}
+
+/* ---------- Hero ---------- */
+.hero{padding:76px 0 88px;position:relative;overflow:hidden;}
+.hero-grid{display:grid;grid-template-columns:minmax(0,1.06fr) minmax(0,.94fr);gap:64px;align-items:start;}
+.eyebrow{display:flex;align-items:center;gap:12px;margin-bottom:26px;}
+.eyebrow .ln{height:1px;background:var(--signal);width:0;}
+h1.hero-h{
+  font-family:var(--f-disp);font-weight:700;letter-spacing:-.015em;
+  font-size:clamp(46px,7.4vw,92px);line-height:.93;margin:0 0 26px;
+}
+h1.hero-h .w{display:inline-block;overflow:hidden;vertical-align:bottom;}
+h1.hero-h .w > span{display:inline-block;transform:translateY(105%);}
+.lead{font-size:19px;line-height:1.58;color:var(--ink-2);max-width:46ch;margin:0 0 32px;}
+.cta-row{display:flex;gap:14px;flex-wrap:wrap;margin-bottom:14px;}
+.fineprint{font-size:12.5px;color:var(--ink-3);margin:0 0 34px;}
+.trust{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0;border-top:1px solid var(--line);max-width:520px;}
+.trust div{padding:13px 16px 13px 0;font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-3);border-bottom:1px solid var(--line-soft);display:flex;align-items:center;gap:9px;}
+.trust div::before{content:"";width:5px;height:5px;background:var(--signal);flex:none;}
+
+/* Portal-Karte, vermaßt */
+.measure{position:relative;padding:34px 40px 34px 0;}
+.dim-top{position:absolute;top:8px;left:0;right:40px;display:flex;align-items:center;gap:8px;}
+.dim-top .bar{flex:1;height:1px;background:var(--signal);position:relative;}
+.dim-top .bar::before,.dim-top .bar::after{content:"";position:absolute;top:-4px;width:1px;height:9px;background:var(--signal);}
+.dim-top .bar::before{left:0;} .dim-top .bar::after{right:0;}
+.dim-top .val{font-family:var(--f-mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--signal);white-space:nowrap;}
+.dim-right{position:absolute;right:8px;top:34px;bottom:34px;display:flex;flex-direction:column;align-items:center;gap:8px;}
+.dim-right .bar{flex:1;width:1px;background:var(--line);position:relative;}
+.dim-right .bar::before,.dim-right .bar::after{content:"";position:absolute;left:-4px;height:1px;width:9px;background:var(--line);}
+.dim-right .bar::before{top:0;} .dim-right .bar::after{bottom:0;}
+.dim-right .val{font-family:var(--f-mono);font-size:10px;letter-spacing:.14em;color:var(--ink-3);writing-mode:vertical-rl;}
+
+.pcard{background:var(--paper-0);border:1px solid var(--line);padding:24px;}
+.pcard .hd{display:flex;justify-content:space-between;align-items:center;gap:12px;padding-bottom:14px;border-bottom:1px solid var(--line-soft);margin-bottom:16px;}
+.pcard .hd .t{font-family:var(--f-disp);font-weight:700;font-size:17px;letter-spacing:.02em;}
+.pill{font-family:var(--f-mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;padding:4px 8px;background:#F5E4E2;color:var(--signal);}
+.step{display:flex;align-items:center;gap:12px;padding:11px 0;border-bottom:1px dotted var(--line);font-size:14.5px;}
+.step:last-of-type{border-bottom:0;}
+.step .st{font-family:var(--f-mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;width:66px;flex:none;color:var(--ink-3);}
+.step.now{font-weight:700;}
+.step.now .st{color:var(--signal);}
+.pcard .foot{margin-top:16px;padding-top:14px;border-top:1px solid var(--line-soft);display:flex;justify-content:space-between;align-items:baseline;gap:12px;}
+.pcard .foot .k{font-family:var(--f-mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-3);}
+.pcard .foot .v{font-family:var(--f-mono);font-size:19px;font-variant-numeric:tabular-nums;}
+
+/* ---------- Preisband ---------- */
+.band{background:var(--paper-2);border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:74px 0;}
+.sec-h{display:flex;align-items:baseline;gap:14px;margin-bottom:10px;}
+h2.sec{font-family:var(--f-disp);font-weight:700;font-size:clamp(30px,4.2vw,50px);line-height:1.02;letter-spacing:-.015em;margin:0;}
+.sec-lead{color:var(--ink-2);max-width:52ch;margin:14px 0 34px;font-size:16.5px;}
+table.pr{width:100%;border-collapse:collapse;}
+table.pr th{text-align:left;font-family:var(--f-mono);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-3);font-weight:400;padding:0 16px 12px 0;border-bottom:2px solid var(--ink);}
+table.pr td{padding:20px 16px 20px 0;border-bottom:1px solid var(--line);vertical-align:top;}
+table.pr .nm{font-family:var(--f-disp);font-weight:700;font-size:24px;}
+table.pr .de{font-size:13.5px;color:var(--ink-3);margin-top:4px;max-width:40ch;}
+table.pr .n{font-family:var(--f-mono);font-size:18px;font-variant-numeric:tabular-nums;white-space:nowrap;}
+table.pr tr.rec td{background:var(--paper-0);}
+.flag{display:inline-block;background:var(--signal);color:#fff;font-family:var(--f-mono);font-size:9.5px;letter-spacing:.16em;text-transform:uppercase;padding:3px 8px;margin-bottom:8px;}
+
+/* ---------- CTA ---------- */
+.cta{background:var(--ink-deep);color:var(--on-dark);padding:78px 0;}
+.cta h2{font-family:var(--f-disp);font-weight:700;font-size:clamp(30px,4.4vw,52px);line-height:1.02;margin:0 0 16px;max-width:18ch;}
+.cta p{color:#A9A59C;max-width:50ch;margin:0 0 28px;font-size:16.5px;}
+.cta .btn-s{color:var(--on-dark);border-color:#454139;}
+.cta .btn-s:hover{border-color:var(--on-dark);}
+
+/* ---------- Reveal ---------- */
+.rv{opacity:0;transform:translateY(18px);transition:opacity .7s cubic-bezier(.2,0,0,1),transform .7s cubic-bezier(.2,0,0,1);}
+.rv.in{opacity:1;transform:none;}
+
+/* ---------- Ladesequenz ---------- */
+@keyframes wUp{to{transform:none;}}
+@keyframes fIn{from{opacity:0;transform:translateY(12px);}to{opacity:1;transform:none;}}
+@keyframes lnGrow{to{width:44px;}}
+@keyframes dimGrow{from{transform:scaleX(0);}to{transform:none;}}
+.go .eyebrow .ln{animation:lnGrow .5s .1s cubic-bezier(.2,0,0,1) forwards;}
+.go .eyebrow .lbl{animation:fIn .5s .18s both;}
+.go h1.hero-h .w > span{animation:wUp .72s cubic-bezier(.16,1,.3,1) both;}
+.go .lead{animation:fIn .6s .52s both;}
+.go .cta-row{animation:fIn .6s .62s both;}
+.go .fineprint{animation:fIn .6s .68s both;}
+.go .trust{animation:fIn .6s .74s both;}
+.go .measure{animation:fIn .7s .5s both;}
+.go .dim-top .bar{transform-origin:left;animation:dimGrow .7s .9s cubic-bezier(.2,0,0,1) both;}
+.go .dim-top .val{animation:fIn .4s 1.25s both;}
+
+/* ---------- Erklärstreifen ---------- */
+.note{background:#FBFAF7;border-bottom:1px solid var(--line-soft);padding:16px 0;font-size:13.5px;color:#57534B;}
+.note b{color:var(--ink);}
+
+/* ---------- Logo-Sektion ---------- */
+.logos{padding:78px 0;}
+.logo-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(268px,1fr));gap:18px;margin-top:30px;}
+.logo-card{border:1px solid var(--line);background:var(--paper-0);padding:26px;display:flex;flex-direction:column;gap:16px;}
+.logo-card .stage{min-height:104px;display:flex;align-items:center;}
+.logo-card h4{font-family:var(--f-disp);font-size:17px;margin:0 0 5px;font-weight:700;letter-spacing:.02em;}
+.logo-card p{margin:0;font-size:13.5px;color:var(--ink-3);line-height:1.5;}
+.logo-card .fav{display:flex;align-items:center;gap:10px;margin-top:auto;padding-top:14px;border-top:1px solid var(--line-soft);}
+.logo-card .fav span{font-family:var(--f-mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-3);}
+
+@media (max-width:900px){
+  .hero-grid{grid-template-columns:minmax(0,1fr);gap:44px;}
+  .nav ul{display:none;}
+  .measure{padding:30px 34px 0 0;}
+  h1.hero-h{font-size:clamp(40px,11vw,62px);}
+  .trust{grid-template-columns:minmax(0,1fr);}
+}
+@media (prefers-reduced-motion:reduce){
+  .rv{opacity:1;transform:none;transition:none;}
+  .go *{animation:none !important;}
+  h1.hero-h .w > span{transform:none;}
+  .eyebrow .ln{width:44px;}
+  .dim-top .bar{transform:none;}
+}
+</style>
+
+<div class="note">
+  <div class="inner"><b>Live-Vorschau der Startseite</b> — echte Bewegung, Papierstruktur und Vermaßung. Das ist die Seite, nicht das Spezifikationsblatt. Unten: vier Logo-Vorschläge.</div>
+</div>
+
+<!-- ============ SEITE ============ -->
+<div class="paper" id="page">
+  <header class="site">
+    <div class="inner nav">
+      <a class="brand" href="#">
+        <span class="wm">SARTU</span>
+        <svg class="rule" width="120" height="5" viewBox="0 0 120 5" fill="none" aria-hidden="true">
+          <path d="M1 2.5H119" stroke="#B4261E" stroke-width="1.2"/>
+          <path d="M1 0.5V4.5M119 0.5V4.5" stroke="#B4261E" stroke-width="1.2"/>
+        </svg>
+      </a>
+      <ul>
+        <li><a href="#">Leistungen</a></li>
+        <li><a href="#">Preise</a></li>
+        <li><a href="#">Ablauf</a></li>
+        <li><a href="#">Ratgeber</a></li>
+      </ul>
+      <div class="nav-r">
+        <a href="#" style="color:var(--ink-2);text-decoration:none;font-size:14.5px">Kontakt</a>
+        <a href="#" class="btn btn-p">Bedarf prüfen lassen</a>
+      </div>
+    </div>
+  </header>
+
+  <section class="hero">
+    <div class="inner frame">
+      <div class="hero-grid">
+        <div>
+          <div class="eyebrow">
+            <span class="ln"></span>
+            <span class="lbl">Webdesign-Agentur · Region Dresden</span>
+          </div>
+
+          <h1 class="hero-h">
+            <span class="w"><span style="animation-delay:.22s">Firmen&shy;websites</span></span>
+            <span class="w"><span style="animation-delay:.30s">zum</span></span>
+            <span class="w"><span style="animation-delay:.36s;color:var(--signal)">Festpreis.</span></span>
+          </h1>
+
+          <p class="lead">Wir planen, texten, programmieren und betreiben Ihre Website. Sie beantworten nur die Fragen zu Ihrem Unternehmen — Struktur, Technik und Sichtbarkeit übernehmen wir.</p>
+
+          <div class="cta-row">
+            <a href="#" class="btn btn-p">Bedarf prüfen lassen</a>
+            <a href="#" class="btn btn-s">Preise ansehen</a>
+          </div>
+          <p class="fineprint">Alle Preise netto zzgl. USt. · Ausschließlich für Unternehmer</p>
+
+          <div class="trust">
+            <div>Festpreis vorab</div>
+            <div>Texte inklusive</div>
+            <div>Portal statt E-Mail</div>
+            <div>Sichtbar ab Launch</div>
+          </div>
+        </div>
+
+        <div class="measure">
+          <div class="dim-top">
+            <span class="bar"></span>
+            <span class="val">Ihr Projekt · jederzeit einsehbar</span>
+          </div>
+          <div class="dim-right">
+            <span class="bar"></span><span class="val">Portal</span><span class="bar"></span>
+          </div>
+          <div class="pcard">
+            <div class="hd">
+              <span class="t">Projektportal</span>
+              <span class="pill">Musteransicht</span>
+            </div>
+            <div class="step"><span class="st">erledigt</span> Unternehmensdaten bestätigt</div>
+            <div class="step now"><span class="st">jetzt</span> Domain bestätigen</div>
+            <div class="step"><span class="st">offen</span> Leistungsfakten ergänzen</div>
+            <div class="step"><span class="st">folgt</span> Vorschau freigeben</div>
+            <div class="foot">
+              <span class="k">Platzhirsch · 40 / 30 / 30</span>
+              <span class="v">7.900 €</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="band">
+    <div class="inner">
+      <div class="sec-h rv"><span class="lbl">Preise</span></div>
+      <h2 class="sec rv">Sie wählen kein Paket.<br>Wir empfehlen eines.</h2>
+      <p class="sec-lead rv">Sie müssen nicht wissen, wie viele Seiten oder welche Technik Sie brauchen. Die kurze Bedarfseinschätzung zeigt, was passt — geprüft wird sie persönlich.</p>
+
+      <div class="rv">
+        <table class="pr">
+          <thead><tr><th>Lösung</th><th>Einmalig netto</th><th>Betrieb</th><th>Erstes Jahr</th></tr></thead>
+          <tbody>
+            <tr><td><div class="nm">Start</div><div class="de">Ein fokussierter One-Pager für ein klares Angebot.</div></td><td class="n">1.490 €</td><td class="n">59 €</td><td class="n">2.198 €</td></tr>
+            <tr><td><div class="nm">Wachstum</div><div class="de">Vollständige Firmenwebsite mit bis zu acht Seiten.</div></td><td class="n">3.900 €</td><td class="n">129 €</td><td class="n">5.448 €</td></tr>
+            <tr class="rec"><td><span class="flag">Empfehlung</span><div class="nm">Platzhirsch</div><div class="de">Vertriebs-, Vertrauens- und Recruiting-System mit bis zu 16 Seiten.</div></td><td class="n">7.900 €</td><td class="n">249 €</td><td class="n">10.888 €</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <section class="cta">
+    <div class="inner">
+      <h2 class="rv">Wenige Angaben reichen für den ersten Schritt.</h2>
+      <p class="rv">Sie beschreiben Ihr Unternehmen, Ihr Ziel und Ihren Domainstatus. Danach sehen Sie eine vorläufige Empfehlung mit Preis.</p>
+      <div class="cta-row rv">
+        <a href="#" class="btn btn-p">Bedarf prüfen lassen</a>
+        <a href="#" class="btn btn-s">Preise ansehen</a>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- ============ LOGO ============ -->
+<section class="logos paper">
+  <div class="inner">
+    <span class="lbl">Logo · vier Richtungen</span>
+    <h2 class="sec" style="margin-top:10px">Vier Vorschläge, alle aus derselben Idee.</h2>
+    <p class="sec-lead">Jeder Vorschlag kommt aus der Welt der technischen Zeichnung — vermessen, geschnitten, beschriftet. Und jeder funktioniert als kleines Zeichen allein.</p>
+
+    <div class="logo-grid">
+
+      <div class="logo-card">
+        <div class="stage">
+          <svg width="210" height="62" viewBox="0 0 210 62" fill="none" aria-label="SARTU mit Maßlinie">
+            <text x="0" y="34" font-family="Arial Narrow, Arial" font-weight="700" font-size="38" letter-spacing="5" fill="#1C1B19">SARTU</text>
+            <path d="M1 50H160" stroke="#B4261E" stroke-width="1.4"/>
+            <path d="M1 45.5V54.5M160 45.5V54.5" stroke="#B4261E" stroke-width="1.4"/>
+            <text x="0" y="62" font-family="ui-monospace, Consolas" font-size="8" letter-spacing="2" fill="#6E6A62">FESTPREIS</text>
+          </svg>
+        </div>
+        <div>
+          <h4>01 · Maßlinie</h4>
+          <p>Die Wortmarke wird vermessen. Sagt ohne ein Wort: nachgemessen, festgelegt, kein Nachverhandeln. Die Linie trägt später wechselnde Zusätze.</p>
+        </div>
+        <div class="fav">
+          <svg width="34" height="34" viewBox="0 0 34 34"><rect width="34" height="34" fill="#1C1B19"/><text x="17" y="20" text-anchor="middle" font-family="Arial Narrow, Arial" font-weight="700" font-size="15" fill="#E6E4DE">S</text><path d="M9 25H25" stroke="#B4261E" stroke-width="1.6"/><path d="M9 22.5V27.5M25 22.5V27.5" stroke="#B4261E" stroke-width="1.6"/></svg>
+          <span>Favicon</span>
+        </div>
+      </div>
+
+      <div class="logo-card">
+        <div class="stage">
+          <svg width="230" height="62" viewBox="0 0 230 62" fill="none" aria-label="SARTU im Schriftfeld">
+            <rect x="1" y="9" width="196" height="42" stroke="#B4B0A6" stroke-width="1.2"/>
+            <path d="M148 9V51" stroke="#B4B0A6" stroke-width="1.2"/>
+            <rect x="148" y="9" width="49" height="42" fill="#B4261E"/>
+            <text x="14" y="37" font-family="Arial Narrow, Arial" font-weight="700" font-size="30" letter-spacing="4" fill="#1C1B19">SARTU</text>
+            <text x="172" y="27" text-anchor="middle" font-family="ui-monospace, Consolas" font-size="8" letter-spacing="1" fill="#fff">WEB</text>
+            <text x="172" y="40" text-anchor="middle" font-family="ui-monospace, Consolas" font-size="8" letter-spacing="1" fill="#fff">2026</text>
+          </svg>
+        </div>
+        <div>
+          <h4>02 · Schriftfeld</h4>
+          <p>Jede technische Zeichnung hat ein Schriftfeld in der Ecke. Als Logo ist das unverwechselbar — und niemand sonst in der Branche macht es.</p>
+        </div>
+        <div class="fav">
+          <svg width="34" height="34" viewBox="0 0 34 34"><rect width="34" height="34" fill="#E6E4DE" stroke="#B4B0A6"/><rect x="19" y="0" width="15" height="34" fill="#B4261E"/><text x="10" y="22" text-anchor="middle" font-family="Arial Narrow, Arial" font-weight="700" font-size="17" fill="#1C1B19">S</text></svg>
+          <span>Favicon</span>
+        </div>
+      </div>
+
+      <div class="logo-card">
+        <div class="stage">
+          <svg width="210" height="62" viewBox="0 0 210 62" fill="none" aria-label="SARTU mit geschnittenem T">
+            <text x="0" y="42" font-family="Arial Narrow, Arial" font-weight="700" font-size="42" letter-spacing="4" fill="#1C1B19">SAR</text>
+            <g>
+              <path d="M75 13H109" stroke="#1C1B19" stroke-width="7"/>
+              <path d="M92 13V42" stroke="#1C1B19" stroke-width="7"/>
+              <path d="M84 24H100" stroke="#B4261E" stroke-width="3.4"/>
+            </g>
+            <text x="115" y="42" font-family="Arial Narrow, Arial" font-weight="700" font-size="42" letter-spacing="4" fill="#1C1B19">U</text>
+          </svg>
+        </div>
+        <div>
+          <h4>03 · Der Schnitt im T</h4>
+          <p>Das T als Tragbalken mit rotem Korrekturschnitt. Das Zeichen steckt im Wort — man erkennt es wieder, auch ohne Zusatzgrafik.</p>
+        </div>
+        <div class="fav">
+          <svg width="34" height="34" viewBox="0 0 34 34"><rect width="34" height="34" fill="#F2F0EA" stroke="#B4B0A6"/><path d="M9 10H25" stroke="#1C1B19" stroke-width="4.4"/><path d="M17 10V26" stroke="#1C1B19" stroke-width="4.4"/><path d="M12 18H22" stroke="#B4261E" stroke-width="2.4"/></svg>
+          <span>Favicon</span>
+        </div>
+      </div>
+
+      <div class="logo-card">
+        <div class="stage">
+          <svg width="230" height="62" viewBox="0 0 230 62" fill="none" aria-label="SARTU mit Passermarke">
+            <path d="M2 10H14M8 4V16" stroke="#B4261E" stroke-width="1.3"/>
+            <circle cx="8" cy="10" r="4.4" stroke="#B4261E" stroke-width="1.3"/>
+            <text x="24" y="38" font-family="Arial Narrow, Arial" font-weight="700" font-size="36" letter-spacing="5" fill="#1C1B19">SARTU</text>
+            <text x="25" y="53" font-family="ui-monospace, Consolas" font-size="8.5" letter-spacing="3.4" fill="#6E6A62">FIRMENWEBSITES</text>
+          </svg>
+        </div>
+        <div>
+          <h4>04 · Passermarke</h4>
+          <p>Die Marke aus dem Druck- und Zeichnungswesen: exakte Ausrichtung. Kleinstes Zeichen, größte Wiedererkennung — funktioniert bis 16 px.</p>
+        </div>
+        <div class="fav">
+          <svg width="34" height="34" viewBox="0 0 34 34"><rect width="34" height="34" fill="#1C1B19"/><path d="M7 17H27M17 7V27" stroke="#B4261E" stroke-width="1.6"/><circle cx="17" cy="17" r="7" stroke="#B4261E" stroke-width="1.6"/></svg>
+          <span>Favicon</span>
+        </div>
+      </div>
+
+    </div>
+
+    <div style="margin-top:30px;border:1px solid var(--line);border-left:3px solid var(--signal);background:var(--paper-0);padding:20px 24px;max-width:74ch">
+      <p style="margin:0 0 10px;font-weight:700">Zum Namen: <span style="color:var(--signal)">SARTU</span> allein — nicht „SARTU digital".</p>
+      <p style="margin:0;font-size:14.5px;color:var(--ink-2);line-height:1.6">„digital" ist ein Anhängsel aus den 2010ern („Müller digital") und sagt nichts, was die Seite nicht in zwei Sekunden selbst erklärt. Es macht den Namen länger, die Domain schlechter und die Marke schwächer. Wenn ein Zusatz nötig ist, gehört er als <strong>Beschriftung</strong> ins Logo — wie in Vorschlag 01 und 04 — und nicht in den Namen: <span class="mono" style="font-size:13px">SARTU · Firmenwebsites</span>. Der Name bleibt vierstellig, sprechbar und ownable.</p>
+    </div>
+  </div>
+</section>
+
+<script>
+  document.getElementById('page').classList.add('go');
+  var io = new IntersectionObserver(function(es){
+    es.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } });
+  }, {threshold:.12, rootMargin:'0px 0px -8% 0px'});
+  document.querySelectorAll('.rv').forEach(function(el, i){
+    el.style.transitionDelay = (i % 4) * 70 + 'ms';
+    io.observe(el);
+  });
+</script>

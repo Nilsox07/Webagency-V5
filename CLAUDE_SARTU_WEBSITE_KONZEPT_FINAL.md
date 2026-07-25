@@ -17,7 +17,9 @@
 >
 > **Verbindliche Quellen ab jetzt:**
 > - **`design/sartu-tokens.css`** — einzige Quelle für Farben, Typografie, Abstände, Radien, Motion
-> - **`design/SARTU_DESIGNSYSTEM.html`** — gerenderte Komponenten-Referenz und Abnahmegrundlage
+> - **`design/SARTU_LIVE_VORSCHAU.html`** — **so sieht die Seite aus**: Papierstruktur, Vermaßung, Ladesequenz, Logo-Vorschläge. Maßgeblich für die Wirkung.
+> - **`design/SARTU_DESIGNSYSTEM.html`** — Komponenten- und Zustandsreferenz (Spezifikationsblatt, **nicht** die Optik der Website)
+> - Umsetzungsdetails zu Textur und Bewegung: `CLAUDE_SARTU_WEBSITE_LASTENHEFT_BAUFINAL.md` §2a
 >
 > **Warum Werkplan:** passt zur Zielgruppe (Handwerk, Bau, lokale Dienstleistung im Umland von Dresden), funktioniert **ohne Hochglanzfotos** — beim Start ohne Referenzbilder ein realer Vorteil — und überträgt sich als Rastersystem auf jede Kundenbranche.
 >
@@ -373,7 +375,17 @@ Die Umsetzung gilt erst als fertig, wenn:
 1. ~~Designrichtung~~ ✅ **„Werkplan"** (technisches Aufmaß), ausgearbeitet in `design/sartu-tokens.css` + `design/SARTU_DESIGNSYSTEM.html`.
 2. ~~Eigenes Layout oder Template~~ ✅ **eigenes Layout/Designsystem** — eine erkennbar Template-basierte eigene Website wäre ein Glaubwürdigkeitsbruch bei „individuell programmiert".
 3. ~~Schrift~~ ✅ **IBM Plex** (Sans Condensed / Sans / Mono), self-hosted. Keine editorial Serif — die Kondensschrift trägt den Charakter.
-4. **Logo-Favorit** — noch offen, blockiert den Bau aber nicht. Empfehlung passend zu Werkplan: **T-02 „geschnittener Beam"** oder **S-02 „konstruiertes Portal-S"**, jeweils mit dem Rotstift-Schnitt als wiederkehrendem Markendetail. Bis dahin trägt die typografische Wortmarke `SARTU` in IBM Plex Sans Condensed.
+4. **Logo** — vier ausgearbeitete Vorschläge in `design/SARTU_LIVE_VORSCHAU.html`, jeweils mit Favicon-Variante. Blockiert den Bau nicht (bis zur Wahl trägt die Wortmarke `SARTU` in IBM Plex Sans Condensed).
+
+| # | Vorschlag | Idee | Stärke |
+|---|---|---|---|
+| **01** | **Maßlinie** | Die Wortmarke wird vermessen — Linie mit Endstrichen unter `SARTU` | **Empfehlung.** Sagt ohne Worte „nachgemessen, festgelegt". Die Linie trägt wechselnde Zusätze (`FESTPREIS`, `FIRMENWEBSITES`). |
+| 02 | Schriftfeld | Rahmen wie das Titelfeld einer technischen Zeichnung, rotes Datenfeld rechts | Unverwechselbar, niemand in der Branche macht das. Braucht mehr Breite. |
+| 03 | Schnitt im T | Das T als Tragbalken mit rotem Korrekturschnitt | Zeichen steckt im Wort, sehr gutes Favicon. Etwas subtiler. |
+| 04 | Passermarke | Passer-/Registermarke vor der Wortmarke, Beschriftung darunter | Kleinstes Zeichen, funktioniert bis 16 px. |
+
+**Namensentscheidung: `SARTU` allein — nicht „SARTU digital".**
+„digital" ist ein Anhängsel aus den 2010ern („Müller digital"), sagt nichts, was die Seite nicht in zwei Sekunden selbst erklärt, verlängert den Namen und schwächt die Domain. Wird ein Zusatz gebraucht, gehört er als **Beschriftung ins Logo** (Vorschlag 01 und 04) und nicht in den Namen: `SARTU · Firmenwebsites`. Der Name bleibt kurz, sprechbar und ownable.
 5. ~~Startregion und Adresse~~ **entschieden:** Wohnsitz Stolpen, Geschäftsadresse Dresden, Markt Region Dresden/Ostsachsen. Verbleibende Teilfrage betrifft nur die Form des Google-Profils (echtes Büro → sichtbare Adresse, reine Postadresse → Service-Area-Business), s. Masterkonzept §23a.1.
 6. **`/agb` zum Launch:** Empfehlung – **nur** live und verlinkt, wenn der Text anwaltlich final ist. Sonst **gar nicht** verlinken (nicht in Navigation, nicht im Footer) und `noindex`. **Launch-Pflicht sind nur Impressum und Datenschutz.**
 

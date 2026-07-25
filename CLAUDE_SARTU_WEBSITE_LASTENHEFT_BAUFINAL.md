@@ -72,6 +72,79 @@
 
 ---
 
+## 2a. Gestaltungsdetails, Textur und Bewegung (verbindlich)
+
+> **Warum dieser Abschnitt existiert:** Ohne ihn baut man aus den Tokens eine korrekte, aber flache Seite. Die Wirkung entsteht aus vier Dingen, die kein Farbwert beschreibt: **Textur, Vermaßung, Ladesequenz und Zurückhaltung**. Referenz: `design/SARTU_LIVE_VORSCHAU.html`.
+
+### 2a.1 Papierstruktur — der wichtigste Einzelfaktor
+
+Der Grund, warum die Seite nach Zeichenpapier aussieht und nicht nach beiger Fläche. Rein CSS, **0 KB JavaScript, keine Bilddatei**:
+
+1. **Feines Raster:** zwei `repeating-linear-gradient` (0° und 90°), Linienfarbe `rgba(28,27,25,.045)`, Raster **32 px**. Muss so schwach sein, dass man es eher spürt als sieht.
+2. **Korn:** ein Inline-SVG mit `feTurbulence` (`baseFrequency .85`, entsättigt) als `background-image`, `opacity ~.28`, `mix-blend-mode: multiply`, `pointer-events: none`.
+3. Beides liegt **hinter** dem Inhalt und niemals über Text.
+
+**Regel:** Das Raster läuft durch die hellen Bereiche durch. Auf dunklen Bändern (CTA) entfällt es.
+
+### 2a.2 Vermaßung als Gestaltungsmittel
+
+Das wiederkehrende Markendetail — es macht aus einer Karte eine technische Zeichnung:
+
+- **Maßlinie** über dem Portal-Mockup: durchgehende Linie in `--c-signal` mit senkrechten Endstrichen (9 px), daneben ein Mono-Label. Genau **eine** vermaßte Sache pro Ansicht.
+- **Senkrechte Bemaßung** rechts daneben in `--c-line` (nicht rot — nur die Hauptaussage ist rot).
+- **Passermarken** an den Ecken des Hero-Rahmens: 14 × 14 px, 1 px Linie, nur oben-links und unten-rechts. Nicht an jeder Ecke, sonst wird es dekorativ.
+- **Mono-Versallabels** mit `letter-spacing: .14em` als durchgehendes Detail über alle Sektionen.
+
+### 2a.3 Ladesequenz (nur „above the fold", einmalig)
+
+Gestaffelt, insgesamt **unter 1,4 Sekunden**. Reine CSS-Animation, kein JavaScript:
+
+| Element | Effekt | Verzögerung |
+|---|---|---|
+| Eyebrow-Linie | wächst auf 44 px | 100 ms |
+| Eyebrow-Text | Fade + 12 px hoch | 180 ms |
+| H1, wortweise | aus der Grundlinie hochschieben (`overflow:hidden` + `translateY(105%)`) | 220 / 300 / 360 ms |
+| Lead | Fade | 520 ms |
+| Buttons | Fade | 620 ms |
+| Trust-Zeile | Fade | 740 ms |
+| Portal-Karte | Fade | 500 ms |
+| Maßlinie | zeichnet sich (`scaleX` von 0) | 900 ms |
+| Maß-Label | Fade | 1250 ms |
+
+**Das wortweise Hochschieben der H1 ist der eine Markenmoment der Startseite.** Er kostet ~0 KB und trägt die gesamte Wirkung.
+
+### 2a.4 Scroll-Reveals
+
+`IntersectionObserver` (~15 Zeilen eigenes JS, keine Bibliothek): `opacity 0 → 1` und `translateY(18px) → 0`, Dauer 700 ms, Kurve `cubic-bezier(.2,0,0,1)`, gestaffelt in Vierergruppen à 70 ms. Jedes Element wird **einmal** ausgelöst (`unobserve`).
+**Pflicht:** Inhalte sind ohne JavaScript sofort sichtbar — der Startzustand `opacity:0` wird nur gesetzt, wenn JS läuft, oder per `@media (prefers-reduced-motion: reduce)` neutralisiert.
+
+### 2a.5 Mikrointeraktionen
+
+- **Navigationslinks:** roter Unterstrich wächst von links (`right: 100% → 0`), 220 ms.
+- **Buttons:** Farbwechsel 140 ms; beim Klick `translateY(1px)`.
+- **Fokus:** 2 px Kontur, 2 px Abstand — wird **nie** wegen Optik entfernt.
+- Kein Parallax, keine Zähler, keine schwebenden Elemente, keine Partikel.
+
+### 2a.6 Wann Bibliotheken wirklich gebraucht werden
+
+Die Startseite oben erreicht ihre Wirkung mit **CSS + ~1 KB eigenem JS**. Bibliotheken werden dort eingesetzt, wo sie echte Arbeit sparen — nicht als Standardausstattung:
+
+| Baustein | Werkzeug | Wofür konkret |
+|---|---|---|
+| Ladesequenz, Reveals, Hover | **CSS + IntersectionObserver** | Standardfall, deckt die Startseite vollständig ab |
+| Verkettete Sequenzen mit Scroll-Bindung (z. B. eine Maßlinie, die sich über mehrere Sektionen aufbaut) | **GSAP + ScrollTrigger** (~34 KB) | nur wenn CSS es nachweislich nicht trägt |
+| Sanftes Scrollen auf der Marketingseite | **Lenis** (~3 KB) | optional, nur Website — **nie** im Portal |
+| Portal-Zustände, Modale, Layoutwechsel | **Motion** (~3–18 KB) | erste Wahl im Portal |
+| Seitenübergänge | **View Transitions API** (0 KB, nativ) | nur wenn Fokus und Analytics sauber bleiben |
+
+**Bindend bleibt das Budget aus §1:** ≤ 75 KB gzip auf der Startseite, ≤ 40 KB auf Unterseiten, **maximal zwei bewusste Markenmomente pro Seite**. Wird eine Bibliothek eingebaut, muss sie ihren Platz im Budget rechtfertigen — nicht umgekehrt.
+
+### 2a.7 Was die Seite billig aussehen lässt (verboten)
+
+Farbverläufe · Leuchtflächen · schwebende Dashboard-Karten mit Schlagschatten · runde Karten mit Akzentbalken · Karten in Karten · Emoji als Sektionsmarker · zentrierter Fließtext · mehrere Akzentfarben pro Sektion · Animationen über Text oder CTA · Stockfotos mit Handschlag oder Laptop · generische WebGL-Hintergründe (Vanta u. Ä.).
+
+---
+
 ## 3. Header-Navigation (final)
 
 **Desktop (≥ 1024 px):**
