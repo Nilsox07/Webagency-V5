@@ -178,6 +178,7 @@ Drei Namensstände (Basis/Pro/Platin vs. Start/Wachstum/Platzhirsch), drei Preis
 - DESIGNSYSTEM: **Teal-forward** (Ink/Paper/Mist/Teal/Signal-Blue/Amber/Red), kein Rostrot.
 - WEBSEITENKONZEPT_FINAL + ELEMENTPLAN: **Teal + Neon-Signal-Grün `#A8E000` + Oxide-Orange**, und **ELEMENTPLAN verwirft Beige explizit** als „zu ruhig".
 - lastenheft: **Navy + Lime `#aef000`**.
+`[ABGELÖST]` — heute gibt es **keine** vorgegebene Palette; die Designrichtung entsteht über 2–3 klickbare Varianten (`CLAUDE_SARTU_DESIGN_BRIEFING_AUSFUEHRUNG.md`).
 → **Keine** Umsetzungsdatei bildet die „kanonische" Beige/Rostrot-Palette sauber ab. Das Neon-Grün widerspricht zudem der Anti-KI-/Editorial-Haltung. (Auflösung: `MASTERKONZEPT §20` – eine Palette: Ink/Ivory/Teal + Oxide/Rostrot als Akzent, Neongrün gestrichen.)
 
 ### 4.5 Heller vs. dunkler Hero `[BELEGT]`
@@ -302,13 +303,13 @@ Altname **„Klarweb"** (sartupaketepreise.md: „Seite sagt aktuell Klarweb →
 1. **Reihenfolge umdrehen: verkaufen vor Vollausbau.** 2–3 Referenzkunden manuell (KI-assistiert) liefern; Minimal-Portal genügt. `[→ Masterkonzept §23]`
 2. **Eine Wahrheitsquelle erzwingen.** `pricing.json`/`prices.js` + Diff-Test; `sartupaketepreise.md` und `sartulastenheftwebsite.md` als **veraltet** nach `konzepte/_archiv/`.
 3. ~~**Stack festnageln:** Website static-first, Portal-Framework offen, Backend PostgreSQL, Supabase für Stufe 0/1.~~ **Erledigt und anders entschieden (25.07.2026):** ein modulares PHP-Projekt, öffentliche Seiten unter `/`, Kundenbereich unter `/portal/`, interner Bereich unter `/admin/`, MySQL/MariaDB, serverseitig gerendert, kein Build-Schritt. Verbindlich: `CLAUDE_SARTU_PORTAL_LASTENHEFT_BAUFINAL.md` §1.
-4. **Design vereinheitlichen:** eine Palette (Ink/Ivory/Teal + Oxide/Rostrot-Akzent), **Neon-Grün streichen**, „Sie" durchziehen, Schrift + Logo-Favorit fixieren.
+4. `[ABGELÖST]` ~~**Design vereinheitlichen:** eine Palette (Ink/Ivory/Teal + Oxide/Rostrot-Akzent), Schrift + Logo-Favorit fixieren.~~ **Heute:** keine Palette vorgeben. Design-Briefing → 2–3 Varianten → Mensch entscheidet. Weiterhin gültig: **Neon-Grün streichen**, „Sie" durchziehen.
 5. **USP umformulieren:** „kein WordPress" → „keine Update-/Plugin-/Sicherheitssorgen **für Sie**; Betrieb inklusive". **Nie „wartungsarm"** (entwertet den Schutz). Portal + Festpreis als Haupt-USP.
 6. **Start-Paket schärfen** gegen Gratis-Wettbewerb (Ergebnis + Betrieb betonen) oder Wachstum als eigentlichen Einstieg framen.
 7. **Lead-Gen-Plan ergänzen** (Local SEO, Google-Unternehmensprofil, gezielte SEA „Website erstellen lassen {Ort}", Empfehlungen). Ohne Nachfrage kein Geschäft.
 8. **KI realistisch einordnen:** Stufe 0/1 assistierend, nicht orchestriert; Std-Caps erst mit reifem Designsystem als bindend behandeln.
 9. **Solo/Team ehrlich** darstellen; Ausfall-/Vertretungskonzept definieren; SLA erst versprechen, wenn haltbar.
-10. **Content gestaffelt (nach Review verkleinert):** Launch mit Kernseiten + **5** Leistungsseiten + **3** Ratgeber + **10–15** Lexikonbegriffen; Ortsseiten/Branchen/weitere Leistungsseiten erst nach Search-Console-Daten. Lieber 15 sehr gute als 60 mittelmäßige Seiten.
+10. **Content gestaffelt (nach Review verkleinert):** Launch mit Kernseiten + **5** Leistungsseiten + **3** Ratgeber + **10–15** Lexikonbegriffen `[ABGELÖST]` — **heute: 3 Transparenzseiten + 2 Vergleichsartikel + 8 Lexikonbegriffe**; Ortsseiten/Branchen/weitere Leistungsseiten erst nach Search-Console-Daten. Lieber 15 sehr gute als 60 mittelmäßige Seiten.
 11. **Recht vor Verkauf** bündeln (AGB/AVV inkl. KI-Subunternehmer/Abnahme/BFSG-Prüfung/Garantie-Wording) – ein Kanzlei-Paket, nicht stückweise.
 12. **Export + Mollie-Abo + INWX-Lifecycle praktisch testen**, bevor damit geworben/eingezogen wird.
 
@@ -323,7 +324,7 @@ Altname **„Klarweb"** (sartupaketepreise.md: „Seite sagt aktuell Klarweb →
 - Nicht mit Neon-Grün/generischer KI-Optik launchen (zerstört die Differenzierung).
 
 **SO starten (empfohlen):**
-1. **Fundament (1 Woche):** eine Preis-/Scope-Quelle, ein Stack, eine Palette, „Sie", Logo/Schrift – fixieren; Altdateien archivieren.
+1. **Fundament (1 Woche):** eine Preis-/Scope-Quelle, ein Stack, „Sie" – fixieren; Altdateien archivieren. `[ABGELÖST]` bei Palette, Logo und Schrift: die kommen **erst nach** der Variantenentscheidung, nicht davor.
 2. **Website (2–4 Wochen):** Kernwebsite (Kernseiten + **5** Leistungsseiten + 3 Ratgeber + 10–15 Lexikonbegriffe) auf **frei entschiedener** Design-/Technikbasis. `[ABGELÖST]` — heute: **PHP-Projekt** nach Portal-Lastenheft §1, Umfang **3 Transparenzseiten + 2 Vergleichsartikel + 8 Lexikonbegriffe**, Designrichtung über das Design-Briefing, ENDKONTROLLE-Profil SARTU-PUBLIC grün, echte Rechtstexte/NAP, Portal-Screens aus echter UI als „Musteransicht".
 3. **Sichtbares Stufe-0-Portal + Verkauf (parallel):** Login/geschützter Zugang, Cockpit mit einem nächsten Schritt, Angebot + Annahme, Rechnung + Mollie-Link, Aufgaben/Upload, Vorschau + Feedback, Freigabe, Domainstatus, **eine** echte Pflegefunktion; **Markteintritt aktiv** (Startregion, Zielkundenliste, Pilotslots); 2–3 Referenzkunden manuell liefern.
 4. **Härten & automatisieren (danach, datengetrieben):** Mollie-Abo, adaptives Onboarding, strukturierte Selbstpflege; dann teilautomatisierte Produktion + SEO-Flotte; zuletzt volle Orchestrierung + programmatische Ortsseiten.
@@ -347,7 +348,7 @@ Ein Gegen-Review von Codex hat mehrere berechtigte Lücken aufgedeckt. Nachfolge
 | **Unit Economics zu freundlich** | Richtig. Vollkosten (Akquise, Admin, Support, KI-Fehlversuche, Ausfallpuffer) ergänzt; engere Steuergrenzen 8–10 / 20–24 / 38–45 h. |
 | **Domain-Ende ungeregelt** | Echte Lücke: Kündigung, Zahlungsverzug, Auth-Code, Renewal, Redemption, fehlender Alt-Zugriff. Neu im Masterkonzept §6. |
 | **Launch-Content noch zu groß** | Zugestimmt: 5 statt 7 Leistungsseiten, 3 Ratgeber, 10–15 Lexikonbegriffe zum Start. `[ABGELÖST]` — heute 3 Transparenzseiten + 2 Vergleichsartikel + 8 Begriffe. |
-| **FTP vs. Portal unklar** | Zugestimmt: explizit trennen – Website statisch/FTP-fähig, Portal braucht echte App-Umgebung. |
+| **FTP vs. Portal unklar** | Zugestimmt: explizit trennen – Website statisch/FTP-fähig, Portal braucht echte App-Umgebung. `[ABGELÖST]` — **heute: ein gemeinsames PHP-Projekt.** Öffentliche Seiten cachebar, Kundenbereich serverseitig, beides per SFTP/Git auf denselben Hosting-Stack (Portal-Lastenheft §1). |
 | **Template-Altlasten** | Zugestimmt: Folex/ScrewFast/AstroWind/Studio/shadcn waren Recherchestände, keine Vorgabe. Freie Entscheidung im neuen Website-Konzept. |
 | **Marktzahlen zu grob** | Konkrete Belege ergänzt (Wyreframe, Für-Gründer, Unicorn Factory, Medienhaus Gersone, W3Techs 41,2 %/59,1 %). |
 | **Portal-Innovation zu konservativ** | Zugestimmt: Aktualitätsradar, Proof Locker, Local Visibility Board, Saisonkalender, Change Preview, Referenzgenerator etc. aufgenommen. |

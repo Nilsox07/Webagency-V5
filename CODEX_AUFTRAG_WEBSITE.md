@@ -220,7 +220,7 @@ Erst nach der Entscheidung: alle Seiten aus dem Lastenheft, im gewählten Stil.
 **Du schreibst selbst — aus den Vorgaben, dann zur Prüfung vorlegen:**
 - Die 5 Leistungsseiten: H1 und „Kurz gesagt" stehen fest, die restlichen Abschnitte des Templates schreibst du
 - 3 **Transparenzseiten** (Lastenheft §11a): Gliederung und die Pflichtangaben stehen fest, den Text schreibst du. **Alle Zahlen kommen aus dem Masterkonzept — keine erfundenen Marktdaten, keine Wettbewerberpreise**
-- 2 Ratgeber-Vergleichsartikel: Gliederung und Kurzantwort stehen fest, den Text schreibst du (je 900–1.300 Wörter)
+- 2 **Vergleichsartikel im Ratgeber-Bereich** (Lastenheft §12): Gliederung und Kurzantwort stehen fest, den Text schreibst du (je 900–1.300 Wörter). **Keine** zusätzlichen klassischen Ratgeberartikel zum Launch
 - 8 Lexikonbegriffe: Struktur steht fest, die Texte schreibst du (je 250–400 Wörter)
 
 > **Die Transparenzseiten sind der wichtigste Teil dieses Auftrags.** Sie sind der Grund, warum SARTU

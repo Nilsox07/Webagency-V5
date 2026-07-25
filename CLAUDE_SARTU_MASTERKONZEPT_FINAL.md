@@ -509,7 +509,7 @@ die belastbarere Wahl: Der Umzug ist ein Kopiervorgang, keine Neuentwicklung.
 >
 > Dieses Masterkonzept regelt **nur noch**: Geschäftsmodell, Angebot/Preise, Zahlung, Domain/Hosting/E-Mail, Portal, KI-/Produktionslogik, Technik, Recht, Markteintritt und Ausbaustufen. Die früheren Website-Detailabschnitte wurden hier **entfernt**, weil zwei Dateien nicht dieselbe Sache regeln dürfen.
 
-**Nur zur Orientierung (nicht maßgeblich):** Launch = Kernseiten (`/`, `/leistungen`, `/preise`, `/ablauf`, `/briefing`, `/ueber-uns`, `/kontakt`, Pflichtseiten) + **5** Leistungsseiten + **3 Transparenzseiten** + **2** Ratgeber + **8** Lexikonbegriffe. Kommerzielle Hubs, Branchen-Hubs, Ortsseiten und ein Lexikonausbau auf 40–60 Begriffe sind **Stufe 2** – erst nach Search-Console-Daten.
+**Nur zur Orientierung (nicht maßgeblich):** Launch = Kernseiten (`/`, `/leistungen`, `/preise`, `/ablauf`, `/briefing`, `/ueber-uns`, `/kontakt`, Pflichtseiten) + **5** Leistungsseiten + **3 Transparenzseiten** + **2 Vergleichsartikel im Ratgeber-Bereich** + **8** Lexikonbegriffe. Kommerzielle Hubs, Branchen-Hubs, Ortsseiten und ein Lexikonausbau auf 40–60 Begriffe sind **Stufe 2** – erst nach Search-Console-Daten.
 
 ---
 
@@ -611,7 +611,7 @@ Siehe `CLAUDE_SARTU_WEBSITE_KONZEPT_FINAL.md`, Abschnitte 4–6.
 ## 17.–19. (verschoben) Ratgeber, Lexikon, Content-Cluster, Bild-/Screenshotkonzept
 
 Siehe `CLAUDE_SARTU_WEBSITE_KONZEPT_FINAL.md`, Abschnitte 7 und 9.
-**Korrigierter Startumfang: 3 Transparenzseiten, 2 Ratgeber und 8 Lexikonbegriffe.** Die früher genannten 40–60 Begriffe bzw. 3–6 Ratgeber gelten **nicht** mehr für den Launch, sondern sind Stufe 2. **Die Transparenzseiten sind der Kern** — sie tragen den einzigen Sichtbarkeitsvorteil, den SARTU gegenüber etablierten Agenturen hat (`SARTU_SEO_GEO_KEYWORDSTRATEGIE.md` §3.4).
+**Korrigierter Startumfang: 3 Transparenzseiten, 2 Vergleichsartikel im Ratgeber-Bereich und 8 Lexikonbegriffe.** Die früher genannten 40–60 Begriffe bzw. 3–6 Ratgeber gelten **nicht** mehr für den Launch, sondern sind Stufe 2. **Die Transparenzseiten sind der Kern** — sie tragen den einzigen Sichtbarkeitsvorteil, den SARTU gegenüber etablierten Agenturen hat (`SARTU_SEO_GEO_KEYWORDSTRATEGIE.md` §3.4).
 
 **Weiterhin im Master gültig – Bildprinzip für Kundenwebsites:** echte Betriebs-, Team-, Projekt- und Produktbilder haben Vorrang; gezielt lizenzierte Bilder nur, wenn reale Motive fehlen; KI-Bilder nie als Dokumentation des Unternehmens. Keine austauschbaren Handschlag-/Laptop-/Callcenter-Stockbilder. Bildrechte und zulässige Verwendung werden **pro Datei im Portal bestätigt**.
 
@@ -669,7 +669,7 @@ Geschäftsseitig verbindlich bleibt:
 > Kernprinzip: **Nachfrage und Lieferfähigkeit zuerst beweisen, Automatisierung zuletzt.** Das kanonische „alles vor Marktstart" wird als **Zielbild** beibehalten, aber in liefernde Stufen zerlegt.
 
 **Stufe 0 – Sichtbares Portal + manuell liefern & Referenzen erzeugen (jetzt, Wochen, nicht Monate):**
-- Öffentliche Website (Kernseiten + **5** Leistungsseiten + **3 Transparenzseiten** + 2 Ratgeber + 8 Lexikonbegriffe), launchfähig.
+- Öffentliche Website (Kernseiten + **5** Leistungsseiten + **3 Transparenzseiten** + 2 Vergleichsartikel im Ratgeber-Bereich + 8 Lexikonbegriffe), launchfähig.
 - Produktion **manuell + KI-assistiert** (Mensch baut aus Designsystem). Domain/DNS via INWX **manuell**. Buchhaltung via lexoffice/sevDesk.
 - **Ziel: 2–3 echte Referenzkunden** live → echte Case Studies + echte Portal-Screens (die die Website ohnehin braucht).
 
@@ -988,7 +988,7 @@ Kostet ~15 Minuten, positioniert SARTU als ehrlichen Fachmann und funktioniert n
 
 **B. Website launchen (2–4 Wochen):**
 4. **Designrichtung final wählen** nach `CLAUDE_SARTU_DESIGN_BRIEFING_AUSFUEHRUNG.md`: 2–3 klickbare Startseitenvarianten mit **echten** Texten werden vorgelegt, ein Mensch entscheidet. Danach **eigenes PHP-Layout** aufsetzen — globale Layouts, Partials, Komponenten, zentrale Design-Variablen. **Keine Template-Basis als Zielarchitektur** — SARTU verkauft „kein Baukasten“ und darf die eigene Seite nicht erkennbar zusammenstecken.
-5. Kernseiten + **5** Leistungsseiten (GEO-Template) + **3 Transparenzseiten** + **2** Ratgeber + **8** Lexikonbegriffe bauen; **echte** NAP/Impressum (nach Kanzlei), sitemap/robots/llms.txt/OG, Search Console + Bing.
+5. Kernseiten + **5** Leistungsseiten (GEO-Template) + **3 Transparenzseiten** + **2 Vergleichsartikel im Ratgeber-Bereich** + **8** Lexikonbegriffe bauen; **echte** NAP/Impressum (nach Kanzlei), sitemap/robots/llms.txt/OG, Search Console + Bing.
 6. Portal-Screens als **Musteransicht** produzieren – aus der **echten** Stufe-0-UI, nie als gezeichnetes Fake-Dashboard.
 7. ENDKONTROLLE-Profil **SARTU-PUBLIC** vollständig grün (keine Add-on-/Minuten-/Alt-Preis-Reste, keine Privatkunden-Formulierungen, kein „wartungsarm").
 

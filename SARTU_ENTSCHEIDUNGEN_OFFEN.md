@@ -23,7 +23,7 @@ erfundenen Wert ersetzt werden. Steht er auf `offen`, gilt die dort genannte Spe
 
 - **Kein** `LocalBusiness` in strukturierten Daten — stattdessen `Organization` ohne Adresse
 - **Kein** Google-Unternehmensprofil, auch nicht vorbereitend angelegt
-- **Keine** Ortsseiten im Produktivbau, auch nicht unverlinkt
+- **Keine** Ortsseiten in der produktiven Veröffentlichung, auch nicht unverlinkt
 - **Keine** Ortsnamen in Title, H1, Meta-Description oder URL
 - **Keine** NAP-Aussage („Name, Adresse, Telefon konsistent") — es gibt noch keine Adresse
 - **Keine** Service-Area-Definition
@@ -58,7 +58,7 @@ Werte oben wird sie ohne Umbau anwendbar.
 | `[AGB]` | dito — bis dahin nicht verlinkt und `noindex` |
 | `[ANSCHRIFT]`, `[TELEFON]`, `[EMAIL]` | erst mit Punkt 1 entscheidbar |
 
-**Sperre:** Der Produktivbau bricht ab, solange hier Platzhalter stehen
+**Sperre:** Die produktive Veröffentlichung bricht ab, solange hier Platzhalter stehen
 (Website-Lastenheft §14a).
 
 ---
@@ -79,7 +79,7 @@ durchbaut, hat das Gate verletzt.
 |---|---|
 | Sprache und Aufbau | **entschieden:** PHP, serverseitig gerendert, ein modulares Projekt (Portal-Lastenheft §1) |
 | Datenbank | **entschieden:** MySQL/MariaDB, weil klassisches Hosting möglich bleiben soll |
-| Konkreter Anbieter und Tarif | *offen* — muss die Anforderungen aus Portal-Lastenheft §1.3 erfüllen |
+| Konkreter Anbieter und Tarif | *offen* — muss die Anforderungen aus Portal-Lastenheft **§1.4** erfüllen (PHP-Erweiterungen, Datenbank, HTTPS, Verzeichnis außerhalb des Webroots, **Cron**, **zuverlässiger Mailversand**, Sicherung, Serverstandort EU) |
 | Umgang mit vorhandenen Prototypen | *offen* — wird in `IMPLEMENTATION_PLAN.md` entschieden und begründet |
 
 ---
