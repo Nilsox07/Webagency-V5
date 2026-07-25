@@ -591,7 +591,7 @@ Siehe `CLAUDE_SARTU_WEBSITE_KONZEPT_FINAL.md`, Abschnitte 7 und 9.
 
 Für die **Kundenwebsites** (das verkaufte Produkt) gilt das versionierte SARTU-Designsystem:
 
-**Unveränderliche Grundlagen:** 4-/8-Pixel-Abstandslogik · stabile Container und responsive Raster · Radius 0–8 px (Spanne für **Kundenwebsites** — die SARTU-Marke selbst nutzt davon nur 0–2 px, s. `design/sartu-tokens.css`) · klare Fokus-/Hoverzustände · semantisches HTML · barrierearme Formulare und Navigation · Bildkomponenten mit festen Seitenverhältnissen und responsiven Quellen · begrenztes JavaScript-/Animationsbudget · keine überlappenden Texte, Layoutsprünge oder abgeschnittenen Bedienelemente.
+**Unveränderliche Grundlagen:** 4-/8-Pixel-Abstandslogik · stabile Container und responsive Raster · einheitlicher Radius je Projekt · klare Fokus-/Hoverzustände · semantisches HTML · barrierearme Formulare und Navigation · Bildkomponenten mit festen Seitenverhältnissen und responsiven Quellen · begrenztes JavaScript-/Animationsbudget · keine überlappenden Texte, Layoutsprünge oder abgeschnittenen Bedienelemente.
 
 **Variable Tokens (SARTU entscheidet, nicht der Kunde):** Markenfarben als **Rollen** statt Hexwerte in Komponenten · eine Hauptschrift, optional eine Akzentschrift · Inhaltsdichte `compact`/`balanced`/`editorial` · Formcharakter `precise`/`human`/`bold` · Bildverhältnisse und Inhaltsrhythmus passend zur Branche · Bewegungsintensität `none`/`subtle`/`expressive`.
 

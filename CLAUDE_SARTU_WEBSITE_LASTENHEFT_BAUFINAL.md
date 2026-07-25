@@ -13,7 +13,7 @@
 
 | # | Entscheidung | Status |
 |---|---|---|
-| 1 | **Designrichtung** | ✅ **entschieden: „Werkplan"** — Tokens in `design/sartu-tokens.css`, Referenz `design/SARTU_DESIGNSYSTEM.html` |
+| 1 | **Designrichtung** | **offen — wird recherchiert**, nicht vorgegeben. Vorgehen: `CLAUDE_SARTU_DESIGN_BRIEFING_AUSFUEHRUNG.md`. Struktur, Copy und Anforderungen in diesem Dokument sind davon unabhängig und vollständig. |
 | 2 | **Startregion / Standort** | ✅ **entschieden** — Wohnsitz Stolpen, Geschäftsadresse Dresden, Markt Region Dresden / Ostsachsen |
 
 **Damit ist dieses Lastenheft vollständig umsetzbar.** Die einzige verbleibende Teilfrage betrifft nicht den Bau, sondern die Form des Google-Unternehmensprofils (echtes Büro → sichtbare Adresse, reine Postadresse → Service-Area-Business, s. Masterkonzept §23a.1).
@@ -43,9 +43,8 @@
 - **Ziele:** LCP < 2,5 s · INP < 200 ms · CLS < 0,1 · mobil zuerst entwickelt. **Animationen dürfen CLS nicht verschlechtern.**
 - **`html lang="de"`**, semantische Landmarks (`header`, `nav`, `main`, `footer`), sichtbarer Fokus, Skip-Link „Zum Inhalt springen".
 - **Breakpoints:** ≤ 599 px mobil · 600–1023 px Tablet · ≥ 1024 px Desktop. Maximale Inhaltsbreite 1280 px, Fließtext max. 68 Zeichen.
-- **Designsystem:** verbindlich `design/sartu-tokens.css` (Richtung **„Werkplan"**), Referenz `design/SARTU_DESIGNSYSTEM.html`. Komponenten nutzen **ausschließlich Tokens**, nie rohe Farbwerte.
-- **Radius:** **0 px**, Eingabefelder und Buttons **2 px** — einheitlich. Keine „Karten in Karten". **Erhöhung durch Linie statt Schatten**; Schatten nur bei Modalen.
-- **Schriften:** IBM Plex Sans Condensed (Überschriften), IBM Plex Sans (Fließtext), IBM Plex Mono (Zahlen, Maße, Labels) — self-hosted WOFF2.
+- **Designsystem:** Farben, Schriften und Radien werden nach `CLAUDE_SARTU_DESIGN_BRIEFING_AUSFUEHRUNG.md` recherchiert und vorgelegt. Verbindlich ist nur: **alle Werte als zentrale Variablen**, Komponenten nutzen **nie** rohe Farbwerte, Radius **einheitlich** über die ganze Seite, keine „Karten in Karten".
+- **Schriften:** selbst gehostet als WOFF2, `font-display: swap`, Zahlen mit `tabular-nums`. Konkrete Wahl nach Design-Briefing §3.3.
 
 ---
 
@@ -72,78 +71,25 @@
 
 ---
 
-## 2a. Gestaltungsdetails, Textur und Bewegung (verbindlich)
+## 2a. Visuelle Ebene — nicht in diesem Dokument festgelegt
 
-> **Warum dieser Abschnitt existiert:** Ohne ihn baut man aus den Tokens eine korrekte, aber flache Seite. Die Wirkung entsteht aus vier Dingen, die kein Farbwert beschreibt: **Textur, Vermaßung, Ladesequenz und Zurückhaltung**. Referenz: `design/SARTU_LIVE_VORSCHAU.html`.
+> **Farbwelt, Schriften, Radien, Textur, Logo und Bewegungsdetails sind hier bewusst NICHT vorgegeben.**
+> Die ausführende KI stellt sie nach **`CLAUDE_SARTU_DESIGN_BRIEFING_AUSFUEHRUNG.md`** aus echten Bibliotheken und Referenzen zusammen und legt **2–3 Vorschläge** zur Entscheidung vor. Erst danach wird gebaut.
 
-### 2a.1 Papierstruktur — der wichtigste Einzelfaktor
+Frühere Designentwürfe unter `design/_verworfen/` sind **nicht** zu verwenden — auch nicht als Anregung.
 
-Der Grund, warum die Seite nach Zeichenpapier aussieht und nicht nach beiger Fläche. Rein CSS, **0 KB JavaScript, keine Bilddatei**:
+**Was dieses Lastenheft weiterhin verbindlich vorgibt** (Anforderungen, keine Gestaltung):
 
-1. **Feines Raster:** zwei `repeating-linear-gradient` (0° und 90°), Linienfarbe `rgba(28,27,25,.045)`, Raster **32 px**. Muss so schwach sein, dass man es eher spürt als sieht.
-2. **Korn:** ein Inline-SVG mit `feTurbulence` (`baseFrequency .85`, entsättigt) als `background-image`, `opacity ~.28`, `mix-blend-mode: multiply`, `pointer-events: none`.
-3. Beides liegt **hinter** dem Inhalt und niemals über Text.
+- **Struktur und Inhalt** jeder Seite: Sektionsreihenfolge, Copy, Überschriften, Feldlabels, Fehlermeldungen (§3 ff.)
+- **Leistung:** ≤ 75 KB gzip JS Startseite, ≤ 40 KB Unterseiten; LCP < 2,5 s · INP < 200 ms · CLS < 0,1
+- **Barrierefreiheit:** Kontrast ≥ 4,5:1, sichtbarer Fokus, volle Tastaturbedienung, Skip-Link, `prefers-reduced-motion` wirksam, Zustände nie allein über Farbe
+- **Ohne JavaScript nutzbar** — kein Inhalt erscheint erst durch eine Scroll-Animation
+- **Bewegung budgetiert:** höchstens zwei bewusste Markenmomente pro Seite, keine Animation über Text oder CTA
+- **Lizenzpflicht:** jedes eingesetzte Teil muss kommerzielle Nutzung **und** Weitergabe im Kundenprojekt erlauben (SARTU verkauft Websites weiter)
+- **Keine externen Verbindungen zur Laufzeit** — Schriften, Icons, Skripte selbst gehostet
+- **Positionierungsschutz:** die Seite darf nicht erkennbar aus einem Template stammen; keine Farbverläufe, Leuchtflächen, schwebenden Dashboard-Karten, Karten in Karten, Emoji-Marker, Handschlag-Stockfotos, generischen WebGL-Hintergründe
+- **Inhaltliche Wahrheit:** keine erfundenen Logos, Bewertungen, Referenzen oder Kundenzahlen; Portal-Ansichten aus echter Oberfläche, gekennzeichnet als „Musteransicht"
 
-**Regel:** Das Raster läuft durch die hellen Bereiche durch. Auf dunklen Bändern (CTA) entfällt es.
-
-### 2a.2 Vermaßung als Gestaltungsmittel
-
-Das wiederkehrende Markendetail — es macht aus einer Karte eine technische Zeichnung:
-
-- **Maßlinie** über dem Portal-Mockup: durchgehende Linie in `--c-signal` mit senkrechten Endstrichen (9 px), daneben ein Mono-Label. Genau **eine** vermaßte Sache pro Ansicht.
-- **Senkrechte Bemaßung** rechts daneben in `--c-line` (nicht rot — nur die Hauptaussage ist rot).
-- **Passermarken** an den Ecken des Hero-Rahmens: 14 × 14 px, 1 px Linie, nur oben-links und unten-rechts. Nicht an jeder Ecke, sonst wird es dekorativ.
-- **Mono-Versallabels** mit `letter-spacing: .14em` als durchgehendes Detail über alle Sektionen.
-
-### 2a.3 Ladesequenz (nur „above the fold", einmalig)
-
-Gestaffelt, insgesamt **unter 1,4 Sekunden**. Reine CSS-Animation, kein JavaScript:
-
-| Element | Effekt | Verzögerung |
-|---|---|---|
-| Eyebrow-Linie | wächst auf 44 px | 100 ms |
-| Eyebrow-Text | Fade + 12 px hoch | 180 ms |
-| H1, wortweise | aus der Grundlinie hochschieben (`overflow:hidden` + `translateY(105%)`) | 220 / 300 / 360 ms |
-| Lead | Fade | 520 ms |
-| Buttons | Fade | 620 ms |
-| Trust-Zeile | Fade | 740 ms |
-| Portal-Karte | Fade | 500 ms |
-| Maßlinie | zeichnet sich (`scaleX` von 0) | 900 ms |
-| Maß-Label | Fade | 1250 ms |
-
-**Das wortweise Hochschieben der H1 ist der eine Markenmoment der Startseite.** Er kostet ~0 KB und trägt die gesamte Wirkung.
-
-### 2a.4 Scroll-Reveals
-
-`IntersectionObserver` (~15 Zeilen eigenes JS, keine Bibliothek): `opacity 0 → 1` und `translateY(18px) → 0`, Dauer 700 ms, Kurve `cubic-bezier(.2,0,0,1)`, gestaffelt in Vierergruppen à 70 ms. Jedes Element wird **einmal** ausgelöst (`unobserve`).
-**Pflicht:** Inhalte sind ohne JavaScript sofort sichtbar — der Startzustand `opacity:0` wird nur gesetzt, wenn JS läuft, oder per `@media (prefers-reduced-motion: reduce)` neutralisiert.
-
-### 2a.5 Mikrointeraktionen
-
-- **Navigationslinks:** roter Unterstrich wächst von links (`right: 100% → 0`), 220 ms.
-- **Buttons:** Farbwechsel 140 ms; beim Klick `translateY(1px)`.
-- **Fokus:** 2 px Kontur, 2 px Abstand — wird **nie** wegen Optik entfernt.
-- Kein Parallax, keine Zähler, keine schwebenden Elemente, keine Partikel.
-
-### 2a.6 Wann Bibliotheken wirklich gebraucht werden
-
-Die Startseite oben erreicht ihre Wirkung mit **CSS + ~1 KB eigenem JS**. Bibliotheken werden dort eingesetzt, wo sie echte Arbeit sparen — nicht als Standardausstattung:
-
-| Baustein | Werkzeug | Wofür konkret |
-|---|---|---|
-| Ladesequenz, Reveals, Hover | **CSS + IntersectionObserver** | Standardfall, deckt die Startseite vollständig ab |
-| Verkettete Sequenzen mit Scroll-Bindung (z. B. eine Maßlinie, die sich über mehrere Sektionen aufbaut) | **GSAP + ScrollTrigger** (~34 KB) | nur wenn CSS es nachweislich nicht trägt |
-| Sanftes Scrollen auf der Marketingseite | **Lenis** (~3 KB) | optional, nur Website — **nie** im Portal |
-| Portal-Zustände, Modale, Layoutwechsel | **Motion** (~3–18 KB) | erste Wahl im Portal |
-| Seitenübergänge | **View Transitions API** (0 KB, nativ) | nur wenn Fokus und Analytics sauber bleiben |
-
-**Bindend bleibt das Budget aus §1:** ≤ 75 KB gzip auf der Startseite, ≤ 40 KB auf Unterseiten, **maximal zwei bewusste Markenmomente pro Seite**. Wird eine Bibliothek eingebaut, muss sie ihren Platz im Budget rechtfertigen — nicht umgekehrt.
-
-### 2a.7 Was die Seite billig aussehen lässt (verboten)
-
-Farbverläufe · Leuchtflächen · schwebende Dashboard-Karten mit Schlagschatten · runde Karten mit Akzentbalken · Karten in Karten · Emoji als Sektionsmarker · zentrierter Fließtext · mehrere Akzentfarben pro Sektion · Animationen über Text oder CTA · Stockfotos mit Handschlag oder Laptop · generische WebGL-Hintergründe (Vanta u. Ä.).
-
----
 
 ## 3. Header-Navigation (final)
 

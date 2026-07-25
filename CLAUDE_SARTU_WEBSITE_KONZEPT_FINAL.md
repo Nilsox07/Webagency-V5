@@ -7,24 +7,11 @@
 - `CLAUDE_SARTU_MASTERKONZEPT_FINAL.md` – Geschäftsmodell, Preise, Portal
 - `CLAUDE_MARKTANALYSE_KRITIK_OPTIMIERUNG.md` – Begründungen
 - **`CLAUDE_SARTU_WEBSITE_LASTENHEFT_BAUFINAL.md`** – umsetzungsreifes Briefing mit finaler Copy, Feldlabels, Fehlermeldungen, Bildmaßen und Abnahmekriterien
-- **`design/SARTU_DESIGNRICHTUNGEN.html`** – die drei Designrichtungen als gerendertes Mockup (Hero, Preise, Portal)
+- **`CLAUDE_SARTU_DESIGN_BRIEFING_AUSFUEHRUNG.md`** – Such- und Auswahlanleitung für die visuelle Ebene (Bibliotheken, Schriften, Icons, Referenzen, Prüfliste)
 
-> ## ✅ Designrichtung entschieden: **„Werkplan"**
+> **Designrichtung: offen.** Farbwelt, Schriften, Logo und Bewegungsdetails werden **nicht** in diesem Dokument festgelegt. Verbindlich ist `CLAUDE_SARTU_DESIGN_BRIEFING_AUSFUEHRUNG.md` — danach recherchiert die ausführende KI die visuelle Ebene und legt Vorschläge zur Entscheidung vor. Frühere Entwürfe unter `design/_verworfen/` sind ungültig.
 >
-> Abschnitt 3 dieses Dokuments ist damit **historisch**. Die dort beschriebenen Richtungen A/B/C wurden nach dem Codex-Review durch drei radikal neue ersetzt („Werkplan", „Kontor", „Signal", siehe `design/SARTU_DESIGNRICHTUNGEN.html`) — Grund: A/B/C blieben zu nah an der alten Farbwelt, und ausgerechnet Ivory + Serif + Rostrot ist das derzeit häufigste KI-Design-Muster.
->
-> **Gewählt und ausgearbeitet ist Richtung 01 „Werkplan"** (technisches Aufmaß: warmes Zeichenpapier, Graphit, Rotstift als einziger Signalakzent), mit der Typo-Kraft aus Richtung 03.
->
-> **Verbindliche Quellen ab jetzt:**
-> - **`design/sartu-tokens.css`** — einzige Quelle für Farben, Typografie, Abstände, Radien, Motion
-> - **`design/SARTU_LIVE_VORSCHAU.html`** — **so sieht die Seite aus**: Papierstruktur, Vermaßung, Ladesequenz, Logo-Vorschläge. Maßgeblich für die Wirkung.
-> - **`design/SARTU_DESIGNSYSTEM.html`** — Komponenten- und Zustandsreferenz (Spezifikationsblatt, **nicht** die Optik der Website)
-> - Umsetzungsdetails zu Textur und Bewegung: `CLAUDE_SARTU_WEBSITE_LASTENHEFT_BAUFINAL.md` §2a
->
-> **Warum Werkplan:** passt zur Zielgruppe (Handwerk, Bau, lokale Dienstleistung im Umland von Dresden), funktioniert **ohne Hochglanzfotos** — beim Start ohne Referenzbilder ein realer Vorteil — und überträgt sich als Rastersystem auf jede Kundenbranche.
->
-> **Die Entscheidung bleibt umkehrbar:** Komponenten greifen ausschließlich auf Tokens zu. Ein Wechsel zu „Kontor" oder „Signal" wäre ein Token-Tausch, kein Umbau.
-
+> Dieses Dokument regelt **Struktur, Inhalt, Aufbau und Anforderungen** — nicht die Optik.
 ---
 
 ## 0. Drei Dinge, die klar getrennt werden müssen
@@ -78,72 +65,23 @@ Die Website muss den Besucher durch **eine mentale Reise** führen. Jede Seite u
 
 ---
 
-## 3. Designrichtungen – drei Vorschläge zur Entscheidung
+## 3. Designrichtung — offen, wird recherchiert
 
-Die Farb-/Stilfrage ist eine **Marken-, keine Sachentscheidung**. Deshalb hier drei vollständig durchdachte Richtungen. Alle drei erfüllen die Pflichtkriterien: editorial, ruhig, hochwertig, **nicht** generisch-KI, kein Neon, keine Gradient-Orbs, keine Fake-Dashboards, keine austauschbare shadcn-Weißgrau-Optik.
+Die visuelle Richtung wird **nicht in diesem Konzept festgelegt**. Frühere Entwürfe (Farbwelten, Tokens, Logovorschläge) sind verworfen und liegen unter `design/_verworfen/`; sie sind nicht zu verwenden.
 
-### Richtung A – „Editorial Werkstatt" (Beige/Schwarz/Rostrot) — **meine Empfehlung**
+**Verbindlich ist stattdessen `CLAUDE_SARTU_DESIGN_BRIEFING_AUSFUEHRUNG.md`.** Danach recherchiert die ausführende KI Komponenten, Schriften, Icons und reale Referenzseiten, prüft sie gegen eine feste Liste (Lizenz, Pflege, Größe, Barrierefreiheit, Template-Erkennbarkeit) und legt **2–3 klickbare Vorschläge mit echten Inhalten** zur Entscheidung vor.
 
-| Aspekt | Festlegung |
-|---|---|
-| **Markenwirkung** | handwerklich-seriös, wertig, deutsch, zeitlos; passt zu Handwerk/Kanzlei/Praxis; wirkt am wenigsten nach Tech-Startup |
-| **Farbwelt** | Ivory/Beige `#F6F4EF` als Grundfläche · Schwarz-Ink `#14181D` für Text/dunkle Bänder · **Rostrot `#B55E2D` als einziger Signalakzent** (CTA, Marken-Detail) · Sand `#E9E4DA` für ruhige Bänder · sparsam Teal `#0B7F73` nur für Status im Portal-UI |
-| **Typografie** | H1/H2 in einer charaktervollen **editorial Serif** oder kräftigen Grotesk mit hoher Kontrastwirkung; Fließtext klare Grotesk; tabellarische Ziffern für Preise |
-| **Layoutprinzip** | Redaktionelles Raster, viel Weißraum, **breite Zeilen statt Kachelwände**, klare Trennlinien statt Schatten, Abschnitte als Bänder |
-| **Bild-/Screenshot-Stil** | echte Portal-Screens auf Ivory-Fläche, leicht angeschnitten; echte Fotos körnig-warm; keine Stockbilder |
-| **Portal-Mockup** | helles UI mit Ink-Text, Rostrot nur für den aktiven nächsten Schritt |
-| **KI-Optik-Risiko** | **niedrig** – warme Papierwelt ist genau das Gegenteil des generischen KI-Looks |
-| **Risiko** | wirkt evtl. „zu ruhig", wenn Typografie zu brav gewählt wird → Kontrast über Schriftgröße und Bandwechsel erzeugen |
+**Anforderungen, die jede Richtung erfüllen muss** — Geschäfts- und Rechtsfragen, keine Geschmacksfragen:
 
-### Richtung B – „Technisches Papier" (Ivory/Ink/Teal)
+- Lizenzen erlauben kommerzielle Nutzung **und** Weitergabe im Kundenprojekt
+- Leistungs- und Barrierefreiheitsziele aus dem Lastenheft
+- keine externen Verbindungen zur Laufzeit
+- nicht erkennbar aus einem Template — die Marke verkauft „individuell programmiert"
+- keine erfundenen Logos, Bewertungen oder Referenzen
+- alle Farben, Schriften und Abstände als zentrale Variablen, damit ein späterer Wechsel ein Variablentausch bleibt
 
-| Aspekt | Festlegung |
-|---|---|
-| **Markenwirkung** | präzise, systemisch, software-nah; betont Portal und Technik-Kompetenz |
-| **Farbwelt** | Paper `#FFFFFF`/Mist `#F3F6F4` · Ink `#14181D` · **Teal `#0B7F73` als Marken-/CTA-Farbe** · Amber `#A8660A` Hinweis · Red `#B63A3A` Fehler |
-| **Typografie** | durchgehend klare Grotesk (z. B. Inter/Instrument Sans), H1 kräftig, keine Serif |
-| **Layoutprinzip** | strenges 8-px-Raster, Tabellen und Statusmodule als Gestaltungsmittel, kompakte Dichte |
-| **Bild-/Screenshot-Stil** | UI-lastig, viele echte Portal-Zustände, Diagramme statt Fotos |
-| **Portal-Mockup** | wirkt fast identisch zur echten App → stärkster „das gibt es wirklich"-Effekt |
-| **KI-Optik-Risiko** | **mittel** – Teal + Weißgrau ist nah am SaaS-Standard; braucht eigene Kante (z. B. eigenwillige Typo, Rasterlinien) |
-| **Risiko** | könnte wie ein Software-Produkt statt wie eine Agentur wirken → weniger Nähe zum Handwerkskunden |
+**Technische Basis:** eigenes Layout statt Fremd-Template — eine erkennbar templatebasierte eigene Website wäre bei „individuell programmiert" ein Glaubwürdigkeitsbruch. Unstyled/Headless-Komponenten sind erlaubt und erwünscht, weil sie Barrierefreiheit mitbringen, ohne fremde Optik aufzuzwingen.
 
-### Richtung C – „Kontrast-Editorial" (Schwarz/Ivory, Akzent minimal)
-
-| Aspekt | Festlegung |
-|---|---|
-| **Markenwirkung** | mutig, hochwertig, Design-Studio-Haltung; stärkste Differenzierung |
-| **Farbwelt** | dominant **Schwarz** `#0E1216` und Ivory `#F6F4EF` im harten Wechsel · **ein** Akzent (Rostrot **oder** Teal) sehr sparsam |
-| **Typografie** | großformatige Display-Typo als Hauptgestaltungsmittel, sehr reduzierte Farbigkeit |
-| **Layoutprinzip** | ganzflächige Bänder im Schwarz-Ivory-Wechsel, große Typo-Sprünge, fast keine Karten |
-| **Bild-/Screenshot-Stil** | Screens groß und selbstbewusst inszeniert, hoher Kontrast |
-| **Portal-Mockup** | dunkles Cockpit als „Produktbühne" |
-| **KI-Optik-Risiko** | **niedrig** – aber Verwechslungsgefahr mit Kreativagentur-Ästhetik |
-| **Risiko** | kann für konservative Zielgruppe (Handwerk, Kanzlei) **zu modisch/kalt** wirken und Vertrauen kosten |
-
-### Bewertung und Empfehlung
-
-| Kriterium | A Editorial Werkstatt | B Technisches Papier | C Kontrast-Editorial |
-|---|---|---|---|
-| Passung Zielgruppe (regional, B2B, konservativ) | **hoch** | mittel | niedrig–mittel |
-| Differenzierung vs. Wettbewerb | hoch | mittel | **sehr hoch** |
-| Anti-KI-Wirkung | **sehr hoch** | mittel | hoch |
-| Portal-USP transportierbar | hoch | **sehr hoch** | hoch |
-| Umsetzungsrisiko (Solo, ohne Designer) | mittel | **niedrig** | hoch |
-
-**Empfehlung: Richtung A** für die Website, mit **B als Portal-Innenwelt** (funktionales Teal für Status/Links innerhalb der Anwendung). Damit bleibt die Marke warm und unverwechselbar, während das Portal sachlich und bedienbar wirkt. Das entspricht auch der zuletzt gezeigten SARTU-Designrichtung.
-
-### Technische Basis – frei entschieden
-
-| Variante | Bewertung |
-|---|---|
-| **A: eigenes Layout/Designsystem** (empfohlen) | Volle Markenkontrolle, keine Lizenzfragen, kein Template-Look. Aufwand höher, aber SARTU baut ohnehin ein eigenes Designsystem für Kundenseiten – die Website ist die erste Anwendung davon und damit **Referenz und Beweis zugleich**. |
-| B: neues Template recherchieren | Nur zulässig nach Prüfung von **Lizenz (Redistribution!), Aktualität, Wartbarkeit, Stack, SEO-Tauglichkeit, Barrierefreiheit, Anpassbarkeit, Wiedererkennungsgrad**. Kein Template, nur weil es in Altdateien stand. |
-| C: Template als reine Rohbasis, visuell stark umgebaut | Pragmatischer Mittelweg, aber Gefahr, dass Template-DNA sichtbar bleibt. |
-
-**Empfehlung: Variante A.** Begründung: SARTU verkauft „individuell programmiert, kein Baukasten". Eine erkennbar Template-basierte eigene Website wäre ein **Glaubwürdigkeitsbruch am wichtigsten Ort**. Technisch: static-first (Astro o. gleichwertig), FTP-/CDN-deploybar.
-
----
 
 ## 4. Sitemap (Launch-Umfang bewusst klein)
 
@@ -292,66 +230,21 @@ Auch wenn später Ortsseiten dazukommen: **die Startseite bleibt die wichtigste 
 
 ---
 
-## 10. Öffentliches Website-Designsystem (Tokens & Komponenten)
+## 10. Designsystem und Bewegung — ausgelagert
 
-**Tokens — ausgelagert und verbindlich:** `design/sartu-tokens.css`. Kurzfassung: warme Papier-Neutrale (`paper-0/1/2`), Graphit-Text (`ink`, `ink-2`, `ink-3`), `line` für Rahmen und Maßlinien, **`signal` (#B4261E, Rotstift)** als einziger Markenakzent, Statusfarben nur im Portal · Abstände 4/8-Logik · **Radius 0 px, Felder und Buttons 2 px** (eine technische Zeichnung hat scharfe Kanten) · Fließtext 17 px Desktop / 16 px mobil · max. Inhaltsbreite 1280 px · Zeilenlänge ≤ 68 Zeichen · Fokus immer sichtbar · Kontrast ≥ 4,5:1 · **Erhöhung durch Linie statt Schatten**.
+Tokens, Komponentenauswahl, Bibliotheken und Bewegungsdetails stehen in **`CLAUDE_SARTU_DESIGN_BRIEFING_AUSFUEHRUNG.md`**. Dort ist beschrieben, **wo** die ausführende KI sucht, **wie** sie prüft (Lizenz, Pflege, Größe, Barrierefreiheit, Template-Erkennbarkeit) und **was** sie zur Entscheidung vorlegt.
 
-**Schriften:** **IBM Plex**, self-hosted als WOFF2 mit `font-display: swap` — *Sans Condensed* (Überschriften), *Sans* (Fließtext), *Mono* (Zahlen, Maße, Labels). Als Technikschrift entworfen, offene Lizenz, drei Rollen aus einer Familie. Bewusst **nicht Inter** — das ist die Standardwahl generischer Layouts.
+Verbindlich bleiben hier nur die Anforderungen:
 
-**Kein Dunkelmodus für die Website.** Die Marke ist auf helles Zeichenpapier festgelegt; ein dunkles Aufmaß widerspricht der Bildidee. Für das Portal ist er ab Stufe 2 möglich, die Tokens sind vorbereitet.
+- **Leistung:** ≤ 75 KB gzip JS Startseite, ≤ 40 KB Unterseiten · LCP < 2,5 s · INP < 200 ms · CLS < 0,1
+- **Barrierefreiheit:** Kontrast ≥ 4,5:1, sichtbarer Fokus, volle Tastaturbedienung, Skip-Link, `prefers-reduced-motion` wirksam, Zustände nie allein über Farbe
+- **Ohne JavaScript nutzbar**, kein Inhalt erscheint erst durch Scroll
+- **Bewegung budgetiert:** höchstens zwei bewusste Markenmomente pro Seite, keine Animation über Text oder CTA
+- **Alles zentral variabel:** Farben, Schriften, Abstände als Variablen, damit ein Wechsel ein Variablentausch bleibt
+- **Keine externen Verbindungen zur Laufzeit**, alle Lizenzen erlauben Weitergabe im Kundenprojekt
 
-**Komponenten (Launch-Set):** Header + mobile Navigation · Hero mit Produktbild · Trust-Zeile · Breite Service-Zeile mit Tags · Paketkarte (empfohlen/kompakt) · Erstjahres-/Vergleichstabelle · Prozess-Timeline · Portal-Screenshot-Rahmen mit „Musteransicht"-Badge · Zwei-Listen-Block (`Im Portal` / `Nicht im Portal`) · FAQ-Akkordeon · CTA-Band · Footer (5 Spalten) · Formularfelder + Fehlerzustände · Breadcrumb · 404.
+**Komponentenbedarf** (Was gebraucht wird — nicht wie es aussieht): Header mit mobiler Navigation · Hero mit Produktbild · Trust-Zeile · breite Leistungszeile mit Tags · Paketdarstellung mit hervorgehobener Empfehlung · Erstjahres-/Vergleichstabelle · Prozess-Timeline · Bildrahmen mit „Musteransicht"-Kennzeichnung · Zwei-Listen-Block · FAQ-Akkordeon · CTA-Band · Footer · Formularfelder mit Fehlerzustand · Breadcrumb · 404.
 
-**Verboten im System:** Karten in Karten · pillenförmige Standard-Buttons · Farbverläufe/Leuchtflecken · mehr als ein Akzentton pro Sektion.
-
----
-
-## 10a. Motion- und Library-Strategie
-
-> **Korrektur:** Die frühere Regel „keine Animationen über dezente Übergänge hinaus" war zu streng. Eine Website, die sich beim Scrollen tot anfühlt, wirkt eher nach Standard-Baukasten — und genau davon soll SARTU sich abheben. Bewegung ist erlaubt und erwünscht, **aber budgetiert**.
-
-**Grundsatz: wenige, erkennbare Markenmomente statt überall ein bisschen Effekt.** Hochwertig entsteht durch stabile Typografie, starke Layoutkomposition und Ladegeschwindigkeit — Motion setzt Akzente, sie ersetzt keine Gestaltung.
-
-### Motion-Budget (verbindlich)
-
-| Regel | Wert |
-|---|---|
-| JS gesamt Startseite | **≤ 75 KB gzip** |
-| JS gesamt Unterseiten | **≤ 40 KB gzip** |
-| Bewusste Markenmomente pro Seite | **maximal 2** |
-| Animationsdauer UI | 120–250 ms |
-| Animationsdauer Editorial-Moment | ≤ 800 ms |
-| `prefers-reduced-motion: reduce` | **Pflicht** — alle nicht-essenziellen Bewegungen aus, Inhalte sofort sichtbar |
-| Layoutverschiebung durch Animation | **verboten** (CLS bleibt < 0,1) |
-| Inhalt, der erst durch Scroll-Animation sichtbar wird | **verboten** ohne JS-Fallback (Inhalt muss ohne JS lesbar sein) |
-| Animation über Text/CTA | **verboten** |
-
-### Library-Bewertung
-
-Größenangaben sind Größenordnungen (gzip) und vor Einsatz zu messen.
-
-| Library | SARTU-Website | Portal | Kundenwebsites | Bewertung |
-|---|---|---|---|---|
-| **CSS-Transitions/Animations** | **Standard** | **Standard** | **Standard** | Erste Wahl. 0 KB. Deckt 80 % ab. |
-| **View Transitions API** (nativ) | ja, vorsichtig | – | ja | 0 KB, in Astro eingebaut. Nur wenn Routing, Fokus und Analytics sauber bleiben. |
-| **Lenis** (~3 KB) | ja, gezielt | **nein** | nur Platzhirsch/Sonder | Sanftes Scrollen. Kein Scroll-Hijacking-Gefühl, Reduced-Motion respektieren. Im Portal stört es die Bedienung. |
-| **GSAP + ScrollTrigger** (~34 KB) | ja, für die 1–2 Markenmomente | **nein** | Platzhirsch optional | Seit April 2025 **vollständig kostenlos, auch kommerziell — inkl. SplitText/MorphSVG/DrawSVG** ([Webflow](https://webflow.com/blog/gsap-becomes-free), [GSAP-Lizenz](https://gsap.com/community/standard-license/), geprüft 25.07.2026). Damit entfällt das frühere Lizenzrisiko. |
-| **Motion (motion.dev)** (~3–18 KB) | optional | **ja, erste Wahl** | Start/Wachstum subtil | Ideal für UI-Zustände, Modals, Microinteractions. Mini-Variante bevorzugen. |
-| **Rive** (~100 KB+ Runtime) | nur für **einen** Marken-/Logomoment | nein | nur Sonderprojekt | Optional, nie Pflicht. Nur wenn die Animation eine echte Idee trägt. |
-| **Barba.js** (~7 KB) | nein | nein | nein | Durch View Transitions weitgehend überholt. |
-| **Vanta.js** | **nein** | nein | nur Sonderprojekt mit echter Art-Direction | Zieht three.js nach (~150 KB+) und sieht nach Template-Demo aus — macht die Marke billiger, nicht teurer. |
-| **Three.js / OGL** | nein | nein | nur Sonderprojekt | Kein Deko-3D. Nur bei selbst entwickelter Idee mit Zweck. |
-
-### Wo Motion bei SARTU tatsächlich eingesetzt wird
-
-1. **Hero-Einstieg** — eine ruhige, gestaffelte Einblendung von Eyebrow → H1 → Lead → Buttons (CSS, ~0 KB). Ohne JS ist alles sofort sichtbar.
-2. **Ein Markenmoment** — z. B. die Portal-Statuskarte, deren „nächster Schritt" beim Scrollen einmal einrastet, oder eine Maßlinie, die sich zeichnet (Richtung Werkplan). GSAP nur, wenn CSS es nicht trägt.
-3. **UI-Feedback** — Hover, Fokus, Akkordeon, Menü-Overlay (CSS).
-4. **Sonst nichts.** Kein Parallax auf jedem Bild, keine Zähler, keine schwebenden Elemente, keine Partikel.
-
-**Accessibility-Pflicht:** `prefers-reduced-motion` wird respektiert; Fokus bleibt sichtbar und darf nicht weganimiert werden; keine Bewegung, die Lesen erschwert; kein Autoplay mit Bewegung über 5 Sekunden.
-
----
 
 ## 11. Abnahmekriterien für die Website
 
@@ -372,22 +265,11 @@ Die Umsetzung gilt erst als fertig, wenn:
 
 ## 12. Entscheidungen — Stand
 
-1. ~~Designrichtung~~ ✅ **„Werkplan"** (technisches Aufmaß), ausgearbeitet in `design/sartu-tokens.css` + `design/SARTU_DESIGNSYSTEM.html`.
+1. **Designrichtung** — offen. Wird von der ausführenden KI nach `CLAUDE_SARTU_DESIGN_BRIEFING_AUSFUEHRUNG.md` recherchiert und als 2–3 klickbare Vorschläge vorgelegt. Blockiert den Bau der Struktur nicht.
 2. ~~Eigenes Layout oder Template~~ ✅ **eigenes Layout/Designsystem** — eine erkennbar Template-basierte eigene Website wäre ein Glaubwürdigkeitsbruch bei „individuell programmiert".
-3. ~~Schrift~~ ✅ **IBM Plex** (Sans Condensed / Sans / Mono), self-hosted. Keine editorial Serif — die Kondensschrift trägt den Charakter.
-4. **Logo** — vier ausgearbeitete Vorschläge in `design/SARTU_LIVE_VORSCHAU.html`, jeweils mit Favicon-Variante. Blockiert den Bau nicht (bis zur Wahl trägt die Wortmarke `SARTU` in IBM Plex Sans Condensed).
+3. **Schrift** — offen. Auswahlkriterien (Rollen, Umlaute, `tabular-nums`, Selbsthosting, Lizenz, keine Standardwahlen) stehen im Design-Briefing §3.3.
+4. **Logo** — offen, blockiert den Bau nicht. Anforderungen und Vorgehen: `CLAUDE_SARTU_DESIGN_BRIEFING_AUSFUEHRUNG.md` §8. Fest steht nur der **Name `SARTU`** ohne Zusatz wie „digital"; ein Beisatz gehört gegebenenfalls ins Logo-Lockup, nicht in den Namen. Bis zur Entscheidung gilt die reine Wortmarke in der gewählten Website-Schrift — das ist eine gültige Lösung, kein Provisorium.
 
-| # | Vorschlag | Idee | Stärke |
-|---|---|---|---|
-| **01** | **Maßlinie** | Die Wortmarke wird vermessen — Linie mit Endstrichen unter `SARTU` | **Empfehlung.** Sagt ohne Worte „nachgemessen, festgelegt". Die Linie trägt wechselnde Zusätze (`FESTPREIS`, `FIRMENWEBSITES`). |
-| 02 | Schriftfeld | Rahmen wie das Titelfeld einer technischen Zeichnung, rotes Datenfeld rechts | Unverwechselbar, niemand in der Branche macht das. Braucht mehr Breite. |
-| 03 | Schnitt im T | Das T als Tragbalken mit rotem Korrekturschnitt | Zeichen steckt im Wort, sehr gutes Favicon. Etwas subtiler. |
-| 04 | Passermarke | Passer-/Registermarke vor der Wortmarke, Beschriftung darunter | Kleinstes Zeichen, funktioniert bis 16 px. |
-
-**Namensentscheidung: `SARTU` allein — nicht „SARTU digital".**
-„digital" ist ein Anhängsel aus den 2010ern („Müller digital"), sagt nichts, was die Seite nicht in zwei Sekunden selbst erklärt, verlängert den Namen und schwächt die Domain. Wird ein Zusatz gebraucht, gehört er als **Beschriftung ins Logo** (Vorschlag 01 und 04) und nicht in den Namen: `SARTU · Firmenwebsites`. Der Name bleibt kurz, sprechbar und ownable.
-5. ~~Startregion und Adresse~~ **entschieden:** Wohnsitz Stolpen, Geschäftsadresse Dresden, Markt Region Dresden/Ostsachsen. Verbleibende Teilfrage betrifft nur die Form des Google-Profils (echtes Büro → sichtbare Adresse, reine Postadresse → Service-Area-Business), s. Masterkonzept §23a.1.
-6. **`/agb` zum Launch:** Empfehlung – **nur** live und verlinkt, wenn der Text anwaltlich final ist. Sonst **gar nicht** verlinken (nicht in Navigation, nicht im Footer) und `noindex`. **Launch-Pflicht sind nur Impressum und Datenschutz.**
 
 ---
 
