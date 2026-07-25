@@ -56,8 +56,20 @@ gelaufene Tests dürfen nie als bestanden gemeldet werden (Portal-Lastenheft §1
 Datenbank ab und kostet dafür einen Vorsatz vor jedem Befehl. Weg B fühlt sich normaler an und
 verlangt drei Handgriffe mehr bei der Einrichtung.
 
-**Wenn Docker Desktop schon läuft oder problemlos installiert: Weg A.** Wenn es unter Windows an
-WSL 2 oder der Virtualisierung hakt, ist das kein Kampf wert — dann **Weg B** und weiter im Text.
+### Welcher passt
+
+| Ausgangslage | Weg |
+|---|---|
+| PHP 8.3 ist schon installiert | **B** — nichts installieren, nur Erweiterungen prüfen |
+| Ein PHP-Paket ist da, aber älter oder unvollständig | **B**, nachziehen |
+| **Auf dem Rechner ist gar nichts** | **A** — ein Installer und zwei Befehle statt `PATH`, `php.ini` und Erweiterungen von Hand |
+| Docker Desktop hakt an WSL 2 oder der Virtualisierung | **B** — kein Kampf wert |
+
+Die dritte Zeile ist der Punkt, der leicht falsch herum gedacht wird: Wenn ohnehin **etwas**
+installiert werden muss, ist Docker nicht der aufwendigere, sondern der **kürzere** Weg. Die
+Erweiterungen aus §1.4 sind darin bereits richtig gesetzt und werden beim Bau geprüft; bei einer
+Installation von Hand sind sie drei Fehlerquellen: falsche Version, `PATH` nicht gesetzt,
+`php.ini` nicht angepasst.
 
 ---
 
@@ -242,8 +254,12 @@ aktuelle Fassung holen, nicht mit der alten anfangen.
 
 ### 3. Zwei Datenbanken anlegen
 
-Nicht eine, sondern zwei. Die Testfälle leeren Tabellen; mit nur einer Datenbank sind irgendwann
-deine Arbeitsdaten weg.
+**Für Sitzung 1 noch nicht nötig** — Plan, Gerüst und Designvarianten brauchen keine Datenbank.
+Wer schnell anfangen will, überspringt diesen Schritt und holt ihn vor Sitzung 2 nach; siehe
+„Bauen, bevor die Datenbank steht".
+
+Dann aber nicht eine, sondern zwei. Die Testfälle leeren Tabellen; mit nur einer Datenbank sind
+irgendwann deine Arbeitsdaten weg.
 
 ```sql
 CREATE DATABASE sartu       CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
