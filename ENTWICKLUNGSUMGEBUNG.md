@@ -73,6 +73,40 @@ Installation von Hand sind sie drei Fehlerquellen: falsche Version, `PATH` nicht
 
 ---
 
+## Was Codex davon selbst erledigen kann
+
+Codex hat Zugriff auf denselben Rechner und kann Befehle ausführen. Die Arbeitsteilung ist trotzdem
+nicht beliebig:
+
+| | Wer |
+|---|---|
+| Docker Desktop bzw. Laragon **installieren** und starten | **Mensch** |
+| Virtualisierung im BIOS/UEFI aktivieren, WSL 2 einrichten, Neustart | **Mensch** |
+| Dateien aus `main` holen, `.env` anlegen, Passwörter erzeugen | Codex |
+| `docker compose up -d --build` | Codex |
+| Prüfen: PHP-Version, Erweiterungen aus §1.4, Datenbankverbindung | Codex |
+| Ergebnis berichten, bei Fehlschlag die Ursache benennen | Codex |
+
+Die ersten beiden Zeilen sind nicht aus Vorsicht dort, sondern weil sie nicht skriptbar sind:
+Grafische Installer, Rechteanhebung, ein Neustart und eine BIOS-Einstellung. Ein Agent, der in eine
+Passwortabfrage läuft, bleibt hängen — und eine BIOS-Einstellung kann keine Software vornehmen.
+
+Unter Windows lässt sich der Installationsteil abkürzen, wenn `winget` vorhanden ist. In einer
+PowerShell **als Administrator**:
+
+```
+wsl --install
+winget install Docker.DockerDesktop
+```
+
+Danach neu starten und Docker Desktop einmal von Hand öffnen. Diese Zeilen selbst ausführen, nicht
+von Codex ausführen lassen — sie brauchen erhöhte Rechte, und was mit erhöhten Rechten auf dem
+eigenen Rechner läuft, sollte man gesehen haben.
+
+Alles ab Schritt 2 kann Codex übernehmen. Der Prompt dafür steht unter „Weiterarbeiten mit Codex".
+
+---
+
 ## Weg A — Einrichtung mit Docker
 
 ### 1. Docker installieren
@@ -175,6 +209,36 @@ git checkout origin/main -- docker-compose.yml .docker .env.example ENTWICKLUNGS
 erhalten. Fehlt sie, zusätzlich `git checkout origin/main -- .gitignore`.
 
 Dann die Einrichtung durchlaufen und Codex den passenden Satz geben.
+
+### Einrichtung an Codex übergeben (Weg A, ab Schritt 2)
+
+Voraussetzung: Docker Desktop ist installiert und **läuft**.
+
+> Docker Desktop läuft jetzt auf diesem Rechner. Richte die Entwicklungsumgebung ein und melde das
+> Ergebnis. Installiere nichts nach und frage bei nichts nach erhöhten Rechten — wenn etwas fehlt,
+> nenne es und halte an.
+>
+> 1. `docker --version` und `docker compose version` prüfen. Kommt keine Ausgabe: melden und anhalten
+> 2. Fehlende Dateien aus `main` holen:
+>    `git fetch origin main` und
+>    `git checkout origin/main -- docker-compose.yml .docker .env.example ENTWICKLUNGSUMGEBUNG.md`
+> 3. `.env` aus `.env.example` anlegen, falls noch nicht vorhanden. `DB_PASSWORD` und
+>    `DB_ROOT_PASSWORD` mit je einem zufälligen Wert füllen. `.env` **niemals** committen —
+>    sie steht in `.gitignore`
+> 4. `docker compose up -d --build`
+> 5. Prüfen und die Ausgaben zeigen:
+>    `docker compose exec app php -v` — muss 8.3 oder höher sein
+>    `docker compose exec app php -m` — muss `pdo_mysql`, `sodium`, `mbstring`, `intl`, `fileinfo`,
+>    `openssl` enthalten
+>    `docker compose exec app composer --version`
+>    Datenbankverbindung mit einem kurzen PDO-Aufruf gegen `db`
+> 6. Bericht: was läuft, was nicht, und bei einem Fehlschlag die Ursache — nicht nur die
+>    Fehlermeldung weiterreichen
+>
+> Danach anhalten. Baue in diesem Durchgang keinen Produktionscode.
+
+Der letzte Satz trennt die Einrichtung sauber vom Bau: Wenn beides in einem Durchlauf passiert und
+etwas schiefgeht, ist hinterher unklar, woran es lag.
 
 ### Nach Weg A (Docker)
 
