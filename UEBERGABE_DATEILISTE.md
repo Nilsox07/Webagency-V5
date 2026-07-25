@@ -65,6 +65,21 @@ Dateien und der Bestätigung, dass das Hauptdokument vollständig ist.
 
 ---
 
+## Wie der Bau abläuft
+
+**Drei Sitzungen, zwei Entscheidungspunkte** — Ablauf und fertige Startprompts stehen in
+`CODEX_SESSIONS_ABLAUF.md`:
+
+| Sitzung | Was entsteht | Endet mit |
+|---|---|---|
+| 1 | `IMPLEMENTATION_PLAN.md`, Projektgerüst, 2–3 Designvarianten | **Stopp** — der Mensch entscheidet |
+| 2 | Kundenbereich vollständig, 59 Tests, Screenshots | Bericht |
+| 3 | Öffentliche Seiten vollständig | Bericht |
+
+Sitzung 2 und 3 laufen weitgehend autonom. Sitzung 1 nicht — sie endet bewusst an einem Gate.
+
+---
+
 ## Zwei harte Gates vor dem Bau
 
 Diese beiden Punkte werden häufig übersprungen, weil die Lastenhefte so vollständig wirken. Genau
