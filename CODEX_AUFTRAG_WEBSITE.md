@@ -205,6 +205,24 @@ Nach `CLAUDE_SARTU_DESIGN_BRIEFING_AUSFUEHRUNG.md`:
 
 Erst nach der Entscheidung: alle Seiten aus dem Lastenheft, im gewählten Stil.
 
+**Zwei Pflichtdateien in dieser Phase — beide bevor die Langtexte entstehen:**
+
+**1. `KEYWORD_VALIDATION.md`.** Je Launch-Adresse: Zielbegriff, Nebenbegriffe, Suchintention, welche
+Ergebnistypen die ersten zehn Treffer dominieren, verwandte Fragen, und die Entscheidung
+„Title/H1/URL bestätigt" oder ein Änderungsvorschlag mit Begründung. Aufbau:
+`SARTU_SEO_GEO_KEYWORDSTRATEGIE.md` §1.1.
+
+> **Ohne Volumenwerkzeug:** Datei trotzdem anlegen, oben als „SERP- und Intent-Validierung ohne
+> Volumendaten" kennzeichnen, Volumenspalte **leer** lassen. **Niemals** Zahlen schätzen, um die
+> Tabelle zu füllen. Schon der Blick auf die Suchergebnisse zeigt, ob eine Seite eine Chance hat.
+
+**2. `GEO_DISCOVERY_CHECKLIST.md`** abarbeiten (liegt im Repository). Besonders: `robots.txt` darf
+`Googlebot`, `Bingbot` und `OAI-SearchBot` **nicht** sperren, die `GPTBot`-Entscheidung wird
+dokumentiert statt nebenbei getroffen, und `sameAs` nimmt **nur echte, gepflegte Profile** auf.
+
+**Herkunftserfassung** nach Lastenheft §9.5b und Portal-Lastenheft §4b.7 einbauen — beim **ersten**
+Seitenaufruf in die Sitzung schreiben, nicht erst beim Absenden.
+
 ---
 
 ## 5. Was du schreiben musst (und was nicht)
@@ -304,6 +322,8 @@ Die Definition of Done steht in **Lastenheft §17**. Sie gilt vollständig. Beso
 - **Bedarfsscheck mit abgeschaltetem JavaScript vollständig durchlaufen** — getestet, nicht behauptet
 - **Nur `/public` ist über den Webserver erreichbar** — `/app`, `/storage`, `.env` liefern 403 oder 404, praktisch geprüft
 - **Kein Netzwerkaufruf an eine fremde Domain** — im Netzwerkprotokoll geprüft
+- **`KEYWORD_VALIDATION.md`** und **`GEO_DISCOVERY_CHECKLIST.md`** liegen vor und sind ausgefüllt
+- **Herkunftserfassung geprüft:** Testanfrage mit `?utm_source=test&utm_medium=audit` landet mit den Werten im Datensatz
 - **Startsperre nachgewiesen (§14a):** Die produktive Veröffentlichung bricht bei einem Platzhalter in Impressum oder Datenschutz nachweislich ab — einmal absichtlich provoziert und belegt
 - Kontrast ≥ 4,5:1, Tastaturbedienung vollständig, Fokus sichtbar
 - Laborwerte im Zielbereich; echte Core Web Vitals sind Nachmessung (§17a), kein Abnahmekriterium
