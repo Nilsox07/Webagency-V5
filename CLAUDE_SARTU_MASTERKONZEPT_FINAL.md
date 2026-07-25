@@ -115,7 +115,7 @@ Der häufigste Kommunikationsfehler wäre, die Website als „wartungsarm" zu be
 
 - **Nicht sagen:** „Unsere Websites brauchen kaum Wartung." · „wartungsfrei" · „wartungsarm".
 - **Sagen:** „**Keine Wartung für Sie.** SARTU betreibt Ihre Website laufend."
-- **Kernunterschied:** Die Website ist wartungsarm **für den Kunden** – nicht wartungsfrei und nicht kostenlos zu betreiben.
+- **Kernunterschied:** Der Aufwand verschwindet **für den Kunden** – er verschwindet nicht, sondern liegt bei SARTU. Genau dafür ist die monatliche Pauschale da.
 
 **Der Schutz bezahlt:** Betrieb, Verantwortung, Verfügbarkeit, Hosting, SSL, Backups, Monitoring, technische Pflege, technische Suchgesundheit, **Formularprüfung**, Versionsstand, Portalzugang (inkl. Sichtbarkeit von SARTU-Rechnungs- und Zahlungsstatus) und Reaktionsbereitschaft.
 *Klarstellung:* „Zahlungsprüfung" meint **den SARTU-Rechnungs-/Mollie-Status im Portal** – **nicht** Zahlungs- oder Shopfunktionen auf der Kundenwebsite. Solche Funktionen gibt es nur in Sonderprojekten und sind dort gesondert beauftragt.
@@ -324,7 +324,7 @@ Zwei Spalten nebeneinander (mobil untereinander):
 | Fragen zu Ihrem Betrieb beantworten | Webtexte schreiben |
 | Bilder und Unterlagen hochladen | Wissen, wie viele Seiten Sie brauchen |
 | Vorschau ansehen und freigeben | Irgendetwas installieren |
-| Später Öffnungszeiten und Kontaktdaten ändern | Sich um Updates oder Sicherheit kümmern |
+| Später Öffnungszeiten ändern | Sich um Updates oder Sicherheit kümmern |
 
 > Struktur, Design, Technik und die Suchmaschinen-Grundlage übernehmen wir. Sie liefern die Fakten aus Ihrem Betrieb — den Rest machen wir.
 
@@ -375,8 +375,8 @@ Die Minutenangabe kommt aus dem Paket (Start/Wachstum/Platzhirsch) und ist als S
 
 | Stufe | Umfang |
 |---|---|
-| **Stufe 0** | **Ein** Willkommensbildschirm (Inhalt von Bildschirm 1 + 2 zusammengefasst) + erklärende Leerzustände. Reicht für die ersten Kunden. |
-| **Stufe 1** | Vollständige Willkommensstrecke, Kurzeinführung nach Zahlung, Ersthilfe je Modul, Wiederaufruf |
+| **Stufe 0** | **Alle drei Bildschirme** (§9a.2) + erklärende Leerzustände + Wiederaufruf unter Hilfe. Die Texte stehen fest und sind statisch — der Mehraufwand gegenüber einem Einzelbildschirm ist minimal, der Nutzen beim ersten Eindruck nicht. **Nicht** enthalten: Ersthilfe je Modul, Kurzeinführung nach Zahlung. |
+| **Stufe 1** | Zusätzlich: Kurzeinführung nach Zahlung, Ersthilfe je Modul, personalisierte Inhalte |
 | **Stufe 2** | Optional kurze Erklärvideos (max. 60 Sekunden) für Vorschau-Freigabe und Selbstpflege — nur, wenn die Praxis zeigt, dass Text nicht reicht |
 
 **Messung:** Erfasst wird, welche Fragen trotz Einführung im Support ankommen. Jede wiederkehrende Frage ist ein Auftrag, die Einführung oder die Oberfläche zu verbessern — **nicht**, mehr Text hinzuzufügen.
@@ -479,7 +479,9 @@ Ein früher geäußerter Wunsch war „am Ende alles per FTP hochladen". Das mus
 ## 13. Eigene SARTU-Website – ausgelagert (Autoritätsregel)
 
 > **Für die eigene SARTU-Verkaufswebsite gilt ausschließlich `CLAUDE_SARTU_WEBSITE_KONZEPT_FINAL.md`.**
-> Dort stehen verbindlich: Sitemap, Startseiten-Dramaturgie, Seitenkonzepte, Leistungsseiten, Ratgeber-/Lexikon-Startumfang, Content-Cluster, Bild- und Screenshotliste, Designrichtungen, Website-Designsystem, Trust/FAQ und Abnahmekriterien.
+> Dort stehen verbindlich: Sitemap, Startseiten-Dramaturgie, Seitenkonzepte, Leistungsseiten, Ratgeber-/Lexikon-Startumfang, Content-Cluster, Bild- und Screenshotliste, Trust/FAQ und Abnahmekriterien. Die **fertigen Texte** stehen in `CLAUDE_SARTU_WEBSITE_LASTENHEFT_BAUFINAL.md`.
+>
+> **Gestaltung ist in keinem dieser Dokumente vorgegeben.** Farben, Schriften und Formen entstehen ausschließlich über `CLAUDE_SARTU_DESIGN_BRIEFING_AUSFUEHRUNG.md`.
 >
 > Dieses Masterkonzept regelt **nur noch**: Geschäftsmodell, Angebot/Preise, Zahlung, Domain/Hosting/E-Mail, Portal, KI-/Produktionslogik, Technik, Recht, Markteintritt und Ausbaustufen. Die früheren Website-Detailabschnitte wurden hier **entfernt**, weil zwei Dateien nicht dieselbe Sache regeln dürfen.
 
@@ -646,7 +648,7 @@ Geschäftsseitig verbindlich bleibt:
 | Muss sichtbar/klickbar sein | Mechanik dahinter darf sein |
 |---|---|
 | Login (oder mind. geschützter, nicht ratbarer Projektlink) | einfache Auth, manuell angelegte Konten |
-| **Willkommensbildschirm beim ersten Login** (§9a) | statisch, ein Bildschirm — Inhalt fest, nicht personalisiert |
+| **Willkommensstrecke beim ersten Login** (§9a.2, drei Bildschirme) | statisch — Inhalt fest, nicht personalisiert, überspringbar, wiederaufrufbar |
 | **Cockpit mit genau einem nächsten Schritt** | Status manuell gesetzt |
 | Angebot mit Scope, Preis, Zahlungsplan + digitale **Annahme** | PDF/Ansicht + protokollierte Zustimmung |
 | Rechnung + Zahlungsstatus mit **Mollie-Zahlungslink** | Link manuell erzeugt, kein Abo-Automatismus |

@@ -12,6 +12,14 @@ Das **SARTU-Kunden- und Adminportal** in der **Stufe-0-Ausbaustufe**: eine volls
 
 ---
 
+## 1a. Reihenfolge der beiden Projekte
+
+**Dieses Projekt kommt zuerst.** Die Website braucht am Ende **echte** Screenshots aus dieser Oberfläche (Abschnitt 7) — gezeichnete Attrappen sind ausgeschlossen. Solange das Portal nicht steht, kann die Website nicht ehrlich live gehen.
+
+Getrennte Repositories, **kein** gemeinsamer Code. Gemeinsam sind nur die Sprachregeln (Website-Lastenheft §2) und das Design-Briefing. Die Website ruft dieses Portal an genau **einer** Stelle an: `POST /api/anfragen` (Lastenheft §4b) — diesen Endpunkt baust **du**, mitsamt Token, Rate-Limit und Adminansicht.
+
+---
+
 ## 2. Lesereihenfolge und Rangfolge
 
 Bei Widersprüchen gilt die **niedrigere Nummer**:
@@ -82,7 +90,7 @@ Diese drei Punkte entscheiden über Brauchbarkeit und Haftung:
 ## 7. Was du am Ende ablieferst
 
 Vollständig nach §18 des Lastenhefts:
-Lauffähiges Portal · `README.md` mit Einrichtung, Migration, Seed, Deployment und Backup · Testbericht über alle 28 Fälle · Messwerte · Offene-Punkte-Liste · **Screenshot-Satz aus der echten Oberfläche** für die Website (Cockpit, Angebot, Aufgaben, Vorschau, Rechnungen, Öffnungszeiten).
+Lauffähiges Portal · `README.md` mit Einrichtung, Migration, Seed, Deployment und Backup · Testbericht über alle 46 Fälle · Messwerte · Offene-Punkte-Liste · **Screenshot-Satz aus der echten Oberfläche** für die Website (Cockpit, Angebot, Aufgaben, Vorschau, Rechnungen, Öffnungszeiten).
 
 Der Screenshot-Satz ist kein Nebenprodukt: Die öffentliche Website braucht ihn als Produktbeweis und darf dafür **keine** gezeichneten Attrappen verwenden.
 

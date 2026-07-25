@@ -3,9 +3,13 @@
 **Stand:** 24.07.2026 · **Zweck:** Umsetzungsreifes Briefing für die **eigene SARTU-Website**. Wer dieses Dokument hat, kann bauen — ohne Rückfragen zu Texten, Struktur, Feldern oder Verhalten.
 
 **Gilt zusammen mit:**
-- `CLAUDE_SARTU_WEBSITE_KONZEPT_FINAL.md` – Architektur, Designrichtungen, Begründungen
+- `CLAUDE_SARTU_WEBSITE_KONZEPT_FINAL.md` – Architektur, Seitenkonzepte, Begründungen
 - `CLAUDE_SARTU_MASTERKONZEPT_FINAL.md` – Geschäftsmodell, Preise, Portal, Recht
-- `design/SARTU_DESIGNRICHTUNGEN.html` – drei Designrichtungen als Mockup
+- `CLAUDE_SARTU_DESIGN_BRIEFING_AUSFUEHRUNG.md` – wie die visuelle Ebene recherchiert und ausgewählt wird
+
+> **Es gibt keine vorgegebene Designrichtung.** Frühere Entwürfe unter `design/_verworfen/` sind
+> **verworfen** und weder Vorgabe noch Anregung. Farben, Schriften und Formen entstehen ausschließlich
+> über das Design-Briefing.
 
 ---
 
@@ -443,6 +447,25 @@ Darunter immer:
 - Fehler erscheinen **am Feld**, nicht als Sammelmeldung oben; erstes fehlerhaftes Feld erhält den Fokus.
 - Mobil: ein Sachverhalt pro Bildschirm, Buttons in Daumenreichweite, Tastaturtyp passend (E-Mail, Telefon, Zahl).
 - Ohne JavaScript: Fallback auf ein einfaches mehrstufiges Formular mit `POST` je Schritt oder Hinweis mit Kontaktalternative.
+
+### 9.5a Wohin die Anfrage geht (verbindlich)
+
+Der Bedarfsscheck ist der **einzige** Punkt, an dem die Website mit dem Portal spricht. Ohne diesen Abschnitt läuft der Bedarfsscheck ins Leere.
+
+| Punkt | Festlegung |
+|---|---|
+| **Ziel** | `POST {PORTAL_BASE_URL}/api/anfragen` — Spezifikation in `CLAUDE_SARTU_PORTAL_LASTENHEFT_BAUFINAL.md` §4b |
+| **Wer sendet** | **Serverseitig**, nicht der Browser. Der Browser sendet an die eigene Domain, die Seite leitet weiter |
+| **Warum serverseitig** | Der Zugangsschlüssel darf niemals im ausgelieferten Quelltext stehen |
+| **Zugangsschlüssel** | Header `X-Sartu-Token`, Wert aus der Umgebungsvariablen `INTAKE_TOKEN`. **Nie** im Repository |
+| **Inhalt** | alle Antworten des Bedarfsschecks + Kontaktdaten aus §9.4 + die vom Regelwerk ermittelte Empfehlung + das Ampelkennzeichen |
+| **Erfolg** | Weiterleitung auf die Danke-Seite §9.6 |
+| **Fehler** | Angaben bleiben erhalten, Meldung: `Wir konnten Ihre Anfrage gerade nicht übermitteln. Bitte versuchen Sie es in einem Moment erneut oder schreiben Sie uns an {E-Mail}.` **Keine** technischen Details |
+| **Zusätzlich** | Benachrichtigungs-E-Mail an SARTU — damit eine Anfrage auch dann ankommt, wenn das Portal nicht erreichbar ist |
+
+**Wenn das Portal noch nicht existiert:** Der Versand wird als **eine** klar benannte Funktion gekapselt, die zunächst nur die Benachrichtigungs-E-Mail verschickt. Der Umbau auf den Endpunkt ist dann ein Eingriff an genau einer Stelle. Als offener Punkt melden.
+
+> **Das allgemeine Kontaktformular** (§11) läuft **nicht** hierüber. Es verschickt ausschließlich eine E-Mail.
 
 ### 9.6 Danke-Seite (`noindex`)
 

@@ -6,7 +6,17 @@
 
 ## 1. Was du baust
 
-Die **öffentliche SARTU-Website** (Marketing-/Verkaufsseite). **Nicht** das Kundenportal — dafür gibt es noch kein Lastenheft.
+Die **öffentliche SARTU-Website** (Marketing-/Verkaufsseite). **Nicht** das Kundenportal — das ist ein eigenes Projekt mit eigenem Auftrag (`CODEX_AUFTRAG_PORTAL.md`).
+
+---
+
+## 1a. Reihenfolge der beiden Projekte
+
+**Empfehlung: erst das Portal, dann die Website.** Grund: Die Website braucht **echte** Screenshots aus der Portaloberfläche als Produktbeweis (Abschnitt 6). Gezeichnete Attrappen sind ausgeschlossen, weil das Portal genau der Punkt ist, mit dem SARTU sich unterscheidet — eine erfundene Abbildung wäre eine Falschaussage über das eigene Produkt.
+
+Wird die Website trotzdem zuerst gebaut, gilt: Bildplätze mit korrekten Maßen anlegen, als offener Punkt melden, **nicht** live schalten, bevor die echten Bilder vorliegen.
+
+**Was beide Projekte teilen:** Sie liegen in getrennten Repositories und teilen **keinen** Code. Gemeinsam sind nur die Sprachregeln (Website-Lastenheft §2) und die Vorgehensweise beim Design (`CLAUDE_SARTU_DESIGN_BRIEFING_AUSFUEHRUNG.md`). Die Designentscheidung wird **einmal** getroffen und in beiden Projekten verwendet — das Portal setzt sie sichtbar abgesetzt um (Kunden- und Adminbereich unterscheidbar).
 
 ---
 

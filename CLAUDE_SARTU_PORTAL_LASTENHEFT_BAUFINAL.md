@@ -25,22 +25,25 @@ Ein **sichtbares, klickbares Portal**, das den kompletten Kundenprozess vom Ange
 
 | Muss sichtbar und bedienbar sein | Mechanik dahinter darf sein |
 |---|---|
+| **Anfrageeingang von der Website** (§4b) | ein Endpunkt, Admin wandelt bewusst in Kunde um |
 | Anmeldung ohne Passwort (Magic Link) | einfache Auth, Konten manuell angelegt |
-| Willkommensstrecke beim ersten Login | statisch, Inhalt fest |
+| Willkommensstrecke beim ersten Login — **drei Bildschirme** | statisch, Inhalt fest |
 | Cockpit mit **genau einem** nächsten Schritt | Status vom Admin gesetzt |
 | Angebot mit Umfang, Preis, Zahlungsplan + digitale Annahme | Admin erstellt das Angebot im Adminbereich |
 | Rechnungen mit Status und **Mollie-Zahlungslink** | Link manuell erzeugt, kein Abo-Automatismus |
 | Aufgabenliste mit Upload | Aufgaben aus Vorlage, vom Admin zugewiesen |
-| Vorschau-Link + gebündeltes Feedback | Vorschau manuell bereitgestellt |
+| **Protokollierte Faktenfreigabe** vor Produktionsstart | Kunde bestätigt mit Namen, Eintrag in `approvals` |
+| Vorschau-Link + gebündeltes Feedback **mit sichtbarer Rundenzählung** | Vorschau manuell bereitgestellt, Runden vom Admin geöffnet |
 | Freigabe/Abnahme mit Zeitstempel | manuell bestätigt, aber protokolliert |
 | Domain- und E-Mail-Status | manuell gepflegter Statuswert |
+| **Onlinegang mit Betriebsbeginn und Mindestlaufzeit** | Admin meldet den Start, System rechnet die Frist |
 | **Eine echte Pflegefunktion:** Öffnungszeiten | Änderung löst manuellen Rebuild aus |
 | Hilfe/Nachricht an SARTU | einfaches Nachrichtenfeld |
 | Adminbereich für all das | – |
 
 ### 0.3 Ausdrücklich NICHT in Stufe 0
 
-Automatische Domainregistrierung · Mollie-Abo/Mandate/Webhooks · KI-Agenten-Orchestrierung · automatische Builds oder Deployments · SEO-Flottenzentrale · Rollback-Automation · Lead-Inbox der Kundenwebsites · Rechnungserzeugung als Buchhaltung (die läuft in lexoffice/sevDesk) · Mehrbenutzer-Rollen pro Kunde · Dateiversionierung · Volltextsuche · Benachrichtigungseinstellungen · Dunkelmodus.
+Automatische Domainregistrierung · Mollie-Abo/Mandate/Webhooks · KI-Agenten-Orchestrierung · automatische Builds oder Deployments · SEO-Flottenzentrale · Rollback-Automation · Lead-Inbox der Kundenwebsites · Rechnungserzeugung als Buchhaltung (die läuft in lexoffice/sevDesk) · Mehrbenutzer-Rollen pro Kunde · Dateiversionierung · Volltextsuche · Benachrichtigungseinstellungen · Dunkelmodus · automatische Berechnung oder Sperrung bei überschrittenen Korrekturrunden · Kündigungs- und Verlängerungslogik.
 
 **Regel:** Wird eine dieser Funktionen gebraucht, wird sie **beantragt, nicht gebaut**.
 
@@ -52,7 +55,7 @@ Die Website braucht Screenshots aus **dieser echten Oberfläche**. Deshalb muss 
 
 ## 1. Technischer Rahmen
 
-**Stack — entschieden, nicht zur Diskussion** (Quelle: `konzepte/sartuportalCLAUDE.md`, bewusst langweilig und wartungsarm):
+**Stack — entschieden, nicht zur Diskussion** (Quelle: `konzepte/sartuportalCLAUDE.md`, bewusst langweilig und dauerhaft betreibbar):
 
 | Bereich | Festlegung |
 |---|---|
@@ -73,7 +76,7 @@ Die Website braucht Screenshots aus **dieser echten Oberfläche**. Deshalb muss 
 **Umgebungen:** `local` (Entwicklung, Seed-Daten) · `production`. Konfiguration ausschließlich über Umgebungsvariablen; `.env.example` gehört ins Repository, `.env` **niemals**.
 
 **Erforderliche Umgebungsvariablen:**
-`DATABASE_URL` · `SESSION_SECRET` · `ENC_KEY` (32 Byte, base64) · `SMTP_HOST` `SMTP_PORT` `SMTP_USER` `SMTP_PASS` `MAIL_FROM` · `BASE_URL` · `ADMIN_TOTP_ISSUER` · `UPLOAD_DIR` · `NODE_ENV`
+`DATABASE_URL` · `SESSION_SECRET` · `ENC_KEY` (32 Byte, base64) · `SMTP_HOST` `SMTP_PORT` `SMTP_USER` `SMTP_PASS` `MAIL_FROM` · `ADMIN_NOTIFY_EMAIL` (interne Meldungen) · `BASE_URL` · `ADMIN_TOTP_ISSUER` · `UPLOAD_DIR` · `INTAKE_TOKEN` (Anfrageeingang, §4b) · `NODE_ENV`
 
 ---
 
@@ -92,9 +95,16 @@ Es gibt **keine** Selbstregistrierung. Admin legt Organisation und Benutzer an; 
 
 ## 3. Eiserne Sicherheitsregeln (nicht verhandelbar)
 
-1. **Mandantentrennung ist heilig.** Jede Abfrage filtert nach `organization_id` **aus der Session** — niemals aus einem Request-Parameter, Formularfeld oder URL-Segment. Kunde A darf unter keinen Umständen Daten von Kunde B sehen.
+1. **Mandantentrennung ist heilig.** Jede Abfrage im **Kundenbereich** filtert nach `organization_id` **aus der Session** — niemals aus einem Request-Parameter, Formularfeld oder URL-Segment. Kunde A darf unter keinen Umständen Daten von Kunde B sehen.
    Der Test `test/tenant-isolation.test.js` ist **unantastbar**: nie löschen, nie abschwächen, um grün zu werden.
 2. **Objektzugriff immer doppelt prüfen:** Existiert das Objekt **und** gehört es zur Session-Organisation? Sonst **404**, nicht 403 (keine Existenz preisgeben).
+2a. **Getrennte Datenzugriffswege für Kunde und Admin.** Regel 1 lässt sich nur einhalten, wenn ein Admin nicht durch dieselbe Tür geht — Admins haben bewusst **keine** eigene `organization_id`. Deshalb gilt:
+   - Es gibt **zwei** getrennte Zugriffsschichten. Die Kundenschicht nimmt die Organisation **ausschließlich** aus der Session und hat **keinen** Parameter, mit dem sich das umgehen ließe. Ein fehlender Session-Wert ist ein **Fehler**, kein „alles anzeigen".
+   - Die Adminschicht ist eine **eigene**, klar getrennte Schicht. Nur sie darf organisationsübergreifend lesen. Jeder Aufruf darin setzt eine bestandene Adminprüfung voraus (Rolle `admin` **und** abgeschlossene Zweifaktor-Anmeldung).
+   - Adminrouten liegen unter `/admin/…` und werden **vollständig** durch eine einzige, zentrale Vorprüfung geschützt — nicht Route für Route einzeln. Fällt die Prüfung aus, ist die Route nicht erreichbar.
+   - **Verboten:** ein gemeinsamer Codepfad, der bei Admins den Organisationsfilter „einfach weglässt" (etwa `WHERE organization_id = $1 OR $2 IS TRUE`). Genau daraus entsteht die typische Datenpanne.
+   - Wählt ein Admin im Adminbereich einen Kunden aus, ist diese Auswahl **nur** im Adminbereich gültig. Sie schreibt **niemals** die Session-Organisation um und wirkt sich nie auf Kundenrouten aus.
+   - Der Isolationstest prüft beides: (a) Kunde A sieht Kunde B nicht, (b) ein **abgemeldeter oder nicht-Admin-Benutzer** erreicht keine einzige Adminroute — geprüft über die **vollständige** Liste der Adminrouten, nicht über eine Stichprobe.
 3. **CSRF-Token bei jedem `POST`.** Kein Token, keine Ausnahme.
 4. **Rate-Limit** auf Login-Anforderung (5 pro E-Mail und Stunde, 20 pro IP und Stunde) und auf Token-Einlösung.
 5. **Magic-Link-Token:** kryptografisch zufällig (≥ 32 Byte), **nur als Hash gespeichert**, gültig **15 Minuten**, **einmalig** verwendbar, an die E-Mail gebunden.
@@ -127,7 +137,7 @@ Alle Tabellen: `id UUID PRIMARY KEY`, `created_at TIMESTAMPTZ NOT NULL DEFAULT n
 ### `users`
 | Feld | Typ | Hinweis |
 |---|---|---|
-| `organization_id` | uuid | **NULL bei Admins** |
+| `organization_id` | uuid | **NULL bei Admins**, **NOT NULL bei Kunden** — als Datenbankbedingung erzwingen: `CHECK ((role = 'admin' AND organization_id IS NULL) OR (role = 'kunde' AND organization_id IS NOT NULL))`. Siehe §3 Regel 2a |
 | `email` | citext, NOT NULL, UNIQUE | |
 | `first_name`, `last_name` | text | |
 | `role` | text, NOT NULL | `kunde` \| `admin` |
@@ -143,12 +153,36 @@ Alle Tabellen: `id UUID PRIMARY KEY`, `created_at TIMESTAMPTZ NOT NULL DEFAULT n
 ### `sessions`
 `user_id` · `token_hash` · `expires_at` · `user_agent` · `ip` (inet)
 
+### `leads`
+Die Anfragen aus dem Bedarfsscheck der öffentlichen Website (§4b).
+
+| Feld | Typ | Hinweis |
+|---|---|---|
+| `payload` | jsonb, NOT NULL | vollständige Antworten, unverändert wie gesendet |
+| `first_name`, `last_name` | text | |
+| `company` | text | |
+| `email` | citext, NOT NULL | |
+| `phone` | text | |
+| `preferred_contact` | text | `email` \| `portal` |
+| `recommended_package` | text | vom Regelwerk der Website vorgeschlagen |
+| `flag` | text | `standard` \| `gelb` \| `orange` \| `rot` |
+| `status` | text, NOT NULL | `neu` \| `in_pruefung` \| `angebot_erstellt` \| `abgelehnt` |
+| `b2b_confirmed` | boolean, NOT NULL | |
+| `privacy_confirmed` | boolean, NOT NULL | |
+| `source_ip` | inet | |
+| `converted_organization_id` | uuid | gesetzt bei Umwandlung |
+| `admin_note` | text | |
+
 ### `projects`
 | Feld | Typ | Hinweis |
 |---|---|---|
 | `organization_id` | uuid, NOT NULL | |
 | `title` | text, NOT NULL | z. B. „Firmenwebsite Musterbau" |
 | `package` | text, NOT NULL | `start` \| `wachstum` \| `platzhirsch` \| `sonderprojekt` |
+| `included_feedback_rounds` | integer, NOT NULL | aus dem Paket vorbelegt: Start **1**, Wachstum **2**, Platzhirsch **2**, Sonderprojekt nach Angebot |
+| `protection_level` | text | `s` \| `m` \| `l` — aus dem Paket abgeleitet |
+| `protection_started_on` | date | **Betriebsbeginn**, s. §5.7 |
+| `protection_min_term_until` | date | Betriebsbeginn + 12 Monate |
 | `status` | text, NOT NULL | siehe §5.1 |
 | `next_step_text` | text | vom Admin gesetzt, überschreibt die Ableitung |
 | `next_step_url` | text | optionaler Sprungziel-Pfad im Portal |
@@ -159,9 +193,60 @@ Alle Tabellen: `id UUID PRIMARY KEY`, `created_at TIMESTAMPTZ NOT NULL DEFAULT n
 | `archived_at` | timestamptz | |
 
 ### `offers`
-`project_id` · `number` (text, UNIQUE) · `status` (§5.2) · `summary` (text) · `sitemap` (text) · `inclusions` (text) · `exclusions` (text) · `one_time_net_cents` (integer) · `protection_monthly_net_cents` (integer) · `first_year_net_cents` (integer) · `payment_plan` (text: `50_50` \| `40_30_30`) · `valid_until` (date) · `sent_at` · `accepted_at` · `accepted_by_user_id` · `accepted_ip` (inet) · `accepted_name` (text)
+Ein angenommenes Angebot ist die **vertragliche Grundlage**. Es muss deshalb alles enthalten,
+was später strittig werden kann — nicht nur den Preis.
+
+| Feld | Typ | Hinweis |
+|---|---|---|
+| `project_id` | uuid, NOT NULL | |
+| `number` | text, UNIQUE, NOT NULL | Format §4a |
+| `status` | text, NOT NULL | §5.2 |
+| `package` | text, NOT NULL | `start` \| `wachstum` \| `platzhirsch` \| `sonderprojekt` |
+| `summary` | text, NOT NULL | Ausgangslage und Ziel in Kundensprache |
+| `sitemap` | text, NOT NULL | die geplanten Seiten, eine je Zeile |
+| `inclusions` | text, NOT NULL | was enthalten ist |
+| `exclusions` | text, NOT NULL | was **nicht** enthalten ist — Pflichtfeld, nie leer |
+| `scope_pages` | integer | Umfangsgrenze Seiten (Start 1, Wachstum 8, Platzhirsch 16) |
+| `scope_words` | integer | Umfangsgrenze Wörter (~1.200 / ~3.500 / ~6.500) |
+| `included_feedback_rounds` | integer, NOT NULL | Start 1, Wachstum 2, Platzhirsch 2 — wird bei Annahme nach `projects` übernommen |
+| `delivery_days_min` | integer, NOT NULL | Lieferkorridor Untergrenze in **Werktagen** |
+| `delivery_days_max` | integer, NOT NULL | Lieferkorridor Obergrenze in Werktagen |
+| `delivery_start_condition` | text, NOT NULL | Fester Text §4c — wann der Korridor zu laufen beginnt |
+| `one_time_net_cents` | integer, NOT NULL | |
+| `protection_level` | text, NOT NULL | `s` \| `m` \| `l` |
+| `protection_monthly_net_cents` | integer, NOT NULL | |
+| `protection_min_term_months` | integer, NOT NULL | Stufe 0 immer **12** |
+| `first_year_net_cents` | integer, NOT NULL | **abgeleitet**, s. Prüfregel unten |
+| `payment_plan` | text, NOT NULL | `50_50` \| `40_30_30` \| `custom` |
+| `payment_plan_custom` | text | nur bei `custom` — Klartext der Raten, s. §4a |
+| `rights_text` | text, NOT NULL | Fester Text §4c — Rechte und Export nach vollständiger Zahlung |
+| `domain_text` | text, NOT NULL | Fester Text §4c — Domain- und E-Mail-Vorgehen |
+| `valid_until` | date, NOT NULL | |
+| `sent_at` | timestamptz | |
+| `accepted_at` | timestamptz | |
+| `accepted_by_user_id` | uuid | |
+| `accepted_ip` | inet | |
+| `accepted_name` | text | selbst getippter Name des Annehmenden |
 
 > Beträge **immer in Cent als integer**. Nie Fließkomma für Geld.
+
+**Prüfregel Erstjahreswert (Pflicht, im Programm geprüft — nicht nur in der Anzeige):**
+
+```
+first_year_net_cents = one_time_net_cents + (12 × protection_monthly_net_cents)
+```
+
+Weicht der eingegebene Wert ab, wird das Angebot **nicht gespeichert**. Fehlermeldung im Admin:
+> Der Erstjahreswert passt nicht zu Einmalpreis und Betriebspauschale. Erwartet: {berechnet} €. Bitte prüfen.
+
+Diese Regel gilt auch für Sonderprojekte. Ein abweichender Erstjahreswert ist in Stufe 0 nicht vorgesehen.
+
+**Prüfregel Zahlungsplan:** `payment_plan = custom` ist **nur** bei `package = sonderprojekt`
+zulässig. Bei allen anderen Paketen lehnt das Programm `custom` ab. Ist `custom` gesetzt, muss
+`payment_plan_custom` gefüllt sein; ist es nicht `custom`, muss das Feld leer sein.
+
+**Prüfregel Annahme:** Ein Angebot ist nur annehmbar, wenn alle NOT-NULL-Felder gefüllt sind und
+`valid_until` nicht in der Vergangenheit liegt. Sonst zeigt das Portal den Hinweis aus §8.3.
 
 ### `invoices`
 `project_id` · `number` (text, UNIQUE) · `milestone` (text: `anzahlung` \| `zwischenrate` \| `schlussrate` \| `betrieb`) · `status` (§5.3) · `net_cents` · `vat_cents` · `gross_cents` · `due_date` (date) · `mollie_payment_url` (text) · `paid_at` · `marked_paid_by_user_id` · `note` (text)
@@ -172,11 +257,41 @@ Alle Tabellen: `id UUID PRIMARY KEY`, `created_at TIMESTAMPTZ NOT NULL DEFAULT n
 ### `task_files`
 `task_id` · `organization_id` (redundant, für die Mandantenprüfung) · `original_name` (text) · `stored_name` (text, UUID) · `mime_type` (text) · `size_bytes` (bigint) · `rights_confirmed` (boolean) · `uploaded_by_user_id`
 
+### `feedback_rounds`
+Bildet die **enthaltenen Korrekturrunden** ab — der zentrale Scope-Schutz des Geschäftsmodells.
+
+| Feld | Typ | Hinweis |
+|---|---|---|
+| `project_id` | uuid, NOT NULL | |
+| `number` | integer, NOT NULL | 1, 2, … — eindeutig je Projekt |
+| `status` | text, NOT NULL | `offen` \| `eingereicht` \| `bearbeitet` |
+| `opened_at` | timestamptz | |
+| `submitted_at` | timestamptz | Kunde hat gebündelt eingereicht |
+| `completed_at` | timestamptz | SARTU hat eingearbeitet |
+| `included` | boolean, NOT NULL, default true | `false` = zusätzliche, kostenpflichtige Runde |
+
 ### `feedback_items`
-`project_id` · `round` (integer) · `body` (text, NOT NULL) · `page_hint` (text) · `status` (§5.5) · `created_by_user_id` · `answered_at` · `answer_text` (text)
+`project_id` · `feedback_round_id` (uuid, NOT NULL) · `body` (text, NOT NULL) · `page_hint` (text) · `status` (§5.5) · `created_by_user_id` · `answered_at` · `answer_text` (text)
 
 ### `approvals`
-`project_id` · `kind` (text: `vorschau` \| `abnahme` \| `launch`) · `granted_at` · `granted_by_user_id` · `granted_ip` (inet) · `granted_name` (text) · `note` (text)
+Protokolliert **ausschließlich Erklärungen des Kunden**, die später beweisbar sein müssen.
+Interne SARTU-Schritte gehören **nicht** hierher, sondern ins Audit-Log.
+
+`project_id` · `kind` (text: `inhalte` \| `abnahme`) · `granted_at` · `granted_by_user_id` · `granted_ip` (inet) · `granted_name` (text) · `note` (text)
+
+| Wert | Entsteht durch | Wirkung |
+|---|---|---|
+| `inhalte` | Abschluss der Aufgabe `Fakten und Umfang final freigeben` (§9.3 Nr. 13, Art `freigabe`) | Produktion darf starten; ab hier läuft der Lieferkorridor (§4c) |
+| `abnahme` | Abnahmeblock in §8.4 | Schlussrechnung und Startvorbereitung |
+
+**Kein `launch`-Eintrag.** Der Onlinegang ist keine Kundenerklärung, sondern eine SARTU-Handlung.
+Er wird über `projects.launched_at`, `projects.live_url` und ein Audit-Ereignis festgehalten (§5.7).
+
+**Kein `vorschau`-Eintrag.** Die Vorschau wird nicht freigegeben, sondern kommentiert — dafür gibt
+es `feedback_rounds` (§5.6a). Die einzige verbindliche Freigabe der fertigen Website ist `abnahme`.
+
+Beide Erklärungen erfordern **Ankreuzen und selbst getippten Namen**; beide erzeugen zusätzlich ein
+Audit-Ereignis. Eine Erklärung ist **einmalig** — ein zweiter Versuch zeigt nur den vorhandenen Eintrag.
 
 ### `domain_status`
 `project_id` (UNIQUE) · `desired_name` (text) · `confirmed_name` (text) · `owner_confirmed` (boolean) · `state` (text: `offen` \| `vorschlaege_bereit` \| `bestaetigt` \| `registriert` \| `verbunden` \| `live`) · `email_note` (text) · `admin_note` (text)
@@ -211,16 +326,103 @@ Damit hier nichts erraten wird:
 | **Geldbeträge** | Speicherung als **integer in Cent**. Anzeige deutsch: `7.900,00 €` (Punkt als Tausendertrenner, Komma als Dezimaltrenner, Leerzeichen vor €) |
 | **Umsatzsteuer** | **19 %** Regelsatz. `vat_cents = round(net_cents * 0.19)`, `gross_cents = net_cents + vat_cents`. Der Satz liegt als Konstante im Code, nicht verstreut |
 | **Preisangaben** | Öffentliche Beträge sind **netto**. Jede Preisanzeige trägt den Zusatz `zzgl. gesetzlicher Umsatzsteuer`, außer es steht ausdrücklich „brutto" daneben |
-| **Prozentwerte Zahlungsplan** | fest: `50_50` = 50/50, `40_30_30` = 40/30/30. Keine freien Prozentsätze in Stufe 0 |
+| **Prozentwerte Zahlungsplan** | fest: `50_50` = 50/50, `40_30_30` = 40/30/30. **Ausnahme Sonderprojekt:** `custom` mit Klartextraten (s. u.) |
 | **Zahlungsziel** | **10 Kalendertage** ab Rechnungsdatum, als Vorbelegung für `due_date` |
 | **Dateigrößen** | `12,4 MB` (deutsch, eine Nachkommastelle) |
 | **Nummernkreise** | Angebot `AN-JJJJ-NNN`, Rechnung `RE-JJJJ-NNN`, je Jahr fortlaufend. In Stufe 0 vom Admin eingegeben, Eindeutigkeit erzwingt die Datenbank |
 | **Telefonnummern** | Anzeige wie eingegeben, keine automatische Umformatierung |
 | **Leere Werte** | nie `null`, `–` oder `undefined` anzeigen. Stattdessen: `Noch nicht hinterlegt` |
 
+**Zahlungsplan `custom` (nur Sonderprojekt):** Der Admin trägt die Raten als **Klartext** in
+`payment_plan_custom` ein, eine Rate je Zeile, Format `Bezeichnung | Betrag netto | Fälligkeit`.
+Beispiel:
+
+```
+Anzahlung bei Auftragsbestätigung | 5.000,00 € | sofort
+Zwischenrate bei Vorschau | 5.000,00 € | bei Freigabe der Vorschau
+Schlussrate bei Veröffentlichung | 2.500,00 € | bei Veröffentlichung
+```
+
+Das Portal rechnet daraus **nichts** ab. Es zeigt den Text im Angebot an, und der Admin legt die
+Rechnungen manuell an. **Prüfregel:** Die Summe der eingetragenen Beträge muss
+`one_time_net_cents` entsprechen; sonst Fehlermeldung
+> Die Summe der Raten ergibt {Summe} € und passt nicht zum Einmalpreis von {Einmalpreis} €.
+
 **Projekte je Organisation:** In Stufe 0 hat eine Organisation **genau ein aktives Projekt**. Mehrere Projekte sind technisch möglich (Fremdschlüssel), die Oberfläche zeigt aber immer das jüngste nicht archivierte. Existieren mehrere, erscheint im Adminbereich ein Hinweis — im Kundenportal keine Projektauswahl.
 
 **Rundung:** kaufmännisch, immer auf ganze Cent.
+
+---
+
+## 4b. Schnittstelle zur öffentlichen Website (Anfrageeingang)
+
+> **Ohne diesen Abschnitt bricht der Gesamtprozess.** Die Website erzeugt Anfragen, das Portal muss sie annehmen — sonst landet der Bedarfsscheck im Nichts.
+
+### Endpunkt `POST /api/anfragen`
+
+- **Nur dieser eine Endpunkt** ist von außen erreichbar und **nicht** durch eine Session geschützt
+- Absicherung: **gemeinsames Geheimnis** im Header `X-Sartu-Token` (Umgebungsvariable `INTAKE_TOKEN`), Rate-Limit **10 Anfragen je IP und Stunde**, Honeypot-Feld wird abgelehnt
+- Erwartet `application/json` mit den Feldern aus `leads`. Unbekannte Felder werden in `payload` mitgespeichert, nicht abgewiesen
+- Antwort: `201` mit `{ "ok": true }` — **niemals** interne Kennungen oder Fehlerdetails zurückgeben
+- Bei ungültigem Token: `401`, ohne Hinweis auf den Grund
+- Jede Anfrage erzeugt ein Audit-Ereignis und eine Benachrichtigungs-E-Mail an SARTU
+
+**Wichtig:** Der Endpunkt legt **niemals** automatisch Benutzer, Organisationen oder Projekte an. Er speichert ausschließlich einen `lead`. Alles Weitere ist eine bewusste Admin-Entscheidung.
+
+### Adminbereich `/admin/anfragen`
+
+Liste aller Anfragen mit Status, Eingangsdatum, Firma, empfohlener Lösung und Ampelkennzeichen.
+Detailansicht zeigt **alle** Antworten in Klartext (Frage → Antwort), nicht das rohe JSON.
+
+Aktionen:
+- `In Kunde und Projekt umwandeln` → legt `organizations`, `users` (Rolle `kunde`) und `projects` an, setzt `converted_organization_id` und `status = angebot_erstellt`, verschickt die Einladungs-E-Mail. **Bestätigungsdialog vorher**, weil dabei ein Zugang entsteht
+- `Als abgelehnt markieren` mit Pflichtnotiz
+- `Notiz speichern`
+
+**Regel:** Anfrage ≠ Kunde. Ein Zugang entsteht ausschließlich durch diesen bewussten Klick — nie automatisch.
+
+### Kontaktformular der Website
+
+Das allgemeine Kontaktformular läuft **nicht** über diesen Endpunkt. Es versendet lediglich eine E-Mail an SARTU und erzeugt keinen Datensatz im Portal.
+
+---
+
+## 4c. Feste Angebotstexte (wörtlich zu übernehmen)
+
+Diese drei Texte stehen in **jedem** Angebot. Sie werden beim Anlegen eines Angebots vorbelegt,
+sind vom Admin editierbar, dürfen aber nicht leer bleiben. Formulierungen nicht erfinden.
+
+### `delivery_start_condition` — Vorbelegung
+
+> Der genannte Zeitraum beginnt, sobald alle Aufgaben in Ihrem Portal erledigt sind: bestätigte
+> Fakten, vollständige Inhalte, freigegebene Rechtstexte und geklärte Bild- und Nutzungsrechte.
+> Bis dahin läuft die Zeit nicht. Fehlt Ihre Mitwirkung länger als 14 Tage, dürfen wir das Projekt
+> nach vorheriger Ankündigung pausieren; bereits abgeschlossene Meilensteine bleiben fällig.
+
+Die Werte für `delivery_days_min` / `delivery_days_max` sind je Paket vorbelegt:
+**Start 7–10**, **Wachstum 10–15**, **Platzhirsch 15–25** Werktage. Sonderprojekt: manuell.
+
+### `rights_text` — Vorbelegung
+
+> Nach vollständiger Zahlung erhalten Sie die Nutzungsrechte am gelieferten Website-Stand, an den
+> von uns erstellten Texten und am für Sie gestalteten Erscheinungsbild. Ihre Domain gehört Ihnen,
+> auf Ihren Namen registriert. Auf Wunsch stellen wir Ihnen den vollständigen Stand Ihrer Website
+> als Export bereit, mit einer Anleitung, wie er ohne uns weiterbetrieben werden kann.
+> Nicht übertragen werden allgemeine Bausteine, die wir projektübergreifend einsetzen, sowie
+> Rechte Dritter (z. B. Schriften oder Bilder), für die die jeweilige Lizenz gilt.
+
+### `domain_text` — Vorbelegung
+
+> Ihre Domain wird auf **Ihren Namen** registriert — Sie sind Inhaber, nicht wir. Wir übernehmen
+> Prüfung, Registrierung, Einrichtung und Verbindung. Die Domaingebühr ist in der Betriebspauschale
+> enthalten, solange der Vertrag läuft. Endet der Vertrag, übertragen wir die Domain kostenfrei an
+> Sie oder an einen Anbieter Ihrer Wahl; ab dann tragen Sie die Gebühr selbst.
+> E-Mail-Postfächer sind nicht enthalten. Auf Wunsch richten wir die nötigen Einträge ein, damit ein
+> Postfach Ihres Anbieters unter Ihrer Domain funktioniert.
+
+> **Hinweis an die ausführende KI:** Diese Texte sind Geschäftsaussagen, keine Rechtstexte.
+> AGB, Widerruf, Datenschutz und Auftragsverarbeitung stehen **nicht** hier und werden **nicht**
+> erfunden (§15).
 
 ---
 
@@ -280,6 +482,38 @@ Ist `next_step_text` gesetzt, wird dieser angezeigt. Sonst wird nach Projektstat
 
 ---
 
+### 5.6a Korrekturrunden — Zählung und Grenze
+
+Die enthaltenen Runden sind eine **harte Scope-Grenze**, keine Empfehlung. Das Portal muss sie sichtbar machen, sonst wird Feedback endlos.
+
+**Ablauf:**
+1. Beim Bereitstellen einer Vorschau öffnet der Admin eine Runde: neuer Satz in `feedback_rounds` mit `status = offen`, `number` fortlaufend
+2. Der Kunde sammelt beliebig viele Rückmeldungen **innerhalb** dieser Runde
+3. Der Kunde reicht **gebündelt** ein → `status = eingereicht`, `submitted_at`. Danach sind in dieser Runde **keine** weiteren Einträge möglich
+4. SARTU arbeitet ein → `status = bearbeitet`, neue Vorschau, nächste Runde
+
+**Anzeige im Kundenportal** (auf `/vorschau`, immer sichtbar, sobald eine Runde offen ist):
+`Korrekturrunde {number} von {included_feedback_rounds}`
+
+**Wenn alle enthaltenen Runden verbraucht sind** und der Admin eine weitere öffnet (`included = false`), zeigt das Portal vor dem Einreichen:
+> **Diese Korrekturrunde ist im Festpreis nicht mehr enthalten.**
+> Ihre vereinbarten {n} Korrekturrunden sind bereits genutzt. Wir schauen uns Ihre Rückmeldung trotzdem an und melden uns, bevor Aufwand entsteht — Sie gehen damit keine Kosten ein.
+
+**Regel:** Das Portal **blockiert nichts** und berechnet nichts automatisch. Es macht den Stand nur sichtbar. Über zusätzlichen Aufwand entscheidet immer ein Mensch.
+
+**Fehlermeldung** beim Versuch, in eine eingereichte Runde zu schreiben:
+`Diese Korrekturrunde wurde bereits eingereicht. Wir arbeiten sie gerade ein und melden uns, sobald die neue Vorschau bereitsteht.`
+
+### 5.7 Betriebsbeginn und Mindestlaufzeit
+
+Der Betrieb („Rundum-Schutz") beginnt regulär mit dem **produktiven Betrieb der Website**.
+
+- Beim Statuswechsel auf `live` setzt der Admin `protection_started_on` (Vorbelegung: heutiges Datum) und das System `protection_min_term_until = protection_started_on + 12 Monate`
+- Beides wird dem Kunden auf `/rechnungen` angezeigt: `Betrieb seit {Datum} · Mindestlaufzeit bis {Datum}`
+- **Sonderfall:** Ist die Website abgenommen und betriebsfertig bereitgestellt und **nur der Kunde** verzögert den Onlinegang, kann der Admin `protection_started_on` manuell auf ein früheres Datum setzen. Das Portal weist dabei hin:
+  > Diese Regel muss vorher schriftlich angekündigt worden sein und mit der vertraglichen Formulierung übereinstimmen.
+- Kündigungen, Verlängerungen und Lastschrift sind **Stufe 2**. In Stufe 0 erzeugt der Admin die monatlichen Betriebsrechnungen manuell.
+
 ## 6. Anmeldung ohne Passwort
 
 ### 6.1 Ablauf
@@ -318,7 +552,14 @@ Ist `next_step_text` gesetzt, wird dieser angezeigt. Sonst wird nach Projektstat
 
 ## 7. Willkommensstrecke beim ersten Login
 
-Erscheint **einmalig**, wenn `users.welcome_seen_at` leer ist. Überspringbar, jederzeit erneut aufrufbar unter Hilfe. Maximal drei Bildschirme. Nach dem letzten Bildschirm oder bei „Überspringen": `welcome_seen_at` setzen.
+Erscheint **einmalig**, wenn `users.welcome_seen_at` leer ist. Überspringbar, jederzeit erneut aufrufbar unter Hilfe. **Genau drei Bildschirme** — nicht mehr, nicht weniger. Nach dem letzten Bildschirm oder bei „Überspringen": `welcome_seen_at` setzen.
+
+**Regeln:**
+- Eigene Seiten mit eigener URL (`/willkommen/1`, `/2`, `/3`), Navigation per `POST`/Link — **kein** JavaScript nötig
+- Ein Sachverhalt je Bildschirm, mobil vollwertig, Buttons in Daumenreichweite
+- Tastaturbedienung vollständig, Fokus sichtbar, `prefers-reduced-motion` respektiert
+- **Kein Zwang:** Wer `Überspringen` klickt, kann alles trotzdem uneingeschränkt bedienen
+- Keine Videos, keine Fortschrittsabzeichen, keine Gamification
 
 **Bildschirm 1**
 > # Willkommen bei SARTU, {Vorname}.
@@ -352,6 +593,8 @@ Buttons: `Weiter` · `Zurück`
 
 Button: `Portal öffnen`
 
+> **Der Hinweis zum passwortlosen Anmelden ist Pflicht und darf nicht gekürzt werden.** Kunden erwarten ein Passwort; ohne Erklärung entsteht der Eindruck, etwas sei kaputt oder unsicher.
+
 ---
 
 ## 8. Kundenportal — Screen für Screen
@@ -383,11 +626,28 @@ Jede Seite: `<h1>` als Seitentitel, Seitentitel im `<title>` als `{Seite} — SA
 
 **H1:** `Ihr Angebot`
 
-Zeigt: Angebotsnummer · Gültig bis · Zusammenfassung des Ziels · empfohlene Lösung · vorgesehene Seitenstruktur · was enthalten ist · was **nicht** enthalten ist · Einmalpreis netto · Umsatzsteuer · Bruttobetrag · monatlicher Betrieb netto · Mindestlaufzeit 12 Monate · Erstjahreswert netto · Zahlungsplan im Klartext.
+Zeigt **alle** Felder aus `offers` (§4), in dieser Reihenfolge:
+
+1. Angebotsnummer · Gültig bis
+2. Zusammenfassung des Ziels · empfohlene Lösung
+3. Vorgesehene Seitenstruktur
+4. Was enthalten ist · was **nicht** enthalten ist
+5. **Umfangsgrenze:** `{scope_pages} Seiten, rund {scope_words} Wörter` — mit dem Satz: `Umfang darüber hinaus bieten wir Ihnen vorher getrennt an.`
+6. **Korrekturrunden:** `{included_feedback_rounds} enthaltene Korrekturrunden` — mit dem Satz: `Eine Korrekturrunde bedeutet: Sie sammeln alle Anmerkungen und reichen sie gebündelt ein, wir arbeiten sie in einem Durchgang ein.`
+7. **Zeitrahmen:** `Fertigstellung in {delivery_days_min}–{delivery_days_max} Werktagen` + der Text aus `delivery_start_condition`
+8. Einmalpreis netto · Umsatzsteuer · Bruttobetrag
+9. Monatlicher Betrieb netto · Mindestlaufzeit `{protection_min_term_months} Monate` · Erstjahreswert netto
+10. Zahlungsplan im Klartext
+11. **Rechte und Export:** Text aus `rights_text`
+12. **Domain und E-Mail:** Text aus `domain_text`
 
 Zahlungsplan-Texte:
 - `50_50`: `50 % bei Auftrag, 50 % nach Abnahme vor dem Onlinegang. Zahlungsziel jeweils 10 Kalendertage.`
 - `40_30_30`: `40 % bei Auftrag, 30 % nach der ersten Vorschau, 30 % nach Abnahme vor dem Onlinegang. Zahlungsziel jeweils 10 Kalendertage.`
+- `custom`: Inhalt von `payment_plan_custom` als Tabelle (Bezeichnung · Betrag · Fälligkeit), darunter: `Zahlungsziel jeweils 10 Kalendertage.`
+
+**Unvollständiges Angebot:** Fehlt eines der Pflichtfelder, ist der Annahmeblock **gesperrt** und es erscheint:
+`Dieses Angebot ist noch nicht vollständig. Wir stellen es Ihnen in Kürze fertig bereit — Sie müssen nichts tun.`
 
 **Annahmeblock** (nur bei `status = gesendet` und `valid_until >= heute`):
 Vier Pflicht-Bestätigungen als Checkboxen:
@@ -405,7 +665,8 @@ Fehlermeldungen:
 - fehlender Name: `Bitte geben Sie Ihren Namen an.`
 
 Nach Annahme: `accepted_at`, `accepted_by_user_id`, `accepted_ip`, `accepted_name` speichern, Audit-Ereignis, Projektstatus auf `angebot_angenommen`, Bestätigungs-E-Mail an Kunde und Admin.
-Danach zeigt die Seite: `Angenommen am {Datum} durch {Name}.` — der Annahmeblock verschwindet.
+**Zugleich werden ins Projekt übernommen:** `included_feedback_rounds`, `protection_level` und `package`. Ab diesem Zeitpunkt ist das Angebot **schreibgeschützt** — auch für den Admin. Eine Änderung erfordert ein neues Angebot mit neuer Nummer.
+Danach zeigt die Seite: `Angenommen am {Datum} durch {Name}.` — der Annahmeblock verschwindet, der vollständige Angebotsinhalt bleibt dauerhaft einsehbar.
 
 **Abgelaufen:** `Dieses Angebot ist am {Datum} abgelaufen. Schreiben Sie uns über „Hilfe" — wir stellen es neu aus.`
 **Leerzustand:** `Sobald wir Ihre Anfrage geprüft haben, erscheint hier Ihr Angebot mit Umfang, Preis und Zahlungsplan.`
@@ -422,10 +683,34 @@ Liste, sortiert nach `sort_order`: Titel · Status · Kurzbeschreibung. Erledigt
 - `bestaetigung`: Anzeige der Angaben, Buttons `Stimmt so` und `Korrigieren` (öffnet Textfeld)
 - `angabe`: Textfeld `Ihre Antwort` (Pflicht)
 - `upload`: Dateiauswahl + Pflicht-Checkbox `Ich habe die Rechte an diesen Dateien und darf sie für meine Website verwenden.`
-- `freigabe`: Anzeige + Button `Freigeben`
+- `freigabe`: Anzeige der freizugebenden Punkte + Pflicht-Checkbox + Namensfeld (siehe unten)
 
 Button: `Aufgabe abschließen` · Sekundär: `Später`
 Fehler: `Bitte beantworten Sie die Frage, bevor Sie die Aufgabe abschließen.` · `Bitte bestätigen Sie die Bildrechte.` · `Bitte wählen Sie mindestens eine Datei aus.`
+
+**Sonderfall `kind = freigabe` — die Faktenfreigabe.** Diese Aufgabe ist keine gewöhnliche
+Rückmeldung, sondern eine **protokollierte Erklärung** (§4 `approvals`). Deshalb:
+
+> ### Fakten und Umfang final freigeben
+> Bitte prüfen Sie Ihre Angaben ein letztes Mal. Danach beginnen wir mit der Produktion.
+> Spätere Änderungen an Fakten oder Umfang sind dann nicht mehr ohne Weiteres möglich.
+
+Anzeige darüber: alle abgeschlossenen Aufgaben mit ihren Antworten in Kurzform, damit der Kunde
+sieht, was er freigibt. Dazu der Umfangssatz aus dem Angebot:
+`Vereinbarter Umfang: {scope_pages} Seiten, {included_feedback_rounds} Korrekturrunden.`
+
+Checkbox: `Die Angaben sind vollständig und richtig. Der Umfang ist so vereinbart.`
+Feld: `Ihr Name`
+Button: `Verbindlich freigeben`
+Fehler: `Bitte bestätigen Sie die Freigabe.` · `Bitte geben Sie Ihren Namen an.`
+
+Nach dem Absenden: Eintrag in `approvals` mit `kind = inhalte`, Audit-Ereignis, Anzeige
+`Freigegeben am {Datum} durch {Name}.` Der Lieferkorridor beginnt an diesem Tag (§4c) — der
+Startzeitpunkt wird angezeigt: `Fertigstellung voraussichtlich in {min}–{max} Werktagen.`
+
+**Sperre:** Die Freigabeaufgabe ist erst abschließbar, wenn **alle** Pflichtaufgaben mit
+`required = true` erledigt sind. Sonst Hinweis statt Button:
+`Bitte schließen Sie zuerst die noch offenen Aufgaben ab.` mit Verweis auf die Liste.
 
 **Leerzustand:** `Aktuell nichts zu tun. Sobald wir etwas von Ihnen brauchen, erscheint es hier — Sie bekommen zusätzlich eine E-Mail.`
 
@@ -438,8 +723,17 @@ Fehler: `Bitte beantworten Sie die Frage, bevor Sie die Aufgabe abschließen.` �
 - Button: `Vorschau öffnen` (neues Fenster, `rel="noopener"`)
 - Hinweis: `Die Vorschau ist noch nicht öffentlich und für Suchmaschinen gesperrt.`
 
-**Feedbackblock:** Textfeld `Ihre Rückmeldung` · optionales Feld `Betrifft welche Seite?` · Button `Rückmeldung senden` · Hinweis: `Sie können mehrere Rückmeldungen senden. Wir bearbeiten sie gebündelt.`
-Darunter: bisherige Rückmeldungen mit Status und Antwort.
+**Rundenanzeige** (immer, sobald eine Runde offen ist, direkt über dem Feedbackblock):
+`Korrekturrunde {number} von {included_feedback_rounds}` — bei `included = false` stattdessen der Hinweistext aus §5.6a.
+
+**Feedbackblock** (nur bei `status = offen` der aktuellen Runde): Textfeld `Ihre Rückmeldung` · optionales Feld `Betrifft welche Seite?` · Button `Rückmeldung senden` · Hinweis: `Sie können mehrere Rückmeldungen senden. Wir bearbeiten sie gebündelt.`
+Darunter: bisherige Rückmeldungen der laufenden Runde mit Status und Antwort, ältere Runden zusammengeklappt.
+
+**Einreichen:** Button `Rückmeldungen abschließen und einreichen`, davor ein Bestätigungsschritt:
+> Danach können Sie in dieser Runde nichts mehr ergänzen. Wir arbeiten alles gebündelt ein und melden uns mit der neuen Fassung. Möchten Sie einreichen?
+
+Buttons: `Ja, einreichen` · `Noch nicht`. Nach dem Einreichen: `status = eingereicht`, `submitted_at`, E-Mail an SARTU, Anzeige `Eingereicht am {Datum}. Wir melden uns, sobald die neue Fassung bereitsteht.`
+Der Button ist gesperrt, solange die Runde keine einzige Rückmeldung enthält — Hinweis: `Bitte geben Sie zuerst eine Rückmeldung ein.`
 
 **Abnahmeblock** (nur bei Status `abnahme`):
 > ### Website abnehmen
@@ -531,7 +825,8 @@ Zugang unter `/admin`, eigenes Layout, sichtbar von der Kundenoberfläche unters
 
 | Pfad | Inhalt |
 |---|---|
-| `/admin` | Cockpit: Projekte nach Status gruppiert, offene Rechnungen, unbeantwortete Nachrichten, offene Feedbacks, wartende Öffnungszeit-Änderungen |
+| `/admin` | Cockpit: **neue Anfragen**, Projekte nach Status gruppiert, offene Rechnungen, unbeantwortete Nachrichten, eingereichte Korrekturrunden, wartende Öffnungszeit-Änderungen |
+| `/admin/anfragen` | Eingegangene Bedarfsschecks (§4b), Umwandlung in Kunde und Projekt |
 | `/admin/kunden` | Liste, Suche nach Name und E-Mail; Anlegen und Bearbeiten von Organisation und Benutzer; Button `Einladung senden` |
 | `/admin/projekte` | Liste mit Filter nach Status |
 | `/admin/projekte/{id}` | **Arbeitsplatz je Projekt** (siehe unten) |
@@ -547,10 +842,12 @@ Alles in Abschnitten auf einer Seite:
 - **Angebot:** Formular für alle Felder aus §4 (`offers`), Button `Angebot senden` (setzt `sent_at`, Status `gesendet`, verschickt E-Mail). Nach Annahme schreibgeschützt mit Anzeige von Zeitpunkt, Name und IP
 - **Rechnungen:** Anlegen mit Nummer, Meilenstein, Beträgen, Fälligkeit, **Feld `Mollie-Zahlungslink`**. Aktionen: `Senden`, `Als bezahlt markieren` (mit Pflicht-Bestätigung, siehe §12), `Stornieren`
 - **Aufgaben:** Anlegen einzeln oder **aus Vorlage** (§9.3), sortierbar, Bearbeiten, Deaktivieren. Anzeige der Kundenantworten und hochgeladenen Dateien mit Download
-- **Vorschau:** Feld `Vorschau-URL`, Button `Vorschau bereitstellen` (setzt Status `vorschau`, verschickt E-Mail)
-- **Feedback:** Liste der Rückmeldungen, je Eintrag Antwortfeld und Statuswechsel
-- **Abnahmen:** Anzeige aller Einträge aus `approvals` mit Zeitpunkt, Name, IP
+- **Vorschau:** Feld `Vorschau-URL`, Button `Vorschau bereitstellen` (setzt Status `vorschau`, öffnet **zugleich** eine neue Korrekturrunde, verschickt E-Mail)
+- **Korrekturrunden:** Liste aller Runden mit Nummer, Status, Zeitpunkten und Kennzeichen `enthalten` / `zusätzlich`. Anzeige `{genutzt} von {included_feedback_rounds} enthaltenen Runden`. Aktionen: `Runde als bearbeitet markieren`, `Zusätzliche Runde öffnen` (legt `included = false` an, **Bestätigungsdialog**: `Diese Runde ist im Festpreis nicht enthalten. Der Kunde wird darauf hingewiesen. Fortfahren?`)
+- **Feedback:** Rückmeldungen der gewählten Runde, je Eintrag Antwortfeld und Statuswechsel
+- **Freigaben:** Anzeige aller Einträge aus `approvals` (`inhalte`, `abnahme`) mit Zeitpunkt, Name, IP. **Nur lesbar** — nachträglich nicht änderbar oder löschbar
 - **Domain:** alle Felder aus `domain_status`, Vorschlagsfelder, Button `Vorschläge bereitstellen`
+- **Onlinegang:** Feld `Live-URL`, Feld `Betriebsbeginn` (vorbelegt mit heute), Button `Website als online melden`. Setzt `live_url`, `launched_at`, Status `live`, `protection_started_on`, berechnet `protection_min_term_until` (§5.7), verschickt die E-Mail `Ihre Website ist online`. **Bestätigungsdialog** mit Anzeige des berechneten Mindestlaufzeit-Endes
 - **Öffnungszeiten:** aktueller Stand des Kunden, Markierung wartender Änderungen, Button `Als veröffentlicht markieren` (setzt `pending_publish = false`, verschickt E-Mail)
 - **Ereignisse:** Audit-Auszug dieses Projekts
 
@@ -580,6 +877,7 @@ Alle Mails: Absender `MAIL_FROM`, Anrede `Guten Tag {Vorname},`, Grußformel `Fr
 
 | Auslöser | Betreff | Kern |
 |---|---|---|
+| Neue Anfrage über die Website (an Admin) | `Neue Anfrage: {Unternehmen}` | interne Kurzmeldung mit empfohlener Lösung und Ampelkennzeichen + Link auf `/admin/anfragen` |
 | Anmeldelink | `Ihr Anmeldelink für das SARTU-Portal` | `Hier ist Ihr Anmeldelink. Er gilt 15 Minuten und lässt sich einmal verwenden.` + Link |
 | Einladung (neu angelegt) | `Ihr Zugang zum SARTU-Portal` | `Ihr Projektportal ist bereit. Dort finden Sie Angebot, Aufgaben, Vorschau und Rechnungen an einem Ort.` + Link |
 | Angebot gesendet | `Ihr Angebot von SARTU liegt bereit` | `Ihr Angebot mit Umfang, Preis und Zahlungsplan liegt im Portal. Gültig bis {Datum}.` |
@@ -588,8 +886,10 @@ Alle Mails: Absender `MAIL_FROM`, Anrede `Guten Tag {Vorname},`, Grußformel `Fr
 | Rechnung gesendet | `Ihre Rechnung {Nummer}` | `Ihre Rechnung liegt im Portal und ist bis zum {Datum} fällig. Sie können direkt dort bezahlen.` |
 | Zahlung verbucht | `Zahlungseingang bestätigt` | `Wir haben Ihre Zahlung erhalten. Vielen Dank.` |
 | Neue Aufgaben | `Es liegen Aufgaben für Sie bereit` | `Wir brauchen ein paar Angaben von Ihnen. Das dauert meist 15 bis 25 Minuten.` |
-| Vorschau bereit | `Ihre Vorschau ist bereit` | `Sie können sich Ihre Website jetzt ansehen und Rückmeldung geben.` |
-| Feedback eingegangen (an Admin) | `Neue Rückmeldung: {Organisation}` | interne Kurzmeldung |
+| Faktenfreigabe erfolgt (an beide) | `Freigabe bestätigt — wir starten` | `Danke für die Freigabe. Wir beginnen mit der Produktion. Fertigstellung voraussichtlich in {min}–{max} Werktagen.` |
+| Vorschau bereit | `Ihre Vorschau ist bereit` | `Sie können sich Ihre Website jetzt ansehen und Rückmeldung geben. Sammeln Sie in Ruhe alles und reichen Sie es gebündelt ein.` |
+| Korrekturrunde eingereicht (an Admin) | `Korrekturrunde {Nummer} eingereicht: {Organisation}` | interne Kurzmeldung mit Anzahl der Rückmeldungen |
+| Korrekturrunde eingearbeitet (an Kunde) | `Ihre Änderungen sind eingearbeitet` | `Wir haben Ihre Rückmeldungen umgesetzt. Die neue Fassung liegt in der Vorschau bereit.` |
 | Abnahme erfolgt (an beide) | `Abnahme bestätigt` | `Danke für die Abnahme. Wir bereiten den Start vor.` |
 | Website online | `Ihre Website ist online` | `Ihre Website ist erreichbar unter {URL}. Ab jetzt übernehmen wir den laufenden Betrieb.` |
 | Öffnungszeiten veröffentlicht | `Ihre Öffnungszeiten sind aktualisiert` | `Ihre Änderung ist jetzt auf der Website sichtbar.` |
@@ -680,6 +980,8 @@ Es gelten die Sprachregeln aus `CLAUDE_SARTU_WEBSITE_LASTENHEFT_BAUFINAL.md` §2
 3. Kunde A sendet `POST` mit fremder `project_id` → **404**, keine Änderung
 4. Kunde A lädt Datei von B über direkte URL → **404**
 5. Liste enthält ausschließlich eigene Datensätze
+5a. Der Test durchläuft die **vollständige Routenliste** des Kundenbereichs, nicht eine Auswahl. Kommt eine Route hinzu, ohne dass der Test sie kennt, **scheitert der Test**
+5b. Eine Kundenabfrage ohne Session-Organisation wirft einen Fehler und liefert **nicht** alle Datensätze (§3 Regel 2a)
 
 **Anmeldung:**
 6. Token funktioniert genau einmal
@@ -696,21 +998,41 @@ Es gelten die Sprachregeln aus `CLAUDE_SARTU_WEBSITE_LASTENHEFT_BAUFINAL.md` §2
 15. `ueberfaellig` wird korrekt gesetzt, wenn `due_date` überschritten ist
 16. Aufgabe mit Pflichtantwort lässt sich nicht ohne Antwort abschließen
 17. Upload ohne Rechtebestätigung wird abgelehnt
-18. Abnahme erzeugt Eintrag in `approvals` **und** Audit-Ereignis
+18. Abnahme erzeugt Eintrag in `approvals` (`kind = abnahme`) **und** Audit-Ereignis
 19. Öffnungszeiten mit Bis vor Von werden abgelehnt
 20. Statuswechsel erzeugt Audit-Ereignis mit Akteur
 
+**Rechenregeln und Scope-Schutz:**
+21. Angebot mit falschem `first_year_net_cents` wird **nicht** gespeichert (§4 Prüfregel)
+22. `payment_plan = custom` wird bei `package ≠ sonderprojekt` abgelehnt
+23. Bei `custom` muss die Summe der Raten dem Einmalpreis entsprechen, sonst Ablehnung
+24. Angebotsannahme überträgt `included_feedback_rounds` und `protection_level` ins Projekt
+25. Eine zweite Korrekturrunde bei Paket **Start** wird als `included = false` angelegt und im Portal entsprechend gekennzeichnet (§5.6a)
+26. Die Freigabeaufgabe lässt sich nicht abschließen, solange Pflichtaufgaben offen sind (§8.3)
+27. Freigabe erzeugt `approvals` mit `kind = inhalte` und setzt den Startzeitpunkt des Lieferkorridors
+28. `protection_started_on` wird beim Wechsel auf `live` gesetzt, `protection_min_term_until` liegt 12 Monate später (§5.7)
+
+**Anfrageeingang (§4b):**
+29. `POST /api/anfragen` ohne gültigen `X-Sartu-Token` → **401**, kein Datensatz
+30. Gültige Anfrage erzeugt **nur** einen `lead` — keine `organizations`, `users` oder `projects`
+31. Rate-Limit greift ab der 11. Anfrage je IP und Stunde
+32. Ausgefülltes Honeypot-Feld wird abgelehnt, ohne dass der Absender es merkt
+
 **Sicherheit:**
-21. `POST` ohne CSRF-Token wird abgelehnt
-22. Kunde erreicht keine `/admin`-Route
-23. Admin ohne bestätigtes TOTP erreicht keine Adminroute
-24. Unerlaubter Dateityp wird abgelehnt
-25. Sicherheitsheader sind in allen Antworten gesetzt
+33. `POST` ohne CSRF-Token wird abgelehnt
+34. Kunde erreicht **keine** `/admin`-Route — geprüft über die vollständige Adminroutenliste (§3 Regel 2a)
+35. Abgemeldeter Benutzer erreicht keine `/admin`-Route
+36. Admin ohne bestätigtes TOTP erreicht keine Adminroute
+37. Die Kundenauswahl im Adminbereich verändert die Session-Organisation **nicht**
+38. Unerlaubter Dateityp wird abgelehnt
+39. Sicherheitsheader sind in allen Antworten gesetzt
+40. Datenbankbedingung greift: Kunde ohne `organization_id` und Admin **mit** `organization_id` lassen sich nicht anlegen
 
 **Bedienung:**
-26. Alle Kernabläufe funktionieren mit deaktiviertem JavaScript
-27. Willkommensstrecke erscheint einmal und danach nicht mehr
-28. Jede Seite hat genau eine `<h1>`
+41. Alle Kernabläufe funktionieren mit deaktiviertem JavaScript
+42. Willkommensstrecke erscheint einmal und danach nicht mehr
+43. Jede Seite hat genau eine `<h1>`
+44. Kein Systemcode aus §5 erscheint in einer Kundenansicht — geprüft per Volltextsuche über die gerenderten Seiten
 
 ---
 
@@ -720,8 +1042,14 @@ Es gelten die Sprachregeln aus `CLAUDE_SARTU_WEBSITE_LASTENHEFT_BAUFINAL.md` §2
 - [ ] Alle Texte aus diesem Dokument **wörtlich** übernommen
 - [ ] Alle Statuswerte zeigen dem Kunden Klartext, nirgends interne Codes
 - [ ] Formate aus §4a eingehalten: deutsche Datums- und Geldformate, Europe/Berlin, 19 % USt., Beträge als Cent gespeichert, keine leeren Werte als `null` sichtbar
-- [ ] Alle 28 Testfälle laufen automatisiert und grün
+- [ ] Alle 46 Testfälle aus §16 laufen automatisiert und grün
 - [ ] `test/tenant-isolation.test.js` vorhanden, vollständig, nicht abgeschwächt
+- [ ] Kunden- und Adminzugriff laufen über **getrennte** Datenzugriffsschichten (§3 Regel 2a); kein gemeinsamer Codepfad lässt den Organisationsfilter weg
+- [ ] Rechenregeln greifen: Erstjahreswert, Zahlungsplan `custom`, Ratensumme (§4)
+- [ ] Korrekturrunden werden gezählt und angezeigt; nichts wird automatisch gesperrt oder berechnet (§5.6a)
+- [ ] Faktenfreigabe und Abnahme erzeugen je einen `approvals`-Eintrag mit Name, Zeitpunkt, IP und Audit-Ereignis — nachträglich nicht änderbar
+- [ ] `POST /api/anfragen` funktioniert, ist mit Token und Rate-Limit geschützt und legt **nur** einen `lead` an (§4b)
+- [ ] Betriebsbeginn und Mindestlaufzeit werden beim Onlinegang gesetzt und dem Kunden angezeigt (§5.7)
 - [ ] Ohne JavaScript vollständig bedienbar
 - [ ] Kontrast, Fokus, Tastaturbedienung, Labels geprüft
 - [ ] Keine Secrets im Repository; `.env.example` vollständig
@@ -738,9 +1066,10 @@ Es gelten die Sprachregeln aus `CLAUDE_SARTU_WEBSITE_LASTENHEFT_BAUFINAL.md` §2
 
 1. Lauffähiges Portal im Repository
 2. **`README.md`**: Voraussetzungen, Einrichtung, Umgebungsvariablen, Migration, Seed, Start, Deployment auf Hetzner, Backup-Hinweis (Datenbank **und** Upload-Verzeichnis)
-3. **Testbericht**: alle 28 Fälle mit Ergebnis
+3. **Testbericht**: alle 46 Fälle aus §16 mit Ergebnis
 4. **Messwerte**: Antwortzeiten der Kernseiten, Seitengröße
 5. **Offene-Punkte-Liste**: alles, was bewusst nicht gebaut wurde (§0.3), plus alles, was du melden musst
-6. **Screenshot-Satz** aus der echten Oberfläche für die Website: Cockpit, Angebot, Aufgaben, Vorschau, Rechnungen, Öffnungszeiten — mit Musterdaten
+6. **Screenshot-Satz** aus der echten Oberfläche für die Website: Cockpit, Angebot, Aufgaben, Vorschau mit Rundenanzeige, Rechnungen, Öffnungszeiten — mit Musterdaten, je einmal Desktop und Mobil
+7. **Schnittstellenbeschreibung** für die Website: das genaue Format von `POST /api/anfragen`, ein funktionierendes Beispiel und der Hinweis, dass `INTAKE_TOKEN` **nicht** im Repository steht
 
 **Arbeite nicht ins Blaue:** Fehlt eine Information oder widerspricht sich etwas, melde es, statt zu raten. Baue **nichts** aus §0.3 „nicht in Stufe 0", auch nicht „schon mal vorbereitet".

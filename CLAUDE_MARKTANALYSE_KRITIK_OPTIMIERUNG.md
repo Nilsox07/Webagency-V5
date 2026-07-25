@@ -135,7 +135,7 @@ Fazit: **Tragfähig – aber nur mit umgekehrter Reihenfolge und drastischer MVP
 | `sartupaketepreise.md` (Juni 2026) | Basis 1.290 / Pro 2.990 / Platin 5.990 / Enterprise ab 9.990 | Wartung 69/149/299, **mit** Minuten | **öffentliche Add-on-Liste**, Garantie |
 | `sartulastenheftwebsite.md` | Start/Wachstum/Platzhirsch **mit alten Preisen** 1.290/2.990/5.990 | Care 49/99/249, **mit** 30/90 Min. | Add-ons, SEO-Stufen 149/390/790, Geld-zurück |
 
-Drei Namensstände (Basis/Pro/Platin vs. Start/Wachstum/Platzhirsch), drei Preisstufen, drei Betriebsmodelle. **`ENDKONTROLLE_WEBSEITEN.md` markiert die alten Reste selbst als „zu entfernen".** → **Kritisch:** ohne eine einzige Preis-/Scope-Quelle (`pricing.json` + Diff-Test) baut ein Umsetzer das Falsche.
+Drei Namensstände (Basis/Pro/Platin vs. Start/Wachstum/Platzhirsch), drei Preisstufen, drei Betriebsmodelle. **`SARTU_ENDKONTROLLE_WEBSEITEN.md` markiert die alten Reste selbst als „zu entfernen".** → **Kritisch:** ohne eine einzige Preis-/Scope-Quelle (`pricing.json` + Diff-Test) baut ein Umsetzer das Falsche.
 
 ### 4.2 DREI Tech-Stacks `[BELEGT]`
 - **Gebaut (Juni):** statisch HTML/CSS/JS auf **Vercel + Supabase** (Auth/PostgreSQL/Storage, Frankfurt), RLS, live getestet. `[SartuProjektZusammenfassung]`
@@ -348,9 +348,27 @@ Ein Gegen-Review von Codex hat mehrere berechtigte Lücken aufgedeckt. Nachfolge
 
 1. **„Claude minimalisiert zu stark" – nur teilweise korrekt.** Meine Stufung betraf ausdrücklich die **Automatisierungstiefe** (KI-Orchestrierung, Mollie-Abo-Automatik, Domain-Lifecycle, SEO-Flotte, Rollback), nicht die *Sichtbarkeit* des Portals. Der Review hat aber recht, dass das im Text zu schwach stand und als „unsichtbares Hilfsportal" gelesen werden konnte. → Formulierung korrigiert, Sache unverändert: **Oberfläche früh echt, Automatik spät.**
 2. **Zeitvorteil gegenüber Agenturen (P2):** Zustimmung mit Warnung – die genannten Belege (Kickoff ≥ 3 h o. ä.) taugen **nicht** als Beweis für einen SARTU-Zeitvorteil. Solche Vergleiche erst mit **eigenen Daten nach 5–10 Projekten**; vorher nur qualitativ formulieren. Ich rate ausdrücklich von jeder Prozentangabe ab.
-3. **Design-Richtung:** Ich hatte Ink/Ivory/Teal + Oxide entschieden, das Review will Beige/Schwarz/Rostrot als Markenwelt. Das ist eine **Geschmacks- und Markenentscheidung, keine Sachfrage** – deshalb löse ich sie nicht per Dekret, sondern liefere **drei bewertete Designrichtungen** zur Auswahl (siehe `CLAUDE_SARTU_WEBSITE_KONZEPT_FINAL.md`).
+3. **Design-Richtung – nachträglich vollständig zurückgenommen.** Ich hatte zunächst eine Palette gesetzt (Ink/Ivory/Teal + Oxide), das Review wollte eine andere. Beides war falsch begründet: Ich habe hier eine **Gestaltungsentscheidung getroffen, für die mir die Qualifikation fehlt** — und das Ergebnis war schlecht. Konsequenz auf Ansage des Auftraggebers: **sämtliche Designvorgaben entfernt**, alte Entwürfe nach `design/_verworfen/` verschoben und dort als unverbindlich gekennzeichnet. An ihrer Stelle steht `CLAUDE_SARTU_DESIGN_BRIEFING_AUSFUEHRUNG.md` — ein **Recherche- und Auswahlauftrag**: die ausführende KI sucht in etablierten Komponenten- und Schriftbibliotheken, prüft jeden Kandidaten gegen Lizenz, Pflegestand, Größe, Barrierefreiheit und Template-Erkennbarkeit und legt **2–3 klickbare Varianten mit echten Texten** zur Entscheidung vor. Farben, Schriften und Formen sind in **keinem** Dokument mehr vorgegeben.
+
+---
+
+## 15. Was nach dieser Prüfung noch offen bleibt (ehrliche Restliste)
+
+Damit hier kein „alles geklärt" suggeriert wird — diese Punkte sind **bewusst** offen und lassen sich nicht am Schreibtisch schließen:
+
+| Offen | Warum nicht lösbar durch Konzeptarbeit | Wann es sich klärt |
+|---|---|---|
+| **Zahlungsbereitschaft 1.490 € / 3.900 € / 7.900 €** in der Region | Preisakzeptanz zeigt sich nur im echten Angebot | nach den ersten 5–10 versendeten Angeboten (Annahmequote) |
+| **Reale Produktionszeit je Paket** | hängt an Werkzeugen, Routine und Kundenmitwirkung | Median nach 3–5 Projekten; erst dann ist die Marge belastbar |
+| **Ob der Portal-USP tatsächlich kaufentscheidend ist** | Kunden nennen im Nachhinein oft andere Gründe als die echten | Verkaufsgespräche protokollieren: Wurde das Portal von selbst angesprochen? |
+| **Kanaleffizienz** (welcher Weg qualifizierte Anfragen bringt) | keine Branchenzahl ersetzt den eigenen Test | Testbudget und Abbruchkriterien stehen in Masterkonzept §23b |
+| **Rechtstexte** (AGB, AVV, Datenschutz, KI-Verarbeitung) | dürfen nicht von einer KI stammen | vor dem ersten Standardkunden, anwaltlich |
+| **Export- und Umzugsversprechen** | nur belastbar, wenn einmal praktisch durchgeführt | vor der ersten Werbeaussage dazu — sonst nicht behaupten |
+
+**Die einzige ehrliche Zusammenfassung:** Das Modell ist **konsistent und baubar**. Ob es **trägt**, entscheiden Zahlen, die es noch nicht gibt.
 
 ---
 
 *Die konkrete, widerspruchsbereinigte Bauvorlage steht in `CLAUDE_SARTU_MASTERKONZEPT_FINAL.md`.
-Das eigenständige Website-/Design-Konzept steht in `CLAUDE_SARTU_WEBSITE_KONZEPT_FINAL.md`.*
+Das eigenständige Website-Konzept steht in `CLAUDE_SARTU_WEBSITE_KONZEPT_FINAL.md`.
+Die Bauvorlagen: `CLAUDE_SARTU_WEBSITE_LASTENHEFT_BAUFINAL.md` und `CLAUDE_SARTU_PORTAL_LASTENHEFT_BAUFINAL.md`.*
