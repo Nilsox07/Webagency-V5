@@ -41,6 +41,7 @@ merkt es, bevor gebaut wird.
 | Was | Warum |
 |---|---|
 | `design/_verworfen/` | verworfene Entwürfe, keine Vorgabe, auch nicht als Anregung |
+| `konzepte/` **vollständig lesen** | ~360 KB historische Quellen mit veralteten Preisen und abgelösten Stacks. **Nur gezielt nachschlagen**, wenn eine bestimmte Frage es verlangt — nie vorsorglich am Anfang einlesen. Das kostet mehr Kontingent als alle Bauunterlagen zusammen und bringt nichts |
 | `CLAUDE_MARKTANALYSE_KRITIK_OPTIMIERUNG.md` | Bewertung vom 24.07.2026 für den Menschen, **keine Bauvorlage**. Enthält bewusst überholte Empfehlungen (alter Stack, alte Palette, alter Launch-Umfang) — sie dokumentieren die Entscheidungshistorie und sind im Dokument als `[ABGELÖST]` gekennzeichnet. **Wer daraus baut, baut einen überholten Stand.** |
 
 ---
