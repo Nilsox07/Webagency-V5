@@ -122,10 +122,11 @@ Rechtstexte · echte Fotos · die Freigabe eigener Texte. Alles davon steht in
 > **Dann anhalten.** Der Mensch entscheidet die Designrichtung. Baue keine weiteren Seiten.
 >
 > **Regeln, die durchgehend gelten:**
-> - **PHP läuft in Docker, nicht auf dem Wirtssystem.** Jeder PHP-, Composer- und Testbefehl
->   bekommt den Vorsatz `docker compose exec app …`. Auf dem Wirtssystem gibt es kein `php`;
->   ein fehlgeschlagenes `php -v` dort ist **kein** Grund anzuhalten. Datenbanken heißen `db`
->   und `db_test`, nicht `localhost`. Einzelheiten: `ENTWICKLUNGSUMGEBUNG.md`
+> - **Wie PHP aufgerufen wird, steht in `ENTWICKLUNGSUMGEBUNG.md`** — je nach eingerichtetem Weg
+>   direkt oder mit dem Vorsatz `docker compose exec app …`. Erst dort nachsehen, dann aufrufen
+> - **Eine fehlende Datenbank ist kein Grund anzuhalten.** Weiterbauen, was ohne sie fertig wird,
+>   und Ungeprüftes in `OFFENE_PRUEFUNGEN.md` eintragen statt als geprüft zu melden
+>   (`ENTWICKLUNGSUMGEBUNG.md`, Abschnitt „Bauen, bevor die Datenbank steht")
 > - PHP 8.3+, serverseitig gerendert, MySQL/MariaDB, PDO mit vorbereiteten Anweisungen. **Kein**
 >   WordPress, **kein** Vollframework, **kein** React/Vue/Next, **kein** Node als Zielsystem,
 >   **kein** Build-Schritt fürs Frontend, **keine** externen CDNs

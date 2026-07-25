@@ -80,7 +80,7 @@ durchbaut, hat das Gate verletzt.
 | Sprache und Aufbau | **entschieden:** PHP, serverseitig gerendert, ein modulares Projekt (Portal-Lastenheft §1) |
 | Datenbank | **entschieden:** MySQL/MariaDB, weil klassisches Hosting möglich bleiben soll |
 | Konkreter Anbieter und Tarif | *offen* — muss die Anforderungen aus Portal-Lastenheft **§1.4** erfüllen (PHP-Erweiterungen, Datenbank, HTTPS, Verzeichnis außerhalb des Webroots, **Cron**, **zuverlässiger Mailversand**, Sicherung, Serverstandort EU) |
-| **Entwicklungsumgebung** | **entschieden 25.07.2026:** Docker auf dem eigenen Rechner — `docker-compose.yml`, Einrichtung in `ENTWICKLUNGSUMGEBUNG.md`. PHP 8.3 mit den Erweiterungen aus §1.4, zwei getrennte MariaDB-Instanzen (Arbeiten/Tests), Mailfänger für die Anmeldelinks |
+| **Entwicklungsumgebung** | **Verfahren entschieden 25.07.2026, Weg offen:** PHP 8.3 + Composer sind Pflicht, die Datenbank darf nachgereicht werden. Zwei gleichwertige Wege in `ENTWICKLUNGSUMGEBUNG.md` — **A** Docker (`docker-compose.yml` liegt bereit), **B** natives Paket (Laragon/XAMPP/Homebrew). Der Weg wird beim Einrichten gewählt und hier eingetragen |
 | Umgang mit vorhandenen Prototypen | *offen* — wird in `IMPLEMENTATION_PLAN.md` entschieden und begründet |
 
 ---
@@ -94,4 +94,4 @@ durchbaut, hat das Gate verletzt.
 
 | Datum | Was entschieden | Von wem |
 |---|---|---|
-| 25.07.2026 | Entwicklungsumgebung: Docker statt lokaler Installation (§4) | Betreiber |
+| 25.07.2026 | Entwicklungsumgebung: PHP+Composer verbindlich, Datenbank nachreichbar; Weg A oder B frei (§4) | Betreiber |

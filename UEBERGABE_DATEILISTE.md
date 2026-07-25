@@ -19,7 +19,7 @@ merkt es, bevor gebaut wird.
 | 3 | `CLAUDE_SARTU_DESIGN_BRIEFING_AUSFUEHRUNG.md` | Vorgehen für die visuelle Ebene | Abbruch |
 | 4 | `CLAUDE_SARTU_MASTERKONZEPT_FINAL.md` | Nachschlagewerk + verbindliche Arbeitsverteilung §10a | Abbruch |
 | 5 | `SARTU_ENTSCHEIDUNGEN_OFFEN.md` | **alle Platzhalter und Sperren** — Standort, Rechtstexte, Design, Betriebsumgebung | **Abbruch.** Sonst werden Werte erfunden |
-| 6 | `ENTWICKLUNGSUMGEBUNG.md` + `docker-compose.yml` | **wie PHP, Composer und MariaDB aufgerufen werden** — alles läuft im Container | **Abbruch.** Sonst wird auf dem Wirtssystem nach PHP gesucht und nichts gefunden |
+| 6 | `ENTWICKLUNGSUMGEBUNG.md` | **wie PHP, Composer und die Datenbank aufgerufen werden** — und was ohne Datenbank trotzdem gebaut wird | **Abbruch.** Sonst wird falsch nach PHP gesucht oder wegen fehlender Datenbank angehalten |
 | 7 | `CLAUDE_SARTU_WEBSITE_LASTENHEFT_BAUFINAL.md` | nur §2 Sprachregeln | Melden, mit Rest fortfahren |
 | 8 | `konzepte/` (20 Dateien) | historische Quellen, **veraltete Preise und abgelöste Stacks** | Melden, mit Rest fortfahren |
 
@@ -36,7 +36,7 @@ merkt es, bevor gebaut wird.
 | 7 | `SARTU_SEO_GEO_KEYWORDSTRATEGIE.md` | welche Seite welche Suchintention bedient, Baureihenfolge | **Abbruch.** Sonst entstehen Texte ohne Zielrichtung |
 | 8 | `SARTU_ENTSCHEIDUNGEN_OFFEN.md` | alle Platzhalter und Sperren | **Abbruch** |
 | 9 | `GEO_DISCOVERY_CHECKLIST.md` | technische Auffindbarkeit für KI-Systeme — **vor Livegang abzuhaken** | Melden, mit Rest fortfahren |
-| 10 | `ENTWICKLUNGSUMGEBUNG.md` + `docker-compose.yml` | **wie PHP, Composer und MariaDB aufgerufen werden** — alles läuft im Container | **Abbruch.** Sonst wird auf dem Wirtssystem nach PHP gesucht und nichts gefunden |
+| 10 | `ENTWICKLUNGSUMGEBUNG.md` | **wie PHP, Composer und die Datenbank aufgerufen werden** — und was ohne Datenbank trotzdem gebaut wird | **Abbruch.** Sonst wird falsch nach PHP gesucht oder wegen fehlender Datenbank angehalten |
 
 ## Nicht übergeben
 
