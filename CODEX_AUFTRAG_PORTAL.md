@@ -78,9 +78,12 @@ Zustände, Interaktionslogik. Angepasst werden Farben, Schriften, Abstände, Tex
 werden dabei in **eigenes CSS mit zentralen Variablen** übersetzt, weil es keinen Build-Schritt gibt.
 Vollständig in `CLAUDE_SARTU_DESIGN_BRIEFING_AUSFUEHRUNG.md` §3.1 — **vor** dem ersten Entwurf lesen.
 
-**Achtung Lizenz (§2.1 dort):** Was in SARTUs eigener Website zulässig ist, ist nicht automatisch im
-späteren Kundenstarter zulässig. Bestimme je Quelle die Stufe, **bevor** du Code übernimmst, und
-trage jedes Teil in die Herkunftsliste ein.
+**Achtung Lizenz (§2.1 dort):** **Nur kostenlose Quellen**, deren Lizenz kommerzielle Nutzung,
+Veränderung **und Weitergabe** erlaubt — MIT, Apache-2.0, ISC, BSD, CC0, bei Schriften OFL. Keine
+gekauften Sammlungen, kein „Pro"-Tarif. Bei Projekten mit freiem und kostenpflichtigem Teil
+(Flowbite, Preline) je Komponente prüfen, in welchem sie liegt. **Lies die Lizenzdatei selbst**, nicht
+die Beschreibung auf der Website. Trage jedes Teil in die Herkunftsliste ein und liefere die
+Lizenzhinweise mit aus.
 
 **Sprachregel nach außen:** Kundenbereich, Ihr Bereich, Anmeldung. **Nie** App, Software, SaaS,
 Plattform, Dashboard, Control-Plane. Der Kunde soll denken „ich melde mich an und sehe mein Projekt",

@@ -114,8 +114,10 @@ Rechtstexte · echte Fotos · die Freigabe eigener Texte. Alles davon steht in
 > setzt sie neu zusammen, ganze Seitengerüste nie.
 > Ergebnis: **2–3 klickbare Startseitenvarianten** mit den **echten** Texten aus Website-Lastenheft
 > §5, als echte PHP-Seiten im Projekt.
-> Vorlegen mit: gewählten Quellen und Begründung, **Lizenzstufe je Quelle** (§2.1), Herkunftsliste
-> je Komponente, gemessenen KB gzip, Laborwerten.
+> **Nur kostenlose Quellen** mit erlaubter Weitergabe (MIT, Apache-2.0, ISC, BSD, CC0, Schriften OFL).
+> Keine gekauften Sammlungen. Lizenzdatei jeweils selbst lesen.
+> Vorlegen mit: gewählten Quellen und Begründung, **Lizenz je Quelle mit Beleg**, Herkunftsliste je
+> Komponente, gemessenen KB gzip, Laborwerten.
 >
 > **Dann anhalten.** Der Mensch entscheidet die Designrichtung. Baue keine weiteren Seiten.
 >
