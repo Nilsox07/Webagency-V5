@@ -35,42 +35,53 @@ Frühere Designentwürfe liegen unter `design/_verworfen/` und sind **nicht** zu
 
 Das sind Geschäfts- und Rechtsanforderungen, keine Geschmacksfragen. Sie gelten für **jeden** Vorschlag.
 
-### 2.1 Lizenz — der kritischste Punkt, und er hat **zwei Stufen**
+### 2.1 Lizenz — **nur kostenlose, frei weitergebbare Quellen**
 
-Das ist der Abschnitt, der über Rechtssicherheit entscheidet. Er wird oft zu einfach gedacht.
+**Entscheidung:** Es werden ausschließlich **kostenlose** Komponenten und Bibliotheken eingesetzt.
+Keine gekauften Sammlungen, kein „Pro"-Tarif, keine Einzelplatzlizenz.
 
-**Der Unterschied, auf den es ankommt:**
+Damit gilt **eine** Anforderung statt zweier Stufen — und sie ist die strengere:
 
-| | **SARTUs eigene Website und Kundenbereich** | **SARTU-Starter für Kundenseiten** |
+> **Jedes Teil muss kommerzielle Nutzung, Veränderung und Weitergabe erlauben.**
+> Zulässig sind vor allem **MIT**, **Apache-2.0**, **ISC**, **BSD**, **CC0**, bei Schriften **SIL OFL**.
+
+**Warum die Weitergabe mitgeprüft werden muss, auch wenn es „nur" um SARTUs eigene Seite geht:**
+Aus denselben Bausteinen entsteht später der **SARTU-Starter**, aus dem Kundenseiten erzeugt werden.
+Ein Starter ist ein weitergegebener Bausatz. Und der Kunde bekommt seine Seite bei Vertragsende als
+**Export** — er muss sie weiterbetreiben dürfen. Ein Baustein, der das nicht hergibt, ist eine
+Zeitbombe im Kundenprojekt.
+
+**Kostenlos ist nicht dasselbe wie frei.** Das ist die häufigste Verwechslung:
+
+| Sieht kostenlos aus | Ist aber ein Problem |
+|---|---|
+| „Free tier" einer kommerziellen Sammlung | freie und kostenpflichtige Teile stehen auf derselben Seite nebeneinander — Flowbite und Preline zum Beispiel. Prüfen, **welche** Komponente in welcher Stufe ist |
+| „Free for personal and commercial use" | sagt nichts über **Weitergabe**. Für den Starter reicht das nicht |
+| „Kostenlos für persönliche Nutzung" | scheidet vollständig aus |
+| Schriften mit `-NC` (nicht kommerziell) | scheiden aus |
+| Etwas ohne auffindbare Lizenzdatei | scheidet aus. Keine Lizenz heißt: alle Rechte vorbehalten |
+
+**Zur Klarstellung bei Tailwind:** Das CSS-Framework **Tailwind CSS selbst ist MIT** und
+unproblematisch. Verboten ist nur **Tailwind Plus** (früher Tailwind UI), die gekaufte
+Komponentensammlung — deren Lizenz untersagt ausdrücklich, daraus einen Starter zu bauen.
+Tailwind-basierte **freie** Sammlungen sind davon nicht betroffen.
+
+### Brauchbare kostenlose Quellen — Startpunkt, keine Vorgabe
+
+Alle Angaben **selbst prüfen**: Lizenzdatei im Repository lesen, nicht die Beschreibung auf einer
+Website. Lizenzen ändern sich, Projekte werden verkauft.
+
+| Was | Kandidaten | Anmerkung |
 |---|---|---|
-| Was es ist | ein Projekt für SARTU selbst | ein wiederverwendbarer Bausatz |
-| Lizenzanforderung | kommerzielle Nutzung erlaubt | kommerzielle Nutzung **und Weitergabe im Bausatz** erlaubt |
-| Zulässig | MIT, Apache-2.0, CC0 — **und** gekaufte Lizenzen wie Tailwind Plus | **nur** MIT, Apache-2.0, CC0 und Vergleichbares |
-| Verboten | „nur persönliche Nutzung", „single site license" | zusätzlich: **jede gekaufte Komponentenlizenz** |
+| **Reines HTML + CSS zum Übernehmen** | **HyperUI** (MIT, geprüft 25.07.2026) · daisyUI · Bulma · Pico · Open Props | der Idealfall — direkt portierbar |
+| **Kopierbare Komponenten** | shadcn/ui (MIT, React → portieren) · Flowbite **freier Kern** · Preline **freier Teil** | bei den letzten beiden je Komponente die Stufe prüfen |
+| **Verhaltensvorlagen** | Radix Primitives · Headless UI · Ark UI · React Aria | React — es wird das **Verhalten** übernommen, nicht der Code |
+| **Bewährtes, buildfrei ausliefbar** | Bootstrap (MIT, fertige CSS-Datei) | unterschätzt für ein Projekt ohne Build-Schritt |
+| **Icons** | Lucide · Phosphor · Tabler · Heroicons · Remix Icon | **ein** Set für alles, selbst gehostet als Inline-SVG |
+| **Schriften** | Fontsource · Google Fonts · Velvetyne · Collletttivo · Use & Modify | auf **OFL** achten; bei Fontshare die eigene Lizenz genau lesen |
 
-**Warum die zweite Spalte enger ist — ein konkretes Beispiel.** Die Tailwind-Plus-Lizenz erlaubt
-ausdrücklich Kundenprojekte („create unlimited End Products for unlimited Clients"), verbietet aber
-genauso ausdrücklich:
-
-> *„Creating a theme, template, or project starter kit using the components, templates, or
-> libraries and making it available either for sale or for free."*
-
-Ein SARTU-Starter, aus dem Kundenseiten entstehen, **ist** ein Starter-Kit. Für SARTUs eigene
-Website wären diese Komponenten zulässig, im Starter nicht. Dasselbe gilt für Flowbite Pro, Preline
-Pro und jede andere gekaufte Sammlung.
-*(Lizenztext geprüft am 25.07.2026: https://tailwindcss.com/plus/license)*
-
-**Regel, die daraus folgt:** Wenn du nicht **sicher** weißt, in welche Spalte ein Teil gehört,
-nimm die rechte. Was im Starter zulässig ist, ist überall zulässig. Umgekehrt gilt das nicht.
-
-### Prüfung je Teil — ohne Ausnahme
-
-- **Lies die Lizenzdatei im Repository selbst.** Nicht die Beschreibung auf der Website, nicht die
-  Zusammenfassung auf einer Vergleichsseite
-- Bei zwei Stufen (kostenlos + kostenpflichtig) prüfen, **welche** Komponenten in welcher Stufe sind.
-  Flowbite und Preline haben freie und gekaufte Teile, die auf derselben Seite nebeneinanderstehen
-- Ausgeschlossen: „kostenlos für persönliche Nutzung", „single site license", alles ohne
-  auffindbare Lizenz
+**Es gibt reichlich Auswahl.** Der Engpass ist nicht die Verfügbarkeit, sondern die Auswahl: lieber
+**eine sehr gute** Quelle gründlich nutzen als fünf mittelmäßige mischen (§3.1).
 
 ### Herkunftsliste — Pflichtabgabe
 
@@ -81,12 +92,15 @@ Für **jedes** übernommene Teil, auf Komponentenebene und nicht pauschal:
 | Komponente | wofür sie bei SARTU eingesetzt wird |
 | Quelle | Projekt, genaue Fundstelle, Datum des Abrufs |
 | Version oder Commit | damit später nachvollziehbar ist, welcher Stand |
-| Lizenz | Typ und wo die Lizenzdatei liegt |
-| Stufe | „nur SARTU-eigen" oder „auch im Kundenstarter zulässig" |
+| Lizenz | Typ **und** wo die Lizenzdatei liegt |
+| Weitergabe erlaubt? | ja/nein — bei „nein" darf das Teil **nicht** eingesetzt werden |
 | Was geändert wurde | in einem Satz |
 
-Diese Liste ist Teil der Abgabe. Ein Teil ohne Zeile in der Liste gilt als nicht eingesetzt und wird
-entfernt.
+Die Lizenzhinweise der übernommenen Projekte werden mit ausgeliefert — meist eine Sammeldatei
+`public/assets/LIZENZEN.txt` oder Kommentare im CSS. Das ist bei MIT und Apache **Pflicht**, nicht
+Höflichkeit.
+
+Ein Teil ohne Zeile in der Liste gilt als nicht eingesetzt und wird entfernt.
 
 ### 2.2 Technik und Leistung
 
@@ -159,15 +173,17 @@ Design**. Eine KI, die frei baut, trifft sie im Mittel — und Mittelmaß ist er
 **1 bis 3 Quellen, nicht zehn.** Mehr Quellen heißt nicht mehr Qualität, sondern weniger Einheit.
 Wähle Quellen, die zueinander passen, und begründe die Wahl in einem Absatz.
 
-| Art | Was du davon übernimmst | Beispiele zum Prüfen |
+| Art | Was du davon übernimmst | Kandidatenliste |
 |---|---|---|
-| **Reines HTML + CSS** — der Idealfall | alles: Markup, CSS, Zustände | HyperUI · daisyUI · Open Props · Pico · reine CSS-Sammlungen |
-| **Kopierbare Komponenten** (Code zum Einfügen, nicht als Abhängigkeit) | Markup und CSS, Verhalten nachgebaut | shadcn/ui (React → portieren) · Flowbite (freie Teile) · Preline (freie Teile) |
-| **Verhaltensvorlagen** (React, nicht direkt nutzbar) | die **Interaktionslogik**: Rollen, Tastaturwege, Zustände, Fokusführung | Radix Primitives · Headless UI · Ark UI · React Aria |
+| **Reines HTML + CSS** — der Idealfall | alles: Markup, CSS, Zustände | §2.1, Zeile 1 |
+| **Kopierbare Komponenten** | Markup und CSS, Verhalten nachgebaut | §2.1, Zeile 2 |
+| **Verhaltensvorlagen** (React) | die **Interaktionslogik**: Rollen, Tastaturwege, Zustände, Fokusführung | §2.1, Zeile 3 |
 | **Echte Seiten im Netz** | einzelne gelöste Details, nie ganze Layouts | siehe §3.5 |
 
-**Bei jeder Quelle zuerst die Lizenzstufe nach §2.1 bestimmen** — bevor du auch nur eine Zeile
-übernimmst. Ein Teil, das nur in Spalte 1 zulässig ist, darf nie in den Kundenstarter wandern.
+**Bei jeder Quelle zuerst die Lizenz nach §2.1 prüfen** — bevor du auch nur eine Zeile übernimmst.
+**Nur kostenlose Quellen mit erlaubter Weitergabe** (MIT, Apache-2.0, ISC, BSD, CC0, bei Schriften
+OFL). Erlaubt eine Lizenz die Weitergabe nicht, scheidet das Teil aus — auch für SARTUs eigene Seite,
+weil dieselben Bausteine später in den Kundenstarter wandern.
 
 #### Wie nah du übernehmen darfst — nach Ebene gestaffelt
 
@@ -275,7 +291,7 @@ Für **jedes** Teil, das du übernehmen willst:
 - [ ] **Gepflegt** — letzte Änderung nachvollziehbar aktuell, keine offenen Sicherheitsprobleme
 - [ ] **Größe** gemessen und im Budget
 - [ ] **Barrierefrei** — Tastatur, Fokus, ARIA belegt, nicht nur behauptet
-- [ ] **Lizenzstufe bestimmt** (§2.1): nur SARTU-eigen, oder auch im Kundenstarter zulässig? Im Zweifel die engere Stufe
+- [ ] **Lizenz geprüft** (§2.1): kostenlos **und** Weitergabe erlaubt (MIT, Apache-2.0, ISC, BSD, CC0, OFL). Lizenzdatei selbst gelesen
 - [ ] **Passt technisch** — läuft **ohne Build-Schritt** und **ohne Framework-Laufzeit**. Erzwingt es React, Vue, einen Bundler oder einen Paketmanager zur Laufzeit: nicht direkt einbinden, sondern nach §3.1 portieren
 - [ ] **Utility-Klassen sind übersetzt** — kein `px-4 py-2` im ausgelieferten Markup, sondern eigenes CSS mit den zentralen Variablen
 - [ ] **Ebene geprüft** (§3.1): Baustein → darf nah sein · Sektion → Mechanik ja, Komposition neu · ganze Seite → nie
@@ -343,7 +359,7 @@ und Kundenbereich gemeinsam genutzt — kein zweites Set für den eingeloggten B
 Je Vorschlag:
 
 1. **Ein Satz zur Haltung** — wie wirkt dieser Vorschlag und auf wen zielt er?
-1a. **Welche 1–3 Quellen** du gewählt hast und **warum diese** — mit Lizenzstufe je Quelle (§2.1)
+1a. **Welche 1–3 Quellen** du gewählt hast und **warum diese** — mit Lizenz je Quelle und Beleg, dass die Weitergabe erlaubt ist (§2.1)
 2. **Herkunftsliste:** jedes eingesetzte Teil mit Name, Version, **Lizenz** und Fundstelle.
 3. **Messwerte:** JS in KB gzip, CSS in KB, LCP und CLS mobil im Labor (TBT statt INP, §2.2).
 4. **Prüfliste aus Abschnitt 4**, abgehakt.
