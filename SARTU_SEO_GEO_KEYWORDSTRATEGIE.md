@@ -108,7 +108,36 @@ Reihenfolge belastbar. Bis dahin ist sie eine begründete Annahme.
 zwei Wochen echte Klickpreise, echte Klickraten und echte Anfragen — und beantwortet nebenbei die
 Frage, ob die Landeseiten überhaupt konvertieren. Das ist mehr wert als jedes Schätztool.
 
+> **Damit das nicht bloß ein guter Vorsatz bleibt: `KEYWORD_VALIDATION.md` ist ein Gate.**
+> Vor der finalen Textproduktion (Sitzung 3) entsteht diese Datei. Ohne sie werden keine Langtexte
+> geschrieben. Was hineingehört, steht in §1.1.
+
 ---
+
+### 1.1 `KEYWORD_VALIDATION.md` — was drinstehen muss
+
+Je Launch-Adresse eine Zeile beziehungsweise ein Block:
+
+| Feld | Inhalt |
+|---|---|
+| **URL** | die geplante Adresse |
+| **Zielbegriff** | der eine Begriff, für den die Seite gebaut wird |
+| **Nebenbegriffe** | 2–5 Varianten, die dieselbe Absicht bedienen |
+| **Suchintention** | kommerziell · vergleichend · problemorientiert · branchenbezogen · definitorisch |
+| **SERP-Typen in den ersten zehn** | was dort tatsächlich steht: Verzeichnisse, Agenturen, Ratgeber, Werkzeuge, Videos, lokale Ergebnisse |
+| **Dominiert etwas?** | z. B. „nur Verzeichnisse" — dann ist die Seite in dieser Form chancenlos |
+| **Verwandte Fragen** | „Nutzer fragen auch", Autovervollständigung, verwandte Suchanfragen, soweit sichtbar |
+| **Volumen** | **nur wenn ein echtes Werkzeug vorliegt.** Sonst bleibt das Feld leer — **nie geschätzt** |
+| **Entscheidung** | Title, H1 und URL bestätigt — oder Änderungsvorschlag mit Begründung |
+
+**Wenn kein Volumenwerkzeug verfügbar ist:** Die Datei wird trotzdem angelegt und oben als
+**„SERP- und Intent-Validierung ohne Volumendaten"** gekennzeichnet. Das ist deutlich mehr wert als
+nichts — die SERP-Betrachtung allein zeigt bereits, ob eine Seite überhaupt eine Chance hat. Was
+**nicht** passiert: erfundene Zahlen eintragen, um die Tabelle zu füllen.
+
+**Wer das macht:** Kann die ausführende KI vorbereiten, indem sie die Suchergebnisse ansieht und
+beschreibt. Die **Entscheidung** je Zeile trifft ein Mensch — sie bestimmt Titel und Adressen, und
+Adressen ändert man später nur mit Weiterleitungen.
 
 ## 2. Die sechs Suchintentionen
 
@@ -460,8 +489,17 @@ den ersten Search-Console-Daten — dann weiß man, wonach tatsächlich gesucht 
 **Getrennt messen, sonst führt die Zahl in die Irre:** Anfragen aus dem Unternehmensprofil, aus der
 organischen Suche, aus Direktansprache und aus Empfehlungen. Wird das vermischt, sieht die
 Suchmaschinenoptimierung im ersten Jahr erfolgreich aus, obwohl die Kunden von woanders kamen — und
-man baut die falsche Sache weiter aus. Jede Anfrage bekommt deshalb im Bedarfsscheck oder im
-Erstgespräch die Frage: **„Wie sind Sie auf uns gekommen?"**
+man baut die falsche Sache weiter aus.
+
+**Technisch gelöst, nicht nur vorgenommen:** Jede Anfrage speichert first-party ihre Herkunft —
+Landeseite, verweisender Hostname, `utm_*`-Kennzeichen, Anzeigen-Klickkennung und die freiwillige
+Selbstauskunft „Wie sind Sie auf uns aufmerksam geworden?". Vollständige Festlegung in
+`CLAUDE_SARTU_PORTAL_LASTENHEFT_BAUFINAL.md` §4b.7. Kein Analysedienst, keine Cookies Dritter,
+kein Einwilligungsbanner nötig.
+
+**Warum beides:** Die Kennzeichen sagen, **woher der Klick kam**. Die Selbstauskunft sagt, **warum
+jemand kam** — und die weicht regelmäßig ab. Wer über eine Empfehlung von SARTU hört und dann den
+Namen googelt, erscheint technisch als Suchtreffer.
 
 **Die ehrliche Erwartung:** Für kommerzielle Begriffe wie „Website erstellen lassen" braucht eine
 neue Domain **Monate bis Jahre**. Die ersten Kunden kommen über Direktansprache (Masterkonzept §23b)

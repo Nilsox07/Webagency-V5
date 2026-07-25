@@ -9,7 +9,7 @@ die Gründe stehen unten.
 
 | # | Was | Warum |
 |---|---|---|
-| 1 | **Branch nach `main` mergen** | Codex liest den Standardbranch des öffentlichen Repositorys. Liegt alles auf einem Feature-Branch, findet es nichts |
+| 1 | **`main` als Standardbranch setzen** (Settings → General → Default branch) | `main` existiert und hat den vollen Stand. Solange der alte Branch Standard ist, laufen beide auseinander |
 | 2 | **Hosting praktisch prüfen** — Testmail an eine Fremdadresse (Posteingang oder Spam?) und ein Cronlauf, der eine Datei schreibt | Portal-Lastenheft §1.4. Fehlt eines, ist der Tarif ungeeignet. Das jetzt zu klären kostet eine Stunde, später eine Migration |
 | 3 | **Entscheiden, wo der Code hinkommt** | Empfehlung: **dasselbe Repository**. Die Konzeptdateien bleiben im Wurzelverzeichnis, der Code entsteht daneben in `app/`, `public/`, `portal/`, `admin/`, `api/`, `migrations/`, `tests/`. Damit funktioniert die Startprüfung unverändert |
 
@@ -46,8 +46,13 @@ fest. Genau deshalb eignet sich dieser Teil für einen langen Durchlauf.
 **Was entsteht:** alle Seiten aus `CODEX_AUFTRAG_WEBSITE.md` im gewählten Design, mit den echten
 Screenshots aus Sitzung 2.
 
-**Deine Rolle:** die selbst geschriebenen Texte prüfen (5 Leistungsseiten, 3 Transparenzseiten,
-2 Vergleichsartikel, 8 Lexikonbegriffe) und die gemeldeten Copy-Konflikte entscheiden.
+**Zwei Pflichtdateien vor den Langtexten:** `KEYWORD_VALIDATION.md` (Aufbau in Keywordstrategie
+§1.1) und die abgearbeitete `GEO_DISCOVERY_CHECKLIST.md`.
+
+**Deine Rolle:** die Entscheidungen in `KEYWORD_VALIDATION.md` treffen — sie legen Titel und
+Adressen fest, und Adressen ändert man später nur noch mit Weiterleitungen. Dazu die selbst
+geschriebenen Texte prüfen (5 Leistungsseiten, 3 Transparenzseiten, 2 Vergleichsartikel,
+8 Lexikonbegriffe) und die gemeldeten Copy-Konflikte entscheiden.
 
 ---
 
@@ -71,8 +76,12 @@ Rechtstexte · echte Fotos · die Freigabe eigener Texte. Alles davon steht in
 
 ## Startprompt für Sitzung 1
 
-> Du arbeitest am öffentlichen Repository **`github.com/Nilsox07/Webagency-V5`**, Branch `main`.
-> Es enthält bisher nur Konzeptdateien, keinen Code. Den Code baust du in dasselbe Repository.
+> Du arbeitest im aktuellen Verzeichnis — ein lokaler Klon von `github.com/Nilsox07/Webagency-V5`,
+> Branch `main`. Es enthält bisher nur Konzeptdateien, keinen Code. Den Code baust du hier hinein.
+>
+> **Prüfe zuerst die lokale Umgebung** und melde das Ergebnis: `php -v`, `php -m`, `mysql --version`,
+> `composer -V`. Fehlt PHP 8.3+, eine der Erweiterungen `pdo_mysql`/`sodium`/`mbstring`/`intl`/
+> `fileinfo`, oder eine MySQL/MariaDB-Instanz: **melden und warten**, nicht ausweichen.
 >
 > **Schritt 1 — Startprüfung.** Lies `UEBERGABE_DATEILISTE.md` und führe die dort beschriebene
 > Startprüfung für den **Portalauftrag** aus. Melde das Ergebnis als ersten Absatz: welche Dateien
@@ -112,6 +121,12 @@ Rechtstexte · echte Fotos · die Freigabe eigener Texte. Alles davon steht in
 > - Bei Widerspruch oder fehlender Information: **melden und anhalten**, nicht raten
 > - Sprache der Oberfläche: deutsch, „Sie". Nach außen heißt es **Kundenbereich**, nie App oder
 >   Dashboard
+> - Die Tests laufen gegen eine **echte** MySQL/MariaDB-Datenbank. Weiche nicht auf SQLite oder einen
+>   Ersatz im Speicher aus und berichte nichts als grün, was nicht gelaufen ist
+>
+> **Git:** Committe nach jedem Schritt einzeln auf dem Branch `feature/fundament-und-designvarianten`,
+> nicht auf `main`. Push erst auf Ansage. Lege eine `.gitignore` an; committe niemals `.env`,
+> Zugangsdaten oder `vendor/`.
 
 ---
 
@@ -142,6 +157,13 @@ Rechtstexte · echte Fotos · die Freigabe eigener Texte. Alles davon steht in
 > nur** bei Widersprüchen, fehlenden Informationen oder wenn dir ein Konflikt zwischen der
 > vorgegebenen Copy und der Suchintention auffällt: dann baust du die vorgegebene Fassung, meldest
 > den Konflikt und legst einen Gegenvorschlag daneben.
+>
+> **Bevor du Langtexte schreibst:** Lege `KEYWORD_VALIDATION.md` an (Aufbau: Keywordstrategie §1.1)
+> und arbeite `GEO_DISCOVERY_CHECKLIST.md` ab. Steht dir kein Volumenwerkzeug zur Verfügung,
+> kennzeichne die Datei als „ohne Volumendaten" und lass die Spalte leer — schätze nichts.
+>
+> Baue außerdem die Herkunftserfassung ein (Website-Lastenheft §9.5b, Portal-Lastenheft §4b.7):
+> beim **ersten** Seitenaufruf in die Sitzung schreiben, nicht erst beim Absenden.
 >
 > Am Ende: Definition of Done aus Website-Lastenheft §17 Punkt für Punkt abgehakt, Herkunftsliste,
 > Messwerte, Offene-Punkte-Liste.

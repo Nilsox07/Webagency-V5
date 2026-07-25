@@ -508,6 +508,17 @@ Bedarfsscheck"**. Bei Abweichungen gilt dort.
 | **Fehler** | Angaben bleiben erhalten, Meldung **am Feld**. Bei Serverfehler: `Wir konnten Ihre Anfrage gerade nicht speichern. Bitte versuchen Sie es in einem Moment erneut oder schreiben Sie uns an {E-Mail}.` **Keine** technischen Details |
 | **Zusätzlich** | Benachrichtigungs-E-Mail an SARTU |
 
+**Herkunft der Anfrage mitgeben:** Beim **ersten** Seitenaufruf werden Landeseite (nur Pfad),
+verweisender Hostname, `utm_source/medium/campaign/term/content` und eine vorhandene Anzeigen-
+Klickkennung (`gclid`, `gbraid`, `wbraid`) in die serverseitige Sitzung geschrieben und beim
+Absenden an den Anfragedienst übergeben. Festlegung: Portal-Lastenheft §4b.7.
+**Nicht** erst beim Absenden auslesen — dann sind die Kennzeichen längst weg.
+
+Im letzten Schritt zusätzlich die **freiwillige** Frage `Wie sind Sie auf uns aufmerksam geworden?`
+(Auswahl `Suchmaschine` · `Empfehlung` · `Direkt angesprochen worden` · `Anzeige` · `Sonstiges` +
+optionales Freitextfeld). **Kein Pflichtfeld** — eine unbeantwortete Frage ist besser als eine
+erzwungene Falschangabe.
+
 **Spamabwehr:** Honigtopffeld `hp_website` (unsichtbar, `aria-hidden="true"` und `tabindex="-1"`),
 Zeitregel (Absenden unter 3 Sekunden wird stillschweigend verworfen, Danke-Seite erscheint trotzdem),
 serverseitige Prüfung aller Felder, Rate-Limit 10 je IP und Stunde. **Kein** Rätselbild und **kein**
@@ -802,6 +813,12 @@ Die Website ist fertig, wenn **alle** Punkte erfüllt sind:
 - [ ] **Keine** Ortsseite in der produktiven Veröffentlichung — auch nicht als unverlinkter Entwurf.
 - [ ] Falls Prototypen existieren: nur in Staging, mit `noindex`, **nicht** in der Sitemap, **nicht** intern verlinkt, `robots.txt` schließt sie aus.
 - [ ] Veröffentlichung erst nach dem Gate in Masterkonzept §16a — die Entscheidung trifft ein Mensch, nicht der Bau.
+
+**Vor dem Livegang zwingend**
+- [ ] **`KEYWORD_VALIDATION.md`** liegt vor und ist je Launch-Adresse ausgefüllt (`SARTU_SEO_GEO_KEYWORDSTRATEGIE.md` §1.1). Ohne diese Datei sind Title, H1 und URL nicht bestätigt.
+- [ ] **`GEO_DISCOVERY_CHECKLIST.md`** vollständig abgehakt, Ergebnis je Punkt dokumentiert.
+- [ ] Herkunftserfassung geprüft: eine Testanfrage mit `?utm_source=test&utm_medium=audit` landet mit den Werten im Datensatz (§9.5b, Portal-Lastenheft §4b.7).
+- [ ] `robots.txt` sperrt weder `Googlebot`, `Bingbot` noch `OAI-SearchBot`; die `GPTBot`-Entscheidung ist dokumentiert.
 
 **Recht**
 - [ ] Impressum und Datenschutz final und vollständig (keine Platzhalter).

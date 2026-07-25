@@ -331,6 +331,11 @@ Die Anfragen aus dem Bedarfsscheck der öffentlichen Website (§4b).
 | `b2b_confirmed` | boolean, NOT NULL | muss `true` sein, sonst wird nicht gespeichert |
 | `privacy_confirmed` | boolean, NOT NULL | dito |
 | `source_ip` | inet | **wird nach 30 Tagen geleert**, s. §4b.4 |
+| `landing_page` | text | erste aufgerufene Seite (**nur Pfad**, ohne Abfragezeichenfolge) |
+| `referrer_host` | text | **nur der Hostname** der verweisenden Seite, nie die vollständige Adresse |
+| `utm_source`, `utm_medium`, `utm_campaign`, `utm_term`, `utm_content` | text | Kampagnenkennzeichen, s. §4b.7 |
+| `click_id` | text | `gclid`, `gbraid` oder `wbraid`, falls vorhanden — Feld speichert Wert **und** Art |
+| `self_reported_source` | text | Antwort auf „Wie sind Sie auf uns aufmerksam geworden?" |
 | `delete_after` | date, NOT NULL | Eingang + 6 Monate; entfällt bei Umwandlung |
 | `converted_organization_id` | uuid | gesetzt bei Umwandlung |
 | `admin_note` | text | |
@@ -624,6 +629,49 @@ bekannt ist.
   `Endgültig löschen` (echtes `DELETE`, **Ausnahme** von der Archivierungsregel in §3, Regel 13 —
   der Löschvorgang wird protokolliert, **ohne** die gelöschten Inhalte)
 - Die Einwilligung erklärt der Interessent im Bedarfsscheck. Gespeichert wird, **dass** und **wann**
+
+### 4b.7 Herkunft einer Anfrage — datensparsam und first-party
+
+**Warum das nötig ist:** Nach einem SEA-Test muss beantwortbar sein, welcher Begriff eine
+**Anfrage** gebracht hat — nicht nur einen Klick. Die Search Console zeigt Suchanfragen, aber nicht,
+was daraus wurde. Ohne diese Felder ist der Test nur halb auswertbar.
+
+**Wann erfasst wird — das ist die Stelle, an der es sonst schiefgeht:** Die Kennzeichen stehen in
+der Adresse der **ersten** aufgerufenen Seite. Bis der Bedarfsscheck abgeschickt wird, sind sie
+längst weg. Sie werden deshalb **beim ersten Seitenaufruf** in die serverseitige Sitzung geschrieben
+und erst beim Anlegen des `lead` übernommen.
+
+| Feld | Woher | Datensparsamkeit |
+|---|---|---|
+| `landing_page` | erste aufgerufene Seite | **nur der Pfad**, ohne Abfragezeichenfolge |
+| `referrer_host` | `Referer`-Kopfzeile | **nur der Hostname**, nie die vollständige Adresse — die kann Suchbegriffe oder Kennungen enthalten |
+| `utm_*` | Abfrageparameter | wie übergeben, auf je 100 Zeichen begrenzt |
+| `click_id` | `gclid`, `gbraid` oder `wbraid` | Wert und Art speichern; nur setzen, wenn tatsächlich vorhanden |
+| `self_reported_source` | Frage im Bedarfsscheck | freiwillig, Auswahl + Freitextfeld |
+
+**Die Frage im Bedarfsscheck** (freiwillig, letzter Schritt, keine Pflichtangabe):
+> Wie sind Sie auf uns aufmerksam geworden?
+
+Auswahl: `Suchmaschine` · `Empfehlung` · `Direkt angesprochen worden` · `Anzeige` · `Sonstiges` +
+optionales Freitextfeld. **Kein Pflichtfeld** — eine unbeantwortete Frage ist besser als eine
+erzwungene Falschangabe.
+
+**Warum beides und nicht nur eines:** Die technischen Kennzeichen sagen, **woher der Klick kam**.
+Die Selbstauskunft sagt, **warum jemand kam** — und die weicht regelmäßig ab. Wer über eine
+Empfehlung von SARTU hört und danach den Namen googelt, kommt technisch über die Suche.
+
+**Datenschutz:**
+- Alles wird **first-party** gespeichert. **Kein** Tracking über fremde Seiten, **keine** Cookies
+  Dritter, **kein** Analysedienst. Damit ist auch kein Einwilligungsbanner nötig
+- Die Daten dienen **ausschließlich** der Auswertung eigener Anfragen, nicht der Profilbildung
+- Sie folgen der **Löschfrist des Leads** (§4b.4): abgelehnte Anfragen nach 6 Monaten weg
+- Die Datenschutzerklärung muss diese Verarbeitung abdecken — das ist Teil des Auftrags an die
+  Kanzlei (`SARTU_ENTSCHEIDUNGEN_OFFEN.md` §2), nicht selbst zu formulieren
+
+**Auswertung im Adminbereich:** `/admin/anfragen` zeigt die Herkunft je Anfrage und erlaubt Filtern
+danach. **Keine** Diagramme, keine Kennzahlenübersicht, kein Zeitverlauf — das ist Stufe 1. In
+Stufe 0 genügt eine filterbare Liste, aus der sich die Frage „welche Kampagne brachte Aufträge?"
+von Hand beantworten lässt.
 
 ### 4b.5 Adminbereich `/admin/anfragen`
 
@@ -1312,6 +1360,8 @@ Es gelten die Sprachregeln aus `CLAUDE_SARTU_WEBSITE_LASTENHEFT_BAUFINAL.md` §2
 38. Unbekanntes Zusatzfeld wird in `payload` gespeichert und **nicht** abgewiesen
 39. **Empfehlung und Ampelkennzeichen werden serverseitig gesetzt** — ein manipuliertes Formularfeld ändert sie nicht
 40. `source_ip` ist nach 30 Tagen geleert, der übrige Datensatz unverändert; `Endgültig löschen` entfernt den Datensatz und hinterlässt ein Audit-Ereignis **ohne** die gelöschten Inhalte
+40a. Herkunftsfelder werden beim **ersten** Seitenaufruf in die Sitzung geschrieben und landen auch dann im `lead`, wenn der Bedarfsscheck erst Schritte später abgeschickt wird (§4b.7)
+40b. `referrer_host` enthält **nur** den Hostnamen, `landing_page` **nur** den Pfad — keine vollständigen Adressen mit Abfragezeichenfolge
 
 **Sicherheit:**
 41. `POST` ohne CSRF-Token wird abgelehnt

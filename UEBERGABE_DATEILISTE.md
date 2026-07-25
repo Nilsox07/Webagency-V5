@@ -34,6 +34,7 @@ merkt es, bevor gebaut wird.
 | 6 | `CLAUDE_SARTU_PORTAL_LASTENHEFT_BAUFINAL.md` | **§1 Stack, Struktur, Hosting** + §4b Anfrageeingang | **Abbruch.** Ohne §1 ist die Architektur unbekannt |
 | 7 | `SARTU_SEO_GEO_KEYWORDSTRATEGIE.md` | welche Seite welche Suchintention bedient, Baureihenfolge | **Abbruch.** Sonst entstehen Texte ohne Zielrichtung |
 | 8 | `SARTU_ENTSCHEIDUNGEN_OFFEN.md` | alle Platzhalter und Sperren | **Abbruch** |
+| 9 | `GEO_DISCOVERY_CHECKLIST.md` | technische Auffindbarkeit für KI-Systeme — **vor Livegang abzuhaken** | Melden, mit Rest fortfahren |
 
 ## Nicht übergeben
 
