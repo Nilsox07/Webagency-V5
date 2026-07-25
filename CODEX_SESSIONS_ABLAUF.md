@@ -154,6 +154,10 @@ Rechtstexte · echte Fotos · die Freigabe eigener Texte. Alles davon steht in
 >
 > Am Ende: alle 59 Testfälle grün, Definition of Done abgehakt, `IMPLEMENTATION_SUMMARY.md`, und der
 > **Screenshot-Satz aus der echten Oberfläche** nach Abschnitt 7a.
+>
+> **Git:** Branch `feature/kundenbereich`. Committe nach **jeder Etappe** einzeln, mit einer Zeile,
+> was fertig ist und was noch fehlt. Nie mehrere Etappen in einen Commit sammeln. Committe niemals
+> `.env`, Zugangsdaten oder `vendor/`.
 
 ---
 
@@ -178,6 +182,28 @@ Rechtstexte · echte Fotos · die Freigabe eigener Texte. Alles davon steht in
 >
 > Am Ende: Definition of Done aus Website-Lastenheft §17 Punkt für Punkt abgehakt, Herkunftsliste,
 > Messwerte, Offene-Punkte-Liste.
+>
+> **Git:** Branch `feature/oeffentliche-seiten`. Committe nach **jedem Seitenblock** einzeln, mit
+> einer Zeile, was fertig ist und was noch fehlt. Committe niemals `.env`, Zugangsdaten oder
+> `vendor/`.
+
+---
+
+## Wenn das Kontingent mitten in einer Sitzung ausgeht
+
+Das ist der teuerste denkbare Fehler, wenn nicht committet wurde: Der Stand ist weg, und die Sitzung
+beginnt von vorn. Deshalb steht in jedem Startprompt oben eine Commit-Regel — sie ist keine
+Ordnungsliebe, sondern die Wiederaufnahmefähigkeit.
+
+**Fortsetzen, nicht neu starten:**
+
+> Fortsetzung im Repository. Lies `IMPLEMENTATION_PLAN.md` und den letzten Commit auf Branch
+> `[BRANCH]`. Sage mir in drei Sätzen, was fertig ist und was als Nächstes ansteht — **bevor** du
+> weiterbaust. Lies **nicht** das gesamte Repository ein; nur die Dateien der Übergabeliste für
+> diesen Auftrag.
+
+Der letzte Satz ist der wichtige. Eine frische Sitzung liest sonst reflexhaft alles noch einmal ein
+und verbraucht das nachgeladene Kontingent für Kontext statt für Arbeit.
 
 ---
 
