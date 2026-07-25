@@ -38,8 +38,12 @@
 ## 1. Technischer Rahmen
 
 - **Ausgabe:** statische Website (Astro o. gleichwertig), FTP-/CDN-deploybar.
-- **PHP/Node zur Laufzeit nicht erforderlich.** Ausnahme: Formularversand (siehe §9) läuft über einen schlanken Endpunkt oder einen Formulardienst; die Entscheidung darf den Rest nicht beeinflussen.
+- **Ein kleiner eigener Serverteil ist Pflicht** — nicht optional. Er nimmt beide Formulare entgegen und spricht mit dem Portal (§9.5a). Grund: Der Zugangsschlüssel zum Portal darf niemals im Browser liegen, und der Bedarfsscheck braucht einen Weg ohne JavaScript. Alle **Inhaltsseiten** bleiben davon unberührt und werden weiterhin statisch ausgeliefert.
 - **Kein** externes CDN für Schriften, CSS oder JS. Schriften self-hosted als WOFF2, `font-display: swap`.
+
+> **Was „keine externen Verbindungen" bedeutet — und was nicht.**
+> **Verboten sind Fremdanbieter zur Laufzeit:** Schrift-, Skript- und Stil-CDNs, Analyse- und Tracking-Dienste, eingebettete Karten, Videoportale, Schriftartendienste, Chat-Widgets, Werbe- und Rätselbild-Dienste, externe Bildhoster. Kein Netzwerkaufruf des Browsers darf eine fremde Domain treffen.
+> **Erlaubt und vorgesehen ist die eigene Infrastruktur:** der Formularendpunkt auf derselben Domain und dessen serverseitiger Aufruf des SARTU-Portals. Das ist keine Fremdverbindung, sondern das Produkt selbst.
 - **JavaScript budgetiert statt verboten:** **≤ 75 KB gzip auf der Startseite, ≤ 40 KB auf Unterseiten.** Pflichtfunktionen: mobile Navigation, FAQ-Akkordeon, Bedarfsscheck-Logik. Darüber hinaus sind **maximal zwei bewusste Markenmomente pro Seite** erlaubt (Motion-Strategie siehe `CLAUDE_SARTU_WEBSITE_KONZEPT_FINAL.md` §10a).
 - Die Seite muss **ohne JS grundlegend nutzbar** bleiben: Inhalte lesbar, Links funktionieren, Kontaktformular absendbar. **Kein Inhalt darf erst durch eine Scroll-Animation sichtbar werden.**
 - **`prefers-reduced-motion: reduce` ist Pflicht:** alle nicht-essenziellen Bewegungen aus, Inhalte sofort sichtbar.
@@ -446,24 +450,44 @@ Darunter immer:
 - Bei reinen Einfachauswahlen darf automatisch weitergeblättert werden; bei Mehrfachauswahl **nicht**.
 - Fehler erscheinen **am Feld**, nicht als Sammelmeldung oben; erstes fehlerhaftes Feld erhält den Fokus.
 - Mobil: ein Sachverhalt pro Bildschirm, Buttons in Daumenreichweite, Tastaturtyp passend (E-Mail, Telefon, Zahl).
-- Ohne JavaScript: Fallback auf ein einfaches mehrstufiges Formular mit `POST` je Schritt oder Hinweis mit Kontaktalternative.
+### 9.5a Bedienbarkeit ohne JavaScript (verbindlich, keine Kann-Regel)
 
-### 9.5a Wohin die Anfrage geht (verbindlich)
+Der Bedarfsscheck ist der einzige Weg zu einem Angebot. Er darf an abgeschaltetem JavaScript **nicht scheitern**. Gebaut wird deshalb **zuerst** die Fassung ohne JavaScript; die Komfortfunktionen kommen darüber.
 
-Der Bedarfsscheck ist der **einzige** Punkt, an dem die Website mit dem Portal spricht. Ohne diesen Abschnitt läuft der Bedarfsscheck ins Leere.
+| | **Ohne JavaScript** (Grundfassung, muss funktionieren) | **Mit JavaScript** (Komfort obendrauf) |
+|---|---|---|
+| Schritte | echte Seiten `/briefing/1` … `/briefing/n`, je Schritt ein `POST`, Server antwortet mit dem nächsten Schritt | dieselben Schritte ohne Neuladen |
+| Zwischenstand | serverseitig in einer kurzlebigen Sitzung (**Ablauf 24 Stunden**, nur Formulardaten, keine Kennung im Klartext in der URL) | zusätzlich im Browserspeicher |
+| Zurück | normaler Link auf den vorigen Schritt, Angaben bleiben erhalten | ohne Neuladen |
+| Bedingte Fragen | der Server entscheidet, welcher Schritt als Nächstes kommt | dieselbe Regel im Browser |
+| Ergebnis vor Kontaktdaten | eigene Seite, serverseitig berechnet | gleiche Anzeige |
+| Fehler | Neuanzeige des Schritts, Meldung am Feld, erstes fehlerhaftes Feld erhält den Fokus | ohne Neuladen |
+| Fortschritt | `Schritt 3 von 8` als Text | zusätzlich Fortschrittsbalken |
+
+**Die Empfehlungsregel liegt auf dem Server.** Der Browser darf sie spiegeln, aber die verbindliche Berechnung erfolgt serverseitig — sonst weichen beide Fassungen voneinander ab.
+
+**Kein** Ersatz durch „Schreiben Sie uns einfach eine E-Mail". Eine Kontaktalternative steht zusätzlich da, ersetzt den Bedarfsscheck aber nicht.
+
+### 9.5b Wohin die Anfrage geht (verbindlich)
+
+Der Bedarfsscheck ist der **einzige** Punkt, an dem die Website mit dem Portal spricht. Maßgeblich ist `CLAUDE_SARTU_PORTAL_LASTENHEFT_BAUFINAL.md`, Abschnitt **„4b. Schnittstelle zur öffentlichen Website — Anfrageeingang"**. Bei Abweichungen gilt dort.
 
 | Punkt | Festlegung |
 |---|---|
-| **Ziel** | `POST {PORTAL_BASE_URL}/api/anfragen` — Spezifikation in `CLAUDE_SARTU_PORTAL_LASTENHEFT_BAUFINAL.md` §4b |
-| **Wer sendet** | **Serverseitig**, nicht der Browser. Der Browser sendet an die eigene Domain, die Seite leitet weiter |
-| **Warum serverseitig** | Der Zugangsschlüssel darf niemals im ausgelieferten Quelltext stehen |
-| **Zugangsschlüssel** | Header `X-Sartu-Token`, Wert aus der Umgebungsvariablen `INTAKE_TOKEN`. **Nie** im Repository |
-| **Inhalt** | alle Antworten des Bedarfsschecks + Kontaktdaten aus §9.4 + die vom Regelwerk ermittelte Empfehlung + das Ampelkennzeichen |
-| **Erfolg** | Weiterleitung auf die Danke-Seite §9.6 |
-| **Fehler** | Angaben bleiben erhalten, Meldung: `Wir konnten Ihre Anfrage gerade nicht übermitteln. Bitte versuchen Sie es in einem Moment erneut oder schreiben Sie uns an {E-Mail}.` **Keine** technischen Details |
-| **Zusätzlich** | Benachrichtigungs-E-Mail an SARTU — damit eine Anfrage auch dann ankommt, wenn das Portal nicht erreichbar ist |
+| **Ziel** | `POST {PORTAL_BASE_URL}/api/anfragen` |
+| **Wer sendet** | **der Server der Website**, niemals der Browser. Der Browser sendet an die eigene Domain |
+| **Warum** | Alles, was der Browser sieht, ist öffentlich. Ein Zugangsschlüssel im Browser wäre kein Schutz, sondern eine offene Tür |
+| **Zugangsschlüssel** | Header `X-Sartu-Token`, Wert aus der Umgebungsvariablen `INTAKE_TOKEN`. **Nie** im Repository, **nie** im ausgelieferten Quelltext, **nie** in einer Fehlermeldung |
+| **Inhalt** | vollständige Nutzdaten nach dem Schema in Portal-§4b.2 — inklusive `submission_id` (vom Server erzeugte UUID), `submitted_at`, `form_started_at` und Honigtopffeld |
+| **Doppelabsenden** | Die `submission_id` entsteht beim **Start** des Bedarfsschecks und bleibt über alle Schritte gleich. Doppelklick, Neuladen und Wiederholversuche erzeugen dadurch keinen zweiten Datensatz |
+| **Erfolg** | Weiterleitung (`303`) auf die Danke-Seite §9.6 — nie ein erneut absendbares Formular anzeigen |
+| **Fehler** | Angaben bleiben erhalten, Meldung: `Wir konnten Ihre Anfrage gerade nicht übermitteln. Bitte versuchen Sie es in einem Moment erneut oder schreiben Sie uns an {E-Mail}.` **Keine** technischen Details, **kein** Statuscode, **keine** Zielangabe |
+| **Wiederholung** | bei Zeitüberschreitung **einmal** nachsenden, danach aufgeben — die `submission_id` verhindert Doppelanlage |
+| **Zusätzlich** | Benachrichtigungs-E-Mail an SARTU, damit eine Anfrage auch dann ankommt, wenn das Portal nicht erreichbar ist |
 
-**Wenn das Portal noch nicht existiert:** Der Versand wird als **eine** klar benannte Funktion gekapselt, die zunächst nur die Benachrichtigungs-E-Mail verschickt. Der Umbau auf den Endpunkt ist dann ein Eingriff an genau einer Stelle. Als offener Punkt melden.
+**Spamabwehr auf der Website:** Honigtopffeld `hp_website` (unsichtbar, `aria-hidden="true"` und `tabindex="-1"`), Zeitregel (Absenden unter 3 Sekunden wird verworfen), serverseitige Prüfung aller Felder. **Kein** Rätselbild und **kein** Fremddienst zum Start — beides wäre eine externe Verbindung mit eigener Datenschutzfolge und kommt erst, wenn Spam messbar auftritt.
+
+**Wenn das Portal noch nicht existiert:** Der Versand ist **eine** klar benannte Funktion, die zunächst nur die Benachrichtigungs-E-Mail verschickt und die Anfrage lokal ablegt. Der Umbau auf den Endpunkt ist dann ein Eingriff an genau einer Stelle. Als offenen Punkt melden.
 
 > **Das allgemeine Kontaktformular** (§11) läuft **nicht** hierüber. Es verschickt ausschließlich eine E-Mail.
 
@@ -588,6 +612,33 @@ Ausbau auf 40–60 Begriffe erst in Stufe 2, gesteuert über Search-Console-Date
 | 404 | H1 `Diese Seite gibt es nicht.` · Text: „Vielleicht wurde die Adresse geändert oder eine alte Seite ist umgezogen." · Links: Startseite, Leistungen, Preise, Bedarf prüfen lassen · echter 404-Status · `noindex`. |
 | Danke-Seiten | `noindex`, klare nächste Erwartung, keine weiteren Angebote. |
 
+### 14a. Startsperre — der Produktivbau muss scheitern, nicht warnen
+
+Ein Platzhalter, der versehentlich live geht, ist bei Impressum und Datenschutz ein **Rechtsverstoß**,
+kein Schönheitsfehler. Eine Warnung im Protokoll reicht nicht — sie wird überlesen.
+
+**Der Produktivbau (`NODE_ENV=production` bzw. der Veröffentlichungsbefehl) bricht mit Fehler ab, wenn
+eine dieser Bedingungen zutrifft:**
+
+1. `/impressum` oder `/datenschutz` enthält die Platzhaltermarkierung `[[PLATZHALTER]]` oder ist kürzer als 500 Zeichen
+2. `/agb` existiert als Seite **und** ist irgendwo verlinkt **und** enthält die Platzhaltermarkierung
+3. Eine Seite mit `noindex` steht in der `sitemap.xml`
+4. Ein Bildplatz für Portal-Screenshots ist noch leer oder trägt die Markierung `[[SCREENSHOT-FEHLT]]`
+5. Eine Zeichenkette aus der Verbotsliste §2 kommt im ausgelieferten Text vor
+6. `INTAKE_TOKEN` ist leer oder taucht irgendwo im Ausgabeverzeichnis auf
+
+**Fehlermeldung im Bau** (Beispiel, muss die Ursache benennen):
+```
+BAU ABGEBROCHEN: /datenschutz enthaelt noch [[PLATZHALTER]].
+Rechtstexte muessen final sein, bevor die Seite oeffentlich geht.
+```
+
+**Der Staging-Bau bricht nicht ab**, sondern listet dieselben Punkte als Warnung auf. So lässt sich
+alles vorbereiten und ansehen, ohne dass etwas Unfertiges live gehen kann.
+
+Alle Platzhalter tragen **eine** einheitliche, suchbare Markierung: `[[PLATZHALTER]]` beziehungsweise
+`[[SCREENSHOT-FEHLT]]`. Keine freien Formulierungen wie „TODO" oder „Lorem ipsum".
+
 ---
 
 ## 15. Bild- und Screenshot-Liste (mit Maßen)
@@ -649,7 +700,7 @@ Die Website ist fertig, wenn **alle** Punkte erfüllt sind:
 - [ ] Jede Seite: Status 200, genau eine H1, eigener Title und Description, Canonical auf sich selbst, Breadcrumb.
 - [ ] Keine toten internen Links; Sitemap enthält nur 200er-URLs; robots.txt korrekt.
 - [ ] Alle Bilder mit Alt-Text, festen Maßen, WebP und `srcset`; Hero nicht lazy.
-- [ ] CWV im Zielbereich (LCP < 2,5 s, INP < 200 ms, CLS < 0,1) auf Mobil gemessen.
+- [ ] **Laborwerte** im Zielbereich, mobil gemessen: LCP < 2,5 s · INP-Ersatzmessung (Total Blocking Time) < 200 ms · CLS < 0,1. Werkzeug und Version nennen. *Echte Core Web Vitals sind Felddaten und existieren erst nach Wochen im Livebetrieb — sie sind kein Abnahmekriterium, sondern eine Nachmessung (§17a).*
 - [ ] Seite ohne JavaScript grundlegend nutzbar; kein Inhalt erscheint erst durch Scroll-Animation.
 - [ ] **JS-Budget eingehalten:** ≤ 75 KB gzip Startseite, ≤ 40 KB Unterseiten (gemessen, nicht geschätzt).
 - [ ] **`prefers-reduced-motion` getestet:** alle nicht-essenziellen Bewegungen aus, Inhalte sofort sichtbar.
@@ -663,10 +714,40 @@ Die Website ist fertig, wenn **alle** Punkte erfüllt sind:
 - [ ] Bedarfsscheck: alle Fehlermeldungen erscheinen am Feld, Autosave funktioniert, „Nichts davon"-Regel greift.
 - [ ] Beide Formulare senden nachweislich; Bestätigungsseiten sind `noindex`.
 
+**Formulare und Schnittstelle**
+- [ ] Bedarfsscheck **vollständig ohne JavaScript** durchlaufbar (§9.5a) — mit abgeschaltetem JS getestet, nicht nur behauptet.
+- [ ] `INTAKE_TOKEN` kommt in **keiner** ausgelieferten Datei vor — per Volltextsuche über das gesamte Ausgabeverzeichnis geprüft.
+- [ ] Doppelklick und Neuladen auf der letzten Seite erzeugen **keinen** zweiten Datensatz (`submission_id`, §9.5b).
+- [ ] Honigtopf und Zeitregel greifen; ein gefülltes Honigtopffeld erzeugt trotzdem die normale Danke-Seite.
+- [ ] Kein Netzwerkaufruf des Browsers geht an eine **fremde** Domain — im Netzwerkprotokoll geprüft.
+
+**Ortsseiten**
+- [ ] **Keine** Ortsseite im Produktivbau — auch nicht als unverlinkter Entwurf.
+- [ ] Falls Prototypen existieren: nur in Staging, mit `noindex`, **nicht** in der Sitemap, **nicht** intern verlinkt, `robots.txt` schließt sie aus.
+- [ ] Veröffentlichung erst nach dem Gate in Masterkonzept §16a — die Entscheidung trifft ein Mensch, nicht der Bau.
+
 **Recht**
 - [ ] Impressum und Datenschutz final und vollständig (keine Platzhalter).
 - [ ] AGB entweder final oder nicht verlinkt und `noindex`.
 - [ ] Consent-Banner nur, wenn zustimmungspflichtige Dienste eingebunden sind — sonst keiner.
+- [ ] **Startsperre nachgewiesen (§14a):** Der Produktivbau bricht bei einem Platzhalter in Impressum oder Datenschutz nachweislich ab — einmal absichtlich provoziert und im Bericht belegt.
+
+---
+
+## 17a. Was erst nach dem Livegang geprüft wird
+
+Diese Punkte gehören **nicht** in die Abnahme, weil sie vor dem Livegang gar nicht messbar sind. Sie
+werden 4 und 12 Wochen nach dem Start nachgehalten:
+
+| Nach 4 Wochen | Nach 12 Wochen |
+|---|---|
+| Echte Core Web Vitals aus Felddaten (Search Console / CrUX), sofern genug Zugriffe | dieselben, belastbarer |
+| Indexierungsstand aller Launch-URLs | Suchanfragen, für die die Seite erscheint |
+| Fehler in der Search Console | Verhältnis Zugriffe → gestartete Bedarfsschecks → abgeschickte Bedarfsschecks |
+| Tatsächliche Spamlast am Formular | Entscheidung, ob Schutzmaßnahmen nachgerüstet werden müssen |
+
+**Wichtig:** Bleiben die Felddaten hinter den Laborwerten zurück, ist das ein Auftrag zur
+Nachbesserung — kein Grund, die Abnahme rückwirkend infrage zu stellen.
 
 ---
 

@@ -43,9 +43,26 @@ Ein **sichtbares, klickbares Portal**, das den kompletten Kundenprozess vom Ange
 
 ### 0.3 Ausdrücklich NICHT in Stufe 0
 
-Automatische Domainregistrierung · Mollie-Abo/Mandate/Webhooks · KI-Agenten-Orchestrierung · automatische Builds oder Deployments · SEO-Flottenzentrale · Rollback-Automation · Lead-Inbox der Kundenwebsites · Rechnungserzeugung als Buchhaltung (die läuft in lexoffice/sevDesk) · Mehrbenutzer-Rollen pro Kunde · Dateiversionierung · Volltextsuche · Benachrichtigungseinstellungen · Dunkelmodus · automatische Berechnung oder Sperrung bei überschrittenen Korrekturrunden · Kündigungs- und Verlängerungslogik.
+Automatische Domainregistrierung · Mollie-Abo/Mandate/Webhooks · KI-Agenten-Orchestrierung · automatische Builds oder Deployments · SEO-Flottenzentrale · Rollback-Automation · Rechnungserzeugung als Buchhaltung (die läuft in lexoffice/sevDesk) · Mehrbenutzer-Rollen pro Kunde · Dateiversionierung · Volltextsuche · Benachrichtigungseinstellungen · Dunkelmodus · automatische Berechnung oder Sperrung bei überschrittenen Korrekturrunden · Kündigungs- und Verlängerungslogik.
 
 **Regel:** Wird eine dieser Funktionen gebraucht, wird sie **beantragt, nicht gebaut**.
+
+### 0.3a Anfrageliste ja, Vertriebssystem nein — die Grenze genau
+
+Frühere Fassungen verboten pauschal eine „Lead-Inbox" und verlangten zugleich einen Anfrageeingang mit
+Adminansicht. Das war widersprüchlich. Die Grenze verläuft so:
+
+| **Wird gebaut** (nötig, sonst geht keine Anfrage ein) | **Wird nicht gebaut** (das wäre ein Vertriebssystem) |
+|---|---|
+| Ein Endpunkt, der Anfragen der eigenen SARTU-Website annimmt (§4b) | Annahme von Anfragen aus **Kundenwebsites** — das ist die „Lead-Inbox" der Stufe 1 |
+| Liste, Detailansicht, Status `neu` / `in_pruefung` / `angebot_erstellt` / `abgelehnt` | Pipeline-, Kanban- oder Trichteransichten |
+| Notizfeld, Umwandlung in Kunde per Klick | Bewertung, Punktevergabe, Priorisierungslogik |
+| Export und Löschung je Datensatz (Betroffenenrechte) | Nachfassketten, Erinnerungen, Kampagnen, Serienmails |
+| Eine Benachrichtigungs-E-Mail an SARTU je Anfrage | E-Mail-Verlauf, Postfachanbindung, Vorlagenverwaltung |
+| | Zuweisung an Bearbeiter, Teamfunktionen, Aktivitätenstrom |
+
+**Merksatz:** Eine **Liste mit vier Zuständen und einem Umwandlungsknopf** — mehr nicht. Sobald etwas
+automatisch nachfasst, bewertet oder verteilt, ist die Grenze überschritten.
 
 ### 0.4 Portal-Screenshots
 
@@ -158,18 +175,21 @@ Die Anfragen aus dem Bedarfsscheck der öffentlichen Website (§4b).
 
 | Feld | Typ | Hinweis |
 |---|---|---|
+| `submission_id` | uuid, NOT NULL, **UNIQUE** | von der Website erzeugt — verhindert Doppeleinreichung (§4b.3) |
+| `submitted_at` | timestamptz, NOT NULL | Zeitpunkt laut Website |
 | `payload` | jsonb, NOT NULL | vollständige Antworten, unverändert wie gesendet |
-| `first_name`, `last_name` | text | |
-| `company` | text | |
-| `email` | citext, NOT NULL | |
+| `first_name`, `last_name` | text, NOT NULL | |
+| `company` | text, NOT NULL | |
+| `email` | citext, NOT NULL | kleingeschrieben gespeichert |
 | `phone` | text | |
-| `preferred_contact` | text | `email` \| `portal` |
+| `preferred_contact` | text, NOT NULL | `email` \| `portal` |
 | `recommended_package` | text | vom Regelwerk der Website vorgeschlagen |
-| `flag` | text | `standard` \| `gelb` \| `orange` \| `rot` |
+| `flag` | text, NOT NULL, default `standard` | `standard` \| `gelb` \| `orange` \| `rot` |
 | `status` | text, NOT NULL | `neu` \| `in_pruefung` \| `angebot_erstellt` \| `abgelehnt` |
-| `b2b_confirmed` | boolean, NOT NULL | |
-| `privacy_confirmed` | boolean, NOT NULL | |
-| `source_ip` | inet | |
+| `b2b_confirmed` | boolean, NOT NULL | muss `true` sein, sonst wird nicht gespeichert |
+| `privacy_confirmed` | boolean, NOT NULL | dito |
+| `source_ip` | inet | **wird nach 30 Tagen geleert**, s. §4b.4 |
+| `delete_after` | date, NOT NULL | Eingang + 6 Monate; entfällt bei Umwandlung |
 | `converted_organization_id` | uuid | gesetzt bei Umwandlung |
 | `admin_note` | text | |
 
@@ -306,7 +326,11 @@ Audit-Ereignis. Eine Erklärung ist **einmalig** — ein zweiter Versuch zeigt n
 `organization_id` · `project_id` (nullable) · `body` (text) · `created_by_user_id` · `answered_at` · `answer_text`
 
 ### `audit_events`
-`actor_user_id` (nullable) · `organization_id` (nullable) · `action` (text) · `entity_type` (text) · `entity_id` (uuid) · `detail` (jsonb) · `ip` (inet)
+`actor_user_id` (nullable) · `organization_id` (nullable) · `action` (text) · `entity_type` (text) · `entity_id` (uuid) · `old_value` (text) · `new_value` (text) · `reason` (text) · `detail` (jsonb) · `ip` (inet)
+
+**Bei jedem Statuswechsel Pflicht:** `old_value`, `new_value` und der handelnde Benutzer. Bei
+Wechseln, die Geld oder Fristen betreffen, zusätzlich `reason` als **Pflichtfeld** — siehe §12.
+Audit-Einträge werden **nie** geändert und **nie** gelöscht.
 
 **Pflichtindizes:** auf allen `organization_id` und `project_id`, auf `users.email`, `login_tokens.token_hash`, `sessions.token_hash`, `audit_events.created_at`.
 
@@ -354,36 +378,141 @@ Rechnungen manuell an. **Prüfregel:** Die Summe der eingetragenen Beträge muss
 
 ---
 
-## 4b. Schnittstelle zur öffentlichen Website (Anfrageeingang)
+## 4b. Schnittstelle zur öffentlichen Website — Anfrageeingang („Formular-Endpunkte")
 
-> **Ohne diesen Abschnitt bricht der Gesamtprozess.** Die Website erzeugt Anfragen, das Portal muss sie annehmen — sonst landet der Bedarfsscheck im Nichts.
+> **Ohne diesen Abschnitt bricht der Gesamtprozess.** Die Website erzeugt Anfragen, das Portal muss
+> sie annehmen — sonst landet der Bedarfsscheck im Nichts.
 
-### Endpunkt `POST /api/anfragen`
+### 4b.1 Wer ruft wen auf — und warum kein Browser-Geheimnis existiert
 
-- **Nur dieser eine Endpunkt** ist von außen erreichbar und **nicht** durch eine Session geschützt
-- Absicherung: **gemeinsames Geheimnis** im Header `X-Sartu-Token` (Umgebungsvariable `INTAKE_TOKEN`), Rate-Limit **10 Anfragen je IP und Stunde**, Honeypot-Feld wird abgelehnt
-- Erwartet `application/json` mit den Feldern aus `leads`. Unbekannte Felder werden in `payload` mitgespeichert, nicht abgewiesen
-- Antwort: `201` mit `{ "ok": true }` — **niemals** interne Kennungen oder Fehlerdetails zurückgeben
-- Bei ungültigem Token: `401`, ohne Hinweis auf den Grund
-- Jede Anfrage erzeugt ein Audit-Ereignis und eine Benachrichtigungs-E-Mail an SARTU
+```
+Browser des Interessenten
+        │  normales Formular-POST an die eigene Website-Domain
+        ▼
+Formularannahme der Website  (kleiner Serverteil, gleiche Domain)
+        │  POST /api/anfragen   +  Header X-Sartu-Token
+        ▼
+SARTU-Portal  →  legt genau einen Datensatz in `leads` an
+```
 
-**Wichtig:** Der Endpunkt legt **niemals** automatisch Benutzer, Organisationen oder Projekte an. Er speichert ausschließlich einen `lead`. Alles Weitere ist eine bewusste Admin-Entscheidung.
+**Eiserne Regel: `INTAKE_TOKEN` darf niemals im Browser ankommen.** Alles, was an den Browser
+ausgeliefert wird — HTML, JavaScript, JSON, Netzwerkantworten — ist öffentlich lesbar. Der Token
+lebt ausschließlich auf dem Server der Website.
 
-### Adminbereich `/admin/anfragen`
+Daraus folgt:
+- Der Browser sendet **nie** direkt an `/api/anfragen`
+- Der Browser sieht den Header `X-Sartu-Token` **nie**
+- `/api/anfragen` ist **kein** öffentliches Formularziel, sondern eine **Server-zu-Server-Schnittstelle**
+- Wäre die Website rein statisch ohne jeden Serverteil, wäre dieser Endpunkt **nicht** sicher benutzbar. Deshalb ist die Formularannahme der Website ausdrücklich Teil des Website-Auftrags
 
-Liste aller Anfragen mit Status, Eingangsdatum, Firma, empfohlener Lösung und Ampelkennzeichen.
-Detailansicht zeigt **alle** Antworten in Klartext (Frage → Antwort), nicht das rohe JSON.
+**Was der Token leistet und was nicht:** Er verhindert, dass Fremde ohne Weiteres Datensätze in die
+Anfrageliste schreiben. Er ist **keine** Benutzerauthentifizierung und ersetzt weder Prüfung des
+Inhalts noch Rate-Limit noch Spamabwehr. Die Prüfungen unten gelten unabhängig davon.
+
+### 4b.2 Endpunkt `POST /api/anfragen`
+
+| Punkt | Festlegung |
+|---|---|
+| Methode und Pfad | `POST /api/anfragen` |
+| Inhaltstyp | `application/json; charset=utf-8` |
+| Erreichbarkeit | **einziger** Pfad ohne Session. Alles andere unter `/api/` existiert nicht |
+| Absicherung | Header `X-Sartu-Token` = `INTAKE_TOKEN`, Vergleich **zeitkonstant** (kein `==` auf Zeichenketten) |
+| Rate-Limit | **10 Anfragen je Absender-IP und Stunde**, zusätzlich **60 je Stunde gesamt** als Notbremse |
+| Größe | Rumpf maximal **64 KB**, sonst `413` |
+| Zeitüberschreitung | 10 Sekunden |
+
+**Nutzdaten — vollständiges Schema.** Unbekannte Felder werden **mitgespeichert**, nicht abgewiesen
+(die Website darf den Bedarfsscheck erweitern, ohne dass das Portal bricht).
+
+| Feld | Typ | Pflicht | Prüfung |
+|---|---|---|---|
+| `submission_id` | Zeichenkette, UUID | ja | **Doppeleinreichung**, s. 4b.3 |
+| `submitted_at` | Zeitstempel ISO 8601 | ja | darf nicht mehr als 24 h in der Vergangenheit oder 5 min in der Zukunft liegen |
+| `first_name` | Zeichenkette ≤ 100 | ja | nicht leer nach Trimmen |
+| `last_name` | Zeichenkette ≤ 100 | ja | nicht leer nach Trimmen |
+| `company` | Zeichenkette ≤ 200 | ja | nicht leer nach Trimmen |
+| `email` | Zeichenkette ≤ 254 | ja | Formatprüfung, wird kleingeschrieben gespeichert |
+| `phone` | Zeichenkette ≤ 50 | nein | wie eingegeben speichern |
+| `preferred_contact` | `email` \| `portal` | ja | nur diese zwei Werte |
+| `b2b_confirmed` | Wahrheitswert | ja | muss `true` sein, sonst `422` |
+| `privacy_confirmed` | Wahrheitswert | ja | muss `true` sein, sonst `422` |
+| `recommended_package` | `start` \| `wachstum` \| `platzhirsch` \| `sonderprojekt` \| `unklar` | nein | |
+| `flag` | `standard` \| `gelb` \| `orange` \| `rot` | nein | Vorgabe `standard` |
+| `answers` | Objekt | ja | Frage-Antwort-Paare des Bedarfsschecks, unverändert nach `payload` |
+| `form_started_at` | Zeitstempel | nein | Zeitregel, s. 4b.3 |
+| `hp_website` | Zeichenkette | nein | **Honigtopf** — gefüllt ⇒ verwerfen |
+
+**Antworten:**
+
+| Lage | Status | Rumpf | Nebenwirkung |
+|---|---|---|---|
+| Angenommen | `201` | `{"ok":true}` | `lead` angelegt, E-Mail an SARTU, Audit-Ereignis |
+| Bereits bekannte `submission_id` | `200` | `{"ok":true}` | **keine** — bewusst gleiche Erfolgsantwort |
+| Honigtopf gefüllt oder Zeitregel verletzt | `201` | `{"ok":true}` | **keine** — der Absender merkt nichts |
+| Token fehlt oder falsch | `401` | `{"ok":false}` | Zählwerk, kein Grund genannt |
+| Schema- oder Pflichtfeldfehler | `422` | `{"ok":false,"fields":["email"]}` | nur **Feldnamen**, nie Werte |
+| Rumpf zu groß | `413` | `{"ok":false}` | |
+| Rate-Limit erreicht | `429` | `{"ok":false}` | Header `Retry-After` |
+| Serverfehler | `500` | `{"ok":false}` | Interne Kennung ins Log, **nicht** in die Antwort |
+
+**Niemals** zurückgeben: interne Kennungen, Datenbankfehler, Stapelüberwachung, ob eine E-Mail-Adresse
+bereits bekannt ist.
+
+### 4b.3 Spamabwehr und Doppeleinreichung
+
+1. **Honigtopf** `hp_website` — für Menschen unsichtbar, aber **nicht** über `display:none` allein
+   (Vorlesesoftware muss es überspringen: `aria-hidden="true"` **und** `tabindex="-1"`). Gefüllt ⇒
+   stillschweigend verwerfen mit Erfolgsantwort
+2. **Zeitregel** — liegt zwischen `form_started_at` und `submitted_at` weniger als **3 Sekunden**,
+   stillschweigend verwerfen. Menschen brauchen für den Bedarfsscheck Minuten
+3. **Doppeleinreichung** — `submission_id` ist in `leads` **eindeutig**. Zweiter Aufruf mit derselben
+   Kennung liefert `200` und ändert nichts. Das deckt Doppelklick, Neuladen und Wiederholversuche der
+   Website nach Zeitüberschreitung ab
+4. **Kein Rätselbild und kein Fremddienst in Stufe 0.** Turnstile, hCaptcha und Vergleichbares sind
+   Fremdverbindungen mit eigener Datenschutzfolge. Erst nachrüsten, wenn Spam **messbar** auftritt,
+   und dann mit dokumentierter Rechtsgrundlage
+
+### 4b.4 Datenschutz und Aufbewahrung
+
+- **Datensparsamkeit:** gespeichert wird ausschließlich, was gesendet wurde. Das Portal reichert
+  **nichts** an — kein Standortnachschlagen, keine Anreicherung aus Fremdquellen, keine Bewertung
+- **`source_ip`** wird gespeichert, weil sie für Missbrauchsabwehr und als Nachweis der Einwilligung
+  gebraucht wird. Sie wird **nach 30 Tagen geleert** (Feld auf `NULL`), der Rest des Datensatzes bleibt
+- **Protokolle:** Anfragen werden protokolliert mit Zeitpunkt, Status, gekürzter IP (letztes Oktett
+  entfernt) und `submission_id`. **Nie** mit Name, E-Mail, Telefonnummer oder Antworttexten
+- **Löschfrist:** abgelehnte Anfragen werden **nach 6 Monaten** gelöscht, umgewandelte bleiben als
+  Teil der Kundenakte. Der Adminbereich zeigt bei jeder Anfrage das Löschdatum
+- **Auskunft und Löschung auf Verlangen:** `/admin/anfragen` hat je Datensatz die Aktionen
+  `Datensatz exportieren` (JSON, alles was gespeichert ist) und `Endgültig löschen` (echtes `DELETE`,
+  **Ausnahme** von der Archivierungsregel in §3, Regel 13, weil Betroffenenrechte vorgehen — der Löschvorgang
+  selbst wird im Audit-Log vermerkt, ohne die gelöschten Inhalte)
+- Die Einwilligung selbst kommt von der Website. Das Portal **prüft nur**, dass
+  `privacy_confirmed = true` ankommt, und **speichert**, wann sie erklärt wurde
+
+### 4b.5 Adminbereich `/admin/anfragen`
+
+**Das ist bewusst eine Liste, kein Vertriebssystem.** Zur Abgrenzung siehe §0.3.
+
+Liste: Eingangsdatum · Firma · Name · empfohlene Lösung · Ampelkennzeichen · Status · Löschdatum.
+Filter nach Status. Sortierung nach Eingang, neueste zuerst.
+
+Detailansicht: **alle** Antworten in Klartext als Frage → Antwort, nicht als rohes JSON.
 
 Aktionen:
-- `In Kunde und Projekt umwandeln` → legt `organizations`, `users` (Rolle `kunde`) und `projects` an, setzt `converted_organization_id` und `status = angebot_erstellt`, verschickt die Einladungs-E-Mail. **Bestätigungsdialog vorher**, weil dabei ein Zugang entsteht
+- `In Kunde und Projekt umwandeln` → legt `organizations`, `users` (Rolle `kunde`) und `projects` an,
+  setzt `converted_organization_id` und `status = angebot_erstellt`, verschickt die Einladungs-E-Mail.
+  **Bestätigungsdialog vorher**, weil dabei ein Zugang entsteht
 - `Als abgelehnt markieren` mit Pflichtnotiz
 - `Notiz speichern`
+- `Datensatz exportieren` · `Endgültig löschen` (§4b.4)
 
-**Regel:** Anfrage ≠ Kunde. Ein Zugang entsteht ausschließlich durch diesen bewussten Klick — nie automatisch.
+**Regel:** Anfrage ≠ Kunde. Ein Zugang entsteht ausschließlich durch diesen bewussten Klick — nie
+automatisch, nie durch den Endpunkt.
 
-### Kontaktformular der Website
+### 4b.6 Kontaktformular der Website
 
-Das allgemeine Kontaktformular läuft **nicht** über diesen Endpunkt. Es versendet lediglich eine E-Mail an SARTU und erzeugt keinen Datensatz im Portal.
+Das allgemeine Kontaktformular läuft **nicht** über diesen Endpunkt. Es versendet ausschließlich eine
+E-Mail an SARTU und erzeugt keinen Datensatz im Portal.
 
 ---
 
@@ -924,7 +1053,28 @@ Alle Mails: Absender `MAIL_FROM`, Anrede `Guten Tag {Vorname},`, Grußformel `Fr
 Beim Markieren als bezahlt erscheint eine Pflicht-Bestätigung:
 > Bestätigen Sie, dass der Zahlungseingang im Zahlungsdienst geprüft wurde. Diese Aktion wird protokolliert.
 
-Danach: `paid_at`, `marked_paid_by_user_id`, Audit-Ereignis, E-Mail an den Kunden.
+Zusätzlich **Pflichtfeld** `Grundlage der Prüfung` (Freitext, mindestens 3 Zeichen) — z. B.
+`Mollie-Zahlung tr_xxx vom 04.08.2026` oder `Überweisung Kontoauszug 12/2026`.
+
+Danach: `paid_at`, `marked_paid_by_user_id`, E-Mail an den Kunden und ein Audit-Ereignis mit
+**allen** folgenden Angaben:
+
+| Feld | Inhalt |
+|---|---|
+| `actor_user_id` | wer den Status gesetzt hat |
+| `created_at` | wann |
+| `entity_type` / `entity_id` | `invoice` / Rechnungs-ID |
+| `old_value` / `new_value` | z. B. `gesendet` → `bezahlt` |
+| `reason` | der eingegebene Grundlagentext |
+| `ip` | IP des Admins |
+
+**Das gilt für jede manuelle Statusänderung an Geld und Fristen**, nicht nur für „bezahlt":
+Stornierung, Rücksetzung auf `offen`, Änderung von `due_date`, Änderung von `protection_started_on`.
+Ohne Grundlagentext lässt sich keine dieser Änderungen speichern.
+
+Ein einmal auf `bezahlt` gesetzter Status lässt sich **nicht stillschweigend** zurücknehmen — die
+Rücknahme ist eine eigene protokollierte Aktion mit eigenem Grundlagentext und erzeugt eine
+Benachrichtigung an den Kunden.
 
 Der **Betrieb** (monatlich) wird in Stufe 0 als normale Rechnung mit Meilenstein `betrieb` angelegt. Lastschrifteinzug, Mandate und Wiederholung sind Stufe 2.
 
@@ -1013,26 +1163,43 @@ Es gelten die Sprachregeln aus `CLAUDE_SARTU_WEBSITE_LASTENHEFT_BAUFINAL.md` §2
 28. `protection_started_on` wird beim Wechsel auf `live` gesetzt, `protection_min_term_until` liegt 12 Monate später (§5.7)
 
 **Anfrageeingang (§4b):**
-29. `POST /api/anfragen` ohne gültigen `X-Sartu-Token` → **401**, kein Datensatz
+29. `POST /api/anfragen` ohne gültigen `X-Sartu-Token` → **401**, kein Datensatz, kein Grund in der Antwort
 30. Gültige Anfrage erzeugt **nur** einen `lead` — keine `organizations`, `users` oder `projects`
-31. Rate-Limit greift ab der 11. Anfrage je IP und Stunde
-32. Ausgefülltes Honeypot-Feld wird abgelehnt, ohne dass der Absender es merkt
+31. Rate-Limit greift ab der 11. Anfrage je IP und Stunde, Antwort `429` mit `Retry-After`
+32. Ausgefülltes Honigtopffeld liefert `201` und erzeugt **keinen** Datensatz
+33. Absenden unter 3 Sekunden nach `form_started_at` liefert `201` und erzeugt **keinen** Datensatz
+34. **Dieselbe `submission_id` zweimal** → beim zweiten Mal `200`, weiterhin genau **ein** Datensatz
+35. `b2b_confirmed = false` oder `privacy_confirmed = false` → `422`, kein Datensatz
+36. Rumpf über 64 KB → `413`
+37. Fehlerantwort enthält **niemals** Feldwerte, interne Kennungen oder Datenbankmeldungen
+38. Unbekanntes Zusatzfeld wird in `payload` gespeichert und **nicht** abgewiesen
+39. `source_ip` ist nach 30 Tagen geleert, der übrige Datensatz unverändert
+40. `Endgültig löschen` entfernt den Datensatz wirklich und hinterlässt ein Audit-Ereignis **ohne** die gelöschten Inhalte
 
 **Sicherheit:**
-33. `POST` ohne CSRF-Token wird abgelehnt
-34. Kunde erreicht **keine** `/admin`-Route — geprüft über die vollständige Adminroutenliste (§3 Regel 2a)
-35. Abgemeldeter Benutzer erreicht keine `/admin`-Route
-36. Admin ohne bestätigtes TOTP erreicht keine Adminroute
-37. Die Kundenauswahl im Adminbereich verändert die Session-Organisation **nicht**
-38. Unerlaubter Dateityp wird abgelehnt
-39. Sicherheitsheader sind in allen Antworten gesetzt
-40. Datenbankbedingung greift: Kunde ohne `organization_id` und Admin **mit** `organization_id` lassen sich nicht anlegen
+41. `POST` ohne CSRF-Token wird abgelehnt
+42. Kunde erreicht **keine** `/admin`-Route — geprüft über die vollständige Adminroutenliste (§3 Regel 2a)
+43. Abgemeldeter Benutzer erreicht keine `/admin`-Route
+44. Admin ohne bestätigtes TOTP erreicht keine Adminroute
+45. Die Kundenauswahl im Adminbereich verändert die Session-Organisation **nicht**
+46. Unerlaubter Dateityp wird abgelehnt
+47. Sicherheitsheader sind in allen Antworten gesetzt
+48. Datenbankbedingung greift: Kunde ohne `organization_id` und Admin **mit** `organization_id` lassen sich nicht anlegen
+49. **`INTAKE_TOKEN` kommt in keiner ausgelieferten Antwort und keiner Ansicht vor** — geprüft per Volltextsuche über alle gerenderten Seiten
+50. Der Tokenvergleich in §4b ist **zeitkonstant** — im Code nachgewiesen, nicht nur behauptet
+
+**Protokollierung:**
+51. Manuelles Setzen auf `bezahlt` ohne Grundlagentext scheitert
+52. Das Audit-Ereignis dazu enthält Akteur, Zeitpunkt, alten Wert, neuen Wert, Grundlagentext und IP (§12)
+53. Änderung von `due_date` und `protection_started_on` erzeugt je ein Audit-Ereignis mit Grundlagentext
+54. Rücknahme von `bezahlt` ist eine eigene protokollierte Aktion und benachrichtigt den Kunden
+55. Ein Audit-Eintrag lässt sich weder ändern noch löschen
 
 **Bedienung:**
-41. Alle Kernabläufe funktionieren mit deaktiviertem JavaScript
-42. Willkommensstrecke erscheint einmal und danach nicht mehr
-43. Jede Seite hat genau eine `<h1>`
-44. Kein Systemcode aus §5 erscheint in einer Kundenansicht — geprüft per Volltextsuche über die gerenderten Seiten
+56. Alle Kernabläufe funktionieren mit deaktiviertem JavaScript
+57. Willkommensstrecke erscheint einmal und danach nicht mehr
+58. Jede Seite hat genau eine `<h1>`
+59. Kein Systemcode aus §5 erscheint in einer Kundenansicht — geprüft per Volltextsuche über die gerenderten Seiten
 
 ---
 
@@ -1042,13 +1209,17 @@ Es gelten die Sprachregeln aus `CLAUDE_SARTU_WEBSITE_LASTENHEFT_BAUFINAL.md` §2
 - [ ] Alle Texte aus diesem Dokument **wörtlich** übernommen
 - [ ] Alle Statuswerte zeigen dem Kunden Klartext, nirgends interne Codes
 - [ ] Formate aus §4a eingehalten: deutsche Datums- und Geldformate, Europe/Berlin, 19 % USt., Beträge als Cent gespeichert, keine leeren Werte als `null` sichtbar
-- [ ] Alle 46 Testfälle aus §16 laufen automatisiert und grün
+- [ ] Alle 59 Testfälle aus §16 laufen automatisiert und grün
 - [ ] `test/tenant-isolation.test.js` vorhanden, vollständig, nicht abgeschwächt
 - [ ] Kunden- und Adminzugriff laufen über **getrennte** Datenzugriffsschichten (§3 Regel 2a); kein gemeinsamer Codepfad lässt den Organisationsfilter weg
 - [ ] Rechenregeln greifen: Erstjahreswert, Zahlungsplan `custom`, Ratensumme (§4)
 - [ ] Korrekturrunden werden gezählt und angezeigt; nichts wird automatisch gesperrt oder berechnet (§5.6a)
 - [ ] Faktenfreigabe und Abnahme erzeugen je einen `approvals`-Eintrag mit Name, Zeitpunkt, IP und Audit-Ereignis — nachträglich nicht änderbar
-- [ ] `POST /api/anfragen` funktioniert, ist mit Token und Rate-Limit geschützt und legt **nur** einen `lead` an (§4b)
+- [ ] `POST /api/anfragen` funktioniert, ist mit Token, Rate-Limit, Honigtopf, Zeitregel und `submission_id` geschützt und legt **nur** einen `lead` an (§4b)
+- [ ] **`INTAKE_TOKEN` erscheint in keiner Antwort, keiner Ansicht und keinem Protokolleintrag**; der Vergleich ist zeitkonstant
+- [ ] Anfrageliste bleibt innerhalb der Grenze aus §0.3a — keine Bewertung, kein Nachfassen, keine Zuweisung
+- [ ] Aufbewahrung und Betroffenenrechte umgesetzt: IP-Löschung nach 30 Tagen, Löschdatum sichtbar, Export und endgültige Löschung je Datensatz (§4b.4)
+- [ ] Jede manuelle Änderung an Geld oder Fristen verlangt einen Grundlagentext und erzeugt ein vollständiges Audit-Ereignis (§12)
 - [ ] Betriebsbeginn und Mindestlaufzeit werden beim Onlinegang gesetzt und dem Kunden angezeigt (§5.7)
 - [ ] Ohne JavaScript vollständig bedienbar
 - [ ] Kontrast, Fokus, Tastaturbedienung, Labels geprüft
@@ -1066,7 +1237,7 @@ Es gelten die Sprachregeln aus `CLAUDE_SARTU_WEBSITE_LASTENHEFT_BAUFINAL.md` §2
 
 1. Lauffähiges Portal im Repository
 2. **`README.md`**: Voraussetzungen, Einrichtung, Umgebungsvariablen, Migration, Seed, Start, Deployment auf Hetzner, Backup-Hinweis (Datenbank **und** Upload-Verzeichnis)
-3. **Testbericht**: alle 46 Fälle aus §16 mit Ergebnis
+3. **Testbericht**: alle 59 Fälle aus §16 mit Ergebnis
 4. **Messwerte**: Antwortzeiten der Kernseiten, Seitengröße
 5. **Offene-Punkte-Liste**: alles, was bewusst nicht gebaut wurde (§0.3), plus alles, was du melden musst
 6. **Screenshot-Satz** aus der echten Oberfläche für die Website: Cockpit, Angebot, Aufgaben, Vorschau mit Rundenanzeige, Rechnungen, Öffnungszeiten — mit Musterdaten, je einmal Desktop und Mobil
