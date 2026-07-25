@@ -153,7 +153,7 @@ Fünf Spalten auf Desktop, gestapelt auf Mobil (Reihenfolge wie unten).
 **Title (58 Z.):** `Firmenwebsite zum Festpreis, ohne WordPress | SARTU`
 **Meta Description (152 Z.):** `SARTU plant, textet, programmiert und betreibt Ihre Firmenwebsite zum Festpreis. Geführtes Portal statt E-Mail-Chaos, SEO-Basis ab Launch, kein WordPress.`
 **H1:** `Individuell programmierte Firmenwebsites zum Festpreis.`
-**Zielumfang:** 750–950 Wörter · **Schema:** `Organization`, `WebSite`, `FAQPage` (nur sichtbare Fragen)
+**Zielumfang:** 750–950 Wörter · **Schema:** `Organization`, `WebSite` · `FAQPage` optional (bringt keine Rich Results mehr, s. §16)
 
 ### Sektion 1 — Hero
 
@@ -293,7 +293,7 @@ Fünf Spalten auf Desktop, gestapelt auf Mobil (Reihenfolge wie unten).
 **Title:** `Leistungen: Webdesign, Texte, SEO und Betrieb | SARTU`
 **Meta (155 Z.):** `Webdesign, Website-Texte, SEO-Grundlage, Domain und Launch, Portal und laufender Betrieb — bei SARTU als ein Ergebnis zum Festpreis statt als Einzeloptionen.`
 **H1:** `Website, Texte, Sichtbarkeit und Betrieb als ein System.`
-**Umfang:** 700–850 Wörter · **Schema:** `Service`, `FAQPage`, `BreadcrumbList`
+**Umfang:** 700–850 Wörter · **Schema:** `Service`, `BreadcrumbList` (`FAQPage` optional, s. §16)
 
 **Sektionen:**
 1. **Hero** — H1 + Lead: „Sie bekommen kein Bündel einzelner Leistungen, sondern ein Ergebnis: eine Website, die Ihr Angebot erklärt, Anfragen erzeugt und danach zuverlässig betrieben wird." + CTA.
@@ -311,7 +311,7 @@ Fünf Spalten auf Desktop, gestapelt auf Mobil (Reihenfolge wie unten).
 **Title:** `Preise: Firmenwebsite ab 1.490 € netto | SARTU`
 **Meta (149 Z.):** `Start 1.490 €, Wachstum 3.900 €, Platzhirsch 7.900 € netto — jeweils mit festem Betriebspaket. Erstjahreskosten und Zahlungsplan transparent aufgeschlüsselt.`
 **H1:** `Klare Preise. Wir prüfen, was wirklich passt.`
-**Umfang:** 650–800 Wörter · **Schema:** `Service`, `FAQPage`, `BreadcrumbList`
+**Umfang:** 650–800 Wörter · **Schema:** `Service`, `BreadcrumbList` (`FAQPage` optional, s. §16)
 
 **Sektionen:**
 1. **Hero** — H1 + Lead: „Sie müssen kein Paket auswählen. Die kurze Bedarfseinschätzung zeigt, welche Lösung wahrscheinlich passt; wir prüfen das Ergebnis persönlich, bevor Sie ein Angebot bekommen." + CTA.
@@ -341,7 +341,7 @@ Fünf Spalten auf Desktop, gestapelt auf Mobil (Reihenfolge wie unten).
 **Title:** `Ablauf: vom Bedarfsscheck zur fertigen Website | SARTU`
 **Meta (151 Z.):** `So läuft ein SARTU-Projekt: kurzer Bedarfsscheck, geprüftes Festpreisangebot, Portal-Onboarding, Produktion, Vorschau und Freigabe, Launch und laufender Betrieb.`
 **H1:** `Ein Websiteprojekt ohne Termin-Marathon.`
-**Umfang:** 700–850 Wörter · **Schema:** `BreadcrumbList`, `FAQPage`
+**Umfang:** 700–850 Wörter · **Schema:** `BreadcrumbList` (`FAQPage` optional, s. §16)
 
 **Sektionen:**
 1. **Hero** — Lead: „Standardprojekte laufen bei SARTU digital und gebündelt. Ein Gespräch ist jederzeit möglich, aber nicht Pflicht: Angebot, Briefing, Zahlungen, Domain, Vorschau und Freigaben laufen im Portal."
@@ -520,7 +520,7 @@ Kein weiteres Angebot, kein Upsell, keine Zusatz-CTAs.
 
 **Gemeinsames Template (verbindlich, in dieser Reihenfolge):**
 `H1` → `Kurz gesagt` (40–60 W. Antwortabsatz mit Preisanker) → `Für wen das passt` → `Was enthalten ist` → `Was nicht enthalten ist` → `Was es kostet` → `Wie es abläuft` → `Welche Entscheidung wir Ihnen abnehmen` → `FAQ (3)` → `CTA`
-**Umfang je Seite:** 450–650 Wörter · **Schema:** `Service` + `FAQPage` + `BreadcrumbList` · genau eine H1
+**Umfang je Seite:** 450–650 Wörter · **Schema:** `Service` + `BreadcrumbList` · genau eine H1 (`FAQPage` optional, s. §16)
 
 | # | URL | H1 | Title | Kernaussage („Kurz gesagt") |
 |---|---|---|---|---|
@@ -567,31 +567,68 @@ Zwei Karten: **`Websitebedarf prüfen`** (primär → `/briefing`) und **`Rückf
 
 ---
 
-## 12. Ratgeber — drei Artikel mit Gliederung
+## 11a. Transparenzseiten — Pflichtblock
 
-**Hub `/ratgeber`:** H1 `Ratgeber für Firmenwebsites` · Kurzintro (2 Sätze) · Artikelliste mit Titel, Kurzantwort, Datum · **kein** Kategorienfilter bei drei Artikeln.
-**Je Artikel:** H1 mit Suchintention · **Kurzantwort in den ersten 2 Sätzen** · Aktualisierungsdatum sichtbar · Tabelle oder Entscheidungslogik · mindestens 2 interne Links · CTA · `Article`-Schema. **Umfang 900–1.300 Wörter.**
+**Maßgeblich ist `SARTU_SEO_GEO_KEYWORDSTRATEGIE.md` §3.4.** Diese Seiten sind kein Beiwerk: Sie
+sind der Grund, warum SARTU in Suchergebnissen und KI-Antworten überhaupt zitiert wird. Fast jede
+Agentur schreibt „Preis auf Anfrage" — SARTU nennt Zahlen. Das ist die Lücke.
 
-**1. `/ratgeber/was-kostet-eine-firmenwebsite`**
-H1: `Was kostet eine Firmenwebsite?` · Title: `Was kostet eine Firmenwebsite? Preise 2026 | SARTU`
-Kurzantwort: Eine professionell erstellte Firmenwebsite kostet in Deutschland je nach Umfang meist zwischen etwa 1.500 € und 15.000 € netto — dazu kommen laufende Kosten für Betrieb und Hosting.
-Gliederung: Was den Preis bestimmt (Seitenzahl, Texte, Technik, Betrieb) → Preisspannen im Markt (Baukasten / Freelancer / Agentur / individuell) → Warum Festpreis vs. Stundensatz → Was laufend dazukommt (Domain, Betrieb) → Rechenbeispiel Erstjahr → Woran man ein unseriöses Angebot erkennt → SARTU-Einordnung → CTA `/preise`.
+**Zum Launch verbindlich:**
 
-**2. `/ratgeber/website-erstellen-lassen-ablauf`**
-H1: `Website erstellen lassen: So läuft ein Projekt ab` · Title: `Website erstellen lassen: Ablauf Schritt für Schritt | SARTU`
-Kurzantwort: Ein Websiteprojekt läuft in sechs Phasen ab — Bedarf klären, Angebot, Inhalte sammeln, Umsetzung, Freigabe, Launch. Der größte Zeitfresser sind fehlende Inhalte, nicht die Programmierung.
-Gliederung: Die sechs Phasen → Was der Kunde liefern muss → Was die Agentur entscheiden sollte → Typische Verzögerungen → Wie viele Korrekturrunden üblich sind → Was nach dem Launch passiert → CTA `/ablauf`.
+| URL | Kern | Was nachprüfbar drinstehen muss |
+|---|---|---|
+| `/ratgeber/was-kostet-eine-firmenwebsite` | die häufigste Frage im Markt | Spannen je Anbieterart **mit Leistungsumfang**, laufende Kosten getrennt, SARTUs Zahlen konkret |
+| `/ratgeber/was-nicht-enthalten-ist` | schreibt sonst niemand | vollständige Ausschlussliste im Klartext, plus Begründung, warum es keine Zusatzoptionen gibt |
+| `/ratgeber/was-der-betrieb-kostet` | zweithäufigste Rückfrage | was in 59/129/249 € enthalten ist, was nicht, was bei Vertragsende mit Domain und Website passiert |
 
-**3. `/ratgeber/firmenwebsite-ohne-wordpress`**
-H1: `Firmenwebsite ohne WordPress: Wann sich das lohnt` · Title: `Firmenwebsite ohne WordPress — Vorteile und Grenzen | SARTU`
-Kurzantwort: Ohne WordPress entfallen Plugin-Updates, Sicherheitslücken und Kompatibilitätsprobleme. Der Preis dafür ist weniger Selbstbedienung — Inhalte ändert nicht mehr jeder selbst.
-Gliederung: Warum WordPress so verbreitet ist → Was daran im Alltag Arbeit macht → Alternativen (Baukasten, statisch, individuell) → Was man dabei aufgibt → Für wen sich was eignet (Entscheidungstabelle) → Wie SARTU es löst → CTA `/leistung-webdesign`.
+**Nach dem Launch** (Reihenfolge in der Keywordstrategie §6): `/ratgeber/wie-lange-dauert-eine-website` ·
+`/ratgeber/website-festpreis-erkennen` · `/ratgeber/was-eine-korrekturrunde-ist`.
+
+**Harte Regeln:**
+- Jede Zahl stammt aus dem **eigenen** Angebot und stimmt. **Keine** Marktdurchschnitte, **keine** Studien, **keine** Wettbewerberpreise
+- Über fremde Anbieter nur in **Kategorien** („Baukasten", „Freelancer", „Agentur") — nie mit Namen, nie mit konkreten Preisen
+- **Preise als Text, nie als Bild.** Ein Preis in einer Grafik existiert für Suchmaschinen und KI-Systeme nicht
+- **Antwort zuerst:** die ersten 40–60 Wörter beantworten die Titelfrage direkt und mit Zahl
+- Vergleiche als **Tabelle**, nicht als Fließtext
+- Sichtbares Aktualisierungsdatum auf jeder Seite
+
+**Technische Pflicht:** Alle Preise, Umfangsgrenzen, Korrekturrunden und Lieferkorridore stehen an
+**einer** Stelle im Code und werden von dort auf allen Seiten ausgegeben. Nie doppelt pflegen.
+Eine veraltete Preisangabe ist schlimmer als keine — sie wird zitiert und dann gegen SARTU verwendet.
 
 ---
 
-## 13. Lexikon — 15 Startbegriffe (final sortiert)
+## 12. Ratgeber — zwei Vergleichsartikel mit Gliederung
 
-**Hub `/lexikon`:** H1 `Website-Lexikon` · Kurzintro · alphabetische Liste mit Ein-Satz-Definition · **kein** Suchfeld bei 15 Begriffen (erst ab ca. 40).
+> **Abgrenzung zu §11a:** Wo **Zahlen** im Mittelpunkt stehen, ist es eine Transparenzseite. Hier
+> geht es um **Entscheidungen** zwischen Optionen. `was-kostet-eine-firmenwebsite` steht deshalb in
+> §11a und **nicht** hier.
+
+**Hub `/ratgeber`:** H1 `Ratgeber für Firmenwebsites` · Kurzintro (2 Sätze) · Artikelliste mit Titel, Kurzantwort, Datum · **kein** Kategorienfilter bei wenigen Artikeln. Der Hub listet Ratgeber **und** Transparenzseiten (§11a), weil sie für Leser dasselbe sind.
+**Je Artikel:** H1 mit Suchintention · **Kurzantwort in den ersten 2 Sätzen** · Aktualisierungsdatum sichtbar · Tabelle oder Entscheidungslogik · mindestens 2 interne Links · CTA · `Article`-Schema. **Umfang 900–1.300 Wörter.**
+
+**1. `/ratgeber/agentur-freelancer-baukasten`**
+H1: `Website erstellen lassen: Agentur, Freelancer oder Baukasten?` · Title: `Agentur, Freelancer oder Baukasten? Der ehrliche Vergleich | SARTU`
+Kurzantwort: Ein Baukasten lohnt sich, wenn Sie selbst pflegen wollen und wenig Anspruch an Struktur haben. Ein Freelancer ist günstig, aber ein Ausfallrisiko. Eine Agentur liefert Verlässlichkeit — meist ohne Festpreis und mit mehr Terminen, als Ihnen lieb ist.
+Gliederung: Die vier Anbieterarten in einer Tabelle (Preisrahmen, Zeitaufwand für Sie, Risiko, Pflege danach) → Wann ein Baukasten wirklich reicht → Was am Freelancer-Modell schiefgehen kann → Warum Agenturen selten Festpreise nennen → **Für wen SARTU nicht passt** → Entscheidungshilfe in fünf Fragen → CTA `/preise`.
+**Pflicht:** ehrlich bleiben. Wenn ein Baukasten für einen Fall reicht, steht das so da. Genau das macht die Seite glaubwürdig.
+
+**2. `/ratgeber/webdesign-ohne-wordpress`**
+H1: `Firmenwebsite ohne WordPress: Wann sich das lohnt` · Title: `Firmenwebsite ohne WordPress — Vorteile und Grenzen | SARTU`
+Kurzantwort: Ohne WordPress entfallen Plugin-Updates, Sicherheitslücken und Kompatibilitätsprobleme. Der Preis dafür ist weniger Selbstbedienung — Inhalte ändert nicht mehr jeder selbst.
+Gliederung: Warum WordPress so verbreitet ist → Was daran im Alltag Arbeit macht → Alternativen (Baukasten, statisch, individuell) → **Was man dabei aufgibt** → Für wen sich was eignet (Entscheidungstabelle) → Wie SARTU es löst → CTA `/leistungen/webdesign`.
+
+**Nach dem Launch** (Reihenfolge in `SARTU_SEO_GEO_KEYWORDSTRATEGIE.md` §6):
+`agentur-auswaehlen-kriterien` · `relaunch-sinnvoll` · `website-handwerker-fehler` · `bfsg-firmenwebsite`.
+
+> **Bei „Agentur auswählen" später:** Kriterien nennen, **keine** Rangliste. Eine Seite, auf der SARTU
+> sich selbst zur besten Wahl erklärt, ist unglaubwürdig und wettbewerbsrechtlich riskant.
+
+---
+
+## 13. Lexikon — 8 Startbegriffe (final sortiert)
+
+**Hub `/lexikon`:** H1 `Website-Lexikon` · Kurzintro · alphabetische Liste mit Ein-Satz-Definition · **kein** Suchfeld bei 8 Begriffen (erst ab ca. 40).
 **Begriffsseite (8 Teile, verbindlich):** H1 = Begriff · Kurzdefinition (2–3 Sätze) · Warum es für Firmenwebsites wichtig ist · Beispiel · Typischer Fehler · Wie SARTU damit umgeht · Verwandte Begriffe (2–4) · Link zur passenden Leistungsseite.
 **Umfang:** 250–400 Wörter · **Schema:** `DefinedTerm` (Fallback `Article`) · `BreadcrumbList`
 
@@ -681,19 +718,32 @@ Alle Platzhalter tragen **eine** einheitliche, suchbare Markierung: `[[PLATZHALT
 
 | URL | Index | Schema | Priorität Sitemap |
 |---|---|---|---|
-| `/` | index | Organization, WebSite, FAQPage | 1.0 |
-| `/leistungen` | index | Service, FAQPage, Breadcrumb | 0.9 |
-| `/preise` | index | Service, FAQPage, Breadcrumb | 0.9 |
-| `/ablauf` | index | FAQPage, Breadcrumb | 0.8 |
-| `/briefing` | index | Breadcrumb | 0.8 |
-| `/leistung-*` (5) | index | Service, FAQPage, Breadcrumb | 0.7 |
-| `/ueber-uns` | index | Breadcrumb | 0.6 |
+| `/` | index | Organization, WebSite | 1.0 |
+| `/leistungen` | index | Service, Breadcrumb | 0.9 |
+| `/preise` | index | Service, Breadcrumb | **1.0** |
+| `/ablauf` | index | Breadcrumb | 0.8 |
+| `/briefing` (Einstiegsseite) | index | Breadcrumb | 0.7 |
+| `/briefing/1` … `/briefing/n` (Schritte) | **noindex** | – | – |
+| `/leistungen/*` (5) | index | Service, Breadcrumb | 0.7 |
+| `/ratgeber` + 3 Transparenzseiten (§11a) | index | Article, Breadcrumb | **0.9** |
+| `/ratgeber` + 2 Vergleichsartikel (§12) | index | Article, Breadcrumb | 0.7 |
+| `/ueber-uns` | index | Person oder Organization, Breadcrumb | 0.6 |
 | `/kontakt` | index | Breadcrumb | 0.6 |
-| `/ratgeber` + 3 Artikel | index | Article, Breadcrumb | 0.6 |
-| `/lexikon` + 15 Begriffe | index | DefinedTerm, Breadcrumb | 0.5 |
+| `/lexikon` + 8 Begriffe | index | DefinedTerm, Breadcrumb | 0.5 |
 | `/impressum`, `/datenschutz` | index | – | 0.3 |
 | `/agb` | noindex bis final | – | – |
 | Danke-Seiten, 404 | noindex | – | – |
+
+> **Warum `FAQPage` nicht mehr in der Tabelle steht:** Google hat FAQ-Rich-Results im September 2023
+> auf staatliche und medizinische Seiten beschränkt und laut Dokumentationsstand vom **15.06.2026**
+> ganz eingestellt. Das Markup schadet nicht, bringt aber **keine** Sichtbarkeit mehr. **Die
+> FAQ-Blöcke selbst bleiben Pflicht** — als Inhalt für Leser und als zitierfähiger Absatz für
+> KI-Antworten, nicht wegen des Schemas. Wer `FAQPage` trotzdem ausliefert, darf es nicht als
+> Maßnahme führen.
+
+> **Warum `/preise` und die Transparenzseiten die höchste Priorität haben:** Sie tragen den einzigen
+> Sichtbarkeitsvorteil, den SARTU gegenüber etablierten Agenturen hat — veröffentlichte, überprüfbare
+> Zahlen in einem Markt, der „Preis auf Anfrage" schreibt (`SARTU_SEO_GEO_KEYWORDSTRATEGIE.md` §3.4).
 
 **Root-Dateien:** `/sitemap.xml` · `/robots.txt` · `/llms.txt` (ohne Ranking-Behauptung) · `/favicon.ico` + PNG-Größen · OG-Bild.
 **Nach Go-live:** Search Console und Bing Webmaster Tools einrichten, Sitemap einreichen.

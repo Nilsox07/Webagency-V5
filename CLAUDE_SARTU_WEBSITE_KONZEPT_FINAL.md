@@ -153,7 +153,7 @@ Sektionen: Hero → Vergleichstabelle klassische Agentur vs. SARTU → 8 Schritt
 **`/briefing` (Lumi)** — Ziel: Anfrage in ~3 Minuten, Preis vor Kontaktdaten.
 Aufbau: Einstieg mit Trust-Hinweisen (3 Min., Preis vor Kontaktdaten, kein Pflichttermin, keine Add-on-Auswahl, unverbindlich) → 5 Themen (Fragenlogik siehe Masterkonzept §8) → **Ergebnis: Empfehlung + Begründung + Einmalpreis + Schutz + Erstjahr** → dann erst Kontaktdaten + B2B-Bestätigung. Keine Paketwechsel-Buttons, keine Add-ons.
 
-**Leistungsseiten (alle 5, gleiches GEO-Template):** `Kurz gesagt` → `Für wen passt das?` → `Was ist enthalten?` → `Was ist nicht enthalten?` → `Was kostet es?` → `Wie läuft es ab?` → `Welche Entscheidung nimmt SARTU ab?` → FAQ → CTA. Genau eine H1, `Service`-Schema, `FAQPage` nur bei sichtbaren Fragen.
+**Leistungsseiten (alle 5, gleiches GEO-Template):** `Kurz gesagt` → `Für wen passt das?` → `Was ist enthalten?` → `Was ist nicht enthalten?` → `Was kostet es?` → `Wie läuft es ab?` → `Welche Entscheidung nimmt SARTU ab?` → FAQ → CTA. Genau eine H1, `Service`-Schema. `FAQPage` ist optional — es bringt seit Juni 2026 keine Rich Results mehr; **die FAQ-Blöcke bleiben trotzdem Pflicht** (Lastenheft §16).
 
 **`/ueber-uns`** — Vertrauen ohne Aufblasen. H1: „Webdesign mit klaren Grenzen, festen Preisen und Verantwortung." Echtes Foto (kein Fake-Teamfoto), Haltung (4 Punkte), „Was SARTU bewusst nicht ist", Arbeitsweise, Verantwortung für KI-Einsatz. **Solo ehrlich darstellen**, solange es so ist.
 
@@ -205,7 +205,7 @@ Aufbau: Einstieg mit Trust-Hinweisen (3 Min., Preis vor Kontaktdaten, kein Pflic
 **Zielbegriffe lokal (gesperrt, bis der Standort entschieden ist):** `Webdesign Region [STARTREGION]` · `Webdesign [UMLAND_ORT_1..4]` · später `Webdesign [HAUPTORT]`. Reihenfolge und Gate: Masterkonzept §16a. **Zum Launch werden keine lokalen Begriffe bespielt** — die Rankinghebel zum Start sind kommerzielle, vergleichende und problemorientierte Suchintentionen (`SARTU_SEO_GEO_KEYWORDSTRATEGIE.md`).
 
 **Pro Seite:** genau eine H1 · eindeutiger Title + Description · Canonical auf finale URL · bewusstes index/noindex · Breadcrumb + `BreadcrumbList` · sprechende URL (Bindestriche, keine Umlaute) · Antwort-zuerst-Absatz oben.
-**Global:** `Organization` + `WebSite` JSON-LD; `LocalBusiness` **nur** bei berechtigtem Standort; `Service` auf Leistungsseiten; `FAQPage` nur für sichtbare Fragen; `Article` auf Ratgebern; `DefinedTerm` im Lexikon.
+**Global:** `Organization` + `WebSite` JSON-LD; `LocalBusiness` **nur** bei berechtigtem Standort; `Service` auf Leistungsseiten; `FAQPage` optional und nur bei sichtbaren Fragen (keine Rich Results mehr); `Article` auf Ratgebern; `DefinedTerm` im Lexikon.
 **Dateien:** `/sitemap.xml`, `/robots.txt`, `/llms.txt` (ohne Ranking-Behauptung), `/favicon.ico`, OG-Bild. Search Console + Bing Webmaster einrichten, Sitemap einreichen.
 **Performance:** LCP < 2,5 s · INP < 200 ms · CLS < 0,1; wenig JavaScript; Fonts self-hosted (`font-display: swap`); statische Auslieferung.
 

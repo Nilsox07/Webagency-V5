@@ -219,8 +219,13 @@ Erst nach der Entscheidung: alle Seiten aus dem Lastenheft, im gewählten Stil.
 
 **Du schreibst selbst — aus den Vorgaben, dann zur Prüfung vorlegen:**
 - Die 5 Leistungsseiten: H1 und „Kurz gesagt" stehen fest, die restlichen Abschnitte des Templates schreibst du
-- 3 Ratgeberartikel: Gliederung und Kurzantwort stehen fest, den Text schreibst du (je 900–1.300 Wörter)
-- 15 Lexikonbegriffe: Struktur steht fest, die Texte schreibst du (je 250–400 Wörter)
+- 3 **Transparenzseiten** (Lastenheft §11a): Gliederung und die Pflichtangaben stehen fest, den Text schreibst du. **Alle Zahlen kommen aus dem Masterkonzept — keine erfundenen Marktdaten, keine Wettbewerberpreise**
+- 2 Ratgeber-Vergleichsartikel: Gliederung und Kurzantwort stehen fest, den Text schreibst du (je 900–1.300 Wörter)
+- 8 Lexikonbegriffe: Struktur steht fest, die Texte schreibst du (je 250–400 Wörter)
+
+> **Die Transparenzseiten sind der wichtigste Teil dieses Auftrags.** Sie sind der Grund, warum SARTU
+> überhaupt gefunden und zitiert wird (`SARTU_SEO_GEO_KEYWORDSTRATEGIE.md` §0 und §3.4). Preise
+> stehen als **Text**, nie als Bild, und werden aus **einer** zentralen Stelle ausgegeben.
 
 **Regeln für selbst geschriebene Texte:** keine erfundenen Zahlen, Studien oder Referenzen. Keine Aussagen über Rankings oder Ergebnisse. Sprachregeln und Verbotsliste aus Lastenheft §2 gelten unverändert.
 

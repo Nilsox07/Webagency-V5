@@ -509,7 +509,7 @@ die belastbarere Wahl: Der Umzug ist ein Kopiervorgang, keine Neuentwicklung.
 >
 > Dieses Masterkonzept regelt **nur noch**: Geschäftsmodell, Angebot/Preise, Zahlung, Domain/Hosting/E-Mail, Portal, KI-/Produktionslogik, Technik, Recht, Markteintritt und Ausbaustufen. Die früheren Website-Detailabschnitte wurden hier **entfernt**, weil zwei Dateien nicht dieselbe Sache regeln dürfen.
 
-**Nur zur Orientierung (nicht maßgeblich):** Launch = Kernseiten (`/`, `/leistungen`, `/preise`, `/ablauf`, `/briefing`, `/ueber-uns`, `/kontakt`, Pflichtseiten) + **5** Leistungsseiten + **3** Ratgeber + **10–15** Lexikonbegriffe. Kommerzielle Hubs, Branchen-Hubs, Ortsseiten und ein Lexikonausbau auf 40–60 Begriffe sind **Stufe 2** – erst nach Search-Console-Daten.
+**Nur zur Orientierung (nicht maßgeblich):** Launch = Kernseiten (`/`, `/leistungen`, `/preise`, `/ablauf`, `/briefing`, `/ueber-uns`, `/kontakt`, Pflichtseiten) + **5** Leistungsseiten + **3 Transparenzseiten** + **2** Ratgeber + **8** Lexikonbegriffe. Kommerzielle Hubs, Branchen-Hubs, Ortsseiten und ein Lexikonausbau auf 40–60 Begriffe sind **Stufe 2** – erst nach Search-Console-Daten.
 
 ---
 
@@ -525,7 +525,7 @@ Siehe `CLAUDE_SARTU_WEBSITE_KONZEPT_FINAL.md`, Abschnitte 4–6.
 
 **Grundhaltung (belegt durch Google-Doku):** GEO ist **kein** magischer Zusatz und **kein** Spezial-Schema. Gute KI-Sichtbarkeit = Fortsetzung guter SEO: crawlbare, hilfreiche, konsistente, entitätsklare Inhalte. **Keine** Garantie auf Rankings/Anfragen/Umsatz/KI-Nennungen. `llms.txt` wird angelegt, aber **nicht** als Rankingfaktor beworben.
 
-**SEO-/GEO-Startsystem (im Websitepreis, ab Launch):** Suchintention + Thema je Seite · Antwort-zuerst-Texte aus bestätigten Fakten · sprechende URLs (Bindestriche, keine Umlaute) · genau eine H1, saubere Überschriften · interne Links als echte Links · Title/Description/Canonical/OG/Robots · Breadcrumb + `BreadcrumbList` · `Organization`+`WebSite` global, `Service`/`FAQPage`/`Article`/`DefinedTerm` seitenweise (nur bei sichtbarer Entsprechung) · XML-Sitemap, robots.txt, 404, Redirect-Plan · echte NAP, `LocalBusiness` **nur** bei berechtigtem Standort · Performance (CWV: LCP < 2,5 s, INP < 200 ms, CLS < 0,1; AVIF/WebP + srcset, Hero nicht lazy + `fetchpriority=high`, self-hosted WOFF2 `font-display:swap`) · Bild-SEO · Search Console + Bing Webmaster + Sitemap einreichen, IndexNow optional.
+**SEO-/GEO-Startsystem (im Websitepreis, ab Launch):** Suchintention + Thema je Seite · Antwort-zuerst-Texte aus bestätigten Fakten · sprechende URLs (Bindestriche, keine Umlaute) · genau eine H1, saubere Überschriften · interne Links als echte Links · Title/Description/Canonical/OG/Robots · Breadcrumb + `BreadcrumbList` · `Organization`+`WebSite` global, `Service`/`Article`/`DefinedTerm` seitenweise (nur bei sichtbarer Entsprechung; `FAQPage` optional — seit Juni 2026 ohne Rich Results) · XML-Sitemap, robots.txt, 404, Redirect-Plan · echte NAP, `LocalBusiness` **nur** bei berechtigtem Standort · Performance (CWV: LCP < 2,5 s, INP < 200 ms, CLS < 0,1; AVIF/WebP + srcset, Hero nicht lazy + `fetchpriority=high`, self-hosted WOFF2 `font-display:swap`) · Bild-SEO · Search Console + Bing Webmaster + Sitemap einreichen, IndexNow optional.
 
 **Laufender Schutz (in Schutz S/M/L):** technische Suchgesundheit – Erreichbarkeit, Crawlbarkeit, Sitemap, Links, Canonicals, Schema aus bestätigten Fakten, technische Regressionen. **Kein** stillschweigender Content-Auftrag.
 
@@ -606,7 +606,7 @@ Siehe `CLAUDE_SARTU_WEBSITE_KONZEPT_FINAL.md`, Abschnitte 4–6.
 ## 17.–19. (verschoben) Ratgeber, Lexikon, Content-Cluster, Bild-/Screenshotkonzept
 
 Siehe `CLAUDE_SARTU_WEBSITE_KONZEPT_FINAL.md`, Abschnitte 7 und 9.
-**Korrigierter Startumfang: 3 Ratgeber und 10–15 Lexikonbegriffe.** Die früher genannten 40–60 Begriffe bzw. 3–6 Ratgeber gelten **nicht** mehr für den Launch, sondern sind Stufe 2.
+**Korrigierter Startumfang: 3 Transparenzseiten, 2 Ratgeber und 8 Lexikonbegriffe.** Die früher genannten 40–60 Begriffe bzw. 3–6 Ratgeber gelten **nicht** mehr für den Launch, sondern sind Stufe 2. **Die Transparenzseiten sind der Kern** — sie tragen den einzigen Sichtbarkeitsvorteil, den SARTU gegenüber etablierten Agenturen hat (`SARTU_SEO_GEO_KEYWORDSTRATEGIE.md` §3.4).
 
 **Weiterhin im Master gültig – Bildprinzip für Kundenwebsites:** echte Betriebs-, Team-, Projekt- und Produktbilder haben Vorrang; gezielt lizenzierte Bilder nur, wenn reale Motive fehlen; KI-Bilder nie als Dokumentation des Unternehmens. Keine austauschbaren Handschlag-/Laptop-/Callcenter-Stockbilder. Bildrechte und zulässige Verwendung werden **pro Datei im Portal bestätigt**.
 
@@ -664,7 +664,7 @@ Geschäftsseitig verbindlich bleibt:
 > Kernprinzip: **Nachfrage und Lieferfähigkeit zuerst beweisen, Automatisierung zuletzt.** Das kanonische „alles vor Marktstart" wird als **Zielbild** beibehalten, aber in liefernde Stufen zerlegt.
 
 **Stufe 0 – Sichtbares Portal + manuell liefern & Referenzen erzeugen (jetzt, Wochen, nicht Monate):**
-- Öffentliche Website (Kernseiten + **5** Leistungsseiten + 3 Ratgeber + 10–15 Lexikonbegriffe) auf statischem Stack, launchfähig.
+- Öffentliche Website (Kernseiten + **5** Leistungsseiten + **3 Transparenzseiten** + 2 Ratgeber + 8 Lexikonbegriffe), launchfähig.
 - Produktion **manuell + KI-assistiert** (Mensch baut aus Designsystem). Domain/DNS via INWX **manuell**. Buchhaltung via lexoffice/sevDesk.
 - **Ziel: 2–3 echte Referenzkunden** live → echte Case Studies + echte Portal-Screens (die die Website ohnehin braucht).
 
@@ -860,8 +860,18 @@ Daraus folgt: Die Website muss beim Launch nicht ranken, sondern **abschließen*
 | **Google Ads** | Tag 1 | gering, kostet Geld | einziger sofort kaufbarer Kanal mit Kaufabsicht |
 | **Netzwerk / Direktansprache** | Woche 1 | hoch | rechtlich gestaffelt (§23a) |
 | **Google-Unternehmensprofil + Bewertungen** | Monat 2+ | gering | Hebel sind **Bewertungen**, nicht die Website |
-| **SEO / Content** | Monat 9–18 | hoch, dauerhaft | richtig jetzt zu starten, falsch sich darauf zu verlassen |
-| **GEO / KI-Antworten** | unbestimmt | gering (fällt nebenbei an) | billige Wette, **kein** planbarer Kanal |
+| **Transparenzseiten** (veröffentlichte Preise) | Monat 3–9 | mittel | **stärkster eigener Hebel** — wirkt in Suche **und** KI-Antworten, weil der Markt „Preis auf Anfrage" schreibt |
+| **SEO / Content** im Übrigen | Monat 9–18 | hoch, dauerhaft | richtig jetzt zu starten, falsch sich darauf zu verlassen |
+| **Ortsseiten** | Monat 12–24 | hoch, **dauerhaft** | erst mit echter Referenz aus dem Ort |
+
+> **Ausführlich:** `SARTU_SEO_GEO_KEYWORDSTRATEGIE.md` §0 (Kanäle mit Zeiträumen, Local Pack gegen
+> Ortsseiten) und §3.4 (Transparenzseiten). Dort steht auch, warum `Webdesignagentur` als Zielbegriff
+> ausscheidet und warum Ortsseiten einen echten Kunden im Ort voraussetzen (§4.1).
+>
+> **Zur früheren Einschätzung „GEO ist eine billige Wette, kein planbarer Kanal":** Das galt, solange
+> GEO als Nebenprodukt gedacht war. Mit den Transparenzseiten wird es ein **gezielter** Hebel — nicht
+> durch ein Format, sondern weil überprüfbare Zahlen zitierfähig sind und fast niemand sonst welche
+> veröffentlicht. Planbar ist der Kanal damit immer noch nicht; **beeinflussbar** aber sehr wohl.
 
 ### 23b.3 Multiplikatoren — der unterschätzte Hauptkanal
 
@@ -973,7 +983,7 @@ Kostet ~15 Minuten, positioniert SARTU als ehrlichen Fachmann und funktioniert n
 
 **B. Website launchen (2–4 Wochen):**
 4. **Designrichtung final wählen** (3 Varianten in `CLAUDE_SARTU_WEBSITE_KONZEPT_FINAL.md`), dann Basis aufsetzen: eigenes Layout **oder** neu begründete Template-Basis; globales Layout + Design-Tokens + Komponenten.
-5. Kernseiten + **5** Leistungsseiten (GEO-Template) + **3** Ratgeber + **10–15** Lexikonbegriffe bauen; **echte** NAP/Impressum (nach Kanzlei), sitemap/robots/llms.txt/OG, Search Console + Bing.
+5. Kernseiten + **5** Leistungsseiten (GEO-Template) + **3 Transparenzseiten** + **2** Ratgeber + **8** Lexikonbegriffe bauen; **echte** NAP/Impressum (nach Kanzlei), sitemap/robots/llms.txt/OG, Search Console + Bing.
 6. Portal-Screens als **Musteransicht** produzieren – aus der **echten** Stufe-0-UI, nie als gezeichnetes Fake-Dashboard.
 7. ENDKONTROLLE-Profil **SARTU-PUBLIC** vollständig grün (keine Add-on-/Minuten-/Alt-Preis-Reste, keine Privatkunden-Formulierungen, kein „wartungsarm").
 
