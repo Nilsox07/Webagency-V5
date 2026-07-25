@@ -122,6 +122,10 @@ Rechtstexte · echte Fotos · die Freigabe eigener Texte. Alles davon steht in
 > **Dann anhalten.** Der Mensch entscheidet die Designrichtung. Baue keine weiteren Seiten.
 >
 > **Regeln, die durchgehend gelten:**
+> - **PHP läuft in Docker, nicht auf dem Wirtssystem.** Jeder PHP-, Composer- und Testbefehl
+>   bekommt den Vorsatz `docker compose exec app …`. Auf dem Wirtssystem gibt es kein `php`;
+>   ein fehlgeschlagenes `php -v` dort ist **kein** Grund anzuhalten. Datenbanken heißen `db`
+>   und `db_test`, nicht `localhost`. Einzelheiten: `ENTWICKLUNGSUMGEBUNG.md`
 > - PHP 8.3+, serverseitig gerendert, MySQL/MariaDB, PDO mit vorbereiteten Anweisungen. **Kein**
 >   WordPress, **kein** Vollframework, **kein** React/Vue/Next, **kein** Node als Zielsystem,
 >   **kein** Build-Schritt fürs Frontend, **keine** externen CDNs
@@ -211,6 +215,7 @@ und verbraucht das nachgeladene Kontingent für Kontext statt für Arbeit.
 
 | Wann | Was |
 |---|---|
+| **vor Sitzung 1** | **Entwicklungsumgebung einrichten** — `ENTWICKLUNGSUMGEBUNG.md`. Ohne PHP, Composer und MariaDB hält Codex nach wenigen Minuten an, egal wie gut die Unterlagen sind |
 | vor Sitzung 1 | Branch nach `main` mergen · Hosting prüfen (Mail, Cron) |
 | nach Sitzung 1 | **Designrichtung entscheiden** |
 | jederzeit | **Standortentscheidung** — blockiert den Bau nicht, aber das Google-Unternehmensprofil und damit den schnellsten Kundenkanal |

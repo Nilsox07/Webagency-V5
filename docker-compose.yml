@@ -1,0 +1,76 @@
+# Entwicklungsumgebung für SARTU — siehe ENTWICKLUNGSUMGEBUNG.md
+#
+# Start:  docker compose up -d --build
+# Stopp:  docker compose down
+#
+# Alle PHP-, Composer- und Testbefehle laufen IM Container:
+#   docker compose exec app php -v
+#   docker compose exec app composer install
+#   docker compose exec app vendor/bin/phpunit
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: .docker/php/Dockerfile
+    restart: unless-stopped
+    ports:
+      - "${APP_PORT:-8080}:80"
+    volumes:
+      - .:/var/www/html
+    env_file: .env
+    depends_on:
+      db:
+        condition: service_healthy
+      db_test:
+        condition: service_healthy
+
+  db:
+    image: mariadb:11.4
+    restart: unless-stopped
+    environment:
+      MARIADB_DATABASE: ${DB_NAME}
+      MARIADB_USER: ${DB_USER}
+      MARIADB_PASSWORD: ${DB_PASSWORD}
+      MARIADB_ROOT_PASSWORD: ${DB_ROOT_PASSWORD}
+    ports:
+      - "${DB_PORT:-3306}:3306"
+    volumes:
+      - dbdata:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "healthcheck.sh", "--connect", "--innodb_initialized"]
+      interval: 5s
+      timeout: 5s
+      retries: 30
+
+  # Eigene Datenbank für die 59 Testfälle.
+  # Portal-Lastenheft §16 verlangt Tests gegen ein echtes MariaDB — kein SQLite, kein Ersatz
+  # im Speicher. Getrennt von der Arbeitsdatenbank, damit ein Test nie echte Daten löscht.
+  # Liegt im Arbeitsspeicher: schnell, und bei jedem Neustart garantiert leer.
+  db_test:
+    image: mariadb:11.4
+    restart: unless-stopped
+    environment:
+      MARIADB_DATABASE: ${DB_NAME_TEST}
+      MARIADB_USER: ${DB_USER}
+      MARIADB_PASSWORD: ${DB_PASSWORD}
+      MARIADB_ROOT_PASSWORD: ${DB_ROOT_PASSWORD}
+    tmpfs:
+      - /var/lib/mysql
+    healthcheck:
+      test: ["CMD", "healthcheck.sh", "--connect", "--innodb_initialized"]
+      interval: 5s
+      timeout: 5s
+      retries: 30
+
+  # Fängt ausgehende Mail ab, statt sie zu versenden.
+  # Der gesamte Zugang läuft über Anmeldelinks per Mail (Portal-Lastenheft §5) — ohne
+  # sichtbare Mail ist die Anmeldung lokal nicht testbar. Posteingang: http://localhost:8025
+  mail:
+    image: axllent/mailpit:latest
+    restart: unless-stopped
+    ports:
+      - "${MAIL_UI_PORT:-8025}:8025"
+
+volumes:
+  dbdata:
