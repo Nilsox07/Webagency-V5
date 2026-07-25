@@ -784,6 +784,7 @@ Die Website ist fertig, wenn **alle** Punkte erfüllt sind:
 - [ ] Keine Ortsangabe, kein `LocalBusiness`, keine Ortsseite, keine Ortsnamen in Title/H1/URL — solange `SARTU_ENTSCHEIDUNGEN_OFFEN.md` §1 auf `offen` steht. Strukturierte Daten nutzen `Organization` **ohne** Adressfeld.
 
 **Technik und SEO**
+- [ ] `php -l` läuft über jede PHP-Datei ohne Fehler.
 - [ ] Jede Seite: Status 200, genau eine H1, eigener Title und Description, Canonical auf sich selbst, Breadcrumb.
 - [ ] Keine toten internen Links; Sitemap enthält nur 200er-URLs; robots.txt korrekt.
 - [ ] Alle Bilder mit Alt-Text, festen Maßen, WebP und `srcset`; Hero nicht lazy.

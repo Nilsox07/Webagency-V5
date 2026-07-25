@@ -1396,6 +1396,7 @@ Es gelten die Sprachregeln aus `CLAUDE_SARTU_WEBSITE_LASTENHEFT_BAUFINAL.md` §2
 - [ ] Alle Texte aus diesem Dokument **wörtlich** übernommen
 - [ ] Alle Statuswerte zeigen dem Kunden Klartext, nirgends interne Codes
 - [ ] Formate aus §4a eingehalten: deutsche Datums- und Geldformate, Europe/Berlin, 19 % USt., Beträge als Cent gespeichert, keine leeren Werte als `null` sichtbar
+- [ ] **`php -l` läuft über jede PHP-Datei ohne Fehler** — billigste Prüfung überhaupt, fängt Syntaxfehler ab, bevor überhaupt ein Test startet. Gehört in den Testlauf, nicht in die Handarbeit
 - [ ] Alle 59 Testfälle aus §16 laufen automatisiert und grün
 - [ ] `tests/TenantIsolationTest.php` vorhanden, vollständig, nicht abgeschwächt
 - [ ] Kunden- und Adminzugriff laufen über **getrennte** Datenzugriffsschichten (§3 Regel 2a); kein gemeinsamer Codepfad lässt den Organisationsfilter weg
