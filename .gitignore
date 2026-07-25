@@ -1,0 +1,24 @@
+# Zugangsdaten — niemals im Repository
+.env
+.env.local
+*.pem
+*.key
+
+# Abhängigkeiten
+/vendor/
+/node_modules/
+
+# Uploads und Laufzeitdaten (liegen außerhalb des Webroots, Portal-Lastenheft §1.3)
+/storage/*
+!/storage/.gitkeep
+
+# Logs und Zwischenstände
+*.log
+/tests/_output/
+.phpunit.result.cache
+
+# Werkzeuge und Betriebssystem
+.DS_Store
+Thumbs.db
+/.idea/
+/.vscode/
