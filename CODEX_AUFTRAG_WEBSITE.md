@@ -286,7 +286,7 @@ Alle Platzhalter tragen **eine** einheitliche, suchbare Markierung: `[[PLATZHALT
 
 ### Ortsseiten — nicht zum Launch, auch nicht vorbereitend indexierbar
 
-- **Keine** Ortsseite im Produktivbau, auch nicht unverlinkt
+- **Keine** Ortsseite in der produktiven Veröffentlichung, auch nicht unverlinkt
 - Existieren Prototypen: nur in Staging, mit `noindex`, **nicht** in der Sitemap, **nicht** intern verlinkt, in `robots.txt` ausgeschlossen
 - Veröffentlichung erst nach dem Gate in Masterkonzept §16a. Die Entscheidung trifft ein Mensch
 - Grund: Massenhaft erzeugte Ortsseiten ohne eigenständigen Wert fallen unter Googles Richtlinien zu Doorway- und skaliertem Inhaltsmissbrauch. Bei einem Betreibermodell trifft die Folge später die Kunden
@@ -304,7 +304,7 @@ Die Definition of Done steht in **Lastenheft §17**. Sie gilt vollständig. Beso
 - **Bedarfsscheck mit abgeschaltetem JavaScript vollständig durchlaufen** — getestet, nicht behauptet
 - **Nur `/public` ist über den Webserver erreichbar** — `/app`, `/storage`, `.env` liefern 403 oder 404, praktisch geprüft
 - **Kein Netzwerkaufruf an eine fremde Domain** — im Netzwerkprotokoll geprüft
-- **Startsperre nachgewiesen (§14a):** Der Produktivbau bricht bei einem Platzhalter in Impressum oder Datenschutz nachweislich ab — einmal absichtlich provoziert und belegt
+- **Startsperre nachgewiesen (§14a):** Die produktive Veröffentlichung bricht bei einem Platzhalter in Impressum oder Datenschutz nachweislich ab — einmal absichtlich provoziert und belegt
 - Kontrast ≥ 4,5:1, Tastaturbedienung vollständig, Fokus sichtbar
 - Laborwerte im Zielbereich; echte Core Web Vitals sind Nachmessung (§17a), kein Abnahmekriterium
 - keine erfundenen Inhalte
@@ -313,7 +313,7 @@ Die Definition of Done steht in **Lastenheft §17**. Sie gilt vollständig. Beso
 
 ## 8. Was du am Ende ablieferst
 
-1. Die Website im Repository, lauffähig, mit getrennten Bau-Betriebsarten (Staging warnt, Produktiv bricht ab)
+1. Die Website im Repository, lauffähig, mit getrennten Betriebsarten (`APP_ENV=staging` warnt, `APP_ENV=production` bricht ab)
 2. **`README.md`**: Stack, Struktur, Umgebungsvariablen, wie man baut und deployt, wie eine neue Seite angelegt wird
 3. **Herkunftsliste**: jedes eingesetzte Fremdteil mit Name, Version, **Lizenz**, Fundstelle
 4. **Messwerte**: JS/CSS in KB gzip, Laborwerte je Kernseite mit genanntem Werkzeug

@@ -984,7 +984,7 @@ Kostet ~15 Minuten, positioniert SARTU als ehrlichen Fachmann und funktioniert n
 **A. Fundament klären (diese Woche):**
 1. **Einen** Preis-/Scope-Stand als Single Source of Truth festlegen (`pricing.json`/`prices.js`) und `sartupaketepreise.md` + `sartulastenheftwebsite.md` in `konzepte/_archiv/` verschieben (als **veraltet** markieren) – gegen Wiederverwendung.
 2. ~~Stack-Entscheidung~~ **entschieden:** ein modulares PHP-Projekt mit `/portal/` und `/admin/`, MySQL/MariaDB, serverseitig gerendert. Verbindlich: Portal-Lastenheft §1. Offen bleibt nur der konkrete Hosting-Anbieter (`SARTU_ENTSCHEIDUNGEN_OFFEN.md` §4).
-3. **Eine** Palette + Ansprache („Sie") + Logo-Favorit fixieren; verbotene Wörter-/Anti-KI-Regeln als Lint/QA-Check.
+3. **Design-Briefing starten.** Jetzt schon festlegen: Ansprache „Sie", Verbotsliste und Anti-KI-Regeln als prüfbarer QA-Check. **Palette, Schrift und Logo erst nach der Variantenentscheidung** — sie vorher zu fixieren würde das Gate aushebeln, für das die Varianten überhaupt gebaut werden.
 
 **B. Website launchen (2–4 Wochen):**
 4. **Designrichtung final wählen** nach `CLAUDE_SARTU_DESIGN_BRIEFING_AUSFUEHRUNG.md`: 2–3 klickbare Startseitenvarianten mit **echten** Texten werden vorgelegt, ein Mensch entscheidet. Danach **eigenes PHP-Layout** aufsetzen — globale Layouts, Partials, Komponenten, zentrale Design-Variablen. **Keine Template-Basis als Zielarchitektur** — SARTU verkauft „kein Baukasten“ und darf die eigene Seite nicht erkennbar zusammenstecken.
@@ -1016,4 +1016,4 @@ Kostet ~15 Minuten, positioniert SARTU als ehrlichen Fachmann und funktioniert n
 
 ---
 
-*Ende Masterkonzept. Die kritische Bewertung, Marktanalyse mit Quellen und Herleitung dieser Entscheidungen steht in `CLAUDE_MARKTANALYSE_KRITIK_OPTIMIERUNG.md`.*
+*Ende Masterkonzept. Die kritische Bewertung und die Herleitung mit Quellen — **Stand 24.07.2026, teils überholt, nicht maßgeblich für den Bau** — stehen in `CLAUDE_MARKTANALYSE_KRITIK_OPTIMIERUNG.md`.*

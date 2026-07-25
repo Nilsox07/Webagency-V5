@@ -3,7 +3,34 @@
 **Erstellt von:** Claude (Opus) · **Stand:** 24.07.2026
 **Grundlage:** alle Konzeptdateien in `konzepte/`. Umsetzungsentscheidungen im Schwesterdokument `CLAUDE_SARTU_MASTERKONZEPT_FINAL.md`.
 
-**Kennzeichnung der Aussagen:** `[BELEGT]` = mit Quelle/Datei belegt · `[ANNAHME]` = plausible, nicht bewiesene Grundannahme · `[EINSCHÄTZUNG]` = meine fachliche Bewertung.
+**Kennzeichnung der Aussagen:** `[BELEGT]` = mit Quelle/Datei belegt · `[ANNAHME]` = plausible, nicht bewiesene Grundannahme · `[EINSCHÄTZUNG]` = meine fachliche Bewertung · `[ABGELÖST]` = damals so empfohlen, inzwischen anders entschieden.
+
+---
+
+> ## ⚠️ Diese Datei ist eine Bewertung vom 24.07.2026 — keine Bauvorlage
+>
+> **Sie wird bewusst nicht nachträglich umgeschrieben.** Ihr Wert liegt darin, festzuhalten, was zu
+> diesem Zeitpunkt vorlag, was daran kritisch war und welche Empfehlungen daraus folgten. Wer sie an
+> den heutigen Stand anpasst, macht sie zu einer zweiten Kopie des Masterkonzepts und löscht die
+> Entscheidungshistorie — genau das, was man später braucht, um zu verstehen, **warum** etwas so
+> entschieden wurde.
+>
+> **Für die Umsetzung ist sie nicht maßgeblich und wird nicht übergeben** (`UEBERGABE_DATEILISTE.md`).
+> Wer daraus baut, baut einen überholten Stand.
+>
+> ### Was sich seit dem 24.07.2026 geändert hat
+>
+> | Damals in dieser Datei | Heute verbindlich | Wo entschieden |
+> |---|---|---|
+> | Portal auf Supabase, später Node + PostgreSQL + Redis; Kundenseiten Astro | **Ein modulares PHP-Projekt**: `/` öffentlich, `/portal/` Kundenbereich, `/admin/` intern, MySQL/MariaDB, serverseitig gerendert, kein Build-Schritt | Portal-Lastenheft §1 |
+> | Website und Portal als getrennte Projekte mit Schnittstelle und gemeinsamem Geheimnis | **Ein** Projekt, ein Repository — der Bedarfsscheck ruft den Anfragedienst direkt auf, kein Token | Portal-Lastenheft §4b.1 |
+> | Design über eine festgelegte Palette (Ink/Ivory/Teal, Oxide) und ggf. eine Template-Basis | **Keine** Designvorgabe. 2–3 klickbare PHP-Varianten mit echten Texten, Mensch entscheidet, danach eigenes Layout | Design-Briefing |
+> | Launch: 3 Ratgeber, 10–15 Lexikonbegriffe | **3 Transparenzseiten + 2 Vergleichsartikel + 8 Lexikonbegriffe** | Masterkonzept §13, Website-Lastenheft §11a/§12/§13 |
+> | Startregion und Geschäftsadresse als entschieden behandelt | **Offen.** Ortsseiten, `LocalBusiness`, Unternehmensprofil und Ortsnamen sind gesperrt | `SARTU_ENTSCHEIDUNGEN_OFFEN.md` §1 |
+> | SEO überwiegend über Leistungs- und Ortsseiten gedacht | **Transparenzseiten** als stärkster Hebel; Local Pack und Ortsseiten sauber getrennt | `SARTU_SEO_GEO_KEYWORDSTRATEGIE.md` §0, §3.4 |
+>
+> Einzelne Textstellen unten sind zusätzlich mit `[ABGELÖST]` markiert. **Bei jedem Widerspruch
+> gewinnt das Masterkonzept.**
 
 ---
 
@@ -139,7 +166,7 @@ Drei Namensstände (Basis/Pro/Platin vs. Start/Wachstum/Platzhirsch), drei Preis
 
 ### 4.2 DREI Tech-Stacks `[BELEGT]`
 - **Gebaut (Juni):** statisch HTML/CSS/JS auf **Vercel + Supabase** (Auth/PostgreSQL/Storage, Frankfurt), RLS, live getestet. `[SartuProjektZusammenfassung]` — *historischer Stand; die Zielarchitektur ist inzwischen PHP.*
-- **Kanonisch spezifiziert (Juli):** **Node + PostgreSQL + Redis + S3 (DE/EU)** Control-Plane; Kundenseiten **Astro** static via isolierter Agenten-Worker. `[DESIGNSYSTEM §2]` (Portal-Template-Doku: **Next.js + shadcn**.)
+- **Historisch spezifiziert (Juli), inzwischen abgelöst:** **Node + PostgreSQL + Redis + S3 (DE/EU)** Control-Plane; Kundenseiten **Astro** static via isolierter Agenten-Worker. `[DESIGNSYSTEM §2]` (Portal-Template-Doku: **Next.js + shadcn**.)
 - **Generisches Website-Lastenheft:** **PHP + Flat-File-JSON + Matomo** auf All-Inkl-Shared-Hosting mit **WordPress-ähnlichem WYSIWYG-Admin**. `[lastenheft_webseite.md]` – widerspricht direkt „kein freier Editor / individuell programmiert".
 → Der PHP-Ansatz und die Supabase-Variante sind gegenüber der Node/Astro-Spezifikation **abgelöst**. Aber es existiert bereits ein **gebautes Supabase-Portal** vs. ein **spezifiziertes Node-Portal** – ein echter Fork mit Sunk-Cost. (Auflösung: `MASTERKONZEPT §12/§25`.)
 
@@ -182,7 +209,7 @@ Altname **„Klarweb"** (sartupaketepreise.md: „Seite sagt aktuell Klarweb →
 6. **Rechtliche Baustellen** (vor Verkauf zwingend): Abnahmefiktion/Mitwirkung, **AVV mit KI-Subunternehmern** (OpenAI/Anthropic), Domain-Datenschutz, Garantie-Formulierung (EuGH C-133/22), RDG bei Rechtstexten, BFSG-Anwendbarkeit. `[BELEGT: mehrere Dateien]`
 7. **Mollie-Abo/Mandat-Komplexität** (SEPA-Mandat, Idempotenz, Fehlschlag/Erstattung/Mahnung) muss E2E getestet sein, bevor wiederkehrend eingezogen wird. `[BELEGT: DESIGNSYSTEM §14]`
 8. **Scope-Creep über „Selbstpflege".** Kunden erwarten evtl. mehr als typisierte Datensätze („nur den einen Satz ändern"). Ohne klare Erwartung droht Support-Last. `[EINSCHÄTZUNG]`
-9. **Content-Last mit Qualitätsgate.** Der **Quellstand** plante 7 Leistungsseiten + Hubs + Branchen + Ortsseiten (je ≥ 5 nicht-austauschbare Abschnitte) + 40–60 Lexikonbegriffe + Ratgeber = hoher, kaum automatisierbarer Redaktionsaufwand. `[BELEGT: WEBSITE_KONZEPT, WEBSEITENKONZEPT]` → **Entschärft:** Launch jetzt 5 Leistungsseiten / 3 Ratgeber / 10–15 Begriffe, Rest Stufe 2.
+9. **Content-Last mit Qualitätsgate.** Der **Quellstand** plante 7 Leistungsseiten + Hubs + Branchen + Ortsseiten (je ≥ 5 nicht-austauschbare Abschnitte) + 40–60 Lexikonbegriffe + Ratgeber = hoher, kaum automatisierbarer Redaktionsaufwand. `[BELEGT: WEBSITE_KONZEPT, WEBSEITENKONZEPT]` → **Entschärft:** Launch jetzt 5 Leistungsseiten / 3 Ratgeber / 10–15 Begriffe, Rest Stufe 2. `[ABGELÖST]` — heute: 5 Leistungsseiten, **3 Transparenzseiten, 2 Vergleichsartikel, 8 Lexikonbegriffe**.
 10. **Export-Versprechen ungetestet.** „Problemloser Umzug" darf nicht beworben werden, bevor der baubare Export praktisch getestet ist. `[BELEGT: GESCHAEFTSMODELL §16]`
 
 ---
@@ -242,7 +269,7 @@ Altname **„Klarweb"** (sartupaketepreise.md: „Seite sagt aktuell Klarweb →
 - **Grundhaltung:** vorbildlich – „GEO = gute SEO", keine Garantien, `llms.txt` ehrlich als Nicht-Rankingfaktor, korrekte Google-Quellen. `[BELEGT: WEBSEITENKONZEPT §2]`
 - **SEO ab Launch enthalten:** richtig und verkaufsstark; späterer Ausbau datenbasiert statt pauschalem Neuschreiben. `[BELEGT]`
 - **Ortsseiten-Gate:** sehr gut (verhindert Doorway-Abstrafung). `[BELEGT: WEBSITE_KONZEPT]`
-- **Lexikon/Ratgeber:** sinnvoll für Entitäten/GEO, aber **Aufwands- und Qualitätsrisiko** (Gefahr „Textfriedhof"). Die Quelldateien wollten 40–60 Begriffe zum Start – **das ist für den Launch immer noch zu viel.** Verbindlich sind jetzt **3 Ratgeber und 10–15 Lexikonbegriffe**; 40–60 Begriffe sind Stufe 2 nach Search-Console-Daten. `[EINSCHÄTZUNG]`
+- **Lexikon/Ratgeber:** sinnvoll für Entitäten/GEO, aber **Aufwands- und Qualitätsrisiko** (Gefahr „Textfriedhof"). Die Quelldateien wollten 40–60 Begriffe zum Start – **das ist für den Launch immer noch zu viel.** Verbindlich waren damals 3 Ratgeber und 10–15 Lexikonbegriffe. `[ABGELÖST]` — **heute: 3 Transparenzseiten + 2 Vergleichsartikel + 8 Lexikonbegriffe** (Website-Lastenheft §11a/§12/§13). Ein Ausbau auf 40–60 Begriffe bleibt Stufe 2. `[EINSCHÄTZUNG]`
 - **Admin-SEO-Flotte:** technisch stark; die Grenze „deterministische Technik automatisch, Inhalt nur als Entwurf" ist genau richtig. `[BELEGT: DESIGNSYSTEM §12]`
 - **Kritik:** Der laufende Content-Aufwand (Ratgeber, Lexikon, Ortsseiten mit echtem Inhalt) ist der versteckte Dauer-Zeitfresser und konkurriert mit der Produktion. `[EINSCHÄTZUNG]`
 
@@ -297,7 +324,7 @@ Altname **„Klarweb"** (sartupaketepreise.md: „Seite sagt aktuell Klarweb →
 
 **SO starten (empfohlen):**
 1. **Fundament (1 Woche):** eine Preis-/Scope-Quelle, ein Stack, eine Palette, „Sie", Logo/Schrift – fixieren; Altdateien archivieren.
-2. **Website (2–4 Wochen):** statische Kernwebsite (Kernseiten + **5** Leistungsseiten + 3 Ratgeber + 10–15 Lexikonbegriffe) auf **frei entschiedener** Design-/Technikbasis (s. `CLAUDE_SARTU_WEBSITE_KONZEPT_FINAL.md`), ENDKONTROLLE-Profil SARTU-PUBLIC grün, echte Rechtstexte/NAP, Portal-Screens aus echter UI als „Musteransicht".
+2. **Website (2–4 Wochen):** Kernwebsite (Kernseiten + **5** Leistungsseiten + 3 Ratgeber + 10–15 Lexikonbegriffe) auf **frei entschiedener** Design-/Technikbasis. `[ABGELÖST]` — heute: **PHP-Projekt** nach Portal-Lastenheft §1, Umfang **3 Transparenzseiten + 2 Vergleichsartikel + 8 Lexikonbegriffe**, Designrichtung über das Design-Briefing, ENDKONTROLLE-Profil SARTU-PUBLIC grün, echte Rechtstexte/NAP, Portal-Screens aus echter UI als „Musteransicht".
 3. **Sichtbares Stufe-0-Portal + Verkauf (parallel):** Login/geschützter Zugang, Cockpit mit einem nächsten Schritt, Angebot + Annahme, Rechnung + Mollie-Link, Aufgaben/Upload, Vorschau + Feedback, Freigabe, Domainstatus, **eine** echte Pflegefunktion; **Markteintritt aktiv** (Startregion, Zielkundenliste, Pilotslots); 2–3 Referenzkunden manuell liefern.
 4. **Härten & automatisieren (danach, datengetrieben):** Mollie-Abo, adaptives Onboarding, strukturierte Selbstpflege; dann teilautomatisierte Produktion + SEO-Flotte; zuletzt volle Orchestrierung + programmatische Ortsseiten.
 
@@ -319,7 +346,7 @@ Ein Gegen-Review von Codex hat mehrere berechtigte Lücken aufgedeckt. Nachfolge
 | **Kaltstart-Pricing fehlte** | Richtig und wichtig. Neu: öffentliche Preise **premium halten**, erste Kunden über **verdeckte Pilot-/Referenzslots** (Rabatt nur gegen Case Study/Testimonial/Screenshot-Freigabe). |
 | **Unit Economics zu freundlich** | Richtig. Vollkosten (Akquise, Admin, Support, KI-Fehlversuche, Ausfallpuffer) ergänzt; engere Steuergrenzen 8–10 / 20–24 / 38–45 h. |
 | **Domain-Ende ungeregelt** | Echte Lücke: Kündigung, Zahlungsverzug, Auth-Code, Renewal, Redemption, fehlender Alt-Zugriff. Neu im Masterkonzept §6. |
-| **Launch-Content noch zu groß** | Zugestimmt: 5 statt 7 Leistungsseiten, 3 Ratgeber, 10–15 Lexikonbegriffe zum Start. |
+| **Launch-Content noch zu groß** | Zugestimmt: 5 statt 7 Leistungsseiten, 3 Ratgeber, 10–15 Lexikonbegriffe zum Start. `[ABGELÖST]` — heute 3 Transparenzseiten + 2 Vergleichsartikel + 8 Begriffe. |
 | **FTP vs. Portal unklar** | Zugestimmt: explizit trennen – Website statisch/FTP-fähig, Portal braucht echte App-Umgebung. |
 | **Template-Altlasten** | Zugestimmt: Folex/ScrewFast/AstroWind/Studio/shadcn waren Recherchestände, keine Vorgabe. Freie Entscheidung im neuen Website-Konzept. |
 | **Marktzahlen zu grob** | Konkrete Belege ergänzt (Wyreframe, Für-Gründer, Unicorn Factory, Medienhaus Gersone, W3Techs 41,2 %/59,1 %). |

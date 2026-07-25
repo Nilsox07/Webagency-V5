@@ -40,7 +40,7 @@ merkt es, bevor gebaut wird.
 | Was | Warum |
 |---|---|
 | `design/_verworfen/` | verworfene Entwürfe, keine Vorgabe, auch nicht als Anregung |
-| `CLAUDE_MARKTANALYSE_KRITIK_OPTIMIERUNG.md` | Bewertungsdokument für den Menschen, keine Bauvorlage |
+| `CLAUDE_MARKTANALYSE_KRITIK_OPTIMIERUNG.md` | Bewertung vom 24.07.2026 für den Menschen, **keine Bauvorlage**. Enthält bewusst überholte Empfehlungen (alter Stack, alte Palette, alter Launch-Umfang) — sie dokumentieren die Entscheidungshistorie und sind im Dokument als `[ABGELÖST]` gekennzeichnet. **Wer daraus baut, baut einen überholten Stand.** |
 
 ---
 

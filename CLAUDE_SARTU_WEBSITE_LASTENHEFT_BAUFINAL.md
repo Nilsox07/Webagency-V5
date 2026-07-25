@@ -38,7 +38,7 @@ Adresse: echtes Büro → sichtbare Adresse, reine Postadresse → Service-Area 
 **Was das bedeutet — Sperren, solange `[GESCHAEFTSADRESSE_STATUS]` auf `offen` steht:**
 - **Kein** `LocalBusiness` in strukturierten Daten. Stattdessen `Organization` **ohne** Adressfeld
 - **Kein** Google-Unternehmensprofil, auch nicht vorbereitend
-- **Keine** Ortsseiten im Produktivbau, auch nicht unverlinkt
+- **Keine** Ortsseiten in der produktiven Veröffentlichung, auch nicht unverlinkt
 - **Keine** Ortsnamen in Title, H1, Meta-Description, URL oder Fließtext
 - **Keine** NAP-Aussage — es gibt noch keine Anschrift
 
@@ -674,7 +674,7 @@ Ausbau auf 40–60 Begriffe erst in Stufe 2, gesteuert über Search-Console-Date
 | 404 | H1 `Diese Seite gibt es nicht.` · Text: „Vielleicht wurde die Adresse geändert oder eine alte Seite ist umgezogen." · Links: Startseite, Leistungen, Preise, Bedarf prüfen lassen · echter 404-Status · `noindex`. |
 | Danke-Seiten | `noindex`, klare nächste Erwartung, keine weiteren Angebote. |
 
-### 14a. Startsperre — der Produktivbau muss scheitern, nicht warnen
+### 14a. Startsperre — die Veröffentlichung muss scheitern, nicht warnen
 
 Ein Platzhalter, der versehentlich live geht, ist bei Impressum und Datenschutz ein **Rechtsverstoß**,
 kein Schönheitsfehler. Eine Warnung im Protokoll reicht nicht — sie wird überlesen.
@@ -799,7 +799,7 @@ Die Website ist fertig, wenn **alle** Punkte erfüllt sind:
 - [ ] Kein Netzwerkaufruf des Browsers geht an eine **fremde** Domain — im Netzwerkprotokoll geprüft.
 
 **Ortsseiten**
-- [ ] **Keine** Ortsseite im Produktivbau — auch nicht als unverlinkter Entwurf.
+- [ ] **Keine** Ortsseite in der produktiven Veröffentlichung — auch nicht als unverlinkter Entwurf.
 - [ ] Falls Prototypen existieren: nur in Staging, mit `noindex`, **nicht** in der Sitemap, **nicht** intern verlinkt, `robots.txt` schließt sie aus.
 - [ ] Veröffentlichung erst nach dem Gate in Masterkonzept §16a — die Entscheidung trifft ein Mensch, nicht der Bau.
 
@@ -807,7 +807,7 @@ Die Website ist fertig, wenn **alle** Punkte erfüllt sind:
 - [ ] Impressum und Datenschutz final und vollständig (keine Platzhalter).
 - [ ] AGB entweder final oder nicht verlinkt und `noindex`.
 - [ ] Consent-Banner nur, wenn zustimmungspflichtige Dienste eingebunden sind — sonst keiner.
-- [ ] **Startsperre nachgewiesen (§14a):** Der Produktivbau bricht bei einem Platzhalter in Impressum oder Datenschutz nachweislich ab — einmal absichtlich provoziert und im Bericht belegt.
+- [ ] **Startsperre nachgewiesen (§14a):** Die produktive Veröffentlichung bricht bei einem Platzhalter in Impressum oder Datenschutz nachweislich ab — einmal absichtlich provoziert und im Bericht belegt.
 
 ---
 

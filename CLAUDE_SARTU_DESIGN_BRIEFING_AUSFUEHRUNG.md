@@ -118,6 +118,18 @@ dazukommen muss.
 
 Nicht einsetzen: Vanta.js, Three.js als Dekoration, Barba.js.
 
+> **Einbinderegel für jedes Fremd-JavaScript — ohne Ausnahme.**
+> Erlaubt ist es nur, wenn **alle** vier Punkte zutreffen:
+>
+> 1. Es liegt als **fertige Browser-Datei im Repository** (`/public/assets/js/…`), lizenzkonform selbst gehostet
+> 2. Es funktioniert **ohne npm, ohne `node_modules`, ohne Bundler und ohne Übersetzungsschritt**
+> 3. Es lädt **nichts** von einer fremden Domain — keine CDN-Adresse, keine Schriften, keine Telemetrie
+> 4. **Lizenz und Größe in KB gzip sind dokumentiert** und im JS-Budget verrechnet
+>
+> **Gibt es keine saubere Variante ohne Übersetzungsschritt: nicht verwenden.** Kein „wir bauen es
+> einmal und legen das Ergebnis ab" — das erzeugt eine Datei, die niemand mehr aktualisieren kann.
+> Ein Effekt ist keinen Werkzeugkasten wert; CSS reicht für fast alles (§3.2, erste Zeile).
+
 ### 3.3 Schriften
 
 Nur selbst gehostet, als WOFF2, mit `font-display: swap`.
@@ -193,7 +205,9 @@ Seiten und Kundenbereich gemeinsam genutzt — kein zweites Set für den eingelo
 
 ## 6. Wenn nichts passt
 
-- **Zwei Bibliotheken mischen** ist erlaubt, solange nur **ein** Icon-Set und **ein** Grundraster gelten.
+- **Mehrere Quellen als Referenz** zu lesen ist erwünscht — je mehr gute Vorbilder, desto besser.
+- **Zwei Laufzeit-Bibliotheken** sind höchstens für kleine, dokumentierte JavaScript-Effekte zulässig, jede einzeln nach der Einbinderegel in §3.2 geprüft und im JS-Budget verrechnet. **Komponentenbibliotheken kommen nie als Laufzeit dazu** (§3.1).
+- Unabhängig davon gilt: nur **ein** Icon-Set und **ein** Grundraster für die gesamte Seite.
 - **Selbst bauen** ist der Normalfall für alles Sartu-Spezifische (Preistabelle, Portal-Vorschau, Bedarfsscheck).
 - **Nicht** irgendetwas nehmen, das die Prüfliste reißt, nur um schneller fertig zu sein.
 - Kommst du nicht weiter: dokumentiere das Problem und lege es vor, statt eine schlechte Lösung einzubauen.
