@@ -393,7 +393,35 @@ Die Minutenangabe kommt aus dem Paket (Start/Wachstum/Platzhirsch) und ist als S
 > **Kundenbereich** — nie App, Software, SaaS, Plattform, Dashboard oder Control-Plane. Der Kunde soll
 > denken „ich melde mich an und sehe mein Projekt", nicht „ich muss ein Werkzeug lernen".
 
-**Kundenseiten-Tech:** **PHP, serverseitig gerendert, öffentliche Seiten cachebar** — dieselbe Bauweise wie SARTUs eigene Website. 1 Repository pro Kunde, gemeinsamer versionierter **SARTU-Starter** + versionierte **Designwerte**. Strukturierte Inhalte statt freiem HTML. Formulare/Dynamik über eng begrenzte Portal-APIs. Jede Produktion reproduzierbar, testbar, **exportierbar, rückrollbar**. Der Kundenstand muss **auch nach Vertragsende baubar** sein (notwendige Komponenten eingefroren/vendort; Master-Designsystem/Generatoren/Prompts bleiben intern).
+**Kundenseiten-Tech:** **PHP, serverseitig gerendert, öffentliche Seiten cachebar** — dieselbe Bauweise wie SARTUs eigene Website. 1 Repository pro Kunde, gemeinsamer versionierter **SARTU-Starter** + versionierte **Designwerte**.
+
+### Zwei getrennte Wege — und der Grund ist rechtlich, nicht ästhetisch
+
+| | **SARTUs eigene Website und Kundenbereich** | **Kundenseiten** |
+|---|---|---|
+| Wie sie entstehen | **Übernehmen und portieren** aus 1–3 kuratierten Quellen (Design-Briefing §3.1) | **Erzeugt aus dem SARTU-Starter** und dem Designsystem |
+| Fremde Komponenten | zulässig nach Lizenzprüfung, auch gekaufte | **nur**, wenn ihre Lizenz die Weitergabe **im Bausatz** erlaubt |
+| Was das praktisch heißt | MIT, Apache-2.0, CC0 — und gekaufte Sammlungen, sofern erworben | **ausschließlich** MIT, Apache-2.0, CC0 und Vergleichbares |
+
+**Der Grund ist keine Geschmacksfrage.** Gekaufte Komponentenlizenzen erlauben regelmäßig
+Kundenprojekte, verbieten aber ausdrücklich, daraus einen wiederverwendbaren Bausatz zu machen.
+Die Tailwind-Plus-Lizenz nennt es wörtlich: *„Creating a theme, template, or project starter kit
+using the components … and making it available either for sale or for free."* — untersagt.
+Ein SARTU-Starter **ist** ein Starter-Kit. *(Geprüft 25.07.2026: https://tailwindcss.com/plus/license)*
+
+**Konsequenz für den Starter:** Er enthält nur Bausteine, deren Lizenz die Weitergabe erlaubt, oder
+solche, die vollständig selbst geschrieben wurden. Jeder Baustein trägt seine Lizenzangabe mit —
+das ist zugleich die Grundlage für den zugesagten **Export nach Vertragsende** (§ Rechte/Export).
+Ein Kunde, der seine Seite mitnimmt, muss sie weiterbetreiben dürfen.
+
+**Konsequenz für Kundenseiten:** Sie werden **nicht** aus fremden Bibliothekskomponenten
+zusammengesetzt, sondern aus dem SARTU-Starter erzeugt. Fremde Muster dürfen den Starter
+beeinflussen — aber der Weg führt immer **durch** den Starter, nie daran vorbei. Sonst entsteht bei
+jedem Kunden eine eigene Lizenzlage, die niemand mehr überblickt.
+
+**Praktische Regel für die erste Zeit:** Solange der Starter noch entsteht, gilt für Kundenseiten
+im Zweifel **selbst schreiben**. Eine unklare Lizenz in einem Kundenprojekt ist teurer als eine
+Stunde Handarbeit — sie trifft den Kunden, und damit die Betriebspauschale. Strukturierte Inhalte statt freiem HTML. Formulare/Dynamik über eng begrenzte Portal-APIs. Jede Produktion reproduzierbar, testbar, **exportierbar, rückrollbar**. Der Kundenstand muss **auch nach Vertragsende baubar** sein (notwendige Komponenten eingefroren/vendort; Master-Designsystem/Generatoren/Prompts bleiben intern).
 
 **Produktionspipeline (Zielbild, ab Ausbaustufe 2/3):**
 1. Portal friert **versionierte Spezifikation** ein (`site-spec.json`, `business.json`, `services.json`, `proof.json`, `content-plan.json`, `brand.json`, `legal.json`, `seo.json`, `design-manifest.json`, `acceptance.json` – jeweils mit Schema-Version, Projekt-ID, Quelle, Freigabestatus).

@@ -70,6 +70,16 @@ als Zielsystem · **kein** Supabase · **kein** Build-Schritt fürs Frontend · 
 > Referenz dienen — Ablauf, Felder, Texte. Ihr **Code** wird nicht übernommen. Was du daraus
 > verwendest, steht begründet in `IMPLEMENTATION_PLAN.md`.
 
+**Zur visuellen Ebene — das ist ausdrücklich kein „bau was Schönes":** Du wählst **1–3 sehr gute,
+sauber lizenzierte Quellen** und **übernimmst deren konkreten Aufbau** — Markup, CSS-Ansatz,
+Zustände, Interaktionslogik. Angepasst werden Farben, Schriften, Abstände, Texte. Utility-Klassen
+werden dabei in **eigenes CSS mit zentralen Variablen** übersetzt, weil es keinen Build-Schritt gibt.
+Vollständig in `CLAUDE_SARTU_DESIGN_BRIEFING_AUSFUEHRUNG.md` §3.1 — **vor** dem ersten Entwurf lesen.
+
+**Achtung Lizenz (§2.1 dort):** Was in SARTUs eigener Website zulässig ist, ist nicht automatisch im
+späteren Kundenstarter zulässig. Bestimme je Quelle die Stufe, **bevor** du Code übernimmst, und
+trage jedes Teil in die Herkunftsliste ein.
+
 **Sprachregel nach außen:** Kundenbereich, Ihr Bereich, Anmeldung. **Nie** App, Software, SaaS,
 Plattform, Dashboard, Control-Plane. Der Kunde soll denken „ich melde mich an und sehe mein Projekt",
 nicht „ich muss ein Werkzeug lernen".
