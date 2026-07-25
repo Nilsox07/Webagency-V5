@@ -138,7 +138,7 @@ Fazit: **Tragfähig – aber nur mit umgekehrter Reihenfolge und drastischer MVP
 Drei Namensstände (Basis/Pro/Platin vs. Start/Wachstum/Platzhirsch), drei Preisstufen, drei Betriebsmodelle. **`SARTU_ENDKONTROLLE_WEBSEITEN.md` markiert die alten Reste selbst als „zu entfernen".** → **Kritisch:** ohne eine einzige Preis-/Scope-Quelle (`pricing.json` + Diff-Test) baut ein Umsetzer das Falsche.
 
 ### 4.2 DREI Tech-Stacks `[BELEGT]`
-- **Gebaut (Juni):** statisch HTML/CSS/JS auf **Vercel + Supabase** (Auth/PostgreSQL/Storage, Frankfurt), RLS, live getestet. `[SartuProjektZusammenfassung]`
+- **Gebaut (Juni):** statisch HTML/CSS/JS auf **Vercel + Supabase** (Auth/PostgreSQL/Storage, Frankfurt), RLS, live getestet. `[SartuProjektZusammenfassung]` — *historischer Stand; die Zielarchitektur ist inzwischen PHP.*
 - **Kanonisch spezifiziert (Juli):** **Node + PostgreSQL + Redis + S3 (DE/EU)** Control-Plane; Kundenseiten **Astro** static via isolierter Agenten-Worker. `[DESIGNSYSTEM §2]` (Portal-Template-Doku: **Next.js + shadcn**.)
 - **Generisches Website-Lastenheft:** **PHP + Flat-File-JSON + Matomo** auf All-Inkl-Shared-Hosting mit **WordPress-ähnlichem WYSIWYG-Admin**. `[lastenheft_webseite.md]` – widerspricht direkt „kein freier Editor / individuell programmiert".
 → Der PHP-Ansatz und die Supabase-Variante sind gegenüber der Node/Astro-Spezifikation **abgelöst**. Aber es existiert bereits ein **gebautes Supabase-Portal** vs. ein **spezifiziertes Node-Portal** – ein echter Fork mit Sunk-Cost. (Auflösung: `MASTERKONZEPT §12/§25`.)
@@ -233,7 +233,7 @@ Altname **„Klarweb"** (sartupaketepreise.md: „Seite sagt aktuell Klarweb →
 - **Baukasten-Gefahr:** gut vermieden – typisierte Datensätze statt freiem Editor, Vorschau/Version/Freigabe. `[BELEGT]`
 - **Überforderungs-Gefahr Kunde:** gering, weil „ein nächster Schritt" statt Aufgabenwand. Gut. `[BELEGT: DESIGNSYSTEM §8]`
 - **Empfehlung:** Portal in **Stufen** (s. Masterkonzept §23). Minimal-Portal (Anfrage-Inbox, Angebot, Mollie-Link, Upload, Vorschau) reicht, um die ersten Kunden zu bedienen. Alles andere folgt datengetrieben.
-- **Sunk-Cost Supabase:** Der gebaute Supabase-Stand (PostgreSQL + Auth + Storage in Frankfurt, RLS) erfüllt die Kernanforderung bereits. Ihn für Stufe 0/1 **behalten** statt sofort auf Node neu zu bauen. `[EINSCHÄTZUNG]`
+- ~~**Sunk-Cost Supabase:** Den gebauten Supabase-Stand für Stufe 0/1 behalten statt auf Node neu zu bauen.~~ **Überholt (25.07.2026):** Die Zielarchitektur ist ein modulares PHP-Projekt (Masterkonzept, Abschnitt Tech-Stack-Entscheidung). Der Prototyp bleibt **fachliche Referenz** — Ablauf, Felder, Texte —, sein Code wird nicht übernommen. `[EINSCHÄTZUNG, ABGELÖST]`
 
 ---
 
@@ -274,7 +274,7 @@ Altname **„Klarweb"** (sartupaketepreise.md: „Seite sagt aktuell Klarweb →
 
 1. **Reihenfolge umdrehen: verkaufen vor Vollausbau.** 2–3 Referenzkunden manuell (KI-assistiert) liefern; Minimal-Portal genügt. `[→ Masterkonzept §23]`
 2. **Eine Wahrheitsquelle erzwingen.** `pricing.json`/`prices.js` + Diff-Test; `sartupaketepreise.md` und `sartulastenheftwebsite.md` als **veraltet** nach `konzepte/_archiv/`.
-3. **Stack festnageln:** Website static-first; **Portal: echte App-Umgebung, Framework offen** (shadcn/ui-Komponenten optional, **kein** `dashboard-01`-Template); Backend PostgreSQL; Supabase-Stand für Stufe 0/1 behalten, Node-Control-Plane erst ab Stufe 2.
+3. ~~**Stack festnageln:** Website static-first, Portal-Framework offen, Backend PostgreSQL, Supabase für Stufe 0/1.~~ **Erledigt und anders entschieden (25.07.2026):** ein modulares PHP-Projekt, öffentliche Seiten unter `/`, Kundenbereich unter `/portal/`, interner Bereich unter `/admin/`, MySQL/MariaDB, serverseitig gerendert, kein Build-Schritt. Verbindlich: `CLAUDE_SARTU_PORTAL_LASTENHEFT_BAUFINAL.md` §1.
 4. **Design vereinheitlichen:** eine Palette (Ink/Ivory/Teal + Oxide/Rostrot-Akzent), **Neon-Grün streichen**, „Sie" durchziehen, Schrift + Logo-Favorit fixieren.
 5. **USP umformulieren:** „kein WordPress" → „keine Update-/Plugin-/Sicherheitssorgen **für Sie**; Betrieb inklusive". **Nie „wartungsarm"** (entwertet den Schutz). Portal + Festpreis als Haupt-USP.
 6. **Start-Paket schärfen** gegen Gratis-Wettbewerb (Ergebnis + Betrieb betonen) oder Wachstum als eigentlichen Einstieg framen.

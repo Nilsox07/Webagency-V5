@@ -122,7 +122,7 @@ Hilfsfunktionen, Datenbankschicht). Existiert es noch nicht, baust du es nach Po
 | Struktur, Seiten, Navigation, alle Texte | echte Screenshots des Kundenbereichs einsetzen |
 | Bedarfsscheck vollständig, inklusive Fassung ohne JavaScript | **Livegang** |
 | SEO-Grundlage, Sitemap, strukturierte Daten | |
-| Designvarianten und Entscheidung | |
+| Designvarianten nach `CLAUDE_SARTU_DESIGN_BRIEFING_AUSFUEHRUNG.md` und die Entscheidung | |
 
 **Die Sperre ist der Livegang, nicht der Bau.** Eine Website, die mit einem Kundenbereich wirbt und
 dafür eine erfundene Oberfläche zeigt, macht eine Falschaussage über das eigene Produkt. Reservierte

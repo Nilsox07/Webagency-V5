@@ -40,7 +40,8 @@ SARTU **verkauft Websites an Kunden weiter**. Was du einsetzt, muss das erlauben
 
 ### 2.2 Technik und Leistung
 
-- Statisch ausgeliefert (Astro oder gleichwertig), FTP-/CDN-fähig.
+- **Serverseitig gerendert im bestehenden PHP-Projekt.** Öffentliche Seiten sind cachebar und dürfen als statische Antwort ausgeliefert werden — es gibt aber **keinen Astro-, Node- oder Frontend-Build als Zielsystem** (Portal-Lastenheft §1).
+- **Kein Build-Schritt fürs Frontend.** CSS und JS werden so ausgeliefert, wie sie im Repository liegen. Was einen Übersetzungsvorgang braucht, kommt nicht in Frage.
 - **Kein externes CDN** für Schriften, CSS, JS oder Icons — alles selbst gehostet (Datenschutz, Tempo, Ausfallsicherheit).
 - **JS-Budget: ≤ 75 KB gzip Startseite, ≤ 40 KB Unterseiten.** Gemessen, nicht geschätzt.
 - Ziele **im Labor, vor Livegang**: LCP < 2,5 s · TBT < 200 ms · CLS < 0,1, gemessen mobil. **Echtes INP** gibt es erst aus Felddaten nach dem Livegang — in Phase 1 also nicht behaupten.
@@ -56,7 +57,7 @@ SARTU **verkauft Websites an Kunden weiter**. Was du einsetzt, muss das erlauben
 
 ### 2.4 Positionierung — was die Marke beschädigen würde
 
-SARTU verkauft „individuell programmiert, kein Baukasten". Die eigene Website darf deshalb **nicht erkennbar aus einem Template** stammen.
+SARTU verkauft „individuell programmiert, kein Baukasten". Die eigene Website darf deshalb **nicht erkennbar aus einem Template** stammen — und aus demselben Grund **kein fremdes Komponentensystem als Laufzeitabhängigkeit** mitbringen. Wer „ohne Baukasten" verkauft und dabei erkennbar einen zusammensteckt, verliert das Argument.
 
 Nicht verwenden:
 - sichtbare Template-Handschrift (bekannte Hero-Layouts, unveränderte Beispielsektionen)
@@ -79,23 +80,38 @@ Prüfe jede Quelle selbst auf Aktualität — Projekte veralten, Lizenzen änder
 
 ### 3.1 Komponenten und Grundgerüst
 
-| Art | Kandidaten zum Prüfen |
-|---|---|
-| **Unstyled / Headless** (Barrierefreiheit geschenkt, kein Template-Look) | Radix Primitives · Headless UI · Ark UI · React Aria |
-| **Gestylte Systeme** (nur als Basis, muss umgestaltet werden) | shadcn/ui · Preline · Flowbite · daisyUI · HyperUI · Park UI |
-| **Astro-Ökosystem** | offizielles Astro-Themes-Verzeichnis · Astro-Integrationen |
-| **CSS-Grundlagen** | Open Props · moderne CSS-Resets |
+> **Die wichtigste Unterscheidung in diesem Abschnitt:** Fast alle bekannten Komponentensysteme
+> setzen React, Vue oder einen Build-Schritt voraus. Das ist hier **kein Zielsystem** (§2.2).
+> Sie bleiben trotzdem wertvoll — als **Referenz**, nicht als Abhängigkeit.
 
-**Bevorzuge unstyled/headless.** Sie liefern Tastaturbedienung und ARIA korrekt, ohne fremde Optik mitzubringen — genau die Kombination, die SARTU braucht.
+| Rolle | Was | Was du davon nimmst |
+|---|---|---|
+| **Referenz für Barrierefreiheit und Interaktion** | Radix Primitives · Headless UI · Ark UI · React Aria | **Verhalten und ARIA-Muster:** Welche Rollen, welche Tastaturwege, welche Zustände? Lies die Dokumentation und den Quelltext. **Nicht** den Code einbinden |
+| **Referenz für Optik und Aufbau** | shadcn/ui · Preline · Flowbite · daisyUI · HyperUI · Park UI · Astro-Themes | **Ideen zu Abständen, Hierarchie, Zustandsdarstellung.** Nie ein komplettes Layout übernehmen (§2.4) |
+| **Direkt einsetzbar** | Open Props · moderne CSS-Resets · natives HTML | **Ja** — reines CSS ohne Abhängigkeit |
+
+**Was tatsächlich gebaut wird:** semantisches HTML in PHP-Views (Layouts, Partials, Komponenten aus
+`/app/views`), CSS mit zentralen Variablen, und kleine eigene JavaScript-Module dort, wo sie nötig
+sind. Nichts davon braucht einen Übersetzungsvorgang.
+
+**Warum das kein Rückschritt ist:** Die genannten Systeme sind vor allem deshalb wertvoll, weil sie
+**Barrierefreiheit richtig gelöst** haben — eine Dialog-Komponente mit korrekter Fokusfalle, ein
+Akkordeon mit richtigen ARIA-Attributen. Dieses Wissen ist übertragbar; der Code ist es nicht.
+Ein Akkordeon in 30 Zeilen HTML und CSS ist genauso barrierefrei wie eines aus einer Bibliothek —
+wenn man weiß, worauf es ankommt. Genau dafür liest du sie.
+
+**Regel:** Findet sich für ein Interaktionsmuster keine vertretbare eigene Umsetzung, ist das ein
+Hinweis, dass das Muster für diese Website zu kompliziert ist — nicht, dass eine Bibliothek
+dazukommen muss.
 
 ### 3.2 Bewegung
 
 | Werkzeug | Wofür es sich lohnt |
 |---|---|
 | **CSS-Transitions/Animations** | erste Wahl, 0 KB — deckt die meisten Fälle ab |
-| **View Transitions API** (nativ) | Seitenwechsel, in Astro eingebaut |
+| **View Transitions API** (nativ) | Seitenwechsel — **nur die native Browser-API**, ohne Framework-Abhängigkeit. Progressiv: Wo sie fehlt, wechselt die Seite normal |
 | **GSAP + ScrollTrigger** | verkettete, an den Scroll gebundene Sequenzen. Lizenz und Größe selbst prüfen |
-| **Motion** | Zustände und Microinteractions, vor allem im Portal |
+| **Motion** | Zustände und Microinteractions, vor allem im Kundenbereich. Nur die Variante ohne Build-Schritt |
 | **Lenis** | sanftes Scrollen, nur Marketingseite, nie im Portal |
 | **auto-animate** | einfache Listenwechsel |
 | **Rive** | nur wenn eine Animation eine echte Idee trägt |
@@ -138,7 +154,7 @@ Für **jedes** Teil, das du übernehmen willst:
 - [ ] **Gepflegt** — letzte Änderung nachvollziehbar aktuell, keine offenen Sicherheitsprobleme
 - [ ] **Größe** gemessen und im Budget
 - [ ] **Barrierefrei** — Tastatur, Fokus, ARIA belegt, nicht nur behauptet
-- [ ] **Passt technisch** — funktioniert statisch, erzwingt kein schweres Framework
+- [ ] **Passt technisch** — läuft **ohne Build-Schritt** und **ohne Framework-Laufzeit**. Erzwingt es React, Vue, einen Bundler oder einen Paketmanager zur Laufzeit: **nicht einsetzen**, nur als Referenz lesen (§3.1)
 - [ ] **Umgestaltbar** — Farben, Schriften und Abstände über Variablen änderbar
 - [ ] **Nicht wiedererkennbar** — man sieht dem Ergebnis die Herkunft nicht an
 - [ ] **Ohne externe Verbindungen** zur Laufzeit
@@ -164,8 +180,14 @@ Der häufigste Fehler ist, korrekte Komponenten zusammenzusetzen und trotzdem ei
 **Wenn eine Stelle leer wirkt, ist die Antwort fast nie „noch ein Element", sondern:** größerer Typ-Kontrast, mehr Weißraum oder ein Inhalt, der wirklich hingehört.
 
 **Entscheidungsreihenfolge beim Bauen einer Komponente:**
-natives HTML/CSS → unstyled Primitive → gestylte Komponente vollständig umgestaltet → Eigenbau.
-**Nie:** ein komplettes Template-Layout übernehmen.
+
+1. **Natives HTML/CSS** — reicht in den allermeisten Fällen (`<details>`, `<dialog>`, `<input>`-Typen)
+2. **Eigene PHP-Komponente in `/app/views/components`** — semantisches HTML, ARIA-Muster aus der Referenzlektüre (§3.1), CSS mit zentralen Variablen
+3. **Kleines eigenes JavaScript-Modul**, nur wo das Verhalten es wirklich verlangt
+
+**Nie:** ein komplettes Template-Layout übernehmen. **Nie:** ein Komponentensystem als
+Laufzeitabhängigkeit einbinden (§3.1). Jede Komponente entsteht **einmal** und wird von öffentlichen
+Seiten und Kundenbereich gemeinsam genutzt — kein zweites Set für den eingeloggten Bereich.
 
 ---
 
@@ -182,11 +204,13 @@ natives HTML/CSS → unstyled Primitive → gestylte Komponente vollständig umg
 
 **Zwei bis drei Vorschläge**, jeder als **klickbare Seite** mit den echten Startseiten-Inhalten aus dem Lastenheft — nicht als Beschreibung, nicht als Farbtafel.
 
+**Gebaut werden sie als echte Seiten im Projekt** — PHP-View, Layout, Partials, CSS mit zentralen Variablen, so wie der spätere Stand aussehen soll. **Keine** losen HTML-Dateien zum Wegwerfen: Der gewählte Vorschlag soll weiterverwendet und nicht nachgebaut werden. Die beiden anderen Varianten werden nach der Entscheidung gelöscht.
+
 Je Vorschlag:
 
 1. **Ein Satz zur Haltung** — wie wirkt dieser Vorschlag und auf wen zielt er?
 2. **Herkunftsliste:** jedes eingesetzte Teil mit Name, Version, **Lizenz** und Fundstelle.
-3. **Messwerte:** JS in KB gzip, CSS in KB, LCP/CLS mobil.
+3. **Messwerte:** JS in KB gzip, CSS in KB, LCP und CLS mobil im Labor (TBT statt INP, §2.2).
 4. **Prüfliste aus Abschnitt 4**, abgehakt.
 5. **Was du bewusst weggelassen hast** und warum.
 6. **Was noch fehlt**, um daraus die fertige Seite zu machen.

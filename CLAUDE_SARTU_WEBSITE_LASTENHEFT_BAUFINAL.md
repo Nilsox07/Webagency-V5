@@ -679,7 +679,7 @@ Ausbau auf 40–60 Begriffe erst in Stufe 2, gesteuert über Search-Console-Date
 Ein Platzhalter, der versehentlich live geht, ist bei Impressum und Datenschutz ein **Rechtsverstoß**,
 kein Schönheitsfehler. Eine Warnung im Protokoll reicht nicht — sie wird überlesen.
 
-**Der Produktivbau (`NODE_ENV=production` bzw. der Veröffentlichungsbefehl) bricht mit Fehler ab, wenn
+**Der Veröffentlichungsvorgang für Produktion (`APP_ENV=production`) bricht mit Fehler ab, wenn
 eine dieser Bedingungen zutrifft:**
 
 1. `/impressum` oder `/datenschutz` enthält die Platzhaltermarkierung `[[PLATZHALTER]]` oder ist kürzer als 500 Zeichen
@@ -690,13 +690,13 @@ eine dieser Bedingungen zutrifft:**
 6. Eine Datei außerhalb von `/public` ist über den Webserver erreichbar
 7. Ein Ortsname erscheint in Title, H1 oder URL, obwohl `SARTU_ENTSCHEIDUNGEN_OFFEN.md` §1 auf `offen` steht
 
-**Fehlermeldung im Bau** (Beispiel, muss die Ursache benennen):
+**Fehlermeldung** (Beispiel, muss die Ursache benennen):
 ```
-BAU ABGEBROCHEN: /datenschutz enthaelt noch [[PLATZHALTER]].
+VEROEFFENTLICHUNG ABGEBROCHEN: /datenschutz enthaelt noch [[PLATZHALTER]].
 Rechtstexte muessen final sein, bevor die Seite oeffentlich geht.
 ```
 
-**Der Staging-Bau bricht nicht ab**, sondern listet dieselben Punkte als Warnung auf. So lässt sich
+**Der Staging-Vorgang bricht nicht ab**, sondern listet dieselben Punkte als Warnung auf. So lässt sich
 alles vorbereiten und ansehen, ohne dass etwas Unfertiges live gehen kann.
 
 Alle Platzhalter tragen **eine** einheitliche, suchbare Markierung: `[[PLATZHALTER]]` beziehungsweise

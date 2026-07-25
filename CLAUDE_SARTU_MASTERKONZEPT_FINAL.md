@@ -987,7 +987,7 @@ Kostet ~15 Minuten, positioniert SARTU als ehrlichen Fachmann und funktioniert n
 3. **Eine** Palette + Ansprache („Sie") + Logo-Favorit fixieren; verbotene Wörter-/Anti-KI-Regeln als Lint/QA-Check.
 
 **B. Website launchen (2–4 Wochen):**
-4. **Designrichtung final wählen** (3 Varianten in `CLAUDE_SARTU_WEBSITE_KONZEPT_FINAL.md`), dann Basis aufsetzen: eigenes Layout **oder** neu begründete Template-Basis; globales Layout + Design-Tokens + Komponenten.
+4. **Designrichtung final wählen** nach `CLAUDE_SARTU_DESIGN_BRIEFING_AUSFUEHRUNG.md`: 2–3 klickbare Startseitenvarianten mit **echten** Texten werden vorgelegt, ein Mensch entscheidet. Danach **eigenes PHP-Layout** aufsetzen — globale Layouts, Partials, Komponenten, zentrale Design-Variablen. **Keine Template-Basis als Zielarchitektur** — SARTU verkauft „kein Baukasten“ und darf die eigene Seite nicht erkennbar zusammenstecken.
 5. Kernseiten + **5** Leistungsseiten (GEO-Template) + **3 Transparenzseiten** + **2** Ratgeber + **8** Lexikonbegriffe bauen; **echte** NAP/Impressum (nach Kanzlei), sitemap/robots/llms.txt/OG, Search Console + Bing.
 6. Portal-Screens als **Musteransicht** produzieren – aus der **echten** Stufe-0-UI, nie als gezeichnetes Fake-Dashboard.
 7. ENDKONTROLLE-Profil **SARTU-PUBLIC** vollständig grün (keine Add-on-/Minuten-/Alt-Preis-Reste, keine Privatkunden-Formulierungen, kein „wartungsarm").
@@ -1009,7 +1009,7 @@ Kostet ~15 Minuten, positioniert SARTU als ehrlichen Fachmann und funktioniert n
 4. **Startregion und Geschäftsadresse — offen.** Bestimmt Ortsseiten, `LocalBusiness`, Unternehmensprofil, lokale Keywords und die Impressumsanschrift. Werte und Sperren in `SARTU_ENTSCHEIDUNGEN_OFFEN.md` §1, Folgen in §23a.1. **Blockiert den Bau nicht**, blockiert den lokalen Launch.
 5. **Solo vs. kleines Team – ehrliche Selbstdarstellung** und daraus abgeleitete **Kapazität/Projekte-pro-Monat** (bestimmt, ob der Portal-Vollausbau realistisch neben der Produktion läuft oder Hilfe/Outsourcing braucht).
 6. **AGB/Garantie:** ob überhaupt eine (sauber formulierte) Zufriedenheitszusage als Verkaufsargument gewünscht ist – sonst weglassen.
-7. **Designrichtung final:** eine der drei Varianten aus `CLAUDE_SARTU_WEBSITE_KONZEPT_FINAL.md` – oder eigenes Layout vs. neu recherchierte Template-Basis.
+7. **Designrichtung final:** eine der 2–3 Varianten aus dem Design-Briefing. **Keine** Template-Basis — die Umsetzung ist immer ein eigenes PHP-Layout mit zentralen Variablen (`CLAUDE_SARTU_DESIGN_BRIEFING_AUSFUEHRUNG.md`).
 8. **Pilotkonditionen:** Werden 2–3 verdeckte Referenzslots angeboten – als Rabatt (5.900–6.500 € statt 7.900 €) oder als Zusatzwert zum vollen Preis?
 9. **Hosting-Anbieter und Tarif:** offen (`SARTU_ENTSCHEIDUNGEN_OFFEN.md` §4). Die Anforderungen stehen fest (Portal-Lastenheft §1.4). **Vor** der Umsetzung praktisch prüfen: Kommt eine Testmail im Posteingang an, nicht im Spam? Läuft ein Cronjob? Fehlt eines von beidem, ist der Tarif ungeeignet.
 10. **Eigenes finales Website-Lastenheft** vor dem Bau erstellen (empfohlen: ja – `CLAUDE_SARTU_WEBSITE_KONZEPT_FINAL.md` ist die Grundlage dafür).
