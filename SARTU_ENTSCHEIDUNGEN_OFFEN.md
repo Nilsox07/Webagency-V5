@@ -90,10 +90,39 @@ Recherche → Prüfliste → **2–3 klickbare Startseitenvarianten mit echten T
 **Abgelöst: das Terrakotta `#c1452f`.** Es erreicht als Linkfarbe nur **4,36:1** und verfehlt damit
 die 4,5:1 aus §2.3 — es war nicht nur Geschmackssache, sondern nicht regelkonform.
 
-**Warum genau ein Akzent:** Der erste Entwurf hatte **zwei** — Terrakotta auf den Knöpfen, Petrol auf
-Punkten, Aufzählungszeichen und Labels. Zwei Akzente ohne Rangordnung sind ein wesentlicher Grund,
-warum die Farbigkeit unruhig wirkte. Die Rangordnung entsteht ab jetzt über **Fläche und Gewicht**,
-nicht über einen zweiten Farbton.
+**Warum nicht zwei gleichrangige Akzente:** Der erste Entwurf hatte Terrakotta auf den Knöpfen und
+Petrol auf Punkten, Aufzählungszeichen und Labels — **zwei Farben für dieselbe Aufgabe**, ohne
+Rangordnung. Das war ein wesentlicher Grund für die unruhige Farbigkeit.
+
+### Zweite Farbe — Lime, aber nur in einer Rolle
+
+Geprüft 25.07.2026. **Lime kann keine zweite Handlungsfarbe sein**, das ist keine Geschmacksfrage:
+
+| Rolle | Wert | |
+|---|---|---|
+| Lime als Link-/Textfarbe auf hellem Grund | 1,30:1 | **fällt durch** (4,5 nötig) |
+| Heller Text auf einem Lime-Knopf | 1,44:1 | **fällt durch** |
+| Dunkler Text auf einer Lime-Fläche | 12,48:1 | sehr gut |
+| Lime als Signal auf dunklem Abschnitt | 12,48:1 | sehr gut |
+
+Daraus folgt eine **Rollentrennung statt einer Rangordnung** — und die macht die Oberfläche
+gleichzeitig verständlicher:
+
+| Farbe | Hex | Rolle | Regel |
+|---|---|---|---|
+| **Petrol** | `#1a6165` | **Handlung** | Alles Anklickbare: Knöpfe, Links, Fokusring. **Immer** |
+| **Lime** | `#a3e635` | **Markierung** | Empfehlungs-Badge, hervorgehobene Fläche, Signalpunkt auf dunklem Grund. **Nie anklickbar** |
+
+**Die Regel in einem Satz: Was petrolfarben ist, kann man anklicken. Was limefarben ist, nicht.**
+Damit ist die zweite Farbe kein Wettbewerb um Aufmerksamkeit, sondern eine Information.
+
+**Harte Grenzen für Lime:**
+
+- **Nie** als Text- oder Linkfarbe auf hellem Grund
+- **Nie** als Knopffläche
+- Nur als **Fläche mit dunklem Text darauf** (`--ink`) oder als Signal auf dunklem Abschnitt
+- Eine Lime-Fläche auf Creme braucht eine **Umrandung** — der Helligkeitsunterschied beträgt nur 1,30:1, ohne Rand verläuft die Kante
+- **Höchstens drei Vorkommen je Seite.** Lime ist laut; sparsam eingesetzt wirkt es entschieden, flächig eingesetzt wirkt es nach Energiegetränk
 
 **Nicht gewählt und warum:** Marineblau hätte die besten Kontrastwerte (10:1), ist aber der
 Vorgabewert praktisch jeder Agentur- und Anbieterseite — für ein Projekt, das sich gerade vom
@@ -151,4 +180,4 @@ Geschäftsentscheidung mit Aufwand und Außenwirkung — keine Gestaltungsfrage.
 |---|---|---|
 | 25.07.2026 | Entwicklungsumgebung: PHP+Composer verbindlich, Datenbank nachreichbar; Weg A oder B frei (§4) | Betreiber |
 | 25.07.2026 | Designrichtung: weichere Formsprache, etwas Verspieltheit, Bewegung ja, Glaseffekt nein (§3) | Betreiber |
-| 25.07.2026 | Akzentfarbe: Petrol `#1a6165` als **einziger** Akzent, Terrakotta abgelöst (§3) | Betreiber |
+| 25.07.2026 | Akzentfarbe: Petrol `#1a6165` für Handlung, Lime `#a3e635` für Markierung; Terrakotta abgelöst (§3) | Betreiber |
