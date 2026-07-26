@@ -313,6 +313,45 @@ sind, liest sich das wie eine Liste, die jemand abgearbeitet hat.
 das mindestens vier verschiedene Muster. Ein Abschnitt darf ruhig einmal die Breite sprengen, einmal
 ganz schmal stehen, einmal nur aus einem Satz bestehen.
 
+### 3.8 Überschriften — Zeilenzahl ist eine Folge, keine Ursache
+
+**Schauüberschriften laufen über höchstens drei Zeilen.** Vier ist die absolute Obergrenze, und sie
+gilt nur für den Aufmacher. Alles darüber wird nicht gelesen, sondern überflogen — und wirkt wie ein
+Absatz, dem jemand versehentlich Überschriftengröße gegeben hat.
+
+**Die Ursache ist fast nie der Text.** „Individuell programmierte Firmenwebsites zum Festpreis." sind
+55 Zeichen — das sind zwei Zeilen bei vernünftigem Satz. Werden sechs Zeilen daraus, stehen dort neun
+Zeichen je Zeile, und das Verhältnis von Schriftgröße zu Spaltenbreite ist kaputt, nicht die Copy.
+
+**Messbare Regel: 25 bis 40 Zeichen je Zeile.** Unter 20 ist die Spalte zu schmal oder die Schrift zu
+groß. Zu beheben in dieser Reihenfolge:
+
+1. Spalte breiter — eine Schauüberschrift darf über die volle Satzbreite laufen
+2. Schrift kleiner — groß wirkt eine Überschrift durch **Kontrast** zum Fließtext, nicht durch
+   absolute Größe
+3. Umbruch von Hand setzen, damit die Zeile an einer sinnvollen Stelle bricht
+
+**Was nicht erlaubt ist: den Text kürzen.** Die Überschriften stehen wörtlich im Website-Lastenheft
+§5 und sind abgestimmt. Wer sie zurechtstutzt, damit der Satz aufgeht, löst ein Gestaltungsproblem
+auf Kosten der Aussage. Passt ein Text auch bei voller Breite und angemessener Größe nicht in drei
+Zeilen: **melden**, nicht selbst umschreiben.
+
+### 3.9 Schaltflächen — die verräterischste Einzelheit
+
+Die vollrunde Pillenform, gern als Paar aus gefüllter und umrandeter Fläche nebeneinander, ist eines
+der am sichersten wiedererkennbaren Merkmale erzeugter Seiten. Sie fällt besonders auf, wenn der Rest
+der Seite scharfkantig ist — dann ist die Schaltfläche das einzige Element mit einer fremden
+Formsprache.
+
+- [ ] **Die Rundung stammt aus derselben Skala wie alles andere.** Hat kein anderes Element der
+      Seite eine starke Rundung, hat die Schaltfläche auch keine. Eine Seite mit Haarlinien und
+      scharfen Ecken verträgt keine Pillen
+- [ ] **Höhe und Innenabstand kommen aus der Abstandsskala**, nicht aus einer übernommenen Vorlage
+- [ ] **Je Abschnitt eine sichtbare Hauptaktion.** Stehen zwei gleich gewichtete Flächen
+      nebeneinander, hat niemand entschieden, was der Besucher tun soll. Die zweite Möglichkeit wird
+      zum Textlink, nicht zur zweiten Schaltfläche
+- [ ] Die Beschriftung sagt, was passiert („Bedarfsscheck starten"), nicht was man tut („Klicken")
+
 ---
 
 ## 4. Prüfliste vor dem Einsatz
@@ -342,6 +381,8 @@ Vor **jeder** Vorlage abzuhaken. Diese Punkte sind nicht Geschmack, sondern nach
 
 - [ ] **Kein Aufbaumuster kommt mehr als zweimal vor** (§3.7)
 - [ ] **Graustufentest bestanden** — die Varianten sind ohne Farbe unterscheidbar (§3.6)
+- [ ] **Keine Schauüberschrift über drei Zeilen**, 25–40 Zeichen je Zeile (§3.8) — nachgemessen, nicht geschätzt
+- [ ] **Keine vollrunden Schaltflächen** auf einer scharfkantigen Seite; je Abschnitt eine Hauptaktion (§3.9)
 - [ ] Kein Farbverlauf in Violett oder Blau als tragende Fläche
 - [ ] Nicht Inter als einzige Schrift
 - [ ] Nicht alles zentriert
