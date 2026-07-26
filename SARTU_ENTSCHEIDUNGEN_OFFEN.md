@@ -77,6 +77,30 @@ Recherche → Prüfliste → **2–3 klickbare Startseitenvarianten mit echten T
 | **Bewegung erwünscht** | Ruhige, scrollgebundene Bewegung nach Design-Briefing §3.2. Umsetzung in CSS ohne JavaScript |
 | **Kein Glaseffekt** | Geprüft und abgelehnt, Begründung in Design-Briefing §3.2 |
 
+### Akzentfarbe — **entschieden 25.07.2026**
+
+**Ein einziger Akzent, Petrol.** Drei Töne, alle gegen die tatsächlichen Hintergründe nachgerechnet:
+
+| Variable | Hex | Wofür | Kontrast |
+|---|---|---|---|
+| `--accent` | `#1a6165` | Knopf, Link, Empfehlungs-Badge, Fortschrittsbalken | 6,16:1 auf Creme · 6,81:1 für hellen Text darauf |
+| `--accent-deep` | `#12474b` | Hover und gedrückter Zustand | 8,94:1 · 9,87:1 |
+| `--accent-bright` | `#5fb3b6` | dieselbe Farbe auf dunklen Abschnitten | 7,72:1 auf `--ink` |
+
+**Abgelöst: das Terrakotta `#c1452f`.** Es erreicht als Linkfarbe nur **4,36:1** und verfehlt damit
+die 4,5:1 aus §2.3 — es war nicht nur Geschmackssache, sondern nicht regelkonform.
+
+**Warum genau ein Akzent:** Der erste Entwurf hatte **zwei** — Terrakotta auf den Knöpfen, Petrol auf
+Punkten, Aufzählungszeichen und Labels. Zwei Akzente ohne Rangordnung sind ein wesentlicher Grund,
+warum die Farbigkeit unruhig wirkte. Die Rangordnung entsteht ab jetzt über **Fläche und Gewicht**,
+nicht über einen zweiten Farbton.
+
+**Nicht gewählt und warum:** Marineblau hätte die besten Kontrastwerte (10:1), ist aber der
+Vorgabewert praktisch jeder Agentur- und Anbieterseite — für ein Projekt, das sich gerade vom
+Allerweltsaussehen löst, das falsche Signal. Tannengrün trägt im deutschen B2B stark die Lesart
+„ökologisch/nachhaltig", die hier nichts zu suchen hat. Bronze bestand mit 4,59:1 nur knapp und
+hätte bei jeder kleinen Anpassung des Hintergrunds gerissen.
+
 **Die Grenze bleibt:** Zielgruppe sind Unternehmer zwischen 35 und 60 aus Handwerk, Handel und
 Dienstleistung, die einen verlässlichen Partner für Jahre suchen. Verspieltheit darf Sympathie
 erzeugen, nie Zweifel an der Ernsthaftigkeit. Im Zweifel ist die ruhigere Lösung die richtige.
@@ -127,3 +151,4 @@ Geschäftsentscheidung mit Aufwand und Außenwirkung — keine Gestaltungsfrage.
 |---|---|---|
 | 25.07.2026 | Entwicklungsumgebung: PHP+Composer verbindlich, Datenbank nachreichbar; Weg A oder B frei (§4) | Betreiber |
 | 25.07.2026 | Designrichtung: weichere Formsprache, etwas Verspieltheit, Bewegung ja, Glaseffekt nein (§3) | Betreiber |
+| 25.07.2026 | Akzentfarbe: Petrol `#1a6165` als **einziger** Akzent, Terrakotta abgelöst (§3) | Betreiber |
