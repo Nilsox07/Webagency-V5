@@ -76,19 +76,36 @@ Rechtstexte · echte Fotos · die Freigabe eigener Texte. Alles davon steht in
 
 ## Startprompt für Sitzung 1
 
-> Du arbeitest im aktuellen Verzeichnis — ein lokaler Klon von `github.com/Nilsox07/Webagency-V5`,
-> Branch `main`. Es enthält bisher nur Konzeptdateien, keinen Code. Den Code baust du hier hinein.
+> Du arbeitest im aktuellen Verzeichnis — ein lokaler Klon von `github.com/Nilsox07/Webagency-V5`.
+> Den Code baust du hier hinein, neben die vorhandenen Konzeptdateien.
 >
-> **Prüfe zuerst die lokale Umgebung** und melde das Ergebnis: `php -v`, `php -m`, `mysql --version`,
-> `composer -V`. Fehlt PHP 8.3+, eine der Erweiterungen `pdo_mysql`/`sodium`/`mbstring`/`intl`/
-> `fileinfo`, oder eine MySQL/MariaDB-Instanz: **melden und warten**, nicht ausweichen.
+> **Schritt 0 — Umgebung einrichten.** Auf diesem Windows-Rechner sind weder PHP noch Composer
+> installiert, und Docker steht nicht zur Verfügung. Richte beides ein, **ohne Administratorrechte**.
+> Fordere zu keinem Zeitpunkt erhöhte Rechte an — wenn ein Schritt sie brauchen würde, halte an und
+> sage, welcher.
+> 1. Prüfen, ob doch schon etwas da ist: `php -v`, `composer --version`
+> 2. PHP 8.3 oder höher, **Thread Safe, x64**, als ZIP von `windows.php.net/download` herunterladen
+>    und nach `C:\php` entpacken
+> 3. Dort `php.ini-development` zu `php.ini` kopieren. `extension_dir = "ext"` setzen und die
+>    Erweiterungen `pdo_mysql`, `sodium`, `mbstring`, `intl`, `fileinfo`, `openssl` freischalten
+> 4. `C:\php` an die **Benutzer**-Umgebungsvariable `Path` anhängen (`'User'`, nicht `'Machine'`)
+> 5. Composer installieren
+> 6. In einem **neuen** Terminal prüfen und die Ausgaben zeigen: `php -v` (muss 8.3+ sein), `php -m`
+>    (muss die sechs Erweiterungen enthalten), `composer --version`
 >
-> **Schritt 1 — Startprüfung.** Lies `UEBERGABE_DATEILISTE.md` und führe die dort beschriebene
+> **Eine Datenbank wird jetzt nicht eingerichtet und nicht gebraucht.** Sie kommt vor Sitzung 2.
+> Halte deswegen an keiner Stelle an.
+>
+> **Schritt 1 — Bestand.** Sieh nach, ob auf dem Branch `feature/fundament-und-designvarianten`
+> bereits Arbeit liegt (letzter Commit, vorhandene `IMPLEMENTATION_PLAN.md`). Falls ja: dort
+> fortsetzen statt neu anfangen, und in einem Satz sagen, was schon steht.
+>
+> **Schritt 2 — Startprüfung.** Lies `UEBERGABE_DATEILISTE.md` und führe die dort beschriebene
 > Startprüfung für den **Portalauftrag** aus. Melde das Ergebnis als ersten Absatz: welche Dateien
 > gefunden, ob das Hauptdokument vollständig ist. Fehlt eine Datei mit „Abbruch": nicht anfangen,
 > melden.
 >
-> **Schritt 2 — Lesen.** Lies vollständig, in dieser Reihenfolge:
+> **Schritt 3 — Lesen.** Lies vollständig, in dieser Reihenfolge:
 > 1. `CODEX_AUFTRAG_PORTAL.md`
 > 2. `CLAUDE_SARTU_PORTAL_LASTENHEFT_BAUFINAL.md` — besonders §1 (Stack, Struktur, Hosting)
 > 3. `CODEX_AUFTRAG_WEBSITE.md`
@@ -96,14 +113,16 @@ Rechtstexte · echte Fotos · die Freigabe eigener Texte. Alles davon steht in
 > 5. `SARTU_ENTSCHEIDUNGEN_OFFEN.md`
 > 6. `CLAUDE_SARTU_WEBSITE_LASTENHEFT_BAUFINAL.md` — §1, §2 und §5 (Startseitentexte)
 >
-> **Schritt 3 — `IMPLEMENTATION_PLAN.md` schreiben** nach Abschnitt 0b des Portalauftrags: Bestand,
+> **Schritt 4 — `IMPLEMENTATION_PLAN.md` schreiben** nach Abschnitt 0b des Portalauftrags: Bestand,
 > Umgang mit vorhandenen Prototypen, Zielstruktur, Modulgrenzen, Datenmodellquelle, Reihenfolge,
 > Risiken, Testplan, offene Entscheidungen. **Vorlegen, bevor du Produktionscode schreibst.**
 >
-> **Schritt 4 — Kleinster lauffähiger Stand.** Projektgerüst nach Portal-Lastenheft §1.3, eine
-> Migration, eine Seite, ein Test. Berichten.
+> **Schritt 5 — Kleinster lauffähiger Stand.** Projektgerüst nach Portal-Lastenheft §1.3, die erste
+> Migrationsdatei, eine Seite, ein Test. Die Migration wird jetzt nur **geschrieben**, nicht
+> ausgeführt — das kommt mit der Datenbank. `php -l` über alle erzeugten Dateien laufen lassen; das
+> geht ohne Datenbank und gehört gemacht. Berichten.
 >
-> **Schritt 5 — Designvarianten nach dem Copy-/Port-Verfahren.** Lies
+> **Schritt 6 — Designvarianten nach dem Copy-/Port-Verfahren.** Lies
 > `CLAUDE_SARTU_DESIGN_BRIEFING_AUSFUEHRUNG.md` §2.1 und §3.1 vollständig. Das ist **kein**
 > „entwirf etwas Schönes": Wähle je Variante **1–3 sehr gute, sauber lizenzierte Quellen** und
 > **übernimm deren konkreten Aufbau** — Markup, CSS-Ansatz, Zustände, Interaktionslogik. Angepasst
@@ -122,11 +141,13 @@ Rechtstexte · echte Fotos · die Freigabe eigener Texte. Alles davon steht in
 > **Dann anhalten.** Der Mensch entscheidet die Designrichtung. Baue keine weiteren Seiten.
 >
 > **Regeln, die durchgehend gelten:**
-> - **Wie PHP aufgerufen wird, steht in `ENTWICKLUNGSUMGEBUNG.md`** — je nach eingerichtetem Weg
->   direkt oder mit dem Vorsatz `docker compose exec app …`. Erst dort nachsehen, dann aufrufen
 > - **Eine fehlende Datenbank ist kein Grund anzuhalten.** Weiterbauen, was ohne sie fertig wird,
->   und Ungeprüftes in `OFFENE_PRUEFUNGEN.md` eintragen statt als geprüft zu melden
->   (`ENTWICKLUNGSUMGEBUNG.md`, Abschnitt „Bauen, bevor die Datenbank steht")
+>   und Ungeprüftes in `OFFENE_PRUEFUNGEN.md` eintragen — je eine Zeile: was gebaut wurde, was daran
+>   ungeprüft ist, womit es geprüft wird, sobald die Datenbank steht.
+>   **Melde nichts als geprüft, was nicht ausgeführt wurde**
+> - Anmeldelinks werden lokal nicht versendet. Solange `APP_ENV=development`, den Link zusätzlich
+>   ins Protokoll schreiben — und diesen Behelf in `OFFENE_PRUEFUNGEN.md` eintragen, damit er vor
+>   dem Livegang wieder verschwindet
 > - PHP 8.3+, serverseitig gerendert, MySQL/MariaDB, PDO mit vorbereiteten Anweisungen. **Kein**
 >   WordPress, **kein** Vollframework, **kein** React/Vue/Next, **kein** Node als Zielsystem,
 >   **kein** Build-Schritt fürs Frontend, **keine** externen CDNs
