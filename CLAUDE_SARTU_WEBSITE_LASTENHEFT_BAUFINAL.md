@@ -204,27 +204,49 @@ Fünf Spalten auf Desktop, gestapelt auf Mobil (Reihenfolge wie unten).
   3. **`Das Portal führt`** — Angebot, Zahlung, Briefing, Dateien, Vorschau, Freigabe, spätere Pflege.
 - **Textlink:** `So läuft ein Projekt ab` → `/ablauf`
 
-### Sektion 3 — Drei Ergebnisse, eine Empfehlung
+### Sektion 3 — Vier Wege, eine Empfehlung
 
-- **H2:** `Sie wählen kein Paket. Wir empfehlen eines.`
+- **H2:** `Sie müssen nicht wissen, welche Lösung Sie brauchen.`
 - **Einleitung (32 W.):**
   > Sie müssen nicht wissen, wie viele Seiten oder welche Technik Sie brauchen. Die kurze Bedarfseinschätzung zeigt, welche Lösung voraussichtlich passt — geprüft wird sie anschließend persönlich.
-- **Platzhirsch (hervorgehoben):** Badge `Empfehlung` · `Platzhirsch` · `7.900 € einmalig` · `+ 249 €/Monat Rundum-Schutz` · `Erstes Jahr: 10.888 € netto`
-  > Für Unternehmen mit mehreren Leistungen, regionalem Wettbewerb oder Recruitingbedarf. Wir entwickeln daraus ein Vertriebs-, Vertrauens- und Recruiting-System mit bis zu 16 strategischen Seiten.
-  Merkmale: `stärkere Leistungs- und Regionsstruktur` · `Team, Karriere, Projekte — wenn sinnvoll` · `ein passender Anfrage-, Buchungs- oder Bewerbungsweg` · `SEO-Grundlage pro Seite`
-  CTA: `Bedarf prüfen lassen`
-- **Start (kompakt):** `1.490 € + 59 €/Monat` — „Ein fokussierter One-Pager für ein klares Angebot." · CTA `Einschätzen lassen`
-- **Wachstum (kompakt):** `3.900 € + 129 €/Monat` — „Eine vollständige Firmenwebsite mit bis zu acht strategischen Seiten." · CTA `Einschätzen lassen`
-- **Sonderprojekt (eine Zeile):**
-  > Shop, Login, komplexe Buchung, Schnittstellen oder mehrere Marken prüfen wir als Sonderprojekt ab 12.500 €.
 
-**Verhalten:** Desktop Platzhirsch deutlich größer (ca. 55 % Breite oder doppelte Höhe). Mobil **Platzhirsch zuerst**, dann Start/Wachstum. Die Buttons von Start/Wachstum sind visuell schwächer als der Platzhirsch-CTA.
+> **Gleiche Informationstiefe für alle vier.** Jede Lösung nennt: für wen sie gedacht ist, was drin
+> ist (drei bis vier Merkmale), Einmalpreis, Monatspreis, Erstjahreswert, eigener Aufruf zum
+> Handeln. **Die Empfehlung wird durch Gestaltung hervorgehoben, nicht dadurch, dass die anderen
+> weniger erklärt bekommen.** Wer eine kleine Lösung braucht und nur die teure erklärt sieht, geht
+> — und zwar zu Recht.
+
+**`Start`** — `1.490 € einmalig` · `+ 59 €/Monat` · `Erstes Jahr: 2.198 € netto`
+> Für Betriebe mit einem klaren Angebot und einem Einzugsgebiet: Handwerk, Praxis, Ladengeschäft.
+
+Merkmale: `eine durchdachte Seite statt vieler halber` · `Kontakt- und Anfahrtsweg` · `SEO-Grundlage` · `Betrieb, Sicherung und Aktualisierungen inklusive`
+CTA: `Einschätzen lassen`
+
+**`Wachstum`** — `3.900 € einmalig` · `+ 129 €/Monat` · `Erstes Jahr: 5.448 € netto`
+> Für Betriebe mit mehreren Leistungen oder mehreren Zielgruppen, die einzeln erklärt werden müssen.
+
+Merkmale: `bis zu acht strategische Seiten` · `eigene Seite je Leistung` · `Anfrageweg passend zum Ziel` · `SEO-Grundlage je Seite`
+CTA: `Einschätzen lassen`
+
+**`Platzhirsch`** — Badge `Empfehlung` · `7.900 € einmalig` · `+ 249 €/Monat` · `Erstes Jahr: 10.888 € netto`
+> Für Unternehmen mit mehreren Leistungen, regionalem Wettbewerb oder Recruitingbedarf. Wir entwickeln daraus ein Vertriebs-, Vertrauens- und Recruiting-System mit bis zu 16 strategischen Seiten.
+
+Merkmale: `stärkere Leistungs- und Regionsstruktur` · `Team, Karriere, Projekte — wenn sinnvoll` · `ein passender Anfrage-, Buchungs- oder Bewerbungsweg` · `SEO-Grundlage pro Seite`
+CTA: `Bedarf prüfen lassen`
+
+**`Sonderprojekt`** — `ab 12.500 € einmalig` · `mind. 249 €/Monat` · `Erstes Jahr: ab 15.488 € netto`
+> Für Shop, Kundenlogin, komplexe Buchung, Schnittstellen zu vorhandener Software oder mehrere Marken unter einem Dach.
+
+Merkmale: `Umfang und Preis nach Vorgespräch` · `eigenes Festangebot` · `keine offene Stundenabrechnung`
+CTA: `Sonderprojekt besprechen`
+
+**Verhalten:** Der Platzhirsch ist optisch die Empfehlung — größere Fläche, Badge, kräftigerer Aufruf zum Handeln — trägt aber **denselben Informationsumfang** wie die anderen. Das Sonderprojekt steht sichtbar als vierte Möglichkeit, nicht als Fußnote. Mobil: Platzhirsch zuerst, dann Wachstum, Start, Sonderprojekt. Die Aufrufe von Start und Wachstum sind visuell schwächer als der des Platzhirschs, aber vorhanden und anklickbar.
 
 ### Sektion 4 — Leistungslandkarte
 
 - **H2:** `Alles, was eine Firmenwebsite braucht. Ohne Aufpreisliste.`
 - **Einleitung (30 W.):**
-  > Diese Leistungen sind Bausteine eines sinnvollen Ergebnisses. Sie buchen sie nicht einzeln; wir ordnen sie im Angebot passend zu Ihrem Ziel ein.
+  > Das alles steckt in jedem Angebot — Sie stellen es nicht selbst zusammen und zahlen nichts davon extra. Wir gewichten die Bausteine passend zu Ihrem Ziel.
 - **Acht breite Zeilen** (Titel · ein Satz · Tags), **keine** Kachelwand, **keine** Preise:
 
 | Titel | Satz | Tags |
@@ -254,7 +276,7 @@ Fünf Spalten auf Desktop, gestapelt auf Mobil (Reihenfolge wie unten).
 
 ### Sektion 6 — SEO und GEO sind eingebaut
 
-- **H2:** `Gefunden werden ist kein späteres Extra.`
+- **H2:** `Ihre Website ist ab dem ersten Tag auffindbar.`
 - **Text (42 W.):**
   > Jede SARTU-Website startet mit klaren Seitenthemen, sprechenden Adressen, sauberer interner Verlinkung, Metadaten, strukturierten Daten und einer soliden Performance-Grundlage. Späterer Ausbau baut auf echten Suchdaten auf — nicht auf pauschalen SEO-Paketen.
 - **Drei Spalten:**
