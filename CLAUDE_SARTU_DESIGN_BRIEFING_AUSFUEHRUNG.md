@@ -235,13 +235,56 @@ gestalte ihn um — entferne ihn nicht.
 |---|---|
 | **CSS-Transitions/Animations** | erste Wahl, 0 KB — deckt die meisten Fälle ab |
 | **View Transitions API** (nativ) | Seitenwechsel — **nur die native Browser-API**, ohne Framework-Abhängigkeit. Progressiv: Wo sie fehlt, wechselt die Seite normal |
-| **GSAP + ScrollTrigger** | verkettete, an den Scroll gebundene Sequenzen. Lizenz und Größe selbst prüfen |
+| **GSAP + ScrollTrigger** | verkettete Scroll-Sequenzen. **Seit 04/2025 kostenlos, auch gewerblich** — aber Sonderfall, siehe unten. Nur SARTUs eigene Seite, **nicht** in den Kundenstarter |
 | **Motion** | Zustände und Microinteractions, vor allem im Kundenbereich. Nur die Variante ohne Build-Schritt |
 | **Lenis** | sanftes Scrollen — **erst nach der CSS-Stufe zu entscheiden**, Bedingungen unten. Nur Marketingseite, nie im Portal |
 | **auto-animate** | einfache Listenwechsel |
 | **Rive** | nur wenn eine Animation eine echte Idee trägt |
 
-Nicht einsetzen: Vanta.js, Three.js als Dekoration, Barba.js.
+| **Motion One** (motion.dev) | MIT, rund 5 KB, setzt auf die Web-Animations-Schnittstelle des Browsers auf. **Der leichte Ersatz für GSAP**, wenn CSS nicht reicht |
+| **anime.js** | MIT, rund 7 KB. Sauberer, kleiner Werkzeugkasten für einzelne Abläufe |
+
+Nicht einsetzen: **Vanta.js**, Three.js als Dekoration, Barba.js. Begründung für Vanta unten — sie ist gemessen, nicht geraten.
+
+#### GSAP — geprüft 25.07.2026
+
+**Was sich geändert hat:** Seit dem 30.04.2025 gehört GSAP zu Webflow und ist **vollständig
+kostenlos**, samt aller früher kostenpflichtigen Erweiterungen. Die Lizenz erlaubt ausdrücklich
+*„implementation and/or use of GSAP Products on any website, web application, or digital interface
+by any person or entity"* — Kundenprojekte eingeschlossen, und der Kunde darf seine Seite auch
+danach eigenständig weiterbetreiben. Untersagt ist nur, damit ein **Animationsbaukasten** zu bauen,
+der mit Webflow konkurriert. Das tut SARTU nicht.
+
+**Trotzdem zwei Einschränkungen:**
+
+1. **Nicht in den Kundenstarter.** Die Lizenz sagt zu Vorlagen und Bausätzen **nichts** — weder ja noch nein. Bei etwas, das in jede Kundenseite wandert und beim Vertragsende exportiert wird, ist Schweigen kein Freibrief. Es ist außerdem eine **Haus-Lizenz eines Unternehmens**, keine MIT-Lizenz: Die Bedingungen wurden schon einmal geändert (kostenpflichtig → kostenlos), sie können erneut geändert werden. Für SARTUs **eigene** Seite ist das tragbar, für 50 Kundenseiten nicht
+2. **Prüfen, ob es überhaupt gebraucht wird.** GSAP-Kern plus ScrollTrigger sind rund 34 KB gzip — knapp die Hälfte des Startseitenbudgets (§2.2), für etwas, das `animation-timeline` seit 2026 nativ und kostenlos kann. GSAP lohnt sich erst bei **verketteten Abläufen**, die CSS nicht abbildet. Vorher: `animation-timeline`, dann Motion One, dann erst GSAP
+
+#### Vanta.js — geprüft und abgelehnt, mit Zahlen
+
+Lizenz MIT, also nicht das Problem. **Drei andere Gründe:**
+
+| | |
+|---|---|
+| **Größe** | Die eigene Dokumentation nennt *„~120kb minified and gzipped (mostly three.js)"*. Das Startseitenbudget liegt bei **75 KB gzip insgesamt** (§2.2). Der Effekt allein wäre 60 % darüber — vor jeder anderen Zeile JavaScript. Das ist kein Abwägen, das ist eine überschrittene Grenze |
+| **Geräte** | WebGL, dauerhaft rechnend. Dieselbe Belastung wie beim abgelehnten Glaseffekt: ältere Telefone ruckeln, der Akku leert sich |
+| **Wirkung** | Vanta hat rund ein Dutzend feste Effekte (Vögel, Netz, Wellen, Nebel, Wolken). Sie sind auf Tausenden Seiten im Einsatz und **sofort als Bibliothek erkennbar**. Wer damit dem Baukastenaussehen entkommen will, tauscht es gegen ein bekannteres |
+
+**Der letzte Punkt ist der entscheidende.** Ein Effekt aus einer Auswahlliste ist keine
+Eigenständigkeit — er ist eine Auswahl, die Tausende vor uns genauso getroffen haben.
+
+#### Was ein bewegter Aufmacher hier wirklich sein sollte
+
+Die Frage „welcher Effekt?" ist die falsche. Für SARTU ist die stärkste Bewegung im Aufmacher
+**kein Effekt, sondern ein Beweis**: eine kurze, tonlose Bildschirmaufnahme des Kundenbereichs in
+Benutzung — eine Aufgabe wird abgehakt, eine Vorschau freigegeben. In Endlosschleife, ohne
+Bedienelemente, mit `prefers-reduced-motion` als Standbild.
+
+Das bewegt sich, es sieht lebendig aus, und es zeigt genau das, was SARTU von jedem Wettbewerber
+unterscheidet. Ein Partikelnetz zeigt, dass jemand eine Bibliothek eingebunden hat.
+
+**Voraussetzung:** Der Kundenbereich muss existieren (Sitzung 2). Bis dahin gibt es keinen bewegten
+Aufmacher — und das ist besser als ein Effekt, der die Lücke kaschiert.
 
 #### Scrollgebundene Bewegung — geht seit 2026 ohne JavaScript
 
