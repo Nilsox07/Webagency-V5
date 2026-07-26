@@ -160,6 +160,19 @@ Fünf Spalten auf Desktop, gestapelt auf Mobil (Reihenfolge wie unten).
 
 ## 5. Startseite `/`
 
+> **Zwei Regeln für diese Seite, die über allem stehen:**
+>
+> **1. Die Startseite muss allein verkaufen.** Ein Unternehmer trifft seine Kaufentscheidung auf
+> dieser Seite, ohne Gespräch. Jede Überschrift wird deshalb aus **seiner** Sicht gelesen, nicht aus
+> unserer. Formulierungen, die intern richtig sind (Umfangsschutz, Zuständigkeitsgrenzen, Abgrenzung
+> zum Wettbewerb), sind nach außen oft das Gegenteil dessen, was sie sagen sollen. Der Test: *Liest
+> sich das wie ein Versprechen an mich — oder wie eine Regel, die für mich gilt?*
+>
+> **2. Nur die hier aufgeführten Sektionen.** Keine Abschnitte aus anderen Seiten übernehmen. Der
+> Satz „Veröffentlicht wird nur, was wir geprüft und freigegeben haben." gehört zu `/ueber-uns`
+> (§11) und hat auf der Startseite **nichts zu suchen** — er beantwortet eine Frage, die dort noch
+> niemand gestellt hat.
+
 **Title (58 Z.):** `Firmenwebsite zum Festpreis, ohne WordPress | SARTU`
 **Meta Description (152 Z.):** `SARTU plant, textet, programmiert und betreibt Ihre Firmenwebsite zum Festpreis. Geführtes Portal statt E-Mail-Chaos, SEO-Basis ab Launch, kein WordPress.`
 **H1:** `Individuell programmierte Firmenwebsites zum Festpreis.`
@@ -186,7 +199,8 @@ Fünf Spalten auf Desktop, gestapelt auf Mobil (Reihenfolge wie unten).
   > Die meisten Firmenwebsites scheitern nicht am Design, sondern an offenen Entscheidungen: Welche Seiten? Welche Texte? Welches System? Welche SEO-Einstellungen? SARTU nimmt Ihnen diese Entscheidungen gebündelt ab und fragt nur die Fakten ab, die wirklich aus Ihrem Unternehmen kommen müssen.
 - **Drei Blöcke:**
   1. **`Sie liefern Fakten`** — Leistungen, Zielgruppen, Einzugsgebiet, Belege, Freigaben.
-  2. **`SARTU entscheidet`** — Struktur, Design, Technik, SEO-Grundlage, Hosting, Domainprozess.
+  2. **`Wir entscheiden den Rest`** — Struktur, Design, Technik, SEO-Grundlage, Hosting, Domainprozess.
+     > **Warum nicht „SARTU entscheidet":** Dieselbe Aussage, aber aus Sicht des Lesers. „SARTU entscheidet" liest sich wie Entzug von Mitsprache — gemeint ist das Gegenteil: Er muss es nicht entscheiden.
   3. **`Das Portal führt`** — Angebot, Zahlung, Briefing, Dateien, Vorschau, Freigabe, spätere Pflege.
 - **Textlink:** `So läuft ein Projekt ab` → `/ablauf`
 
@@ -208,7 +222,7 @@ Fünf Spalten auf Desktop, gestapelt auf Mobil (Reihenfolge wie unten).
 
 ### Sektion 4 — Leistungslandkarte
 
-- **H2:** `Alles, was eine Firmenwebsite braucht — aber nicht als Add-on-Liste.`
+- **H2:** `Alles, was eine Firmenwebsite braucht. Ohne Aufpreisliste.`
 - **Einleitung (30 W.):**
   > Diese Leistungen sind Bausteine eines sinnvollen Ergebnisses. Sie buchen sie nicht einzeln; wir ordnen sie im Angebot passend zu Ihrem Ziel ein.
 - **Acht breite Zeilen** (Titel · ein Satz · Tags), **keine** Kachelwand, **keine** Preise:
@@ -233,7 +247,8 @@ Fünf Spalten auf Desktop, gestapelt auf Mobil (Reihenfolge wie unten).
   > Kein loses Formular, keine endlose E-Mail-Kette, kein WordPress-Editor. Im SARTU-Portal sehen Sie den nächsten Schritt, bestätigen Fakten, laden Material hoch, prüfen die Vorschau, geben frei — und pflegen später Ihre Öffnungszeiten und Kontaktdaten selbst.
 - **Zwei Listen nebeneinander:**
   - **`Im Portal`** — Angebot und Annahme · Rechnungen und Zahlung · Domainstatus · Briefing-Aufgaben · Uploads und Bildrechte · Vorschau und Feedback · Öffnungszeiten, Kontakt, Seitenstatus nach Launch
-  - **`Nicht im Portal`** — Layout selbst bauen · Plugins installieren · SEO-Felder frei verstellen · Navigation oder URLs umbauen · Code bearbeiten · Seiten hart löschen
+  - **`Darum kümmern wir uns`** — Layout bauen · Erweiterungen und Updates · SEO-Felder · Navigation und Adressen · Code · Seitenstruktur
+    > **Warum nicht „Nicht im Portal":** Inhaltlich dieselbe Grenze, aber als Entlastung statt als Verbot. Dieselbe Liste beantwortet die Frage „Was muss ich nie wieder selbst machen?" statt „Was darf ich nicht?". Die Grenze bleibt hart — sie wird nur nicht als Einschränkung verkauft.
 - **Bild:** Portal-Screenshot „Briefingaufgaben", Badge „Musteransicht".
 - **CTA:** `Das Portal ansehen` → `/leistung-portal`
 
