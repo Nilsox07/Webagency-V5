@@ -542,6 +542,24 @@ Vor **jeder** Vorlage abzuhaken. Diese Punkte sind nicht Geschmack, sondern nach
 - [ ] **Kein Platzhalterkasten an einer Vertrauensstelle.** Ein leerer Rahmen dort, wo der Beweis erwartet wird — im Aufmacher, beim Kundenbereich — beschädigt genau die Aussage, die der Abschnitt trägt. Entweder echter Inhalt, oder die Stelle wird anders gelöst. Es gibt keinen dritten Weg
 - [ ] Auf der Seite kommt **ein Mensch** vor — als Foto, als Name, als benannte Verantwortung. Bei einem Betrieb, der von persönlichem Vertrauen lebt, ist eine menschenleere Startseite eine inhaltliche Lücke, keine gestalterische Entscheidung
 
+### Erfundene Angaben — auch in einer Variante
+
+**Die Sperren aus `SARTU_ENTSCHEIDUNGEN_OFFEN.md` gelten ab der ersten Designvariante, nicht erst
+beim Livegang.** Was in einer Vorschau steht, wandert erfahrungsgemäß unbemerkt in die fertige
+Seite — niemand entfernt es später, weil niemand weiß, dass es erfunden war.
+
+Vor jeder Vorlage durchsuchen und melden:
+
+- [ ] **Kein Ortsname** — nicht im Fußbereich, nicht in der Kopfzeile, nicht in einem Beispiel. §1 steht auf `offen`
+- [ ] **Keine Anschrift, keine Telefonnummer, keine E-Mail-Adresse**, auch keine erfundene Domain. §2 steht auf `offen`
+- [ ] **Keine Terminzusage** („verfügbar ab …"), keine Kapazitätsangabe, keine Kundenzahl
+- [ ] **Keine erfundenen Produktnamen.** Es heißt `Rundum-Schutz` — nicht `Schutz S`, `Schutz M`, `Schutz L`
+- [ ] **Portal-Ansichten tragen sichtbar „Musteransicht"** (§2.5). Eine nachgebaute Oberfläche ohne diesen Vermerk ist eine erfundene Bildschirmaufnahme
+- [ ] **Preisangaben vollständig** — Einmalpreis, Monatspreis **und Erstjahreswert**. Ein Preisblock ohne Erstjahreswert verschweigt den Betrag, um den es tatsächlich geht
+
+Fehlt eine Angabe, wird sie **weggelassen**, nicht erfunden. Eine Vorschau darf Lücken haben. Sie
+darf keine Behauptungen enthalten, die niemand geprüft hat.
+
 **Der Abschlusstest.** Nimm die Startseite und irgendeine beliebige KI-erzeugte Anbieterseite.
 Entferne bei beiden Logo und Texte. Sind sie noch auseinanderzuhalten? Wenn nicht, hilft kein
 saubererer Code.
