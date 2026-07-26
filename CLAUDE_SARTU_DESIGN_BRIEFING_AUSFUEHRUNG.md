@@ -243,6 +243,52 @@ gestalte ihn um — entferne ihn nicht.
 
 Nicht einsetzen: Vanta.js, Three.js als Dekoration, Barba.js.
 
+#### Scrollgebundene Bewegung — geht seit 2026 ohne JavaScript
+
+`animation-timeline: scroll()` und `view()` sind nativ verfügbar (Chrome/Edge ab 115, Firefox ab 132,
+Safari ab 18 — rund 84 % weltweit, Stand Mitte 2026). Damit lassen sich Einblendungen beim Scrollen,
+Fortschrittsanzeigen und Parallaxe **ohne eine Zeile JavaScript** bauen: kein GSAP, kein
+ScrollTrigger, kein Intersection Observer, keine KB im Budget.
+
+**Das ist ab sofort der erste Weg für scrollgebundene Bewegung.** Eine Bibliothek dafür ist nur noch
+zu rechtfertigen, wenn eine Sequenz nachweislich nicht in CSS abbildbar ist — und das steht dann
+begründet in der Herkunftsliste.
+
+Wo die Eigenschaft fehlt, passiert schlicht nichts: Der Inhalt steht sofort da. Das ist der richtige
+Rückfall und muss geprüft werden — **nie** Inhalte erst durch Bewegung sichtbar machen.
+
+#### Maß — was diese Zielgruppe verträgt
+
+Die Besucher sind Unternehmer aus Handwerk, Handel und Dienstleistung, meist zwischen 35 und 60, oft
+auf dem Telefon zwischen zwei Terminen. Bewegung darf hier **das Lesen unterstützen**, nicht sich
+selbst vorführen.
+
+| Trägt | Trägt nicht |
+|---|---|
+| ruhiges Einblenden beim Scrollen, einmal je Abschnitt | Elemente, die von allen Seiten hereinfliegen |
+| ein einziges bewegtes Element im Aufmacher, das **etwas Echtes zeigt** — den Kundenbereich in Benutzung | Partikel, Farbverläufe in Bewegung, 3-D-Figuren |
+| weiche Zustandswechsel bei Bedienelementen | erzwungenes langsames Scrollen |
+| Seitenwechsel über die View-Transitions-API | Aufmacher, die erst nach zwei Sekunden lesbar sind |
+
+**Harte Grenzen:**
+
+- [ ] `@media (prefers-reduced-motion: reduce)` schaltet **jede** nicht wesentliche Bewegung ab. Das ist kein Zusatz, das ist Pflicht (§2.3)
+- [ ] Keine Bewegung verzögert die erste Lesbarkeit. Überschrift, Text und Schaltfläche im ersten Bildausschnitt stehen **sofort**
+- [ ] Bewegung wird nie zum Träger einer Information — was sich bewegt, sagt nichts, was nicht auch im Text steht
+
+#### Glaseffekt — geprüft und abgelehnt
+
+Der Apple-artige Milchglaseffekt wird für SARTU **nicht** als gestalterische Sprache eingesetzt. Drei
+Gründe, in dieser Reihenfolge:
+
+1. **Lesbarkeit.** Text auf Glas braucht 4,5:1 Kontrast gegen das, was **dahinter** durchscheint — bei einem verschiebbaren, unscharfen Hintergrund ist das nicht zuverlässig einzuhalten. Genau deshalb meiden die meisten Produktteams den Effekt inzwischen wieder
+2. **Geräte.** Die Unschärfeberechnung belastet die Grafikeinheit; auf älteren Telefonen ruckelt es und der Akku leert sich schneller. Die Zielgruppe sitzt nicht auf neuen Geräten
+3. **Aussage.** Milchglas sagt „Technikprodukt". SARTU muss „verlässlicher Partner" sagen. Ein Handwerksbetrieb, der einen Dienstleister für die nächsten Jahre sucht, sucht keine Oberfläche, die nach Betriebssystem aussieht
+
+**Eng begrenzte Ausnahme:** ein einzelnes Element — etwa eine mitlaufende Kopfzeile über einem
+**unbewegten** Hintergrund — darf leicht durchscheinen, wenn der Kontrast an der ungünstigsten Stelle
+gemessen und dokumentiert ist. Als Sprache der Seite: nein.
+
 > **Einbinderegel für jedes Fremd-JavaScript — ohne Ausnahme.**
 > Erlaubt ist es nur, wenn **alle** vier Punkte zutreffen:
 >
@@ -382,6 +428,8 @@ Vor **jeder** Vorlage abzuhaken. Diese Punkte sind nicht Geschmack, sondern nach
 - [ ] **Kein Aufbaumuster kommt mehr als zweimal vor** (§3.7)
 - [ ] **Graustufentest bestanden** — die Varianten sind ohne Farbe unterscheidbar (§3.6)
 - [ ] **Keine Schauüberschrift über drei Zeilen**, 25–40 Zeichen je Zeile (§3.8) — nachgemessen, nicht geschätzt
+- [ ] **Der verkaufende Text ist lesbar, nicht Beiwerk.** Die Fließtexte der Startseite tragen die Kaufentscheidung. Werden sie klein und grau neben eine riesige Überschrift gesetzt, bleibt vom Abschnitt nur die Überschrift — und eine Überschrift allein verkauft nichts. Mindestens 17 px, voller Textkontrast, Zeilenlänge 60–75 Zeichen
+- [ ] **Kein Abschnitt stammt von einer anderen Seite.** Gebaut wird genau die Sektionsliste des jeweiligen Lastenheftabschnitts — nichts dazu, nichts umgehängt
 - [ ] **Keine vollrunden Schaltflächen** auf einer scharfkantigen Seite; je Abschnitt eine Hauptaktion (§3.9)
 - [ ] Kein Farbverlauf in Violett oder Blau als tragende Fläche
 - [ ] Nicht Inter als einzige Schrift
