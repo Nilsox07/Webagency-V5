@@ -389,9 +389,11 @@ der am sichersten wiedererkennbaren Merkmale erzeugter Seiten. Sie fällt besond
 der Seite scharfkantig ist — dann ist die Schaltfläche das einzige Element mit einer fremden
 Formsprache.
 
-- [ ] **Die Rundung stammt aus derselben Skala wie alles andere.** Hat kein anderes Element der
-      Seite eine starke Rundung, hat die Schaltfläche auch keine. Eine Seite mit Haarlinien und
-      scharfen Ecken verträgt keine Pillen
+- [ ] **Die Rundung stammt aus derselben Skala wie alles andere.** Ob die Seite weich oder streng
+      ist, entscheidet die Richtung (`SARTU_ENTSCHEIDUNGEN_OFFEN.md` §3) — **hier gilt nur, dass
+      sie es überall gleich ist.** Eine scharfkantige Seite verträgt keine Pillenknöpfe; eine
+      durchgehend weiche Seite verträgt keine hart geschnittenen Kästen. Der Fehler ist die
+      Mischung, nicht die Wahl
 - [ ] **Höhe und Innenabstand kommen aus der Abstandsskala**, nicht aus einer übernommenen Vorlage
 - [ ] **Je Abschnitt eine sichtbare Hauptaktion.** Stehen zwei gleich gewichtete Flächen
       nebeneinander, hat niemand entschieden, was der Besucher tun soll. Die zweite Möglichkeit wird
