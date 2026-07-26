@@ -240,6 +240,28 @@ Voraussetzung: Docker Desktop ist installiert und **läuft**.
 Der letzte Satz trennt die Einrichtung sauber vom Bau: Wenn beides in einem Durchlauf passiert und
 etwas schiefgeht, ist hinterher unklar, woran es lag.
 
+### Einrichtung an Codex übergeben (Weg B, Windows ohne Administratorrechte)
+
+> Richte auf diesem Windows-Rechner PHP 8.3 und Composer ein, ohne Administratorrechte und ohne
+> Docker. **Fordere zu keinem Zeitpunkt erhöhte Rechte an** — wenn ein Schritt sie brauchen würde,
+> halte an und sage mir, welcher.
+>
+> 1. Prüfen, ob schon etwas da ist: `php -v`, `composer --version`
+> 2. PHP 8.3 oder höher, **Thread Safe, x64**, als ZIP von `windows.php.net/download` herunterladen
+>    und nach `C:\php` entpacken
+> 3. Dort `php.ini-development` zu `php.ini` kopieren. In `php.ini` `extension_dir = "ext"` setzen
+>    und die Erweiterungen `pdo_mysql`, `sodium`, `mbstring`, `intl`, `fileinfo`, `openssl`
+>    freischalten
+> 4. `C:\php` an die **Benutzer**-Umgebungsvariable `Path` anhängen (`'User'`, nicht `'Machine'` —
+>    letzteres bräuchte erhöhte Rechte)
+> 5. Composer installieren
+> 6. In einem **neuen** Terminal prüfen und die Ausgaben zeigen: `php -v` (muss 8.3+ sein),
+>    `php -m` (muss die sechs Erweiterungen enthalten), `composer --version`
+> 7. Bericht: was läuft, was nicht, und bei einem Fehlschlag die Ursache — nicht nur die
+>    Fehlermeldung weiterreichen
+>
+> Eine Datenbank wird jetzt noch nicht gebraucht. Danach anhalten, keinen Produktionscode bauen.
+
 ### Nach Weg A (Docker)
 
 > Die Umgebung steht jetzt, aber sie läuft in Docker, nicht auf dem Wirtssystem. PHP, Composer,
@@ -297,9 +319,41 @@ Vollwertig, nur mit ein paar Handgriffen mehr. `docker-compose.yml` bleibt liege
 
 | System | Womit |
 |---|---|
-| **Windows** | **Laragon** (empfohlen — bringt PHP, MySQL und Composer mit und setzt `PATH` selbst) oder XAMPP plus den Composer-Installer |
+| **Windows** | **PHP einzeln** (siehe unten — braucht keine Administratorrechte) oder Laragon/XAMPP, wenn zusätzlich MySQL mit soll |
 | **macOS** | `brew install php@8.3 composer mariadb` |
 | **Linux** | über die Paketverwaltung: `php8.3`, `php8.3-mysql`, `php8.3-intl`, `php8.3-mbstring`, `composer`, `mariadb-server` |
+
+#### Windows ohne Administratorrechte
+
+Für Sitzung 1 genügen PHP und Composer — MySQL kommt später. Das lässt sich vollständig im
+Benutzerprofil einrichten, ohne Rechteanhebung und ohne Virtualisierung:
+
+1. **PHP 8.3+ (Thread Safe, x64)** von `windows.php.net/download` als ZIP herunterladen und nach
+   `C:\php` entpacken
+2. Dort `php.ini-development` zu `php.ini` kopieren
+3. In `php.ini` das Semikolon vor diesen Zeilen entfernen und `extension_dir` setzen:
+   ```
+   extension_dir = "ext"
+   extension=pdo_mysql
+   extension=sodium
+   extension=mbstring
+   extension=intl
+   extension=fileinfo
+   extension=openssl
+   ```
+4. `C:\php` in die **Benutzer**-Umgebungsvariable `Path` eintragen — das geht ohne
+   Administratorrechte:
+   ```powershell
+   [Environment]::SetEnvironmentVariable('Path', $env:Path + ';C:\php', 'User')
+   ```
+   Danach ein **neues** Terminalfenster öffnen, sonst greift die Änderung nicht
+5. Composer über `Composer-Setup.exe` von `getcomposer.org` — findet das PHP aus Schritt 4 selbst
+
+Prüfen: `php -v` zeigt 8.3 oder höher, `php -m` enthält die sechs Erweiterungen,
+`composer --version` zeigt 2.x.
+
+**Diese fünf Schritte kann Codex ausführen** — sie brauchen keine erhöhten Rechte. Der Prompt dafür
+steht unter „Weiterarbeiten mit Codex".
 
 ### 2. Erweiterungen prüfen
 
