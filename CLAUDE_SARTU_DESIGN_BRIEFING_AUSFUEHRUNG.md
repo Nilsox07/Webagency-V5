@@ -237,7 +237,7 @@ gestalte ihn um — entferne ihn nicht.
 | **View Transitions API** (nativ) | Seitenwechsel — **nur die native Browser-API**, ohne Framework-Abhängigkeit. Progressiv: Wo sie fehlt, wechselt die Seite normal |
 | **GSAP + ScrollTrigger** | verkettete, an den Scroll gebundene Sequenzen. Lizenz und Größe selbst prüfen |
 | **Motion** | Zustände und Microinteractions, vor allem im Kundenbereich. Nur die Variante ohne Build-Schritt |
-| **Lenis** | sanftes Scrollen, nur Marketingseite, nie im Portal |
+| **Lenis** | sanftes Scrollen — **erst nach der CSS-Stufe zu entscheiden**, Bedingungen unten. Nur Marketingseite, nie im Portal |
 | **auto-animate** | einfache Listenwechsel |
 | **Rive** | nur wenn eine Animation eine echte Idee trägt |
 
@@ -256,6 +256,35 @@ begründet in der Herkunftsliste.
 
 Wo die Eigenschaft fehlt, passiert schlicht nichts: Der Inhalt steht sofort da. Das ist der richtige
 Rückfall und muss geprüft werden — **nie** Inhalte erst durch Bewegung sichtbar machen.
+
+#### Sanftes Scrollen (Lenis) — zulässig, aber zuletzt
+
+**Lizenz und Technik geprüft (25.07.2026):** MIT, `dist/lenis.min.js` als fertige Browser-Datei
+selbst hostbar, kein npm nötig. Erfüllt die Einbinderegel oben. Es ist also **nicht** verboten.
+
+**Trotzdem nicht als Erstes, aus einem sachlichen Grund:** Lenis verändert das **Scrollgefühl**,
+nicht das Aussehen. Es blendet nichts ein, bewegt kein Bild, zeigt nichts. Auf einer Seite, die als
+zu ruhig empfunden wird, gleitet danach dieselbe Ruhe nur weicher vorbei.
+
+Was auf Agenturseiten als „lebendig" wahrgenommen wird, ist fast immer die **Kombination**: große
+Bilder, die beim Scrollen einblenden und leicht versetzt mitlaufen — plus weiches Scrollen als
+Zugabe. Der sichtbare Teil ist der erste, und der kostet nichts:
+
+| Wirkung | Womit | Kosten |
+|---|---|---|
+| Einblenden, Versatz, Fortschritt — **das Sichtbare** | CSS `animation-timeline` | 0 KB, kein JavaScript |
+| Scrollgefühl — **das Spürbare** | Lenis | JavaScript in jedem Scrollbild |
+
+**Reihenfolge: erst die CSS-Stufe bauen, ansehen, dann entscheiden.** Werden beide Stufen zugleich
+eingebaut und das Ergebnis fühlt sich falsch an, ist nicht mehr feststellbar, welche davon es war.
+
+**Bedingungen, falls Lenis danach dazukommt:**
+
+- [ ] `prefers-reduced-motion: reduce` schaltet es **vollständig ab.** Die Projektdokumentation sagt dazu nichts — es muss also von Hand verdrahtet und geprüft werden, nicht angenommen
+- [ ] Sprungmarken, Suche im Text (`Strg+F`), Tastaturscrollen und Bildlauf per Rollrad-Klick funktionieren unverändert. Praktisch geprüft, nicht der Beschreibung geglaubt
+- [ ] Größe in KB gzip gemessen und im JS-Budget verrechnet (§2.2)
+- [ ] Auf einem älteren Telefon geprüft, nicht nur auf dem Entwicklungsrechner
+- [ ] Fällt einer dieser Punkte durch: **raus.** Ein Scrollgefühl ist keine kaputte Sprungmarke wert
 
 #### Maß — was diese Zielgruppe verträgt
 
@@ -300,6 +329,34 @@ gemessen und dokumentiert ist. Als Sprache der Seite: nein.
 > **Gibt es keine saubere Variante ohne Übersetzungsschritt: nicht verwenden.** Kein „wir bauen es
 > einmal und legen das Ergebnis ab" — das erzeugt eine Datei, die niemand mehr aktualisieren kann.
 > Ein Effekt ist keinen Werkzeugkasten wert; CSS reicht für fast alles (§3.2, erste Zeile).
+
+### 3.2a Bildmaterial — der eigentliche Engpass
+
+Bewegung, Weißraum und Typografie können vieles, aber **eine Seite ohne Bilder bleibt eine Seite ohne
+Bilder.** Wer den Eindruck „zu ruhig" beheben will, kommt an dieser Frage nicht vorbei.
+
+**Was es zum Start tatsächlich gibt:**
+
+| Quelle | Stand | Wofür |
+|---|---|---|
+| **Ansichten aus dem Kundenbereich** | entsteht in Sitzung 2 | Aufmacher und Portal-Abschnitt — die zwei Stellen, an denen das Lastenheft ein Bild verlangt. **Die stärkste Quelle**, weil sie das Unterscheidungsmerkmal zeigt |
+| **Foto des Gründers** | vorhanden, sobald fotografiert | `/ueber-uns`, eventuell Aufmacher |
+| **Eigene Demoprojekte** | *existiert nicht* — siehe unten | zeigt, was SARTU herstellt |
+| Bestandsfotos aus Bilddatenbanken | verfügbar | **Nicht verwenden.** Ein austauschbares Bestandsfoto ist bei einem Anbieter, der Echtheit verkauft, schlechter als gar kein Bild |
+
+**Die Lücke, die niemand mit Gestaltung schließt:** SARTU hat kein Beispiel eigener Arbeit. Eine
+Webagentur ohne sichtbares Ergebnis hat ein Glaubwürdigkeitsproblem, das keine Gestaltung behebt —
+und gleichzeitig fehlt genau daraus das Bildmaterial.
+
+**Vorschlag, offen zu entscheiden** (`SARTU_ENTSCHEIDUNGEN_OFFEN.md` §5): ein bis zwei **erkennbar
+gekennzeichnete Demoprojekte** bauen — vollständige Beispielseiten für erfundene, als solche
+benannte Betriebe. Das ist keine erfundene Referenz, solange es **deutlich sichtbar** als
+Demonstration ausgewiesen ist und kein Kunde behauptet wird. Es liefert dreierlei auf einmal:
+echtes Bildmaterial, einen Beleg für die Arbeitsqualität und einen ersten Belastungstest des
+Produktionswegs.
+
+**Bis dahin gilt:** kein Platzhalterrahmen an einer Vertrauensstelle (§4a). Wo kein echtes Bild
+existiert, wird die Stelle **ohne** Bild gelöst — nicht mit einem leeren Kasten.
 
 ### 3.3 Schriften
 

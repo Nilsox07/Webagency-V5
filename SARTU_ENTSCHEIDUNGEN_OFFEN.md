@@ -98,7 +98,25 @@ durchbaut, hat das Gate verletzt.
 
 ---
 
-## 5. Wie diese Datei benutzt wird
+## 5. Bildmaterial und Demoprojekte — **OFFEN**
+
+| Punkt | Stand |
+|---|---|
+| Ansichten aus dem Kundenbereich | entstehen mit Sitzung 2 — die zwei Bildplätze der Startseite hängen daran |
+| Foto des Gründers | *offen* — echtes Foto nötig, kein Bestandsfoto, kein Platzhalter, der wie ein Foto wirkt |
+| **Ein bis zwei gekennzeichnete Demoprojekte** | *offen, zu entscheiden* — vollständige Beispielseiten für erfundene, **als solche benannte** Betriebe. Liefert Bildmaterial, Arbeitsbeleg und einen Belastungstest des Produktionswegs in einem |
+| Bestandsfotos | **ausgeschlossen** (Design-Briefing §3.2a) |
+
+**Sperre:** Solange kein echtes Bild vorliegt, wird die betreffende Stelle **ohne** Bild gestaltet.
+Ein leerer Platzhalterrahmen an einer Vertrauensstelle ist ausdrücklich unzulässig
+(Design-Briefing §4a).
+
+**Warum das hier steht und nicht im Design-Briefing:** Ob es Demoprojekte gibt, ist eine
+Geschäftsentscheidung mit Aufwand und Außenwirkung — keine Gestaltungsfrage.
+
+---
+
+## 6. Wie diese Datei benutzt wird
 
 1. Ein Wert wird entschieden → hier eintragen, Status von `offen` auf den Wert ändern
 2. Datum und Entscheider dazuschreiben
