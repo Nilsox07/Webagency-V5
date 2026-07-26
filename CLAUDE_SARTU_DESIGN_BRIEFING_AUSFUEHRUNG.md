@@ -281,6 +281,38 @@ Schau dir **reale Seiten** an, nicht nur Design-Galerien:
 
 Notiere zu jeder Referenz **einen konkreten Satz**, was du übernehmen willst — „großzügiger Abstand zwischen Sektionen", „Preistabelle statt Kartenwand". Keine Gesamtkopie einer Seite.
 
+### 3.6 Was drei Varianten unterscheiden muss
+
+**Eine Farbpalette ist keine Richtung.** Drei Varianten, die sich nur in Farbe und Schriftart
+unterscheiden, sind eine Variante in drei Anstrichen — der Mensch entscheidet dann nichts, egal
+welche er wählt.
+
+Die Varianten müssen sich in **mindestens vier** dieser sechs Punkte unterscheiden:
+
+| Merkmal | Die Varianten unterscheiden sich darin, ob … |
+|---|---|
+| **Reihenfolge** | direkt nach dem Aufmacher der Preis kommt, der Beweis oder der Ablauf |
+| **Angebotsdarstellung** | Tabelle · Fließtext mit einer einzigen hervorgehobenen Zahl · Gegenüberstellung zweier Wege |
+| **Seitenlänge** | eine lange Seite alles erklärt · eine kurze Seite früh in den Bedarfsscheck führt |
+| **Typografie** | eine Schrift in vielen Größen trägt · zwei Schriften mit klarer Aufgabenteilung |
+| **Bildanteil** | mit Bildern gearbeitet wird · bewusst ohne, dafür mit Typografie und Flächen |
+| **Führung** | eine durchgehende Erzählung entsteht · nebeneinanderstehende Blöcke zum Springen |
+
+**Graustufentest.** Setze alle Varianten auf Graustufen und sieh sie nebeneinander an. Sind sie dann
+nicht mehr auseinanderzuhalten, sind es keine drei Varianten. Dann noch einmal — vor der Vorlage,
+nicht danach.
+
+### 3.7 Abschnittsrhythmus — die häufigste Ursache für „wirkt maschinell"
+
+Nicht Farben und nicht Schriften lassen eine Seite gemacht statt gestaltet aussehen, sondern die
+**Wiederholung desselben Aufbaus**. Wenn die Abschnitte 3, 5, 7 und 9 alle nach dem Muster
+„kleines Label, große Überschrift links, Absatz rechts, darunter drei gleich breite Spalten" gebaut
+sind, liest sich das wie eine Liste, die jemand abgearbeitet hat.
+
+**Regel: Kein Aufbaumuster kommt auf einer Seite mehr als zweimal vor.** Bei acht Abschnitten heißt
+das mindestens vier verschiedene Muster. Ein Abschnitt darf ruhig einmal die Breite sprengen, einmal
+ganz schmal stehen, einmal nur aus einem Satz bestehen.
+
 ---
 
 ## 4. Prüfliste vor dem Einsatz
@@ -301,6 +333,27 @@ Für **jedes** Teil, das du übernehmen willst:
 - [ ] **Ohne externe Verbindungen** zur Laufzeit
 
 Fällt ein Punkt durch: nicht einsetzen. Kein „passt schon".
+
+---
+
+## 4a. Prüfliste gegen den Maschineneindruck
+
+Vor **jeder** Vorlage abzuhaken. Diese Punkte sind nicht Geschmack, sondern nachsehbar:
+
+- [ ] **Kein Aufbaumuster kommt mehr als zweimal vor** (§3.7)
+- [ ] **Graustufentest bestanden** — die Varianten sind ohne Farbe unterscheidbar (§3.6)
+- [ ] Kein Farbverlauf in Violett oder Blau als tragende Fläche
+- [ ] Nicht Inter als einzige Schrift
+- [ ] Nicht alles zentriert
+- [ ] Symbole stehen **neben** Inhalt, nie **statt** Inhalt
+- [ ] **`<html lang="de">` ist gesetzt.** Ohne das trennt der Browser deutsche Wörter nach englischen Regeln — aus „Firmenwebsites" wird „Fir-menwebs-ites". Fällt sofort auf und wirkt unsauber
+- [ ] Große Schauüberschriften: Silbentrennung **aus** oder von Hand gesetzt (`&shy;`), nicht dem Automatismus überlassen
+- [ ] **Kein Platzhalterkasten an einer Vertrauensstelle.** Ein leerer Rahmen dort, wo der Beweis erwartet wird — im Aufmacher, beim Kundenbereich — beschädigt genau die Aussage, die der Abschnitt trägt. Entweder echter Inhalt, oder die Stelle wird anders gelöst. Es gibt keinen dritten Weg
+- [ ] Auf der Seite kommt **ein Mensch** vor — als Foto, als Name, als benannte Verantwortung. Bei einem Betrieb, der von persönlichem Vertrauen lebt, ist eine menschenleere Startseite eine inhaltliche Lücke, keine gestalterische Entscheidung
+
+**Der Abschlusstest.** Nimm die Startseite und irgendeine beliebige KI-erzeugte Anbieterseite.
+Entferne bei beiden Logo und Texte. Sind sie noch auseinanderzuhalten? Wenn nicht, hilft kein
+saubererer Code.
 
 ---
 
