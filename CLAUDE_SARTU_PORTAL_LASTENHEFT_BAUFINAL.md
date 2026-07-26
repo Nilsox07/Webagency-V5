@@ -280,7 +280,56 @@ Es gibt **keine** Selbstregistrierung. Admin legt Organisation und Benutzer an; 
 
 ## 4. Datenmodell
 
-Alle Tabellen: `id UUID PRIMARY KEY`, `created_at TIMESTAMPTZ NOT NULL DEFAULT now()`, `updated_at TIMESTAMPTZ NOT NULL DEFAULT now()`. Fremdschlüssel mit `ON DELETE RESTRICT`.
+### 4.0 Typabbildung — verbindlich
+
+Zielsystem ist **MySQL 8 / MariaDB 10.6+** (§1.4). Frühere Fassungen dieses Dokuments nannten an
+einigen Stellen PostgreSQL-Typen — sie stammen aus dem abgelösten Stack und sind **ungültig**.
+Verbindlich ist diese Abbildung. Wo unten noch ein alter Name steht, gilt die rechte Spalte.
+
+| Gemeint | In MySQL / MariaDB | Warum |
+|---|---|---|
+| Schlüssel (`uuid`) | `CHAR(36) CHARACTER SET ascii COLLATE ascii_bin` | MySQL 8 hat keinen UUID-Typ. `ascii` statt `utf8mb4` spart je Schlüssel 108 Byte und hält die Indizes schmal. Der Wert wird **in PHP** erzeugt, nicht in der Datenbank |
+| Zeitpunkt (`timestamptz`) | `DATETIME` | siehe Zeitzonenregel unten |
+| Text ohne Beachtung der Groß-/Kleinschreibung (`citext`) | `VARCHAR(n)` mit `utf8mb4_unicode_ci` | Diese Kollation vergleicht ohnehin ohne Beachtung der Schreibweise — damit ist `UNIQUE` auf E-Mail-Adressen automatisch das, was `citext` geleistet hat |
+| Freitext ohne Index | `TEXT` | |
+| Binärdaten (`bytea`) | `VARBINARY(n)` | |
+| Strukturierte Ablage (`jsonb`) | `JSON` | in MySQL 8 nativ, in MariaDB ein geprüfter Textwert — für beide Systeme derselbe Ausdruck |
+| IP-Adresse (`inet`) | `VARCHAR(45)` | fasst auch die längste IPv6-Schreibweise. Bewusst als Text, weil das Feld nach 30 Tagen geleert und nie berechnet wird |
+| Wahrheitswert | `TINYINT(1)` | |
+| `now()` | `CURRENT_TIMESTAMP` | |
+
+**Tabellenvorgabe:** `ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci`
+
+**Zeitzone — der Punkt, an dem es sonst still schiefgeht.** `DATETIME` speichert **keine** Zeitzone.
+Alle Zeitpunkte werden in **UTC** abgelegt (§8). Damit `CURRENT_TIMESTAMP` auch UTC schreibt, setzt
+die Anwendung unmittelbar nach dem Verbindungsaufbau:
+
+```sql
+SET time_zone = '+00:00';
+```
+
+Ohne diese Zeile landen Vorgabewerte in der lokalen Zeit des Datenbankservers — falsch, aber
+unauffällig, weil im Sommer nur zwei Stunden daneben. Die Umrechnung nach **Europe/Berlin** geschieht
+ausschließlich bei der Anzeige, in PHP.
+
+**Längen:** `TEXT` überall dort, wo frei geschrieben wird. **`VARCHAR(n)` überall dort, wo ein Index,
+ein `UNIQUE` oder ein Fremdschlüssel darauf liegt** — MySQL kann `TEXT` nicht ohne Längenangabe
+indizieren. Die betroffenen Felder tragen unten eine ausdrückliche Länge.
+
+**Prüfbedingungen** (`CHECK`) werden von MySQL ab 8.0.16 und MariaDB ab 10.2 durchgesetzt; beide
+liegen unter der Mindestversion aus §1.4. Sie sind also verbindlich und kein Kommentar.
+
+### 4.1 Gemeinsame Felder
+
+Alle Tabellen:
+
+```sql
+id         CHAR(36) CHARACTER SET ascii COLLATE ascii_bin NOT NULL PRIMARY KEY,
+created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+updated_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+```
+
+Fremdschlüssel mit `ON DELETE RESTRICT`.
 
 ### `organizations`
 | Feld | Typ | Hinweis |
@@ -289,40 +338,40 @@ Alle Tabellen: `id UUID PRIMARY KEY`, `created_at TIMESTAMPTZ NOT NULL DEFAULT n
 | `brand_name` | text | sichtbarer Name, falls abweichend |
 | `street`, `postal_code`, `city` | text | Rechnungsanschrift |
 | `vat_id` | text | optional |
-| `contact_email` | citext, NOT NULL | |
+| `contact_email` | varchar(255), NOT NULL | |
 | `contact_phone` | text | |
-| `archived_at` | timestamptz | |
+| `archived_at` | datetime | |
 
 ### `users`
 | Feld | Typ | Hinweis |
 |---|---|---|
-| `organization_id` | uuid | **NULL bei Admins**, **NOT NULL bei Kunden** — als Datenbankbedingung erzwingen: `CHECK ((role = 'admin' AND organization_id IS NULL) OR (role = 'kunde' AND organization_id IS NOT NULL))`. Siehe §3 Regel 2a |
-| `email` | citext, NOT NULL, UNIQUE | |
+| `organization_id` | char(36) | **NULL bei Admins**, **NOT NULL bei Kunden** — als Datenbankbedingung erzwingen: `CHECK ((role = 'admin' AND organization_id IS NULL) OR (role = 'kunde' AND organization_id IS NOT NULL))`. Siehe §3 Regel 2a |
+| `email` | varchar(255), NOT NULL, UNIQUE | |
 | `first_name`, `last_name` | text | |
-| `role` | text, NOT NULL | `kunde` \| `admin` |
+| `role` | varchar(16), NOT NULL | `kunde` \| `admin` |
 | `password_hash` | text | nur Admin (Argon2id) |
-| `totp_secret_enc` | bytea | nur Admin, AES-256-GCM |
-| `welcome_seen_at` | timestamptz | steuert die Willkommensstrecke |
-| `last_login_at` | timestamptz | |
-| `archived_at` | timestamptz | |
+| `totp_secret_enc` | varbinary(255) | nur Admin, AES-256-GCM |
+| `welcome_seen_at` | datetime | steuert die Willkommensstrecke |
+| `last_login_at` | datetime | |
+| `archived_at` | datetime | |
 
 ### `login_tokens`
-`user_id` · `token_hash` (text, NOT NULL) · `expires_at` · `used_at` · `requested_ip` (inet)
+`user_id` (char(36)) · `token_hash` (varchar(64), NOT NULL, UNIQUE) · `expires_at` (datetime) · `used_at` (datetime) · `requested_ip` (varchar(45))
 
 ### `sessions`
-`user_id` · `token_hash` · `expires_at` · `user_agent` · `ip` (inet)
+`user_id` (char(36)) · `token_hash` (varchar(64), NOT NULL, UNIQUE) · `expires_at` (datetime) · `user_agent` (varchar(255)) · `ip` (varchar(45))
 
 ### `leads`
 Die Anfragen aus dem Bedarfsscheck der öffentlichen Website (§4b).
 
 | Feld | Typ | Hinweis |
 |---|---|---|
-| `submission_id` | uuid, NOT NULL, **UNIQUE** | von der Website erzeugt — verhindert Doppeleinreichung (§4b.3) |
-| `submitted_at` | timestamptz, NOT NULL | Zeitpunkt laut Website |
-| `payload` | jsonb, NOT NULL | vollständige Antworten, unverändert wie gesendet |
+| `submission_id` | char(36), NOT NULL, **UNIQUE** | von der Website erzeugt — verhindert Doppeleinreichung (§4b.3) |
+| `submitted_at` | datetime, NOT NULL | Zeitpunkt laut Website |
+| `payload` | json, NOT NULL | vollständige Antworten, unverändert wie gesendet |
 | `first_name`, `last_name` | text, NOT NULL | |
 | `company` | text, NOT NULL | |
-| `email` | citext, NOT NULL | kleingeschrieben gespeichert |
+| `email` | varchar(255), NOT NULL | kleingeschrieben gespeichert |
 | `phone` | text | |
 | `preferred_contact` | text, NOT NULL | `email` \| `portal` |
 | `recommended_package` | text | vom Regelwerk der Website vorgeschlagen |
@@ -330,20 +379,20 @@ Die Anfragen aus dem Bedarfsscheck der öffentlichen Website (§4b).
 | `status` | text, NOT NULL | `neu` \| `in_pruefung` \| `angebot_erstellt` \| `abgelehnt` |
 | `b2b_confirmed` | boolean, NOT NULL | muss `true` sein, sonst wird nicht gespeichert |
 | `privacy_confirmed` | boolean, NOT NULL | dito |
-| `source_ip` | inet | **wird nach 30 Tagen geleert**, s. §4b.4 |
+| `source_ip` | varchar(45) | **wird nach 30 Tagen geleert**, s. §4b.4 |
 | `landing_page` | text | erste aufgerufene Seite (**nur Pfad**, ohne Abfragezeichenfolge) |
 | `referrer_host` | text | **nur der Hostname** der verweisenden Seite, nie die vollständige Adresse |
 | `utm_source`, `utm_medium`, `utm_campaign`, `utm_term`, `utm_content` | text | Kampagnenkennzeichen, s. §4b.7 |
 | `click_id` | text | `gclid`, `gbraid` oder `wbraid`, falls vorhanden — Feld speichert Wert **und** Art |
 | `self_reported_source` | text | Antwort auf „Wie sind Sie auf uns aufmerksam geworden?" |
 | `delete_after` | date, NOT NULL | Eingang + 6 Monate; entfällt bei Umwandlung |
-| `converted_organization_id` | uuid | gesetzt bei Umwandlung |
+| `converted_organization_id` | char(36) | gesetzt bei Umwandlung |
 | `admin_note` | text | |
 
 ### `projects`
 | Feld | Typ | Hinweis |
 |---|---|---|
-| `organization_id` | uuid, NOT NULL | |
+| `organization_id` | char(36), NOT NULL | |
 | `title` | text, NOT NULL | z. B. „Firmenwebsite Musterbau" |
 | `package` | text, NOT NULL | `start` \| `wachstum` \| `platzhirsch` \| `sonderprojekt` |
 | `included_feedback_rounds` | integer, NOT NULL | aus dem Paket vorbelegt: Start **1**, Wachstum **2**, Platzhirsch **2**, Sonderprojekt nach Angebot |
@@ -354,10 +403,10 @@ Die Anfragen aus dem Bedarfsscheck der öffentlichen Website (§4b).
 | `next_step_text` | text | vom Admin gesetzt, überschreibt die Ableitung |
 | `next_step_url` | text | optionaler Sprungziel-Pfad im Portal |
 | `preview_url` | text | Vorschau-Link |
-| `preview_published_at` | timestamptz | |
+| `preview_published_at` | datetime | |
 | `live_url` | text | |
-| `launched_at` | timestamptz | |
-| `archived_at` | timestamptz | |
+| `launched_at` | datetime | |
+| `archived_at` | datetime | |
 
 ### `offers`
 Ein angenommenes Angebot ist die **vertragliche Grundlage**. Es muss deshalb alles enthalten,
@@ -365,7 +414,7 @@ was später strittig werden kann — nicht nur den Preis.
 
 | Feld | Typ | Hinweis |
 |---|---|---|
-| `project_id` | uuid, NOT NULL | |
+| `project_id` | char(36), NOT NULL | |
 | `number` | text, UNIQUE, NOT NULL | Format §4a |
 | `status` | text, NOT NULL | §5.2 |
 | `package` | text, NOT NULL | `start` \| `wachstum` \| `platzhirsch` \| `sonderprojekt` |
@@ -389,10 +438,10 @@ was später strittig werden kann — nicht nur den Preis.
 | `rights_text` | text, NOT NULL | Fester Text §4c — Rechte und Export nach vollständiger Zahlung |
 | `domain_text` | text, NOT NULL | Fester Text §4c — Domain- und E-Mail-Vorgehen |
 | `valid_until` | date, NOT NULL | |
-| `sent_at` | timestamptz | |
-| `accepted_at` | timestamptz | |
-| `accepted_by_user_id` | uuid | |
-| `accepted_ip` | inet | |
+| `sent_at` | datetime | |
+| `accepted_at` | datetime | |
+| `accepted_by_user_id` | char(36) | |
+| `accepted_ip` | varchar(45) | |
 | `accepted_name` | text | selbst getippter Name des Annehmenden |
 
 > Beträge **immer in Cent als integer**. Nie Fließkomma für Geld.
@@ -422,29 +471,29 @@ zulässig. Bei allen anderen Paketen lehnt das Programm `custom` ab. Ist `custom
 `project_id` · `title` (text) · `description` (text) · `why_needed` (text, die Zeile „Warum wir das brauchen") · `kind` (text: `bestaetigung` \| `angabe` \| `upload` \| `freigabe`) · `status` (§5.4) · `sort_order` (integer) · `answer_text` (text) · `completed_at` · `completed_by_user_id` · `required` (boolean, default true)
 
 ### `task_files`
-`task_id` · `organization_id` (redundant, für die Mandantenprüfung) · `original_name` (text) · `stored_name` (text, UUID) · `mime_type` (text) · `size_bytes` (bigint) · `rights_confirmed` (boolean) · `uploaded_by_user_id`
+`task_id` · `organization_id` (redundant, für die Mandantenprüfung) · `original_name` (varchar(255)) · `stored_name` (char(36)) · `mime_type` (varchar(127)) · `size_bytes` (bigint) · `rights_confirmed` (boolean) · `uploaded_by_user_id`
 
 ### `feedback_rounds`
 Bildet die **enthaltenen Korrekturrunden** ab — der zentrale Scope-Schutz des Geschäftsmodells.
 
 | Feld | Typ | Hinweis |
 |---|---|---|
-| `project_id` | uuid, NOT NULL | |
+| `project_id` | char(36), NOT NULL | |
 | `number` | integer, NOT NULL | 1, 2, … — eindeutig je Projekt |
 | `status` | text, NOT NULL | `offen` \| `eingereicht` \| `bearbeitet` |
-| `opened_at` | timestamptz | |
-| `submitted_at` | timestamptz | Kunde hat gebündelt eingereicht |
-| `completed_at` | timestamptz | SARTU hat eingearbeitet |
+| `opened_at` | datetime | |
+| `submitted_at` | datetime | Kunde hat gebündelt eingereicht |
+| `completed_at` | datetime | SARTU hat eingearbeitet |
 | `included` | boolean, NOT NULL, default true | `false` = zusätzliche, kostenpflichtige Runde |
 
 ### `feedback_items`
-`project_id` · `feedback_round_id` (uuid, NOT NULL) · `body` (text, NOT NULL) · `page_hint` (text) · `status` (§5.5) · `created_by_user_id` · `answered_at` · `answer_text` (text)
+`project_id` · `feedback_round_id` (char(36), NOT NULL) · `body` (text, NOT NULL) · `page_hint` (text) · `status` (§5.5) · `created_by_user_id` · `answered_at` · `answer_text` (text)
 
 ### `approvals`
 Protokolliert **ausschließlich Erklärungen des Kunden**, die später beweisbar sein müssen.
 Interne SARTU-Schritte gehören **nicht** hierher, sondern ins Audit-Log.
 
-`project_id` · `kind` (text: `inhalte` \| `abnahme`) · `granted_at` · `granted_by_user_id` · `granted_ip` (inet) · `granted_name` (text) · `note` (text)
+`project_id` · `kind` (text: `inhalte` \| `abnahme`) · `granted_at` · `granted_by_user_id` · `granted_ip` (varchar(45)) · `granted_name` (text) · `note` (text)
 
 | Wert | Entsteht durch | Wirkung |
 |---|---|---|
@@ -473,7 +522,7 @@ Audit-Ereignis. Eine Erklärung ist **einmalig** — ein zweiter Versuch zeigt n
 `organization_id` · `project_id` (nullable) · `body` (text) · `created_by_user_id` · `answered_at` · `answer_text`
 
 ### `audit_events`
-`actor_user_id` (nullable) · `organization_id` (nullable) · `action` (text) · `entity_type` (text) · `entity_id` (uuid) · `old_value` (text) · `new_value` (text) · `reason` (text) · `detail` (jsonb) · `ip` (inet)
+`actor_user_id` (nullable) · `organization_id` (nullable) · `action` (varchar(64)) · `entity_type` (varchar(64)) · `entity_id` (char(36)) · `old_value` (text) · `new_value` (text) · `reason` (text) · `detail` (json) · `ip` (varchar(45))
 
 **Bei jedem Statuswechsel Pflicht:** `old_value`, `new_value` und der handelnde Benutzer. Bei
 Wechseln, die Geld oder Fristen betreffen, zusätzlich `reason` als **Pflichtfeld** — siehe §12.
@@ -490,7 +539,7 @@ Damit hier nichts erraten wird:
 | Thema | Festlegung |
 |---|---|
 | **Sprache** | `<html lang="de">`, Oberfläche durchgehend deutsch, keine Umschaltung |
-| **Zeitzone** | **Europe/Berlin** für jede Anzeige. Speicherung immer in UTC (`timestamptz`) |
+| **Zeitzone** | **Europe/Berlin** für jede Anzeige. Speicherung immer in UTC (`DATETIME`, Verbindung auf `+00:00`, §4.0) |
 | **Datum** | `TT.MM.JJJJ` (z. B. `04.08.2026`). Nie ISO in der Oberfläche |
 | **Datum mit Uhrzeit** | `TT.MM.JJJJ, HH:MM Uhr` |
 | **Wochentage** | ausgeschrieben: Montag … Sonntag; Woche beginnt Montag |
@@ -1416,6 +1465,8 @@ Es gelten die Sprachregeln aus `CLAUDE_SARTU_WEBSITE_LASTENHEFT_BAUFINAL.md` §2
 - [ ] Kontrast, Fokus, Tastaturbedienung, Labels geprüft
 - [ ] Keine Secrets im Repository; `.env.example` vollständig
 - [ ] Migrationen laufen von leerer Datenbank fehlerfrei durch
+- [ ] **Alle Spaltentypen entsprechen §4.0** — keine PostgreSQL-Typen (`timestamptz`, `citext`, `uuid`, `bytea`, `jsonb`, `inet`) im Migrationscode
+- [ ] Die Datenbankverbindung setzt `SET time_zone = '+00:00'`; ein neu angelegter Datensatz trägt einen UTC-Zeitpunkt, keinen lokalen (§4.0)
 - [ ] Seed erzeugt einen vollständigen Musterkunden über alle Projektstände — geeignet für die Website-Screenshots, ohne echte Namen oder realistische Rechnungsnummern
 - [ ] Audit-Log erfasst alle in §3.9 genannten Ereignisse
 - [ ] E-Mails werden versendet und sind in Klartext und HTML lesbar
