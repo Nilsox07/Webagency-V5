@@ -177,6 +177,63 @@ Fünf Spalten auf Desktop, gestapelt auf Mobil (Reihenfolge wie unten).
 **Meta Description (152 Z.):** `SARTU plant, textet, programmiert und betreibt Ihre Firmenwebsite zum Festpreis. Geführtes Portal statt E-Mail-Chaos, SEO-Basis ab Launch, kein WordPress.`
 **H1:** `Individuell programmierte Firmenwebsites zum Festpreis.`
 **Zielumfang:** 750–950 Wörter · **Schema:** `Organization`, `WebSite` · `FAQPage` optional (bringt keine Rich Results mehr, s. §16)
+### Reihenfolge der Sektionen — verbindlich
+
+| # | Sektion | Beantwortet die Frage |
+|---|---|---|
+| 1 | Aufmacher | Was, für wen, zu welchem Preis |
+| 2 | Das bekommen Sie | „Was kriege ich fürs Geld?" |
+| 3 | Preise | „Was kostet es?" — **und zugleich der Belegersatz** |
+| 4 | Der Kundenbereich | „Was unterscheidet euch?" |
+| 5 | Ablauf | „Wie läuft das?" |
+| 6 | Leistungen im Einzelnen | „Ist alles dabei?" |
+| 7 | Auffindbarkeit | „Werde ich gefunden?" |
+| 8 | Wer dahintersteckt | „Wem vertraue ich hier?" |
+| 9 | Häufige Fragen | die letzten Einwände |
+| 10 | Bedarfsscheck | die Handlung — **zuletzt** |
+
+> **Warum diese Reihenfolge und keine andere.** Gute B2B-Seiten beantworten in fünf Sekunden
+> „welches Problem, welches Produkt, für wen", legen danach **Belege** vor und stellen die
+> Handlung ans Ende. SARTU hat zum Start **keine üblichen Belege** — keine Kundenlogos, keine
+> Fallstudien, keine Bewertungen. Diesen Platz füllen deshalb die drei Dinge, die SARTU
+> tatsächlich vorweisen kann: **der veröffentlichte Festpreis** (Sektion 3), **die benannten
+> Grenzen** (Sektion 8) und **ein Mensch mit Namen und Gesicht** (Sektion 8).
+>
+> **Der Bedarfsscheck steht bewusst ganz unten.** Ein Formular weit oben verlangt eine
+> Entscheidung, bevor ein einziger Grund dafür geliefert wurde. Der Einstieg oben ist der Knopf
+> im Aufmacher — nicht das Formular.
+
+### 5a — Statusanzeige (Auftragslage)
+
+Zeigt, ob SARTU gerade Aufträge annehmen kann. **Der Wert wird im internen Bereich gepflegt** und
+nie im Quelltext erfunden.
+
+| Zustand | Darstellung | Knopfbeschriftung |
+|---|---|---|
+| `offen` | leise Zeile **unter** dem Knopf: gefüllter Punkt + `Freie Kapazitäten` | `Bedarf prüfen lassen` |
+| `knapp` | dieselbe Stelle, halb gefüllter Punkt + `Nur noch wenige Plätze` | `Bedarf prüfen lassen` |
+| `ausgebucht` | **über** dem Knopf, abgesetzte Fläche mit Rand: leerer Punkt mit Ring + `Zurzeit ausgebucht — Warteliste möglich` | `Auf die Warteliste` |
+| *nicht gesetzt* | **nichts wird angezeigt** | `Bedarf prüfen lassen` |
+
+**Wo sie erscheint:** in der Aufmacher-Karte beim Hauptknopf und in Sektion 10 beim Abschluss.
+**Sonst nirgends** — insbesondere **kein Vollbreiten-Streifen über der Navigation**. Ein Balken
+über dem Logo ist das Format von Cookie- und Werbehinweisen; Besucher überspringen diese Zone, und
+eine Betriebsinformation gehört nicht über die Marke.
+
+**Regeln:**
+
+- Der Zustand wird **nie allein über Farbe** unterschieden, sondern über die Füllung des Punktes plus den Text (§2.3)
+- Der Punkt ist lime **mit dünnem Ring in `--ink`** — Lime allein erreicht gegen die helle Fläche nur 1,30:1 und wäre als Grafik unsichtbar
+- Bei `offen` und `knapp` bleibt die Zeile klein und ruhig. Sie beruhigt, sie wirbt nicht
+- Nur bei `ausgebucht` bekommt sie Gewicht und **ändert die Handlung** — eine Anfrage wäre dann eine Sackgasse
+- **Kein Pulsieren, kein Blinken, kein Countdown.** Ein pulsierender Punkt behauptet Echtzeitüberwachung; dieser Wert ändert sich vielleicht monatlich
+- **Keine Zahlen, keine Termine.** Weder „3 Plätze frei" noch „ab Q3" — beides wäre eine ungeprüfte Zusage
+- `Nur noch wenige Plätze` wird **nur gesetzt, wenn es zutrifft**. Als Dauerzustand ist es erfundene Knappheit und damit dieselbe Kategorie wie eine erfundene Referenz
+
+**Gegenstelle:** Der Zustand wird im internen Bereich gesetzt und erzeugt wie jede andere Änderung
+einen Audit-Eintrag (Portal-Lastenheft).
+
+---
 
 ### Sektion 1 — Hero
 
@@ -192,17 +249,29 @@ Fünf Spalten auf Desktop, gestapelt auf Mobil (Reihenfolge wie unten).
 
 **Verhalten:** Desktop zweispaltig (Text 55 %, Visual 45 %). Mobil einspaltig — **H1 zuerst, Buttons direkt darunter, Visual danach**, Trust-Zeile als 2 × 2-Raster. Das Visual scrollt **nicht** horizontal. Unterer Rand des ersten Viewports zeigt bereits einen Anschnitt der nächsten Sektion.
 
-### Sektion 2 — Problem und Entlastung
+### Sektion 2 — Das bekommen Sie
 
-- **H2:** `Eine Website darf nicht Ihr zweiter Job werden.`
-- **Text (55 W.):**
-  > Die meisten Firmenwebsites scheitern nicht am Design, sondern an offenen Entscheidungen: Welche Seiten? Welche Texte? Welches System? Welche SEO-Einstellungen? SARTU nimmt Ihnen diese Entscheidungen gebündelt ab und fragt nur die Fakten ab, die wirklich aus Ihrem Unternehmen kommen müssen.
-- **Drei Blöcke:**
-  1. **`Sie liefern Fakten`** — Leistungen, Zielgruppen, Einzugsgebiet, Belege, Freigaben.
-  2. **`Wir entscheiden den Rest`** — Struktur, Design, Technik, SEO-Grundlage, Hosting, Domainprozess.
-     > **Warum nicht „SARTU entscheidet":** Dieselbe Aussage, aber aus Sicht des Lesers. „SARTU entscheidet" liest sich wie Entzug von Mitsprache — gemeint ist das Gegenteil: Er muss es nicht entscheiden.
-  3. **`Das Portal führt`** — Angebot, Zahlung, Briefing, Dateien, Vorschau, Freigabe, spätere Pflege.
-- **Textlink:** `So läuft ein Projekt ab` → `/ablauf`
+- **H2:** `Das bekommen Sie.`
+- **Fünf Ergebnisse**, groß gesetzt, je Titel und ein kurzer Satz. **Gegenstände, keine Zuständigkeiten** — der Leser weiß an dieser Stelle noch nicht genug, um sich für eine Arbeitsteilung zu interessieren:
+
+| Titel | Satz |
+|---|---|
+| `Eine individuell programmierte Website` | Kein Baukasten, kein WordPress, keine Vorlage von der Stange. |
+| `Texte, die wir schreiben` | Sie liefern Fakten und Stichpunkte — die Website-Texte schreiben wir daraus. |
+| `Domain und Umzug erledigt` | Wir prüfen, verbinden und schalten live. Ihre bestehende E-Mail bleibt erreichbar. |
+| `Betrieb, Sicherung, Aktualisierungen` | Hosting, Backups, Monitoring und technische Pflege laufen bei uns. |
+| `Ein Kundenbereich statt E-Mail-Ketten` | Angebot, Briefing, Vorschau, Freigabe und spätere Pflege an einem Ort. |
+
+- **Textlink:** `Alle Leistungen im Überblick` → `/leistungen`
+
+> **Diese Sektion hat vier misslungene Vorfassungen.** Sie hieß „Eine Website darf nicht Ihr
+> zweiter Job werden." und erklärte die **Arbeitsteilung** zwischen Kunde und SARTU — als drei
+> Karten mit Fließtext, dann als Zweispaltenvergleich, dann als große Liste. Alle drei Fassungen
+> scheiterten am selben Punkt: **An Position 2 weiß der Leser noch nicht, worum es geht.** Eine
+> Aufteilung von Aufgaben interessiert erst, wenn klar ist, welche Aufgaben es überhaupt gibt.
+>
+> Die Arbeitsteilung ist trotzdem eine gute Aussage — sie steht jetzt in **Sektion 5 (Ablauf)**,
+> wo sie hingehört. Diese Sektion hier bleibt bei **Gegenständen**.
 
 ### Sektion 3 — Vier Wege, eine Empfehlung
 
@@ -242,7 +311,40 @@ CTA: `Sonderprojekt besprechen`
 
 **Verhalten:** Der Platzhirsch ist optisch die Empfehlung — größere Fläche, Badge, kräftigerer Aufruf zum Handeln — trägt aber **denselben Informationsumfang** wie die anderen. Das Sonderprojekt steht sichtbar als vierte Möglichkeit, nicht als Fußnote. Mobil: Platzhirsch zuerst, dann Wachstum, Start, Sonderprojekt. Die Aufrufe von Start und Wachstum sind visuell schwächer als der des Platzhirschs, aber vorhanden und anklickbar.
 
-### Sektion 4 — Leistungslandkarte
+### Sektion 4 — Das Portal
+
+- **H2:** `Ihr Projekt bleibt an einem Ort.`
+- **Text (48 W.):**
+  > Kein loses Formular, keine endlose E-Mail-Kette, kein WordPress-Editor. Im SARTU-Portal sehen Sie den nächsten Schritt, bestätigen Fakten, laden Material hoch, prüfen die Vorschau, geben frei — und pflegen später Ihre Öffnungszeiten und Kontaktdaten selbst.
+- **Zwei Listen nebeneinander:**
+  - **`Im Portal`** — Angebot und Annahme · Rechnungen und Zahlung · Domainstatus · Briefing-Aufgaben · Uploads und Bildrechte · Vorschau und Feedback · Öffnungszeiten, Kontakt, Seitenstatus nach Launch
+  - **`Darum kümmern wir uns`** — Layout bauen · Erweiterungen und Updates · SEO-Felder · Navigation und Adressen · Code · Seitenstruktur
+    > **Warum nicht „Nicht im Portal":** Inhaltlich dieselbe Grenze, aber als Entlastung statt als Verbot. Dieselbe Liste beantwortet die Frage „Was muss ich nie wieder selbst machen?" statt „Was darf ich nicht?". Die Grenze bleibt hart — sie wird nur nicht als Einschränkung verkauft.
+- **Bild:** Portal-Screenshot „Briefingaufgaben", Badge „Musteransicht".
+- **CTA:** `Das Portal ansehen` → `/leistung-portal`
+
+### Sektion 5 — Ablauf
+
+- **H2:** `Von wenigen Angaben zur fertigen Website.`
+- **Sechs Schritte** (nummeriert, weil es eine echte Reihenfolge ist):
+  1. **Bedarfsscheck** — Wenige Fragen zu Unternehmen, Ziel, Umfang und Domain.
+  2. **Geprüftes Angebot** — Wir bestätigen Empfehlung, Seitenstruktur, Preis und Zahlungsplan.
+  3. **Portal-Onboarding** — Bekannte Fakten übernehmen wir, offene klären wir gezielt.
+  4. **Produktion** — Wir bauen die Website; KI unterstützt, geprüft und freigegeben wird von uns.
+  5. **Vorschau und Freigabe** — Sie sehen die Website und geben gebündelt Feedback.
+  6. **Launch und Betrieb** — Domain, Monitoring, Backups, technische Suchgesundheit.
+- **CTA:** `Ablauf im Detail` → `/ablauf`
+
+**Am Ende dieser Sektion, als Abschluss des Zeitstrahls — die Arbeitsteilung:**
+
+> `Ihr Anteil: Was Ihr Betrieb macht, für wen, in welchem Gebiet, Belege und Freigaben.`
+> `Alles Übrige — Struktur, Texte, Gestaltung, Programmierung, SEO-Grundlage, Domain, Hosting, Betrieb und die Verantwortung für das Ergebnis — liegt bei uns.`
+
+Zwei Zeilen, keine Liste, keine Karten, keine Spalten. **Hier funktioniert die Aussage**, weil der
+Leser die sechs Schritte gerade gesehen hat und weiß, wovon die Rede ist. Als eigene Sektion weit
+oben ist sie viermal misslungen (§5 Sektion 2).
+
+### Sektion 6 — Leistungen im Einzelnen
 
 - **H2:** `Alles, was eine Firmenwebsite braucht. Ohne Aufpreisliste.`
 - **Einleitung (30 W.):**
@@ -262,19 +364,7 @@ CTA: `Sonderprojekt besprechen`
 
 - **CTA:** `Alle Leistungen im Überblick` → `/leistungen`
 
-### Sektion 5 — Das Portal
-
-- **H2:** `Ihr Projekt bleibt an einem Ort.`
-- **Text (48 W.):**
-  > Kein loses Formular, keine endlose E-Mail-Kette, kein WordPress-Editor. Im SARTU-Portal sehen Sie den nächsten Schritt, bestätigen Fakten, laden Material hoch, prüfen die Vorschau, geben frei — und pflegen später Ihre Öffnungszeiten und Kontaktdaten selbst.
-- **Zwei Listen nebeneinander:**
-  - **`Im Portal`** — Angebot und Annahme · Rechnungen und Zahlung · Domainstatus · Briefing-Aufgaben · Uploads und Bildrechte · Vorschau und Feedback · Öffnungszeiten, Kontakt, Seitenstatus nach Launch
-  - **`Darum kümmern wir uns`** — Layout bauen · Erweiterungen und Updates · SEO-Felder · Navigation und Adressen · Code · Seitenstruktur
-    > **Warum nicht „Nicht im Portal":** Inhaltlich dieselbe Grenze, aber als Entlastung statt als Verbot. Dieselbe Liste beantwortet die Frage „Was muss ich nie wieder selbst machen?" statt „Was darf ich nicht?". Die Grenze bleibt hart — sie wird nur nicht als Einschränkung verkauft.
-- **Bild:** Portal-Screenshot „Briefingaufgaben", Badge „Musteransicht".
-- **CTA:** `Das Portal ansehen` → `/leistung-portal`
-
-### Sektion 6 — SEO und GEO sind eingebaut
+### Sektion 7 — SEO und GEO sind eingebaut
 
 - **H2:** `Ihre Website ist ab dem ersten Tag auffindbar.`
 - **Text (42 W.):**
@@ -286,26 +376,23 @@ CTA: `Sonderprojekt besprechen`
 - **Pflichthinweis:**
   > Rankings, Anfragen oder Nennungen in KI-Systemen kann niemand garantieren. Wir bauen das Fundament und halten die technische Suchgesundheit im Betrieb im Blick.
 
-### Sektion 7 — Ablauf
+### Sektion 8 — Wer dahintersteckt
 
-- **H2:** `Von wenigen Angaben zur fertigen Website.`
-- **Sechs Schritte** (nummeriert, weil es eine echte Reihenfolge ist):
-  1. **Bedarfsscheck** — Wenige Fragen zu Unternehmen, Ziel, Umfang und Domain.
-  2. **Geprüftes Angebot** — Wir bestätigen Empfehlung, Seitenstruktur, Preis und Zahlungsplan.
-  3. **Portal-Onboarding** — Bekannte Fakten übernehmen wir, offene klären wir gezielt.
-  4. **Produktion** — Wir bauen die Website; KI unterstützt, geprüft und freigegeben wird von uns.
-  5. **Vorschau und Freigabe** — Sie sehen die Website und geben gebündelt Feedback.
-  6. **Launch und Betrieb** — Domain, Monitoring, Backups, technische Suchgesundheit.
-- **CTA:** `Ablauf im Detail` → `/ablauf`
+- **H2:** `Wer hier arbeitet.`
+- **Echtes Foto** von `[GRUENDER_NAME]`, keine Bestandsaufnahme, kein Platzhalter, der wie ein Foto wirkt. Steht das Foto nicht zur Verfügung, entfällt die Sektion **vollständig** — ein leerer Rahmen an einer Vertrauensstelle ist schlechter als gar nichts (Design-Briefing §4a).
+- **Name und Rolle:** `[GRUENDER_NAME]`, gründergeführt.
+- **Zwei bis drei Sätze Haltung.** Kein Lebenslauf, keine Erfolgsgeschichte, keine Zahlen.
+- **`Was SARTU bewusst nicht ist`** — vier Punkte, knapp:
+  `kein Baukasten` · `kein WordPress-Hoster` · `keine Billig-Seitenschleuder` · `kein Anbieter für Privat- und Hobbyseiten`
+- **Textlink:** `Mehr über SARTU` → `/ueber-uns`
 
-### Sektion 8 — Bedarfsscheck-Einstieg
-
-- **H2:** `Welche Website passt zu Ihrem Unternehmen?`
-- **Text (36 W.):**
-  > Der Bedarfsscheck fragt nicht nach Seitenzahlen, Farben oder SEO-Stufen. Sie beantworten wenige Fragen zu Ihrem Geschäft und sehen sofort eine vorläufige Empfehlung mit Preis. Danach prüfen wir persönlich.
-- **Chips (nur Anzeige):** `Branche` · `Region` · `Ziel` · `Umfang` · `Domain` · `Besonderheiten`
-- **Vertrauenszeile:** `Dauert etwa 3 Minuten` · `Preis vor Kontaktdaten` · `Kein Pflichttermin` · `Unverbindlich`
-- **CTA:** `Bedarf prüfen lassen` → `/briefing`
+> **Warum diese Sektion existiert und warum genau hier.** Sie ist der **Belegersatz**. Der übliche
+> Platz für Kundenlogos und Fallstudien bleibt bei SARTU zum Start leer. Was stattdessen trägt:
+> ein Mensch mit Namen und Gesicht — und die ausdrückliche Aufzählung dessen, was SARTU **nicht**
+> macht. Wer seine Grenzen benennt, wirkt geprüft; wer nur Vorzüge aufzählt, wirkt beliebig.
+>
+> **Ehrlichkeitsregel (§11):** Solange eine Einzelperson arbeitet, heißt es `gründergeführt` —
+> nie `unser Team`. Kein Wir, das größer tut, als es ist.
 
 ### Sektion 9 — FAQ (8 Fragen, sichtbar, Akkordeon)
 
@@ -326,14 +413,25 @@ CTA: `Sonderprojekt besprechen`
 8. **Können Sie eine bestimmte Google-Position zusichern?**
    > Nein, und niemand kann das seriös. Wir bauen das technische und inhaltliche Fundament und halten es im Betrieb sauber.
 
-### Sektion 10 — Abschluss-CTA
+### Sektion 10 — Bedarfsscheck-Einstieg
 
-- **H2:** `Wenige Angaben reichen für den ersten Schritt.`
-- **Text:** `Sie beschreiben Ihr Unternehmen, Ziel und Ihren Domainstatus. Danach sehen Sie eine vorläufige Empfehlung mit Preis.`
-- **Buttons:** `Bedarf prüfen lassen` (primär) · `Preise ansehen` (sekundär)
-- **Hinweis:** `Unverbindlich bis zum geprüften Angebot. Alle Preise netto zzgl. USt. Ausschließlich für Unternehmer.`
+- **H2:** `Welche Website passt zu Ihrem Unternehmen?`
+- **Text (36 W.):**
+  > Der Bedarfsscheck fragt nicht nach Seitenzahlen, Farben oder SEO-Stufen. Sie beantworten wenige Fragen zu Ihrem Geschäft und sehen sofort eine vorläufige Empfehlung mit Preis. Danach prüfen wir persönlich.
+- **Chips (nur Anzeige):** `Branche` · `Region` · `Ziel` · `Umfang` · `Domain` · `Besonderheiten`
+- **Vertrauenszeile:** `Dauert etwa 3 Minuten` · `Preis vor Kontaktdaten` · `Kein Pflichttermin` · `Unverbindlich`
+- **CTA:** `Bedarf prüfen lassen` (primär) → `/briefing` · `Preise ansehen` (sekundär, als Textlink) → `/preise`
+- **Statuszeile** nach §5a — bei `ausgebucht` steht sie über dem Knopf und die Beschriftung lautet `Auf die Warteliste`
+- **Pflichthinweis, direkt darunter:**
+  `Unverbindlich bis zum geprüften Angebot. Alle Preise netto zzgl. USt. Ausschließlich für Unternehmer.`
 
----
+> **Diese Sektion ist zugleich der Abschluss der Seite.** Der frühere separate Abschluss-Aufruf
+> („Wenige Angaben reichen für den ersten Schritt.") entfällt — er sagte dasselbe wie diese
+> Sektion, nur zwei Bildschirmhöhen später. Zwei Aufrufe hintereinander schwächen beide.
+>
+> **Warum der Bedarfsscheck ganz unten steht:** Wer bis hierher gescrollt hat, hat den Preis
+> gesehen, den Kundenbereich, den Ablauf, die Leistungen und die Person dahinter. Erst dann ist
+> ein Formular eine sinnvolle Bitte. Der Einstieg weiter oben ist der Knopf im Aufmacher.
 
 ## 6. `/leistungen`
 
