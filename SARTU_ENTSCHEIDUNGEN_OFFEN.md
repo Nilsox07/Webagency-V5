@@ -77,58 +77,44 @@ Recherche → Prüfliste → **2–3 klickbare Startseitenvarianten mit echten T
 | **Bewegung erwünscht** | Ruhige, scrollgebundene Bewegung nach Design-Briefing §3.2. Umsetzung in CSS ohne JavaScript |
 | **Kein Glaseffekt** | Geprüft und abgelehnt, Begründung in Design-Briefing §3.2 |
 
-### Akzentfarbe — **entschieden 25.07.2026**
+### Farbsystem — **entschieden 25.07.2026, Fassung 3**
 
-**Ein einziger Akzent, Petrol.** Drei Töne, alle gegen die tatsächlichen Hintergründe nachgerechnet:
+**Eine einzige Farbe: Lime. Sie ist eine Flächenfarbe, nie eine Schriftfarbe auf hellem Grund.**
+Alles Übrige ist neutral — Creme, Papier, Tinte.
 
-| Variable | Hex | Wofür | Kontrast |
-|---|---|---|---|
-| `--accent` | `#1a6165` | Knopf, Link, Empfehlungs-Badge, Fortschrittsbalken | 6,16:1 auf Creme · 6,81:1 für hellen Text darauf |
-| `--accent-deep` | `#12474b` | Hover und gedrückter Zustand | 8,94:1 · 9,87:1 |
-| `--accent-bright` | `#5fb3b6` | dieselbe Farbe auf dunklen Abschnitten | 7,72:1 auf `--ink` |
+| Variable | Hex | Rolle |
+|---|---|---|
+| `--lime` | `#a3e635` | Fläche für Hauptaktionen, Badge, Textmarker |
+| `--lime-hover` | `#8dc92a` | Hover |
+| `--lime-press` | `#7ab023` | gedrückt |
+| `--lime-soft` | `#e4f5b8` | zarte Tönung für hervorgehobene Blöcke |
+| `--ink` | `#14110d` | die **einzige** Textfarbe auf allen Lime-Flächen |
 
-**Abgelöst: das Terrakotta `#c1452f`.** Es erreicht als Linkfarbe nur **4,36:1** und verfehlt damit
-die 4,5:1 aus §2.3 — es war nicht nur Geschmackssache, sondern nicht regelkonform.
-
-**Warum nicht zwei gleichrangige Akzente:** Der erste Entwurf hatte Terrakotta auf den Knöpfen und
-Petrol auf Punkten, Aufzählungszeichen und Labels — **zwei Farben für dieselbe Aufgabe**, ohne
-Rangordnung. Das war ein wesentlicher Grund für die unruhige Farbigkeit.
-
-### Zweite Farbe — Lime, aber nur in einer Rolle
-
-Geprüft 25.07.2026. **Lime kann keine zweite Handlungsfarbe sein**, das ist keine Geschmacksfrage:
+**Nachgerechnet:**
 
 | Rolle | Wert | |
 |---|---|---|
-| Lime als Link-/Textfarbe auf hellem Grund | 1,30:1 | **fällt durch** (4,5 nötig) |
-| Heller Text auf einem Lime-Knopf | 1,44:1 | **fällt durch** |
-| Dunkler Text auf einer Lime-Fläche | 12,48:1 | sehr gut |
-| Lime als Signal auf dunklem Abschnitt | 12,48:1 | sehr gut |
+| Dunkler Text auf Lime-Fläche | 12,48:1 | die Rolle, die trägt |
+| Lime als Signal auf dunklem Abschnitt | 12,48:1 | erlaubt |
+| Lime als Link-/Textfarbe auf hellem Grund | 1,30:1 | **verboten** |
+| Heller Text auf einer Lime-Fläche | 1,44:1 | **verboten** |
 
-Daraus folgt eine **Rollentrennung statt einer Rangordnung** — und die macht die Oberfläche
-gleichzeitig verständlicher:
+**Umsetzung je Element:**
 
-| Farbe | Hex | Rolle | Regel |
-|---|---|---|---|
-| **Petrol** | `#1a6165` | **Handlung** | Alles Anklickbare: Knöpfe, Links, Fokusring. **Immer** |
-| **Lime** | `#a3e635` | **Markierung** | Empfehlungs-Badge, hervorgehobene Fläche, Signalpunkt auf dunklem Grund. **Nie anklickbar** |
+- **Hauptknopf:** Lime gefüllt, Text in `--ink`. Hover und gedrückt ändern nur die Fläche
+- **Zweitknopf:** transparent, Umrandung in `--ink`, Text in `--ink`. Kein Lime
+- **Links im Fließtext:** Text in `--ink`, Lime als **Textmarker** dahinter (`background-image`/`background-size`), beim Überfahren wächst er auf volle Höhe. **Kein** `text-decoration: underline` in Lime
+- **Fokusring:** Doppelring — innen 2 px `--ink`, außen 2 px `--lime`. Lime allein erreicht gegen Creme nur 1,30:1
+- **Jede Lime-Fläche auf hellem Grund braucht eine 1 px-Umrandung**, sonst verläuft die Kante
+- **Keine vollflächigen Lime-Bänder.** Lime bleibt auf Knöpfe, Badges, Textmarker und kleine Blöcke beschränkt
 
-**Die Regel in einem Satz: Was petrolfarben ist, kann man anklicken. Was limefarben ist, nicht.**
-Damit ist die zweite Farbe kein Wettbewerb um Aufmerksamkeit, sondern eine Information.
-
-**Harte Grenzen für Lime:**
-
-- **Nie** als Text- oder Linkfarbe auf hellem Grund
-- **Nie** als Knopffläche
-- Nur als **Fläche mit dunklem Text darauf** (`--ink`) oder als Signal auf dunklem Abschnitt
-- Eine Lime-Fläche auf Creme braucht eine **Umrandung** — der Helligkeitsunterschied beträgt nur 1,30:1, ohne Rand verläuft die Kante
-- **Höchstens drei Vorkommen je Seite.** Lime ist laut; sparsam eingesetzt wirkt es entschieden, flächig eingesetzt wirkt es nach Energiegetränk
-
-**Nicht gewählt und warum:** Marineblau hätte die besten Kontrastwerte (10:1), ist aber der
-Vorgabewert praktisch jeder Agentur- und Anbieterseite — für ein Projekt, das sich gerade vom
-Allerweltsaussehen löst, das falsche Signal. Tannengrün trägt im deutschen B2B stark die Lesart
-„ökologisch/nachhaltig", die hier nichts zu suchen hat. Bronze bestand mit 4,59:1 nur knapp und
-hätte bei jeder kleinen Anpassung des Hintergrunds gerissen.
+> **Zwei abgelöste Fassungen, damit niemand sie wieder aufgreift:**
+> **Fassung 1** war Terrakotta `#c1452f` — erreichte als Linkfarbe nur 4,36:1 und verfehlte die
+> 4,5:1 aus Design-Briefing §2.3.
+> **Fassung 2** war Petrol `#1a6165` als Handlungsfarbe plus Lime als Markierung. Technisch
+> einwandfrei, in der Anwendung aber nicht stimmig — zwei Farben, die um dieselbe Aufmerksamkeit
+> konkurrierten. **Beide sind ungültig.** Wer `--accent`, `--terra` oder `--petrol` im Code
+> findet, ersetzt sie durch das System oben.
 
 **Die Grenze bleibt:** Zielgruppe sind Unternehmer zwischen 35 und 60 aus Handwerk, Handel und
 Dienstleistung, die einen verlässlichen Partner für Jahre suchen. Verspieltheit darf Sympathie
@@ -156,7 +142,8 @@ durchbaut, hat das Gate verletzt.
 | Punkt | Stand |
 |---|---|
 | Ansichten aus dem Kundenbereich | entstehen mit Sitzung 2 — die zwei Bildplätze der Startseite hängen daran |
-| Foto des Gründers | *offen* — echtes Foto nötig, kein Bestandsfoto, kein Platzhalter, der wie ein Foto wirkt |
+| `[GRUENDER_NAME]` | *offen* — Name für Startseite §5 Sektion 8 und `/ueber-uns` |
+| Foto des Gründers | *offen* — echtes Foto nötig, kein Bestandsfoto, kein Platzhalter, der wie ein Foto wirkt. **Fehlt es, entfällt Sektion 8 der Startseite vollständig** — kein leerer Rahmen an einer Vertrauensstelle |
 | **Ein bis zwei gekennzeichnete Demoprojekte** | *offen, zu entscheiden* — vollständige Beispielseiten für erfundene, **als solche benannte** Betriebe. Liefert Bildmaterial, Arbeitsbeleg und einen Belastungstest des Produktionswegs in einem |
 | Bestandsfotos | **ausgeschlossen** (Design-Briefing §3.2a) |
 
