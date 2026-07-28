@@ -219,6 +219,35 @@ Fünf Spalten auf Desktop, gestapelt auf Mobil (Reihenfolge wie unten).
 
 ---
 
+## 5aa — Sprachregel für alle Kundentexte
+
+**Die häufigste Ursache unverständlicher Abschnitte auf dieser Seite ist immer dieselbe:
+Fachwörter aus unserer Arbeitsweise landen im Verkaufstext.**
+
+| Wir sagen intern | Der Leser versteht | Auf der Seite steht |
+|---|---|---|
+| Briefing | nichts | *Sie beantworten die Fragen zu Ihrem Betrieb* |
+| Onboarding | nichts | *Wir tragen ein, was wir schon wissen* |
+| Freigabe | ungefähr | *Sie schauen sich die Vorschau an und sagen Ja* |
+| Produktion | „Fabrik?" | *Wir bauen die Website* |
+| Cockpit | nichts | *Ihre Übersicht* |
+| Add-on | nichts | *später dazubuchen* |
+
+**Drei Regeln, die für jeden Text auf der öffentlichen Website gelten:**
+
+1. **Verben statt Substantive.** `Sie laden Unterlagen hoch` statt `Upload von Unterlagen`. Was der Leser **tut** oder **sieht**, nicht wie der Arbeitsschritt heißt
+2. **Kein Bild ohne Aussage.** `Ihr Projekt bleibt an einem Ort` klingt gut und sagt nichts — welcher Ort, und was habe ich davon? Bilder ersetzen keine Information
+3. **Der Unterschied wird ausgesprochen, nicht angedeutet.** Wenn etwas besser ist als das Übliche, muss dastehen, was das Übliche ist — beschrieben als Erfahrung des Lesers (`kein Suchen in alten E-Mails`), nicht als Behauptung über Wettbewerber
+
+**Prüfung vor jeder Abgabe:** Jede Überschrift und jeder Absatz laut lesen und fragen —
+*„Würde ein Malermeister nach diesem Satz sagen können, worum es geht und was er davon hat?"*
+Wenn nein, ist der Satz nicht fertig, egal wie gut er klingt.
+
+> **Ausnahme:** `Bedarfsscheck` ist ein bewusst geprägter eigener Begriff und bleibt. Er ist aus
+> sich heraus verständlich und wird an jeder Verwendungsstelle durch den umgebenden Satz erklärt.
+
+---
+
 ## 5b — Hauptnavigation
 
 `Ergebnis` · `Preise` · `Ablauf` · **`Portal`** · `Über uns` · `Fragen`
@@ -281,15 +310,28 @@ einen Audit-Eintrag (Portal-Lastenheft).
 
 ### Sektion 2 — Der Kundenbereich
 
-- **H2:** `Ihr Projekt bleibt an einem Ort.`
-- **Text (48 W.):**
-  > Kein loses Formular, keine endlose E-Mail-Kette, kein WordPress-Editor. Im SARTU-Portal sehen Sie den nächsten Schritt, bestätigen Fakten, laden Material hoch, prüfen die Vorschau, geben frei — und pflegen später Ihre Öffnungszeiten und Kontaktdaten selbst.
-- **Zwei Listen nebeneinander:**
-  - **`Im Portal`** — Angebot und Annahme · Rechnungen und Zahlung · Domainstatus · Briefing-Aufgaben · Uploads und Bildrechte · Vorschau und Feedback · Öffnungszeiten, Kontakt, Seitenstatus nach Launch
-  - **`Darum kümmern wir uns`** — Layout bauen · Erweiterungen und Updates · SEO-Felder · Navigation und Adressen · Code · Seitenstruktur
-    > **Warum nicht „Nicht im Portal":** Inhaltlich dieselbe Grenze, aber als Entlastung statt als Verbot. Dieselbe Liste beantwortet die Frage „Was muss ich nie wieder selbst machen?" statt „Was darf ich nicht?". Die Grenze bleibt hart — sie wird nur nicht als Einschränkung verkauft.
-- **Bild:** Portal-Screenshot „Briefingaufgaben", Badge „Musteransicht".
-- **CTA:** `Das Portal ansehen` → `/leistung-portal`
+- **Eyebrow:** `Kundenbereich`
+- **H2:** `Sie müssen nie fragen, wie weit wir sind.`
+- **Text:**
+  > Sie bekommen einen eigenen Zugang zu Ihrem Projekt. Dort sehen Sie, was gerade ansteht und was schon erledigt ist, laden Unterlagen und Bilder hoch, schauen sich die fertige Vorschau an und geben sie frei. Nach dem Start ändern Sie dort Öffnungszeiten, Kontaktdaten und Bilder selbst und sehen Ihre Rechnungen.
+- **Der Unterschied, als eigene hervorgehobene Zeile:**
+  > `Kein Suchen in alten E-Mails. Kein Anruf, um den Stand zu erfahren. Keine Datei, die niemand mehr findet.`
+- **Bild:** Ansicht aus dem Kundenbereich, Vermerk `Musteransicht`. Solange keine echte Aufnahme vorliegt: ehrlich beschrifteter Bildplatz, **keine nachgebaute Oberfläche**
+- **Textlink:** `Den Kundenbereich ansehen` → `/leistung-portal`
+
+> **Diese Sektion hatte eine misslungene Vorfassung.** Sie hieß `Ihr Projekt bleibt an einem
+> Ort.` und zählte darunter `Angebot, Briefing, Vorschau, Freigabe und die spätere Pflege` auf.
+> Beides scheiterte am selben Punkt: **Der Leser weiß danach nicht, was das Ding ist, was er
+> damit tun kann und warum es besonders sein soll.**
+>
+> „An einem Ort" ist ein Bild, keine Aussage — welcher Ort, und was habe ich davon? Und
+> `Briefing`, `Freigabe`, `Onboarding` sind **Namen für Arbeitsschritte aus unserer Sicht**.
+> Ein Malerbetrieb hat dafür kein Vorwissen; er hat noch nie einen Kundenbereich bei einer
+> Agentur gehabt, weil es das dort nicht gibt. Genau deshalb muss hier **beschrieben** statt
+> **benannt** werden.
+>
+> **Die drei Fragen, die jede Fassung dieser Sektion beantworten muss, in dieser Reihenfolge:**
+> Was ist das? · Was kann ich damit tun? · Warum hat das sonst niemand?
 
 ### Sektion 3 — Ablauf
 
@@ -297,7 +339,7 @@ einen Audit-Eintrag (Portal-Lastenheft).
 - **Sechs Schritte** (nummeriert, weil es eine echte Reihenfolge ist):
   1. **Bedarfsscheck** — Wenige Fragen zu Unternehmen, Ziel, Umfang und Domain.
   2. **Geprüftes Angebot** — Wir bestätigen Empfehlung, Seitenstruktur, Preis und Zahlungsplan.
-  3. **Portal-Onboarding** — Bekannte Fakten übernehmen wir, offene klären wir gezielt.
+  3. **Ihre Angaben** — Was wir schon wissen, tragen wir ein. Nach dem Rest fragen wir gezielt — im Kundenbereich, wann es Ihnen passt.
   4. **Produktion** — Wir bauen die Website; KI unterstützt, geprüft und freigegeben wird von uns.
   5. **Vorschau und Freigabe** — Sie sehen die Website und geben gebündelt Feedback.
   6. **Launch und Betrieb** — Domain, Monitoring, Backups, technische Suchgesundheit.
