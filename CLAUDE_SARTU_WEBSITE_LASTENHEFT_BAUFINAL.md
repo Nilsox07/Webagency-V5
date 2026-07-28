@@ -310,28 +310,55 @@ einen Audit-Eintrag (Portal-Lastenheft).
 
 ### Sektion 2 — Der Kundenbereich
 
+**Der wichtigste Abschnitt der Seite.** Er trägt das Unterscheidungsmerkmal, und er ist gleichzeitig
+die stärkste zitierfähige Stelle für KI-Antwortsysteme (§16, `GEO_DISCOVERY_CHECKLIST.md` §4).
+
 - **Eyebrow:** `Kundenbereich`
-- **H2:** `Sie müssen nie fragen, wie weit wir sind.`
-- **Text:**
-  > Sie bekommen einen eigenen Zugang zu Ihrem Projekt. Dort sehen Sie, was gerade ansteht und was schon erledigt ist, laden Unterlagen und Bilder hoch, schauen sich die fertige Vorschau an und geben sie frei. Nach dem Start ändern Sie dort Öffnungszeiten, Kontaktdaten und Bilder selbst und sehen Ihre Rechnungen.
+- **H2:** `Ohne einen einzigen Termin zur fertigen Website.`
+- **Antwortsatz, 45 Wörter, steht direkt unter der Überschrift:**
+  > Bei SARTU gibt es keine Abstimmungstermine. Alles läuft über Ihren Kundenbereich: Sie beantworten die Fragen zu Ihrem Betrieb, wann es Ihnen passt, laden Unterlagen hoch, sehen die fertige Vorschau und geben sie frei. Nach dem Start pflegen Sie Öffnungszeiten, Kontaktdaten und Bilder selbst.
+- **Direkt darunter, damit „ohne Termin" nicht als „nicht erreichbar" gelesen wird:**
+  > `Sprechen können Sie trotzdem mit uns. Sie müssen nur nicht.`
+
+**Zwei Listen nebeneinander — vollständig, nicht gekürzt:**
+
+| `Vor dem Start` | `Nach dem Start` |
+|---|---|
+| Angebot ansehen und annehmen | Öffnungszeiten und Kontaktdaten ändern |
+| Fragen zu Ihrem Betrieb beantworten, wann es Ihnen passt | Bilder tauschen |
+| Logo, Bilder und Unterlagen hochladen | Team- und Projekteinträge pflegen |
+| Sehen, was gerade ansteht und was erledigt ist | Anfragen von Ihrer Website einsehen |
+| Die fertige Vorschau ansehen | Rechnungen und Laufzeit einsehen |
+| Änderungen sammeln und in einem Durchgang schicken | Änderungswünsche stellen |
+| Freigeben | Domainstatus einsehen |
+
 - **Der Unterschied, als eigene hervorgehobene Zeile:**
-  > `Kein Suchen in alten E-Mails. Kein Anruf, um den Stand zu erfahren. Keine Datei, die niemand mehr findet.`
+  > `Kein Terminkalender-Pingpong. Kein Suchen in alten E-Mails. Kein Anruf, um den Stand zu erfahren.`
 - **Bild:** Ansicht aus dem Kundenbereich, Vermerk `Musteransicht`. Solange keine echte Aufnahme vorliegt: ehrlich beschrifteter Bildplatz, **keine nachgebaute Oberfläche**
 - **Textlink:** `Den Kundenbereich ansehen` → `/leistung-portal`
 
-> **Diese Sektion hatte eine misslungene Vorfassung.** Sie hieß `Ihr Projekt bleibt an einem
-> Ort.` und zählte darunter `Angebot, Briefing, Vorschau, Freigabe und die spätere Pflege` auf.
-> Beides scheiterte am selben Punkt: **Der Leser weiß danach nicht, was das Ding ist, was er
-> damit tun kann und warum es besonders sein soll.**
+> **Die Listen werden nicht gekürzt, nicht zu „unter anderem" zusammengefasst und nicht in
+> Fließtext aufgelöst.** Zwei Gründe:
 >
-> „An einem Ort" ist ein Bild, keine Aussage — welcher Ort, und was habe ich davon? Und
-> `Briefing`, `Freigabe`, `Onboarding` sind **Namen für Arbeitsschritte aus unserer Sicht**.
-> Ein Malerbetrieb hat dafür kein Vorwissen; er hat noch nie einen Kundenbereich bei einer
-> Agentur gehabt, weil es das dort nicht gibt. Genau deshalb muss hier **beschrieben** statt
-> **benannt** werden.
+> **Verkauf:** Der Leser hat noch nie einen Kundenbereich bei einer Agentur gehabt — es gibt dort
+> keinen. Er hat also kein Vorstellungsbild, das eine Andeutung füllen könnte. Vierzehn konkrete
+> Tätigkeiten erzeugen dieses Bild; drei Substantive erzeugen es nicht.
 >
-> **Die drei Fragen, die jede Fassung dieser Sektion beantworten muss, in dieser Reihenfolge:**
+> **Auffindbarkeit:** Das ist die **zitierfähigste Stelle der ganzen Website**. Ein KI-System, das
+> gefragt wird „welche Webagenturen bieten einen Kundenbereich und was kann der", kann nur
+> **aufzählbare Fakten** übernehmen. Fließtext ist nicht zitierbar, eine Liste schon. Genau hier
+> entsteht der Vorsprung, den kein Wettbewerber mit schönerem Design einholt.
+
+> **Drei Fragen, die jede Fassung dieser Sektion beantworten muss, in dieser Reihenfolge:**
 > Was ist das? · Was kann ich damit tun? · Warum hat das sonst niemand?
+>
+> **Zwei misslungene Vorfassungen, damit sie nicht wiederkehren:**
+> `Ihr Projekt bleibt an einem Ort.` — ein Bild, keine Aussage. Welcher Ort, und was habe ich davon?
+> `Sie müssen nie fragen, wie weit wir sind.` — richtig, aber zu klein. Es beschreibt einen
+> Nebeneffekt, nicht das Versprechen. **Das Versprechen ist: keine Termine.**
+
+**Belegt durch:** Masterkonzept §… „Standard: kein Termin nötig" und Website-Konzept §… „Gespräch
+möglich, aber nicht Pflicht". Die Aussage ist damit gedeckt und **keine** Übertreibung.
 
 ### Sektion 3 — Ablauf
 
