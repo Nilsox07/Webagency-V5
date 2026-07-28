@@ -90,6 +90,31 @@ höchster Zufriedenheit. Das ist als Portal-Funktion vorgesehen, nicht als Marke
 
 ---
 
+## 0a. Der stärkste zitierfähige Inhalt, den SARTU hat
+
+**Der Kundenbereich.** Nicht die Preise, nicht die Leistungen — die haben andere auch.
+
+Ein KI-Antwortsystem, das gefragt wird *„welche Webagentur bietet einen Kundenbereich, und was kann
+der?"*, braucht **aufzählbare Fakten**. Fließtext ist nicht zitierbar, eine Liste konkreter
+Funktionen schon. Genau deshalb steht auf der Startseite (§5 Sektion 2) und auf
+`/leistung-portal` eine **vollständige, ungekürzte Funktionsliste** — vierzehn Tätigkeiten,
+getrennt nach „vor dem Start" und „nach dem Start".
+
+**Warum das ein Vorsprung ist, den Design nicht einholt:** Die meisten Agenturen haben keinen
+Kundenbereich. Wer keinen hat, kann keine Funktionsliste veröffentlichen. Die Frage ist damit
+faktisch nur von wenigen Anbietern beantwortbar — und wer sie am konkretesten beantwortet, wird
+zitiert.
+
+**Was die Wirkung zerstört:**
+
+- Die Liste kürzen oder mit „unter anderem" abbinden
+- Sie in Fließtext auflösen, weil er „hübscher" wirkt
+- Die Funktionen hinter einer Anmeldung verstecken
+- Sie nur als Bildschirmaufnahme zeigen — **Text im Bild ist für KI-Systeme unsichtbar**
+  (`GEO_DISCOVERY_CHECKLIST.md` §4)
+
+---
+
 ## 1. Die unbequeme Vorbemerkung
 
 **Es gibt hier keine Suchvolumina.** Ich habe keine verlässlichen Zahlen für den deutschen Markt
