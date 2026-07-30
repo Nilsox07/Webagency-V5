@@ -187,9 +187,9 @@ Fünf Spalten auf Desktop, gestapelt auf Mobil (Reihenfolge wie unten).
 | 3 | Ablauf | „Wie läuft das?" | Zeitstrahl |
 | 4 | Preise | „Was kostet es?" — **und der Belegersatz** | Stufen, eine dunkel |
 | 5 | Die Zusage | Luft holen | **randlos dunkel, ein Satz** |
-| 6 | Leistungen | „Ist alles dabei?" | Zeilen — die einzige Liste |
-| 7 | Musterprojekte | „Was kommt dabei heraus?" | Karten |
-| 8 | Wer dahintersteckt | „Wem vertraue ich hier?" | Porträt |
+| 6 | **Wer dahintersteckt** | „Wem vertraue ich hier?" | Porträt |
+| 7 | Leistungen | „Ist alles dabei?" | Zeilen — die einzige Liste |
+| 8 | Musterprojekte | „Was kommt dabei heraus?" | Karten |
 | 9 | Häufige Fragen | die letzten Einwände | Akkordeon |
 | 10 | Bedarfsscheck | die Handlung — **zuletzt** | dunkel |
 
@@ -441,7 +441,25 @@ Dieser Abschnitt kostet nichts, braucht kein Bildmaterial und ist das wirksamste
 Eindruck einer durchgehenden Liste. Er wird **nicht** um Unterpunkte, Symbole oder einen zweiten
 Satz ergänzt — die Wirkung entsteht aus der Leere ringsum.
 
-### Sektion 6 — Leistungen
+### Sektion 6 — Wer dahintersteckt
+
+- **H2:** `Wer hier arbeitet.`
+- **Echtes Foto** von `[GRUENDER_NAME]`, keine Bestandsaufnahme, kein Platzhalter, der wie ein Foto wirkt. Steht das Foto nicht zur Verfügung, entfällt die Sektion **vollständig** — ein leerer Rahmen an einer Vertrauensstelle ist schlechter als gar nichts (Design-Briefing §4a).
+- **Name und Rolle:** `[GRUENDER_NAME]`, gründergeführt.
+- **Zwei bis drei Sätze Haltung.** Kein Lebenslauf, keine Erfolgsgeschichte, keine Zahlen.
+- **`Was SARTU bewusst nicht ist`** — vier Punkte, knapp:
+  `kein Baukasten` · `kein WordPress-Hoster` · `keine Billig-Seitenschleuder` · `kein Anbieter für Privat- und Hobbyseiten`
+- **Textlink:** `Mehr über SARTU` → `/ueber-uns`
+
+> **Warum diese Sektion existiert und warum genau hier.** Sie ist der **Belegersatz**. Der übliche
+> Platz für Kundenlogos und Fallstudien bleibt bei SARTU zum Start leer. Was stattdessen trägt:
+> ein Mensch mit Namen und Gesicht — und die ausdrückliche Aufzählung dessen, was SARTU **nicht**
+> macht. Wer seine Grenzen benennt, wirkt geprüft; wer nur Vorzüge aufzählt, wirkt beliebig.
+>
+> **Ehrlichkeitsregel (§11):** Solange eine Einzelperson arbeitet, heißt es `gründergeführt` —
+> nie `unser Team`. Kein Wir, das größer tut, als es ist.
+
+### Sektion 7 — Leistungen
 
 - **H2:** `Alles, was eine Firmenwebsite braucht. Ohne Aufpreisliste.`
 - **Einleitung (30 W.):**
@@ -471,7 +489,7 @@ Satz ergänzt — die Wirkung entsteht aus der Leere ringsum.
 - **Pflichthinweis:**
   > Rankings, Anfragen oder Nennungen in KI-Systemen kann niemand garantieren. Wir bauen das Fundament und halten die technische Suchgesundheit im Betrieb im Blick.
 
-### Sektion 7 — Musterprojekte
+### Sektion 8 — Musterprojekte
 
 **Der Ersatz für fehlende Referenzen** — und der einzige, der ohne Kunden funktioniert.
 
@@ -493,24 +511,6 @@ Satz ergänzt — die Wirkung entsteht aus der Leere ringsum.
 > **Voraussetzung:** Die Musterprojekte müssen tatsächlich existieren
 > (`SARTU_ENTSCHEIDUNGEN_OFFEN.md` §5). Bis dahin bleibt die Sektion **ungebaut** — eine
 > Musterprojekt-Sektion ohne Musterprojekte ist schlechter als keine.
-
-### Sektion 8 — Wer dahintersteckt
-
-- **H2:** `Wer hier arbeitet.`
-- **Echtes Foto** von `[GRUENDER_NAME]`, keine Bestandsaufnahme, kein Platzhalter, der wie ein Foto wirkt. Steht das Foto nicht zur Verfügung, entfällt die Sektion **vollständig** — ein leerer Rahmen an einer Vertrauensstelle ist schlechter als gar nichts (Design-Briefing §4a).
-- **Name und Rolle:** `[GRUENDER_NAME]`, gründergeführt.
-- **Zwei bis drei Sätze Haltung.** Kein Lebenslauf, keine Erfolgsgeschichte, keine Zahlen.
-- **`Was SARTU bewusst nicht ist`** — vier Punkte, knapp:
-  `kein Baukasten` · `kein WordPress-Hoster` · `keine Billig-Seitenschleuder` · `kein Anbieter für Privat- und Hobbyseiten`
-- **Textlink:** `Mehr über SARTU` → `/ueber-uns`
-
-> **Warum diese Sektion existiert und warum genau hier.** Sie ist der **Belegersatz**. Der übliche
-> Platz für Kundenlogos und Fallstudien bleibt bei SARTU zum Start leer. Was stattdessen trägt:
-> ein Mensch mit Namen und Gesicht — und die ausdrückliche Aufzählung dessen, was SARTU **nicht**
-> macht. Wer seine Grenzen benennt, wirkt geprüft; wer nur Vorzüge aufzählt, wirkt beliebig.
->
-> **Ehrlichkeitsregel (§11):** Solange eine Einzelperson arbeitet, heißt es `gründergeführt` —
-> nie `unser Team`. Kein Wir, das größer tut, als es ist.
 
 ### Sektion 9 — Häufige Fragen (10–12 Einwände, Akkordeon)
 

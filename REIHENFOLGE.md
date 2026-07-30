@@ -31,61 +31,86 @@ nach Vertragsschluss.
 
 ## Stufe A — bis der erste Kunde live ist
 
-Der Weg, den ein erster Kunde tatsächlich geht, auf **beiden** Seiten.
+**In vier lieferbaren Etappen.** Jede endet an einem Punkt, an dem etwas durchgängig funktioniert
+und vorführbar ist — nicht an einer Bauteilgrenze.
 
-| Kundenseite | Adminseite |
-|---|---|
-| Anmeldung per Link | Angebot erstellen und versenden |
-| Angebot ansehen und annehmen | Antworten des Kunden lesen |
-| Fragen zum Betrieb beantworten | Hochgeladene Dateien herunterladen |
-| Logo, Bilder, Unterlagen hochladen | Rückmeldungen beantworten |
-| Fertige Vorschau ansehen | Vorschau freischalten |
-| Rückmeldung geben und freigeben | Projektstatus setzen |
+> **Korrigiert 28.07.2026 nach einer externen Prüfung.** Die erste Fassung schob `leads` und
+> `invoices` auf Stufe B. Beides war falsch: Ohne `leads` gibt es keinen Weg zum ersten Kunden,
+> ohne `invoices` keinen Weg von der Angebotsannahme zur Produktion. Der Statusfluss belegt es —
+> `angebot_angenommen` → *„wartet auf erste Zahlung"* → `zahlung_offen` → `briefing`. **Verschoben
+> wird die Zahlungs*automatik*, nicht die Rechnung.**
 
-### Tabellen in Stufe A
+### A0 — Fundament
 
-`organizations` · `users` · `login_tokens` · `sessions` · `projects` · `offers` · `tasks` ·
-`task_files` · `feedback_rounds` · `feedback_items` · `approvals` · `audit_events`
+Ersteinrichtung (§1.5) · Migrationen · Adminanmeldung mit TOTP · Betreiberdaten (§1.4a) ·
+Rechtstexte mit Freigabezustand · Testmailversand · **Mandantentrennung** · Prüfprotokoll.
 
-**Zwölf von achtzehn.** Zurückgestellt: `leads`, `invoices`, `domain_status`, `business_hours`,
-`business_hours_exceptions`, `support_messages`.
+**Tabellen:** `operator_settings` · `legal_texts` · `users` · `sessions` · `audit_events`
+**Fertig, wenn:** Installation läuft auf leerer Datenbank durch, ein Admin kann sich anmelden, eine
+Testmail kommt an, `TenantIsolationTest` läuft grün.
 
-### Warum Stufe A zuerst kommt
+### A1 — Anfrage bis Auftrag
 
-**Fünfzehn Bildplätze** im Website-Lastenheft warten auf Ansichten aus dem Kundenbereich —
-Aufmacher, Portal-Abschnitt und sechs Ablaufschritte. Solange Stufe A nicht läuft, ist die
-Startseite **nicht fertigstellbar**, egal wie viele Design-Runden noch folgen.
+Bedarfsscheck-Eingang (§4b) · Anfrageliste im Adminbereich · Umwandlung in Kunde und Projekt ·
+Einladung des Kunden · Angebot erstellen, senden, annehmen.
 
-Stufe A ist damit die kritische Kette des gesamten Projekts.
+**Tabellen:** `leads` · `organizations` · `login_tokens` · `projects` · `offers`
+**Fertig, wenn:** Eine echte Anfrage über die Website führt bis zu einem angenommenen Angebot.
 
----
+### A2 — Auftrag bis Produktionsstart
+
+Rechnungen **von Hand angelegt**, Zahlungsstatus **von Hand gesetzt**, Mollie-Link eingetragen ·
+Aufgaben · Uploads · Inhaltsfreigabe.
+
+**Tabellen:** `invoices` · `tasks` · `task_files`
+**Fertig, wenn:** Nach Angebotsannahme führt der Weg über Anzahlung und Aufgaben bis `produktion`.
+
+### A3 — Produktion bis Livegang
+
+Vorschau · Korrekturrunden · Abnahme · minimaler Domainstatus · Livegang.
+
+**Tabellen:** `feedback_rounds` · `feedback_items` · `approvals` · `domain_status` *(nur Statusfeld,
+keine Registrar-Anbindung)*
+**Fertig, wenn:** Ein Projekt erreicht `live`. **Ab hier existieren die Bildschirmansichten für die
+Website.**
+
+### Summe Stufe A
+
+**15 Tabellen von 20.** Zurückgestellt: `business_hours` · `business_hours_exceptions` ·
+`support_messages` — und die Automatik hinter `invoices` und `domain_status`.
 
 ## Stufe B — wenn der erste Kunde live ist
 
 Ein paar Wochen nach Vertragsschluss, vor Kunde zwei und drei.
 
 - Selbstpflege: Öffnungszeiten, Kontaktdaten, Bilder tauschen, Team- und Projekteinträge
-- Anfragen von der Website einsehen
-- Rechnungen und Laufzeit einsehen
-- Domainstatus
+- Anfragen von der Website in der Kundenansicht
 - Nachrichten an den Betreuer
+- Domainstatus mit Verlauf statt nur Statusfeld
 
-**Tabellen:** `leads` · `invoices` · `domain_status` · `business_hours` ·
-`business_hours_exceptions` · `support_messages`
+**Tabellen:** `business_hours` · `business_hours_exceptions` · `support_messages`
+
+**Erst hier verfügbar:** die Bildschirmansichten *Öffnungszeiten*, *Website-Anfragen* und
+*Domainstatus* für die Website. Der Screenshot-Satz aus Portal-Lastenheft §7a gilt nach Stufe A
+als vollständig **ohne** diese drei.
 
 ---
 
 ## Stufe C — wenn Handarbeit lästig wird
 
-- Mollie-Abo, Zahlungsautomatik, Mahnwesen
+- Mollie-Abo, Zahlungsautomatik, Webhooks, Mahnwesen
 - Domainlebenszyklus beim Registrar
 - Zeitgesteuerte Löschfristen und Überfälligkeitsprüfung
 - Finanzübersichten, Auswertungen, Massenvorgänge
 - Bereitstellungsautomatik, Rollback
 
 **Bei ein bis drei Kunden ersetzt jede dieser Funktionen zwanzig Minuten Handarbeit im Monat.**
-Rechnung selbst schreiben, Domain beim Registrar klicken. Erst wenn das spürbar stört, lohnt die
-Automatisierung — und dann ist auch bekannt, wie sie aussehen muss, statt es zu raten.
+Rechnungsstatus von Hand setzen, Domain beim Registrar klicken. Erst wenn das spürbar stört, lohnt
+die Automatisierung — und dann ist auch bekannt, wie sie aussehen muss, statt es zu raten.
+
+> **Der Unterschied zu Stufe A2, weil er einmal falsch gezogen war:** Die **Tabelle** `invoices` und
+> der von Hand gesetzte Zahlungsstatus gehören nach A2 — ohne sie kommt kein Projekt von der
+> Angebotsannahme in die Produktion. Nur die **Automatik** dahinter wandert nach C.
 
 ---
 
@@ -108,13 +133,18 @@ Repository, keine erfundenen Werte für Platzhalter aus `SARTU_ENTSCHEIDUNGEN_OF
 
 ## Testfälle je Stufe
 
-Die 59 Testfälle aus §16 verteilen sich mit. **In Stufe A laufen die Tests, die Stufe-A-Funktionen
-betreffen — plus `TenantIsolationTest` vollständig.** Tests zu Rechnungen, Domainstatus oder
-Öffnungszeiten gehören zu Stufe B und werden dort geschrieben, nicht vorher als leere Hüllen
-angelegt.
+Die 59 Testfälle aus §16 verteilen sich auf die Etappen. **Nach jeder Etappe laufen die Testfälle
+dieser Etappe grün — plus `TenantIsolationTest` vollständig, ab A0, immer.**
 
-**Was nicht passiert:** Testfälle überspringen, auskommentieren oder als „später" markieren, um die
-Definition of Done früher abhaken zu können.
+**Was nicht passiert:**
+
+- Testfälle zu noch nicht gebauten Funktionen als leere Hüllen anlegen
+- Tests überspringen, auskommentieren oder als „später" markieren
+- Die vollständige Definition of Done nach Stufe A abhaken
+
+**Die vollständige Definition of Done gilt für den Livegang**, nicht für Stufe A. Am Ende von
+Stufe A gehört in `IMPLEMENTATION_SUMMARY.md` eine Zuordnung: welcher Testfall zu welcher Etappe
+gehört und welche noch offen sind.
 
 ---
 

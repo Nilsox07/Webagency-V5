@@ -182,8 +182,17 @@ Rechtstexte · echte Fotos · die Freigabe eigener Texte. Alles davon steht in
 > warten. **Anhalten nur** bei einem Widerspruch in den Vorgaben, einer fehlenden Information, die
 > du sonst erfinden müsstest, oder einer Frage zu Sicherheit und Umfang.
 >
-> Am Ende: alle 59 Testfälle grün, Definition of Done abgehakt, `IMPLEMENTATION_SUMMARY.md`, und der
-> **Screenshot-Satz aus der echten Oberfläche** nach Abschnitt 7a.
+> **Abnahme je Etappe, nicht am Ende:** Nach jeder Etappe aus `REIHENFOLGE.md` (A0, A1, A2, A3)
+> laufen **die Testfälle dieser Etappe** grün, plus `TenantIsolationTest` **vollständig** — der
+> läuft ab A0 immer. Testfälle zu noch nicht gebauten Funktionen werden **nicht** angelegt, nicht
+> übersprungen und nicht auskommentiert; sie entstehen in ihrer Etappe.
+>
+> **Am Ende von Stufe A:** `IMPLEMENTATION_SUMMARY.md` mit der Zuordnung, welche der 59 Testfälle
+> zu welcher Etappe gehören und welche noch offen sind. Dazu der **Screenshot-Satz der gebauten
+> Stufe** nach Abschnitt 7a — Öffnungszeiten, Website-Anfragen und Domainstatus gehören zu Stufe B
+> und fehlen dort zulässigerweise.
+>
+> **Die vollständige Definition of Done gilt für den Livegang, nicht für Stufe A.**
 >
 > **Git:** Branch `feature/kundenbereich`. Committe nach **jeder Etappe** einzeln, mit einer Zeile,
 > was fertig ist und was noch fehlt. Nie mehrere Etappen in einen Commit sammeln. Committe niemals

@@ -630,6 +630,32 @@ Audit-Ereignis. Eine Erklärung ist **einmalig** — ein zweiter Versuch zeigt n
 ### `support_messages`
 `organization_id` · `project_id` (nullable) · `body` (text) · `created_by_user_id` · `answered_at` · `answer_text`
 
+### `operator_settings`
+
+Die Betreiberdaten aus §1.4a. **Genau eine Zeile** — erzwungen über einen festen Schlüssel.
+
+`id` (char(36)) · `firmenname` (varchar(200), NOT NULL) · `rechtsform` (varchar(80)) ·
+`strasse` (varchar(200), NOT NULL) · `plz` (varchar(10), NOT NULL) · `ort` (varchar(120), NOT NULL) ·
+`land` (varchar(2), NOT NULL) · `telefon` (varchar(40)) · `email` (varchar(255), NOT NULL) ·
+`ust_id` (varchar(20)) · `steuernummer` (varchar(30)) · `registergericht` (varchar(120)) ·
+`registernummer` (varchar(40)) · `inhaltlich_verantwortlich` (varchar(200), NOT NULL) ·
+`bank_iban` (varchar(34)) · `bank_bic` (varchar(11)) · `bank_institut` (varchar(120)) ·
+`kleinunternehmer` (tinyint(1), NOT NULL DEFAULT 0)
+
+**Prüfbedingung:** `CHECK (ust_id IS NOT NULL OR steuernummer IS NOT NULL)` — eines von beiden muss
+gesetzt sein.
+
+### `legal_texts`
+
+Impressum, Datenschutz und AGB als Inhalte mit Freigabezustand (§1.4a).
+
+`id` (char(36)) · `slug` (varchar(40), NOT NULL, UNIQUE — `impressum` \| `datenschutz` \| `agb`) ·
+`body` (mediumtext, NOT NULL) · `status` (varchar(20), NOT NULL — `entwurf` \| `in_pruefung` \|
+`freigegeben`) · `released_at` (datetime) · `released_by` (varchar(200)) · `version` (int, NOT NULL)
+
+**Nur `freigegeben` wird öffentlich ausgeliefert.** Den Zustand setzt ausschließlich ein Mensch,
+mit Datum und Namen der prüfenden Stelle — kein automatischer Übergang, keine Voreinstellung.
+
 ### `audit_events`
 `actor_user_id` (nullable) · `organization_id` (nullable) · `action` (varchar(64)) · `entity_type` (varchar(64)) · `entity_id` (char(36)) · `old_value` (text) · `new_value` (text) · `reason` (text) · `detail` (json) · `ip` (varchar(45))
 
@@ -1591,7 +1617,10 @@ Es gelten die Sprachregeln aus `CLAUDE_SARTU_WEBSITE_LASTENHEFT_BAUFINAL.md` §2
 3. **Testbericht**: alle 59 Fälle aus §16 mit Ergebnis
 4. **Messwerte**: Antwortzeiten der Kernseiten, Seitengröße
 5. **Offene-Punkte-Liste**: alles, was bewusst nicht gebaut wurde (§0.3), plus alles, was du melden musst
-6. **Screenshot-Satz** aus der echten Oberfläche für die Website: Cockpit, Angebot, Aufgaben, Vorschau mit Rundenanzeige, Rechnungen, Öffnungszeiten — mit Musterdaten, je einmal Desktop und Mobil
+6. **Screenshot-Satz** aus der echten Oberfläche für die Website — mit Musterdaten, je einmal Desktop und Mobil.
+   **Nach Stufe A verfügbar:** Cockpit · Bedarfsscheck-Antworten · Angebot · Aufgaben · Uploads · Vorschau mit Rundenanzeige · Rechnungen (Status manuell gesetzt).
+   **Erst nach Stufe B:** Öffnungszeiten · Anfragen von der Website · Domainstatus.
+   Der Satz gilt als vollständig, wenn alle Ansichten der **jeweils gebauten Stufe** vorliegen (`REIHENFOLGE.md`)
 7. **`IMPLEMENTATION_SUMMARY.md`**: gebaute Struktur, Abweichungen vom Plan mit Begründung, offene Punkte
 8. **`MIGRATION_NOTES.md`**, falls aus einem Prototyp etwas übernommen wurde: was, warum, was verworfen
 
