@@ -459,6 +459,11 @@ sind, liest sich das wie eine Liste, die jemand abgearbeitet hat.
 das mindestens vier verschiedene Muster. Ein Abschnitt darf ruhig einmal die Breite sprengen, einmal
 ganz schmal stehen, einmal nur aus einem Satz bestehen.
 
+> **Der Wortlaut selbst steht in `SARTU_TEXTREGELN.md`.** Dieses Briefing regelt, wie eine
+> Überschrift **aussieht** — Zeilenlänge, Umbruch, Größe. Was in ihr **steht**, regeln die
+> Textregeln: höchstens neun Wörter, und sie muss eine Behauptung sein, der man widersprechen
+> könnte. Beides wird zusammen geprüft; zu jeder abgegebenen Seite gehört der Textprüfbericht.
+
 ### 3.8 Überschriften — Zeilenzahl ist eine Folge, keine Ursache
 
 **Schauüberschriften laufen über höchstens drei Zeilen.** Vier ist die absolute Obergrenze, und sie

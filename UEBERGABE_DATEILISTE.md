@@ -15,12 +15,13 @@ merkt es, bevor gebaut wird.
 | # | Datei | Rolle | Ohne sie? |
 |---|---|---|---|
 | 1 | `CODEX_AUFTRAG_PORTAL.md` | die Anweisung selbst | — |
-| 2 | `CLAUDE_SARTU_PORTAL_LASTENHEFT_BAUFINAL.md` | **Hauptdokument** — Stack, Datenmodell, jeder Screen, jeder Text, 77 Testfälle | **Abbruch.** Nicht baubar |
+| 2 | `CLAUDE_SARTU_PORTAL_LASTENHEFT_BAUFINAL.md` | **Hauptdokument** — Stack, Datenmodell, jeder Screen, jeder Text, 81 Testfälle | **Abbruch.** Nicht baubar |
 | 3 | `CLAUDE_SARTU_DESIGN_BRIEFING_AUSFUEHRUNG.md` | Vorgehen für die visuelle Ebene | Abbruch |
 | 4 | `CLAUDE_SARTU_MASTERKONZEPT_FINAL.md` | Nachschlagewerk + verbindliche Arbeitsverteilung §10a | Abbruch |
 | 5 | `SARTU_ENTSCHEIDUNGEN_OFFEN.md` | **alle Platzhalter und Sperren** — Standort, Rechtstexte, Design, Betriebsumgebung | **Abbruch.** Sonst werden Werte erfunden |
 | 6 | `ENTWICKLUNGSUMGEBUNG.md` | **wie PHP, Composer und die Datenbank aufgerufen werden** — und was ohne Datenbank trotzdem gebaut wird | **Abbruch.** Sonst wird falsch nach PHP gesucht oder wegen fehlender Datenbank angehalten |
 | 6a | `REIHENFOLGE.md` | **welche Teile jetzt gebaut werden und welche warten** — Stufe A, B, C | **Abbruch.** Sonst entstehen alle 20 Tabellen auf einmal |
+| 6b | `SARTU_TEXTREGELN.md` | **wie jeder Text formuliert sein muss** — zehn zählbare Regeln, Wortlisten, Pflicht-Prüfbericht | **Abbruch.** Sonst entsteht wieder der Ton, der schon zweimal verworfen wurde |
 | 7 | `CLAUDE_SARTU_WEBSITE_LASTENHEFT_BAUFINAL.md` | nur §2 Sprachregeln | Melden, mit Rest fortfahren |
 | 8 | `konzepte/` (20 Dateien) | historische Quellen, **veraltete Preise und abgelöste Stacks** | Melden, mit Rest fortfahren |
 
@@ -38,7 +39,8 @@ merkt es, bevor gebaut wird.
 | 8 | `SARTU_ENTSCHEIDUNGEN_OFFEN.md` | alle Platzhalter und Sperren | **Abbruch** |
 | 9 | `GEO_DISCOVERY_CHECKLIST.md` | technische Auffindbarkeit für KI-Systeme — **vor Livegang abzuhaken** | Melden, mit Rest fortfahren |
 | 10 | `ENTWICKLUNGSUMGEBUNG.md` | **wie PHP, Composer und die Datenbank aufgerufen werden** — und was ohne Datenbank trotzdem gebaut wird | **Abbruch.** Sonst wird falsch nach PHP gesucht oder wegen fehlender Datenbank angehalten |
-| 11 | `REIHENFOLGE.md` | **Abschnitt „Zwei Livegänge"** — welche Portalfunktionen zum Zeitpunkt des Websitestarts überhaupt existieren | **Abbruch.** Sonst bewirbt die Seite Funktionen, die es noch nicht gibt |
+| 11 | `SARTU_TEXTREGELN.md` | **wie jeder Text formuliert sein muss** — zehn zählbare Regeln, Wortlisten. Der **Prüfbericht mit Zahlen** gehört zu jeder abgegebenen Seite | **Abbruch.** Sonst entsteht wieder der Ton, der schon zweimal verworfen wurde |
+| 12 | `REIHENFOLGE.md` | **Abschnitt „Zwei Livegänge"** — welche Portalfunktionen zum Zeitpunkt des Websitestarts überhaupt existieren | **Abbruch.** Sonst bewirbt die Seite Funktionen, die es noch nicht gibt |
 
 ## Nicht übergeben
 
@@ -73,16 +75,21 @@ Dateien und der Bestätigung, dass das Hauptdokument vollständig ist.
 
 ## Wie der Bau abläuft
 
-**Drei Sitzungen, zwei Entscheidungspunkte** — Ablauf und fertige Startprompts stehen in
+**Vier Sitzungen, drei Entscheidungspunkte** — Ablauf und fertige Startprompts stehen in
 `CODEX_SESSIONS_ABLAUF.md`:
 
 | Sitzung | Was entsteht | Endet mit |
 |---|---|---|
 | 1 | `IMPLEMENTATION_PLAN.md`, Projektgerüst, 2–3 Designvarianten | **Stopp** — der Mensch entscheidet |
-| 2 | Kundenbereich vollständig, 77 Tests, Screenshots | Bericht |
-| 3 | Öffentliche Seiten vollständig | Bericht |
+| 2 | Kundenbereich **Stufe A** (A0–A3), 80 der 81 Tests, Screenshots der Stufe | Bericht |
+| — | **Gate 3:** drei Selbstpflege-Funktionen bauen oder Copy streichen (`SARTU_ENTSCHEIDUNGEN_OFFEN.md` §5a) | **Stopp** |
+| 3 | Kundenbereich **Stufe B**, Testfall 19, vollständiger Screenshot-Satz | Bericht |
+| 4 | Öffentliche Seiten vollständig | Bericht |
 
-Sitzung 2 und 3 laufen weitgehend autonom. Sitzung 1 nicht — sie endet bewusst an einem Gate.
+Sitzung 2, 3 und 4 laufen weitgehend autonom. Sitzung 1 nicht — sie endet bewusst an einem Gate.
+
+**Die öffentliche Website entsteht erst nach Stufe B.** Sonst bewirbt sie Funktionen, die es noch
+nicht gibt (`REIHENFOLGE.md`, „Zwei Livegänge").
 
 ---
 

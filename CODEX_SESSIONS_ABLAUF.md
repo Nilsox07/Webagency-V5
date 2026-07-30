@@ -1,7 +1,12 @@
 # Ablauf: von den Konzeptdateien zur fertigen Website
 
-**Drei Codex-Sitzungen, zwei Entscheidungspunkte dazwischen.** Nicht eine Sitzung, die alles baut —
+**Vier Codex-Sitzungen, drei Entscheidungspunkte dazwischen.** Nicht eine Sitzung, die alles baut —
 die Gründe stehen unten.
+
+> **Korrigiert am 30.07.2026 nach externer Prüfung.** Die frühere Fassung kannte drei Sitzungen und
+> ließ die öffentliche Website direkt nach Stufe A entstehen. Das widersprach `REIHENFOLGE.md`:
+> Dort ist der öffentliche Livegang erst **nach Stufe B** erlaubt, weil die Seite sonst Funktionen
+> bewirbt, die es nicht gibt. Für Stufe B existierte überhaupt keine Sitzung.
 
 ---
 
@@ -29,10 +34,18 @@ dokumentiert und blockieren den Bau nicht.
 
 ---
 
-## Sitzung 2 — Kundenbereich *(lang, läuft weitgehend allein)*
+## Sitzung 2 — Kundenbereich, **Stufe A** *(lang, läuft weitgehend allein)*
 
-**Was entsteht:** `/portal/` und `/admin/` vollständig, Etappe 1–5 aus `CODEX_AUFTRAG_PORTAL.md`,
-77 Testfälle, am Ende der **Screenshot-Satz aus der echten Oberfläche**.
+**Was entsteht:** `/portal/` und `/admin/` im **Umfang von Stufe A** — die vier Etappen A0 bis A3
+aus `REIHENFOLGE.md`, bis ein Pilotkunde live gehen kann. Am Ende der **Screenshot-Satz der
+gebauten Stufe**.
+
+**Nicht in dieser Sitzung:** Öffnungszeiten, Nachrichten an den Betreuer (Stufe B) · Mollie,
+Registrar, Mahnwesen, Auswertungen (Stufe C).
+
+**Testumfang:** die Fälle der jeweiligen Etappe nach der Zuordnungstabelle in `REIHENFOLGE.md` —
+A0 = 24 Fälle, A1 = 33, A2 = 17, A3 = 6. Zusammen **80 von 81**. Der verbleibende Fall 19 gehört
+zu Stufe B.
 
 Hier ist am wenigsten zu entscheiden: Datenmodell, Statuslogik, alle Texte und alle E-Mails stehen
 fest. Genau deshalb eignet sich dieser Teil für einen langen Durchlauf.
@@ -41,7 +54,35 @@ fest. Genau deshalb eignet sich dieser Teil für einen langen Durchlauf.
 
 ---
 
-## Sitzung 3 — Öffentliche Seiten *(lang, läuft weitgehend allein)*
+## Gate 3 — Produktentscheidung, vor Stufe B
+
+Die Startseite verspricht drei Selbstpflege-Funktionen, für die keine Grundlage existiert:
+*Bilder tauschen* · *Team- und Projekteinträge pflegen* · *Anfragen von Ihrer Website einsehen*.
+Die letzte ist im Portalauftrag **ausdrücklich verboten** (Lead-Inbox der Stufe 1).
+
+**Du entscheidest:** die Funktionen bauen oder die Zeilen streichen. Beschrieben in
+`SARTU_ENTSCHEIDUNGEN_OFFEN.md` §5a. Ohne Entscheidung geht die Seite mit elf statt vierzehn
+Punkten live — das ist die Sicherung, keine Entscheidung.
+
+**Warum hier und nicht später:** Nach Stufe B wird die öffentliche Website gebaut. Wer dann erst
+merkt, dass drei beworbene Funktionen fehlen, hat die Texte zweimal geschrieben.
+
+---
+
+## Sitzung 3 — Kundenbereich, **Stufe B** *(kurz)*
+
+**Was entsteht:** Öffnungszeiten mit Ausnahmen, Nachrichten an den Betreuer, dazu das Ergebnis von
+Gate 3. Drei Tabellen, Testfall 19, und der **vollständige** Screenshot-Satz.
+
+**Warum eine eigene Sitzung:** Erst danach darf die öffentliche Website live gehen
+(`REIHENFOLGE.md`, „Zwei Livegänge"). Ohne diese Sitzung gäbe es keinen Ort, an dem Stufe B
+entsteht — und die Website bewürbe Funktionen, die niemand gebaut hat.
+
+**Deine Rolle:** Bericht lesen. Sonst nichts.
+
+---
+
+## Sitzung 4 — Öffentliche Seiten *(lang, läuft weitgehend allein)*
 
 **Was entsteht:** alle Seiten aus `CODEX_AUFTRAG_WEBSITE.md` im gewählten Design, mit den echten
 Screenshots aus Sitzung 2.
@@ -58,14 +99,15 @@ geschriebenen Texte prüfen (5 Leistungsseiten, 3 Transparenzseiten, 2 Vergleich
 
 ## Warum nicht alles in einem Durchlauf?
 
-Die beiden Gates sind kein Formalismus. Sie verhindern die zwei teuersten Fehler:
+Die drei Gates sind kein Formalismus. Sie verhindern die drei teuersten Fehler:
 
 | Ohne Gate | Kosten |
 |---|---|
 | Codex wählt eine Struktur, du siehst sie erst nach Tagen | alles danach steht auf der falschen Grundlage |
 | Codex baut 40 Seiten in einer Optik, die du ablehnst | 40 Seiten neu |
+| Die Website bewirbt drei Funktionen, die niemand gebaut hat | Texte zweimal geschrieben, im schlimmsten Fall eine irreführende Werbeaussage online |
 
-**Zwischen den Gates darf es dagegen durchlaufen.** Sitzung 2 und 3 sind lang, autonom und brauchen
+**Zwischen den Gates darf es dagegen durchlaufen.** Sitzung 2 und 4 sind lang, autonom und brauchen
 dich nur zum Lesen der Berichte. Das ist der erreichbare Automatisierungsgrad — und er ist hoch.
 
 **Was nie automatisch geht**, unabhängig vom Werkzeug: Designentscheidung · Standortentscheidung ·
@@ -111,6 +153,8 @@ Rechtstexte · echte Fotos · die Freigabe eigener Texte. Alles davon steht in
 > 3. `CODEX_AUFTRAG_WEBSITE.md`
 > 4. `CLAUDE_SARTU_DESIGN_BRIEFING_AUSFUEHRUNG.md`
 > 5. `SARTU_ENTSCHEIDUNGEN_OFFEN.md`
+> 5a. `SARTU_TEXTREGELN.md` — **vollständig**, bevor der erste Text entsteht. Zu jeder abgegebenen
+>     Seite gehört der Prüfbericht aus Abschnitt 2 **mit ausgefüllten Zahlen**
 > 6. `CLAUDE_SARTU_WEBSITE_LASTENHEFT_BAUFINAL.md` — §1, §2 und §5 (Startseitentexte)
 >
 > **Schritt 4 — `IMPLEMENTATION_PLAN.md` schreiben** nach Abschnitt 0b des Portalauftrags: Bestand,
@@ -193,7 +237,7 @@ Rechtstexte · echte Fotos · die Freigabe eigener Texte. Alles davon steht in
 > läuft ab A0 immer. Testfälle zu noch nicht gebauten Funktionen werden **nicht** angelegt, nicht
 > übersprungen und nicht auskommentiert; sie entstehen in ihrer Etappe.
 >
-> **Am Ende von Stufe A:** `IMPLEMENTATION_SUMMARY.md` mit der Zuordnung, welche der 77 Testfälle
+> **Am Ende von Stufe A:** `IMPLEMENTATION_SUMMARY.md` mit der Zuordnung, welche der 81 Testfälle
 > zu welcher Etappe gehören und welche noch offen sind. Dazu der **Screenshot-Satz der gebauten
 > Stufe** nach Abschnitt 7a — Öffnungszeiten und Nachrichten an den Betreuer gehören zu Stufe B und
 > fehlen dort zulässigerweise. **Der Domainstatus gehört zu A3** und muss vorhanden sein; verschoben
@@ -207,12 +251,43 @@ Rechtstexte · echte Fotos · die Freigabe eigener Texte. Alles davon steht in
 
 ---
 
-## Startprompt für Sitzung 3
+## Startprompt für Sitzung 3 — Stufe B
 
 > Fortsetzung im Repository `github.com/Nilsox07/Webagency-V5`.
 >
-> Der Kundenbereich steht, die Screenshots liegen vor. Baue jetzt `CODEX_AUFTRAG_WEBSITE.md`,
-> Phase 2, vollständig durch — alle Seiten im entschiedenen Design.
+> Stufe A steht, ein Pilotkunde ist live. Baue jetzt **Stufe B** aus `REIHENFOLGE.md`:
+> Öffnungszeiten mit Ausnahmen und Nachrichten an den Betreuer. Drei Tabellen —
+> `business_hours`, `business_hours_exceptions`, `support_messages`.
+>
+> **Das Ergebnis von Gate 3 steht in `SARTU_ENTSCHEIDUNGEN_OFFEN.md` §5a.** Lies es zuerst. Ist
+> dort nichts entschieden, baust du **nur** die drei Tabellen oben und meldest den offenen Punkt.
+> **Erfinde weder `media_assets` noch `site_content`, und baue die Lead-Inbox nicht** — sie steht
+> im Portalauftrag unter „Nicht bauen".
+>
+> **Abnahme:** Testfall 19 grün, `TenantIsolationTest` um die neuen Kundenrouten erweitert, alle
+> Fälle aus Stufe A weiterhin grün. Dazu der **vollständige** Screenshot-Satz nach Abschnitt 7a —
+> ab jetzt fehlt keine Ansicht mehr.
+>
+> **Erst nach dieser Sitzung darf die öffentliche Website gebaut werden.**
+>
+> **Git:** Branch `feature/selbstpflege`. Committe je Tabelle einzeln. Committe niemals `.env`,
+> Zugangsdaten oder `vendor/`.
+
+---
+
+## Startprompt für Sitzung 4 — Öffentliche Seiten
+
+> Fortsetzung im Repository `github.com/Nilsox07/Webagency-V5`.
+>
+> Stufe A und Stufe B stehen, die Screenshots liegen vollständig vor. Baue jetzt
+> `CODEX_AUFTRAG_WEBSITE.md`, Phase 2, vollständig durch — alle Seiten im entschiedenen Design.
+>
+> **`SARTU_TEXTREGELN.md` gilt für jeden Wortlaut.** Zu **jeder** abgegebenen Seite gehört der
+> Prüfbericht aus Abschnitt 2 mit ausgefüllten Zahlen. Eine Seite ohne Bericht gilt als nicht
+> abgegeben. Reißt eine Grenze, änderst du den Text — nicht den Bericht.
+>
+> **Sektion 2 der Startseite geht mit elf Punkten live**, solange Gate 3 nicht anders entschieden
+> ist (`SARTU_ENTSCHEIDUNGEN_OFFEN.md` §5a).
 >
 > **Ich arbeite nicht Seite für Seite mit** — berichte in Blöcken und arbeite weiter. **Anhalten
 > nur** bei Widersprüchen, fehlenden Informationen oder wenn dir ein Konflikt zwischen der

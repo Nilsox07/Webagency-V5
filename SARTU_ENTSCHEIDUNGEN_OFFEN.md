@@ -184,6 +184,31 @@ Geschäftsentscheidung mit Aufwand und Außenwirkung — keine Gestaltungsfrage.
 
 ---
 
+## 5a. Selbstpflege durch den Kunden — **OFFEN, blockiert den Websitestart**
+
+Die Startseite (Website-Lastenheft §5 Sektion 2) verspricht in der rechten Spalte drei Dinge, für
+die es **keine Grundlage** gibt:
+
+| Versprechen | Stand |
+|---|---|
+| *Bilder tauschen* | Keine Tabelle im Datenmodell. Es fehlt sinngemäß `media_assets` |
+| *Team- und Projekteinträge pflegen* | Keine Tabelle. Es fehlt sinngemäß `site_content` |
+| *Anfragen von Ihrer Website einsehen* | **Ausdrücklich verboten.** `CODEX_AUFTRAG_PORTAL.md` listet „Annahme von Anfragen aus Kundenwebsites" unter **Nicht bauen** — das ist die Lead-Inbox der Stufe 1 |
+
+**Zwei Wege, einer muss gewählt werden:**
+
+| Weg | Folge |
+|---|---|
+| **A — bauen** | Datenmodell um `media_assets` und `site_content` erweitern. Für die Anfragen zusätzlich die Sperre im Portalauftrag aufheben und den Endpunkt unter `/api/` bauen. Verschiebt den Websitestart deutlich nach hinten |
+| **B — streichen** | Die drei Zeilen entfallen dauerhaft. Die Sektion behält elf Punkte. Der Websitestart bleibt, wo er ist |
+
+**Solange nichts entschieden ist, gilt B als Sicherung:** Die Seite geht mit elf Punkten live.
+Das ist keine Entscheidung, sondern die Verhinderung eines Werbeversprechens ohne Deckung.
+
+**Wer entscheidet:** der Betreiber. Es ist eine Produktentscheidung, keine technische.
+
+---
+
 ## 6. Wie diese Datei benutzt wird
 
 1. Ein Wert wird entschieden → hier eintragen, Status von `offen` auf den Wert ändern

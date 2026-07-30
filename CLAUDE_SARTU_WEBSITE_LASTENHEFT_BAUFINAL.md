@@ -82,6 +82,11 @@ Einladung.
 
 ## 2. Globale Sprach- und Inhaltsregeln
 
+> **Der Wortlaut wird zusätzlich von `SARTU_TEXTREGELN.md` geregelt** — zehn zählbare Regeln und
+> ein Prüfbericht mit Zahlen. Diese Datei hier verbietet **Behauptungen** (Rankinggarantie,
+> „wartungsfrei"), die Textregeln regeln **die Form** (Satzlänge, Aufzählungen, Wortlisten).
+> Beide gelten. Ohne ausgefüllten Prüfbericht gilt eine Seite als nicht abgegeben.
+
 **Ansprache:** durchgängig **„Sie"**. Marke immer **`SARTU`** (Versalien), auch im Fließtext.
 
 **Verbotene Wörter und Aussagen** (gelten für alle Seiten, prüfbar per Suche):
@@ -172,6 +177,10 @@ Fünf Spalten auf Desktop, gestapelt auf Mobil (Reihenfolge wie unten).
 > Satz „Veröffentlicht wird nur, was wir geprüft und freigegeben haben." gehört zu `/ueber-uns`
 > (§11) und hat auf der Startseite **nichts zu suchen** — er beantwortet eine Frage, die dort noch
 > niemand gestellt hat.
+>
+> **3. `SARTU_TEXTREGELN.md` gilt für jeden Wortlaut auf dieser Seite.** Zehn zählbare Regeln, dazu
+> ein Prüfbericht mit Zahlen. **Ohne ausgefüllten Prüfbericht gilt die Seite als nicht abgegeben.**
+> Die Texte unten sind bereits danach überarbeitet; wer sie ändert, rechnet den Bericht neu.
 
 **Title (58 Z.):** `Firmenwebsite zum Festpreis, ohne WordPress | SARTU`
 **Meta Description (152 Z.):** `SARTU plant, textet, programmiert und betreibt Ihre Firmenwebsite zum Festpreis. Geführtes Portal statt E-Mail-Chaos, SEO-Basis ab Launch, kein WordPress.`
@@ -298,8 +307,13 @@ einen Audit-Eintrag (Portal-Lastenheft).
 
 - **Eyebrow:** `Webdesign-Agentur für Firmenwebsites`
 - **H1:** `Individuell programmierte Firmenwebsites zum Festpreis.`
-- **Lead (38 W.):**
-  > SARTU plant, textet, programmiert und betreibt Ihre Website. Sie beantworten nur die Fragen zu Ihrem Unternehmen — Struktur, Design, Technik und die SEO-Grundlage übernehmen wir und verantworten das Ergebnis.
+- **Lead (22 W., drei Sätze, längster 10):**
+  > Sie erzählen uns, was Ihr Betrieb macht und für wen. Den Rest bauen und betreiben wir. Dafür ist kein einziger Termin nötig.
+
+  > **Alte Fassung, nicht wieder verwenden:** *„SARTU plant, textet, programmiert und betreibt Ihre
+  > Website. Sie beantworten nur die Fragen zu Ihrem Unternehmen — Struktur, Design, Technik und die
+  > SEO-Grundlage übernehmen wir und verantworten das Ergebnis."* 38 Wörter, zwei Vierer-Aufzählungen,
+  > und die wichtigste Aussage der Firma fehlte: **ohne Termin.**
 - **Primär-CTA:** `Bedarf prüfen lassen` → `/briefing`
 - **Sekundär-CTA:** `Preise ansehen` → `/preise`
 - **Preishinweis (klein, direkt unter den Buttons):** `Alle Preise netto zzgl. USt. Ausschließlich für Unternehmer.`
@@ -315,22 +329,43 @@ die stärkste zitierfähige Stelle für KI-Antwortsysteme (§16, `GEO_DISCOVERY_
 
 - **Eyebrow:** `Kundenbereich`
 - **H2:** `Ohne einen einzigen Termin zur fertigen Website.`
-- **Antwortsatz, 45 Wörter, steht direkt unter der Überschrift:**
-  > Bei SARTU gibt es keine Abstimmungstermine. Alles läuft über Ihren Kundenbereich: Sie beantworten die Fragen zu Ihrem Betrieb, wann es Ihnen passt, laden Unterlagen hoch, sehen die fertige Vorschau und geben sie frei. Nach dem Start pflegen Sie Öffnungszeiten, Kontaktdaten und Bilder selbst.
+- **Antwortsatz, vier Sätze, längster 14 Wörter, steht direkt unter der Überschrift:**
+  > Bei SARTU gibt es keine Abstimmungstermine. Alles läuft über Ihren Kundenbereich. Sie
+  > beantworten die Fragen zu Ihrem Betrieb, wann es Ihnen passt. Was dort geht, steht unten —
+  > vollständig.
+
+  > **Alte Fassung, nicht wieder verwenden:** ein Satz mit 45 Wörtern und fünf Gliedern, der die
+  > Liste darunter vorwegnahm. Der Leser las dieselbe Information zweimal, beim ersten Mal
+  > unlesbar. Die Liste **ist** der Antwortsatz.
 - **Direkt darunter, damit „ohne Termin" nicht als „nicht erreichbar" gelesen wird:**
   > `Sprechen können Sie trotzdem mit uns. Sie müssen nur nicht.`
 
 **Zwei Listen nebeneinander — vollständig, nicht gekürzt:**
 
-| `Vor dem Start` | `Nach dem Start` |
-|---|---|
-| Angebot ansehen und annehmen | Öffnungszeiten und Kontaktdaten ändern |
-| Fragen zu Ihrem Betrieb beantworten, wann es Ihnen passt | Bilder tauschen |
-| Logo, Bilder und Unterlagen hochladen | Team- und Projekteinträge pflegen |
-| Sehen, was gerade ansteht und was erledigt ist | Anfragen von Ihrer Website einsehen |
-| Die fertige Vorschau ansehen | Rechnungen und Laufzeit einsehen |
-| Änderungen sammeln und in einem Durchgang schicken | Änderungswünsche stellen |
-| Freigeben | Domainstatus einsehen |
+| `Vor dem Start` | `Nach dem Start` | gebaut in |
+|---|---|---|
+| Angebot ansehen und annehmen | Öffnungszeiten und Kontaktdaten ändern | A1 · **B** |
+| Fragen zu Ihrem Betrieb beantworten, wann es Ihnen passt | **Bilder tauschen** | A2 · **offen** |
+| Logo, Bilder und Unterlagen hochladen | **Team- und Projekteinträge pflegen** | A2 · **offen** |
+| Sehen, was gerade ansteht und was erledigt ist | **Anfragen von Ihrer Website einsehen** | A2 · **verboten** |
+| Die fertige Vorschau ansehen | Rechnungen und Laufzeit einsehen | A3 · A2 |
+| Änderungen sammeln und in einem Durchgang schicken | Änderungswünsche stellen | A3 · **B** |
+| Freigeben | Domainstatus einsehen | A3 · A3 |
+
+> **Drei Zeilen der rechten Spalte dürfen zum Websitestart nicht dastehen.** Das ist keine
+> Kleinigkeit an der Formulierung, sondern ein Werbeversprechen ohne Deckung:
+>
+> | Zeile | Stand |
+> |---|---|
+> | *Bilder tauschen* | Keine Tabelle im Datenmodell. Es fehlt sinngemäß `media_assets` |
+> | *Team- und Projekteinträge pflegen* | Keine Tabelle. Es fehlt sinngemäß `site_content` |
+> | *Anfragen von Ihrer Website einsehen* | **Ausdrücklich verboten.** `CODEX_AUFTRAG_PORTAL.md` §… listet „Annahme von Anfragen aus Kundenwebsites" unter **Nicht bauen** — das ist die Lead-Inbox der Stufe 1 |
+>
+> **Verbindlich bis zur Entscheidung:** Die Seite geht mit **elf** Punkten live. Die drei markierten
+> Zeilen werden erst aufgenommen, wenn die Funktion existiert.
+>
+> **Die Entscheidung selbst gehört dem Menschen** und steht in `SARTU_ENTSCHEIDUNGEN_OFFEN.md` §5a:
+> die drei Funktionen bauen — oder die Zeilen dauerhaft streichen. Sie wird hier **nicht** ersetzt.
 
 - **Der Unterschied, als eigene hervorgehobene Zeile:**
   > `Kein Terminkalender-Pingpong. Kein Suchen in alten E-Mails. Kein Anruf, um den Stand zu erfahren.`
@@ -341,8 +376,11 @@ die stärkste zitierfähige Stelle für KI-Antwortsysteme (§16, `GEO_DISCOVERY_
 > Fließtext aufgelöst.** Zwei Gründe:
 >
 > **Verkauf:** Der Leser hat noch nie einen Kundenbereich bei einer Agentur gehabt — es gibt dort
-> keinen. Er hat also kein Vorstellungsbild, das eine Andeutung füllen könnte. Vierzehn konkrete
+> keinen. Er hat also kein Vorstellungsbild, das eine Andeutung füllen könnte. Elf konkrete
 > Tätigkeiten erzeugen dieses Bild; drei Substantive erzeugen es nicht.
+>
+> **Die Kürzung von vierzehn auf elf ist keine Vereinfachung**, sondern die Streichung dreier
+> Versprechen ohne Deckung. Sobald die Funktionen existieren, stehen sie wieder da.
 >
 > **Auffindbarkeit:** Das ist die **zitierfähigste Stelle der ganzen Website**. Ein KI-System, das
 > gefragt wird „welche Webagenturen bieten einen Kundenbereich und was kann der", kann nur
@@ -365,17 +403,22 @@ möglich, aber nicht Pflicht". Die Aussage ist damit gedeckt und **keine** Über
 - **H2:** `Von wenigen Angaben zur fertigen Website.`
 - **Sechs Schritte** (nummeriert, weil es eine echte Reihenfolge ist):
   1. **Bedarfsscheck** — Wenige Fragen zu Unternehmen, Ziel, Umfang und Domain.
-  2. **Geprüftes Angebot** — Wir bestätigen Empfehlung, Seitenstruktur, Preis und Zahlungsplan.
-  3. **Ihre Angaben** — Was wir schon wissen, tragen wir ein. Nach dem Rest fragen wir gezielt — im Kundenbereich, wann es Ihnen passt.
-  4. **Produktion** — Wir bauen die Website; KI unterstützt, geprüft und freigegeben wird von uns.
-  5. **Vorschau und Freigabe** — Sie sehen die Website und geben gebündelt Feedback.
-  6. **Launch und Betrieb** — Domain, Monitoring, Backups, technische Suchgesundheit.
+  2. **Geprüftes Angebot** — Sie bekommen Umfang, Preis und Zahlungsplan schriftlich.
+  3. **Ihre Angaben** — Was wir schon wissen, tragen wir ein. Den Rest fragen wir Sie im Kundenbereich.
+  4. **Produktion** — Wir bauen die Website. KI hilft, geprüft und freigegeben wird von uns.
+  5. **Vorschau und Freigabe** — Sie sehen die fertige Website und sammeln Ihre Änderungen.
+  6. **Start und Betrieb** — Wir schalten live und halten die Seite am Laufen.
 - **CTA:** `Ablauf im Detail` → `/ablauf`
 
 **Am Ende dieser Sektion, als Abschluss des Zeitstrahls — die Arbeitsteilung:**
 
-> `Ihr Anteil: Was Ihr Betrieb macht, für wen, in welchem Gebiet, Belege und Freigaben.`
-> `Alles Übrige — Struktur, Texte, Gestaltung, Programmierung, SEO-Grundlage, Domain, Hosting, Betrieb und die Verantwortung für das Ergebnis — liegt bei uns.`
+> `Ihr Anteil: was Ihr Betrieb macht, für wen und in welchem Gebiet. Dazu Bilder und Freigaben.`
+> `Unser Anteil: alles andere. Auch die Verantwortung, wenn etwas nicht funktioniert.`
+
+> **Alte Fassung, nicht wieder verwenden:** *„Alles Übrige — Struktur, Texte, Gestaltung,
+> Programmierung, SEO-Grundlage, Domain, Hosting, Betrieb und die Verantwortung für das Ergebnis —
+> liegt bei uns."* **Neun Glieder in einem Satz.** Der Leser hat sie zwei Zentimeter darüber als
+> sechs nummerierte Schritte gelesen. `alles andere` ist kürzer und sagt mehr.
 
 Zwei Zeilen, keine Liste, keine Karten, keine Spalten. **Hier funktioniert die Aussage**, weil der
 Leser die sechs Schritte gerade gesehen hat und weiß, wovon die Rede ist. Als eigene Sektion weit
@@ -385,8 +428,12 @@ oben ist sie viermal misslungen (§5 Sektion 2).
 
 - **H2:** `Sie beschreiben Ihr Geschäft. Wir empfehlen das passende Ergebnis.`
 - **Subline:** `Eine Empfehlung statt Paketwahl.`
-- **Einleitung (32 W.):**
-  > Sie müssen nicht wissen, wie viele Seiten oder welche Technik Sie brauchen. Die kurze Bedarfseinschätzung zeigt, welche Lösung voraussichtlich passt — geprüft wird sie anschließend persönlich.
+- **Einleitung (25 W., drei Sätze):**
+  > Sie müssen nicht wissen, wie viele Seiten Sie brauchen. Der Bedarfsscheck zeigt, welcher Umfang voraussichtlich passt. Wir prüfen das anschließend selbst nach.
+
+  > **Wortwechsel, gilt für die ganze Seite:** `Lösung` als Wort für das Produkt ist gestrichen
+  > (`SARTU_TEXTREGELN.md` Liste C). Es heißt `Umfang` oder der Name selbst — `Start`, `Wachstum`,
+  > `Platzhirsch`.
 
 > **Gleiche Informationstiefe für alle vier.** Jede Lösung nennt: für wen sie gedacht ist, was drin
 > ist (drei bis vier Merkmale), Einmalpreis, Monatspreis, Erstjahreswert, eigener Aufruf zum
@@ -394,29 +441,41 @@ oben ist sie viermal misslungen (§5 Sektion 2).
 > weniger erklärt bekommen.** Wer eine kleine Lösung braucht und nur die teure erklärt sieht, geht
 > — und zwar zu Recht.
 
-**`Start`** — `1.490 € einmalig` · `+ 59 €/Monat` · `Erstes Jahr: 2.198 € netto`
-> Für Betriebe mit einem klaren Angebot und einem Einzugsgebiet: Handwerk, Praxis, Ladengeschäft.
+> **Jede Stufe nennt ihren Umfang als Zahl** (`SARTU_TEXTREGELN.md` Regel 1). Die frühere Fassung
+> sagte „eine durchdachte Seite", „bis zu acht strategische Seiten" — **keine einzige der acht
+> festgelegten Umfangszahlen stand auf der Seite.** Quelle ist die Preistabelle im Masterkonzept.
+> Die Zahl steht **zuerst**, vor der Zielgruppe: Sie ist das, was der Leser vergleichen kann.
 
-Merkmale: `eine durchdachte Seite statt vieler halber` · `Kontakt- und Anfahrtsweg` · `SEO-Grundlage` · `Betrieb, Sicherung und Aktualisierungen inklusive`
+**`Start`** — `1.490 € einmalig` · `+ 59 €/Monat` · `Erstes Jahr: 2.198 € netto`
+> **1 Seite, rund 1.200 Wörter. 1 Korrekturrunde.**
+> Für Betriebe mit einem Angebot und einem Einzugsgebiet: Handwerk, Praxis, Ladengeschäft.
+
+Merkmale: `1 Seite, rund 1.200 Wörter` · `1 Korrekturrunde` · `Kontakt- und Anfahrtsweg` · `Betrieb und Sicherungen enthalten`
 CTA: `Einschätzen lassen`
 
 **`Wachstum`** — `3.900 € einmalig` · `+ 129 €/Monat` · `Erstes Jahr: 5.448 € netto`
+> **Bis zu 8 Seiten, rund 3.500 Wörter. 2 Korrekturrunden.**
 > Für Betriebe mit mehreren Leistungen oder mehreren Zielgruppen, die einzeln erklärt werden müssen.
 
-Merkmale: `bis zu acht strategische Seiten` · `eigene Seite je Leistung` · `Anfrageweg passend zum Ziel` · `SEO-Grundlage je Seite`
+Merkmale: `bis zu 8 Seiten, rund 3.500 Wörter` · `2 Korrekturrunden` · `eigene Seite je Leistung` · `SEO-Grundlage je Seite`
 CTA: `Einschätzen lassen`
 
 **`Platzhirsch`** — Badge `Empfehlung` · `7.900 € einmalig` · `+ 249 €/Monat` · `Erstes Jahr: 10.888 € netto`
-> Für Unternehmen mit mehreren Leistungen, regionalem Wettbewerb oder Recruitingbedarf. Wir entwickeln daraus ein Vertriebs-, Vertrauens- und Recruiting-System mit bis zu 16 strategischen Seiten.
+> **Bis zu 16 Seiten, rund 6.500 Wörter. 2 Korrekturrunden.**
+> Für Betriebe, die in ihrer Region als erste Adresse auftreten wollen — sichtbar für Kunden und für Bewerber.
 
-Merkmale: `stärkere Leistungs- und Regionsstruktur` · `Team, Karriere, Projekte — wenn sinnvoll` · `ein passender Anfrage-, Buchungs- oder Bewerbungsweg` · `SEO-Grundlage pro Seite`
+Merkmale: `bis zu 16 Seiten, rund 6.500 Wörter` · `2 Korrekturrunden` · `eigene Seite je Leistung und Ort` · `Karriere- und Bewerbungsbereich`
 CTA: `Bedarf prüfen lassen`
 
 **`Sonderprojekt`** — `ab 12.500 € einmalig` · `mind. 249 €/Monat` · `Erstes Jahr: ab 15.488 € netto`
+> **Umfang nach technischer Vorprüfung. Kein Paket.**
 > Für Shop, Kundenlogin, komplexe Buchung, Schnittstellen zu vorhandener Software oder mehrere Marken unter einem Dach.
 
-Merkmale: `Umfang und Preis nach Vorgespräch` · `eigenes Festangebot` · `keine offene Stundenabrechnung`
+Merkmale: `Festpreis vor Ihrer Entscheidung` · `keine offene Stundenabrechnung` · `Absage, wenn wir es nicht verantworten können`
 CTA: `Sonderprojekt besprechen`
+
+**Für alle Stufen zusätzlich sichtbar:** `Erstlaufzeit 12 Monate` · `Zahlungsziel 10 Tage`.
+Beide Zahlen standen bisher nirgends auf der Startseite und sind Teil des Angebots.
 
 > **Sechs Vorgaben aus dem UX-Audit vom 28.07.2026, alle verbindlich:**
 >

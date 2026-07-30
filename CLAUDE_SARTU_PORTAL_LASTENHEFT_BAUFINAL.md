@@ -342,6 +342,45 @@ Ein „Reparieren"-Knopf wird **nicht** gebaut. Er würde raten müssen.
 > Rücknahme, die es auf diesem Datenbanksystem nicht gibt. Das ist der gefährlichste Fehlertyp in
 > einer Einrichtungsstrecke — er wird erst sichtbar, wenn schon etwas schiefgegangen ist.
 
+#### 1.5a Spätere Migrationen — der zweite Weg, ohne den Stufe B nicht einspielbar ist
+
+Die Einrichtung aus §1.5 bricht bei einer **nicht leeren** Datenbank ab. Das ist richtig für die
+Erstinstallation. Ohne einen zweiten Weg wäre danach aber **keine einzige Migration mehr
+möglich** — und `REIHENFOLGE.md` sieht ausdrücklich vor, dass Stufe B drei Tabellen nachträglich
+hinzufügt. Diese Lücke stammt aus der Fassung vom 30.07.2026 und wird hier geschlossen.
+
+**Zwei getrennte Wege, unterschiedliche Voraussetzungen:**
+
+| | Ersteinrichtung (§1.5) | Nachträgliche Migration (§1.5a) |
+|---|---|---|
+| Aufruf | `/admin/setup` im Browser | **Befehlszeile auf dem Server**, kein Webaufruf |
+| Voraussetzung | Datenbank **leer** | Datenbank **nicht leer**, `schema_migrations` vorhanden und lückenlos |
+| Anmeldung | keine (es gibt noch kein Konto) | Dateizugriff auf dem Server |
+| Sperre danach | dauerhaft, `404` | keine — der Weg bleibt offen |
+
+**Der Befehl:** `php bin/migrate.php` mit drei Unterbefehlen.
+
+| Unterbefehl | Was er tut |
+|---|---|
+| `status` | Zeigt eingespielte und offene Migrationen. **Ändert nichts.** Der Normalfall vor jedem Einspielen |
+| `up` | Spielt alle offenen Migrationen ein, einzeln, mit Protokolleintrag nach jedem Erfolg |
+| `verify` | Prüft nur die Prüfsummen aller eingetragenen Migrationen gegen die Dateien |
+
+**Die Regeln aus „Schritt 3 im Detail" gelten unverändert weiter:** Prüfsummenabgleich vor dem
+Start, Einzelausführung, Eintrag unmittelbar nach Erfolg, Abbruch mit Nennung der Datei.
+
+**Zusätzlich, weil hier echte Daten liegen:**
+
+- [ ] **`up` verlangt eine vorherige Sicherung.** Der Befehl fragt nach dem Pfad der Sicherungsdatei und prüft, dass sie existiert und nicht leer ist. Ohne Angabe: Abbruch
+- [ ] **Kein `up` über das Netz.** Kein Webaufruf, kein Endpunkt unter `/api/`, keine Schaltfläche im Adminbereich. Wer migrieren darf, hat ohnehin Dateizugriff
+- [ ] **Wartungsmodus während `up`.** Kunden- und Adminbereich liefern `503` mit Klartext; nach Erfolg wird er automatisch aufgehoben, nach Abbruch **nicht**
+- [ ] Jeder Lauf schreibt ein Audit-Ereignis mit Startzeit, Endzeit, eingespielten Versionen und Ergebnis
+- [ ] **Migrationen werden nie geändert, nur ergänzt.** Eine bereits eingespielte Datei anzufassen bricht den Prüfsummenabgleich — das ist beabsichtigt
+- [ ] **Kein `down`.** Es gibt keinen Rückwärtsbefehl. Der Grund steht oben: schemaverändernde Befehle lösen ein implizites Commit aus. Wer zurück muss, spielt die Sicherung ein
+
+> **Der Satz, der die Erwartung setzt:** Vorwärts ist ein Befehl. Rückwärts ist eine Sicherung.
+> Alles andere wäre ein Versprechen, das die Datenbank nicht hält.
+
 #### Sicherheitsregeln — nicht verhandelbar
 
 Eine Einrichtungsstrecke ist die klassische Angriffsfläche. Wer sie erreicht, übernimmt das System.
@@ -1711,7 +1750,8 @@ Es gelten die Sprachregeln aus `CLAUDE_SARTU_WEBSITE_LASTENHEFT_BAUFINAL.md` §2
 **Protokollierung:**
 51. Manuelles Setzen auf `bezahlt` ohne Grundlagentext scheitert
 52. Das Audit-Ereignis dazu enthält Akteur, Zeitpunkt, alten Wert, neuen Wert, Grundlagentext und IP (§12)
-53. Änderung von `due_date` und `protection_started_on` erzeugt je ein Audit-Ereignis mit Grundlagentext
+53a. Änderung von `due_date` erzeugt ein Audit-Ereignis mit Grundlagentext
+53b. Änderung von `protection_started_on` erzeugt ein Audit-Ereignis mit Grundlagentext
 54. Rücknahme von `bezahlt` ist eine eigene protokollierte Aktion und benachrichtigt den Kunden
 55. Ein Audit-Eintrag lässt sich weder ändern noch löschen
 
@@ -1741,10 +1781,17 @@ Es gelten die Sprachregeln aus `CLAUDE_SARTU_WEBSITE_LASTENHEFT_BAUFINAL.md` §2
 72. `X-Forwarded-Proto: https` bei tatsächlichem HTTP wird ignoriert, solange keine vertrauenswürdige Zwischenstelle konfiguriert ist
 73. Nach Abschluss liefert `/admin/setup` `404`, auch nach Löschen **einer** der beiden Sperren
 
-> **Zur Anzahl:** Die Liste hat **73 durchnummerierte plus vier mit Buchstabenzusatz** (5a, 5b, 40a,
-> 40b) — zusammen **77 Testfälle**. Frühere Fassungen sprachen von „59"; das war schon damals um die
-> vier Buchstabenfälle zu niedrig. Maßgeblich ist die Liste, nicht die Zahl: Wer 77 zählt und 59
-> erwartet, hat nichts vergessen.
+**Nachträgliche Migration (§1.5a):**
+74. `php bin/migrate.php status` auf einer **nicht leeren** Datenbank listet offene Migrationen und verändert nichts
+75. `up` ohne angegebene Sicherungsdatei bricht ab — ebenso bei angegebener, aber fehlender oder leerer Datei
+76. Während `up` liefern Kunden- und Adminbereich `503`; nach Erfolg ist der Wartungsmodus aufgehoben, nach Abbruch bleibt er bestehen
+
+> **Zur Anzahl:** Die Liste hat **76 durchnummerierte plus fünf mit Buchstabenzusatz** (5a, 5b, 40a,
+> 40b, 53a/53b als Teilung von 53) — zusammen **81 Testfälle**. Frühere Fassungen sprachen von „59";
+> das war schon damals um vier Fälle zu niedrig. Maßgeblich ist die Liste, nicht die Zahl.
+>
+> **Welcher Fall in welcher Etappe entsteht, steht in `REIHENFOLGE.md`** — eine Zeile je Fall,
+> jeder genau einmal. Keine Sammelzuordnung, keine Mehrfachnennung.
 
 ---
 
@@ -1755,7 +1802,7 @@ Es gelten die Sprachregeln aus `CLAUDE_SARTU_WEBSITE_LASTENHEFT_BAUFINAL.md` §2
 - [ ] Alle Statuswerte zeigen dem Kunden Klartext, nirgends interne Codes
 - [ ] Formate aus §4a eingehalten: deutsche Datums- und Geldformate, Europe/Berlin, 19 % USt., Beträge als Cent gespeichert, keine leeren Werte als `null` sichtbar
 - [ ] **`php -l` läuft über jede PHP-Datei ohne Fehler** — billigste Prüfung überhaupt, fängt Syntaxfehler ab, bevor überhaupt ein Test startet. Gehört in den Testlauf, nicht in die Handarbeit
-- [ ] Alle 77 Testfälle aus §16 laufen automatisiert und grün
+- [ ] Alle 81 Testfälle aus §16 laufen automatisiert und grün
 - [ ] `tests/TenantIsolationTest.php` vorhanden, vollständig, nicht abgeschwächt
 - [ ] Kunden- und Adminzugriff laufen über **getrennte** Datenzugriffsschichten (§3 Regel 2a); kein gemeinsamer Codepfad lässt den Organisationsfilter weg
 - [ ] Rechenregeln greifen: Erstjahreswert, Zahlungsplan `custom`, Ratensumme (§4)
@@ -1788,12 +1835,16 @@ Es gelten die Sprachregeln aus `CLAUDE_SARTU_WEBSITE_LASTENHEFT_BAUFINAL.md` §2
 
 1. Lauffähiges Portal im Repository
 2. **`README.md`**: Voraussetzungen, Einrichtung, Umgebungsvariablen, Migration, Seed, Start, Deployment auf Hetzner, Backup-Hinweis (Datenbank **und** Upload-Verzeichnis)
-3. **Testbericht**: alle 77 Fälle aus §16 mit Ergebnis
+3. **Testbericht**: alle 81 Fälle aus §16 mit Ergebnis
 4. **Messwerte**: Antwortzeiten der Kernseiten, Seitengröße
 5. **Offene-Punkte-Liste**: alles, was bewusst nicht gebaut wurde (§0.3), plus alles, was du melden musst
 6. **Screenshot-Satz** aus der echten Oberfläche für die Website — mit Musterdaten, je einmal Desktop und Mobil.
    **Nach Stufe A verfügbar:** Cockpit · Bedarfsscheck-Antworten · Angebot · Aufgaben · Uploads · Vorschau mit Rundenanzeige · Rechnungen (Status manuell gesetzt).
-   **Erst nach Stufe B:** Öffnungszeiten · Anfragen von der Website · Domainstatus.
+   **Erst nach Stufe B:** Öffnungszeiten · Nachrichten an den Betreuer.
+   **Zu Stufe A gehören und müssen vorhanden sein:** Bedarfsscheck und Anfrageliste (A1) ·
+   Domainstatus (A3). Verschoben ist beim Domainstatus nur die Registrar-Anbindung, nicht die
+   Ansicht. **„Anfragen von der Website" bedeutet hier ausschließlich die Bedarfsschecks der
+   eigenen SARTU-Seite** — Anfragen aus Kundenwebsites sind Stufe 1 und ausdrücklich nicht zu bauen.
    Der Satz gilt als vollständig, wenn alle Ansichten der **jeweils gebauten Stufe** vorliegen (`REIHENFOLGE.md`)
 7. **`IMPLEMENTATION_SUMMARY.md`**: gebaute Struktur, Abweichungen vom Plan mit Begründung, offene Punkte
 8. **`MIGRATION_NOTES.md`**, falls aus einem Prototyp etwas übernommen wurde: was, warum, was verworfen

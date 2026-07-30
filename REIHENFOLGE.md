@@ -2,7 +2,7 @@
 
 **Stand:** 28.07.2026
 **Zweck:** Verhindern, dass der Kundenbereich in voller Ausbaustufe entsteht, bevor der erste Kunde
-existiert. Das Portal-Lastenheft beschreibt **20 Tabellen und 77 Testfälle**. Wer es von vorn nach
+existiert. Das Portal-Lastenheft beschreibt **20 Tabellen und 81 Testfälle**. Wer es von vorn nach
 hinten abarbeitet, baut Monate an Automatik, bevor jemand sie benutzt.
 
 > **Warnung aus dem eigenen Konzept**, `CLAUDE_SARTU_MASTERKONZEPT_FINAL.md` Zeile 12:
@@ -32,7 +32,7 @@ nach Vertragsschluss.
 ## Rangfolge — diese Datei überschreibt nur den Zeitpunkt
 
 **Wichtig, sonst hält ein ausführender Agent an dieser Datei an:** Der Portalauftrag erklärt das
-Portal-Lastenheft zur Quelle mit der höchsten Priorität. Es beschreibt alle Screens und alle 77
+Portal-Lastenheft zur Quelle mit der höchsten Priorität. Es beschreibt alle Screens und alle 81
 Testfälle **ohne Zeitangabe**. Diese Datei widerspricht dem nicht, sie ergänzt eine Dimension.
 
 > **`REIHENFOLGE.md` überschreibt für den zeitlichen Umfang** Portal-Lastenheft §0.2, §16 und §17
@@ -83,32 +83,53 @@ eine Testmail kommt an · der Mandantentest im Umfang von A0 läuft grün.
 ### A1 — Anfrage bis Auftrag
 
 Funktionsfähiger Bedarfsscheck unter `/briefing` · Anfrageliste im Adminbereich · Umwandlung in
-Kunde und Projekt · Einladung des Kunden · Kundenanmeldung per Link · Angebot erstellen, senden,
-annehmen.
+Kunde und Projekt · Einladung des Kunden · Kundenanmeldung per Link · Angebot erstellen und
+**senden** · **Löschlauf für IP-Adressen und Anfragefristen**.
 
 **Tabellen (4):** `leads` · `login_tokens` · `projects` · `offers`
 
 > **Der Bedarfsscheck wird hier als schmaler senkrechter Ausschnitt gebaut** — Formular, Annahme,
-> `leads`-Eintrag, Danke-Seite. **Ohne das umgebende Website-Design**, das erst in Sitzung 3
+> `leads`-Eintrag, Danke-Seite. **Ohne das umgebende Website-Design**, das erst in Sitzung 4
 > entsteht. Sonst wäre A1 von etwas abhängig, das nach Stufe A gebaut wird.
 
-**Fertig, wenn:** Eine über `/briefing` abgeschickte Anfrage führt bis zu einem angenommenen
-Angebot. Mandantentest um Projekte und Angebote erweitert.
+> **A1 endet beim gesendeten Angebot, nicht bei der Annahme.** Grund: Nach der Annahme lautet der
+> festgelegte nächste Schritt „Anzahlung bezahlen" mit Ziel `/rechnungen` (§5.6). Diese Route
+> entsteht erst in A2. Ein Kunde in A1 wäre also in einen Zustand gelaufen, dessen nächster Schritt
+> ins Leere zeigt. **Die Angebotsannahme steht am Anfang von A2**, zusammen mit den Rechnungen.
+> Die Tabelle `offers` bleibt in A1 — nur die Handlung wandert.
+
+> **Warum der Löschlauf schon hier steht:** Ab A1 entstehen **echte** Anfragen mit echten
+> IP-Adressen. Testfall 40 verlangt, dass `source_ip` nach 30 Tagen geleert ist. Eine zugesagte
+> Löschfrist, die niemand ausführt, ist keine Verzögerung im Bauplan, sondern ein
+> Datenschutzverstoß. Der Lauf ist klein: ein Cron-Aufruf, zwei Abfragen. Mollie, Mahnwesen und
+> Komfortautomatik bleiben in C.
+
+**Fertig, wenn:** Eine über `/briefing` abgeschickte Anfrage führt bis zu einem **gesendeten**
+Angebot, das der Kunde in seinem Bereich sieht. Der Löschlauf leert nachweislich eine 31 Tage alte
+`source_ip`. Mandantentest um Projekte und Angebote erweitert.
 
 ### A2 — Auftrag bis Produktionsstart
 
-Rechnungen **von Hand angelegt**, Zahlungsstatus **von Hand gesetzt**, Mollie-Link eingetragen ·
-Aufgaben · Uploads · **Faktenfreigabe**.
+**Angebotsannahme durch den Kunden** · Rechnungen **von Hand angelegt**, Zahlungsstatus **von Hand
+gesetzt**, Mollie-Link eingetragen · **Überfälligkeitslauf** · Aufgaben · Uploads ·
+**Faktenfreigabe**.
 
 **Tabellen (4):** `invoices` · `tasks` · `task_files` · `approvals`
+
+> **Der Überfälligkeitslauf gehört hierher, nicht nach C.** §5.3 legt fest, dass `ueberfaellig`
+> **täglich automatisch** gesetzt wird, sobald `due_date` überschritten ist. Ab A2 gibt es echte
+> Rechnungen mit echten Fristen. Ohne den Lauf zeigt das Portal einem Kunden „Offen — zahlbar bis
+> gestern". Auch dieser Lauf ist eine Abfrage. Die **Automatik drumherum** — Mollie-Abgleich,
+> Mahnstufen, Erinnerungsmails — bleibt in C.
 
 > **Warum `approvals` schon hier:** Die Faktenfreigabe vor Produktionsstart erzeugt zwingend einen
 > Eintrag mit `kind = inhalte` (§ Aufgaben, Sonderfall `kind = freigabe`). Ohne die Tabelle
 > erreicht kein Projekt den Zustand `produktion`. A3 nutzt dieselbe Tabelle danach für
 > `kind = abnahme`.
 
-**Fertig, wenn:** Nach Angebotsannahme führt der Weg über Anzahlung, Aufgaben und Faktenfreigabe bis
-`produktion`. Mandantentest um Rechnungen, Aufgaben und Dateien erweitert.
+**Fertig, wenn:** Der Kunde nimmt das Angebot an, und der Weg führt über Anzahlung, Aufgaben und
+Faktenfreigabe bis `produktion`. Eine Rechnung mit überschrittenem `due_date` steht am nächsten Tag
+auf `ueberfaellig`. Mandantentest um Rechnungen, Aufgaben und Dateien erweitert.
 
 ### A3 — Produktion bis Livegang
 
@@ -135,9 +156,14 @@ Website.** Mandantentest vollständig für alle Kundenrouten.
 
 - Öffnungszeiten und Ausnahmen selbst pflegen
 - Nachrichten an den Betreuer
-- Registrar-Anbindung für Domainereignisse
 
 **Tabellen (3):** `business_hours` · `business_hours_exceptions` · `support_messages`
+
+> **Kein Registrar in B.** Eine frühere Fassung nannte hier „Registrar-Anbindung für
+> Domainereignisse" und in C „Domainlebenszyklus beim Registrar" — zweimal dieselbe Sache ohne
+> Grenze dazwischen. **Verbindlich:** In A3 wird `domain_status` vollständig angelegt und **von
+> Hand** gepflegt. Die **gesamte** Registrar-Anbindung — Verfügbarkeitsabfrage, Registrierung,
+> Verlängerung, Ablaufwarnung, Übertragung — liegt geschlossen in C. In B passiert dazu nichts.
 
 > **Offene Lücke im Lastenheft, nicht in dieser Datei:** Die Selbstpflege verspricht außerdem
 > *Bilder tauschen*, *Team- und Projekteinträge pflegen* und *Anfragen von der Website einsehen*.
@@ -171,8 +197,7 @@ ist irreführend — und bei einem Anbieter, der mit Ehrlichkeit wirbt, der teue
 ## Stufe C — wenn Handarbeit lästig wird
 
 - Mollie-Abo, Zahlungsautomatik, Webhooks, Mahnwesen
-- Domainlebenszyklus beim Registrar
-- **Zeitgesteuerte Aufgaben:** IP-Löschung nach 30 Tagen, Löschfristen, Überfälligkeitsprüfung
+- **Registrar vollständig:** Verfügbarkeit, Registrierung, Verlängerung, Ablaufwarnung, Übertragung
 - Finanzübersichten, Auswertungen, Massenvorgänge
 - Bereitstellungsautomatik, Rollback
 
@@ -180,10 +205,13 @@ ist irreführend — und bei einem Anbieter, der mit Ehrlichkeit wirbt, der teue
 > gehören nach A2 — ohne sie kommt kein Projekt in die Produktion. Nur die **Automatik** wandert
 > nach C.
 
-> **Zwei Testfälle hängen an C und sind vorab zugeordnet:** der Überfälligkeitstest und der Test
-> zur IP-Löschung nach 30 Tagen setzen die zeitgesteuerte Aufgabe voraus. Sie werden **in C**
-> geschrieben, nicht vorher als leere Hüllen angelegt. Die Zuordnung steht **vor** dem Bau fest,
-> nicht erst in der Abschlusszusammenfassung.
+> **Die zeitgesteuerten Aufgaben stehen nicht mehr hier.** Eine frühere Fassung schob IP-Löschung,
+> Löschfristen und Überfälligkeitsprüfung geschlossen nach C. Das war falsch: Ab A1 entstehen echte
+> Anfragen, ab A2 echte Rechnungen. Beide Läufe sind jetzt in ihrer Etappe (A1 und A2). **In C
+> bleibt, was darauf aufsetzt** — Mahnstufen, Erinnerungsmails, Zahlungsabgleich.
+>
+> **Kein Testfall hängt mehr an C.** Alle Testfälle aus §16 sind einer Etappe in A oder B
+> zugeordnet, jeder genau einmal (siehe unten).
 
 ---
 
@@ -218,23 +246,70 @@ Tabellen prüfen müsste, die es noch nicht gibt.
 | **A3** | zusätzlich: alle Kundenrouten — **Endfassung** |
 | **B** | um jede neu hinzukommende Kundenroute erweitert |
 
-**Die übrigen Testblöcke nach Etappe** — damit nicht am Ende von Stufe A eine Zuordnung erfunden
-werden muss:
+### Jeder Testfall genau einmal — die vollständige Zuordnung
 
-| §16-Block | Etappe | Begründung |
+Die frühere Fassung ordnete **Blöcke** zu. Eine externe Prüfung hat daran vier Fehler gefunden:
+Fall 40 stand in A1 **und** in C · Fall 20 nirgends · Fall 53 prüfte zwei Dinge aus zwei Etappen ·
+und der Sammelblock „41–50 ab A0" enthielt Fälle, die eine Tabelle aus A2 brauchen. Alle vier
+Befunde stimmten.
+
+**Deshalb hier eine Zeile je Testfall.** Die Etappe ist die, in der er **entsteht**; danach läuft
+er in jeder folgenden Etappe mit.
+
+| # | Etappe | | # | Etappe | | # | Etappe |
+|---|---|---|---|---|---|---|---|
+| 1 | A1 | | 28 | A3 | | 55 | A0 |
+| 2 | A2 | | 29 | A1 | | 56 | A0 |
+| 3 | A1 | | 30 | A1 | | 57 | A1 |
+| 4 | A2 | | 31 | A1 | | 58 | A0 |
+| 5 | A1 | | 32 | A1 | | 59 | A1 |
+| 5a | A0 | | 33 | A1 | | 60 | A1 |
+| 5b | A0 | | 34 | A1 | | 61 | A2 |
+| 6 | A1 | | 35 | A1 | | 62 | A1 |
+| 7 | A1 | | 36 | A1 | | 63 | A3 |
+| 8 | A1 | | 37 | A1 | | 64 | A0 |
+| 9 | A1 | | 38 | A1 | | 65 | A0 |
+| 10 | A1 | | 39 | A1 | | 66 | A0 |
+| 11 | A2 | | 40 | **A1** | | 67 | A0 |
+| 12 | A2 | | 40a | A1 | | 68 | A0 |
+| 13 | A2 | | 40b | A1 | | 69 | A0 |
+| 14 | A2 | | 41 | A0 | | 70 | A0 |
+| 15 | **A2** | | 42 | A1 | | 71 | A0 |
+| 16 | A2 | | 43 | A0 | | 72 | A0 |
+| 17 | A2 | | 44 | A0 | | 73 | A0 |
+| 18 | A3 | | 45 | A1 | | 74 | A0 |
+| 19 | **B** | | 46 | **A2** | | 75 | A0 |
+| 20 | **A1** | | 47 | A0 | | 76 | A0 |
+| 21 | A1 | | 48 | A0 | | | |
+| 22 | A1 | | 49 | A0 | | | |
+| 23 | A1 | | 50 | A0 | | | |
+| 24 | A2 | | 51 | A2 | | | |
+| 25 | A3 | | 52 | A2 | | | |
+| 26 | A2 | | 53a | **A2** | | | |
+| 27 | A2 | | 53b | **A3** | | | |
+| | | | 54 | A2 | | | |
+
+**Summe:** A0 = 24 · A1 = 33 · A2 = 17 · A3 = 6 · B = 1 · C = 0. **Zusammen 81.**
+
+**Die acht Fälle, bei denen die Zuordnung nicht offensichtlich ist:**
+
+| # | Was er prüft | Warum diese Etappe |
 |---|---|---|
-| **67–73** Ersteinrichtung | **A0** | Die Installation ist A0. Ohne sie entsteht keine Datenbank |
-| **64–66** Betreiberdaten | **A0** | `operator_settings` und `legal_texts` gehören zu A0 |
-| 1–5b Mandantentrennung | wächst A0→A3 | siehe Tabelle oben |
-| 6–10 Anmeldung | **A1** | `login_tokens` entsteht dort |
-| 29–40b Anfrageeingang | **A1** | `/briefing` ist der senkrechte Ausschnitt in A1 |
-| 11–13, 21–24 Angebot | **A1** | |
-| 14, 16–17, 26–27, 51–54 Zahlung, Aufgaben, Freigabe | **A2** | |
-| 18, 25, 28 Abnahme, Runden, Schutzbeginn | **A3** | |
-| **60–63** Statusübergänge | wächst A1→A3 | Geprüft wird immer nur, was an Zuständen existiert: A1 bis `angebot_angenommen`, A2 bis `produktion`, A3 bis `live`. **Fall 63 (`live → korrektur`) erst in A3** |
-| 19 Öffnungszeiten | **B** | `business_hours` ist Stufe B |
-| 15 Überfälligkeit, 40 IP-Löschung | **C** | setzen die zeitgesteuerte Aufgabe voraus |
-| 41–50, 55–59 Sicherheit, Protokoll, Bedienung | ab **A0**, wachsend | Jede neue Route wird sofort mit aufgenommen, nicht nachgezogen |
+| 2 | fremde Rechnung, Aufgabe, Datei **und** Angebot | Braucht alle vier Entitäten. `invoices`, `tasks`, `task_files` entstehen in **A2** |
+| 11–13 | Angebotsannahme | Die **Annahme** ist nach A2 gewandert, das Angebot bleibt A1 |
+| 15 | `ueberfaellig` wird gesetzt | Der Überfälligkeitslauf ist von C nach **A2** vorgezogen |
+| 20 | Statuswechsel erzeugt Audit mit Akteur | War vorher **nirgends** zugeordnet. Der erste Wechsel ist `angebot_offen` beim Senden — **A1** |
+| 40 | `source_ip` nach 30 Tagen geleert | War doppelt (A1 **und** C). Der Löschlauf ist nach **A1** vorgezogen, damit gilt A1 |
+| 46 | unerlaubter Dateityp abgelehnt | Steckte im Sammelblock „ab A0", braucht aber `task_files` aus **A2** |
+| 53a/53b | `due_date` **und** `protection_started_on` | War **ein** Fall über zwei Etappen. **Wird geteilt:** `due_date` in A2, `protection_started_on` in A3 |
+| 57 | Willkommensstrecke erscheint einmal | Steckte im Sammelblock „ab A0", braucht aber die Kundenanmeldung aus **A1** |
+
+> **Fall 53 wird in §16 geteilt.** Aus einem Testfall werden zwei mit eigener Nummer. Das ist keine
+> Erfindung eines neuen Kriteriums, sondern die Trennung zweier Prüfungen, die versehentlich in
+> einer Zeile standen.
+
+> **Die Fälle 74–76 sind neu** und prüfen die nachträgliche Migration aus Portal-Lastenheft §1.5a.
+> Ohne sie wäre der zweite Migrationsweg ungeprüft — und genau daran wäre Stufe B gescheitert.
 
 **Was nicht passiert:** Tests zu ungebauten Funktionen als leere Hüllen anlegen · Tests
 überspringen, auskommentieren oder als „später" markieren · den Mandantentest abschwächen, damit
@@ -248,7 +323,7 @@ er grün wird · die vollständige Definition of Done nach Stufe A abhaken.
 
 | Wartet auf | Was blockiert ist |
 |---|---|
-| **Stufe A läuft** | 15 Bildplätze der Website · bewegter Aufmacher · Sitzung 3 insgesamt |
+| **Stufe A läuft** | 15 Bildplätze der Website · bewegter Aufmacher · Sitzung 4 insgesamt |
 | **Foto des Gründers** | Startseite Sektion 8 (`SARTU_ENTSCHEIDUNGEN_OFFEN.md` §5) |
 | **Anwaltliche Freigabe** | Startsperre, Website-Lastenheft §14a |
 | **Adressstatus** | Google-Unternehmensprofil · `LocalBusiness` · Impressum (§1) |
@@ -261,12 +336,12 @@ er grün wird · die vollständige Definition of Done nach Stufe A abhaken.
 
 | Wer | Was |
 |---|---|
-| **Codex, lokal** | Stufe A bauen. Es kann auf dem Entwicklungsrechner ausführen, was es baut — bei 77 Tests gegen eine echte Datenbank wiegt das schwerer als jede Sorgfalt beim Schreiben |
+| **Codex, lokal** | Stufe A bauen. Es kann auf dem Entwicklungsrechner ausführen, was es baut — bei 81 Tests gegen eine echte Datenbank wiegt das schwerer als jede Sorgfalt beim Schreiben |
 | **Claude Code** | Entwürfe der Rechtstexte · Gegenlesen nach jeder Sitzung · Mandantentrennung prüfen · Spezifikation nachziehen, wenn Widersprüche auffallen |
 | **Betreiber** | Die drei offenen Angaben · Foto · Hosting auswählen und **praktisch prüfen** (Testmail an eine Fremdadresse, Cronlauf, der eine Datei schreibt) · Mailserver mit SPF, DKIM, DMARC |
 
 > **Warum Claude Code Stufe A nicht baut:** In seiner Umgebung läuft keine MySQL und kein
-> Docker-Dienst — geprüft am 28.07.2026. Damit sind die 77 Testfälle dort nicht ausführbar, und
+> Docker-Dienst — geprüft am 28.07.2026. Damit sind die 81 Testfälle dort nicht ausführbar, und
 > **nicht ausgeführter Code ist kein fertiger Code.**
 
 ---
