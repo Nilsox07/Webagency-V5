@@ -960,6 +960,14 @@ Ausbau auf 40–60 Begriffe erst in Stufe 2, gesteuert über Search-Console-Date
 
 ### 14a. Startsperre — die Veröffentlichung muss scheitern, nicht warnen
 
+> **Geändert 28.07.2026:** Die Sperre prüft **nicht mehr auf Platzhalter in Vorlagen**, sondern auf
+> den Zustand der Betreiberdaten im internen Bereich (Portal-Lastenheft §1.4a). Anschrift,
+> Kontaktdaten und Steuerangaben stehen nicht mehr im Quelltext.
+>
+> **Die Veröffentlichung bricht ab, wenn:** ein Pflichtfeld der Betreiberdaten leer ist · weder
+> Umsatzsteuer-Identifikationsnummer noch Steuernummer gesetzt ist · einer der Rechtstexte noch
+> im Zustand `entwurf` oder `in_pruefung` steht.
+
 Ein Platzhalter, der versehentlich live geht, ist bei Impressum und Datenschutz ein **Rechtsverstoß**,
 kein Schönheitsfehler. Eine Warnung im Protokoll reicht nicht — sie wird überlesen.
 

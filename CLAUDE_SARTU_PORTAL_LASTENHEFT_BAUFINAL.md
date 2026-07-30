@@ -240,6 +240,56 @@ Website-Copy halten sich an die linke Spalte. Der USP ist nicht die Software, so
 Kunde nichts suchen muss**.
 
 
+### 1.4a Betreiberdaten — gepflegt im internen Bereich, nicht im Code
+
+**Anschrift, Kontaktdaten und Steuerangaben stehen nirgends im Quelltext.** Sie liegen als
+Einstellungen in der Datenbank und werden unter `/admin/einstellungen/betrieb` gepflegt.
+
+| Feld | Verwendung |
+|---|---|
+| `firmenname`, `rechtsform` | Impressum, Fußbereich, Rechnungen, strukturierte Daten |
+| `strasse`, `plz`, `ort`, `land` | Impressum, Rechnungen, `LocalBusiness` |
+| `telefon`, `email` | Impressum, Fußbereich, Kontaktseite, Absender |
+| `ust_id` **oder** `steuernummer` | Impressum, Rechnungen |
+| `registergericht`, `registernummer` | nur bei eingetragener Gesellschaft |
+| `inhaltlich_verantwortlich` | Impressum |
+| `bank_iban`, `bank_bic`, `bank_institut` | Rechnungen |
+| `kleinunternehmer` (ja/nein) | **steuert die Preisdarstellung der gesamten Website** |
+
+**Warum das nicht in den Code gehört — drei Gründe, jeder allein ausreichend:**
+
+1. **Eine falsche Anschrift im Impressum ist abmahnfähig.** Sie muss in Minuten korrigierbar sein, nicht über einen Entwicklungs- und Auslieferungsvorgang
+2. **Eine Quelle für alles.** Fußbereich, Impressum, Rechnungen, E-Mails und strukturierte Daten ziehen dieselben Werte. Genau diese Übereinstimmung verlangt `GEO_DISCOVERY_CHECKLIST.md` §3 — uneinheitliche Angaben führen dazu, dass KI-Systeme gar nichts zuordnen
+3. **Das Feld `kleinunternehmer` ist geschäftskritisch.** Steht es auf „ja", darf **nirgends** „zzgl. USt." erscheinen und keine Umsatzsteuer ausgewiesen werden — weder auf der Website noch auf Rechnungen. Ein falscher Steuerausweis ist nach § 14c UStG geschuldet, auch wenn er versehentlich war
+
+**Regeln:**
+
+- [ ] Jede Änderung erzeugt einen vollständigen Prüfeintrag mit altem Wert, neuem Wert und Grund (§3.9) — es sind rechtlich erhebliche Angaben
+- [ ] Pflichtfelder sind serverseitig geprüft: keine leeren Werte, Postleitzahl formal gültig, entweder `ust_id` oder `steuernummer` gesetzt
+- [ ] **Ein Postfach genügt nicht.** Das Impressum verlangt eine ladungsfähige Anschrift; die Oberfläche weist beim Speichern darauf hin
+- [ ] Werden Anschrift oder Firmenname geändert, wird sichtbar vermerkt, dass Impressum und Rechnungsvorlagen geprüft werden müssen
+- [ ] Die Werte werden **nie** aus einer Anfrage übernommen, sondern nur über den Adminbereich gesetzt
+
+#### Auswirkung auf die Startsperre
+
+Website-Lastenheft §14a prüft ab jetzt **nicht mehr auf Platzhalter in Vorlagen**, sondern auf den
+Zustand dieser Einstellungen. Die produktive Veröffentlichung bricht ab, wenn:
+
+- ein Pflichtfeld leer ist
+- weder `ust_id` noch `steuernummer` gesetzt ist
+- die Rechtstexte noch den Vermerk `ENTWURF` tragen (`SARTU_ENTSCHEIDUNGEN_OFFEN.md` §2)
+
+**Abbruch, keine Warnung.** Eine Warnung wird weggeklickt.
+
+#### Die Rechtstexte selbst
+
+`impressum`, `datenschutz` und `agb` liegen ebenfalls als Inhalte in der Datenbank, mit einem
+Zustand je Text: `entwurf` · `in_pruefung` · `freigegeben`. Nur `freigegeben` wird öffentlich
+ausgeliefert; `entwurf` ist ausschließlich angemeldet im Adminbereich sichtbar.
+
+**Den Zustand auf `freigegeben` setzen darf nur ein Mensch**, mit Datum und Namen der prüfenden
+Stelle. Kein automatischer Übergang, keine Voreinstellung.
+
 ### 1.5 Ersteinrichtung — geführte Installation im internen Bereich
 
 **Ziel:** Nach dem Hochladen der Dateien und dem Anlegen einer leeren Datenbank richtet sich das
