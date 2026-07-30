@@ -9,57 +9,85 @@ erfundenen Wert ersetzt werden. Steht er auf `offen`, gilt die dort genannte Spe
 
 ---
 
-## 1. Startregion und Geschäftsadresse — **OFFEN**
+## 1. Startregion und Geschäftsadresse — **teilentschieden 28.07.2026**
 
-| Platzhalter | Wert | Bedeutung |
+| Platzhalter | Wert | Stand |
 |---|---|---|
-| `[STARTREGION]` | *offen* | Region, in der verkauft wird (z. B. „Region X") |
-| `[HAUPTORT]` | *offen* | größte Stadt der Region — höchstes Suchvolumen, härtester Wettbewerb |
-| `[UMLAND_ORT_1]` … `[UMLAND_ORT_4]` | *offen* | Tier-1-Orte im Umland — dünner Wettbewerb, echter Ortsbezug |
-| `[HEIMATORT]` | *offen* | Wohn-/Herkunftsort, dient als Vertrauensanker, nicht als Traffic-Quelle |
-| `[GESCHAEFTSADRESSE_STATUS]` | *offen* | `offen` · `echtes Buero` · `reine Postadresse` |
+| `[STARTREGION]` | **Raum Dresden** | entschieden |
+| `[HAUPTORT]` | **Dresden** | entschieden |
+| `[UMLAND_ORT_1]` … `[UMLAND_ORT_4]` | *offen* | **Betreiber wählt vier** — Vorschlag unten |
+| `[HEIMATORT]` | *offen* | nur wenn er ein echter Vertrauensanker ist |
+| `[GESCHAEFTSADRESSE_STATUS]` | *offen* | **blockiert weiterhin das Google-Unternehmensprofil** |
 
-### Was gesperrt bleibt, solange der Status `offen` ist
+### Was damit freigeschaltet ist
 
-- **Kein** `LocalBusiness` in strukturierten Daten — stattdessen `Organization` ohne Adresse
-- **Kein** Google-Unternehmensprofil, auch nicht vorbereitend angelegt
-- **Keine** Ortsseiten in der produktiven Veröffentlichung, auch nicht unverlinkt
-- **Keine** Ortsnamen in Title, H1, Meta-Description oder URL
-- **Keine** NAP-Aussage („Name, Adresse, Telefon konsistent") — es gibt noch keine Adresse
-- **Keine** Service-Area-Definition
-- Im Fließtext: **keine** Ortsnennung. Formulierungen bleiben überregional („für Betriebe im deutschsprachigen Raum", „vor Ort beim Kunden")
+- Ortsnamen im Fließtext, in Titeln und Adressen — **für die Startregion**
+- `/webdesign-dresden` und Umlandseiten, **nach dem Gate in Masterkonzept §16a**
+- Service-Area-Definition
+- Regionale Formulierungen statt „im deutschsprachigen Raum"
 
-### Was trotzdem gebaut werden darf
+### Was weiterhin gesperrt bleibt
 
-Die gesamte Website ohne lokale Ebene: Startseite, Preise, Bedarfsscheck, Ablauf, Leistungsseiten,
-Ratgeber, Lexikon, Kundenbereich. **Das ist der Regelfall**, nicht der Notfall — die lokale Ebene ist
-eine spätere Ergänzung, kein Fundament.
+- **Google-Unternehmensprofil** — braucht `[GESCHAEFTSADRESSE_STATUS]`. Ein Profil ohne prüfbare Adresse ist nicht anlegbar, und ein falsch angelegtes Profil ist schwer zu korrigieren
+- **`LocalBusiness`** in strukturierten Daten — dito, bis eine Anschrift feststeht
+- **NAP-Aussage** — es gibt noch keine Adresse
 
-### Was passiert, wenn die Entscheidung fällt
+### Umlandorte — Auswahlregel, nicht Liste
 
-Die regionale Strategie in `CLAUDE_SARTU_MASTERKONZEPT_FINAL.md` §23a ist bewusst **ortsunabhängig**
-formuliert: Umland zuerst, Hauptort später. Diese Logik gilt für jede Region. Beim Eintragen der
-Werte oben wird sie ohne Umbau anwendbar.
+Die vier Tier-1-Orte werden nach **drei** Kriterien gewählt, nicht nach Sympathie:
 
-> **Hinweis zur Historie:** In früheren Fassungen standen hier konkrete Orte, die aus einer
-> Gesprächsnotiz stammten. Sie sind entfernt, weil eine beiläufig genannte Wohn- oder
-> Wunschadresse **keine getroffene Marktentscheidung** ist. Der Unterschied ist wichtig: Die
-> Marktentscheidung bestimmt Keywords, Seitenstruktur, Google-Profil und Impressum — sie will
-> bewusst getroffen und nicht aus einem Nebensatz abgeleitet werden.
+1. **erreichbar in unter 45 Minuten** — der Ortsbezug muss im Zweifel belegbar sein
+2. **genug Betriebe der Zielgrößen** — Handwerk, Praxen, Kanzleien, Ladengeschäfte
+3. **dünner Anbieterwettbewerb** — im Umland deutlich dünner als in der Kernstadt
+
+Naheliegende Kandidaten im Umkreis: Radebeul · Meißen · Pirna · Freital · Radeberg · Coswig ·
+Heidenau · Bautzen. **Der Betreiber wählt vier und trägt sie hier ein** — nicht die ausführende KI.
+
+> **Reihenfolge bleibt: Umland vor Kernstadt.** Masterkonzept §23a. In Dresden konkurrierst du mit
+> Agenturen, die seit Jahren dort ranken. Im Umland sind es eine Handvoll — dort entsteht der erste
+> Beleg, und der trägt später die Kernstadtseite.
+
+### Ausbau in kleinere Städte deutschlandweit — **Stufe 2, mit Vorbehalt**
+
+Die Idee, gezielt Klein- und Mittelstädte mit dünnem Anbieterangebot zu bespielen, ist grundsätzlich
+richtig und deutlich besser als „alle Orte über 5.000 Einwohner". Sie ist aber **kein Startvorhaben**,
+aus drei Gründen:
+
+| | |
+|---|---|
+| **Der Kartenbereich ist nicht erreichbar** | Ein Google-Unternehmensprofil erlaubt höchstens 20 Einzugsgebiete, Richtwert rund zwei Stunden Fahrzeit. Außerhalb davon ist der lokale Kartenbereich **verschlossen** — dort wirkt nur die organische Suche, und die ist langsamer und härter |
+| **Doorway-Risiko** | Google nennt ausdrücklich „mehrere Seiten, die auf bestimmte Regionen oder Städte ausgerichtet sind und Nutzer auf eine Seite leiten". Ohne echten örtlichen Nutzwert je Seite ist genau das der Tatbestand — §16a gilt unverändert |
+| **Dünner Wettbewerb heißt oft dünne Nachfrage** | Eine Stadt ohne Agenturen hat manchmal keine, weil dort niemand 5.448 € für eine Website ausgibt. **Vor dem Bau prüfen**, nicht danach |
+
+**Bedingung für Stufe 2:** Erst müssen im Raum Dresden **echte Kundenprojekte** existieren. Jede
+auswärtige Ortsseite braucht dann einen belegbaren örtlichen Nutzwert — nach der Beweisleiter in
+`SARTU_SEO_GEO_KEYWORDSTRATEGIE.md` §4.1, Stufe 6: **eine Fallstudie eines echten Kunden aus dem
+Ort, schriftlich freigegeben.** Ohne die entsteht keine Seite.
 
 ---
 
 ## 2. Rechtstexte — **OFFEN**
 
-| Platzhalter | Status |
-|---|---|
-| `[IMPRESSUM]` | kommt von einer Kanzlei. **Nie** von einer KI formuliert |
-| `[DATENSCHUTZ]` | dito |
-| `[AGB]` | dito — bis dahin nicht verlinkt und `noindex` |
+**Verfahren geändert 28.07.2026:** Entwürfe werden von der KI erstellt, **anschließend anwaltlich
+geprüft**. Die frühere Regel „nie von einer KI formuliert" ist damit abgelöst — die Sperre bis zur
+Prüfung bleibt jedoch bestehen.
+
+| Platzhalter | Status | Risiko des Entwurfs |
+|---|---|---|
+| `[IMPRESSUM]` | Entwurf durch KI, dann Prüfung | **gering** — überwiegend Formsache nach § 5 DDG |
+| `[DATENSCHUTZ]` | Entwurf durch KI, dann Prüfung | **mittel** — hängt an dem, was die Seite tatsächlich tut. Der technische Aufbau ist bekannt, damit ist ein belastbarer Entwurf möglich |
+| `[AGB]` | Entwurf durch KI, dann Prüfung | **hoch** — Laufzeit, Kündigung, Haftung, Zahlung, Leistungsumfang. Hier entscheidet die anwaltliche Prüfung über Geld, nicht über Formulierungen |
 | `[ANSCHRIFT]`, `[TELEFON]`, `[EMAIL]` | erst mit Punkt 1 entscheidbar |
 
-**Sperre:** Die produktive Veröffentlichung bricht ab, solange hier Platzhalter stehen
-(Website-Lastenheft §14a).
+**Sperre bleibt unverändert:** Die produktive Veröffentlichung bricht ab, solange die Texte nicht
+**anwaltlich freigegeben** sind (Website-Lastenheft §14a). Ein Entwurf zählt nicht als Freigabe.
+
+**Kennzeichnungspflicht:** Jeder Entwurf trägt am Kopf `ENTWURF — NICHT GEPRÜFT, NICHT
+VERÖFFENTLICHEN`. Der Vermerk wird erst nach der Freigabe entfernt, und zwar von einem Menschen.
+
+> **Warum die Sperre trotz Entwurf bleibt:** Ein plausibel klingender Rechtstext ist gefährlicher
+> als gar keiner. Ohne Text weiß jeder, dass etwas fehlt. Mit einem gut formulierten Entwurf denkt
+> man, es sei erledigt — und genau so geht er live.
 
 ---
 
