@@ -173,7 +173,11 @@ Rechtstexte · echte Fotos · die Freigabe eigener Texte. Alles davon steht in
 >
 > Die Designrichtung ist entschieden: **[Variante X]**. Setze sie als zentrale Variablen um.
 >
-> Baue jetzt `CODEX_AUFTRAG_PORTAL.md`, Etappen 1 bis 5, vollständig durch. **Ich arbeite nicht
+> **Lies zuerst `REIHENFOLGE.md`.** Gebaut wird **nur Stufe A** — zwölf der achtzehn Tabellen und
+> der Weg, den ein erster Kunde tatsächlich geht. Stufe B und C werden **nicht** angelegt, auch
+> nicht als leere Hüllen oder auskommentierte Entwürfe.
+>
+> Baue jetzt `CODEX_AUFTRAG_PORTAL.md`, Etappen 1 bis 5, **im Umfang von Stufe A**, durch. **Ich arbeite nicht
 > Etappe für Etappe mit** — berichte nach jeder Etappe und arbeite weiter, ohne auf Freigabe zu
 > warten. **Anhalten nur** bei einem Widerspruch in den Vorgaben, einer fehlenden Information, die
 > du sonst erfinden müsstest, oder einer Frage zu Sicherheit und Umfang.
