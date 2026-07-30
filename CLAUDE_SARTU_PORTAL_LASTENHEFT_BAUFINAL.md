@@ -239,6 +239,65 @@ Intern darf ein Begriff wie „Adminbereich" stehen. **Kundensichtbare** Oberfl�
 Website-Copy halten sich an die linke Spalte. Der USP ist nicht die Software, sondern **dass der
 Kunde nichts suchen muss**.
 
+
+### 1.5 Ersteinrichtung — geführte Installation im internen Bereich
+
+**Ziel:** Nach dem Hochladen der Dateien und dem Anlegen einer leeren Datenbank richtet sich das
+System selbst ein. Kein Bearbeiten von Konfigurationsdateien auf dem Server, kein Einspielen von
+SQL-Dateien von Hand.
+
+**Ablauf beim ersten Aufruf**, solange die Installation nicht abgeschlossen ist: Jeder Aufruf
+außer der Einrichtung leitet auf `/admin/setup`. Sechs Schritte, jeder einzeln prüfbar:
+
+| # | Schritt | Was geprüft wird |
+|---|---|---|
+| 1 | **Umgebung** | PHP-Version, die sechs Erweiterungen aus §1.4, Schreibrechte auf `/storage`, Verzeichnis außerhalb des Webroots erreichbar |
+| 2 | **Datenbank** | Zugangsdaten eingeben, **Verbindung sofort testen**, Zeichensatz und Kollation prüfen, erst dann speichern |
+| 3 | **Migrationen** | Alle Migrationen ausführen, Ergebnis je Schritt anzeigen. Bei Fehler: Abbruch mit Klartextmeldung, kein halber Stand |
+| 4 | **Mailversand** | SMTP-Zugang eingeben, **Testmail an eine eingegebene Adresse senden**, Empfang muss bestätigt werden, bevor es weitergeht |
+| 5 | **Erstes Adminkonto** | E-Mail, Name, TOTP einrichten. **Kein Vorgabepasswort, kein Standardkonto** |
+| 6 | **Abschluss** | Anwendungsschlüssel erzeugen, `.env` schreiben, Cron-Befehl zum Kopieren anzeigen, Einrichtung sperren |
+
+**Ergebnis:** `.env` liegt geschrieben vor, das Schema steht, ein Adminkonto existiert, ein
+Testmail ist nachweislich angekommen.
+
+#### Sicherheitsregeln — nicht verhandelbar
+
+Eine Einrichtungsstrecke ist die klassische Angriffsfläche. Wer sie erreicht, übernimmt das System.
+
+- [ ] **Nach Abschluss ist `/admin/setup` dauerhaft gesperrt** und liefert `404`. Die Sperre wird in der Datenbank **und** als Datei in `/storage` vermerkt — beide müssen fehlen, damit die Strecke wieder aufgeht
+- [ ] Die Sperre ist **über das Netz nicht aufhebbar**. Ein Zurücksetzen erfordert Dateizugriff auf dem Server
+- [ ] Zugangsdaten werden **nie** angezeigt, nie protokolliert, nie in eine Fehlermeldung geschrieben — auch nicht teilweise
+- [ ] **Rate-Limit** auf jeden Schritt, damit die Strecke nicht als Passwortprobierfläche dient
+- [ ] Läuft die Einrichtung über unverschlüsseltes HTTP, wird sie mit deutlicher Warnung abgebrochen. Zugangsdaten gehen nicht im Klartext über die Leitung
+- [ ] Schlägt Schritt 3 fehl, wird **zurückgerollt** — kein halb migriertes Schema
+- [ ] Die Einrichtung legt **kein** Beispielkonto und **keine** Beispieldaten in der produktiven Umgebung an
+
+#### Was die Einrichtung ausdrücklich **nicht** kann
+
+Damit keine falsche Erwartung entsteht:
+
+| Nicht automatisierbar | Warum |
+|---|---|
+| **Rechtstexte** | Kommen aus anwaltlicher Prüfung (`SARTU_ENTSCHEIDUNGEN_OFFEN.md` §2). Die Startsperre aus Website-Lastenheft §14a bleibt davon unberührt |
+| **Mailserver einrichten** | SPF, DKIM und DMARC werden beim Anbieter und im DNS gesetzt. Die Einrichtung **prüft** den Versand, sie richtet ihn nicht ein |
+| **Cron eintragen** | Der Befehl wird zum Kopieren angezeigt; eintragen muss ihn der Mensch beim Anbieter |
+| **HTTPS besorgen** | Zertifikat und Weiterleitung liegen beim Anbieter |
+| **Standortentscheidung** | §1 — eine Geschäftsentscheidung, kein Konfigurationswert |
+
+> **Der Satz, der die Erwartung setzt:** Die Ersteinrichtung nimmt dir **alles ab, was die
+> Anwendung über sich selbst weiß** — Schema, Schlüssel, Konto, Konfiguration. Sie nimmt dir
+> **nichts** ab, was außerhalb liegt: Server, DNS, Mail, Recht. Beides zusammen ist der Unterschied
+> zwischen „läuft nach dem Hochladen" und „ist startklar".
+
+#### Prüfliste vor dem Livegang
+
+- [ ] Einrichtung auf einer **leeren** Datenbank vollständig durchgespielt
+- [ ] Nach Abschluss liefert `/admin/setup` einen `404`
+- [ ] Datei- und Datenbanksperre beide vorhanden
+- [ ] Testmail ist in einem echten Posteingang angekommen, nicht im Spam
+- [ ] Cronlauf schreibt nachweislich
+
 ## 2. Rollen und Rechte
 
 | Rolle | Anmeldung | Sieht |
