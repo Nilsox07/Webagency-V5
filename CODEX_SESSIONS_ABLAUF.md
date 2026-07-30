@@ -32,7 +32,7 @@ dokumentiert und blockieren den Bau nicht.
 ## Sitzung 2 — Kundenbereich *(lang, läuft weitgehend allein)*
 
 **Was entsteht:** `/portal/` und `/admin/` vollständig, Etappe 1–5 aus `CODEX_AUFTRAG_PORTAL.md`,
-59 Testfälle, am Ende der **Screenshot-Satz aus der echten Oberfläche**.
+77 Testfälle, am Ende der **Screenshot-Satz aus der echten Oberfläche**.
 
 Hier ist am wenigsten zu entscheiden: Datenmodell, Statuslogik, alle Texte und alle E-Mails stehen
 fest. Genau deshalb eignet sich dieser Teil für einen langen Durchlauf.
@@ -171,10 +171,16 @@ Rechtstexte · echte Fotos · die Freigabe eigener Texte. Alles davon steht in
 
 > Fortsetzung im Repository `github.com/Nilsox07/Webagency-V5`.
 >
-> Die Designrichtung ist entschieden: **[Variante X]**. Setze sie als zentrale Variablen um.
+> Die Designrichtung ist entschieden: **[hier den Namen der an Gate 2 gewählten Variante eintragen]**.
+> Setze sie als zentrale Variablen um. Farbsystem und Regeln stehen fest in
+> `SARTU_ENTSCHEIDUNGEN_OFFEN.md` §3 und `CLAUDE_SARTU_DESIGN_BRIEFING_AUSFUEHRUNG.md` — offen ist
+> **nur die Layoutvariante**, weil sie erst nach Sitzung 1 entstehen kann.
 >
-> **Lies zuerst `REIHENFOLGE.md`.** Gebaut wird **nur Stufe A** — zwölf der achtzehn Tabellen und
-> der Weg, den ein erster Kunde tatsächlich geht. Stufe B und C werden **nicht** angelegt, auch
+> **Steht hier beim Einfügen noch eine Klammer: nicht anfangen.** Dann wurde Gate 2 übersprungen,
+> und der Vollausbau liefe in eine Richtung, die niemand entschieden hat.
+>
+> **Lies zuerst `REIHENFOLGE.md`.** Gebaut wird **nur Stufe A** — **siebzehn der zwanzig Tabellen**
+> und der Weg, den ein erster Kunde tatsächlich geht. Stufe B und C werden **nicht** angelegt, auch
 > nicht als leere Hüllen oder auskommentierte Entwürfe.
 >
 > Baue jetzt `CODEX_AUFTRAG_PORTAL.md`, Etappen 1 bis 5, **im Umfang von Stufe A**, durch. **Ich arbeite nicht
@@ -187,10 +193,11 @@ Rechtstexte · echte Fotos · die Freigabe eigener Texte. Alles davon steht in
 > läuft ab A0 immer. Testfälle zu noch nicht gebauten Funktionen werden **nicht** angelegt, nicht
 > übersprungen und nicht auskommentiert; sie entstehen in ihrer Etappe.
 >
-> **Am Ende von Stufe A:** `IMPLEMENTATION_SUMMARY.md` mit der Zuordnung, welche der 59 Testfälle
+> **Am Ende von Stufe A:** `IMPLEMENTATION_SUMMARY.md` mit der Zuordnung, welche der 77 Testfälle
 > zu welcher Etappe gehören und welche noch offen sind. Dazu der **Screenshot-Satz der gebauten
-> Stufe** nach Abschnitt 7a — Öffnungszeiten, Website-Anfragen und Domainstatus gehören zu Stufe B
-> und fehlen dort zulässigerweise.
+> Stufe** nach Abschnitt 7a — Öffnungszeiten und Nachrichten an den Betreuer gehören zu Stufe B und
+> fehlen dort zulässigerweise. **Der Domainstatus gehört zu A3** und muss vorhanden sein; verschoben
+> ist dort nur die Registrar-Anbindung, nicht die Ansicht.
 >
 > **Die vollständige Definition of Done gilt für den Livegang, nicht für Stufe A.**
 >

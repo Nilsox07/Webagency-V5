@@ -303,13 +303,44 @@ außer der Einrichtung leitet auf `/admin/setup`. Sechs Schritte, jeder einzeln 
 |---|---|---|
 | 1 | **Umgebung** | PHP-Version, die sechs Erweiterungen aus §1.4, Schreibrechte auf `/storage`, Verzeichnis außerhalb des Webroots erreichbar |
 | 2 | **Datenbank** | Zugangsdaten eingeben, **Verbindung sofort testen**, Zeichensatz und Kollation prüfen, erst dann speichern |
-| 3 | **Migrationen** | Alle Migrationen ausführen, Ergebnis je Schritt anzeigen. Bei Fehler: Abbruch mit Klartextmeldung, kein halber Stand |
+| 3 | **Migrationen** | Vorprüfung, dann jede Migration **einzeln** ausführen und einzeln protokollieren. Bei Fehler: sofortiger Abbruch mit Klartextmeldung und der Nummer der gescheiterten Migration. Ablauf und Wiederanlauf siehe unten |
 | 4 | **Mailversand** | SMTP-Zugang eingeben, **Testmail an eine eingegebene Adresse senden**, Empfang muss bestätigt werden, bevor es weitergeht |
 | 5 | **Erstes Adminkonto** | E-Mail, Name, TOTP einrichten. **Kein Vorgabepasswort, kein Standardkonto** |
 | 6 | **Abschluss** | Anwendungsschlüssel erzeugen, `.env` schreiben, Cron-Befehl zum Kopieren anzeigen, Einrichtung sperren |
 
 **Ergebnis:** `.env` liegt geschrieben vor, das Schema steht, ein Adminkonto existiert, ein
 Testmail ist nachweislich angekommen.
+
+#### Schritt 3 im Detail — warum „wird zurückgerollt" hier falsch wäre
+
+**Der technische Sachverhalt:** MySQL und MariaDB führen bei schemaverändernden Befehlen —
+`CREATE TABLE`, `ALTER TABLE`, `DROP TABLE`, `CREATE INDEX` — ein **implizites Commit** aus. Eine
+offene Transaktion wird dadurch beendet, *bevor* der Befehl läuft. Ein `ROLLBACK` nach einer
+gescheiterten Migration nimmt die vorher gelaufenen Tabellen **nicht** zurück. Wer „alles in eine
+Transaktion, bei Fehler zurückrollen" schreibt, beschreibt PostgreSQL, nicht MySQL.
+
+Wird das nicht berücksichtigt, entsteht genau der Zustand, den die Regel verhindern sollte: ein
+halb migriertes Schema, das sich für vollständig hält.
+
+**Stattdessen — vier Bestandteile:**
+
+| Bestandteil | Was konkret passiert |
+|---|---|
+| **Vorprüfung** | Vor der ersten Migration: Ist die Datenbank leer? Reichen die Rechte für `CREATE`, `ALTER`, `INDEX`, `REFERENCES`? Stimmen Zeichensatz (`utf8mb4`) und Kollation? Ist `SET time_zone = '+00:00'` gesetzt (§4.1)? **Eine nicht leere Datenbank bricht ab** — die Einrichtung migriert nicht in fremden Bestand hinein |
+| **Einzelprotokoll** | Tabelle `schema_migrations` (`version`, `checksum`, `applied_at`, `duration_ms`). Sie wird **als Erstes** angelegt. Jede Migration wird einzeln ausgeführt und **unmittelbar nach Erfolg** eingetragen — nicht am Ende im Block |
+| **Prüfsumme** | Je Migrationsdatei wird ein SHA-256 über den Dateiinhalt gespeichert. Beim Start wird jede bereits eingetragene Migration gegen ihre Datei geprüft. **Abweichung = Abbruch:** Jemand hat eine ausgelieferte Migration nachträglich geändert, der Datenbankstand ist dann unbekannt |
+| **Wiederanlauf** | Ein erneuter Aufruf setzt bei der **ersten nicht eingetragenen** Migration fort. Migrationen sind so zu schreiben, dass sie bei teilweiser Ausführung nicht kollidieren — jede Migration verändert **genau ein** Schemaobjekt, nie mehrere Tabellen in einer Datei |
+
+**Wenn der Wiederanlauf nicht greift:** Ist eine Migration mittendrin gescheitert — Tabelle
+angelegt, Fremdschlüssel nicht —, ist der Stand nicht zuverlässig reparierbar. Dann gilt der
+einzige ehrliche Weg: **neue leere Datenbank, Einrichtung von vorn.** Die Oberfläche sagt genau
+das, mit dem Namen der gescheiterten Migration und der Fehlermeldung des Servers im Klartext.
+
+Ein „Reparieren"-Knopf wird **nicht** gebaut. Er würde raten müssen.
+
+> **Warum das hier so ausführlich steht:** Die frühere Fassung dieses Abschnitts versprach eine
+> Rücknahme, die es auf diesem Datenbanksystem nicht gibt. Das ist der gefährlichste Fehlertyp in
+> einer Einrichtungsstrecke — er wird erst sichtbar, wenn schon etwas schiefgegangen ist.
 
 #### Sicherheitsregeln — nicht verhandelbar
 
@@ -319,9 +350,37 @@ Eine Einrichtungsstrecke ist die klassische Angriffsfläche. Wer sie erreicht, �
 - [ ] Die Sperre ist **über das Netz nicht aufhebbar**. Ein Zurücksetzen erfordert Dateizugriff auf dem Server
 - [ ] Zugangsdaten werden **nie** angezeigt, nie protokolliert, nie in eine Fehlermeldung geschrieben — auch nicht teilweise
 - [ ] **Rate-Limit** auf jeden Schritt, damit die Strecke nicht als Passwortprobierfläche dient
-- [ ] Läuft die Einrichtung über unverschlüsseltes HTTP, wird sie mit deutlicher Warnung abgebrochen. Zugangsdaten gehen nicht im Klartext über die Leitung
-- [ ] Schlägt Schritt 3 fehl, wird **zurückgerollt** — kein halb migriertes Schema
+- [ ] Läuft die Einrichtung über unverschlüsseltes HTTP, wird sie **abgebrochen** — nicht gewarnt. Zugangsdaten gehen nicht im Klartext über die Leitung. **Eine einzige Ausnahme**, siehe unten
+- [ ] Schlägt Schritt 3 fehl, gilt der Ablauf aus „Schritt 3 im Detail": Abbruch bei der gescheiterten Migration, Wiederanlauf oder neue leere Datenbank. **Keine Rücknahme versprechen**
 - [ ] Die Einrichtung legt **kein** Beispielkonto und **keine** Beispieldaten in der produktiven Umgebung an
+
+#### Die HTTP-Ausnahme — eng begrenzt, sonst blockiert sich die Entwicklung selbst
+
+`ENTWICKLUNGSUMGEBUNG.md` schreibt `http://localhost:8080` vor. Ein bedingungsloser HTTPS-Zwang
+macht die Einrichtung dort unbenutzbar — und der wahrscheinlichste Ausweg wäre, die Prüfung ganz
+zu entfernen. Deshalb steht die Ausnahme hier ausformuliert, statt sie später improvisieren zu
+lassen.
+
+**Die Einrichtung läuft über HTTP nur, wenn alle drei Bedingungen gleichzeitig zutreffen:**
+
+1. `APP_ENV=local` — gelesen **aus der Serverumgebung**, nie aus einer Anfrage, nie aus einem Formularfeld
+2. Die Gegenstelle ist eine Loopback-Adresse: `127.0.0.1` oder `::1`. Geprüft wird `REMOTE_ADDR` **direkt**, ohne Weiterleitungs-Kopfzeilen
+3. Der angefragte Hostname ist `localhost`, `127.0.0.1` oder `[::1]` — mit oder ohne Portangabe
+
+Trifft eine Bedingung nicht zu, wird abgebrochen. Kein Bestätigungsdialog, kein „trotzdem
+fortfahren".
+
+**Was ausdrücklich nicht als Nachweis gilt:**
+
+| Nicht ausreichend | Warum |
+|---|---|
+| `X-Forwarded-Proto: https` | Frei setzbar, solange keine Liste vertrauenswürdiger Zwischenstellen konfiguriert ist. Ohne diese Liste wird die Kopfzeile **ignoriert** |
+| `X-Forwarded-For` für die Loopback-Prüfung | Ebenso frei setzbar. Bedingung 2 prüft ausschließlich `REMOTE_ADDR` |
+| Ein Hostname, der `localhost` nur enthält | `localhost.angreifer.de` ist nicht `localhost`. Verglichen wird der **vollständige** Hostname, nicht ein Teilstring |
+| `APP_ENV` aus der `.env`, wenn die `.env` noch gar nicht existiert | Vor Schritt 6 gibt es keine `.env`. Fehlt `APP_ENV` in der Serverumgebung, gilt **produktiv** — also HTTPS-Zwang |
+
+**Der Test dazu gehört in die Testfälle:** Aufruf von `/admin/setup` über HTTP mit `APP_ENV=production`
+muss abbrechen, auch wenn die Anfrage von `127.0.0.1` kommt.
 
 #### Was die Einrichtung ausdrücklich **nicht** kann
 
@@ -347,6 +406,12 @@ Damit keine falsche Erwartung entsteht:
 - [ ] Datei- und Datenbanksperre beide vorhanden
 - [ ] Testmail ist in einem echten Posteingang angekommen, nicht im Spam
 - [ ] Cronlauf schreibt nachweislich
+- [ ] Einrichtung gegen eine **nicht leere** Datenbank gestartet → bricht ab, migriert nicht hinein
+- [ ] Eine Migrationsdatei nachträglich geändert → Prüfsummenabgleich schlägt an, Abbruch mit Nennung der Datei
+- [ ] Abbruch mitten in Schritt 3, dann erneut aufgerufen → setzt bei der ersten nicht eingetragenen Migration fort
+- [ ] `/admin/setup` über HTTP mit `APP_ENV=production` von `127.0.0.1` → **bricht ab** (die Loopback-Ausnahme greift nur bei `APP_ENV=local`)
+- [ ] `/admin/setup` über HTTP mit `APP_ENV=local` von einer fremden Adresse → bricht ab
+- [ ] `X-Forwarded-Proto: https` bei tatsächlichem HTTP → wird ignoriert, bricht ab
 
 ## 2. Rollen und Rechte
 
@@ -440,6 +505,11 @@ updated_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTA
 
 Fremdschlüssel mit `ON DELETE RESTRICT`.
 
+**Eine Ausnahme:** `schema_migrations` (§1.5) folgt diesem Schema **nicht**. Sie ist keine
+Fachtabelle, sondern das Protokoll der Einrichtung, hat `version` als Schlüssel und existiert,
+bevor die erste Fachtabelle angelegt wird. Sie zählt deshalb **nicht** zu den zwanzig Tabellen aus
+`REIHENFOLGE.md`.
+
 ### `organizations`
 | Feld | Typ | Hinweis |
 |---|---|---|
@@ -509,6 +579,8 @@ Die Anfragen aus dem Bedarfsscheck der öffentlichen Website (§4b).
 | `protection_started_on` | date | **Betriebsbeginn**, s. §5.7 |
 | `protection_min_term_until` | date | Betriebsbeginn + 12 Monate |
 | `status` | text, NOT NULL | siehe §5.1 |
+| `paused_from_status` | text | nur gesetzt, solange `status = pausiert`. Beim Fortsetzen wird **auf diesen Wert** zurückgesetzt, nicht auf einen frei gewählten (§5.1a) |
+| `pause_reason` | text | Grund der Pause — **wird dem Kunden angezeigt** (§5.1) |
 | `next_step_text` | text | vom Admin gesetzt, überschreibt die Ableitung |
 | `next_step_url` | text | optionaler Sprungziel-Pfad im Portal |
 | `preview_url` | text | Vorschau-Link |
@@ -632,18 +704,54 @@ Audit-Ereignis. Eine Erklärung ist **einmalig** — ein zweiter Versuch zeigt n
 
 ### `operator_settings`
 
-Die Betreiberdaten aus §1.4a. **Genau eine Zeile** — erzwungen über einen festen Schlüssel.
+Die Betreiberdaten aus §1.4a. **Genau eine Zeile.**
 
-`id` (char(36)) · `firmenname` (varchar(200), NOT NULL) · `rechtsform` (varchar(80)) ·
-`strasse` (varchar(200), NOT NULL) · `plz` (varchar(10), NOT NULL) · `ort` (varchar(120), NOT NULL) ·
-`land` (varchar(2), NOT NULL) · `telefon` (varchar(40)) · `email` (varchar(255), NOT NULL) ·
-`ust_id` (varchar(20)) · `steuernummer` (varchar(30)) · `registergericht` (varchar(120)) ·
-`registernummer` (varchar(40)) · `inhaltlich_verantwortlich` (varchar(200), NOT NULL) ·
-`bank_iban` (varchar(34)) · `bank_bic` (varchar(11)) · `bank_institut` (varchar(120)) ·
+`id` (char(36)) · `singleton` (tinyint(1), NOT NULL DEFAULT 1) · `firmenname` (varchar(200), NOT NULL) ·
+`rechtsform` (varchar(80)) · `strasse` (varchar(200), NOT NULL) · `plz` (varchar(10), NOT NULL) ·
+`ort` (varchar(120), NOT NULL) · `land` (varchar(2), NOT NULL) · `telefon` (varchar(40)) ·
+`email` (varchar(255), NOT NULL) · `ust_id` (varchar(20)) · `steuernummer` (varchar(30)) ·
+`registergericht` (varchar(120)) · `registernummer` (varchar(40)) ·
+`inhaltlich_verantwortlich` (varchar(200), NOT NULL) · `bank_iban` (varchar(34)) ·
+`bank_bic` (varchar(11)) · `bank_institut` (varchar(120)) ·
 `kleinunternehmer` (tinyint(1), NOT NULL DEFAULT 0)
 
-**Prüfbedingung:** `CHECK (ust_id IS NOT NULL OR steuernummer IS NOT NULL)` — eines von beiden muss
-gesetzt sein.
+**Wie „genau eine Zeile" erzwungen wird** — nicht als Absicht, sondern im Schema:
+
+```sql
+singleton TINYINT(1) NOT NULL DEFAULT 1,
+UNIQUE KEY uq_operator_settings_singleton (singleton),
+CONSTRAINT chk_operator_settings_singleton CHECK (singleton = 1)
+```
+
+Der eindeutige Schlüssel verhindert eine zweite Zeile, die Prüfbedingung verhindert das Umgehen
+über einen anderen Wert. Die **erste** Zeile legt die Ersteinrichtung an (§1.5, Schritt 6). Der
+Adminbereich kennt für diese Tabelle nur `UPDATE` — **kein** `INSERT`, **kein** `DELETE`.
+
+**Prüfbedingung Steuerangabe** — und warum die naheliegende Fassung nicht reicht:
+
+```sql
+CONSTRAINT chk_operator_settings_steuer CHECK (
+  (ust_id      IS NOT NULL AND ust_id      <> '') OR
+  (steuernummer IS NOT NULL AND steuernummer <> '')
+)
+```
+
+`CHECK (ust_id IS NOT NULL OR steuernummer IS NOT NULL)` wäre wirkungslos: Ein leerer Text ist
+nicht `NULL`. Ein Formular, das ein unausgefülltes Feld als `''` speichert, hätte die Bedingung
+erfüllt und trotzdem keine Steuerangabe — und die Startsperre aus §1.4a hätte durchgelassen, was
+sie verhindern soll.
+
+**Dieselbe Falle bei allen `NOT NULL`-Feldern.** `NOT NULL` erlaubt `''`. Für jedes Pflichtfeld
+dieser Tabelle gilt daher zusätzlich serverseitig: nach `trim()` mindestens ein Zeichen. Die
+Startsperre (§1.4a) prüft **nach derselben Regel** — leer heißt leer, nicht `NULL`.
+
+| Feld | Zusätzliche Prüfung beim Speichern |
+|---|---|
+| `plz` | 5 Ziffern bei `land = 'DE'` |
+| `land` | zwei Großbuchstaben (ISO 3166-1 alpha-2) |
+| `email` | formal gültig, wird für Impressum und Rechnungen verwendet |
+| `bank_iban` | wenn gesetzt: Prüfziffer nach ISO 7064 rechnen, nicht nur die Länge zählen |
+| `ust_id` | wenn gesetzt: Landespräfix + Ziffernfolge. **Keine** Abfrage beim Bundeszentralamt — das ist kein Einrichtungsschritt |
 
 ### `legal_texts`
 
@@ -944,7 +1052,48 @@ Die Werte für `delivery_days_min` / `delivery_days_max` sind je Paket vorbelegt
 | `live` | **Online** | Betrieb läuft |
 | `pausiert` | **Pausiert** | Grund wird angezeigt |
 
-Zulässige Übergänge setzt **nur der Admin**. Rücksprünge sind erlaubt (z. B. `abnahme → korrektur`) und werden im Audit-Log festgehalten.
+### 5.1a Zulässige Übergänge — wer löst was aus
+
+Eine Liste von Zuständen ohne Übergangsregeln ist keine Statuslogik. Ohne diese Tabelle wird sie
+beim Bauen erfunden — und zwar an der teuersten Stelle: Produktion startet vor Zahlungseingang,
+oder der Lieferkorridor beginnt zu früh.
+
+**`projects.status` — vollständige Übergangstabelle.** Was hier nicht steht, ist nicht erlaubt.
+
+| Von | Nach | Auslösendes Ereignis | Wer löst aus | Was zwingend mitpassiert |
+|---|---|---|---|---|
+| *(Anlage)* | `angebot_offen` | Angebot gesendet | Admin | `offers.status = gesendet`, alle Pflichtfelder aus §4 gefüllt |
+| `angebot_offen` | `angebot_angenommen` | Angebot angenommen | **Kunde** | Ankreuzen + selbst getippter Name; `offers.status = angenommen` mit Zeitpunkt; Audit-Ereignis |
+| `angebot_angenommen` | `zahlung_offen` | Anzahlungsrechnung gesendet | Admin | `invoices.status = gesendet`, `due_date` = +10 Tage (§4a) |
+| `zahlung_offen` | `briefing` | **Zahlungseingang bestätigt** | **Admin, von Hand** | `invoices.status = bezahlt` mit Datum. **Nie** aus der Rückkehr des Browsers abgeleitet (§12). Audit mit `reason` als Pflichtfeld |
+| `briefing` | `produktion` | **Faktenfreigabe erteilt** | **Kunde** | Alle Aufgaben der Art `pflicht` erledigt; `approvals` mit `kind = inhalte`; **ab hier läuft der Lieferkorridor** (§4c) |
+| `produktion` | `vorschau` | Vorschau veröffentlicht | Admin | `preview_url` und `preview_published_at` gesetzt; Feedbackrunde eröffnet |
+| `vorschau` | `korrektur` | Rückmeldungen abgeschickt | **Kunde** | Runde wird geschlossen und **gegen `included_feedback_rounds` gezählt** (§5.6a) |
+| `korrektur` | `vorschau` | überarbeitete Vorschau bereit | Admin | neue `preview_published_at`; nächste Runde nur, wenn Kontingent reicht |
+| `vorschau` | `abnahme` | keine weiteren Änderungen | Admin | Kunde wird benachrichtigt, dass jetzt die Abnahme fehlt |
+| `abnahme` | `launch_vorbereitung` | **Abnahme erklärt** | **Kunde** | `approvals` mit `kind = abnahme`; Schlussrechnung wird fällig |
+| `abnahme` | `korrektur` | Rücksprung | Admin | `reason` Pflichtfeld; verbrauchte Runden bleiben verbraucht |
+| `launch_vorbereitung` | `live` | Onlinegang | Admin | `launched_at`, `live_url`, `protection_started_on`, `protection_min_term_until` (§5.7); Audit |
+| *(jeder außer `live`)* | `pausiert` | Projekt angehalten | Admin | `reason` Pflichtfeld — **wird dem Kunden angezeigt**; Herkunftsstatus wird gespeichert |
+| `pausiert` | *(Herkunftsstatus)* | Fortsetzung | Admin | zurück auf `paused_from_status`, nicht auf einen frei gewählten Wert |
+
+**Was ausdrücklich verboten ist:**
+
+| Verboten | Grund |
+|---|---|
+| `zahlung_offen` überspringen | Produktion beginnt nicht auf Zusage. Der einzige Weg nach `briefing` führt über den bestätigten Eingang |
+| `briefing → produktion` ohne `approvals`-Eintrag | Ohne protokollierte Freigabe fehlt später der Nachweis, worauf gebaut wurde — und der Lieferkorridor hätte keinen Startpunkt |
+| `abnahme → live` direkt | Der Onlinegang ist ein eigener Arbeitsschritt, keine Folge der Abnahme |
+| `live → korrektur` oder zurück in die Produktionskette | Ein laufender Betrieb wird nicht in den Bauzustand zurückgesetzt. Änderungen an einer Live-Seite laufen über einen neuen Vorgang |
+| Zielstatus aus der Anfrage übernehmen | Der Server prüft jeden Wechsel gegen **diese** Tabelle. Ein nicht aufgeführtes Paar wird abgewiesen, nicht ausgeführt |
+
+**Für jeden Wechsel gilt ohne Ausnahme:** Prüfung serverseitig gegen die Tabelle · Audit-Ereignis
+mit `old_value`, `new_value` und handelndem Benutzer · bei Wechseln, die Geld oder Fristen
+betreffen, zusätzlich `reason` (§4 `audit_events`, §12).
+
+**Kundenausgelöste Wechsel** sind genau drei: Angebotsannahme, Faktenfreigabe, Abnahme. Alle drei
+sind Erklärungen mit Namen und Zeitpunkt. Alles andere setzt der Admin. Die frühere Formulierung
+„zulässige Übergänge setzt nur der Admin" war falsch und widersprach §8.4 und §9.3.
 
 ### 5.2 `offers.status`
 `entwurf` (unsichtbar für Kunden) → `gesendet` → `angenommen` \| `abgelaufen` \| `zurueckgezogen`
@@ -1572,6 +1721,31 @@ Es gelten die Sprachregeln aus `CLAUDE_SARTU_WEBSITE_LASTENHEFT_BAUFINAL.md` §2
 58. Jede Seite hat genau eine `<h1>`
 59. Kein Systemcode aus §5 erscheint in einer Kundenansicht — geprüft per Volltextsuche über die gerenderten Seiten
 
+**Statusübergänge (§5.1a):**
+60. Ein Paar, das **nicht** in der Übergangstabelle steht, wird abgewiesen — geprüft an `zahlung_offen → produktion`. Kein Statuswechsel, kein Teileffekt
+61. `briefing → produktion` scheitert, solange kein `approvals`-Eintrag mit `kind = inhalte` existiert
+62. Fortsetzen aus `pausiert` führt auf `paused_from_status` zurück — ein im Formular mitgesendeter Zielstatus wird ignoriert
+63. `live → korrektur` wird abgewiesen
+
+**Betreiberdaten (§1.4a, §4 `operator_settings`):**
+64. Eine **zweite** Zeile in `operator_settings` lässt sich nicht anlegen — weder mit anderem `singleton`-Wert noch mit anderem Schlüssel
+65. `ust_id = ''` **und** `steuernummer = ''` wird abgewiesen. Leer ist nicht gesetzt — die Prüfbedingung darf nicht nur auf `NULL` prüfen
+66. Startsperre greift: Bei leerem Pflichtfeld oder Rechtstext im Zustand `entwurf` bricht die produktive Veröffentlichung ab (Website-Lastenheft §14a)
+
+**Ersteinrichtung (§1.5):**
+67. Einrichtung gegen eine **nicht leere** Datenbank bricht vor der ersten Migration ab
+68. Eine nachträglich geänderte Migrationsdatei löst beim Start einen Prüfsummenabbruch aus, mit Nennung der Datei
+69. Nach einem Abbruch mitten in Schritt 3 setzt der erneute Aufruf bei der **ersten nicht eingetragenen** Migration fort und wiederholt keine bereits eingetragene
+70. `/admin/setup` über HTTP mit `APP_ENV=production` von `127.0.0.1` bricht ab
+71. `/admin/setup` über HTTP mit `APP_ENV=local` von einer **nicht** loopback-Adresse bricht ab
+72. `X-Forwarded-Proto: https` bei tatsächlichem HTTP wird ignoriert, solange keine vertrauenswürdige Zwischenstelle konfiguriert ist
+73. Nach Abschluss liefert `/admin/setup` `404`, auch nach Löschen **einer** der beiden Sperren
+
+> **Zur Anzahl:** Die Liste hat **73 durchnummerierte plus vier mit Buchstabenzusatz** (5a, 5b, 40a,
+> 40b) — zusammen **77 Testfälle**. Frühere Fassungen sprachen von „59"; das war schon damals um die
+> vier Buchstabenfälle zu niedrig. Maßgeblich ist die Liste, nicht die Zahl: Wer 77 zählt und 59
+> erwartet, hat nichts vergessen.
+
 ---
 
 ## 17. Definition of Done
@@ -1581,7 +1755,7 @@ Es gelten die Sprachregeln aus `CLAUDE_SARTU_WEBSITE_LASTENHEFT_BAUFINAL.md` §2
 - [ ] Alle Statuswerte zeigen dem Kunden Klartext, nirgends interne Codes
 - [ ] Formate aus §4a eingehalten: deutsche Datums- und Geldformate, Europe/Berlin, 19 % USt., Beträge als Cent gespeichert, keine leeren Werte als `null` sichtbar
 - [ ] **`php -l` läuft über jede PHP-Datei ohne Fehler** — billigste Prüfung überhaupt, fängt Syntaxfehler ab, bevor überhaupt ein Test startet. Gehört in den Testlauf, nicht in die Handarbeit
-- [ ] Alle 59 Testfälle aus §16 laufen automatisiert und grün
+- [ ] Alle 77 Testfälle aus §16 laufen automatisiert und grün
 - [ ] `tests/TenantIsolationTest.php` vorhanden, vollständig, nicht abgeschwächt
 - [ ] Kunden- und Adminzugriff laufen über **getrennte** Datenzugriffsschichten (§3 Regel 2a); kein gemeinsamer Codepfad lässt den Organisationsfilter weg
 - [ ] Rechenregeln greifen: Erstjahreswert, Zahlungsplan `custom`, Ratensumme (§4)
@@ -1614,7 +1788,7 @@ Es gelten die Sprachregeln aus `CLAUDE_SARTU_WEBSITE_LASTENHEFT_BAUFINAL.md` §2
 
 1. Lauffähiges Portal im Repository
 2. **`README.md`**: Voraussetzungen, Einrichtung, Umgebungsvariablen, Migration, Seed, Start, Deployment auf Hetzner, Backup-Hinweis (Datenbank **und** Upload-Verzeichnis)
-3. **Testbericht**: alle 59 Fälle aus §16 mit Ergebnis
+3. **Testbericht**: alle 77 Fälle aus §16 mit Ergebnis
 4. **Messwerte**: Antwortzeiten der Kernseiten, Seitengröße
 5. **Offene-Punkte-Liste**: alles, was bewusst nicht gebaut wurde (§0.3), plus alles, was du melden musst
 6. **Screenshot-Satz** aus der echten Oberfläche für die Website — mit Musterdaten, je einmal Desktop und Mobil.

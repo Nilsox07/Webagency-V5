@@ -252,7 +252,7 @@ Vollständig nach §18 des Lastenhefts:
 
 1. Lauffähiges Portal
 2. `README.md` mit Einrichtung, Umgebungsvariablen, Migration, Seed, Deployment und Backup
-3. **Testbericht** über alle 59 Fälle aus §16
+3. **Testbericht** über alle 77 Fälle aus §16
 4. **Messwerte** — konkret diese, nicht „Performance allgemein":
    - Antwortzeit des Servers je Kernscreen (Median und 95. Perzentil, angemeldeter Zustand)
    - Seitengröße je Kernscreen: HTML, CSS, JS getrennt, in KB gzip
