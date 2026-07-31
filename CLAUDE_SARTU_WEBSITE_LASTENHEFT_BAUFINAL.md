@@ -283,11 +283,20 @@ Wenn nein, ist der Satz nicht fertig, egal wie gut er klingt.
 > **Dies ist die einzige gültige Navigation.** §3 ist für die Punkteliste abgelöst und behält nur
 > Verhalten und Maße. Gilt für Desktop **und** Mobil-Overlay.
 
-`Leistungen` · `Preise` · `Ablauf` · **`Portal`** · `Über uns` · `Fragen`
+`Leistungen` · `Preise` · `Ablauf` · **`Kundenbereich`** · `Über uns` · `Fragen`
 
 > **`Ergebnis` ist gestrichen und durch `Leistungen` ersetzt.** Die Beschriftungsregel drei Absätze
 > weiter unten verlangt selbst: *„im Zweifel die konkretere Bezeichnung wählen, nicht die
 > elegantere."* `Ergebnis` war die elegantere. Der Absatz widersprach sich in sich.
+>
+> **`Portal` ist gestrichen und durch `Kundenbereich` ersetzt** (30.07.2026). Drei Gründe:
+> 1. Das höher stehende Portal-Lastenheft führt `Portal` unter **„nach außen nie verwenden"**
+> 2. Die Startseite selbst schreibt **zehnmal** `Kundenbereich` und nur dreimal `Portal`. Die
+>    Navigation widersprach dem Text, auf den sie zeigt
+> 3. `Kundenbereich` sagt einem Malermeister, was dahinterliegt. `Portal` nicht
+>
+> **Wird die Zeile dadurch zu breit, greift das Mobilmenü früher** — der verständlichere Begriff
+> wird nicht für sechs Pixel geopfert. Der Befund kam von außen und war richtig.
 >
 > `Leistungen` bleibt damit in der Hauptnavigation statt im Fußbereich — es ist die Seite, die auf
 > „webdesign" und „firmenwebsite erstellen lassen" antwortet. `Ratgeber` und `Lexikon` wandern in
@@ -539,7 +548,11 @@ Merkmale: `Festpreis vor Ihrer Entscheidung` · `keine offene Stundenabrechnung`
 CTA: `Sonderprojekt besprechen`
 
 **Pflichtzeile beim Sonderprojekt, direkt unter dem Knopf:**
-> `Der einzige Fall, in dem wir vorher sprechen.`
+> `Nur Sonderprojekte klären wir vor dem Angebot persönlich.`
+
+> **Erste Fassung war schwächer:** `Der einzige Fall, in dem wir vorher sprechen.` Gleich lang,
+> sagt aber weniger — der Leser muss „Fall wovon?" selbst auflösen, und der Zeitpunkt fehlt. Die
+> gültige Fassung nennt beides. Der Vorschlag kam von außen.
 
 > **Warum diese Zeile gebraucht wird.** Sektion 2 verspricht `Ohne einen einzigen Termin zur
 > fertigen Website.` Der Knopf hier heißt `Sonderprojekt besprechen`. Ohne die Zeile widerspricht
@@ -555,7 +568,14 @@ Beide Zahlen standen bisher nirgends auf der Startseite und sind Teil des Angebo
 
 > **Sechs Vorgaben aus dem UX-Audit vom 28.07.2026, alle verbindlich:**
 >
-> 1. **Das Sonderprojekt steht nicht als vierte gleichwertige Karte.** Es ist kein Paket, sondern eine technische Vorprüfung — es steht als eigene Zeile **unterhalb** der drei Lösungen, gestalterisch abgesetzt. Drei echte Optionen plus ein Sonderfall sind leichter zu erfassen als vier Karten nebeneinander
+> 1. **Das Sonderprojekt steht nicht als vierte gleichwertige Karte.** Es ist kein Paket, sondern eine technische Vorprüfung — es steht als eigene Zeile **unterhalb** der drei Stufen, gestalterisch abgesetzt. Drei echte Optionen plus ein Sonderfall sind leichter zu erfassen als vier Karten nebeneinander
+>
+>    **Abgesetzt heißt nicht abgeschwächt.** Der Entwurf setzte das als gestrichelten Rahmen ohne
+>    Flächenfarbe um — das liest sich wie ein deaktiviertes Feld. Die 12.500 € sind der **obere
+>    Preisanker** und müssen als nächsthöhere Kategorie erkennbar bleiben: gleiche Schriftgröße für
+>    den Betrag, voller Textkontrast, durchgezogener Rahmen. Anders ist nur die **Form** — eine
+>    Zeile statt einer Karte —, nicht das Gewicht. Dasselbe gilt für den Block
+>    *„Was die Monatspauschale abdeckt"*: abgesetzt, aber nicht blass
 > 2. **Nie „Vier Lösungen" als Überschrift.** Das widerspricht der eigenen Aussage „Sie wählen kein Paket". Es heißt `Eine Empfehlung. Vier mögliche Ergebnisse.`
 > 3. **Die Monatspauschale wird aufgeschlüsselt**, nicht nur benannt. „Deckt Betrieb, Pflege und Support" beantwortet die teuerste offene Frage der Seite nicht: *Wofür zahle ich jeden Monat?* Konkret nennen: Hosting, technische Pflege, Sicherheitsaktualisierungen, Sicherungen, Überwachung, Support, Kundenbereich
 > 4. **`Platzhirsch` wird erklärt**, sonst klingt der Name großspurig: `Für Betriebe, die in ihrer Region als erste Adresse auftreten wollen.` **Keine** Ranking-Zusage

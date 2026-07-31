@@ -68,6 +68,19 @@ auch nicht auf der Seite.
 Der kurze Satz ist keine Zierde. Er ist die Stelle, an der der Leser Luft holt. Ein Abschnitt aus
 lauter gleich langen Sätzen liest sich wie eine Verordnung — auch wenn jeder Satz für sich stimmt.
 
+> **Die 20 sind ein hartes Ziel mit benannter Ausnahme, keine Mathematik.** Ein Einwand von außen
+> lautete, eine absolute Grenze erzeuge abgehacktes Deutsch. Das stimmt, wenn man sie absolut
+> nimmt — deutsche Sätze dürfen länger sein als englische.
+>
+> **Die Ausnahme steht in Abschnitt 2 und gilt für jede Grenze dieser Datei:** Eine Überschreitung
+> darf bleiben, wenn sie im Prüfbericht **einzeln benannt und begründet** ist. Unbegründet ist sie
+> ein Abgabefehler.
+>
+> **Warum trotzdem eine Zahl und kein „möglichst kurz":** Die weiche Fassung stand vorher in
+> §5aa — *„Würde ein Malermeister nach diesem Satz sagen können, worum es geht?"* Sie hat einen
+> Aufmacher mit 38 Wörtern und einen Satz mit neun Gliedern durchgelassen. Eine Zahl kostet beim
+> Überschreiten eine Begründung. Ein Wunsch kostet nichts.
+
 ### Regel 3 — Aufzählungen gehören in Listen
 
 **Mehr als drei Glieder: Der Satz wird zur Liste.**
