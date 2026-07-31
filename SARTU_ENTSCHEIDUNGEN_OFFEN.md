@@ -182,6 +182,32 @@ Ein leerer Platzhalterrahmen an einer Vertrauensstelle ist ausdrücklich unzulä
 **Warum das hier steht und nicht im Design-Briefing:** Ob es Demoprojekte gibt, ist eine
 Geschäftsentscheidung mit Aufwand und Außenwirkung — keine Gestaltungsfrage.
 
+### 5.1 Der Klarname ist gleichzeitig offen und schon vergeben
+
+`[GRUENDER_NAME]` steht oben als *offen*, und die Startseite sagt `Name wird nachgereicht`.
+**Gleichzeitig steht der volle Klarname bereits in zwei Dateien** — als Bildbeschreibung:
+
+| Datei | Stelle |
+|---|---|
+| `CLAUDE_SARTU_WEBSITE_KONZEPT_FINAL.md` | Bildliste, `nils-arbeitsbild.webp` |
+| `CLAUDE_SARTU_WEBSITE_LASTENHEFT_BAUFINAL.md` §15 | Bildliste, `sartu-portrait.webp` |
+
+Bildbeschreibungen sind öffentlich. Sie stehen im Quelltext, werden vorgelesen und von
+Suchmaschinen gelesen. **Der Name wäre also veröffentlicht worden, ohne dass er je entschieden
+wurde** — über eine Tabellenzeile in einer Bildliste.
+
+**Zu entscheiden:**
+
+| Weg | Folge |
+|---|---|
+| **A — voller Klarname** | Stärkstes Vertrauenssignal, das ohne Referenzen möglich ist. Google nennt eine erkennbare, verantwortliche Person ausdrücklich als Merkmal vertrauenswürdiger Inhalte. Der Name wird damit dauerhaft mit SARTU verknüpft und ist praktisch nicht zurücknehmbar |
+| **B — Vorname und Rolle** | Zum Beispiel „Nils, Gründer". Weniger Angriffsfläche, schwächeres Signal. Im Impressum steht der volle Name ohnehin — dort ist er Pflicht |
+
+**Solange nichts entschieden ist, gilt:** Der Name erscheint **nur** im Impressum, nirgends sonst —
+auch nicht in Bildbeschreibungen. Die Startsperre §14a Bedingung 4a hält die Sektion zurück.
+
+**Wer entscheidet:** der Betreiber. Es ist eine persönliche Entscheidung, keine fachliche.
+
 ---
 
 ## 5a. Selbstpflege durch den Kunden — **OFFEN, blockiert den Websitestart**

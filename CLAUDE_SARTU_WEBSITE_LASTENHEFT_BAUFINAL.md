@@ -128,18 +128,29 @@ Frühere Designentwürfe unter `design/_verworfen/` sind **nicht** zu verwenden 
 - **Inhaltliche Wahrheit:** keine erfundenen Logos, Bewertungen, Referenzen oder Kundenzahlen; Portal-Ansichten aus echter Oberfläche, gekennzeichnet als „Musteransicht"
 
 
-## 3. Header-Navigation (final)
+## 3. Header-Navigation
+
+> **⚠️ ABGELÖST — die Punkteliste unten gilt nicht mehr.** Verbindlich ist **§5b**. Dieser Abschnitt
+> behält nur noch **Verhalten und Maße** — Höhe, Sticky-Zustand, Overlay-Bedienung.
+>
+> **Was hier falsch war:** Die Liste unten nannte `Leistungen · Preise · Ablauf · Ratgeber · Lexikon`
+> und schloss `Über uns` ausdrücklich aus. §5b nennt eine andere Liste und nimmt `Über uns` auf.
+> **Beide standen als „final" im selben Dokument.** Der Befund kam von außen und war richtig — mit
+> zwei verbindlichen Navigationen baut jeder Entwickler die, die er zuerst liest.
+>
+> **Ersetze beim Lesen jede Punkteliste unten durch die aus §5b.** Das gilt auch für die
+> Reihenfolge im Mobil-Overlay.
 
 **Desktop (≥ 1024 px):**
-`[SARTU-Wortmarke]` — links · `Leistungen · Preise · Ablauf · Ratgeber · Lexikon` — Mitte · `Kontakt` (Textlink) + **`Bedarf prüfen lassen`** (Button) — rechts
+`[SARTU-Wortmarke]` — links · Punkte nach **§5b** — Mitte · `Kontakt` (Textlink) + **`Bedarf prüfen lassen`** (Button) — rechts
 
 - Höhe 72–80 px. Beim Scrollen kompakt sticky (Höhe 56–60 px), Hintergrund deckend, dünne Trennlinie unten.
 - Aktiver Menüpunkt wird markiert (Unterstrich oder Farbe, keine Fettung-Verschiebung).
-- **`Über uns`** ist bewusst **nicht** in der Hauptnavigation — Link steht im Footer und in der Startseiten-Sektion „Verantwortung". Begründung: die Navigation bleibt bei 5 Punkten, Vertrauen wird über Inhalte transportiert.
+- ~~**`Über uns`** ist bewusst **nicht** in der Hauptnavigation.~~ **Abgelöst.** §5b nimmt `Über uns` auf. Grund für die Änderung: Ohne Referenzen trägt die Person hinter SARTU den Vertrauensaufbau; sie darf nicht nur im Fußbereich stehen.
 
 **Mobil (≤ 1023 px):**
 - Links Wortmarke, rechts Menü-Icon (44 × 44 px Trefferfläche).
-- Menü öffnet als **Vollbild-Overlay**, nicht als Dropdown. Reihenfolge: Leistungen · Preise · Ablauf · Ratgeber · Lexikon · Kontakt · Über uns · dann großflächiger CTA `Bedarf prüfen lassen`.
+- Menü öffnet als **Vollbild-Overlay**, nicht als Dropdown. Reihenfolge: **die sechs Punkte aus §5b**, danach `Kontakt`, dann großflächiger CTA `Bedarf prüfen lassen`.
 - Schließen per X, `Esc` und Klick außerhalb. Fokus wird im Overlay gehalten, beim Schließen zurück auf das Menü-Icon.
 - **Kein** sticky Bottom-CTA-Balken (verdeckt Inhalte, wirkt aufdringlich).
 
@@ -182,7 +193,17 @@ Fünf Spalten auf Desktop, gestapelt auf Mobil (Reihenfolge wie unten).
 > ein Prüfbericht mit Zahlen. **Ohne ausgefüllten Prüfbericht gilt die Seite als nicht abgegeben.**
 > Die Texte unten sind bereits danach überarbeitet; wer sie ändert, rechnet den Bericht neu.
 
-**Title (58 Z.):** `Firmenwebsite zum Festpreis, ohne WordPress | SARTU`
+**Title (54 Z.):** `Firmenwebsite zum Festpreis für regionale Betriebe | SARTU`
+
+> **Geändert am 30.07.2026.** Vorher: `Firmenwebsite zum Festpreis, ohne WordPress | SARTU`. Das
+> verstieß gegen die eigene Positionierung — `CLAUDE_MARKTANALYSE_KRITIK_OPTIMIERUNG.md` sagt
+> ausdrücklich: *„Nicht ‚ohne WordPress' plakatieren; Entlastung verkaufen."* Ein Meta-Titel ist die
+> plakativste Stelle, die es gibt. Dazu kam: Das Abgrenzungsmerkmal stand im Titel, die Zielgruppe
+> nicht.
+>
+> **`ohne WordPress` bleibt** auf `/leistung-webdesign` und im zugehörigen Ratgeberartikel. Dort
+> beantwortet es eine echte Suchanfrage, statt die Startseite auf einen Wettbewerbsvergleich zu
+> verengen.
 **Meta Description (152 Z.):** `SARTU plant, textet, programmiert und betreibt Ihre Firmenwebsite zum Festpreis. Geführtes Portal statt E-Mail-Chaos, SEO-Basis ab Launch, kein WordPress.`
 **H1:** `Individuell programmierte Firmenwebsites zum Festpreis.`
 **Zielumfang:** 750–950 Wörter · **Schema:** `Organization`, `WebSite` · `FAQPage` optional (bringt keine Rich Results mehr, s. §16)
@@ -259,7 +280,21 @@ Wenn nein, ist der Satz nicht fertig, egal wie gut er klingt.
 
 ## 5b — Hauptnavigation
 
-`Ergebnis` · `Preise` · `Ablauf` · **`Portal`** · `Über uns` · `Fragen`
+> **Dies ist die einzige gültige Navigation.** §3 ist für die Punkteliste abgelöst und behält nur
+> Verhalten und Maße. Gilt für Desktop **und** Mobil-Overlay.
+
+`Leistungen` · `Preise` · `Ablauf` · **`Portal`** · `Über uns` · `Fragen`
+
+> **`Ergebnis` ist gestrichen und durch `Leistungen` ersetzt.** Die Beschriftungsregel drei Absätze
+> weiter unten verlangt selbst: *„im Zweifel die konkretere Bezeichnung wählen, nicht die
+> elegantere."* `Ergebnis` war die elegantere. Der Absatz widersprach sich in sich.
+>
+> `Leistungen` bleibt damit in der Hauptnavigation statt im Fußbereich — es ist die Seite, die auf
+> „webdesign" und „firmenwebsite erstellen lassen" antwortet. `Ratgeber` und `Lexikon` wandern in
+> den Fußbereich und bekommen starke interne Links aus den Leistungsseiten.
+>
+> **Die Beschriftungen sind eine Geschäftsentscheidung, kein Bauwert.** Wer sie ändern will, ändert
+> sie hier — an einer Stelle.
 
 **`Portal` gehört zwingend in die sichtbare Navigation.** Es ist das stärkste
 Unterscheidungsmerkmal gegenüber jedem Wettbewerber — es aus der Hauptnavigation zu lassen,
@@ -318,6 +353,18 @@ einen Audit-Eintrag (Portal-Lastenheft).
 - **Sekundär-CTA:** `Preise ansehen` → `/preise`
 - **Preishinweis (klein, direkt unter den Buttons):** `Alle Preise netto zzgl. USt. Ausschließlich für Unternehmer.`
 - **Trust-Zeile (4 Punkte):** `Festpreis vorab` · `Texte inklusive` · `Portal statt E-Mail-Chaos` · `SEO-Basis ab Launch`
+- **Branchenangabe:** `Handwerk` · `Praxen` · `Kanzleien` · `Ladengeschäfte`
+
+  > **Diese vier dürfen nicht anklickbar aussehen.** Im Entwurf sind sie als Pillen mit Rand und
+  > Hintergrund gebaut — dieselbe Form wie die Knöpfe. Sie führen aber nirgendwohin. Eine Form, die
+  > Interaktion verspricht und keine liefert, ist ein Bedienfehler, kein Gestaltungsdetail.
+  >
+  > **Zwei zulässige Auflösungen, eine muss gewählt werden:**
+  > 1. **Ent-interaktivieren:** kein Rand, kein Flächenhintergrund, keine Rundung wie beim Knopf.
+  >    Reine Typografie mit Trennzeichen
+  > 2. **Verlinken:** auf echte Branchenseiten — dann aber erst, wenn diese Seiten existieren
+  >
+  > Solange keine Branchenseiten gebaut sind, gilt **1**.
 - **Visual rechts (Desktop) / darunter (Mobil):** Portal-Cockpit-Screenshot, Badge „Musteransicht".
 
 **Verhalten:** Desktop zweispaltig (Text 55 %, Visual 45 %). Mobil einspaltig — **H1 zuerst, Buttons direkt darunter, Visual danach**, Trust-Zeile als 2 × 2-Raster. Das Visual scrollt **nicht** horizontal. Unterer Rand des ersten Viewports zeigt bereits einen Anschnitt der nächsten Sektion.
@@ -382,10 +429,16 @@ die stärkste zitierfähige Stelle für KI-Antwortsysteme (§16, `GEO_DISCOVERY_
 > **Die Kürzung von vierzehn auf elf ist keine Vereinfachung**, sondern die Streichung dreier
 > Versprechen ohne Deckung. Sobald die Funktionen existieren, stehen sie wieder da.
 >
-> **Auffindbarkeit:** Das ist die **zitierfähigste Stelle der ganzen Website**. Ein KI-System, das
-> gefragt wird „welche Webagenturen bieten einen Kundenbereich und was kann der", kann nur
-> **aufzählbare Fakten** übernehmen. Fließtext ist nicht zitierbar, eine Liste schon. Genau hier
-> entsteht der Vorsprung, den kein Wettbewerber mit schönerem Design einholt.
+> **Auffindbarkeit:** Ein KI-System, das gefragt wird „welche Webagenturen bieten einen
+> Kundenbereich und was kann der", braucht **benennbare Einzelfakten**. Elf davon stehen hier.
+> Ein Absatz mit denselben elf Punkten enthielte dieselbe Information, aber niemand schreibt so
+> einen Absatz — man fasst zusammen, und beim Zusammenfassen verschwinden die Einzelheiten.
+>
+> **Berichtigt am 30.07.2026:** Hier stand vorher *„Fließtext ist nicht zitierbar, eine Liste
+> schon."* Das ist technisch falsch. Suchmaschinen und Sprachmodelle zitieren Fließtext
+> selbstverständlich. Listen helfen beim Überfliegen und beim Herauslösen einzelner Aussagen —
+> sie sind **kein** eigener Mechanismus. Der Grund für die Liste ist die Menge an Einzelfakten,
+> nicht eine angebliche technische Grenze. Der Befund kam von außen und war richtig.
 
 > **Drei Fragen, die jede Fassung dieser Sektion beantworten muss, in dieser Reihenfolge:**
 > Was ist das? · Was kann ich damit tun? · Warum hat das sonst niemand?
@@ -409,6 +462,17 @@ möglich, aber nicht Pflicht". Die Aussage ist damit gedeckt und **keine** Über
   5. **Vorschau und Freigabe** — Sie sehen die fertige Website und sammeln Ihre Änderungen.
   6. **Start und Betrieb** — Wir schalten live und halten die Seite am Laufen.
 - **CTA:** `Ablauf im Detail` → `/ablauf`
+
+> **Höchstens drei Bildmotive im Zeitstrahl, nicht sechs.** Bilder bekommen nur die Schritte 1
+> (Bedarfsscheck), 2 (geprüftes Angebot) und 5 (Vorschau und Freigabe). Die Schritte 3, 4 und 6
+> bleiben rein typografisch.
+>
+> **Zwei Gründe, jeder allein ausreichend:**
+> 1. Design-Briefing §3.7: *„Kein Aufbaumuster kommt mehr als zweimal vor."* Sechs gleich gebaute
+>    Bildflächen sind dasselbe Muster sechsmal
+> 2. Es spart **drei der fünfzehn Bildplätze**, die auf Stufe A warten (`REIHENFOLGE.md`)
+>
+> Die Strecke wird dadurch etwa halb so lang, und die drei verbliebenen Bilder tragen mehr.
 
 **Am Ende dieser Sektion, als Abschluss des Zeitstrahls — die Arbeitsteilung:**
 
@@ -474,6 +538,18 @@ CTA: `Bedarf prüfen lassen`
 Merkmale: `Festpreis vor Ihrer Entscheidung` · `keine offene Stundenabrechnung` · `Absage, wenn wir es nicht verantworten können`
 CTA: `Sonderprojekt besprechen`
 
+**Pflichtzeile beim Sonderprojekt, direkt unter dem Knopf:**
+> `Der einzige Fall, in dem wir vorher sprechen.`
+
+> **Warum diese Zeile gebraucht wird.** Sektion 2 verspricht `Ohne einen einzigen Termin zur
+> fertigen Website.` Der Knopf hier heißt `Sonderprojekt besprechen`. Ohne die Zeile widerspricht
+> sich die Seite auf demselben Bildschirm. Der Befund kam von außen und war richtig.
+>
+> **Die Überschrift in Sektion 2 bleibt trotzdem unverändert.** Sie beschreibt den Regelfall — drei
+> von vier Angeboten und praktisch das gesamte erwartete Volumen. Eine Einschränkung wie
+> *„Standardprojekte ohne Pflichttermine"* würde den stärksten Satz der Seite kaputtmachen, um
+> einen Sonderfall abzudecken. Der Sonderfall wird **dort** benannt, wo er auftritt.
+
 **Für alle Stufen zusätzlich sichtbar:** `Erstlaufzeit 12 Monate` · `Zahlungsziel 10 Tage`.
 Beide Zahlen standen bisher nirgends auf der Startseite und sind Teil des Angebots.
 
@@ -538,7 +614,12 @@ Satz ergänzt — die Wirkung entsteht aus der Leere ringsum.
 
 - **CTA:** `Alle Leistungen im Überblick` → `/leistungen`
 
-- **H2:** `Ihre Website ist ab dem ersten Tag auffindbar.`
+- **H2:** `Ihre Website ist ab dem ersten Tag für Suchmaschinen vorbereitet.`
+
+  > **Alte Fassung, verboten:** `Ihre Website ist ab dem ersten Tag auffindbar.` Das ist
+  > „garantierte Sichtbarkeit" in weichen Worten und verstößt gegen §2. Weder die Aufnahme in den
+  > Index noch ihr Zeitpunkt liegen bei uns. Überall sonst formulieren wir korrekt — *„Die Grundlage
+  > ja, ab dem ersten Tag"*, *„Ohne Rankinggarantie"*. Die H2 war der Ausreißer.
 - **Text (42 W.):**
   > Jede SARTU-Website startet mit klaren Seitenthemen, sprechenden Adressen, sauberer interner Verlinkung, Metadaten, strukturierten Daten und einer soliden Performance-Grundlage. Späterer Ausbau baut auf echten Suchdaten auf — nicht auf pauschalen SEO-Paketen.
 - **Drei Spalten:**
@@ -553,10 +634,22 @@ Satz ergänzt — die Wirkung entsteht aus der Leere ringsum.
 **Der Ersatz für fehlende Referenzen** — und der einzige, der ohne Kunden funktioniert.
 
 - **H2:** `So könnte ein Projekt aussehen.`
-- **Einleitung:**
-  > Noch keine lange Referenzliste. Deshalb zeigen wir offen, wie ein Projekt aufgebaut wird, welche Entscheidungen wir treffen und was am Ende dabei herauskommt.
-- **Drei Musterprojekte**, je eine Karte: Handwerksbetrieb · Praxis · Kanzlei
+- **Einleitung, einmal über dem Raster:**
+  > SARTU ist 2026 gestartet. Die drei Beispiele sind Muster, keine Kundenaufträge.
+
+  > **Alte Fassung, nicht wieder verwenden:** *„Noch keine lange Referenzliste. Deshalb zeigen wir
+  > offen, wie ein Projekt aufgebaut wird, welche Entscheidungen wir treffen und was am Ende dabei
+  > herauskommt."* Die Seite erklärt sich selbst (`SARTU_TEXTREGELN.md` Regel 6), und der Satz hat
+  > drei Glieder ohne Information.
+- **Drei Musterprojekte**, je eine Karte: **Malerbetrieb · Physiotherapiepraxis · Arbeitsrechtskanzlei**
+
+  > **Konkrete Gattung statt Oberbegriff** (`SARTU_TEXTREGELN.md` Regel 5). „Handwerksbetrieb" kann
+  > man nicht vor sich sehen, „Malerbetrieb" schon — und ein Malermeister erkennt sich wieder.
+  > **Weiterhin verboten:** erfundene Firmennamen. Die Gattung genügt.
 - **Über jeder Karte, unübersehbar:** `Musterprojekt — kein Kundenauftrag`
+
+  > **Die Bezeichnung bleibt.** Ein Vorschlag von außen lautete `Konzeptstudie`. Das ist mehr
+  > Fachwort und sagt gerade **nicht**, worauf es rechtlich ankommt: dass kein Kunde dahintersteht.
 - Je Karte: Ausgangslage · empfohlene Lösung · Seitenstruktur · Bildplatz · was der Kunde selbst liefern müsste
 - **CTA:** `Alle Musterprojekte ansehen`
 
@@ -1037,6 +1130,13 @@ eine dieser Bedingungen zutrifft:**
 2. `/agb` existiert als Seite **und** ist irgendwo verlinkt **und** enthält die Platzhaltermarkierung
 3. Eine Seite mit `noindex` steht in der `sitemap.xml`
 4. Ein Bildplatz für Portal-Screenshots ist noch leer oder trägt die Markierung `[[SCREENSHOT-FEHLT]]`
+4a. **Die Sektion „Wer dahintersteckt" enthält einen Platzhalter** — kein Foto hinterlegt, oder der Text enthält `Name wird nachgereicht`, `[[PLATZHALTER]]` oder `[[FOTO-FEHLT]]`
+
+    > **Neu am 30.07.2026, echte Lücke.** Bedingung 4 sperrte nur **Portal**-Screenshots. Das
+    > Gründerfoto ist kein Portal-Screenshot, und `Name wird nachgereicht` steht in keiner
+    > Verbotsliste — die Sektion wäre mit leerem Rahmen und ohne Namen live gegangen. Ohne
+    > Referenzen ist die Person hinter SARTU der Vertrauensanker; ein leerer Rahmen an dieser
+    > Stelle wirkt schlechter als gar keine Sektion. Der Befund kam von außen und war richtig.
 5. Eine Zeichenkette aus der Verbotsliste §2 kommt im ausgelieferten Text vor
 6. Eine Datei außerhalb von `/public` ist über den Webserver erreichbar
 7. Ein Ortsname erscheint in Title, H1 oder URL, obwohl `SARTU_ENTSCHEIDUNGEN_OFFEN.md` §1 auf `offen` steht

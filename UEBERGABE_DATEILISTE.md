@@ -52,6 +52,47 @@ merkt es, bevor gebaut wird.
 
 ---
 
+## Rangfolge — welche Datei gewinnt bei Widerspruch
+
+**Sechs Dateien tragen „FINAL" im Namen.** Das Wort bedeutet nichts über ihr Alter. Zweimal hat
+eine externe Prüfung deshalb einen überholten Stand verteidigt, einmal wurden zwei verbindliche
+Navigationen im selben Dokument gefunden. Deshalb hier eine Reihenfolge, die keine Auslegung
+zulässt:
+
+| Rang | Quelle | Gilt für |
+|---|---|---|
+| 1 | `SARTU_ENTSCHEIDUNGEN_OFFEN.md` | Alles, was noch offen ist. **Schlägt jede andere Datei.** Wo hier `offen` steht, wird nichts gebaut und nichts erfunden |
+| 2 | `REIHENFOLGE.md` | **nur der Zeitpunkt** — was jetzt gebaut wird und was wartet |
+| 3 | `SARTU_TEXTREGELN.md` | **nur die Form** jedes Textes — Satzlänge, Wortlisten, Prüfbericht |
+| 4 | `CLAUDE_SARTU_PORTAL_LASTENHEFT_BAUFINAL.md` | Stack, Datenmodell, Kundenbereich, Sicherheit, Testfälle |
+| 5 | `CLAUDE_SARTU_WEBSITE_LASTENHEFT_BAUFINAL.md` | öffentliche Seiten, Struktur, Wortlaut |
+| 6 | `CLAUDE_SARTU_DESIGN_BRIEFING_AUSFUEHRUNG.md` | visuelle Ausführung |
+| 7 | `CLAUDE_SARTU_MASTERKONZEPT_FINAL.md` | Geschäftsmodell und Preise — **die Preistabelle ist die Quelle jeder Zahl** |
+| — | `CLAUDE_SARTU_WEBSITE_KONZEPT_FINAL.md` | **Nachschlagewerk, keine Bauvorlage.** §5 Sektionsdramaturgie ist ausdrücklich abgelöst |
+| — | `CLAUDE_MARKTANALYSE_KRITIK_OPTIMIERUNG.md` | Bewertung für den Menschen. Enthält als `[ABGELÖST]` markierte Empfehlungen |
+| — | `konzepte/` | historisch |
+
+**Zwei Regeln dazu:**
+
+1. **Ein abgelöster Abschnitt wird gekennzeichnet, nicht gelöscht.** Er dokumentiert, warum etwas
+   heute anders ist. Wer ihn löscht, provoziert dieselbe Diskussion in drei Wochen erneut
+2. **Widersprechen sich zwei Stellen im selben Dokument, gilt die mit der Begründung.** Steht bei
+   keiner eine, ist es ein Fehler — **melden, nicht auswählen**
+
+## Nur `main` ist gültig
+
+**Der Stand liegt auf `main`.** Ältere Zweige — insbesondere `claude/sartu-concept-review-pdhb5t`
+— sind unvollständig: Dort fehlen `REIHENFOLGE.md`, `SARTU_TEXTREGELN.md` und alle Umfangszahlen
+in den Preisen.
+
+**Drei externe Prüfungen haben bereits einen alten Zweig bewertet** und Befunde gemeldet, die auf
+`main` längst behoben waren. Wer prüft oder baut, prüft `main`.
+
+> **Offen und beim Betreiber:** Der Standardzweig auf GitHub zeigt noch auf den alten Zweig. Bis er
+> auf `main` umgestellt ist, landet dort jeder, der den Repository-Link öffnet.
+
+---
+
 ## Startprüfung — vor der ersten Zeile Code
 
 Codex führt **zuerst** diesen Ablauf aus und meldet das Ergebnis:

@@ -117,6 +117,30 @@ Die visuelle Richtung wird **nicht in diesem Konzept festgelegt**. Frühere Entw
 
 ## 5. Startseite – Sektionsdramaturgie
 
+> **⚠️ ABGELÖST am 30.07.2026 — nicht danach bauen.** Verbindlich ist
+> `CLAUDE_SARTU_WEBSITE_LASTENHEFT_BAUFINAL.md` **§5**. Die Tabelle unten ist eine frühere Fassung
+> und wird nur als Entscheidungsgeschichte aufbewahrt.
+>
+> **Der Unterschied ist nicht klein:**
+>
+> | | Diese Fassung (abgelöst) | Lastenheft §5 (gültig) |
+> |---|---|---|
+> | 2 | Problem & Entlastung | **Der Kundenbereich** |
+> | 3 | Platzhirsch als Empfehlung | Ablauf |
+> | 4 | Leistungslandkarte | Preise |
+> | 5 | Portal als USP | Die Zusage |
+> | 6 | SEO/GEO | Wer dahintersteckt |
+> | 7 | Ablauf | Leistungen |
+> | 8 | Betrieb/Rundum-Schutz | Musterprojekte |
+> | 9 | **Lumi-Einstieg** | Häufige Fragen |
+> | 10 | — | Bedarfsscheck |
+>
+> Außerdem nennt die Tabelle unten **„Lumi"** — der Name ist abgelöst, es heißt `Bedarfsscheck`.
+>
+> **Warum das hier stehen muss:** Beide Dateien liegen im Repository, beide tragen „FINAL" im
+> Namen, beide beschrieben eine verbindliche Sektionsreihenfolge. Wer zuerst diese Datei liest,
+> baut eine andere Startseite. Der Befund kam aus einer externen Prüfung und war richtig.
+
 Jede Sektion hat eine Aufgabe in der Reise aus Abschnitt 1.
 
 | # | Sektion | Aufgabe | Kerninhalt |
