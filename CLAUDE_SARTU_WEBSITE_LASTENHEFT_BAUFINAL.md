@@ -334,7 +334,7 @@ eine Betriebsinformation gehört nicht über die Marke.
 
 **Regeln:**
 
-- Der Zustand wird **nie allein über Farbe** unterschieden, sondern über die Füllung des Punktes plus den Text (§2.3)
+- Der Zustand wird **nie allein über Farbe** unterschieden, sondern über die Füllung des Punktes plus den Text (§2a, Barrierefreiheit)
 - Der Punkt ist lime **mit dünnem Ring in `--ink`** — Lime allein erreicht gegen die helle Fläche nur 1,30:1 und wäre als Grafik unsichtbar
 - Bei `offen` und `knapp` bleibt die Zeile klein und ruhig. Sie beruhigt, sie wirbt nicht
 - Nur bei `ausgebucht` bekommt sie Gewicht und **ändert die Handlung** — eine Anfrage wäre dann eine Sackgasse
@@ -819,7 +819,7 @@ Was fehlt Ihnen, bevor Sie anfragen? · Was wirkt unglaubwürdig? · Was klingt 
 
 ---
 
-## 9. `/briefing` — Bedarfsscheck (Lumi), feldgenau
+## 9. `/briefing` — Bedarfsscheck, feldgenau
 
 **Title:** `Bedarf prüfen lassen — unverbindliche Empfehlung | SARTU`
 **Meta (147 Z.):** `Beantworten Sie wenige Fragen zu Ihrem Unternehmen und sehen Sie sofort eine vorläufige Empfehlung mit Festpreis. Unverbindlich, ohne Termin, in etwa drei Minuten.`

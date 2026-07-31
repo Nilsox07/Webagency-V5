@@ -359,6 +359,7 @@ Fehlt ein geforderter Abschnitt, ist die Grenze das falsche Werkzeug: dann wird 
 
 | Nicht hier | Wo stattdessen |
 |---|---|
+| **Wie man schreibt** — Überschrift, Fließtext, Schaltfläche und Metadaten haben verschiedene Regeln | `.claude/skills/sartu-texter/SKILL.md`. Diese Datei hier zählt, jene erklärt das Handwerk und nennt die Belege |
 | Welche Aussage getroffen wird, welche Sektion existiert | Website-Lastenheft §5, Portal-Lastenheft |
 | Fachwörter in Kundensprache übersetzen | Website-Lastenheft §5aa (gilt weiter) |
 | Verbotene **Behauptungen** (Rankinggarantie, „wartungsfrei", „rechtssicher") | Website-Lastenheft §2 (gilt weiter) |

@@ -22,6 +22,7 @@ merkt es, bevor gebaut wird.
 | 6 | `ENTWICKLUNGSUMGEBUNG.md` | **wie PHP, Composer und die Datenbank aufgerufen werden** — und was ohne Datenbank trotzdem gebaut wird | **Abbruch.** Sonst wird falsch nach PHP gesucht oder wegen fehlender Datenbank angehalten |
 | 6a | `REIHENFOLGE.md` | **welche Teile jetzt gebaut werden und welche warten** — Stufe A, B, C | **Abbruch.** Sonst entstehen alle 20 Tabellen auf einmal |
 | 6b | `SARTU_TEXTREGELN.md` | **wie jeder Text formuliert sein muss** — zehn zählbare Regeln, Wortlisten, Pflicht-Prüfbericht | **Abbruch.** Sonst entsteht wieder der Ton, der schon zweimal verworfen wurde |
+| 6c | `.claude/skills/sartu-texter/SKILL.md` | **das Handwerk dahinter** — getrennte Vorgaben für Überschriften, Fließtext, Mikrotexte und Metadaten; belegte SEO- und GEO-Regeln | Melden. Ohne ihn gelten die Textregeln trotzdem, aber jede Formulierung wird geraten |
 | 7 | `CLAUDE_SARTU_WEBSITE_LASTENHEFT_BAUFINAL.md` | nur §2 Sprachregeln | Melden, mit Rest fortfahren |
 | 8 | `konzepte/` (20 Dateien) | historische Quellen, **veraltete Preise und abgelöste Stacks** | Melden, mit Rest fortfahren |
 
@@ -40,6 +41,7 @@ merkt es, bevor gebaut wird.
 | 9 | `GEO_DISCOVERY_CHECKLIST.md` | technische Auffindbarkeit für KI-Systeme — **vor Livegang abzuhaken** | Melden, mit Rest fortfahren |
 | 10 | `ENTWICKLUNGSUMGEBUNG.md` | **wie PHP, Composer und die Datenbank aufgerufen werden** — und was ohne Datenbank trotzdem gebaut wird | **Abbruch.** Sonst wird falsch nach PHP gesucht oder wegen fehlender Datenbank angehalten |
 | 11 | `SARTU_TEXTREGELN.md` | **wie jeder Text formuliert sein muss** — zehn zählbare Regeln, Wortlisten. Der **Prüfbericht mit Zahlen** gehört zu jeder abgegebenen Seite | **Abbruch.** Sonst entsteht wieder der Ton, der schon zweimal verworfen wurde |
+| 11a | `.claude/skills/sartu-texter/SKILL.md` | **das Handwerk dahinter** — Überschrift, Fließtext, Schaltfläche und Metadaten haben **verschiedene** Regeln. Dazu, was an SEO und GEO belegt ist und was Mythos | **Abbruch.** Beim Websiteauftrag entsteht fast nur Text |
 | 12 | `REIHENFOLGE.md` | **Abschnitt „Zwei Livegänge"** — welche Portalfunktionen zum Zeitpunkt des Websitestarts überhaupt existieren | **Abbruch.** Sonst bewirbt die Seite Funktionen, die es noch nicht gibt |
 
 ## Nicht übergeben

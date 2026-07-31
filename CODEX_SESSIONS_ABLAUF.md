@@ -155,6 +155,9 @@ Rechtstexte · echte Fotos · die Freigabe eigener Texte. Alles davon steht in
 > 5. `SARTU_ENTSCHEIDUNGEN_OFFEN.md`
 > 5a. `SARTU_TEXTREGELN.md` — **vollständig**, bevor der erste Text entsteht. Zu jeder abgegebenen
 >     Seite gehört der Prüfbericht aus Abschnitt 2 **mit ausgefüllten Zahlen**
+> 5b. `.claude/skills/sartu-texter/SKILL.md` — das Handwerk dazu. Überschriften, Fließtext,
+>     Schaltflächen und Metadaten folgen **verschiedenen** Regeln; dort steht auch, was an SEO und
+>     GEO belegt ist und was Werbeversprechen der Werkzeuganbieter
 > 6. `CLAUDE_SARTU_WEBSITE_LASTENHEFT_BAUFINAL.md` — §1, §2 und §5 (Startseitentexte)
 >
 > **Schritt 4 — `IMPLEMENTATION_PLAN.md` schreiben** nach Abschnitt 0b des Portalauftrags: Bestand,
