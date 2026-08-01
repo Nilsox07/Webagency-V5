@@ -17,6 +17,28 @@ weiche Formsprache angepasst (Vorgabe vom 25.07.2026).
 | `sartu-logo-digital.svg` | dieselbe Fassung mit Beisatz `DIGITAL`, wie vorgelegt |
 | `sartu-favicon.svg` | Tinte auf Lime, gerundetes Quadrat |
 | `vorschau.html` | alle Fassungen, Größentest, Regeln |
+| **`sartu-wortmarke-schwarz.svg`** | **die komplette Wortmarke in der Konstruktion des Zeichens** — schwarz, Kontur bereits zu Flächen erweitert, keine Schrift nötig |
+
+## Die Wortmarke im selben Stil
+
+Alle fünf Buchstaben folgen der Konstruktion des Zeichens: Waagerechte, Senkrechte und
+45-Grad-Diagonalen, keine Kurven. Strichstärke **13** bei Versalhöhe **48**, Gelenke gerundet,
+Enden gerade geschnitten.
+
+**Das löst das Schriftproblem.** Die Wortmarke braucht keine Schriftdatei mehr — sie ist Geometrie.
+Die Kontur ist in `sartu-wortmarke-schwarz.svg` bereits zu einer Fläche erweitert, damit ist die
+Datei ohne weiteren Schritt druckfertig.
+
+| Buchstabe | Konstruktion |
+|---|---|
+| **S** | identisch mit dem Zeichen |
+| **A** | zwei Senkrechte, oben gefast, Querstrich bei 29 |
+| **R** | Stamm, gefaste Punze, Bein als Diagonale |
+| **T** | Querbalken und Stamm, optisch enger gesetzt |
+| **U** | zwei Senkrechte, unten gefast |
+
+**Die Abstände sind optisch, nicht metrisch.** Das T steht enger als A und R, weil sein Weißraum
+sonst ein Loch in die Zeile reißt.
 
 ## Die Konstruktion
 
