@@ -94,6 +94,19 @@ eine Schaltfläche ist keine kurze Überschrift.
 > **Steht in der Überschrift etwas, das man nachzählen, nachmessen oder nachprüfen kann?**
 > **Nein** → Umschreiben. **Ja** → Sie trägt.
 
+> ### Wofür der Test gilt — und wofür nicht
+>
+> **Er gilt für Behauptungen über SARTU**: was geliefert wird, was es kostet, wie lange es dauert,
+> was **nicht** enthalten ist. Dort ist eine unbelegte Aussage ein Versprechen ohne Deckung.
+>
+> **Er gilt nicht für den Satz, der Wiedererkennung herstellt.** `Ein Rohrbruch wartet nicht auf
+> Bürozeiten.` enthält keine prüfbare Zahl und ist trotzdem richtig — er behauptet nichts über uns,
+> sondern beschreibt etwas, das der Leser kennt.
+>
+> **Warum diese Eingrenzung nötig ist:** Eine frühere Fassung verlangte den Beleg in **jedem** Satz.
+> Das Ergebnis liest sich wie ein Prüfbericht — technisch fehlerfrei und vollkommen unverkäuflich.
+> Der Einwand kam vom Betreiber und war richtig: *„too much auf Beweise."*
+
 Das ist Regel 1 der Textregeln, angewandt auf Überschriften. Der Unterschied zwischen guten und
 schlechten Überschriften auf dieser Website ist **nicht der Inhalt** — der ist fast immer richtig.
 Es ist die Unbestimmtheit der Formulierung.
@@ -153,6 +166,44 @@ durch etwas Zählbares ersetzen.
 | **Zahl statt Eigenschaftswort** | „1 Seite, rund 1.200 Wörter" statt „kompakter Aufbau" |
 | **Mehr als drei Glieder werden zur Liste** | Neun Aufzählungsglieder in einem Satz liest niemand |
 | **Verben statt Substantivierungen** | „Sie laden Unterlagen hoch" statt „Upload von Unterlagen" |
+
+#### Der Vierschritt — wie ein Abschnitt trägt
+
+Ein Abschnitt, der nur aus Belegen besteht, überzeugt niemanden. Ein Abschnitt ohne Belege auch
+nicht. Die Reihenfolge macht den Unterschied:
+
+| Schritt | Aufgabe | Braucht einen Beleg? |
+|---|---|---|
+| **1 Wiedererkennung** | Der Leser denkt „das kenne ich" | **nein** |
+| **2 Konsequenz** | Was ihn das heute kostet | **nein** |
+| **3 Auflösung** | Wie es bei SARTU läuft | **ja** |
+| **4 Beleg** | Die Zahl, die Grenze, das Ding | **ja** |
+
+**Am Beispiel:**
+
+> **1** Ein Rohrbruch wartet nicht auf Bürozeiten.
+> **2** Wer nachts sucht, will eine Nummer, keine Leistungsliste. Er ruft die erste an, die er ohne Scrollen findet.
+> **3** Auf Ihrer Startseite steht sie ganz oben.
+> **4** Groß genug für einen Daumen, klickbar, auf jedem Bildschirm.
+
+**Schritt 1 und 2 dürfen frei formuliert sein.** Sie behaupten nichts über uns. Erst ab Schritt 3
+greifen Nachprüftest und Wortlisten.
+
+**Der häufigste Fehler ist, mit Schritt 3 anzufangen.** Dann steht die Lösung vor dem Problem, und
+der Leser weiß nicht, wovon die Rede ist.
+
+#### Keine Hausaufgaben — der Leser wird nie weggeschickt
+
+**Verboten:** `Suchen Sie einmal selbst nach …` · `Vergleichen Sie das mit …` · `Fragen Sie Ihren
+bisherigen Anbieter …` · `Testen Sie doch mal …`
+
+Im Verkaufsgespräch ist das eine starke Technik — man sitzt daneben und der Kunde kommt zurück.
+**Auf einer Website ist es ein Ausgang.** Wer zu Google geschickt wird, landet beim nächsten
+Anbieter.
+
+**Stattdessen:** die Beobachtung selbst hinschreiben, so dass der Leser sie wiedererkennt, ohne
+etwas tun zu müssen. `Er will eine Nummer, keine Leistungsliste.` leistet dasselbe und kostet
+keinen Besucher.
 
 **Der Streichtest zum Schluss:** Jeden Satz einzeln entfernen. Fehlt dem Leser danach eine
 Tatsache? Wenn nein, bleibt er gestrichen. Bei erstem Entwurf fällt regelmäßig ein Drittel weg.

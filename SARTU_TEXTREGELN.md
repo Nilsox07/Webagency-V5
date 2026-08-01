@@ -37,7 +37,7 @@ er verhindern soll. Hier stehen Zahlen, die man nachzählen kann.
 
 ---
 
-## 1. Die zehn Regeln
+## 1. Die zwölf Regeln
 
 ### Regel 1 — Wo eine Zahl bekannt ist, steht die Zahl
 
@@ -112,6 +112,28 @@ Innungsmitgliedschaft. Ein Gründungsjahr. Das schreibt man hin.
 
 **Test:** Kann man es fotografieren, zählen oder nachschlagen? Wenn nein, ist es ein Abstraktum und
 wird ersetzt.
+
+### Regel 5a — Der Beleg gehört zur Behauptung, nicht in jeden Satz
+
+**Nachprüfbar sein müssen Aussagen über SARTU** — Leistung, Preis, Dauer, Grenzen. **Nicht** der
+Satz, der Wiedererkennung herstellt.
+
+`Ein Rohrbruch wartet nicht auf Bürozeiten.` enthält keine Zahl und ist trotzdem richtig: Er
+behauptet nichts über uns.
+
+**Der Aufbau eines Abschnitts, ausführlich im Texter-Skill:**
+Wiedererkennung → Konsequenz → Auflösung → Beleg. Die ersten beiden Schritte sind frei, ab dem
+dritten gilt der Nachprüftest.
+
+**Warum das hier steht:** Eine frühere Fassung verlangte den Beleg in jedem Satz. Ein Text, der nur
+aus Belegen besteht, liest sich wie ein Prüfbericht.
+
+### Regel 5b — Der Leser bekommt keine Hausaufgaben
+
+**Verboten:** `Suchen Sie einmal selbst …` · `Vergleichen Sie das mit …` · `Testen Sie doch mal …`
+
+Im Gespräch funktioniert das. Auf einer Website ist es ein Ausgang — wer zu Google geschickt wird,
+landet beim nächsten Anbieter. Die Beobachtung wird stattdessen hingeschrieben.
 
 ### Regel 6 — Die Seite erklärt sich nicht selbst
 
