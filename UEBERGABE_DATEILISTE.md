@@ -20,6 +20,7 @@ merkt es, bevor gebaut wird.
 | 4 | `CLAUDE_SARTU_MASTERKONZEPT_FINAL.md` | Nachschlagewerk + verbindliche Arbeitsverteilung §10a | Abbruch |
 | 5 | `SARTU_ENTSCHEIDUNGEN_OFFEN.md` | **alle Platzhalter und Sperren** — Standort, Rechtstexte, Design, Betriebsumgebung | **Abbruch.** Sonst werden Werte erfunden |
 | 6 | `ENTWICKLUNGSUMGEBUNG.md` | **wie PHP, Composer und die Datenbank aufgerufen werden** — und was ohne Datenbank trotzdem gebaut wird | **Abbruch.** Sonst wird falsch nach PHP gesucht oder wegen fehlender Datenbank angehalten |
+| 6x | `SARTU_CORPORATE_DESIGN.md` | **die Marke** — Wortmarke, Farbregeln, Motiv, Bildsprache, E-Mail, Rechnung, Favicon | **Abbruch bei allem mit Außenwirkung.** Sonst entsteht bei jedem Dokument ein anderer Auftritt |
 | 6y | `SARTU_DESIGNSYSTEM.md` + `design/tokens.css` | **jede Farbe, jeder Radius, jede Abstandsstufe** — aus dem bestätigten Artefakt vom 30.07.2026 | **Abbruch.** Sonst wird Gestaltung erfunden |
 | 6z | `BAUFREIGABE.md` | **was heute starten darf und was nicht** — eine Sperre vor dem Datenmodell, drei vor der Veröffentlichung | **Zuerst lesen.** Sonst wird auf etwas gewartet, das nicht blockiert |
 | 6a | `REIHENFOLGE.md` | **welche Teile jetzt gebaut werden und welche warten** — Stufe A, B, C | **Abbruch.** Sonst entstehen alle 20 Tabellen auf einmal |
