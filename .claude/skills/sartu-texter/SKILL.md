@@ -167,6 +167,56 @@ durch etwas Zählbares ersetzen.
 | **Mehr als drei Glieder werden zur Liste** | Neun Aufzählungsglieder in einem Satz liest niemand |
 | **Verben statt Substantivierungen** | „Sie laden Unterlagen hoch" statt „Upload von Unterlagen" |
 
+#### Vor dem Vierschritt: das Argument wählen
+
+**Ein Text kann jede Regel bestehen und trotzdem wertlos sein.** Das passiert, wenn die Form
+geprüft wurde und niemand gefragt hat, ob das Argument überhaupt trägt. Es ist der teuerste Fehler
+dieses Skills, weil der Prüfbericht dabei **grün** ist.
+
+**Drei Fragen, bevor ein Satz entsteht:**
+
+##### 1 — Der Auftragswert-Test
+
+> **Rechtfertigt das Argument den Preis?** Gilt es auch für eine Seite für 500 €, ist es keines.
+
+| Argument | Gilt auch für 500 € | Taugt |
+|---|---|---|
+| Die Telefonnummer steht oben | **ja** — kann jeder Baukasten | ✗ |
+| Die Seite lädt schnell | **ja** | ✗ |
+| Mobil bedienbar | **ja** | ✗ |
+| Eine eigene Seite je Leistung, jede mit eigenem Text | nein — das ist Arbeit | ✓ |
+| Texte aus seinen Fakten geschrieben | nein | ✓ |
+| Betrieb, Sicherung und Ansprechpartner für 12 Monate | nein | ✓ |
+
+##### 2 — Welches Geschäft will er eigentlich?
+
+**Nicht jedes Geschäft einer Branche ist gleich viel wert.** Ein Betrieb hat Aufträge, die er
+gern annimmt, und solche, die er mitmacht.
+
+| Branche | Will er | Nimmt er mit |
+|---|---|---|
+| Sanitär und Heizung | Badsanierung, Heizungstausch — geplant, hoher Wert | Notdienst nachts |
+| Elektro | Neubau, Photovoltaik, Gewerbe | Steckdose tauschen |
+| Dachdecker | komplettes Dach | Sturmschaden |
+
+**Der Text argumentiert für das Geschäft, das er will.** Wer die Seite um den Notdienst baut,
+verkauft ihm Kundschaft, die er nachts aus dem Bett holt.
+
+##### 3 — Weiß ich das, oder nehme ich es an?
+
+**Verboten sind Behauptungen über das Verhalten seiner Kunden**, wenn keine Quelle dafür existiert.
+`Wer nachts sucht, ruft die erste Nummer an, die er ohne Scrollen findet.` klingt einleuchtend und
+ist **erfunden**. Niemand hat das gemessen.
+
+**Erlaubt ist, was der Betrieb selbst weiß:** Er hat Fotos von fertigen Bädern. Er sucht Gesellen.
+Er erklärt Förderungen am Telefon. Das sind Tatsachen aus seinem Alltag, keine Annahmen über
+Fremde.
+
+> **Der Fehler, an dem diese drei Fragen entstanden sind:** Die erste Fassung dieser Branchenseite
+> argumentierte mit der Notdienstnummer. Formal fehlerfrei, jeder Prüfwert grün — und trotzdem
+> unbrauchbar. Sie verkaufte ein Detail, das nichts kostet, für ein Geschäft, das er nicht will,
+> auf Basis einer Kundenreise, die niemand belegt hat.
+
 #### Der Vierschritt — wie ein Abschnitt trägt
 
 Ein Abschnitt, der nur aus Belegen besteht, überzeugt niemanden. Ein Abschnitt ohne Belege auch
@@ -181,10 +231,14 @@ nicht. Die Reihenfolge macht den Unterschied:
 
 **Am Beispiel:**
 
-> **1** Ein Rohrbruch wartet nicht auf Bürozeiten.
-> **2** Wer nachts sucht, will eine Nummer, keine Leistungsliste. Er ruft die erste an, die er ohne Scrollen findet.
-> **3** Auf Ihrer Startseite steht sie ganz oben.
-> **4** Groß genug für einen Daumen, klickbar, auf jedem Bildschirm.
+> **1** Die besten Verkaufsargumente Ihres Betriebs liegen auf Ihrem Telefon.
+> **2** Ein Bad kauft niemand nach einer Leistungsliste. Der Kunde will vorher sehen, was Sie können.
+> **3** Sie laden Ihre Fotos hoch, wir bauen die Seiten darum.
+> **4** Eine eigene Seite je Leistung — bei `Wachstum` bis zu 8, rund 3.500 Wörter.
+
+**Warum dieses Argument trägt und das erste nicht:** Fotos von fertigen Bädern hat er wirklich, und
+sie verkaufen das nächste Bad. Eine Referenzstrecke daraus zu bauen ist Arbeit, die eine
+500-€-Seite nicht leistet. Und es zielt auf das Geschäft, das er **will**.
 
 **Schritt 1 und 2 dürfen frei formuliert sein.** Sie behaupten nichts über uns. Erst ab Schritt 3
 greifen Nachprüftest und Wortlisten.
@@ -469,6 +523,7 @@ obere sagt es so, dass jemand es liest.
 
 ## Sofort-Prüfung: sechs Fragen an jeden fertigen Text
 
+0. **Rechtfertigt das Argument den Preis, oder gilt es auch für eine 500-€-Seite?**
 1. Steht die Antwort im **ersten** Satz?
 2. Ist jede Behauptung mit einer **Zahl, einem Namen oder einer Tatsache** belegt?
 3. Würde ein Malermeister nach dem Lesen sagen können, **was er bekommt und was es kostet**?

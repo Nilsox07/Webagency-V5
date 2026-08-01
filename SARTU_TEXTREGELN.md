@@ -37,7 +37,22 @@ er verhindern soll. Hier stehen Zahlen, die man nachzählen kann.
 
 ---
 
-## 1. Die zwölf Regeln
+## 1. Die dreizehn Regeln
+
+### Regel 0 — Erst das Argument, dann die Formulierung
+
+**Ein Text kann jede Regel dieser Datei bestehen und trotzdem wertlos sein.** Das passiert, wenn
+das Argument nicht trägt. Der Prüfbericht ist dann grün und der Text unbrauchbar.
+
+**Der Auftragswert-Test:** Gilt das Argument auch für eine Seite für 500 €, ist es keines.
+`Die Telefonnummer steht oben` kann jeder Baukasten. `Eine eigene Seite je Leistung mit eigenem
+Text` nicht.
+
+**Zwei weitere Fragen vor dem ersten Satz**, ausgeführt im Texter-Skill:
+Für welches Geschäft argumentiert der Text — das, was der Betrieb **will**, oder das, was er
+mitnimmt? Und: Weiß ich das, oder nehme ich es an?
+
+**Diese Regel steht vor allen anderen.** Wer sie überspringt, formuliert das Falsche perfekt.
 
 ### Regel 1 — Wo eine Zahl bekannt ist, steht die Zahl
 
