@@ -1,0 +1,357 @@
+<title>SARTU — Logo</title>
+
+<style>
+:root{
+  --cream:#f4efe5; --paper:#fbf8f2; --ink:#14110d; --ink-soft:#241f18;
+  --text:#231e17; --muted:#4d473d; --line:#ddd4c4; --line-dark:#332d24; --sand:#e8dfcd;
+  --lime:#a3e635; --label:#5c554a; --label-dark:#a89b88;
+  --r-xs:8px; --r-m:22px; --r-l:34px; --r-xl:52px; --r-pill:999px;
+  --s-2:12px; --s-3:20px; --s-4:32px; --s-5:48px; --s-6:72px; --s-7:104px;
+  --wrap:1180px; --gut:clamp(20px,4vw,56px);
+  --font-sans:-apple-system,BlinkMacSystemFont,"Segoe UI",system-ui,"Helvetica Neue",Helvetica,sans-serif;
+  --font-mono:ui-monospace,"SFMono-Regular",Menlo,Consolas,monospace;
+  color-scheme:light;
+}
+:root[data-theme="dark"],:root[data-theme="light"]{color-scheme:light}
+*{box-sizing:border-box}
+body{margin:0;background:var(--cream);color:var(--text);font-family:var(--font-sans);
+  font-size:18px;line-height:1.62;text-wrap:pretty;overflow-x:hidden}
+h1,h2,h3,h4{margin:0;font-weight:650;letter-spacing:-.025em;line-height:1.05;color:var(--ink);text-wrap:balance}
+p{margin:0} ul{margin:0;padding:0;list-style:none}
+:focus-visible{outline:2px solid var(--ink);outline-offset:2px;box-shadow:0 0 0 4px var(--lime)}
+.wrap{width:100%;max-width:var(--wrap);margin:0 auto;padding:0 var(--gut)}
+.mono{font-family:var(--font-mono);font-size:12.5px;letter-spacing:.13em;text-transform:uppercase;color:var(--label)}
+.body{font-size:17.5px;line-height:1.62;color:var(--muted)}
+
+/* Das Zeichen — als Inline-SVG, damit currentColor greift */
+.mk{display:block}
+
+.top{padding:clamp(48px,7vw,92px) 0 var(--s-6);border-bottom:1px solid var(--line)}
+h1{font-size:clamp(34px,5vw,58px);letter-spacing:-.035em;margin-top:var(--s-3);max-width:18ch}
+.hero{display:flex;align-items:center;gap:clamp(20px,4vw,44px);flex-wrap:wrap;margin-top:var(--s-5)}
+.hero-mark{width:118px;height:118px;color:var(--ink)}
+.hero-word{display:flex;flex-direction:column}
+.hero-word b{font-size:clamp(44px,6.6vw,78px);font-weight:700;letter-spacing:-.045em;color:var(--ink);line-height:.98}
+.hero-word span{font-family:var(--font-mono);font-size:12px;letter-spacing:.18em;text-transform:uppercase;
+  color:var(--label);margin-top:6px;padding-left:3px}
+
+.sec{padding:var(--s-7) 0;border-bottom:1px solid var(--line)}
+.sec:last-of-type{border-bottom:none}
+.sec-head{display:grid;grid-template-columns:64px minmax(0,1fr);gap:clamp(16px,3vw,40px);align-items:baseline;margin-bottom:var(--s-5)}
+.sec-num{font-family:var(--font-mono);font-size:14px;color:var(--label)}
+.sec-head h2{font-size:clamp(27px,3.5vw,40px)}
+.sec-head .body{margin-top:var(--s-2);max-width:60ch}
+@media (max-width:700px){.sec-head{grid-template-columns:1fr;gap:6px}}
+
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:var(--s-3)}
+.card{background:var(--paper);border:1px solid var(--line);border-radius:var(--r-l);
+  padding:26px 24px;display:flex;flex-direction:column;gap:18px}
+.card h4{font-size:17px}
+.card .note{font-size:15.5px;line-height:1.5;color:var(--muted)}
+.stage{flex:1;min-height:128px;display:flex;align-items:center;justify-content:center;gap:16px;
+  padding:22px;background:var(--cream);border:1px solid var(--line);border-radius:var(--r-m)}
+.stage-dark{background:var(--ink);border-color:var(--line-dark)}
+.stage-lime{background:var(--lime);border-color:var(--line)}
+.stage-sand{background:var(--sand)}
+
+/* Groessentest */
+.sizes{display:flex;align-items:flex-end;gap:26px;flex-wrap:wrap}
+.size{display:flex;flex-direction:column;align-items:center;gap:9px}
+.size b{font-family:var(--font-mono);font-size:10px;letter-spacing:.1em;color:var(--label);font-weight:500}
+.fav{border-radius:12px;background:var(--lime);display:grid;place-items:center;border:1px solid var(--line)}
+.fav svg{color:var(--ink)}
+.f96{width:96px;height:96px} .f96 svg{width:66px;height:66px}
+.f48{width:48px;height:48px;border-radius:9px} .f48 svg{width:33px;height:33px}
+.f32{width:32px;height:32px;border-radius:6px} .f32 svg{width:22px;height:22px}
+.f16{width:16px;height:16px;border-radius:3px} .f16 svg{width:11px;height:11px}
+
+/* Konstruktion */
+.build{display:grid;grid-template-columns:minmax(0,300px) minmax(0,1fr);gap:clamp(24px,5vw,56px);align-items:center}
+@media (max-width:760px){.build{grid-template-columns:1fr}}
+.blueprint{width:100%;max-width:300px;aspect-ratio:1;background:var(--paper);
+  border:1px solid var(--line);border-radius:var(--r-m);padding:18px}
+
+/* Verwendung */
+.rules{margin-top:var(--s-4);border-top:1px solid var(--line)}
+.rules li{display:grid;grid-template-columns:26px minmax(0,1fr);gap:16px;align-items:start;
+  padding:16px 4px;border-bottom:1px solid var(--line);font-size:17px;line-height:1.5}
+.mark{width:22px;height:22px;margin-top:2px;display:grid;place-items:center;font-size:12px;font-weight:700;border-radius:4px}
+.m-ok{background:var(--lime);color:var(--ink)}
+.m-no{background:transparent;border:1.5px solid var(--ink);color:var(--ink)}
+
+.tblwrap{overflow-x:auto;margin-top:var(--s-4);border:1px solid var(--line);border-radius:var(--r-m);background:var(--paper)}
+table{width:100%;border-collapse:collapse;font-size:16.5px}
+th,td{padding:14px 20px;text-align:left;border-bottom:1px solid var(--line);vertical-align:top}
+th{font-family:var(--font-mono);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--label);font-weight:500;white-space:nowrap}
+tr:last-child td{border-bottom:none}
+code{font-family:var(--font-mono);font-size:14.5px;color:var(--ink)}
+
+.warn{background:var(--ink);color:#efe9dd;border-radius:var(--r-xl) var(--r-xl) 0 0;padding:var(--s-7) 0}
+.warn h2{color:#f6f1e6} .warn .body{color:#c3bcae} .warn .mono{color:var(--label-dark)}
+.warn code{color:#f6f1e6}
+.warn-box{background:var(--ink-soft);border:1px solid var(--line-dark);border-radius:var(--r-m);padding:26px;margin-top:var(--s-4)}
+
+footer{background:var(--ink);color:#7d766a;padding:var(--s-5) 0;
+  font-family:var(--font-mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase}
+.foot-in{display:flex;flex-wrap:wrap;gap:8px 26px;justify-content:space-between}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+
+
+<header class="top">
+  <div class="wrap">
+    <p class="mono">Vorlage zur Entscheidung · 01.08.2026</p>
+    <h1>Der Satzspiegel</h1>
+    <p class="body" style="margin-top:var(--s-3);max-width:56ch">
+      Eine Seite, geteilt durch zwei Stege, die bewusst nicht mittig sitzen. Vier ungleiche Felder.
+      Das Zeichen ist kein Buchstabe — deshalb kollidiert es mit keinem S-Logo der Welt.
+    </p>
+
+    <div class="hero">
+      <svg class="mk hero-mark" viewBox="0 0 64 64" aria-label="SARTU" role="img">
+        <g fill="currentColor">
+          <path d="M10 4h24v16H4V10a6 6 0 0 1 6-6z"/><path d="M42 4h12a6 6 0 0 1 6 6v10H42z"/>
+          <path d="M4 28h30v32H10a6 6 0 0 1-6-6z"/><path d="M42 28h18v26a6 6 0 0 1-6 6H42z"/>
+        </g>
+      </svg>
+      <span class="hero-word"><b>SARTU</b><span>Webdesign</span></span>
+    </div>
+  </div>
+</header>
+
+<main>
+
+  <!-- Warum -->
+  <section class="sec">
+    <div class="wrap">
+      <div class="sec-head">
+        <p class="sec-num">01</p>
+        <div>
+          <p class="mono" style="margin-bottom:12px">Die Idee</p>
+          <h2>Ein Satzspiegel ist nie mittig.</h2>
+          <p class="body">Der Satzspiegel ist die Fläche, in der Text auf einer Seite steht. In
+          jedem gut gesetzten Buch sitzt er <b>außermittig</b> — oben und innen enger, unten und
+          außen weiter. Wer das weiß, erkennt das Zeichen. Wer es nicht weiß, sieht eine geteilte
+          Seite. Beides ist richtig.</p>
+        </div>
+      </div>
+
+      <div class="build">
+        <div class="blueprint">
+          <svg viewBox="0 0 64 64" width="100%" height="100%" aria-hidden="true">
+            <g fill="none" stroke="#ddd4c4" stroke-width=".5" stroke-dasharray="2 2">
+              <path d="M32 0v64M0 32h64"/>
+            </g>
+            <g fill="#14110d">
+              <path d="M10 4h24v16H4V10a6 6 0 0 1 6-6z"/><path d="M42 4h12a6 6 0 0 1 6 6v10H42z"/>
+              <path d="M4 28h30v32H10a6 6 0 0 1-6-6z"/><path d="M42 28h18v26a6 6 0 0 1-6 6H42z"/>
+            </g>
+            <g fill="none" stroke="#a3e635" stroke-width="1">
+              <path d="M34 0v64M42 0v64M0 20h64M0 28h64"/>
+            </g>
+          </svg>
+        </div>
+        <div>
+          <div class="tblwrap" style="margin-top:0">
+            <table>
+              <thead><tr><th scope="col">Wert</th><th scope="col">Einheiten von 64</th><th scope="col">Warum</th></tr></thead>
+              <tbody>
+                <tr><td>Steg senkrecht</td><td><code>34 – 42</code></td><td>rechts der Mitte, 8 breit</td></tr>
+                <tr><td>Steg waagerecht</td><td><code>20 – 28</code></td><td>über der Mitte, 8 hoch</td></tr>
+                <tr><td>Außenrundung</td><td><code>6</code></td><td>weiche Formsprache, Vorgabe 25.07.</td></tr>
+                <tr><td>Innenecken</td><td><code>0</code></td><td>eine runde Ecke außen, drei enge innen</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p class="body" style="margin-top:var(--s-3)">
+            <b style="color:var(--ink)">Jedes der vier Felder hat genau eine runde Ecke außen und
+            drei enge innen.</b> Das ist dieselbe Regel wie bei den Flächen im Designsystem — Marke
+            und Motiv folgen einer Konstruktion, nicht zwei.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Fassungen -->
+  <section class="sec">
+    <div class="wrap">
+      <div class="sec-head">
+        <p class="sec-num">02</p>
+        <div>
+          <p class="mono" style="margin-bottom:12px">Die Fassungen</p>
+          <h2>Fünf Dateien, jede für einen Zweck.</h2>
+          <p class="body">Alle als SVG, alle einfarbig über <code>currentColor</code>, keine
+          Verläufe, keine Effekte.</p>
+        </div>
+      </div>
+
+      <div class="grid">
+        <div class="card">
+          <h4>Auf hellem Grund</h4>
+          <div class="stage">
+            <svg class="mk" style="width:52px;height:52px;color:var(--ink)" viewBox="0 0 64 64" aria-hidden="true">
+              <g fill="currentColor"><path d="M10 4h24v16H4V10a6 6 0 0 1 6-6z"/><path d="M42 4h12a6 6 0 0 1 6 6v10H42z"/>
+              <path d="M4 28h30v32H10a6 6 0 0 1-6-6z"/><path d="M42 28h18v26a6 6 0 0 1-6 6H42z"/></g></svg>
+            <span style="font-size:30px;font-weight:700;letter-spacing:-.045em;color:var(--ink)">SARTU</span>
+          </div>
+          <p class="note">Marke und Wortmarke in Tinte. <code>sartu-logo.svg</code></p>
+        </div>
+
+        <div class="card">
+          <h4>Auf dunklem Grund</h4>
+          <div class="stage stage-dark">
+            <svg class="mk" style="width:52px;height:52px;color:var(--lime)" viewBox="0 0 64 64" aria-hidden="true">
+              <g fill="currentColor"><path d="M10 4h24v16H4V10a6 6 0 0 1 6-6z"/><path d="M42 4h12a6 6 0 0 1 6 6v10H42z"/>
+              <path d="M4 28h30v32H10a6 6 0 0 1-6-6z"/><path d="M42 28h18v26a6 6 0 0 1-6 6H42z"/></g></svg>
+            <span style="font-size:30px;font-weight:700;letter-spacing:-.045em;color:#f6f1e6">SARTU</span>
+          </div>
+          <p class="note">Zeichen in Lime — 12,48 : 1. Nur hier, nie umgekehrt.
+          <code>sartu-logo-invers.svg</code></p>
+        </div>
+
+        <div class="card">
+          <h4>Auf Lime</h4>
+          <div class="stage stage-lime">
+            <svg class="mk" style="width:52px;height:52px;color:var(--ink)" viewBox="0 0 64 64" aria-hidden="true">
+              <g fill="currentColor"><path d="M10 4h24v16H4V10a6 6 0 0 1 6-6z"/><path d="M42 4h12a6 6 0 0 1 6 6v10H42z"/>
+              <path d="M4 28h30v32H10a6 6 0 0 1-6-6z"/><path d="M42 28h18v26a6 6 0 0 1-6 6H42z"/></g></svg>
+            <span style="font-size:30px;font-weight:700;letter-spacing:-.045em;color:var(--ink)">SARTU</span>
+          </div>
+          <p class="note">Auf der Akzentfläche steht immer Tinte. Dieselbe Datei,
+          <code>currentColor</code> erledigt das.</p>
+        </div>
+
+        <div class="card">
+          <h4>Kontur — Prägung, Stempel, Gravur</h4>
+          <div class="stage stage-sand">
+            <svg class="mk" style="width:52px;height:52px;color:var(--ink)" viewBox="0 0 64 64" aria-hidden="true">
+              <g fill="none" stroke="currentColor" stroke-width="3">
+                <path d="M11.5 5.5h21v13h-27v-7a6 6 0 0 1 6-6z"/><path d="M43.5 5.5h10a5 5 0 0 1 5 5v8h-15z"/>
+                <path d="M5.5 29.5h27v29h-16a6 6 0 0 1-6-6z"/><path d="M43.5 29.5h15v23a6 6 0 0 1-6 6h-9z"/></g></svg>
+          </div>
+          <p class="note">Strichstärke 3 von 64. Für alles, was nicht drucken, sondern prägen kann.
+          <code>sartu-mark-outline.svg</code></p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Groessentest -->
+  <section class="sec">
+    <div class="wrap">
+      <div class="sec-head">
+        <p class="sec-num">03</p>
+        <div>
+          <p class="mono" style="margin-bottom:12px">Der Größentest</p>
+          <h2>Ab 16 px lesbar — das ist die Anforderung, und sie ist erfüllt.</h2>
+          <p class="body">Die Stege sind 8 von 64 Einheiten breit. Bei 16 px Kantenlänge sind das
+          2 px. Das letzte Feld unten ist genau die Größe, in der ein Browser das Zeichen im Reiter
+          zeigt.</p>
+        </div>
+      </div>
+
+      <div class="sizes">
+        <div class="size">
+          <span class="fav f96"><svg viewBox="0 0 64 64" aria-hidden="true"><g fill="currentColor">
+            <path d="M10 4h24v16H4V10a6 6 0 0 1 6-6z"/><path d="M42 4h12a6 6 0 0 1 6 6v10H42z"/>
+            <path d="M4 28h30v32H10a6 6 0 0 1-6-6z"/><path d="M42 28h18v26a6 6 0 0 1-6 6H42z"/></g></svg></span>
+          <b>96 px</b>
+        </div>
+        <div class="size">
+          <span class="fav f48"><svg viewBox="0 0 64 64" aria-hidden="true"><g fill="currentColor">
+            <path d="M10 4h24v16H4V10a6 6 0 0 1 6-6z"/><path d="M42 4h12a6 6 0 0 1 6 6v10H42z"/>
+            <path d="M4 28h30v32H10a6 6 0 0 1-6-6z"/><path d="M42 28h18v26a6 6 0 0 1-6 6H42z"/></g></svg></span>
+          <b>48 px</b>
+        </div>
+        <div class="size">
+          <span class="fav f32"><svg viewBox="0 0 64 64" aria-hidden="true"><g fill="currentColor">
+            <path d="M10 4h24v16H4V10a6 6 0 0 1 6-6z"/><path d="M42 4h12a6 6 0 0 1 6 6v10H42z"/>
+            <path d="M4 28h30v32H10a6 6 0 0 1-6-6z"/><path d="M42 28h18v26a6 6 0 0 1-6 6H42z"/></g></svg></span>
+          <b>32 px</b>
+        </div>
+        <div class="size">
+          <span class="fav f16"><svg viewBox="0 0 64 64" aria-hidden="true"><g fill="currentColor">
+            <path d="M10 4h24v16H4V10a6 6 0 0 1 6-6z"/><path d="M42 4h12a6 6 0 0 1 6 6v10H42z"/>
+            <path d="M4 28h30v32H10a6 6 0 0 1-6-6z"/><path d="M42 28h18v26a6 6 0 0 1-6 6H42z"/></g></svg></span>
+          <b>16 px</b>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Verwendung -->
+  <section class="sec">
+    <div class="wrap">
+      <div class="sec-head">
+        <p class="sec-num">04</p>
+        <div>
+          <p class="mono" style="margin-bottom:12px">Die Verwendung</p>
+          <h2>Sieben Regeln.</h2>
+        </div>
+      </div>
+      <ul class="rules">
+        <li><span class="mark m-ok" aria-hidden="true">✓</span><span><b>Schutzraum:</b> ringsum mindestens die Breite eines Stegs — ein Achtel der Zeichenhöhe. Nichts rückt näher heran.</span></li>
+        <li><span class="mark m-ok" aria-hidden="true">✓</span><span><b>Kleinste Größe:</b> 16 px im Bildschirm, 8 mm im Druck.</span></li>
+        <li><span class="mark m-ok" aria-hidden="true">✓</span><span><b>Auf hellem Grund</b> steht das Zeichen in Tinte. <b>Auf dunklem</b> in Lime.</span></li>
+        <li><span class="mark m-no" aria-hidden="true">✕</span><span><b>Nie in Lime auf hellem Grund.</b> 1,32 : 1 — die Farbregel gilt auch für das Logo.</span></li>
+        <li><span class="mark m-no" aria-hidden="true">✕</span><span><b>Nie drehen, spiegeln oder verzerren.</b> Die Außermittigkeit ist die Aussage; gespiegelt sagt sie das Gegenteil.</span></li>
+        <li><span class="mark m-no" aria-hidden="true">✕</span><span><b>Nie mit Schatten, Rahmen oder Verlauf.</b> Auch nicht auf unruhigem Grund — dort steht es auf einer Tinte- oder Creme-Fläche.</span></li>
+        <li><span class="mark m-no" aria-hidden="true">✕</span><span><b>Nie mit Zusatz im Namen.</b> Der Beisatz heißt <code>Webdesign</code> und steht im Lockup, nicht im Namen.</span></li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- Offene Punkte -->
+  <section class="warn">
+    <div class="wrap">
+      <p class="mono" style="margin-bottom:14px">Bevor das irgendwo gedruckt wird</p>
+      <h2 style="font-size:clamp(27px,3.6vw,40px);max-width:24ch">Zwei Dinge sind offen, und beide sind wichtig.</h2>
+
+      <div class="warn-box">
+        <h3 style="font-size:20px;color:#f6f1e6">1 — Die Markenrecherche fehlt</h3>
+        <p class="body" style="margin-top:12px;max-width:62ch">
+          Das Design-Briefing verlangt eine <b>aktive Prüfung gegen bestehende Marken</b>, auch
+          gegen deutsche Register. Die habe ich nicht durchgeführt — sie gehört zu einer
+          Recherche im DPMA-Register und notfalls zu einer anwaltlichen Einschätzung.
+        </p>
+        <p class="body" style="margin-top:12px;max-width:62ch">
+          <b style="color:#f6f1e6">Was für dieses Zeichen spricht:</b> Es ist kein Buchstabe. Damit
+          entfällt die größte Kollisionsquelle — das eckige S, das in jeder zweiten Technikmarke
+          steckt. Eine geteilte Fläche ist geometrisch, und geometrische Marken sind schwerer zu
+          monopolisieren. <b style="color:#f6f1e6">Das ersetzt die Recherche nicht.</b>
+        </p>
+      </div>
+
+      <div class="warn-box">
+        <h3 style="font-size:20px;color:#f6f1e6">2 — Die Wortmarke steht noch in Systemschrift</h3>
+        <p class="body" style="margin-top:12px;max-width:62ch">
+          In den SVG-Dateien ist <code>SARTU</code> echter Text, keine Pfade. Auf einem fremden
+          Gerät rendert er anders. <b style="color:#f6f1e6">Vor jedem Druck und vor jeder Weitergabe
+          muss der Text in Pfade umgewandelt werden.</b>
+        </p>
+        <p class="body" style="margin-top:12px;max-width:62ch">
+          Das ist kein Versäumnis, sondern die Folge einer offenen Entscheidung: Solange keine
+          eigene Schrift gewählt ist, gilt die Wortmarke in der Website-Schrift — so festgehalten
+          in Design-Briefing §8. <b style="color:#f6f1e6">Das Zeichen selbst ist davon nicht
+          betroffen</b>, es ist reine Geometrie und überall identisch.
+        </p>
+      </div>
+
+      <p class="body" style="margin-top:var(--s-5);max-width:60ch">
+        Und die dritte Sache, die keine Warnung ist, sondern eine Entscheidung: <b style="color:#f6f1e6">Das
+        ist ein Vorschlag, keine Festlegung.</b> Das Briefing sagt ausdrücklich, dass Logo und
+        Gesamtwirkung dem Betreiber gehören.
+      </p>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap foot-in">
+    <span>SARTU · Logovorschlag · 01.08.2026</span>
+    <span>design/logo/ · fünf SVG-Dateien</span>
+  </div>
+</footer>

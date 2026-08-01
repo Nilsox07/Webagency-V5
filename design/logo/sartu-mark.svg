@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64"
+     role="img" aria-label="SARTU">
+  <title>SARTU</title>
+  <!-- Der Satzspiegel. Eine Seite, geteilt durch zwei Stege, die bewusst
+       nicht mittig sitzen. Vier ungleiche Felder. Jedes Feld hat genau eine
+       runde Ecke aussen und drei enge innen — dieselbe Regel wie die
+       Flaechen im Designsystem.
+       Einfarbig ueber currentColor. Keine Verlaeufe, keine Effekte. -->
+  <g fill="currentColor">
+    <path d="M10 4h24v16H4V10a6 6 0 0 1 6-6z"/>
+    <path d="M42 4h12a6 6 0 0 1 6 6v10H42z"/>
+    <path d="M4 28h30v32H10a6 6 0 0 1-6-6z"/>
+    <path d="M42 28h18v26a6 6 0 0 1-6 6H42z"/>
+  </g>
+</svg>

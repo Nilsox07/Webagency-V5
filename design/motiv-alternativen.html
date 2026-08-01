@@ -1,0 +1,456 @@
+<title>SARTU — Vier Motive zur Entscheidung</title>
+
+<style>
+:root{
+  --cream:#f4efe5; --paper:#fbf8f2; --ink:#14110d; --ink-soft:#241f18;
+  --text:#231e17; --muted:#4d473d; --line:#ddd4c4; --line-dark:#332d24; --sand:#e8dfcd;
+  --lime:#a3e635; --lime-soft:#e4f5b8; --label:#5c554a; --label-dark:#a89b88;
+  --r-xs:8px; --r-s:14px; --r-m:22px; --r-l:34px; --r-xl:52px; --r-pill:999px;
+  --s-2:12px; --s-3:20px; --s-4:32px; --s-5:48px; --s-6:72px; --s-7:104px;
+  --wrap:1180px; --gut:clamp(20px,4vw,56px);
+  --font-sans:-apple-system,BlinkMacSystemFont,"Segoe UI",system-ui,"Helvetica Neue",Helvetica,sans-serif;
+  --font-mono:ui-monospace,"SFMono-Regular",Menlo,Consolas,monospace;
+  --shadow-soft:0 24px 60px -30px rgba(20,17,13,.28);
+  --ease:cubic-bezier(.22,.61,.36,1);
+  color-scheme:light;
+}
+:root[data-theme="dark"],:root[data-theme="light"]{color-scheme:light}
+
+*{box-sizing:border-box}
+body{margin:0;background:var(--cream);color:var(--text);font-family:var(--font-sans);
+  font-size:18px;line-height:1.62;text-wrap:pretty;overflow-x:hidden}
+h1,h2,h3,h4{margin:0;font-weight:650;letter-spacing:-.025em;line-height:1.05;color:var(--ink);text-wrap:balance}
+p{margin:0}
+ul{margin:0;padding:0;list-style:none}
+:focus-visible{outline:2px solid var(--ink);outline-offset:2px;box-shadow:0 0 0 4px var(--lime)}
+.wrap{width:100%;max-width:var(--wrap);margin:0 auto;padding:0 var(--gut)}
+.mono{font-family:var(--font-mono);font-size:12.5px;letter-spacing:.13em;text-transform:uppercase;color:var(--label)}
+.body{font-size:17.5px;line-height:1.62;color:var(--muted)}
+
+/* Kopf */
+.top{padding:clamp(48px,7vw,92px) 0 var(--s-6);border-bottom:1px solid var(--line)}
+h1{font-size:clamp(34px,5vw,60px);letter-spacing:-.035em;margin-top:var(--s-3);max-width:20ch}
+.brand{display:flex;align-items:baseline;gap:8px;font-size:23px;font-weight:700;letter-spacing:-.04em;color:var(--ink)}
+.brand em{font-family:var(--font-mono);font-style:normal;font-size:10.5px;font-weight:500;
+  letter-spacing:.16em;color:var(--label);text-transform:uppercase}
+
+/* Problemblock */
+.why{padding:var(--s-6) 0;border-bottom:1px solid var(--line)}
+.why-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(24px,5vw,64px);align-items:center}
+@media (max-width:800px){.why-grid{grid-template-columns:1fr}}
+.leafdemo{display:flex;flex-wrap:wrap;gap:18px;align-items:center}
+.leafbox{width:120px;height:120px;background:var(--lime);border:1px solid var(--line);
+  border-radius:52px 22px 52px 22px;display:grid;place-items:center;
+  font-family:var(--font-mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink)}
+.leafdot{width:44px;height:44px;background:var(--label);border-radius:999px 12px 999px 12px}
+
+/* Motivkarten */
+.opt{padding:var(--s-7) 0;border-bottom:1px solid var(--line)}
+.opt-head{display:grid;grid-template-columns:64px minmax(0,1fr);gap:clamp(16px,3vw,40px);align-items:baseline}
+.opt-num{font-family:var(--font-mono);font-size:14px;color:var(--label)}
+.opt-head h2{font-size:clamp(27px,3.5vw,40px)}
+.opt-head .body{margin-top:var(--s-2);max-width:60ch}
+@media (max-width:700px){.opt-head{grid-template-columns:1fr;gap:6px}}
+
+.demo{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:var(--s-3);margin-top:var(--s-5)}
+.cell{background:var(--paper);border:1px solid var(--line);border-radius:var(--r-l);
+  padding:26px 24px;display:flex;flex-direction:column;gap:20px}
+.cell-key{font-family:var(--font-mono);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--label)}
+.cell-stage{flex:1;display:flex;align-items:center;justify-content:flex-start;gap:14px;
+  min-height:96px;padding:18px;background:var(--cream);border:1px solid var(--line);border-radius:var(--r-m)}
+.verdicts{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:var(--s-3);margin-top:var(--s-4)}
+.vd{padding:22px 24px;border-radius:var(--r-m);border:1px solid var(--line);background:var(--paper)}
+.vd h4{font-size:14px;font-family:var(--font-mono);letter-spacing:.12em;text-transform:uppercase;
+  color:var(--label);font-weight:500;margin-bottom:10px}
+.vd p{font-size:16.5px;line-height:1.55;color:var(--muted)}
+
+/* --- Motiv 1: Der Winkel --- */
+.w-mark{width:14px;height:14px;flex:none;border-left:2.5px solid var(--label);border-bottom:2.5px solid var(--label)}
+.w-mark-lime{border-color:var(--ink)}
+.w-card{width:104px;height:104px;background:var(--lime);border:1px solid var(--line);border-radius:var(--r-m);
+  position:relative}
+.w-card::after{content:"";position:absolute;left:14px;bottom:14px;width:26px;height:26px;
+  border-left:3px solid var(--ink);border-bottom:3px solid var(--ink)}
+.w-bub{width:44px;height:44px;border-radius:var(--r-m);background:var(--lime);border:1px solid var(--line);
+  display:grid;place-items:center;font-family:var(--font-mono);font-size:14px;color:var(--ink)}
+
+/* --- Motiv 2: Die Schnittmarke --- */
+.c-mark{width:14px;height:14px;flex:none;position:relative}
+.c-mark::before,.c-mark::after{content:"";position:absolute;background:var(--label)}
+.c-mark::before{left:0;top:5px;width:14px;height:2.5px}
+.c-mark::after{left:5px;top:0;width:2.5px;height:14px}
+.c-card{width:104px;height:104px;background:var(--sand);border:1px solid var(--line);border-radius:var(--r-s);
+  position:relative}
+.c-card span{position:absolute;background:var(--ink)}
+.c-card .h{left:10px;top:22px;width:24px;height:2px}
+.c-card .v{left:22px;top:10px;width:2px;height:24px}
+.c-bub{width:44px;height:44px;border-radius:var(--r-s);background:var(--lime);border:1px solid var(--line);
+  display:grid;place-items:center;font-family:var(--font-mono);font-size:14px;color:var(--ink)}
+
+/* --- Motiv 3: Die einseitige Rundung --- */
+.o-mark{width:13px;height:13px;flex:none;background:var(--label);border-radius:var(--r-pill) 3px 3px 3px}
+.o-card{width:104px;height:104px;background:var(--lime);border:1px solid var(--line);
+  border-radius:var(--r-xl) var(--r-xs) var(--r-xs) var(--r-xs)}
+.o-bub{width:44px;height:44px;border-radius:22px 6px 6px 6px;background:var(--lime);
+  border:1px solid var(--line);display:grid;place-items:center;font-family:var(--font-mono);font-size:14px;color:var(--ink)}
+
+/* --- Motiv 4: Der Anschnitt --- */
+.n-mark{width:14px;height:14px;flex:none;background:var(--label);
+  clip-path:polygon(0 0, 100% 0, 100% 62%, 62% 100%, 0 100%)}
+.n-card{width:104px;height:104px;background:var(--lime);border:1px solid var(--line);
+  clip-path:polygon(0 0, 100% 0, 100% 66%, 66% 100%, 0 100%)}
+.n-bub{width:44px;height:44px;background:var(--lime);border:1px solid var(--line);
+  clip-path:polygon(0 0, 100% 0, 100% 62%, 62% 100%, 0 100%);
+  display:grid;place-items:center;font-family:var(--font-mono);font-size:14px;color:var(--ink)}
+
+/* gemeinsame Bausteine */
+.tagline{display:inline-flex;align-items:center;gap:10px;font-family:var(--font-mono);
+  font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--label)}
+.tiny{display:flex;align-items:center;gap:8px}
+.tiny b{font-family:var(--font-mono);font-size:10px;letter-spacing:.1em;color:var(--label);font-weight:500}
+
+/* Empfehlung */
+.rec{background:var(--ink);color:#efe9dd;padding:var(--s-7) 0;border-radius:var(--r-xl) var(--r-xl) 0 0}
+.rec h2,.rec h3{color:#f6f1e6}
+.rec .body{color:#c3bcae}
+.rec .mono{color:var(--label-dark)}
+.rec-box{background:var(--ink-soft);border:1px solid var(--line-dark);border-radius:var(--r-m);
+  padding:28px;margin-top:var(--s-4)}
+.tblwrap{overflow-x:auto;margin-top:var(--s-4);border:1px solid var(--line-dark);border-radius:var(--r-m)}
+table{width:100%;border-collapse:collapse;font-size:16.5px}
+th,td{padding:14px 20px;text-align:left;border-bottom:1px solid var(--line-dark);vertical-align:top}
+th{font-family:var(--font-mono);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--label-dark);font-weight:500;white-space:nowrap}
+tr:last-child td{border-bottom:none}
+code{font-family:var(--font-mono);font-size:14.5px}
+
+/* Logo-Abschnitt */
+.logo{padding:var(--s-7) 0}
+.logo-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(290px,1fr));gap:var(--s-3);margin-top:var(--s-4)}
+.lg{border-radius:var(--r-l);padding:26px;border:1px solid var(--line);background:var(--paper)}
+.lg h4{display:flex;align-items:center;gap:10px;font-size:17px;margin-bottom:14px}
+.badge{width:24px;height:24px;flex:none;display:grid;place-items:center;font-size:12px;font-weight:700;
+  border-radius:var(--r-xs)}
+.b-ok{background:var(--lime);color:var(--ink)}
+.b-no{background:transparent;border:1.5px solid var(--ink);color:var(--ink)}
+.lg li{padding:8px 0 8px 20px;position:relative;font-size:16.5px;color:var(--muted);line-height:1.5}
+.lg li::before{content:"";position:absolute;left:0;top:16px;width:8px;height:8px;background:var(--label)}
+
+footer{background:var(--ink);color:#7d766a;padding:var(--s-5) 0;
+  font-family:var(--font-mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase}
+.foot-in{display:flex;flex-wrap:wrap;gap:8px 26px;justify-content:space-between}
+
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+
+
+<header class="top">
+  <div class="wrap">
+    <p class="brand">SARTU <em>Webdesign</em></p>
+    <h1>Vier Motive zur Entscheidung</h1>
+    <p class="body" style="margin-top:var(--s-3);max-width:58ch">
+      Das bisherige Zeichen liest sich als Blatt. Hier stehen vier Alternativen, jeweils an den drei
+      Stellen gezeigt, an denen das Motiv wirklich auftaucht.
+    </p>
+  </div>
+</header>
+
+<section class="why">
+  <div class="wrap why-grid">
+    <div>
+      <p class="mono" style="margin-bottom:14px">Warum es ein Blatt ist</p>
+      <h2 style="font-size:clamp(25px,3.2vw,34px)">Die Diagonale macht das Blatt, nicht die Rundung.</h2>
+      <p class="body" style="margin-top:var(--s-3)">
+        Bei <code>52px 22px 52px 22px</code> liegen die beiden weiten Rundungen sich
+        <b>gegenüber</b>. Diese Diagonalsymmetrie ist die Grundform eines Blattes — sie steht so in
+        jedem zweiten Umweltlogo.
+      </p>
+      <p class="body" style="margin-top:var(--s-3)">
+        <b>Die gute Nachricht:</b> Die weiche Formsprache muss deshalb nicht weg. Sie war eine
+        ausdrückliche Vorgabe vom 25.07.2026 und bleibt. Nur das <b>Zeichen</b> wird ersetzt und die
+        <b>diagonale Paarung</b> aufgelöst.
+      </p>
+    </div>
+    <div class="leafdemo">
+      <div class="leafbox">bisher</div>
+      <div class="leafdot" aria-hidden="true"></div>
+      <p class="body" style="flex-basis:100%;font-size:16px">Groß und klein — beide Male dieselbe Silhouette.</p>
+    </div>
+  </div>
+</section>
+
+<main>
+
+  <!-- 1 -->
+  <section class="opt">
+    <div class="wrap">
+      <div class="opt-head">
+        <p class="opt-num">A</p>
+        <div>
+          <p class="mono" style="margin-bottom:12px">Der Winkel</p>
+          <h2>Das Werkzeug, das jeder auf der Baustelle hat.</h2>
+          <p class="body">Ein rechter Winkel aus zwei Strichen — der Anschlagwinkel. Maurer,
+          Tischler und Dachdecker benutzen ihn täglich. Er steht für rechtwinklig, gerade,
+          nachgemessen. Das genaue Gegenteil von organisch.</p>
+        </div>
+      </div>
+      <div class="demo">
+        <div class="cell">
+          <p class="cell-key">Abschnittsmarke</p>
+          <div class="cell-stage"><p class="tagline"><span class="w-mark" aria-hidden="true"></span> Kundenbereich</p></div>
+        </div>
+        <div class="cell">
+          <p class="cell-key">Fläche</p>
+          <div class="cell-stage"><span class="w-card" aria-hidden="true"></span></div>
+        </div>
+        <div class="cell">
+          <p class="cell-key">Blase im Ablauf</p>
+          <div class="cell-stage"><span class="w-bub">01</span></div>
+        </div>
+        <div class="cell">
+          <p class="cell-key">Bei 11 px</p>
+          <div class="cell-stage">
+            <span class="tiny"><span class="w-mark" style="width:11px;height:11px;border-width:2px" aria-hidden="true"></span><b>11 px</b></span>
+            <span class="tiny"><span class="w-mark" style="width:8px;height:8px;border-width:1.5px" aria-hidden="true"></span><b>8 px</b></span>
+          </div>
+        </div>
+      </div>
+      <div class="verdicts">
+        <div class="vd"><h4>Spricht dafür</h4><p>Direkt aus der Welt der Zielgruppe. Präzision statt Natur. Als Ecke einer Fläche wiederholbar, ohne die Silhouette zu verändern.</p></div>
+        <div class="vd"><h4>Spricht dagegen</h4><p>Zwei Striche sind bei 8 px grenzwertig. Und ein Winkel ist auch ein Häkchen-Rest — er kann als abgebrochenes Kontrollkästchen gelesen werden.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 2 -->
+  <section class="opt">
+    <div class="wrap">
+      <div class="opt-head">
+        <p class="opt-num">B</p>
+        <div>
+          <p class="mono" style="margin-bottom:12px">Die Schnittmarke</p>
+          <h2>Was auf jedem Druckbogen steht, bevor er geschnitten wird.</h2>
+          <p class="body">Ein Kreuz aus zwei versetzten Strichen — die Passermarke aus dem Druck.
+          Sie passt zum Grundton: Die Seite soll wie Papier wirken, und eine Schnittmarke ist das
+          Zeichen für „hier wird gleich etwas Fertiges daraus".</p>
+        </div>
+      </div>
+      <div class="demo">
+        <div class="cell">
+          <p class="cell-key">Abschnittsmarke</p>
+          <div class="cell-stage"><p class="tagline"><span class="c-mark" aria-hidden="true"></span> Kundenbereich</p></div>
+        </div>
+        <div class="cell">
+          <p class="cell-key">Fläche</p>
+          <div class="cell-stage"><span class="c-card" aria-hidden="true"><span class="h"></span><span class="v"></span></span></div>
+        </div>
+        <div class="cell">
+          <p class="cell-key">Blase im Ablauf</p>
+          <div class="cell-stage"><span class="c-bub">01</span></div>
+        </div>
+        <div class="cell">
+          <p class="cell-key">Bei 11 px</p>
+          <div class="cell-stage">
+            <span class="tiny"><span class="c-mark" style="width:11px;height:11px" aria-hidden="true"></span><b>11 px</b></span>
+            <span class="tiny"><span class="c-mark" style="width:8px;height:8px" aria-hidden="true"></span><b>8 px</b></span>
+          </div>
+        </div>
+      </div>
+      <div class="verdicts">
+        <div class="vd"><h4>Spricht dafür</h4><p>Handwerkliche Herkunft, aber aus <b>unserem</b> Handwerk. Ruhiger als der Winkel und bei kleinen Größen stabiler, weil zentriert.</p></div>
+        <div class="vd"><h4>Spricht dagegen</h4><p>Ein Kreuz ist nah an einem Plus und an einem Schließen-Symbol. In einer Oberfläche mit Knöpfen kann das für einen Moment falsch gelesen werden.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3 -->
+  <section class="opt">
+    <div class="wrap">
+      <div class="opt-head">
+        <p class="opt-num">C</p>
+        <div>
+          <p class="mono" style="margin-bottom:12px">Die einseitige Rundung</p>
+          <h2>Dieselbe Weichheit, ohne die Diagonale.</h2>
+          <p class="body">Eine Ecke weit gerundet, die anderen drei eng. Der kleinste mögliche
+          Eingriff: Es bleibt bei <code>border-radius</code>, es bleibt weich — aber die
+          Diagonalsymmetrie verschwindet, und damit das Blatt.</p>
+        </div>
+      </div>
+      <div class="demo">
+        <div class="cell">
+          <p class="cell-key">Abschnittsmarke</p>
+          <div class="cell-stage"><p class="tagline"><span class="o-mark" aria-hidden="true"></span> Kundenbereich</p></div>
+        </div>
+        <div class="cell">
+          <p class="cell-key">Fläche</p>
+          <div class="cell-stage"><span class="o-card" aria-hidden="true"></span></div>
+        </div>
+        <div class="cell">
+          <p class="cell-key">Blase im Ablauf</p>
+          <div class="cell-stage"><span class="o-bub">01</span></div>
+        </div>
+        <div class="cell">
+          <p class="cell-key">Bei 11 px</p>
+          <div class="cell-stage">
+            <span class="tiny"><span class="o-mark" style="width:11px;height:11px" aria-hidden="true"></span><b>11 px</b></span>
+            <span class="tiny"><span class="o-mark" style="width:8px;height:8px;border-radius:999px 2px 2px 2px" aria-hidden="true"></span><b>8 px</b></span>
+          </div>
+        </div>
+      </div>
+      <div class="verdicts">
+        <div class="vd"><h4>Spricht dafür</h4><p>Der geringste Aufwand: eine Zeile in <code>tokens.css</code>. Keine neuen Formen, keine <code>clip-path</code>, kein Risiko bei Schatten. Die Vorgabe „weiche Formsprache" bleibt wörtlich erfüllt.</p></div>
+        <div class="vd"><h4>Spricht dagegen</h4><p>Es sagt nichts. Die Form ist unauffällig statt eigen — sie löst das Problem, ohne einen Charakter zu gewinnen.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4 -->
+  <section class="opt">
+    <div class="wrap">
+      <div class="opt-head">
+        <p class="opt-num">D</p>
+        <div>
+          <p class="mono" style="margin-bottom:12px">Der Anschnitt</p>
+          <h2>Die abgeschnittene Ecke.</h2>
+          <p class="body">Eine Ecke gerade weggeschnitten, drei bleiben. Das Zeichen für ein Blatt,
+          von dem etwas abgetrennt wurde — Kartei, Aktendeckel, Lochkarte. Sachlich und ohne
+          Verwandtschaft zu Natur.</p>
+        </div>
+      </div>
+      <div class="demo">
+        <div class="cell">
+          <p class="cell-key">Abschnittsmarke</p>
+          <div class="cell-stage"><p class="tagline"><span class="n-mark" aria-hidden="true"></span> Kundenbereich</p></div>
+        </div>
+        <div class="cell">
+          <p class="cell-key">Fläche</p>
+          <div class="cell-stage"><span class="n-card" aria-hidden="true"></span></div>
+        </div>
+        <div class="cell">
+          <p class="cell-key">Blase im Ablauf</p>
+          <div class="cell-stage"><span class="n-bub">01</span></div>
+        </div>
+        <div class="cell">
+          <p class="cell-key">Bei 11 px</p>
+          <div class="cell-stage">
+            <span class="tiny"><span class="n-mark" style="width:11px;height:11px" aria-hidden="true"></span><b>11 px</b></span>
+            <span class="tiny"><span class="n-mark" style="width:8px;height:8px" aria-hidden="true"></span><b>8 px</b></span>
+          </div>
+        </div>
+      </div>
+      <div class="verdicts">
+        <div class="vd"><h4>Spricht dafür</h4><p>Klare, eigene Silhouette, die auch bei 8 px erkennbar bleibt. Passt zur Papier-Metapher, ohne organisch zu wirken.</p></div>
+        <div class="vd"><h4>Spricht dagegen</h4><p>Braucht <code>clip-path</code> statt <code>border-radius</code>. Damit fällt die Kante weg — eine Lime-Fläche auf hellem Grund bekommt keinen 1-px-Rand mehr, und genau den verlangt die Farbregel.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Empfehlung -->
+  <section class="rec">
+    <div class="wrap">
+      <p class="mono" style="margin-bottom:14px">Meine Empfehlung</p>
+      <h2 style="font-size:clamp(27px,3.6vw,42px);max-width:22ch">B für das Zeichen, C für die Flächen.</h2>
+      <p class="body" style="margin-top:var(--s-3);max-width:62ch">
+        Das sind zwei getrennte Aufgaben, und die bisherige Lösung hat sie mit einer Form erledigt —
+        deshalb fiel das Blatt so auf. Ein <b>Zeichen</b> darf eigen sein. Eine <b>Fläche</b> soll
+        ruhig bleiben, sonst kämpfen zwölf Karten auf einer Seite miteinander.
+      </p>
+
+      <div class="rec-box">
+        <div style="display:flex;align-items:center;gap:26px;flex-wrap:wrap">
+          <p class="tagline" style="color:var(--label-dark);font-size:14px">
+            <span class="c-mark" style="width:16px;height:16px" aria-hidden="true"></span> Kundenbereich</p>
+          <span class="o-card" style="width:72px;height:72px;border-color:var(--line-dark)" aria-hidden="true"></span>
+          <span class="o-bub" style="border-color:var(--line-dark)">01</span>
+        </div>
+        <p class="body" style="margin-top:22px;max-width:58ch">
+          Die Schnittmarke als wiederkehrendes Zeichen, die einseitige Rundung als Flächenform.
+          Beides zusammen: weich wie vorgegeben, präzise wie das Versprechen, und ohne jede
+          Verwandtschaft zum Umweltamt.
+        </p>
+      </div>
+
+      <h3 style="margin-top:var(--s-6);font-size:23px">Was sich in <code>tokens.css</code> ändert</h3>
+      <div class="tblwrap">
+        <table>
+          <thead><tr><th scope="col">Bisher</th><th scope="col">Neu</th><th scope="col">Wirkung</th></tr></thead>
+          <tbody>
+            <tr>
+              <td><code>--r-leaf:52px 22px 52px 22px</code></td>
+              <td><code>--r-cut:52px 8px 8px 8px</code></td>
+              <td>Diagonale weg, Weichheit bleibt</td>
+            </tr>
+            <tr>
+              <td><code>border-radius:999px 3px 999px 3px</code><br>am Motivpunkt</td>
+              <td>zwei Striche, 2,5 px,<br>versetzt gekreuzt</td>
+              <td>Aus dem Punkt wird ein Zeichen</td>
+            </tr>
+            <tr>
+              <td>eine Form für alles</td>
+              <td>Zeichen und Fläche getrennt</td>
+              <td>Die Fläche hört auf, mitzureden</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="body" style="margin-top:var(--s-4);max-width:60ch">
+        <b style="color:#f6f1e6">Zwei Werte, ein neues Zeichen.</b> Alles andere am System bleibt
+        unangetastet — Farben, Abstände, Schrift, Bewegung.
+      </p>
+    </div>
+  </section>
+
+  <!-- Logo -->
+  <section class="logo">
+    <div class="wrap">
+      <p class="mono" style="margin-bottom:12px">Zum vorgelegten Logo</p>
+      <h2 style="font-size:clamp(27px,3.6vw,40px);max-width:24ch">Die Marke taugt. Der Zusatz nicht.</h2>
+      <p class="body" style="margin-top:var(--s-3);max-width:62ch">
+        Ein Urteil zur Ähnlichkeit mit bestehenden Marken kann ich aus einem Bild nicht abgeben —
+        das verlangt eine Registerrecherche. Was sich ohne Recherche sagen lässt, steht hier.
+      </p>
+
+      <div class="logo-grid">
+        <div class="lg">
+          <h4><span class="badge b-ok" aria-hidden="true">✓</span> Was trägt</h4>
+          <ul>
+            <li>Das Zeichen funktioniert allein — es ist als Favicon ab 16 px brauchbar, und genau das verlangt die Anforderungsliste</li>
+            <li>Lime auf dunklem Grund ist die belegte Kombination: 12,48 : 1</li>
+            <li>Einfarbig umsetzbar, keine Verläufe, keine Effekte</li>
+          </ul>
+        </div>
+        <div class="lg">
+          <h4><span class="badge b-no" aria-hidden="true">✕</span> Was nicht geht</h4>
+          <ul>
+            <li><b>„DIGITAL" muss weg.</b> Der Name steht ohne Zusatz fest — schriftlich, seit dem Design-Briefing. Der Beisatz auf der Website heißt <code>Webdesign</code></li>
+            <li>Der Wortlaut wäre damit auch uneinheitlich: zwei verschiedene Beisätze auf zwei Trägern</li>
+            <li>Das eckige S aus zwei Winkeln ist die häufigste Konstruktion für ein Technikzeichen überhaupt. Genau dort ist die Verwechslungsgefahr am größten</li>
+          </ul>
+        </div>
+        <div class="lg">
+          <h4><span class="badge b-no" aria-hidden="true">!</span> Was zu prüfen ist</h4>
+          <ul>
+            <li>Ist das Grün exakt <code>#a3e635</code>? Ein anderer Ton bricht das ganze System</li>
+            <li>Wie sieht die Fassung auf <b>hellem</b> Grund aus? Lime als Schrift auf Creme ergibt 1,32 : 1 — dort muss die Wortmarke in Tinte stehen</li>
+            <li>Register- und Markenrecherche, bevor irgendetwas gedruckt wird</li>
+          </ul>
+        </div>
+      </div>
+
+      <p class="body" style="margin-top:var(--s-5);max-width:64ch">
+        <b style="color:var(--ink)">Praktischer Vorschlag:</b> Zeichen behalten, „DIGITAL" streichen,
+        Beisatz auf <code>Webdesign</code> vereinheitlichen, Grün auf <code>#a3e635</code> ziehen und
+        eine helle Fassung anlegen. Dann ist es prüfbar — und die Markenrecherche entscheidet, ob es
+        bleibt.
+      </p>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap foot-in">
+    <span>SARTU · Motiventscheidung · 01.08.2026</span>
+    <span>Farben, Abstände und Schrift unverändert</span>
+  </div>
+</footer>
