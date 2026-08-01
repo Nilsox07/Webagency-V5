@@ -306,7 +306,8 @@ durchbaut, hat das Gate verletzt.
 | Sprache und Aufbau | **entschieden:** PHP, serverseitig gerendert, ein modulares Projekt (Portal-Lastenheft §1) |
 | Datenbank | **entschieden:** MySQL/MariaDB, weil klassisches Hosting möglich bleiben soll |
 | Konkreter Anbieter und Tarif | *offen* — muss die Anforderungen aus Portal-Lastenheft **§1.4** erfüllen (PHP-Erweiterungen, Datenbank, HTTPS, Verzeichnis außerhalb des Webroots, **Cron**, **zuverlässiger Mailversand**, Sicherung, Serverstandort EU) |
-| **Entwicklungsumgebung** | **Verfahren entschieden 25.07.2026, Weg offen:** PHP 8.3 + Composer sind Pflicht, die Datenbank darf nachgereicht werden. Zwei gleichwertige Wege in `ENTWICKLUNGSUMGEBUNG.md` — **A** Docker (`docker-compose.yml` liegt bereit), **B** natives Paket (Laragon/XAMPP/Homebrew). Der Weg wird beim Einrichten gewählt und hier eingetragen |
+| **Entwicklungsumgebung** | **Weg entschieden 01.08.2026: A — Docker.** In der Bauumgebung geprüft: PHP **8.4.19** und Composer sind vorhanden, Docker **29.3.1** läuft, ein MySQL-Client fehlt. Die Datenbank kommt deshalb aus dem Container. **Achtung:** Der Zielhoster muss ≥ 8.3 fahren; gegen dessen Version wird vor dem Livegang gegengetestet |
+| ~~Entwicklungsumgebung, alte Fassung~~ | ~~**Verfahren entschieden 25.07.2026, Weg offen:** PHP 8.3 + Composer sind Pflicht, die Datenbank darf nachgereicht werden. Zwei gleichwertige Wege in `ENTWICKLUNGSUMGEBUNG.md` — **A** Docker (`docker-compose.yml` liegt bereit), **B** natives Paket (Laragon/XAMPP/Homebrew). Der Weg wird beim Einrichten gewählt und hier eingetragen~~ |
 | Umgang mit vorhandenen Prototypen | *offen* — wird in `IMPLEMENTATION_PLAN.md` entschieden und begründet |
 
 ---

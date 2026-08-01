@@ -20,6 +20,7 @@ merkt es, bevor gebaut wird.
 | 4 | `CLAUDE_SARTU_MASTERKONZEPT_FINAL.md` | Nachschlagewerk + verbindliche Arbeitsverteilung §10a | Abbruch |
 | 5 | `SARTU_ENTSCHEIDUNGEN_OFFEN.md` | **alle Platzhalter und Sperren** — Standort, Rechtstexte, Design, Betriebsumgebung | **Abbruch.** Sonst werden Werte erfunden |
 | 6 | `ENTWICKLUNGSUMGEBUNG.md` | **wie PHP, Composer und die Datenbank aufgerufen werden** — und was ohne Datenbank trotzdem gebaut wird | **Abbruch.** Sonst wird falsch nach PHP gesucht oder wegen fehlender Datenbank angehalten |
+| 6z | `BAUFREIGABE.md` | **was heute starten darf und was nicht** — eine Sperre vor dem Datenmodell, drei vor der Veröffentlichung | **Zuerst lesen.** Sonst wird auf etwas gewartet, das nicht blockiert |
 | 6a | `REIHENFOLGE.md` | **welche Teile jetzt gebaut werden und welche warten** — Stufe A, B, C | **Abbruch.** Sonst entstehen alle 20 Tabellen auf einmal |
 | 6b | `SARTU_TEXTREGELN.md` | **wie jeder Text formuliert sein muss** — vierzehn Regeln, Wortlisten, Pflicht-Prüfbericht | **Abbruch.** Sonst entsteht wieder der Ton, der schon zweimal verworfen wurde |
 | 6bb | `SARTU_KUNDENMOTIVE_BELEGT.md` | **warum ein Betrieb kauft** — fünf belegte Motive mit Zahlen und Quelle, dazu was sich nicht belegen ließ | **Abbruch.** Sonst wird das Argument geraten, und der Prüfbericht bleibt trotzdem grün |
