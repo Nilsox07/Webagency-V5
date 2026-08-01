@@ -110,7 +110,16 @@ aussehen** — das folgt aus dem Plan und ist kein Fehler darin.
 
 ---
 
-## 4. Wo „erst bauen, dann Design" die Reihenfolge umdreht
+## 4. Design — **erledigt am 01.08.2026**
+
+> **Diese Sperre ist weg.** Der Betreiber hat das Artefakt vom 30.07.2026 als verbindlich
+> bestätigt. Das komplette Token-System liegt in `design/tokens.css`, die Regeln dazu in
+> `SARTU_DESIGNSYSTEM.md`. Die Variantenrunde entfällt — **es gibt nichts mehr auszuwählen.**
+>
+> **Damit fällt auch die Reihenfolgefrage weg:** A0 und das Frontend können ab sofort parallel
+> laufen. Der Abschnitt unten bleibt als Begründung stehen, warum die Frage überhaupt bestand.
+
+### Warum die Frage bestand — historisch
 
 **Der geplante Weg** (`CLAUDE_SARTU_DESIGN_BRIEFING_AUSFUEHRUNG.md`):
 Recherche → Prüfliste → **2–3 klickbare Startseitenvarianten mit echten Texten** → Mensch

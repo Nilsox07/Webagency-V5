@@ -237,7 +237,21 @@ VERÖFFENTLICHEN`. Der Vermerk wird erst nach der Freigabe entfernt, und zwar vo
 
 ---
 
-## 3. Designrichtung — **teilentschieden**
+## 3. Designrichtung — **ENTSCHIEDEN 01.08.2026**
+
+> **Der Betreiber hat das Artefakt vom 30.07.2026 als verbindlich bestätigt.** Damit ist das
+> Auswahlverfahren des Design-Briefings abgeschlossen — die Variantenrunde entfällt.
+>
+> | | |
+> |---|---|
+> | **Werte** | `design/tokens.css` — Farben, Radien, Abstände, Schrift, Bewegung |
+> | **Begründung und Regeln** | `SARTU_DESIGNSYSTEM.md` |
+> | **Kontraste** | nachgerechnet, niedrigster Wert im System **6,42 : 1** bei AA-Grenze 4,5 : 1 |
+>
+> **Was das für den Bauplan ändert:** `BAUFREIGABE.md` §4 sah eine Variantenrunde **vor** dem
+> Ausbau vor. Sie entfällt. A0 und das Frontend können parallel laufen.
+
+### Die ursprüngliche Fassung
 
 Entsteht über `CLAUDE_SARTU_DESIGN_BRIEFING_AUSFUEHRUNG.md`:
 Recherche → Prüfliste → **2–3 klickbare Startseitenvarianten mit echten Texten** → Mensch entscheidet.
