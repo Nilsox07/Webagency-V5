@@ -56,9 +56,11 @@ greifen ins Fundament.
 
 **Wer das nach dem Backend entscheidet, zahlt eine Migration und eine Preisänderung.**
 
-**Empfehlung, damit es heute vom Tisch ist:** nur Textseite plus E-Mail-Adresse, keine
-Bewerbungsdaten im Portal. Dann ändert sich am Datenmodell nichts, und die Funktion lässt sich
-später nachrüsten. Aufwand der Entscheidung: fünf Minuten.
+**Stand 01.08.2026:** Der Betreiber hat „mit Bewerbungsformular ins Portal" gewählt. **Die Antwort
+hat zwei Lesarten** — Formular auf der Kundenwebsite mit E-Mail an den Handwerker, oder Bewerbungen
+im SARTU-Kundenbereich. Die erste kostet nichts und steht schon im Masterkonzept. Die zweite
+verlangt sechs zusätzliche Festlegungen und hebt eine bestehende Grenze auf
+(`CODEX_AUFTRAG_PORTAL.md` §5, „Nicht bauen"). Einzelheiten in `SARTU_ENTSCHEIDUNGEN_OFFEN.md` §7b.
 
 ---
 

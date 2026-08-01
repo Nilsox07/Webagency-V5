@@ -491,7 +491,43 @@ Betriebsmonat** des ersten Kunden muss der Ablauf stehen.
 
 ---
 
-## 7b. Stellen- und Karriereseite in den Paketen — **OFFEN, neu am 01.08.2026**
+## 7b. Stellen- und Karriereseite in den Paketen — **Richtung gewählt 01.08.2026, eine Rückfrage offen**
+
+> **Antwort des Betreibers am 01.08.2026: „Mit Bewerbungsformular ins Portal."**
+>
+> **Diese Antwort hat zwei Lesarten, und sie führen zu völlig verschiedenem Aufwand.**
+>
+> | Lesart | Was gemeint sein kann | Aufwand |
+> |---|---|---|
+> | **A — Formular auf der Kundenwebsite** | Der Handwerker bekommt eine Karriereseite mit Bewerbungsformular. Die Bewerbung geht **per E-Mail an ihn**. SARTUs Portal sieht sie nie | **null neue Tabellen.** Steht bereits im Masterkonzept: `Platzhirsch` bekommt „genau ein Conversion-Modul (… *oder* einfaches Bewerbungsformular)" |
+> | **B — Bewerbungen laufen in den SARTU-Kundenbereich** | Der Handwerker sieht seine Bewerbungen im Portal, wie er heute seine Aufgaben sieht | **Neue Tabelle, neue Löschfrist, neue Rechtsgrundlage, neue Bildschirme, neue Testfälle** |
+>
+> ### Lesart B widerspricht zwei bestehenden Festlegungen
+>
+> | Festlegung | Wortlaut |
+> |---|---|
+> | `CODEX_AUFTRAG_PORTAL.md` §5 | *„**Nicht bauen:** Annahme von Anfragen aus **Kundenwebsites** (das ist die Lead-Inbox der Stufe 1)"* |
+> | Website-Lastenheft, entschieden **gestern** | Die Zeile *„Anfragen von Ihrer Website einsehen"* **entfällt dauerhaft** — mit derselben Begründung |
+>
+> **Das ist kein Einwand gegen die Entscheidung.** Der Betreiber darf beide Festlegungen aufheben.
+> Es muss nur ausgesprochen sein, weil sonst ein ausführender Agent zwischen zwei Dokumenten steht,
+> die sich widersprechen.
+>
+> ### Was Lesart B zusätzlich verlangt, bevor gebaut wird
+>
+> | # | Fehlt | Warum es nicht nebenbei geht |
+> |---|---|---|
+> | 1 | Tabelle mit Feldern und Typen | Das Datenmodell hat 20 Tabellen auf Feldebene. Eine 21. ohne dieselbe Tiefe bricht das Muster |
+> | 2 | **Löschfrist für Bewerberdaten** | §15.1 kennt Anfragen (12 Monate) und Rechnungen (8 Jahre). Bewerberdaten sind eine dritte Kategorie mit eigener Frist |
+> | 3 | **Rolle im Datenschutz** | Bei Bewerbungen an den Handwerker ist **er** verantwortlich und SARTU Auftragsverarbeiter. Der AVV aus §15.2 deckt diesen Zweck heute nicht ab |
+> | 4 | Speicherung von Lebensläufen | §11 begrenzt 500 MB je Organisation. `task_files` hängt an Aufgaben und passt nicht |
+> | 5 | Bildschirme, E-Mails, Testfälle | 88 Testfälle sind nummeriert und zugeordnet. Bewerbungen haben keinen |
+> | 6 | Wirkung auf Seitenzahl und Preis | Offen. Betrifft die Preistabelle und jede Stelle mit `1 / 8 / 16 Seiten` |
+>
+> **Nächster Schritt: Lesart A oder B bestätigen.** Bei A ist der Punkt erledigt und nichts zu tun.
+> Bei B entsteht zuerst die Spezifikation, dann der Bau.
+
+### Die ursprüngliche Fragestellung
 
 **Woher der Punkt kommt:** die Motivrecherche in `SARTU_KUNDENMOTIVE_BELEGT.md`.
 
