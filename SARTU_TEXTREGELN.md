@@ -168,17 +168,18 @@ Ist „wir" häufiger, handelt die Seite von SARTU. Der Leser sucht aber sich se
 „Auffindbarkeit" ist ein Thema. „Ihre Website ist ab dem ersten Tag auffindbar." ist eine
 Behauptung. „Wer hier arbeitet." ist ein Thema mit einem Punkt dahinter.
 
-**Der Test heißt Gegenteiltest und ist im Texter-Skill ausgeführt:** Bilde das Gegenteil des
-Satzes. **Würde ein ernstzunehmender Wettbewerber es behaupten?** Wenn nein, sagt der Satz nichts.
+**Der Test heißt Nachprüftest und ist im Texter-Skill ausgeführt:** Steht in der Überschrift
+etwas, das man **nachzählen, nachmessen oder nachprüfen** kann?
 
-`Von wenigen Angaben zur fertigen Website.` — das Gegenteil wäre „von vielen Angaben". Das
-behauptet niemand. Also war die Aussage nie strittig.
+`Von wenigen Angaben zur fertigen Website.` — wie viele sind wenige? Nicht prüfbar.
+`Ohne einen einzigen Termin zur fertigen Website.` — einen einzigen. Zählbar: null.
 
-`Ohne einen einzigen Termin zur fertigen Website.` — das Gegenteil ist „mit mehreren
-Abstimmungsterminen", und das ist der Normalfall der Branche. Der Satz unterscheidet.
+**Am Startseitenentwurf gemessen fielen fünf von neun Überschriften durch.** Jede enthielt ein
+unbestimmtes Wort an der Stelle, an der eine Zahl oder eine Grenze stehen müsste: `wenige` ·
+`passend` · `alles` · `könnte`.
 
-**Am Startseitenentwurf gemessen fielen sechs von neun Überschriften durch.** Der Prüfbericht
-zählt sie mit.
+**Der Inhalt war dabei fast immer richtig.** Falsch war nur die Formulierung — deshalb heißt die
+Reparatur nicht „schöner schreiben", sondern: das unbestimmte Wort durch etwas Zählbares ersetzen.
 
 ### Regel 10 — Der Streichtest
 
@@ -211,7 +212,7 @@ Treffer Wortliste C                   ____             Grenze 0
 Sie / Ihr / Ihre / Ihnen              ____
 wir / uns / unser                     ____             muss ≤ Sie sein
 H2 über 9 Wörter                      ____             Grenze 0
-Überschriften ohne Gegenteil          ____             Grenze 0
+Überschriften ohne Nachprüfbares      ____             Grenze 0
 Konjunktive in Überschriften          ____             Grenze 0
 Umfangszahlen genannt                 ____ von ____    alle, die die Seite behauptet
 ```

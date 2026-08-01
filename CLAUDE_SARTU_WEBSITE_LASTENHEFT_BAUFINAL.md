@@ -212,8 +212,10 @@ Fünf Spalten auf Desktop, gestapelt auf Mobil (Reihenfolge wie unten).
 > | **3 — frei** | Branchenseiten (§10a), Ratgeber, Lexikon | dort steht nur das Ziel |
 >
 > **Die Texte unten sind KEIN Qualitätsmaßstab.** Diese Einschätzung stand hier einen Tag lang und
-> war falsch. Gemessen am Gegenteiltest des Skills fallen **sechs von neun Überschriften durch** —
-> sie beschreiben etwas Selbstverständliches so, dass es nach einem Vorteil klingt.
+> war falsch. Gemessen am Nachprüftest des Skills fallen **fünf von neun Überschriften durch** —
+> jede enthält ein unbestimmtes Wort an der Stelle, an der eine Zahl oder eine Grenze stehen müsste.
+>
+> **Der Inhalt war fast immer richtig.** Falsch war nur die Formulierung.
 >
 > **Was sie sind:** die Aussage, die getroffen werden muss. **Nicht der Wortlaut, in dem das
 > geschieht.** Wer sie abschreibt, übernimmt den Fehler.
@@ -514,7 +516,7 @@ möglich, aber nicht Pflicht". Die Aussage ist damit gedeckt und **keine** Über
 
 - **H2:** `Sie liefern die Fakten. Alles andere machen wir.`
 
-  > **Ersetzt am 01.08.2026.** `Von wenigen Angaben zur fertigen Website.` fiel durch den Gegenteiltest: Niemand behauptet „von vielen Angaben". Die neue Fassung hat ein Gegenteil, das jede andere Agentur behauptet.
+  > **Ersetzt am 01.08.2026.** `wenige Angaben` — wie viele sind wenige? Nicht nachprüfbar. Die neue Fassung zieht eine Grenze, die man überprüfen kann.
 - **Sechs Schritte** (nummeriert, weil es eine echte Reihenfolge ist):
   1. **Bedarfsscheck** — Wenige Fragen zu Unternehmen, Ziel, Umfang und Domain.
   2. **Geprüftes Angebot** — Sie bekommen Umfang, Preis und Zahlungsplan schriftlich.
@@ -553,7 +555,7 @@ oben ist sie viermal misslungen (§5 Sektion 2).
 
 - **H2:** `Sie wählen kein Paket. Wir sagen Ihnen, welcher Umfang passt.`
 
-  > **Ersetzt am 01.08.2026.** „das passende Ergebnis" — niemand verspricht das unpassende. Die neue Fassung benennt die Entscheidung, die auch anders ausfallen könnte: Paketwahl ist Marktstandard.
+  > **Ersetzt am 01.08.2026.** `das passende Ergebnis` — woran misst man passend? Die neue Fassung nennt eine Tatsache, die man prüfen kann: Es gibt keine Paketwahl.
 - **Subline:** `Eine Empfehlung statt Paketwahl.`
 - **Einleitung (25 W., drei Sätze):**
   > Sie müssen nicht wissen, wie viele Seiten Sie brauchen. Der Bedarfsscheck zeigt, welcher Umfang voraussichtlich passt. Wir prüfen das anschließend selbst nach.
@@ -654,7 +656,7 @@ Satz ergänzt — die Wirkung entsteht aus der Leere ringsum.
 
 - **H2:** `Eine Person baut Ihre Website. Dieselbe antwortet danach.`
 
-  > **Ersetzt am 01.08.2026.** `Wer hier arbeitet.` ist ein Etikett mit Punkt dahinter, keine Aussage. Gegenteil der neuen Fassung: „ein Team mit wechselnden Ansprechpartnern" — genau das ist der Normalfall.
+  > **Ersetzt am 01.08.2026.** `Wer hier arbeitet.` ist ein Etikett mit Punkt dahinter. Die neue Fassung nennt eine Zahl: **eine** Person, und dieselbe später.
 - **Echtes Foto** von `[GRUENDER_NAME]`, keine Bestandsaufnahme, kein Platzhalter, der wie ein Foto wirkt. Steht das Foto nicht zur Verfügung, entfällt die Sektion **vollständig** — ein leerer Rahmen an einer Vertrauensstelle ist schlechter als gar nichts (Design-Briefing §4a).
 - **Name und Rolle:** `[GRUENDER_NAME]`, gründergeführt.
 - **Zwei bis drei Sätze Haltung.** Kein Lebenslauf, keine Erfolgsgeschichte, keine Zahlen.
@@ -674,7 +676,7 @@ Satz ergänzt — die Wirkung entsteht aus der Leere ringsum.
 
 - **H2:** `Es gibt keine Aufpreisliste.`
 
-  > **Ersetzt am 01.08.2026.** Der erste Halbsatz sagte nichts — niemand wirbt mit „nur das Nötigste". Der zweite trug allein. Vier Wörter, ein Gegenteil, das der ganze Markt behauptet.
+  > **Ersetzt am 01.08.2026.** `Alles, was eine Firmenwebsite braucht` — wer entscheidet, was sie braucht? Der zweite Halbsatz trug allein. Eine Aufpreisliste ist ein Ding: Es gibt sie oder nicht.
 - **Einleitung (30 W.):**
   > Das alles steckt in jedem Angebot — Sie stellen es nicht selbst zusammen und zahlen nichts davon extra. Wir gewichten die Bausteine passend zu Ihrem Ziel.
 - **Acht breite Zeilen** (Titel · ein Satz · Tags), **keine** Kachelwand, **keine** Preise:
@@ -713,7 +715,7 @@ Satz ergänzt — die Wirkung entsteht aus der Leere ringsum.
 
 - **H2:** `Noch keine Kunden. Deshalb zeigen wir Musterprojekte.`
 
-  > **Ersetzt am 01.08.2026.** Konjunktiv ist keine Behauptung. Die neue Fassung ist unangenehm ehrlich — und genau deshalb glaubwürdig. Gegenteil: „Hier sind unsere 40 Referenzen".
+  > **Ersetzt am 01.08.2026.** `könnte` ist Konjunktiv und damit keine Aussage. Die neue Fassung nennt eine Zahl — null Kunden. Unangenehm, aber nachprüfbar.
 - **Einleitung, einmal über dem Raster:**
   > SARTU ist 2026 gestartet. Die drei Beispiele sind Muster, keine Kundenaufträge.
 

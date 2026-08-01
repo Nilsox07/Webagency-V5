@@ -81,7 +81,7 @@ eine Schaltfläche ist keine kurze Überschrift.
 
 | Regel | Warum |
 |---|---|
-| **Eine Behauptung, kein Thema.** Könnte jemand widersprechen? | „Auffindbarkeit" ist ein Etikett. „Ihre Website ist ab dem ersten Tag für Suchmaschinen vorbereitet." ist eine Aussage |
+| **Etwas Nachprüfbares** — eine Zahl, ein Ding, eine Grenze | „Auffindbarkeit" ist ein Etikett. „Ihre Website ist ab dem ersten Tag für Suchmaschinen vorbereitet." nennt einen Zeitpunkt |
 | **Höchstens neun Wörter** | Darüber wird sie überflogen statt gelesen |
 | **Das Wichtigste in die ersten zwei bis drei Wörter** | Wer scannt, liest den Anfang der Zeile und springt weiter |
 | **Aus Sicht des Lesers, nicht der Firma** | „Ohne einen einzigen Termin zur fertigen Website." schlägt „Unser digitaler Prozess" |
@@ -89,63 +89,57 @@ eine Schaltfläche ist keine kurze Überschrift.
 
 **H1 gibt es genau einmal je Seite.** Sie nennt das Angebot, nicht die Marke.
 
-#### Der Gegenteiltest — die schärfste Prüfung, die es dafür gibt
+#### Der Nachprüftest — die Prüfung, die zählt
 
-**Jede Überschrift und jede Behauptung muss ihn bestehen. Ohne Ausnahme.**
+> **Steht in der Überschrift etwas, das man nachzählen, nachmessen oder nachprüfen kann?**
+> **Nein** → Umschreiben. **Ja** → Sie trägt.
 
-> **Bilde das Gegenteil des Satzes. Würde ein ernstzunehmender Wettbewerber es behaupten?**
->
-> **Ja** → Der Satz unterscheidet. Er bleibt.
-> **Nein** → Der Satz sagt nichts. Niemand behauptet das Gegenteil, also war die Aussage nie strittig.
+Das ist Regel 1 der Textregeln, angewandt auf Überschriften. Der Unterschied zwischen guten und
+schlechten Überschriften auf dieser Website ist **nicht der Inhalt** — der ist fast immer richtig.
+Es ist die Unbestimmtheit der Formulierung.
 
-Das ist der Test, der „klingt gut, sagt nichts" zuverlässig erwischt — und den kein Stilgefühl
-ersetzt. Gemessen an den Überschriften, die dieses Projekt zwei Runden lang mitgeschleppt hat:
+| Überschrift | Was ist nachprüfbar? | |
+|---|---|---|
+| `Ohne einen einzigen Termin zur fertigen Website.` | **einen einzigen** — zählbar: null | ✓ |
+| `Es gibt keine Aufpreisliste.` | eine Aufpreisliste existiert oder nicht | ✓ |
+| `Eine Person baut Ihre Website. Dieselbe antwortet danach.` | **eine** — zählbar: eins | ✓ |
+| `Sie liefern die Fakten. Alles andere machen wir.` | die Grenze ist gezogen und überprüfbar | ✓ |
+| `Von **wenigen** Angaben zur fertigen Website.` | wie viele sind wenige? | ✗ |
+| `Wir empfehlen das **passende** Ergebnis.` | woran misst man passend? | ✗ |
+| `**Alles**, was eine Firmenwebsite braucht.` | wer entscheidet, was sie braucht? | ✗ |
+| `Wer hier arbeitet.` | gar nichts, es ist keine Aussage | ✗ |
+| `So **könnte** ein Projekt aussehen.` | Konjunktiv, also nichts | ✗ |
 
-| Überschrift | Gegenteil | Behauptet das jemand? | |
-|---|---|---|---|
-| `Ohne einen einzigen Termin zur fertigen Website.` | mit mehreren Abstimmungsterminen | **ja** — das ist der Normalfall | ✓ |
-| `Individuell programmierte Firmenwebsites zum Festpreis.` | Baukasten, nach Aufwand abgerechnet | **ja** | ✓ |
-| `Ihre Website ist ab dem ersten Tag für Suchmaschinen vorbereitet.` | SEO ist ein späteres Zusatzprojekt | **ja** | ✓ |
-| `Von wenigen Angaben zur fertigen Website.` | von **vielen** Angaben | nein | ✗ |
-| `Sie beschreiben Ihr Geschäft. Wir empfehlen das passende Ergebnis.` | wir empfehlen das **unpassende** | nein | ✗ |
-| `Alles, was eine Firmenwebsite braucht.` | nur das Nötigste | nein | ✗ |
-| `Wer hier arbeitet.` | — | **keine Aussage** | ✗ |
-| `So könnte ein Projekt aussehen.` | — | **Konjunktiv, keine Behauptung** | ✗ |
-| `Ihr Projekt bleibt an einem Ort.` | über viele Orte verteilt | nein | ✗ |
+**Das Muster:** Jede durchgefallene Überschrift enthält ein unbestimmtes Wort an der Stelle, an der
+eine Zahl, ein Ding oder eine Grenze stehen müsste. `wenige` · `passend` · `alles` · `könnte`.
 
-**Sechs von neun fallen durch.** Und sie fallen alle auf dieselbe Weise: Sie beschreiben etwas
-Selbstverständliches so, dass es nach einem Vorteil klingt.
+**Die Reparatur ist deshalb nie „schöner schreiben".** Sie ist: das unbestimmte Wort suchen und
+durch etwas Zählbares ersetzen.
 
-#### Zwei Zusatzprüfungen für hartnäckige Fälle
+| Unbestimmt | Ersetzt durch | Warum es jetzt trägt |
+|---|---|---|
+| von **wenigen** Angaben | `Sie liefern die Fakten. Alles andere machen wir.` | Die Arbeitsteilung ist eine Grenze, keine Menge |
+| das **passende** Ergebnis | `Sie wählen kein Paket. Wir sagen Ihnen, welcher Umfang passt.` | „kein Paket wählen" ist prüfbar |
+| **alles**, was eine Website braucht | `Es gibt keine Aufpreisliste.` | Eine Aufpreisliste ist ein Ding. Es gibt sie oder nicht |
+| Wer hier arbeitet | `Eine Person baut Ihre Website. Dieselbe antwortet danach.` | Eine Person ist eine Zahl |
+| So **könnte** ein Projekt aussehen | `Noch keine Kunden. Deshalb zeigen wir Musterprojekte.` | Null Kunden ist eine Zahl, auch wenn sie wehtut |
+
+#### Zwei Zusatzprüfungen
 
 | Test | Wie er geht |
 |---|---|
-| **Konjunktivsperre** | `könnte`, `sollte`, `kann Ihnen helfen`, `unterstützt Sie dabei` — wer sich nicht festlegt, behauptet nichts. Umschreiben oder streichen |
-| **Ding-und-gut-Test** | Ersetze jedes Substantiv durch „Ding" und jedes Eigenschaftswort durch „gut". Ergibt der Satz noch ungefähr dieselbe Aussage, war er leer. `Eine gute Lösung für Ihr Ding` — genau |
+| **Konjunktivsperre** | `könnte` · `sollte` · `kann Ihnen helfen` · `unterstützt Sie dabei`. Wer sich nicht festlegt, sagt nichts |
+| **Praxistest** | Ist das Gegenteil **gängige Praxis** in der Branche? Bei Terminen: ja, fast jede Agentur arbeitet so — der Satz unterscheidet also. Bei „wir liefern Qualität": nein, niemandes Praxis ist schlechte Arbeit — der Satz ist leer |
 
-#### Wie man einen durchgefallenen Satz repariert
+> **Der Praxistest fragt nach der Praxis, nicht nach der Werbung.** Eine frühere Fassung dieses
+> Skills fragte, ob ein Wettbewerber **das Gegenteil behaupten** würde. Das war falsch: Niemand
+> wirbt mit Nachteilen, also lautet die Antwort fast immer nein — und der Test verwarf auch gute
+> Sätze. Entscheidend ist, ob das Gegenteil **vorkommt**, nicht ob jemand damit wirbt.
 
-**Nicht schöner formulieren. Die Behauptung suchen, die dahinterliegt.**
-
-| Durchgefallen | Was eigentlich gemeint war | Neue Fassung | Gegenteil |
-|---|---|---|---|
-| `Von wenigen Angaben zur fertigen Website.` | Der Kunde liefert Fakten, sonst nichts | `Sie liefern die Fakten. Alles andere machen wir.` | „Sie liefern Texte, Bilder und Struktur" — **behauptet jeder** ✓ |
-| `Sie beschreiben Ihr Geschäft. Wir empfehlen das passende Ergebnis.` | Es gibt keine Paketwahl | `Sie wählen kein Paket. Wir sagen Ihnen, welcher Umfang passt.` | „Wählen Sie Ihr Paket" — **Marktstandard** ✓ |
-| `Wer hier arbeitet.` | Eine Person, dieselbe auch später | `Eine Person baut Ihre Website. Dieselbe antwortet danach.` | „ein Team mit wechselnden Ansprechpartnern" ✓ |
-| `Alles, was eine Firmenwebsite braucht. Ohne Aufpreisliste.` | Es gibt keine Zusatzposten | `Es gibt keine Aufpreisliste.` | „Zusatzleistungen einzeln buchbar" ✓ |
-| `So könnte ein Projekt aussehen.` | Noch keine echten Kunden | `Noch keine Kunden. Deshalb zeigen wir Musterprojekte.` | „Hier sind unsere 40 Referenzen" ✓ |
-
-**Das Muster in allen fünf Fällen:** Die schwache Fassung beschreibt einen **Zustand**, die starke
-benennt eine **Entscheidung**, die auch anders hätte ausfallen können.
-
-> **Eine Ausnahme:** Im Abschlussabschnitt darf die Überschrift eine **Frage** sein
-> (`Welche Website passt zu Ihrem Unternehmen?`). Dort ist sie die Aufforderung zum Handeln, keine
-> Behauptung. Überall sonst gilt der Gegenteiltest.
-
-> **Belegt:** Nielsen Norman Group beschreibt das F-Muster beim Lesen am Bildschirm — und
-> ausdrücklich als **Versagenszustand**: Es entsteht, wenn Überschriften schwach sind, Absätze
-> dicht und die Hierarchie fehlt. Gute Struktur verhindert es. Wer also nur „für das F-Muster
-> optimiert", behandelt das Symptom.
+> **Eine Ausnahme vom Nachprüftest:** Die **H1** benennt das Angebot und darf ein Substantivsatz
+> sein — `Individuell programmierte Firmenwebsites zum Festpreis.` trägt, weil `Festpreis` prüfbar
+> ist. Und im **Abschlussabschnitt** darf die Überschrift eine Frage sein
+> (`Welche Website passt zu Ihrem Unternehmen?`), weil sie dort zur Handlung auffordert.
 
 ### 2 — Fließtext und Erklärungen
 
