@@ -226,12 +226,15 @@ ist trotzdem eine unbelegte Behauptung über fremdes Kaufverhalten.
 Ein Abschnitt, der nur aus Belegen besteht, überzeugt niemanden. Ein Abschnitt ohne Belege auch
 nicht. Die Reihenfolge macht den Unterschied:
 
-| Schritt | Aufgabe | Braucht einen Beleg? |
-|---|---|---|
-| **1 Wiedererkennung** | Der Leser denkt „das kenne ich" | **nein** |
-| **2 Konsequenz** | Was ihn das heute kostet | **nein** |
-| **3 Auflösung** | Wie es bei SARTU läuft | **ja** |
-| **4 Beleg** | Die Zahl, die Grenze, das Ding | **ja** |
+| Schritt | Aufgabe | Entspricht in PAS | Braucht einen Beleg? |
+|---|---|---|---|
+| **1 Wiedererkennung** | Der Leser denkt „das kenne ich" | **P**roblem | **nein** |
+| **2 Konsequenz** | Was ihn das heute kostet | **A**gitate | **nein** |
+| **3 Auflösung** | Wie es bei SARTU läuft — **und was er dafür tun muss** | **S**olution | **ja** |
+| **4 Beleg** | Die Zahl, die Grenze, das Ding | — | **ja** |
+
+**Der Vierschritt ist PAS mit einem vierten Schritt.** Wer die Formel kennt, erkennt sie hier
+wieder. Was wir anders machen und warum, steht unten unter „PAS".
 
 **Am Beispiel:**
 
@@ -260,6 +263,60 @@ greifen Nachprüftest und Wortlisten.
 
 **Der häufigste Fehler ist, mit Schritt 3 anzufangen.** Dann steht die Lösung vor dem Problem, und
 der Leser weiß nicht, wovon die Rede ist.
+
+#### PAS — was davon gilt und was wir ändern
+
+**Die Formel selbst ist Handwerkslehre, kein Forschungsergebnis.** Wer nach Belegen für
+„Problem-Agitate-Solution" sucht, findet Agenturblogs. Keine geprüfte Studie.
+
+**Der Mechanismus dahinter ist dagegen gut belegt.** Die größte Auswertung zu Furchtappellen
+(Tannenbaum u. a., *Psychological Bulletin* 141(6), 2015) fasst **248 Stichproben mit 27.372
+Personen** zusammen. Drei Ergebnisse, die uns betreffen:
+
+| Befund | Was folgt daraus |
+|---|---|
+| Furchtappelle wirken, mittlere Effektstärke **d = 0,27** | Das Problem gehört an den Anfang. Nicht nur die Lösung zeigen |
+| **Stärkere Zuspitzung wirkt stärker**, nicht schwächer | Schritt 2 darf deutlich sein. Weichspülen kostet Wirkung |
+| **Die Wirkung steigt mit Aussagen zur Selbstwirksamkeit** — dass die Lösung funktioniert **und** dass der Leser sie schafft | Schritt 3 muss beides sagen: was wir liefern **und** wie wenig er tun muss |
+
+> **Vorsicht bei der Übertragung.** Die Auswertung stammt aus der Gesundheitskommunikation —
+> Rauchen, Anschnallen, Vorsorge. Dort ist die Gefahr real und von außen belegt. **Sie erlaubt
+> keine erfundene Gefahr.**
+
+**Deshalb gelten für Schritt 2 zwei Grenzen, die klassisches PAS nicht kennt:**
+
+| Grenze | Woher |
+|---|---|
+| Nur Folgen, die er **selbst bestätigen** kann | Nicken-Test, `SARTU_BRANCHENFAKTEN.md` |
+| Keine erfundene Aussage über seine Kunden oder „den Markt" | Regel 0a |
+
+**Zuspitzung ohne Erfindung geht so: zwei Zahlen gegeneinanderstellen, die beide stimmen.**
+
+> Über 40 % der Heizungen im Bestand sind veraltet. Verkauft wurden 2025 trotzdem nur
+> 627.000 Anlagen — der tiefste Stand seit 15 Jahren.
+
+Das ist Schritt 2 in seiner stärksten Form. Der Bedarf ist riesig und der Absatz am Boden. **Beide
+Zahlen nickt er ab**, und der Widerspruch dazwischen entsteht in seinem Kopf. Wir behaupten ihn
+nicht.
+
+**Die Ergänzung, die aus der Auswertung folgt — Selbstwirksamkeit in Schritt 3.** Es reicht nicht
+zu sagen, dass wir es können. Es muss dastehen, **was er tut**: ein Gespräch, Fakten liefern, zwei
+Korrekturrunden. 72 % der Betriebe geben an, zu viel zu tun zu haben (Bitkom 2025). Wer diesen
+Einwand nicht ausräumt, verliert trotz bester Lösung.
+
+#### Zwei Ordnungen gleichzeitig — und beide sind richtig
+
+| Ebene | Reihenfolge | Warum |
+|---|---|---|
+| **Der Abschnitt** | Problem → Konsequenz → Lösung → Beleg | Ohne Rahmen wirkt der Preis willkürlich |
+| **Der Absatz** | Antwort zuerst, Begründung danach | Er überfliegt. Der erste Satz muss tragen |
+
+**Das sind zwei Ebenen, kein Widerspruch.** Wer beides verwechselt, baut entweder eine Seite ohne
+Spannung oder eine, die ihre Antwort versteckt.
+
+**Harte Grenze für die Problemphase:** Auf einer Seite stehen **höchstens 150 Wörter** zwischen
+Aufmacher und der ersten Aussage darüber, was SARTU liefert. Er liest abends auf dem Telefon. Wer
+länger auf dem Problem verweilt, verliert ihn vor der Lösung.
 
 #### Keine Hausaufgaben — der Leser wird nie weggeschickt
 
@@ -632,6 +689,10 @@ obere sagt es so, dass jemand es liest.
   https://developers.google.com/search/docs/fundamentals/ai-optimization-guide
 - Google — *query fan-out* in AI Mode, offizielle Beschreibung:
   https://blog.google/products/search/ai-mode-search/
+- **Furchtappelle und Selbstwirksamkeit:** M. B. Tannenbaum u. a., *Appealing to Fear: A
+  Meta-Analysis of Fear Appeal Effectiveness and Theories*, Psychological Bulletin 141(6), 2015,
+  S. 1178–1204. 127 Arbeiten, 248 Stichproben, N = 27.372.
+- **Belegte Zahlen je Branche:** `SARTU_BRANCHENFAKTEN.md` · **Motive:** `SARTU_KUNDENMOTIVE_BELEGT.md`
 
 **Zahlen aus Sekundärquellen wurden bewusst weggelassen.** Zu Mikrotexten kursieren
 Prozentangaben aus einzelnen A/B-Tests. Die Richtung ist belegt, die Größe nicht — und dieses

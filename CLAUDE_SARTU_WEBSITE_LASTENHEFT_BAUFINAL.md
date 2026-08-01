@@ -1120,6 +1120,21 @@ Der Besucher muss die Website **nicht verlassen und nicht weiterklicken**.
 
 **Umfang:** 900–1.300 Wörter · **Schema:** `Service` + `BreadcrumbList` · genau eine H1
 
+> **Warum Block 2 die Antwort vorwegnimmt, obwohl das Problem erst in Block 3 steht.** Der Aufbau
+> bedient zwei Leser gleichzeitig, und das ist Absicht:
+>
+> | Leser | Was er bekommt |
+> |---|---|
+> | Wer überfliegt oder aus einer KI-Antwort kommt | Block 2 — Antwort und Preisanker in 40–60 Wörtern |
+> | Wer bleibt | Blöcke 3 bis 6 — Problem, Folge, Lösung, Beleg |
+>
+> **Block 2 ist keine Zusammenfassung des Problems, sondern die Antwort auf die Suchanfrage.**
+> Danach beginnt der Bogen von vorn, ausführlich. Wer eine der beiden Ordnungen „aufräumt",
+> zerstört die andere.
+>
+> **Grenze für die Problemphase:** zwischen Block 2 und der ersten Aussage darüber, was SARTU
+> liefert, stehen **höchstens 150 Wörter**. Begründung im Texter-Skill unter „PAS".
+
 > **Statistiken auf der Seite — Grenzen aus `SARTU_BRANCHENFAKTEN.md` Abschnitt 1:** höchstens
 > **drei** je Seite · **nie im Aufmacher** (Block 1 und 2) · Quelle, Jahr und Stichprobe **an der
 > Zahl** · keine Quartalszahlen, die veralten schneller als 12 bis 15 Seiten gepflegt werden
