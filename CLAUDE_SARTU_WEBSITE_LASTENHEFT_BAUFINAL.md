@@ -417,11 +417,12 @@ die stärkste zitierfähige Stelle für KI-Antwortsysteme (§16, `GEO_DISCOVERY_
 > | *Team- und Projekteinträge pflegen* | Keine Tabelle. Es fehlt sinngemäß `site_content` |
 > | *Anfragen von Ihrer Website einsehen* | **Ausdrücklich verboten.** `CODEX_AUFTRAG_PORTAL.md` §… listet „Annahme von Anfragen aus Kundenwebsites" unter **Nicht bauen** — das ist die Lead-Inbox der Stufe 1 |
 >
-> **Verbindlich bis zur Entscheidung:** Die Seite geht mit **elf** Punkten live. Die drei markierten
-> Zeilen werden erst aufgenommen, wenn die Funktion existiert.
+> **Entschieden am 01.08.2026: Die drei markierten Zeilen entfallen dauerhaft.** Die Seite geht mit
+> **elf** Punkten live — das ist der Endstand, nicht eine Sicherung.
 >
-> **Die Entscheidung selbst gehört dem Menschen** und steht in `SARTU_ENTSCHEIDUNGEN_OFFEN.md` §5a:
-> die drei Funktionen bauen — oder die Zeilen dauerhaft streichen. Sie wird hier **nicht** ersetzt.
+> Ausschlaggebend war ein Widerspruch: Das Portal sagt dem Kunden in seiner eigenen Hilfe (§8.8),
+> dass SARTU **Bilder für ihn ändert**. Die Website bewarb dasselbe als Selbstbedienung.
+> Vollständige Begründung in `SARTU_ENTSCHEIDUNGEN_OFFEN.md` §5a.
 
 - **Der Unterschied, als eigene hervorgehobene Zeile:**
   > `Kein Terminkalender-Pingpong. Kein Suchen in alten E-Mails. Kein Anruf, um den Stand zu erfahren.`

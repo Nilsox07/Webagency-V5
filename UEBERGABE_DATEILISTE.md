@@ -118,14 +118,13 @@ Dateien und der Bestätigung, dass das Hauptdokument vollständig ist.
 
 ## Wie der Bau abläuft
 
-**Vier Sitzungen, drei Entscheidungspunkte** — Ablauf und fertige Startprompts stehen in
+**Vier Sitzungen, zwei Entscheidungspunkte** — Ablauf und fertige Startprompts stehen in
 `CODEX_SESSIONS_ABLAUF.md`:
 
 | Sitzung | Was entsteht | Endet mit |
 |---|---|---|
 | 1 | `IMPLEMENTATION_PLAN.md`, Projektgerüst, 2–3 Designvarianten | **Stopp** — der Mensch entscheidet |
 | 2 | Kundenbereich **Stufe A** (A0–A3), 87 der 88 Tests, Screenshots der Stufe | Bericht |
-| — | **Gate 3:** drei Selbstpflege-Funktionen bauen oder Copy streichen (`SARTU_ENTSCHEIDUNGEN_OFFEN.md` §5a) | **Stopp** |
 | 3 | Kundenbereich **Stufe B**, Testfall 19, vollständiger Screenshot-Satz | Bericht |
 | 4 | Öffentliche Seiten vollständig | Bericht |
 

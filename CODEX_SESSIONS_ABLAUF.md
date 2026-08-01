@@ -1,6 +1,6 @@
 # Ablauf: von den Konzeptdateien zur fertigen Website
 
-**Vier Codex-Sitzungen, drei Entscheidungspunkte dazwischen.** Nicht eine Sitzung, die alles baut —
+**Vier Codex-Sitzungen, zwei Entscheidungspunkte dazwischen.** Nicht eine Sitzung, die alles baut —
 die Gründe stehen unten.
 
 > **Korrigiert am 30.07.2026 nach externer Prüfung.** Die frühere Fassung kannte drei Sitzungen und
@@ -57,24 +57,26 @@ fest. Genau deshalb eignet sich dieser Teil für einen langen Durchlauf.
 
 ---
 
-## Gate 3 — Produktentscheidung, vor Stufe B
+## Gate 3 — entfällt, weil entschieden
 
-Die Startseite verspricht drei Selbstpflege-Funktionen, für die keine Grundlage existiert:
-*Bilder tauschen* · *Team- und Projekteinträge pflegen* · *Anfragen von Ihrer Website einsehen*.
-Die letzte ist im Portalauftrag **ausdrücklich verboten** (Lead-Inbox der Stufe 1).
+**Entschieden am 01.08.2026:** Die drei Selbstpflege-Funktionen — *Bilder tauschen*, *Team- und
+Projekteinträge pflegen*, *Anfragen von Ihrer Website einsehen* — **entfallen dauerhaft**.
+Begründung in `SARTU_ENTSCHEIDUNGEN_OFFEN.md` §5a.
 
-**Du entscheidest:** die Funktionen bauen oder die Zeilen streichen. Beschrieben in
-`SARTU_ENTSCHEIDUNGEN_OFFEN.md` §5a. Ohne Entscheidung geht die Seite mit elf statt vierzehn
-Punkten live — das ist die Sicherung, keine Entscheidung.
+Ausschlaggebend war ein Widerspruch zwischen den Lastenheften: Die Website bewarb *Bilder tauschen*
+als Selbstbedienung, während die Hilfe im Portal (§8.8) dem Kunden sagt, dass SARTU Bilder für ihn
+ändert. Der Kunde liest die zweite Fassung — nach dem Kauf.
 
-**Warum hier und nicht später:** Nach Stufe B wird die öffentliche Website gebaut. Wer dann erst
-merkt, dass drei beworbene Funktionen fehlen, hat die Texte zweimal geschrieben.
+**Sektion 2 der Startseite geht mit elf Punkten live.** Das ist der Endstand, nicht die Sicherung.
+
+**Damit bleiben zwei Gates:** der Plan vor der ersten Codezeile und die Designentscheidung vor dem
+Vollausbau.
 
 ---
 
 ## Sitzung 3 — Kundenbereich, **Stufe B** *(kurz)*
 
-**Was entsteht:** Öffnungszeiten mit Ausnahmen, dazu das Ergebnis von Gate 3. Zwei Tabellen,
+**Was entsteht:** Öffnungszeiten mit Ausnahmen. Zwei Tabellen,
 Testfall 19, und der **vollständige** Screenshot-Satz.
 
 **Warum eine eigene Sitzung:** Erst danach darf die öffentliche Website live gehen
@@ -102,7 +104,7 @@ geschriebenen Texte prüfen (5 Leistungsseiten, 3 Transparenzseiten, 2 Vergleich
 
 ## Warum nicht alles in einem Durchlauf?
 
-Die drei Gates sind kein Formalismus. Sie verhindern die drei teuersten Fehler:
+Die Gates sind kein Formalismus. Sie verhindern die teuersten Fehler:
 
 | Ohne Gate | Kosten |
 |---|---|
@@ -265,10 +267,9 @@ Rechtstexte · echte Fotos · die Freigabe eigener Texte. Alles davon steht in
 > Öffnungszeiten mit Ausnahmen. Zwei Tabellen — `business_hours` und
 > `business_hours_exceptions`. **`support_messages` gehört seit dem Audit zu A2** und steht bereits.
 >
-> **Das Ergebnis von Gate 3 steht in `SARTU_ENTSCHEIDUNGEN_OFFEN.md` §5a.** Lies es zuerst. Ist
-> dort nichts entschieden, baust du **nur** die drei Tabellen oben und meldest den offenen Punkt.
-> **Erfinde weder `media_assets` noch `site_content`, und baue die Lead-Inbox nicht** — sie steht
-> im Portalauftrag unter „Nicht bauen".
+> **`SARTU_ENTSCHEIDUNGEN_OFFEN.md` §5a ist entschieden:** Die drei Selbstpflege-Funktionen
+> entfallen. **Erfinde weder `media_assets` noch `site_content`, und baue die Lead-Inbox nicht** —
+> sie steht im Portalauftrag unter „Nicht bauen".
 >
 > **Abnahme:** Testfall 19 grün, `TenantIsolationTest` um die neuen Kundenrouten erweitert, alle
 > Fälle aus Stufe A weiterhin grün. Dazu der **vollständige** Screenshot-Satz nach Abschnitt 7a —
@@ -292,8 +293,8 @@ Rechtstexte · echte Fotos · die Freigabe eigener Texte. Alles davon steht in
 > Prüfbericht aus Abschnitt 2 mit ausgefüllten Zahlen. Eine Seite ohne Bericht gilt als nicht
 > abgegeben. Reißt eine Grenze, änderst du den Text — nicht den Bericht.
 >
-> **Sektion 2 der Startseite geht mit elf Punkten live**, solange Gate 3 nicht anders entschieden
-> ist (`SARTU_ENTSCHEIDUNGEN_OFFEN.md` §5a).
+> **Sektion 2 der Startseite geht mit elf Punkten live** — entschieden, kein offener Punkt
+> (`SARTU_ENTSCHEIDUNGEN_OFFEN.md` §5a).
 >
 > **Ich arbeite nicht Seite für Seite mit** — berichte in Blöcken und arbeite weiter. **Anhalten
 > nur** bei Widersprüchen, fehlenden Informationen oder wenn dir ein Konflikt zwischen der

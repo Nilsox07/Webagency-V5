@@ -1097,16 +1097,45 @@ Die Werte für `delivery_days_min` / `delivery_days_max` sind je Paket vorbelegt
 Barrierefreiheitsstärkungsgesetz gilt seit dem 28.06.2025. Ob es den Kunden betrifft, hängt an
 seiner Größe und daran, ob er Verbrauchern etwas verkauft oder buchen lässt.
 
-**Der Text ist noch nicht entschieden** — er hängt an
-`SARTU_ENTSCHEIDUNGEN_OFFEN.md` §6. Solange dort nichts steht, gilt der vorsichtige Stand:
+**Entschieden am 01.08.2026** (`SARTU_ENTSCHEIDUNGEN_OFFEN.md` §6). Zwei Textbausteine, je nach Fall.
 
-> `Barrierefreiheit nach dem Barrierefreiheitsstärkungsgesetz ist nicht Gegenstand dieses Angebots.
-> Wir bauen nach den üblichen technischen Grundlagen — ausreichender Kontrast, Bedienung per
-> Tastatur, sinnvolle Beschriftungen. Eine Prüfung auf Gesetzeskonformität und ein Nachweis darüber
-> sind darin nicht enthalten und können getrennt beauftragt werden.`
+**Baustein 1 — steht in jedem Angebot unter „was enthalten ist":**
 
-**Die Zeile darf nicht fehlen und nicht umformuliert werden.** Sie beschreibt eine Grenze der
-Leistung. Wer sie weglässt, verkauft stillschweigend etwas mit, das nicht geliefert wird.
+> `Technische Grundlagen der Bedienbarkeit sind enthalten: ausreichender Kontrast, vollständige
+> Bedienung per Tastatur, sichtbare Fokusmarkierung, beschriftete Formularfelder und semantisches
+> HTML. Ihre Website ist damit auch für Menschen mit Einschränkungen benutzbar.`
+
+**Baustein 2 — steht in `exclusions`, solange die Seite keinen Vertrag schließt:**
+
+> `Eine Prüfung und Bestätigung der Konformität nach dem Barrierefreiheitsstärkungsgesetz ist nicht
+> Gegenstand dieses Angebots. Nach unserer Einschätzung ist Ihre Website davon nicht erfasst, weil
+> Besucher darüber keinen Vertrag abschließen. Ändert sich das, sprechen Sie uns bitte an.`
+
+**Beide Zeilen dürfen nicht fehlen und nicht umformuliert werden.** Die erste ist ein
+Verkaufsargument, die zweite eine Grenze der Leistung. Wer die zweite weglässt, verkauft
+stillschweigend etwas mit, das nicht geliefert wird.
+
+#### Pflichtprüfung, sobald ein Buchungs-, Bestell- oder Kaufweg im Umfang steht
+
+Der Adminbereich zeigt beim Anlegen des Angebots zwei Pflichtfragen, sobald `sitemap` oder
+`inclusions` einen Buchungs-, Bestell- oder Abonnementweg nennen:
+
+| Frage | Feld |
+|---|---|
+| `Schließen Besucher über die Seite einen Vertrag ab — Buchung, Bestellung oder Abonnement?` | `bfsg_vertragsabschluss` (ja/nein) |
+| `Hat der Betrieb weniger als 10 Beschäftigte und höchstens 2 Mio. € Umsatz oder Bilanzsumme?` | `bfsg_kleinstunternehmen` (ja/nein/unbekannt) |
+
+**Beide Antworten werden im Angebot mitgespeichert** und dort sichtbar wiedergegeben — es sind
+Angaben des Kunden, keine Feststellung von SARTU.
+
+| Antworten | Folge |
+|---|---|
+| Vertragsabschluss `nein` | Baustein 2 wie oben |
+| Vertragsabschluss `ja`, Kleinstunternehmen `ja` | Baustein 2, ergänzt um: `nach Ihrer Angabe als Kleinstunternehmen ausgenommen` |
+| Vertragsabschluss `ja`, Kleinstunternehmen `nein` oder `unbekannt` | **Angebot lässt sich nicht senden.** Hinweis: `Hier greift das Barrierefreiheitsstärkungsgesetz. Bitte als eigenen Festpreisposten anbieten oder das Vorhaben ablehnen.` |
+
+> **Warum die Sperre und keine Warnung:** Es geht um ein Bußgeld bis 100.000 € und eine Zusage, die
+> SARTU sonst stillschweigend mitverkauft. Eine Warnung wird weggeklickt.
 
 > **Warum das im Datenmodell steht und nicht nur im Konzept:** Das BFSG kam im Masterkonzept vor,
 > in **keinem** der beiden Lastenhefte. `exclusions` war Pflichtfeld ohne inhaltliche Vorgabe. Bei

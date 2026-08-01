@@ -9,13 +9,14 @@ erfundenen Wert ersetzt werden. Steht er auf `offen`, gilt die dort genannte Spe
 
 ---
 
-## 1. Startregion und Geschäftsadresse — **teilentschieden 28.07.2026**
+## 1. Startregion und Geschäftsadresse — **teilentschieden, Orte entschieden 01.08.2026**
 
 | Platzhalter | Wert | Stand |
 |---|---|---|
 | `[STARTREGION]` | **Raum Dresden** | entschieden |
 | `[HAUPTORT]` | **Dresden** | entschieden |
-| `[UMLAND_ORT_1]` … `[UMLAND_ORT_4]` | *offen* | **Betreiber wählt vier** — Vorschlag unten |
+| Einzugsgebiet | **Dresden + Umkreis**, Liste unten | **entschieden 01.08.2026** — alle Orte ins Profil und in den Fließtext |
+| Eigene Ortsseiten | **nur `/webdesign-dresden`** zum Start | entschieden — weitere werden verdient, nicht verteilt |
 | `[HEIMATORT]` | *offen* | nur wenn er ein echter Vertrauensanker ist |
 | `[GESCHAEFTSADRESSE_STATUS]` | *offen* | **blockiert weiterhin das Google-Unternehmensprofil** |
 
@@ -32,20 +33,99 @@ erfundenen Wert ersetzt werden. Steht er auf `offen`, gilt die dort genannte Spe
 - **`LocalBusiness`** in strukturierten Daten — dito, bis eine Anschrift feststeht
 - **NAP-Aussage** — es gibt noch keine Adresse
 
-### Umlandorte — Auswahlregel, nicht Liste
+### Einzugsgebiet und Ortsseiten sind zwei verschiedene Dinge — entschieden 01.08.2026
 
-Die vier Tier-1-Orte werden nach **drei** Kriterien gewählt, nicht nach Sympathie:
+**Der Betreiber hat eingewandt, vier Orte seien zu wenig, und genannt:** Meißen · Radeberg ·
+Coswig · Bischofswerda · Bautzen · Sebnitz · Pirna · Heidenau · Dippoldiswalde, dazu Dresden nach
+Stadtteilen aufteilen.
 
-1. **erreichbar in unter 45 Minuten** — der Ortsbezug muss im Zweifel belegbar sein
-2. **genug Betriebe der Zielgrößen** — Handwerk, Praxen, Kanzleien, Ladengeschäfte
-3. **dünner Anbieterwettbewerb** — im Umland deutlich dünner als in der Kernstadt
+**Der Einwand stimmt zur Hälfte.** Das Einzugsgebiet soll alle diese Orte umfassen. Neun eigene
+Ortsseiten wären trotzdem ein Fehler. Die Auflösung liegt in der Trennung:
 
-Naheliegende Kandidaten im Umkreis: Radebeul · Meißen · Pirna · Freital · Radeberg · Coswig ·
-Heidenau · Bautzen. **Der Betreiber wählt vier und trägt sie hier ein** — nicht die ausführende KI.
+#### Ebene 1 — Einzugsgebiet: alle Orte, sofort, ohne eine einzige neue Seite
 
-> **Reihenfolge bleibt: Umland vor Kernstadt.** Masterkonzept §23a. In Dresden konkurrierst du mit
-> Agenturen, die seit Jahren dort ranken. Im Umland sind es eine Handvoll — dort entsteht der erste
-> Beleg, und der trägt später die Kernstadtseite.
+| Wo | Was |
+|---|---|
+| **Google-Unternehmensprofil** | alle genannten Orte als Einzugsgebiet. Bis zu **20** sind erlaubt — die Liste passt vollständig hinein |
+| **`/kontakt` und die Dresden-Seite** | ein Absatz im Fließtext, der die Orte namentlich nennt |
+| **Angebote und E-Mails** | Formulierungen wie „im Raum Dresden" statt „deutschlandweit" |
+
+**Das bedient alle genannten Orte** und kostet nichts. Kein Doorway-Risiko, weil keine Seite
+entsteht, die nur aus einem Ortsnamen besteht.
+
+#### Ebene 2 — eine starke Regionsseite statt neun dünner
+
+`/webdesign-dresden` ist die Hauptseite. Darin ein Abschnitt zum Umkreis mit den Ortsnamen.
+
+**Eine gute Seite rankt für „webdesign dresden" und streut auf die Umlandbegriffe. Neun dünne
+Seiten ranken für nichts.** Sie unterscheiden sich nur im Ortsnamen — und genau das nennt Google
+als Doorway-Tatbestand (§16a, unverändert gültig).
+
+#### Ebene 3 — Ortsseiten werden verdient, nicht verteilt
+
+Eine eigene Seite entsteht erst, wenn **beides** vorliegt:
+
+1. Die Search Console zeigt für diesen Ort **tatsächlich Impressionen**
+2. Es gibt dort einen **echten Kunden mit schriftlich freigegebener Fallstudie**
+   (`SARTU_SEO_GEO_KEYWORDSTRATEGIE.md` §4.1, Stufe 6)
+
+Realistisch sind das **zwei bis drei Orte im ersten Jahr**, nicht neun.
+
+### Warum Dresden nicht aufgeteilt wird
+
+**Stadtteilseiten tragen bei Laufkundschaft** — Friseur, Bäcker, Apotheke. Da sucht jemand in
+seiner Nachbarschaft.
+
+**Webdesign ist keine Laufkundschaft.** Niemand sucht „Webdesign Dresden-Striesen". Die Anfrage
+kommt aus der Region, nicht aus der Straße. Stadtteilseiten wären neun weitere Doorway-Kandidaten
+ohne Suchvolumen dahinter.
+
+### Die Größenordnungen, damit die Entscheidung nachvollziehbar ist
+
+Einwohnerzahlen zum 31.12.2025:
+
+| Ort | Einwohner |
+|---|---|
+| **Dresden** | **562.764** |
+| Pirna | 40.039 |
+| Freital | 39.174 |
+| Bautzen | 37.306 |
+| Radebeul | 33.081 |
+| Meißen | 28.863 |
+| Coswig | 20.479 |
+| Radeberg | 18.667 |
+| Heidenau | 16.597 |
+| Bischofswerda · Sebnitz · Dippoldiswalde | jeweils **unter 15.000** |
+
+**Dresden zu Sebnitz ist rund 70:1.** Und maßgeblich ist nicht die Einwohnerzahl, sondern wie
+viele Betriebe dort im Jahr **2.198 bis 10.888 €** für eine Website ausgeben. In einer Stadt unter
+15.000 Einwohnern sind das im Zweifel null bis zwei.
+
+### Der bessere Ausbau: Branche statt Ort
+
+Wer wachsen will, baut **nicht** die zehnte Ortsseite, sondern die erste Branchenseite.
+
+| | Ortsseite | Branchenseite |
+|---|---|---|
+| Beispiel | `/webdesign-bischofswerda` | `/webdesign-zahnarztpraxis` |
+| Nachfrage | an die Ortsgröße gebunden | **überregional** |
+| Wettbewerb | dünn, aber die Nachfrage auch | dünn bei echter Spezialisierung |
+| Inhalt | unterscheidet sich **nur im Ortsnamen** | andere Argumente, andere Beispiele, andere Rechtsfragen |
+| Doorway-Risiko | hoch | **keins** |
+
+Eine Seite über Websites für Zahnarztpraxen kann echte Substanz tragen: Terminbuchung, Heilmittel-
+werbegesetz, Bewertungen, Personalsuche. Eine Seite über Bischofswerda kann nur den Ortsnamen
+tragen.
+
+**Empfehlung für Stufe 2:** drei Branchenseiten vor der zweiten Ortsseite.
+
+> **„Umland vor Kernstadt" gilt weiter — für den Verkauf, nicht für die Seiten.** Masterkonzept
+> §23a meint die Kundengewinnung: Die ersten Aufträge holt man leichter in Radeberg als in Dresden,
+> wo Agenturen seit Jahren ranken.
+>
+> **Die Seite ist trotzdem `/webdesign-dresden`.** Dort liegt das Suchvolumen, und dieselbe Seite
+> deckt das Umland mit ab. Beides zusammen: **im Umland verkaufen, über Dresden gefunden werden.**
+> Das ist kein Widerspruch, sondern zwei verschiedene Wege zum selben Kunden.
 
 ### Ausbau in kleinere Städte deutschlandweit — **Stufe 2, mit Vorbehalt**
 
@@ -210,7 +290,7 @@ auch nicht in Bildbeschreibungen. Die Startsperre §14a Bedingung 4a hält die S
 
 ---
 
-## 5a. Selbstpflege durch den Kunden — **OFFEN, blockiert den Websitestart**
+## 5a. Selbstpflege durch den Kunden — **ENTSCHIEDEN 01.08.2026**
 
 Die Startseite (Website-Lastenheft §5 Sektion 2) verspricht in der rechten Spalte drei Dinge, für
 die es **keine Grundlage** gibt:
@@ -223,19 +303,37 @@ die es **keine Grundlage** gibt:
 
 **Zwei Wege, einer muss gewählt werden:**
 
-| Weg | Folge |
+### Entschieden am 01.08.2026 — die drei Zeilen entfallen
+
+**Ein Fund hat die Frage beantwortet:** Die beiden Lastenhefte widersprechen sich bereits.
+
+| Wo | Was dasteht |
 |---|---|
-| **A — bauen** | Datenmodell um `media_assets` und `site_content` erweitern. Für die Anfragen zusätzlich die Sperre im Portalauftrag aufheben und den Endpunkt unter `/api/` bauen. Verschiebt den Websitestart deutlich nach hinten |
-| **B — streichen** | Die drei Zeilen entfallen dauerhaft. Die Sektion behält elf Punkte. Der Websitestart bleibt, wo er ist |
+| Website-Lastenheft §5 Sektion 2 | *Bilder tauschen* — als Selbstbedienung beworben |
+| Portal-Lastenheft §8.8, Frage 2 | *„Öffnungszeiten pflegen Sie selbst. Texte, **Bilder** und Seitenstruktur ändern wir für Sie."* |
 
-**Solange nichts entschieden ist, gilt B als Sicherung:** Die Seite geht mit elf Punkten live.
-Das ist keine Entscheidung, sondern die Verhinderung eines Werbeversprechens ohne Deckung.
+**Der Kunde liest die zweite Fassung — im Produkt, nach dem Kauf.** Die Website versprach etwas,
+das die Anwendung schon in ihrer eigenen Hilfe zurücknimmt.
 
-**Wer entscheidet:** der Betreiber. Es ist eine Produktentscheidung, keine technische.
+**Drei Gründe, jeder allein ausreichend:**
+
+1. **Eine der drei Funktionen ist ausdrücklich verboten.** `CODEX_AUFTRAG_PORTAL.md` führt
+   „Annahme von Anfragen aus Kundenwebsites" unter **Nicht bauen** — das ist die Lead-Inbox der
+   Stufe 1, mit eigenem Endpunkt, eigener Missbrauchsabwehr und eigenem Datenschutzumfang
+2. **Die anderen beiden kosten mehr, als sie einbringen.** Zwei neue Tabellen, eine Bearbeitung im
+   Portal, eine Prüfstrecke vor der Veröffentlichung — für Funktionen, die der Kunde selten braucht
+3. **Was er wirklich oft geändert haben will, ist Text und Bild.** Genau das macht SARTU ohnehin
+   für ihn. Das ist kein Mangel, das ist die Leistung
+
+**Die Sektion behält elf Punkte.** Elf konkrete Tätigkeiten, die kein Wettbewerber anbietet, sind
+kein reduzierter Umfang — sie sind das stärkste Argument der Seite.
+
+**Umkehrbar in einer Zeile:** Wer die Funktionen später baut, trägt die Zeilen wieder ein. Die
+Entscheidung verbaut nichts.
 
 ---
 
-## 6. Barrierefreiheit nach dem BFSG — **OFFEN**
+## 6. Barrierefreiheit nach dem BFSG — **ENTSCHIEDEN 01.08.2026**
 
 Das Barrierefreiheitsstärkungsgesetz gilt seit dem **28.06.2025**. Es stand im Masterkonzept, aber
 in **keinem** der beiden Lastenhefte — und damit nicht dort, wo gebaut wird.
@@ -245,20 +343,54 @@ liegt er über der Kleinstunternehmensgrenze (10 Beschäftigte, 2 Mio. € Umsat
 Firmenwebsite eines Handwerksbetriebs ist regelmäßig außerhalb. Ein Shop oder eine
 Online-Terminbuchung eines größeren Betriebs nicht.
 
-| Weg | Folge |
+### Entschieden am 01.08.2026 — Grundstand immer, Konformität nur nach Prüfung
+
+**Geprüfte Rechtslage:**
+
+| Fall | Gilt das BFSG? |
 |---|---|
-| **A — ausschließen** | Die Pflichtzeile in `exclusions` bleibt wie im Portal-Lastenheft §4c vorbelegt. Kein Nachweis, keine Prüfung, kein Mehraufwand. **Gilt bis zur Entscheidung** |
-| **B — als getrennte Leistung anbieten** | Eigenes Festangebot je Projekt, nach Prüfung. Braucht Kenntnis der Norm EN 301 549 und Zeit für Tests |
-| **C — grundsätzlich enthalten** | Stärkstes Verkaufsargument, größter Aufwand, höchste Haftung. Für den Start nicht empfohlen |
+| Reine Firmenwebsite mit Kontaktformular, ohne Buchung, Bestellung oder Abo | **Nein.** Es fehlt der Verbrauchervertrag über die Seite |
+| Seite mit Online-Terminbuchung, Shop, Bestellung oder Abo | **Ja** — es sei denn, der Betrieb ist Kleinstunternehmen |
+| Kleinstunternehmen: **unter 10 Beschäftigte** **und** höchstens **2 Mio. €** Umsatz oder Bilanzsumme | **ausgenommen**, aber nur bei Dienstleistungen |
+| Verstoß | Bußgeld bis **100.000 €**, dazu Abmahnrisiko |
 
-**Was in jedem Fall gebaut wird**, unabhängig von der Entscheidung: Kontrast ab 4,5:1, volle
-Tastaturbedienung, sichtbarer Fokus, sinnvolle Beschriftungen. Das steht in beiden Lastenheften
-und bleibt.
+**Drei Regeln, die zusammen gelten:**
 
-**Der Unterschied ist der Nachweis.** „Wir bauen technisch sauber" und „wir bestätigen
-Gesetzeskonformität" sind zwei verschiedene Zusagen.
+**1. Der technische Grundstand ist immer enthalten — und wird ab jetzt im Angebot benannt.**
+Kontrast ab 4,5:1 · volle Tastaturbedienung · sichtbarer Fokus · sinnvolle Beschriftungen ·
+semantisches HTML · `prefers-reduced-motion`. Das stand ohnehin in beiden Lastenheften, war aber
+für den Kunden unsichtbar. **Es ist ein Verkaufsargument und wahr — beides gleichzeitig.**
 
-**Wer entscheidet:** der Betreiber, sinnvollerweise nach anwaltlicher Rückfrage.
+**2. Standardfall: die Ausschlusszeile aus Portal-Lastenheft §4c.** Eine Seite ohne Buchungs-,
+Bestell- oder Kaufweg schließt keinen Verbrauchervertrag. Das BFSG greift nicht, und SARTU sagt
+keine Gesetzeskonformität zu.
+
+**3. Sobald ein Buchungs-, Bestell- oder Kaufweg dazukommt, zwei Pflichtfragen vor dem Angebot:**
+
+> `Schließen Besucher über die Seite einen Vertrag ab — Buchung, Bestellung oder Abonnement?`
+> `Hat Ihr Betrieb weniger als 10 Beschäftigte und höchstens 2 Mio. € Umsatz oder Bilanzsumme?`
+
+**Beide Antworten werden im Angebot festgehalten.** Nur wenn die erste `ja` und die zweite `nein`
+lautet, greift das BFSG. Dann gibt es zwei Möglichkeiten: **Konformität als eigener
+Festpreisposten** — oder eine Absage, wenn SARTU es nicht verantworten kann.
+
+### Warum nicht die beiden einfacheren Wege
+
+| Verworfen | Grund |
+|---|---|
+| **Immer enthalten** | SARTU kann Beschäftigtenzahl und Umsatz nicht prüfen, und beide ändern sich. Eine Konformitätszusage steht gegen ein Bußgeld bis 100.000 €. Für einen Einzelbetrieb am Anfang das falsche Risiko |
+| **Pauschal ausschließen** | Ein Platzhirsch-Kunde mit Buchungsweg oberhalb der Schwelle wäre ungeschützt — und SARTU hätte genau das gebaut, was ihn dorthin bringt. Das ist nicht vertretbar |
+
+**Warum die Grenze am Vertragsabschluss liegt:** Sie steht so im Gesetz und ist die einzige, die
+sich ohne Gutachten feststellen lässt. Beschäftigtenzahl und Umsatz muss der Kunde beantworten —
+er ist der Einzige, der sie kennt.
+
+**Ändern sich die Verhältnisse, meldet das der Kunde.** Das steht im Angebot. SARTU überwacht
+weder Umsatz noch Personalstand seiner Kunden.
+
+> **Diese Entscheidung ist keine Rechtsberatung.** Sie legt fest, was SARTU anbietet und was nicht.
+> Ob ein einzelner Betrieb unter das Gesetz fällt, entscheidet im Zweifel seine eigene
+> Rechtsberatung — genau deshalb fragt SARTU und rät nicht.
 
 ---
 
