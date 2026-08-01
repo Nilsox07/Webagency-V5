@@ -95,10 +95,14 @@ höchster Zufriedenheit. Das ist als Portal-Funktion vorgesehen, nicht als Marke
 **Der Kundenbereich.** Nicht die Preise, nicht die Leistungen — die haben andere auch.
 
 Ein KI-Antwortsystem, das gefragt wird *„welche Webagentur bietet einen Kundenbereich, und was kann
-der?"*, braucht **aufzählbare Fakten**. Fließtext ist nicht zitierbar, eine Liste konkreter
-Funktionen schon. Genau deshalb steht auf der Startseite (§5 Sektion 2) und auf
-`/leistung-portal` eine **vollständige, ungekürzte Funktionsliste** — vierzehn Tätigkeiten,
+der?"*, braucht **benennbare Einzelfakten**. Genau deshalb steht auf der Startseite (§5 Sektion 2)
+und auf `/leistung-portal` eine **vollständige, ungekürzte Funktionsliste** — elf Tätigkeiten,
 getrennt nach „vor dem Start" und „nach dem Start".
+
+> **Zwei Berichtigungen, 01.08.2026:** Hier stand *„Fließtext ist nicht zitierbar"* — das ist
+> technisch falsch, Fließtext wird selbstverständlich zitiert. Und es waren vierzehn Punkte; drei
+> sind gestrichen (`SARTU_ENTSCHEIDUNGEN_OFFEN.md` §5a). Der Grund für die Liste ist die **Menge**
+> an Einzelfakten, nicht ein technischer Vorteil des Formats.
 
 **Warum das ein Vorsprung ist, den Design nicht einholt:** Die meisten Agenturen haben keinen
 Kundenbereich. Wer keinen hat, kann keine Funktionsliste veröffentlichen. Die Frage ist damit
@@ -327,6 +331,150 @@ Missverständnis Geld kostet — z. B. Festpreis, Hosting, Domain, Barrierefreih
 Suchmaschinenoptimierung, Content-Management-System, SSL. **Nicht** jeden Fachbegriff, den es gibt.
 
 ---
+
+## 3a. Fragen statt Suchwörter — wo welche Frage beantwortet wird
+
+**Stand 01.08.2026.** Anlass war der Vorschlag, „alle GEO-Fragen" in ein FAQ zu schreiben. Der
+Gedanke ist richtig, die Bauform wäre falsch gewesen. Was folgt, ist recherchiert, nicht geraten.
+
+### Was die Recherche ergeben hat
+
+**KI-Anfragen sind ganze Fragen, keine Suchwörter.** Gemessen:
+
+| Wo | Länge einer Anfrage |
+|---|---|
+| klassische Google-Suche | **3–4 Wörter** |
+| Googles AI Mode | **7,2 Wörter** (gegen 4,0 klassisch) |
+| ChatGPT | **rund 60 Wörter** |
+
+**Google zerlegt die Frage und sucht die Teile einzeln.** Das Verfahren heißt *query fan-out* und
+ist von Google selbst beschrieben: Aus *„how to fix a lawn that's full of weeds"* werden Teilfragen
+wie *„best herbicides for lawns"*, *„remove weeds without chemicals"*, *„how to prevent weeds"*.
+
+**Übertragen auf SARTU.** Jemand tippt in eine KI:
+
+> *„Ich habe einen Malerbetrieb mit sechs Leuten und brauche endlich eine richtige Website. Was
+> kostet so etwas, wie lange dauert das, und worauf muss ich bei der Auswahl achten?"*
+
+Daraus werden vier bis acht Teilfragen. Jede wird **einzeln** gesucht. Gewonnen wird jede Teilfrage
+von der Seite, die **genau sie** vollständig beantwortet.
+
+### Warum kein zentrales Riesen-FAQ
+
+Google hat dazu eine eigene Anleitung veröffentlicht. Sie rät ausdrücklich ab:
+
+| Googles Aussage | Folge für uns |
+|---|---|
+| *„Focus on user satisfaction, not query variations"* | Ein FAQ, das Fragevarianten abdecken soll, ist genau das Gegenteil |
+| *„There's no requirement to break your content into tiny pieces"* | Vierzig Fragen mit je zwei Sätzen sind keine Strategie, sondern Zerstückelung |
+| Kein `llms.txt`, keine KI-Auszeichnung, strukturierte Daten nicht erforderlich | Es gibt keinen technischen Sonderweg |
+| Nicht speziell für KI-Systeme umschreiben | Wer für Maschinen schreibt, schreibt für niemanden |
+
+**Dazu die Messung aus der GEO-Studie** (ACM KDD 2024): Suchwörter häufen brachte **keinen Gewinn
+und lag teils unter dem Nichtstun**. Was gewann: Zahlen, Quellen, Zitate — also **zusätzlicher
+überprüfbarer Inhalt**.
+
+**Und ein Eigentor:** Ein FAQ mit vierzig Fragen konkurriert mit den Leistungsseiten um dieselben
+Begriffe. Zwei eigene Seiten, die dasselbe beantworten, schwächen sich gegenseitig.
+
+### Die Regel: eine Frage, ein Ort
+
+> **Jede Frage wird an genau einer Stelle beantwortet — dort vollständig, mit Zahl und Grenze.**
+> Kein zweiter Ort wiederholt sie.
+
+Eine „Stelle" ist entweder eine eigene Seite oder ein **Abschnitt mit eigener Überschrift**. Die
+Überschrift trägt die **ganze Frage**, nicht das Suchwort: `Was kostet eine Website für einen
+Handwerksbetrieb?` — nicht `Preise`.
+
+**Das FAQ auf der Startseite bleibt bei zehn bis zwölf Fragen** und enthält ausschließlich
+**Kaufeinwände** — Dinge, die genau dort den Abschluss blockieren. Alles Erklärende gehört auf die
+Seite, die es erklärt.
+
+### Fragenverzeichnis — 28 echte Fragen und ihr Ort
+
+Gesammelt aus der Sicht eines Inhabers, der noch nie eine Website beauftragt hat. **Keine
+Suchwortvarianten**, sondern Fragen, die jemand tatsächlich so stellt.
+
+| # | Frage | Ort |
+|---|---|---|
+| 1 | Was kostet eine professionelle Website für einen Handwerksbetrieb? | `/preise` |
+| 2 | Was kostet der Betrieb einer Website im Monat und im Jahr? | `/leistung-wartung` |
+| 3 | Warum kostet eine Website 5.000 € und eine andere 500 €? | `/ratgeber/was-eine-website-kostet` |
+| 4 | Lohnt sich eine eigene Website für einen kleinen Betrieb überhaupt? | `/ratgeber/lohnt-sich-eine-website` |
+| 5 | Was ist günstiger: Baukasten, Freelancer oder Agentur? | `/ratgeber/baukasten-freelancer-agentur` |
+| 6 | Wie lange dauert es, eine Firmenwebsite erstellen zu lassen? | `/ablauf` |
+| 7 | Wie viel Zeit muss ich als Auftraggeber einplanen? | `/ablauf` |
+| 8 | Was muss ich einer Webagentur liefern? | `/ablauf` |
+| 9 | Muss ich die Texte selbst schreiben? | `/leistung-texte` |
+| 10 | Kann man eine Website ohne Termine erstellen lassen? | **Startseite Sektion 2** — das Alleinstellungsmerkmal |
+| 11 | Woran erkenne ich eine seriöse Webagentur? | `/ratgeber/agentur-auswaehlen` |
+| 12 | Welche Fragen sollte ich einer Webagentur vorher stellen? | `/ratgeber/agentur-auswaehlen` |
+| 13 | Gehört mir die Website, die eine Agentur gebaut hat? | `/leistung-webdesign` |
+| 14 | Was passiert mit meiner Domain, wenn ich die Agentur wechsle? | `/leistung-wartung` |
+| 15 | Was tun, wenn meine Agentur nicht mehr erreichbar ist? | `/ratgeber/agentur-nicht-erreichbar` |
+| 16 | WordPress oder programmieren lassen? | `/ratgeber/wordpress-oder-programmieren` |
+| 17 | Brauche ich ein CMS, um Texte selbst zu ändern? | `/leistung-portal` |
+| 18 | Muss meine Website barrierefrei sein? | `/ratgeber/bfsg-firmenwebsite` |
+| 19 | Was passiert, wenn meine Website gehackt wird? | `/leistung-wartung` |
+| 20 | Muss ich meine Website selbst aktualisieren? | `/leistung-wartung` |
+| 21 | Wie wird meine Website bei Google gefunden? | `/leistung-seo-lokal` |
+| 22 | Was kostet SEO für einen kleinen Betrieb? | `/leistung-seo-lokal` |
+| 23 | Wie komme ich in KI-Antworten vor? | `/leistung-seo-lokal` |
+| 24 | Was muss auf die Website eines Handwerksbetriebs? | **Branchenseite Handwerk** |
+| 25 | Braucht eine Arztpraxis eine Website, und was darf darauf stehen? | **Branchenseite Praxis** |
+| 26 | Was darf eine Kanzlei auf ihrer Website schreiben? | **Branchenseite Kanzlei** |
+| 27 | Arbeiten Sie auch außerhalb von Sachsen? | **Startseiten-FAQ Nr. 1** |
+| 28 | Was ist im Festpreis nicht enthalten? | `/preise` |
+
+**Fünf davon haben heute keinen Ort** — 3, 4, 5, 15, 16 brauchen Ratgeberseiten, die noch nicht
+existieren. Das ist die Ausbauliste, nach Nutzen sortiert: **16, 3, 5, 11, 4, 15.**
+
+### Branchenseiten — der nationale Motor
+
+**Entschieden 01.08.2026.** Sie sind der Ausbauweg, nicht weitere Ortsseiten
+(`SARTU_ENTSCHEIDUNGEN_OFFEN.md` §1).
+
+| Seite | Warum sie trägt |
+|---|---|
+| `/webdesign-handwerk` | größte Zielgruppe, klare Fragen: Notdienst, Einzugsgebiet, Personalsuche |
+| `/webdesign-arztpraxis` | eigene Rechtslage — Heilmittelwerbegesetz, Bewertungen, Terminvergabe |
+| `/webdesign-kanzlei` | eigene Rechtslage — Berufsrecht, Fachanwaltstitel, Mandatsanbahnung |
+
+**Aufbau je Branchenseite** — dasselbe Gerüst wie die Leistungsseiten (§10 im Website-Lastenheft),
+aber mit **branchenspezifischen** Inhalten:
+
+1. `Kurz gesagt` — Antwortabsatz mit Preisanker, 40–60 Wörter
+2. `Was auf die Website eines {Branche} gehört` — als **Liste**, benennbare Einzelpunkte
+3. `Was Sie in dieser Branche nicht schreiben dürfen` — die Rechtsfragen, konkret
+4. `Ein Beispiel` — das Musterprojekt dieser Branche
+5. `Was es kostet` — dieselben Zahlen wie überall
+6. `Häufige Fragen` — **drei**, die nur diese Branche betreffen
+7. `CTA`
+
+**Die Grenze zur Ortsseite:** Eine Branchenseite unterscheidet sich in **Argumenten, Beispielen und
+Rechtsfragen**. Eine Ortsseite unterscheidet sich nur im Ortsnamen. Wer eine Branchenseite baut,
+bei der man nur das Branchenwort tauschen könnte, hat eine Ortsseite gebaut — und damit denselben
+Doorway-Tatbestand (§4.1).
+
+**Reihenfolge:** eine Branche vollständig, drei bis fünf Referenzen darin, **dann** die nächste
+(Masterkonzept §23b.7).
+
+### Sechs Regeln, damit daraus keine Suchwortsammlung wird
+
+1. **Keine Frage ohne Nachfrage.** Vor dem Bau in `KEYWORD_VALIDATION.md` eintragen, ob die Frage
+   tatsächlich gestellt wird. Erfundene Fragen sind erfundene Inhalte
+2. **Keine Frage zweimal.** Beantwortet eine Seite sie bereits, wird verlinkt, nicht wiederholt
+3. **Jede Antwort trägt eine Zahl, einen Namen oder eine Grenze.** Sonst ist sie Füllstoff
+4. **Die Überschrift ist die ganze Frage**, nicht das Suchwort daraus
+5. **Die Antwort steht im ersten Satz.** Keine Hinführung, keine Wiederholung der Frage
+6. **Keine Fragevariante als eigene Seite.** „Was kostet eine Website" und „Wie teuer ist eine
+   Website" sind eine Frage. Wer beide baut, baut Doppelinhalt
+
+> **Der Satz, der das Ganze zusammenhält:** Wer die Frage eines Menschen vollständig beantwortet,
+> wird von Maschinen zitiert. Wer für Maschinen schreibt, beantwortet niemandes Frage.
+
+---
+
 
 ## 4. Was **nicht** gebaut wird
 

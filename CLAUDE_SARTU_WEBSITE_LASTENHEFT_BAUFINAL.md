@@ -1030,6 +1030,52 @@ Kein weiteres Angebot, kein Upsell, keine Zusatz-CTAs.
 
 ---
 
+## 10a. Branchenseiten — der bundesweite Ausbauweg
+
+**Entschieden 01.08.2026.** Nach `SARTU_ENTSCHEIDUNGEN_OFFEN.md` §1 ist die Branchenseite das
+Ausbauwerkzeug, nicht die Ortsseite: Eine Seite für Flensburg wirkt **nur** in Flensburg, eine
+Seite für Zahnarztpraxen **überall**.
+
+| # | URL | Wann | Warum diese Branche |
+|---|---|---|---|
+| 1 | `/webdesign-handwerk` | **zum Launch** | größte Zielgruppe, geringste Rechtskomplexität. Eigene Fragen: Notdienst, Einzugsgebiet, Personalsuche |
+| 2 | `/webdesign-arztpraxis` | nach den ersten Kunden dieser Branche | eigene Rechtslage: Heilmittelwerbegesetz, Bewertungen, Terminvergabe |
+| 3 | `/webdesign-kanzlei` | nach den ersten Kunden dieser Branche | eigene Rechtslage: Berufsrecht, Fachanwaltstitel, Mandatsanbahnung |
+
+> **Nur eine zum Launch, nicht drei.** Zwei Gründe: Masterkonzept §23b.7 verlangt, eine Branche
+> vollständig aufzurollen, bevor die nächste beginnt. Und die beiden anderen Seiten brauchen echte
+> Kenntnis der Berufsrechte — geschrieben ohne diese Kenntnis wären sie erfundene Inhalte.
+
+**Aufbau je Seite** — dasselbe Gerüst wie §10, aber mit branchenspezifischen Inhalten:
+
+1. `H1` mit der Branche im Klartext
+2. `Kurz gesagt` — Antwortabsatz mit Preisanker, 40–60 Wörter
+3. `Was auf die Website eines {Branche} gehört` — **als Liste**, benennbare Einzelpunkte
+4. `Was Sie in dieser Branche nicht schreiben dürfen` — die Rechtsfragen, konkret
+5. `Ein Beispiel` — das Musterprojekt dieser Branche
+6. `Was es kostet` — **dieselben Zahlen wie überall**, keine Branchenpreise
+7. `Häufige Fragen` — **drei**, die ausschließlich diese Branche betreffen
+8. `CTA`
+
+**Umfang:** 500–700 Wörter · **Schema:** `Service` + `BreadcrumbList` · genau eine H1
+
+### Die Grenze zur Ortsseite — und wie man sie prüft
+
+Eine Branchenseite unterscheidet sich in **Argumenten, Beispielen und Rechtsfragen**. Eine
+Ortsseite unterscheidet sich nur im Ortsnamen.
+
+> **Der Austauschtest:** Ersetze das Branchenwort durch ein anderes. Ergibt der Text weiterhin
+> Sinn, ist es keine Branchenseite, sondern eine Ortsseite mit anderem Etikett — und damit
+> derselbe Doorway-Tatbestand (Keywordstrategie §4.1).
+
+Bei `/webdesign-handwerk` scheitert der Test korrekt: Notdienstnummer, Einzugsgebiet und
+Gesellensuche gibt es bei einer Kanzlei nicht.
+
+**Verboten:** Branchenpreise erfinden · Branchenzahlen ohne Quelle · Rechtsaussagen ohne
+Fundstelle · eine vierte Branche anfangen, bevor die erste drei bis fünf Referenzen hat
+
+---
+
 ## 11. `/ueber-uns` und `/kontakt`
 
 ### `/ueber-uns`

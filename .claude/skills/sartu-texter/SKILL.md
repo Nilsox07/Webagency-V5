@@ -130,6 +130,21 @@ generativen Suchmaschinen ist es sogar schlechter als nichts zu tun.
 
 **Der Stand der Belege, nicht der Werbeversprechen.**
 
+### Wie eine Frage bei einer KI ankommt
+
+| Wo | Länge einer Anfrage |
+|---|---|
+| klassische Google-Suche | **3–4 Wörter** |
+| Googles AI Mode | **7,2 Wörter** |
+| ChatGPT | **rund 60 Wörter** |
+
+**Google zerlegt die Frage und sucht die Teile einzeln** — das Verfahren heißt *query fan-out* und
+ist von Google selbst beschrieben. Aus einer Frage werden vier bis acht Teilfragen.
+
+**Die Folge für den Text:** Eine Überschrift trägt die **ganze Frage**, nicht das Suchwort daraus.
+`Was kostet eine Website für einen Handwerksbetrieb?` schlägt `Preise`. Und jede Teilfrage wird an
+**genau einer** Stelle vollständig beantwortet — Zuordnung in Keywordstrategie §3a.
+
 ### Google sagt: keine Sonderbehandlung
 
 > *„There are no additional requirements to appear in AI Overviews or AI Mode, nor other special
@@ -139,6 +154,15 @@ generativen Suchmaschinen ist es sogar schlechter als nichts zu tun.
 Es gibt **kein** GEO-Schema, **keine** KI-Textdatei, **keine** Sonderauszeichnung. Wer so etwas
 verkauft, verkauft Luft. Was zählt: Die Seite ist indexierbar, die Information steht als Text da,
 und die normalen Grundlagen stimmen.
+
+**Googles eigene Anleitung rät zusätzlich ausdrücklich ab:**
+
+| Googles Aussage | Was daraus folgt |
+|---|---|
+| *„Focus on user satisfaction, not query variations"* | Kein Text, der Fragevarianten abdecken soll |
+| *„There's no requirement to break your content into tiny pieces"* | **Kein Zerstückeln** in Häppchen. Die kursierende Empfehlung, auf 134–167 Wörter je Passage zu optimieren, stammt von Anbietern — nicht von Google |
+| Strukturierte Daten sind **nicht erforderlich** | Sie sind nützlich, aber kein Hebel für KI-Antworten |
+| Nicht speziell für KI-Systeme umschreiben | Wer für Maschinen schreibt, beantwortet niemandes Frage |
 
 ### Was messbar wirkt
 
@@ -222,6 +246,10 @@ Schritt 6 wird am häufigsten übersprungen und bringt am meisten.
   https://www.nngroup.com/videos/f-pattern-reading-digital-content/
 - Nielsen Norman Group — *Information Scent* und Beschriftungsfehler:
   https://www.nngroup.com/articles/3-ia-mistakes/
+- Google Search Central — *Guide to Optimizing for Generative AI Features*:
+  https://developers.google.com/search/docs/fundamentals/ai-optimization-guide
+- Google — *query fan-out* in AI Mode, offizielle Beschreibung:
+  https://blog.google/products/search/ai-mode-search/
 
 **Zahlen aus Sekundärquellen wurden bewusst weggelassen.** Zu Mikrotexten kursieren
 Prozentangaben aus einzelnen A/B-Tests. Die Richtung ist belegt, die Größe nicht — und dieses
