@@ -60,6 +60,10 @@ merkt es, bevor gebaut wird.
 
 ## Rangfolge — welche Datei gewinnt bei Widerspruch
 
+> **Diese Tabelle ist die einzige gültige Rangfolge des Projekts.** `CODEX_AUFTRAG_PORTAL.md` §2
+> und `CODEX_AUFTRAG_WEBSITE.md` nennen eine **Lesereihenfolge** — in welcher Folge man liest, nicht
+> wer bei Widerspruch gewinnt. Beides wurde am 01.08.2026 verwechselt und ist jetzt getrennt.
+
 **Sechs Dateien tragen „FINAL" im Namen.** Das Wort bedeutet nichts über ihr Alter. Zweimal hat
 eine externe Prüfung deshalb einen überholten Stand verteidigt, einmal wurden zwei verbindliche
 Navigationen im selben Dokument gefunden. Deshalb hier eine Reihenfolge, die keine Auslegung

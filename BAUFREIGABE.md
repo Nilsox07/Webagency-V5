@@ -7,12 +7,37 @@ verhandelt wird.
 
 ---
 
+> ## Korrigiert am 01.08.2026 — die erste Fassung war zu optimistisch
+>
+> Sie behauptete „Stufe A0 startet sofort". Eine externe Prüfung gegen Commit `8ad6207` hat
+> **fünf Widersprüche gefunden, die schon A0 blockierten**. Alle fünf wurden nachgerechnet und
+> bestätigt, alle fünf sind inzwischen behoben.
+>
+> | # | Befund | Warum es A0 traf | Behoben durch |
+> |---|---|---|---|
+> | 1 | **Zwei sich widersprechende Rangfolgen** — Übergabeliste stellt `SARTU_ENTSCHEIDUNGEN_OFFEN.md` auf Rang 1 und das Portal-Lastenheft auf 4, der Portalauftrag genau umgekehrt | Der Bauauftrag verlangt bei Vorgabenwiderspruch **anhalten**. Ein Bauchat wäre in Zeile 1 stehengeblieben | Portalauftrag §2 ist jetzt nur noch **Lesereihenfolge**. Die Rangfolge steht allein in `UEBERGABE_DATEILISTE.md` |
+> | 2 | **Ersteinrichtung nicht ausführbar** — Schritt 5 erhob kein Passwort, §7 verlangt eines · `ENC_KEY` entstand nach dem verschlüsselten TOTP-Geheimnis · `operator_settings` sollte angelegt werden, ohne dass eines seiner sieben Pflichtfelder erhoben wurde | Der Installer wäre am `INSERT` gescheitert, und der Admin hätte sich nie anmelden können | §1.5 neu gefasst: **acht Schritte**, Schlüssel vor Verschlüsselung, eigener Schritt für Betreiberdaten, Passwort in Schritt 7 |
+> | 3 | **`.env.example` passte nicht zu §1.5** — `DB_PASSWORD` statt `DB_PASS`, `APP_KEY` statt `SESSION_SECRET` und `ENC_KEY`, `MAIL_HOST` statt `SMTP_HOST`, `APP_URL` statt `BASE_URL`. Sieben Pflichtwerte fehlten ganz, und `APP_ENV=development` gibt es nicht | Die lokale HTTP-Ausnahme des Setups hätte nie gegriffen | `.env.example`, `docker-compose.yml` und `ENTWICKLUNGSUMGEBUNG.md` auf die Namen aus §1.5 gezogen |
+> | 4 | **Testzuordnung rechnerisch falsch** — behauptet A0 = 26 · A1 = 35 · A2 = 20 · A3 = 6, tatsächlich **27 · 34 · 21 · 5**. Dazu lag Fall 56 („alle Kernabläufe ohne JavaScript") in A0, wo es keinen Kernablauf gibt | Die Abnahme von A0 hätte gegen eine falsche Zahl geprüft | Fall 56 nach **A3** verschoben, Zahlen mit Skript nachgerechnet: **26 · 34 · 21 · 6 · 1 = 88** |
+> | 5 | **Sperre der Einrichtung ohne benannten Ort** — „in Datei und Datenbank", aber wo in der Datenbank? | Nicht implementierbar | `operator_settings.setup_completed_at` **und** `/storage/installed.lock`. **Einer** von beiden genügt für 404 |
+>
+> **Zwei Befunde ließen sich nicht bestätigen.** Zu `audit_events` steht im Lastenheft nur die
+> Frist von drei Jahren. Ein „niemals löschen" gibt es dort nicht. Und die Stelle „17 von 20
+> Tabellen" existiert im Repository nicht mehr.
+>
+> **Zwei Befunde außerhalb von A0 wurden mitbehoben:**
+>
+> | Befund | Behoben |
+> |---|---|
+> | Die zweite Zahlungserinnerung hatte nur ein Zeitstempelfeld. Ab Tag 7 wäre sie täglich rausgegangen | Neues Feld `reminder2_sent_at` |
+> | Für Leads standen 6 **und** 12 Monate Löschfrist | Getrennt: `abgelehnt` 6 Monate, sonstige nicht umgewandelte 12 |
+
 ## Die Antwort in drei Zeilen
 
 | | |
 |---|---|
-| **Stufe A0 startet sofort** | Keine offene Entscheidung berührt sie |
-| **Eine Sperre steht vor dem vollständigen Backend** | §7b Karriereseite — betrifft Datenmodell und Preistabelle |
+| **Stufe A0 ist freigegeben** | seit der Korrektur vom 01.08.2026. Die fünf Befunde oben sind behoben |
+| **Eine Sperre steht vor dem vollständigen Backend** | §7b Karriereseite — zwei Lesarten, siehe unten |
 | **Drei Sperren stehen vor der Veröffentlichung** | Rechtstexte, Bildmaterial, Branchenseiten. **Nicht** vor dem Bauen |
 
 ---
@@ -24,14 +49,19 @@ verhandelt wird.
 Ersteinrichtung · Migrationen · Adminanmeldung mit TOTP · Betreiberdaten · Rechtstexte mit
 Freigabezustand · Testmailversand · Mandantentrennung · Prüfprotokoll.
 
-**Warum unblockiert:** Adresse, Rechtsform und Name sind offen — sie stehen aber in
-`operator_settings` und werden im Adminbereich gesetzt. Der Betreiber hat das am 01.08.2026
-ausdrücklich so entschieden. Die Tabelle braucht die Werte nicht, um zu entstehen.
+**Warum unblockiert:** Adresse, Rechtsform und Name sind für die **Außendarstellung** offen. Die
+Ersteinrichtung fragt sie trotzdem ab (§1.5 Schritt 6) — `operator_settings` hat sieben
+`NOT NULL`-Felder und eine `CHECK`-Bedingung auf die Steuerangabe. **Vorläufige Werte sind
+erlaubt** und im Adminbereich änderbar; die Startsperre §1.4a prüft auf Inhalt.
+
+> **Die erste Fassung stand hier falsch:** *„Die Tabelle braucht die Werte nicht, um zu
+> entstehen."* Die **Tabelle** braucht sie nicht. Die **Zeile** schon — und §1.5 legt sie beim
+> Setup an.
 
 **`legal_texts` genauso:** Die Tabelle, der Freigabezustand und die Kennzeichnung `ENTWURF` sind
 festgelegt. Dass noch kein geprüfter Text existiert, hindert das Schema nicht.
 
-### A1 — Anfrage bis Auftrag, 4 Tabellen, 35 Testfälle
+### A1 — Anfrage bis Auftrag, 4 Tabellen, 34 Testfälle
 
 Bedarfsscheck · Anfrageliste · Umwandlung in Kunde und Projekt · Anmeldelink · Angebot senden ·
 Löschlauf.

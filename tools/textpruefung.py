@@ -18,9 +18,10 @@ for l in t.split('\n'):
     s = l.strip()
     if s.startswith('```'): incode = not incode; continue
     if incode: continue
+    s = re.sub(r'^>\s?','',s)          # Zitatzeichen zuerst weg, sonst bleiben Tabellen drin
     if s.startswith(('|','#')): continue
     if re.match(r'^[-*+]\s', s) or re.match(r'^\d+\.\s', s): continue   # nur echte Listen
-    prose.append(re.sub(r'^>\s?','',l))
+    prose.append(s)
 p = ' '.join(prose)
 p = re.sub(r'`[^`]*`','X',p); p = re.sub(r'\*\*|\*','',p); p = re.sub(r'—',' ',p)
 s_ = [x.strip() for x in re.split(r'(?<=[.!?])\s+',p) if len(x.strip())>3]

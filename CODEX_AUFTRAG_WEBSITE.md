@@ -148,7 +148,10 @@ selben Programm auf (Portal-Lastenheft §4b.1). Kein Token, kein gemeinsames Geh
 
 ## 2. Lesereihenfolge und Rangfolge
 
-Lies in dieser Reihenfolge. Bei Widersprüchen gilt die **niedrigere Nummer**:
+Lies in dieser Reihenfolge.
+
+> **Korrigiert am 01.08.2026.** Diese Liste ist die **Lesereihenfolge**, nicht die Rangfolge.
+> Wer bei Widerspruch gewinnt, steht ausschließlich in `UEBERGABE_DATEILISTE.md`.
 
 1. **`CLAUDE_SARTU_WEBSITE_LASTENHEFT_BAUFINAL.md`** — dein Hauptdokument: Struktur, fertige Texte, Feldlabels, Fehlermeldungen, Bildliste, SEO-Tabelle, Abnahmekriterien
 2. **`CLAUDE_SARTU_MASTERKONZEPT_FINAL.md`, Abschnitt „10a. Arbeitsverteilung Codex ↔ Claude Code"** — **verbindlich**, siehe Abschnitt 2a

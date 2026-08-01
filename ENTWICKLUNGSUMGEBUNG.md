@@ -134,7 +134,7 @@ cp .env.example .env
 
 Unter Windows in der PowerShell: `Copy-Item .env.example .env`
 
-Dann `.env` öffnen und **beide** Passwortfelder ausfüllen — `DB_PASSWORD` und `DB_ROOT_PASSWORD`.
+Dann `.env` öffnen und **beide** Passwortfelder ausfüllen — `DB_PASS` und `DB_ROOT_PASSWORD`.
 Irgendein Wert genügt, er gilt nur lokal. Bleiben sie leer, startet die Datenbank nicht.
 
 `.env` steht in `.gitignore` und wird nie committet.
@@ -155,7 +155,7 @@ docker compose ps
 docker compose exec app php -v
 docker compose exec app php -m
 docker compose exec app composer --version
-docker compose exec app php -r "new PDO('mysql:host=db;dbname='.getenv('DB_NAME'), getenv('DB_USER'), getenv('DB_PASSWORD')); echo 'Datenbank erreichbar', PHP_EOL;"
+docker compose exec app php -r "new PDO('mysql:host=db;dbname='.getenv('DB_NAME'), getenv('DB_USER'), getenv("DB_PASS")); echo 'Datenbank erreichbar', PHP_EOL;"
 ```
 
 Erwartung: PHP 8.3.x, in der Erweiterungsliste stehen `pdo_mysql`, `sodium`, `mbstring`, `intl`,
@@ -222,7 +222,7 @@ Voraussetzung: Docker Desktop ist installiert und **läuft**.
 > 2. Fehlende Dateien aus `main` holen:
 >    `git fetch origin main` und
 >    `git checkout origin/main -- docker-compose.yml .docker .env.example ENTWICKLUNGSUMGEBUNG.md`
-> 3. `.env` aus `.env.example` anlegen, falls noch nicht vorhanden. `DB_PASSWORD` und
+> 3. `.env` aus `.env.example` anlegen, falls noch nicht vorhanden. `DB_PASS` und
 >    `DB_ROOT_PASSWORD` mit je einem zufälligen Wert füllen. `.env` **niemals** committen —
 >    sie steht in `.gitignore`
 > 4. `docker compose up -d --build`
@@ -399,14 +399,14 @@ cp .env.example .env
 ```
 
 Darin auf die lokale Installation umstellen: `DB_HOST=127.0.0.1`, `DB_HOST_TEST=127.0.0.1`,
-`DB_PASSWORD=` dein Passwort von oben. `DB_ROOT_PASSWORD` bleibt leer — das braucht nur Docker.
+`DB_PASS=` dein Passwort von oben. `DB_ROOT_PASSWORD` bleibt leer — das braucht nur Docker.
 
 ### 5. Mail
 
 Es gibt keinen Mailfänger. Der gesamte Zugang läuft über Anmeldelinks (Portal-Lastenheft §5) — ohne
 sichtbare Mail kommst du lokal nicht ins Portal. Zwei Möglichkeiten:
 
-- **Anmeldelink zusätzlich ins Protokoll schreiben**, solange `APP_ENV=development`. Der einfachste
+- **Anmeldelink zusätzlich ins Protokoll schreiben**, solange `APP_ENV=local`. Der einfachste
   Weg; muss in der Produktion zwingend abgeschaltet sein
 - **echten SMTP-Zugang** eintragen und an eine eigene Adresse senden
 

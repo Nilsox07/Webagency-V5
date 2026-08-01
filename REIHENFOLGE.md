@@ -269,7 +269,7 @@ er in jeder folgenden Etappe mit.
 | # | Etappe | | # | Etappe | | # | Etappe |
 |---|---|---|---|---|---|---|---|
 | 1 | A1 | | 28 | A3 | | 55 | A0 |
-| 2 | A2 | | 29 | A1 | | 56 | A0 |
+| 2 | A2 | | 29 | A1 | | 56 | A3 |
 | 3 | A1 | | 30 | A1 | | 57 | A1 |
 | 4 | A2 | | 31 | A1 | | 58 | A0 |
 | 5 | A1 | | 32 | A1 | | 59 | A1 |
@@ -312,7 +312,19 @@ niemand geprüft hätte:
 | 82 | **A0** | Rechtstext mit `audience = kunde` ist öffentlich nicht abrufbar |
 | 83 | **A1** | Anmeldeseite zeigt die Telefonnummer aus den Betreiberdaten |
 
-**Summe:** A0 = 26 · A1 = 35 · A2 = 20 · A3 = 6 · B = 1 · C = 0. **Zusammen 88.**
+**Summe:** A0 = **26** · A1 = **34** · A2 = **21** · A3 = **6** · B = 1 · C = 0. **Zusammen 88.**
+
+> **Nachgerechnet am 01.08.2026, vierte Korrektur dieser Zahl.** Eine externe Prüfung hat die
+> Tabelle Zeile für Zeile ausgezählt und kam auf **A0 = 27 · A1 = 34 · A2 = 21 · A3 = 5**. Die
+> Nachrechnung mit Skript hat das bestätigt: **alle vier Etappenzahlen waren falsch**, nur die
+> Summe 88 stimmte.
+>
+> **Zusätzlich falsch zugeordnet war Fall 56** — „alle Kernabläufe funktionieren mit deaktiviertem
+> JavaScript". Er stand in **A0**, wo es noch keinen einzigen Kernablauf gibt. Er ist nach **A3**
+> gewandert, wo alle Kundenrouten existieren.
+>
+> **Damit stimmt die Summe wieder:** 27 − 1 = 26 in A0, 5 + 1 = 6 in A3. Die Zahlen oben sind die
+> Werte **nach** dieser Verschiebung.
 
 **Die acht Fälle, bei denen die Zuordnung nicht offensichtlich ist:**
 

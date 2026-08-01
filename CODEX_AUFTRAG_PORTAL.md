@@ -141,7 +141,15 @@ Screenshots aus dieser Oberfläche (Abschnitt 7a); gezeichnete Attrappen sind au
 
 ## 2. Lesereihenfolge und Rangfolge
 
-Bei Widersprüchen gilt die **niedrigere Nummer**:
+> **Korrigiert am 01.08.2026 nach externer Prüfung.** Diese Liste stand im Widerspruch zur
+> Rangfolge in `UEBERGABE_DATEILISTE.md`: Dort ist `SARTU_ENTSCHEIDUNGEN_OFFEN.md` **Rang 1** und
+> das Portal-Lastenheft **Rang 4**, hier war es umgekehrt. Ein Bauchat hätte nach eigener Regel
+> anhalten müssen.
+>
+> **Verbindlich ist ab sofort die Rangfolge in `UEBERGABE_DATEILISTE.md`.** Die Liste unten ist
+> nur noch die **Lesereihenfolge** — in welcher Folge man die Unterlagen durcharbeitet.
+
+**Lesereihenfolge** (bei Widersprüchen entscheidet die Rangfolge in `UEBERGABE_DATEILISTE.md`):
 
 1. **`CLAUDE_SARTU_PORTAL_LASTENHEFT_BAUFINAL.md`** — dein Hauptdokument. Enthält Stack, Datenmodell, Statuslogik, jeden Screen, jeden Text, jede E-Mail, Sicherheitsregeln, Testfälle und Abnahme
 2. **`CLAUDE_SARTU_MASTERKONZEPT_FINAL.md`, Abschnitt „10a. Arbeitsverteilung Codex ↔ Claude Code"** — **verbindlich**, siehe Abschnitt 2a unten

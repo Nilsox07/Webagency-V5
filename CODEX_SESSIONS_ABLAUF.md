@@ -47,7 +47,7 @@ Mahnstufen, Auswertungen (Stufe C).
 gezogen — ohne sie hat der Kunde keinen Rückkanal.
 
 **Testumfang:** die Fälle der jeweiligen Etappe nach der Zuordnungstabelle in `REIHENFOLGE.md` —
-A0 = 26 Fälle, A1 = 35, A2 = 20, A3 = 6. Zusammen **87 von 88**. Der verbleibende Fall 19 gehört
+A0 = 26 Fälle, A1 = **34**, A2 = **21**, A3 = 6. Zusammen **87 von 88**. Der verbleibende Fall 19 gehört
 zu Stufe B.
 
 Hier ist am wenigsten zu entscheiden: Datenmodell, Statuslogik, alle Texte und alle E-Mails stehen

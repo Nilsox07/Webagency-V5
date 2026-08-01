@@ -299,17 +299,48 @@ SQL-Dateien von Hand.
 **Ablauf beim ersten Aufruf**, solange die Installation nicht abgeschlossen ist: Jeder Aufruf
 außer der Einrichtung leitet auf `/admin/setup`. Sechs Schritte, jeder einzeln prüfbar:
 
+> **Neu gefasst am 01.08.2026 nach externer Prüfung.** Die vorige Fassung war in dieser Form
+> nicht ausführbar. Drei Fehler, alle in der Reihenfolge:
+>
+> | Fehler | Folge |
+> |---|---|
+> | Schritt 5 erhob **kein Passwort**, §7 verlangt für Admins „E-Mail + Passwort (Argon2id) + TOTP" | Der Admin hätte sich nie anmelden können |
+> | `ENC_KEY` entstand erst in Schritt 6, das TOTP-Geheimnis wird aber in Schritt 5 **verschlüsselt** abgelegt (`totp_secret_enc`) | Verschlüsseln ohne Schlüssel |
+> | Schritt 6 legte `operator_settings` an. Die Tabelle hat **sieben** `NOT NULL`-Felder und eine `CHECK`-Bedingung auf die Steuerangabe — **keines davon wurde je erhoben** | Das `INSERT` wäre gescheitert |
+>
+> **„Kein Vorgabepasswort" hieß: kein voreingestelltes Passwort.** Es hieß nie: gar keins. Der
+> Admin **vergibt** eines.
+
 | # | Schritt | Was geprüft wird |
 |---|---|---|
 | 1 | **Umgebung** | PHP-Version, die sechs Erweiterungen aus §1.4, Schreibrechte auf `/storage`, Verzeichnis außerhalb des Webroots erreichbar |
 | 2 | **Datenbank** | Zugangsdaten eingeben, **Verbindung sofort testen**, Zeichensatz und Kollation prüfen, erst dann speichern |
-| 3 | **Migrationen** | Vorprüfung, dann jede Migration **einzeln** ausführen und einzeln protokollieren. Bei Fehler: sofortiger Abbruch mit Klartextmeldung und der Nummer der gescheiterten Migration. Ablauf und Wiederanlauf siehe unten |
-| 4 | **Mailversand** | SMTP-Zugang eingeben, **Testmail an eine eingegebene Adresse senden**, Empfang muss bestätigt werden, bevor es weitergeht |
-| 5 | **Erstes Adminkonto** | E-Mail, Name, TOTP einrichten. **Kein Vorgabepasswort, kein Standardkonto** |
-| 6 | **Abschluss** | Anwendungsschlüssel erzeugen, `.env` schreiben, Cron-Befehl zum Kopieren anzeigen, Einrichtung sperren |
+| 3 | **Schlüssel** | `SESSION_SECRET` und `ENC_KEY` erzeugen (je 32 Byte aus `random_bytes`, base64) und in die `.env` schreiben. **Vor** allem, was verschlüsselt wird |
+| 4 | **Migrationen** | Vorprüfung, dann jede Migration **einzeln** ausführen und einzeln protokollieren. Bei Fehler: sofortiger Abbruch mit Klartextmeldung und der Nummer der gescheiterten Migration. Ablauf und Wiederanlauf siehe unten |
+| 5 | **Mailversand** | SMTP-Zugang eingeben, **Testmail an eine eingegebene Adresse senden**, Empfang muss bestätigt werden, bevor es weitergeht |
+| 6 | **Betreiberdaten** | Die Pflichtfelder aus `operator_settings`: Firmenname, Straße, PLZ, Ort, Land, E-Mail, inhaltlich Verantwortlicher **und genau eine Steuerangabe** (USt-IdNr. **oder** Steuernummer). Jedes Feld nach `trim()` mindestens ein Zeichen |
+| 7 | **Erstes Adminkonto** | E-Mail, Name, **selbst vergebenes Passwort** (Argon2id, mindestens 12 Zeichen), TOTP einrichten und **einen Code bestätigen**. Kein Vorgabepasswort, kein Standardkonto |
+| 8 | **Abschluss** | Cron-Befehl zum Kopieren anzeigen, `operator_settings.setup_completed_at` setzen, Sperrdatei schreiben, Einrichtung sperren |
 
-**Ergebnis:** `.env` liegt geschrieben vor, das Schema steht, ein Adminkonto existiert, ein
-Testmail ist nachweislich angekommen.
+**Ergebnis:** `.env` liegt geschrieben vor, das Schema steht, die Betreiberdaten stehen, ein
+Adminkonto mit Passwort und geprüftem TOTP existiert, eine Testmail ist nachweislich angekommen.
+
+> **Warum Schritt 6 die Betreiberdaten erzwingt, obwohl Anschrift und Rechtsform „offen" sind.**
+> Sie sind es für die **Außendarstellung** — Impressum, Rechnungen, Angebote. Die Tabelle braucht
+> aber beim `INSERT` Werte, sonst greifen `NOT NULL` und die `CHECK`-Bedingung. **Vorläufige Werte
+> sind erlaubt** und im Adminbereich jederzeit änderbar. Die Startsperre aus §1.4a verhindert
+> weiterhin, dass mit Platzhaltern nach außen gegangen wird — sie prüft auf Inhalt, nicht auf
+> Vorhandensein.
+
+> **Die Sperre der Einrichtung liegt an zwei Orten, beide benannt:**
+>
+> | Ort | Was |
+> |---|---|
+> | Datenbank | `operator_settings.setup_completed_at` (datetime, NULL bis zum Abschluss) |
+> | Datei | `/storage/installed.lock`, außerhalb des Webroots |
+>
+> **`/admin/setup` liefert 404, sobald einer von beiden gesetzt ist.** Nicht beide — einer genügt,
+> sonst hebt ein gelöschtes Lockfile die Sperre auf. Zurücksetzen ist über das Netz nicht möglich.
 
 #### Schritt 3 im Detail — warum „wird zurückgerollt" hier falsch wäre
 
@@ -686,7 +717,7 @@ zulässig. Bei allen anderen Paketen lehnt das Programm `custom` ab. Ist `custom
 `valid_until` nicht in der Vergangenheit liegt. Sonst zeigt das Portal den Hinweis aus §8.3.
 
 ### `invoices`
-`project_id` · `number` (text, UNIQUE) · `milestone` (text: `anzahlung` \| `zwischenrate` \| `schlussrate` \| `betrieb`) · `status` (§5.3) · `net_cents` · `vat_cents` · `gross_cents` · **`paid_cents` (integer, NOT NULL, DEFAULT 0)** · `due_date` (date) · `mollie_payment_url` (text) · `paid_at` · `marked_paid_by_user_id` · `note` (text) · **`reminder_sent_at` (datetime)**
+`project_id` · `number` (text, UNIQUE) · `milestone` (text: `anzahlung` \| `zwischenrate` \| `schlussrate` \| `betrieb`) · `status` (§5.3) · `net_cents` · `vat_cents` · `gross_cents` · **`paid_cents` (integer, NOT NULL, DEFAULT 0)** · `due_date` (date) · `mollie_payment_url` (text) · `paid_at` · `marked_paid_by_user_id` · `note` (text) · **`reminder_sent_at` (datetime)** · **`reminder2_sent_at` (datetime)**
 
 > **`paid_cents` schließt eine Lücke aus dem Audit.** Bisher kannte `status` nur „bezahlt" oder
 > „nicht bezahlt". Zahlt ein Kunde 600 € auf eine Rechnung über 745 €, musste der Admin zwischen
@@ -699,7 +730,11 @@ zulässig. Bei allen anderen Paketen lehnt das Programm `custom` ab. Ist `custom
 > - Jede Änderung an `paid_cents` verlangt den Grundlagentext aus §12 und erzeugt ein Audit-Ereignis
 > - **Überzahlung wird nicht abgewiesen**, sondern gespeichert und im Adminbereich angezeigt
 >
-> `reminder_sent_at` verhindert, dass die Zahlungserinnerung täglich erneut verschickt wird.
+> `reminder_sent_at` und `reminder2_sent_at` verhindern, dass die Zahlungserinnerungen täglich
+> erneut verschickt werden. **Zwei Erinnerungen brauchen zwei Felder** — mit nur einem hätte die
+> zweite Mail ab Tag 7 jeden Tag ausgelöst, weil ihre Bedingung dauerhaft wahr bleibt. Gefunden
+> bei der externen Prüfung am 01.08.2026; Testfall 78 hätte gegen die Spezifikation selbst
+> geschlagen.
 
 ### `tasks`
 `project_id` · `title` (text) · `description` (text) · `why_needed` (text, die Zeile „Warum wir das brauchen") · `kind` (text: `bestaetigung` \| `angabe` \| `upload` \| `freigabe`) · `status` (§5.4) · `sort_order` (integer) · `answer_text` (text) · `completed_at` · `completed_by_user_id` · `required` (boolean, default true)
@@ -766,7 +801,7 @@ Die Betreiberdaten aus §1.4a. **Genau eine Zeile.**
 `registergericht` (varchar(120)) · `registernummer` (varchar(40)) ·
 `inhaltlich_verantwortlich` (varchar(200), NOT NULL) · `bank_iban` (varchar(34)) ·
 `bank_bic` (varchar(11)) · `bank_institut` (varchar(120)) ·
-`kleinunternehmer` (tinyint(1), NOT NULL DEFAULT 0)
+`kleinunternehmer` (tinyint(1), NOT NULL DEFAULT 0) · **`setup_completed_at` (datetime, NULL bis zum Abschluss der Ersteinrichtung — §1.5 Schritt 8)**
 
 **Wie „genau eine Zeile" erzwungen wird** — nicht als Absicht, sondern im Schema:
 
@@ -990,7 +1025,9 @@ bekannt ist.
   geleert** — der übrige Datensatz bleibt. Umsetzung über die tägliche zeitgesteuerte Aufgabe (§1.4)
 - **Protokolle:** Zeitpunkt, Ergebnis, gekürzte IP (letztes Oktett entfernt), `submission_id`.
   **Nie** Name, E-Mail, Telefonnummer oder Antworttexte
-- **Löschfrist:** abgelehnte Anfragen werden **nach 6 Monaten** gelöscht, umgewandelte bleiben als
+- **Löschfrist:** abgelehnte Anfragen werden **nach 6 Monaten** gelöscht, alle übrigen nicht
+  umgewandelten **nach 12 Monaten** (§15.1 — die kürzere Frist gilt für den engeren Fall),
+  umgewandelte bleiben als
   Teil der Kundenakte. Das Löschdatum ist im Adminbereich sichtbar
 - **Betroffenenrechte:** je Datensatz `Datensatz exportieren` (alles, was gespeichert ist) und
   `Endgültig löschen` (echtes `DELETE`, **Ausnahme** von der Archivierungsregel in §3, Regel 13 —
@@ -1239,7 +1276,7 @@ Maßgeblich für die Erinnerung ist der Restbetrag, nicht der Status.
 | Wann | Was |
 |---|---|
 | `due_date` überschritten, Restbetrag > 0, `reminder_sent_at` leer | **eine** Mail an den Kunden, `reminder_sent_at` setzen |
-| 7 Tage nach der ersten Erinnerung, Restbetrag weiterhin > 0 | **zweite** Mail, zusätzlich Hinweis an den Admin |
+| 7 Tage nach `reminder_sent_at`, Restbetrag weiterhin > 0, **`reminder2_sent_at` leer** | **zweite** Mail, zusätzlich Hinweis an den Admin, `reminder2_sent_at` setzen |
 | danach | **keine weitere automatische Mail.** Ab hier entscheidet ein Mensch |
 
 > **Warum das nicht fehlen darf:** §5.3 setzt `ueberfaellig` automatisch, aber bisher erfuhr das
@@ -1859,7 +1896,8 @@ Es gelten die Sprachregeln aus `CLAUDE_SARTU_WEBSITE_LASTENHEFT_BAUFINAL.md` §2
 | `login_tokens` | nach Ablauf | sofortige Löschung durch den täglichen Lauf |
 | `sessions` | nach Verfall | sofortige Löschung |
 | `leads.source_ip` | **30 Tage** | Feld wird geleert, der übrige Datensatz bleibt (§4b.4) |
-| **`leads` insgesamt, nicht umgewandelt** | **12 Monate** | **vollständige Löschung** mit Audit-Ereignis **ohne** die gelöschten Inhalte |
+| **`leads`, Zustand `abgelehnt`** | **6 Monate** | **vollständige Löschung** mit Audit-Ereignis **ohne** die gelöschten Inhalte |
+| **`leads`, sonstige nicht umgewandelte** | **12 Monate** | dasselbe |
 | `invoices` und zugehörige Belege | **8 Jahre** ab Ende des Kalenderjahres | keine automatische Löschung. Vorrang vor jedem Löschverlangen |
 | Uploads einer archivierten Organisation | **8 Jahre**, wenn sie einer Rechnung zugeordnet sind, sonst **12 Monate** | Löschung durch den täglichen Lauf |
 
