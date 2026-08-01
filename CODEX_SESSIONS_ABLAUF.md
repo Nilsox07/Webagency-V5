@@ -97,12 +97,15 @@ Screenshots aus Sitzung 2.
 
 **Deine Rolle:** die Entscheidungen in `KEYWORD_VALIDATION.md` treffen — sie legen Titel und
 Adressen fest, und Adressen ändert man später nur noch mit Weiterleitungen. Dazu die selbst
-geschriebenen Texte prüfen (5 Leistungsseiten, **1 Branchenseite**, 3 Transparenzseiten,
+geschriebenen Texte prüfen (5 Leistungsseiten, **3 Branchenseiten**, 3 Transparenzseiten,
 2 Vergleichsartikel, 8 Lexikonbegriffe) und die gemeldeten Copy-Konflikte entscheiden.
 
-> **Neu seit 01.08.2026:** `/webdesign-handwerk` als erste Branchenseite (§10a) und das
-> Fragenverzeichnis aus Keywordstrategie §3a. Die beiden weiteren Branchenseiten und die fünf
-> fehlenden Ratgeber kommen **nach** den ersten Kunden — nicht zum Launch.
+> **Neu seit 01.08.2026:** drei Branchenseiten nach §10a — Sanitär-Heizung-Klima, Elektrotechnik,
+> Dachdecker. **Jede ist eine vollständige Zielseite mit eingebettetem Bedarfsscheck.** Vor der
+> Abgabe die zwei Prüfungen aus §10a rechnen: Austauschtest und mindestens 400 eigene Wörter.
+> Reißt eine, wird die Seite **nicht** veröffentlicht. Dazu das Fragenverzeichnis aus
+> Keywordstrategie §3a. Weitere Branchen und die fünf fehlenden Ratgeber kommen nach den ersten
+> Kunden.
 
 ---
 

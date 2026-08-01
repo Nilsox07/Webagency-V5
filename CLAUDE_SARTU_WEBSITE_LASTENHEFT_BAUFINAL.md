@@ -1030,49 +1030,101 @@ Kein weiteres Angebot, kein Upsell, keine Zusatz-CTAs.
 
 ---
 
-## 10a. Branchenseiten — der bundesweite Ausbauweg
+## 10a. Branchenseiten — vollständige Zielseiten, keine Durchgangsstationen
 
-**Entschieden 01.08.2026.** Nach `SARTU_ENTSCHEIDUNGEN_OFFEN.md` §1 ist die Branchenseite das
-Ausbauwerkzeug, nicht die Ortsseite: Eine Seite für Flensburg wirkt **nur** in Flensburg, eine
-Seite für Zahnarztpraxen **überall**.
+**Neu gefasst am 01.08.2026.** Die erste Fassung sah **eine** Seite `/webdesign-handwerk` vor. Das
+war falsch: „Handwerk" ist genau die Sammelbezeichnung, die dieses Projekt sonst überall verbietet.
+Ein Malerbetrieb, ein Dachdecker und ein Heizungsbauer haben verschiedene Probleme, verschiedene
+Bilder und verschiedene Kunden.
 
-| # | URL | Wann | Warum diese Branche |
-|---|---|---|---|
-| 1 | `/webdesign-handwerk` | **zum Launch** | größte Zielgruppe, geringste Rechtskomplexität. Eigene Fragen: Notdienst, Einzugsgebiet, Personalsuche |
-| 2 | `/webdesign-arztpraxis` | nach den ersten Kunden dieser Branche | eigene Rechtslage: Heilmittelwerbegesetz, Bewertungen, Terminvergabe |
-| 3 | `/webdesign-kanzlei` | nach den ersten Kunden dieser Branche | eigene Rechtslage: Berufsrecht, Fachanwaltstitel, Mandatsanbahnung |
+### Was Google wirklich verbietet — und was daraus folgt
 
-> **Nur eine zum Launch, nicht drei.** Zwei Gründe: Masterkonzept §23b.7 verlangt, eine Branche
-> vollständig aufzurollen, bevor die nächste beginnt. Und die beiden anderen Seiten brauchen echte
-> Kenntnis der Berufsrechte — geschrieben ohne diese Kenntnis wären sie erfundene Inhalte.
+Wörtlich aus den Spam-Richtlinien:
 
-**Aufbau je Seite** — dasselbe Gerüst wie §10, aber mit branchenspezifischen Inhalten:
+> *„Doorway abuse is when sites or pages are created to rank for specific, similar search queries.
+> They lead users to **intermediate pages** that are not as useful as the final destination."*
+>
+> Beispiel: *„pages targeted at specific regions or cities that **funnel users to one page**"*
 
-1. `H1` mit der Branche im Klartext
-2. `Kurz gesagt` — Antwortabsatz mit Preisanker, 40–60 Wörter
-3. `Was auf die Website eines {Branche} gehört` — **als Liste**, benennbare Einzelpunkte
-4. `Was Sie in dieser Branche nicht schreiben dürfen` — die Rechtsfragen, konkret
-5. `Ein Beispiel` — das Musterprojekt dieser Branche
-6. `Was es kostet` — **dieselben Zahlen wie überall**, keine Branchenpreise
-7. `Häufige Fragen` — **drei**, die ausschließlich diese Branche betreffen
-8. `CTA`
+**Das Kriterium ist: Durchgangsstation oder Ziel.** Eine Seite, auf der ein Malermeister alles
+erfährt und **direkt beauftragen kann**, ist keine Durchgangsstation — sie ist das Ziel. Damit
+fällt der wichtigste Teil des Vorwurfs weg.
 
-**Umfang:** 500–700 Wörter · **Schema:** `Service` + `BreadcrumbList` · genau eine H1
+**Was bleibt, ist das zweite Kriterium:** *„substantially similar pages"*. Dagegen hilft **kein
+Formular**. Nur Inhalt.
 
-### Die Grenze zur Ortsseite — und wie man sie prüft
+> **Die Bedingung in einem Satz:** Jede Branchenseite ist eine vollständige Zielseite mit
+> Konfigurator — **und** enthält mindestens **400 Wörter, die auf keiner anderen Seite der Website
+> stehen**.
 
-Eine Branchenseite unterscheidet sich in **Argumenten, Beispielen und Rechtsfragen**. Eine
-Ortsseite unterscheidet sich nur im Ortsnamen.
+### Aufbau je Seite — vollständige Zielseite
 
-> **Der Austauschtest:** Ersetze das Branchenwort durch ein anderes. Ergibt der Text weiterhin
-> Sinn, ist es keine Branchenseite, sondern eine Ortsseite mit anderem Etikett — und damit
-> derselbe Doorway-Tatbestand (Keywordstrategie §4.1).
+Der Besucher muss die Website **nicht verlassen und nicht weiterklicken**.
 
-Bei `/webdesign-handwerk` scheitert der Test korrekt: Notdienstnummer, Einzugsgebiet und
-Gesellensuche gibt es bei einer Kanzlei nicht.
+| # | Block | Eigen oder geteilt |
+|---|---|---|
+| 1 | `H1` mit der Branche im Klartext | **eigen** |
+| 2 | `Kurz gesagt` — Antwortabsatz mit Preisanker, 40–60 Wörter | **eigen** |
+| 3 | `Was {Branche} bei ihrer Website wirklich beschäftigt` — 3–5 echte Probleme dieser Branche | **eigen** |
+| 4 | `Was auf die Website eines {Branche} gehört` — als Liste | **eigen** |
+| 5 | `Was Sie in dieser Branche beachten müssen` — Rechts- und Fachfragen | **eigen** |
+| 6 | `Ein Beispiel` — das Musterprojekt dieser Branche | **eigen** |
+| 7 | `Was es kostet` — dieselben Zahlen wie überall | geteilt |
+| 8 | `Wie es abläuft` — die sechs Schritte, gekürzt | geteilt |
+| 9 | **`Bedarfsscheck` direkt eingebettet, Branche vorausgefüllt** | geteilt |
+| 10 | `Häufige Fragen` — **drei**, die nur diese Branche betreffen | **eigen** |
+
+**Umfang:** 900–1.300 Wörter · **Schema:** `Service` + `BreadcrumbList` · genau eine H1
+
+> **Der Konfigurator auf der Seite ist der eigentliche Gewinn** — nicht wegen Google, sondern wegen
+> der Abbruchquote. Wer erst zu `/briefing` klicken muss, klickt oft gar nicht. Und die Branche ist
+> bereits beantwortet: ein Feld weniger für den Kunden, eine Angabe mehr für uns.
+>
+> **Technisch:** derselbe Endpunkt und dieselben Schutzmaßnahmen wie in Portal-Lastenheft §4b. Das
+> Feld `branche` wird aus der Seite vorbelegt und landet in `leads.payload`. Kein zweiter Weg, kein
+> zweites Formular.
+
+### Zwei Prüfungen vor der Abgabe, beide hart
+
+**1. Der Austauschtest.** Ersetze das Branchenwort durch ein anderes. Ergibt der Text weiterhin
+Sinn, ist es keine Branchenseite, sondern eine Vorlage mit getauschtem Etikett.
+
+Beispiel, das korrekt scheitert: Notdienst um drei Uhr nachts · Gesellensuche · Bilder von
+Baustellen statt von Büros. Bei einer Steuerkanzlei ergibt keiner dieser Punkte Sinn.
+
+**2. Die Eigenanteilsmessung.** Mindestens **400 Wörter** der Seite dürfen **auf keiner anderen
+Seite** vorkommen. Prüfbar mit einer Textabgleichsuche über alle Branchenseiten.
+
+**Reißt eine der beiden Prüfungen: Die Seite wird nicht veröffentlicht.** Nicht überarbeitet —
+nicht veröffentlicht. Eine Branche, über die sich keine 400 eigenen Wörter schreiben lassen, ist
+eine Branche, über die niemand genug weiß.
+
+### Welche Branchen — gefiltert nach Zahlungsfähigkeit, nicht nach Vollständigkeit
+
+**Nicht jede Branche kann 2.198 € im ersten Jahr zahlen.** Ein Friseursalon mit zwei Stühlen und
+eine Bäckerei mit einer Filiale sind keine Zielgruppe, egal wie viele es davon gibt. Die Liste
+folgt dem Auftragswert und dem echten Bedarf.
+
+| Welle | Branchen | Warum |
+|---|---|---|
+| **1 — zum Launch, drei Stück** | Sanitär-Heizung-Klima · Elektrotechnik · Dachdecker | höchste Auftragswerte im Handwerk, akute Personalnot, Notdienstthema. Keine besondere Rechtslage — schreibbar ohne Fachgutachten |
+| **2 — nach den ersten Kunden** | Garten- und Landschaftsbau · Tischlerei · Malerbetrieb · Fliesenleger · Kfz-Werkstatt | starker Bildbedarf, mittlere bis hohe Auftragswerte |
+| **3 — braucht Rechtskenntnis** | Zahnarztpraxis · Physiotherapie · Steuerkanzlei · Rechtsanwaltskanzlei · Architekturbüro · Immobilienmakler | sehr zahlungsfähig, aber **eigene Berufsrechte**. Erst schreiben, wenn die Regeln geprüft sind |
+
+**Zielgröße: 12 bis 15 Seiten über 18 Monate.** Nicht vierzig.
+
+> **Warum nicht alle auf einmal:** Die Grenze ist nicht Google, sondern **wer die Fachtexte
+> schreibt**. Vierzig Seiten mit je 400 eigenen Wörtern sind 16.000 Wörter Fachwissen über
+> Berufsrechte, Auftragswege und Branchenprobleme. Ohne dieses Wissen entstehen genau die
+> „substantially similar pages", die verboten sind — und die Seiten wären zugleich schlechte
+> Verkaufstexte.
+>
+> **Die Regel bleibt:** eine Branche vollständig, drei bis fünf Referenzen darin, **dann** die
+> nächste (Masterkonzept §23b.7). Ab dem ersten Kunden einer Branche schreibt sich ihre Seite fast
+> von selbst — die Einwände, die Sprache und das Beispiel liegen dann vor.
 
 **Verboten:** Branchenpreise erfinden · Branchenzahlen ohne Quelle · Rechtsaussagen ohne
-Fundstelle · eine vierte Branche anfangen, bevor die erste drei bis fünf Referenzen hat
+Fundstelle · eine Seite veröffentlichen, die eine der beiden Prüfungen reißt
 
 ---
 

@@ -598,6 +598,7 @@ Die Anfragen aus dem Bedarfsscheck der öffentlichen Website (§4b).
 | `b2b_confirmed` | boolean, NOT NULL | muss `true` sein, sonst wird nicht gespeichert |
 | `privacy_confirmed` | boolean, NOT NULL | dito |
 | `source_ip` | varchar(45) | **wird nach 30 Tagen geleert**, s. §4b.4 |
+| `branche_vorbelegt` | varchar(60) | gesetzt, wenn die Anfrage von einer Branchenseite kommt (Website-Lastenheft §10a). **Aus dem Seitenkontext, nie aus einem Formularfeld des Besuchers** — sonst ließe sie sich manipulieren |
 | `landing_page` | text | erste aufgerufene Seite (**nur Pfad**, ohne Abfragezeichenfolge) |
 | `referrer_host` | text | **nur der Hostname** der verweisenden Seite, nie die vollständige Adresse |
 | `utm_source`, `utm_medium`, `utm_campaign`, `utm_term`, `utm_content` | text | Kampagnenkennzeichen, s. §4b.7 |

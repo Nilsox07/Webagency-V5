@@ -431,33 +431,31 @@ existieren. Das ist die Ausbauliste, nach Nutzen sortiert: **16, 3, 5, 11, 4, 15
 
 ### Branchenseiten — der nationale Motor
 
-**Entschieden 01.08.2026.** Sie sind der Ausbauweg, nicht weitere Ortsseiten
-(`SARTU_ENTSCHEIDUNGEN_OFFEN.md` §1).
+**Neu gefasst 01.08.2026.** Vollständige Fassung in Website-Lastenheft §10a. Das Wesentliche:
 
-| Seite | Warum sie trägt |
-|---|---|
-| `/webdesign-handwerk` | größte Zielgruppe, klare Fragen: Notdienst, Einzugsgebiet, Personalsuche |
-| `/webdesign-arztpraxis` | eigene Rechtslage — Heilmittelwerbegesetz, Bewertungen, Terminvergabe |
-| `/webdesign-kanzlei` | eigene Rechtslage — Berufsrecht, Fachanwaltstitel, Mandatsanbahnung |
+**„Handwerk" als eine Seite war ein Fehler.** Ein Dachdecker und ein Heizungsbauer haben
+verschiedene Probleme. Jede Branche bekommt eine eigene Seite mit eigenen Texten.
 
-**Aufbau je Branchenseite** — dasselbe Gerüst wie die Leistungsseiten (§10 im Website-Lastenheft),
-aber mit **branchenspezifischen** Inhalten:
+**Jede Branchenseite ist eine vollständige Zielseite** — Probleme der Branche, Preise, Ablauf und
+der **eingebettete Bedarfsscheck mit vorausgefüllter Branche**. Der Besucher muss nicht
+weiterklicken.
 
-1. `Kurz gesagt` — Antwortabsatz mit Preisanker, 40–60 Wörter
-2. `Was auf die Website eines {Branche} gehört` — als **Liste**, benennbare Einzelpunkte
-3. `Was Sie in dieser Branche nicht schreiben dürfen` — die Rechtsfragen, konkret
-4. `Ein Beispiel` — das Musterprojekt dieser Branche
-5. `Was es kostet` — dieselben Zahlen wie überall
-6. `Häufige Fragen` — **drei**, die nur diese Branche betreffen
-7. `CTA`
+**Das ist der Unterschied zur Doorway-Seite.** Google definiert sie als *„intermediate pages"*, die
+Besucher *„funnel users to one page"*. Eine Seite, auf der man alles erfährt und direkt beauftragt,
+ist keine Zwischenstation, sondern das Ziel.
 
-**Die Grenze zur Ortsseite:** Eine Branchenseite unterscheidet sich in **Argumenten, Beispielen und
-Rechtsfragen**. Eine Ortsseite unterscheidet sich nur im Ortsnamen. Wer eine Branchenseite baut,
-bei der man nur das Branchenwort tauschen könnte, hat eine Ortsseite gebaut — und damit denselben
-Doorway-Tatbestand (§4.1).
+**Was trotzdem gilt:** Das zweite Kriterium heißt *„substantially similar pages"*. Ein Formular
+macht zwei Seiten nicht verschieden — nur Inhalt tut das. Deshalb zwei harte Prüfungen vor jeder
+Veröffentlichung:
 
-**Reihenfolge:** eine Branche vollständig, drei bis fünf Referenzen darin, **dann** die nächste
-(Masterkonzept §23b.7).
+1. **Austauschtest** — Branchenwort ersetzen. Ergibt der Text weiterhin Sinn, ist es keine Branchenseite
+2. **Eigenanteil** — mindestens **400 Wörter**, die auf keiner anderen Seite stehen
+
+**Reißt eine Prüfung, wird die Seite nicht veröffentlicht.**
+
+**Zielgröße 12 bis 15 Seiten über 18 Monate**, gefiltert nach Zahlungsfähigkeit. Zum Launch drei:
+Sanitär-Heizung-Klima, Elektrotechnik, Dachdecker. Die Grenze ist nicht Google, sondern wer die
+Fachtexte schreibt.
 
 ### Sechs Regeln, damit daraus keine Suchwortsammlung wird
 
