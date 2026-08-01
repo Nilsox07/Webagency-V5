@@ -641,7 +641,7 @@ was später strittig werden kann — nicht nur den Preis.
 | `summary` | text, NOT NULL | Ausgangslage und Ziel in Kundensprache |
 | `sitemap` | text, NOT NULL | die geplanten Seiten, eine je Zeile |
 | `inclusions` | text, NOT NULL | was enthalten ist |
-| `exclusions` | text, NOT NULL | was **nicht** enthalten ist — Pflichtfeld, nie leer |
+| `exclusions` | text, NOT NULL | was **nicht** enthalten ist — Pflichtfeld, nie leer. **Muss eine Zeile zur Barrierefreiheit enthalten**, s. u. |
 | `scope_pages` | integer | Umfangsgrenze Seiten (Start 1, Wachstum 8, Platzhirsch 16) |
 | `scope_words` | integer | Umfangsgrenze Wörter (~1.200 / ~3.500 / ~6.500) |
 | `included_feedback_rounds` | integer, NOT NULL | Start 1, Wachstum 2, Platzhirsch 2 — wird bei Annahme nach `projects` übernommen |
@@ -685,7 +685,20 @@ zulässig. Bei allen anderen Paketen lehnt das Programm `custom` ab. Ist `custom
 `valid_until` nicht in der Vergangenheit liegt. Sonst zeigt das Portal den Hinweis aus §8.3.
 
 ### `invoices`
-`project_id` · `number` (text, UNIQUE) · `milestone` (text: `anzahlung` \| `zwischenrate` \| `schlussrate` \| `betrieb`) · `status` (§5.3) · `net_cents` · `vat_cents` · `gross_cents` · `due_date` (date) · `mollie_payment_url` (text) · `paid_at` · `marked_paid_by_user_id` · `note` (text)
+`project_id` · `number` (text, UNIQUE) · `milestone` (text: `anzahlung` \| `zwischenrate` \| `schlussrate` \| `betrieb`) · `status` (§5.3) · `net_cents` · `vat_cents` · `gross_cents` · **`paid_cents` (integer, NOT NULL, DEFAULT 0)** · `due_date` (date) · `mollie_payment_url` (text) · `paid_at` · `marked_paid_by_user_id` · `note` (text) · **`reminder_sent_at` (datetime)**
+
+> **`paid_cents` schließt eine Lücke aus dem Audit.** Bisher kannte `status` nur „bezahlt" oder
+> „nicht bezahlt". Zahlt ein Kunde 600 € auf eine Rechnung über 745 €, musste der Admin zwischen
+> zwei falschen Angaben wählen. Bei Beträgen dieser Größe sind Teilzahlungen üblich.
+>
+> **Regeln:**
+> - `paid_cents = 0` → Status bleibt `gesendet` oder `ueberfaellig`
+> - `0 < paid_cents < gross_cents` → Status **`teilweise_bezahlt`**
+> - `paid_cents >= gross_cents` → Status `bezahlt`, `paid_at` wird gesetzt
+> - Jede Änderung an `paid_cents` verlangt den Grundlagentext aus §12 und erzeugt ein Audit-Ereignis
+> - **Überzahlung wird nicht abgewiesen**, sondern gespeichert und im Adminbereich angezeigt
+>
+> `reminder_sent_at` verhindert, dass die Zahlungserinnerung täglich erneut verschickt wird.
 
 ### `tasks`
 `project_id` · `title` (text) · `description` (text) · `why_needed` (text, die Zeile „Warum wir das brauchen") · `kind` (text: `bestaetigung` \| `angabe` \| `upload` \| `freigabe`) · `status` (§5.4) · `sort_order` (integer) · `answer_text` (text) · `completed_at` · `completed_by_user_id` · `required` (boolean, default true)
@@ -794,11 +807,33 @@ Startsperre (§1.4a) prüft **nach derselben Regel** — leer heißt leer, nicht
 
 ### `legal_texts`
 
-Impressum, Datenschutz und AGB als Inhalte mit Freigabezustand (§1.4a).
+Impressum, Datenschutz, AGB, **Auftragsverarbeitungsvertrag** und die zugehörigen **technischen und
+organisatorischen Maßnahmen** als Inhalte mit Freigabezustand (§1.4a).
 
-`id` (char(36)) · `slug` (varchar(40), NOT NULL, UNIQUE — `impressum` \| `datenschutz` \| `agb`) ·
-`body` (mediumtext, NOT NULL) · `status` (varchar(20), NOT NULL — `entwurf` \| `in_pruefung` \|
-`freigegeben`) · `released_at` (datetime) · `released_by` (varchar(200)) · `version` (int, NOT NULL)
+`id` (char(36)) · `slug` (varchar(40), NOT NULL, UNIQUE — `impressum` \| `datenschutz` \| `agb` \|
+**`avv`** \| **`tom`**) · `body` (mediumtext, NOT NULL) · `status` (varchar(20), NOT NULL —
+`entwurf` \| `in_pruefung` \| `freigegeben`) · `released_at` (datetime) ·
+`released_by` (varchar(200)) · `version` (int, NOT NULL) · `audience` (varchar(20), NOT NULL —
+`oeffentlich` \| `kunde`)
+
+**`audience` steuert die Auslieferung:**
+
+| Wert | Wo sichtbar |
+|---|---|
+| `oeffentlich` | frei erreichbar unter `/impressum`, `/datenschutz`, `/agb` |
+| `kunde` | **nur angemeldet** im Kundenbereich unter `/vertrag` — gilt für `avv` und `tom` |
+
+> **Warum AVV und TOM überhaupt hier stehen** (ergänzt 31.07.2026 nach dem Audit):
+> SARTU betreibt die Website des Kunden und verarbeitet die Anfragen, die dort eingehen. Damit ist
+> SARTU **Auftragsverarbeiter für den Kunden** nach Art. 28 DSGVO. Ein Vertrag darüber ist Pflicht,
+> und zu jedem AVV gehören die technischen und organisatorischen Maßnahmen als Anlage.
+>
+> Beide Texte fehlten in beiden Lastenheften vollständig. `legal_texts` kannte nur drei Slugs, und
+> die Startsperre konnte deshalb nicht auf sie prüfen.
+>
+> **Der AVV wird nicht von einem Werkzeug formuliert.** Er durchläuft dieselbe Strecke wie alle
+> Rechtstexte: `entwurf` → `in_pruefung` → `freigegeben`, freigegeben nur durch einen Menschen mit
+> Datum und Namen der prüfenden Stelle (`SARTU_ENTSCHEIDUNGEN_OFFEN.md` §2).
 
 **Nur `freigegeben` wird öffentlich ausgeliefert.** Den Zustand setzt ausschließlich ein Mensch,
 mit Datum und Namen der prüfenden Stelle — kein automatischer Übergang, keine Voreinstellung.
@@ -1056,6 +1091,28 @@ Die Werte für `delivery_days_min` / `delivery_days_max` sind je Paket vorbelegt
 > Nicht übertragen werden allgemeine Bausteine, die wir projektübergreifend einsetzen, sowie
 > Rechte Dritter (z. B. Schriften oder Bilder), für die die jeweilige Lizenz gilt.
 
+### Barrierefreiheit im Angebot — Pflichtzeile in `exclusions`
+
+**Jedes Angebot muss die Frage beantworten, bevor sie gestellt wird.** Das
+Barrierefreiheitsstärkungsgesetz gilt seit dem 28.06.2025. Ob es den Kunden betrifft, hängt an
+seiner Größe und daran, ob er Verbrauchern etwas verkauft oder buchen lässt.
+
+**Der Text ist noch nicht entschieden** — er hängt an
+`SARTU_ENTSCHEIDUNGEN_OFFEN.md` §6. Solange dort nichts steht, gilt der vorsichtige Stand:
+
+> `Barrierefreiheit nach dem Barrierefreiheitsstärkungsgesetz ist nicht Gegenstand dieses Angebots.
+> Wir bauen nach den üblichen technischen Grundlagen — ausreichender Kontrast, Bedienung per
+> Tastatur, sinnvolle Beschriftungen. Eine Prüfung auf Gesetzeskonformität und ein Nachweis darüber
+> sind darin nicht enthalten und können getrennt beauftragt werden.`
+
+**Die Zeile darf nicht fehlen und nicht umformuliert werden.** Sie beschreibt eine Grenze der
+Leistung. Wer sie weglässt, verkauft stillschweigend etwas mit, das nicht geliefert wird.
+
+> **Warum das im Datenmodell steht und nicht nur im Konzept:** Das BFSG kam im Masterkonzept vor,
+> in **keinem** der beiden Lastenhefte. `exclusions` war Pflichtfeld ohne inhaltliche Vorgabe. Bei
+> einem Platzhirsch-Projekt mit Buchungsfunktion für einen Betrieb oberhalb der
+> Kleinstunternehmensgrenze ist das eine Haftungsfrage, keine Geschmacksfrage.
+
 ### `domain_text` — Vorbelegung
 
 > Ihre Domain wird auf **Ihren Namen** registriert — Sie sind Inhaber, nicht wir. Wir übernehmen
@@ -1139,9 +1196,28 @@ sind Erklärungen mit Namen und Zeitpunkt. Alles andere setzt der Admin. Die fr�
 Kundentexte: **Angebot liegt vor** · **Angenommen am {Datum}** · **Abgelaufen** · **Zurückgezogen**
 
 ### 5.3 `invoices.status`
-`entwurf` (unsichtbar) → `gesendet` → `bezahlt` \| `ueberfaellig` \| `storniert`
-Kundentexte: **Offen — zahlbar bis {Datum}** · **Bezahlt am {Datum}** · **Überfällig seit {Datum}** · **Storniert**
-`ueberfaellig` wird täglich automatisch gesetzt, wenn `status = gesendet` und `due_date < heute`.
+`entwurf` (unsichtbar) → `gesendet` → `teilweise_bezahlt` → `bezahlt` \| `ueberfaellig` \| `storniert`
+Kundentexte: **Offen — zahlbar bis {Datum}** · **Teilweise bezahlt — offen: {Restbetrag}** · **Bezahlt am {Datum}** · **Überfällig seit {Datum}** · **Storniert**
+`ueberfaellig` wird täglich automatisch gesetzt, wenn `due_date < heute` und `paid_cents < gross_cents`.
+
+**`teilweise_bezahlt` und `ueberfaellig` schließen sich nicht aus.** Eine angezahlte Rechnung nach
+Fälligkeit ist **beides**. Angezeigt wird dann `Überfällig seit {Datum} — offen: {Restbetrag}`.
+Maßgeblich für die Erinnerung ist der Restbetrag, nicht der Status.
+
+### 5.3a Zahlungserinnerung — der tägliche Lauf
+
+| Wann | Was |
+|---|---|
+| `due_date` überschritten, Restbetrag > 0, `reminder_sent_at` leer | **eine** Mail an den Kunden, `reminder_sent_at` setzen |
+| 7 Tage nach der ersten Erinnerung, Restbetrag weiterhin > 0 | **zweite** Mail, zusätzlich Hinweis an den Admin |
+| danach | **keine weitere automatische Mail.** Ab hier entscheidet ein Mensch |
+
+> **Warum das nicht fehlen darf:** §5.3 setzt `ueberfaellig` automatisch, aber bisher erfuhr das
+> niemand. Der Kunde meldet sich nur per Anmeldelink an — er sieht das Portal nur, wenn eine Mail
+> ihn hinschickt. Ohne Erinnerung lief die einzige Geldeintreibung über den Zufall.
+>
+> **Kein Mahnwesen.** Zwei Erinnerungen, dann übernimmt der Mensch. Mahnstufen, Gebühren und
+> Zinsen bleiben Stufe C.
 
 ### 5.4 `tasks.status`
 `offen` → `erledigt`
@@ -1223,6 +1299,26 @@ Der Betrieb („Rundum-Schutz") beginnt regulär mit dem **produktiven Betrieb d
 - H1: `Prüfen Sie Ihr Postfach`
 - Text: `Wenn ein Zugang zu dieser Adresse besteht, ist der Anmeldelink unterwegs. Er gilt 15 Minuten und lässt sich einmal verwenden.`
 - Hinweis: `Nichts angekommen? Sehen Sie im Spam-Ordner nach oder fordern Sie den Link erneut an.`
+- **Notweg, immer sichtbar** (Werte aus `operator_settings`, §1.4a):
+  > `Kommt der Link auch nach ein paar Minuten nicht an, rufen Sie uns an: {telefon}. Oder schreiben Sie an {email}. Wir richten Ihnen den Zugang von Hand ein.`
+
+> ### 6.3 Warum der Notweg Pflicht ist
+>
+> **Der Anmeldelink ist der einzige Weg ins Portal.** Kommt die Mail nicht an — Spamfilter,
+> abgelehnt vom Mailserver des Kunden, Tippfehler in der Adresse —, ist der Kunde **ausgesperrt**.
+> Und er kann es niemandem melden, weil der Meldeweg selbst im Portal liegt.
+>
+> Postfächer kleiner Betriebe liegen häufig bei Providern mit harten Filtern. Das ist kein
+> Randfall.
+>
+> **Die Telefonnummer steht auf `/login`, auf der Bestätigungsseite und in jeder Anmeldemail.**
+> Sie kommt aus den Betreiberdaten, nie aus dem Quelltext.
+>
+> **Kein zusätzliches Passwort.** Das würde die Entscheidung gegen Passwörter umkehren und eine
+> zweite Angriffsfläche schaffen. Der Notweg ist ein Mensch, kein zweites Verfahren.
+>
+> **Der Admin sieht je Kunde:** wann zuletzt ein Link gesendet wurde und ob er verwendet wurde.
+> Ein gesendeter, nie verwendeter Link ist das Warnzeichen für ein Zustellproblem.
 
 **Ungültiger oder abgelaufener Link**
 - H1: `Dieser Link gilt nicht mehr`
@@ -1285,7 +1381,13 @@ Button: `Portal öffnen`
 
 ## 8. Kundenportal — Screen für Screen
 
-**Navigation (feste Reihenfolge):** Übersicht · Angebot · Aufgaben · Vorschau · Rechnungen · Domain · Inhalte · Hilfe
+**Navigation (feste Reihenfolge):** Übersicht · Angebot · Aufgaben · Vorschau · Rechnungen · Domain · Inhalte · **Vertrag** · Hilfe
+
+**`/vertrag`** zeigt die Rechtstexte mit `audience = kunde` aus `legal_texts` — den
+Auftragsverarbeitungsvertrag und die technischen und organisatorischen Maßnahmen (§15.2).
+Zusätzlich eine Schaltfläche `Zur Kenntnis genommen`, die Zeitpunkt, Name und IP speichert und ein
+Audit-Ereignis erzeugt. **Keine Zustimmung, keine Sperre** — der Vertrag gilt durch den Hauptvertrag,
+die Bestätigung ist ein Nachweis der Bereitstellung.
 Menüpunkte, für die es noch nichts gibt, werden **angezeigt und erklärt**, nicht ausgeblendet (siehe Leerzustände).
 
 Jede Seite: `<h1>` als Seitentitel, Seitentitel im `<title>` als `{Seite} — SARTU-Portal`.
@@ -1301,6 +1403,28 @@ Jede Seite: `<h1>` als Seitentitel, Seitentitel im `<title>` als `{Seite} — SA
 - Wenn nichts zu tun ist: `Nichts zu tun — wir melden uns, sobald etwas ansteht.`
 
 **Block 2 — Projektstand:** Projekttitel, Paketname im Klartext (`Start` / `Wachstum` / `Platzhirsch` / `Sonderprojekt`), Kundentext des Status, Fortschrittsanzeige über die Stationen: `Angebot · Zahlung · Angaben · Produktion · Vorschau · Abnahme · Online`. Die aktuelle Station ist markiert.
+
+**Welcher Status auf welcher Station steht — verbindlich:**
+
+| Status | Station |
+|---|---|
+| `angebot_offen`, `angebot_angenommen` | **Angebot** |
+| `zahlung_offen` | **Zahlung** |
+| `briefing` | **Angaben** |
+| `produktion`, `korrektur` | **Produktion** |
+| `vorschau` | **Vorschau** |
+| `abnahme`, `launch_vorbereitung` | **Abnahme** |
+| `live` | **Online** |
+| `pausiert` | **keine Station wird markiert.** Stattdessen erscheint über der Anzeige: `Pausiert — {pause_reason}` |
+
+> **Ergänzt nach dem Audit.** Sieben Stationen für elf Status: Für `angebot_angenommen`,
+> `korrektur`, `launch_vorbereitung` und `pausiert` war die Zuordnung nicht bestimmt. Ohne
+> Festlegung hätte der Bau geraten — und die Anzeige hätte in vier Fällen etwas anderes gesagt
+> als der Text darunter.
+>
+> **`korrektur` gehört zu Produktion, nicht zu Vorschau.** Aus Sicht des Kunden wird gearbeitet,
+> nicht angesehen. **`launch_vorbereitung` gehört zu Abnahme, nicht zu Online** — online ist die
+> Seite erst, wenn sie erreichbar ist.
 
 **Block 3 — Offene Punkte:** höchstens drei Zeilen, jeweils mit Link: offene Aufgaben (`{n} offene Aufgaben`), offene Rechnung (`Rechnung {Nummer} — zahlbar bis {Datum}`), ausstehende Freigabe.
 
@@ -1580,8 +1704,28 @@ Alle Mails: Absender `MAIL_FROM`, Anrede `Guten Tag {Vorname},`, Grußformel `Fr
 | Website online | `Ihre Website ist online` | `Ihre Website ist erreichbar unter {URL}. Ab jetzt übernehmen wir den laufenden Betrieb.` |
 | Öffnungszeiten veröffentlicht | `Ihre Öffnungszeiten sind aktualisiert` | `Ihre Änderung ist jetzt auf der Website sichtbar.` |
 | Antwort auf Nachricht | `Antwort auf Ihre Nachricht` | Antworttext + Portallink |
+| **Zahlungserinnerung** (§5.3a, erste) | `Erinnerung: Rechnung {Nummer} ist fällig` | `Die Rechnung {Nummer} über {Restbetrag} war am {Datum} fällig. Sie können direkt im Portal bezahlen. Haben Sie bereits überwiesen, ist diese Nachricht gegenstandslos.` |
+| **Zahlungserinnerung** (zweite, nach 7 Tagen) | `Zweite Erinnerung: Rechnung {Nummer}` | derselbe Aufbau, zusätzlich: `Bitte melden Sie sich bei uns, wenn etwas unklar ist.` — parallel Hinweis an den Admin |
+| **Teilzahlung verbucht** | `Teilzahlung erhalten` | `Wir haben {Betrag} erhalten. Offen sind noch {Restbetrag}.` |
+| **Zahlungsstatus zurückgenommen** | `Korrektur zu Rechnung {Nummer}` | `Wir haben den Zahlungsstatus der Rechnung {Nummer} korrigiert. Grund: {Grundlagentext}. Bitte prüfen Sie den Stand im Portal.` |
+| **Angebot läuft in 3 Tagen ab** | `Ihr Angebot gilt noch bis {Datum}` | `Ihr Angebot läuft am {Datum} ab. Danach stellen wir es Ihnen gern neu aus — melden Sie sich einfach.` |
+| **Projekt pausiert** | `Ihr Projekt pausiert` | `Wir haben Ihr Projekt vorübergehend angehalten. Grund: {pause_reason}. Sobald es weitergeht, melden wir uns.` |
+| **Projekt wird fortgesetzt** | `Es geht weiter` | `Ihr Projekt läuft wieder. Ihren nächsten Schritt finden Sie im Portal.` |
 
 **Keine** Werbemails, keine Newsletter, keine Massenversendung.
+
+> **Sieben Zeilen ergänzt am 31.07.2026 nach dem Audit.** Vier Zustände traten ein, ohne dass
+> jemand davon erfuhr:
+>
+> | Zustand | Vorher |
+> |---|---|
+> | Rechnung wird überfällig | Status sprang automatisch um, **keine Mail** |
+> | Zahlungsstatus zurückgenommen | §12 versprach eine Benachrichtigung, §10 kannte sie nicht |
+> | Angebot läuft ab | Sackgasse, aus der nur Handarbeit herausführte |
+> | Projekt pausiert | `pause_reason` war Pflichtfeld und wurde im Portal angezeigt — gesehen hat es niemand |
+>
+> Der Kunde meldet sich ausschließlich per Anmeldelink an. **Was ihm keine Mail mitteilt, erfährt
+> er nicht.**
 
 ---
 
@@ -1589,6 +1733,8 @@ Alle Mails: Absender `MAIL_FROM`, Anrede `Guten Tag {Vorname},`, Grußformel `Fr
 
 - Erlaubt: `jpg`, `jpeg`, `png`, `webp`, `svg`, `pdf`, `docx`, `zip`
 - Höchstens **20 MB** je Datei, **10** Dateien je Aufgabe
+- **Höchstens 500 MB je Organisation insgesamt.** Bei Überschreitung wird abgelehnt: `Ihr Speicher ist voll (500 MB). Bitte schreiben Sie uns — wir schaffen Platz.` Der Admin sieht den Verbrauch je Kunde und kann die Grenze einzeln anheben
+- Vor jedem Upload wird der **freie Platz auf dem Server** geprüft. Unter 1 GB: Ablehnung mit Klartextmeldung und Hinweis an den Admin, statt eines abgebrochenen Schreibvorgangs
 - Prüfung von Endung **und** MIME-Typ; bei Abweichung ablehnen
 - Speicherung unter `UPLOAD_DIR` mit UUID-Dateinamen, **außerhalb** des öffentlich ausgelieferten Verzeichnisses
 - Auslieferung nur über eine Route, die Session und Organisationszugehörigkeit prüft
@@ -1672,10 +1818,43 @@ Es gelten die Sprachregeln aus `CLAUDE_SARTU_WEBSITE_LASTENHEFT_BAUFINAL.md` §2
 - Server und Daten in **Deutschland/EU**
 - Datensparsamkeit: nur erheben, was der Prozess braucht
 - **Kein** Tracking, **keine** Analyse-Werkzeuge, **keine** externen Schriften oder Skripte im Portal → kein Cookie-Banner nötig; die Session ist technisch erforderlich
-- Aufbewahrung: Audit-Ereignisse 3 Jahre, Anmeldetoken nach Ablauf löschen, Sessions nach Verfall löschen
-- Auskunft und Löschung: Adminfunktion `Daten exportieren` (JSON je Organisation) und `Organisation archivieren`. Vollständige Löschung nur manuell nach Prüfung — gesetzliche Aufbewahrungspflichten für Rechnungen gehen vor
-- Auftragsverarbeitungsvertrag mit Hoster und Mailversand ist Sache des Betreibers, nicht des Codes
-- Rechtstexte des Portals (Impressum, Datenschutz) werden **verlinkt**, nicht selbst formuliert
+- Auskunft und Löschung: Adminfunktion `Daten exportieren` (JSON je Organisation) und `Organisation archivieren`. Vollständige Löschung nur manuell nach Prüfung
+- Rechtstexte des Portals werden **verlinkt**, nicht selbst formuliert
+
+### 15.1 Aufbewahrungs- und Löschfristen — als Zahl, sonst nicht ausführbar
+
+| Datensatz | Frist | Was danach passiert |
+|---|---|---|
+| `audit_events` | **3 Jahre** | Löschung, ohne Ersatzeintrag |
+| `login_tokens` | nach Ablauf | sofortige Löschung durch den täglichen Lauf |
+| `sessions` | nach Verfall | sofortige Löschung |
+| `leads.source_ip` | **30 Tage** | Feld wird geleert, der übrige Datensatz bleibt (§4b.4) |
+| **`leads` insgesamt, nicht umgewandelt** | **12 Monate** | **vollständige Löschung** mit Audit-Ereignis **ohne** die gelöschten Inhalte |
+| `invoices` und zugehörige Belege | **8 Jahre** ab Ende des Kalenderjahres | keine automatische Löschung. Vorrang vor jedem Löschverlangen |
+| Uploads einer archivierten Organisation | **8 Jahre**, wenn sie einer Rechnung zugeordnet sind, sonst **12 Monate** | Löschung durch den täglichen Lauf |
+
+> **Zwei Lücken aus dem Audit geschlossen:**
+>
+> 1. **Nicht umgewandelte Anfragen wurden nie gelöscht.** Geleert wurde nur die IP. Name, Firma,
+>    E-Mail, Telefonnummer und Freitext blieben unbegrenzt liegen. Die DSGVO verlangt eine
+>    Speicherbegrenzung — jetzt zwölf Monate
+> 2. **„Gesetzliche Aufbewahrungspflichten gehen vor" stand ohne Zahl da.** Eine Regel ohne Zahl
+>    kann eine Löschfunktion nicht ausführen. Für Buchungsbelege sind es acht Jahre
+
+### 15.2 Auftragsverarbeitung — zwei Richtungen, beide nötig
+
+| Richtung | Wer ist was | Wer sorgt dafür |
+|---|---|---|
+| **SARTU → Kunde** | Der Kunde ist Verantwortlicher, **SARTU ist Auftragsverarbeiter** — SARTU betreibt seine Website und verarbeitet die dort eingehenden Anfragen | **Vertrag im Kundenbereich** unter `/vertrag`, aus `legal_texts` mit `slug = avv`. Anlage: `tom` |
+| **SARTU → Dienstleister** | SARTU ist Verantwortlicher, Hoster und Mailversand sind Auftragsverarbeiter | Sache des Betreibers, außerhalb des Codes |
+
+**Was das Programm leistet:** Es zeigt den Vertrag an, protokolliert, wann der Kunde ihn zur
+Kenntnis genommen hat, und blockiert die Veröffentlichung, solange er im Zustand `entwurf` oder
+`in_pruefung` steht. **Es formuliert ihn nicht.**
+
+**Was der Betreiber leisten muss und kein Programm abnimmt:** das Verzeichnis von
+Verarbeitungstätigkeiten nach Art. 30 DSGVO. Es gehört in die Betriebsunterlagen, nicht in die
+Anwendung.
 
 ---
 
@@ -1786,8 +1965,17 @@ Es gelten die Sprachregeln aus `CLAUDE_SARTU_WEBSITE_LASTENHEFT_BAUFINAL.md` §2
 75. `up` ohne angegebene Sicherungsdatei bricht ab — ebenso bei angegebener, aber fehlender oder leerer Datei
 76. Während `up` liefern Kunden- und Adminbereich `503`; nach Erfolg ist der Wartungsmodus aufgehoben, nach Abbruch bleibt er bestehen
 
-> **Zur Anzahl:** Die Liste hat **76 durchnummerierte plus fünf mit Buchstabenzusatz** (5a, 5b, 40a,
-> 40b, 53a/53b als Teilung von 53) — zusammen **81 Testfälle**. Frühere Fassungen sprachen von „59";
+**Geld, Fristen und Zugang (ergänzt nach dem Audit vom 31.07.2026):**
+77. `paid_cents` zwischen 0 und `gross_cents` ergibt Status `teilweise_bezahlt` — **nicht** `bezahlt`, auch nicht bei einem Cent Differenz
+78. Eine überfällige Rechnung löst **genau eine** Erinnerung aus; ein zweiter Lauf am selben oder am Folgetag verschickt **keine weitere**
+79. Ein Upload, der die Organisationsgrenze von 500 MB überschreitet, wird abgelehnt — auch wenn die Einzeldatei unter 20 MB liegt
+80. Eine nicht umgewandelte Anfrage älter als 12 Monate wird vom täglichen Lauf gelöscht; das Audit-Ereignis enthält **keine** der gelöschten Inhalte
+81. `legal_texts` mit `slug = avv` im Zustand `entwurf` blockiert die produktive Veröffentlichung (§14a)
+82. `legal_texts` mit `audience = kunde` ist **öffentlich nicht abrufbar** und angemeldet sichtbar
+83. `/login` zeigt die Telefonnummer aus `operator_settings`. Ist dort keine gesetzt, erscheint die E-Mail-Adresse — **nie** ein Wert aus dem Quelltext
+
+> **Zur Anzahl:** Die Liste hat **83 durchnummerierte plus fünf mit Buchstabenzusatz** (5a, 5b, 40a,
+> 40b, 53a/53b als Teilung von 53) — zusammen **88 Testfälle**. Frühere Fassungen sprachen von „59";
 > das war schon damals um vier Fälle zu niedrig. Maßgeblich ist die Liste, nicht die Zahl.
 >
 > **Welcher Fall in welcher Etappe entsteht, steht in `REIHENFOLGE.md`** — eine Zeile je Fall,
@@ -1802,7 +1990,7 @@ Es gelten die Sprachregeln aus `CLAUDE_SARTU_WEBSITE_LASTENHEFT_BAUFINAL.md` §2
 - [ ] Alle Statuswerte zeigen dem Kunden Klartext, nirgends interne Codes
 - [ ] Formate aus §4a eingehalten: deutsche Datums- und Geldformate, Europe/Berlin, 19 % USt., Beträge als Cent gespeichert, keine leeren Werte als `null` sichtbar
 - [ ] **`php -l` läuft über jede PHP-Datei ohne Fehler** — billigste Prüfung überhaupt, fängt Syntaxfehler ab, bevor überhaupt ein Test startet. Gehört in den Testlauf, nicht in die Handarbeit
-- [ ] Alle 81 Testfälle aus §16 laufen automatisiert und grün
+- [ ] Alle 88 Testfälle aus §16 laufen automatisiert und grün
 - [ ] `tests/TenantIsolationTest.php` vorhanden, vollständig, nicht abgeschwächt
 - [ ] Kunden- und Adminzugriff laufen über **getrennte** Datenzugriffsschichten (§3 Regel 2a); kein gemeinsamer Codepfad lässt den Organisationsfilter weg
 - [ ] Rechenregeln greifen: Erstjahreswert, Zahlungsplan `custom`, Ratensumme (§4)
@@ -1835,12 +2023,13 @@ Es gelten die Sprachregeln aus `CLAUDE_SARTU_WEBSITE_LASTENHEFT_BAUFINAL.md` §2
 
 1. Lauffähiges Portal im Repository
 2. **`README.md`**: Voraussetzungen, Einrichtung, Umgebungsvariablen, Migration, Seed, Start, Deployment auf Hetzner, Backup-Hinweis (Datenbank **und** Upload-Verzeichnis)
-3. **Testbericht**: alle 81 Fälle aus §16 mit Ergebnis
+3. **Testbericht**: alle 88 Fälle aus §16 mit Ergebnis
 4. **Messwerte**: Antwortzeiten der Kernseiten, Seitengröße
 5. **Offene-Punkte-Liste**: alles, was bewusst nicht gebaut wurde (§0.3), plus alles, was du melden musst
 6. **Screenshot-Satz** aus der echten Oberfläche für die Website — mit Musterdaten, je einmal Desktop und Mobil.
    **Nach Stufe A verfügbar:** Cockpit · Bedarfsscheck-Antworten · Angebot · Aufgaben · Uploads · Vorschau mit Rundenanzeige · Rechnungen (Status manuell gesetzt).
-   **Erst nach Stufe B:** Öffnungszeiten · Nachrichten an den Betreuer.
+   **Erst nach Stufe B:** ausschließlich die Öffnungszeiten.
+   **Nachrichten an den Betreuer gehören seit dem Audit vom 31.07.2026 zu A2** und müssen vorhanden sein.
    **Zu Stufe A gehören und müssen vorhanden sein:** Bedarfsscheck und Anfrageliste (A1) ·
    Domainstatus (A3). Verschoben ist beim Domainstatus nur die Registrar-Anbindung, nicht die
    Ansicht. **„Anfragen von der Website" bedeutet hier ausschließlich die Bedarfsschecks der

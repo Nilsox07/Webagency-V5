@@ -4,6 +4,33 @@
 **Geprüft:** 16 Bauunterlagen, 8.839 Zeilen. Code: **0 Zeilen.**
 **Zweck:** Der letzte Durchgang, bevor gebaut wird. Danach kostet jeder Fund das Zehnfache.
 
+> ## Stand der Abarbeitung — 31.07.2026
+>
+> **Alle drei Sperren und alle zehn Fehler sind eingearbeitet.** Was jetzt noch offen ist, sind
+> ausschließlich Entscheidungen, die einem Menschen gehören.
+>
+> | Fund | Stand | Wo eingearbeitet |
+> |---|---|---|
+> | **S1** kein Rückkanal | **behoben** | `support_messages` von B nach **A2** · `REIHENFOLGE.md` |
+> | **S2** AVV fehlt | **behoben** | `legal_texts` um `avv` und `tom` erweitert · neues Feld `audience` · Portal §15.2 · Kundenbildschirm `/vertrag` · Startsperre §14a Bedingung 8 |
+> | **S3** Anmeldelink einziger Weg | **behoben** | Portal §6.3 — Telefonnummer aus den Betreiberdaten auf `/login`, auf der Bestätigungsseite und in jeder Anmeldemail |
+> | **F1** Benachrichtigung fehlt in §10 | **behoben** | §10, Zeile `Zahlungsstatus zurückgenommen` |
+> | **F2** keine Zahlungserinnerung | **behoben** | neues §5.3a · zwei Mails · Feld `reminder_sent_at` |
+> | **F3** Angebot läuft still ab | **behoben** | §10, Mail drei Tage vorher |
+> | **F4** `pausiert` ohne Mail | **behoben** | §10, zwei Zeilen für Pause und Fortsetzung |
+> | **F5** 7 Stationen für 11 Status | **behoben** | §8.1, vollständige Zuordnungstabelle |
+> | **F6** Teilzahlung nicht abbildbar | **behoben** | Feld `paid_cents` · Status `teilweise_bezahlt` · §5.3 |
+> | **F7** kein Speicherlimit | **behoben** | §11 — 500 MB je Organisation, Prüfung des freien Serverplatzes |
+> | **F8** Anfragen ohne Löschfrist | **behoben** | neues §15.1 — 12 Monate |
+> | **F9** Aufbewahrungsfrist ohne Zahl | **behoben** | §15.1 — acht Jahre für Rechnungen |
+> | **F10** `Lumi`, toter Verweis `§2.3` | **behoben** | Website-Lastenheft |
+> | **E1** BFSG | **strukturell vorbereitet, inhaltlich offen** | Pflichtzeile in `exclusions` (§4c) mit vorsichtigem Vorbelegungstext · Entscheidung als `SARTU_ENTSCHEIDUNGEN_OFFEN.md` §6 |
+> | **E2** ein Benutzer je Kunde | **dokumentiert, Formulierung offen** | §7 |
+> | **E3** Vertragsende im Portal | **bewusst verschoben** | §7a — spätestens vor dem zwölften Betriebsmonat |
+>
+> **Sieben neue Testfälle** (77–83) prüfen die neuen Regeln. Gesamtzahl **88**, Zuordnung je Fall
+> in `REIHENFOLGE.md`.
+
 ---
 
 ## Was sauber ist

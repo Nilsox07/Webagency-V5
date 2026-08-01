@@ -15,7 +15,7 @@ merkt es, bevor gebaut wird.
 | # | Datei | Rolle | Ohne sie? |
 |---|---|---|---|
 | 1 | `CODEX_AUFTRAG_PORTAL.md` | die Anweisung selbst | — |
-| 2 | `CLAUDE_SARTU_PORTAL_LASTENHEFT_BAUFINAL.md` | **Hauptdokument** — Stack, Datenmodell, jeder Screen, jeder Text, 81 Testfälle | **Abbruch.** Nicht baubar |
+| 2 | `CLAUDE_SARTU_PORTAL_LASTENHEFT_BAUFINAL.md` | **Hauptdokument** — Stack, Datenmodell, jeder Screen, jeder Text, 88 Testfälle | **Abbruch.** Nicht baubar |
 | 3 | `CLAUDE_SARTU_DESIGN_BRIEFING_AUSFUEHRUNG.md` | Vorgehen für die visuelle Ebene | Abbruch |
 | 4 | `CLAUDE_SARTU_MASTERKONZEPT_FINAL.md` | Nachschlagewerk + verbindliche Arbeitsverteilung §10a | Abbruch |
 | 5 | `SARTU_ENTSCHEIDUNGEN_OFFEN.md` | **alle Platzhalter und Sperren** — Standort, Rechtstexte, Design, Betriebsumgebung | **Abbruch.** Sonst werden Werte erfunden |
@@ -124,7 +124,7 @@ Dateien und der Bestätigung, dass das Hauptdokument vollständig ist.
 | Sitzung | Was entsteht | Endet mit |
 |---|---|---|
 | 1 | `IMPLEMENTATION_PLAN.md`, Projektgerüst, 2–3 Designvarianten | **Stopp** — der Mensch entscheidet |
-| 2 | Kundenbereich **Stufe A** (A0–A3), 80 der 81 Tests, Screenshots der Stufe | Bericht |
+| 2 | Kundenbereich **Stufe A** (A0–A3), 87 der 88 Tests, Screenshots der Stufe | Bericht |
 | — | **Gate 3:** drei Selbstpflege-Funktionen bauen oder Copy streichen (`SARTU_ENTSCHEIDUNGEN_OFFEN.md` §5a) | **Stopp** |
 | 3 | Kundenbereich **Stufe B**, Testfall 19, vollständiger Screenshot-Satz | Bericht |
 | 4 | Öffentliche Seiten vollständig | Bericht |

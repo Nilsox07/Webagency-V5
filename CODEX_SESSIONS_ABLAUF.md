@@ -40,11 +40,14 @@ dokumentiert und blockieren den Bau nicht.
 aus `REIHENFOLGE.md`, bis ein Pilotkunde live gehen kann. Am Ende der **Screenshot-Satz der
 gebauten Stufe**.
 
-**Nicht in dieser Sitzung:** Öffnungszeiten, Nachrichten an den Betreuer (Stufe B) · Mollie,
-Registrar, Mahnwesen, Auswertungen (Stufe C).
+**Nicht in dieser Sitzung:** Öffnungszeiten mit Ausnahmen (Stufe B) · Mollie, Registrar,
+Mahnstufen, Auswertungen (Stufe C).
+
+**Neu in Stufe A seit dem Audit vom 31.07.2026:** Nachrichten an den Betreuer sind von B nach **A2**
+gezogen — ohne sie hat der Kunde keinen Rückkanal.
 
 **Testumfang:** die Fälle der jeweiligen Etappe nach der Zuordnungstabelle in `REIHENFOLGE.md` —
-A0 = 24 Fälle, A1 = 33, A2 = 17, A3 = 6. Zusammen **80 von 81**. Der verbleibende Fall 19 gehört
+A0 = 26 Fälle, A1 = 35, A2 = 20, A3 = 6. Zusammen **87 von 88**. Der verbleibende Fall 19 gehört
 zu Stufe B.
 
 Hier ist am wenigsten zu entscheiden: Datenmodell, Statuslogik, alle Texte und alle E-Mails stehen
@@ -71,8 +74,8 @@ merkt, dass drei beworbene Funktionen fehlen, hat die Texte zweimal geschrieben.
 
 ## Sitzung 3 — Kundenbereich, **Stufe B** *(kurz)*
 
-**Was entsteht:** Öffnungszeiten mit Ausnahmen, Nachrichten an den Betreuer, dazu das Ergebnis von
-Gate 3. Drei Tabellen, Testfall 19, und der **vollständige** Screenshot-Satz.
+**Was entsteht:** Öffnungszeiten mit Ausnahmen, dazu das Ergebnis von Gate 3. Zwei Tabellen,
+Testfall 19, und der **vollständige** Screenshot-Satz.
 
 **Warum eine eigene Sitzung:** Erst danach darf die öffentliche Website live gehen
 (`REIHENFOLGE.md`, „Zwei Livegänge"). Ohne diese Sitzung gäbe es keinen Ort, an dem Stufe B
@@ -240,11 +243,11 @@ Rechtstexte · echte Fotos · die Freigabe eigener Texte. Alles davon steht in
 > läuft ab A0 immer. Testfälle zu noch nicht gebauten Funktionen werden **nicht** angelegt, nicht
 > übersprungen und nicht auskommentiert; sie entstehen in ihrer Etappe.
 >
-> **Am Ende von Stufe A:** `IMPLEMENTATION_SUMMARY.md` mit der Zuordnung, welche der 81 Testfälle
+> **Am Ende von Stufe A:** `IMPLEMENTATION_SUMMARY.md` mit der Zuordnung, welche der 88 Testfälle
 > zu welcher Etappe gehören und welche noch offen sind. Dazu der **Screenshot-Satz der gebauten
-> Stufe** nach Abschnitt 7a — Öffnungszeiten und Nachrichten an den Betreuer gehören zu Stufe B und
-> fehlen dort zulässigerweise. **Der Domainstatus gehört zu A3** und muss vorhanden sein; verschoben
-> ist dort nur die Registrar-Anbindung, nicht die Ansicht.
+> Stufe** nach Abschnitt 7a — **nur die Öffnungszeiten** gehören zu Stufe B und fehlen dort
+> zulässigerweise. **Vorhanden sein müssen:** Domainstatus (A3) und Nachrichten an den Betreuer
+> (A2). Beim Domainstatus ist nur die Registrar-Anbindung verschoben, nicht die Ansicht.
 >
 > **Die vollständige Definition of Done gilt für den Livegang, nicht für Stufe A.**
 >
@@ -259,8 +262,8 @@ Rechtstexte · echte Fotos · die Freigabe eigener Texte. Alles davon steht in
 > Fortsetzung im Repository `github.com/Nilsox07/Webagency-V5`.
 >
 > Stufe A steht, ein Pilotkunde ist live. Baue jetzt **Stufe B** aus `REIHENFOLGE.md`:
-> Öffnungszeiten mit Ausnahmen und Nachrichten an den Betreuer. Drei Tabellen —
-> `business_hours`, `business_hours_exceptions`, `support_messages`.
+> Öffnungszeiten mit Ausnahmen. Zwei Tabellen — `business_hours` und
+> `business_hours_exceptions`. **`support_messages` gehört seit dem Audit zu A2** und steht bereits.
 >
 > **Das Ergebnis von Gate 3 steht in `SARTU_ENTSCHEIDUNGEN_OFFEN.md` §5a.** Lies es zuerst. Ist
 > dort nichts entschieden, baust du **nur** die drei Tabellen oben und meldest den offenen Punkt.

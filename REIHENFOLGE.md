@@ -2,7 +2,7 @@
 
 **Stand:** 28.07.2026
 **Zweck:** Verhindern, dass der Kundenbereich in voller Ausbaustufe entsteht, bevor der erste Kunde
-existiert. Das Portal-Lastenheft beschreibt **20 Tabellen und 81 Testfälle**. Wer es von vorn nach
+existiert. Das Portal-Lastenheft beschreibt **20 Tabellen und 88 Testfälle**. Wer es von vorn nach
 hinten abarbeitet, baut Monate an Automatik, bevor jemand sie benutzt.
 
 > **Warnung aus dem eigenen Konzept**, `CLAUDE_SARTU_MASTERKONZEPT_FINAL.md` Zeile 12:
@@ -32,7 +32,7 @@ nach Vertragsschluss.
 ## Rangfolge — diese Datei überschreibt nur den Zeitpunkt
 
 **Wichtig, sonst hält ein ausführender Agent an dieser Datei an:** Der Portalauftrag erklärt das
-Portal-Lastenheft zur Quelle mit der höchsten Priorität. Es beschreibt alle Screens und alle 81
+Portal-Lastenheft zur Quelle mit der höchsten Priorität. Es beschreibt alle Screens und alle 88
 Testfälle **ohne Zeitangabe**. Diese Datei widerspricht dem nicht, sie ergänzt eine Dimension.
 
 > **`REIHENFOLGE.md` überschreibt für den zeitlichen Umfang** Portal-Lastenheft §0.2, §16 und §17
@@ -114,7 +114,16 @@ Angebot, das der Kunde in seinem Bereich sieht. Der Löschlauf leert nachweislic
 gesetzt**, Mollie-Link eingetragen · **Überfälligkeitslauf** · Aufgaben · Uploads ·
 **Faktenfreigabe**.
 
-**Tabellen (4):** `invoices` · `tasks` · `task_files` · `approvals`
+**Tabellen (5):** `invoices` · `tasks` · `task_files` · `approvals` · **`support_messages`**
+
+> **`support_messages` ist von B nach A2 vorgezogen** (Audit vom 31.07.2026). Die
+> Kundenoberfläche verweist schon vorher zweimal auf `Hilfe`: bei einem abgelaufenen Angebot
+> (§8.2) und bei den Grenzen der Selbstpflege (§8.7). Der Kunde meldet sich ausschließlich per
+> Anmeldelink an — ohne diese Tabelle hat er **keinen Rückkanal**, und jede Rückfrage endet in
+> einer Sackgasse.
+>
+> Eine Tabelle mit vier Feldern, ein Formular, eine Adminansicht. Der Aufwand ist klein, die
+> Lücke war es nicht.
 
 > **Der Überfälligkeitslauf gehört hierher, nicht nach C.** §5.3 legt fest, dass `ueberfaellig`
 > **täglich automatisch** gesetzt wird, sobald `due_date` überschritten ist. Ab A2 gibt es echte
@@ -146,18 +155,19 @@ Website.** Mandantentest vollständig für alle Kundenrouten.
 
 ### Summe Stufe A
 
-**17 Tabellen** — A0 sechs, A1 vier, A2 vier, A3 drei.
-**Zurückgestellt: drei** — `business_hours` · `business_hours_exceptions` · `support_messages`.
-**17 + 3 = 20.**
+**18 Tabellen** — A0 sechs, A1 vier, A2 **fünf**, A3 drei.
+**Zurückgestellt: zwei** — `business_hours` · `business_hours_exceptions`.
+**18 + 2 = 20.**
 
 ---
 
 ## Stufe B — wenn der erste Kunde live ist
 
 - Öffnungszeiten und Ausnahmen selbst pflegen
-- Nachrichten an den Betreuer
 
-**Tabellen (3):** `business_hours` · `business_hours_exceptions` · `support_messages`
+**Tabellen (2):** `business_hours` · `business_hours_exceptions`
+
+> **Nachrichten an den Betreuer stehen nicht mehr hier**, sondern in A2 — siehe dort.
 
 > **Kein Registrar in B.** Eine frühere Fassung nannte hier „Registrar-Anbindung für
 > Domainereignisse" und in C „Domainlebenszyklus beim Registrar" — zweimal dieselbe Sache ohne
@@ -289,7 +299,20 @@ er in jeder folgenden Etappe mit.
 | 27 | A2 | | 53b | **A3** | | | |
 | | | | 54 | A2 | | | |
 
-**Summe:** A0 = 24 · A1 = 33 · A2 = 17 · A3 = 6 · B = 1 · C = 0. **Zusammen 81.**
+**Nach dem Audit vom 31.07.2026 kamen sieben Fälle dazu** — 77 bis 83, alle zu Lücken, die vorher
+niemand geprüft hätte:
+
+| # | Etappe | Prüft |
+|---|---|---|
+| 77 | **A2** | Teilzahlung ergibt `teilweise_bezahlt`, nicht `bezahlt` |
+| 78 | **A2** | Zahlungserinnerung genau einmal, nicht täglich |
+| 79 | **A2** | Speichergrenze je Organisation greift |
+| 80 | **A1** | Nicht umgewandelte Anfrage wird nach 12 Monaten gelöscht |
+| 81 | **A0** | AVV im Zustand `entwurf` blockiert die Veröffentlichung |
+| 82 | **A0** | Rechtstext mit `audience = kunde` ist öffentlich nicht abrufbar |
+| 83 | **A1** | Anmeldeseite zeigt die Telefonnummer aus den Betreiberdaten |
+
+**Summe:** A0 = 26 · A1 = 35 · A2 = 20 · A3 = 6 · B = 1 · C = 0. **Zusammen 88.**
 
 **Die acht Fälle, bei denen die Zuordnung nicht offensichtlich ist:**
 
@@ -336,12 +359,12 @@ er grün wird · die vollständige Definition of Done nach Stufe A abhaken.
 
 | Wer | Was |
 |---|---|
-| **Codex, lokal** | Stufe A bauen. Es kann auf dem Entwicklungsrechner ausführen, was es baut — bei 81 Tests gegen eine echte Datenbank wiegt das schwerer als jede Sorgfalt beim Schreiben |
+| **Codex, lokal** | Stufe A bauen. Es kann auf dem Entwicklungsrechner ausführen, was es baut — bei 88 Tests gegen eine echte Datenbank wiegt das schwerer als jede Sorgfalt beim Schreiben |
 | **Claude Code** | Entwürfe der Rechtstexte · Gegenlesen nach jeder Sitzung · Mandantentrennung prüfen · Spezifikation nachziehen, wenn Widersprüche auffallen |
 | **Betreiber** | Die drei offenen Angaben · Foto · Hosting auswählen und **praktisch prüfen** (Testmail an eine Fremdadresse, Cronlauf, der eine Datei schreibt) · Mailserver mit SPF, DKIM, DMARC |
 
 > **Warum Claude Code Stufe A nicht baut:** In seiner Umgebung läuft keine MySQL und kein
-> Docker-Dienst — geprüft am 28.07.2026. Damit sind die 81 Testfälle dort nicht ausführbar, und
+> Docker-Dienst — geprüft am 28.07.2026. Damit sind die 88 Testfälle dort nicht ausführbar, und
 > **nicht ausgeführter Code ist kein fertiger Code.**
 
 ---

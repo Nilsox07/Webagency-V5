@@ -235,7 +235,64 @@ Das ist keine Entscheidung, sondern die Verhinderung eines Werbeversprechens ohn
 
 ---
 
-## 6. Wie diese Datei benutzt wird
+## 6. Barrierefreiheit nach dem BFSG — **OFFEN**
+
+Das Barrierefreiheitsstärkungsgesetz gilt seit dem **28.06.2025**. Es stand im Masterkonzept, aber
+in **keinem** der beiden Lastenhefte — und damit nicht dort, wo gebaut wird.
+
+**Wen es trifft, hängt an zwei Fragen:** Verkauft oder bucht der Kunde etwas an Verbraucher? Und
+liegt er über der Kleinstunternehmensgrenze (10 Beschäftigte, 2 Mio. € Umsatz)? Eine reine
+Firmenwebsite eines Handwerksbetriebs ist regelmäßig außerhalb. Ein Shop oder eine
+Online-Terminbuchung eines größeren Betriebs nicht.
+
+| Weg | Folge |
+|---|---|
+| **A — ausschließen** | Die Pflichtzeile in `exclusions` bleibt wie im Portal-Lastenheft §4c vorbelegt. Kein Nachweis, keine Prüfung, kein Mehraufwand. **Gilt bis zur Entscheidung** |
+| **B — als getrennte Leistung anbieten** | Eigenes Festangebot je Projekt, nach Prüfung. Braucht Kenntnis der Norm EN 301 549 und Zeit für Tests |
+| **C — grundsätzlich enthalten** | Stärkstes Verkaufsargument, größter Aufwand, höchste Haftung. Für den Start nicht empfohlen |
+
+**Was in jedem Fall gebaut wird**, unabhängig von der Entscheidung: Kontrast ab 4,5:1, volle
+Tastaturbedienung, sichtbarer Fokus, sinnvolle Beschriftungen. Das steht in beiden Lastenheften
+und bleibt.
+
+**Der Unterschied ist der Nachweis.** „Wir bauen technisch sauber" und „wir bestätigen
+Gesetzeskonformität" sind zwei verschiedene Zusagen.
+
+**Wer entscheidet:** der Betreiber, sinnvollerweise nach anwaltlicher Rückfrage.
+
+---
+
+## 7. Ein Benutzer je Kunde — **entschieden, aber nicht kommuniziert**
+
+Portal-Lastenheft §2: *„Stufe 0 kennt genau einen Benutzer je Kundenorganisation."*
+
+Die Entscheidung ist vertretbar und bleibt. In der Praxis beauftragt aber der Inhaber, und die
+Bürokraft füllt die Aufgaben aus. Beide müssten sich dann ein Postfach teilen — denn Anmeldelinks
+gelten **einmal** und **15 Minuten**. Ein weitergeleiteter Link ist meist schon tot.
+
+**Zu tun, sobald bestätigt:** Der Satz gehört ins Angebot und in die häufigen Fragen der Website.
+Vorschlag:
+
+> `Der Zugang zum Kundenbereich läuft über eine E-Mail-Adresse. Wenn mehrere Personen mitarbeiten
+> sollen, verwenden Sie am besten eine gemeinsame Adresse wie info@ihrefirma.de.`
+
+**Das ist keine Einschränkung, die man versteckt.** Sie ist erklärbar — aber nur, wenn sie vorher
+dasteht.
+
+---
+
+## 7a. Vertragsende im Kundenbereich — **bewusst verschoben**
+
+Das Masterkonzept regelt Export, Domainübergabe und wer die Verlängerung zahlt. Im Kundenbereich
+gibt es dazu **keinen Bildschirm und keinen Ablauf**.
+
+**Für Stufe A ist das richtig so** — der erste Kunde kündigt nicht in den ersten Monaten. Es steht
+hier, damit es als verschoben gilt und nicht als vergessen. **Spätestens vor dem zwölften
+Betriebsmonat** des ersten Kunden muss der Ablauf stehen.
+
+---
+
+## 8. Wie diese Datei benutzt wird
 
 1. Ein Wert wird entschieden → hier eintragen, Status von `offen` auf den Wert ändern
 2. Datum und Entscheider dazuschreiben

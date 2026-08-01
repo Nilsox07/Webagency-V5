@@ -1160,6 +1160,12 @@ eine dieser Bedingungen zutrifft:**
 5. Eine Zeichenkette aus der Verbotsliste §2 kommt im ausgelieferten Text vor
 6. Eine Datei außerhalb von `/public` ist über den Webserver erreichbar
 7. Ein Ortsname erscheint in Title, H1 oder URL, obwohl `SARTU_ENTSCHEIDUNGEN_OFFEN.md` §1 auf `offen` steht
+8. **Ein Rechtstext in `legal_texts` steht auf `entwurf` oder `in_pruefung`** — geprüft werden **alle fünf** Slugs: `impressum` · `datenschutz` · `agb` · `avv` · `tom`
+
+   > **Ergänzt am 31.07.2026 nach dem Audit.** Die Sperre kannte nur drei Rechtstexte. Der
+   > Auftragsverarbeitungsvertrag und die technischen und organisatorischen Maßnahmen fehlten im
+   > Datenmodell vollständig — obwohl SARTU als Auftragsverarbeiter für den Kunden nach Art. 28
+   > DSGVO ohne sie nicht arbeiten darf (Portal-Lastenheft §15.2).
 
 **Fehlermeldung** (Beispiel, muss die Ursache benennen):
 ```

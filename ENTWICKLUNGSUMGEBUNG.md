@@ -34,7 +34,7 @@ Anfrage). Ob diese Trennung hält, **sieht man einer Oberfläche nicht an**. Man
 `tests/TenantIsolationTest.php` gelaufen ist. Ein Fehler dort ist kein Schönheitsfehler, sondern
 Kundendaten beim falschen Kunden.
 
-Deshalb die einzige harte Grenze in dieser Datei: **Vor dem Livegang müssen die 81 Testfälle
+Deshalb die einzige harte Grenze in dieser Datei: **Vor dem Livegang müssen die 88 Testfälle
 irgendwo einmal wirklich gelaufen sein** — lokal oder auf dem Server, das ist gleichgültig. Nicht
 gelaufene Tests dürfen nie als bestanden gemeldet werden (Portal-Lastenheft §16).
 
@@ -429,7 +429,7 @@ Das ist der weit überwiegende Teil.
 
 ### Was erst mit Datenbank geht
 
-Migrationen ausführen, die 81 Testfälle, jeder Seitenaufruf, der Daten liest.
+Migrationen ausführen, die 88 Testfälle, jeder Seitenaufruf, der Daten liest.
 
 ### Die Regel
 
@@ -442,7 +442,7 @@ Prüfung im Rauschen und niemand merkt es — bis ein Kunde die Daten eines ande
 
 ### Die eine harte Grenze
 
-**Vor dem Livegang müssen die 81 Testfälle einmal wirklich gelaufen sein**, insbesondere
+**Vor dem Livegang müssen die 88 Testfälle einmal wirklich gelaufen sein**, insbesondere
 `tests/TenantIsolationTest.php`. Wo, ist gleichgültig: lokal, auf einem Testserver, beim Hoster.
 Dass die Oberfläche richtig aussieht, ist **kein** Beleg dafür — ob Kunde A die Angebote von Kunde B
 lesen kann, sieht man einem Bildschirm nicht an.
