@@ -16,20 +16,44 @@ misst für *Statistics Addition* **+25,9 %** Sichtbarkeit in KI-Antworten, für 
 **+24,9 %**. Das ist der belegte Nutzen.
 
 **Der Schaden ist genauso real.** Eine Seite voller Prozentwerte liest sich wie eine
-Beratungsunterlage. Und die meisten Zahlen erzählen dem Leser, was er ohnehin jeden Tag erlebt.
+Beratungsunterlage. Und eine einzige Zahl, die seiner Erfahrung widerspricht, kostet die ganze
+Seite ihre Glaubwürdigkeit.
 
-### Regel S1 — Nur Zahlen, die er selbst nicht sehen kann
+### Regel S1 — Er muss nicken können
 
-**Der Test:** Weiß er das aus seinem eigenen Betrieb? Dann raus.
+**Der Test:** Liest er die Zahl und denkt „ja, genau"? Dann rein. Denkt er „bei mir stimmt das
+nicht"? Raus — auch bei bester Quelle.
 
-| Zahl | Sieht er selbst | Auf die Seite |
+| Seine Reaktion | Beispiel | Auf die Seite |
 |---|---|---|
-| „40 % der Heizungen im Bestand sind veraltet" | **ja** — er baut sie aus | ✗ |
-| „83 % der Betriebe finden keine Azubis" | **ja** — er sucht selbst | ✗ |
-| „Der Anteil der E-Betriebe mit Photovoltaik fiel von 57,1 auf 52,1 %" | **nein** — das ist der Wettbewerb | ✓ |
-| „Die Wärmepumpe war 2025 erstmals die meistverkaufte Heiztechnik" | **nein** — er sieht nur seine Aufträge | ✓ |
+| **„Ja, genau — kenne ich"** | `Über 40 % der Heizungen im Bestand sind veraltet.` | ✓ **stärkste Wirkung** |
+| **„Wusste ich nicht, klingt aber richtig"** | `78 % der Dachdeckerbetriebe haben weniger als zehn Arbeitnehmer.` | ✓ |
+| **„Das stimmt bei mir nicht"** | `Der Anteil der E-Betriebe mit Photovoltaik sinkt.` | ✗ |
 
-**Eine Zahl, die seine eigene Erfahrung bestätigt, überzeugt ihn nicht. Sie belehrt ihn.**
+**Das Risiko ist einseitig.** Trifft die Zahl zu, gewinnt sie ein Nicken. Trifft sie nicht zu,
+verliert sie den Leser — er hält uns dann für branchenfremd. Im Zweifel bleibt sie draußen.
+
+**Auf einer Verkaufsseite hat die Zahl nicht die Aufgabe, ihn zu informieren.** Sie soll zeigen,
+dass wir sein Geschäft kennen. Das leistet nur eine Zahl, der er zustimmt.
+
+> **Korrektur vom 01.08.2026.** Die erste Fassung dieser Regel stand auf dem Kopf. Sie verlangte
+> Zahlen, die der Betrieb **nicht** kennt. Begründet war das damit, eine bekannte Zahl „belehre"
+> ihn. Das war falsch. **Belehrend wird eine Zahl durch den Ton, nicht durch Bekanntheit.**
+> `Wussten Sie, dass 40 % der Heizungen veraltet sind?` belehrt.
+> `Über 40 % der Heizungen im Bestand sind veraltet — das sehen Sie in jedem zweiten Keller.`
+> lässt ihn nicken. Die alte Fassung hätte genau die Zahlen ausgesiebt, die am besten wirken.
+
+#### Ausnahme: Ratgeber, Lexikon und FAQ
+
+Dort kommt der Leser, **um etwas zu erfahren**. Eine Zahl, die er noch nicht kennt, ist da richtig
+— sie darf seiner Erfahrung nur weiterhin nicht widersprechen.
+
+**Auf Branchen-, Leistungs- und Standortseiten gilt Regel S1 ohne Ausnahme.**
+
+#### Wenn unklar ist, ob er nickt
+
+Dann wird gefragt — **Briefing-Angabe 7**. Der Auftraggeber oder ein Betrieb der Branche entscheidet
+das in einem Satz. Geraten wird nicht.
 
 ### Regel S2 — Höchstens drei Zahlen je Seite, nie zwei im selben Abschnitt
 
@@ -78,101 +102,93 @@ Sie rechtfertigt nicht, es mit uns zu tun.
 
 ## 2. Sanitär, Heizung, Klima
 
-### Verwendbar
+| # | Zahl | Nickt er? | Quelle | Gültig bis |
+|---|---|---|---|---|
+| S1 | **Über 40 %** der Heizungen im Bestand entsprechen **nicht dem Stand der Technik**, viele sind über 30 Jahre alt | **ja** — sieht er in jedem zweiten Keller | BDH-Jahresbilanz, 01.02.2026 | 08/2027 |
+| S2 | Heizungsabsatz 2025: **627.000 Anlagen, minus 12 %** — niedrigster Stand seit 15 Jahren | **ja** — sein Auftragsbuch ist dünner | BDH-Jahresbilanz, 01.02.2026 | 08/2027 |
+| S3 | **299.000 Wärmepumpen** 2025, **plus 55 %** | **wahrscheinlich** — er baut mehr davon ein | BDH-Jahresbilanz, 01.02.2026 | 08/2027 |
 
-| # | Zahl | Quelle | Gültig bis |
-|---|---|---|---|
-| S1 | **299.000 Wärmepumpen** 2025 verkauft, **plus 55 %** — erstmals die meistverkaufte Heiztechnik | BDH-Jahresbilanz, 01.02.2026 | 08/2027 |
-| S2 | Gesamtabsatz Heizungen 2025: **627.000 Anlagen, minus 12 %** — niedrigster Stand seit 15 Jahren | BDH-Jahresbilanz, 01.02.2026 | 08/2027 |
-| S3 | 1. Quartal 2026: **83.500 Wärmepumpen**, Marktanteil **48,7 %** — erstmals vor der Gasheizung | BDH, Q1/2026 | 09/2026 |
+**S1 ist die stärkste Zahl für diese Branche.** In der ersten Fassung dieser Datei stand sie unter
+„nicht verwenden" — mit der Begründung, er kenne sie ohnehin. Genau deshalb wirkt sie.
 
-**Die eigentliche Tatsache liegt zwischen S1 und S2.** Der Markt schrumpfte um 12 %. Gleichzeitig
-drehte sich die gefragte Technik. Das sieht ein einzelner Betrieb an seinem Auftragsbuch nicht.
+**S1 und S2 zusammen sind das Argument.** Der Bedarf ist riesig. Der Absatz steht trotzdem auf dem
+tiefsten Stand seit 15 Jahren. **Zwischen beidem steht die Frage, wer gefunden wird.**
 
-**Was daraus für die Seite folgt:** Wer heute nach einer Heizung sucht, sucht anders als vor drei
-Jahren. Die Leistungsseiten müssen die Wärmepumpe eigenständig führen, nicht als Unterpunkt von
-„Heizung".
+### Rückfrage nötig
+
+| Zahl | Warum |
+|---|---|
+| „Die Wärmepumpe war 2025 erstmals die meistverkaufte Heiztechnik" | Ein Betrieb, der überwiegend Gasgeräte im Bestand tauscht, nickt hier **nicht**. Vor Verwendung beim Auftraggeber klären |
 
 ### Nicht verwenden
 
 | Zahl | Warum |
 |---|---|
-| „Über 40 % der Heizungen im Bestand entsprechen nicht dem Stand der Technik" (BDH) | Regel S1 — genau das baut er jeden Tag aus |
-| „Eine Million Heizungen müssten jährlich modernisiert werden" (BDH) | Politische Zielzahl, kein Marktwert |
+| Q1/2026: Wärmepumpen-Marktanteil 48,7 % | Quartalszahl (Regel S5). Und zu feinkörnig, um Zustimmung auszulösen |
+| „Eine Million Heizungen müssten jährlich modernisiert werden" | Politische Zielzahl, kein Marktwert |
 
 ---
 
 ## 3. Elektrotechnik
 
-### Verwendbar
+| # | Zahl | Nickt er? | Quelle | Gültig bis |
+|---|---|---|---|---|
+| E1 | Vom E-Handwerk installierte **PV-Anlagen: 395.000 → 355.000** | **ja**, wenn seine PV-Aufträge auch zurückgingen | ZVEH-Frühjahrsumfrage 2026, 1.641 Betriebe | 09/2027 |
+| E2 | **Batteriespeicher: 260.000 → 235.000**, rund minus 10 % | **ja** | ZVEH-Frühjahrsumfrage 2026 | 09/2027 |
+| E3 | **Ladepunkte: 377.000 → 360.000** | **ja** | ZVEH-Frühjahrsumfrage 2026 | 09/2027 |
+| E4 | Anteil der E-Betriebe mit **Wärmepumpe: 44,4 → 48,0 %** gestiegen | **wahrscheinlich** — er überlegt es selbst oder macht es schon | ZVEH-Frühjahrsumfrage 2026 | 09/2027 |
 
-| # | Zahl | Quelle | Gültig bis |
-|---|---|---|---|
-| E1 | Anteil der E-Betriebe, die **Photovoltaik anbieten**: von **57,1 auf 52,1 %** gefallen | ZVEH-Frühjahrsumfrage 2026, 1.641 Betriebe | 09/2027 |
-| E2 | Vom E-Handwerk installierte **PV-Anlagen**: **395.000 → 355.000** | ZVEH-Frühjahrsumfrage 2026 | 09/2027 |
-| E3 | **Batteriespeicher**: 260.000 → 235.000, rund **minus 10 %** | ZVEH-Frühjahrsumfrage 2026 | 09/2027 |
-| E4 | **Ladepunkte**: 377.000 → 360.000 | ZVEH-Frühjahrsumfrage 2026 | 09/2027 |
-| E5 | Anteil der E-Betriebe, die **Wärmepumpen anbieten**: von **44,4 auf 48,0 %** gestiegen | ZVEH-Frühjahrsumfrage 2026 | 09/2027 |
-
-**E1 ist die stärkste Zahl dieser Datei.** Der Wettbewerb zieht sich aus der Photovoltaik zurück,
-während E5 zeigt, wohin er stattdessen geht. **Beides kann ein einzelner Betrieb unmöglich
-wissen** — und beides entscheidet, welche Leistung auf der Seite nach vorn gehört.
-
-**Was daraus für die Seite folgt:** Ein Betrieb, der Photovoltaik **behält**, verliert gerade
-Wettbewerber. Das ist ein Grund, die Leistung sichtbar zu führen, statt sie zu verstecken.
+**Drei rückläufige Zahlen in Folge treffen seine Lage.** Wer 2023 noch Photovoltaik im Wochentakt
+gebaut hat, merkt das seit zwei Jahren. E4 zeigt, wohin die Branche stattdessen geht.
 
 ### Nicht verwenden
 
 | Zahl | Warum |
 |---|---|
-| „84 % der Betriebe können Meisterstellen nicht zeitnah besetzen" (ZVEH Q4/2025) | Regel S1. Gehört zur Karriereseite — die ist gesperrt, siehe `SARTU_ENTSCHEIDUNGEN_OFFEN.md` §7b |
+| „Der Anteil der E-Betriebe mit Photovoltaik fiel von 57,1 auf 52,1 %" | **Die vorige Fassung nannte das die stärkste Zahl der Datei. Das war falsch.** Ein Betrieb, der Photovoltaik gerade ausbaut, liest hier das Gegenteil seiner Lage und hält uns für branchenfremd. Das Risiko ist einseitig |
+| „84 % können Meisterstellen nicht zeitnah besetzen" (ZVEH Q4/2025) | Er nickt sofort — **die Zahl ist gut.** Sie gehört aber zur Karriereseite, und die ist gesperrt: `SARTU_ENTSCHEIDUNGEN_OFFEN.md` §7b. **Freigeben, sobald §7b entschieden ist** |
 
 ---
 
 ## 4. Dachdecker
 
-### Verwendbar
-
-| # | Zahl | Quelle | Gültig bis |
-|---|---|---|---|
-| D1 | **78 %** der Dachdeckerbetriebe haben **weniger als zehn** gewerbliche Arbeitnehmer, **53 %** weniger als fünf | ZVDH-Steckbrief März 2026, Stand 31.12.2024 | 09/2027 |
-| D2 | Gesamtumsatz 2025: **13,5 Mrd. €**, Veränderung **0,0 %** — bei **4,5 %** Preissteigerung ein reales Minus | ZVDH-Steckbrief März 2026 | 09/2027 |
-| D3 | **15.241** Dachdeckerbetriebe zum 31.12.2025 | SOKA-DACH, über ZVDH | 09/2027 |
-| D4 | Gewerbliche Arbeitnehmende **minus 1,0 %** in 2025 — viertes Rückgangsjahr in Folge | ZVDH-Steckbrief März 2026 | 09/2027 |
-| D5 | Auszubildende 2026 auf dem **höchsten Stand seit 2003**, erstes Lehrjahr **plus 10,8 %** | ZVDH, Stand Januar 2026 | 09/2027 |
-| D6 | Insolvenzquote 2025: **0,7 %**, 105 Verfahren | SOKA-DACH, über ZVDH | 09/2027 |
+| # | Zahl | Nickt er? | Quelle | Gültig bis |
+|---|---|---|---|---|
+| D1 | **78 %** der Betriebe haben **weniger als zehn** gewerbliche Arbeitnehmer, **53 %** weniger als fünf | **ja** — er kennt jeden Wettbewerber im Umkreis | ZVDH-Steckbrief März 2026, Stand 31.12.2024 | 09/2027 |
+| D2 | Umsatz 2025: **13,5 Mrd. €**, Veränderung **0,0 %** — bei **4,5 %** Preissteigerung ein reales Minus | **ja** — mehr Arbeit für dasselbe Geld | ZVDH-Steckbrief März 2026 | 09/2027 |
+| D3 | Gewerbliche Arbeitnehmende **minus 1,0 %** in 2025, **viertes Rückgangsjahr** — Ursache: Renteneintritt der Babyboomer | **ja** | ZVDH-Steckbrief März 2026 | 09/2027 |
 
 **D1 beantwortet einen Einwand aus einer ganz anderen Quelle.** 59 % der Handwerksbetriebe halten
 digitale Anwendungen nur für größere Betriebe für sinnvoll (Bitkom 2025). Im Dachdeckerhandwerk
-**gibt es die größeren Betriebe fast nicht**: 78 % liegen unter zehn Arbeitnehmern. Wer auf
-„größere Betriebe" wartet, wartet auf 22 % seiner Branche.
+**gibt es die größeren fast nicht**: 78 % liegen unter zehn Arbeitnehmern. Wer auf „größere
+Betriebe" wartet, wartet auf 22 % seiner Branche.
 
 **D2 ist der Preisdruck in einer Zahl.** Gleicher Umsatz bei 4,5 % höheren Preisen heißt weniger
-Arbeit für dasselbe Geld.
-
-**D5 ist die einzige positive Zahl dieser Datei** und die einzige, die zur Nachwuchsfrage taugt.
+Arbeit für dasselbe Geld. Das ist genau das Gefühl, das er ohnehin hat.
 
 ### Nicht verwenden
 
 | Zahl | Warum |
 |---|---|
-| Sturmschadenzahlen | Regel S1 und die Geschäftsfrage: Sturmschaden ist das Geschäft, das er **mitnimmt**. Er lebt vom kompletten Dach |
+| „Auszubildende 2026 auf dem höchsten Stand seit 2003, erstes Lehrjahr plus 10,8 %" | **Die vorige Fassung lobte das als beste positive Zahl.** Ein Betrieb, der seit drei Jahren keinen Azubi findet, liest das als Widerspruch zu seinem Alltag. Bundesweit richtig, in seinem Kopf falsch |
+| „15.241 Dachdeckerbetriebe" und „Insolvenzquote 0,7 %" | Löst weder Zustimmung noch Widerspruch aus. Für unsere Marktabschätzung nützlich, auf der Seite Füllung |
+| Sturmschadenzahlen | Das Geschäft, das er **mitnimmt**. Er lebt vom kompletten Dach |
 
 ---
 
 ## 5. Der Kern gilt weiter
 
-Die branchenübergreifenden Motive stehen in `SARTU_KUNDENMOTIVE_BELEGT.md`. **Zwei davon sind für
-jede Branchenseite wichtiger als jede Branchenzahl:**
+Die branchenübergreifenden Motive stehen in `SARTU_KUNDENMOTIVE_BELEGT.md`. **Drei davon bestehen
+den Nicken-Test auf jeder Branchenseite:**
 
-| Motiv | Zahl |
-|---|---|
-| **94 %** haben bereits eine Website | Bitkom 2025 |
-| **72 %** haben zu viel zu tun, um sich damit zu befassen | Bitkom 2025 |
+| Motiv | Zahl | Warum er nickt |
+|---|---|---|
+| Er kommt nicht dazu | **72 %** haben zu viel zu tun für Digitalisierung | Das ist seine Woche |
+| Der Wettbewerb ist online | **94 %** der Handwerksbetriebe haben eine Website | Er hat selbst eine und kennt die der anderen |
+| Der Kunde vergleicht schärfer | **87 %** preissensibler, **74 %** kritischer | Er verhandelt jedes Angebot |
 
-Beide fallen unter Regel S1 als **Grenzfall**: Der Leser weiß, dass er eine Website hat. Er weiß
-nicht, dass 94 % seiner Wettbewerber ebenfalls eine haben. **Nur die zweite Hälfte darf auf die
-Seite.**
+**Diese drei sind sicherer als jede Branchenzahl**, weil sie nichts Fachliches behaupten. Sie
+beschreiben, wie sein Alltag sich anfühlt.
 
 ---
 
@@ -219,20 +235,16 @@ weitergerechnet.
 ```text
 TEXTPRUEFUNG   Datei: SARTU_BRANCHENFAKTEN.md   Datum: 01.08.2026
 
-Sätze gesamt (laufende Prosa)           65
+Sätze gesamt (laufende Prosa)           91
 Längster Satz                           20 Wörter        Grenze 25 (Abschnitt 6)
 Sätze über 20 Wörter                     0               Grenze 0
 Aufzählungen >3 Glieder im Satz          0               Grenze 0
 Treffer Wortlisten A/B/C                 0               Grenze 0
-Gegensatzformel                          3               Grenze 2 — überschritten
+Gegensatzformel                          2               Grenze 2
 Behauptungen über Dritte ohne Quelle     0               Grenze 0
 Zahlen ohne Quelle und Jahr              0               Grenze 0
 ```
 
-**Begründete Überschreitung — Gegensatzformel, 3 bei Grenze 2.** Diese Datei hat den Umfang
-mehrerer Seiten. Alle drei Treffer trennen eine erlaubte von einer verbotenen Verwendung — die
-Aufgabe der Formel.
-
-> **Zum Zählskript:** `tools/textpruefung.py` meldet für diese Datei zwei Sätze über 20 Wörter,
-> die keine sind. Es klebt eine Zeile, die auf einen Doppelpunkt endet, an den Folgesatz. Beide
-> Fälle wurden von Hand nachgezählt. Die Einschränkung steht im Kopf des Skripts.
+> **Zum Zählskript:** `tools/textpruefung.py` meldet für diese Datei einen Satz über 20 Wörter,
+> der keiner ist. Es klebt eine Zeile, die auf einen Doppelpunkt endet, an den Folgesatz. Von Hand
+> nachgezählt. Die Einschränkung steht im Kopf des Skripts.

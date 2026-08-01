@@ -71,7 +71,8 @@ seine Kunden besser als wir — trifft der Satz nicht zu, ist die Seite erledigt
 Stichprobe stehen **an der Zahl**, nicht in einer Fußnote.
 
 **Welche Zahl auf eine Seite darf, regelt `SARTU_BRANCHENFAKTEN.md` Abschnitt 1** — höchstens drei
-je Seite, nie im Aufmacher, nie eine, die der Leser aus seinem eigenen Betrieb kennt.
+je Seite, nie im Aufmacher, und nur, wenn der Leser beim Lesen **nicken** kann. Eine Zahl, die
+seiner eigenen Erfahrung widerspricht, kostet die Seite ihre Glaubwürdigkeit.
 
 ```bash
 # Behauptungen über Dritte — jeder Treffer wird einzeln geprüft

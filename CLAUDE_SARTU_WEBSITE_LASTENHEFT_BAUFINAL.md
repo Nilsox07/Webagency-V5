@@ -1125,9 +1125,10 @@ Der Besucher muss die Website **nicht verlassen und nicht weiterklicken**.
 > Zahl** · keine Quartalszahlen, die veralten schneller als 12 bis 15 Seiten gepflegt werden
 > können · **keine regionalen Werte** auf einer bundesweit auffindbaren Seite.
 >
-> **Der Filter davor:** Eine Zahl, die der Betrieb aus seinem eigenen Alltag kennt, kommt nicht auf
-> die Seite. Sie belehrt ihn. Verwendbar ist, was er von seiner Position aus nicht sehen kann —
-> was der Wettbewerb tut, wohin der Markt sich dreht.
+> **Der Filter davor — der Nicken-Test:** Liest der Betrieb die Zahl und denkt „ja, genau"? Dann
+> darf sie auf die Seite. Denkt er „bei mir stimmt das nicht", bleibt sie draußen — auch bei
+> bester Quelle. Das Risiko ist einseitig: Zustimmung bringt ein Nicken, Widerspruch kostet die
+> ganze Seite. Bei Unklarheit wird der Auftraggeber gefragt.
 
 > **Der Konfigurator auf der Seite ist der eigentliche Gewinn** — nicht wegen Google, sondern wegen
 > der Abbruchquote. Wer erst zu `/briefing` klicken muss, klickt oft gar nicht. Und die Branche ist

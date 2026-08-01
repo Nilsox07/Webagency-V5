@@ -465,8 +465,9 @@ sind kein eigener Mechanismus.
 `Statistics Addition` und `Cite Sources` gehören zu den drei besten Verfahren oben. **Das verführt
 dazu, Branchenzahlen über die Seite zu streuen.** Zwei Dinge halten dagegen.
 
-**Erstens belehrt die falsche Zahl.** Ein Dachdecker weiß, dass er keine Gesellen findet. Eine
-Studie, die ihm das in Prozent bestätigt, sagt ihm nichts Neues und klingt nach Beratungsunterlage.
+**Erstens ist das Risiko einseitig.** Trifft die Zahl seine Lage, nickt er. Trifft sie nicht zu,
+hält er uns für branchenfremd — und die ganze Seite verliert ihre Glaubwürdigkeit. Ein Gewinn ist
+klein, der Verlust ist total.
 
 **Zweitens veraltet sie.** Bei 12 bis 15 Branchenseiten wird jede Quartalszahl zur Pflegelast.
 
@@ -479,17 +480,19 @@ Studie, die ihm das in Prozent bestätigt, sagt ihm nichts Neues und klingt nach
 | Quartalszahlen auf Branchenseiten | **nein.** Nur auf Standortseiten |
 | Regionale Zahlen auf bundesweiten Seiten | **nein** |
 
-> **Der Filter vor allem anderen:** Kennt der Betrieb die Zahl aus seinem eigenen Alltag? Dann
-> raus. Verwendbar ist, was er von seiner Position aus **nicht sehen kann** — was der Wettbewerb
-> tut, wohin der Markt sich dreht.
+> **Der Filter vor allem anderen — der Nicken-Test:** Liest er die Zahl und denkt „ja, genau"?
+> Dann rein. Denkt er „bei mir stimmt das nicht"? Raus, auch bei bester Quelle.
 >
-> Schwach: `Über 40 % der Heizungen im Bestand sind veraltet.` Er baut sie täglich aus.
-> Stark: `Der Anteil der Elektrobetriebe mit Photovoltaik sank von 57,1 auf 52,1 %
-> (ZVEH-Frühjahrsumfrage 2026, 1.641 Betriebe).` Sein Wettbewerb zieht sich zurück — das sieht er
-> aus seiner Werkstatt nicht.
+> Stark: `Über 40 % der Heizungen im Bestand sind veraltet.` Das sieht er in jedem zweiten Keller.
+> Schwach: `Der Anteil der Elektrobetriebe mit Photovoltaik sank von 57,1 auf 52,1 %.` Wer gerade
+> Photovoltaik ausbaut, liest hier das Gegenteil seiner Lage.
+>
+> **Die Zahl soll nicht informieren, sondern zeigen, dass wir sein Geschäft kennen.** Das leistet
+> nur eine Zahl, der er zustimmt. **Ausnahme sind Ratgeber, Lexikon und FAQ** — dort kommt er, um
+> etwas zu erfahren. Widersprechen darf die Zahl seiner Erfahrung auch dort nicht.
 
-**Die geprüften Zahlen je Branche stehen in `SARTU_BRANCHENFAKTEN.md`**, jede mit Quelle und
-Verfallsdatum. Steht eine Zahl dort nicht, wird sie nicht verwendet.
+**Die geprüften Zahlen je Branche stehen in `SARTU_BRANCHENFAKTEN.md`**, jede mit Quelle,
+Verfallsdatum und einer Spalte `Nickt er?`. Steht eine Zahl dort nicht, wird sie nicht verwendet.
 
 ---
 
