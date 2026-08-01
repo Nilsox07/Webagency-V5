@@ -42,6 +42,7 @@ merkt es, bevor gebaut wird.
 | 9 | `GEO_DISCOVERY_CHECKLIST.md` | technische Auffindbarkeit für KI-Systeme — **vor Livegang abzuhaken** | Melden, mit Rest fortfahren |
 | 10 | `ENTWICKLUNGSUMGEBUNG.md` | **wie PHP, Composer und die Datenbank aufgerufen werden** — und was ohne Datenbank trotzdem gebaut wird | **Abbruch.** Sonst wird falsch nach PHP gesucht oder wegen fehlender Datenbank angehalten |
 | 11 | `SARTU_TEXTREGELN.md` | **wie jeder Text formuliert sein muss** — vierzehn Regeln, Wortlisten. Der **Prüfbericht mit Zahlen** gehört zu jeder abgegebenen Seite | **Abbruch.** Sonst entsteht wieder der Ton, der schon zweimal verworfen wurde |
+| 10b | `SARTU_BRANCHENFAKTEN.md` | **belegte Zahlen je Branche** — was verwendet werden darf, was nicht, und bis wann es gilt | **Abbruch bei Branchenseiten.** Ohne sie entstehen Blöcke 3 und 5 aus dem Gefühl |
 | 10a | `SARTU_KUNDENMOTIVE_BELEGT.md` | **warum ein Betrieb kauft** — fünf belegte Motive, Branchentabelle Ostsachsen, Quelle für Briefing-Angabe 7 | **Abbruch.** Ohne sie argumentiert jede Branchenseite ins Blaue |
 | 11a | `.claude/skills/sartu-texter/SKILL.md` | **das Handwerk dahinter** — Überschrift, Fließtext, Schaltfläche und Metadaten haben **verschiedene** Regeln. Dazu, was an SEO und GEO belegt ist und was Mythos | **Abbruch.** Beim Websiteauftrag entsteht fast nur Text |
 | 12 | `REIHENFOLGE.md` | **Abschnitt „Zwei Livegänge"** — welche Portalfunktionen zum Zeitpunkt des Websitestarts überhaupt existieren | **Abbruch.** Sonst bewirbt die Seite Funktionen, die es noch nicht gibt |

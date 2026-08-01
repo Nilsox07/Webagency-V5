@@ -460,6 +460,37 @@ eine Quelle, ein Zitat. Was verliert, ist Umformulieren desselben Inhalts.
 werden, ist falsch. Listen helfen beim Überfliegen und beim Herauslösen einzelner Aussagen — sie
 sind kein eigener Mechanismus.
 
+### Fremde Statistiken auf der Seite — der Nutzen ist belegt, der Schaden auch
+
+`Statistics Addition` und `Cite Sources` gehören zu den drei besten Verfahren oben. **Das verführt
+dazu, Branchenzahlen über die Seite zu streuen.** Zwei Dinge halten dagegen.
+
+**Erstens belehrt die falsche Zahl.** Ein Dachdecker weiß, dass er keine Gesellen findet. Eine
+Studie, die ihm das in Prozent bestätigt, sagt ihm nichts Neues und klingt nach Beratungsunterlage.
+
+**Zweitens veraltet sie.** Bei 12 bis 15 Branchenseiten wird jede Quartalszahl zur Pflegelast.
+
+| Regel | Wert |
+|---|---|
+| Höchstens je Seite | **3** Statistiken, nie zwei im selben Abschnitt |
+| Im Aufmacher | **nie.** Block 1 und 2 handeln von ihm |
+| Im Vierschritt | Schritt **2** oder **4** — nie Schritt 1 |
+| Quelle, Jahr, Stichprobe | **an der Zahl**, nicht in einer Fußnote |
+| Quartalszahlen auf Branchenseiten | **nein.** Nur auf Standortseiten |
+| Regionale Zahlen auf bundesweiten Seiten | **nein** |
+
+> **Der Filter vor allem anderen:** Kennt der Betrieb die Zahl aus seinem eigenen Alltag? Dann
+> raus. Verwendbar ist, was er von seiner Position aus **nicht sehen kann** — was der Wettbewerb
+> tut, wohin der Markt sich dreht.
+>
+> Schwach: `Über 40 % der Heizungen im Bestand sind veraltet.` Er baut sie täglich aus.
+> Stark: `Der Anteil der Elektrobetriebe mit Photovoltaik sank von 57,1 auf 52,1 %
+> (ZVEH-Frühjahrsumfrage 2026, 1.641 Betriebe).` Sein Wettbewerb zieht sich zurück — das sieht er
+> aus seiner Werkstatt nicht.
+
+**Die geprüften Zahlen je Branche stehen in `SARTU_BRANCHENFAKTEN.md`**, jede mit Quelle und
+Verfallsdatum. Steht eine Zahl dort nicht, wird sie nicht verwendet.
+
 ---
 
 ## Ablauf beim Schreiben

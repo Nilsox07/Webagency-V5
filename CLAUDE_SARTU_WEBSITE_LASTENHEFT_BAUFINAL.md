@@ -1120,6 +1120,15 @@ Der Besucher muss die Website **nicht verlassen und nicht weiterklicken**.
 
 **Umfang:** 900–1.300 Wörter · **Schema:** `Service` + `BreadcrumbList` · genau eine H1
 
+> **Statistiken auf der Seite — Grenzen aus `SARTU_BRANCHENFAKTEN.md` Abschnitt 1:** höchstens
+> **drei** je Seite · **nie im Aufmacher** (Block 1 und 2) · Quelle, Jahr und Stichprobe **an der
+> Zahl** · keine Quartalszahlen, die veralten schneller als 12 bis 15 Seiten gepflegt werden
+> können · **keine regionalen Werte** auf einer bundesweit auffindbaren Seite.
+>
+> **Der Filter davor:** Eine Zahl, die der Betrieb aus seinem eigenen Alltag kennt, kommt nicht auf
+> die Seite. Sie belehrt ihn. Verwendbar ist, was er von seiner Position aus nicht sehen kann —
+> was der Wettbewerb tut, wohin der Markt sich dreht.
+
 > **Der Konfigurator auf der Seite ist der eigentliche Gewinn** — nicht wegen Google, sondern wegen
 > der Abbruchquote. Wer erst zu `/briefing` klicken muss, klickt oft gar nicht. Und die Branche ist
 > bereits beantwortet: ein Feld weniger für den Kunden, eine Angabe mehr für uns.
@@ -1144,6 +1153,7 @@ Quellenzeile: **woher stammt diese Aussage über die Branche?** Zulässig sind n
 
 | Quelle | Beispiel |
 |---|---|
+| **`SARTU_BRANCHENFAKTEN.md`** | **Zahlen je Branche mit Quelle und Verfallsdatum** — deckt Welle 1 ab |
 | **`SARTU_KUNDENMOTIVE_BELEGT.md`** | der belegte Kern und die Branchentabelle Ostsachsen |
 | Der Auftraggeber | „Chef hat mir gesagt: Förderung erklären ist der häufigste Anruf" |
 | Ein Betrieb der Branche | Gespräch, E-Mail, ausgefüllter Fragebogen |

@@ -66,6 +66,13 @@ mitnimmt? Und: Weiß ich das, oder nehme ich es an?
 Behauptungen über Dritte klingen selbstverständlich und sind trotzdem ungezählt. Der Leser kennt
 seine Kunden besser als wir — trifft der Satz nicht zu, ist die Seite erledigt.
 
+**Die Ausnahme: eine Zahl mit Quelle.** `Der Anteil der Elektrobetriebe mit Photovoltaik sank von
+57,1 auf 52,1 % (ZVEH-Frühjahrsumfrage 2026, 1.641 Betriebe).` ist erlaubt. Quelle, Jahr und
+Stichprobe stehen **an der Zahl**, nicht in einer Fußnote.
+
+**Welche Zahl auf eine Seite darf, regelt `SARTU_BRANCHENFAKTEN.md` Abschnitt 1** — höchstens drei
+je Seite, nie im Aufmacher, nie eine, die der Leser aus seinem eigenen Betrieb kennt.
+
 ```bash
 # Behauptungen über Dritte — jeder Treffer wird einzeln geprüft
 grep -noiE '(der|ihr|ihre) (kunde|kunden|interessent)[a-zäöüß]* (will|wollen|erwartet|erwarten|sucht|suchen|ruft|rufen|klickt|klicken|vergleicht|vergleichen)|die meisten (kunden|betriebe|handwerker|unternehmen)|kaum ein[a-zäöüß]* (kunde|betrieb)|niemand (liest|klickt|ruft)' datei
