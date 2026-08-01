@@ -204,13 +204,17 @@ verkauft ihm Kundschaft, die er nachts aus dem Bett holt.
 
 ##### 3 — Weiß ich das, oder nehme ich es an?
 
-**Verboten sind Behauptungen über das Verhalten seiner Kunden**, wenn keine Quelle dafür existiert.
-`Wer nachts sucht, ruft die erste Nummer an, die er ohne Scrollen findet.` klingt einleuchtend und
-ist **erfunden**. Niemand hat das gemessen.
+**Die Grenze verläuft zwischen ihm und Dritten:**
 
-**Erlaubt ist, was der Betrieb selbst weiß:** Er hat Fotos von fertigen Bädern. Er sucht Gesellen.
-Er erklärt Förderungen am Telefon. Das sind Tatsachen aus seinem Alltag, keine Annahmen über
-Fremde.
+| Worüber der Satz etwas behauptet | Erlaubt? | Warum |
+|---|---|---|
+| **Über ihn selbst** — `Sie haben Fotos von fertigen Bädern auf dem Telefon.` | **ja** | Er prüft es beim Lesen in einer Sekunde. Stimmt es nicht, liest er weiter — es kostet nichts |
+| **Über ein Produkt, das jeder aufmachen kann** — `Ein Baukasten liefert leere Textfelder.` | **ja** | Nachprüfbar von jedem, der einen aufmacht |
+| **Über das Verhalten seiner Kunden** — `Wer nachts sucht, ruft die erste Nummer an.` | **nein** | Er kann es nicht prüfen. Ist es falsch, ist die ganze Seite unglaubwürdig |
+| **Über den Markt** — `Auf den meisten Handwerkerseiten steht Beispieltext.` | **nein** | Klingt richtig, hat niemand gezählt |
+
+`Der Kunde will vorher sehen, was Sie können.` fällt in Zeile 3. Es klingt selbstverständlich und
+ist trotzdem eine unbelegte Behauptung über fremdes Kaufverhalten.
 
 > **Der Fehler, an dem diese drei Fragen entstanden sind:** Die erste Fassung dieser Branchenseite
 > argumentierte mit der Notdienstnummer. Formal fehlerfrei, jeder Prüfwert grün — und trotzdem
@@ -231,14 +235,25 @@ nicht. Die Reihenfolge macht den Unterschied:
 
 **Am Beispiel:**
 
-> **1** Die besten Verkaufsargumente Ihres Betriebs liegen auf Ihrem Telefon.
-> **2** Ein Bad kauft niemand nach einer Leistungsliste. Der Kunde will vorher sehen, was Sie können.
-> **3** Sie laden Ihre Fotos hoch, wir bauen die Seiten darum.
-> **4** Eine eigene Seite je Leistung — bei `Wachstum` bis zu 8, rund 3.500 Wörter.
+> **1** Ein Baukasten ist an einem Abend aufgebaut. Danach stehen die Textfelder leer da.
+> **2** Bis jemand sie füllt, geht die Seite nicht online.
+> **3** Wir schreiben die Texte. Sie liefern die Fakten in einem Gespräch — je eine Seite für
+> Badsanierung, Heizungstausch, Wartung.
+> **4** `Wachstum`: bis zu 8 Seiten, rund 3.500 Wörter, zwei Korrekturrunden.
 
-**Warum dieses Argument trägt und das erste nicht:** Fotos von fertigen Bädern hat er wirklich, und
-sie verkaufen das nächste Bad. Eine Referenzstrecke daraus zu bauen ist Arbeit, die eine
-500-€-Seite nicht leistet. Und es zielt auf das Geschäft, das er **will**.
+**Warum dieses Argument trägt:**
+
+| Test | Ergebnis |
+|---|---|
+| Auftragswert | 3.500 Wörter schreibt kein Baukasten für 500 € |
+| Welches Geschäft | Badsanierung und Heizungstausch — das, was er **will** |
+| Weiß ich das | Schritt 1 ist am Produkt nachprüfbar, Schritt 2 ist logisch zwingend. Keine Behauptung über seine Kunden |
+
+**Und warum die beiden Fassungen davor durchgefallen sind:** Die erste argumentierte mit der
+Notdienstnummer — kostenlos, falsches Geschäft, erfundene Kundenreise. Die zweite mit seinen Fotos:
+besser, aber der Satz `Der Kunde will vorher sehen, was Sie können.` behauptete wieder etwas über
+fremdes Kaufverhalten, und Fotos hochladen kann jeder Baukasten. **Beide Fassungen hatten einen
+grünen Prüfbericht.**
 
 **Schritt 1 und 2 dürfen frei formuliert sein.** Sie behaupten nichts über uns. Erst ab Schritt 3
 greifen Nachprüftest und Wortlisten.
@@ -449,7 +464,7 @@ sind kein eigener Mechanismus.
 
 ## Ablauf beim Schreiben
 
-### Das Briefing — ohne diese sechs Angaben entsteht kein Satz
+### Das Briefing — ohne diese sieben Angaben entsteht kein Satz
 
 Fehlt eine, wird sie beschafft oder gemeldet — **nicht angenommen.**
 
@@ -461,6 +476,15 @@ Fehlt eine, wird sie beschafft oder gemeldet — **nicht angenommen.**
 | 4 | **Was darf hier nicht behauptet werden?** | Website-Lastenheft §2, Verbotsliste |
 | 5 | **Welche Texte sind gebunden?** | Klasse 1 oben |
 | 6 | **Welche Bauform hat der Abschnitt?** | „Bauformen" oben |
+| 7 | **Welches Argument trägt die Seite — und woher stammt es?** | Nur aus den Unterlagen oder vom Auftraggeber. **Nie ausgedacht** |
+
+**Angabe 7 ist die einzige, die du nicht selbst beschaffen kannst.** Bei einer Branchenseite heißt
+sie: welches Geschäft dieser Betrieb will, was ihn an seiner heutigen Seite stört, was er beim
+Erstgespräch immer erklären muss. Das weiß nur jemand aus der Branche.
+
+**Fehlt Angabe 7, wird die Seite nicht geschrieben.** Sie wird als offener Punkt gemeldet, mit der
+konkreten Frage, die zu klären ist. Eine Branchenseite mit ausgedachtem Argument ist schlechter als
+keine — sie liest sich flüssig und argumentiert am Leser vorbei.
 
 **Der häufigste Grund für schlechten Text ist nicht schlechtes Schreiben, sondern ein leeres
 Briefing.** Wer nicht weiß, welche Tatsache er übergeben soll, formuliert um die Leere herum — so
@@ -479,7 +503,7 @@ formulieren · eine Funktion beschreiben, die nicht gebaut ist.
 
 ### Die acht Schritte
 
-1. **Briefing prüfen.** Alle sechs Angaben da?
+1. **Briefing prüfen.** Alle sieben Angaben da? Fehlt 7, hört es hier auf
 2. **Tatsachen sammeln.** Stichworte, je mit Fundstelle
 3. **Bauform wählen** und die Blöcke leer hinschreiben
 4. **Erste Fassung schreiben**, egal wie
@@ -521,9 +545,10 @@ obere sagt es so, dass jemand es liest.
 
 ---
 
-## Sofort-Prüfung: sechs Fragen an jeden fertigen Text
+## Sofort-Prüfung: acht Fragen an jeden fertigen Text
 
 0. **Rechtfertigt das Argument den Preis, oder gilt es auch für eine 500-€-Seite?**
+0b. **Steht irgendwo eine Behauptung über das Verhalten seiner Kunden oder über „den Markt"?** Dann raus
 1. Steht die Antwort im **ersten** Satz?
 2. Ist jede Behauptung mit einer **Zahl, einem Namen oder einer Tatsache** belegt?
 3. Würde ein Malermeister nach dem Lesen sagen können, **was er bekommt und was es kostet**?

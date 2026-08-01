@@ -37,7 +37,7 @@ er verhindern soll. Hier stehen Zahlen, die man nachzählen kann.
 
 ---
 
-## 1. Die dreizehn Regeln
+## 1. Die vierzehn Regeln
 
 ### Regel 0 — Erst das Argument, dann die Formulierung
 
@@ -53,6 +53,23 @@ Für welches Geschäft argumentiert der Text — das, was der Betrieb **will**, 
 mitnimmt? Und: Weiß ich das, oder nehme ich es an?
 
 **Diese Regel steht vor allen anderen.** Wer sie überspringt, formuliert das Falsche perfekt.
+
+### Regel 0a — Keine Behauptung über Dritte
+
+| Der Satz behauptet etwas über | Erlaubt |
+|---|---|
+| **den Leser selbst** — `Sie haben Fotos von fertigen Bädern auf dem Telefon.` | ja, er prüft es sofort |
+| **ein Produkt, das jeder aufmachen kann** — `Ein Baukasten liefert leere Textfelder.` | ja |
+| **seine Kunden** — `Der Kunde will vorher sehen, was Sie können.` | **nein** |
+| **den Markt** — `Auf den meisten Handwerkerseiten steht Beispieltext.` | **nein** |
+
+Behauptungen über Dritte klingen selbstverständlich und sind trotzdem ungezählt. Der Leser kennt
+seine Kunden besser als wir — trifft der Satz nicht zu, ist die Seite erledigt.
+
+```bash
+# Behauptungen über Dritte — jeder Treffer wird einzeln geprüft
+grep -noiE '(der|ihr|ihre) (kunde|kunden|interessent)[a-zäöüß]* (will|wollen|erwartet|erwarten|sucht|suchen|ruft|rufen|klickt|klicken|vergleicht|vergleichen)|die meisten (kunden|betriebe|handwerker|unternehmen)|kaum ein[a-zäöüß]* (kunde|betrieb)|niemand (liest|klickt|ruft)' datei
+```
 
 ### Regel 1 — Wo eine Zahl bekannt ist, steht die Zahl
 
@@ -133,8 +150,8 @@ wird ersetzt.
 **Nachprüfbar sein müssen Aussagen über SARTU** — Leistung, Preis, Dauer, Grenzen. **Nicht** der
 Satz, der Wiedererkennung herstellt.
 
-`Ein Rohrbruch wartet nicht auf Bürozeiten.` enthält keine Zahl und ist trotzdem richtig: Er
-behauptet nichts über uns.
+`Ein Baukasten ist an einem Abend aufgebaut.` enthält keine Zahl über SARTU und ist trotzdem
+zulässig: Der Satz behauptet nichts über uns und ist am Produkt nachprüfbar.
 
 **Der Aufbau eines Abschnitts, ausführlich im Texter-Skill:**
 Wiedererkennung → Konsequenz → Auflösung → Beleg. Die ersten beiden Schritte sind frei, ab dem
@@ -252,6 +269,8 @@ H2 über 9 Wörter                      ____             Grenze 0
 Überschriften ohne Nachprüfbares      ____             Grenze 0
 Konjunktive in Überschriften          ____             Grenze 0
 Umfangszahlen genannt                 ____ von ____    alle, die die Seite behauptet
+Behauptungen über Kunden / Markt      ____             Grenze 0
+Argument gilt auch für 500-€-Seite    ja / nein        muss nein sein
 ```
 
 **Wer eine Grenze reißt, ändert den Text — nicht den Bericht.** Eine Überschreitung darf stehen

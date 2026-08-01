@@ -1128,20 +1128,49 @@ Der Besucher muss die Website **nicht verlassen und nicht weiterklicken**.
 > Feld `branche` wird aus der Seite vorbelegt und landet in `leads.payload`. Kein zweiter Weg, kein
 > zweites Formular.
 
-### Zwei Prüfungen vor der Abgabe, beide hart
+### Drei Prüfungen vor der Abgabe, alle hart
 
 **1. Der Austauschtest.** Ersetze das Branchenwort durch ein anderes. Ergibt der Text weiterhin
 Sinn, ist es keine Branchenseite, sondern eine Vorlage mit getauschtem Etikett.
 
-Beispiel, das korrekt scheitert: Notdienst um drei Uhr nachts · Gesellensuche · Bilder von
-Baustellen statt von Büros. Bei einer Steuerkanzlei ergibt keiner dieser Punkte Sinn.
+Beispiel, das korrekt scheitert: Gesellensuche · Bilder von Baustellen statt von Büros · die
+Förderfrage beim Heizungstausch. Bei einer Steuerkanzlei ergibt keiner dieser Punkte Sinn.
 
 **2. Die Eigenanteilsmessung.** Mindestens **400 Wörter** der Seite dürfen **auf keiner anderen
 Seite** vorkommen. Prüfbar mit einer Textabgleichsuche über alle Branchenseiten.
 
-**Reißt eine der beiden Prüfungen: Die Seite wird nicht veröffentlicht.** Nicht überarbeitet —
+**3. Der Herkunftsnachweis — neu am 01.08.2026.** Zu den Blöcken 3, 5, 6 und 10 gehört eine
+Quellenzeile: **woher stammt diese Aussage über die Branche?** Zulässig sind nur drei Quellen.
+
+| Quelle | Beispiel |
+|---|---|
+| Der Auftraggeber | „Chef hat mir gesagt: Förderung erklären ist der häufigste Anruf" |
+| Ein Betrieb der Branche | Gespräch, E-Mail, ausgefüllter Fragebogen |
+| Eine benannte, öffentliche Fundstelle | Innungsseite, Fachverband, Gesetzestext |
+
+**Nicht zulässig:** was einleuchtend klingt.
+
+> **Warum Prüfung 1 und 2 dafür nicht reichen — an einem echten Fehlschlag.** Der erste Entwurf der
+> SHK-Seite argumentierte mit der Notdienstnummer oben auf der Seite. Er bestand den Austauschtest
+> mühelos: Notdienst ist branchentypisch, eine Steuerkanzlei hat keinen. Er bestand die
+> Eigenanteilsmessung. Er bestand jede Zahl aus `SARTU_TEXTREGELN.md`.
+>
+> **Und er war trotzdem unbrauchbar.** Eine Telefonnummer oben rechtfertigt keine 2.198 € — das
+> kann jeder Baukasten für 500 €. Der Notdienst ist außerdem das Geschäft, das ein
+> Sanitärbetrieb am **wenigsten** will; er lebt von Badsanierung und Heizungstausch. Und die
+> Begründung *„wer nachts sucht, ruft die erste Nummer an"* war frei erfunden.
+>
+> **Ein branchentypisches Argument ist nicht automatisch ein tragfähiges.** Genau diese Lücke
+> schließt Prüfung 3.
+
+**Reißt eine der drei Prüfungen: Die Seite wird nicht veröffentlicht.** Nicht überarbeitet —
 nicht veröffentlicht. Eine Branche, über die sich keine 400 eigenen Wörter schreiben lassen, ist
 eine Branche, über die niemand genug weiß.
+
+> **Folge für die Reihenfolge:** Eine Branchenseite ohne Herkunftsnachweis wird **nicht
+> geschrieben**, sondern als offener Punkt gemeldet — mit der konkreten Frage, die zu klären ist.
+> Damit hängt Welle 1 (Sanitär/Heizung, Elektro, Dachdecker) an einem Gespräch je Branche. Das
+> ist Absicht: drei belegte Seiten schlagen fünfzehn ausgedachte.
 
 ### Welche Branchen — gefiltert nach Zahlungsfähigkeit, nicht nach Vollständigkeit
 

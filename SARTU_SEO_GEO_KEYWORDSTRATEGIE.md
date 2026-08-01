@@ -445,13 +445,17 @@ Besucher *„funnel users to one page"*. Eine Seite, auf der man alles erfährt 
 ist keine Zwischenstation, sondern das Ziel.
 
 **Was trotzdem gilt:** Das zweite Kriterium heißt *„substantially similar pages"*. Ein Formular
-macht zwei Seiten nicht verschieden — nur Inhalt tut das. Deshalb zwei harte Prüfungen vor jeder
+macht zwei Seiten nicht verschieden — nur Inhalt tut das. Deshalb drei harte Prüfungen vor jeder
 Veröffentlichung:
 
 1. **Austauschtest** — Branchenwort ersetzen. Ergibt der Text weiterhin Sinn, ist es keine Branchenseite
 2. **Eigenanteil** — mindestens **400 Wörter**, die auf keiner anderen Seite stehen
+3. **Herkunftsnachweis** — zu jeder Aussage über die Branche eine Quelle: Auftraggeber, ein Betrieb
+   der Branche oder eine benannte Fundstelle. Was nur einleuchtend klingt, zählt nicht
 
-**Reißt eine Prüfung, wird die Seite nicht veröffentlicht.**
+**Reißt eine Prüfung, wird die Seite nicht veröffentlicht.** Prüfung 3 ist die jüngste und fängt
+den Fehler, den 1 und 2 durchlassen: ein branchentypisches Argument, das trotzdem für das falsche
+Geschäft wirbt. Begründung in Website-Lastenheft §10a.
 
 **Zielgröße 12 bis 15 Seiten über 18 Monate**, gefiltert nach Zahlungsfähigkeit. Zum Launch drei:
 Sanitär-Heizung-Klima, Elektrotechnik, Dachdecker. Die Grenze ist nicht Google, sondern wer die
