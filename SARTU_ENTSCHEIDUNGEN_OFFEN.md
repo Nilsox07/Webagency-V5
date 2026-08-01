@@ -20,12 +20,78 @@ erfundenen Wert ersetzt werden. Steht er auf `offen`, gilt die dort genannte Spe
 | `[HEIMATORT]` | *offen* | nur wenn er ein echter Vertrauensanker ist |
 | `[GESCHAEFTSADRESSE_STATUS]` | *offen* | **blockiert weiterhin das Google-Unternehmensprofil** |
 
+### Was die Standortentscheidung regelt — und was nicht
+
+> **Berichtigt am 01.08.2026.** Die frühere Fassung dieses Abschnitts las sich, als sei SARTU ein
+> regionales Unternehmen. Das ist falsch, und der Betreiber hat zu Recht widersprochen.
+
+**Sie regelt genau zwei Dinge:**
+
+1. das **Google-Unternehmensprofil** und damit den Kartenbereich
+2. ob und wo **eigene Ortsseiten** entstehen
+
+**Sie regelt nicht, wo SARTU arbeitet.** Das Produkt kommt ohne einen einzigen Termin aus.
+Entfernung spielt in der Lieferung keine Rolle — ein Malermeister in Kassel wird genauso bedient
+wie einer in Radeberg. **Der Markt ist Deutschland.**
+
+#### Von zehn Kanälen ist genau einer ortsgebunden
+
+Nach `CLAUDE_SARTU_MASTERKONZEPT_FINAL.md` §23b.2:
+
+| Kanal | Ortsgebunden? |
+|---|---|
+| Multiplikatoren — Steuerberater, Kammern, Werbetechniker | teilweise. Das Gespräch ist örtlich, die Empfehlung nicht |
+| Verwaiste Bestandskunden | **nein** |
+| Trigger-Events | **nein** |
+| Google Ads | **nein** — bundesweit schaltbar, ab Tag 1 |
+| **Transparenzseiten mit veröffentlichten Preisen** | **nein** — laut §23b.2 der **stärkste eigene Hebel** |
+| **Branchen-Spirale** (§23b.7) | **nein** — der eigentliche nationale Motor |
+| SEO und Inhalte im Übrigen | **nein** |
+| Auffindbarkeit in KI-Antworten | **nein** |
+| **Google-Unternehmensprofil und Kartenbereich** | **ja — der einzige** |
+| Ortsseiten | ja, und laut §23b.2 der schwächste: Wirkung erst Monat 12–24 |
+
+**Dresden ist kein Markt, sondern ein Gratis-Kanal.** Das Unternehmensprofil kostet nichts, hängt
+an der Adresse und bringt Anfragen im Umkreis. Das nimmt man mit — nicht weil SARTU regional wäre,
+sondern weil es geschenkt ist.
+
+#### Wie SARTU deutschlandweit gefunden wird
+
+Der Weg führt **nicht** über Ortsnamen. Er führt über drei Dinge, die alle bundesweit wirken und
+alle ab Tag eins gebaut werden können:
+
+| Weg | Warum er national trägt |
+|---|---|
+| **Branchenseiten** | „Website für Physiotherapiepraxis" hat überall dieselbe Nachfrage. Kein Grenzaufwand je Markt (`SARTU_SEO_GEO_KEYWORDSTRATEGIE.md` §0.3) |
+| **Transparenzseiten** | Der Markt schreibt „Preis auf Anfrage". Wer echte Zahlen veröffentlicht, wird zitiert — in der Suche **und** in KI-Antworten |
+| **Die Positionierung selbst** | „Website ohne Termin", „Festpreis ohne Beratungsgespräch". Winzige Suchmengen, aber die genaueste Kaufabsicht, die es gibt — und praktisch kein Wettbewerb |
+
+**Warum nicht über den Begriff „Webdesign":** Dort stehen bundesweit tausende Agenturen mit Jahren
+Vorsprung. Eine neue Domain gewinnt das nicht. Die Keywordstrategie schließt `Webdesignagentur`
+als Zielbegriff deshalb ausdrücklich aus.
+
+**Warum nicht über viele Ortsseiten:** Vierhundert Städte mal eine dünne Seite ist der
+Doorway-Tatbestand. Und selbst wenn nicht: Eine Seite für Flensburg wirkt **nur** in Flensburg.
+Eine Branchenseite wirkt überall.
+
+#### Ehrlich zum Zeitrahmen
+
+| Kanal | Erste Anfragen |
+|---|---|
+| Multiplikatoren, Direktansprache, Google Ads | **Woche 2 bis 8** |
+| Transparenz- und Branchenseiten | **Monat 3 bis 9** |
+| Kartenbereich in Dresden | Monat 2 und später, sobald Bewertungen da sind |
+| Organische Suche im Übrigen | **Monat 9 bis 18** |
+
+**Die ersten fünf Kunden kommen nicht über Suchmaschinen.** Sie kommen über Menschen. Das steht so
+schon in §23b.2 — Multiplikatoren stehen dort auf Platz eins, Ortsseiten auf Platz zehn.
+
 ### Was damit freigeschaltet ist
 
 - Ortsnamen im Fließtext, in Titeln und Adressen — **für die Startregion**
 - `/webdesign-dresden` und Umlandseiten, **nach dem Gate in Masterkonzept §16a**
 - Service-Area-Definition
-- Regionale Formulierungen statt „im deutschsprachigen Raum"
+- Ortsnennung im Fußbereich und auf `/kontakt` — **zusätzlich** zur bundesweiten Aussage, nicht statt ihr
 
 ### Was weiterhin gesperrt bleibt
 
@@ -47,8 +113,8 @@ Ortsseiten wären trotzdem ein Fehler. Die Auflösung liegt in der Trennung:
 | Wo | Was |
 |---|---|
 | **Google-Unternehmensprofil** | alle genannten Orte als Einzugsgebiet. Bis zu **20** sind erlaubt — die Liste passt vollständig hinein |
-| **`/kontakt` und die Dresden-Seite** | ein Absatz im Fließtext, der die Orte namentlich nennt |
-| **Angebote und E-Mails** | Formulierungen wie „im Raum Dresden" statt „deutschlandweit" |
+| **`/kontakt` und die Dresden-Seite** | ein Absatz, der die Orte namentlich nennt — **und den Satz, dass bundesweit gearbeitet wird** |
+| **Angebote und E-Mails** | Sitz im Raum Dresden nennen, **Arbeitsgebiet bundesweit**. Nicht „nur im Raum Dresden" |
 
 **Das bedient alle genannten Orte** und kostet nichts. Kein Doorway-Risiko, weil keine Seite
 entsteht, die nur aus einem Ortsnamen besteht.

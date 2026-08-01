@@ -204,7 +204,12 @@ Fünf Spalten auf Desktop, gestapelt auf Mobil (Reihenfolge wie unten).
 > **`ohne WordPress` bleibt** auf `/leistung-webdesign` und im zugehörigen Ratgeberartikel. Dort
 > beantwortet es eine echte Suchanfrage, statt die Startseite auf einen Wettbewerbsvergleich zu
 > verengen.
-**Meta Description (152 Z.):** `SARTU plant, textet, programmiert und betreibt Ihre Firmenwebsite zum Festpreis. Geführtes Portal statt E-Mail-Chaos, SEO-Basis ab Launch, kein WordPress.`
+**Meta Description (148 Z.):** `Firmenwebsite zum Festpreis, bundesweit und ohne einen einzigen Termin. Geplant, geschrieben, programmiert und betrieben von SARTU. Ab 1.490 € netto.`
+
+> **Geändert am 01.08.2026.** Vorher stand dort *„Geführtes Portal statt E-Mail-Chaos, SEO-Basis ab
+> Launch, kein WordPress."* Drei Probleme: `kein WordPress` verstößt gegen die eigene Positionierung
+> (Marktanalyse: nicht plakatieren), die **Reichweite** fehlte, und es stand **keine Zahl** darin.
+> Die neue Fassung nennt beides — und der Preis filtert vor dem Klick.
 **H1:** `Individuell programmierte Firmenwebsites zum Festpreis.`
 **Zielumfang:** 750–950 Wörter · **Schema:** `Organization`, `WebSite` · `FAQPage` optional (bringt keine Rich Results mehr, s. §16)
 
@@ -361,7 +366,19 @@ einen Audit-Eintrag (Portal-Lastenheft).
 - **Primär-CTA:** `Bedarf prüfen lassen` → `/briefing`
 - **Sekundär-CTA:** `Preise ansehen` → `/preise`
 - **Preishinweis (klein, direkt unter den Buttons):** `Alle Preise netto zzgl. USt. Ausschließlich für Unternehmer.`
-- **Trust-Zeile (4 Punkte):** `Festpreis vorab` · `Texte inklusive` · `Portal statt E-Mail-Chaos` · `SEO-Basis ab Launch`
+- **Trust-Zeile (4 Punkte):** `Festpreis vorab` · `Texte inklusive` · `Bundesweit, ohne Termin` · `SEO-Basis ab Launch`
+
+  > **`Bundesweit, ohne Termin` ersetzt `Portal statt E-Mail-Chaos`** (01.08.2026). Zwei Gründe:
+  >
+  > 1. **Die Reichweite stand nirgends auf der Seite.** Ein Betrieb außerhalb Sachsens konnte nicht
+  >    erkennen, ob er überhaupt Kunde werden kann. Das ist die teuerste Art, einen Besucher zu
+  >    verlieren — er geht, ohne zu fragen
+  > 2. **„Ohne Termin" und „bundesweit" sind dieselbe Tatsache.** Genau weil es keine
+  >    Abstimmungstermine gibt, spielt Entfernung keine Rolle. Die Seite nannte bisher nur die eine
+  >    Hälfte
+  >
+  > Der ersetzte Punkt geht nicht verloren — der Kundenbereich bekommt in Sektion 2 einen ganzen
+  > Abschnitt mit elf Einzelpunkten.
 - **Branchenangabe:** `Handwerk` · `Praxen` · `Kanzleien` · `Ladengeschäfte`
 
   > **Diese vier dürfen nicht anklickbar aussehen.** Im Entwurf sind sie als Pillen mit Rand und
@@ -687,21 +704,27 @@ Satz ergänzt — die Wirkung entsteht aus der Leere ringsum.
 
 ### Sektion 9 — Häufige Fragen (10–12 Einwände, Akkordeon)
 
-1. **Muss ich mir selbst ein Paket aussuchen?**
-   > Nein. Sie beschreiben Ihr Unternehmen und Ihr Ziel; wir empfehlen genau eine Lösung und begründen sie. Wenn eine kleinere Lösung reicht, empfehlen wir die kleinere.
-2. **Schreiben Sie die Texte?**
+1. **Arbeiten Sie auch außerhalb von Sachsen?**
+   > Ja, bundesweit. Weil es keine Abstimmungstermine gibt, spielt die Entfernung keine Rolle — in Flensburg läuft es genauso ab wie in Dresden. Unser Sitz ist im Raum Dresden, gearbeitet wird für Betriebe in ganz Deutschland.
+
+   > **Diese Frage steht bewusst an erster Stelle** (01.08.2026). Sie entscheidet, ob der Leser sich überhaupt angesprochen fühlt. Vorher stand die Reichweite **nirgends auf der Seite** — ein Betrieb außerhalb Sachsens ging, ohne zu fragen.
+2. **Muss ich mir selbst ein Paket aussuchen?**
+   > Nein. Sie beschreiben Ihr Unternehmen und Ihr Ziel; wir empfehlen genau einen Umfang und begründen ihn. Wenn ein kleinerer reicht, empfehlen wir den kleineren.
+3. **Schreiben Sie die Texte?**
    > Ja. Sie liefern Fakten, Stichpunkte und vorhandene Unterlagen — wir schreiben daraus die Website-Texte. Erfundene Belege oder ungeprüfte Fachaussagen gibt es nicht.
-3. **Warum gibt es keine Liste mit Zusatzoptionen?**
+4. **Warum gibt es keine Liste mit Zusatzoptionen?**
    > Weil Zusatzlisten den Preis unklar machen. Ein Standardangebot endet exakt beim genannten Festpreis. Passt eine Anforderung nicht hinein, bekommen Sie dafür ein eigenes Angebot mit eigenem Festpreis.
-4. **Was passiert mit meiner Domain und meinen E-Mail-Adressen?**
+5. **Was passiert mit meiner Domain und meinen E-Mail-Adressen?**
    > Die Domain gehört Ihnen — auch wenn wir sie technisch verwalten. Vor jeder Änderung sichern wir Ihre bestehenden Einträge, damit Ihre E-Mail-Adressen beim Umschalten erreichbar bleiben.
-5. **Kann ich später selbst etwas ändern?**
-   > Ja, die Dinge, die sich wirklich ändern: Öffnungszeiten, Kontaktdaten, Team- und Projekteinträge, Bilder in vorhandenen Bildplätzen, und ob eine Seite sichtbar ist. Layout, Technik und Adressen bleiben bei uns.
-6. **Ist SEO enthalten?**
+6. **Kann ich später selbst etwas ändern?**
+   > Öffnungszeiten und Kontaktdaten pflegen Sie selbst im Kundenbereich. Texte, Bilder und Seitenstruktur ändern wir für Sie — schreiben Sie uns einfach, das ist im Betrieb enthalten.
+
+   > **Korrigiert am 01.08.2026.** Die alte Antwort versprach zusätzlich *Team- und Projekteinträge* und *Bilder in vorhandenen Bildplätzen* als Selbstbedienung. Genau diese drei Funktionen sind gestrichen (`SARTU_ENTSCHEIDUNGEN_OFFEN.md` §5a), und die Portalhilfe §8.8 sagte ohnehin schon das Gegenteil. Der Wortlaut ist jetzt in beiden Dokumenten identisch.
+7. **Ist SEO enthalten?**
    > Die Grundlage ja, ab dem ersten Tag: Seitenthemen, Metadaten, strukturierte Daten, interne Verlinkung, Ladezeit. Ein späterer Ausbau folgt echten Suchdaten und ist ein eigenes Angebot.
-7. **Warum kein WordPress?**
+8. **Warum kein WordPress?**
    > Weil Sie sich dann um Updates, Plugins und Sicherheitslücken kümmern müssten. Wir programmieren die Website ohne diese Abhängigkeiten und betreiben sie selbst.
-8. **Können Sie eine bestimmte Google-Position zusichern?**
+9. **Können Sie eine bestimmte Google-Position zusichern?**
    > Nein, und niemand kann das seriös. Wir bauen das technische und inhaltliche Fundament und halten es im Betrieb sauber.
 
 ### Sektion 10 — Bedarfsscheck-Einstieg
@@ -1026,6 +1049,24 @@ Sektionen: Hero mit **echtem Foto** (kein Fake-Teamfoto) · „Warum SARTU ander
 **Umfang:** 250–350 Wörter
 
 Zwei Karten: **`Websitebedarf prüfen`** (primär → `/briefing`) und **`Rückfrage stellen`** (Anker zum Formular).
+
+**Pflichtabschnitt „Wo wir arbeiten"** — direkt unter den beiden Karten:
+
+> ### Wo wir arbeiten
+> Bundesweit. Weil es keine Abstimmungstermine gibt, spielt die Entfernung keine Rolle — der Ablauf
+> ist überall derselbe.
+>
+> Unser Sitz ist im Raum Dresden. Betriebe aus Dresden und dem Umkreis besuchen wir bei Bedarf
+> persönlich: Meißen, Radebeul, Coswig, Radeberg, Pirna, Heidenau, Freital, Dippoldiswalde,
+> Bischofswerda, Bautzen und Sebnitz.
+
+**Die Reihenfolge ist verbindlich: erst bundesweit, dann der Umkreis.** Umgekehrt liest ein Betrieb
+aus Kassel „Dresden" und geht.
+
+> **Warum dieser Abschnitt Pflicht ist** (01.08.2026): Die Reichweite stand vorher **nirgends** auf
+> der Website. Dabei ist sie die logische Folge des stärksten Verkaufsarguments — *ohne Termin*
+> heißt *überall*. Die Ortsliste dient dem Kartenbereich und dem Vertrauen der Nachbarschaft, nicht
+> der Abgrenzung.
 
 **Formularfelder:** Name (Pflicht) · Unternehmen (Pflicht) · E-Mail (Pflicht) · Telefon (optional) · Anliegen (Auswahl: Websiteprojekt · Bestehendes Angebot · Domain und Launch · Allgemeine Rückfrage) · Nachricht (Pflicht, min. 20 Zeichen) · Datenschutz-Checkbox (Pflicht) · Honeypot.
 **Fehlermeldung Nachricht:** „Bitte beschreiben Sie Ihr Anliegen in ein bis zwei Sätzen."
