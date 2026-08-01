@@ -1,0 +1,344 @@
+<title>Wie andere Seiten das Motivproblem lösen</title>
+
+<style>
+:root{
+  --cream:#f4efe5; --paper:#fbf8f2; --ink:#14110d; --ink-soft:#241f18;
+  --text:#231e17; --muted:#4d473d; --line:#ddd4c4; --line-dark:#332d24; --sand:#e8dfcd;
+  --lime:#a3e635; --lime-soft:#e4f5b8; --label:#5c554a; --label-dark:#a89b88;
+  --r-xs:8px; --r-s:14px; --r-m:22px; --r-l:34px; --r-xl:52px; --r-pill:999px;
+  --s-2:12px; --s-3:20px; --s-4:32px; --s-5:48px; --s-6:72px; --s-7:104px;
+  --wrap:1180px; --gut:clamp(20px,4vw,56px);
+  --font-sans:-apple-system,BlinkMacSystemFont,"Segoe UI",system-ui,"Helvetica Neue",Helvetica,sans-serif;
+  --font-mono:ui-monospace,"SFMono-Regular",Menlo,Consolas,monospace;
+  color-scheme:light;
+}
+:root[data-theme="dark"],:root[data-theme="light"]{color-scheme:light}
+*{box-sizing:border-box}
+body{margin:0;background:var(--cream);color:var(--text);font-family:var(--font-sans);
+  font-size:18px;line-height:1.62;text-wrap:pretty;overflow-x:hidden}
+h1,h2,h3,h4{margin:0;font-weight:650;letter-spacing:-.025em;line-height:1.05;color:var(--ink);text-wrap:balance}
+p{margin:0} ul{margin:0;padding:0;list-style:none}
+:focus-visible{outline:2px solid var(--ink);outline-offset:2px;box-shadow:0 0 0 4px var(--lime)}
+.wrap{width:100%;max-width:var(--wrap);margin:0 auto;padding:0 var(--gut)}
+.mono{font-family:var(--font-mono);font-size:12.5px;letter-spacing:.13em;text-transform:uppercase;color:var(--label)}
+.body{font-size:17.5px;line-height:1.62;color:var(--muted)}
+
+.top{padding:clamp(48px,7vw,88px) 0 var(--s-6);border-bottom:1px solid var(--line)}
+h1{font-size:clamp(32px,4.6vw,54px);letter-spacing:-.035em;margin-top:var(--s-3);max-width:22ch}
+
+.sec{padding:var(--s-7) 0;border-bottom:1px solid var(--line)}
+.sec:last-of-type{border-bottom:none}
+.sh{display:grid;grid-template-columns:64px minmax(0,1fr);gap:clamp(16px,3vw,40px);align-items:baseline;margin-bottom:var(--s-5)}
+.sn{font-family:var(--font-mono);font-size:14px;color:var(--label)}
+.sh h2{font-size:clamp(26px,3.4vw,38px)}
+.sh .body{margin-top:var(--s-2);max-width:62ch}
+@media (max-width:700px){.sh{grid-template-columns:1fr;gap:6px}}
+
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(258px,1fr));gap:var(--s-3)}
+.card{background:var(--paper);border:1px solid var(--line);border-radius:var(--r-l);
+  padding:26px 24px;display:flex;flex-direction:column;gap:16px}
+.card h4{font-size:17px}
+.card .note{font-size:15.5px;line-height:1.5;color:var(--muted)}
+.stage{min-height:104px;display:flex;align-items:center;justify-content:flex-start;gap:14px;flex-wrap:wrap;
+  padding:20px;background:var(--cream);border:1px solid var(--line);border-radius:var(--r-m)}
+
+.tblwrap{overflow-x:auto;margin-top:var(--s-4);border:1px solid var(--line);border-radius:var(--r-m);background:var(--paper)}
+table{width:100%;border-collapse:collapse;font-size:16.5px}
+th,td{padding:14px 20px;text-align:left;border-bottom:1px solid var(--line);vertical-align:top}
+th{font-family:var(--font-mono);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--label);font-weight:500;white-space:nowrap}
+tr:last-child td{border-bottom:none}
+code{font-family:var(--font-mono);font-size:14.5px;color:var(--ink)}
+.num{font-variant-numeric:tabular-nums}
+
+/* Die drei Fassungen im Vergleich */
+.abtest{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:var(--s-3);margin-top:var(--s-4)}
+.ab{border:1px solid var(--line);border-radius:var(--r-l);overflow:hidden;background:var(--paper)}
+.ab-flag{padding:11px 22px;background:var(--sand);border-bottom:1px solid var(--line);
+  font-family:var(--font-mono);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink)}
+.ab-in{padding:28px 26px}
+.ab h3{font-size:23px;margin-top:14px;margin-bottom:10px}
+.ab p{font-size:16.5px;line-height:1.55;color:var(--muted)}
+.ab .verdict{margin-top:18px;padding-top:16px;border-top:1px solid var(--line);
+  font-size:15px;color:var(--muted);line-height:1.5}
+
+/* Markenvarianten */
+.tag{display:inline-flex;align-items:center;gap:10px;font-family:var(--font-mono);
+  font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--label)}
+.dot-leaf::before{content:"";width:11px;height:11px;flex:none;background:var(--label);
+  border-radius:var(--r-pill) 3px var(--r-pill) 3px}
+.dot-crop::before{content:"";width:12px;height:12px;flex:none;position:relative;
+  background:
+    linear-gradient(var(--label),var(--label)) 0 5px/12px 2.5px no-repeat,
+    linear-gradient(var(--label),var(--label)) 5px 0/2.5px 12px no-repeat}
+.dot-rule::before{content:"";width:26px;height:2.5px;flex:none;background:var(--label)}
+.dot-none{}
+
+/* Kategorien */
+.cats{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:var(--s-3);margin-top:var(--s-4)}
+.cat{background:var(--paper);border:1px solid var(--line);border-radius:var(--r-l);padding:24px}
+.cat-key{font-family:var(--font-mono);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--label);margin-bottom:12px}
+.cat h4{font-size:18px;margin-bottom:10px}
+.cat p{font-size:16px;line-height:1.55;color:var(--muted)}
+.cat .demo{margin-top:18px;padding:18px;background:var(--cream);border:1px solid var(--line);
+  border-radius:var(--r-m);min-height:78px;display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.radi{display:flex;gap:8px;align-items:flex-end}
+.radi span{width:34px;height:34px;background:var(--sand);border:1px solid var(--line)}
+.hair{width:100%;height:1px;background:var(--line)}
+.hair2{width:100%;height:2.5px;background:var(--ink)}
+.blk{padding:7px 14px;background:var(--lime);border:1px solid var(--line);color:var(--ink);
+  font-weight:600;font-size:15px}
+.mlab{font-family:var(--font-mono);font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink)}
+
+.rec{background:var(--ink);color:#efe9dd;padding:var(--s-7) 0;border-radius:var(--r-xl) var(--r-xl) 0 0}
+.rec h2,.rec h3{color:#f6f1e6} .rec .body{color:#c3bcae} .rec .mono{color:var(--label-dark)}
+.rec code{color:#f6f1e6}
+.rbox{background:var(--ink-soft);border:1px solid var(--line-dark);border-radius:var(--r-m);padding:26px;margin-top:var(--s-4)}
+.rec .tblwrap{border-color:var(--line-dark);background:var(--ink-soft)}
+.rec th,.rec td{border-color:var(--line-dark)}
+.rec th{color:var(--label-dark)}
+
+footer{background:var(--ink);color:#7d766a;padding:var(--s-5) 0;
+  font-family:var(--font-mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase}
+.foot-in{display:flex;flex-wrap:wrap;gap:8px 26px;justify-content:space-between}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+
+
+<header class="top">
+  <div class="wrap">
+    <p class="mono">Recherche · 01.08.2026</p>
+    <h1>Wie andere Seiten das Motivproblem lösen</h1>
+    <p class="body" style="margin-top:var(--s-3);max-width:58ch">
+      Kurze Antwort: Die meisten haben gar keins. Sie haben eine Radienskala — und die
+      Wiedererkennung kommt aus Schrift, Farbe und Raster.
+    </p>
+  </div>
+</header>
+
+<main>
+
+  <!-- 01 -->
+  <section class="sec">
+    <div class="wrap">
+      <div class="sh">
+        <p class="sn">01</p>
+        <div>
+          <p class="mono" style="margin-bottom:12px">Der Befund</p>
+          <h2>Material Design hat kein Motiv. Es hat sieben Radien.</h2>
+          <p class="body">Das meistkopierte Designsystem der Welt definiert seine Formsprache
+            ausschließlich über Eckenrundungen — eine Skala von eckig bis vollrund. Keine
+            Sonderform, kein wiederkehrendes Zeichen.</p>
+        </div>
+      </div>
+
+      <div class="tblwrap" style="margin-top:0">
+        <table>
+          <thead><tr><th scope="col">Material 3</th><th scope="col">Wert</th><th scope="col">SARTU</th><th scope="col">Wert</th></tr></thead>
+          <tbody>
+            <tr><td>Extra small</td><td class="num">4 dp</td><td><code>--r-xs</code></td><td class="num">8 px</td></tr>
+            <tr><td>Small</td><td class="num">8 dp</td><td><code>--r-s</code></td><td class="num">14 px</td></tr>
+            <tr><td>Medium</td><td class="num">12 dp</td><td><code>--r-m</code></td><td class="num">22 px</td></tr>
+            <tr><td>Large</td><td class="num">16 dp</td><td><code>--r-l</code></td><td class="num">34 px</td></tr>
+            <tr><td>Large increased</td><td class="num">20 dp</td><td><code>--r-xl</code></td><td class="num">52 px</td></tr>
+            <tr><td>Extra large</td><td class="num">32 dp</td><td>—</td><td>—</td></tr>
+            <tr><td>Full</td><td class="num">9999 dp</td><td><code>--r-pill</code></td><td class="num">999 px</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <p class="body" style="margin-top:var(--s-4);max-width:64ch">
+        <b style="color:var(--ink)">Bis auf eine Zeile ist unsere Skala dieselbe Idee.</b> Der
+        Unterschied ist `--r-leaf` — eine achte Form, die keine Skalenstufe ist, sondern ein
+        Zeichen. Genau die fällt auf.
+      </p>
+
+      <p class="body" style="margin-top:var(--s-3);max-width:64ch">
+        Und die Warnung dazu steht in der Quelle, die den Begriff geprägt hat — Dave Chiu,
+        Google Design, 28.11.2018: <b style="color:var(--ink)">„overuse can dilute your brand
+        expression."</b> Ein Zeichen an fünf Stellen ist genau das.
+      </p>
+    </div>
+  </section>
+
+  <!-- 02 -->
+  <section class="sec">
+    <div class="wrap">
+      <div class="sh">
+        <p class="sn">02</p>
+        <div>
+          <p class="mono" style="margin-bottom:12px">Die fünf Wege</p>
+          <h2>Wenn eine Seite doch wiedererkennbar sein soll.</h2>
+          <p class="body">Fünf Verfahren, die tatsächlich verwendet werden. Vier davon sind keine
+            Sonderform.</p>
+        </div>
+      </div>
+
+      <div class="cats">
+        <div class="cat">
+          <p class="cat-key">Weg 1 — der häufigste</p>
+          <h4>Nur eine Radienskala</h4>
+          <p>Keine Sonderform. Die Wiedererkennung kommt aus Farbe, Schrift und Raster.</p>
+          <div class="demo"><span class="radi">
+            <span style="border-radius:8px"></span><span style="border-radius:14px"></span>
+            <span style="border-radius:22px"></span><span style="border-radius:999px"></span>
+          </span></div>
+        </div>
+
+        <div class="cat">
+          <p class="cat-key">Weg 2</p>
+          <h4>Die Linie als Signatur</h4>
+          <p>Eine bestimmte Trennlinie, überall gleich: Haarlinie oder fetter Strich, nie beides.</p>
+          <div class="demo" style="flex-direction:column;align-items:stretch;gap:14px">
+            <span class="hair"></span><span class="hair2"></span></div>
+        </div>
+
+        <div class="cat">
+          <p class="cat-key">Weg 3</p>
+          <h4>Der Farbblock</h4>
+          <p>Eine Akzentfläche mit fester Behandlung. Nicht die Form ist das Zeichen, sondern die
+            Regel dahinter.</p>
+          <div class="demo"><span class="blk">Bedarf prüfen lassen</span></div>
+        </div>
+
+        <div class="cat">
+          <p class="cat-key">Weg 4</p>
+          <h4>Die Schrift als Signatur</h4>
+          <p>Ein eigener Umgang mit einer Zweitschrift — Versalien, weiter Sperrsatz, immer an
+            derselben Stelle.</p>
+          <div class="demo"><span class="mlab">Kundenbereich</span></div>
+        </div>
+
+        <div class="cat">
+          <p class="cat-key">Weg 5 — der teuerste</p>
+          <h4>Das Zeichen aus dem Logo</h4>
+          <p>Ein Ausschnitt der Bildmarke wird zum Muster. Funktioniert erst, wenn die Marke
+            entschieden ist — und bindet alles daran.</p>
+          <div class="demo"><span class="mono" style="color:var(--muted);font-size:14px">Logo offen — Weg gesperrt</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 03 -->
+  <section class="sec">
+    <div class="wrap">
+      <div class="sh">
+        <p class="sn">03</p>
+        <div>
+          <p class="mono" style="margin-bottom:12px">Der Vergleich</p>
+          <h2>Dieselbe Abschnittsmarke, drei Fassungen.</h2>
+          <p class="body">Links das Blatt, in der Mitte die Schnittmarke, rechts gar kein Zeichen.
+            Alles andere ist identisch.</p>
+        </div>
+      </div>
+
+      <div class="abtest">
+        <div class="ab">
+          <p class="ab-flag">Bisher — die Lozenge</p>
+          <div class="ab-in">
+            <p class="tag dot-leaf">Kundenbereich</p>
+            <h3>Ihr Projekt bleibt an einem Ort.</h3>
+            <p>Angebot, Briefing, Vorschau und Freigabe laufen über Ihren Kundenbereich.</p>
+            <p class="verdict"><b style="color:var(--ink)">Das Zeichen zieht Blick.</b> Es ist das
+              Erste, was man sieht — und es sagt nichts.</p>
+          </div>
+        </div>
+
+        <div class="ab">
+          <p class="ab-flag">Ersatz — die Schnittmarke</p>
+          <div class="ab-in">
+            <p class="tag dot-crop">Kundenbereich</p>
+            <h3>Ihr Projekt bleibt an einem Ort.</h3>
+            <p>Angebot, Briefing, Vorschau und Freigabe laufen über Ihren Kundenbereich.</p>
+            <p class="verdict">Ruhiger, aber dasselbe Muster: ein Zeichen, das erklärt werden
+              müsste, um etwas zu bedeuten.</p>
+          </div>
+        </div>
+
+        <div class="ab">
+          <p class="ab-flag">Ohne Zeichen</p>
+          <div class="ab-in">
+            <p class="tag dot-none">Kundenbereich</p>
+            <h3>Ihr Projekt bleibt an einem Ort.</h3>
+            <p>Angebot, Briefing, Vorschau und Freigabe laufen über Ihren Kundenbereich.</p>
+            <p class="verdict"><b style="color:var(--ink)">Die Marke trägt die Zeile allein.</b>
+              Versalien, weiter Sperrsatz, Monospace — das ist bereits eine Signatur.</p>
+          </div>
+        </div>
+      </div>
+
+      <p class="body" style="margin-top:var(--s-5);max-width:64ch">
+        <b style="color:var(--ink)">Die dritte Fassung ist die ruhigste, und sie verliert nichts.</b>
+        Das Label steht schon in einer Schrift, die sonst nirgends auf der Seite vorkommt, in
+        Versalien, mit 0,14 em Sperrung. Das ist Weg 4 — und er ist längst gebaut.
+      </p>
+    </div>
+  </section>
+
+  <!-- 04 -->
+  <section class="rec">
+    <div class="wrap">
+      <p class="mono" style="margin-bottom:14px">Empfehlung</p>
+      <h2 style="font-size:clamp(27px,3.6vw,42px);max-width:24ch">Streichen statt ersetzen.</h2>
+      <p class="body" style="margin-top:var(--s-3);max-width:62ch">
+        Der Fehler war nicht die Form. Der Fehler war, überhaupt eine achte Form neben eine
+        Sieben-Stufen-Skala zu stellen. Ein Ersatzzeichen wiederholt den Fehler mit anderer
+        Silhouette.
+      </p>
+
+      <div class="rbox">
+        <h3 style="font-size:20px">Was SARTU schon hat, ohne es zu nutzen</h3>
+        <div class="tblwrap" style="margin-top:18px">
+          <table>
+            <thead><tr><th scope="col">Signatur</th><th scope="col">Wo sie schon steht</th></tr></thead>
+            <tbody>
+              <tr><td><b style="color:#f6f1e6">Monospace-Versalie, 0,14 em gesperrt</b></td><td>jede Abschnittsmarke, jeder Chip, jede Rechtszeile</td></tr>
+              <tr><td><b style="color:#f6f1e6">Lime als Fläche mit 1-px-Kante</b></td><td>jeder Hauptknopf, jede Markierung</td></tr>
+              <tr><td><b style="color:#f6f1e6">Creme statt Weiß</b></td><td>der gesamte Grund</td></tr>
+              <tr><td><b style="color:#f6f1e6">Überschriften mit Gewicht 650 und −0,025 em</b></td><td>jede Überschrift</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="body" style="margin-top:20px;max-width:60ch">
+          Vier Signaturen sind bereits im System. <b style="color:#f6f1e6">Keine davon ist eine
+          Form</b> — und genau deshalb hat keine von ihnen ein Blattproblem.
+        </p>
+      </div>
+
+      <h3 style="margin-top:var(--s-6);font-size:22px">Was sich ändert</h3>
+      <div class="tblwrap">
+        <table>
+          <thead><tr><th scope="col">Bisher</th><th scope="col">Neu</th></tr></thead>
+          <tbody>
+            <tr><td><code>--r-leaf: 52px 22px 52px 22px</code></td><td><b style="color:#f6f1e6">entfällt</b></td></tr>
+            <tr><td>Motivpunkt vor jedem Label<br><code>999px 3px 999px 3px</code></td><td><b style="color:#f6f1e6">entfällt.</b> Das Label steht allein</td></tr>
+            <tr><td>Karte im Aufmacher, hervorgehobene Karte,<br>Bildplatz, Blase im Ablauf</td><td><code>--r-l</code> bzw. <code>--r-m</code> aus der Skala</td></tr>
+            <tr><td>acht Formen</td><td><b style="color:#f6f1e6">sechs Radien, null Sonderformen</b></td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <p class="body" style="margin-top:var(--s-4);max-width:62ch">
+        <b style="color:#f6f1e6">Die weiche Formsprache bleibt unangetastet.</b> Sie war die Vorgabe
+        vom 25.07.2026 und steckt in der Radienskala, nicht in der Lozenge. Was wegfällt, ist nur
+        die achte Form.
+      </p>
+
+      <p class="body" style="margin-top:var(--s-4);max-width:62ch">
+        <b style="color:#f6f1e6">Und wenn später doch ein Zeichen soll:</b> Dann kommt es aus der
+        Bildmarke, sobald die entschieden ist. Das ist Weg 5 — der einzige, bei dem das Zeichen
+        etwas bedeutet, statt nur eine Form zu sein.
+      </p>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap foot-in">
+    <span>SARTU · Motivrecherche · 01.08.2026</span>
+    <span>Quellen: Material 3 · Google Design 2018</span>
+  </div>
+</footer>
