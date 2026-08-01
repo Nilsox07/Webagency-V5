@@ -9,13 +9,47 @@ description: Schreibt und prüft jeden Text für SARTU — Website, Kundenbereic
 
 | Datei | Regelt |
 |---|---|
-| **Dieser Skill** | **wie man schreibt** — je Textart, mit Belegen |
+| **Dieser Skill** | **den Wortlaut selbst** — Briefing, Bauformen, Kalibrierung. Die Lastenhefte geben die Aussage vor, hier entsteht die Formulierung |
 | `SARTU_TEXTREGELN.md` | **was zählbar gilt** — Satzlänge, Wortlisten, Prüfbericht |
 | Website-Lastenheft §2 | welche **Behauptungen** verboten sind |
 | Website-Lastenheft §5aa | Fachwörter in Kundensprache |
 
-**Alle vier gelten gleichzeitig.** Dieser Skill ersetzt keine Regel, er erklärt das Handwerk
-dahinter. Bei Widerspruch gewinnt die zählbare Regel.
+**Alle vier gelten gleichzeitig.** Dieser Skill ersetzt keine Regel — er füllt den Raum, den die
+Regeln offenlassen. Bei Widerspruch gewinnt die zählbare Regel.
+
+---
+
+## Was du selbst formulierst — und was nie
+
+**Die Lastenhefte geben ab jetzt überwiegend die *Aussage* vor, nicht den *Wortlaut*.** Du
+schreibst. Drei Klassen, und die erste ist unantastbar.
+
+### Klasse 1 — gebunden. Wortlaut übernehmen, nie umschreiben
+
+| Was | Warum |
+|---|---|
+| **Jede Zahl** — Preise, Seiten, Wörter, Korrekturrunden, Fristen, Laufzeiten | Quelle ist die Preistabelle im Masterkonzept. Eine geschriebene Zahl ist eine erfundene Zahl |
+| **Vertragliche Erklärungen** — die vier Bestätigungen bei der Angebotsannahme, Faktenfreigabe, Abnahme | Das sind Beweismittel im Streitfall, keine Werbetexte |
+| **Rechtstexte** — Impressum, Datenschutz, AGB, AVV, TOM | Kommen aus anwaltlicher Prüfung |
+| **Pflichthinweise** — `Alle Preise netto zzgl. gesetzlicher Umsatzsteuer. Ausschließlich für Unternehmer.` · die Ausschlusszeile zur Barrierefreiheit · `Musterprojekt — kein Kundenauftrag` | Wegfall oder Umformulierung ist ein Rechtsrisiko |
+| **Wiederkehrende Beschriftungen** — Knopftexte, Navigationspunkte, Statusnamen, Meilensteinbezeichnungen | Wer `Bedarf prüfen lassen` auf einer Seite zu `Jetzt starten` macht, lässt die Website unfertig wirken |
+| **Die Positionierungssätze** (unten unter „Kalibrierung") | Vier Fassungen wurden verworfen, bis diese standen |
+
+**Fehlt dir eine Zahl oder ein gebundener Text: anhalten und melden.** Nicht sinngemäß ersetzen.
+
+### Klasse 2 — Aussage gebunden, Wortlaut frei
+
+Das Lastenheft sagt, **was** ein Abschnitt leisten muss und **was er nicht behaupten darf**. Wie es
+klingt, entscheidest du. Das ist der Regelfall und betrifft fast allen Fließtext.
+
+### Klasse 3 — frei
+
+Branchenseiten (§10a), Ratgeber und Lexikon. Hier gibt es nur ein Ziel und Grenzen, keinen
+Wortlaut.
+
+> **Nach der Freigabe ist auch Klasse 2 und 3 gebunden.** Ein freigegebener Text wird nicht bei
+> jedem Durchlauf neu erfunden — sonst hat das Projekt bei jedem Bau eine andere Website. Der
+> fertige Code ist der Stand. Neu geschrieben wird nur, was neu ist oder ausdrücklich verworfen wurde.
 
 ---
 
@@ -107,6 +141,67 @@ Orientierung.
 
 Die Beschreibung ist kein Rankingfaktor, aber sie entscheidet über den Klick. Sie ist ein
 Verkaufstext mit Zeichenlimit — und sie muss halten, was die Seite einlöst.
+
+---
+
+## Bauformen — jeder Abschnittstyp hat eine eigene Aufgabe
+
+Wer alle Abschnitte gleich baut, bekommt eine Seite, die von oben bis unten gleich aussieht. Das
+ist der häufigste Grund, warum eine Seite „nach Maschine" wirkt.
+
+### Aufmacher
+
+**Aufgabe:** In fünf Sekunden beantworten — was ist das, für wen, was kostet es ungefähr.
+
+**Form:** Kleine Zeile (Zielgruppe) · H1 (das Angebot) · 2–3 kurze Sätze · ein Knopf · Preishinweis.
+**Länge:** unter 30 Wörtern Fließtext.
+**Typischer Fehler:** die Firma beschreiben statt das Angebot. Der Leser sucht sich, nicht dich.
+
+### Unterscheidungsabschnitt
+
+**Aufgabe:** Die eine Sache benennen, die kein Wettbewerber hat.
+
+**Form:** Behauptung als H2, direkt darunter der Beleg. Wenn es viele Einzelfakten sind: **Liste**.
+**Länge:** kurz einleiten, dann die Fakten sprechen lassen.
+**Typischer Fehler:** die Liste zusammenfassen, weil sie „zu lang" wirkt. Genau die Länge ist der
+Beleg — drei Substantive erzeugen kein Vorstellungsbild, elf Tätigkeiten schon.
+
+### Ablauf
+
+**Aufgabe:** Vorhersehbarkeit. Der Leser will wissen, was auf ihn zukommt.
+
+**Form:** nummerierte Schritte, weil es eine echte Reihenfolge ist. Je Schritt eine Überschrift und
+**ein** Satz.
+**Typischer Fehler:** je Schritt drei Sätze. Nach Schritt zwei liest niemand mehr.
+
+### Preise
+
+**Aufgabe:** Vergleichbarkeit. Nicht überzeugen — **vergleichbar machen.**
+
+**Form:** je Stufe dieselben Angaben in derselben Reihenfolge. **Zahl zuerst**, dann Zielgruppe,
+dann Merkmale.
+**Typischer Fehler:** die empfohlene Stufe ausführlich erklären und die anderen knapp. Wer eine
+kleine Lösung braucht und nur die teure erklärt sieht, geht — zu Recht.
+
+### Einwandabschnitt (häufige Fragen)
+
+**Aufgabe:** Die Gründe ausräumen, **nicht** zu kaufen.
+
+**Form:** Frage als Überschrift, Antwort im ersten Satz, danach höchstens zwei Sätze.
+**Typischer Fehler:** Fragen aufnehmen, die niemand stellt, weil sie gut zu beantworten sind. Eine
+Frage gehört hierher, wenn ihre Antwort den Kauf blockieren könnte.
+
+### Abschluss
+
+**Aufgabe:** Die Handlung — und die Angst davor nehmen.
+
+**Form:** Was passiert als Nächstes, wie lange es dauert, was es **nicht** auslöst
+(`Unverbindlich bis zum geprüften Angebot`).
+**Typischer Fehler:** ein Knopf ohne Erwartung. Wer nicht weiß, was nach dem Klick kommt, klickt nicht.
+
+> **Zwei Regeln über allen Bauformen:**
+> **Kein Aufbaumuster kommt mehr als zweimal auf einer Seite vor** (Design-Briefing §3.7).
+> **Der Rhythmus wechselt** — auf einen dichten Abschnitt folgt ein kurzer.
 
 ---
 
@@ -202,16 +297,75 @@ sind kein eigener Mechanismus.
 
 ## Ablauf beim Schreiben
 
-1. **Tatsachen sammeln.** Stichworte. Welche Zahl, welcher Name, welche Handlung
-2. **Fundstelle prüfen.** Jede Zahl kommt aus der Preistabelle im Masterkonzept oder aus einem
-   Lastenheft. Gibt es keine Fundstelle, wird nichts geschrieben — **nichts wird geschätzt**
-3. **Textart bestimmen.** Überschrift, Fließtext, Mikrotext oder Meta. Die Regeln unterscheiden sich
+### Das Briefing — ohne diese sechs Angaben entsteht kein Satz
+
+Fehlt eine, wird sie beschafft oder gemeldet — **nicht angenommen.**
+
+| # | Angabe | Woher |
+|---|---|---|
+| 1 | **Wer liest das?** Nicht „Unternehmer" — ein Malermeister mit acht Leuten, abends am Telefon | Zielgruppe der Seite |
+| 2 | **Welche eine Frage beantwortet die Seite?** | Keywordstrategie §3a, Fragenverzeichnis |
+| 3 | **Welche Tatsachen liegen vor?** Zahlen, Namen, Fristen, Grenzen — je mit Fundstelle | Preistabelle im Masterkonzept, Lastenhefte |
+| 4 | **Was darf hier nicht behauptet werden?** | Website-Lastenheft §2, Verbotsliste |
+| 5 | **Welche Texte sind gebunden?** | Klasse 1 oben |
+| 6 | **Welche Bauform hat der Abschnitt?** | „Bauformen" oben |
+
+**Der häufigste Grund für schlechten Text ist nicht schlechtes Schreiben, sondern ein leeres
+Briefing.** Wer nicht weiß, welche Tatsache er übergeben soll, formuliert um die Leere herum — so
+entstehen „durchdachte Lösungen" und „klare Strukturen".
+
+### Wenn eine Tatsache fehlt
+
+**Drei erlaubte Wege, in dieser Reihenfolge:**
+
+1. **Nachschlagen.** Steht sie irgendwo in den Unterlagen?
+2. **Weglassen.** Der Satz entfällt. Vier belegte Aussagen schlagen sechs, von denen zwei erfunden sind
+3. **Melden.** Als offener Punkt in den Bericht, mit Stelle
+
+**Nie erlaubt:** eine Zahl schätzen · eine Referenz erfinden · eine Rechtsaussage aus dem Gedächtnis
+formulieren · eine Funktion beschreiben, die nicht gebaut ist.
+
+### Die acht Schritte
+
+1. **Briefing prüfen.** Alle sechs Angaben da?
+2. **Tatsachen sammeln.** Stichworte, je mit Fundstelle
+3. **Bauform wählen** und die Blöcke leer hinschreiben
 4. **Erste Fassung schreiben**, egal wie
 5. **Kürzen**, bis die Zahlen aus `SARTU_TEXTREGELN.md` halten
-6. **Streichtest**
-7. **Prüfbericht rechnen** und mitliefern
+6. **Streichtest** — jeden Satz einzeln entfernen und prüfen, ob eine Tatsache fehlt
+7. **Gegen die Kalibrierung halten** (unten)
+8. **Prüfbericht rechnen** und mitliefern
 
 Schritt 6 wird am häufigsten übersprungen und bringt am meisten.
+
+---
+
+## Kalibrierung — woran du dich misst
+
+**Regeln beschreiben, was nicht sein darf. Diese Sätze zeigen, was sein soll.** Sie sind das Ziel,
+nicht die Vorlage: abschreiben hilft nicht, treffen schon.
+
+### Gebunden — und zugleich der Maßstab für den Ton
+
+| Satz | Warum er trägt |
+|---|---|
+| `Ohne einen einzigen Termin zur fertigen Website.` | Sieben Wörter, eine bestreitbare Behauptung, das Unterscheidungsmerkmal. **Vier Vorfassungen wurden verworfen** |
+| `Sprechen können Sie trotzdem mit uns. Sie müssen nur nicht.` | Fängt das Missverständnis „nicht erreichbar" ab, bevor es entsteht |
+| `Ein Preis. Ein Ergebnis. Keine Stundenabrechnung, keine Nachforderung.` | Drei Einheiten, acht Wörter. Die Musterzeile des Projekts |
+| `Nur Sonderprojekte klären wir vor dem Angebot persönlich.` | Löst einen Widerspruch in acht Wörtern und nennt den Zeitpunkt |
+
+### Verworfen — und woran es lag
+
+| Verworfen | Woran es scheiterte |
+|---|---|
+| `Ihr Projekt bleibt an einem Ort.` | Ein Bild, keine Aussage. Welcher Ort, und was habe ich davon? |
+| `SARTU plant, textet, programmiert und betreibt Ihre Website. Sie beantworten nur die Fragen zu Ihrem Unternehmen — Struktur, Design, Technik und die SEO-Grundlage übernehmen wir…` | 38 Wörter, zwei Vierer-Aufzählungen, und die wichtigste Aussage fehlte |
+| `eine durchdachte Seite statt vieler halber` | Ein Eigenschaftswort, wo eine Zahl hingehört: **1 Seite, rund 1.200 Wörter** |
+| `Ihre Website ist ab dem ersten Tag auffindbar.` | Überzieht. Die Aufnahme in den Index liegt nicht bei uns |
+| `Alles Übrige — Struktur, Texte, Gestaltung, Programmierung, SEO-Grundlage, Domain, Hosting, Betrieb und die Verantwortung — liegt bei uns.` | **Neun Glieder in einem Satz.** `alles andere` ist kürzer und sagt mehr |
+
+**Der Unterschied zwischen beiden Tabellen ist die ganze Aufgabe.** Beide sagen dasselbe. Nur die
+obere sagt es so, dass jemand es liest.
 
 ---
 

@@ -82,10 +82,15 @@ Einladung.
 
 ## 2. Globale Sprach- und Inhaltsregeln
 
-> **Der Wortlaut wird zusätzlich von `SARTU_TEXTREGELN.md` geregelt** — zehn zählbare Regeln und
-> ein Prüfbericht mit Zahlen. Diese Datei hier verbietet **Behauptungen** (Rankinggarantie,
-> „wartungsfrei"), die Textregeln regeln **die Form** (Satzlänge, Aufzählungen, Wortlisten).
-> Beide gelten. Ohne ausgefüllten Prüfbericht gilt eine Seite als nicht abgegeben.
+> **Drei Ebenen regeln den Text, und sie greifen ineinander:**
+>
+> | Datei | Regelt |
+> |---|---|
+> | **dieses §2** | welche **Behauptungen** verboten sind — Rankinggarantie, „wartungsfrei", „rechtssicher" |
+> | `SARTU_TEXTREGELN.md` | die **Form** — Satzlänge, Aufzählungen, Wortlisten, Prüfbericht |
+> | `.claude/skills/sartu-texter/SKILL.md` | **wie geschrieben wird** — Briefing, Bauformen, Kalibrierung. **Er schreibt den Wortlaut** |
+>
+> Alle drei gelten. Ohne ausgefüllten Prüfbericht gilt eine Seite als nicht abgegeben.
 
 **Ansprache:** durchgängig **„Sie"**. Marke immer **`SARTU`** (Versalien), auch im Fließtext.
 
@@ -191,7 +196,31 @@ Fünf Spalten auf Desktop, gestapelt auf Mobil (Reihenfolge wie unten).
 >
 > **3. `SARTU_TEXTREGELN.md` gilt für jeden Wortlaut auf dieser Seite.** Zehn zählbare Regeln, dazu
 > ein Prüfbericht mit Zahlen. **Ohne ausgefüllten Prüfbericht gilt die Seite als nicht abgegeben.**
-> Die Texte unten sind bereits danach überarbeitet; wer sie ändert, rechnet den Bericht neu.
+
+> **4. Die Texte unten sind ab 01.08.2026 überwiegend Referenz, nicht Vorschrift.**
+>
+> Geschrieben wird mit `.claude/skills/sartu-texter/SKILL.md`. Dort steht, **wie** formuliert wird —
+> Briefing, Bauformen je Abschnitt, Kalibrierung, Prüfbericht. Dieses Lastenheft gibt die **Aussage**
+> vor, der Skill den **Wortlaut**.
+>
+> **Drei Klassen, im Skill vollständig beschrieben:**
+>
+> | Klasse | Was | Hier unten erkennbar an |
+> |---|---|---|
+> | **1 — gebunden** | Zahlen · vertragliche Erklärungen · Pflichthinweise · wiederkehrende Beschriftungen · die vier Positionierungssätze | ausdrücklich als **gebunden** oder **Pflichtzeile** gekennzeichnet |
+> | **2 — Aussage gebunden, Wortlaut frei** | fast aller Fließtext unten | alles Übrige |
+> | **3 — frei** | Branchenseiten (§10a), Ratgeber, Lexikon | dort steht nur das Ziel |
+>
+> **Was das ändert:** Ein Satz unten ist ein **Beispiel für die Zielqualität**, kein Diktat. Wer ihn
+> trifft oder übertrifft, hat recht. Wer ihn abschreibt, obwohl er für seine Seite nicht passt,
+> hat den Skill nicht gelesen.
+>
+> **Was das nicht ändert:** Die Aussage bleibt. Wer aus „ohne einen einzigen Termin" ein „mit
+> flexiblen Abstimmungsformaten" macht, hat nicht umformuliert, sondern das Produkt geändert.
+>
+> **Und: Freigegeben ist freigegeben.** Ein einmal abgenommener Text wird nicht bei jedem Durchlauf
+> neu erfunden — sonst hat das Projekt bei jedem Bau eine andere Website. Der ausgelieferte Code
+> ist der Stand.
 
 **Title (54 Z.):** `Firmenwebsite zum Festpreis für regionale Betriebe | SARTU`
 

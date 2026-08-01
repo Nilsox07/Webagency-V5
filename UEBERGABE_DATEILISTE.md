@@ -22,7 +22,7 @@ merkt es, bevor gebaut wird.
 | 6 | `ENTWICKLUNGSUMGEBUNG.md` | **wie PHP, Composer und die Datenbank aufgerufen werden** — und was ohne Datenbank trotzdem gebaut wird | **Abbruch.** Sonst wird falsch nach PHP gesucht oder wegen fehlender Datenbank angehalten |
 | 6a | `REIHENFOLGE.md` | **welche Teile jetzt gebaut werden und welche warten** — Stufe A, B, C | **Abbruch.** Sonst entstehen alle 20 Tabellen auf einmal |
 | 6b | `SARTU_TEXTREGELN.md` | **wie jeder Text formuliert sein muss** — zehn zählbare Regeln, Wortlisten, Pflicht-Prüfbericht | **Abbruch.** Sonst entsteht wieder der Ton, der schon zweimal verworfen wurde |
-| 6c | `.claude/skills/sartu-texter/SKILL.md` | **das Handwerk dahinter** — getrennte Vorgaben für Überschriften, Fließtext, Mikrotexte und Metadaten; belegte SEO- und GEO-Regeln | Melden. Ohne ihn gelten die Textregeln trotzdem, aber jede Formulierung wird geraten |
+| 6c | `.claude/skills/sartu-texter/SKILL.md` | **schreibt den Wortlaut.** Die Lastenhefte geben die Aussage vor, dieser Skill die Formulierung — Briefing, Bauformen je Abschnitt, Kalibrierung, drei Bindungsklassen | **Abbruch.** Ohne ihn wird jede Formulierung geraten |
 | 7 | `CLAUDE_SARTU_WEBSITE_LASTENHEFT_BAUFINAL.md` | nur §2 Sprachregeln | Melden, mit Rest fortfahren |
 | 8 | `konzepte/` (20 Dateien) | historische Quellen, **veraltete Preise und abgelöste Stacks** | Melden, mit Rest fortfahren |
 
@@ -66,6 +66,7 @@ zulässt:
 | 1 | `SARTU_ENTSCHEIDUNGEN_OFFEN.md` | Alles, was noch offen ist. **Schlägt jede andere Datei.** Wo hier `offen` steht, wird nichts gebaut und nichts erfunden |
 | 2 | `REIHENFOLGE.md` | **nur der Zeitpunkt** — was jetzt gebaut wird und was wartet |
 | 3 | `SARTU_TEXTREGELN.md` | **nur die Form** jedes Textes — Satzlänge, Wortlisten, Prüfbericht |
+| 3a | `.claude/skills/sartu-texter/SKILL.md` | **den Wortlaut selbst.** Gebunden bleibt nur Klasse 1: Zahlen, vertragliche Erklärungen, Pflichthinweise, wiederkehrende Beschriftungen |
 | 4 | `CLAUDE_SARTU_PORTAL_LASTENHEFT_BAUFINAL.md` | Stack, Datenmodell, Kundenbereich, Sicherheit, Testfälle |
 | 5 | `CLAUDE_SARTU_WEBSITE_LASTENHEFT_BAUFINAL.md` | öffentliche Seiten, Struktur, Wortlaut |
 | 6 | `CLAUDE_SARTU_DESIGN_BRIEFING_AUSFUEHRUNG.md` | visuelle Ausführung |
