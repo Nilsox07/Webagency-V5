@@ -1,15 +1,14 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64"
      role="img" aria-label="SARTU">
   <title>SARTU</title>
-  <!-- Der Satzspiegel. Eine Seite, geteilt durch zwei Stege, die bewusst
-       nicht mittig sitzen. Vier ungleiche Felder. Jedes Feld hat genau eine
-       runde Ecke aussen und drei enge innen — dieselbe Regel wie die
-       Flaechen im Designsystem.
-       Einfarbig ueber currentColor. Keine Verlaeufe, keine Effekte. -->
-  <g fill="currentColor">
-    <path d="M10 4h24v16H4V10a6 6 0 0 1 6-6z"/>
-    <path d="M42 4h12a6 6 0 0 1 6 6v10H42z"/>
-    <path d="M4 28h30v32H10a6 6 0 0 1-6-6z"/>
-    <path d="M42 28h18v26a6 6 0 0 1-6 6H42z"/>
-  </g>
+  <!-- Das Zeichen. Ein kantiges S aus einem durchgehenden Zug: waagerecht,
+       diagonal, waagerecht, diagonal, waagerecht. Die Gelenke sind gerundet
+       (stroke-linejoin="round") — das ist die Anpassung an die weiche
+       Formsprache aus der Betreibervorgabe vom 25.07.2026.
+       Einfarbig ueber currentColor. Keine Verlaeufe, keine Effekte.
+       HINWEIS: Fuer Druck und Fremdweitergabe die Kontur in eine Flaeche
+       umwandeln (Pfad erweitern). -->
+  <polyline points="53,12 22,12 12,22 12,29 21,38 43,38 52,47 52,52 43,60"
+            fill="none" stroke="currentColor" stroke-width="12"
+            stroke-linejoin="round" stroke-linecap="butt"/>
 </svg>

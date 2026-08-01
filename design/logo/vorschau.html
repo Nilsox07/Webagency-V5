@@ -102,18 +102,17 @@ footer{background:var(--ink);color:#7d766a;padding:var(--s-5) 0;
 <header class="top">
   <div class="wrap">
     <p class="mono">Vorlage zur Entscheidung · 01.08.2026</p>
-    <h1>Der Satzspiegel</h1>
-    <p class="body" style="margin-top:var(--s-3);max-width:56ch">
-      Eine Seite, geteilt durch zwei Stege, die bewusst nicht mittig sitzen. Vier ungleiche Felder.
-      Das Zeichen ist kein Buchstabe — deshalb kollidiert es mit keinem S-Logo der Welt.
+    <h1>Das Zeichen</h1>
+    <p class="body" style="margin-top:var(--s-3);max-width:58ch">
+      Nachgebaut aus dem Entwurf vom 01.08.2026. Ein kantiges S aus einem durchgehenden Zug —
+      Gelenke gerundet, Winkel kantig. Die Rundung ist die Anpassung an die weiche Formsprache
+      aus der Betreibervorgabe vom 25.07.2026.
     </p>
 
     <div class="hero">
       <svg class="mk hero-mark" viewBox="0 0 64 64" aria-label="SARTU" role="img">
-        <g fill="currentColor">
-          <path d="M10 4h24v16H4V10a6 6 0 0 1 6-6z"/><path d="M42 4h12a6 6 0 0 1 6 6v10H42z"/>
-          <path d="M4 28h30v32H10a6 6 0 0 1-6-6z"/><path d="M42 28h18v26a6 6 0 0 1-6 6H42z"/>
-        </g>
+        <polyline points="53,12 22,12 12,22 12,29 21,38 43,38 52,47 52,52 43,60" fill="none"
+                  stroke="currentColor" stroke-width="12" stroke-linejoin="round"/>
       </svg>
       <span class="hero-word"><b>SARTU</b><span>Webdesign</span></span>
     </div>
@@ -122,33 +121,35 @@ footer{background:var(--ink);color:#7d766a;padding:var(--s-5) 0;
 
 <main>
 
-  <!-- Warum -->
   <section class="sec">
     <div class="wrap">
       <div class="sec-head">
         <p class="sec-num">01</p>
         <div>
-          <p class="mono" style="margin-bottom:12px">Die Idee</p>
-          <h2>Ein Satzspiegel ist nie mittig.</h2>
-          <p class="body">Der Satzspiegel ist die Fläche, in der Text auf einer Seite steht. In
-          jedem gut gesetzten Buch sitzt er <b>außermittig</b> — oben und innen enger, unten und
-          außen weiter. Wer das weiß, erkennt das Zeichen. Wer es nicht weiß, sieht eine geteilte
-          Seite. Beides ist richtig.</p>
+          <p class="mono" style="margin-bottom:12px">Die Konstruktion</p>
+          <h2>Ein Zug, neun Punkte, kein Kurvenstück.</h2>
+          <p class="body">Waagerecht, diagonal, waagerecht, diagonal, waagerecht. Strichstärke 12
+          von 64. Alles andere ergibt sich daraus.</p>
         </div>
       </div>
 
       <div class="build">
         <div class="blueprint">
           <svg viewBox="0 0 64 64" width="100%" height="100%" aria-hidden="true">
-            <g fill="none" stroke="#ddd4c4" stroke-width=".5" stroke-dasharray="2 2">
-              <path d="M32 0v64M0 32h64"/>
+            <g fill="none" stroke="#ddd4c4" stroke-width=".4">
+              <path d="M0 12h64M0 22h64M0 29h64M0 38h64M0 47h64M0 60h64"/>
+              <path d="M12 0v64M22 0v64M43 0v64M52 0v64"/>
             </g>
-            <g fill="#14110d">
-              <path d="M10 4h24v16H4V10a6 6 0 0 1 6-6z"/><path d="M42 4h12a6 6 0 0 1 6 6v10H42z"/>
-              <path d="M4 28h30v32H10a6 6 0 0 1-6-6z"/><path d="M42 28h18v26a6 6 0 0 1-6 6H42z"/>
-            </g>
-            <g fill="none" stroke="#a3e635" stroke-width="1">
-              <path d="M34 0v64M42 0v64M0 20h64M0 28h64"/>
+            <polyline points="53,12 22,12 12,22 12,29 21,38 43,38 52,47 52,52 43,60" fill="none"
+                      stroke="#14110d" stroke-width="12" stroke-linejoin="round"/>
+            <polyline points="53,12 22,12 12,22 12,29 21,38 43,38 52,47 52,52 43,60" fill="none"
+                      stroke="#a3e635" stroke-width="1"/>
+            <g fill="#a3e635">
+              <circle cx="53" cy="12" r="1.6"/><circle cx="22" cy="12" r="1.6"/>
+              <circle cx="12" cy="22" r="1.6"/><circle cx="12" cy="29" r="1.6"/>
+              <circle cx="21" cy="38" r="1.6"/><circle cx="43" cy="38" r="1.6"/>
+              <circle cx="52" cy="47" r="1.6"/><circle cx="52" cy="52" r="1.6"/>
+              <circle cx="43" cy="60" r="1.6"/>
             </g>
           </svg>
         </div>
@@ -157,17 +158,17 @@ footer{background:var(--ink);color:#7d766a;padding:var(--s-5) 0;
             <table>
               <thead><tr><th scope="col">Wert</th><th scope="col">Einheiten von 64</th><th scope="col">Warum</th></tr></thead>
               <tbody>
-                <tr><td>Steg senkrecht</td><td><code>34 – 42</code></td><td>rechts der Mitte, 8 breit</td></tr>
-                <tr><td>Steg waagerecht</td><td><code>20 – 28</code></td><td>über der Mitte, 8 hoch</td></tr>
-                <tr><td>Außenrundung</td><td><code>6</code></td><td>weiche Formsprache, Vorgabe 25.07.</td></tr>
-                <tr><td>Innenecken</td><td><code>0</code></td><td>eine runde Ecke außen, drei enge innen</td></tr>
+                <tr><td>Strichstärke</td><td><code>12</code></td><td>bei 16 px sind das 3 px — noch lesbar</td></tr>
+                <tr><td>Gelenke</td><td><code>stroke-linejoin: round</code></td><td>die Anpassung an die weiche Formsprache</td></tr>
+                <tr><td>Enden</td><td><code>butt</code></td><td>gerade geschnitten, nicht abgerundet</td></tr>
+                <tr><td>Diagonalen</td><td><code>45°</code></td><td>überall dieselbe Neigung</td></tr>
               </tbody>
             </table>
           </div>
           <p class="body" style="margin-top:var(--s-3)">
-            <b style="color:var(--ink)">Jedes der vier Felder hat genau eine runde Ecke außen und
-            drei enge innen.</b> Das ist dieselbe Regel wie bei den Flächen im Designsystem — Marke
-            und Motiv folgen einer Konstruktion, nicht zwei.
+            <b style="color:var(--ink)">Die scharfe Fassung wurde verglichen und verworfen.</b>
+            Nebeneinandergestellt wirkt sie neben den gerundeten Flächen des Systems fremd — das
+            Zeichen gehörte dann zu einer anderen Marke als die Seite darunter.
           </p>
         </div>
       </div>
@@ -192,8 +193,7 @@ footer{background:var(--ink);color:#7d766a;padding:var(--s-5) 0;
           <h4>Auf hellem Grund</h4>
           <div class="stage">
             <svg class="mk" style="width:52px;height:52px;color:var(--ink)" viewBox="0 0 64 64" aria-hidden="true">
-              <g fill="currentColor"><path d="M10 4h24v16H4V10a6 6 0 0 1 6-6z"/><path d="M42 4h12a6 6 0 0 1 6 6v10H42z"/>
-              <path d="M4 28h30v32H10a6 6 0 0 1-6-6z"/><path d="M42 28h18v26a6 6 0 0 1-6 6H42z"/></g></svg>
+              <polyline points="53,12 22,12 12,22 12,29 21,38 43,38 52,47 52,52 43,60" fill="none" stroke="currentColor" stroke-width="12" stroke-linejoin="round"/></svg>
             <span style="font-size:30px;font-weight:700;letter-spacing:-.045em;color:var(--ink)">SARTU</span>
           </div>
           <p class="note">Marke und Wortmarke in Tinte. <code>sartu-logo.svg</code></p>
@@ -203,8 +203,7 @@ footer{background:var(--ink);color:#7d766a;padding:var(--s-5) 0;
           <h4>Auf dunklem Grund</h4>
           <div class="stage stage-dark">
             <svg class="mk" style="width:52px;height:52px;color:var(--lime)" viewBox="0 0 64 64" aria-hidden="true">
-              <g fill="currentColor"><path d="M10 4h24v16H4V10a6 6 0 0 1 6-6z"/><path d="M42 4h12a6 6 0 0 1 6 6v10H42z"/>
-              <path d="M4 28h30v32H10a6 6 0 0 1-6-6z"/><path d="M42 28h18v26a6 6 0 0 1-6 6H42z"/></g></svg>
+              <polyline points="53,12 22,12 12,22 12,29 21,38 43,38 52,47 52,52 43,60" fill="none" stroke="currentColor" stroke-width="12" stroke-linejoin="round"/></svg>
             <span style="font-size:30px;font-weight:700;letter-spacing:-.045em;color:#f6f1e6">SARTU</span>
           </div>
           <p class="note">Zeichen in Lime — 12,48 : 1. Nur hier, nie umgekehrt.
@@ -215,8 +214,7 @@ footer{background:var(--ink);color:#7d766a;padding:var(--s-5) 0;
           <h4>Auf Lime</h4>
           <div class="stage stage-lime">
             <svg class="mk" style="width:52px;height:52px;color:var(--ink)" viewBox="0 0 64 64" aria-hidden="true">
-              <g fill="currentColor"><path d="M10 4h24v16H4V10a6 6 0 0 1 6-6z"/><path d="M42 4h12a6 6 0 0 1 6 6v10H42z"/>
-              <path d="M4 28h30v32H10a6 6 0 0 1-6-6z"/><path d="M42 28h18v26a6 6 0 0 1-6 6H42z"/></g></svg>
+              <polyline points="53,12 22,12 12,22 12,29 21,38 43,38 52,47 52,52 43,60" fill="none" stroke="currentColor" stroke-width="12" stroke-linejoin="round"/></svg>
             <span style="font-size:30px;font-weight:700;letter-spacing:-.045em;color:var(--ink)">SARTU</span>
           </div>
           <p class="note">Auf der Akzentfläche steht immer Tinte. Dieselbe Datei,
@@ -227,9 +225,7 @@ footer{background:var(--ink);color:#7d766a;padding:var(--s-5) 0;
           <h4>Kontur — Prägung, Stempel, Gravur</h4>
           <div class="stage stage-sand">
             <svg class="mk" style="width:52px;height:52px;color:var(--ink)" viewBox="0 0 64 64" aria-hidden="true">
-              <g fill="none" stroke="currentColor" stroke-width="3">
-                <path d="M11.5 5.5h21v13h-27v-7a6 6 0 0 1 6-6z"/><path d="M43.5 5.5h10a5 5 0 0 1 5 5v8h-15z"/>
-                <path d="M5.5 29.5h27v29h-16a6 6 0 0 1-6-6z"/><path d="M43.5 29.5h15v23a6 6 0 0 1-6 6h-9z"/></g></svg>
+              <polyline points="53,12 22,12 12,22 12,29 21,38 43,38 52,47 52,52 43,60" fill="none" stroke="currentColor" stroke-width="7" stroke-linejoin="round"/></svg>
           </div>
           <p class="note">Strichstärke 3 von 64. Für alles, was nicht drucken, sondern prägen kann.
           <code>sartu-mark-outline.svg</code></p>
@@ -254,27 +250,19 @@ footer{background:var(--ink);color:#7d766a;padding:var(--s-5) 0;
 
       <div class="sizes">
         <div class="size">
-          <span class="fav f96"><svg viewBox="0 0 64 64" aria-hidden="true"><g fill="currentColor">
-            <path d="M10 4h24v16H4V10a6 6 0 0 1 6-6z"/><path d="M42 4h12a6 6 0 0 1 6 6v10H42z"/>
-            <path d="M4 28h30v32H10a6 6 0 0 1-6-6z"/><path d="M42 28h18v26a6 6 0 0 1-6 6H42z"/></g></svg></span>
+          <span class="fav f96"><svg viewBox="0 0 64 64" aria-hidden="true"><polyline points="53,12 22,12 12,22 12,29 21,38 43,38 52,47 52,52 43,60" fill="none" stroke="currentColor" stroke-width="12" stroke-linejoin="round"/></svg></span>
           <b>96 px</b>
         </div>
         <div class="size">
-          <span class="fav f48"><svg viewBox="0 0 64 64" aria-hidden="true"><g fill="currentColor">
-            <path d="M10 4h24v16H4V10a6 6 0 0 1 6-6z"/><path d="M42 4h12a6 6 0 0 1 6 6v10H42z"/>
-            <path d="M4 28h30v32H10a6 6 0 0 1-6-6z"/><path d="M42 28h18v26a6 6 0 0 1-6 6H42z"/></g></svg></span>
+          <span class="fav f48"><svg viewBox="0 0 64 64" aria-hidden="true"><polyline points="53,12 22,12 12,22 12,29 21,38 43,38 52,47 52,52 43,60" fill="none" stroke="currentColor" stroke-width="12" stroke-linejoin="round"/></svg></span>
           <b>48 px</b>
         </div>
         <div class="size">
-          <span class="fav f32"><svg viewBox="0 0 64 64" aria-hidden="true"><g fill="currentColor">
-            <path d="M10 4h24v16H4V10a6 6 0 0 1 6-6z"/><path d="M42 4h12a6 6 0 0 1 6 6v10H42z"/>
-            <path d="M4 28h30v32H10a6 6 0 0 1-6-6z"/><path d="M42 28h18v26a6 6 0 0 1-6 6H42z"/></g></svg></span>
+          <span class="fav f32"><svg viewBox="0 0 64 64" aria-hidden="true"><polyline points="53,12 22,12 12,22 12,29 21,38 43,38 52,47 52,52 43,60" fill="none" stroke="currentColor" stroke-width="12" stroke-linejoin="round"/></svg></span>
           <b>32 px</b>
         </div>
         <div class="size">
-          <span class="fav f16"><svg viewBox="0 0 64 64" aria-hidden="true"><g fill="currentColor">
-            <path d="M10 4h24v16H4V10a6 6 0 0 1 6-6z"/><path d="M42 4h12a6 6 0 0 1 6 6v10H42z"/>
-            <path d="M4 28h30v32H10a6 6 0 0 1-6-6z"/><path d="M42 28h18v26a6 6 0 0 1-6 6H42z"/></g></svg></span>
+          <span class="fav f16"><svg viewBox="0 0 64 64" aria-hidden="true"><polyline points="53,12 22,12 12,22 12,29 21,38 43,38 52,47 52,52 43,60" fill="none" stroke="currentColor" stroke-width="12" stroke-linejoin="round"/></svg></span>
           <b>16 px</b>
         </div>
       </div>
@@ -292,11 +280,11 @@ footer{background:var(--ink);color:#7d766a;padding:var(--s-5) 0;
         </div>
       </div>
       <ul class="rules">
-        <li><span class="mark m-ok" aria-hidden="true">✓</span><span><b>Schutzraum:</b> ringsum mindestens die Breite eines Stegs — ein Achtel der Zeichenhöhe. Nichts rückt näher heran.</span></li>
+        <li><span class="mark m-ok" aria-hidden="true">✓</span><span><b>Schutzraum:</b> ringsum mindestens eine Strichstärke. Nichts rückt näher heran.</span></li>
         <li><span class="mark m-ok" aria-hidden="true">✓</span><span><b>Kleinste Größe:</b> 16 px im Bildschirm, 8 mm im Druck.</span></li>
         <li><span class="mark m-ok" aria-hidden="true">✓</span><span><b>Auf hellem Grund</b> steht das Zeichen in Tinte. <b>Auf dunklem</b> in Lime.</span></li>
         <li><span class="mark m-no" aria-hidden="true">✕</span><span><b>Nie in Lime auf hellem Grund.</b> 1,32 : 1 — die Farbregel gilt auch für das Logo.</span></li>
-        <li><span class="mark m-no" aria-hidden="true">✕</span><span><b>Nie drehen, spiegeln oder verzerren.</b> Die Außermittigkeit ist die Aussage; gespiegelt sagt sie das Gegenteil.</span></li>
+        <li><span class="mark m-no" aria-hidden="true">✕</span><span><b>Nie drehen, spiegeln oder verzerren.</b> Gespiegelt wird aus dem S ein Z.</span></li>
         <li><span class="mark m-no" aria-hidden="true">✕</span><span><b>Nie mit Schatten, Rahmen oder Verlauf.</b> Auch nicht auf unruhigem Grund — dort steht es auf einer Tinte- oder Creme-Fläche.</span></li>
         <li><span class="mark m-no" aria-hidden="true">✕</span><span><b>Nie mit Zusatz im Namen.</b> Der Beisatz heißt <code>Webdesign</code> und steht im Lockup, nicht im Namen.</span></li>
       </ul>
@@ -317,10 +305,10 @@ footer{background:var(--ink);color:#7d766a;padding:var(--s-5) 0;
           Recherche im DPMA-Register und notfalls zu einer anwaltlichen Einschätzung.
         </p>
         <p class="body" style="margin-top:12px;max-width:62ch">
-          <b style="color:#f6f1e6">Was für dieses Zeichen spricht:</b> Es ist kein Buchstabe. Damit
-          entfällt die größte Kollisionsquelle — das eckige S, das in jeder zweiten Technikmarke
-          steckt. Eine geteilte Fläche ist geometrisch, und geometrische Marken sind schwerer zu
-          monopolisieren. <b style="color:#f6f1e6">Das ersetzt die Recherche nicht.</b>
+          <b style="color:#f6f1e6">Bei dieser Form ist sie besonders wichtig.</b> Ein kantiges S
+          ist die häufigste Konstruktion für ein Technikzeichen überhaupt — genau dort ist die
+          Verwechslungsgefahr am größten. Recherchiert werden muss im DPMA-Register, notfalls mit
+          anwaltlicher Einschätzung.
         </p>
       </div>
 

@@ -1,22 +1,16 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 336 64" width="336" height="64"
-     role="img" aria-label="SARTU Webdesign">
-  <title>SARTU Webdesign</title>
-  <!-- Lockup fuer hellen Grund. Marke und Wortmarke stehen beide in Tinte.
-       ACHTUNG: Die Wortmarke nutzt die Systemschrift. Vor jedem Druck und vor
-       jeder Weitergabe an Dritte muss der Text in Pfade umgewandelt werden —
-       sonst rendert er auf fremden Geraeten anders.
-       Solange keine eigene Schrift entschieden ist, ist das die vorgesehene
-       Loesung (Design-Briefing §8). -->
-  <g fill="#14110d">
-    <path d="M10 4h24v16H4V10a6 6 0 0 1 6-6z"/>
-    <path d="M42 4h12a6 6 0 0 1 6 6v10H42z"/>
-    <path d="M4 28h30v32H10a6 6 0 0 1-6-6z"/>
-    <path d="M42 28h18v26a6 6 0 0 1-6 6H42z"/>
-  </g>
-  <text x="84" y="43" fill="#14110d"
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 340 72" width="340" height="72"
+     role="img" aria-label="SARTU WEBDESIGN">
+  <title>SARTU WEBDESIGN</title>
+  <!-- Lockup. Zeichen, Wortmarke, Beisatz.
+       ACHTUNG: Die Wortmarke ist echter Text in der Systemschrift. Vor jedem
+       Druck und vor jeder Weitergabe in Pfade umwandeln — sonst rendert sie
+       auf fremden Geraeten anders. Design-Briefing §8. -->
+  <polyline points="46,16 25,16 18,23 18,30 24,36 39,36 45,42 45,46 39,52"
+            fill="none" stroke="#14110d" stroke-width="9" stroke-linejoin="round"/>
+  <text x="72" y="45" fill="#14110d"
         font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, 'Helvetica Neue', Helvetica, sans-serif"
-        font-size="44" font-weight="700" letter-spacing="-1.8">SARTU</text>
-  <text x="86" y="58" fill="#5c554a"
+        font-size="42" font-weight="800" letter-spacing="-1.4">SARTU</text>
+  <text x="74" y="60" fill="#5c554a"
         font-family="ui-monospace, 'SFMono-Regular', Menlo, Consolas, monospace"
-        font-size="10.5" font-weight="500" letter-spacing="1.7">WEBDESIGN</text>
+        font-size="10.5" font-weight="500" letter-spacing="4.4">WEBDESIGN</text>
 </svg>

@@ -1,14 +1,10 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64"
      role="img" aria-label="SARTU">
   <title>SARTU</title>
-  <!-- Favicon. Lime-Flaeche, Tinte-Marke — die belegte Kombination, 12,48:1.
-       Ab 16 px lesbar: die Stege sind 8 von 64 Einheiten breit, das sind
-       2 px bei 16 px Kantenlaenge. -->
-  <rect width="64" height="64" rx="12" fill="#a3e635"/>
-  <g fill="#14110d">
-    <path d="M16 14h13v9H12v-5a4 4 0 0 1 4-4z"/>
-    <path d="M35 14h13a4 4 0 0 1 4 4v5H35z"/>
-    <path d="M12 29h17v21H16a4 4 0 0 1-4-4z"/>
-    <path d="M35 29h17v17a4 4 0 0 1-4 4H35z"/>
-  </g>
+  <!-- Lime-Flaeche, Tinte-Zeichen: die belegte Kombination, 12,48:1.
+       Bei 16 px bleibt das S erkennbar — nachgeprueft im Rendertest. -->
+  <rect width="64" height="64" rx="13" fill="#a3e635"/>
+  <polyline points="46,19 26,19 20,25 20,30 26,36 40,36 46,42 46,45 40,50"
+            fill="none" stroke="#14110d" stroke-width="8"
+            stroke-linejoin="round" stroke-linecap="butt"/>
 </svg>
