@@ -277,7 +277,16 @@ Argument gilt auch für 500-€-Seite    ja / nein        muss nein sein
 bleiben, wenn sie im Bericht **einzeln benannt und begründet** ist. Eine unbegründete
 Überschreitung ist ein Abgabefehler.
 
-**Zählhilfen** (laufen ohne zusätzliche Werkzeuge, Datei als Klartext):
+**Das fertige Zählskript:** `tools/textpruefung.py`, Aufruf `python3 tools/textpruefung.py DATEI`.
+Es überspringt Tabellen, Codeblöcke, Überschriften und Listen und zählt nur laufende Prosa.
+
+> **Warnung aus einem echten Fehlschlag:** Die erste Fassung des Skripts warf jede Zeile weg, die
+> mit `*` beginnt — gedacht für Listen, getroffen hat es **alle fettgedruckten Absatzanfänge**.
+> Auf `SARTU_KUNDENMOTIVE_BELEGT.md` meldete es 4 Gegensatzformeln. Der wahre Wert war **12**.
+> **Ein Prüfbericht ist nur so gut wie sein Zähler.** Wer das Skript ändert, prüft es an einer
+> Datei, deren Werte er von Hand gezählt hat.
+
+**Zählhilfen einzeln** (laufen ohne zusätzliche Werkzeuge, Datei als Klartext):
 
 ```bash
 # Sätze über 20 Wörter

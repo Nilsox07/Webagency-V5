@@ -490,6 +490,38 @@ Betriebsmonat** des ersten Kunden muss der Ablauf stehen.
 
 ---
 
+## 7b. Stellen- und Karriereseite in den Paketen — **OFFEN, neu am 01.08.2026**
+
+**Woher der Punkt kommt:** die Motivrecherche in `SARTU_KUNDENMOTIVE_BELEGT.md`.
+
+| Belegt | Wert | Quelle |
+|---|---|---|
+| Mangel an Auszubildenden | **83 %** | Bitkom 2025, n=504 |
+| Fachkräftemangel | **75 %** | Bitkom 2025 |
+| Fürchten Nachteile im Wettbewerb um Fachkräfte ohne digitale Technik | **54 %** | Bitkom 2025 |
+| Ausbildungsbetriebe, die Nachwuchs über digitale Kanäle ansprechen | **80 %** | Bitkom 2025 |
+
+**Der Azubimangel liegt über jeder anderen Herausforderung** — über Energiepreisen (81 %),
+Fachkräftemangel (75 %) und Digitalisierung (62 %). Im Konzept kommt eine Karriereseite nirgends
+vor.
+
+**Was zu entscheiden ist:**
+
+| # | Frage | Folge |
+|---|---|---|
+| 1 | Gehört eine Stellenseite in `Start`, oder erst ab `Wachstum`? | `Start` hat 1 Seite — eine Stellenseite wäre die halbe Lieferung |
+| 2 | Nur Textseite oder mit Bewerbungsformular? | Ein Formular erzeugt Bewerberdaten: eigene Löschfristen, eigene Rechtsgrundlage, eigener Eintrag im Verarbeitungsverzeichnis |
+| 3 | Landen Bewerbungen im Kundenbereich wie Anfragen? | Dann eine eigene Art in `leads` oder eine eigene Tabelle — betrifft das Datenmodell |
+| 4 | Ändern sich Seitenzahl und Wortumfang der Pakete? | Betrifft Preistabelle und jede Stelle, an der 1 / 8 / 16 Seiten steht |
+
+**Sperre:** Solange das offen ist, wird auf keiner Website- und keiner Branchenseite eine
+Karriere- oder Stellenseite erwähnt, angekündigt oder verlinkt.
+
+**Empfehlung:** Frage 2 mit „nur Textseite plus E-Mail-Adresse" beantworten. Ein Bewerbungsformular
+zieht den größten Rechtsaufwand nach sich und lässt sich später nachrüsten.
+
+---
+
 ## 8. Wie diese Datei benutzt wird
 
 1. Ein Wert wird entschieden → hier eintragen, Status von `offen` auf den Wert ändern

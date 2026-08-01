@@ -476,15 +476,31 @@ Fehlt eine, wird sie beschafft oder gemeldet — **nicht angenommen.**
 | 4 | **Was darf hier nicht behauptet werden?** | Website-Lastenheft §2, Verbotsliste |
 | 5 | **Welche Texte sind gebunden?** | Klasse 1 oben |
 | 6 | **Welche Bauform hat der Abschnitt?** | „Bauformen" oben |
-| 7 | **Welches Argument trägt die Seite — und woher stammt es?** | Nur aus den Unterlagen oder vom Auftraggeber. **Nie ausgedacht** |
+| 7 | **Welches Argument trägt die Seite — und woher stammt es?** | `SARTU_KUNDENMOTIVE_BELEGT.md`. Was dort fehlt: Auftraggeber oder benannte Fundstelle. **Nie ausgedacht** |
 
-**Angabe 7 ist die einzige, die du nicht selbst beschaffen kannst.** Bei einer Branchenseite heißt
-sie: welches Geschäft dieser Betrieb will, was ihn an seiner heutigen Seite stört, was er beim
-Erstgespräch immer erklären muss. Das weiß nur jemand aus der Branche.
+#### Der belegte Kern — gilt für jede Branche
 
-**Fehlt Angabe 7, wird die Seite nicht geschrieben.** Sie wird als offener Punkt gemeldet, mit der
-konkreten Frage, die zu klären ist. Eine Branchenseite mit ausgedachtem Argument ist schlechter als
-keine — sie liest sich flüssig und argumentiert am Leser vorbei.
+Diese fünf Motive sind gemessen und müssen nicht erfragt werden:
+
+| # | Motiv | Zahl | Quelle |
+|---|---|---|---|
+| 1 | Der Chef kommt nicht dazu | **72 %** „zu viel zu tun für Digitalisierung" | Bitkom 2025, n=504 |
+| 2 | Die Auftragslage sinkt | **35 %** melden Rückgang, nur 13 % Zuwachs | HWK Dresden, Frühjahr 2026 |
+| 3 | Der Nachwuchs fehlt | **83 %** Azubimangel, **75 %** Fachkräftemangel | Bitkom 2025 |
+| 4 | Der Kunde ist preissensibel | **87 %**, dazu **74 %** kritischer | Bitkom 2025 |
+| 5 | **Eine Seite ist schon da** | **94 %** haben eine Website | Bitkom 2025 |
+
+**Motiv 5 ändert jeden Aufmacher.** Der Leser braucht keine Website — er hat eine. Ein Text, der
+erklärt, warum man eine braucht, redet an 94 von 100 Lesern vorbei. Das Argument muss gegen
+„ich habe doch eine" bestehen.
+
+**Was Angabe 7 dann noch offen lässt:** die branchenspezifische Ausprägung — welche Leistung,
+welche Fachfrage, was der Betrieb beim Erstgespräch immer erklären muss. Nur dieser Teil braucht
+den Auftraggeber oder eine Fundstelle.
+
+**Fehlt der branchenspezifische Teil, entstehen die geteilten Blöcke trotzdem** — der eigene Teil
+wird als offener Punkt gemeldet, mit der konkreten Frage. Eine ausgedachte Branchenaussage ist
+schlechter als eine fehlende: sie liest sich flüssig und argumentiert am Leser vorbei.
 
 **Der häufigste Grund für schlechten Text ist nicht schlechtes Schreiben, sondern ein leeres
 Briefing.** Wer nicht weiß, welche Tatsache er übergeben soll, formuliert um die Leere herum — so

@@ -1144,6 +1144,7 @@ Quellenzeile: **woher stammt diese Aussage über die Branche?** Zulässig sind n
 
 | Quelle | Beispiel |
 |---|---|
+| **`SARTU_KUNDENMOTIVE_BELEGT.md`** | der belegte Kern und die Branchentabelle Ostsachsen |
 | Der Auftraggeber | „Chef hat mir gesagt: Förderung erklären ist der häufigste Anruf" |
 | Ein Betrieb der Branche | Gespräch, E-Mail, ausgefüllter Fragebogen |
 | Eine benannte, öffentliche Fundstelle | Innungsseite, Fachverband, Gesetzestext |
@@ -1167,10 +1168,16 @@ Quellenzeile: **woher stammt diese Aussage über die Branche?** Zulässig sind n
 nicht veröffentlicht. Eine Branche, über die sich keine 400 eigenen Wörter schreiben lassen, ist
 eine Branche, über die niemand genug weiß.
 
-> **Folge für die Reihenfolge:** Eine Branchenseite ohne Herkunftsnachweis wird **nicht
-> geschrieben**, sondern als offener Punkt gemeldet — mit der konkreten Frage, die zu klären ist.
-> Damit hängt Welle 1 (Sanitär/Heizung, Elektro, Dachdecker) an einem Gespräch je Branche. Das
-> ist Absicht: drei belegte Seiten schlagen fünfzehn ausgedachte.
+> **Folge für die Reihenfolge — korrigiert am 01.08.2026.** Die erste Fassung dieses Absatzes
+> sperrte Welle 1 komplett, bis je Branche ein Gespräch geführt ist. Das war zu streng: Der
+> **universelle Kern ist inzwischen belegt** (`SARTU_KUNDENMOTIVE_BELEGT.md`, fünf Motive mit
+> Zahlen), und für Ostsachsen liegen sogar **Werte je Gewerbegruppe** vor.
+>
+> **Es gilt jetzt getrennt nach Block:** Die Blöcke 1, 2, 7, 8, 9 entstehen aus dem belegten Kern.
+> Die Blöcke 3, 5, 6 und 10 brauchen den Herkunftsnachweis. Fehlt er, entsteht die Seite ohne
+> diese Blöcke und geht **nicht online** — die 400-Wörter-Prüfung reißt dann ohnehin.
+>
+> **Damit hängt Welle 1 an je einem Gespräch für den eigenen Teil, nicht an der ganzen Seite.**
 
 ### Welche Branchen — gefiltert nach Zahlungsfähigkeit, nicht nach Vollständigkeit
 
