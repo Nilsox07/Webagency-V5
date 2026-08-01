@@ -168,8 +168,17 @@ Ist „wir" häufiger, handelt die Seite von SARTU. Der Leser sucht aber sich se
 „Auffindbarkeit" ist ein Thema. „Ihre Website ist ab dem ersten Tag auffindbar." ist eine
 Behauptung. „Wer hier arbeitet." ist ein Thema mit einem Punkt dahinter.
 
-**Test:** Könnte jemand widersprechen? Wenn nein, ist es keine Überschrift, sondern ein Etikett.
-Etiketten gehören in die kleine Zeile darüber.
+**Der Test heißt Gegenteiltest und ist im Texter-Skill ausgeführt:** Bilde das Gegenteil des
+Satzes. **Würde ein ernstzunehmender Wettbewerber es behaupten?** Wenn nein, sagt der Satz nichts.
+
+`Von wenigen Angaben zur fertigen Website.` — das Gegenteil wäre „von vielen Angaben". Das
+behauptet niemand. Also war die Aussage nie strittig.
+
+`Ohne einen einzigen Termin zur fertigen Website.` — das Gegenteil ist „mit mehreren
+Abstimmungsterminen", und das ist der Normalfall der Branche. Der Satz unterscheidet.
+
+**Am Startseitenentwurf gemessen fielen sechs von neun Überschriften durch.** Der Prüfbericht
+zählt sie mit.
 
 ### Regel 10 — Der Streichtest
 
@@ -202,6 +211,8 @@ Treffer Wortliste C                   ____             Grenze 0
 Sie / Ihr / Ihre / Ihnen              ____
 wir / uns / unser                     ____             muss ≤ Sie sein
 H2 über 9 Wörter                      ____             Grenze 0
+Überschriften ohne Gegenteil          ____             Grenze 0
+Konjunktive in Überschriften          ____             Grenze 0
 Umfangszahlen genannt                 ____ von ____    alle, die die Seite behauptet
 ```
 
