@@ -1,0 +1,876 @@
+<title>SARTU — Corporate Design</title>
+
+<style>
+/* ============================================================
+   SARTU — Corporate-Design-Handbuch
+   Gebaut aus dem System, das es beschreibt. Jede Farbe, jeder
+   Radius und jeder Abstand auf dieser Seite stammt aus
+   design/tokens.css. Wer hier eine Zahl findet, die dort nicht
+   steht, hat einen Fehler gefunden.
+   ============================================================ */
+
+:root{
+  --cream:#f4efe5;  --paper:#fbf8f2;  --ink:#14110d;  --ink-soft:#241f18;
+  --text:#231e17;   --muted:#4d473d;  --line:#ddd4c4; --line-dark:#332d24;
+  --sand:#e8dfcd;
+  --lime:#a3e635;   --lime-hover:#8dc92a; --lime-press:#7ab023; --lime-soft:#e4f5b8;
+  --label:#5c554a;  --label-dark:#a89b88;
+
+  --rk:1;
+  --r-xs:calc(8px * var(--rk));   --r-s:calc(14px * var(--rk));
+  --r-m:calc(22px * var(--rk));   --r-l:calc(34px * var(--rk));
+  --r-xl:calc(52px * var(--rk));  --r-pill:999px;
+  --r-leaf:var(--r-xl) var(--r-m) var(--r-xl) var(--r-m);
+
+  --s-1:6px; --s-2:12px; --s-3:20px; --s-4:32px;
+  --s-5:48px; --s-6:72px; --s-7:104px; --s-8:140px;
+
+  --wrap:1180px;
+  --gut:clamp(20px,4vw,56px);
+
+  --font-sans:-apple-system,BlinkMacSystemFont,"Segoe UI",system-ui,"Helvetica Neue",Helvetica,sans-serif;
+  --font-mono:ui-monospace,"SFMono-Regular",Menlo,Consolas,monospace;
+
+  --shadow-soft:0 24px 60px -30px rgba(20,17,13,.28);
+  --shadow-lift:0 34px 80px -34px rgba(20,17,13,.4);
+  --ease:cubic-bezier(.22,.61,.36,1);
+
+  color-scheme:light;
+}
+/* SARTU legt sich bewusst auf einen Look fest. Dunkelmodus steht im
+   Portalauftrag unter „Nicht bauen". Der Umschalter der Vorschau darf
+   das Layout deshalb nicht umfaerben. */
+:root[data-theme="dark"],:root[data-theme="light"]{color-scheme:light}
+
+*{box-sizing:border-box}
+body{
+  margin:0;background:var(--cream);color:var(--text);
+  font-family:var(--font-sans);font-size:18px;line-height:1.62;
+  text-wrap:pretty;overflow-x:hidden;
+}
+h1,h2,h3,h4{margin:0;font-weight:650;letter-spacing:-.025em;line-height:1.04;color:var(--ink);text-wrap:balance}
+p{margin:0}
+ul,ol{margin:0;padding:0;list-style:none}
+a{color:var(--ink);text-decoration:none;
+  background-image:linear-gradient(var(--lime),var(--lime));
+  background-repeat:no-repeat;background-position:0 100%;background-size:100% .2em;
+  transition:background-size .24s var(--ease)}
+a:hover{background-size:100% 100%}
+:focus-visible{outline:2px solid var(--ink);outline-offset:2px;box-shadow:0 0 0 4px var(--lime)}
+
+.wrap{width:100%;max-width:var(--wrap);margin:0 auto;padding:0 var(--gut)}
+.mono{font-family:var(--font-mono);font-size:13px;letter-spacing:.1em;text-transform:uppercase}
+.lede{font-size:20px;line-height:1.58}
+.body{font-size:17.5px;line-height:1.65;color:var(--muted)}
+.dim{color:var(--muted)}
+
+/* Abschnittsmarke: Motivpunkt plus Label. Das wiederkehrende Zeichen. */
+.tag{display:inline-flex;align-items:center;gap:10px;color:var(--label);
+  font-family:var(--font-mono);font-size:12.5px;letter-spacing:.14em;text-transform:uppercase}
+.tag::before{content:"";width:11px;height:11px;flex:none;background:var(--label);
+  border-radius:var(--r-pill) 3px var(--r-pill) 3px}
+.dark .tag{color:var(--label-dark)}
+.dark .tag::before{background:var(--label-dark)}
+
+/* ---------- Kopf ---------- */
+.masthead{padding:clamp(56px,8vw,110px) 0 var(--s-6);border-bottom:1px solid var(--line)}
+.mast-grid{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,.7fr);
+  gap:clamp(28px,5vw,72px);align-items:end}
+.brand{display:flex;align-items:baseline;gap:8px;font-size:23px;font-weight:700;
+  letter-spacing:-.04em;color:var(--ink)}
+.brand em{font-family:var(--font-mono);font-style:normal;font-size:10.5px;font-weight:500;
+  letter-spacing:.16em;color:var(--label);text-transform:uppercase}
+h1{font-size:clamp(38px,5.6vw,68px);letter-spacing:-.035em;margin-top:var(--s-3)}
+.mast-meta{display:flex;flex-direction:column;gap:var(--s-2);
+  font-family:var(--font-mono);font-size:12.5px;letter-spacing:.08em;text-transform:uppercase;
+  color:var(--label)}
+.mast-meta b{display:block;color:var(--ink);font-weight:500;letter-spacing:.06em}
+@media (max-width:820px){.mast-grid{grid-template-columns:1fr}}
+
+/* ---------- Abschnitt ---------- */
+.sec{padding:var(--s-7) 0;border-bottom:1px solid var(--line)}
+.sec:last-of-type{border-bottom:none}
+.sec-head{display:grid;grid-template-columns:64px minmax(0,1fr);gap:clamp(16px,3vw,40px);
+  align-items:baseline;margin-bottom:var(--s-5)}
+.sec-num{font-family:var(--font-mono);font-size:14px;color:var(--label);letter-spacing:.06em}
+.sec-head h2{font-size:clamp(29px,3.8vw,44px)}
+.sec-head p{margin-top:var(--s-2);max-width:62ch}
+@media (max-width:700px){.sec-head{grid-template-columns:1fr;gap:var(--s-1)}}
+
+.dark{background:var(--ink);color:#efe9dd}
+.dark h2,.dark h3,.dark h4{color:#f6f1e6}
+.dark .dim{color:#c3bcae}
+.round-top{border-radius:var(--r-xl) var(--r-xl) 0 0}
+.round-bot{border-radius:0 0 var(--r-xl) var(--r-xl)}
+
+/* ---------- Farbfelder ---------- */
+.swatches{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:var(--s-3)}
+.sw{border:1px solid var(--line);border-radius:var(--r-l);overflow:hidden;background:var(--paper);
+  text-align:left;font:inherit;color:inherit;cursor:pointer;padding:0;
+  transition:transform .25s var(--ease),box-shadow .25s var(--ease)}
+.sw:hover{transform:translateY(-3px);box-shadow:var(--shadow-soft)}
+.sw-chip{height:112px;display:flex;align-items:flex-end;padding:14px 18px}
+.sw-chip span{font-family:var(--font-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;opacity:.72}
+.sw-in{padding:16px 18px 20px;border-top:1px solid var(--line)}
+.sw-in b{display:block;font-size:18px;font-weight:600;color:var(--ink);letter-spacing:-.01em}
+.sw-in code{display:block;margin-top:5px;font-family:var(--font-mono);font-size:14px;color:var(--muted);
+  font-variant-numeric:tabular-nums}
+.sw-in em{display:block;margin-top:9px;font-style:normal;font-size:15.5px;color:var(--muted);line-height:1.5}
+.sw-copy{margin-top:11px;font-family:var(--font-mono);font-size:10.5px;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--label);opacity:0;transition:opacity .2s ease}
+.sw:hover .sw-copy,.sw:focus-visible .sw-copy{opacity:1}
+.sw.copied .sw-copy{opacity:1;color:var(--ink)}
+
+/* ---------- Kontrastnachweis ---------- */
+.proof{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:var(--s-3);margin-top:var(--s-4)}
+.pr{border-radius:var(--r-m);padding:26px 24px;border:1px solid var(--line)}
+.pr-txt{font-size:21px;font-weight:600;letter-spacing:-.02em}
+.pr-foot{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:18px;
+  font-family:var(--font-mono);font-size:12px;letter-spacing:.1em;text-transform:uppercase;
+  font-variant-numeric:tabular-nums}
+.verdict{padding:5px 11px;border-radius:var(--r-pill);font-size:10.5px;letter-spacing:.13em}
+.v-ok{background:var(--ink);color:#f4efe5}
+.v-no{background:#fff;color:var(--ink);border:1.5px solid var(--ink)}
+
+/* ---------- Tabelle ---------- */
+.tblwrap{overflow-x:auto;margin-top:var(--s-4);border:1px solid var(--line);border-radius:var(--r-m);background:var(--paper)}
+.dark .tblwrap{border-color:var(--line-dark);background:var(--ink-soft)}
+table{width:100%;border-collapse:collapse;font-size:16.5px}
+th,td{padding:15px 22px;text-align:left;border-bottom:1px solid var(--line);vertical-align:top}
+.dark th,.dark td{border-color:var(--line-dark)}
+th{font-family:var(--font-mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--label);font-weight:500;white-space:nowrap}
+.dark th{color:var(--label-dark)}
+tr:last-child td{border-bottom:none}
+td code{font-family:var(--font-mono);font-size:14.5px;color:var(--ink);font-variant-numeric:tabular-nums}
+.dark td code{color:#f6f1e6}
+.num{font-variant-numeric:tabular-nums;white-space:nowrap}
+
+/* ---------- Schriftmuster ---------- */
+.spec{border:1px solid var(--line);border-radius:var(--r-l);background:var(--paper);overflow:hidden}
+.spec-row{display:grid;grid-template-columns:minmax(0,200px) minmax(0,1fr);gap:clamp(12px,3vw,36px);
+  padding:26px clamp(20px,3vw,32px);border-bottom:1px solid var(--line);align-items:center}
+.spec-row:last-child{border-bottom:none}
+.spec-key{font-family:var(--font-mono);font-size:11.5px;letter-spacing:.13em;text-transform:uppercase;
+  color:var(--label);line-height:1.7;font-variant-numeric:tabular-nums}
+.spec-key b{display:block;color:var(--ink);font-weight:500}
+@media (max-width:640px){.spec-row{grid-template-columns:1fr;gap:10px}}
+
+/* ---------- Motiv ---------- */
+.motifs{display:flex;flex-wrap:wrap;gap:var(--s-3);margin-top:var(--s-4)}
+.mo{width:132px;height:132px;background:var(--sand);border:1px solid var(--line);
+  display:flex;align-items:flex-end;padding:12px;
+  font-family:var(--font-mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--label)}
+.mo-leaf{border-radius:var(--r-leaf)}
+.mo-l{border-radius:var(--r-l)}
+.mo-m{border-radius:var(--r-m)}
+.mo-pill{border-radius:var(--r-pill)}
+.mo-lime{background:var(--lime);color:var(--ink)}
+
+/* ---------- Bausteine ---------- */
+.parts{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:var(--s-3);margin-top:var(--s-4)}
+.part{background:var(--paper);border:1px solid var(--line);border-radius:var(--r-l);padding:28px 26px;
+  display:flex;flex-direction:column;gap:18px}
+.part h4{font-size:19px}
+.part .note{font-size:15.5px;line-height:1.55;color:var(--muted)}
+.stage{display:flex;flex-wrap:wrap;align-items:center;gap:12px;padding:22px;background:var(--cream);
+  border-radius:var(--r-m);border:1px solid var(--line)}
+
+.btn{display:inline-flex;align-items:center;gap:12px;padding:19px 32px;border-radius:var(--r-pill);
+  background:var(--lime);color:var(--ink);border:1px solid var(--line);background-image:none;
+  font-size:18px;font-weight:600;line-height:1;cursor:pointer;font-family:inherit;
+  transition:background .25s ease,transform .25s ease}
+.btn:hover{background:var(--lime-hover);transform:translateY(-2px)}
+.btn:active{background:var(--lime-press);transform:none}
+.btn .ar{transition:transform .25s ease}
+.btn:hover .ar{transform:translateX(4px)}
+.btn-ghost{background:transparent;border:1.5px solid var(--ink);padding:17px 28px}
+.btn-ghost:hover{background:var(--ink);color:var(--cream)}
+.chip{padding:9px 18px;border-radius:var(--r-pill);background:var(--paper);border:1px solid var(--line);
+  font-family:var(--font-mono);font-size:12.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.focusdemo{outline:2px solid var(--ink);outline-offset:2px;box-shadow:0 0 0 4px var(--lime)}
+.shot{border:2px dashed var(--line);border-radius:var(--r-m);background:transparent;
+  padding:22px;display:flex;flex-direction:column;gap:6px;min-height:120px;justify-content:flex-end}
+.shot .mono{color:var(--label);font-size:11.5px}
+.shot p{font-size:15px;color:var(--muted)}
+
+/* ---------- Ja / Nein ---------- */
+.pairs{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:var(--s-3);margin-top:var(--s-4)}
+.pair{border-radius:var(--r-l);padding:26px;border:1px solid var(--line);background:var(--paper)}
+.pair-no{border-style:dashed}
+.pair h4{display:flex;align-items:center;gap:10px;font-size:17px;margin-bottom:16px}
+.mark{width:24px;height:24px;flex:none;border-radius:var(--r-pill) 4px var(--r-pill) 4px;
+  display:grid;place-items:center;font-size:13px;font-weight:700}
+.m-ok{background:var(--lime);color:var(--ink)}
+.m-no{background:transparent;border:1.5px solid var(--ink);color:var(--ink)}
+.pair li{padding:9px 0 9px 22px;position:relative;font-size:16.5px;color:var(--muted);line-height:1.5}
+.pair li::before{content:"";position:absolute;left:0;top:17px;width:9px;height:9px;
+  border-radius:var(--r-pill) 3px var(--r-pill) 3px;background:var(--label)}
+
+/* ---------- Anwendungsmuster ---------- */
+.apps{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:var(--s-3);margin-top:var(--s-4)}
+.app{background:var(--paper);border:1px solid var(--line);border-radius:var(--r-l);overflow:hidden}
+.app-flag{padding:11px 22px;background:var(--sand);border-bottom:1px solid var(--line);
+  font-family:var(--font-mono);font-size:11px;letter-spacing:.13em;text-transform:uppercase;color:var(--ink)}
+.app-in{padding:26px 24px;display:flex;flex-direction:column;gap:16px}
+.mail-head{display:flex;align-items:baseline;gap:8px;font-size:19px;font-weight:700;letter-spacing:-.04em;color:var(--ink)}
+.mail-head em{font-family:var(--font-mono);font-style:normal;font-size:9.5px;font-weight:500;
+  letter-spacing:.16em;color:var(--label);text-transform:uppercase}
+.rule{height:1px;background:var(--line)}
+.inv-row{display:flex;justify-content:space-between;gap:16px;font-size:16px;
+  font-variant-numeric:tabular-nums;padding:7px 0}
+.inv-row b{font-weight:600;color:var(--ink)}
+.legal{font-size:13.5px;color:var(--muted);line-height:1.5;padding-top:12px;border-top:1px solid var(--line)}
+.fav{display:flex;gap:14px;align-items:flex-end}
+.fav i{display:grid;place-items:center;background:var(--lime);color:var(--ink);
+  font-style:normal;font-weight:700;letter-spacing:-.05em;border:1px solid var(--line)}
+.fav .f64{width:64px;height:64px;font-size:38px;border-radius:var(--r-s)}
+.fav .f32{width:32px;height:32px;font-size:20px;border-radius:7px}
+.fav .f16{width:16px;height:16px;font-size:11px;border-radius:4px}
+
+/* ---------- Wortmarke gross ---------- */
+.wordmark{overflow:hidden;margin-top:var(--s-5)}
+.wordmark span{display:block;font-size:clamp(84px,20.5vw,300px);font-weight:700;
+  letter-spacing:-.055em;line-height:.78;color:color-mix(in oklab,var(--ink),#fff 8%);
+  user-select:none;margin-bottom:-.1em}
+.dark .wordmark span{color:color-mix(in oklab,var(--ink),#fff 12%)}
+
+/* ---------- Prüfliste ---------- */
+.check{margin-top:var(--s-4);border-top:1px solid var(--line)}
+.check li{display:flex;gap:16px;align-items:flex-start;padding:17px 4px;border-bottom:1px solid var(--line);
+  font-size:17px;line-height:1.5}
+.box{width:20px;height:20px;flex:none;margin-top:3px;border:1.5px solid var(--ink);
+  border-radius:var(--r-pill) 3px var(--r-pill) 3px}
+
+/* ---------- Fuss ---------- */
+footer{background:var(--ink);color:#b9b2a4;padding:var(--s-6) 0 0;margin-top:0}
+.foot-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:var(--s-4);
+  padding-bottom:var(--s-5);border-bottom:1px solid var(--line-dark)}
+.foot-grid h4{font-family:var(--font-mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;
+  color:#7d766a;margin-bottom:12px;font-weight:500}
+.foot-grid li{font-size:16px;padding:4px 0;color:#d5cec0}
+.foot-grid code{font-family:var(--font-mono);font-size:14px;color:#efe9dd}
+.foot-legal{display:flex;flex-wrap:wrap;gap:6px 26px;justify-content:space-between;
+  padding:var(--s-3) 0 var(--s-4);font-family:var(--font-mono);font-size:11px;letter-spacing:.1em;
+  text-transform:uppercase;color:#7d766a}
+
+@media (prefers-reduced-motion:reduce){
+  *{animation:none!important;transition:none!important;scroll-behavior:auto!important}
+  .sw:hover{transform:none}
+}
+</style>
+
+
+<header class="masthead">
+  <div class="wrap mast-grid">
+    <div>
+      <p class="brand">SARTU <em>Webdesign</em></p>
+      <h1>Corporate Design</h1>
+      <p class="lede dim" style="margin-top:var(--s-3);max-width:52ch">
+        Alles, was den Namen SARTU trägt, sieht so aus. Jede Regel auf dieser Seite ist an der Seite
+        selbst gebaut — sie ist ihr eigener Beleg.
+      </p>
+    </div>
+    <div class="mast-meta">
+      <p><b>Stand</b>01.08.2026</p>
+      <p><b>Quelle</b>Artefakt 30.07.2026, bestätigt</p>
+      <p><b>Werte</b><code style="font-size:12px">design/tokens.css</code></p>
+      <p><b>Status</b>verbindlich</p>
+    </div>
+  </div>
+</header>
+
+<main>
+
+  <!-- 1 — Name -->
+  <section class="sec">
+    <div class="wrap">
+      <div class="sec-head">
+        <p class="sec-num">01</p>
+        <div>
+          <p class="tag" style="margin-bottom:16px">Der Name</p>
+          <h2>SARTU. In Versalien, immer.</h2>
+          <p class="body">Der Name steht in Großbuchstaben — im Logo und im Fließtext. Gemischtes
+          „Sartu" wird nicht verwendet. Die kurze Marke wirkt in Versalien grafisch stärker.</p>
+        </div>
+      </div>
+
+      <div class="pairs">
+        <div class="pair">
+          <h4><span class="mark m-ok" aria-hidden="true">✓</span> So</h4>
+          <ul>
+            <li><code>SARTU</code> — allein, ohne Zusatz</li>
+            <li><code>SARTU · Firmenwebsites</code> — Beisatz im Lockup</li>
+            <li>„bei SARTU", „von SARTU"</li>
+          </ul>
+        </div>
+        <div class="pair pair-no">
+          <h4><span class="mark m-no" aria-hidden="true">✕</span> Nicht so</h4>
+          <ul>
+            <li><code>SARTU digital</code> — kein Zusatz im Namen</li>
+            <li><code>Sartu</code> — nie gemischt</li>
+            <li>„bei SARTUs" — nie gebeugt</li>
+            <li>Der Name wird nicht erklärt. Er bedeutet nichts, und das bleibt so</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 2 — Wortmarke -->
+  <section class="sec">
+    <div class="wrap">
+      <div class="sec-head">
+        <p class="sec-num">02</p>
+        <div>
+          <p class="tag" style="margin-bottom:16px">Die Wortmarke</p>
+          <h2>Bis eine Bildmarke entschieden ist, trägt die Wortmarke allein.</h2>
+          <p class="body">Das ist eine gültige Lösung und kein Zwischenstand. Die Anforderungen an
+          ein späteres Logo stehen in Abschnitt 09.</p>
+        </div>
+      </div>
+
+      <div class="spec">
+        <div class="spec-row">
+          <div class="spec-key">
+            <b>Klein</b>
+            23 px · Gewicht 700<br>Spationierung −0,04 em<br>Beisatz 10,5 px · +0,16 em
+          </div>
+          <p class="brand">SARTU <em>Webdesign</em></p>
+        </div>
+        <div class="spec-row">
+          <div class="spec-key">
+            <b>Auf dunklem Grund</b>
+            Marke <code style="font-size:12px">#f6f1e6</code><br>Beisatz <code style="font-size:12px">#a89b88</code>
+          </div>
+          <div style="background:var(--ink);border-radius:var(--r-m);padding:26px 28px">
+            <p class="brand" style="color:#f6f1e6"><span>SARTU</span> <em style="color:#a89b88">Webdesign</em></p>
+          </div>
+        </div>
+        <div class="spec-row">
+          <div class="spec-key">
+            <b>Verboten</b>
+            Die Marke ist nie unterstrichen und nie mit dem Lime-Balken hinterlegt — auch dann nicht,
+            wenn sie ein Verweis ist.
+          </div>
+          <p class="brand" style="opacity:.45;text-decoration:line-through;text-decoration-color:var(--ink)">
+            SARTU <em>Webdesign</em></p>
+        </div>
+      </div>
+
+      <p class="body" style="margin-top:var(--s-5);max-width:60ch"><b>Groß, für die Fußzeile:</b>
+      <code>clamp(84px, 20.5vw, 300px)</code>, Zeilenhöhe 0,78, Spationierung −0,055 em. Sie läuft
+      unten aus dem Bild. Eine Marke, die vollständig und mittig dasteht, wirkt wie ein Siegel —
+      beschnitten wirkt sie wie Druck auf Papier.</p>
+
+      <div class="wordmark" aria-hidden="true"><span>SARTU</span></div>
+    </div>
+  </section>
+
+  <!-- 3 — Farben -->
+  <section class="sec">
+    <div class="wrap">
+      <div class="sec-head">
+        <p class="sec-num">03</p>
+        <div>
+          <p class="tag" style="margin-bottom:16px">Die Farben</p>
+          <h2>Fünf Töne, ein Akzent.</h2>
+          <p class="body">Der Grundton ist Creme, nicht Weiß — die Seite soll wie Papier wirken.
+          Lime ist die einzige Farbe, die etwas bedeutet: Sie markiert, was der Leser als Nächstes
+          tun kann. Zum Kopieren anklicken.</p>
+        </div>
+      </div>
+
+      <div class="swatches">
+        <button class="sw" type="button" data-hex="#f4efe5">
+          <span class="sw-chip" style="background:#f4efe5"><span style="color:#14110d">Grund</span></span>
+          <span class="sw-in"><b>Creme</b><code>#f4efe5</code><em>Seitengrund. Der Ton, auf dem alles steht.</em>
+          <span class="sw-copy">Klicken zum Kopieren</span></span>
+        </button>
+        <button class="sw" type="button" data-hex="#fbf8f2">
+          <span class="sw-chip" style="background:#fbf8f2"><span style="color:#14110d">Erhöht</span></span>
+          <span class="sw-in"><b>Papier</b><code>#fbf8f2</code><em>Alles, was einen Schritt näher am Leser ist: Karten, Chips, Zeilen.</em>
+          <span class="sw-copy">Klicken zum Kopieren</span></span>
+        </button>
+        <button class="sw" type="button" data-hex="#14110d">
+          <span class="sw-chip" style="background:#14110d"><span style="color:#efe9dd">Schrift</span></span>
+          <span class="sw-in"><b>Tinte</b><code>#14110d</code><em>Schrift und die Abschnitte, die Gewicht tragen sollen.</em>
+          <span class="sw-copy">Klicken zum Kopieren</span></span>
+        </button>
+        <button class="sw" type="button" data-hex="#a3e635">
+          <span class="sw-chip" style="background:#a3e635;border-bottom:1px solid var(--line)"><span style="color:#14110d">Akzent</span></span>
+          <span class="sw-in"><b>Lime</b><code>#a3e635</code><em>Die einzige Akzentfarbe. Immer Fläche, nie Schrift auf hellem Grund.</em>
+          <span class="sw-copy">Klicken zum Kopieren</span></span>
+        </button>
+        <button class="sw" type="button" data-hex="#e8dfcd">
+          <span class="sw-chip" style="background:#e8dfcd"><span style="color:#14110d">Füllung</span></span>
+          <span class="sw-in"><b>Sand</b><code>#e8dfcd</code><em>Ruhige Fläche ohne eigene Aussage.</em>
+          <span class="sw-copy">Klicken zum Kopieren</span></span>
+        </button>
+        <button class="sw" type="button" data-hex="#ddd4c4">
+          <span class="sw-chip" style="background:#ddd4c4"><span style="color:#14110d">Kante</span></span>
+          <span class="sw-in"><b>Linie</b><code>#ddd4c4</code><em>Kanten auf hellem Grund. Auf dunklem: <code style="display:inline">#332d24</code></em>
+          <span class="sw-copy">Klicken zum Kopieren</span></span>
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3b — Die Lime-Regel, vorgeführt -->
+  <section class="sec dark round-top">
+    <div class="wrap">
+      <div class="sec-head">
+        <p class="sec-num" style="color:var(--label-dark)">03·1</p>
+        <div>
+          <p class="tag" style="margin-bottom:16px">Die Lime-Regel</p>
+          <h2>Lime ist Fläche. Auf hellem Grund nie Schrift.</h2>
+          <p class="body dim">Das ist keine Geschmacksfrage. Die drei Felder unten sind gemessen,
+          nicht geschätzt — der dritte zeigt, warum die Regel existiert.</p>
+        </div>
+      </div>
+
+      <div class="proof">
+        <div class="pr" style="background:#a3e635;border-color:#a3e635">
+          <p class="pr-txt" style="color:#14110d">Bedarf prüfen lassen</p>
+          <p class="pr-foot" style="color:#14110d">
+            <span>Tinte auf Lime · 12,48 : 1</span>
+            <span class="verdict v-ok">Erlaubt</span>
+          </p>
+        </div>
+        <div class="pr" style="background:#14110d;border-color:#332d24">
+          <p class="pr-txt" style="color:#a3e635">Bedarf prüfen lassen</p>
+          <p class="pr-foot" style="color:#a89b88">
+            <span>Lime auf Tinte · 12,48 : 1</span>
+            <span class="verdict v-ok">Erlaubt</span>
+          </p>
+        </div>
+        <div class="pr" style="background:#f4efe5;border-color:#ddd4c4">
+          <p class="pr-txt" style="color:#a3e635">Bedarf prüfen lassen</p>
+          <p class="pr-foot" style="color:#4d473d">
+            <span>Lime auf Creme · 1,32 : 1</span>
+            <span class="verdict v-no">Nie</span>
+          </p>
+        </div>
+      </div>
+
+      <p class="body dim" style="margin-top:var(--s-4);max-width:66ch">
+        <b style="color:#f6f1e6">Zweite Regel:</b> Jede Lime-Fläche auf hellem Grund bekommt 1 px
+        <code style="color:#f6f1e6">--line</code> als Kante. Ohne Kante verschwimmt sie mit Creme.
+      </p>
+      <p class="body dim" style="margin-top:var(--s-2);max-width:66ch">
+        <b style="color:#f6f1e6">Dritte Regel:</b> Es gibt keine zweite Akzentfarbe. Kein Rot für
+        Fehler, kein Grün für Erfolg. Zustände entstehen aus Text und Fläche.
+      </p>
+
+      <div class="tblwrap">
+        <table>
+          <caption class="visually-hidden" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)">
+            Gemessene Kontrastwerte aller Paarungen</caption>
+          <thead>
+            <tr><th scope="col">Paarung</th><th scope="col">Kontrast</th><th scope="col">AA-Fließtext</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Fließtext auf Papier</td><td class="num">15,60 : 1</td><td>erfüllt</td></tr>
+            <tr><td>Hell auf Tinte</td><td class="num">15,57 : 1</td><td>erfüllt</td></tr>
+            <tr><td>Fließtext auf Creme</td><td class="num">14,43 : 1</td><td>erfüllt</td></tr>
+            <tr><td>Tinte auf Sand</td><td class="num">14,22 : 1</td><td>erfüllt</td></tr>
+            <tr><td>Tinte auf Lime</td><td class="num">12,48 : 1</td><td>erfüllt</td></tr>
+            <tr><td>Fließtext im dunklen Abschnitt</td><td class="num">9,97 : 1</td><td>erfüllt</td></tr>
+            <tr><td>Gedämpft auf Papier</td><td class="num">8,67 : 1</td><td>erfüllt</td></tr>
+            <tr><td>Gedämpft auf Creme</td><td class="num">8,02 : 1</td><td>erfüllt</td></tr>
+            <tr><td>Label auf Papier</td><td class="num">6,94 : 1</td><td>erfüllt</td></tr>
+            <tr><td>Label auf Tinte</td><td class="num">6,91 : 1</td><td>erfüllt</td></tr>
+            <tr><td><b>Label auf Creme — niedrigster Wert im System</b></td><td class="num">6,42 : 1</td><td>erfüllt</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="body dim" style="margin-top:var(--s-3);max-width:64ch">
+        AA verlangt 4,5 : 1 für Fließtext. Der niedrigste Wert im ganzen System liegt bei 6,42 : 1.
+        Das System hat überall Reserve — auch dort, wo später jemand eine Schriftgröße ändert.
+      </p>
+    </div>
+  </section>
+
+  <!-- 4 — Schrift -->
+  <section class="sec">
+    <div class="wrap">
+      <div class="sec-head">
+        <p class="sec-num">04</p>
+        <div>
+          <p class="tag" style="margin-bottom:16px">Die Schrift</p>
+          <h2>Systemschriften. Keine Lizenz, kein CDN, keine Ladezeit.</h2>
+          <p class="body">Die Monospace-Schrift ist Teil der Marke. Sie trägt jedes Label, jede
+          Abschnittsmarke, jede Rechtszeile — immer in Versalien mit weiter Spationierung. Sie ist
+          das zweite wiederkehrende Zeichen neben der Lozenge.</p>
+        </div>
+      </div>
+
+      <div class="spec">
+        <div class="spec-row">
+          <div class="spec-key"><b>H1</b>clamp(40px, 6.4vw, 80px)<br>Gewicht 650 · −0,035 em · 1,04</div>
+          <p style="font-size:clamp(34px,5vw,60px);font-weight:650;letter-spacing:-.035em;line-height:1.04;color:var(--ink)">
+            Websites zum Festpreis.</p>
+        </div>
+        <div class="spec-row">
+          <div class="spec-key"><b>H2</b>clamp(31px, 4.3vw, 50px)<br>Gewicht 650 · −0,025 em</div>
+          <p style="font-size:clamp(27px,3.6vw,42px);font-weight:650;letter-spacing:-.025em;line-height:1.04;color:var(--ink)">
+            Ihr Projekt bleibt an einem Ort.</p>
+        </div>
+        <div class="spec-row">
+          <div class="spec-key"><b>Vorspann</b>20 px · 1,58</div>
+          <p style="font-size:20px;line-height:1.58">Sie beantworten die Fragen zu Ihrem Unternehmen.
+          Struktur, Technik und Text übernehmen wir.</p>
+        </div>
+        <div class="spec-row">
+          <div class="spec-key"><b>Fließtext</b>18 px · 1,62</div>
+          <p style="font-size:18px;line-height:1.62">Der Fließtext liegt bei 18 px. Die Prüfliste
+          verlangt mindestens 17 px — ein Pixel Reserve, damit eine spätere Änderung nicht sofort
+          gegen die Grenze läuft.</p>
+        </div>
+        <div class="spec-row">
+          <div class="spec-key"><b>Absatztext</b>17,5 px · 1,65 · gedämpft</div>
+          <p style="font-size:17.5px;line-height:1.65;color:var(--muted)">Zweite Textebene für
+          Erklärungen, die neben einer Aussage stehen.</p>
+        </div>
+        <div class="spec-row">
+          <div class="spec-key"><b>Label</b>Monospace · Versalien<br>12,5 px · +0,14 em</div>
+          <p class="tag">Kundenbereich</p>
+        </div>
+        <div class="spec-row">
+          <div class="spec-key"><b>Preis</b>38 px · Gewicht 700 · −0,035 em</div>
+          <p style="display:flex;align-items:baseline;gap:10px;font-size:38px;font-weight:700;letter-spacing:-.035em;color:var(--ink);font-variant-numeric:tabular-nums">
+            1.490 €<span style="font-size:17px;font-weight:500;letter-spacing:0;color:var(--muted)">einmalig, netto</span></p>
+        </div>
+      </div>
+
+      <p class="body" style="margin-top:var(--s-4);max-width:64ch"><b>Überschriften wiegen 650, nicht 700.</b>
+      Bei 700 wird aus entschieden laut. Eine eigene Schrift lässt sich später einhängen, ohne dass
+      sich am System etwas ändert — der Platz dafür steht in <code>design/tokens.css</code>.</p>
+    </div>
+  </section>
+
+  <!-- 5 — Motiv -->
+  <section class="sec">
+    <div class="wrap">
+      <div class="sec-head">
+        <p class="sec-num">05</p>
+        <div>
+          <p class="tag" style="margin-bottom:16px">Das Motiv</p>
+          <h2>Eine Lozenge, zweimal rund, zweimal eng.</h2>
+          <p class="body">Zwei gegenüberliegende Ecken sind weit gerundet, die anderen beiden eng.
+          Das ist der einzige Schmuck, den der Auftritt hat: keine Symbole, keine Illustrationen,
+          keine Verläufe.</p>
+        </div>
+      </div>
+
+      <div class="motifs">
+        <div class="mo mo-leaf mo-lime">--r-leaf</div>
+        <div class="mo mo-l">--r-l · 34</div>
+        <div class="mo mo-m">--r-m · 22</div>
+        <div class="mo mo-pill">--r-pill</div>
+      </div>
+
+      <p class="body" style="margin-top:var(--s-4);max-width:64ch">
+        Die Lozenge erscheint an fünf Stellen: Karte im Aufmacher, hervorgehobene Lösungskarte,
+        Bildplatz beim Foto, Motivpunkt vor jedem Label und Blase im Ablauf. In kleiner Form wird
+        sie zu <code>999px 3px 999px 3px</code> — der Punkt links neben jeder Abschnittsmarke auf
+        dieser Seite.
+      </p>
+      <p class="body" style="margin-top:var(--s-3);max-width:64ch">
+        <b>Fünf Radien, ein Regler.</b> <code>--rk</code> skaliert alle gleichzeitig; der
+        entschiedene Wert ist 1. Wer einen einzelnen Radius ändert, bricht das System.
+      </p>
+    </div>
+  </section>
+
+  <!-- 6 — Bausteine -->
+  <section class="sec">
+    <div class="wrap">
+      <div class="sec-head">
+        <p class="sec-num">06</p>
+        <div>
+          <p class="tag" style="margin-bottom:16px">Die Bausteine</p>
+          <h2>Was immer gleich aussieht.</h2>
+          <p class="body">Alle Elemente unten sind live, nicht abgebildet. Was hier steht, ist der
+          Zustand — nicht ein Bild davon.</p>
+        </div>
+      </div>
+
+      <div class="parts">
+        <div class="part">
+          <h4>Hauptknopf</h4>
+          <div class="stage"><button class="btn" type="button">Bedarf prüfen lassen <span class="ar" aria-hidden="true">→</span></button></div>
+          <p class="note">Lime-Fläche, Tinte-Schrift, 1 px Kante, volle Rundung. Der Pfeil rückt beim
+          Überfahren 4 px nach rechts. <b>Ein Hauptknopf je Ansicht.</b></p>
+        </div>
+        <div class="part">
+          <h4>Zweitknopf</h4>
+          <div class="stage"><button class="btn btn-ghost" type="button">So läuft ein Projekt ab</button></div>
+          <p class="note">Durchsichtig mit 1,5 px Tinte-Rahmen. Beim Überfahren kehrt er sich um.
+          Nie Lime — sonst konkurriert er mit dem Hauptknopf.</p>
+        </div>
+        <div class="part">
+          <h4>Chip</h4>
+          <div class="stage">
+            <span class="chip">Handwerk</span><span class="chip">Praxen</span><span class="chip">Kanzleien</span>
+          </div>
+          <p class="note">Papier auf Creme, volle Rundung, Monospace in Versalien. Nie anklickbar —
+          ein Chip beschreibt, er tut nichts.</p>
+        </div>
+        <div class="part">
+          <h4>Fokus</h4>
+          <div class="stage"><button class="btn btn-ghost focusdemo" type="button">Angebot ansehen</button></div>
+          <p class="note">Doppelring: 2 px Tinte innen, 4 px Lime außen. Er ist auf hellem
+          <b>und</b> dunklem Grund sichtbar — deshalb zwei Farben statt einer.</p>
+        </div>
+        <div class="part">
+          <h4>Verweis im Text</h4>
+          <div class="stage" style="font-size:18px">Mehr dazu unter <a href="#">so läuft ein Projekt ab</a>.</div>
+          <p class="note">Ein Lime-Balken unter der Zeile, der beim Überfahren auf volle Höhe wächst.
+          <b>Nie farbige Schrift.</b></p>
+        </div>
+        <div class="part">
+          <h4>Bildplatz ohne Bild</h4>
+          <div class="shot">
+            <p class="mono">Platz für Bildschirmansicht</p>
+            <p>Hier steht später eine echte Aufnahme aus dem Kundenbereich.</p>
+          </div>
+          <p class="note">2 px gestrichelt, beschriftet, mit einem Satz zum Inhalt.
+          <b>Nie ein leerer Rahmen</b> an einer Vertrauensstelle.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 7 — Bildsprache -->
+  <section class="sec">
+    <div class="wrap">
+      <div class="sec-head">
+        <p class="sec-num">07</p>
+        <div>
+          <p class="tag" style="margin-bottom:16px">Die Bildsprache</p>
+          <h2>Echt oder gar nicht.</h2>
+          <p class="body">SARTU wirbt damit, nichts zu erfinden. Ein Bestandsfoto auf der eigenen
+          Seite widerspricht genau dem — und der Kunde, der es erkennt, glaubt danach auch den Rest
+          nicht.</p>
+        </div>
+      </div>
+
+      <div class="pairs">
+        <div class="pair">
+          <h4><span class="mark m-ok" aria-hidden="true">✓</span> Erlaubt</h4>
+          <ul>
+            <li>Echte Aufnahmen aus dem Kundenbereich, als solche gekennzeichnet</li>
+            <li>Echtes Foto des Gründers</li>
+            <li>Musterprojekte mit dem Vermerk <code>Musterprojekt — kein Kundenauftrag</code></li>
+            <li>Der beschriftete Bildplatz, solange kein Bild vorliegt</li>
+          </ul>
+        </div>
+        <div class="pair pair-no">
+          <h4><span class="mark m-no" aria-hidden="true">✕</span> Verboten</h4>
+          <ul>
+            <li>Bestandsfotos — Handschlag, Laptop, Callcenter</li>
+            <li>Erfundene Logowolken, Bewertungen, Kennzahlen</li>
+            <li>Verlaufskugeln, generische KI-Illustrationen</li>
+            <li>Der leere Platzhalterrahmen</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 8 — Anwendungen -->
+  <section class="sec">
+    <div class="wrap">
+      <div class="sec-head">
+        <p class="sec-num">08</p>
+        <div>
+          <p class="tag" style="margin-bottom:16px">Die Anwendungen</p>
+          <h2>Dieselbe Marke auf jedem Papier.</h2>
+          <p class="body">E-Mail, Angebot und Rechnung entstehen im Kundenbereich. Alle
+          Pflichtangaben stammen aus den Betreiberdaten — nichts wird in eine Vorlage geschrieben.</p>
+        </div>
+      </div>
+
+      <div class="apps">
+        <div class="app">
+          <p class="app-flag">E-Mail</p>
+          <div class="app-in">
+            <p class="mail-head">SARTU <em>Webdesign</em></p>
+            <div class="rule"></div>
+            <p style="font-size:17px;line-height:1.6">Guten Tag,<br>Ihr Angebot liegt in Ihrem
+            Kundenbereich bereit. Es gilt 14 Tage.</p>
+            <p><button class="btn" type="button" style="font-size:16px;padding:15px 26px">Angebot ansehen <span class="ar" aria-hidden="true">→</span></button></p>
+            <p class="legal">Text und HTML. Die Wortmarke steht als Text, nicht als Bild — Bilder
+            werden in vielen Postfächern blockiert. <b>Nie mehr als ein Knopf je Mail:</b> zwei
+            Knöpfe sind zwei nächste Schritte, und dann gibt es keinen.</p>
+          </div>
+        </div>
+
+        <div class="app">
+          <p class="app-flag">Rechnung</p>
+          <div class="app-in">
+            <p class="mail-head">SARTU <em>Webdesign</em></p>
+            <div class="rule"></div>
+            <p class="mono" style="font-size:11.5px;color:var(--label)">Rechnung 2026-0001 · fällig 15.08.2026</p>
+            <div>
+              <p class="inv-row"><span>Anzahlung <code style="font-family:var(--font-mono);font-size:14px">Wachstum</code></span><b>1.950,00 €</b></p>
+              <p class="inv-row"><span>Umsatzsteuer 19 %</span><b>370,50 €</b></p>
+              <p class="inv-row" style="border-top:1px solid var(--line);padding-top:12px"><span><b>Gesamt</b></span><b>2.320,50 €</b></p>
+            </div>
+            <p class="legal">Alle Preise netto zzgl. gesetzlicher Umsatzsteuer. Ausschließlich für
+            Unternehmer. — <b>Diese Zeile ist im Wortlaut gebunden</b> und steht auf jedem
+            Preisdokument.</p>
+          </div>
+        </div>
+
+        <div class="app">
+          <p class="app-flag">Favicon — bis zur Logoentscheidung</p>
+          <div class="app-in">
+            <div class="fav">
+              <i class="f64" aria-hidden="true">S</i>
+              <i class="f32" aria-hidden="true">S</i>
+              <i class="f16" aria-hidden="true">S</i>
+            </div>
+            <p class="legal" style="border-top:none;padding-top:0">Ein <code style="font-family:var(--font-mono);font-size:14px">S</code>
+            in der Website-Schrift, Tinte auf Lime, quadratisch. Ab 16 px lesbar. Keine Effekte,
+            kein Verlauf. Ersetzt wird es erst, wenn eine Bildmarke entschieden ist.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 9 — Ton und Offenes -->
+  <section class="sec dark round-top">
+    <div class="wrap">
+      <div class="sec-head">
+        <p class="sec-num" style="color:var(--label-dark)">09</p>
+        <div>
+          <p class="tag" style="margin-bottom:16px">Ton und Offenes</p>
+          <h2>Wie SARTU spricht — und was noch fehlt.</h2>
+        </div>
+      </div>
+
+      <div class="tblwrap">
+        <table>
+          <tbody>
+            <tr><th scope="row" style="width:190px">Ansprache</th><td>„Sie", durchgehend. Auch in Fehlermeldungen.</td></tr>
+            <tr><th scope="row">Haltung</th><td>Der Betrieb weiß, was er tut. Wir wissen, was wir tun. Niemand muss belehrt werden.</td></tr>
+            <tr><th scope="row">Zahlen</th><td>Wo eine bekannt ist, steht sie. <code>1.490 €</code> statt „ab ca. 1.500 €".</td></tr>
+            <tr><th scope="row">Grenzen</th><td>Was <b>nicht</b> enthalten ist, steht genauso deutlich da wie das Enthaltene.</td></tr>
+            <tr><th scope="row">Verboten</th><td>Superlative. Garantien zu Ranking, KI-Nennung oder Umsatz. Erfundene Referenzen.</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <p class="body dim" style="margin-top:var(--s-5);max-width:64ch">
+        Der vollständige Regelsatz steht in <code style="color:#f6f1e6">SARTU_TEXTREGELN.md</code> —
+        vierzehn zählbare Regeln mit Prüfbericht.
+      </p>
+
+      <h3 style="margin-top:var(--s-6);font-size:24px">Was offen ist</h3>
+      <div class="tblwrap">
+        <table>
+          <thead><tr><th scope="col">Punkt</th><th scope="col">Stand</th></tr></thead>
+          <tbody>
+            <tr><td><b>Bildmarke</b></td><td>Offen. Anforderungen: einfarbig tauglich, ab 16 px lesbar, hell und dunkel, als SVG, <b>aktiv gegen bestehende Marken geprüft</b>. Drei bis fünf Richtungen vorlegen.</td></tr>
+            <tr><td>Gründername und Foto</td><td>Offen. Ohne Foto entfällt die Sektion vollständig.</td></tr>
+            <tr><td>Firmenname, Rechtsform, Anschrift</td><td>Offen. Steht in den Betreiberdaten, nie in einer Vorlage.</td></tr>
+            <tr><td>Eigene Schrift</td><td>Offen und unkritisch. Der Einhängepunkt ist vorbereitet.</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="body dim" style="margin-top:var(--s-4);max-width:62ch">
+        <b style="color:#f6f1e6">Der Auftritt ist trotzdem vollständig.</b> Die Wortmarke trägt ihn
+        allein — das ist so entschieden und keine Lücke.
+      </p>
+    </div>
+  </section>
+
+  <!-- 10 — Prüfliste -->
+  <section class="sec">
+    <div class="wrap">
+      <div class="sec-head">
+        <p class="sec-num">10</p>
+        <div>
+          <p class="tag" style="margin-bottom:16px">Vor jeder Veröffentlichung</p>
+          <h2>Zehn Punkte, alle in einer Minute prüfbar.</h2>
+        </div>
+      </div>
+
+      <ul class="check">
+        <li><span class="box" aria-hidden="true"></span>Kein Wert steht hart im Bauteil, wo eine Variable aus <code>tokens.css</code> existiert</li>
+        <li><span class="box" aria-hidden="true"></span>Lime nirgends als Schriftfarbe auf hellem Grund</li>
+        <li><span class="box" aria-hidden="true"></span>Jede Lime-Fläche auf hellem Grund hat eine 1-px-Kante</li>
+        <li><span class="box" aria-hidden="true"></span>Keine zweite Akzentfarbe im Dokument</li>
+        <li><span class="box" aria-hidden="true"></span>Wortmarke in Versalien, ohne Unterstreichung, ohne Zusatz im Namen</li>
+        <li><span class="box" aria-hidden="true"></span>Kein Bestandsfoto, kein leerer Bildrahmen</li>
+        <li><span class="box" aria-hidden="true"></span>Höchstens ein Knopf je E-Mail</li>
+        <li><span class="box" aria-hidden="true"></span>Pflichtzeile auf jedem Preisdokument, im Wortlaut</li>
+        <li><span class="box" aria-hidden="true"></span>Fokusring auf jedem bedienbaren Element sichtbar — hell und dunkel</li>
+        <li><span class="box" aria-hidden="true"></span><code>prefers-reduced-motion</code> schaltet jede Bewegung ab</li>
+      </ul>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <h4>Werte</h4>
+        <ul>
+          <li><code>design/tokens.css</code></li>
+          <li class="dim" style="font-size:15px;color:#a49d8f">Jede Farbe, jeder Radius, jeder Abstand</li>
+        </ul>
+      </div>
+      <div>
+        <h4>Bausteine</h4>
+        <ul>
+          <li><code>SARTU_DESIGNSYSTEM.md</code></li>
+          <li class="dim" style="font-size:15px;color:#a49d8f">Knopf, Karte, Fokus, Bildplatz</li>
+        </ul>
+      </div>
+      <div>
+        <h4>Marke</h4>
+        <ul>
+          <li><code>SARTU_CORPORATE_DESIGN.md</code></li>
+          <li class="dim" style="font-size:15px;color:#a49d8f">Diese Seite als Textfassung</li>
+        </ul>
+      </div>
+      <div>
+        <h4>Sprache</h4>
+        <ul>
+          <li><code>SARTU_TEXTREGELN.md</code></li>
+          <li class="dim" style="font-size:15px;color:#a49d8f">Vierzehn zählbare Regeln</li>
+        </ul>
+      </div>
+    </div>
+    <p class="foot-legal">
+      <span>SARTU · Corporate Design · Stand 01.08.2026</span>
+      <span>Quelle: Artefakt vom 30.07.2026</span>
+    </p>
+    <div class="wordmark" aria-hidden="true"><span>SARTU</span></div>
+  </div>
+</footer>
+
+<script>
+document.addEventListener('click', function(e){
+  var sw = e.target.closest('.sw');
+  if(!sw) return;
+  var hex = sw.getAttribute('data-hex');
+  var label = sw.querySelector('.sw-copy');
+  var done = function(){
+    sw.classList.add('copied');
+    label.textContent = hex + ' kopiert';
+    setTimeout(function(){ sw.classList.remove('copied'); label.textContent = 'Klicken zum Kopieren'; }, 1600);
+  };
+  if(navigator.clipboard && navigator.clipboard.writeText){
+    navigator.clipboard.writeText(hex).then(done, function(){ label.textContent = hex; });
+  } else {
+    label.textContent = hex;
+  }
+});
+</script>

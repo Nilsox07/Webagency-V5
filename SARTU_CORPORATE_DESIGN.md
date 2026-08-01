@@ -14,6 +14,7 @@
 | `design/tokens.css` | die **Werte** — jede Farbe, jeder Radius, jeder Abstand |
 | `SARTU_DESIGNSYSTEM.md` | die **Bausteine** — Knopf, Karte, Fokus, Bildplatz |
 | `SARTU_TEXTREGELN.md` + Texter-Skill | die **Sprache** |
+| `design/corporate-design.html` | **dieselbe Marke zum Ansehen** — jede Regel als lebendes Beispiel |
 
 > **Diese Datei erfindet nichts.** Jeder Wert stammt aus dem Artefakt vom 30.07.2026, das der
 > Betreiber am 01.08.2026 bestätigt hat. Was offen ist, steht in Abschnitt 9 als offen.
