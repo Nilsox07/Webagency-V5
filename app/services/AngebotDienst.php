@@ -8,6 +8,7 @@ use Sartu\Data\Admin\AdminAngebote;
 use Sartu\Data\Admin\AdminNachweis;
 use Sartu\Data\Admin\AdminProjekte;
 use Sartu\Data\AuditProtokoll;
+use Sartu\Helpers\Format;
 use Sartu\Helpers\Validate;
 
 /**
@@ -92,8 +93,7 @@ final class AngebotDienst
             'domain_text'                  => Angebotstexte::DOMAIN,
             'bfsg_vertragsabschluss'       => 'nein',
             'bfsg_kleinstunternehmen'      => 'unbekannt',
-            'valid_until'                  => (new \DateTimeImmutable('now', new \DateTimeZone('Europe/Berlin')))
-                ->modify('+' . self::GUELTIGKEIT_TAGE . ' days')->format('Y-m-d'),
+            'valid_until'                  => Format::inTagen(self::GUELTIGKEIT_TAGE),
         ];
     }
 

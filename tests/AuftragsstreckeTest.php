@@ -34,8 +34,12 @@ use Sartu\Services\Wartungsmodus;
  * Anzahlung, Aufgaben und Faktenfreigabe bis `produktion`. Eine Rechnung mit überschrittenem
  * `due_date` steht am nächsten Tag auf `ueberfaellig`."*
  *
- * Testfälle: 11 · 12 · 13 · 14 · 15 · 16 · 17 · 18 · 24 · 26 · 27 · 46 · 51 · 52 · 53a ·
+ * Testfälle: 11 · 12 · 13 · 14 · 15 · 16 · 17 · 24 · 26 · 27 · 46 · 51 · 52 · 53a ·
  * 61 · 77 · 78 · 79
+ *
+ * **Fall 18 stand hier falsch.** Er verlangt `approvals` mit `kind = abnahme`; geprüft war
+ * die Faktenfreigabe mit `kind = inhalte` — das ist Fall 27. `REIHENFOLGE.md` ordnet 18 der
+ * Etappe A3 zu, wo die Abnahme entsteht. Der Fall steht jetzt dort, jeder genau einmal.
  */
 final class AuftragsstreckeTest extends Datenbankfall
 {
@@ -521,7 +525,7 @@ final class AuftragsstreckeTest extends Datenbankfall
         ));
     }
 
-    /** Testfall 18 — die Erklärung erzeugt `approvals` **und** ein Audit-Ereignis. */
+    /** Testfall 27 — die Faktenfreigabe erzeugt `approvals` mit `kind = inhalte` **und** ein Audit-Ereignis. */
     public function testFreigabeErzeugtApprovalUndAudit(): void
     {
         $this->projektStatusSetzen(Projektstatus::BRIEFING);

@@ -110,9 +110,7 @@ final class Rechnungsdienst
         $faellig = self::text($eingabe, 'due_date');
 
         if ($faellig === '') {
-            $faellig = (new \DateTimeImmutable('now', new \DateTimeZone('Europe/Berlin')))
-                ->modify('+' . self::ZAHLUNGSZIEL_TAGE . ' days')
-                ->format('Y-m-d');
+            $faellig = Format::inTagen(self::ZAHLUNGSZIEL_TAGE);
         }
 
         $id = $this->rechnungen()->anlegen([
@@ -379,7 +377,7 @@ final class Rechnungsdienst
             return false;
         }
 
-        return $faellig < (new \DateTimeImmutable('now', new \DateTimeZone('Europe/Berlin')))->format('Y-m-d')
+        return $faellig < Format::heute()
             && (int) ($rechnung['paid_cents'] ?? 0) < (int) ($rechnung['gross_cents'] ?? 0);
     }
 
@@ -415,34 +413,18 @@ final class Rechnungsdienst
         }
     }
 
-    /** @param array<string,mixed> $projekt */
+    /**
+     * @param array<string,mixed> $projekt
+     *
+     * Der Rahmen steht in `Projektmail` — §10 schreibt ihn allen Mails gleich vor, und die
+     * Fußzeile mit dem Projekttitel fehlte hier vorher.
+     *
+     * Eine gescheiterte Mail nimmt keine Buchung zurück; `Projektmail` wirft deshalb nicht.
+     * §6.3 hält den Notweg bereit.
+     */
     private function kundenmailSenden(array $projekt, string $betreff, string $kern): void
     {
-        $empfaenger = $this->kundenadresse((string) $projekt['organization_id']);
-
-        if ($empfaenger === null) {
-            return;
-        }
-
-        try {
-            ($this->mail ?? new Mailversand())->senden(
-                $empfaenger,
-                $betreff,
-                "Guten Tag,\n\n" . $kern . "\nFreundliche Grüße\nSARTU\n",
-            );
-        } catch (\Throwable) {
-            // Eine gescheiterte Mail nimmt keine Buchung zurück. §6.3 haelt den Notweg bereit.
-        }
-    }
-
-    private function kundenadresse(string $organisationId): ?string
-    {
-        $organisation = (new \Sartu\Data\Admin\AdminOrganisationen($this->nachweis, $this->pdo))
-            ->finden($organisationId);
-
-        $adresse = $organisation['contact_email'] ?? null;
-
-        return is_string($adresse) && Validate::email($adresse) ? $adresse : null;
+        (new Projektmail($this->mail, $this->pdo))->anKunden($projekt, $betreff, $kern);
     }
 
     private function kleinunternehmer(): bool

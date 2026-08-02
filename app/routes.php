@@ -26,6 +26,7 @@ use Sartu\Admin\RechnungenSteuerung;
 use Sartu\Admin\RechtstexteSteuerung;
 use Sartu\Admin\SetupSteuerung;
 use Sartu\Admin\TestmailSteuerung;
+use Sartu\Admin\VorschauSteuerung as AdminVorschauSteuerung;
 use Sartu\BedarfsscheckSteuerung;
 use Sartu\OeffentlicheSeiten;
 use Sartu\Portal\AnmeldeSteuerung as KundenAnmeldeSteuerung;
@@ -33,6 +34,7 @@ use Sartu\Portal\AngebotSteuerung;
 use Sartu\Portal\AufgabenSteuerung;
 use Sartu\Portal\PortalSteuerung;
 use Sartu\Portal\RechnungenSteuerung as KundenRechnungenSteuerung;
+use Sartu\Portal\VorschauSteuerung;
 use Sartu\Route;
 
 return [
@@ -102,6 +104,16 @@ return [
     new Route(Route::BEREICH_ADMIN, 'GET', '/admin/projekte/{id}', [ProjekteSteuerung::class, 'einzeln']),
     new Route(Route::BEREICH_ADMIN, 'POST', '/admin/angebote/{id}/senden', [ProjekteSteuerung::class, 'angebotSenden']),
     new Route(Route::BEREICH_ADMIN, 'POST', '/admin/projekte/{id}/rechnung', [RechnungenSteuerung::class, 'anlegen']),
+    // Vorschau, Korrekturrunden, Domainlage und Onlinegang (§5.6a, §5.7, §8.7).
+    new Route(Route::BEREICH_ADMIN, 'POST', '/admin/projekte/{id}/vorschau', [AdminVorschauSteuerung::class, 'vorschauBereitstellen']),
+    new Route(Route::BEREICH_ADMIN, 'POST', '/admin/projekte/{id}/runde', [AdminVorschauSteuerung::class, 'rundeAbschliessen']),
+    new Route(Route::BEREICH_ADMIN, 'POST', '/admin/projekte/{id}/zusatzrunde', [AdminVorschauSteuerung::class, 'zusaetzlicheRunde']),
+    new Route(Route::BEREICH_ADMIN, 'POST', '/admin/projekte/{id}/abnahme', [AdminVorschauSteuerung::class, 'zurAbnahme']),
+    new Route(Route::BEREICH_ADMIN, 'POST', '/admin/projekte/{id}/livegang', [AdminVorschauSteuerung::class, 'livegang']),
+    new Route(Route::BEREICH_ADMIN, 'POST', '/admin/projekte/{id}/betriebsbeginn', [AdminVorschauSteuerung::class, 'betriebsbeginn']),
+    new Route(Route::BEREICH_ADMIN, 'POST', '/admin/projekte/{id}/domain', [AdminVorschauSteuerung::class, 'domain']),
+    new Route(Route::BEREICH_ADMIN, 'POST', '/admin/projekte/{id}/pausieren', [AdminVorschauSteuerung::class, 'pausieren']),
+    new Route(Route::BEREICH_ADMIN, 'POST', '/admin/projekte/{id}/fortsetzen', [AdminVorschauSteuerung::class, 'fortsetzen']),
     // Rechnungen (§12). Der Zahlungsstatus wird von Hand gesetzt — es gibt hier bewusst
     // KEINE Rueckkehrroute vom Zahlungsdienst.
     new Route(Route::BEREICH_ADMIN, 'GET', '/admin/rechnungen', [RechnungenSteuerung::class, 'liste']),
@@ -135,7 +147,14 @@ return [
     new Route(Route::BEREICH_PORTAL, 'GET', '/portal/aufgaben/{id}', [AufgabenSteuerung::class, 'einzeln']),
     // §11: Auslieferung nur ueber eine Route, die Sitzung UND Organisation prueft.
     new Route(Route::BEREICH_PORTAL, 'GET', '/portal/dateien/{id}', [AufgabenSteuerung::class, 'datei']),
+    // Vorschau, Korrekturrunden und Abnahme (§8.4). Die Projektkennung kommt aus der
+    // Sitzungsorganisation, nie aus der Adresse — deshalb kein `{projekt}` im Pfad.
+    new Route(Route::BEREICH_PORTAL, 'GET', '/portal/vorschau', [VorschauSteuerung::class, 'vorschau']),
+    new Route(Route::BEREICH_PORTAL, 'POST', '/portal/vorschau/rueckmeldung', [VorschauSteuerung::class, 'rueckmeldung']),
+    new Route(Route::BEREICH_PORTAL, 'POST', '/portal/vorschau/einreichen', [VorschauSteuerung::class, 'einreichen']),
+    new Route(Route::BEREICH_PORTAL, 'POST', '/portal/vorschau/abnehmen', [VorschauSteuerung::class, 'abnehmen']),
     new Route(Route::BEREICH_PORTAL, 'GET', '/portal/rechnungen', [KundenRechnungenSteuerung::class, 'liste']),
+    new Route(Route::BEREICH_PORTAL, 'GET', '/portal/domain', [VorschauSteuerung::class, 'domain']),
     new Route(Route::BEREICH_PORTAL, 'GET', '/portal/vertrag', [PortalSteuerung::class, 'vertrag']),
     new Route(Route::BEREICH_PORTAL, 'GET', '/portal/hilfe', [KundenRechnungenSteuerung::class, 'hilfe']),
     new Route(Route::BEREICH_PORTAL, 'POST', '/portal/hilfe', [KundenRechnungenSteuerung::class, 'nachrichtSenden']),

@@ -9,6 +9,7 @@ use Sartu\Data\AuditProtokoll;
 use Sartu\Data\Customer\KundenAngebote;
 use Sartu\Data\Customer\KundenBereich;
 use Sartu\Data\AnmeldeKonten;
+use Sartu\Helpers\Format;
 use Sartu\Helpers\Validate;
 
 /**
@@ -166,7 +167,7 @@ final class Angebotsannahme
             return true;
         }
 
-        return $bis < (new \DateTimeImmutable('now', new \DateTimeZone('Europe/Berlin')))->format('Y-m-d');
+        return $bis < Format::heute();
     }
 
     /** §8.2: „Der Annahmeblock erscheint nur bei `status = gesendet` und `valid_until >= heute`." */

@@ -49,9 +49,11 @@ final class TenantIsolationTest extends Datenbankfall
             'GET /portal/aufgaben',
             'GET /portal/aufgaben/{id}',
             'GET /portal/dateien/{id}',
+            'GET /portal/domain',
             'GET /portal/hilfe',
             'GET /portal/rechnungen',
             'GET /portal/vertrag',
+            'GET /portal/vorschau',
             'GET /willkommen/{nummer}',
             'POST /login',
             'POST /portal/abmelden',
@@ -59,6 +61,9 @@ final class TenantIsolationTest extends Datenbankfall
             'POST /portal/aufgaben/{id}/abschliessen',
             'POST /portal/aufgaben/{id}/datei',
             'POST /portal/hilfe',
+            'POST /portal/vorschau/abnehmen',
+            'POST /portal/vorschau/einreichen',
+            'POST /portal/vorschau/rueckmeldung',
             'POST /willkommen/fertig',
         ];
 

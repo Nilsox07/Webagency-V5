@@ -6,6 +6,7 @@ use Sartu\Ansicht;
 use Sartu\Helpers\Csrf;
 use Sartu\Helpers\Format;
 use Sartu\Helpers\Html;
+use Sartu\Services\Domainstand;
 use Sartu\Services\Preise;
 use Sartu\Services\Projektstatus;
 
@@ -18,6 +19,9 @@ use Sartu\Services\Projektstatus;
  *
  * @var array<string,mixed> $projekt
  * @var list<array<string,mixed>> $angebote
+ * @var list<array<string,mixed>> $runden
+ * @var list<array<string,mixed>> $freigaben
+ * @var array<string,mixed>|null $domainstand
  * @var array<string,mixed>|null $vorbelegung
  * @var list<string> $fehler
  * @var list<string> $hinweise
@@ -114,6 +118,215 @@ $zustaende = [
     </div>
     <button type="submit" class="knopf knopf--ruhig">Rechnung als Entwurf anlegen</button>
   </form>
+</div>
+
+<?php
+$stand      = (string) $projekt['status'];
+$rundentext = ['offen' => 'offen', 'eingereicht' => 'eingereicht', 'bearbeitet' => 'eingearbeitet'];
+?>
+<div class="karte">
+  <h2>Vorschau und Korrekturrunden</h2>
+  <ul class="pruefliste">
+    <li><span>Vorschau</span><span><?= Html::e(Format::text($projekt['preview_url'] === null ? null : (string) $projekt['preview_url'])) ?></span></li>
+    <li><span>Website</span><span><?= Html::e(Format::text($projekt['live_url'] === null ? null : (string) $projekt['live_url'])) ?></span></li>
+  </ul>
+
+<?php if ($runden === []): ?>
+  <p>Zu diesem Projekt ist noch keine Korrekturrunde geöffnet.</p>
+<?php else: ?>
+  <ul class="liste">
+<?php foreach ($runden as $runde): ?>
+    <li>
+      <span>Runde <?= Html::e((string) $runde['number']) ?>
+        · <?= Html::e($rundentext[(string) $runde['status']] ?? (string) $runde['status']) ?>
+        · <?= (int) $runde['included'] === 1 ? 'im Festpreis enthalten' : 'zusätzliche Runde' ?></span>
+      <span>
+<?php if ((string) $runde['status'] === 'eingereicht'): ?>
+        <form method="post" action="/admin/projekte/<?= Html::e((string) $projekt['id']) ?>/runde">
+          <?= Csrf::feld() ?>
+          <input type="hidden" name="runde" value="<?= Html::e((string) $runde['id']) ?>">
+          <button type="submit" class="knopf knopf--ruhig">Als eingearbeitet vermerken</button>
+        </form>
+<?php endif; ?>
+      </span>
+    </li>
+<?php foreach ($runde['rueckmeldungen'] as $eintrag): ?>
+    <li class="liste__unterzeile">
+      <span><?= Html::e(Format::text($eintrag['page_hint'] === null ? null : (string) $eintrag['page_hint'])) ?></span>
+      <span><?= Html::e((string) $eintrag['body']) ?></span>
+    </li>
+<?php endforeach; ?>
+<?php endforeach; ?>
+  </ul>
+<?php endif; ?>
+
+<?php if ($stand === Projektstatus::VORSCHAU || $stand === Projektstatus::KORREKTUR): ?>
+  <form method="post" action="/admin/projekte/<?= Html::e((string) $projekt['id']) ?>/zusatzrunde">
+    <?= Csrf::feld() ?>
+    <p class="feld__hinweis">Eine zusätzliche Runde ist im Festpreis nicht enthalten. Der Kunde
+    wird darauf hingewiesen; abgerechnet wird nichts von allein.</p>
+    <button type="submit" class="knopf knopf--ruhig">Zusätzliche Runde öffnen</button>
+  </form>
+<?php endif; ?>
+
+<?php if ($stand === Projektstatus::PRODUKTION || $stand === Projektstatus::KORREKTUR): ?>
+  <form method="post" action="/admin/projekte/<?= Html::e((string) $projekt['id']) ?>/vorschau">
+    <?= Csrf::feld() ?>
+    <div class="feld">
+      <label for="feld-preview_url">Adresse der Vorschau</label>
+      <input type="url" id="feld-preview_url" name="preview_url" value="" placeholder="https://" required>
+      <p class="feld__hinweis">Mit dem Bereitstellen öffnet sich die nächste Korrekturrunde.
+      Ist sie nicht mehr im Festpreis enthalten, sieht der Kunde das vorher — gesperrt wird nichts.</p>
+    </div>
+    <button type="submit" class="knopf">Vorschau bereitstellen</button>
+  </form>
+<?php endif; ?>
+
+<?php if ($stand === Projektstatus::VORSCHAU): ?>
+  <form method="post" action="/admin/projekte/<?= Html::e((string) $projekt['id']) ?>/abnahme">
+    <?= Csrf::feld() ?>
+    <button type="submit" class="knopf">Zur Abnahme geben</button>
+  </form>
+<?php endif; ?>
+</div>
+
+<?php if ($stand === Projektstatus::LAUNCH_VORBEREITUNG): ?>
+<div class="karte">
+  <h2>Onlinegang</h2>
+  <form method="post" action="/admin/projekte/<?= Html::e((string) $projekt['id']) ?>/livegang">
+    <?= Csrf::feld() ?>
+    <div class="feldpaar">
+      <div class="feld">
+        <label for="feld-live_url">Adresse der Website</label>
+        <input type="url" id="feld-live_url" name="live_url" value="" placeholder="https://" required>
+      </div>
+      <div class="feld">
+        <label for="feld-protection_started_on">Betrieb beginnt am</label>
+        <input type="date" id="feld-protection_started_on" name="protection_started_on" value="">
+        <p class="feld__hinweis">Leer lassen: heute. Die Mindestlaufzeit von zwölf Monaten
+        rechnet das System daraus.</p>
+      </div>
+    </div>
+    <button type="submit" class="knopf">Website ist online</button>
+  </form>
+</div>
+<?php endif; ?>
+
+<div class="karte">
+  <h2>Erklärungen des Kunden</h2>
+  <p class="leise">Nur lesbar. Eine Erklärung wird nachträglich weder geändert noch gelöscht.</p>
+<?php if ($freigaben === []): ?>
+  <p>Es liegt noch keine Erklärung vor.</p>
+<?php else: ?>
+  <ul class="liste">
+<?php foreach ($freigaben as $freigabe): ?>
+    <li>
+      <span><?= Html::e((string) $freigabe['kind'] === 'inhalte' ? 'Fakten und Umfang freigegeben' : 'Website abgenommen') ?></span>
+      <span><?= Html::e((string) $freigabe['granted_name']) ?> · <?= Html::e(Format::datumZeit((string) $freigabe['granted_at'])) ?>
+        · <?= Html::e(Format::text($freigabe['granted_ip'] === null ? null : (string) $freigabe['granted_ip'])) ?></span>
+    </li>
+<?php endforeach; ?>
+  </ul>
+<?php endif; ?>
+</div>
+
+<?php if ($projekt['protection_started_on'] !== null): ?>
+<div class="karte">
+  <h2>Betriebsbeginn</h2>
+  <ul class="pruefliste">
+    <li><span>Betrieb seit</span><span><?= Html::e(Format::datum((string) $projekt['protection_started_on'])) ?></span></li>
+    <li><span>Mindestlaufzeit bis</span><span><?= Html::e(Format::datum($projekt['protection_min_term_until'] === null ? null : (string) $projekt['protection_min_term_until'])) ?></span></li>
+  </ul>
+
+  <form method="post" action="/admin/projekte/<?= Html::e((string) $projekt['id']) ?>/betriebsbeginn">
+    <?= Csrf::feld() ?>
+    <div class="feld">
+      <label for="feld-betriebsbeginn">Betriebsbeginn verschieben auf</label>
+      <input type="date" id="feld-betriebsbeginn" name="protection_started_on" value="">
+    </div>
+    <div class="feld">
+      <label for="feld-betriebsbeginn-grund">Worauf sich das stützt</label>
+      <textarea id="feld-betriebsbeginn-grund" name="grund" required></textarea>
+      <p class="feld__hinweis">Diese Regel muss vorher schriftlich angekündigt worden sein und
+      mit der vertraglichen Formulierung übereinstimmen. Die Mindestlaufzeit rechnet sich neu.</p>
+    </div>
+    <button type="submit" class="knopf knopf--ruhig">Betriebsbeginn ändern</button>
+  </form>
+</div>
+<?php endif; ?>
+
+<div class="karte">
+  <h2>Domain</h2>
+  <form method="post" action="/admin/projekte/<?= Html::e((string) $projekt['id']) ?>/domain">
+    <?= Csrf::feld() ?>
+    <div class="feldpaar">
+      <div class="feld">
+        <label for="feld-desired_name">Wunschname</label>
+        <input type="text" id="feld-desired_name" name="desired_name"
+          value="<?= Html::e((string) ($domainstand['desired_name'] ?? '')) ?>">
+      </div>
+      <div class="feld">
+        <label for="feld-confirmed_name">Bestätigter Name</label>
+        <input type="text" id="feld-confirmed_name" name="confirmed_name"
+          value="<?= Html::e((string) ($domainstand['confirmed_name'] ?? '')) ?>">
+      </div>
+      <div class="feld">
+        <label for="feld-state">Stand</label>
+        <select id="feld-state" name="state">
+<?php foreach (Domainstand::zustaende() as $zustand): ?>
+          <option value="<?= Html::e($zustand) ?>"<?= (string) ($domainstand['state'] ?? 'offen') === $zustand ? ' selected' : '' ?>><?= Html::e(Domainstand::kundentext($zustand)) ?></option>
+<?php endforeach; ?>
+        </select>
+        <p class="feld__hinweis">Der Kunde liest genau diesen Satz.</p>
+      </div>
+    </div>
+
+    <fieldset class="frage">
+      <legend>Ist die Domain auf den Namen des Kunden registriert?</legend>
+      <ul class="wahl">
+        <li><input type="checkbox" id="feld-owner_confirmed" name="owner_confirmed" value="1"
+          <?= (int) ($domainstand['owner_confirmed'] ?? 0) === 1 ? 'checked' : '' ?>>
+          <label for="feld-owner_confirmed">Ja, auf seinen Namen</label></li>
+      </ul>
+    </fieldset>
+
+    <div class="feld">
+      <label for="feld-email_note">Hinweis zu den E-Mail-Adressen</label>
+      <textarea id="feld-email_note" name="email_note"><?= Html::e((string) ($domainstand['email_note'] ?? '')) ?></textarea>
+      <p class="feld__hinweis">Dieser Text steht im Kundenbereich.</p>
+    </div>
+
+    <div class="feld">
+      <label for="feld-admin_note">Interne Notiz</label>
+      <textarea id="feld-admin_note" name="admin_note"><?= Html::e((string) ($domainstand['admin_note'] ?? '')) ?></textarea>
+      <p class="feld__hinweis">Nur im internen Bereich sichtbar.</p>
+    </div>
+
+    <button type="submit" class="knopf knopf--ruhig">Domainstand speichern</button>
+  </form>
+</div>
+
+<div class="karte">
+  <h2>Projekt anhalten</h2>
+<?php if ($stand === Projektstatus::PAUSIERT): ?>
+  <p>Das Projekt pausiert. Der Kunde sieht den Grund in seinem Bereich.</p>
+  <form method="post" action="/admin/projekte/<?= Html::e((string) $projekt['id']) ?>/fortsetzen">
+    <?= Csrf::feld() ?>
+    <button type="submit" class="knopf">Projekt fortsetzen</button>
+  </form>
+<?php elseif ($stand !== Projektstatus::LIVE): ?>
+  <form method="post" action="/admin/projekte/<?= Html::e((string) $projekt['id']) ?>/pausieren">
+    <?= Csrf::feld() ?>
+    <div class="feld">
+      <label for="feld-grund">Grund</label>
+      <textarea id="feld-grund" name="grund" required></textarea>
+      <p class="feld__hinweis">Der Kunde liest den Grund. Er steht auch im Protokoll.</p>
+    </div>
+    <button type="submit" class="knopf knopf--ruhig">Projekt anhalten</button>
+  </form>
+<?php else: ?>
+  <p>Eine Website, die online ist, wird nicht angehalten.</p>
+<?php endif; ?>
 </div>
 
 <?php if ($vorbelegung !== null): ?>

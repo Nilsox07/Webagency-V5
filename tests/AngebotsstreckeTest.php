@@ -442,6 +442,12 @@ final class AngebotsstreckeTest extends Datenbankfall
      *
      * Volltextsuche über die tatsächlich gerenderten Seiten. Der Kunde sieht „Ihr Angebot
      * liegt bereit", nicht `angebot_offen`.
+     *
+     * **Gesucht wird im sichtbaren Text, nicht im Markup.** Seit A3 gibt es die Adresse
+     * `/portal/vorschau` — ein Pfad ist kein Systemcode, den ein Mensch liest, und §59
+     * spricht von „erscheint in einer Kundenansicht". `strip_tags()` schärft die Prüfung
+     * in die richtige Richtung: Ein Statuswert in einem `title`-Attribut oder einer
+     * Beschriftung wird weiterhin gefunden, ein Pfad in einem `href` nicht mehr.
      */
     public function testKeinSystemcodeInEinerKundenansicht(): void
     {
@@ -459,8 +465,14 @@ final class AngebotsstreckeTest extends Datenbankfall
             'qa_failed',
         ];
 
-        foreach (['/portal', '/portal/angebot', '/willkommen/1', '/willkommen/2', '/willkommen/3'] as $pfad) {
-            $html = $this->router()->behandeln('GET', $pfad)->rumpf;
+        $seiten = [
+            '/portal', '/portal/angebot', '/portal/aufgaben', '/portal/rechnungen',
+            '/portal/vorschau', '/portal/domain', '/portal/hilfe', '/portal/vertrag',
+            '/willkommen/1', '/willkommen/2', '/willkommen/3',
+        ];
+
+        foreach ($seiten as $pfad) {
+            $html = strip_tags($this->router()->behandeln('GET', $pfad)->rumpf);
 
             foreach ($codes as $code) {
                 $this->assertStringNotContainsString(

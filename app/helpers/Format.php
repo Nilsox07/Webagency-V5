@@ -41,6 +41,29 @@ final class Format
         return number_format($cent / 100, 2, ',', '.') . ' €';
     }
 
+    /**
+     * Der heutige Tag in `Y-m-d` — **in Anzeigezeit**, nicht in UTC.
+     *
+     * Fristen sind Kalendertage, keine Zeitpunkte: Eine Rechnung, die am 3. fällig ist, ist
+     * am 3. deutscher Zeit fällig. Zwischen 00:00 und 02:00 MESZ steht in UTC noch der
+     * Vortag — ohne diese Zeile wäre jede nachts angelegte Frist einen Tag zu früh.
+     *
+     * Sie stand vorher an fünf Stellen ausgeschrieben. Die fünfte hätte irgendwann UTC
+     * genommen, und niemand hätte es gemerkt.
+     */
+    public static function heute(): string
+    {
+        return self::inTagen(0);
+    }
+
+    /** Ein Kalendertag in der Zukunft, gerechnet ab heute in Anzeigezeit. */
+    public static function inTagen(int $tage): string
+    {
+        $tag = new \DateTimeImmutable('now', new \DateTimeZone(self::ANZEIGE_ZEITZONE));
+
+        return ($tage === 0 ? $tag : $tag->modify('+' . $tage . ' days'))->format('Y-m-d');
+    }
+
     public static function text(?string $wert): string
     {
         $wert = $wert === null ? '' : trim($wert);

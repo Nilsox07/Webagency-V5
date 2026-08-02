@@ -275,6 +275,15 @@ a:focus-visible {
 
 .liste li:last-child { border-bottom: 0; }
 
+/* Eine Rückmeldung gehört zu der Runde über ihr — eingerückt, ohne eigene Trennlinie,
+   damit die Runden als Blöcke lesbar bleiben. */
+.liste__unterzeile {
+  border-bottom: 0;
+  padding-top: 0;
+  padding-left: var(--s-4);
+  color: var(--muted);
+}
+
 .marke {
   font-family: var(--font-mono);
   font-size: var(--fs-mono);

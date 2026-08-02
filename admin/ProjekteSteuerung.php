@@ -11,6 +11,7 @@ use Sartu\Data\Admin\AdminNachweis;
 use Sartu\Data\Admin\AdminOrganisationen;
 use Sartu\Data\Admin\AdminProjekte;
 use Sartu\Data\Admin\AdminRechnungen;
+use Sartu\Data\Admin\AdminVorschau;
 use Sartu\Helpers\Http;
 use Sartu\Services\AngebotDienst;
 
@@ -84,6 +85,9 @@ final class ProjekteSteuerung
             'projekt'     => $projekt,
             'angebote'    => $angebote,
             'rechnungen'  => (new AdminRechnungen($nachweis))->jeProjekt((string) $projekt['id']),
+            'runden'      => $this->rundenMitRueckmeldungen($nachweis, (string) $projekt['id']),
+            'freigaben'   => (new AdminVorschau($nachweis))->freigaben((string) $projekt['id']),
+            'domainstand' => (new AdminVorschau($nachweis))->domainstand((string) $projekt['id']),
             // Vorbelegt aus §4c — der Admin ändert, was er ändern will, aber er tippt die
             // drei festen Texte nicht ab.
             'vorbelegung' => $angebote === []
@@ -92,6 +96,24 @@ final class ProjekteSteuerung
             'fehler'      => $fehler,
             'hinweise'    => $hinweise,
         ]));
+    }
+
+    /**
+     * §9.2 „Feedback": die Rückmeldungen hängen an ihrer Runde.
+     *
+     * Sie werden hier zusammengesetzt und nicht in der Ansicht geholt — eine Ansicht liest
+     * keine Daten nach (§1.3).
+     *
+     * @return list<array<string,mixed>>
+     */
+    private function rundenMitRueckmeldungen(AdminNachweis $nachweis, string $projektId): array
+    {
+        $vorschau = new AdminVorschau($nachweis);
+
+        return array_map(
+            static fn (array $runde) => $runde + ['rueckmeldungen' => $vorschau->rueckmeldungen((string) $runde['id'])],
+            $vorschau->runden($projektId),
+        );
     }
 
     /** @param array<string,string> $parameter */
