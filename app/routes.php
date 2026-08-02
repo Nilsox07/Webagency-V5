@@ -57,6 +57,18 @@ return [
 
     // ---------------------------------------------------------- oeffentliche Website (Stufe B)
     new Route(Route::BEREICH_OEFFENTLICH, 'GET', '/', [Website::class, 'start']),
+    new Route(Route::BEREICH_OEFFENTLICH, 'GET', '/leistungen', [Website::class, 'leistungen']),
+    new Route(Route::BEREICH_OEFFENTLICH, 'GET', '/preise', [Website::class, 'preise']),
+    new Route(Route::BEREICH_OEFFENTLICH, 'GET', '/ablauf', [Website::class, 'ablauf']),
+    // Die fuenf Leistungsseiten (§10). Feste Adressen aus §16, einzeln eingetragen.
+    new Route(Route::BEREICH_OEFFENTLICH, 'GET', '/leistung-webdesign', [Website::class, 'webdesign']),
+    new Route(Route::BEREICH_OEFFENTLICH, 'GET', '/leistung-texte', [Website::class, 'texte']),
+    new Route(Route::BEREICH_OEFFENTLICH, 'GET', '/leistung-seo-lokal', [Website::class, 'seoLokal']),
+    new Route(Route::BEREICH_OEFFENTLICH, 'GET', '/leistung-wartung', [Website::class, 'wartung']),
+    new Route(Route::BEREICH_OEFFENTLICH, 'GET', '/leistung-portal', [Website::class, 'portal']),
+    new Route(Route::BEREICH_OEFFENTLICH, 'GET', '/ueber-uns', [Website::class, 'ueberUns']),
+    new Route(Route::BEREICH_OEFFENTLICH, 'GET', '/kontakt', [Website::class, 'kontakt']),
+    new Route(Route::BEREICH_OEFFENTLICH, 'POST', '/kontakt', [Website::class, 'kontaktSenden']),
 
     // ---------------------------------------------------------- Rechtstexte
     new Route(Route::BEREICH_OEFFENTLICH, 'GET', '/impressum', [OeffentlicheSeiten::class, 'impressum']),

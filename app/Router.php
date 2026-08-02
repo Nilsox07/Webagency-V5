@@ -243,9 +243,23 @@ final class Router
         return $handler($parameter);
     }
 
+    /**
+     * Die Fehlerseite — seit Stufe B im Rahmen der öffentlichen Website.
+     *
+     * Website-Lastenheft §14 verlangt für 404 einen gebundenen Wortlaut, vier Verweise,
+     * echten 404-Status und `noindex`. Das leistet `Website::nichtGefunden()`.
+     *
+     * **Der Rückfall bleibt.** Solange die Betreiberdaten fehlen — vor der Ersteinrichtung —
+     * gibt es keine Website und keinen Fußbereich. Dann antwortet die schlichte Fehlerseite
+     * aus A0. Eine 404, die selbst einen Fehler wirft, ist die schlechteste aller Antworten.
+     */
     private function nichtGefunden(): Antwort
     {
-        return Antwort::nichtGefunden();
+        try {
+            return (new Website())->nichtGefunden();
+        } catch (\Throwable) {
+            return Antwort::nichtGefunden();
+        }
     }
 
     /**

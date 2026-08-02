@@ -36,8 +36,12 @@ final class AnfrageErgebnis
     ) {
     }
 
-    /** @param list<string> $gruende */
-    public static function angelegt(string $id, string $paket, string $ampel, array $gruende): self
+    /**
+     * @param string|null $paket `null` bei einer Rückfrage über `/kontakt` — dort gab es
+     *                           keinen Bedarfsscheck, also gibt es keine Empfehlung.
+     * @param list<string> $gruende
+     */
+    public static function angelegt(string $id, ?string $paket, string $ampel, array $gruende): self
     {
         return new self(true, $id, $paket, $ampel, $gruende);
     }

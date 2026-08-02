@@ -28,17 +28,18 @@ use Sartu\Helpers\Validate;
 final class AnfrageService
 {
     /** §4b.3: Menschen brauchen für den Bedarfsscheck Minuten. */
-    public const MINDESTDAUER_SEKUNDEN = 3;
+    /** Beide Werte stehen jetzt in `Formularschutz` — hier nur noch als Verweis. */
+    public const MINDESTDAUER_SEKUNDEN = Formularschutz::MINDESTDAUER_SEKUNDEN;
 
     /** §4b.2: maximal 64 KB Formulardaten (Testfall 36). */
-    public const MAX_BYTES = 65536;
+    public const MAX_BYTES = Formularschutz::MAX_BYTES;
 
     /** §4b.2: 10 je IP und Stunde, zusätzlich 60 je Stunde gesamt (Testfall 31). */
     public const VERSUCHE_JE_IP = 10;
 
     public const VERSUCHE_GESAMT = 60;
 
-    private const FENSTER_SEKUNDEN = 3600;
+    private const FENSTER_SEKUNDEN = Formularschutz::FENSTER_SEKUNDEN;
 
     /**
      * Löschfrist — die Stelle, an der das Lastenheft zweimal verschieden stand.
@@ -71,7 +72,7 @@ final class AnfrageService
     public function anlegen(array $eingabe, array $herkunft = [], ?string $ip = null): AnfrageErgebnis
     {
         // 1. Größe. Vor allem anderen — was zu groß ist, wird nicht erst geprüft.
-        if (self::groesse($eingabe) > self::MAX_BYTES) {
+        if (Formularschutz::zuGross($eingabe)) {
             return AnfrageErgebnis::abgewiesen(['Ihre Angaben sind zu umfangreich. Bitte kürzen Sie die Freitexte.']);
         }
 
@@ -82,17 +83,17 @@ final class AnfrageService
         }
 
         // 3. Honigtopf und Zeitregel — beide still. Der Absender sieht die Danke-Seite.
-        if (Validate::gefuellt(self::text($eingabe, 'hp_website'))) {
+        if (Formularschutz::honigtopfGefuellt($eingabe)) {
             return AnfrageErgebnis::stillVerworfen();
         }
 
-        if (!$this->zeitregelErfuellt(self::text($eingabe, 'form_started_at'))) {
+        if (!Formularschutz::zeitregelErfuellt(self::text($eingabe, 'form_started_at'))) {
             return AnfrageErgebnis::stillVerworfen();
         }
 
         $submissionId = self::text($eingabe, 'submission_id');
 
-        if (!self::istUuid($submissionId)) {
+        if (!Formularschutz::istUuid($submissionId)) {
             return AnfrageErgebnis::stillVerworfen();
         }
 
@@ -207,22 +208,6 @@ final class AnfrageService
         return $fehler;
     }
 
-    /** §4b.3: unter drei Sekunden ist kein Mensch. */
-    private function zeitregelErfuellt(string $begonnenAm): bool
-    {
-        if ($begonnenAm === '') {
-            return false;
-        }
-
-        $start = (int) $begonnenAm;
-
-        if ($start <= 0) {
-            return false;
-        }
-
-        return (time() - $start) >= self::MINDESTDAUER_SEKUNDEN;
-    }
-
     /**
      * §4b.2: „Der Bedarfsscheck darf erweitert werden; unbekannte Felder landen unverändert
      * in `payload`, statt abgewiesen zu werden" (Testfall 38).
@@ -237,16 +222,6 @@ final class AnfrageService
         $ohne = ['hp_website', 'form_started_at', 'submission_id', '_token'];
 
         return array_diff_key($eingabe, array_flip($ohne));
-    }
-
-    private static function groesse(array $eingabe): int
-    {
-        return strlen((string) json_encode($eingabe, JSON_UNESCAPED_UNICODE));
-    }
-
-    private static function istUuid(string $wert): bool
-    {
-        return preg_match('/^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i', $wert) === 1;
     }
 
     private static function text(array $eingabe, string $feld): string
