@@ -173,7 +173,20 @@ final class SecurityHeadersTest extends Datenbankfall
         $this->assertStringContainsString("frame-ancestors 'none'", $csp);
     }
 
-    /** Keine Ausgabe der Anwendung enthaelt ein eingebettetes Skript — sonst braeche die CSP. */
+    /**
+     * Keine Ausgabe der Anwendung enthaelt ein eingebettetes Skript — sonst braeche die CSP.
+     *
+     * **Eine Ausnahme, und nur diese eine:** `<script type="application/ld+json">`. Das ist
+     * kein Skript, sondern ein Datenblock — der Browser fuehrt ihn nie aus, und `script-src`
+     * greift auf ihn nicht zu. Website-Lastenheft §16 verlangt strukturierte Daten, und es
+     * gibt keine andere Form, sie auszuliefern.
+     *
+     * **Der Test wird dadurch schaerfer, nicht weicher.** Bisher pruefte er eine Zeichenkette.
+     * Jetzt prueft er zusaetzlich, dass jeder erlaubte Datenblock **gueltiges JSON ohne rohe
+     * spitze Klammern** enthaelt — die Stelle, an der ein `</` das `<script>` vorzeitig
+     * beenden und den Rest als Markup auf die Seite bringen wuerde. Genau davor schuetzt
+     * `JSON_HEX_TAG` in `Strukturdaten`, und genau das wird hier nachgewiesen.
+     */
     public function testKeineAnsichtEnthaeltEingebettetesSkript(): void
     {
         $treffer = [];
@@ -187,7 +200,12 @@ final class SecurityHeadersTest extends Datenbankfall
                 continue;
             }
 
-            $inhalt = (string) file_get_contents($datei->getPathname());
+            // Der eine erlaubte Datenblock faellt raus, jedes andere <script bleibt stehen.
+            $inhalt = preg_replace(
+                '/<script type="application\/ld\+json">/',
+                '',
+                (string) file_get_contents($datei->getPathname()),
+            ) ?? '';
 
             if (preg_match('/<script\b/i', $inhalt) === 1 || preg_match('/\son[a-z]+\s*=\s*"/i', $inhalt) === 1) {
                 $treffer[] = $datei->getPathname();
@@ -195,6 +213,30 @@ final class SecurityHeadersTest extends Datenbankfall
         }
 
         $this->assertSame([], $treffer, 'Eine Ansicht enthält ein eingebettetes Skript oder einen Inline-Handler.');
+    }
+
+    /**
+     * Der ausgelieferte Datenblock ist gueltiges JSON und enthaelt keine rohe spitze Klammer.
+     *
+     * Die Gegenprobe zur Ausnahme oben: Waere `JSON_HEX_TAG` in `Strukturdaten` nicht
+     * gesetzt, koennte ein Wert das `<script>` beenden. Der Test faehrt die echte Seite an,
+     * nicht die Klasse — geprueft wird, was der Browser bekommt.
+     */
+    public function testDerDatenblockDerStartseiteIstGueltigesJsonOhneMarkup(): void
+    {
+        $html = (string) $this->router()->behandeln('GET', '/')->rumpf;
+
+        $this->assertSame(
+            1,
+            preg_match('#<script type="application/ld\+json">(.*?)</script>#s', $html, $treffer),
+            'Die Startseite liefert keine strukturierten Daten (§16).',
+        );
+
+        $rumpf = $treffer[1];
+
+        $this->assertStringNotContainsString('<', $rumpf, 'Im Datenblock steht eine rohe spitze Klammer.');
+        $this->assertStringNotContainsString('>', $rumpf, 'Im Datenblock steht eine rohe spitze Klammer.');
+        $this->assertIsArray(json_decode($rumpf, true), 'Der Datenblock ist kein gültiges JSON.');
     }
 
     // ------------------------------------------------------------ Fall 49

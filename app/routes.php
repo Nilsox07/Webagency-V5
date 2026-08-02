@@ -30,6 +30,7 @@ use Sartu\Admin\TestmailSteuerung;
 use Sartu\Admin\VorschauSteuerung as AdminVorschauSteuerung;
 use Sartu\BedarfsscheckSteuerung;
 use Sartu\OeffentlicheSeiten;
+use Sartu\Website;
 use Sartu\Portal\AnmeldeSteuerung as KundenAnmeldeSteuerung;
 use Sartu\Portal\AngebotSteuerung;
 use Sartu\Portal\AufgabenSteuerung;
@@ -54,7 +55,10 @@ return [
     new Route(Route::BEREICH_OEFFENTLICH, 'GET', '/briefing/{nummer}', [BedarfsscheckSteuerung::class, 'schritt']),
     new Route(Route::BEREICH_OEFFENTLICH, 'POST', '/briefing/{nummer}', [BedarfsscheckSteuerung::class, 'schrittSpeichern']),
 
-    // ---------------------------------------------------------- oeffentlich
+    // ---------------------------------------------------------- oeffentliche Website (Stufe B)
+    new Route(Route::BEREICH_OEFFENTLICH, 'GET', '/', [Website::class, 'start']),
+
+    // ---------------------------------------------------------- Rechtstexte
     new Route(Route::BEREICH_OEFFENTLICH, 'GET', '/impressum', [OeffentlicheSeiten::class, 'impressum']),
     new Route(Route::BEREICH_OEFFENTLICH, 'GET', '/datenschutz', [OeffentlicheSeiten::class, 'datenschutz']),
     new Route(Route::BEREICH_OEFFENTLICH, 'GET', '/agb', [OeffentlicheSeiten::class, 'agb']),
