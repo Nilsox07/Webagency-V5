@@ -21,6 +21,7 @@ declare(strict_types=1);
 use Sartu\Admin\AnfragenSteuerung;
 use Sartu\Admin\AnmeldeSteuerung;
 use Sartu\Admin\BetriebSteuerung;
+use Sartu\Admin\OeffnungszeitenSteuerung;
 use Sartu\Admin\ProjekteSteuerung;
 use Sartu\Admin\RechnungenSteuerung;
 use Sartu\Admin\RechtstexteSteuerung;
@@ -32,6 +33,7 @@ use Sartu\OeffentlicheSeiten;
 use Sartu\Portal\AnmeldeSteuerung as KundenAnmeldeSteuerung;
 use Sartu\Portal\AngebotSteuerung;
 use Sartu\Portal\AufgabenSteuerung;
+use Sartu\Portal\InhalteSteuerung;
 use Sartu\Portal\PortalSteuerung;
 use Sartu\Portal\RechnungenSteuerung as KundenRechnungenSteuerung;
 use Sartu\Portal\VorschauSteuerung;
@@ -112,6 +114,7 @@ return [
     new Route(Route::BEREICH_ADMIN, 'POST', '/admin/projekte/{id}/livegang', [AdminVorschauSteuerung::class, 'livegang']),
     new Route(Route::BEREICH_ADMIN, 'POST', '/admin/projekte/{id}/betriebsbeginn', [AdminVorschauSteuerung::class, 'betriebsbeginn']),
     new Route(Route::BEREICH_ADMIN, 'POST', '/admin/projekte/{id}/domain', [AdminVorschauSteuerung::class, 'domain']),
+    new Route(Route::BEREICH_ADMIN, 'POST', '/admin/projekte/{id}/zeiten', [OeffnungszeitenSteuerung::class, 'veroeffentlichen']),
     new Route(Route::BEREICH_ADMIN, 'POST', '/admin/projekte/{id}/pausieren', [AdminVorschauSteuerung::class, 'pausieren']),
     new Route(Route::BEREICH_ADMIN, 'POST', '/admin/projekte/{id}/fortsetzen', [AdminVorschauSteuerung::class, 'fortsetzen']),
     // Rechnungen (§12). Der Zahlungsstatus wird von Hand gesetzt — es gibt hier bewusst
@@ -155,6 +158,9 @@ return [
     new Route(Route::BEREICH_PORTAL, 'POST', '/portal/vorschau/abnehmen', [VorschauSteuerung::class, 'abnehmen']),
     new Route(Route::BEREICH_PORTAL, 'GET', '/portal/rechnungen', [KundenRechnungenSteuerung::class, 'liste']),
     new Route(Route::BEREICH_PORTAL, 'GET', '/portal/domain', [VorschauSteuerung::class, 'domain']),
+    // Oeffnungszeiten — die eine Pflegefunktion (§8.7), ab Stufe B.
+    new Route(Route::BEREICH_PORTAL, 'GET', '/portal/inhalte', [InhalteSteuerung::class, 'formular']),
+    new Route(Route::BEREICH_PORTAL, 'POST', '/portal/inhalte', [InhalteSteuerung::class, 'speichern']),
     new Route(Route::BEREICH_PORTAL, 'GET', '/portal/vertrag', [PortalSteuerung::class, 'vertrag']),
     new Route(Route::BEREICH_PORTAL, 'GET', '/portal/hilfe', [KundenRechnungenSteuerung::class, 'hilfe']),
     new Route(Route::BEREICH_PORTAL, 'POST', '/portal/hilfe', [KundenRechnungenSteuerung::class, 'nachrichtSenden']),

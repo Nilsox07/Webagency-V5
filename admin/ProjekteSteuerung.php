@@ -8,6 +8,7 @@ use Sartu\Ansicht;
 use Sartu\Antwort;
 use Sartu\Data\Admin\AdminAngebote;
 use Sartu\Data\Admin\AdminNachweis;
+use Sartu\Data\Admin\AdminOeffnungszeiten;
 use Sartu\Data\Admin\AdminOrganisationen;
 use Sartu\Data\Admin\AdminProjekte;
 use Sartu\Data\Admin\AdminRechnungen;
@@ -88,6 +89,10 @@ final class ProjekteSteuerung
             'runden'      => $this->rundenMitRueckmeldungen($nachweis, (string) $projekt['id']),
             'freigaben'   => (new AdminVorschau($nachweis))->freigaben((string) $projekt['id']),
             'domainstand' => (new AdminVorschau($nachweis))->domainstand((string) $projekt['id']),
+            'zeiten'      => (new AdminOeffnungszeiten($nachweis))
+                ->wochentage((string) $projekt['organization_id']),
+            'zeitausnahmen' => (new AdminOeffnungszeiten($nachweis))
+                ->ausnahmen((string) $projekt['organization_id']),
             // Vorbelegt aus §4c — der Admin ändert, was er ändern will, aber er tippt die
             // drei festen Texte nicht ab.
             'vorbelegung' => $angebote === []

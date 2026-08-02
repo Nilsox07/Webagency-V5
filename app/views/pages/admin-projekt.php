@@ -6,6 +6,7 @@ use Sartu\Ansicht;
 use Sartu\Helpers\Csrf;
 use Sartu\Helpers\Format;
 use Sartu\Helpers\Html;
+use Sartu\Data\Customer\KundenOeffnungszeiten;
 use Sartu\Services\Domainstand;
 use Sartu\Services\Preise;
 use Sartu\Services\Projektstatus;
@@ -22,6 +23,8 @@ use Sartu\Services\Projektstatus;
  * @var list<array<string,mixed>> $runden
  * @var list<array<string,mixed>> $freigaben
  * @var array<string,mixed>|null $domainstand
+ * @var list<array<string,mixed>> $zeiten
+ * @var list<array<string,mixed>> $zeitausnahmen
  * @var array<string,mixed>|null $vorbelegung
  * @var list<string> $fehler
  * @var list<string> $hinweise
@@ -304,6 +307,46 @@ $rundentext = ['offen' => 'offen', 'eingereicht' => 'eingereicht', 'bearbeitet' 
 
     <button type="submit" class="knopf knopf--ruhig">Domainstand speichern</button>
   </form>
+</div>
+
+<div class="karte">
+  <h2>Öffnungszeiten des Kunden</h2>
+<?php if ($zeiten === []): ?>
+  <p>Der Kunde hat noch keine Öffnungszeiten gepflegt.</p>
+<?php else: ?>
+<?php $wartet = false; ?>
+  <ul class="liste">
+<?php foreach ($zeiten as $zeit): ?>
+<?php $wartet = $wartet || (int) $zeit['pending_publish'] === 1; ?>
+    <li>
+      <span><?= Html::e(KundenOeffnungszeiten::TAGE[(int) $zeit['weekday']] ?? '') ?><?= (int) $zeit['pending_publish'] === 1 ? ' · wartet' : '' ?></span>
+      <span><?= (int) $zeit['closed'] === 1
+        ? 'Geschlossen'
+        : Html::e(substr((string) $zeit['open_time'], 0, 5) . ' bis ' . substr((string) $zeit['close_time'], 0, 5)) ?><?php
+        if (trim((string) ($zeit['note'] ?? '')) !== ''): ?> · <?= Html::e((string) $zeit['note']) ?><?php endif; ?></span>
+    </li>
+<?php endforeach; ?>
+<?php foreach ($zeitausnahmen as $ausnahme): ?>
+    <li class="liste__unterzeile">
+      <span><?= Html::e(Format::datum((string) $ausnahme['date'])) ?> · <?= Html::e(Format::text((string) $ausnahme['label'])) ?></span>
+      <span><?= (int) $ausnahme['closed'] === 1
+        ? 'Geschlossen'
+        : Html::e(substr((string) $ausnahme['open_time'], 0, 5) . ' bis ' . substr((string) $ausnahme['close_time'], 0, 5)) ?></span>
+    </li>
+<?php endforeach; ?>
+  </ul>
+
+<?php if ($wartet): ?>
+  <form method="post" action="/admin/projekte/<?= Html::e((string) $projekt['id']) ?>/zeiten">
+    <?= Csrf::feld() ?>
+    <p class="feld__hinweis">Erst auf die Website bringen, dann hier bestätigen. Der Kunde
+    bekommt daraufhin die Nachricht, dass seine Änderung sichtbar ist.</p>
+    <button type="submit" class="knopf knopf--ruhig">Als veröffentlicht markieren</button>
+  </form>
+<?php else: ?>
+  <p class="leise">Es wartet keine Änderung.</p>
+<?php endif; ?>
+<?php endif; ?>
 </div>
 
 <div class="karte">
