@@ -205,7 +205,29 @@ final class AngebotDienst
             ip: $ip,
         );
 
+        // §10, Zeile „Angebot gesendet". Sie fehlte bis zum 02.08.2026, und ohne sie riss
+        // der Verkaufsweg genau hier ab: Das Angebot lag im Kundenbereich, und niemand
+        // schickte den Kunden hin. §10: „Was ihm keine Mail mitteilt, erfährt er nicht."
+        //
+        // **Nach dem Protokolleintrag, nicht davor.** Eine gescheiterte Mail nimmt den
+        // Versand nicht zurück — `Projektmail` wirft deshalb nicht, sondern gibt `false`.
+        if ($projekt !== null) {
+            (new Projektmail($this->mail, $this->pdo))->anKunden(
+                $projekt,
+                Mailtexte::ANGEBOT_GESENDET_BETREFF,
+                Mailtexte::angebotGesendet(self::datum($angebot, 'valid_until')),
+            );
+        }
+
         return [];
+    }
+
+    /** @param array<string,mixed> $zeile */
+    private static function datum(array $zeile, string $feld): ?string
+    {
+        $wert = $zeile[$feld] ?? null;
+
+        return is_string($wert) && $wert !== '' ? $wert : null;
     }
 
     /**
