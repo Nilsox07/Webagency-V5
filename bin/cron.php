@@ -11,6 +11,7 @@ declare(strict_types=1);
  * | A0 | abgelaufene Anmeldungen entfernen (§3 Regel 6, Verfallszeit 30 Tage) |
  * | A1 | `leads.source_ip` nach 30 Tagen leeren, faellige Anfragen loeschen (§15.1) |
  * | A2 | Ueberfaelligkeit, zwei Zahlungserinnerungen, abgelaufene Angebote (§5.3, §5.3a, §5.2) |
+ * | 02.08.2026 | Erinnerung drei Tage vor Ablauf eines Angebots (§10) |
  *
  * Ein Fehler in einem Schritt darf die uebrigen nicht verhindern: Wer den Lauf einmal
  * ueberspringt, verschiebt eine Loeschfrist um einen Tag — wer ihn ganz abbrechen laesst,
@@ -55,10 +56,12 @@ try {
 try {
     $stand = (new Zahlungslauf())->ausfuehren();
     fwrite(STDOUT, sprintf(
-        'Ueberfaellig gesetzt: %d, Erinnerungen: %d + %d, abgelaufene Angebote: %d%s',
+        'Ueberfaellig gesetzt: %d, Erinnerungen: %d + %d, Angebote vor Ablauf: %d,'
+        . ' abgelaufene Angebote: %d%s',
         $stand['ueberfaellig'],
         $stand['erinnerung1'],
         $stand['erinnerung2'],
+        $stand['ablauf'],
         $stand['angebote'],
         PHP_EOL,
     ));

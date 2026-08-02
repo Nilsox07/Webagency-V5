@@ -57,7 +57,12 @@ final class Zahlungslauf
     ) {
     }
 
-    /** @return array{ueberfaellig:int,erinnerung1:int,erinnerung2:int,angebote:int} */
+    /** §10: Die Ablauferinnerung kommt drei Tage vor `valid_until`. */
+    public const ABLAUF_VORLAUF_TAGE = 3;
+
+    /**
+     * @return array{ueberfaellig:int,erinnerung1:int,erinnerung2:int,angebote:int,ablauf:int}
+     */
     public function ausfuehren(?\DateTimeImmutable $jetzt = null): array
     {
         $jetzt ??= new \DateTimeImmutable('now', new \DateTimeZone('UTC'));
@@ -67,8 +72,45 @@ final class Zahlungslauf
             'ueberfaellig' => $this->ueberfaelligSetzen($heute),
             'erinnerung1'  => $this->ersteErinnerungen($heute),
             'erinnerung2'  => $this->zweiteErinnerungen($jetzt),
+            // **Vor dem Ablaufsetzen.** Umgekehrt stünde ein Angebot, das heute abläuft,
+            // schon auf `abgelaufen`, bevor die Warnung es sieht — und die Warnung drei Tage
+            // vorher gäbe es nie.
+            'ablauf'       => $this->ablaufErinnerungen($heute),
             'angebote'     => $this->daten()->abgelaufeneAngeboteSetzen($heute),
         ];
+    }
+
+    /**
+     * §10, Zeile „Angebot läuft in 3 Tagen ab".
+     *
+     * Der Lauf setzte abgelaufene Angebote schon auf `abgelaufen`, warnte aber nicht vorher:
+     * Der Kunde erfuhr vom Ablauf, indem der Annahmeknopf verschwand. §10 nennt dafür eine
+     * eigene Mail — sie fehlte bis zum 02.08.2026.
+     */
+    private function ablaufErinnerungen(string $heute): int
+    {
+        $stichtag = (new \DateTimeImmutable($heute))
+            ->modify('+' . self::ABLAUF_VORLAUF_TAGE . ' days')
+            ->format('Y-m-d');
+
+        $gesendet = 0;
+
+        foreach ($this->daten()->angeboteVorAblauf($stichtag) as $angebot) {
+            $gueltigBis = is_string($angebot['valid_until'] ?? null) ? $angebot['valid_until'] : null;
+
+            (new Projektmail($this->mail, $this->pdo))->anKunden(
+                $angebot,
+                Mailtexte::ablaufBetreff($gueltigBis),
+                Mailtexte::ablauf($gueltigBis),
+            );
+
+            // Vermerkt wird auch dann, wenn die Mail scheiterte — wie bei den Rechnungen.
+            // Der Stichtag ist genau ein Tag; ein zweiter Versuch käme nie.
+            $this->daten()->ablauferinnerungVermerken((string) $angebot['id']);
+            ++$gesendet;
+        }
+
+        return $gesendet;
     }
 
     /** §5.3, Testfall 15. */

@@ -109,6 +109,39 @@ final class Faelligkeiten
         $anweisung->execute([Db::jetzt(), $rechnungId]);
     }
 
+    /**
+     * §10: Angebote, deren `valid_until` in **genau** so vielen Tagen erreicht ist.
+     *
+     * `= ?`, nicht `<= ?`. Wer die Bedingung aufweitet, verschickt die Mail an drei Tagen
+     * hintereinander — dasselbe, was §4 fuer die zweite Zahlungserinnerung festhaelt.
+     *
+     * Der Merker `reminder_sent_at` faengt den Rest: Faellt ein Lauf aus, bleibt die Mail
+     * aus, statt am naechsten Tag doppelt zu kommen.
+     *
+     * @return list<array<string,mixed>>
+     */
+    public function angeboteVorAblauf(string $stichtag): array
+    {
+        $anweisung = $this->pdo()->prepare(
+            'SELECT o.*, p.organization_id, p.title FROM offers o'
+            . ' JOIN projects p ON p.id = o.project_id'
+            . " WHERE o.status = 'gesendet' AND o.valid_until = ?"
+            . ' AND o.reminder_sent_at IS NULL AND p.archived_at IS NULL'
+        );
+        $anweisung->execute([$stichtag]);
+
+        return $anweisung->fetchAll();
+    }
+
+    /** `IS NULL` in der Bedingung, aus demselben Grund wie bei den Rechnungen. */
+    public function ablauferinnerungVermerken(string $angebotId): void
+    {
+        $anweisung = $this->pdo()->prepare(
+            'UPDATE offers SET reminder_sent_at = ? WHERE id = ? AND reminder_sent_at IS NULL'
+        );
+        $anweisung->execute([Db::jetzt(), $angebotId]);
+    }
+
     /** §5.2: Ein abgelaufenes Angebot ist nicht mehr annehmbar. */
     public function abgelaufeneAngeboteSetzen(string $heute): int
     {

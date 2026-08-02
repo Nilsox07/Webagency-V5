@@ -1,0 +1,27 @@
+-- Portal-Lastenheft §10, Zeile „Angebot laeuft in 3 Tagen ab".
+--
+-- ## Warum diese Spalte gebraucht wird
+--
+-- §10 verschickt `Ihr Angebot gilt noch bis {Datum}` drei Tage vor `valid_until`. Die
+-- Bedingung „valid_until ist in drei Tagen erreicht" ist an genau **einem** Tag wahr — aber
+-- der taegliche Lauf laeuft jeden Tag, und ein verpasster Lauf verschoebe die Mail sonst
+-- ersatzlos. Wer die Bedingung auf „in drei Tagen oder weniger" aufweitet, verschickt sie
+-- ohne Merker an drei Tagen hintereinander.
+--
+-- Genau dieses Problem ist bei den Zahlungserinnerungen schon einmal aufgetreten und in §4
+-- festgehalten: „**Zwei Erinnerungen brauchen zwei Felder** — mit nur einem haette die zweite
+-- Mail ab Tag 7 **jeden Tag** ausgeloest, weil ihre Bedingung dauerhaft wahr bleibt."
+--
+-- ## Warum sie so heisst wie ihr Vorbild
+--
+-- `invoices.reminder_sent_at` loest dieselbe Aufgabe fuer die Zahlungserinnerung. Der Name
+-- `reminder_sent_at` steht hier deshalb ein zweites Mal, in derselben Bedeutung: Ist er
+-- gesetzt, ist die Erinnerung raus, und sie geht nicht noch einmal raus.
+--
+-- ## Warum kein Vorgabewert
+--
+-- NULL heisst „noch nicht verschickt". Ein Vorgabewert `CURRENT_TIMESTAMP` haette jedes
+-- bestehende Angebot als erinnert markiert — und die Mail waere fuer alle heute offenen
+-- Angebote nie gekommen.
+ALTER TABLE offers
+  ADD COLUMN reminder_sent_at DATETIME NULL AFTER valid_until;

@@ -292,7 +292,86 @@ final class ProjektmailsTest extends Datenbankfall
         $this->assertSame([], $postfach->mails);
     }
 
+    // ---------------------------------------------------------------- 6 Angebot läuft ab
+
+    /**
+     * §10 — `Ihr Angebot gilt noch bis {Datum}`, drei Tage vorher, **einmal**.
+     *
+     * Der Lauf setzte abgelaufene Angebote schon auf `abgelaufen`, warnte aber nicht vorher:
+     * Der Kunde erfuhr vom Ablauf, indem der Annahmeknopf verschwand.
+     *
+     * Geprüft wird die Grenze selbst, nicht ein Beispiel darin — vier Tage sind zu früh,
+     * zwei zu spät. Ein Merker ohne Stichtag hätte an drei Tagen hintereinander geschickt.
+     */
+    public function testDieAblauferinnerungKommtDreiTageVorherUndGenauEinmal(): void
+    {
+        $postfach = new Postfach();
+        $this->alsAdmin($this->adminId);
+        $angebotId = $this->angebotAnlegen($postfach);
+        (new AngebotDienst($this->nachweis(), mail: $postfach))->senden($angebotId, null);
+
+        // Vier Tage: zu früh.
+        $this->gueltigBis($angebotId, 4);
+        $postfach = new Postfach();
+        $this->assertSame(0, (new \Sartu\Services\Zahlungslauf(mail: $postfach))->ausfuehren()['ablauf']);
+        $this->assertSame([], $postfach->mails);
+
+        // Zwei Tage: zu spät, der eine Tag ist vorbei.
+        $this->gueltigBis($angebotId, 2);
+        $postfach = new Postfach();
+        $this->assertSame(0, (new \Sartu\Services\Zahlungslauf(mail: $postfach))->ausfuehren()['ablauf']);
+        $this->assertSame([], $postfach->mails);
+
+        // Drei Tage: genau jetzt.
+        $this->gueltigBis($angebotId, \Sartu\Services\Zahlungslauf::ABLAUF_VORLAUF_TAGE);
+        $postfach = new Postfach();
+
+        $this->assertSame(1, (new \Sartu\Services\Zahlungslauf(mail: $postfach))->ausfuehren()['ablauf']);
+        $this->assertCount(1, $postfach->mails);
+        $this->assertSame(self::KUNDE, $postfach->mails[0]['an']);
+
+        $gueltigBis = \Sartu\Helpers\Format::inTagen(\Sartu\Services\Zahlungslauf::ABLAUF_VORLAUF_TAGE);
+        $this->assertSame(Mailtexte::ablaufBetreff($gueltigBis), $postfach->mails[0]['betreff']);
+        $this->assertStringContainsString(
+            \Sartu\Helpers\Format::datum($gueltigBis),
+            $postfach->mails[0]['text'],
+        );
+
+        // Zweiter Lauf am selben Tag: nichts mehr. Der Merker steht.
+        $zweites = new Postfach();
+        $this->assertSame(0, (new \Sartu\Services\Zahlungslauf(mail: $zweites))->ausfuehren()['ablauf']);
+        $this->assertSame([], $zweites->mails);
+    }
+
+    /** Ein abgelaufenes Angebot geht auf `abgelaufen` — derselbe Lauf, andere Aufgabe. */
+    public function testDerselbeLaufSetztAbgelaufeneAngeboteWeiterhin(): void
+    {
+        $postfach = new Postfach();
+        $this->alsAdmin($this->adminId);
+        $angebotId = $this->angebotAnlegen($postfach);
+        (new AngebotDienst($this->nachweis(), mail: $postfach))->senden($angebotId, null);
+
+        $this->gueltigBis($angebotId, -1);
+        $stand = (new \Sartu\Services\Zahlungslauf(mail: new Postfach()))->ausfuehren();
+
+        $this->assertSame(1, $stand['angebote']);
+        $this->assertSame(0, $stand['ablauf'], 'Ein abgelaufenes Angebot wird nicht mehr erinnert.');
+
+        $anweisung = $this->pdo->prepare('SELECT status FROM offers WHERE id = ?');
+        $anweisung->execute([$angebotId]);
+
+        $this->assertSame('abgelaufen', (string) $anweisung->fetchColumn());
+    }
+
     // ---------------------------------------------------------------- Hilfsmittel
+
+    private function gueltigBis(string $angebotId, int $inTagen): void
+    {
+        $anweisung = $this->pdo->prepare(
+            'UPDATE offers SET valid_until = ?, reminder_sent_at = NULL WHERE id = ?'
+        );
+        $anweisung->execute([\Sartu\Helpers\Format::inTagen($inTagen), $angebotId]);
+    }
 
     /** @return array{an:string,betreff:string,text:string} */
     private function mailAn(Postfach $postfach, string $adresse): array
