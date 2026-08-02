@@ -54,8 +54,12 @@
   --r-l:calc(34px * var(--rk));
   --r-xl:calc(52px * var(--rk));
   --r-pill:999px;
-  /* wiederkehrendes Motiv: asymmetrische Lozenge */
-  --r-leaf:var(--r-xl) var(--r-m) var(--r-xl) var(--r-m);
+
+  /* Es gibt bewusst KEINE achte Form neben dieser Skala.
+     Bis 01.08.2026 stand hier --r-leaf, eine asymmetrische Lozenge als
+     wiederkehrendes Zeichen. Sie las sich als Blatt und ist gestrichen.
+     Begruendung und Vergleich: design/motiv-recherche.html
+     Material Design 3 macht es genauso — eine Radienskala, kein Motiv. */
 
   /* ---- Abstaende ----------------------------------------- */
   --s-1:6px;

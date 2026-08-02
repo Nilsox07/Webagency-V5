@@ -64,24 +64,43 @@ ist **1**.
 
 | Stufe | Wert bei `--rk:1` | Wofür |
 |---|---|---|
-| `--r-xs` | 8 px | kleine Marken, Motivpunkte |
+| `--r-xs` | 8 px | kleine Marken |
 | `--r-s` | 14 px | — |
 | `--r-m` | 22 px | Zeilen, Bildplätze, Aufklapper |
 | `--r-l` | 34 px | Karten |
 | `--r-xl` | 52 px | Abschnittskanten |
 | `--r-pill` | 999 px | Knöpfe, Chips, Marken |
 
-**Das Motiv:** `--r-leaf` — `52px 22px 52px 22px`. Eine asymmetrische Lozenge als wiederkehrendes
-Zeichen. Sie läuft über die ganze Seite:
-
-- im Aufmacher
-- auf der hervorgehobenen Lösungskarte
-- beim Foto
-- bei jedem Motivpunkt vor einem Label
-
-**Das ist die „Verspieltheit" aus der Vorgabe vom 25.07.2026.** Ein Motiv. Effekte gibt es keine.
-
 **Wer einen einzelnen Radius ändert, bricht das System.** Geändert wird `--rk`.
+
+### Es gibt kein Motiv, und das ist entschieden
+
+Bis zum 01.08.2026 stand neben der Skala eine siebte Form: `--r-leaf`, eine asymmetrische Lozenge
+mit zwei weiten Rundungen über Kreuz. **Sie las sich als Blatt** und ist gestrichen.
+
+| Warum sie weg ist | |
+|---|---|
+| **Die Diagonale macht das Blatt** | zwei weite Rundungen, die sich gegenüberliegen, sind die Grundform eines Blattes |
+| **Sie war keine Skalenstufe** | eine achte Form neben sieben Radien fällt zwangsläufig auf |
+| **Sie stand an fünf Stellen** | Dave Chiu, Google Design, 28.11.2018: *„overuse can dilute your brand expression"* |
+
+**Ersetzt wurde sie durch nichts.** Ein anderes Zeichen hätte den Fehler mit anderer Silhouette
+wiederholt. Material Design 3 führt aus demselben Grund nur eine Radienskala und keine Sonderform.
+Der Vergleich steht in `design/motiv-recherche.html`.
+
+**Die „Verspieltheit" aus der Vorgabe vom 25.07.2026 bleibt.** Sie steckt in der Skala — 52 px
+Rundung an einer Abschnittskante ist ungewöhnlich weich. Sie steckte nie in der Lozenge.
+
+### Was die Marke stattdessen trägt
+
+| Signatur | Wo sie steht |
+|---|---|
+| **Monospace-Versalie, 0,14 em gesperrt** | jede Abschnittsmarke, jeder Chip, jede Rechtszeile |
+| **Lime als Fläche mit 1-px-Kante** | jeder Hauptknopf, jede Markierung |
+| **Creme statt Weiß** | der gesamte Grund |
+| **Überschriften mit Gewicht 650 und −0,025 em** | jede Überschrift |
+
+**Keine davon ist eine Form.** Genau deshalb kann keine ein Blattproblem bekommen.
 
 ---
 
@@ -149,9 +168,9 @@ immer sichtbar. Genau deshalb wurde diese Technik gewählt.
 | **Verweis im Text** | Lime-Balken unter der Zeile, wächst bei `:hover` auf volle Höhe. **Nie farbige Schrift** |
 | **Fokus** | Doppelring: 2 px Tinte innen, 4 px Lime außen. Sichtbar auf jedem Grund |
 | **Chip** | Papier · `--r-pill` · Monospace 12,5 px Versalien |
-| **Abschnittsmarke** | Motivpunkt (`--r-leaf` klein) plus Monospace-Label |
+| **Abschnittsmarke** | **nur** das Monospace-Label. Kein Punkt, kein Zeichen davor |
 | **Karte** | Papier · 1 px `--line` · `--r-l` |
-| **Hervorgehobene Karte** | Tinte-Fläche · `--r-leaf` · `--shadow-lift` |
+| **Hervorgehobene Karte** | Tinte-Fläche · `--r-l` · `--shadow-lift` |
 | **Dunkler Abschnitt** | Tinte · Text `#efe9dd` · Fließtext `#c3bcae` · obere Kante `--r-xl` |
 | **Bildplatz ohne Bild** | 2 px gestrichelt, beschriftet, **nie leerer Rahmen** (Design-Briefing §4a) |
 

@@ -20,7 +20,6 @@
   --r-xs:calc(8px * var(--rk));   --r-s:calc(14px * var(--rk));
   --r-m:calc(22px * var(--rk));   --r-l:calc(34px * var(--rk));
   --r-xl:calc(52px * var(--rk));  --r-pill:999px;
-  --r-leaf:var(--r-xl) var(--r-m) var(--r-xl) var(--r-m);
 
   --s-1:6px; --s-2:12px; --s-3:20px; --s-4:32px;
   --s-5:48px; --s-6:72px; --s-7:104px; --s-8:140px;
@@ -64,13 +63,10 @@ a:hover{background-size:100% 100%}
 .body{font-size:17.5px;line-height:1.65;color:var(--muted)}
 .dim{color:var(--muted)}
 
-/* Abschnittsmarke: Motivpunkt plus Label. Das wiederkehrende Zeichen. */
-.tag{display:inline-flex;align-items:center;gap:10px;color:var(--label);
+/* Abschnittsmarke: nur das Label. Kein Zeichen davor — siehe Abschnitt 05. */
+.tag{display:inline-block;color:var(--label);
   font-family:var(--font-mono);font-size:12.5px;letter-spacing:.14em;text-transform:uppercase}
-.tag::before{content:"";width:11px;height:11px;flex:none;background:var(--label);
-  border-radius:var(--r-pill) 3px var(--r-pill) 3px}
 .dark .tag{color:var(--label-dark)}
-.dark .tag::before{background:var(--label-dark)}
 
 /* ---------- Kopf ---------- */
 .masthead{padding:clamp(56px,8vw,110px) 0 var(--s-6);border-bottom:1px solid var(--line)}
@@ -161,7 +157,6 @@ td code{font-family:var(--font-mono);font-size:14.5px;color:var(--ink);font-vari
 .mo{width:132px;height:132px;background:var(--sand);border:1px solid var(--line);
   display:flex;align-items:flex-end;padding:12px;
   font-family:var(--font-mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--label)}
-.mo-leaf{border-radius:var(--r-leaf)}
 .mo-l{border-radius:var(--r-l)}
 .mo-m{border-radius:var(--r-m)}
 .mo-pill{border-radius:var(--r-pill)}
@@ -199,13 +194,13 @@ td code{font-family:var(--font-mono);font-size:14.5px;color:var(--ink);font-vari
 .pair{border-radius:var(--r-l);padding:26px;border:1px solid var(--line);background:var(--paper)}
 .pair-no{border-style:dashed}
 .pair h4{display:flex;align-items:center;gap:10px;font-size:17px;margin-bottom:16px}
-.mark{width:24px;height:24px;flex:none;border-radius:var(--r-pill) 4px var(--r-pill) 4px;
+.mark{width:24px;height:24px;flex:none;border-radius:var(--r-xs);
   display:grid;place-items:center;font-size:13px;font-weight:700}
 .m-ok{background:var(--lime);color:var(--ink)}
 .m-no{background:transparent;border:1.5px solid var(--ink);color:var(--ink)}
 .pair li{padding:9px 0 9px 22px;position:relative;font-size:16.5px;color:var(--muted);line-height:1.5}
 .pair li::before{content:"";position:absolute;left:0;top:17px;width:9px;height:9px;
-  border-radius:var(--r-pill) 3px var(--r-pill) 3px;background:var(--label)}
+  border-radius:var(--r-xs);background:var(--label)}
 
 /* ---------- Anwendungsmuster ---------- */
 .apps{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:var(--s-3);margin-top:var(--s-4)}
@@ -240,7 +235,7 @@ td code{font-family:var(--font-mono);font-size:14.5px;color:var(--ink);font-vari
 .check li{display:flex;gap:16px;align-items:flex-start;padding:17px 4px;border-bottom:1px solid var(--line);
   font-size:17px;line-height:1.5}
 .box{width:20px;height:20px;flex:none;margin-top:3px;border:1.5px solid var(--ink);
-  border-radius:var(--r-pill) 3px var(--r-pill) 3px}
+  border-radius:var(--r-xs)}
 
 /* ---------- Fuss ---------- */
 footer{background:var(--ink);color:#b9b2a4;padding:var(--s-6) 0 0;margin-top:0}
@@ -501,7 +496,7 @@ footer{background:var(--ink);color:#b9b2a4;padding:var(--s-6) 0 0;margin-top:0}
           <h2>Systemschriften. Keine Lizenz, kein CDN, keine Ladezeit.</h2>
           <p class="body">Die Monospace-Schrift ist Teil der Marke. Sie trägt jedes Label, jede
           Abschnittsmarke, jede Rechtszeile — immer in Versalien mit weiter Spationierung. Sie ist
-          das zweite wiederkehrende Zeichen neben der Lozenge.</p>
+          das wiederkehrende Zeichen der Marke — und seit dem 01.08.2026 das einzige.</p>
         </div>
       </div>
 
@@ -555,30 +550,52 @@ footer{background:var(--ink);color:#b9b2a4;padding:var(--s-6) 0 0;margin-top:0}
       <div class="sec-head">
         <p class="sec-num">05</p>
         <div>
-          <p class="tag" style="margin-bottom:16px">Das Motiv</p>
-          <h2>Eine Lozenge, zweimal rund, zweimal eng.</h2>
-          <p class="body">Zwei gegenüberliegende Ecken sind weit gerundet, die anderen beiden eng.
-          Das ist der einzige Schmuck, den der Auftritt hat: keine Symbole, keine Illustrationen,
-          keine Verläufe.</p>
+          <p class="tag" style="margin-bottom:16px">Die Formsprache</p>
+          <h2>Sechs Radien. Sonst nichts.</h2>
+          <p class="body">Bis zum 01.08.2026 stand hier eine siebte Form: eine asymmetrische
+          Lozenge, an fünf Stellen wiederholt. <b>Sie las sich als Blatt</b> und ist gestrichen —
+          ersetzt durch nichts.</p>
         </div>
       </div>
 
       <div class="motifs">
-        <div class="mo mo-leaf mo-lime">--r-leaf</div>
-        <div class="mo mo-l">--r-l · 34</div>
+        <div class="mo" style="border-radius:var(--r-xs)">--r-xs · 8</div>
         <div class="mo mo-m">--r-m · 22</div>
-        <div class="mo mo-pill">--r-pill</div>
+        <div class="mo mo-l">--r-l · 34</div>
+        <div class="mo" style="border-radius:var(--r-xl)">--r-xl · 52</div>
+        <div class="mo mo-pill mo-lime">--r-pill</div>
       </div>
 
-      <p class="body" style="margin-top:var(--s-4);max-width:64ch">
-        Die Lozenge erscheint an fünf Stellen: Karte im Aufmacher, hervorgehobene Lösungskarte,
-        Bildplatz beim Foto, Motivpunkt vor jedem Label und Blase im Ablauf. In kleiner Form wird
-        sie zu <code>999px 3px 999px 3px</code> — der Punkt links neben jeder Abschnittsmarke auf
-        dieser Seite.
-      </p>
-      <p class="body" style="margin-top:var(--s-3);max-width:64ch">
-        <b>Fünf Radien, ein Regler.</b> <code>--rk</code> skaliert alle gleichzeitig; der
-        entschiedene Wert ist 1. Wer einen einzelnen Radius ändert, bricht das System.
+      <div class="pairs" style="margin-top:var(--s-5)">
+        <div class="pair">
+          <h4><span class="mark m-ok" aria-hidden="true">✓</span> Was bleibt</h4>
+          <ul>
+            <li><b>Die weiche Formsprache.</b> 52 px Rundung an einer Abschnittskante ist
+            ungewöhnlich — das war die Vorgabe vom 25.07.2026, und sie steckt in der Skala</li>
+            <li><b>Ein Regler für alles:</b> <code>--rk</code> skaliert die sechs Stufen
+            gemeinsam. Der entschiedene Wert ist 1</li>
+            <li>Wer einen einzelnen Radius ändert, bricht das System</li>
+          </ul>
+        </div>
+        <div class="pair pair-no">
+          <h4><span class="mark m-no" aria-hidden="true">✕</span> Warum die Lozenge weg ist</h4>
+          <ul>
+            <li><b>Die Diagonale macht das Blatt</b>, nicht die Rundung — zwei weite Rundungen, die
+            sich gegenüberliegen, sind die Grundform eines Blattes</li>
+            <li><b>Sie war keine Skalenstufe.</b> Eine achte Form neben sieben Radien fällt
+            zwangsläufig auf</li>
+            <li><b>Sie stand an fünf Stellen.</b> Dave Chiu, Google Design, 28.11.2018:
+            <em>„overuse can dilute your brand expression"</em></li>
+            <li><b>Material Design 3 macht es genauso</b> — eine Radienskala, keine Sonderform</li>
+          </ul>
+        </div>
+      </div>
+
+      <p class="body" style="margin-top:var(--s-5);max-width:64ch">
+        <b>Der Auftritt hat damit gar keinen Schmuck.</b> Keine Symbole, keine Illustrationen, keine
+        Verläufe, keine Schlagschatten außer den zwei definierten. Was ihn trägt, steht in
+        Abschnitt 03 und 04: eine Farbe mit einer harten Regel, und eine Zweitschrift, die sonst
+        niemand so benutzt.
       </p>
     </div>
   </section>
@@ -804,6 +821,7 @@ footer{background:var(--ink);color:#b9b2a4;padding:var(--s-6) 0 0;margin-top:0}
         <li><span class="box" aria-hidden="true"></span>Lime nirgends als Schriftfarbe auf hellem Grund</li>
         <li><span class="box" aria-hidden="true"></span>Jede Lime-Fläche auf hellem Grund hat eine 1-px-Kante</li>
         <li><span class="box" aria-hidden="true"></span>Keine zweite Akzentfarbe im Dokument</li>
+        <li><span class="box" aria-hidden="true"></span><b>Keine Sonderform</b> neben der Radienskala — kein Zeichen vor einem Label</li>
         <li><span class="box" aria-hidden="true"></span>Wortmarke in Versalien, ohne Unterstreichung, ohne Zusatz im Namen</li>
         <li><span class="box" aria-hidden="true"></span>Kein Bestandsfoto, kein leerer Bildrahmen</li>
         <li><span class="box" aria-hidden="true"></span>Höchstens ein Knopf je E-Mail</li>

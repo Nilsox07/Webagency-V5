@@ -111,7 +111,7 @@ Beschnitten wirkt sie wie Druck auf Papier.
 
 **Die Monospace-Schrift ist Teil der Marke.** Sie trägt jedes Label, jede
 Abschnittsmarke, jede Rechtszeile — immer in Versalien mit weitem Zeichenabstand. Sie ist das
-zweite wiederkehrende Zeichen neben der Lozenge.
+wiederkehrende Zeichen der Marke — und seit dem 01.08.2026 das einzige.
 
 | Verwendung | Grad | Zeichenabstand |
 |---|---|---|
@@ -125,23 +125,30 @@ in `--font-sans` an erster Stelle eintragen. Der Platz dafür ist in `design/tok
 
 ---
 
-## 5. Das Motiv
+## 5. Es gibt kein Motiv
 
-**Die asymmetrische Lozenge** — `--r-leaf`, also `52px 22px 52px 22px`. Zwei runde und zwei enge
-Ecken über Kreuz.
+**Entschieden am 01.08.2026.** Bis dahin stand hier eine asymmetrische Lozenge — zwei weite
+Rundungen über Kreuz, an fünf Stellen wiederholt. **Sie las sich als Blatt.**
 
-Sie erscheint an fünf Stellen:
+| Warum sie weg ist | |
+|---|---|
+| Die **Diagonale** macht das Blatt, nicht die Rundung | zwei weite Rundungen, die sich gegenüberliegen, sind die Grundform eines Blattes |
+| Sie war **keine Skalenstufe** | eine achte Form neben sieben Radien fällt zwangsläufig auf |
+| Sie stand an **fünf Stellen** | *„overuse can dilute your brand expression"* — Dave Chiu, Google Design, 28.11.2018 |
 
-1. Karte im Aufmacher
-2. hervorgehobene Lösungskarte
-3. Bildplatz beim Foto
-4. Motivpunkt vor jedem Label
-5. Blase im Ablauf
+**Ersetzt wurde sie durch nichts.** Ein anderes Zeichen hätte denselben Fehler mit anderer
+Silhouette wiederholt. Material Design 3 führt aus demselben Grund nur eine Radienskala.
 
-In kleiner Form wird sie zu `999px 3px 999px 3px`.
+**Die Formsprache bleibt weich.** 52 px Rundung an einer Abschnittskante ist ungewöhnlich. Das war
+die Vorgabe vom 25.07.2026, und sie steckt in der Skala.
 
-**Das ist der einzige Schmuck, den der Auftritt hat.** Keine Symbole, keine Illustrationen, keine
-Verläufe, keine Schlagschatten außer den zwei definierten.
+**Der Auftritt hat damit gar keinen Schmuck.** Keine Symbole, keine Illustrationen, keine Verläufe,
+keine Schlagschatten außer den zwei definierten. Was ihn trägt, steht in Abschnitt 3 und 4. Eine
+Farbe mit einer harten Regel. Eine Zweitschrift, die sonst niemand so benutzt.
+
+> **Wenn später doch ein Zeichen soll:** Dann kommt es aus der Bildmarke, sobald die entschieden
+> ist. Das ist der einzige Weg, bei dem ein Zeichen etwas bedeutet, statt nur eine Form zu sein.
+> Vergleich und Begründung: `design/motiv-recherche.html`.
 
 ---
 
@@ -229,6 +236,7 @@ so entschieden und keine Lücke.
 - [ ] Lime nirgends als Schriftfarbe auf hellem Grund
 - [ ] Jede Lime-Fläche auf hellem Grund hat eine 1-px-Kante
 - [ ] Keine zweite Akzentfarbe im Dokument
+- [ ] **Keine Sonderform** neben der Radienskala — kein Zeichen vor einem Label
 - [ ] Wortmarke in Versalien, ohne Unterstreichung, ohne Zusatz im Namen
 - [ ] Kein Bestandsfoto, kein leerer Bildrahmen
 - [ ] Höchstens ein Knopf je E-Mail
@@ -244,12 +252,12 @@ so entschieden und keine Lücke.
 ```text
 TEXTPRUEFUNG   Datei: SARTU_CORPORATE_DESIGN.md   Datum: 01.08.2026
 
-Sätze gesamt (laufende Prosa)           43
+Sätze gesamt (laufende Prosa)           56
 Längster Satz                           20 Wörter        Grenze 25 (Abschnitt 6)
 Sätze über 20 Wörter                     0               Grenze 0
 Aufzählungen >3 Glieder im Satz          0               Grenze 0
 Treffer Wortlisten A/B/C                 0               Grenze 0
-Gegensatzformel                          0               Grenze 2
+Gegensatzformel                          1               Grenze 2
 Reine Verneinungen ohne Gegenstück       6               erlaubt (Regel 4)
 Erfundene Werte                          0               Grenze 0
 ```
