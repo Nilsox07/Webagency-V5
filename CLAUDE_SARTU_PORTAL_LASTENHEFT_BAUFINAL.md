@@ -698,7 +698,7 @@ was später strittig werden kann — nicht nur den Preis.
 | `payment_plan_custom` | text | nur bei `custom` — Klartext der Raten, s. §4a |
 | `rights_text` | text, NOT NULL | Fester Text §4c — Rechte und Export nach vollständiger Zahlung |
 | `domain_text` | text, NOT NULL | Fester Text §4c — Domain- und E-Mail-Vorgehen |
-| `valid_until` | date, NOT NULL | |
+| `valid_until` | date, NOT NULL | Vorbelegt auf **30 Kalendertage ab Versand**, im Adminbereich änderbar — s. unten |
 | `sent_at` | datetime | |
 | `accepted_at` | datetime | |
 | `accepted_by_user_id` | char(36) | |
@@ -724,6 +724,28 @@ zulässig. Bei allen anderen Paketen lehnt das Programm `custom` ab. Ist `custom
 
 **Prüfregel Annahme:** Ein Angebot ist nur annehmbar, wenn alle NOT-NULL-Felder gefüllt sind und
 `valid_until` nicht in der Vergangenheit liegt. Sonst zeigt das Portal den Hinweis aus §8.3.
+
+#### Vorbelegung `valid_until` — 30 Tage
+
+> **Ergänzt am 02.08.2026.** Die Zahl fehlte. `valid_until` stand als `NOT NULL` im Datenmodell,
+> ohne dass irgendwo eine Frist genannt war. Die Bau-Session der Stufe A1 hat das gemeldet, statt
+> zu raten — richtig so.
+
+**Entschieden: 30 Kalendertage, gerechnet ab dem Tag des Versands** (`sent_at`). Beim Anlegen eines
+Angebots ist das Feld damit vorbelegt. Es bleibt im Adminbereich änderbar — 30 Tage sind die
+Vorbelegung, keine Obergrenze und keine Untergrenze.
+
+| Warum 30 | |
+|---|---|
+| **Die Erinnerungsmail braucht Vorlauf** | §10 verschickt `Ihr Angebot gilt noch bis {Datum}` **drei Tage** vor Ablauf. Bei 14 Tagen fällt sie in die zweite Woche, bei 7 Tagen ist sie sinnlos |
+| **Der Empfänger ist ein Betriebsinhaber** | 72 % der Handwerksbetriebe nennen „zu viel zu tun" als Digitalisierungshemmnis (Bitkom Research 2025, n = 504). Ein Angebot über 2.198 bis 10.888 € wird selten am Eingangstag entschieden |
+| **Es gibt kein Preisrisiko** | Kurze Fristen schützen vor schwankenden Materialpreisen. SARTU verkauft zum Festpreis ohne Materialanteil |
+| **Es passt zu den übrigen Fristen** | Zahlungsziel 10 Tage · Erstlaufzeit 12 Monate · IP-Löschung 30 Tage |
+
+**Nicht gewählt: 14 Tage.** Im Handwerk üblich, weil dort Materialpreise die Kalkulation bewegen.
+Hier entstünden dadurch nur mehr abgelaufene Angebote, die jemand von Hand neu ausstellt.
+
+**Sonderprojekte folgen derselben Vorbelegung.** Wer eine andere Frist braucht, trägt sie ein.
 
 ### `invoices`
 `project_id` · `number` (text, UNIQUE) · `milestone` (text: `anzahlung` \| `zwischenrate` \| `schlussrate` \| `betrieb`) · `status` (§5.3) · `net_cents` · `vat_cents` · `gross_cents` · **`paid_cents` (integer, NOT NULL, DEFAULT 0)** · `due_date` (date) · `mollie_payment_url` (text) · `paid_at` · `marked_paid_by_user_id` · `note` (text) · **`reminder_sent_at` (datetime)** · **`reminder2_sent_at` (datetime)**

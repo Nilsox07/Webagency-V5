@@ -175,14 +175,17 @@ Website.** Mandantentest vollständig für alle Kundenrouten.
 > Hand** gepflegt. Die **gesamte** Registrar-Anbindung — Verfügbarkeitsabfrage, Registrierung,
 > Verlängerung, Ablaufwarnung, Übertragung — liegt geschlossen in C. In B passiert dazu nichts.
 
-> **Offene Lücke im Lastenheft, nicht in dieser Datei:** Die Selbstpflege verspricht außerdem
-> *Bilder tauschen*, *Team- und Projekteinträge pflegen* und *Anfragen von der Website einsehen*.
-> **Für keine dieser drei Funktionen existiert eine Tabelle im Datenmodell.** Es fehlen sinngemäß
-> `site_content`, `media_assets` und `website_inquiries`.
+> **Die drei Zeilen der Selbstpflege sind entschieden — nachgetragen am 02.08.2026.**
+> Diese Datei nannte *Bilder tauschen*, *Team- und Projekteinträge pflegen* und *Anfragen von der
+> Website einsehen* weiter als offene Lücke. Der Betreiber hat das am **01.08.2026** entschieden,
+> nur stand es allein in `SARTU_ENTSCHEIDUNGEN_OFFEN.md` §5a.
 >
-> **Das wird nicht hier erfunden.** Entweder das Datenmodell im Portal-Lastenheft wird um diese
-> Tabellen ergänzt, oder die Funktionsliste im Website-Lastenheft §5 Sektion 2 wird gekürzt.
-> **Bis dahin darf die Website diese drei Funktionen nicht bewerben** — siehe „Zwei Livegänge".
+> **Die drei Zeilen entfallen.** Sektion 2 der Startseite behält **elf** Punkte. Es entstehen
+> weder `site_content` noch `media_assets` noch `website_inquiries`. Eine der drei Funktionen —
+> Anfragen aus Kundenwebsites — steht in `CODEX_AUFTRAG_PORTAL.md` ohnehin unter **Nicht bauen**.
+>
+> **Damit ist Stufe B frei von offenen Punkten.** Die Begründung steht in §5a und ist in einer
+> Zeile umkehrbar, falls die Funktionen später doch entstehen.
 
 **Erst hier verfügbar:** die Bildschirmansichten *Öffnungszeiten* und *Nachrichten*.
 
