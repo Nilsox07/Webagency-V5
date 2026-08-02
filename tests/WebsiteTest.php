@@ -5,9 +5,11 @@ declare(strict_types=1);
 namespace Sartu\Tests;
 
 use Sartu\Data\BetreiberdatenSpeicher;
+use Sartu\Helpers\Csrf;
 use Sartu\Router;
 use Sartu\Services\Branchenseiten;
 use Sartu\Services\InstallationsSperre;
+use Sartu\Services\Kontaktanfrage;
 use Sartu\Services\Launchadressen;
 use Sartu\Services\Preise;
 use Sartu\Services\Wartungsmodus;
@@ -421,7 +423,131 @@ final class WebsiteTest extends Datenbankfall
         }
     }
 
+    // ---------------------------------------------------------------- §11 Kontaktformular
+
+    /**
+     * §17: „Beide Formulare senden nachweislich."
+     *
+     * Der Bedarfsscheck ist in `BedarfsscheckTest` geprüft. Hier das zweite.
+     */
+    public function testDasKontaktformularLegtEinenDatensatzAn(): void
+    {
+        $ergebnis = (new Kontaktanfrage())->anlegen($this->kontakteingabe(), [], '127.0.0.1');
+
+        $this->assertTrue($ergebnis->dankeSeite);
+        $this->assertNotNull($ergebnis->anfrageId);
+
+        $zeile = $this->pdo->query('SELECT * FROM leads')->fetch(\PDO::FETCH_ASSOC);
+
+        $this->assertIsArray($zeile);
+        $this->assertSame('Erika Mustermann', (string) $zeile['first_name']);
+        $this->assertSame('mustermann-sanitaer.example', (string) $zeile['company']);
+        // §11 kennt keinen Bedarfsscheck — also gibt es keine Empfehlung.
+        $this->assertNull($zeile['recommended_package']);
+        $this->assertSame('standard', (string) $zeile['flag']);
+
+        $inhalt = json_decode((string) $zeile['payload'], true);
+
+        $this->assertSame('kontakt', $inhalt['formular']);
+        $this->assertSame('domain', $inhalt['anliegen']);
+        $this->assertStringContainsString('Heizung', $inhalt['nachricht']);
+    }
+
+    /** §11: die Nachricht braucht mindestens 20 Zeichen, mit dem Wortlaut aus §11. */
+    public function testEineZuKurzeNachrichtWirdAmFeldAbgewiesen(): void
+    {
+        $eingabe = $this->kontakteingabe();
+        $eingabe['nachricht'] = 'Zu kurz.';
+
+        $ergebnis = (new Kontaktanfrage())->anlegen($eingabe, [], '127.0.0.1');
+
+        $this->assertFalse($ergebnis->dankeSeite);
+        $this->assertSame(
+            'Bitte beschreiben Sie Ihr Anliegen in ein bis zwei Sätzen.',
+            $ergebnis->feldfehler['nachricht'] ?? null,
+        );
+        $this->assertSame(0, (int) $this->pdo->query('SELECT COUNT(*) FROM leads')->fetchColumn());
+    }
+
+    /**
+     * §17: Honigtopf, Zeitregel und Doppeleinreichung greifen — und der Absender sieht
+     * trotzdem die normale Bestätigung.
+     */
+    public function testHonigtopfZeitregelUndDoppeleinreichungGreifenStill(): void
+    {
+        $mitHonig = $this->kontakteingabe();
+        $mitHonig['hp_website'] = 'https://spam.example';
+
+        $ergebnis = (new Kontaktanfrage())->anlegen($mitHonig, [], '127.0.0.1');
+        $this->assertTrue($ergebnis->dankeSeite, 'Der Absender sieht nicht die Bestätigungsseite.');
+        $this->assertSame(0, (int) $this->pdo->query('SELECT COUNT(*) FROM leads')->fetchColumn());
+
+        $zuSchnell = $this->kontakteingabe();
+        $zuSchnell['form_started_at'] = (string) time();
+
+        $this->assertTrue((new Kontaktanfrage())->anlegen($zuSchnell, [], '127.0.0.1')->dankeSeite);
+        $this->assertSame(0, (int) $this->pdo->query('SELECT COUNT(*) FROM leads')->fetchColumn());
+
+        // Doppeleinreichung: dieselbe `submission_id` zweimal ergibt einen Datensatz.
+        $eingabe = $this->kontakteingabe();
+
+        (new Kontaktanfrage())->anlegen($eingabe, [], '127.0.0.1');
+        (new Kontaktanfrage())->anlegen($eingabe, [], '127.0.0.1');
+
+        $this->assertSame(1, (int) $this->pdo->query('SELECT COUNT(*) FROM leads')->fetchColumn());
+    }
+
+    /** §11 und §2: ohne die beiden Bestätigungen wird nichts gespeichert. */
+    public function testOhneBestaetigungenWirdNichtsGespeichert(): void
+    {
+        foreach (['b2b_confirmed', 'privacy_confirmed'] as $feld) {
+            $eingabe = $this->kontakteingabe();
+            unset($eingabe[$feld]);
+
+            $ergebnis = (new Kontaktanfrage())->anlegen($eingabe, [], '127.0.0.1');
+
+            $this->assertFalse($ergebnis->dankeSeite, $feld);
+            $this->assertArrayHasKey($feld, $ergebnis->feldfehler);
+        }
+
+        $this->assertSame(0, (int) $this->pdo->query('SELECT COUNT(*) FROM leads')->fetchColumn());
+    }
+
+    /** §11: das Formular läuft über die Route, mit CSRF und ohne JavaScript. */
+    public function testDasFormularLaeuftUeberDieRouteUndBrauchtEinCsrfFeld(): void
+    {
+        $html = (string) $this->router()->behandeln('GET', '/kontakt')->rumpf;
+
+        $this->assertStringContainsString('action="/kontakt"', $html);
+        $this->assertStringContainsString(Csrf::FELD, $html);
+        $this->assertSame(0, preg_match('/\son[a-z]+\s*=/i', $html), 'Ein on…-Attribut im Formular.');
+
+        // Ohne CSRF-Feld: 419, kein Datensatz.
+        $_POST = $this->kontakteingabe();
+
+        $this->assertSame(419, $this->router()->behandeln('POST', '/kontakt')->status);
+        $this->assertSame(0, (int) $this->pdo->query('SELECT COUNT(*) FROM leads')->fetchColumn());
+    }
+
     // ---------------------------------------------------------------- Hilfsmittel
+
+    /** @return array<string,mixed> eine gültige Rückfrage — §11, alle Pflichtfelder. */
+    private function kontakteingabe(): array
+    {
+        return [
+            'name'              => 'Erika Mustermann',
+            'company'           => 'mustermann-sanitaer.example',
+            'email'             => 'erika@example.org',
+            'phone'             => '',
+            'anliegen'          => 'domain',
+            'nachricht'         => 'Unsere Heizung soll auf die neue Website. Wie lange dauert das?',
+            'b2b_confirmed'     => '1',
+            'privacy_confirmed' => '1',
+            'hp_website'        => '',
+            'form_started_at'   => (string) (time() - 60),
+            'submission_id'     => '4f8a1c2e-9b3d-4a5f-8c7e-1d2b3a4c5d6e',
+        ];
+    }
 
     /**
      * Alle öffentlichen Seiten als gerendertes HTML.

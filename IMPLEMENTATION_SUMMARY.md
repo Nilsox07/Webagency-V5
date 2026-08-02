@@ -1,8 +1,12 @@
-# IMPLEMENTATION_SUMMARY — Stufe A0
+# IMPLEMENTATION_SUMMARY
 
-**Stand:** 02.08.2026
-**Zweig:** `claude/php-a0-modellplan-06duus`
-**Umfang:** genau A0 nach `REIHENFOLGE.md`. Nichts aus A1 bis C.
+**Stand:** 02.08.2026 · **Zweig:** `claude/php-a0-modellplan-06duus`
+**Umfang:** Stufe A (A0 bis A3) und Stufe B nach `REIHENFOLGE.md`. Nichts aus C.
+
+> **Der Abschlussbericht über alle Etappen steht in `ABSCHLUSSBERICHT.md`.**
+> Dieser Bericht ist mit A0 entstanden und wächst seither. Die Abschnitte 1 bis 8 unten
+> beschreiben **A0** — sie bleiben unverändert stehen, weil sie den Stand beschreiben, an
+> dem sie geschrieben wurden. Was danach kam, steht im Abschlussbericht und in `STAND.md`.
 
 ---
 
