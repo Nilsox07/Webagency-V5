@@ -29,10 +29,11 @@ final class Leistungszeilen
                 'ziel'  => null,
                 'ausfuehrlich' => [
                     'Vor der ersten Zeile Text steht die Seitenkarte.',
-                    'Wir prüfen, wonach Ihre Kunden suchen, und geben jeder Suchabsicht genau '
-                        . 'eine Seite. Zwei Absichten auf einer Seite bedienen beide schlecht.',
-                    'Was keine Frage beantwortet, wird nicht gebaut. Eine Seite weniger ist '
-                        . 'billiger für Sie und besser auffindbar.',
+                    'Wir prüfen, welche Suchanfragen in Ihrem Fach gestellt werden, und geben '
+                        . 'jeder genau eine Seite. Zwei Absichten auf einer Seite bedienen '
+                        . 'beide schlecht.',
+                    'Was keine Frage beantwortet, wird nicht gebaut. Eine Seite weniger kostet '
+                        . 'Sie weniger und ist besser auffindbar.',
                 ],
             ],
             [
@@ -42,8 +43,8 @@ final class Leistungszeilen
                 'ziel'  => '/leistung-webdesign',
                 'ausfuehrlich' => [
                     'Ihre Website entsteht als eigener Programmcode.',
-                    'Farben, Schriften und Formen kommen aus einem festen System — deshalb '
-                        . 'sieht jede Seite gleich aus und keine muss neu erfunden werden.',
+                    'Farben, Schriften und Formen kommen aus einem festen System. Deshalb '
+                        . 'sieht jede Seite gleich aus, und keine muss neu erfunden werden.',
                     'Es gibt keine Erweiterungen, die Sie aktualisieren müssten, und keine '
                         . 'Vorlage, die tausend andere Betriebe auch haben.',
                 ],

@@ -31,6 +31,7 @@ use Sartu\Admin\VorschauSteuerung as AdminVorschauSteuerung;
 use Sartu\BedarfsscheckSteuerung;
 use Sartu\OeffentlicheSeiten;
 use Sartu\Website;
+use Sartu\Wurzeldateien;
 use Sartu\Portal\AnmeldeSteuerung as KundenAnmeldeSteuerung;
 use Sartu\Portal\AngebotSteuerung;
 use Sartu\Portal\AufgabenSteuerung;
@@ -57,6 +58,10 @@ return [
 
     // ---------------------------------------------------------- oeffentliche Website (Stufe B)
     new Route(Route::BEREICH_OEFFENTLICH, 'GET', '/', [Website::class, 'start']),
+    // Wurzeldateien (§16). Erzeugt aus der Adressliste, nicht als Datei abgelegt.
+    new Route(Route::BEREICH_OEFFENTLICH, 'GET', '/sitemap.xml', [Wurzeldateien::class, 'sitemap']),
+    new Route(Route::BEREICH_OEFFENTLICH, 'GET', '/robots.txt', [Wurzeldateien::class, 'robots']),
+    new Route(Route::BEREICH_OEFFENTLICH, 'GET', '/llms.txt', [Wurzeldateien::class, 'llms']),
     new Route(Route::BEREICH_OEFFENTLICH, 'GET', '/leistungen', [Website::class, 'leistungen']),
     new Route(Route::BEREICH_OEFFENTLICH, 'GET', '/preise', [Website::class, 'preise']),
     new Route(Route::BEREICH_OEFFENTLICH, 'GET', '/ablauf', [Website::class, 'ablauf']),
@@ -69,6 +74,15 @@ return [
     new Route(Route::BEREICH_OEFFENTLICH, 'GET', '/ueber-uns', [Website::class, 'ueberUns']),
     new Route(Route::BEREICH_OEFFENTLICH, 'GET', '/kontakt', [Website::class, 'kontakt']),
     new Route(Route::BEREICH_OEFFENTLICH, 'POST', '/kontakt', [Website::class, 'kontaktSenden']),
+    // Branchenseiten, Welle 1 (§10a). Vollstaendige Zielseiten mit eingebettetem Konfigurator.
+    new Route(Route::BEREICH_OEFFENTLICH, 'GET', '/website-sanitaer-heizung-klima', [Website::class, 'shk']),
+    new Route(Route::BEREICH_OEFFENTLICH, 'GET', '/website-elektrotechnik', [Website::class, 'elektro']),
+    new Route(Route::BEREICH_OEFFENTLICH, 'GET', '/website-dachdecker', [Website::class, 'dachdecker']),
+    // Ratgeber und Lexikon (§11a, §12, §13). Feste Pfade vor dem Muster.
+    new Route(Route::BEREICH_OEFFENTLICH, 'GET', '/ratgeber', [Website::class, 'ratgeber']),
+    new Route(Route::BEREICH_OEFFENTLICH, 'GET', '/ratgeber/{schluessel}', [Website::class, 'ratgeberArtikel']),
+    new Route(Route::BEREICH_OEFFENTLICH, 'GET', '/lexikon', [Website::class, 'lexikon']),
+    new Route(Route::BEREICH_OEFFENTLICH, 'GET', '/lexikon/{schluessel}', [Website::class, 'lexikonBegriff']),
 
     // ---------------------------------------------------------- Rechtstexte
     new Route(Route::BEREICH_OEFFENTLICH, 'GET', '/impressum', [OeffentlicheSeiten::class, 'impressum']),

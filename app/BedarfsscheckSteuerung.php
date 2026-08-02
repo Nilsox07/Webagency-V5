@@ -6,6 +6,7 @@ namespace Sartu;
 
 use Sartu\Data\BetreiberdatenSpeicher;
 use Sartu\Helpers\Http;
+use Sartu\Services\Branchenseiten;
 use Sartu\Services\Anfragebenachrichtigung;
 use Sartu\Services\AnfrageService;
 use Sartu\Services\Bedarfsscheck;
@@ -60,13 +61,24 @@ final class BedarfsscheckSteuerung
             // §9.5a: „Eine Kontaktalternative steht zusätzlich da, ersetzt den Bedarfsscheck
             // aber nicht."
             'kontaktweg'   => self::betreiberEmail(),
+            // §16: `/briefing` ist eine Launch-Adresse mit `index`. §17 verlangt fuer jede
+            // Seite ein Canonical auf sich selbst. Die Schritte darunter tragen `noindex`
+            // und bekommen deshalb keins.
+            'pfad'         => '/briefing',
         ]));
     }
 
     /** @param array<string,string> $parameter */
     public function starten(array $parameter = []): Antwort
     {
-        BedarfsscheckSitzung::starten();
+        // §10a: Der Konfigurator auf einer Branchenseite belegt `branche` vor. Der Wert wird
+        // gegen die gebauten Branchenseiten geprueft — ein beliebiger Wert aus dem Request
+        // landete sonst ungeprueft in `leads.branche_vorbelegt`.
+        $branche = Http::getrimmteEingabe('branche_vorbelegt');
+
+        BedarfsscheckSitzung::starten(
+            Branchenseiten::finden($branche) === null ? null : $branche,
+        );
 
         return Antwort::weiter('/briefing/1', 303);
     }

@@ -208,7 +208,7 @@ final class Startseitentexte
             ['titel' => 'Suchmaschinen erfassen',
              'satz'  => 'Sauberes HTML, Sitemap, Canonicals, strukturierte Daten, Ladezeit.'],
             ['titel' => 'KI-Antworten einordnen',
-             'satz'  => 'Konsistente Unternehmensfakten, FAQ und Definitionen statt Textwüsten.'],
+             'satz'  => 'Konsistente Unternehmensfakten, beantwortete Fragen, klare Definitionen.'],
         ];
     }
 

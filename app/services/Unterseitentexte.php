@@ -24,9 +24,9 @@ final class Unterseitentexte
 
     public const LEISTUNGEN_H1 = 'Website, Texte, Sichtbarkeit und Betrieb als ein System.';
 
-    public const LEISTUNGEN_LEAD = 'Sie bekommen kein Bündel einzelner Leistungen, sondern ein '
-        . 'Ergebnis: eine Website, die Ihr Angebot erklärt, Anfragen erzeugt und danach '
-        . 'zuverlässig betrieben wird.';
+    public const LEISTUNGEN_LEAD = 'Sie bekommen kein Bündel einzelner Leistungen. Sie '
+        . 'bekommen ein Ergebnis: eine Website, die Ihr Angebot erklärt und Anfragen '
+        . 'erzeugt. Betrieben wird sie danach von uns.';
 
     /** §6 Sektion 2 — das Antwortmodul, 45 Wörter. */
     public const LEISTUNGEN_KURZ = 'SARTU verbindet Strategie, Texte, Design, Programmierung, '

@@ -36,7 +36,15 @@ final class BedarfsscheckSitzung
     private const ABLAUF = Bedarfsscheck::ZWISCHENSTAND_STUNDEN * 3600;
 
     /** Startet einen Durchlauf — oder setzt einen laufenden fort. */
-    public static function starten(): void
+    /**
+     * @param string|null $branche vorbelegt von einer Branchenseite (§10a)
+     *
+     * **Die Branche wird nur beim Start gesetzt, nie unterwegs.** §10a: „Das Feld `branche`
+     * wird aus der Seite vorbelegt" — also von der Seite, auf der der Besucher startet. Ein
+     * spaeterer Aufruf mit anderem Wert wuerde einen laufenden Zwischenstand umschreiben,
+     * und der Wert kaeme aus dem Request statt aus der Seite.
+     */
+    public static function starten(?string $branche = null): void
     {
         if (self::laeuft()) {
             return;
@@ -46,7 +54,7 @@ final class BedarfsscheckSitzung
             'submission_id'   => Uuid::v4(),
             'form_started_at' => (string) time(),
             'begonnen_am'     => time(),
-            'antworten'       => [],
+            'antworten'       => $branche === null ? [] : ['branche_vorbelegt' => $branche],
         ];
     }
 

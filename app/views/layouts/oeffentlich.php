@@ -22,6 +22,10 @@ use Sartu\Helpers\Html;
 <?php if (($noindex ?? false) === true): ?>
 <meta name="robots" content="noindex, follow">
 <?php endif; ?>
+<?php /* §17: Canonical auf jeder Seite. Fehlt der Pfad, gibt es keins — geraten wird nicht. */ ?>
+<?php if (isset($pfad)): ?>
+<link rel="canonical" href="<?= Html::e(rtrim((string) \Sartu\Helpers\Env::get('BASE_URL', ''), '/') . $pfad) ?>">
+<?php endif; ?>
 <link rel="stylesheet" href="/assets/css/tokens.css">
 <link rel="stylesheet" href="/assets/css/anwendung.css">
 </head>

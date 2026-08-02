@@ -213,10 +213,10 @@ final class Leistungsseiten
                 'titel' => 'Rundum-Schutz: Betrieb Ihrer Website | SARTU',
                 'beschreibung' => 'Ab 59 € netto im Monat übernehmen wir Hosting, SSL, tägliche '
                     . 'Sicherungen, Überwachung und technische Aktualisierungen Ihrer Website.',
-                'kurz' => 'Ab 59 € netto im Monat übernehmen wir den Betrieb: Hosting, SSL, '
-                    . 'tägliche Sicherungen, Überwachung, technische Aktualisierungen, '
-                    . 'technische Suchgesundheit und Ihren Zugang zum Kundenbereich. Kein Konto '
-                    . 'mit Änderungsminuten.',
+                'kurz' => 'Ab 59 € netto im Monat übernehmen wir den Betrieb. Enthalten sind '
+                    . 'Hosting, SSL, tägliche Sicherungen, Überwachung, technische '
+                    . 'Aktualisierungen, technische Suchgesundheit und Ihr Zugang zum '
+                    . 'Kundenbereich. Kein Konto mit Änderungsminuten.',
                 'fuer_wen' => [
                     'Betriebe ohne eigene IT',
                     'Betriebe, deren letzte Website an einem abgelaufenen Vertrag gescheitert ist',
@@ -273,9 +273,9 @@ final class Leistungsseiten
                 'titel' => 'Der SARTU-Kundenbereich: Freigaben und Pflege | SARTU',
                 'beschreibung' => 'Angebot, Zahlung, Fragen, Dateien, Domain, Vorschau und '
                     . 'Freigabe liegen an einem Ort. Ohne Abstimmungstermine, ohne E-Mail-Ketten.',
-                'kurz' => 'In Ihrem Bereich laufen Angebot, Zahlung, die Fragen zu Ihrem Betrieb, '
-                    . 'Dateien, Domain, Vorschau, Freigabe und spätere kleine Pflege an einem '
-                    . 'Ort. Layout, Code und Adressen bleiben bei uns.',
+                'kurz' => 'In Ihrem Bereich liegt alles an einem Ort: Angebot, Zahlung, die Fragen '
+                    . 'zu Ihrem Betrieb, Dateien, Domain, Vorschau und Freigabe. Später auch '
+                    . 'die kleine Pflege. Layout, Code und Adressen bleiben bei uns.',
                 'fuer_wen' => [
                     'Betriebe, die abends um zehn Zeit haben und nicht um zehn Uhr morgens',
                     'Betriebe, die schon einmal einen Anhang in einer E-Mail-Kette gesucht haben',

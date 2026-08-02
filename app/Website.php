@@ -8,9 +8,12 @@ use Sartu\Data\BetreiberdatenSpeicher;
 use Sartu\Data\Uuid;
 use Sartu\Helpers\Http;
 use Sartu\Services\Auftragslage;
+use Sartu\Services\Branchenseiten;
 use Sartu\Services\Firmenseitentexte;
 use Sartu\Services\Herkunft;
 use Sartu\Services\Kontaktanfrage;
+use Sartu\Services\Lexikon;
+use Sartu\Services\Ratgeber;
 use Sartu\Services\Leistungsseiten;
 use Sartu\Services\Startseitentexte;
 use Sartu\Services\Unterseitentexte;
@@ -240,6 +243,178 @@ final class Website
             'pfad'         => '/404',
             'noindex'      => true,
         ]), 404);
+    }
+
+    // ---------------------------------------------------------------- Branchenseiten (§10a)
+
+    /** @param array<string,string> $parameter */
+    public function shk(array $parameter = []): Antwort { return $this->branche('sanitaer-heizung-klima'); }
+
+    /** @param array<string,string> $parameter */
+    public function elektro(array $parameter = []): Antwort { return $this->branche('elektrotechnik'); }
+
+    /** @param array<string,string> $parameter */
+    public function dachdecker(array $parameter = []): Antwort { return $this->branche('dachdecker'); }
+
+    private function branche(string $schluessel): Antwort
+    {
+        $seite = Branchenseiten::finden($schluessel);
+
+        if ($seite === null) {
+            return $this->nichtGefunden();
+        }
+
+        $pfad = '/website-' . $schluessel;
+        $krumen = [[$pfad, (string) $seite['branche']]];
+
+        return $this->seite('website-branche', [
+            'titel'        => (string) $seite['titel'],
+            'beschreibung' => (string) $seite['beschreibung'],
+            'pfad'         => $pfad,
+            'brotkrumen'   => $krumen,
+            'seite'        => $seite,
+            'schluessel'   => $schluessel,
+            'schema'       => Strukturdaten::verbinden(
+                Strukturdaten::dienstleistung(
+                    (string) $seite['h1'],
+                    (string) $seite['beschreibung'],
+                    $pfad,
+                ),
+                Strukturdaten::brotkrumen($krumen),
+            ),
+        ]);
+    }
+
+    // ---------------------------------------------------------------- Ratgeber (§11a, §12)
+
+    /** @param array<string,string> $parameter */
+    public function ratgeber(array $parameter = []): Antwort
+    {
+        $krumen = [['/ratgeber', 'Ratgeber']];
+
+        return $this->seite('website-ratgeber-hub', [
+            'titel'        => Ratgeber::HUB_TITEL,
+            'beschreibung' => Ratgeber::HUB_BESCHREIBUNG,
+            'pfad'         => '/ratgeber',
+            'brotkrumen'   => $krumen,
+            'schema'       => Strukturdaten::brotkrumen($krumen),
+        ]);
+    }
+
+    /** @param array<string,string> $parameter */
+    public function ratgeberArtikel(array $parameter = []): Antwort
+    {
+        $schluessel = (string) ($parameter['schluessel'] ?? '');
+        $artikel = Ratgeber::finden($schluessel);
+
+        if ($artikel === null) {
+            return $this->nichtGefunden();
+        }
+
+        $pfad = '/ratgeber/' . $schluessel;
+        $krumen = [['/ratgeber', 'Ratgeber'], [$pfad, (string) $artikel['h1']]];
+
+        return $this->seite('website-ratgeber', [
+            'titel'        => (string) $artikel['titel'],
+            'beschreibung' => (string) $artikel['beschreibung'],
+            'pfad'         => $pfad,
+            'brotkrumen'   => $krumen,
+            'artikel'      => $artikel,
+            'schema'       => Strukturdaten::verbinden(
+                Strukturdaten::artikel(
+                    (string) $artikel['h1'],
+                    (string) $artikel['beschreibung'],
+                    $pfad,
+                    Ratgeber::STAND,
+                ),
+                Strukturdaten::brotkrumen($krumen),
+            ),
+        ]);
+    }
+
+    // ---------------------------------------------------------------- Lexikon (§13)
+
+    /** @param array<string,string> $parameter */
+    public function lexikon(array $parameter = []): Antwort
+    {
+        $begriffe = [];
+
+        foreach (Lexikon::alle() as $schluessel => $eintrag) {
+            $begriffe[] = [
+                'schluessel' => $schluessel,
+                'begriff'    => (string) $eintrag['begriff'],
+                'kurz'       => (string) $eintrag['kurz'],
+            ];
+        }
+
+        // §13: alphabetisch — nach dem Begriff, nicht nach dem Schlüssel. `local-seo` stünde
+        // sonst vor `relaunch`, obwohl „Local SEO" davor gehört und „GEO" ganz nach vorn.
+        usort($begriffe, static fn (array $a, array $b) => strcoll($a['begriff'], $b['begriff']));
+
+        $krumen = [['/lexikon', 'Lexikon']];
+
+        return $this->seite('website-lexikon-hub', [
+            'titel'        => Lexikon::HUB_TITEL,
+            'beschreibung' => Lexikon::HUB_BESCHREIBUNG,
+            'pfad'         => '/lexikon',
+            'brotkrumen'   => $krumen,
+            'begriffe'     => $begriffe,
+            'schema'       => Strukturdaten::brotkrumen($krumen),
+        ]);
+    }
+
+    /** @param array<string,string> $parameter */
+    public function lexikonBegriff(array $parameter = []): Antwort
+    {
+        $schluessel = (string) ($parameter['schluessel'] ?? '');
+        $eintrag = Lexikon::finden($schluessel);
+
+        if ($eintrag === null) {
+            return $this->nichtGefunden();
+        }
+
+        $pfad = '/lexikon/' . $schluessel;
+        $krumen = [['/lexikon', 'Lexikon'], [$pfad, (string) $eintrag['begriff']]];
+
+        return $this->seite('website-lexikon', [
+            'titel'        => (string) $eintrag['begriff'] . ' — einfach erklärt | SARTU',
+            'beschreibung' => (string) $eintrag['kurz'],
+            'pfad'         => $pfad,
+            'brotkrumen'   => $krumen,
+            'eintrag'      => $eintrag,
+            'verwandte'    => self::verwandteAdressen($eintrag['verwandt']),
+            'schema'       => Strukturdaten::verbinden(
+                Strukturdaten::begriff((string) $eintrag['begriff'], (string) $eintrag['kurz'], $pfad),
+                Strukturdaten::brotkrumen($krumen),
+            ),
+        ]);
+    }
+
+    /**
+     * Verwandte Begriffe in Adressen auflösen.
+     *
+     * Ein Begriff, den es nicht gibt, fällt heraus statt ins Leere zu zeigen (§0.3b).
+     *
+     * @param list<string> $namen
+     * @return array<string,string>
+     */
+    private static function verwandteAdressen(array $namen): array
+    {
+        $adressen = [];
+
+        foreach (Lexikon::alle() as $schluessel => $eintrag) {
+            $adressen[(string) $eintrag['begriff']] = '/lexikon/' . $schluessel;
+        }
+
+        $treffer = [];
+
+        foreach ($namen as $name) {
+            if (isset($adressen[$name])) {
+                $treffer[$name] = $adressen[$name];
+            }
+        }
+
+        return $treffer;
     }
 
     // ------------------------------------------------------------------ intern
