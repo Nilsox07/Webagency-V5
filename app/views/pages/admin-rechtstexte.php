@@ -2,8 +2,6 @@
 
 declare(strict_types=1);
 
-use Sartu\Ansicht;
-use Sartu\Helpers\Format;
 use Sartu\Helpers\Html;
 
 /** @var array<string,array<string,mixed>|null> $texte */

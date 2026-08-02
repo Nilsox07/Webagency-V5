@@ -13,6 +13,7 @@ use Sartu\Data\Db;
 use Sartu\Data\Migrator;
 use Sartu\Helpers\Env;
 use Sartu\Helpers\Http;
+use Sartu\Helpers\Speicher;
 use Sartu\Helpers\Validate;
 
 /**
@@ -165,9 +166,13 @@ final class Ersteinrichtung
         return $ergebnis;
     }
 
-    public function umgebungInOrdnung(): bool
+    /**
+     * @param null|list<array{punkt:string,erfuellt:bool,hinweis:string}> $pruefungen
+     *        bereits gerechnete Pruefung, damit sie nicht dreimal je Seitenaufruf laeuft
+     */
+    public function umgebungInOrdnung(?array $pruefungen = null): bool
     {
-        foreach ($this->umgebungspruefung() as $punkt) {
+        foreach ($pruefungen ?? $this->umgebungspruefung() as $punkt) {
             if (!$punkt['erfuellt']) {
                 return false;
             }
@@ -434,7 +439,7 @@ final class Ersteinrichtung
         $nachweis = AdminNachweis::fuerErsteinrichtung($this->installationssperre());
         $benutzer = new AdminBenutzer($nachweis);
 
-        if ($benutzer->anzahlAdmins() > 0) {
+        if ((new AnmeldeKonten())->anzahlAdmins() > 0) {
             return ['Es gibt bereits ein Adminkonto. Die Einrichtung legt kein zweites an.'];
         }
 
@@ -505,9 +510,16 @@ final class Ersteinrichtung
         return new BetreiberdatenSpeicher();
     }
 
+    /**
+     * Dasselbe Verzeichnis, das auch die Ratenbegrenzung und die Sperren benutzen.
+     *
+     * Vorher fiel diese Stelle auf `$this->wurzel . '/storage'` zurueck und alle anderen auf
+     * einen anderen Pfad. Schritt 1 pruefte damit die Schreibrechte auf einem Verzeichnis,
+     * in das spaeter niemand schrieb — beide Zweige funktionierten fuer sich.
+     */
     private function speicherverzeichnis(): string
     {
-        return Env::get('STORAGE_DIR', $this->wurzel . '/storage') ?? $this->wurzel . '/storage';
+        return Speicher::verzeichnis();
     }
 
     private function pfadAufloesen(string $pfad): string

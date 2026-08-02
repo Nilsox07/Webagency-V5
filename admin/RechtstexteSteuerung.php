@@ -23,12 +23,6 @@ use Sartu\Helpers\Http;
  */
 final class RechtstexteSteuerung
 {
-    private const ZUSTAENDE = [
-        'entwurf'     => 'Entwurf',
-        'in_pruefung' => 'in Prüfung',
-        'freigegeben' => 'freigegeben',
-    ];
-
     public function __construct(private readonly ?RechtstexteSpeicher $speicher = null)
     {
     }
@@ -46,7 +40,7 @@ final class RechtstexteSteuerung
             'angemeldet'     => true,
             'texte'          => $texte,
             'beschriftungen' => RechtstexteSpeicher::BESCHRIFTUNGEN,
-            'zustaende'      => self::ZUSTAENDE,
+            'zustaende'      => RechtstexteSpeicher::ZUSTANDS_BESCHRIFTUNGEN,
         ]));
     }
 
@@ -71,7 +65,7 @@ final class RechtstexteSteuerung
             'text'          => $this->speicher()->intern($slug),
             'fehler'        => $fehler,
             'hinweise'      => $hinweise,
-            'zustaende'     => self::ZUSTAENDE,
+            'zustaende'     => RechtstexteSpeicher::ZUSTANDS_BESCHRIFTUNGEN,
         ]));
     }
 
@@ -166,10 +160,6 @@ final class RechtstexteSteuerung
 
     private function nichtGefunden(): Antwort
     {
-        return Antwort::html(Ansicht::seite('oeffentlich', 'fehler', [
-            'titel'   => 'Diese Seite gibt es nicht',
-            'meldung' => 'Der Link führt ins Leere. Vielleicht hat sich die Adresse geändert.',
-            'kennung' => null,
-        ]), 404);
+        return Antwort::nichtGefunden();
     }
 }

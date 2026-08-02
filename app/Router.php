@@ -39,7 +39,19 @@ final class Router
     ) {
     }
 
+    /**
+     * Der eine Ausgang.
+     *
+     * Die Sicherheitskopfzeilen werden hier gesetzt und nirgends sonst. Vorher stand der
+     * Aufruf an sieben Rueckgabestellen — Testfall 47 verlangt sie „in allen Antworten",
+     * und sieben Wiederholungen sind sieben Gelegenheiten, eine zu vergessen.
+     */
     public function behandeln(string $methode, string $pfad): Antwort
+    {
+        return $this->sicherheitskopfzeilen($this->abwickeln($methode, $pfad));
+    }
+
+    private function abwickeln(string $methode, string $pfad): Antwort
     {
         $methode = strtoupper($methode);
 
@@ -51,17 +63,14 @@ final class Router
         // 1. Wartungsmodus (§1.5a)
         if ($this->wartungsmodus()->aktiv()
             && in_array($bereich, [Route::BEREICH_PORTAL, Route::BEREICH_ADMIN, Route::BEREICH_API], true)) {
-            return $this->sicherheitskopfzeilen(Antwort::html(
-                Ansicht::seite('oeffentlich', 'wartung', ['titel' => 'Wartung']),
-                503,
-            ));
+            return Antwort::html(Ansicht::seite('oeffentlich', 'wartung', ['titel' => 'Wartung']), 503);
         }
 
         // 2. Einrichtung offen (§1.5)
         $einrichtungOffen = !$this->installationssperre()->gesperrt();
 
         if ($einrichtungOffen && !$this->istEinrichtung($pfad)) {
-            return $this->sicherheitskopfzeilen(Antwort::weiter('/admin/setup'));
+            return Antwort::weiter('/admin/setup');
         }
 
         // §1.5: Laeuft die Einrichtung ueber unverschluesseltes HTTP, wird sie abgebrochen —
@@ -69,10 +78,10 @@ final class Router
         // Der Abbruch kommt VOR jedem Formular, damit keine Zugangsdaten im Klartext ueber
         // die Leitung gehen (Testfälle 70, 71, 72).
         if ($einrichtungOffen && $this->istEinrichtung($pfad) && !Ersteinrichtung::zugangErlaubt()) {
-            return $this->sicherheitskopfzeilen(Antwort::html(
+            return Antwort::html(
                 Ansicht::seite('setup', 'setup-abbruch', ['titel' => 'Die Einrichtung wurde abgebrochen']),
                 403,
-            ));
+            );
         }
 
         if (!$einrichtungOffen && $this->istEinrichtung($pfad)) {
@@ -101,23 +110,23 @@ final class Router
             // zurueckziehbar, solange das PHP-Cookie gilt — die geloeschte Zeile laege dann
             // ungelesen in der Datenbank.
             if (AdminNachweis::ausSitzung() === null || !$this->anmeldung()->sitzungGueltig()) {
-                return $this->sicherheitskopfzeilen(Antwort::weiter('/admin/anmelden'));
+                return Antwort::weiter('/admin/anmelden');
             }
         }
 
         // 4. CSRF bei jedem POST (§3 Regel 3)
         if ($methode === 'POST' && !Csrf::pruefen(Http::eingabe(Csrf::FELD))) {
-            return $this->sicherheitskopfzeilen(Antwort::html(
+            return Antwort::html(
                 Ansicht::seite('oeffentlich', 'fehler', [
-                    'titel'    => 'Das Formular ist abgelaufen',
-                    'meldung'  => 'Bitte laden Sie die Seite neu und schicken Sie das Formular noch einmal ab.',
-                    'kennung'  => null,
+                    'titel'   => 'Das Formular ist abgelaufen',
+                    'meldung' => 'Bitte laden Sie die Seite neu und schicken Sie das Formular noch einmal ab.',
+                    'kennung' => null,
                 ]),
                 419,
-            ));
+            );
         }
 
-        return $this->sicherheitskopfzeilen($this->aufrufen($route, $parameter));
+        return $this->aufrufen($route, $parameter);
     }
 
     /** @return list<Route> */
@@ -209,14 +218,7 @@ final class Router
 
     private function nichtGefunden(): Antwort
     {
-        return $this->sicherheitskopfzeilen(Antwort::html(
-            Ansicht::seite('oeffentlich', 'fehler', [
-                'titel'   => 'Diese Seite gibt es nicht',
-                'meldung' => 'Der Link führt ins Leere. Vielleicht hat sich die Adresse geändert.',
-                'kennung' => null,
-            ]),
-            404,
-        ));
+        return Antwort::nichtGefunden();
     }
 
     /**

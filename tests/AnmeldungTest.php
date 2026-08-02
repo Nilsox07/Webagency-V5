@@ -8,7 +8,6 @@ use Sartu\Data\Admin\AdminBenutzer;
 use Sartu\Data\Admin\AdminNachweis;
 use Sartu\Data\AnmeldeKonten;
 use Sartu\Data\SitzungsSpeicher;
-use Sartu\Route;
 use Sartu\Router;
 use Sartu\Services\AnmeldeDienst;
 use Sartu\Services\InstallationsSperre;

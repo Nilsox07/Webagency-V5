@@ -6,7 +6,6 @@ namespace Sartu\Tests;
 
 use Sartu\Data\BetreiberdatenSpeicher;
 use Sartu\Data\RechtstexteSpeicher;
-use Sartu\Route;
 use Sartu\Router;
 use Sartu\Services\InstallationsSperre;
 use Sartu\Services\Wartungsmodus;

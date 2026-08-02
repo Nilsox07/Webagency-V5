@@ -59,8 +59,4 @@ final class AdminNachweis
         return new self(self::EINRICHTUNG);
     }
 
-    public function istEinrichtung(): bool
-    {
-        return $this->adminBenutzerId === self::EINRICHTUNG;
-    }
 }

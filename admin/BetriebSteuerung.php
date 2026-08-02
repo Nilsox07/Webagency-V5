@@ -8,7 +8,6 @@ use Sartu\Ansicht;
 use Sartu\Antwort;
 use Sartu\Data\Admin\AdminNachweis;
 use Sartu\Data\BetreiberdatenSpeicher;
-use Sartu\Data\RechtstexteSpeicher;
 use Sartu\Helpers\Http;
 use Sartu\Services\BetreiberdatenDienst;
 use Sartu\Services\Startsperre;

@@ -7,8 +7,6 @@ namespace Sartu\Tests;
 use Sartu\Data\BetreiberdatenSpeicher;
 use Sartu\Data\MigrationFehler;
 use Sartu\Data\Migrator;
-use Sartu\Data\Uuid;
-use Sartu\Route;
 use Sartu\Router;
 use Sartu\Services\Ersteinrichtung;
 use Sartu\Services\InstallationsSperre;
@@ -358,6 +356,47 @@ final class SetupTest extends Datenbankfall
         $this->expectException(\LogicException::class);
 
         \Sartu\Data\Admin\AdminNachweis::fuerErsteinrichtung($sperre);
+    }
+
+    /**
+     * Jede schreibende Route der Einrichtung hat einen Schrittwächter.
+     *
+     * Der Wächter steht in jedem Handler einzeln — und der Kopf des Routers sagt selbst,
+     * warum das eine Gefahr ist: „Wer sie je Route schreibt, vergisst sie irgendwann bei
+     * einer." Eine neunte Setup-Route ohne Wächter fällt sonst niemandem auf. Dieser Test
+     * ist der Ersatz für die Zentralisierung, die der Router hier nicht leisten kann.
+     */
+    public function testJedeSchreibendeEinrichtungsrouteHatEinenSchrittwaechter(): void
+    {
+        $quelle = (string) file_get_contents(SARTU_WURZEL . '/admin/SetupSteuerung.php');
+        $ohneWaechter = [];
+        $geprueft = 0;
+
+        foreach (require SARTU_WURZEL . '/app/routes.php' as $route) {
+            if ($route->methode !== 'POST' || !str_starts_with($route->pfad, '/admin/setup')) {
+                continue;
+            }
+
+            // Schritt 1 speichert nichts — der Knopf geht nur weiter.
+            if ($route->pfad === '/admin/setup') {
+                continue;
+            }
+
+            [, $methode] = $route->handler;
+            ++$geprueft;
+
+            $anfang = strpos($quelle, 'public function ' . $methode . '(');
+            $this->assertIsInt($anfang, sprintf('Der Handler %s fehlt.', $methode));
+
+            $rumpf = substr($quelle, $anfang, 400);
+
+            if (!str_contains($rumpf, 'nurInSchritt(')) {
+                $ohneWaechter[] = $route->schluessel();
+            }
+        }
+
+        $this->assertGreaterThanOrEqual(7, $geprueft, 'Es wurden zu wenige Einrichtungsrouten geprüft.');
+        $this->assertSame([], $ohneWaechter, 'Eine schreibende Einrichtungsroute hat keinen Schrittwächter.');
     }
 
     // ------------------------------------------------------------ Hilfsmittel

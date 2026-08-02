@@ -27,9 +27,20 @@ final class Antwort
         return new self($status, ['Content-Type' => 'text/html; charset=utf-8'] + $kopfzeilen, $rumpf);
     }
 
-    public static function text(string $rumpf, int $status = 200): self
+    /**
+     * Die 404-Seite.
+     *
+     * Sie steht hier und nicht in drei Steuerungen: Ein abweichender Wortlaut verraet, dass
+     * eine Route anders behandelt wird als die anderen — und §3 Regel 2 verlangt gerade,
+     * dass „gibt es nicht" und „gehoert dir nicht" ununterscheidbar sind.
+     */
+    public static function nichtGefunden(): self
     {
-        return new self($status, ['Content-Type' => 'text/plain; charset=utf-8'], $rumpf);
+        return self::html(Ansicht::seite('oeffentlich', 'fehler', [
+            'titel'   => 'Diese Seite gibt es nicht',
+            'meldung' => 'Der Link führt ins Leere. Vielleicht hat sich die Adresse geändert.',
+            'kennung' => null,
+        ]), 404);
     }
 
     public static function weiter(string $ziel, int $status = 302): self

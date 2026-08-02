@@ -6,7 +6,6 @@ namespace Sartu\Admin;
 
 use Sartu\Ansicht;
 use Sartu\Antwort;
-use Sartu\Data\MigrationFehler;
 use Sartu\Helpers\Env;
 use Sartu\Helpers\Http;
 use Sartu\Services\Ersteinrichtung;
@@ -120,9 +119,9 @@ final class SetupSteuerung
 
         try {
             $this->einrichtung->migrationenEinspielen();
-        } catch (MigrationFehler $fehler) {
-            return $this->seite(4, ['fehler' => [$fehler->getMessage()], ...$this->daten(4)]);
         } catch (\RuntimeException $fehler) {
+            // MigrationFehler ist eine RuntimeException — ein eigener Zweig daneben liest
+            // sich, als wuerde er etwas anderes tun.
             return $this->seite(4, ['fehler' => [$fehler->getMessage()], ...$this->daten(4)]);
         }
 
@@ -252,15 +251,17 @@ final class SetupSteuerung
     private function daten(int $schritt): array
     {
         return match ($schritt) {
-            1 => [
-                'pruefungen' => $this->einrichtung->umgebungspruefung(),
-                'bereit'     => $this->einrichtung->umgebungInOrdnung(),
-            ],
+            // Einmal rechnen, zweimal benutzen: Die Pruefung liest rund fuenfzehn Mal vom
+            // Dateisystem.
+            1 => (static function (array $pruefungen, Ersteinrichtung $einrichtung): array {
+                return ['pruefungen' => $pruefungen, 'bereit' => $einrichtung->umgebungInOrdnung($pruefungen)];
+            })($this->einrichtung->umgebungspruefung(), $this->einrichtung),
             2 => ['werte' => ['db_host' => Env::get('DB_HOST', 'db') ?? 'db', 'db_name' => Env::get('DB_NAME', '') ?? '']],
-            4 => [
-                'offene'       => $this->einrichtung->migrator()->offene(),
-                'eingetragene' => $this->einrichtung->migrator()->eingetragene(),
-            ],
+            // Ein Migrator statt zweier: Jeder liest das Verzeichnis, rechnet acht
+            // Pruefsummen und fragt die Protokolltabelle ab.
+            4 => (static function (\Sartu\Data\Migrator $migrator): array {
+                return ['offene' => $migrator->offene(), 'eingetragene' => $migrator->eingetragene()];
+            })($this->einrichtung->migrator()),
             5 => [
                 'gesendet' => false,
                 'werte'    => ['smtp_host' => Env::get('SMTP_HOST', '') ?? '', 'smtp_port' => Env::get('SMTP_PORT', '587') ?? '587'],

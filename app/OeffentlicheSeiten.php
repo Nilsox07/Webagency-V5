@@ -19,12 +19,6 @@ use Sartu\Data\RechtstexteSpeicher;
  */
 final class OeffentlicheSeiten
 {
-    private const BESCHRIFTUNGEN = [
-        'impressum'   => 'Impressum',
-        'datenschutz' => 'Datenschutzerklärung',
-        'agb'         => 'Allgemeine Geschäftsbedingungen',
-    ];
-
     public function __construct(private readonly ?RechtstexteSpeicher $speicher = null)
     {
     }
@@ -58,16 +52,12 @@ final class OeffentlicheSeiten
         $text = $this->speicher()->oeffentlich($slug);
 
         if ($text === null) {
-            return Antwort::html(Ansicht::seite('oeffentlich', 'fehler', [
-                'titel'   => 'Diese Seite gibt es nicht',
-                'meldung' => 'Der Link führt ins Leere. Vielleicht hat sich die Adresse geändert.',
-                'kennung' => null,
-            ]), 404);
+            return Antwort::nichtGefunden();
         }
 
         return Antwort::html(Ansicht::seite('oeffentlich', 'rechtstext', [
-            'titel'        => self::BESCHRIFTUNGEN[$slug],
-            'beschriftung' => self::BESCHRIFTUNGEN[$slug],
+            'titel'        => RechtstexteSpeicher::beschriftung($slug),
+            'beschriftung' => RechtstexteSpeicher::beschriftung($slug),
             'rumpf'        => (string) $text['body'],
         ]));
     }

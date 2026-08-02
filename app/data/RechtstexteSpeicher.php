@@ -43,6 +43,13 @@ final class RechtstexteSpeicher
 
     public const ZUSTAENDE = ['entwurf', 'in_pruefung', 'freigegeben'];
 
+    /** Dieselben Zustaende in Klartext — §13: der Mensch sieht keinen Systemcode. */
+    public const ZUSTANDS_BESCHRIFTUNGEN = [
+        'entwurf'     => 'Entwurf',
+        'in_pruefung' => 'in Prüfung',
+        'freigegeben' => 'freigegeben',
+    ];
+
     /** §2 SARTU_ENTSCHEIDUNGEN_OFFEN: Jeder Entwurf traegt diesen Vermerk am Kopf. */
     public const ENTWURFSVERMERK = 'ENTWURF — NICHT GEPRÜFT, NICHT VERÖFFENTLICHEN';
 

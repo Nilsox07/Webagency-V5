@@ -2,7 +2,6 @@
 
 declare(strict_types=1);
 
-use Sartu\Ansicht;
 use Sartu\Helpers\Html;
 
 /** @var list<string> $hindernisse */

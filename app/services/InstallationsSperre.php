@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Sartu\Services;
 
 use Sartu\Data\BetreiberdatenSpeicher;
-use Sartu\Helpers\Env;
+use Sartu\Helpers\Speicher;
 
 /**
  * Die Sperre der Ersteinrichtung — Portal-Lastenheft §1.5.
@@ -67,11 +67,7 @@ final class InstallationsSperre
     {
         ($this->betreiberdaten ?? new BetreiberdatenSpeicher())->einrichtungAbschliessen();
 
-        $verzeichnis = $this->verzeichnis();
-
-        if (!is_dir($verzeichnis) && !mkdir($verzeichnis, 0770, true) && !is_dir($verzeichnis)) {
-            throw new \RuntimeException(sprintf('Das Verzeichnis %s liess sich nicht anlegen.', $verzeichnis));
-        }
+        Speicher::sicherstellen($this->verzeichnis());
 
         $geschrieben = file_put_contents(
             $this->sperrdatei(),
@@ -91,8 +87,6 @@ final class InstallationsSperre
 
     private function verzeichnis(): string
     {
-        return $this->speicherverzeichnis
-            ?? Env::get('STORAGE_DIR', dirname(__DIR__, 2) . '/storage')
-            ?? dirname(__DIR__, 2) . '/storage';
+        return Speicher::verzeichnis($this->speicherverzeichnis);
     }
 }

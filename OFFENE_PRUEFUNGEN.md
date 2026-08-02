@@ -21,7 +21,7 @@ Damit die Liste unten einzuordnen ist, zuerst das Gegenteil — geprüft und bel
 | Adminanmeldung mit Passwort **und** TOTP | im Durchlauf, `/admin` erreicht |
 | Testmail **angekommen** | Mailpit, Absender `noreply@sartu.local`, Betreff „Testnachricht aus der Einrichtung" |
 | Acht Migrationen einzeln eingespielt und protokolliert | `bin/migrate.php status`: eingespielt 8, offen 0 |
-| **100 PHPUnit-Tests gegen echtes MariaDB 11.4** | grün, 456 Zusicherungen, kein SQLite |
+| **101 PHPUnit-Tests gegen echtes MariaDB 11.4** | grün, 467 Zusicherungen, kein SQLite |
 | Nur `/public` über den Webserver erreichbar | `SecurityHeadersTest` gegen den laufenden Apache |
 
 ---
@@ -77,3 +77,18 @@ danach neu erzeugen.
 | Rechtstexte im Wortlaut | `SARTU_ENTSCHEIDUNGEN_OFFEN.md` §2 steht auf **offen**. `legal_texts` startet leer |
 | Adminmaske für `ADMIN_NOTIFY_EMAIL` | Der Wert steht in §1.5 unter „Erforderliche Werte", wird aber in keinem der acht Setup-Schritte erhoben. **Gemeldet, nicht erfunden** — Vorschlag: erheben in A1, wo ihn die erste Benachrichtigung braucht |
 | Kundenrouten unter `/portal/` | Die Kundenanmeldung ist A1. `TenantIsolationTest` prüft ausdrücklich, dass die Liste **leer** ist, und schlägt an, sobald die erste dazukommt |
+| Firmenname im Fußbereich | §1.4a nennt ihn für den Fußbereich der **öffentlichen** Website — die entsteht nach Stufe B. Bis dahin würde die Abfrage auf jeder Antwort laufen, auch auf 404 und Wartungsseite, und eine Ansicht dürfte nicht auf die Datenbank zugreifen (§1.3) |
+
+---
+
+## Vier Aufräumpunkte, bewusst auf A1 verschoben
+
+Sie stehen hier, damit sie nicht als übersehen gelten. Begründung je Punkt in
+`IMPLEMENTATION_SUMMARY.md` §5b.
+
+| Punkt | Wann |
+|---|---|
+| Verdrahtung der Dienste an einer Kompositionswurzel statt `$this->x ?? new X()` an 29 Stellen | Anfang A1 |
+| `EinrichtungsStand` aus `Ersteinrichtung` herauslösen — Prädikate von Mutationen trennen | Anfang A1 |
+| Betreiberdaten-Formular als gemeinsames Partial für Setup-Schritt 6 und Adminmaske | wenn A1 die dritte Fassung braucht |
+| Arbeitsverzeichnis und Aufräumen der Tests in `Datenbankfall` zusammenziehen | wenn A1 die sechste Testklasse anlegt |

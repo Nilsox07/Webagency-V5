@@ -54,11 +54,6 @@ final class AdminOrganisationen
         return $id;
     }
 
-    public function nachweis(): AdminNachweis
-    {
-        return $this->nachweis;
-    }
-
     private function pdo(): \PDO
     {
         return $this->pdo ?? Db::verbindung();

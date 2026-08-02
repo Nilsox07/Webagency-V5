@@ -10,6 +10,9 @@ use Sartu\Data\Uuid;
 /**
  * Adminseitiger Zugriff auf `users`.
  *
+ * Zaehlen und Anmelden stehen NICHT hier, sondern in AnmeldeKonten: Beides braucht keinen
+ * Nachweis, und zwei Fassungen derselben Abfrage laufen irgendwann auseinander.
+ *
  * `password_hash` und `totp_secret_enc` verlassen diese Klasse nur ueber die ausdruecklich
  * dafuer gebauten Methoden. Portal-Lastenheft §1.5: Zugangsdaten werden nie angezeigt, nie
  * protokolliert, nie in eine Fehlermeldung geschrieben — auch nicht teilweise.
@@ -53,19 +56,6 @@ final class AdminBenutzer
     }
 
     /** @return array<string,mixed>|null */
-    public function nachEmail(string $email): ?array
-    {
-        $anweisung = $this->pdo()->prepare(
-            'SELECT * FROM users WHERE email = ? AND role = ? AND archived_at IS NULL'
-        );
-        $anweisung->execute([mb_strtolower(trim($email)), 'admin']);
-
-        $zeile = $anweisung->fetch();
-
-        return is_array($zeile) ? $zeile : null;
-    }
-
-    /** @return array<string,mixed>|null */
     public function finden(string $id): ?array
     {
         $anweisung = $this->pdo()->prepare('SELECT * FROM users WHERE id = ?');
@@ -74,20 +64,6 @@ final class AdminBenutzer
         $zeile = $anweisung->fetch();
 
         return is_array($zeile) ? $zeile : null;
-    }
-
-    public function anmeldungVermerken(string $benutzerId): void
-    {
-        $anweisung = $this->pdo()->prepare('UPDATE users SET last_login_at = ? WHERE id = ?');
-        $anweisung->execute([Db::jetzt(), $benutzerId]);
-    }
-
-    public function anzahlAdmins(): int
-    {
-        $anweisung = $this->pdo()->prepare('SELECT COUNT(*) FROM users WHERE role = ?');
-        $anweisung->execute(['admin']);
-
-        return (int) $anweisung->fetchColumn();
     }
 
     private function pdo(): \PDO

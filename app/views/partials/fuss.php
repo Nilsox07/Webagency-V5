@@ -2,30 +2,23 @@
 
 declare(strict_types=1);
 
-use Sartu\Data\BetreiberdatenSpeicher;
-use Sartu\Helpers\Format;
-use Sartu\Helpers\Html;
-
 /**
- * Der Fussbereich zieht Firmenname und Kontakt aus `operator_settings` — nie aus dem
- * Quelltext (§1.4a: eine Quelle fuer alles). Steht dort noch nichts, bleibt die Zeile leer,
- * statt einen Platzhalter zu zeigen.
+ * Der Fussbereich.
+ *
+ * Hier stand bis zum 02.08.2026 ein Datenbankzugriff, um den Firmennamen aus
+ * `operator_settings` zu ziehen — samt `try/catch`, weil die Ansicht selbst nicht sicher
+ * sein konnte, dass er gelingt. Genau das verbietet §1.3 und der Kopf von `Ansicht`:
+ * „Datenbankzugriff schon gar nicht. Eine Ansicht bekommt fertige Werte und gibt sie aus."
+ * Er lief auf JEDER Antwort, auch auf 404, 419 und der Wartungsseite.
+ *
+ * Die Angaben aus §1.4a gehoeren in den Fussbereich der oeffentlichen Website — und die
+ * entsteht nach Stufe B (`REIHENFOLGE.md`, „Zwei Livegaenge"). Sie werden dann als Wert
+ * hereingereicht, nicht hier geholt.
  */
-
-$betreiber = null;
-
-try {
-    $betreiber = (new BetreiberdatenSpeicher())->lesen();
-} catch (Throwable) {
-    $betreiber = null;
-}
 
 ?>
 <footer class="fussband">
   <div class="bahn">
-<?php if (is_array($betreiber)): ?>
-    <p><?= Html::e(Format::text(is_string($betreiber['firmenname'] ?? null) ? $betreiber['firmenname'] : null)) ?></p>
-<?php endif; ?>
     <p><a href="/impressum">Impressum</a> · <a href="/datenschutz">Datenschutz</a> · <a href="/agb">AGB</a></p>
   </div>
 </footer>

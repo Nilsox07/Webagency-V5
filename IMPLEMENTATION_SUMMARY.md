@@ -19,7 +19,7 @@ grün."*
 | 3 | Testmail kommt nachweislich an | **erfüllt** | Mailpit: `noreply@sartu.local` → `betreiber@example.org`, „Testnachricht aus der Einrichtung" |
 | 4 | `TenantIsolationTest` im Umfang von A0 grün | **erfüllt** | 13 Tests, gegen MariaDB 11.4 |
 
-**Gesamt: 100 PHPUnit-Tests, 456 Zusicherungen, grün.** Sie decken die 26 A0-Testfälle ab; die
+**Gesamt: 101 PHPUnit-Tests, 467 Zusicherungen, grün.** Sie decken die 26 A0-Testfälle ab; die
 übrigen sichern die Befunde aus Abschnitt 5a.
 
 ---
@@ -152,6 +152,44 @@ sie **fast**, und keiner der 81 Tests hat den Unterschied bemerkt.
 SQL-Einschleusung an ~35 Aufrufstellen · kein unescaptes Ausgabefeld in den Ansichten · keine
 Umgehung der Mandantentrennung · kein Weg, die Installationssperre über das Netz zu lösen ·
 kein Pfaddurchgriff · kein Konfigurationsdurchgriff über `.env`.
+
+---
+
+## 5b. Aufräumen — was angewendet wurde und was nicht
+
+`/simplify` lief mit **zwei** Prüfern statt der vorgesehenen vier: Wiederverwendung und
+Vereinfachung arbeiten auf denselben Dateien, ebenso Effizienz und Bauhöhe. Zusammen
+22 Befunde.
+
+**Angewendet — die sieben, die etwas kosten:**
+
+| Was | Warum es zählte |
+|---|---|
+| **`Speicher::verzeichnis()`** löst `/storage` an einer Stelle auf statt an fünf | Eine der fünf war **schon auseinandergelaufen**: Setup-Schritt 1 prüfte die Schreibrechte auf einem anderen Verzeichnis, als die Ratenbegrenzung später beschrieb. Beide Zweige funktionierten für sich — genau so entstehen Fehler, die niemand sieht |
+| **`ZahlenlistenDatei`** trägt die Ablage für Ratenbegrenzung und Wiederholungssperre | Beide hatten dieselbe Datei-Logik zweimal, ohne dass ein Test sie verband |
+| **`Antwort::nichtGefunden()`** statt drei Kopien derselben 404-Seite | §3 Regel 2 verlangt, dass „gibt es nicht" und „gehört dir nicht" ununterscheidbar sind. Drei Wortlaute an drei Stellen sind der schnellste Weg, das zu verlieren |
+| **Sicherheitskopfzeilen an einem Ausgang** statt an sieben Rückgabestellen | Testfall 47 verlangt sie „in allen Antworten". Sieben Wiederholungen sind sieben Gelegenheiten, eine zu vergessen |
+| **`app/views/partials/fuss.php` liest nicht mehr aus der Datenbank** | Eine Abfrage auf **jeder** Antwort, auch auf 404, 419 und der Wartungsseite — und ein `try/catch` drumherum, weil die Ansicht selbst nicht sicher sein konnte. Genau das verbietet der Kopf von `Ansicht`. Die Angaben aus §1.4a gehören in den Fußbereich der **öffentlichen** Website, und die entsteht nach Stufe B |
+| **Ein Schrittwächter-Test** für jede schreibende Einrichtungsroute | Der Wächter steht in jedem Handler einzeln. Eine neunte Route ohne ihn fiele sonst niemandem auf — und das ist die Route, die Befund A wieder aufmacht |
+| **Toter Code und doppelte Abfragen entfernt** | `AdminBenutzer` hatte drei Methoden, die `AnmeldeKonten` byte-gleich schon hatte, und `Ersteinrichtung` stellte dieselbe Frage über beide Klassen |
+
+**Dazu Kleinigkeiten:** elf unbenutzte Importe, ein doppelter `catch` mit gleichem Rumpf, und
+die Umgebungsprüfung läuft einmal je Seitenaufruf statt dreimal.
+
+**Ein Befund war besonders unangenehm:** `OeffentlicheSeiten` und `RechtstexteSteuerung` hatten
+eigene Beschriftungstabellen — **derselbe Fehler**, den ich eine Stunde vorher in
+`BetreiberdatenSpeicher` behoben und dort ausdrücklich kommentiert hatte. Auch behoben.
+
+**Nicht angewendet, mit Grund:**
+
+| Vorschlag | Warum nicht |
+|---|---|
+| **Ein Kompositionswurzel- oder Dienstcontainer** für die 29 Stellen mit `$this->x ?? new X()` | Der Befund stimmt: So bringt Zwischenspeichern nichts, weil sechs Aufrufstellen sechs eigene Objekte bauen. Aber das ist ein Umbau der Verdrahtung **der ganzen Anwendung** — nach A0, wo die Anzahl der Aufrufstellen feststeht, und nicht als Nebensache am Ende einer Etappe |
+| **`EinrichtungsStand` aus `Ersteinrichtung` herauslösen** | Richtig gesehen — Prädikate und Mutationen in einer Klasse. Derselbe Grund: ein Schnitt, der A1 betrifft, gehört an den Anfang von A1 |
+| **`operator_settings` je Anfrage zwischenspeichern** | Hängt am Punkt darüber. Ohne geteilte Objekte spart es fast nichts |
+| **Schema nur einmal je Testlauf aufbauen, dann `TRUNCATE`** | Spart rund acht Sekunden. Der Aufbau über den **echten** Migrator je Test ist aber die Zusage aus `REIHENFOLGE.md`, und acht Sekunden sind kein Grund, sie anzufassen |
+| **Betreiberdaten-Formular als gemeinsames Partial** (Setup-Schritt 6 und Adminmaske) | Der Befund stimmt, §1.3 verbietet Markup-Kopien. Die beiden Masken unterscheiden sich aber in Umfang und Zweck, und ein gemeinsames Partial mit Schalter wäre in A1 wieder aufzutrennen. **Als offener Punkt vermerkt**, nicht als erledigt |
+| **Testhelfer in `Datenbankfall` zusammenziehen** | Fünf Testklassen bauen ihr Arbeitsverzeichnis selbst. Lohnt sich, gehört aber zu dem Zeitpunkt gemacht, an dem A1 die sechste Klasse anlegt |
 
 ---
 

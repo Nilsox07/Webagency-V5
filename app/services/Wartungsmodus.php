@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Sartu\Services;
 
-use Sartu\Helpers\Env;
+use Sartu\Helpers\Speicher;
 
 /**
  * Portal-Lastenheft §1.5a: Waehrend `migrate.php up` liefern Kunden- und Adminbereich 503
@@ -26,11 +26,7 @@ final class Wartungsmodus
 
     public function einschalten(string $grund): void
     {
-        $verzeichnis = $this->verzeichnis();
-
-        if (!is_dir($verzeichnis) && !mkdir($verzeichnis, 0770, true) && !is_dir($verzeichnis)) {
-            throw new \RuntimeException(sprintf('Das Verzeichnis %s liess sich nicht anlegen.', $verzeichnis));
-        }
+        Speicher::sicherstellen($this->verzeichnis());
 
         file_put_contents($this->datei(), $grund . "\n" . gmdate('Y-m-d H:i:s') . " UTC\n", LOCK_EX);
     }
@@ -49,8 +45,6 @@ final class Wartungsmodus
 
     private function verzeichnis(): string
     {
-        return $this->speicherverzeichnis
-            ?? Env::get('STORAGE_DIR', dirname(__DIR__, 2) . '/storage')
-            ?? dirname(__DIR__, 2) . '/storage';
+        return Speicher::verzeichnis($this->speicherverzeichnis);
     }
 }

@@ -56,21 +56,6 @@ final class Db
         return $pdo;
     }
 
-    /** Verbindung ohne Datenbanknamen — fuer die Vorpruefung der Ersteinrichtung (§1.5 Schritt 2). */
-    public static function oeffnenOhneDatenbank(string $host, string $port, string $benutzer, string $passwort): \PDO
-    {
-        $pdo = new \PDO(
-            sprintf('mysql:host=%s;port=%s;charset=utf8mb4', $host, $port),
-            $benutzer,
-            $passwort,
-            [\PDO::ATTR_ERRMODE => \PDO::ERRMODE_EXCEPTION, \PDO::ATTR_EMULATE_PREPARES => false],
-        );
-
-        $pdo->exec("SET time_zone = '+00:00'");
-
-        return $pdo;
-    }
-
     /**
      * Steht die Verbindung?
      *

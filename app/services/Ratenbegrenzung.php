@@ -4,8 +4,6 @@ declare(strict_types=1);
 
 namespace Sartu\Services;
 
-use Sartu\Helpers\Env;
-
 /**
  * Portal-Lastenheft §1.5: „Rate-Limit auf jeden Schritt, damit die Strecke nicht als
  * Passwortprobierflaeche dient." §3 Regel 4 verlangt dasselbe fuer die Anmeldung.
@@ -17,10 +15,13 @@ use Sartu\Helpers\Env;
  */
 final class Ratenbegrenzung
 {
+    private ZahlenlistenDatei $ablage;
+
     public function __construct(
-        private readonly ?string $speicherverzeichnis = null,
+        ?string $speicherverzeichnis = null,
         private readonly ?\Closure $uhr = null,
     ) {
+        $this->ablage = new ZahlenlistenDatei('ratenbegrenzung', $speicherverzeichnis);
     }
 
     public function erlaubt(string $schluessel, int $versuche, int $fensterSekunden): bool
@@ -30,76 +31,31 @@ final class Ratenbegrenzung
 
     public function verbleibend(string $schluessel, int $versuche, int $fensterSekunden): int
     {
-        $jetzt = $this->jetzt();
-        $zeitstempel = array_values(array_filter(
-            $this->lesen($schluessel),
-            static fn (int $z) => $z > $jetzt - $fensterSekunden
-        ));
-
-        return max(0, $versuche - count($zeitstempel));
+        return max(0, $versuche - count($this->imFenster($schluessel, $fensterSekunden)));
     }
 
     public function vermerken(string $schluessel, int $fensterSekunden): void
     {
-        $jetzt = $this->jetzt();
-        $zeitstempel = array_values(array_filter(
-            $this->lesen($schluessel),
-            static fn (int $z) => $z > $jetzt - $fensterSekunden
-        ));
-        $zeitstempel[] = $jetzt;
+        $zeitstempel = $this->imFenster($schluessel, $fensterSekunden);
+        $zeitstempel[] = $this->jetzt();
 
-        $this->schreiben($schluessel, $zeitstempel);
+        $this->ablage->schreiben($schluessel, $zeitstempel);
     }
 
     public function zuruecksetzen(string $schluessel): void
     {
-        $datei = $this->datei($schluessel);
-        if (is_file($datei)) {
-            unlink($datei);
-        }
+        $this->ablage->loeschen($schluessel);
     }
 
     /** @return list<int> */
-    private function lesen(string $schluessel): array
+    private function imFenster(string $schluessel, int $fensterSekunden): array
     {
-        $datei = $this->datei($schluessel);
-        if (!is_file($datei)) {
-            return [];
-        }
+        $grenze = $this->jetzt() - $fensterSekunden;
 
-        $inhalt = file_get_contents($datei);
-        if ($inhalt === false || $inhalt === '') {
-            return [];
-        }
-
-        $werte = json_decode($inhalt, true);
-
-        return is_array($werte) ? array_values(array_map('intval', $werte)) : [];
-    }
-
-    /** @param list<int> $zeitstempel */
-    private function schreiben(string $schluessel, array $zeitstempel): void
-    {
-        $verzeichnis = $this->verzeichnis();
-        if (!is_dir($verzeichnis) && !mkdir($verzeichnis, 0770, true) && !is_dir($verzeichnis)) {
-            throw new \RuntimeException(sprintf('Das Verzeichnis %s liess sich nicht anlegen.', $verzeichnis));
-        }
-
-        file_put_contents($this->datei($schluessel), json_encode($zeitstempel, JSON_THROW_ON_ERROR), LOCK_EX);
-    }
-
-    private function datei(string $schluessel): string
-    {
-        return $this->verzeichnis() . '/' . hash('sha256', $schluessel) . '.json';
-    }
-
-    private function verzeichnis(): string
-    {
-        $basis = $this->speicherverzeichnis
-            ?? Env::get('STORAGE_DIR', dirname(__DIR__, 2) . '/storage')
-            ?? dirname(__DIR__, 2) . '/storage';
-
-        return rtrim($basis, '/') . '/ratenbegrenzung';
+        return array_values(array_filter(
+            $this->ablage->lesen($schluessel),
+            static fn (int $zeitpunkt) => $zeitpunkt > $grenze
+        ));
     }
 
     private function jetzt(): int

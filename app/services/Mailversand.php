@@ -6,7 +6,6 @@ namespace Sartu\Services;
 
 use PHPMailer\PHPMailer\Exception as MailFehler;
 use PHPMailer\PHPMailer\PHPMailer;
-use Sartu\Helpers\Env;
 
 /**
  * Mailversand ueber SMTP — Portal-Lastenheft §10.
