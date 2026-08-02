@@ -244,6 +244,101 @@ final class Bedarfsscheck
     }
 
     /**
+     * Die Antworten als Frage → Antwort, in Klartext — Portal-Lastenheft §4b.5.
+     *
+     * > „Detailansicht: **alle** Antworten in Klartext als Frage → Antwort, nicht als
+     * > Rohdaten."
+     *
+     * Zwei Punkte, die diese Vorgabe streng nimmt:
+     *
+     * **Alle** heisst alle. Ein Feld, das der Bedarfsscheck später dazubekommt, landet nach
+     * §4b.2 unverändert in `payload` — und taucht hier mit seinem Feldnamen als Frage auf,
+     * statt zu verschwinden. Eine Antwort, die niemand sieht, ist so gut wie nicht gegeben.
+     *
+     * **Klartext** heisst: `mehrere_regionen` wird zu „Wir arbeiten in mehreren Regionen
+     * oder an mehreren Standorten". Der Systemwert steht nirgends — §3 Regel 12 verbietet
+     * ihn schon dem Kunden gegenüber, und für den Admin ist er auch nur schwerer zu lesen.
+     *
+     * @param array<string,mixed> $payload
+     *
+     * @return list<array{frage:string,antwort:string}>
+     */
+    public static function klartext(array $payload): array
+    {
+        $bekannt = [];
+
+        foreach (self::themen() as $thema) {
+            foreach ($thema['felder'] as $feld) {
+                $bekannt[(string) $feld['name']] = $feld;
+            }
+        }
+
+        $zeilen = [];
+
+        // Erst die bekannten Felder, in der Reihenfolge des Bedarfsschecks.
+        foreach ($bekannt as $name => $feld) {
+            if (!array_key_exists($name, $payload)) {
+                continue;
+            }
+
+            $zeilen[] = [
+                'frage'   => (string) $feld['label'],
+                'antwort' => self::antwort($payload[$name], (array) ($feld['optionen'] ?? [])),
+            ];
+        }
+
+        // Dann alles, was der Bedarfsscheck heute noch nicht kennt.
+        foreach ($payload as $name => $wert) {
+            if (isset($bekannt[$name]) || in_array($name, self::NICHT_ANZEIGEN, true)) {
+                continue;
+            }
+
+            $zeilen[] = [
+                'frage'   => 'Zusätzliche Angabe: ' . (string) $name,
+                'antwort' => self::antwort($wert, []),
+            ];
+        }
+
+        return $zeilen;
+    }
+
+    /**
+     * Felder, die in der Detailansicht nichts zu suchen haben.
+     *
+     * Sie stehen bereits als eigene Spalten und damit als eigene Zeilen in der Kopfleiste
+     * der Detailansicht. Zweimal dasselbe zu zeigen macht die Liste länger, nicht klarer.
+     */
+    private const NICHT_ANZEIGEN = [
+        'first_name', 'last_name', 'company', 'email', 'phone', 'preferred_contact',
+        'b2b_confirmed', 'privacy_confirmed', 'self_reported_source',
+    ];
+
+    /** @param array<string,string> $optionen */
+    private static function antwort(mixed $wert, array $optionen): string
+    {
+        if (is_array($wert)) {
+            $teile = [];
+
+            foreach ($wert as $einzeln) {
+                if (is_string($einzeln)) {
+                    $teile[] = $optionen[$einzeln] ?? $einzeln;
+                }
+            }
+
+            return $teile === [] ? 'Nicht beantwortet' : implode(' · ', $teile);
+        }
+
+        $text = is_scalar($wert) ? trim((string) $wert) : '';
+
+        if ($text === '') {
+            // §4a: nie null, „–" oder „undefined".
+            return 'Nicht beantwortet';
+        }
+
+        return $optionen[$text] ?? $text;
+    }
+
+    /**
      * Prüft einen Schritt serverseitig.
      *
      * @param array<string,mixed> $eingabe

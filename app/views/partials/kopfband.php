@@ -13,6 +13,7 @@ use Sartu\Helpers\Csrf;
     <?php if ($angemeldet): ?>
     <nav aria-label="Interner Bereich">
       <a href="/admin">Übersicht</a>
+      <a href="/admin/anfragen">Anfragen</a>
       <a href="/admin/einstellungen/betrieb">Betreiberdaten</a>
       <a href="/admin/rechtstexte">Rechtstexte</a>
       <a href="/admin/testmail">Testmail</a>

@@ -195,7 +195,13 @@ final class MarkupTest extends Datenbankfall
         $this->alsAdmin($this->adminAnlegen());
         $this->betreiberdatenAnlegen();
 
-        foreach (['/admin', '/admin/einstellungen/betrieb', '/admin/rechtstexte', '/admin/rechtstexte/impressum', '/admin/testmail'] as $pfad) {
+        // Die Anfrageliste einmal leer und einmal gefuellt: Der Leerzustand ist eine eigene
+        // Seite mit eigenem Text (§0.3b) und faellt sonst durch jede Pruefung.
+        $seiten['GET /admin/anfragen (leer)'] = $fertig->behandeln('GET', '/admin/anfragen')->rumpf;
+        $anfrageId = $this->anfrageAnlegen();
+
+        foreach (['/admin', '/admin/einstellungen/betrieb', '/admin/rechtstexte', '/admin/rechtstexte/impressum',
+                  '/admin/testmail', '/admin/anfragen', '/admin/anfragen/' . $anfrageId] as $pfad) {
             $seiten['GET ' . $pfad] = $fertig->behandeln('GET', $pfad)->rumpf;
         }
 
@@ -257,6 +263,36 @@ final class MarkupTest extends Datenbankfall
         $seiten['GET /briefing/danke'] = $router->behandeln('GET', '/briefing/danke')->rumpf;
 
         return $seiten;
+    }
+
+    /** Eine Anfrage, damit die Detailansicht etwas anzuzeigen hat. */
+    private function anfrageAnlegen(): string
+    {
+        $ergebnis = (new \Sartu\Services\AnfrageService(
+            null,
+            new \Sartu\Services\Ratenbegrenzung($this->arbeitsverzeichnis),
+        ))->anlegen([
+            'submission_id'      => \Sartu\Data\Uuid::v4(),
+            'form_started_at'    => (string) (time() - 60),
+            'first_name'         => 'Erika',
+            'last_name'          => 'Mustermann',
+            'company'            => 'Mustermann Sanitär GmbH',
+            'email'              => 'erika@example.org',
+            'preferred_contact'  => 'email',
+            'b2b_confirmed'      => '1',
+            'privacy_confirmed'  => '1',
+            'angebot'            => 'Wir sanieren Bäder.',
+            'einsatzort'         => '48431',
+            'bestehende_website' => 'nein',
+            'hauptziel'          => 'anfragen',
+            'zielgruppe'         => 'privatkunden',
+            'umfangssignale'     => ['hauptangebot'],
+            'sonderfunktionen'   => ['formular'],
+            'domainstatus'       => 'vorhanden',
+            'fester_termin'      => 'nein',
+        ], [], '203.0.113.9');
+
+        return (string) $ergebnis->anfrageId;
     }
 
     private function router(bool $gesperrt): Router

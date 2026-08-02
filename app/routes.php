@@ -12,17 +12,19 @@ declare(strict_types=1);
  * Das geht nur mit einer Liste. Zwei Listen — eine zum Ausliefern, eine zum Pruefen — waeren
  * zwei Wahrheiten, und die auseinanderlaufende von beiden ist immer die im Test.
  *
- * Stufe A0: Der Kundenbereich hat noch KEINE Route. Die Kundenanmeldung entsteht in A1
- * (`REIHENFOLGE.md`). Die leere Liste ist deshalb richtig und wird vom Test genau so
- * erwartet — sobald A1 die erste Portalroute anlegt, schlaegt er an.
+ * Stand A1: Der Kundenbereich hat weiterhin KEINE Route. Der Bedarfsscheck ist oeffentlich
+ * und die Anfrageliste ist Adminbereich — beides beruehrt die Mandantentrennung nicht, weil
+ * eine Anfrage entsteht, BEVOR es einen Kunden gibt. Die Kundenanmeldung kommt als naechstes;
+ * sobald sie die erste Portalroute anlegt, schlaegt der Isolationstest an.
  */
 
+use Sartu\Admin\AnfragenSteuerung;
 use Sartu\Admin\AnmeldeSteuerung;
-use Sartu\BedarfsscheckSteuerung;
 use Sartu\Admin\BetriebSteuerung;
 use Sartu\Admin\RechtstexteSteuerung;
 use Sartu\Admin\SetupSteuerung;
 use Sartu\Admin\TestmailSteuerung;
+use Sartu\BedarfsscheckSteuerung;
 use Sartu\OeffentlicheSeiten;
 use Sartu\Route;
 
@@ -77,6 +79,14 @@ return [
     new Route(Route::BEREICH_ADMIN, 'GET', '/admin/rechtstexte/{slug}', [RechtstexteSteuerung::class, 'einzeln']),
     new Route(Route::BEREICH_ADMIN, 'POST', '/admin/rechtstexte/{slug}', [RechtstexteSteuerung::class, 'speichern']),
     new Route(Route::BEREICH_ADMIN, 'POST', '/admin/rechtstexte/{slug}/freigabe', [RechtstexteSteuerung::class, 'freigabe']),
+    // Anfragen (§4b.5). Auch hier stehen die festen Pfade vor dem Muster: `{id}` wuerde
+    // sonst auf jede Unterseite passen.
+    new Route(Route::BEREICH_ADMIN, 'GET', '/admin/anfragen', [AnfragenSteuerung::class, 'liste']),
+    new Route(Route::BEREICH_ADMIN, 'GET', '/admin/anfragen/{id}/export', [AnfragenSteuerung::class, 'exportieren']),
+    new Route(Route::BEREICH_ADMIN, 'POST', '/admin/anfragen/{id}/zustand', [AnfragenSteuerung::class, 'zustand']),
+    new Route(Route::BEREICH_ADMIN, 'POST', '/admin/anfragen/{id}/notiz', [AnfragenSteuerung::class, 'notiz']),
+    new Route(Route::BEREICH_ADMIN, 'POST', '/admin/anfragen/{id}/loeschen', [AnfragenSteuerung::class, 'loeschen']),
+    new Route(Route::BEREICH_ADMIN, 'GET', '/admin/anfragen/{id}', [AnfragenSteuerung::class, 'einzeln']),
     new Route(Route::BEREICH_ADMIN, 'GET', '/admin/testmail', [TestmailSteuerung::class, 'formular']),
     new Route(Route::BEREICH_ADMIN, 'POST', '/admin/testmail', [TestmailSteuerung::class, 'senden']),
 

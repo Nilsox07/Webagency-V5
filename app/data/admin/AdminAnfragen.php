@@ -68,6 +68,18 @@ final class AdminAnfragen
         $anweisung->execute([$zustand, $id]);
     }
 
+    /**
+     * §4b.4: Die Ablehnung verkuerzt die Frist von 12 auf 6 Monate.
+     *
+     * Das Datum wird uebergeben, nicht hier gerechnet — welche Frist zu welchem Zustand
+     * gehoert, ist Fachlogik und steht in `Services\Anfragebearbeitung` (§1.3).
+     */
+    public function loeschfristSetzen(string $id, string $datum): void
+    {
+        $anweisung = $this->pdo()->prepare('UPDATE leads SET delete_after = ? WHERE id = ?');
+        $anweisung->execute([$datum, $id]);
+    }
+
     public function notizSetzen(string $id, string $notiz): void
     {
         $anweisung = $this->pdo()->prepare('UPDATE leads SET admin_note = ? WHERE id = ?');

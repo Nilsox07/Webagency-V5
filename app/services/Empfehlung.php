@@ -213,6 +213,24 @@ final class Empfehlung
         ];
     }
 
+    /**
+     * Das Ampelkennzeichen in Klartext.
+     *
+     * §3 Regel 12 verbietet Systemcodes gegenueber dem Kunden. Im Adminbereich waere
+     * `standard` erlaubt — aber der Wert steht dort an zwei Stellen, und zwei Stellen mit
+     * je eigener Uebersetzung laufen auseinander. Also eine.
+     */
+    public static function ampelName(string $ampel): string
+    {
+        return match ($ampel) {
+            'standard' => 'Standard',
+            'gelb'     => 'Rückfrage',
+            'orange'   => 'Fachmodul',
+            'rot'      => 'Sonderprojekt',
+            default    => $ampel,
+        };
+    }
+
     private static function gateName(string $gate): string
     {
         return match ($gate) {

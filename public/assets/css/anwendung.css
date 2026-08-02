@@ -174,7 +174,17 @@ a { color: var(--text); text-underline-offset: .18em; }
   padding: var(--s-2);
 }
 
-.feld textarea { min-height: 18rem; font-family: var(--font-mono); font-size: var(--fs-small); }
+/* Der Rechtstexteditor ist ein Editor: hoch und in fester Breite.
+   Eine interne Notiz ist keiner — sie bekam vorher dieselben 18 rem
+   und dieselbe Schreibmaschinenschrift. */
+
+.feld textarea { min-height: 7rem; }
+
+.feld textarea.editor {
+  min-height: 18rem;
+  font-family: var(--font-mono);
+  font-size: var(--fs-small);
+}
 
 .feld input:focus-visible,
 .feld select:focus-visible,
@@ -494,3 +504,58 @@ input[type="radio"] {
   height: var(--s-3);
   flex: none;
 }
+
+/* ---- Tabellen des internen Bereichs ---------------------- */
+/* Die Anfrageliste hat sieben Spalten. Auf dem Telefon passt
+   das nicht — die Tabelle scrollt in ihrem eigenen Rahmen,
+   die Seite nicht. */
+
+.tabellenrahmen { overflow-x: auto; }
+
+.tabelle {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: var(--fs-small);
+}
+
+.tabelle th,
+.tabelle td {
+  text-align: left;
+  padding: var(--s-2);
+  border-bottom: 1px solid var(--line);
+  vertical-align: top;
+}
+
+/* Nur die Spalten, in denen ein Umbruch den Wert zerreisst: Datum und
+   Kennzeichen. Firma und Name duerfen umbrechen — sonst ist die Tabelle
+   breiter als der Bildschirm, obwohl sie hineinpasst. */
+
+.tabelle td:first-child,
+.tabelle td:last-child,
+.tabelle .marke { white-space: nowrap; }
+
+.tabelle th {
+  font-weight: var(--fw-head);
+  color: var(--label);
+}
+
+.tabelle tbody tr:last-child td { border-bottom: 0; }
+
+.filterzeile {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--s-3);
+  align-items: flex-end;
+  margin-bottom: var(--s-4);
+}
+
+.filterzeile .feld { margin-bottom: 0; }
+
+/* Das Ampelkennzeichen. Kein Rot, kein Gelb, kein Orange —
+   es gibt eine Akzentfarbe. Unterschieden wird ueber Flaeche
+   und Kante, und das Wort steht ohnehin daneben. */
+
+.marke[data-stand="standard"] { background: var(--paper); }
+.marke[data-stand="gelb"]     { background: var(--sand); }
+.marke[data-stand="orange"]   { background: var(--lime-soft); }
+.marke[data-stand="rot"]      { background: var(--lime); }

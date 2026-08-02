@@ -42,7 +42,7 @@ $zustand = is_array($text) ? (string) $text['status'] : 'entwurf';
   <?= Csrf::feld() ?>
   <div class="feld">
     <label for="feld-body">Text</label>
-    <textarea id="feld-body" name="body" required><?= Html::e($rumpf) ?></textarea>
+    <textarea id="feld-body" name="body" class="editor" required><?= Html::e($rumpf) ?></textarea>
     <p class="feld__hinweis">Beim Speichern geht der Zustand zurück auf Entwurf. Die Fassung zählt eins hoch.</p>
   </div>
   <div class="knopfreihe">

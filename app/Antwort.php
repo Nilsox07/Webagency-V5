@@ -28,6 +28,25 @@ final class Antwort
     }
 
     /**
+     * Ein Download — Portal-Lastenheft §4b.4, „Datensatz exportieren".
+     *
+     * Eine eigene Fabrik und nicht `html()` mit anderer Kopfzeile: `html()` setzt den
+     * Inhaltstyp mit `+` und gewinnt damit gegen jede uebergebene Kopfzeile. Ein Export,
+     * der als `text/html` ausgeliefert wird, oeffnet sich im Browser statt zu speichern —
+     * und wird vom Browser als Auszeichnung gelesen.
+     *
+     * @param array<string,string> $kopfzeilen
+     */
+    public static function datei(string $rumpf, string $inhaltstyp, string $dateiname, array $kopfzeilen = []): self
+    {
+        return new self(200, [
+            'Content-Type'        => $inhaltstyp,
+            'Content-Disposition' => 'attachment; filename="' . str_replace('"', '', $dateiname) . '"',
+            'X-Content-Type-Options' => 'nosniff',
+        ] + $kopfzeilen, $rumpf);
+    }
+
+    /**
      * Die 404-Seite.
      *
      * Sie steht hier und nicht in drei Steuerungen: Ein abweichender Wortlaut verraet, dass
