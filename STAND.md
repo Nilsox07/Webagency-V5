@@ -14,10 +14,10 @@ wo er aufgehört hat, statt von vorn zu beginnen.**
 | **Fertig** | A0 · A1 · A2 · A3 · **B** |
 | **Läuft gerade** | — |
 | **Als Nächstes** | **Stufe C** ist nicht beauftragt. Was jetzt ansteht, steht in `LIVEGANG.md` — und zwei Dinge davon kann nur ein Mensch tun |
-| **Tests** | **264 grün**, 3508 Zusicherungen, gegen echtes MariaDB 11.4. Kein SQLite |
+| **Tests** | **276 grün**, 3615 Zusicherungen, gegen echtes MariaDB. Kein SQLite |
 | **Tabellen** | **20 von 20** |
 | **Testfälle** | **88 von 88** gebaut und geprüft |
-| **Migrationen** | 025, lückenlos eingespielt, Prüfsummen stimmen |
+| **Migrationen** | 026, lückenlos eingespielt, Prüfsummen stimmen |
 
 ---
 
@@ -37,10 +37,10 @@ wo er aufgehört hat, statt von vorn zu beginnen.**
 Branchenseiten, und ein Menü, das mit `Esc` nicht zuging, obwohl zwei Kommentare das
 behaupteten.
 
-**Einen Fehler hat sie gefunden und gemeldet:** Sechs Mails aus §10 gibt es nicht — darunter
-`Ihr Angebot von SARTU liegt bereit`. Ohne sie liegt das Angebot im Kundenbereich, und
-niemand schickt den Kunden hin. Es steht in `LIVEGANG.md` §6.1 als Sperre vor dem ersten
-Kunden.
+**Einen Fehler hat sie gefunden — er ist behoben:** Sechs Mails aus §10 fehlten, darunter
+`Ihr Angebot von SARTU liegt bereit`. Ohne sie lag das Angebot im Kundenbereich, und niemand
+schickte den Kunden hin. Alle sechs sind am 02.08.2026 gebaut worden, je mit Test. Ebenso
+Block 4 des Kundenbereichs. `LIVEGANG.md` §6.1 und §6.2 führen beides als erledigt.
 
 ---
 

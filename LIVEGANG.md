@@ -306,28 +306,36 @@ Datenbankschema einspielen, `php bin/migrate.php status` laufen lassen, einmal a
 Diese Punkte sind gemessen, nicht vermutet. Sie stehen hier, weil sie den Betrieb betreffen
 und nicht die Einrichtung.
 
-### 6.1 Sechs Mails aus §10 gibt es nicht
+### 6.1 Sechs Mails aus §10 — erledigt am 02.08.2026
 
-`MESSUNGEN.md` §4 hat sie beim Durchspielen gefunden. Der Wortlaut steht in §10 — es ist
-nichts zu erfinden, nur zu bauen.
+Diese Liste stand hier als Lücke. **Sie ist geschlossen.** Alle sechs Mails sind gebaut, je mit
+einem Test, der Betreff und Empfänger prüft:
 
-| §10 verlangt | Betreff | Folge, wenn sie fehlt |
+| §10 verlangt | Betreff | Gebaut |
 |---|---|---|
-| Angebot gesendet | `Ihr Angebot von SARTU liegt bereit` | **Das Angebot liegt im Kundenbereich, und niemand schickt den Kunden hin** |
-| Neue Aufgaben | `Es liegen Aufgaben für Sie bereit` | Das Projekt wartet auf Angaben, die niemand erfragt |
-| Faktenfreigabe erfolgt | `Freigabe bestätigt — wir starten` | Der Lieferkorridor beginnt unbemerkt |
-| Antwort auf Nachricht | `Antwort auf Ihre Nachricht` | Die Antwort liegt im Kundenbereich und wird nicht gelesen |
-| Angebot läuft in 3 Tagen ab | `Ihr Angebot gilt noch bis {Datum}` | Das Angebot verfällt ohne Vorwarnung |
-| Angebot angenommen (an Admin) | `Angebot angenommen: {Organisation}` | SARTU erfährt die Beauftragung nur durch Nachsehen |
+| Angebot gesendet | `Ihr Angebot von SARTU liegt bereit` | ✓ |
+| Neue Aufgaben | `Es liegen Aufgaben für Sie bereit` | ✓ |
+| Faktenfreigabe erfolgt | `Freigabe bestätigt — wir starten` | ✓ |
+| Antwort auf Nachricht | `Antwort auf Ihre Nachricht` | ✓ |
+| Angebot läuft in 3 Tagen ab | `Ihr Angebot gilt noch bis {Datum}` | ✓ täglicher Lauf |
+| Angebot angenommen (an Admin) | `Angebot angenommen: {Organisation}` | ✓ |
 
-**Die erste Zeile ist die dringendste.** Ohne sie funktioniert der Weg vom Angebot zur
-Annahme nur, wenn jemand von Hand eine Mail schreibt.
+Die Ablauferinnerung geht **einmal** raus, nicht täglich. Der Merker dafür ist
+`offers.reminder_sent_at` aus `migrations/026`.
 
-### 6.2 Block 4 des Cockpits fehlt
+### 6.2 Block 4 des Kundenbereichs — erledigt am 02.08.2026
 
-§8.1 verlangt „Letzte Aktivität" — die letzten fünf für den Kunden relevanten Ereignisse.
-Sie stünden in `audit_events`, aber kein Dokument legt fest, welche Aktion kundenrelevant ist
-und wie ihr Klartext lautet. **Gemeldet, nicht geraten** (`OFFENE_PRUEFUNGEN.md`).
+Auch dieser Punkt stand hier als Lücke. §8.1 nennt **fünf** Ereignisse, jedes im fertigen
+Wortlaut — die Festlegung fehlte also nie. Sie sind auf die vorhandenen Ereignisse des
+Prüfprotokolls abgebildet.
+
+**Der Kunde sieht davon nur Klartext und Datum.** Die Abfrage wählt zwei Spalten und kann
+ausschließlich fünf feste Schlüssel erzeugen. Diese Felder stehen nicht in der Auswahl:
+
+- `reason`
+- `old_value` und `new_value`
+- `detail`
+- `ip`
 
 ---
 
@@ -393,8 +401,9 @@ Was er **nicht** prüft, steht darunter — es sind Einstellungen des Anbieters:
 
 ### Vor dem ersten Kunden
 
-- [ ] Die sechs Mails aus §6.1 gebaut — allen voran `Ihr Angebot von SARTU liegt bereit`
-- [ ] Entschieden, ob Block 4 des Cockpits (§6.2) vor dem Start entsteht
+- [x] Die sechs Mails aus §6.1 gebaut — erledigt am 02.08.2026
+- [x] Block 4 des Kundenbereichs (§6.2) — erledigt am 02.08.2026
+- [ ] Der tägliche Cronlauf ist eingetragen und hat **einmal nachweislich geschrieben**
 
 ---
 
