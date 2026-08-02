@@ -23,6 +23,7 @@ use Sartu\Admin\AnmeldeSteuerung;
 use Sartu\Admin\BetriebSteuerung;
 use Sartu\Admin\OeffnungszeitenSteuerung;
 use Sartu\Admin\ProjekteSteuerung;
+use Sartu\Admin\NachrichtenSteuerung;
 use Sartu\Admin\RechnungenSteuerung;
 use Sartu\Admin\RechtstexteSteuerung;
 use Sartu\Admin\SetupSteuerung;
@@ -149,6 +150,8 @@ return [
     new Route(Route::BEREICH_ADMIN, 'POST', '/admin/projekte/{id}/fortsetzen', [AdminVorschauSteuerung::class, 'fortsetzen']),
     // Rechnungen (§12). Der Zahlungsstatus wird von Hand gesetzt — es gibt hier bewusst
     // KEINE Rueckkehrroute vom Zahlungsdienst.
+    new Route(Route::BEREICH_ADMIN, 'GET', '/admin/nachrichten', [NachrichtenSteuerung::class, 'liste']),
+    new Route(Route::BEREICH_ADMIN, 'POST', '/admin/nachrichten/{id}/antwort', [NachrichtenSteuerung::class, 'antworten']),
     new Route(Route::BEREICH_ADMIN, 'GET', '/admin/rechnungen', [RechnungenSteuerung::class, 'liste']),
     new Route(Route::BEREICH_ADMIN, 'POST', '/admin/rechnungen/{id}/senden', [RechnungenSteuerung::class, 'senden']),
     new Route(Route::BEREICH_ADMIN, 'POST', '/admin/rechnungen/{id}/zahlung', [RechnungenSteuerung::class, 'zahlungEintragen']),

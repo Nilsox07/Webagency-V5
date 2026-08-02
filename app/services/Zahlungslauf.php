@@ -216,7 +216,8 @@ final class Zahlungslauf
         return $this->audit ?? new AuditProtokoll($this->pdo);
     }
 
-    private function mailversand(): Mailversand
+    /** `Versender`, nicht `Mailversand` — sonst geht die Naht aus dem Konstruktor nicht auf. */
+    private function mailversand(): Versender
     {
         return $this->mail ?? new Mailversand();
     }

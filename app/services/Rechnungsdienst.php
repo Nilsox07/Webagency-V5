@@ -296,8 +296,19 @@ final class Rechnungsdienst
             $ip,
         );
 
-        if ($fehler === null) {
-            Aufgabenvorlage::anlegen($this->nachweis, (string) $projekt['id'], $this->pdo);
+        if ($fehler !== null) {
+            return;
+        }
+
+        $entstanden = Aufgabenvorlage::anlegen($this->nachweis, (string) $projekt['id'], $this->pdo);
+
+        // §10, Zeile „Neue Aufgaben". Sie fehlte bis zum 02.08.2026 — der Kunde bekam eine
+        // Aufgabenliste, von der ihm niemand erzählte.
+        //
+        // **An der Zahl, nicht am Zustandswechsel.** Entstand keine Aufgabe, gibt es nichts
+        // zu erledigen, und eine Mail darüber wäre eine Aufforderung ins Leere.
+        if ($entstanden > 0) {
+            $this->kundenmailSenden($projekt, Mailtexte::AUFGABEN_BETREFF, Mailtexte::aufgaben());
         }
     }
 

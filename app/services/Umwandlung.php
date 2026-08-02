@@ -195,7 +195,13 @@ final class Umwandlung
         ];
     }
 
-    private function mailversand(): Mailversand
+    /**
+     * **Rückgabetyp `Versender`, nicht `Mailversand`.** Er stand bis zum 02.08.2026 auf der
+     * konkreten Klasse, während der Konstruktor längst die Schnittstelle annahm — ein
+     * eingesetzter Prüfversender löste damit einen `TypeError` aus, den der `catch` daneben
+     * verschluckte. Die Naht war da und ging nicht auf.
+     */
+    private function mailversand(): Versender
     {
         return $this->mail ?? new Mailversand();
     }

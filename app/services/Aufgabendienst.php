@@ -5,10 +5,12 @@ declare(strict_types=1);
 namespace Sartu\Services;
 
 use Sartu\Data\AuditProtokoll;
+use Sartu\Data\Customer\KundenAngebote;
 use Sartu\Data\Customer\KundenAufgaben;
 use Sartu\Data\Customer\KundenBereich;
 use Sartu\Data\Customer\KundenDateien;
 use Sartu\Data\Customer\KundenFreigaben;
+use Sartu\Data\Customer\KundenProjekte;
 use Sartu\Helpers\Validate;
 
 /**
@@ -45,6 +47,7 @@ final class Aufgabendienst
         private readonly ?KundenFreigaben $freigaben = null,
         private readonly ?Projektwechsel $wechsel = null,
         private readonly ?AuditProtokoll $audit = null,
+        private readonly ?Versender $mail = null,
         private readonly ?\PDO $pdo = null,
     ) {
     }
@@ -164,9 +167,18 @@ final class Aufgabendienst
             ip: $ip,
         );
 
+        // §10, Zeile „Faktenfreigabe erfolgt (an beide)". Sie fehlte bis zum 02.08.2026 —
+        // der Lieferkorridor begann unbemerkt, und genau seine Länge steht in der Mail.
+        //
+        // **Vor dem Zustandswechsel**, aus demselben Grund wie bei der Angebotsannahme: Die
+        // Erklärung steht und wird nicht zurückgenommen. Ob der Zustand nachzieht, ändert an
+        // der Freigabe nichts, darf aber die Nachricht darüber nicht kosten.
+        $this->freigabemailsSenden($projektId, $name);
+
         // §5.1a: `briefing` → `produktion`, ausgelöst vom Kunden, `reason` Pflicht —
-        // ab hier läuft der Lieferkorridor.
-        $wechselfehler = $this->wechsel()->wechseln(
+        // ab hier läuft der Lieferkorridor. Dass der Zustand nicht nachzog, sieht der Admin
+        // am fehlenden Wechsel — nicht der Kunde an einem Fehler, den er nicht verursacht hat.
+        $this->wechsel()->wechseln(
             $projektId,
             $this->bereich->organisationId,
             Projektstatus::PRODUKTION,
@@ -176,14 +188,50 @@ final class Aufgabendienst
             $ip,
         );
 
-        if ($wechselfehler !== null) {
-            // Die Erklärung steht und wird nicht zurückgenommen. Dass der Zustand nicht
-            // nachzog, sieht der Admin am fehlenden Wechsel — nicht der Kunde an einem
-            // Fehler, den er nicht verursacht hat.
-            return [];
+        return [];
+    }
+
+    /**
+     * Die zwei Mails zur Faktenfreigabe — §10 sagt „an beide".
+     *
+     * Der Lieferkorridor kommt aus dem **angenommenen Angebot**, nicht aus einer Konstante:
+     * §4 macht `delivery_days_min` und `delivery_days_max` zu Pflichtfeldern des Angebots,
+     * und §4c legt sie je Paket fest. Fehlt das Angebot, entfällt der Satz mit den Tagen —
+     * eine erfundene Zahl in einer Fertigstellungszusage wäre der schlimmere Fehler.
+     */
+    private function freigabemailsSenden(string $projektId, string $name): void
+    {
+        $projekt = (new KundenProjekte($this->bereich, $this->pdo))->finden($projektId);
+
+        if ($projekt === null) {
+            return;
         }
 
-        return [];
+        $angebot = (new KundenAngebote($this->bereich, $this->pdo))->aktuelles();
+        $mail = new Projektmail($this->mail, $this->pdo);
+
+        $mail->anKunden(
+            $projekt,
+            Mailtexte::FREIGABE_BETREFF,
+            Mailtexte::freigabe(
+                self::tage($angebot, 'delivery_days_min'),
+                self::tage($angebot, 'delivery_days_max'),
+            ),
+        );
+
+        $mail->anBetreuer(
+            $projekt,
+            Mailtexte::FREIGABE_BETREFF,
+            Mailtexte::freigabeIntern($name, $projektId),
+        );
+    }
+
+    /** @param array<string,mixed>|null $angebot */
+    private static function tage(?array $angebot, string $feld): ?int
+    {
+        $wert = $angebot[$feld] ?? null;
+
+        return is_numeric($wert) ? (int) $wert : null;
     }
 
     private function aufgaben(): KundenAufgaben

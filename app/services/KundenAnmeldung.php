@@ -223,7 +223,8 @@ final class KundenAnmeldung
         return $this->tokens ?? new AnmeldeTokenSpeicher($this->pdo);
     }
 
-    private function mail(): Mailversand
+    /** `Versender`, nicht `Mailversand` — sonst geht die Naht aus dem Konstruktor nicht auf. */
+    private function mail(): Versender
     {
         return $this->mail ?? new Mailversand();
     }

@@ -8,6 +8,8 @@ use Sartu\Data\AngebotAnnahme;
 use Sartu\Data\AuditProtokoll;
 use Sartu\Data\Customer\KundenAngebote;
 use Sartu\Data\Customer\KundenBereich;
+use Sartu\Data\Customer\KundenOrganisationen;
+use Sartu\Data\Customer\KundenProjekte;
 use Sartu\Data\AnmeldeKonten;
 use Sartu\Helpers\Format;
 use Sartu\Helpers\Validate;
@@ -136,8 +138,18 @@ final class Angebotsannahme
             ip: $ip,
         );
 
+        // **Vor dem Zustandswechsel, mit Absicht.** Die Annahme ist erklärt und protokolliert;
+        // ob der Zustand nachzieht, ändert daran nichts. Bis zum 02.08.2026 stand der Versand
+        // hinter dem Wechsel — ein gescheiterter Wechsel kostete den Kunden seine Bestätigung
+        // und SARTU die Nachricht über eine Beauftragung.
+        $this->benachrichtigen($angebot, $benutzerId, $name);
+
         // §5.1a: `angebot_offen` → `angebot_angenommen`, ausgelöst vom Kunden.
-        $wechselfehler = $this->wechsel()->wechseln(
+        //
+        // Der Rückgabewert wird nicht geprüft, und das ist die Aussage: Scheitert der
+        // Wechsel, zieht der Zustand nach, sobald der Admin ihn setzt. Die Annahme steht so
+        // oder so — sie ist eine Erklärung des Kunden und wird nicht zurückgenommen.
+        $this->wechsel()->wechseln(
             $projektId,
             $this->bereich->organisationId,
             Projektstatus::ANGEBOT_ANGENOMMEN,
@@ -147,15 +159,44 @@ final class Angebotsannahme
             $ip,
         );
 
-        if ($wechselfehler !== null) {
-            // Die Annahme steht bereits und wird nicht zurückgenommen — sie ist eine
-            // Erklärung des Kunden. Der Zustand zieht nach, sobald der Admin ihn setzt.
-            return [];
-        }
+        return [];
+    }
 
+    /**
+     * Die zwei Mails zur Annahme — §10, Zeilen „(an Kunde)" und „(an Admin)".
+     *
+     * Die zweite fehlte bis zum 02.08.2026. Ohne sie erfuhr SARTU von einer kostenpflichtigen
+     * Beauftragung nur durch Nachsehen.
+     *
+     * @param array<string,mixed> $angebot
+     */
+    private function benachrichtigen(array $angebot, string $benutzerId, string $name): void
+    {
         $this->bestaetigungSenden($benutzerId, $name);
 
-        return [];
+        $projekt = (new KundenProjekte($this->bereich, $this->pdo))
+            ->finden((string) $angebot['project_id']);
+
+        if ($projekt === null) {
+            return;
+        }
+
+        $organisation = (new KundenOrganisationen($this->bereich, $this->pdo))->eigene();
+
+        (new Projektmail($this->mail, $this->pdo))->anBetreuer(
+            $projekt,
+            Mailtexte::angebotAngenommenBetreff(
+                trim((string) ($organisation['legal_name'] ?? '')) !== ''
+                    ? (string) $organisation['legal_name']
+                    : (string) $projekt['title'],
+            ),
+            Mailtexte::angebotAngenommen(
+                (string) $angebot['number'],
+                $name,
+                (int) $angebot['one_time_net_cents'],
+                (string) $projekt['id'],
+            ),
+        );
     }
 
     /** §4 Prüfregel Annahme: `valid_until` darf nicht in der Vergangenheit liegen. */
@@ -216,7 +257,8 @@ final class Angebotsannahme
         return $this->audit ?? new AuditProtokoll($this->pdo);
     }
 
-    private function mailversand(): Mailversand
+    /** `Versender`, nicht `Mailversand` — sonst geht die Naht aus dem Konstruktor nicht auf. */
+    private function mailversand(): Versender
     {
         return $this->mail ?? new Mailversand();
     }

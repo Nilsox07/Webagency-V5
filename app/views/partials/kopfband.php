@@ -16,6 +16,7 @@ use Sartu\Helpers\Csrf;
       <a href="/admin/anfragen">Anfragen</a>
       <a href="/admin/projekte">Projekte</a>
       <a href="/admin/rechnungen">Rechnungen</a>
+      <a href="/admin/nachrichten">Nachrichten</a>
       <a href="/admin/einstellungen/betrieb">Betreiberdaten</a>
       <a href="/admin/rechtstexte">Rechtstexte</a>
       <a href="/admin/testmail">Testmail</a>

@@ -58,12 +58,58 @@ final class AdminAufgaben
         )->fetchAll();
     }
 
-    public function nachrichtBeantworten(string $nachrichtId, string $antwort): void
+    /**
+     * Alle Nachrichten, unbeantwortete zuerst — §9.1 `/admin/nachrichten`.
+     *
+     * Beantwortete bleiben sichtbar: Eine Antwort, die man nach dem Absenden nicht mehr
+     * nachlesen kann, ist im Streitfall keine.
+     *
+     * @return list<array<string,mixed>>
+     */
+    public function alleNachrichten(): array
+    {
+        return $this->pdo()->query(
+            'SELECT s.*, o.legal_name, p.title AS project_title FROM support_messages s'
+            . ' JOIN organizations o ON o.id = s.organization_id'
+            . ' LEFT JOIN projects p ON p.id = s.project_id'
+            . ' WHERE s.archived_at IS NULL'
+            . ' ORDER BY s.answered_at IS NOT NULL, s.created_at ASC'
+        )->fetchAll();
+    }
+
+    /** @return array<string,mixed>|null */
+    public function nachricht(string $nachrichtId): ?array
     {
         $anweisung = $this->pdo()->prepare(
-            'UPDATE support_messages SET answer_text = ?, answered_at = ? WHERE id = ?'
+            'SELECT s.*, o.legal_name FROM support_messages s'
+            . ' JOIN organizations o ON o.id = s.organization_id'
+            . ' WHERE s.id = ? AND s.archived_at IS NULL'
+        );
+        $anweisung->execute([$nachrichtId]);
+
+        $zeile = $anweisung->fetch();
+
+        return is_array($zeile) ? $zeile : null;
+    }
+
+    /**
+     * Trägt die Antwort ein — **genau einmal**.
+     *
+     * `answered_at IS NULL` steht in der Bedingung, nicht nur im Wert. Ohne sie überschriebe
+     * ein zweiter Klick die erste Antwort, und der Kunde bekäme eine zweite Mail zu einer
+     * Nachricht, die er längst beantwortet gesehen hat.
+     *
+     * @return bool `false`, wenn die Nachricht bereits beantwortet war
+     */
+    public function nachrichtBeantworten(string $nachrichtId, string $antwort): bool
+    {
+        $anweisung = $this->pdo()->prepare(
+            'UPDATE support_messages SET answer_text = ?, answered_at = ?'
+            . ' WHERE id = ? AND answered_at IS NULL'
         );
         $anweisung->execute([$antwort, Db::jetzt(), $nachrichtId]);
+
+        return $anweisung->rowCount() === 1;
     }
 
     private function pdo(): \PDO

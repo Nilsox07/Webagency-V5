@@ -117,7 +117,293 @@ final class ProjektmailsTest extends Datenbankfall
         $this->assertCount(1, $postfach->mails);
     }
 
+    // ------------------------------------------------------- 2 Angebot angenommen (Admin)
+
+    /**
+     * §10 — `Angebot angenommen: {Organisation}`, an SARTU.
+     *
+     * Die Annahme verschickt **zwei** Mails: die Bestätigung an den Kunden (gab es schon) und
+     * die Kurzmeldung an SARTU (fehlte). Geprüft werden beide, samt Empfänger — ohne die
+     * zweite erfuhr SARTU von einer kostenpflichtigen Beauftragung nur durch Nachsehen.
+     */
+    public function testEineAnnahmeSchicktZweiMailsAnBeideSeiten(): void
+    {
+        $postfach = new Postfach();
+        $this->alsAdmin($this->adminId);
+        $angebotId = $this->angebotAnlegen($postfach);
+        (new AngebotDienst($this->nachweis(), mail: $postfach))->senden($angebotId, null);
+
+        $postfach = new Postfach();
+        $this->alsKunde($this->organisationId, $this->kundeId);
+
+        $this->assertSame([], (new \Sartu\Services\Angebotsannahme($this->bereich(), mail: $postfach))
+            ->annehmen($angebotId, $this->annahmeeingabe(), $this->kundeId, '127.0.0.1'));
+
+        $this->assertCount(2, $postfach->mails, 'Es sind nicht genau zwei Nachrichten.');
+
+        $anKunden = $this->mailAn($postfach, self::KUNDE);
+        $anBetreuer = $this->mailAn($postfach, self::BETREUER);
+
+        $this->assertSame('Bestätigung Ihrer Beauftragung', $anKunden['betreff']);
+        $this->assertSame(
+            Mailtexte::angebotAngenommenBetreff('Mustermann Sanitär GmbH'),
+            $anBetreuer['betreff'],
+        );
+
+        // Die interne Kurzmeldung trägt Feldwerte, keine Wertung.
+        $this->assertStringContainsString('AN-2026-001', $anBetreuer['text']);
+        $this->assertStringContainsString('Erika Mustermann', $anBetreuer['text']);
+    }
+
+    // ---------------------------------------------------------------- 3 Neue Aufgaben
+
+    /**
+     * §10 — `Es liegen Aufgaben für Sie bereit`, an den Kunden.
+     *
+     * Auslöser ist die verbuchte **Anzahlung**: Dort entsteht die Aufgabenliste (§8.3). Ohne
+     * die Mail bekam der Kunde eine Liste, von der ihm niemand erzählte.
+     */
+    public function testDieVerbuchteAnzahlungKuendigtDieAufgabenAn(): void
+    {
+        $postfach = new Postfach();
+        $this->angebotAnnehmen($postfach);
+
+        $this->alsAdmin($this->adminId);
+        $rechnungId = $this->anzahlungAnlegen($postfach);
+        $dienst = new \Sartu\Services\Rechnungsdienst($this->nachweis(), mail: $postfach);
+
+        $this->assertSame([], $dienst->senden($rechnungId, null));
+        $postfach->mails = [];
+
+        $this->assertSame([], $dienst->zahlungEintragen($rechnungId, 119000, 'Kontoauszug', null));
+
+        // Zwei Nachrichten: der Zahlungseingang (gab es schon) und die Aufgaben (fehlte).
+        $aufgabenmail = $this->mailMitBetreff($postfach, Mailtexte::AUFGABEN_BETREFF);
+
+        $this->assertSame(self::KUNDE, $aufgabenmail['an']);
+        $this->assertStringContainsString('15 bis 25 Minuten', $aufgabenmail['text']);
+        $this->assertSame(
+            1,
+            $this->anzahlMitBetreff($postfach, Mailtexte::AUFGABEN_BETREFF),
+            'Die Aufgabenmail ging nicht genau einmal raus.',
+        );
+    }
+
+    // ---------------------------------------------------------------- 4 Faktenfreigabe
+
+    /**
+     * §10 — `Freigabe bestätigt — wir starten`, **an beide**.
+     *
+     * Der Lieferkorridor in der Kundenmail kommt aus dem angenommenen Angebot, nicht aus
+     * einer Konstante — geprüft wird die Zahl, die dort steht.
+     */
+    public function testDieFaktenfreigabeSchicktAnBeideSeiten(): void
+    {
+        $postfach = new Postfach();
+        $this->angebotAnnehmen($postfach);
+
+        $this->alsAdmin($this->adminId);
+        $rechnungId = $this->anzahlungAnlegen($postfach);
+        $rechnungsdienst = new \Sartu\Services\Rechnungsdienst($this->nachweis(), mail: $postfach);
+        $rechnungsdienst->senden($rechnungId, null);
+        $rechnungsdienst->zahlungEintragen($rechnungId, 119000, 'Kontoauszug', null);
+
+        // Alle Pflichtaufgaben vor der Freigabe erledigen — die Sperre aus §8.3.
+        $this->alsKunde($this->organisationId, $this->kundeId);
+        $aufgabendienst = new \Sartu\Services\Aufgabendienst($this->bereich(), mail: $postfach);
+
+        foreach ($this->offenePflichtaufgabenOhneFreigabe() as $aufgabeId) {
+            $aufgabendienst->abschliessen($aufgabeId, ['answer_text' => 'Antwort'], $this->kundeId, null);
+        }
+
+        $postfach->mails = [];
+
+        $this->assertSame([], $aufgabendienst->abschliessen(
+            $this->freigabeaufgabe(),
+            ['bestaetigung' => '1', 'granted_name' => 'Erika Mustermann'],
+            $this->kundeId,
+            null,
+        ));
+
+        $this->assertCount(2, $postfach->mails, 'Es sind nicht genau zwei Nachrichten.');
+
+        $anKunden = $this->mailAn($postfach, self::KUNDE);
+        $anBetreuer = $this->mailAn($postfach, self::BETREUER);
+
+        $this->assertSame(Mailtexte::FREIGABE_BETREFF, $anKunden['betreff']);
+        $this->assertSame(Mailtexte::FREIGABE_BETREFF, $anBetreuer['betreff']);
+
+        // §4c: Paket `wachstum` liefert den Korridor. Die Zahl steht im Angebot, nicht hier.
+        $korridor = \Sartu\Services\Angebotstexte::lieferkorridor('wachstum');
+        $this->assertStringContainsString(
+            $korridor[0] . '–' . $korridor[1] . ' Werktagen',
+            $anKunden['text'],
+        );
+    }
+
+    // ---------------------------------------------------------------- 5 Antwort auf Nachricht
+
+    /** §10 — `Antwort auf Ihre Nachricht`, an den Kunden. */
+    public function testEineBeantworteteNachrichtErreichtDenKunden(): void
+    {
+        $nachrichtId = $this->nachrichtAnlegen();
+        $postfach = new Postfach();
+        $this->alsAdmin($this->adminId);
+
+        $this->assertSame([], (new \Sartu\Services\Nachrichtendienst($this->nachweis(), mail: $postfach))
+            ->beantworten($nachrichtId, 'Ihre Domain bleibt bei Ihnen. Wir übernehmen nur die Technik.'));
+
+        $this->assertCount(1, $postfach->mails);
+        $this->assertSame(self::KUNDE, $postfach->mails[0]['an']);
+        $this->assertSame(Mailtexte::ANTWORT_BETREFF, $postfach->mails[0]['betreff']);
+        $this->assertStringContainsString('Ihre Domain bleibt bei Ihnen.', $postfach->mails[0]['text']);
+    }
+
+    /** Zweimal beantworten geht nicht — und schickt keine zweite Mail. */
+    public function testEineNachrichtLaesstSichNurEinmalBeantworten(): void
+    {
+        $nachrichtId = $this->nachrichtAnlegen();
+        $postfach = new Postfach();
+        $this->alsAdmin($this->adminId);
+        $dienst = new \Sartu\Services\Nachrichtendienst($this->nachweis(), mail: $postfach);
+
+        $this->assertSame([], $dienst->beantworten($nachrichtId, 'Die erste Antwort steht.'));
+        $this->assertNotSame([], $dienst->beantworten($nachrichtId, 'Und noch eine hinterher.'));
+        $this->assertCount(1, $postfach->mails);
+
+        // Die erste Antwort steht unverändert in der Zeile.
+        $anweisung = $this->pdo->prepare('SELECT answer_text FROM support_messages WHERE id = ?');
+        $anweisung->execute([$nachrichtId]);
+
+        $this->assertSame('Die erste Antwort steht.', (string) $anweisung->fetchColumn());
+    }
+
+    /** Eine zu kurze Antwort geht nicht raus — §8.9 verlangt mindestens zehn Zeichen. */
+    public function testEineZuKurzeAntwortGehtNichtRaus(): void
+    {
+        $nachrichtId = $this->nachrichtAnlegen();
+        $postfach = new Postfach();
+        $this->alsAdmin($this->adminId);
+
+        $fehler = (new \Sartu\Services\Nachrichtendienst($this->nachweis(), mail: $postfach))
+            ->beantworten($nachrichtId, 'Ja.');
+
+        $this->assertNotSame([], $fehler);
+        $this->assertSame([], $postfach->mails);
+    }
+
     // ---------------------------------------------------------------- Hilfsmittel
+
+    /** @return array{an:string,betreff:string,text:string} */
+    private function mailAn(Postfach $postfach, string $adresse): array
+    {
+        foreach ($postfach->mails as $mail) {
+            if ($mail['an'] === $adresse) {
+                return $mail;
+            }
+        }
+
+        $this->fail('Keine Nachricht an ' . $adresse . '.');
+    }
+
+    /** @return array{an:string,betreff:string,text:string} */
+    private function mailMitBetreff(Postfach $postfach, string $betreff): array
+    {
+        foreach ($postfach->mails as $mail) {
+            if ($mail['betreff'] === $betreff) {
+                return $mail;
+            }
+        }
+
+        $this->fail('Keine Nachricht mit dem Betreff „' . $betreff . '".');
+    }
+
+    private function anzahlMitBetreff(Postfach $postfach, string $betreff): int
+    {
+        return count(array_filter(
+            $postfach->mails,
+            static fn (array $mail) => $mail['betreff'] === $betreff,
+        ));
+    }
+
+    /** @return array<string,mixed> */
+    private function annahmeeingabe(): array
+    {
+        $eingabe = ['accepted_name' => 'Erika Mustermann'];
+
+        foreach (array_keys(\Sartu\Services\Angebotsannahme::BESTAETIGUNGEN) as $feld) {
+            $eingabe[$feld] = '1';
+        }
+
+        return $eingabe;
+    }
+
+    /** Angebot anlegen, senden und annehmen — der Weg bis zur Anzahlungsrechnung. */
+    private function angebotAnnehmen(Postfach $postfach): void
+    {
+        $this->alsAdmin($this->adminId);
+        $angebotId = $this->angebotAnlegen($postfach);
+
+        $this->assertSame([], (new AngebotDienst($this->nachweis(), mail: $postfach))
+            ->senden($angebotId, null));
+
+        $this->alsKunde($this->organisationId, $this->kundeId);
+
+        $this->assertSame([], (new \Sartu\Services\Angebotsannahme($this->bereich(), mail: $postfach))
+            ->annehmen($angebotId, $this->annahmeeingabe(), $this->kundeId, null));
+    }
+
+    private function anzahlungAnlegen(Postfach $postfach): string
+    {
+        $angelegt = (new \Sartu\Services\Rechnungsdienst($this->nachweis(), mail: $postfach))
+            ->anlegen($this->projektId, [
+                'number'    => 'RE-2026-001',
+                'milestone' => 'anzahlung',
+                'net_cents' => '100000',
+            ], null);
+
+        $this->assertSame([], $angelegt['fehler']);
+
+        return (string) $angelegt['id'];
+    }
+
+    /** @return list<string> */
+    private function offenePflichtaufgabenOhneFreigabe(): array
+    {
+        $anweisung = $this->pdo->prepare(
+            "SELECT id FROM tasks WHERE project_id = ? AND status = 'offen'"
+            . " AND required = 1 AND kind <> 'freigabe'"
+        );
+        $anweisung->execute([$this->projektId]);
+
+        return $anweisung->fetchAll(\PDO::FETCH_COLUMN);
+    }
+
+    private function freigabeaufgabe(): string
+    {
+        $anweisung = $this->pdo->prepare(
+            "SELECT id FROM tasks WHERE project_id = ? AND kind = 'freigabe' LIMIT 1"
+        );
+        $anweisung->execute([$this->projektId]);
+
+        return (string) $anweisung->fetchColumn();
+    }
+
+    private function nachrichtAnlegen(): string
+    {
+        $id = Uuid::v4();
+
+        $anweisung = $this->pdo->prepare(
+            'INSERT INTO support_messages (id, organization_id, project_id, body, created_by_user_id)'
+            . ' VALUES (?, ?, ?, ?, ?)'
+        );
+        $anweisung->execute([
+            $id, $this->organisationId, $this->projektId,
+            'Was passiert mit meiner Domain, wenn wir umziehen?', $this->kundeId,
+        ]);
+
+        return $id;
+    }
 
     private function nachweis(): AdminNachweis
     {
