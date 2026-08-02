@@ -47,6 +47,38 @@ final class BetreiberdatenSpeicher
         'kleinunternehmer',
     ];
 
+    /**
+     * Menschliche Beschriftung je Feld.
+     *
+     * Sie steht hier und nicht in einer Maske, weil drei Stellen dieselbe brauchen: das
+     * Formular, die Fehlermeldung beim Speichern und die Startsperre. Drei Kopien laufen
+     * auseinander, und die auseinandergelaufene zeigt dann `inhaltlich_verantwortlich`.
+     */
+    public const BESCHRIFTUNGEN = [
+        'firmenname'                => 'Firmenname',
+        'rechtsform'                => 'Rechtsform',
+        'strasse'                   => 'Straße und Hausnummer',
+        'plz'                       => 'Postleitzahl',
+        'ort'                       => 'Ort',
+        'land'                      => 'Land',
+        'telefon'                   => 'Telefonnummer',
+        'email'                     => 'E-Mail-Adresse',
+        'ust_id'                    => 'Umsatzsteuer-Identifikationsnummer',
+        'steuernummer'              => 'Steuernummer',
+        'registergericht'           => 'Registergericht',
+        'registernummer'            => 'Registernummer',
+        'inhaltlich_verantwortlich' => 'Inhaltlich verantwortlich',
+        'bank_iban'                 => 'IBAN',
+        'bank_bic'                  => 'BIC',
+        'bank_institut'             => 'Bank',
+        'kleinunternehmer'          => 'Kleinunternehmer nach § 19 UStG',
+    ];
+
+    public static function beschriftung(string $feld): string
+    {
+        return self::BESCHRIFTUNGEN[$feld] ?? $feld;
+    }
+
     public function __construct(private readonly ?\PDO $pdo = null)
     {
     }

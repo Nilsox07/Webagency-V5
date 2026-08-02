@@ -7,6 +7,7 @@ namespace Sartu;
 use Sartu\Data\Admin\AdminNachweis;
 use Sartu\Helpers\Csrf;
 use Sartu\Helpers\Http;
+use Sartu\Services\AnmeldeDienst;
 use Sartu\Services\Ersteinrichtung;
 use Sartu\Services\InstallationsSperre;
 use Sartu\Services\Wartungsmodus;
@@ -34,6 +35,7 @@ final class Router
         private readonly array $routen,
         private readonly ?InstallationsSperre $sperre = null,
         private readonly ?Wartungsmodus $wartung = null,
+        private readonly ?AnmeldeDienst $anmeldung = null,
     ) {
     }
 
@@ -89,7 +91,16 @@ final class Router
         // unangemeldeter POST die Frage „ist mein Token gueltig" — und das ist eine
         // Auskunft an jemanden, der hier nichts zu suchen hat.
         if ($route->bereich === Route::BEREICH_ADMIN && !$route->ohneAnmeldung) {
-            if (AdminNachweis::ausSitzung() === null) {
+            // Zwei Bedingungen, beide noetig:
+            //
+            //   1. Der Sitzungszustand traegt Rolle `admin` UND ein bestaetigtes TOTP.
+            //   2. Die zugehoerige Zeile in `sessions` existiert und ist nicht abgelaufen.
+            //
+            // Punkt 2 ist der Unterschied zwischen „serverseitig gespeichert" und
+            // „serverseitig durchgesetzt" (§3 Regel 6). Ohne ihn waere eine Anmeldung nicht
+            // zurueckziehbar, solange das PHP-Cookie gilt — die geloeschte Zeile laege dann
+            // ungelesen in der Datenbank.
+            if (AdminNachweis::ausSitzung() === null || !$this->anmeldung()->sitzungGueltig()) {
                 return $this->sicherheitskopfzeilen(Antwort::weiter('/admin/anmelden'));
             }
         }
@@ -239,5 +250,10 @@ final class Router
     private function wartungsmodus(): Wartungsmodus
     {
         return $this->wartung ?? new Wartungsmodus();
+    }
+
+    private function anmeldung(): AnmeldeDienst
+    {
+        return $this->anmeldung ?? new AnmeldeDienst();
     }
 }

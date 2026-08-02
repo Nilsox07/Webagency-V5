@@ -23,27 +23,10 @@ use Sartu\Helpers\Http;
  */
 final class RechtstexteSteuerung
 {
-    private const BESCHRIFTUNGEN = [
-        'impressum'   => 'Impressum',
-        'datenschutz' => 'Datenschutzerklärung',
-        'agb'         => 'Allgemeine Geschäftsbedingungen',
-        'avv'         => 'Auftragsverarbeitungsvertrag',
-        'tom'         => 'Technische und organisatorische Maßnahmen',
-    ];
-
     private const ZUSTAENDE = [
         'entwurf'     => 'Entwurf',
         'in_pruefung' => 'in Prüfung',
         'freigegeben' => 'freigegeben',
-    ];
-
-    /** avv und tom sind nur angemeldet sichtbar (§4 `legal_texts`, Testfall 82). */
-    private const ZIELGRUPPEN = [
-        'impressum'   => 'oeffentlich',
-        'datenschutz' => 'oeffentlich',
-        'agb'         => 'oeffentlich',
-        'avv'         => 'kunde',
-        'tom'         => 'kunde',
     ];
 
     public function __construct(private readonly ?RechtstexteSpeicher $speicher = null)
@@ -54,7 +37,7 @@ final class RechtstexteSteuerung
     public function liste(array $parameter = []): Antwort
     {
         $texte = [];
-        foreach (array_keys(self::BESCHRIFTUNGEN) as $slug) {
+        foreach (array_keys(RechtstexteSpeicher::BESCHRIFTUNGEN) as $slug) {
             $texte[$slug] = $this->speicher()->intern($slug);
         }
 
@@ -62,7 +45,7 @@ final class RechtstexteSteuerung
             'titel'          => 'Rechtstexte',
             'angemeldet'     => true,
             'texte'          => $texte,
-            'beschriftungen' => self::BESCHRIFTUNGEN,
+            'beschriftungen' => RechtstexteSpeicher::BESCHRIFTUNGEN,
             'zustaende'      => self::ZUSTAENDE,
         ]));
     }
@@ -76,15 +59,15 @@ final class RechtstexteSteuerung
     {
         $slug = $parameter['slug'] ?? '';
 
-        if (!isset(self::BESCHRIFTUNGEN[$slug])) {
+        if (!isset(RechtstexteSpeicher::BESCHRIFTUNGEN[$slug])) {
             return $this->nichtGefunden();
         }
 
         return Antwort::html(Ansicht::seite('admin', 'admin-rechtstext', [
-            'titel'         => self::BESCHRIFTUNGEN[$slug],
+            'titel'         => RechtstexteSpeicher::BESCHRIFTUNGEN[$slug],
             'angemeldet'    => true,
             'slug'          => $slug,
-            'beschriftung'  => self::BESCHRIFTUNGEN[$slug],
+            'beschriftung'  => RechtstexteSpeicher::BESCHRIFTUNGEN[$slug],
             'text'          => $this->speicher()->intern($slug),
             'fehler'        => $fehler,
             'hinweise'      => $hinweise,
@@ -98,7 +81,7 @@ final class RechtstexteSteuerung
         $slug = $parameter['slug'] ?? '';
         $nachweis = AdminNachweis::ausSitzung();
 
-        if (!isset(self::BESCHRIFTUNGEN[$slug]) || $nachweis === null) {
+        if (!isset(RechtstexteSpeicher::BESCHRIFTUNGEN[$slug]) || $nachweis === null) {
             return $this->nichtGefunden();
         }
 
@@ -111,7 +94,7 @@ final class RechtstexteSteuerung
         $vorher = $this->speicher()->intern($slug);
 
         if ($vorher === null) {
-            $this->speicher()->anlegen($slug, $rumpf, self::ZIELGRUPPEN[$slug]);
+            $this->speicher()->anlegen($slug, $rumpf, RechtstexteSpeicher::ZIELGRUPPEN[$slug]);
         } else {
             $this->speicher()->entwurfSpeichern($slug, $rumpf);
         }
@@ -136,7 +119,7 @@ final class RechtstexteSteuerung
         $slug = $parameter['slug'] ?? '';
         $nachweis = AdminNachweis::ausSitzung();
 
-        if (!isset(self::BESCHRIFTUNGEN[$slug]) || $nachweis === null) {
+        if (!isset(RechtstexteSpeicher::BESCHRIFTUNGEN[$slug]) || $nachweis === null) {
             return $this->nichtGefunden();
         }
 

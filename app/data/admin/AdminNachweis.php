@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Sartu\Data\Admin;
 
+use Sartu\Services\InstallationsSperre;
 use Sartu\Sitzung;
 
 /**
@@ -18,6 +19,9 @@ use Sartu\Sitzung;
  */
 final class AdminNachweis
 {
+    /** Kennung des Nachweises, den die Ersteinrichtung benutzt. Kein echtes Konto. */
+    private const EINRICHTUNG = '00000000-0000-4000-8000-000000000000';
+
     private function __construct(
         public readonly string $adminBenutzerId,
     ) {
@@ -35,23 +39,28 @@ final class AdminNachweis
     }
 
     /**
-     * Nur fuer die Ersteinrichtung (§1.5 Schritte 6 bis 8). Zu diesem Zeitpunkt existiert
-     * noch kein Konto, mit dem sich jemand anmelden koennte — die Strecke hat stattdessen
-     * ihre eigene, strengere Sperre (InstallationsSperre).
+     * Nur waehrend der Ersteinrichtung (§1.5 Schritte 6 bis 8).
      *
-     * Ausserhalb der Ersteinrichtung wirft die Methode.
+     * Zu diesem Zeitpunkt existiert noch kein Konto, mit dem sich jemand anmelden koennte.
+     * Die Strecke hat stattdessen ihre eigene, strengere Sperre — und **die** wird hier
+     * gefragt, nicht der Aufrufer.
+     *
+     * Vorher stand hier ein Parameter `bool $einrichtungLaeuft`, der ausnahmslos mit `true`
+     * uebergeben wurde. Eine Bedingung, die der Aufrufer selbst setzt, ist keine.
      */
-    public static function fuerErsteinrichtung(bool $einrichtungLaeuft): self
+    public static function fuerErsteinrichtung(?InstallationsSperre $sperre = null): self
     {
-        if (!$einrichtungLaeuft) {
-            throw new \LogicException('Ein Nachweis fuer die Ersteinrichtung ist nur waehrend der Ersteinrichtung zulaessig.');
+        if (($sperre ?? new InstallationsSperre())->gesperrt()) {
+            throw new \LogicException(
+                'Ein Nachweis fuer die Ersteinrichtung ist nach ihrem Abschluss nicht mehr zulaessig.'
+            );
         }
 
-        return new self('00000000-0000-4000-8000-000000000000');
+        return new self(self::EINRICHTUNG);
     }
 
     public function istEinrichtung(): bool
     {
-        return $this->adminBenutzerId === '00000000-0000-4000-8000-000000000000';
+        return $this->adminBenutzerId === self::EINRICHTUNG;
     }
 }

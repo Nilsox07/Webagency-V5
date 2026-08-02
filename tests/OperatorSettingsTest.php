@@ -150,7 +150,7 @@ final class OperatorSettingsTest extends Datenbankfall
 
         $hindernisse = $this->startsperre()->hindernisse();
 
-        $this->assertContains('Das Pflichtfeld „ort" der Betreiberdaten ist leer.', $hindernisse);
+        $this->assertContains('Das Pflichtfeld „Ort" der Betreiberdaten ist leer.', $hindernisse);
         $this->assertFalse($this->startsperre()->starterlaubt());
     }
 
@@ -178,7 +178,7 @@ final class OperatorSettingsTest extends Datenbankfall
         $this->pdo->exec("UPDATE operator_settings SET inhaltlich_verantwortlich = '   ' WHERE singleton = 1");
 
         $this->assertContains(
-            'Das Pflichtfeld „inhaltlich_verantwortlich" der Betreiberdaten ist leer.',
+            'Das Pflichtfeld „Inhaltlich verantwortlich" der Betreiberdaten ist leer.',
             $this->startsperre()->hindernisse()
         );
     }

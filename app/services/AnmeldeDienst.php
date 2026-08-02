@@ -25,12 +25,32 @@ final class AnmeldeDienst
 {
     private const VORMERK = '_anmeldung_benutzer';
 
+    private const VORMERK_ZEIT = '_anmeldung_seit';
+
+    /**
+     * Wie lange der Vormerk zwischen Passwort und Code gilt.
+     *
+     * Ohne Frist bleibt er fuer die Lebensdauer der Sitzung stehen. Wer einmal das richtige
+     * Passwort hatte, koennte danach beliebig lange Codes probieren.
+     */
+    private const VORMERK_SEKUNDEN = 300;
+
     public const SITZUNGSTOKEN = 'sitzung_token';
 
     /** §3 Regel 4 sinngemaess: die Anmeldung ist keine Probierflaeche. */
     private const VERSUCHE_JE_KONTO = 5;
 
     private const VERSUCHE_JE_IP = 20;
+
+    /**
+     * Versuche fuer den zweiten Faktor.
+     *
+     * Ohne eigenen Zaehler ist der zweite Faktor keiner: Der Zaehler aus Schritt 1 schlaegt
+     * einmal an, und danach laesst sich der sechsstellige Code beliebig oft probieren.
+     * §3 Regel 10 verlangt aber, dass die Zweifaktor-Anmeldung Pflicht ist — eine Pflicht,
+     * die sich durchprobieren laesst, ist keine.
+     */
+    private const VERSUCHE_ZWEITER_FAKTOR = 5;
 
     private const FENSTER_SEKUNDEN = 3600;
 
@@ -48,6 +68,7 @@ final class AnmeldeDienst
         private readonly ?SitzungsSpeicher $sitzungen = null,
         private readonly ?Ratenbegrenzung $begrenzung = null,
         private readonly ?Verschluesselung $verschluesselung = null,
+        private readonly ?VerbrauchteCodes $verbrauchteCodes = null,
     ) {
     }
 
@@ -83,6 +104,7 @@ final class AnmeldeDienst
         }
 
         $_SESSION[self::VORMERK] = (string) $konto['id'];
+        $_SESSION[self::VORMERK_ZEIT] = time();
 
         return true;
     }
@@ -90,8 +112,24 @@ final class AnmeldeDienst
     public function vorgemerkterBenutzer(): ?string
     {
         $wert = $_SESSION[self::VORMERK] ?? null;
+        $seit = $_SESSION[self::VORMERK_ZEIT] ?? null;
 
-        return is_string($wert) && $wert !== '' ? $wert : null;
+        if (!is_string($wert) || $wert === '' || !is_int($seit)) {
+            return null;
+        }
+
+        if (time() - $seit > self::VORMERK_SEKUNDEN) {
+            $this->vormerkVerwerfen();
+
+            return null;
+        }
+
+        return $wert;
+    }
+
+    private function vormerkVerwerfen(): void
+    {
+        unset($_SESSION[self::VORMERK], $_SESSION[self::VORMERK_ZEIT]);
     }
 
     /**
@@ -107,6 +145,18 @@ final class AnmeldeDienst
             return null;
         }
 
+        // Eigener Zaehler fuer den zweiten Faktor. Der aus Schritt 1 hilft hier nicht: Er
+        // schlaegt beim Passwort an, und der Code kaeme danach ungezaehlt durch.
+        $schluessel = 'zweifaktor:' . $benutzerId;
+
+        if (!$this->begrenzung()->erlaubt($schluessel, self::VERSUCHE_ZWEITER_FAKTOR, self::FENSTER_SEKUNDEN)) {
+            $this->vormerkVerwerfen();
+
+            return null;
+        }
+
+        $this->begrenzung()->vermerken($schluessel, self::FENSTER_SEKUNDEN);
+
         $konto = $this->konten()->adminNachId($benutzerId);
         $geheimnis = is_array($konto) ? ($konto['totp_secret_enc'] ?? null) : null;
 
@@ -114,7 +164,12 @@ final class AnmeldeDienst
             return null;
         }
 
-        if (!Zweifaktor::pruefen($this->verschluesselung()->entschluesseln($geheimnis), $code)) {
+        $zeitschritt = Zweifaktor::zeitschrittZumCode(
+            $this->verschluesselung()->entschluesseln($geheimnis),
+            $code
+        );
+
+        if ($zeitschritt === null) {
             $this->auditProtokoll()->schreiben(
                 aktion: 'anmeldung_fehlgeschlagen',
                 objektart: 'users',
@@ -126,7 +181,24 @@ final class AnmeldeDienst
             return null;
         }
 
-        unset($_SESSION[self::VORMERK]);
+        // RFC 6238 §5.2: Ein angenommener Code gilt kein zweites Mal. Sonst laesst sich ein
+        // mitgelesener Code innerhalb seiner dreissig Sekunden erneut einloesen.
+        // Entwertet wird der Zeitschritt, zu dem der Code WIRKLICH gehoert — nicht der
+        // gerade laufende. Sonst liesse sich ein Code aus dem vorigen Schritt im naechsten
+        // ein zweites Mal einloesen.
+        if (!$this->verbrauchteCodes()->einloesen($benutzerId, $zeitschritt)) {
+            $this->auditProtokoll()->schreiben(
+                aktion: 'anmeldung_fehlgeschlagen',
+                objektart: 'users',
+                objektId: $benutzerId,
+                detail: ['schritt' => 'zweifaktor', 'grund' => 'code_bereits_verwendet'],
+                ip: $ip,
+            );
+
+            return null;
+        }
+
+        $this->vormerkVerwerfen();
 
         $sitzung = $this->sitzungsSpeicher()->anlegen($benutzerId, $benutzerkennung, $ip);
 
@@ -146,8 +218,34 @@ final class AnmeldeDienst
         );
 
         $this->begrenzung()->zuruecksetzen($this->kontoSchluessel((string) $konto['email']));
+        $this->begrenzung()->zuruecksetzen($schluessel);
 
         return $sitzung['token'];
+    }
+
+    /**
+     * Gilt die Anmeldung noch — serverseitig?
+     *
+     * §3 Regel 6 verlangt Sitzungen, die serverseitig gespeichert sind und bei der Abmeldung
+     * serverseitig geloescht werden. Das ist nur dann mehr als ein Eintrag in einer Tabelle,
+     * wenn ihn auch jemand liest: Ohne diese Pruefung waere eine Anmeldung nicht
+     * zurueckziehbar, solange das PHP-Cookie gilt.
+     */
+    public function sitzungGueltig(): bool
+    {
+        $token = $_SESSION[self::SITZUNGSTOKEN] ?? null;
+
+        if (!is_string($token) || $token === '') {
+            return false;
+        }
+
+        $eintrag = $this->sitzungsSpeicher()->finden($token);
+
+        if ($eintrag === null) {
+            return false;
+        }
+
+        return (string) $eintrag['user_id'] === (string) Sitzung::wert(Sitzung::BENUTZER);
     }
 
     public function abmelden(?string $ip): void
@@ -200,5 +298,10 @@ final class AnmeldeDienst
     private function verschluesselung(): Verschluesselung
     {
         return $this->verschluesselung ?? new Verschluesselung();
+    }
+
+    private function verbrauchteCodes(): VerbrauchteCodes
+    {
+        return $this->verbrauchteCodes ?? new VerbrauchteCodes();
     }
 }

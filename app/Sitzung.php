@@ -46,7 +46,15 @@ final class Sitzung
 
     public static function anmelden(string $benutzerId, string $rolle, ?string $organisationId): void
     {
-        session_regenerate_id(true);
+        // Neue Kennung bei jeder Anmeldung — sonst laesst sich eine vorher untergeschobene
+        // Sitzungskennung nach dem Anmelden weiterverwenden.
+        //
+        // Die Abfrage auf eine laufende Sitzung ist keine Abschwaechung: Ueber den Webserver
+        // ist immer eine aktiv (public/index.php startet sie als Erstes). Nur im Testlauf
+        // ueber die Befehlszeile gibt es keine, und dort gibt es auch nichts zu uebernehmen.
+        if (session_status() === PHP_SESSION_ACTIVE) {
+            session_regenerate_id(true);
+        }
 
         $_SESSION[self::BENUTZER]     = $benutzerId;
         $_SESSION[self::ROLLE]        = $rolle;

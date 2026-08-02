@@ -117,12 +117,21 @@ abstract class Datenbankfall extends TestCase
         $_SESSION[Sitzung::ORGANISATION] = $organisationId;
     }
 
-    /** Versetzt die Sitzung in den Zustand „Admin angemeldet, TOTP bestaetigt". */
+    /**
+     * Versetzt die Sitzung in den Zustand „Admin angemeldet, TOTP bestaetigt".
+     *
+     * Dazu gehoert eine echte Zeile in `sessions`: Der Router prueft nicht nur den
+     * Sitzungszustand, sondern auch, dass die Anmeldung serverseitig noch gilt
+     * (§3 Regel 6). Ohne die Zeile ist der Zustand kein angemeldeter.
+     */
     protected function alsAdmin(string $benutzerId): void
     {
         $_SESSION[Sitzung::BENUTZER]        = $benutzerId;
         $_SESSION[Sitzung::ROLLE]           = 'admin';
         $_SESSION[Sitzung::ORGANISATION]    = null;
         $_SESSION[Sitzung::TOTP_BESTAETIGT] = Db::jetzt();
+
+        $sitzung = (new \Sartu\Data\SitzungsSpeicher($this->pdo))->anlegen($benutzerId, 'Testlauf', '127.0.0.1');
+        $_SESSION[\Sartu\Services\AnmeldeDienst::SITZUNGSTOKEN] = $sitzung['token'];
     }
 }

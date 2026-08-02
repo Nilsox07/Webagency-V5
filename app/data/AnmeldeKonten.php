@@ -52,6 +52,15 @@ final class AnmeldeKonten
         return is_array($zeile) ? $zeile : null;
     }
 
+    /** Gibt es ueberhaupt schon ein Adminkonto? Eine Zahl, kein Datenzugriff auf Konten. */
+    public function anzahlAdmins(): int
+    {
+        $anweisung = $this->pdo()->prepare('SELECT COUNT(*) FROM users WHERE role = ?');
+        $anweisung->execute(['admin']);
+
+        return (int) $anweisung->fetchColumn();
+    }
+
     public function anmeldungVermerken(string $benutzerId): void
     {
         $anweisung = $this->pdo()->prepare('UPDATE users SET last_login_at = ? WHERE id = ?');

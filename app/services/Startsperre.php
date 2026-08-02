@@ -45,7 +45,10 @@ final class Startsperre
         foreach (BetreiberdatenSpeicher::PFLICHTFELDER as $feld) {
             $wert = $daten[$feld] ?? null;
             if (!Validate::gefuellt(is_string($wert) ? $wert : null)) {
-                $hindernisse[] = sprintf('Das Pflichtfeld „%s" der Betreiberdaten ist leer.', $feld);
+                $hindernisse[] = sprintf(
+                    'Das Pflichtfeld „%s" der Betreiberdaten ist leer.',
+                    BetreiberdatenSpeicher::beschriftung($feld)
+                );
             }
         }
 
@@ -57,7 +60,10 @@ final class Startsperre
         }
 
         foreach (($this->rechtstexte ?? new RechtstexteSpeicher())->nichtFreigegebene() as $slug) {
-            $hindernisse[] = sprintf('Der Rechtstext „%s" ist noch nicht freigegeben.', $slug);
+            $hindernisse[] = sprintf(
+                'Der Rechtstext „%s" ist noch nicht freigegeben.',
+                RechtstexteSpeicher::beschriftung($slug)
+            );
         }
 
         return $hindernisse;

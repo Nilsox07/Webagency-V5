@@ -6,6 +6,7 @@ namespace Sartu\Services;
 
 use Sartu\Data\Admin\AdminBenutzer;
 use Sartu\Data\Admin\AdminNachweis;
+use Sartu\Data\AnmeldeKonten;
 use Sartu\Data\AuditProtokoll;
 use Sartu\Data\BetreiberdatenSpeicher;
 use Sartu\Data\Db;
@@ -430,7 +431,7 @@ final class Ersteinrichtung
             return $fehler;
         }
 
-        $nachweis = AdminNachweis::fuerErsteinrichtung(true);
+        $nachweis = AdminNachweis::fuerErsteinrichtung($this->installationssperre());
         $benutzer = new AdminBenutzer($nachweis);
 
         if ($benutzer->anzahlAdmins() > 0) {
@@ -456,10 +457,17 @@ final class Ersteinrichtung
         return [];
     }
 
+    /**
+     * Eine Zaehlung, kein Kontozugriff — deshalb ohne AdminNachweis.
+     *
+     * Vorher lief sie ueber die Adminschicht und damit ueber einen Nachweis, den es nach
+     * dem Abschluss der Einrichtung nicht mehr gibt. Sie haette danach „kein Admin"
+     * gemeldet, obwohl einer existiert.
+     */
     public function adminVorhanden(): bool
     {
         try {
-            return (new AdminBenutzer(AdminNachweis::fuerErsteinrichtung(true)))->anzahlAdmins() > 0;
+            return (new AnmeldeKonten())->anzahlAdmins() > 0;
         } catch (\Throwable) {
             return false;
         }

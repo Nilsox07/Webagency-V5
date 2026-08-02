@@ -20,10 +20,36 @@ final class RechtstexteSpeicher
 {
     public const SLUGS = ['impressum', 'datenschutz', 'agb', 'avv', 'tom'];
 
+    /**
+     * Menschliche Beschriftung je Text. Ein Slug ist ein Systemcode — §13 verlangt Klartext,
+     * und `tom` sagt niemandem etwas.
+     */
+    public const BESCHRIFTUNGEN = [
+        'impressum'   => 'Impressum',
+        'datenschutz' => 'Datenschutzerklärung',
+        'agb'         => 'Allgemeine Geschäftsbedingungen',
+        'avv'         => 'Auftragsverarbeitungsvertrag',
+        'tom'         => 'Technische und organisatorische Maßnahmen',
+    ];
+
+    /** Wo ein Text ausgeliefert wird. `avv` und `tom` nur angemeldet (Testfall 82). */
+    public const ZIELGRUPPEN = [
+        'impressum'   => 'oeffentlich',
+        'datenschutz' => 'oeffentlich',
+        'agb'         => 'oeffentlich',
+        'avv'         => 'kunde',
+        'tom'         => 'kunde',
+    ];
+
     public const ZUSTAENDE = ['entwurf', 'in_pruefung', 'freigegeben'];
 
     /** §2 SARTU_ENTSCHEIDUNGEN_OFFEN: Jeder Entwurf traegt diesen Vermerk am Kopf. */
     public const ENTWURFSVERMERK = 'ENTWURF — NICHT GEPRÜFT, NICHT VERÖFFENTLICHEN';
+
+    public static function beschriftung(string $slug): string
+    {
+        return self::BESCHRIFTUNGEN[$slug] ?? $slug;
+    }
 
     public function __construct(private readonly ?\PDO $pdo = null)
     {

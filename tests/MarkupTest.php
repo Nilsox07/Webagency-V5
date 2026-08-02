@@ -61,8 +61,11 @@ final class MarkupTest extends Datenbankfall
     /** Die Ueberschriftenhierarchie ist echte Struktur: keine h3 ohne h2 darueber. */
     public function testKeineUebersprungeneUeberschriftenebene(): void
     {
+        $geprueft = 0;
+
         foreach ($this->seiten() as $bezeichnung => $html) {
             preg_match_all('/<h([1-6])[\s>]/i', $html, $treffer);
+            $geprueft += count($treffer[1]);
 
             $vorherige = 0;
             foreach ($treffer[1] as $ebene) {
@@ -79,6 +82,8 @@ final class MarkupTest extends Datenbankfall
                 $vorherige = $ebene;
             }
         }
+
+        $this->assertGreaterThan(0, $geprueft, 'Es wurde keine Überschrift geprüft.');
     }
 
     /** Jede Seite deklariert Deutsch und bindet tokens.css vor dem Bauteil-CSS ein. */
@@ -128,6 +133,49 @@ final class MarkupTest extends Datenbankfall
         }
 
         $this->assertSame([], $verstoesse);
+    }
+
+    /**
+     * Jedes Formularfeld traegt seinen eigenen Namen.
+     *
+     * Dieser Test steht hier wegen eines Fehlers, den keiner der anderen 81 Tests bemerkt
+     * hat: `Ansicht::teil()` hiess sein erster Parameter `$name`, und `extract(EXTR_SKIP)`
+     * ueberschreibt Vorhandenes nicht — also hiess jedes Feld `components/feld`. Die Seite
+     * sah dabei vollkommen richtig aus. Aufgefallen ist es erst im Browser.
+     */
+    public function testFormularfelderTragenIhrenEigenenNamen(): void
+    {
+        $html = $this->router(gesperrt: true)->behandeln('GET', '/admin/anmelden')->rumpf;
+
+        $this->assertStringContainsString('name="email"', $html);
+        $this->assertStringContainsString('name="passwort"', $html);
+        $this->assertStringContainsString('id="feld-email"', $html);
+        $this->assertStringContainsString('id="feld-passwort"', $html);
+
+        $this->assertStringNotContainsString(
+            'components/feld',
+            $html,
+            'Der Ansichtspfad ist in ein Feldattribut geraten.'
+        );
+    }
+
+    /** Jedes Eingabefeld hat eine Beschriftung, die auf seine Kennung zeigt. */
+    public function testJedesEingabefeldHatEineBeschriftung(): void
+    {
+        foreach ($this->seiten() as $bezeichnung => $html) {
+            preg_match_all('/<input[^>]*\bid="([^"]+)"/', $html, $felder);
+            preg_match_all('/<label[^>]*\bfor="([^"]+)"/', $html, $beschriftungen);
+
+            foreach ($felder[1] as $kennung) {
+                if (str_starts_with($kennung, 'feld-')) {
+                    $this->assertContains(
+                        $kennung,
+                        $beschriftungen[1],
+                        sprintf('%s: das Feld %s hat keine Beschriftung.', $bezeichnung, $kennung)
+                    );
+                }
+            }
+        }
     }
 
     /** @return array<string,string> */

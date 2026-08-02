@@ -39,7 +39,10 @@ final class BetreiberdatenDienst
 
         foreach (BetreiberdatenSpeicher::PFLICHTFELDER as $feld) {
             if (!Validate::gefuellt($eingabe[$feld] ?? null)) {
-                $fehler[] = sprintf('Bitte füllen Sie das Feld „%s" aus.', $this->beschriftung($feld));
+                $fehler[] = sprintf(
+                    'Bitte füllen Sie das Feld „%s" aus.',
+                    BetreiberdatenSpeicher::beschriftung($feld)
+                );
             }
         }
 
@@ -170,19 +173,5 @@ final class BetreiberdatenDienst
         }
 
         return $hinweise;
-    }
-
-    private function beschriftung(string $feld): string
-    {
-        return match ($feld) {
-            'firmenname'                => 'Firmenname',
-            'strasse'                   => 'Straße und Hausnummer',
-            'plz'                       => 'Postleitzahl',
-            'ort'                       => 'Ort',
-            'land'                      => 'Land',
-            'email'                     => 'E-Mail-Adresse',
-            'inhaltlich_verantwortlich' => 'Inhaltlich verantwortlich',
-            default                     => $feld,
-        };
     }
 }

@@ -286,7 +286,92 @@ final class SetupTest extends Datenbankfall
         $this->assertSame('/admin/setup', $antwort->kopfzeilen['Location'] ?? null);
     }
 
+    // -------------------------------------- Nach der Sicherheitspruefung vom 02.08.2026
+
+    /**
+     * Kein Setup-Schritt läuft außer der Reihe.
+     *
+     * Der Befund: `POST /admin/setup/abschluss` prüfte gar nichts. **Ein** unangemeldeter
+     * Aufruf gegen eine frische Installation hätte die Sperre gesetzt — ohne Adminkonto,
+     * ohne Datenbank, ohne Weg zurück. Aufheben lässt sie sich nur mit Dateizugriff auf dem
+     * Server; genau das ist ihr Zweck, und genau das wäre hier gegen den Betreiber gelaufen.
+     *
+     * Dasselbe galt für `POST /admin/setup/admin`: Wer dort vor dem Betreiber ankam, hatte
+     * das einzige Adminkonto.
+     */
+    public function testEinSetupSchrittAusserDerReiheAendertNichts(): void
+    {
+        $sperre = new InstallationsSperre(new BetreiberdatenSpeicher($this->pdo), $this->arbeitsverzeichnis . '/storage');
+
+        // Die Strecke steht bei Schritt 1: Das Speicherverzeichnis der Anwendung ist im
+        // Testlauf nicht das aus der Umgebung, also ist die Umgebungspruefung nicht durch.
+        $einrichtung = new Ersteinrichtung(SARTU_WURZEL, $sperre);
+        $this->assertLessThan(8, $einrichtung->aktuellerSchritt());
+
+        $antwort = $this->setupPost('/admin/setup/abschluss', $sperre);
+
+        $this->assertSame(302, $antwort->status);
+        $this->assertSame('/admin/setup', $antwort->kopfzeilen['Location'] ?? null);
+
+        $this->assertFalse($sperre->gesperrt(), 'Ein Aufruf außer der Reihe hat die Installation gesperrt.');
+        $this->assertFalse(is_file($sperre->sperrdatei()), 'Die Sperrdatei wurde außer der Reihe geschrieben.');
+    }
+
+    /** Auch das Anlegen des Adminkontos springt nicht vor. */
+    public function testAdminkontoLaesstSichNichtVorzeitigAnlegen(): void
+    {
+        $sperre = new InstallationsSperre(new BetreiberdatenSpeicher($this->pdo), $this->arbeitsverzeichnis . '/storage');
+
+        $antwort = $this->setupPost('/admin/setup/admin', $sperre);
+
+        $this->assertSame(302, $antwort->status);
+        $this->assertSame(0, (int) $this->pdo->query("SELECT COUNT(*) FROM users WHERE role = 'admin'")->fetchColumn());
+    }
+
+    /**
+     * Die Sperre setzt zuerst die Datenbank, dann die Datei.
+     *
+     * Umgekehrt bliebe bei einem Fehler in der Datenbank die Datei liegen — die Einrichtung
+     * wäre dauerhaft zu, ohne je fertig geworden zu sein.
+     */
+    public function testSperreSetztDieDatenbankVorDerDatei(): void
+    {
+        $quelle = (string) file_get_contents(SARTU_WURZEL . '/app/services/InstallationsSperre.php');
+        $rumpf = substr($quelle, strpos($quelle, 'public function setzen()') ?: 0);
+
+        $datenbank = strpos($rumpf, 'einrichtungAbschliessen()');
+        $datei = strpos($rumpf, 'file_put_contents');
+
+        $this->assertIsInt($datenbank);
+        $this->assertIsInt($datei);
+        $this->assertLessThan($datei, $datenbank, 'Die Sperrdatei wird vor dem Datenbankeintrag geschrieben.');
+    }
+
+    /** Ein Nachweis für die Ersteinrichtung entsteht nach ihrem Abschluss nicht mehr. */
+    public function testNachweisFuerDieEinrichtungGiltNurWaehrendDerEinrichtung(): void
+    {
+        $speicher = $this->arbeitsverzeichnis . '/storage';
+        touch($speicher . '/' . InstallationsSperre::DATEINAME);
+
+        $sperre = new InstallationsSperre(new BetreiberdatenSpeicher($this->pdo), $speicher);
+
+        $this->expectException(\LogicException::class);
+
+        \Sartu\Data\Admin\AdminNachweis::fuerErsteinrichtung($sperre);
+    }
+
     // ------------------------------------------------------------ Hilfsmittel
+
+    private function setupPost(string $pfad, InstallationsSperre $sperre): \Sartu\Antwort
+    {
+        putenv('APP_ENV=local');
+        $this->anfrage(https: false, gegenstelle: '127.0.0.1', host: 'localhost');
+
+        $_POST = [\Sartu\Helpers\Csrf::FELD => \Sartu\Helpers\Csrf::token()];
+
+        return $this->router($sperre)->behandeln('POST', $pfad);
+    }
+
 
     /**
      * Ein leeres Migrationsverzeichnis MIT leerem Protokoll.

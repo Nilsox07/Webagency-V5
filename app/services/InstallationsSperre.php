@@ -52,8 +52,21 @@ final class InstallationsSperre
         }
     }
 
+    /**
+     * Zuerst die Datenbank, dann die Datei — die Reihenfolge ist nicht beliebig.
+     *
+     * Umgekehrt bliebe bei einem Fehler in der Datenbank die Sperrdatei liegen, und die
+     * Einrichtung waere dauerhaft zu, ohne je fertig geworden zu sein. Aufheben liesse sie
+     * sich nur mit Dateizugriff auf dem Server — das ist der Zweck der Sperre und waere hier
+     * ein Eigentor.
+     *
+     * Andersherum ist der halbe Zustand harmlos: Ein gesetztes `setup_completed_at` ohne
+     * Datei sperrt genauso (§1.5 — einer von beiden genuegt).
+     */
     public function setzen(): void
     {
+        ($this->betreiberdaten ?? new BetreiberdatenSpeicher())->einrichtungAbschliessen();
+
         $verzeichnis = $this->verzeichnis();
 
         if (!is_dir($verzeichnis) && !mkdir($verzeichnis, 0770, true) && !is_dir($verzeichnis)) {
@@ -69,8 +82,6 @@ final class InstallationsSperre
         if ($geschrieben === false) {
             throw new \RuntimeException('Die Sperrdatei liess sich nicht schreiben.');
         }
-
-        ($this->betreiberdaten ?? new BetreiberdatenSpeicher())->einrichtungAbschliessen();
     }
 
     public function sperrdatei(): string

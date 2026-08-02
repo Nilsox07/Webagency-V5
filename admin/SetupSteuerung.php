@@ -42,6 +42,30 @@ final class SetupSteuerung
         return $this->seite($schritt, $this->daten($schritt));
     }
 
+    /**
+     * Jeder POST gehoert zu genau einem Schritt — und laeuft nur, wenn die Strecke auch dort
+     * steht.
+     *
+     * Ohne diese Pruefung genuegt EIN unangemeldeter Aufruf von `/admin/setup/abschluss`, um
+     * eine frische Installation dauerhaft unbrauchbar zu machen: Die Sperre waere gesetzt,
+     * ein Adminkonto gaebe es nicht, und aufheben laesst sie sich ueber das Netz nicht — das
+     * ist ihr Zweck. Dasselbe gilt fuer `/admin/setup/admin`: Wer dort vor dem Betreiber
+     * ankommt, hat das einzige Adminkonto.
+     *
+     * Die Strecke ist bewusst ohne Anmeldung erreichbar (es gibt noch kein Konto). Genau
+     * deshalb muss die Reihenfolge selbst die Sperre sein.
+     */
+    private function nurInSchritt(int $erwartet): ?Antwort
+    {
+        $schritt = $this->einrichtung->aktuellerSchritt();
+
+        if ($schritt === $erwartet) {
+            return null;
+        }
+
+        return Antwort::weiter('/admin/setup');
+    }
+
     /** Schritt 1 hat nichts zu speichern — der Knopf geht weiter, sobald alles in Ordnung ist. */
     public function umgebungBestaetigen(array $parameter = []): Antwort
     {
@@ -50,6 +74,10 @@ final class SetupSteuerung
 
     public function datenbank(array $parameter = []): Antwort
     {
+        if (($halt = $this->nurInSchritt(2)) !== null) {
+            return $halt;
+        }
+
         $fehler = $this->einrichtung->datenbankSpeichern(
             Http::getrimmteEingabe('db_host'),
             Http::getrimmteEingabe('db_port'),
@@ -75,6 +103,10 @@ final class SetupSteuerung
 
     public function schluessel(array $parameter = []): Antwort
     {
+        if (($halt = $this->nurInSchritt(3)) !== null) {
+            return $halt;
+        }
+
         $this->einrichtung->schluesselErzeugen();
 
         return Antwort::weiter('/admin/setup');
@@ -82,6 +114,10 @@ final class SetupSteuerung
 
     public function migrationen(array $parameter = []): Antwort
     {
+        if (($halt = $this->nurInSchritt(4)) !== null) {
+            return $halt;
+        }
+
         try {
             $this->einrichtung->migrationenEinspielen();
         } catch (MigrationFehler $fehler) {
@@ -95,6 +131,10 @@ final class SetupSteuerung
 
     public function mail(array $parameter = []): Antwort
     {
+        if (($halt = $this->nurInSchritt(5)) !== null) {
+            return $halt;
+        }
+
         $werte = [
             'smtp_host' => Http::getrimmteEingabe('smtp_host'),
             'smtp_port' => Http::getrimmteEingabe('smtp_port'),
@@ -121,6 +161,10 @@ final class SetupSteuerung
 
     public function mailBestaetigen(array $parameter = []): Antwort
     {
+        if (($halt = $this->nurInSchritt(5)) !== null) {
+            return $halt;
+        }
+
         $this->einrichtung->mailBestaetigen();
 
         return Antwort::weiter('/admin/setup');
@@ -128,6 +172,10 @@ final class SetupSteuerung
 
     public function betrieb(array $parameter = []): Antwort
     {
+        if (($halt = $this->nurInSchritt(6)) !== null) {
+            return $halt;
+        }
+
         $eingabe = $this->betriebsEingabe();
         $fehler = $this->einrichtung->betreiberdatenAnlegen($eingabe);
 
@@ -140,6 +188,10 @@ final class SetupSteuerung
 
     public function admin(array $parameter = []): Antwort
     {
+        if (($halt = $this->nurInSchritt(7)) !== null) {
+            return $halt;
+        }
+
         $werte = [
             'vorname'  => Http::getrimmteEingabe('vorname'),
             'nachname' => Http::getrimmteEingabe('nachname'),
@@ -173,6 +225,10 @@ final class SetupSteuerung
 
     public function abschluss(array $parameter = []): Antwort
     {
+        if (($halt = $this->nurInSchritt(8)) !== null) {
+            return $halt;
+        }
+
         $this->einrichtung->abschliessen();
 
         return Antwort::weiter('/admin/anmelden');

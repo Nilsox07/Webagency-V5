@@ -39,7 +39,7 @@ final class LegalTextsTest extends Datenbankfall
         $speicher->entwurfSpeichern('avv', 'Überarbeitete Fassung.');
 
         $this->assertContains(
-            'Der Rechtstext „avv" ist noch nicht freigegeben.',
+            'Der Rechtstext „Auftragsverarbeitungsvertrag" ist noch nicht freigegeben.',
             $this->startsperre()->hindernisse()
         );
         $this->assertFalse($this->startsperre()->starterlaubt());
@@ -50,8 +50,8 @@ final class LegalTextsTest extends Datenbankfall
     {
         $this->betreiberdatenAnlegen();
 
-        $this->assertContains('Der Rechtstext „avv" ist noch nicht freigegeben.', $this->startsperre()->hindernisse());
-        $this->assertContains('Der Rechtstext „tom" ist noch nicht freigegeben.', $this->startsperre()->hindernisse());
+        $this->assertContains('Der Rechtstext „Auftragsverarbeitungsvertrag" ist noch nicht freigegeben.', $this->startsperre()->hindernisse());
+        $this->assertContains('Der Rechtstext „Technische und organisatorische Maßnahmen" ist noch nicht freigegeben.', $this->startsperre()->hindernisse());
     }
 
     /** Eine Freigabe ohne Namen der pruefenden Stelle gibt es nicht (§1.4a). */
