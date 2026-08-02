@@ -14,6 +14,7 @@ use Sartu\Helpers\Csrf;
     <nav aria-label="Interner Bereich">
       <a href="/admin">Übersicht</a>
       <a href="/admin/anfragen">Anfragen</a>
+      <a href="/admin/projekte">Projekte</a>
       <a href="/admin/einstellungen/betrieb">Betreiberdaten</a>
       <a href="/admin/rechtstexte">Rechtstexte</a>
       <a href="/admin/testmail">Testmail</a>

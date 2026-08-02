@@ -329,6 +329,57 @@ was als Nächstes passiert).
 
 ---
 
+## 6b. Der Wortlaut aus den Lastenheften — vier Stellen, an denen er geändert wurde
+
+`SARTU_TEXTREGELN.md` und der Texter-Skill stehen in der Rangfolge auf **Rang 3 und 3a** und
+regeln die Form jedes Textes. Portal- und Website-Lastenheft stehen auf **Rang 4 und 5**. Wo
+beide auseinandergehen, gewinnt Rang 3.
+
+Alle vier Änderungen betreffen **ein Wort**, nie eine Zahl, eine Frist oder eine Zusage.
+
+| Fundstelle | Vorgabe | Ausgeliefert | Regel |
+|---|---|---|---|
+| Website §9.1 | H1 `Welche Website passt **wirklich** …` | ohne „wirklich" | Regel 7 Liste A. Die gekürzte Fassung steht im Texter-Skill selbst als Muster |
+| Website §9.3 | `in eine unserer drei **Lösungen**` | `zu einem unserer drei **Umfänge**` | Regel 7 Liste C. Den Ersatz nennt die Regel wörtlich |
+| Portal §10 | Betreff `Ihr Anmeldelink für das SARTU-**Portal**` | `… für Ihren **Kundenbereich**` | Nach außen heißt der Bereich Kundenbereich (`CLAUDE.md`, Website §5b Navigation) |
+| Portal §4c, §7 | `alle Aufgaben in Ihrem **Portal**` · `Das ist Ihr **Projektportal**.` | „in Ihrem Bereich" · „Das ist Ihr Kundenbereich." | dasselbe |
+
+**Was nicht geändert wurde, obwohl es eine Liste reißt:** `Wir haben ein klares Hauptangebot`
+und `Mehr passende Anfragen` (Website §9.2, Wortliste A). Sie stehen in **Antwortmöglichkeiten**,
+die ein Mensch ankreuzt, und Regel 7 nennt für sie keinen Ersatz. Eine umformulierte Antwort
+bedeutet etwas anderes als die, der zugestimmt wurde. Begründet in §6a.
+
+---
+
+## 6c. Zwei Widersprüche im Portal-Lastenheft, beide aufgelöst statt ausgewählt
+
+**§5.1a — drei oder vier kundenausgelöste Wechsel?** Die Übergangstabelle nennt **vier**
+Zeilen mit „Wer löst aus: Kunde". Der Satz darunter sagt „Kundenausgelöste Wechsel sind genau
+**drei**".
+
+Aufgelöst über die Begründung, die der Satz mitliefert: *„Alle drei sind Erklärungen mit Namen
+und Zeitpunkt."* Er zählt keine Klicks, sondern Erklärungen. `vorschau → korrektur`
+(Rückmeldungen einreichen) ist eine Handlung ohne getippten Namen. **Beide Stellen bleiben
+gültig:** `Projektstatus` führt `wer` (wer handelt) und `erklaerung` (was rechtlich zählt)
+getrennt, und `AngebotsstreckeTest` hält beide Zahlen fest.
+
+**§4 gegen §4c — die BFSG-Felder.** §4c verlangt wörtlich, `bfsg_vertragsabschluss` und
+`bfsg_kleinstunternehmen` im Angebot mitzuspeichern. Die Feldliste in §4 kennt sie nicht.
+Aufgelöst über die Rangfolgeregel *„es gewinnt die Stelle mit der Begründung"*: §4c begründet
+ausführlich, warum das ins Datenmodell gehört — Bußgeld bis 100.000 €. Die Felder heißen
+wörtlich so und stehen in `migrations/013_offers_bfsg.sql`.
+
+---
+
+## 6d. Zwei Zahlen, die fehlen — gemeldet, nicht erfunden
+
+| Was fehlt | Wo es fehlt | Wie damit umgegangen wird |
+|---|---|---|
+| **Angebotsgültigkeit** | Kein Abschnitt nennt eine Frist. §4c belegt drei Texte und den Lieferkorridor vor, `valid_until` steht dort nicht | Der Admin gibt sie je Angebot ein, das Formular verlangt sie. Eine erfundene Frist wäre eine vertragliche Zusage |
+| **Empfänger der Anfragebenachrichtigung** | `ADMIN_NOTIFY_EMAIL` steht in §1.5 unter „Erforderliche Werte", wird in keinem Einrichtungsschritt erhoben | Wert aus der `.env`. Ist er leer, geht **keine** Mail — es wird kein Ersatzempfänger erfunden |
+
+---
+
 ## 7. Gestaltung
 
 `design/tokens.css` liegt unverändert unter `public/assets/css/tokens.css` und wird **vor** jedem

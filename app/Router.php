@@ -20,13 +20,22 @@ use Sartu\Services\Wartungsmodus;
  *
  *   1. Wartungsmodus        §1.5a — 503 fuer Kunden- und Adminbereich
  *   2. Einrichtung offen    §1.5  — jeder Aufruf ausser der Einrichtung leitet dorthin
- *   3. CSRF bei jedem POST  §3 Regel 3 — kein Token, keine Ausnahme
- *   4. Adminpruefung        §3 Regel 2a — „vollstaendig durch eine einzige, zentrale
+ *   3. Adminpruefung        §3 Regel 2a — „vollstaendig durch eine einzige, zentrale
  *                           Vorpruefung geschuetzt, nicht Route fuer Route einzeln.
  *                           Faellt die Pruefung aus, ist die Route nicht erreichbar."
+ *   3b. Kundenpruefung      §3 Regel 1 und 2a — dieselbe Zusage fuer den Kundenbereich
+ *   4. CSRF bei jedem POST  §3 Regel 3 — kein Token, keine Ausnahme
  *
- * Punkt 4 ist der Grund, warum die Adminpruefung hier und nicht in den Handlern steht: Wer
- * sie je Route schreibt, vergisst sie irgendwann bei einer.
+ * Punkt 3 und 3b sind der Grund, warum beide Pruefungen hier und nicht in den Handlern
+ * stehen: Wer sie je Route schreibt, vergisst sie irgendwann bei einer.
+ *
+ * **Sie sind zwei Bedingungen, nicht eine mit Verzweigung.** §3 Regel 2 verbietet den
+ * gemeinsamen Codepfad, der den Organisationsfilter fuer Admins weglaesst. Dieselbe Regel
+ * gilt fuer die Zugangspruefung: Ein `if ($istAdmin || $istKunde)` waere genau die Stelle,
+ * an der spaeter ein Kunde in eine Adminroute rutscht.
+ *
+ * Die Reihenfolge — Zugang VOR CSRF — ist ebenfalls Absicht: Ein unangemeldeter POST soll
+ * nicht erfahren, ob sein Token gueltig war.
  */
 final class Router
 {
@@ -111,6 +120,24 @@ final class Router
             // ungelesen in der Datenbank.
             if (AdminNachweis::ausSitzung() === null || !$this->anmeldung()->sitzungGueltig()) {
                 return Antwort::weiter('/admin/anmelden');
+            }
+        }
+
+        // 3b. Kundenpruefung (§3 Regel 1 und 2a)
+        //
+        // Eine EIGENE Bedingung, kein gemeinsamer Zweig mit Punkt 3. §3 Regel 2 verbietet
+        // ausdruecklich den geteilten Codepfad, der den Filter fuer eine der beiden Rollen
+        // weglaesst — „genau daraus entsteht die typische Datenpanne". Zwei Schichten
+        // heisst hier: zwei Bedingungen, die sich nicht gegenseitig aufheben koennen.
+        //
+        // Verlangt wird: Rolle `kunde` UND eine Organisation in der Sitzung UND eine
+        // serverseitig gueltige Anmeldung. Ein Admin kommt hier NICHT durch — er hat keine
+        // Organisation, und ohne Organisation gibt es keinen Kundenzugriff (Testfall 45).
+        if ($route->bereich === Route::BEREICH_PORTAL && !$route->ohneAnmeldung) {
+            if (Sitzung::wert(Sitzung::ROLLE) !== 'kunde'
+                || Sitzung::wert(Sitzung::ORGANISATION) === null
+                || !$this->anmeldung()->sitzungGueltig()) {
+                return Antwort::weiter('/login');
             }
         }
 

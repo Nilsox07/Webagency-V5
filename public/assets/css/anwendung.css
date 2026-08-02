@@ -559,3 +559,102 @@ input[type="radio"] {
 .marke[data-stand="gelb"]     { background: var(--sand); }
 .marke[data-stand="orange"]   { background: var(--lime-soft); }
 .marke[data-stand="rot"]      { background: var(--lime); }
+
+/* ============================================================
+   Kundenbereich
+
+   Er muss sich vom internen Bereich unterscheiden lassen
+   (CODEX_AUFTRAG_PORTAL.md §4). Der interne traegt ein dunkles
+   Kopfband, der Kundenbereich ein helles mit Lime-Kante.
+   Dieselben Gestaltungswerte, andere Flaeche — keine zweite
+   Farbwelt.
+   ============================================================ */
+
+.kundenband {
+  background: var(--paper);
+  border-bottom: var(--s-1) solid var(--lime);
+  padding-top: var(--s-3);
+  padding-bottom: var(--s-3);
+}
+
+.kundenband__reihe {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--s-3);
+  align-items: baseline;
+  justify-content: space-between;
+}
+
+.kundenband nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--s-3);
+  align-items: baseline;
+  font-size: var(--fs-small);
+}
+
+.karte--betont {
+  background: var(--lime-soft);
+  border-color: var(--line);
+}
+
+/* Die sieben Stationen aus §8.1. Der Stand steht als Wort im
+   data-Attribut UND als Textzusatz — Zustaende nie allein ueber
+   Farbe (Website-Lastenheft §2). */
+
+.stationen {
+  list-style: none;
+  margin: var(--s-4) 0 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--s-1);
+  font-size: var(--fs-small);
+}
+
+.stationen li {
+  border: 1px solid var(--line);
+  border-radius: var(--r-pill);
+  padding: var(--s-1) var(--s-3);
+  background: var(--paper);
+  color: var(--muted);
+}
+
+.stationen li[data-stand="erledigt"] { background: var(--lime-soft); color: var(--ink); }
+
+.stationen li[data-stand="hier"] {
+  background: var(--lime);
+  color: var(--ink);
+  font-weight: var(--fw-head);
+}
+
+.stationen li[data-stand="hier"]::after { content: " · hier"; font-weight: 400; }
+
+.spaltenpaar {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr));
+  gap: var(--s-4);
+  margin-bottom: var(--s-4);
+}
+
+.liste--einfach li {
+  display: block;
+  border-bottom: 1px solid var(--line);
+  padding: var(--s-2) 0;
+}
+
+.ueberspringen { margin-top: var(--s-3); }
+
+.textknopf {
+  font: inherit;
+  font-size: var(--fs-small);
+  background: none;
+  border: 0;
+  padding: 0;
+  color: var(--muted);
+  cursor: pointer;
+  text-decoration: underline;
+  text-underline-offset: .18em;
+}
+
+.textknopf:focus-visible { outline: 2px solid var(--ink); outline-offset: 2px; }

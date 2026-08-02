@@ -67,6 +67,71 @@ final class AnmeldeKonten
         $anweisung->execute([Db::jetzt(), $benutzerId]);
     }
 
+    // ------------------------------------------------------------ Kundenanmeldung (§6)
+
+    /**
+     * Genau ein Kundenkonto, adressiert ueber die E-Mail.
+     *
+     * Drei Bedingungen, jede mit eigenem Grund:
+     *
+     *   role = 'kunde'          ein Admin bekommt keinen Anmeldelink (§3 Regel 4)
+     *   archived_at IS NULL     ein archiviertes Konto meldet sich nicht mehr an (§3 Regel 13)
+     *   organization_id NOT NULL  ohne Organisation gibt es keinen Kundenzugriff (§3 Regel 1)
+     *
+     * Die dritte ist bereits durch die Pruefbedingung auf `users` gesichert. Sie steht
+     * trotzdem hier: Eine Sitzung ohne Organisation ist der Zustand, gegen den die ganze
+     * Mandantentrennung gebaut ist, und sie darf hier nicht entstehen koennen.
+     *
+     * @return array<string,mixed>|null
+     */
+    public function kundeNachEmail(string $email): ?array
+    {
+        return $this->kunde('email', $email);
+    }
+
+    /** @return array<string,mixed>|null */
+    public function kundeNachId(string $id): ?array
+    {
+        return $this->kunde('id', $id);
+    }
+
+    /** §7: Die Willkommensstrecke erscheint einmalig, solange `welcome_seen_at` leer ist. */
+    public function willkommenOffen(string $benutzerId): bool
+    {
+        $anweisung = $this->pdo()->prepare('SELECT welcome_seen_at FROM users WHERE id = ?');
+        $anweisung->execute([$benutzerId]);
+
+        return $anweisung->fetchColumn() === null;
+    }
+
+    /**
+     * `IS NULL` in der Bedingung, nicht nur im Wert: Zweimal „gesehen" darf den Zeitpunkt
+     * des ersten Males nicht ueberschreiben.
+     */
+    public function willkommenVermerken(string $benutzerId): void
+    {
+        $anweisung = $this->pdo()->prepare(
+            'UPDATE users SET welcome_seen_at = ? WHERE id = ? AND welcome_seen_at IS NULL'
+        );
+        $anweisung->execute([Db::jetzt(), $benutzerId]);
+    }
+
+    /** @return array<string,mixed>|null */
+    private function kunde(string $spalte, string $wert): ?array
+    {
+        // $spalte kommt ausschliesslich aus den beiden Aufrufern oben, nie von aussen.
+        $anweisung = $this->pdo()->prepare(
+            'SELECT id, email, first_name, last_name, organization_id, welcome_seen_at FROM users'
+            . ' WHERE ' . ($spalte === 'id' ? 'id' : 'email') . ' = ?'
+            . " AND role = 'kunde' AND archived_at IS NULL AND organization_id IS NOT NULL"
+        );
+        $anweisung->execute([$wert]);
+
+        $zeile = $anweisung->fetch(\PDO::FETCH_ASSOC);
+
+        return is_array($zeile) ? $zeile : null;
+    }
+
     private function pdo(): \PDO
     {
         return $this->pdo ?? Db::verbindung();

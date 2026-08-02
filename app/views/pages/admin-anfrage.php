@@ -88,6 +88,22 @@ $herkunft = [
   </ul>
 </div>
 
+<?php if ($anfrage['converted_organization_id'] === null): ?>
+<div class="karte">
+  <h2>In Kunde und Projekt umwandeln</h2>
+  <p>Dabei entsteht ein Zugang. Der nächste Schritt zeigt Ihnen, was genau angelegt wird.</p>
+  <p class="knopfreihe">
+    <a class="knopf" href="/admin/anfragen/<?= Html::e($id) ?>/umwandeln">In Kunde und Projekt umwandeln</a>
+  </p>
+</div>
+<?php else: ?>
+<div class="karte">
+  <h2>Umgewandelt</h2>
+  <p>Aus dieser Anfrage sind Kunde und Projekt entstanden. Die Anfrage ist damit Teil der
+  Kundenakte und wird nicht mehr automatisch gelöscht.</p>
+</div>
+<?php endif; ?>
+
 <div class="karte">
   <h2>Zustand ändern</h2>
   <p>Eine Ablehnung braucht eine Notiz und verkürzt die Löschfrist auf sechs Monate.</p>

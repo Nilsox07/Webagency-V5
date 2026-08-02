@@ -21,11 +21,14 @@ declare(strict_types=1);
 use Sartu\Admin\AnfragenSteuerung;
 use Sartu\Admin\AnmeldeSteuerung;
 use Sartu\Admin\BetriebSteuerung;
+use Sartu\Admin\ProjekteSteuerung;
 use Sartu\Admin\RechtstexteSteuerung;
 use Sartu\Admin\SetupSteuerung;
 use Sartu\Admin\TestmailSteuerung;
 use Sartu\BedarfsscheckSteuerung;
 use Sartu\OeffentlicheSeiten;
+use Sartu\Portal\AnmeldeSteuerung as KundenAnmeldeSteuerung;
+use Sartu\Portal\PortalSteuerung;
 use Sartu\Route;
 
 return [
@@ -86,10 +89,31 @@ return [
     new Route(Route::BEREICH_ADMIN, 'POST', '/admin/anfragen/{id}/zustand', [AnfragenSteuerung::class, 'zustand']),
     new Route(Route::BEREICH_ADMIN, 'POST', '/admin/anfragen/{id}/notiz', [AnfragenSteuerung::class, 'notiz']),
     new Route(Route::BEREICH_ADMIN, 'POST', '/admin/anfragen/{id}/loeschen', [AnfragenSteuerung::class, 'loeschen']),
+    new Route(Route::BEREICH_ADMIN, 'GET', '/admin/anfragen/{id}/umwandeln', [AnfragenSteuerung::class, 'umwandelnFragen']),
+    new Route(Route::BEREICH_ADMIN, 'POST', '/admin/anfragen/{id}/umwandeln', [AnfragenSteuerung::class, 'umwandeln']),
     new Route(Route::BEREICH_ADMIN, 'GET', '/admin/anfragen/{id}', [AnfragenSteuerung::class, 'einzeln']),
+    // Projekte und Angebote (§4, §4c, §5.1a).
+    new Route(Route::BEREICH_ADMIN, 'GET', '/admin/projekte', [ProjekteSteuerung::class, 'liste']),
+    new Route(Route::BEREICH_ADMIN, 'POST', '/admin/projekte/{id}/angebot', [ProjekteSteuerung::class, 'angebotAnlegen']),
+    new Route(Route::BEREICH_ADMIN, 'GET', '/admin/projekte/{id}', [ProjekteSteuerung::class, 'einzeln']),
+    new Route(Route::BEREICH_ADMIN, 'POST', '/admin/angebote/{id}/senden', [ProjekteSteuerung::class, 'angebotSenden']),
     new Route(Route::BEREICH_ADMIN, 'GET', '/admin/testmail', [TestmailSteuerung::class, 'formular']),
     new Route(Route::BEREICH_ADMIN, 'POST', '/admin/testmail', [TestmailSteuerung::class, 'senden']),
 
+    // ---------------------------------------------------------- Kundenanmeldung (§6)
+    // ohneAnmeldung: Wer sich anmelden will, ist noch nicht angemeldet. Die Strecke hat
+    // stattdessen ihre eigene Begrenzung — 5 Versuche je Adresse und Stunde (§3 Regel 4).
+    new Route(Route::BEREICH_PORTAL, 'GET', '/login', [KundenAnmeldeSteuerung::class, 'formular'], true),
+    new Route(Route::BEREICH_PORTAL, 'POST', '/login', [KundenAnmeldeSteuerung::class, 'anfordern'], true),
+    new Route(Route::BEREICH_PORTAL, 'GET', '/login/{token}', [KundenAnmeldeSteuerung::class, 'einloesen'], true),
+
     // ---------------------------------------------------------- Kundenbereich
-    // Leer bis A1. Siehe Kopf dieser Datei.
+    // Ab hier greift die zentrale Kundenpruefung im Router: Rolle `kunde` UND eine
+    // Organisation in der Sitzung UND eine serverseitig gueltige Anmeldung (§3 Regel 1
+    // und 2a). Testfaelle 5a, 42 und 45 pruefen diese Liste vollstaendig.
+    new Route(Route::BEREICH_PORTAL, 'POST', '/portal/abmelden', [KundenAnmeldeSteuerung::class, 'abmelden']),
+    new Route(Route::BEREICH_PORTAL, 'GET', '/portal', [PortalSteuerung::class, 'uebersicht']),
+    new Route(Route::BEREICH_PORTAL, 'GET', '/portal/angebot', [PortalSteuerung::class, 'angebot']),
+    new Route(Route::BEREICH_PORTAL, 'POST', '/willkommen/fertig', [PortalSteuerung::class, 'willkommenFertig']),
+    new Route(Route::BEREICH_PORTAL, 'GET', '/willkommen/{nummer}', [PortalSteuerung::class, 'willkommen']),
 ];

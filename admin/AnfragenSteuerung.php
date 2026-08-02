@@ -11,6 +11,7 @@ use Sartu\Data\Admin\AdminNachweis;
 use Sartu\Helpers\Http;
 use Sartu\Services\Anfragebearbeitung;
 use Sartu\Services\Bedarfsscheck;
+use Sartu\Services\Umwandlung;
 
 /**
  * `/admin/anfragen` — Portal-Lastenheft §4b.5.
@@ -20,9 +21,10 @@ use Sartu\Services\Bedarfsscheck;
  * Vertriebssystem. Hier gibt es deshalb keine Punktevergabe, keine Priorität, keine
  * Zuweisung und keinen Trichter.
  *
- * **Der Umwandlungsknopf fehlt noch.** Er legt `organizations`, `users` und `projects` an
- * und verschickt die Einladung — das ist der nächste Schritt in A1 und steht nicht als
- * ausgegraute Schaltfläche da (§0.3b: keine toten Menüpunkte).
+ * **`In Kunde und Projekt umwandeln`** legt `organizations`, `users` und `projects` an und
+ * verschickt die Einladung. §4b.5 verlangt einen Bestätigungsdialog davor, „weil dabei ein
+ * Zugang entsteht" — ohne JavaScript ist das eine eigene Seite mit einem zweiten Klick,
+ * kein `confirm()`.
  *
  * Anfragen gehören **keiner** Organisation. Sie entstehen, bevor es einen Kunden gibt. Die
  * Mandantentrennung berührt sie damit nicht — die zentrale Adminprüfung im Router schon.
@@ -111,6 +113,64 @@ final class AnfragenSteuerung
         return $this->aktion($parameter, function (Anfragebearbeitung $dienst, string $id): ?string {
             return $dienst->notizSpeichern($id, Http::getrimmteEingabe('notiz'), Http::gegenstelle());
         }, 'Die Notiz ist gespeichert.');
+    }
+
+    /**
+     * Der Bestätigungsschritt vor der Umwandlung — §4b.5.
+     *
+     * Eine eigene Seite und kein Browserdialog: §9.5a-Denkweise, hier auf den Adminbereich
+     * übertragen — was ohne JavaScript nicht geht, gibt es nicht. Und ein Dialog, den man
+     * wegklickt, ist keine Bestätigung.
+     *
+     * @param array<string,string> $parameter
+     */
+    public function umwandelnFragen(array $parameter = []): Antwort
+    {
+        $nachweis = AdminNachweis::ausSitzung();
+
+        if ($nachweis === null) {
+            return Antwort::weiter('/admin/anmelden');
+        }
+
+        $anfrage = (new AdminAnfragen($nachweis))->finden((string) ($parameter['id'] ?? ''));
+
+        if ($anfrage === null) {
+            return Antwort::nichtGefunden();
+        }
+
+        return Antwort::html(Ansicht::seite('admin', 'admin-anfrage-umwandeln', [
+            'titel'      => 'Anfrage umwandeln',
+            'angemeldet' => true,
+            'anfrage'    => $anfrage,
+        ]));
+    }
+
+    /** @param array<string,string> $parameter */
+    public function umwandeln(array $parameter = []): Antwort
+    {
+        $nachweis = AdminNachweis::ausSitzung();
+
+        if ($nachweis === null) {
+            return Antwort::weiter('/admin/anmelden');
+        }
+
+        $ergebnis = (new Umwandlung($nachweis))->ausfuehren(
+            (string) ($parameter['id'] ?? ''),
+            Http::getrimmteEingabe('paket'),
+            Http::gegenstelle(),
+        );
+
+        if ($ergebnis['fehler'] !== null) {
+            return $this->einzeln($parameter, [$ergebnis['fehler']]);
+        }
+
+        // Ein gescheiterter Mailversand rollt nichts zurueck: Der Zugang steht, und §6.3
+        // haelt den Notweg genau fuer diesen Fall bereit. Der Admin erfaehrt es auf der
+        // Projektseite.
+        return Antwort::weiter(
+            '/admin/projekte/' . $ergebnis['projektId'] . ($ergebnis['mailFehler'] ? '?einladung=fehler' : ''),
+            303,
+        );
     }
 
     /**

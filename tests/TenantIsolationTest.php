@@ -19,24 +19,38 @@ use Sartu\Services\Wartungsmodus;
  * Portal-Lastenheft §3 Regel 1: „Der Test tests/TenantIsolationTest.php ist unantastbar:
  * nie loeschen, nie abschwaechen, um gruen zu werden."
  *
- * Umfang in Stufe A0 nach REIHENFOLGE.md: Die Datenzugriffsschicht filtert nach
+ * Der Test waechst mit jeder Etappe mit. Stand A1: Die Datenzugriffsschicht filtert nach
  * organization_id aus der Sitzung · Admin hat organization_id IS NULL · die Pruefbedingung
- * greift. Der Test waechst mit jeder Etappe mit.
+ * greift · jede Kundenroute verlangt eine angemeldete Sitzung · fremde Projekte und
+ * Angebote sind unsichtbar, auch bei gezieltem Aufruf ihrer Kennung.
  *
- * Testfälle: 5a · 5b · 43 · 44 · 48
+ * Testfälle: 1 · 3 · 5 · 5a · 5b · 42 · 43 · 44 · 45 · 48
  */
 final class TenantIsolationTest extends Datenbankfall
 {
     /**
      * Fall 5a — die vollstaendige Routenliste des Kundenbereichs, nicht eine Auswahl.
      *
-     * In A0 hat der Kundenbereich noch keine Route: Die Kundenanmeldung entsteht in A1.
-     * Sobald dort die erste Portalroute dazukommt, schlaegt dieser Test an — und zwingt
-     * dazu, sie hier einzutragen und zu pruefen. Genau das ist seine Aufgabe.
+     * Die Liste hat in A0 angeschlagen, als sie leer war, und sie schlaegt bei jeder
+     * weiteren Route wieder an. Genau das ist ihre Aufgabe: Eine Kundenroute, die dieser
+     * Test nicht kennt, ist eine ungeprueft ausgelieferte Kundenroute.
+     *
+     * Die drei offenen Routen (`/login`, `/login/{token}`) tragen `ohneAnmeldung` — sie
+     * existieren, BEVOR jemand angemeldet ist. Die uebrigen fuenf sind geschuetzt, und
+     * `testJedeGeschuetzteKundenrouteVerlangtEineAngemeldeteSitzung` faehrt sie einzeln an.
      */
     public function testRoutenlisteDesKundenbereichsIstVollstaendigBekannt(): void
     {
-        $bekannt = [];
+        $bekannt = [
+            'GET /login',
+            'GET /login/{token}',
+            'GET /portal',
+            'GET /portal/angebot',
+            'GET /willkommen/{nummer}',
+            'POST /login',
+            'POST /portal/abmelden',
+            'POST /willkommen/fertig',
+        ];
 
         $this->assertSame(
             $bekannt,
@@ -44,6 +58,107 @@ final class TenantIsolationTest extends Datenbankfall
             'Es gibt eine Kundenroute, die dieser Test nicht kennt. Tragen Sie sie hier ein '
             . 'und pruefen Sie sie — nicht umgekehrt.'
         );
+    }
+
+    /**
+     * Jede geschuetzte Kundenroute verlangt eine angemeldete Sitzung — einzeln geprueft.
+     *
+     * Nicht stichprobenartig: §3 Regel 2a verlangt, dass die Pruefung zentral greift und
+     * keine Route sie umgeht. Der Test faehrt deshalb die Liste ab, die der Test darueber
+     * als vollstaendig festhaelt.
+     */
+    public function testJedeGeschuetzteKundenrouteVerlangtEineAngemeldeteSitzung(): void
+    {
+        $_SESSION = [];
+        $geprueft = 0;
+
+        foreach ($this->router()->routen() as $route) {
+            if ($route->bereich !== Route::BEREICH_PORTAL || $route->ohneAnmeldung) {
+                continue;
+            }
+
+            $antwort = $this->router()->behandeln($route->methode, str_replace('{nummer}', '1', $route->pfad));
+            ++$geprueft;
+
+            $this->assertSame(302, $antwort->status, $route->schluessel());
+            $this->assertSame('/login', $antwort->kopfzeilen['Location'] ?? null, $route->schluessel());
+        }
+
+        $this->assertGreaterThanOrEqual(5, $geprueft);
+    }
+
+    /**
+     * Fall 45 — ein Admin erreicht den Kundenbereich NICHT.
+     *
+     * Das ist keine Formalie: Ein Admin hat bewusst keine `organization_id` (§3 Regel 2a).
+     * Kaeme er durch, muesste irgendwo ein Zweig stehen, der den Organisationsfilter fuer
+     * ihn weglaesst — und genau der ist verboten.
+     */
+    public function testAngemeldeterAdminErreichtKeineKundenroute(): void
+    {
+        $this->alsAdmin($this->adminAnlegen());
+
+        foreach (['/portal', '/portal/angebot', '/willkommen/1'] as $pfad) {
+            $antwort = $this->router()->behandeln('GET', $pfad);
+
+            $this->assertSame(302, $antwort->status, $pfad);
+            $this->assertSame('/login', $antwort->kopfzeilen['Location'] ?? null, $pfad);
+        }
+    }
+
+    /**
+     * Faelle 1, 3 und 5 — fremde Projekte und Angebote gibt es fuer Kunde A nicht.
+     *
+     * Geprueft wird ueber die Datenzugriffsschicht und nicht ueber die Oberflaeche: Dort
+     * entscheidet sich, ob ein fremder Datensatz sichtbar wird. Eine Ansicht, die ihn
+     * ausblendet, hat ihn trotzdem geladen.
+     */
+    public function testKundeSiehtWederFremdeProjekteNochFremdeAngebote(): void
+    {
+        $meine = $this->organisationAnlegen('Betrieb A', 'a@example.org');
+        $fremde = $this->organisationAnlegen('Betrieb B', 'b@example.org');
+
+        $meinProjekt = $this->projektAnlegen($meine, 'Website A');
+        $fremdesProjekt = $this->projektAnlegen($fremde, 'Website B');
+
+        $meinAngebot = $this->angebotAnlegen($meinProjekt, 'AN-2026-001');
+        $fremdesAngebot = $this->angebotAnlegen($fremdesProjekt, 'AN-2026-002');
+
+        $this->alsKunde($meine, $this->kundeAnlegen($meine, 'kunde-a@example.org'));
+
+        $bereich = \Sartu\Data\Customer\KundenBereich::ausSitzung();
+        $projekte = new \Sartu\Data\Customer\KundenProjekte($bereich);
+        $angebote = new \Sartu\Data\Customer\KundenAngebote($bereich);
+
+        // Fall 5 — die Liste enthaelt ausschliesslich eigene Datensaetze.
+        $this->assertCount(1, $projekte->liste());
+        $this->assertSame($meinProjekt, (string) $projekte->liste()[0]['id']);
+        $this->assertCount(1, $angebote->liste());
+
+        // Fall 1 und 3 — der gezielte Aufruf einer fremden Kennung findet nichts.
+        $this->assertNull($projekte->finden($fremdesProjekt), 'Ein fremdes Projekt war sichtbar.');
+        $this->assertNull($angebote->finden($fremdesAngebot), 'Ein fremdes Angebot war sichtbar.');
+
+        // Und die eigenen sind es sehr wohl — sonst prueft der Test nur, dass nichts geht.
+        $this->assertNotNull($projekte->finden($meinProjekt));
+        $this->assertNotNull($angebote->finden($meinAngebot));
+    }
+
+    /** §5.2: Ein Angebot im Zustand `entwurf` ist fuer den Kunden unsichtbar. */
+    public function testEntwurfEinesAngebotsIstFuerDenKundenUnsichtbar(): void
+    {
+        $organisation = $this->organisationAnlegen('Betrieb A', 'a@example.org');
+        $projekt = $this->projektAnlegen($organisation, 'Website A');
+        $entwurf = $this->angebotAnlegen($projekt, 'AN-2026-003', 'entwurf');
+
+        $this->alsKunde($organisation, $this->kundeAnlegen($organisation, 'kunde-a@example.org'));
+
+        $angebote = new \Sartu\Data\Customer\KundenAngebote(
+            \Sartu\Data\Customer\KundenBereich::ausSitzung()
+        );
+
+        $this->assertNull($angebote->finden($entwurf), 'Ein Entwurf war fuer den Kunden sichtbar.');
+        $this->assertSame([], $angebote->liste());
     }
 
     /** Fall 5b — eine Kundenabfrage ohne Organisation in der Sitzung wirft. */
@@ -286,6 +401,40 @@ final class TenantIsolationTest extends Datenbankfall
         }
 
         $this->assertSame([], $verdaechtig, 'Ein Organisationsfilter laesst sich abschalten.');
+    }
+
+    private function projektAnlegen(string $organisationId, string $titel): string
+    {
+        $id = \Sartu\Data\Uuid::v4();
+
+        $anweisung = $this->pdo->prepare(
+            'INSERT INTO projects (id, organization_id, title, package, included_feedback_rounds,'
+            . ' protection_level, status) VALUES (?, ?, ?, ?, ?, ?, ?)'
+        );
+        $anweisung->execute([$id, $organisationId, $titel, 'wachstum', 2, 'm', 'angebot_offen']);
+
+        return $id;
+    }
+
+    private function angebotAnlegen(string $projektId, string $nummer, string $zustand = 'gesendet'): string
+    {
+        $id = \Sartu\Data\Uuid::v4();
+
+        $anweisung = $this->pdo->prepare(
+            'INSERT INTO offers (id, project_id, number, status, package, summary, sitemap, inclusions,'
+            . ' exclusions, included_feedback_rounds, delivery_days_min, delivery_days_max,'
+            . ' delivery_start_condition, one_time_net_cents, protection_level,'
+            . ' protection_monthly_net_cents, protection_min_term_months, first_year_net_cents,'
+            . ' payment_plan, rights_text, domain_text, valid_until)'
+            . ' VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)'
+        );
+        $anweisung->execute([
+            $id, $projektId, $nummer, $zustand, 'wachstum', 'Zusammenfassung', 'Seitenstruktur',
+            'Enthalten', 'Nicht enthalten', 2, 10, 15, 'Bedingung', 390000, 'm', 12900, 12,
+            390000 + 12 * 12900, '50_50', 'Rechte', 'Domain', '2027-12-31',
+        ]);
+
+        return $id;
     }
 
     private function router(): Router

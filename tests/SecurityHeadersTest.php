@@ -45,9 +45,13 @@ final class SecurityHeadersTest extends Datenbankfall
                 continue;
             }
 
-            // Die geschuetzten Adminrouten faengt schon die Anmeldepruefung ab; fuer die
-            // CSRF-Pruefung sind die offenen Routen der interessante Fall.
-            if ($route->bereich === Route::BEREICH_ADMIN && !$route->ohneAnmeldung) {
+            // Geschuetzte Routen faengt schon die Zugangspruefung ab — sie steht im Router
+            // absichtlich VOR der CSRF-Pruefung, damit ein unangemeldeter POST nicht
+            // erfaehrt, ob sein Token gueltig war. Fuer die CSRF-Pruefung sind deshalb die
+            // offenen Routen der interessante Fall; dass die geschuetzten wirklich
+            // abgefangen werden, prueft der Test darunter.
+            if (!$route->ohneAnmeldung
+                && in_array($route->bereich, [Route::BEREICH_ADMIN, Route::BEREICH_PORTAL], true)) {
                 continue;
             }
 
@@ -61,6 +65,46 @@ final class SecurityHeadersTest extends Datenbankfall
                 419,
                 $antwort->status,
                 sprintf('Die Route %s hat einen POST ohne Token angenommen.', $route->schluessel())
+            );
+        }
+
+        $this->assertGreaterThan(0, $geprueft);
+    }
+
+    /**
+     * Die Kehrseite: Jede geschuetzte POST-Route weist einen unangemeldeten Aufruf ab —
+     * ohne die Frage nach dem Token zu beantworten.
+     *
+     * Ohne diesen Test waere die Ausnahme oben ein Loch: Eine Route, die weder Anmeldung
+     * noch Token prueft, faellt durch beide Raster.
+     */
+    public function testGeschuetztePostRoutenWeisenOhneAnmeldungAb(): void
+    {
+        $_POST = [];
+        $_SESSION = [];
+        $geprueft = 0;
+
+        foreach ($this->router(gesperrt: true)->routen() as $route) {
+            if ($route->methode !== 'POST' || $route->ohneAnmeldung) {
+                continue;
+            }
+
+            if (!in_array($route->bereich, [Route::BEREICH_ADMIN, Route::BEREICH_PORTAL], true)) {
+                continue;
+            }
+
+            $antwort = $this->router(gesperrt: true)->behandeln('POST', $route->pfad);
+            ++$geprueft;
+
+            $this->assertSame(
+                302,
+                $antwort->status,
+                sprintf('Die Route %s wurde ohne Anmeldung ausgefuehrt.', $route->schluessel())
+            );
+            $this->assertSame(
+                $route->bereich === Route::BEREICH_ADMIN ? '/admin/anmelden' : '/login',
+                $antwort->kopfzeilen['Location'] ?? null,
+                $route->schluessel()
             );
         }
 
