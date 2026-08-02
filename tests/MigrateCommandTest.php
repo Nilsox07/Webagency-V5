@@ -56,8 +56,12 @@ final class MigrateCommandTest extends Datenbankfall
         [$code, $ausgabe] = $this->befehl(['status']);
 
         $this->assertSame(0, $code, $ausgabe);
-        $this->assertStringContainsString('Eingespielt: 8', $ausgabe);
-        $this->assertStringContainsString('offen: 0', $ausgabe);
+        // Die Zahl kommt aus dem Verzeichnis, nicht aus dem Kopf: Sonst ist der Test bei
+        // jeder neuen Migration rot, ohne dass etwas kaputt ist.
+        $this->assertStringContainsString(
+            sprintf('Eingespielt: %d · offen: 0', count((array) glob(SARTU_WURZEL . '/migrations/*.sql'))),
+            $ausgabe
+        );
         $this->assertStringContainsString('001_organizations', $ausgabe);
 
         $this->assertSame($vorher, $this->tabellen(), 'status hat das Schema verändert.');
