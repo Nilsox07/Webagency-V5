@@ -310,6 +310,24 @@ a:focus-visible {
 
 .pruefliste li:last-child { border-bottom: 0; }
 
+/* Block 3 des Cockpits (§8.1). Eine Zeile je offenem Punkt, der Zusatz darunter — nicht
+   daneben: Bei schmalem Fenster stünde er sonst unter dem halben Link. */
+.punkteliste { list-style: none; margin: 0; padding: 0; }
+
+.punkteliste li {
+  padding: var(--s-2) 0;
+  border-bottom: 1px solid var(--line);
+}
+
+.punkteliste li:last-child { border-bottom: 0; }
+
+.punkteliste__hinweis {
+  display: block;
+  margin-top: var(--s-1);
+  font-size: var(--fs-small);
+  color: var(--muted);
+}
+
 .schluesselwert {
   font-family: var(--font-mono);
   font-size: var(--fs-copy);

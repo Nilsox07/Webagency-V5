@@ -104,6 +104,64 @@ final class Zahlungsstatus
         };
     }
 
+    /**
+     * Die Schwelle, ab der eine Frist „knapp" ist — **drei Tage**.
+     *
+     * §8.1 nennt den Hinweis, ohne die Zahl. Sie stand deshalb bis zum 02.08.2026 als
+     * offener Punkt in `OFFENE_ENTSCHEIDUNGEN.md`; der Betreiber hat sie entschieden.
+     *
+     * **Drei Tage, weil §10 dieselbe Zahl schon kennt:** „Angebot läuft in 3 Tagen ab."
+     * Eine zweite Frist daneben wäre eine Zahl ohne Grund — und zwei Vorwarnzeiten im
+     * selben Bereich lernt niemand.
+     */
+    public const KNAPP_TAGE = 3;
+
+    /**
+     * Ist die Zahlungsfrist knapp?
+     *
+     * **Nur bei offenen Rechnungen.** Eine bezahlte hat keine Frist mehr, eine überfällige
+     * ist nicht knapp, sondern vorbei — dort steht bereits der schärfere Text.
+     *
+     * `heute` kommt als Parameter, nicht aus der Uhr: Ein Fristvergleich, der sich nicht
+     * stellen lässt, ist ein Fristvergleich, den kein Test prüfen kann.
+     *
+     * @param array<string,mixed> $rechnung
+     */
+    public static function fristKnapp(array $rechnung, ?string $heute = null): bool
+    {
+        $zustand = (string) ($rechnung['status'] ?? '');
+
+        if (!in_array($zustand, [self::GESENDET, self::TEILWEISE_BEZAHLT], true)) {
+            return false;
+        }
+
+        $faellig = self::wert($rechnung, 'due_date');
+
+        if ($faellig === null) {
+            return false;
+        }
+
+        $heute ??= Format::heute();
+        $grenze = (new \DateTimeImmutable($heute))
+            ->modify('+' . self::KNAPP_TAGE . ' days')
+            ->format('Y-m-d');
+
+        // Bereits überfällig ist nicht knapp — das sagt der Zustand, nicht dieser Hinweis.
+        return $faellig >= $heute && $faellig <= $grenze;
+    }
+
+    /**
+     * §8.1, der Hinweis bei knapper Frist. Wortlaut hier, nicht in der Ansicht.
+     *
+     * **Ohne Datum, mit Absicht.** Der Hinweis steht in Block 3 hinter der gebundenen Zeile
+     * `Rechnung {Nummer} — zahlbar bis {Datum}`. Das Datum ein zweites Mal danebenzusetzen
+     * hiesse, den Leser zu fragen, ob es dieselbe Frist ist.
+     */
+    public static function knapphinweis(): string
+    {
+        return 'Diese Frist ist in wenigen Tagen erreicht.';
+    }
+
     /** §4a: 19 % Umsatzsteuer, an einer Stelle. */
     public static function umsatzsteuer(int $nettoCent, bool $kleinunternehmer = false): int
     {

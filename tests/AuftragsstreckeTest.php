@@ -14,6 +14,7 @@ use Sartu\Data\Customer\KundenFreigaben;
 use Sartu\Data\Customer\KundenRechnungen;
 use Sartu\Data\Uuid;
 use Sartu\Helpers\Csrf;
+use Sartu\Helpers\Format;
 use Sartu\Router;
 use Sartu\Services\Angebotsannahme;
 use Sartu\Services\Aufgabendienst;
@@ -423,6 +424,81 @@ final class AuftragsstreckeTest extends Datenbankfall
 
         $this->assertSame(1, (new Zahlungslauf())->ausfuehren()['angebote']);
         $this->assertSame('abgelaufen', (string) $this->angebot()['status']);
+    }
+
+    // ---------------------------------------------------------------- §8.1 Block 3
+
+    /**
+     * Die Schwelle für „knappe Frist" — **drei Tage**, entschieden am 02.08.2026.
+     *
+     * Geprüft wird die Grenze selbst, nicht ein Beispiel darin: drei Tage zählen noch, vier
+     * nicht mehr. Eine Schwelle, die nur in der Mitte geprüft ist, ist nicht geprüft.
+     */
+    public function testKnappeFristBeginntDreiTageVorFaelligkeit(): void
+    {
+        $this->assertSame(3, Zahlungsstatus::KNAPP_TAGE);
+
+        $offen = static fn (int $tage, string $zustand = Zahlungsstatus::GESENDET): array => [
+            'status' => $zustand, 'due_date' => Format::inTagen($tage),
+        ];
+
+        $this->assertTrue(Zahlungsstatus::fristKnapp($offen(3)), 'Drei Tage zählen noch.');
+        $this->assertFalse(Zahlungsstatus::fristKnapp($offen(4)), 'Vier Tage sind nicht knapp.');
+        $this->assertTrue(Zahlungsstatus::fristKnapp($offen(0)), 'Heute fällig ist knapp.');
+
+        // Gestern fällig ist nicht knapp, sondern vorbei — das sagt der Zustand.
+        $this->assertFalse(Zahlungsstatus::fristKnapp($offen(-1)));
+        $this->assertFalse(Zahlungsstatus::fristKnapp($offen(1, Zahlungsstatus::UEBERFAELLIG)));
+
+        // Eine angezahlte Rechnung hat weiter eine Frist, eine bezahlte nicht mehr.
+        $this->assertTrue(Zahlungsstatus::fristKnapp($offen(2, Zahlungsstatus::TEILWEISE_BEZAHLT)));
+        $this->assertFalse(Zahlungsstatus::fristKnapp($offen(2, Zahlungsstatus::BEZAHLT)));
+        $this->assertFalse(Zahlungsstatus::fristKnapp($offen(2, Zahlungsstatus::STORNIERT)));
+
+        // Ohne Fälligkeit gibt es nichts zu warnen.
+        $this->assertFalse(Zahlungsstatus::fristKnapp(['status' => Zahlungsstatus::GESENDET]));
+    }
+
+    /** §8.1 Block 3 — die offenen Punkte stehen im Cockpit, mit Link und knappem Hinweis. */
+    public function testCockpitZeigtOffenePunkteMitHinweisBeiKnapperFrist(): void
+    {
+        $rechnungId = $this->rechnungAnlegen();
+        $this->faelligkeitVerschieben($rechnungId, '+2 days');
+        $this->aufgabeAnlegen('angabe');
+
+        $this->alsKunde($this->organisationId, $this->kundeId);
+        $rumpf = $this->router()->behandeln('GET', '/portal')->rumpf;
+
+        $this->assertStringContainsString('Offene Punkte', $rumpf);
+        $this->assertStringContainsString('Eine offene Aufgabe', $rumpf);
+        $this->assertStringContainsString('/portal/aufgaben', $rumpf);
+        $this->assertStringContainsString(
+            'Rechnung RE-2026-001 — zahlbar bis ' . Format::datum(Format::inTagen(2)),
+            $rumpf
+        );
+        $this->assertStringContainsString('Diese Frist ist in wenigen Tagen erreicht.', $rumpf);
+    }
+
+    /** Ohne knappe Frist steht der Hinweis nicht da — und ohne offenen Punkt kein Block. */
+    public function testCockpitOhneKnappeFristUndOhneOffenePunkte(): void
+    {
+        $rechnungId = $this->rechnungAnlegen();
+        $this->faelligkeitVerschieben($rechnungId, '+10 days');
+
+        $this->alsKunde($this->organisationId, $this->kundeId);
+        $rumpf = $this->router()->behandeln('GET', '/portal')->rumpf;
+
+        $this->assertStringContainsString('Rechnung RE-2026-001', $rumpf);
+        $this->assertStringNotContainsString('Diese Frist ist in wenigen Tagen erreicht.', $rumpf);
+
+        // Bezahlt: kein offener Punkt, kein Kasten.
+        $this->alsAdmin($this->adminId);
+        (new Rechnungsdienst($this->nachweis()))->zahlungEintragen($rechnungId, 119000, 'Kontoauszug', null);
+
+        $this->alsKunde($this->organisationId, $this->kundeId);
+        $rumpf = $this->router()->behandeln('GET', '/portal')->rumpf;
+
+        $this->assertStringNotContainsString('Offene Punkte', $rumpf);
     }
 
     // ---------------------------------------------------------------- Aufgaben und Uploads

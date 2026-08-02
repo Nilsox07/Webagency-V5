@@ -9,11 +9,14 @@ use Sartu\Antwort;
 use Sartu\Data\Customer\KundenAngebote;
 use Sartu\Data\Customer\KundenBereich;
 use Sartu\Data\Customer\KundenAufgaben;
+use Sartu\Data\Customer\KundenFreigaben;
 use Sartu\Data\Customer\KundenProjekte;
 use Sartu\Data\Customer\KundenRechnungen;
+use Sartu\Helpers\Format;
 use Sartu\Services\KundenAnmeldung;
 use Sartu\Services\Preise;
 use Sartu\Services\Projektstatus;
+use Sartu\Services\Zahlungsstatus;
 use Sartu\Sitzung;
 
 /**
@@ -53,14 +56,14 @@ final class PortalSteuerung
 
         $offeneAufgaben = (new KundenAufgaben($bereich))->offeneGesamt();
         $offeneRechnung = (new KundenRechnungen($bereich))->aeltesteOffene();
+        $freigabeOffen  = self::freigabeOffen($bereich, $projekt);
 
         return Antwort::html(Ansicht::seite('portal', 'portal-uebersicht', [
             'titel'        => 'Übersicht',
             'angemeldet'   => true,
             'projekt'      => $projekt,
             'angebot'      => $angebot,
-            'offeneAufgaben' => $offeneAufgaben,
-            'offeneRechnung' => $offeneRechnung,
+            'offenePunkte' => self::offenePunkte($offeneAufgaben, $offeneRechnung, $freigabeOffen),
             'naechsterSchritt' => self::naechsterSchritt($projekt, $angebot, $offeneAufgaben, $offeneRechnung),
         ]));
     }
@@ -140,6 +143,84 @@ final class PortalSteuerung
      *
      * @return array{text:string,ziel:?string,knopf:?string}
      */
+    /**
+     * Steht eine Freigabe des Kunden aus? — die dritte Zeile aus §8.1 Block 3.
+     *
+     * **Gemeint ist die Abnahme, nicht die Faktenfreigabe.** Die Faktenfreigabe ist selbst
+     * eine Aufgabe (`tasks.kind = 'freigabe'`, §8.3) und steht damit bereits in der ersten
+     * Zeile — sie ein zweites Mal aufzuführen hiesse, denselben Punkt doppelt zu zaehlen.
+     * Die Abnahme ist keine Aufgabe: Sie haengt am Projektzustand `abnahme` (§5.1a) und
+     * waere ohne diese Zeile nirgends im Cockpit zu sehen.
+     *
+     * @param array<string,mixed>|null $projekt
+     */
+    private static function freigabeOffen(KundenBereich $bereich, ?array $projekt): bool
+    {
+        if ($projekt === null || (string) $projekt['status'] !== Projektstatus::ABNAHME) {
+            return false;
+        }
+
+        return (new KundenFreigaben($bereich))
+            ->finden((string) $projekt['id'], KundenFreigaben::ABNAHME) === null;
+    }
+
+    /**
+     * §8.1 Block 3 — „hoechstens drei Zeilen, jeweils mit Link".
+     *
+     * Der Wortlaut der ersten beiden Zeilen ist dort gebunden: `{n} offene Aufgaben` und
+     * `Rechnung {Nummer} — zahlbar bis {Datum}`. Bei genau einer Aufgabe steht `Eine offene
+     * Aufgabe` — „1 offene Aufgaben" waere kein deutscher Satz, und die Vorlage meint die
+     * Zahl, nicht die Ziffer.
+     *
+     * **Der Hinweis bei knapper Frist** (drei Tage, `Zahlungsstatus::KNAPP_TAGE`) kommt als
+     * eigener Satz **hinter** die gebundene Zeile, nicht statt ihr. Nummer und Datum bleiben
+     * so an derselben Stelle stehen, egal wie nah die Frist ist.
+     *
+     * @param array<string,mixed>|null $offeneRechnung
+     *
+     * @return list<array{text:string,zusatz:?string,ziel:string}>
+     */
+    private static function offenePunkte(
+        int $offeneAufgaben,
+        ?array $offeneRechnung,
+        bool $freigabeOffen,
+    ): array {
+        $punkte = [];
+
+        if ($offeneAufgaben > 0) {
+            $punkte[] = [
+                'text'   => $offeneAufgaben === 1
+                    ? 'Eine offene Aufgabe'
+                    : $offeneAufgaben . ' offene Aufgaben',
+                'zusatz' => null,
+                'ziel'   => '/portal/aufgaben',
+            ];
+        }
+
+        if ($offeneRechnung !== null) {
+            $punkte[] = [
+                'text'   => 'Rechnung ' . (string) $offeneRechnung['number']
+                    . ' — zahlbar bis ' . Format::datum(
+                        is_string($offeneRechnung['due_date'] ?? null) ? $offeneRechnung['due_date'] : null
+                    ),
+                'zusatz' => Zahlungsstatus::fristKnapp($offeneRechnung)
+                    ? Zahlungsstatus::knapphinweis()
+                    : null,
+                'ziel'   => '/portal/rechnungen',
+            ];
+        }
+
+        if ($freigabeOffen) {
+            $punkte[] = [
+                'text'   => 'Ihre Abnahme steht noch aus',
+                'zusatz' => null,
+                'ziel'   => '/portal/vorschau',
+            ];
+        }
+
+        return $punkte;
+    }
+
     private static function naechsterSchritt(
         ?array $projekt,
         ?array $angebot,

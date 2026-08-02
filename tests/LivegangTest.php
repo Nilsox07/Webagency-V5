@@ -185,6 +185,36 @@ final class LivegangTest extends Datenbankfall
         $this->assertFalse($zweite);
     }
 
+    /**
+     * §8.1 Block 3, dritte Zeile — die ausstehende Freigabe.
+     *
+     * Gemeint ist die Abnahme: Sie ist keine Aufgabe und stünde sonst nirgends im Cockpit.
+     * Sobald sie erklärt ist, verschwindet die Zeile — ein offener Punkt, der erledigt ist,
+     * bleibt kein offener Punkt.
+     */
+    public function testCockpitZeigtDieAusstehendeAbnahmeAlsOffenenPunkt(): void
+    {
+        $this->projektStatusSetzen(Projektstatus::ABNAHME);
+        $this->alsKunde($this->organisationId, $this->kundeId);
+
+        $rumpf = $this->router()->behandeln('GET', '/portal')->rumpf;
+
+        $this->assertStringContainsString('Offene Punkte', $rumpf);
+        $this->assertStringContainsString('Ihre Abnahme steht noch aus', $rumpf);
+        $this->assertStringContainsString('/portal/vorschau', $rumpf);
+
+        $this->assertSame([], (new Vorschaudienst($this->bereich()))->abnehmen(
+            $this->projektId,
+            ['bestaetigung' => '1', 'granted_name' => 'Erika Mustermann'],
+            $this->kundeId,
+            '127.0.0.1',
+        ));
+
+        $rumpf = $this->router()->behandeln('GET', '/portal')->rumpf;
+
+        $this->assertStringNotContainsString('Ihre Abnahme steht noch aus', $rumpf);
+    }
+
     /** Die Abnahme ohne Ankreuzen und ohne getippten Namen scheitert — §8.4. */
     public function testAbnahmeOhneBestaetigungUndNamenScheitert(): void
     {
