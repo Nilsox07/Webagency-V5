@@ -18,6 +18,10 @@ use Sartu\Helpers\Html;
 <?php if (isset($beschreibung) && $beschreibung !== null): ?>
 <meta name="description" content="<?= Html::e($beschreibung) ?>">
 <?php endif; ?>
+<?php /* Website-Lastenheft §9: die Ergebnisschritte und die Danke-Seite sind `noindex`. */ ?>
+<?php if (($noindex ?? false) === true): ?>
+<meta name="robots" content="noindex, follow">
+<?php endif; ?>
 <link rel="stylesheet" href="/assets/css/tokens.css">
 <link rel="stylesheet" href="/assets/css/anwendung.css">
 </head>

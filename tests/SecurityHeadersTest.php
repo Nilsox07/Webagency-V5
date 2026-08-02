@@ -18,14 +18,10 @@ use Sartu\Services\Wartungsmodus;
  */
 final class SecurityHeadersTest extends Datenbankfall
 {
-    private string $arbeitsverzeichnis;
-
     protected function setUp(): void
     {
         parent::setUp();
 
-        $this->arbeitsverzeichnis = sys_get_temp_dir() . '/sartu-header-' . bin2hex(random_bytes(4));
-        mkdir($this->arbeitsverzeichnis, 0770, true);
         touch($this->arbeitsverzeichnis . '/' . InstallationsSperre::DATEINAME);
 
         $_SERVER = ['REMOTE_ADDR' => '127.0.0.1', 'HTTP_HOST' => 'localhost'];
@@ -33,9 +29,6 @@ final class SecurityHeadersTest extends Datenbankfall
 
     protected function tearDown(): void
     {
-        @unlink($this->arbeitsverzeichnis . '/' . InstallationsSperre::DATEINAME);
-        @rmdir($this->arbeitsverzeichnis);
-
         parent::tearDown();
     }
 

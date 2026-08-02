@@ -21,25 +21,12 @@ use Sartu\Services\Wartungsmodus;
  */
 final class MarkupTest extends Datenbankfall
 {
-    private string $arbeitsverzeichnis;
-
     protected function setUp(): void
     {
         parent::setUp();
 
-        $this->arbeitsverzeichnis = sys_get_temp_dir() . '/sartu-markup-' . bin2hex(random_bytes(4));
-        mkdir($this->arbeitsverzeichnis, 0770, true);
-
         $_SERVER = ['REMOTE_ADDR' => '127.0.0.1', 'HTTP_HOST' => 'localhost'];
         putenv('APP_ENV=local');
-    }
-
-    protected function tearDown(): void
-    {
-        @unlink($this->arbeitsverzeichnis . '/' . InstallationsSperre::DATEINAME);
-        @rmdir($this->arbeitsverzeichnis);
-
-        parent::tearDown();
     }
 
     /** Fall 58 — jede erreichbare GET-Seite hat genau eine <h1>. */
@@ -196,6 +183,14 @@ final class MarkupTest extends Datenbankfall
         $this->rechtstextFreigeben();
         $seiten['GET /impressum'] = $fertig->behandeln('GET', '/impressum')->rumpf;
 
+        // Zustand 2b: der Bedarfsscheck, Schritt fuer Schritt bis zur Danke-Seite.
+        // Er wird hier vollstaendig durchlaufen, weil seine Seiten sonst als einzige
+        // oeffentliche Strecke ungeprueft blieben — und er ist der einzige Weg zu einem
+        // Angebot (Website-Lastenheft §9.5a).
+        foreach ($this->bedarfsscheckSeiten($fertig) as $bezeichnung => $rumpf) {
+            $seiten[$bezeichnung] = $rumpf;
+        }
+
         // Zustand 3: angemeldet.
         $this->alsAdmin($this->adminAnlegen());
         $this->betreiberdatenAnlegen();
@@ -211,6 +206,55 @@ final class MarkupTest extends Datenbankfall
             $this->wartungAktiv(),
         );
         $seiten['GET /admin (503)'] = $wartung->behandeln('GET', '/admin')->rumpf;
+
+        return $seiten;
+    }
+
+    /**
+     * Der Bedarfsscheck als Seitenfolge — Einstieg, fuenf Themen, Ergebnis, Kontakt, Danke.
+     *
+     * Der Durchlauf ist derselbe wie in `BedarfsscheckTest`; hier interessiert nicht das
+     * Ergebnis, sondern die Auszeichnung jeder einzelnen Seite.
+     *
+     * @return array<string,string>
+     */
+    private function bedarfsscheckSeiten(Router $router): array
+    {
+        $antworten = [
+            1 => ['angebot' => 'Wir sanieren Bäder.', 'einsatzort' => '48268', 'bestehende_website' => 'nein'],
+            2 => ['hauptziel' => 'anfragen', 'zielgruppe' => 'privatkunden'],
+            3 => ['umfangssignale' => [\Sartu\Services\Empfehlung::SIGNAL_HAUPTANGEBOT]],
+            4 => ['sonderfunktionen' => [\Sartu\Services\Empfehlung::GATE_FORMULAR]],
+            5 => ['domainstatus' => 'vorhanden', 'fester_termin' => 'nein'],
+        ];
+
+        $seiten = ['GET /briefing' => $router->behandeln('GET', '/briefing')->rumpf];
+
+        $_POST = [\Sartu\Helpers\Csrf::FELD => \Sartu\Helpers\Csrf::token()];
+        $router->behandeln('POST', '/briefing/start');
+
+        foreach ($antworten as $nummer => $eingabe) {
+            $seiten['GET /briefing/' . $nummer] = $router->behandeln('GET', '/briefing/' . $nummer)->rumpf;
+
+            $_POST = $eingabe + [\Sartu\Helpers\Csrf::FELD => \Sartu\Helpers\Csrf::token()];
+            $router->behandeln('POST', '/briefing/' . $nummer);
+        }
+
+        $seiten['GET /briefing/ergebnis'] = $router->behandeln('GET', '/briefing/ergebnis')->rumpf;
+        $seiten['GET /briefing/kontakt'] = $router->behandeln('GET', '/briefing/kontakt')->rumpf;
+
+        // Die Danke-Seite erscheint nur nach einem echten Absenden.
+        $_SESSION['_bedarfsscheck']['form_started_at'] = (string) (time() - 60);
+        $_POST = [
+            'first_name' => 'Erika', 'last_name' => 'Mustermann', 'company' => 'Mustermann GmbH',
+            'email' => 'erika@example.org', 'preferred_contact' => 'email',
+            'b2b_confirmed' => '1', 'privacy_confirmed' => '1',
+            \Sartu\Helpers\Csrf::FELD => \Sartu\Helpers\Csrf::token(),
+        ];
+        $router->behandeln('POST', '/briefing/absenden');
+        $_POST = [];
+
+        $seiten['GET /briefing/danke'] = $router->behandeln('GET', '/briefing/danke')->rumpf;
 
         return $seiten;
     }

@@ -292,11 +292,10 @@ final class TenantIsolationTest extends Datenbankfall
     {
         // Die Einrichtung gilt als abgeschlossen: sonst leitet jede Route auf /admin/setup
         // und der Test prueft die Weiterleitung statt die Adminsperre.
-        $sperre = new InstallationsSperre(null, sys_get_temp_dir() . '/sartu-test-gesperrt');
-        @mkdir(sys_get_temp_dir() . '/sartu-test-gesperrt', 0770, true);
-        touch(sys_get_temp_dir() . '/sartu-test-gesperrt/' . InstallationsSperre::DATEINAME);
+        $sperre = new InstallationsSperre(null, $this->arbeitsverzeichnis);
+        touch($this->arbeitsverzeichnis . '/' . InstallationsSperre::DATEINAME);
 
-        $wartung = new Wartungsmodus(sys_get_temp_dir() . '/sartu-test-ohne-wartung');
+        $wartung = new Wartungsmodus($this->arbeitsverzeichnis . '/ohne-wartung');
 
         return new Router(require SARTU_WURZEL . '/app/routes.php', $sperre, $wartung);
     }

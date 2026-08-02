@@ -29,8 +29,6 @@ final class AnmeldungTest extends Datenbankfall
 {
     private const PASSWORT = 'einlangespasswort';
 
-    private string $arbeitsverzeichnis;
-
     private string $geheimnis;
 
     private string $adminId;
@@ -38,9 +36,6 @@ final class AnmeldungTest extends Datenbankfall
     protected function setUp(): void
     {
         parent::setUp();
-
-        $this->arbeitsverzeichnis = sys_get_temp_dir() . '/sartu-anmeldung-' . bin2hex(random_bytes(4));
-        mkdir($this->arbeitsverzeichnis, 0770, true);
 
         $this->geheimnis = Zweifaktor::geheimnisErzeugen();
 
@@ -54,13 +49,6 @@ final class AnmeldungTest extends Datenbankfall
             );
 
         $_SERVER = ['REMOTE_ADDR' => '127.0.0.1', 'HTTP_HOST' => 'localhost'];
-    }
-
-    protected function tearDown(): void
-    {
-        $this->verzeichnisLoeschen($this->arbeitsverzeichnis);
-
-        parent::tearDown();
     }
 
     // ------------------------------------------------------------ Der gute Weg
@@ -330,21 +318,4 @@ final class AnmeldungTest extends Datenbankfall
         return $schluessel ??= Verschluesselung::schluesselErzeugen();
     }
 
-    private function verzeichnisLoeschen(string $pfad): void
-    {
-        if (!is_dir($pfad)) {
-            return;
-        }
-
-        $lauf = new \RecursiveIteratorIterator(
-            new \RecursiveDirectoryIterator($pfad, \FilesystemIterator::SKIP_DOTS),
-            \RecursiveIteratorIterator::CHILD_FIRST,
-        );
-
-        foreach ($lauf as $eintrag) {
-            $eintrag->isDir() ? rmdir($eintrag->getPathname()) : unlink($eintrag->getPathname());
-        }
-
-        rmdir($pfad);
-    }
 }

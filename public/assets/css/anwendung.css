@@ -311,3 +311,186 @@ a:focus-visible {
   font-size: var(--fs-small);
   color: var(--muted);
 }
+
+/* ============================================================
+   Bedarfsscheck — Website-Lastenheft §9
+
+   Der oeffentliche Bereich traegt kein dunkles Kopfband; das
+   unterscheidet ihn sichtbar vom internen Bereich.
+
+   Zustaende nie allein ueber Farbe (§2, Barrierefreiheit): ein
+   fehlerhaftes Feld traegt eine staerkere Kante UND eine
+   Meldung im Text. Es gibt weiterhin kein Rot.
+   ============================================================ */
+
+.lead {
+  font-size: var(--fs-lede);
+  line-height: var(--lh-lede);
+  margin-bottom: var(--s-4);
+}
+
+.fussnote {
+  font-size: var(--fs-small);
+  color: var(--muted);
+  margin-top: var(--s-4);
+}
+
+.punkte {
+  list-style: none;
+  margin: 0 0 var(--s-4);
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--s-2);
+}
+
+.punkte li {
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: var(--r-pill);
+  padding: var(--s-1) var(--s-3);
+  font-size: var(--fs-small);
+}
+
+/* ---- Eine Frage des Bedarfsschecks ----------------------- */
+
+.frage {
+  border: 0;
+  margin: 0 0 var(--s-4);
+  padding: 0;
+}
+
+.frage > legend,
+.frage > label {
+  display: block;
+  padding: 0;
+  margin-bottom: var(--s-1);
+  font-size: var(--fs-copy);
+  font-weight: var(--fw-head);
+}
+
+.frage--fehler {
+  border-left: var(--s-1) solid var(--ink);
+  padding-left: var(--s-3);
+}
+
+.frage__hilfe {
+  margin: 0 0 var(--s-2);
+  font-size: var(--fs-small);
+  color: var(--muted);
+}
+
+.frage__fehler {
+  margin: 0 0 var(--s-2);
+  font-size: var(--fs-small);
+  font-weight: var(--fw-head);
+  color: var(--ink);
+}
+
+.frage__optional { font-weight: 400; color: var(--muted); }
+
+.frage input[type="text"],
+.frage input[type="email"],
+.frage input[type="tel"],
+.frage textarea {
+  width: 100%;
+  font: inherit;
+  font-size: var(--fs-copy);
+  color: var(--text);
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: var(--r-xs);
+  padding: var(--s-2);
+  margin-bottom: var(--s-2);
+}
+
+.frage textarea { min-height: 7rem; }
+
+.frage input:focus-visible,
+.frage textarea:focus-visible {
+  outline: 2px solid var(--ink);
+  outline-offset: 2px;
+}
+
+/* ---- Auswahlgruppen -------------------------------------- */
+
+.wahl { list-style: none; margin: 0; padding: 0; }
+
+.wahl li {
+  display: flex;
+  gap: var(--s-2);
+  align-items: baseline;
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: var(--r-s);
+  padding: var(--s-2) var(--s-3);
+  margin-bottom: var(--s-1);
+}
+
+.wahl label { font-size: var(--fs-copy); }
+
+.wahl__hilfe {
+  display: block;
+  font-size: var(--fs-small);
+  color: var(--muted);
+}
+
+.haken {
+  display: flex;
+  gap: var(--s-2);
+  align-items: baseline;
+  max-width: 62ch;
+}
+
+.haken label { font-size: var(--fs-copy); }
+
+/* ---- Preisblock der Ergebnisseite ------------------------ */
+
+.preisblock {
+  background: var(--lime-soft);
+  border: 1px solid var(--line);
+  border-radius: var(--r-m);
+  padding: var(--s-4);
+  margin-bottom: var(--s-3);
+}
+
+.preisblock__zeile { font-size: var(--fs-h3); margin-bottom: var(--s-1); }
+.preisblock__jahr { margin-bottom: var(--s-3); }
+.preisblock > :last-child { margin-bottom: 0; }
+
+/* ---- Honigtopf ------------------------------------------- */
+/* Nicht display:none — ein unsichtbares Feld, das trotzdem im
+   Quelltext steht, ist genau die Falle (§9.5b). */
+
+.honigtopf {
+  position: absolute;
+  left: -9999px;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+
+/* Beschriftungen INNERHALB einer Frage — Vorname und Nachname stehen
+   unter einer gemeinsamen Legende, brauchen aber je eine eigene. */
+
+.frage label:not(:first-child) {
+  display: block;
+  margin-bottom: var(--s-1);
+  font-size: var(--fs-small);
+  color: var(--muted);
+}
+
+.wahl label:not(:first-child) { font-size: var(--fs-copy); color: var(--text); }
+.haken label:not(:first-child) { font-size: var(--fs-copy); color: var(--text); }
+
+/* Es gibt EINE Akzentfarbe. Ohne diese Zeile faerbt der Browser
+   Haken und Punkte in seinem eigenen Blau — eine zweite Farbe,
+   die niemand entschieden hat. */
+
+input[type="checkbox"],
+input[type="radio"] {
+  accent-color: var(--lime);
+  width: var(--s-3);
+  height: var(--s-3);
+  flex: none;
+}

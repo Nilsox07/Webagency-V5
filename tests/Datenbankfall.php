@@ -21,9 +21,30 @@ abstract class Datenbankfall extends TestCase
 {
     protected \PDO $pdo;
 
+    /**
+     * Ein eigenes `/storage` je Testfall.
+     *
+     * Vorher legte jede Testklasse es selbst an — dreimal derselbe Code, und **eine der
+     * drei setzte `STORAGE_DIR` nicht**. Die Ratenbegrenzung schrieb dort in das echte
+     * Verzeichnis, zählte über alle Laeufe hinweg mit und liess den zehnten Testlauf an
+     * einer Begrenzung scheitern, die mit dem geprueften Verhalten nichts zu tun hatte.
+     *
+     * Dieser Aufräumpunkt stand seit A0 in `OFFENE_PRUEFUNGEN.md` unter „ab der sechsten
+     * Testklasse". Es sind zwölf.
+     */
+    protected string $arbeitsverzeichnis;
+
+    private ?string $vorigesSpeicherverzeichnis = null;
+
     protected function setUp(): void
     {
         parent::setUp();
+
+        $this->arbeitsverzeichnis = sys_get_temp_dir() . '/sartu-test-' . bin2hex(random_bytes(4));
+        mkdir($this->arbeitsverzeichnis, 0770, true);
+
+        $this->vorigesSpeicherverzeichnis = getenv('STORAGE_DIR') === false ? null : (string) getenv('STORAGE_DIR');
+        putenv('STORAGE_DIR=' . $this->arbeitsverzeichnis);
 
         $this->pdo = Db::oeffnen(
             Env::get('DB_HOST_TEST', 'db_test') ?? 'db_test',
@@ -45,7 +66,28 @@ abstract class Datenbankfall extends TestCase
         Db::setzen(null);
         $_SESSION = [];
 
+        if ($this->vorigesSpeicherverzeichnis === null) {
+            putenv('STORAGE_DIR');
+        } else {
+            putenv('STORAGE_DIR=' . $this->vorigesSpeicherverzeichnis);
+        }
+
+        $this->verzeichnisLoeschen($this->arbeitsverzeichnis);
+
         parent::tearDown();
+    }
+
+    protected function verzeichnisLoeschen(string $verzeichnis): void
+    {
+        if (!is_dir($verzeichnis)) {
+            return;
+        }
+
+        foreach (glob($verzeichnis . '/*') ?: [] as $eintrag) {
+            is_dir($eintrag) ? $this->verzeichnisLoeschen($eintrag) : @unlink($eintrag);
+        }
+
+        @rmdir($verzeichnis);
     }
 
     protected function schemaNeuAufbauen(): void

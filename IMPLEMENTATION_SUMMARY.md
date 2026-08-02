@@ -253,6 +253,82 @@ erklärt.
 
 ---
 
+## 6a. Textprüfbericht — Bedarfsscheck (Stufe A1)
+
+Gemessen an der **ausgelieferten** Fassung: die acht Seiten `/briefing`, `/briefing/1` bis
+`/briefing/5`, `/briefing/ergebnis` und `/briefing/kontakt`, über den laufenden Apache geholt
+und aus dem Markup gelöst.
+
+```text
+TEXTPRUEFUNG   Seite: Bedarfsscheck /briefing   Datum: 02.08.2026
+
+Sätze gesamt                            33
+Längster Satz                           19 Wörter      Grenze 20
+Sätze über 20 Wörter                     0             Grenze 0
+Absätze mit mehr als 3 Sätzen            0             Grenze 0
+Aufzählungen >3 Glieder im Satz          1             Grenze 0   — begründet, siehe unten
+Gegensatzformel                          0             Grenze 2
+Treffer Wortliste A                      2             Grenze 0   — begründet, siehe unten
+Treffer Wortliste B                      0             Grenze 0
+Treffer Wortliste C                      0             Grenze 0
+"individuell"                            0             Grenze 3
+Sie / Ihr / Ihre / Ihnen                30
+wir / uns / unser                       14             muss ≤ Sie sein   ✓
+H2 über 9 Wörter                         0             Grenze 0
+Überschriften ohne Nachprüfbares         5             Grenze 0   — begründet, siehe unten
+Konjunktive in Überschriften             0             Grenze 0
+Umfangszahlen genannt                    3 von 3       (Seiten, Wörter, Korrekturrunden)
+Behauptungen über Kunden / Markt         0             Grenze 0
+Argument gilt auch für 500-€-Seite      nein           ✓ (7.900 €, 16 Seiten, 6.500 Wörter)
+```
+
+### Zwei Stellen, an denen der vorgegebene Wortlaut geändert wurde
+
+`SARTU_TEXTREGELN.md` steht in der Rangfolge auf **Rang 3** und regelt die Form jedes Textes,
+das Website-Lastenheft auf **Rang 5**. Wo beide auseinandergehen, gewinnt Rang 3.
+
+| §9 schreibt | Ausgeliefert | Regel |
+|---|---|---|
+| H1 `Welche Website passt **wirklich** zu Ihrem Unternehmen?` | ohne „wirklich" | Regel 7 Liste A, „wirklich" als Verstärkung. Die gekürzte Fassung steht im Texter-Skill selbst als Muster |
+| §9.3 `passt voraussichtlich in eine unserer drei **Lösungen**` | `passt voraussichtlich zu einem unserer drei **Umfänge**` | Regel 7 Liste C. Den Ersatz nennt die Regel wörtlich: „der Name selbst oder `Umfang`" |
+
+### Drei gerissene Grenzen, einzeln benannt und begründet
+
+`SARTU_TEXTREGELN.md` Abschnitt 2 lässt das ausdrücklich zu.
+
+**1 — Zwei Treffer auf Wortliste A.** `Wir haben ein klares Hauptangebot` (Thema 3) und
+`Mehr passende Anfragen` (Thema 2).
+
+Beide stehen **in Antwortmöglichkeiten**, die ein Mensch ankreuzt. Website-Lastenheft §2 erklärt
+Feldlabels für verbindlich, und anders als bei den zwei Änderungen oben nennt Regel 7 hier
+**keinen** Ersatz. Eine umformulierte Antwortmöglichkeit bedeutet etwas anderes als die, der
+zugestimmt wurde — und `hauptangebot` ist zugleich der Schlüssel, an dem die Empfehlungsregel
+hängt. Der Unterschied zu den beiden Änderungen oben ist also nicht der Rang, sondern ob ein
+Ersatz feststeht und ob sich die Aussage dabei ändert.
+
+**2 — Eine Aufzählung mit vier Gliedern.** `Sie müssen weder Paket noch Seitenzahl,
+Designrichtung oder SEO-Stufe kennen.` (§9.1, Einstiegsseite)
+
+Als Liste gesetzt liest sich die Verneinung wie eine Merkmalsliste — also wie eine Aufzählung
+dessen, was man **braucht**, statt dessen, was man **nicht kennen muss**. Genau die Umkehrung
+ist der Satz. Er bleibt als Satz stehen.
+
+**3 — Fünf Überschriften ohne Nachprüfbares.** `Ihr Unternehmen` · `Ihr Ziel` · `Umfang` ·
+`Besondere Anforderungen` · `Domain und Termin`.
+
+Das sind die fünf Themennamen aus §9.2 — **Schrittbeschriftungen eines Formulars**, keine
+Behauptungen über SARTU. Dieselbe Begründung wie bei den sieben Adminüberschriften in §6: Der
+Texter-Skill regelt sie unter „Mikrotexte", und dort sagt ein Label, was hineingehört. Eine
+Behauptung über der Frage `Was bietet Ihr Unternehmen an?` wäre eine Werbezeile über einem
+Eingabefeld.
+
+Die drei Überschriften, die etwas behaupten, tun es: `Welche Website passt zu Ihrem
+Unternehmen?` (Abschlussfrage, im Skill ausdrücklich erlaubt) · `Unsere vorläufige Empfehlung:
+Platzhirsch` (nennt das Ergebnis) · `Wohin sollen wir das geprüfte Angebot schicken?` (nennt,
+was als Nächstes passiert).
+
+---
+
 ## 7. Gestaltung
 
 `design/tokens.css` liegt unverändert unter `public/assets/css/tokens.css` und wird **vor** jedem

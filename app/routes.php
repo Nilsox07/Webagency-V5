@@ -18,6 +18,7 @@ declare(strict_types=1);
  */
 
 use Sartu\Admin\AnmeldeSteuerung;
+use Sartu\BedarfsscheckSteuerung;
 use Sartu\Admin\BetriebSteuerung;
 use Sartu\Admin\RechtstexteSteuerung;
 use Sartu\Admin\SetupSteuerung;
@@ -26,6 +27,20 @@ use Sartu\OeffentlicheSeiten;
 use Sartu\Route;
 
 return [
+    // ---------------------------------------------------------- Bedarfsscheck (Website §9)
+    //
+    // Die Reihenfolge ist hier nicht beliebig: `finden()` nimmt den ERSTEN passenden
+    // Eintrag, und `/briefing/{nummer}` wuerde auch auf `/briefing/ergebnis` passen. Die
+    // festen Pfade stehen deshalb vor dem Muster.
+    new Route(Route::BEREICH_OEFFENTLICH, 'GET', '/briefing', [BedarfsscheckSteuerung::class, 'einstieg']),
+    new Route(Route::BEREICH_OEFFENTLICH, 'POST', '/briefing/start', [BedarfsscheckSteuerung::class, 'starten']),
+    new Route(Route::BEREICH_OEFFENTLICH, 'GET', '/briefing/ergebnis', [BedarfsscheckSteuerung::class, 'ergebnis']),
+    new Route(Route::BEREICH_OEFFENTLICH, 'GET', '/briefing/kontakt', [BedarfsscheckSteuerung::class, 'kontakt']),
+    new Route(Route::BEREICH_OEFFENTLICH, 'POST', '/briefing/absenden', [BedarfsscheckSteuerung::class, 'absenden']),
+    new Route(Route::BEREICH_OEFFENTLICH, 'GET', '/briefing/danke', [BedarfsscheckSteuerung::class, 'danke']),
+    new Route(Route::BEREICH_OEFFENTLICH, 'GET', '/briefing/{nummer}', [BedarfsscheckSteuerung::class, 'schritt']),
+    new Route(Route::BEREICH_OEFFENTLICH, 'POST', '/briefing/{nummer}', [BedarfsscheckSteuerung::class, 'schrittSpeichern']),
+
     // ---------------------------------------------------------- oeffentlich
     new Route(Route::BEREICH_OEFFENTLICH, 'GET', '/impressum', [OeffentlicheSeiten::class, 'impressum']),
     new Route(Route::BEREICH_OEFFENTLICH, 'GET', '/datenschutz', [OeffentlicheSeiten::class, 'datenschutz']),

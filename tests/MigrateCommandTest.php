@@ -16,17 +16,12 @@ use Sartu\Services\Wartungsmodus;
  */
 final class MigrateCommandTest extends Datenbankfall
 {
-    private string $arbeitsverzeichnis;
-
     /** @var list<string> */
     private array $wegwerfskripte = [];
 
     protected function setUp(): void
     {
         parent::setUp();
-
-        $this->arbeitsverzeichnis = sys_get_temp_dir() . '/sartu-migrate-' . bin2hex(random_bytes(4));
-        mkdir($this->arbeitsverzeichnis, 0770, true);
     }
 
     protected function tearDown(): void
@@ -36,8 +31,6 @@ final class MigrateCommandTest extends Datenbankfall
         foreach ($this->wegwerfskripte as $skript) {
             @unlink($skript);
         }
-
-        @rmdir($this->arbeitsverzeichnis);
 
         parent::tearDown();
     }

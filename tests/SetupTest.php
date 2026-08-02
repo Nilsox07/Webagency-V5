@@ -19,8 +19,6 @@ use Sartu\Services\Wartungsmodus;
  */
 final class SetupTest extends Datenbankfall
 {
-    private string $arbeitsverzeichnis;
-
     private ?string $appEnvVorher = null;
 
     protected function setUp(): void
@@ -29,7 +27,6 @@ final class SetupTest extends Datenbankfall
 
         $this->appEnvVorher = getenv('APP_ENV') === false ? null : (string) getenv('APP_ENV');
 
-        $this->arbeitsverzeichnis = sys_get_temp_dir() . '/sartu-setup-' . bin2hex(random_bytes(4));
         mkdir($this->arbeitsverzeichnis . '/migrations', 0770, true);
         mkdir($this->arbeitsverzeichnis . '/storage', 0770, true);
 
@@ -43,8 +40,6 @@ final class SetupTest extends Datenbankfall
         } else {
             putenv('APP_ENV=' . $this->appEnvVorher);
         }
-
-        $this->verzeichnisLoeschen($this->arbeitsverzeichnis);
 
         parent::tearDown();
     }
@@ -567,21 +562,4 @@ final class SetupTest extends Datenbankfall
         return (int) $anweisung->fetchColumn();
     }
 
-    private function verzeichnisLoeschen(string $pfad): void
-    {
-        if (!is_dir($pfad)) {
-            return;
-        }
-
-        $lauf = new \RecursiveIteratorIterator(
-            new \RecursiveDirectoryIterator($pfad, \FilesystemIterator::SKIP_DOTS),
-            \RecursiveIteratorIterator::CHILD_FIRST,
-        );
-
-        foreach ($lauf as $eintrag) {
-            $eintrag->isDir() ? rmdir($eintrag->getPathname()) : unlink($eintrag->getPathname());
-        }
-
-        rmdir($pfad);
-    }
 }
