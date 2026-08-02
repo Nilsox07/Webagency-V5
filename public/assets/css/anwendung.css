@@ -1,0 +1,669 @@
+/* ============================================================
+   SARTU — Bauteile des internen Bereichs
+
+   tokens.css wird VOR dieser Datei eingebunden. Hier steht
+   keine Farbe, kein Radius und keine Abstandsstufe als Zahl —
+   nur Variablen aus tokens.css. Eine Zahl im Bauteil ist ein
+   Abgabefehler (SARTU_DESIGNSYSTEM.md).
+
+   Lime ist Flaeche, nie Schrift auf hellem Grund: gemessen
+   1,32:1 gegen Creme. Auf Lime steht immer --ink (12,48:1).
+   Jede Lime-Flaeche auf hellem Grund traegt 1px --line.
+
+   Kunden- und Adminbereich muessen visuell unterscheidbar
+   sein (CODEX_AUFTRAG_PORTAL.md §4). Der interne Bereich
+   traegt deshalb ein dunkles Kopfband, der Kundenbereich
+   spaeter keines.
+   ============================================================ */
+
+*,
+*::before,
+*::after { box-sizing: border-box; }
+
+html { -webkit-text-size-adjust: 100%; }
+
+body {
+  margin: 0;
+  background: var(--cream);
+  color: var(--text);
+  font-family: var(--font-sans);
+  font-size: var(--fs-body);
+  line-height: var(--lh-body);
+}
+
+/* ---- Grundgeruest ---------------------------------------- */
+
+.bahn {
+  width: 100%;
+  max-width: var(--wrap);
+  margin: 0 auto;
+  padding-left: var(--gut);
+  padding-right: var(--gut);
+}
+
+.schmal { max-width: 46rem; }
+
+main { padding-top: var(--s-5); padding-bottom: var(--s-7); }
+
+/* ---- Kopfband des internen Bereichs ---------------------- */
+
+.kopfband {
+  background: var(--ink);
+  color: var(--paper);
+  padding-top: var(--s-3);
+  padding-bottom: var(--s-3);
+}
+
+.kopfband a { color: var(--paper); }
+
+.kopfband__reihe {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--s-3);
+  align-items: baseline;
+  justify-content: space-between;
+}
+
+.wortmarke {
+  font-weight: var(--fw-head);
+  letter-spacing: var(--ls-mono);
+  text-transform: uppercase;
+  text-decoration: none;
+}
+
+.kopfband nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--s-3);
+  font-size: var(--fs-small);
+}
+
+/* ---- Schrift --------------------------------------------- */
+
+h1, h2, h3 {
+  font-weight: var(--fw-head);
+  line-height: var(--lh-head);
+  letter-spacing: var(--ls-head);
+  margin: 0 0 var(--s-3);
+}
+
+h1 { font-size: var(--fs-h2); letter-spacing: var(--ls-h1); }
+h2 { font-size: var(--fs-h3); margin-top: var(--s-5); }
+h3 { font-size: var(--fs-copy); margin-top: var(--s-4); }
+
+p { margin: 0 0 var(--s-3); max-width: 62ch; }
+
+.vorzeile {
+  font-family: var(--font-mono);
+  font-size: var(--fs-mono);
+  letter-spacing: var(--ls-mono);
+  text-transform: uppercase;
+  color: var(--label);
+  margin: 0 0 var(--s-2);
+}
+
+.leise { color: var(--muted); font-size: var(--fs-small); }
+
+a { color: var(--text); text-underline-offset: .18em; }
+
+/* ---- Karten ---------------------------------------------- */
+
+.karte {
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: var(--r-m);
+  padding: var(--s-4);
+  margin-bottom: var(--s-4);
+}
+
+.karte > :last-child { margin-bottom: 0; }
+
+/* ---- Schrittleiste der Ersteinrichtung ------------------- */
+
+.schritte {
+  list-style: none;
+  margin: 0 0 var(--s-5);
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--s-1);
+  font-size: var(--fs-small);
+}
+
+.schritte li {
+  border: 1px solid var(--line);
+  border-radius: var(--r-pill);
+  padding: var(--s-1) var(--s-3);
+  background: var(--paper);
+  color: var(--muted);
+}
+
+.schritte li[data-stand="erledigt"] {
+  background: var(--lime-soft);
+  color: var(--ink);
+}
+
+.schritte li[data-stand="hier"] {
+  background: var(--lime);
+  border-color: var(--line);
+  color: var(--ink);
+  font-weight: var(--fw-head);
+}
+
+/* ---- Formulare ------------------------------------------- */
+
+.feld { margin-bottom: var(--s-3); }
+
+.feld label {
+  display: block;
+  margin-bottom: var(--s-1);
+  font-size: var(--fs-small);
+  font-weight: var(--fw-head);
+}
+
+.feld input,
+.feld select,
+.feld textarea {
+  width: 100%;
+  font: inherit;
+  font-size: var(--fs-copy);
+  color: var(--text);
+  background: var(--cream);
+  border: 1px solid var(--line);
+  border-radius: var(--r-xs);
+  padding: var(--s-2);
+}
+
+/* Der Rechtstexteditor ist ein Editor: hoch und in fester Breite.
+   Eine interne Notiz ist keiner — sie bekam vorher dieselben 18 rem
+   und dieselbe Schreibmaschinenschrift. */
+
+.feld textarea { min-height: 7rem; }
+
+.feld textarea.editor {
+  min-height: 18rem;
+  font-family: var(--font-mono);
+  font-size: var(--fs-small);
+}
+
+.feld input:focus-visible,
+.feld select:focus-visible,
+.feld textarea:focus-visible,
+.knopf:focus-visible,
+a:focus-visible {
+  outline: 2px solid var(--ink);
+  outline-offset: 2px;
+}
+
+.feld__hinweis { margin: var(--s-1) 0 0; font-size: var(--fs-small); color: var(--muted); }
+
+.feldpaar {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr));
+  gap: var(--s-3);
+}
+
+/* ---- Schaltflaechen -------------------------------------- */
+
+.knopf {
+  display: inline-block;
+  font: inherit;
+  font-size: var(--fs-small);
+  font-weight: var(--fw-head);
+  cursor: pointer;
+  border-radius: var(--r-pill);
+  padding: var(--s-2) var(--s-4);
+  transition: background var(--t-fast) var(--ease);
+  /* Lime als Flaeche, --ink als Schrift, --line als Kante. */
+  background: var(--lime);
+  border: 1px solid var(--line);
+  color: var(--ink);
+  text-decoration: none;
+}
+
+.knopf:hover { background: var(--lime-hover); }
+.knopf:active { background: var(--lime-press); }
+
+.knopf--ruhig {
+  background: var(--paper);
+  color: var(--text);
+}
+
+.knopf--ruhig:hover { background: var(--sand); }
+
+.knopfreihe {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--s-2);
+  align-items: center;
+  margin-top: var(--s-4);
+}
+
+/* ---- Meldungen ------------------------------------------- */
+/* Es gibt eine Akzentfarbe. Kein Rot fuer Fehler, kein Gruen
+   fuer Erfolg (SARTU_DESIGNSYSTEM.md). Unterschieden wird
+   ueber Flaeche und Kante, nicht ueber Signalfarben. */
+
+.meldung {
+  border: 1px solid var(--line);
+  border-left-width: var(--s-1);
+  border-radius: var(--r-s);
+  background: var(--paper);
+  padding: var(--s-3);
+  margin-bottom: var(--s-4);
+}
+
+.meldung--hinweis { background: var(--lime-soft); }
+
+.meldung ul { margin: var(--s-2) 0 0; padding-left: var(--s-3); }
+
+.meldung > :last-child { margin-bottom: 0; }
+
+/* ---- Listen und Tabellen --------------------------------- */
+
+.liste { list-style: none; margin: 0; padding: 0; }
+
+.liste li {
+  border-bottom: 1px solid var(--line);
+  padding: var(--s-3) 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--s-2);
+  align-items: baseline;
+  justify-content: space-between;
+}
+
+.liste li:last-child { border-bottom: 0; }
+
+/* Eine Rückmeldung gehört zu der Runde über ihr — eingerückt, ohne eigene Trennlinie,
+   damit die Runden als Blöcke lesbar bleiben. */
+.liste__unterzeile {
+  border-bottom: 0;
+  padding-top: 0;
+  padding-left: var(--s-4);
+  color: var(--muted);
+}
+
+.marke {
+  font-family: var(--font-mono);
+  font-size: var(--fs-mono);
+  letter-spacing: var(--ls-mono);
+  text-transform: uppercase;
+  border: 1px solid var(--line);
+  border-radius: var(--r-pill);
+  padding: var(--s-1) var(--s-2);
+  color: var(--label);
+  background: var(--sand);
+}
+
+.marke[data-stand="freigegeben"] { background: var(--lime); color: var(--ink); }
+
+.pruefliste { list-style: none; margin: 0; padding: 0; }
+
+.pruefliste li {
+  display: flex;
+  gap: var(--s-2);
+  justify-content: space-between;
+  padding: var(--s-2) 0;
+  border-bottom: 1px solid var(--line);
+}
+
+.pruefliste li:last-child { border-bottom: 0; }
+
+.schluesselwert {
+  font-family: var(--font-mono);
+  font-size: var(--fs-copy);
+  letter-spacing: var(--ls-mono);
+  background: var(--sand);
+  border: 1px solid var(--line);
+  border-radius: var(--r-xs);
+  padding: var(--s-2);
+  overflow-wrap: anywhere;
+}
+
+/* ---- Fussbereich ----------------------------------------- */
+
+.fussband {
+  border-top: 1px solid var(--line);
+  padding-top: var(--s-4);
+  padding-bottom: var(--s-5);
+  font-size: var(--fs-small);
+  color: var(--muted);
+}
+
+/* ============================================================
+   Bedarfsscheck — Website-Lastenheft §9
+
+   Der oeffentliche Bereich traegt kein dunkles Kopfband; das
+   unterscheidet ihn sichtbar vom internen Bereich.
+
+   Zustaende nie allein ueber Farbe (§2, Barrierefreiheit): ein
+   fehlerhaftes Feld traegt eine staerkere Kante UND eine
+   Meldung im Text. Es gibt weiterhin kein Rot.
+   ============================================================ */
+
+.lead {
+  font-size: var(--fs-lede);
+  line-height: var(--lh-lede);
+  margin-bottom: var(--s-4);
+}
+
+.fussnote {
+  font-size: var(--fs-small);
+  color: var(--muted);
+  margin-top: var(--s-4);
+}
+
+.punkte {
+  list-style: none;
+  margin: 0 0 var(--s-4);
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--s-2);
+}
+
+.punkte li {
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: var(--r-pill);
+  padding: var(--s-1) var(--s-3);
+  font-size: var(--fs-small);
+}
+
+/* ---- Eine Frage des Bedarfsschecks ----------------------- */
+
+.frage {
+  border: 0;
+  margin: 0 0 var(--s-4);
+  padding: 0;
+}
+
+.frage > legend,
+.frage > label {
+  display: block;
+  padding: 0;
+  margin-bottom: var(--s-1);
+  font-size: var(--fs-copy);
+  font-weight: var(--fw-head);
+}
+
+.frage--fehler {
+  border-left: var(--s-1) solid var(--ink);
+  padding-left: var(--s-3);
+}
+
+.frage__hilfe {
+  margin: 0 0 var(--s-2);
+  font-size: var(--fs-small);
+  color: var(--muted);
+}
+
+.frage__fehler {
+  margin: 0 0 var(--s-2);
+  font-size: var(--fs-small);
+  font-weight: var(--fw-head);
+  color: var(--ink);
+}
+
+.frage__optional { font-weight: 400; color: var(--muted); }
+
+.frage input[type="text"],
+.frage input[type="email"],
+.frage input[type="tel"],
+.frage textarea {
+  width: 100%;
+  font: inherit;
+  font-size: var(--fs-copy);
+  color: var(--text);
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: var(--r-xs);
+  padding: var(--s-2);
+  margin-bottom: var(--s-2);
+}
+
+.frage textarea { min-height: 7rem; }
+
+.frage input:focus-visible,
+.frage textarea:focus-visible {
+  outline: 2px solid var(--ink);
+  outline-offset: 2px;
+}
+
+/* ---- Auswahlgruppen -------------------------------------- */
+
+.wahl { list-style: none; margin: 0; padding: 0; }
+
+.wahl li {
+  display: flex;
+  gap: var(--s-2);
+  align-items: baseline;
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: var(--r-s);
+  padding: var(--s-2) var(--s-3);
+  margin-bottom: var(--s-1);
+}
+
+.wahl label { font-size: var(--fs-copy); }
+
+.wahl__hilfe {
+  display: block;
+  font-size: var(--fs-small);
+  color: var(--muted);
+}
+
+.haken {
+  display: flex;
+  gap: var(--s-2);
+  align-items: baseline;
+  max-width: 62ch;
+}
+
+.haken label { font-size: var(--fs-copy); }
+
+/* ---- Preisblock der Ergebnisseite ------------------------ */
+
+.preisblock {
+  background: var(--lime-soft);
+  border: 1px solid var(--line);
+  border-radius: var(--r-m);
+  padding: var(--s-4);
+  margin-bottom: var(--s-3);
+}
+
+.preisblock__zeile { font-size: var(--fs-h3); margin-bottom: var(--s-1); }
+.preisblock__jahr { margin-bottom: var(--s-3); }
+.preisblock > :last-child { margin-bottom: 0; }
+
+/* ---- Honigtopf ------------------------------------------- */
+/* Nicht display:none — ein unsichtbares Feld, das trotzdem im
+   Quelltext steht, ist genau die Falle (§9.5b). */
+
+.honigtopf {
+  position: absolute;
+  left: -9999px;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+
+/* Beschriftungen INNERHALB einer Frage — Vorname und Nachname stehen
+   unter einer gemeinsamen Legende, brauchen aber je eine eigene. */
+
+.frage label:not(:first-child) {
+  display: block;
+  margin-bottom: var(--s-1);
+  font-size: var(--fs-small);
+  color: var(--muted);
+}
+
+.wahl label:not(:first-child) { font-size: var(--fs-copy); color: var(--text); }
+.haken label:not(:first-child) { font-size: var(--fs-copy); color: var(--text); }
+
+/* Es gibt EINE Akzentfarbe. Ohne diese Zeile faerbt der Browser
+   Haken und Punkte in seinem eigenen Blau — eine zweite Farbe,
+   die niemand entschieden hat. */
+
+input[type="checkbox"],
+input[type="radio"] {
+  accent-color: var(--lime);
+  width: var(--s-3);
+  height: var(--s-3);
+  flex: none;
+}
+
+/* ---- Tabellen des internen Bereichs ---------------------- */
+/* Die Anfrageliste hat sieben Spalten. Auf dem Telefon passt
+   das nicht — die Tabelle scrollt in ihrem eigenen Rahmen,
+   die Seite nicht. */
+
+.tabellenrahmen { overflow-x: auto; }
+
+.tabelle {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: var(--fs-small);
+}
+
+.tabelle th,
+.tabelle td {
+  text-align: left;
+  padding: var(--s-2);
+  border-bottom: 1px solid var(--line);
+  vertical-align: top;
+}
+
+/* Nur die Spalten, in denen ein Umbruch den Wert zerreisst: Datum und
+   Kennzeichen. Firma und Name duerfen umbrechen — sonst ist die Tabelle
+   breiter als der Bildschirm, obwohl sie hineinpasst. */
+
+.tabelle td:first-child,
+.tabelle td:last-child,
+.tabelle .marke { white-space: nowrap; }
+
+.tabelle th {
+  font-weight: var(--fw-head);
+  color: var(--label);
+}
+
+.tabelle tbody tr:last-child td { border-bottom: 0; }
+
+.filterzeile {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--s-3);
+  align-items: flex-end;
+  margin-bottom: var(--s-4);
+}
+
+.filterzeile .feld { margin-bottom: 0; }
+
+/* Das Ampelkennzeichen. Kein Rot, kein Gelb, kein Orange —
+   es gibt eine Akzentfarbe. Unterschieden wird ueber Flaeche
+   und Kante, und das Wort steht ohnehin daneben. */
+
+.marke[data-stand="standard"] { background: var(--paper); }
+.marke[data-stand="gelb"]     { background: var(--sand); }
+.marke[data-stand="orange"]   { background: var(--lime-soft); }
+.marke[data-stand="rot"]      { background: var(--lime); }
+
+/* ============================================================
+   Kundenbereich
+
+   Er muss sich vom internen Bereich unterscheiden lassen
+   (CODEX_AUFTRAG_PORTAL.md §4). Der interne traegt ein dunkles
+   Kopfband, der Kundenbereich ein helles mit Lime-Kante.
+   Dieselben Gestaltungswerte, andere Flaeche — keine zweite
+   Farbwelt.
+   ============================================================ */
+
+.kundenband {
+  background: var(--paper);
+  border-bottom: var(--s-1) solid var(--lime);
+  padding-top: var(--s-3);
+  padding-bottom: var(--s-3);
+}
+
+.kundenband__reihe {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--s-3);
+  align-items: baseline;
+  justify-content: space-between;
+}
+
+.kundenband nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--s-3);
+  align-items: baseline;
+  font-size: var(--fs-small);
+}
+
+.karte--betont {
+  background: var(--lime-soft);
+  border-color: var(--line);
+}
+
+/* Die sieben Stationen aus §8.1. Der Stand steht als Wort im
+   data-Attribut UND als Textzusatz — Zustaende nie allein ueber
+   Farbe (Website-Lastenheft §2). */
+
+.stationen {
+  list-style: none;
+  margin: var(--s-4) 0 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--s-1);
+  font-size: var(--fs-small);
+}
+
+.stationen li {
+  border: 1px solid var(--line);
+  border-radius: var(--r-pill);
+  padding: var(--s-1) var(--s-3);
+  background: var(--paper);
+  color: var(--muted);
+}
+
+.stationen li[data-stand="erledigt"] { background: var(--lime-soft); color: var(--ink); }
+
+.stationen li[data-stand="hier"] {
+  background: var(--lime);
+  color: var(--ink);
+  font-weight: var(--fw-head);
+}
+
+.stationen li[data-stand="hier"]::after { content: " · hier"; font-weight: 400; }
+
+.spaltenpaar {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr));
+  gap: var(--s-4);
+  margin-bottom: var(--s-4);
+}
+
+.liste--einfach li {
+  display: block;
+  border-bottom: 1px solid var(--line);
+  padding: var(--s-2) 0;
+}
+
+.ueberspringen { margin-top: var(--s-3); }
+
+.textknopf {
+  font: inherit;
+  font-size: var(--fs-small);
+  background: none;
+  border: 0;
+  padding: 0;
+  color: var(--muted);
+  cursor: pointer;
+  text-decoration: underline;
+  text-underline-offset: .18em;
+}
+
+.textknopf:focus-visible { outline: 2px solid var(--ink); outline-offset: 2px; }
