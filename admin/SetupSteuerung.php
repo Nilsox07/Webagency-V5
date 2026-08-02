@@ -197,7 +197,14 @@ final class SetupSteuerung
             'email'    => Http::getrimmteEingabe('email'),
         ];
 
-        $geheimnis = Http::getrimmteEingabe('totp_geheimnis');
+        // Das Geheimnis kommt aus der SITZUNG, nicht aus dem Formular.
+        //
+        // Vorher stand es als verstecktes Feld im Formular und wurde von dort gelesen. Wer
+        // es austauscht, richtet sein eigenes Geraet als zweiten Faktor des einzigen
+        // Adminkontos ein — und die Pruefung des Codes bestaetigt genau das ausgetauschte
+        // Geheimnis. Die Sitzung haelt den richtigen Wert ohnehin bereits.
+        $geheimnis = $_SESSION[self::TOTP_VORMERK] ?? '';
+        $geheimnis = is_string($geheimnis) ? $geheimnis : '';
 
         $fehler = $this->einrichtung->adminAnlegen(
             $werte['email'],
@@ -210,10 +217,8 @@ final class SetupSteuerung
         );
 
         if ($fehler !== []) {
-            // Dasselbe Geheimnis weiterreichen: Ein neues wuerde die gerade eingerichtete
-            // App entwerten und den Benutzer in eine Schleife schicken.
-            $_SESSION[self::TOTP_VORMERK] = $geheimnis;
-
+            // Das Geheimnis bleibt in der Sitzung stehen. Ein neues wuerde die gerade
+            // eingerichtete App entwerten und den Benutzer in eine Schleife schicken.
             return $this->seite(7, ['fehler' => $fehler, 'werte' => $werte]);
         }
 
@@ -285,9 +290,11 @@ final class SetupSteuerung
         $konto = Env::get('MAIL_FROM', 'SARTU') ?? 'SARTU';
 
         return [
-            'geheimnis' => $geheimnis,
-            'lesbar'    => Zweifaktor::lesbaresGeheimnis($geheimnis),
-            'adresse'   => $konto,
+            'lesbar'  => Zweifaktor::lesbaresGeheimnis($geheimnis),
+            'konto'   => $konto,
+            // Zum Kopieren statt Abtippen. Viele Authenticator-Apps nehmen die Adresse
+            // direkt an; ein QR-Code braeuchte eine weitere Bibliothek.
+            'adresse' => Zweifaktor::einrichtungsAdresse($geheimnis, $konto),
         ];
     }
 

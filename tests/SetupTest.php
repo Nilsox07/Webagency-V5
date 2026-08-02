@@ -399,6 +399,95 @@ final class SetupTest extends Datenbankfall
         $this->assertSame([], $ohneWaechter, 'Eine schreibende Einrichtungsroute hat keinen Schrittwächter.');
     }
 
+    // ---------------------------------------- Befund vom 02.08.2026: Geheimnis aus dem Formular
+
+    /**
+     * Das TOTP-Geheimnis steht nicht mehr im Formular.
+     *
+     * Es lag als verstecktes Feld in Schritt 7 und wurde von dort gelesen. Wer es
+     * austauscht, richtet sein eigenes Gerät als zweiten Faktor des **einzigen**
+     * Adminkontos ein — und die Codeprüfung bestätigt genau das ausgetauschte Geheimnis,
+     * weil sie gegen denselben Wert rechnet. Die Sitzung hielt den richtigen Wert die ganze
+     * Zeit bereit.
+     */
+    public function testGeheimnisWirdNichtAusDemFormularGelesen(): void
+    {
+        $quelle = $this->ohneKommentare((string) file_get_contents(SARTU_WURZEL . '/admin/SetupSteuerung.php'));
+
+        $this->assertStringNotContainsString(
+            "'totp_geheimnis'",
+            $quelle,
+            'Das TOTP-Geheimnis wird wieder aus der Anfrage gelesen.'
+        );
+        $this->assertStringContainsString('$_SESSION[self::TOTP_VORMERK]', $quelle);
+    }
+
+    /** Und die Gegenprobe an der gerenderten Seite: kein verstecktes Feld mehr. */
+    public function testSchrittSiebenTraegtKeinVerstecktesGeheimnis(): void
+    {
+        $geheimnis = \Sartu\Services\Zweifaktor::geheimnisErzeugen();
+
+        $html = \Sartu\Ansicht::seite('setup', 'setup-7', [
+            'titel'   => 'Erstes Adminkonto',
+            'schritt' => 7,
+            'fehler'  => [],
+            'werte'   => [],
+            'lesbar'  => \Sartu\Services\Zweifaktor::lesbaresGeheimnis($geheimnis),
+            'konto'   => 'admin@example.org',
+            'adresse' => \Sartu\Services\Zweifaktor::einrichtungsAdresse($geheimnis, 'admin@example.org'),
+        ]);
+
+        $this->assertStringNotContainsString('name="totp_geheimnis"', $html);
+        $this->assertStringContainsString('otpauth://totp/', $html, 'Die Adresse zum Kopieren fehlt.');
+    }
+
+    /** RFC 4226 §4 R6: 160 Bit. Mehr bringt bei HMAC-SHA1 nichts und wird abgetippt. */
+    public function testGeheimnisHatEinhundertsechzigBit(): void
+    {
+        for ($lauf = 0; $lauf < 5; ++$lauf) {
+            $geheimnis = \Sartu\Services\Zweifaktor::geheimnisErzeugen();
+
+            $this->assertSame(32, strlen($geheimnis), '32 Zeichen Base32 entsprechen 160 Bit.');
+            $this->assertMatchesRegularExpression('/^[A-Z2-7]{32}$/', $geheimnis);
+        }
+    }
+
+    /** Die Adresse trägt den Namen aus ADMIN_TOTP_ISSUER — sonst wäre der Wert unbenutzt. */
+    public function testEinrichtungsadresseTraegtDenHerausgeber(): void
+    {
+        $geheimnis = \Sartu\Services\Zweifaktor::geheimnisErzeugen();
+        $adresse = \Sartu\Services\Zweifaktor::einrichtungsAdresse($geheimnis, 'admin@example.org');
+
+        $this->assertStringStartsWith('otpauth://totp/', $adresse);
+        $this->assertStringContainsString('issuer=' . rawurlencode(\Sartu\Helpers\Env::get('ADMIN_TOTP_ISSUER', 'SARTU') ?? 'SARTU'), $adresse);
+        $this->assertStringContainsString('secret=' . $geheimnis, $adresse);
+    }
+
+    /** Der Webserver nennt seine PHP-Version nicht. */
+    public function testDiePhpVersionGehtNichtNachAussen(): void
+    {
+        $this->assertStringContainsString(
+            'expose_php = Off',
+            (string) file_get_contents(SARTU_WURZEL . '/.docker/php/php.ini'),
+            'expose_php ist nicht abgeschaltet — X-Powered-By nennt die genaue PHP-Version.'
+        );
+    }
+
+    private function ohneKommentare(string $quelltext): string
+    {
+        $ausgabe = '';
+
+        foreach (token_get_all($quelltext) as $marke) {
+            if (is_array($marke) && in_array($marke[0], [T_COMMENT, T_DOC_COMMENT], true)) {
+                continue;
+            }
+
+            $ausgabe .= is_array($marke) ? $marke[1] : $marke;
+        }
+
+        return $ausgabe;
+    }
+
     // ------------------------------------------------------------ Hilfsmittel
 
     private function setupPost(string $pfad, InstallationsSperre $sperre): \Sartu\Antwort

@@ -21,8 +21,6 @@ use Sartu\Helpers\Html;
 
 <form method="post" action="/admin/setup/admin" class="karte">
   <?= Csrf::feld() ?>
-  <input type="hidden" name="totp_geheimnis" value="<?= Html::e($geheimnis) ?>">
-
   <div class="feldpaar">
     <?= Ansicht::teil('components/feld', ['name' => 'vorname', 'beschriftung' => 'Vorname', 'wert' => $werte['vorname'] ?? '', 'pflicht' => true, 'autovervollstaendigung' => 'given-name']) ?>
     <?= Ansicht::teil('components/feld', ['name' => 'nachname', 'beschriftung' => 'Nachname', 'wert' => $werte['nachname'] ?? '', 'pflicht' => true, 'autovervollstaendigung' => 'family-name']) ?>
@@ -36,7 +34,10 @@ use Sartu\Helpers\Html;
   <h2>Schlüssel in die Authenticator-App eintragen</h2>
   <p>Tippen Sie den Schlüssel in Ihre App ein. Sie zeigt Ihnen danach einen sechsstelligen Code.</p>
   <p class="schluesselwert"><?= Html::e($lesbar) ?></p>
-  <p class="feld__hinweis">Konto: <?= Html::e($adresse) ?></p>
+  <p class="feld__hinweis">Konto: <?= Html::e($konto) ?></p>
+
+  <p>Nimmt Ihre App eine Adresse entgegen, geht es auch damit — kopieren statt tippen:</p>
+  <p class="schluesselwert"><?= Html::e($adresse) ?></p>
 
   <?= Ansicht::teil('components/feld', ['name' => 'code', 'beschriftung' => 'Sechsstelliger Code aus der App', 'pflicht' => true, 'autovervollstaendigung' => 'one-time-code', 'hinweis' => 'Der Code wechselt alle 30 Sekunden.']) ?>
 

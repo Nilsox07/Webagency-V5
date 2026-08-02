@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Sartu\Services;
 
 use OTPHP\TOTP;
+use ParagonIE\ConstantTime\Base32;
 use Sartu\Helpers\Env;
 
 /**
@@ -27,9 +28,23 @@ final class Zweifaktor
 
     public const PERIODE_SEKUNDEN = 30;
 
+    /**
+     * 160 Bit — die Empfehlung aus RFC 4226 §4 R6.
+     *
+     * Die Voreinstellung der Bibliothek liefert 512 Bit, also 103 Zeichen Base32. Bei
+     * HMAC-SHA1 bringt jedes Bit oberhalb der Blockgroesse nichts: Ein laengerer Schluessel
+     * wird intern gehasht und damit wieder auf 160 Bit gebracht. Was bleibt, sind 71
+     * zusaetzliche Zeichen, die jemand abtippt — und jeder Tippfehler kostet einen Versuch.
+     */
+    private const GEHEIMNIS_BITS = 160;
+
     public static function geheimnisErzeugen(): string
     {
-        return TOTP::generate()->getSecret();
+        $geheimnis = Base32::encodeUpperUnpadded(random_bytes(intdiv(self::GEHEIMNIS_BITS, 8)));
+
+        // Ueber createFromSecret geprueft: Was hier herauskommt, laesst die Bibliothek
+        // spaeter auch wieder einlesen.
+        return TOTP::createFromSecret($geheimnis)->getSecret();
     }
 
     public static function einrichtungsAdresse(string $geheimnis, string $konto): string
