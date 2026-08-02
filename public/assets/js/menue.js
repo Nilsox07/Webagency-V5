@@ -1,13 +1,14 @@
 /*
- * Die Fokusfalle im mobilen Menü — Website-Lastenheft §3.
+ * Das mobile Menü — Website-Lastenheft §3.
  *
  * Das Menü bleibt ohne Skript vollständig bedienbar — es ist ein `details`-Element und
  * bleibt eines. Das Skript fügt nur die Falle hinzu, wenn es läuft. Damit gilt
  * Portal-Lastenheft §3 Regel 7 unverändert weiter: Jeder Kernablauf funktioniert mit
  * abgeschaltetem JavaScript.
  *
- * §3 verlangt zwei Dinge, die ein `details` nicht kann: „Fokus wird im Overlay gehalten,
- * beim Schließen zurück auf das Menü-Icon." Die stehen hier, sonst nichts.
+ * `summary` liefert Öffnen und Schließen. Fokusfalle, Rücksprung aufs Icon, `Esc` und Klick
+ * außerhalb liefert es nicht — am 02.08.2026 in Chromium nachgemessen, nachdem zwei
+ * Kommentare im Bau das Gegenteil behauptet hatten. Die vier stehen hier, sonst nichts.
  */
 (function () {
   'use strict';
@@ -20,8 +21,13 @@
 
   var knopf = menue.querySelector('summary');
 
-  // `offsetParent === null` faellt raus: Auf breiten Fenstern blendet das CSS das ganze
-  // Menue aus, und eine Falle um Unsichtbares waere eine Falle um nichts.
+  function zu() {
+    if (menue.open) {
+      menue.open = false;
+    }
+  }
+
+  // Unsichtbares faellt raus: Auf breiten Fenstern blendet das CSS das Menue ganz aus.
   function anspringbare() {
     var alle = menue.querySelectorAll('summary, a[href], button:not([disabled])');
 
@@ -31,7 +37,7 @@
   }
 
   menue.addEventListener('keydown', function (ereignis) {
-    if (ereignis.key !== 'Tab' || !menue.open) {
+    if (!menue.open || ereignis.key !== 'Tab') {
       return;
     }
 
@@ -50,6 +56,20 @@
     } else if (!ereignis.shiftKey && document.activeElement === letztes) {
       erstes.focus();
       ereignis.preventDefault();
+    }
+  });
+
+  // `Esc` am Dokument: Eine Taste, die nur bei passendem Fokus wirkt, ist schlimmer als
+  // keine. Der Klick daneben schliesst ebenfalls — beides verlangt §3.
+  document.addEventListener('keydown', function (ereignis) {
+    if (ereignis.key === 'Escape') {
+      zu();
+    }
+  });
+
+  document.addEventListener('click', function (ereignis) {
+    if (menue.open && !menue.contains(ereignis.target)) {
+      zu();
     }
   });
 

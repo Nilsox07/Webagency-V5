@@ -714,11 +714,17 @@ final class WebsiteTest extends Datenbankfall
 
         $this->assertGreaterThan(0, $mitMenue, 'Keine einzige Seite trägt das mobile Menü.');
 
-        // Die Datei bleibt klein genug, dass sie niemand nachlädt statt sie zu lesen.
+        // Die Datei bleibt klein genug, dass man sie liest statt sie zu glauben.
+        //
+        // **Die Grenze stand auf 2 KB und steht jetzt auf 2,5.** Der Betreiber setzte sie
+        // für die Fokusfalle allein. Die Messung in Chromium am 02.08.2026 zeigte, dass ein
+        // `details` auch `Esc` und den Klick daneben nicht liefert — beides verlangt §3.
+        // Aus einer Ergänzung wurden vier. Die Grenze wandert mit dem Auftrag mit, nicht mit
+        // dem Bedarf: Wer sie das nächste Mal anhebt, begründet das hier.
         $skript = SARTU_WURZEL . '/public/assets/js/menue.js';
 
         $this->assertFileExists($skript);
-        $this->assertLessThan(2048, filesize($skript), 'Die Fokusfalle ist über 2 KB gewachsen.');
+        $this->assertLessThan(2560, filesize($skript), 'menue.js ist über 2,5 KB gewachsen.');
     }
 
     // ---------------------------------------------------------------- Hilfsmittel

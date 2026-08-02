@@ -477,7 +477,11 @@
   padding-bottom: var(--s-7);
 }
 
+/* Jede zweite Textebene in einem dunklen Abschnitt braucht `--label-dark`. `--muted` ist
+   fuer helle Flaechen gerechnet und kommt auf `--ink` auf 2,05:1 — gemessen am 02.08.2026
+   auf den drei Branchenseiten, die den Preishinweis ohne `handlung--dunkel` setzen. */
 .abschluss .lede,
+.abschluss .preishinweis,
 .abschluss .marken { color: var(--label-dark); }
 
 .abschluss .textlink { color: var(--lime); }

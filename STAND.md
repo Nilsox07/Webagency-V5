@@ -3,7 +3,7 @@
 **Eine Seite. Sie sagt, wo der Bau steht — damit ein abgebrochener Lauf dort weitermacht,
 wo er aufgehört hat, statt von vorn zu beginnen.**
 
-**Letzte Änderung:** 02.08.2026 · **Zweig:** `claude/php-a0-modellplan-06duus`
+**Letzte Änderung:** 02.08.2026 · **Zweig:** `main`
 
 ---
 
@@ -13,11 +13,34 @@ wo er aufgehört hat, statt von vorn zu beginnen.**
 |---|---|
 | **Fertig** | A0 · A1 · A2 · A3 · **B** |
 | **Läuft gerade** | — |
-| **Als Nächstes** | **Stufe C** ist nicht beauftragt. Was jetzt ansteht, liegt beim Betreiber — siehe unten |
-| **Tests** | **254 grün**, 3345 Zusicherungen, gegen echtes MariaDB 11.4. Kein SQLite |
+| **Als Nächstes** | **Stufe C** ist nicht beauftragt. Was jetzt ansteht, steht in `LIVEGANG.md` — und zwei Dinge davon kann nur ein Mensch tun |
+| **Tests** | **264 grün**, 3508 Zusicherungen, gegen echtes MariaDB 11.4. Kein SQLite |
 | **Tabellen** | **20 von 20** |
 | **Testfälle** | **88 von 88** gebaut und geprüft |
 | **Migrationen** | 025, lückenlos eingespielt, Prüfsummen stimmen |
+
+---
+
+## Was am 02.08.2026 dazukam
+
+| Was | Wo |
+|---|---|
+| **§4b.6** — das Kontaktformular erzeugt **keinen** Datensatz mehr, nur eine Mail | `Kontaktanfrage`, `WebsiteTest` |
+| **§8.1 Block 3** — „Offene Punkte" im Cockpit, mit der entschiedenen Frist von drei Tagen | `PortalSteuerung`, `Zahlungsstatus::fristKnapp()` |
+| **Fokusfalle, `Esc` und Klick daneben** im mobilen Menü | `public/assets/js/menue.js`, 2,3 KB, `defer` |
+| **`KEYWORD_VALIDATION.md`** — erzeugt aus dem Bau, 32 Adressen | `bin/keywords.php` |
+| **`MESSUNGEN.md`** — Kontrast, Tastatur, Antwortzeiten, zwölf Mailwege, beide Bereiche im Browser | `MESSUNGEN.md` |
+| **`LIVEGANG.md`** — was vor dem ersten Besucher getan sein muss | `LIVEGANG.md` |
+| **`bin/startklar.php`** — die Startsperre als Befehl, Rückgabewert 1 bei jedem Hindernis | `bin/startklar.php` |
+
+**Zwei Fehler hat die Messung gefunden und behoben:** ein Kontrast von 2,05 : 1 auf den drei
+Branchenseiten, und ein Menü, das mit `Esc` nicht zuging, obwohl zwei Kommentare das
+behaupteten.
+
+**Einen Fehler hat sie gefunden und gemeldet:** Sechs Mails aus §10 gibt es nicht — darunter
+`Ihr Angebot von SARTU liegt bereit`. Ohne sie liegt das Angebot im Kundenbereich, und
+niemand schickt den Kunden hin. Es steht in `LIVEGANG.md` §6.1 als Sperre vor dem ersten
+Kunden.
 
 ---
 
@@ -83,7 +106,9 @@ Cron und Mail müssen auf echter Hardware laufen; im Container ist beides nur na
 - **Mail:** SPF, DKIM und DMARC gehören dazu. Mailpit fängt lokal jede Mail ab und sagt über
   Zustellbarkeit nichts
 - **TLS:** `session.cookie_secure = 1`, HSTS, und `/admin/setup` über echtes `https://`
-- Die vollständige Liste steht in `OFFENE_PRUEFUNGEN.md` unter „Aufgeschoben"
+- **Die vollständige Liste steht in `LIVEGANG.md`** — mit Befehlen zum Kopieren und einer
+  Prüfliste zum Abhaken. `OFFENE_PRUEFUNGEN.md` sagt zusätzlich, was gebaut, aber nicht
+  ausgeführt ist
 
 ---
 
@@ -94,3 +119,4 @@ Cron und Mail müssen auf echter Hardware laufen; im Container ist beides nur na
 3. `docker compose exec app php bin/migrate.php status` — eingespielt 25, offen 0
 4. `REIHENFOLGE.md` sagt, was jetzt dran ist. `OFFENE_ENTSCHEIDUNGEN.md` sagt, was gemeldet
    und nicht erfunden wurde. `OFFENE_PRUEFUNGEN.md` sagt, was gebaut, aber nicht ausgeführt ist
+5. Vor dem Livegang: `docker compose exec app php bin/startklar.php` und `LIVEGANG.md`
