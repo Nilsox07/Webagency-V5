@@ -10,9 +10,7 @@ declare(strict_types=1);
  * |---|---|
  * | A0 | abgelaufene Anmeldungen entfernen (§3 Regel 6, Verfallszeit 30 Tage) |
  * | A1 | `leads.source_ip` nach 30 Tagen leeren, faellige Anfragen loeschen (§15.1) |
- *
- * Der Ueberfaelligkeitslauf gehoert nach A2 (`REIHENFOLGE.md`) und wird hier nicht
- * vorbereitet.
+ * | A2 | Ueberfaelligkeit, zwei Zahlungserinnerungen, abgelaufene Angebote (§5.3, §5.3a, §5.2) |
  *
  * Ein Fehler in einem Schritt darf die uebrigen nicht verhindern: Wer den Lauf einmal
  * ueberspringt, verschiebt eine Loeschfrist um einen Tag — wer ihn ganz abbrechen laesst,
@@ -21,6 +19,7 @@ declare(strict_types=1);
 
 use Sartu\Data\SitzungsSpeicher;
 use Sartu\Services\Loeschlauf;
+use Sartu\Services\Zahlungslauf;
 
 if (PHP_SAPI !== 'cli') {
     http_response_code(404);
@@ -51,6 +50,21 @@ try {
 } catch (\Throwable $ausnahme) {
     ++$fehler;
     fwrite(STDERR, 'Loeschlauf fehlgeschlagen: ' . $ausnahme->getMessage() . PHP_EOL);
+}
+
+try {
+    $stand = (new Zahlungslauf())->ausfuehren();
+    fwrite(STDOUT, sprintf(
+        'Ueberfaellig gesetzt: %d, Erinnerungen: %d + %d, abgelaufene Angebote: %d%s',
+        $stand['ueberfaellig'],
+        $stand['erinnerung1'],
+        $stand['erinnerung2'],
+        $stand['angebote'],
+        PHP_EOL,
+    ));
+} catch (\Throwable $ausnahme) {
+    ++$fehler;
+    fwrite(STDERR, 'Zahlungslauf fehlgeschlagen: ' . $ausnahme->getMessage() . PHP_EOL);
 }
 
 exit($fehler === 0 ? 0 : 1);

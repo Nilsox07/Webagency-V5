@@ -10,6 +10,7 @@ use Sartu\Data\Admin\AdminAngebote;
 use Sartu\Data\Admin\AdminNachweis;
 use Sartu\Data\Admin\AdminOrganisationen;
 use Sartu\Data\Admin\AdminProjekte;
+use Sartu\Data\Admin\AdminRechnungen;
 use Sartu\Helpers\Http;
 use Sartu\Services\AngebotDienst;
 
@@ -82,6 +83,7 @@ final class ProjekteSteuerung
             'angemeldet'  => true,
             'projekt'     => $projekt,
             'angebote'    => $angebote,
+            'rechnungen'  => (new AdminRechnungen($nachweis))->jeProjekt((string) $projekt['id']),
             // Vorbelegt aus §4c — der Admin ändert, was er ändern will, aber er tippt die
             // drei festen Texte nicht ab.
             'vorbelegung' => $angebote === []

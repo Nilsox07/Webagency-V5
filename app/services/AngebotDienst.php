@@ -34,15 +34,18 @@ use Sartu\Helpers\Validate;
  * **Er erfindet keine Angebotsnummer.** §4a: Nummernkreis `AN-JJJJ-NNN`, „in Stufe 0 vom
  * Admin eingegeben, Eindeutigkeit erzwingt die Datenbank".
  *
- * **Er setzt kein Gültigkeitsdatum.** §4c belegt drei Texte und den Lieferkorridor vor —
- * `valid_until` steht dort nicht, und im ganzen Lastenheft steht keine Zahl für die
- * Angebotsgültigkeit. Eine erfundene Frist wäre eine vertragliche Zusage. Der Admin gibt
- * sie ein, das Formular verlangt sie.
+ * **Das Gültigkeitsdatum ist seit dem 02.08.2026 entschieden:** 30 Kalendertage ab Versand,
+ * im Adminbereich änderbar. Vorher stand im Lastenheft keine Zahl dafür — sie war als
+ * fehlend gemeldet, nicht erfunden. Jetzt ist sie vorbelegt und bleibt änderbar, weil ein
+ * Angebot mit besonderem Zuschnitt eine andere Frist haben kann.
  */
 final class AngebotDienst
 {
     /** §4: „Stufe 0 immer 12." */
     public const MINDESTLAUFZEIT_MONATE = 12;
+
+    /** Entschieden am 02.08.2026: 30 Kalendertage ab Versand, im Adminbereich änderbar. */
+    public const GUELTIGKEIT_TAGE = 30;
 
     private const ZAHLUNGSPLAENE = ['50_50', '40_30_30', 'custom'];
 
@@ -89,6 +92,8 @@ final class AngebotDienst
             'domain_text'                  => Angebotstexte::DOMAIN,
             'bfsg_vertragsabschluss'       => 'nein',
             'bfsg_kleinstunternehmen'      => 'unbekannt',
+            'valid_until'                  => (new \DateTimeImmutable('now', new \DateTimeZone('Europe/Berlin')))
+                ->modify('+' . self::GUELTIGKEIT_TAGE . ' days')->format('Y-m-d'),
         ];
     }
 

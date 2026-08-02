@@ -71,6 +71,51 @@ $zustaende = [
 <?php endif; ?>
 </div>
 
+<div class="karte">
+  <h2>Rechnungen</h2>
+<?php if ($rechnungen === []): ?>
+  <p>Zu diesem Projekt gibt es noch keine Rechnung.</p>
+<?php else: ?>
+  <ul class="liste">
+<?php foreach ($rechnungen as $rechnung): ?>
+    <li>
+      <span><a href="/admin/rechnungen/<?= Html::e((string) $rechnung['id']) ?>"><?= Html::e((string) $rechnung['number']) ?></a>
+        · <?= Html::e(\Sartu\Services\Rechnungsdienst::MEILENSTEINE[(string) $rechnung['milestone']] ?? '') ?></span>
+      <span><?= Html::e(Format::euro((int) $rechnung['gross_cents'])) ?> · <?= Html::e((string) $rechnung['status']) ?></span>
+    </li>
+<?php endforeach; ?>
+  </ul>
+<?php endif; ?>
+
+  <form method="post" action="/admin/projekte/<?= Html::e((string) $projekt['id']) ?>/rechnung">
+    <?= Csrf::feld() ?>
+    <div class="feldpaar">
+      <div class="feld">
+        <label for="feld-re-number">Rechnungsnummer</label>
+        <input type="text" id="feld-re-number" name="number" value="" placeholder="RE-2026-001" required>
+      </div>
+      <div class="feld">
+        <label for="feld-milestone">Betreff</label>
+        <select id="feld-milestone" name="milestone">
+<?php foreach (\Sartu\Services\Rechnungsdienst::MEILENSTEINE as $wert => $beschriftung): ?>
+          <option value="<?= Html::e($wert) ?>"><?= Html::e($beschriftung) ?></option>
+<?php endforeach; ?>
+        </select>
+      </div>
+      <div class="feld">
+        <label for="feld-net_cents">Nettobetrag in Cent</label>
+        <input type="number" id="feld-net_cents" name="net_cents" value="" min="1" required>
+      </div>
+      <div class="feld">
+        <label for="feld-due_date">Fällig am</label>
+        <input type="date" id="feld-due_date" name="due_date" value="">
+        <p class="feld__hinweis">Leer lassen: 10 Kalendertage ab heute.</p>
+      </div>
+    </div>
+    <button type="submit" class="knopf knopf--ruhig">Rechnung als Entwurf anlegen</button>
+  </form>
+</div>
+
 <?php if ($vorbelegung !== null): ?>
 <div class="karte">
   <h2>Neues Angebot</h2>
@@ -90,8 +135,9 @@ $zustaende = [
       </div>
       <div class="feld">
         <label for="feld-valid_until">Gültig bis</label>
-        <input type="date" id="feld-valid_until" name="valid_until" value="" required>
-        <p class="feld__hinweis">Das Lastenheft nennt keine Frist. Sie entscheiden sie je Angebot.</p>
+        <input type="date" id="feld-valid_until" name="valid_until"
+          value="<?= Html::e((string) $vorbelegung['valid_until']) ?>" required>
+        <p class="feld__hinweis">Vorbelegt mit 30 Kalendertagen. Änderbar.</p>
       </div>
     </div>
 

@@ -24,7 +24,7 @@ use Sartu\Services\Wartungsmodus;
  * greift · jede Kundenroute verlangt eine angemeldete Sitzung · fremde Projekte und
  * Angebote sind unsichtbar, auch bei gezieltem Aufruf ihrer Kennung.
  *
- * Testfälle: 1 · 3 · 5 · 5a · 5b · 42 · 43 · 44 · 45 · 48
+ * Testfälle: 1 · 2 · 3 · 4 · 5 · 5a · 5b · 42 · 43 · 44 · 45 · 48
  */
 final class TenantIsolationTest extends Datenbankfall
 {
@@ -46,9 +46,19 @@ final class TenantIsolationTest extends Datenbankfall
             'GET /login/{token}',
             'GET /portal',
             'GET /portal/angebot',
+            'GET /portal/aufgaben',
+            'GET /portal/aufgaben/{id}',
+            'GET /portal/dateien/{id}',
+            'GET /portal/hilfe',
+            'GET /portal/rechnungen',
+            'GET /portal/vertrag',
             'GET /willkommen/{nummer}',
             'POST /login',
             'POST /portal/abmelden',
+            'POST /portal/angebot/{id}/annehmen',
+            'POST /portal/aufgaben/{id}/abschliessen',
+            'POST /portal/aufgaben/{id}/datei',
+            'POST /portal/hilfe',
             'POST /willkommen/fertig',
         ];
 
@@ -77,14 +87,15 @@ final class TenantIsolationTest extends Datenbankfall
                 continue;
             }
 
-            $antwort = $this->router()->behandeln($route->methode, str_replace('{nummer}', '1', $route->pfad));
+            $pfad = str_replace(['{nummer}', '{id}'], ['1', \Sartu\Data\Uuid::v4()], $route->pfad);
+            $antwort = $this->router()->behandeln($route->methode, $pfad);
             ++$geprueft;
 
             $this->assertSame(302, $antwort->status, $route->schluessel());
             $this->assertSame('/login', $antwort->kopfzeilen['Location'] ?? null, $route->schluessel());
         }
 
-        $this->assertGreaterThanOrEqual(5, $geprueft);
+        $this->assertGreaterThanOrEqual(15, $geprueft);
     }
 
     /**
@@ -142,6 +153,75 @@ final class TenantIsolationTest extends Datenbankfall
         // Und die eigenen sind es sehr wohl — sonst prueft der Test nur, dass nichts geht.
         $this->assertNotNull($projekte->finden($meinProjekt));
         $this->assertNotNull($angebote->finden($meinAngebot));
+    }
+
+    /**
+     * Faelle 2 und 4 — fremde Rechnungen, Aufgaben und Dateien gibt es fuer Kunde A nicht.
+     *
+     * Bei den Dateien ist das der Fall, den §4 mit der redundanten `organization_id`
+     * ausdruecklich meint: „Kunde A laedt Datei von B ueber direkte URL → 404."
+     */
+    public function testKundeSiehtWederFremdeRechnungenNochAufgabenNochDateien(): void
+    {
+        $meine = $this->organisationAnlegen('Betrieb A', 'a@example.org');
+        $fremde = $this->organisationAnlegen('Betrieb B', 'b@example.org');
+
+        $meinProjekt = $this->projektAnlegen($meine, 'Website A');
+        $fremdesProjekt = $this->projektAnlegen($fremde, 'Website B');
+
+        $meineRechnung = $this->rechnungAnlegen($meinProjekt, 'RE-2026-001');
+        $fremdeRechnung = $this->rechnungAnlegen($fremdesProjekt, 'RE-2026-002');
+
+        $meineAufgabe = $this->aufgabeAnlegen($meinProjekt, 'Fakten A');
+        $fremdeAufgabe = $this->aufgabeAnlegen($fremdesProjekt, 'Fakten B');
+
+        $meineDatei = $this->dateiAnlegen($meineAufgabe, $meine);
+        $fremdeDatei = $this->dateiAnlegen($fremdeAufgabe, $fremde);
+
+        $this->alsKunde($meine, $this->kundeAnlegen($meine, 'kunde-a@example.org'));
+
+        $bereich = \Sartu\Data\Customer\KundenBereich::ausSitzung();
+        $rechnungen = new \Sartu\Data\Customer\KundenRechnungen($bereich);
+        $aufgaben = new \Sartu\Data\Customer\KundenAufgaben($bereich);
+        $dateien = new \Sartu\Data\Customer\KundenDateien($bereich);
+
+        // Fall 5 — Listen enthalten ausschliesslich Eigenes.
+        $this->assertCount(1, $rechnungen->liste());
+        $this->assertCount(1, $aufgaben->liste());
+        $this->assertCount(1, $dateien->jeAufgabe($meineAufgabe));
+        $this->assertSame([], $dateien->jeAufgabe($fremdeAufgabe));
+
+        // Fall 2 und 4 — der gezielte Aufruf einer fremden Kennung findet nichts.
+        $this->assertNull($rechnungen->finden($fremdeRechnung), 'Eine fremde Rechnung war sichtbar.');
+        $this->assertNull($aufgaben->finden($fremdeAufgabe), 'Eine fremde Aufgabe war sichtbar.');
+        $this->assertNull($dateien->finden($fremdeDatei), 'Eine fremde Datei war abrufbar.');
+
+        // Und die eigenen sind es.
+        $this->assertNotNull($rechnungen->finden($meineRechnung));
+        $this->assertNotNull($aufgaben->finden($meineAufgabe));
+        $this->assertNotNull($dateien->finden($meineDatei));
+    }
+
+    /**
+     * Fall 4 ueber die Route, nicht nur ueber die Datenschicht.
+     *
+     * §11 verlangt eine Ausspielroute, die Sitzung UND Organisation prueft. Der Test faehrt
+     * sie an — die Datenschicht allein waere kein Nachweis, dass die Route sie benutzt.
+     */
+    public function testFremdeDateiLiefertUeberDieRoute404(): void
+    {
+        $fremde = $this->organisationAnlegen('Betrieb B', 'b@example.org');
+        $fremdesProjekt = $this->projektAnlegen($fremde, 'Website B');
+        $fremdeDatei = $this->dateiAnlegen($this->aufgabeAnlegen($fremdesProjekt, 'Fakten B'), $fremde);
+
+        $meine = $this->organisationAnlegen('Betrieb A', 'a@example.org');
+        $this->alsKunde($meine, $this->kundeAnlegen($meine, 'kunde-a@example.org'));
+
+        $antwort = $this->router()->behandeln('GET', '/portal/dateien/' . $fremdeDatei);
+
+        $this->assertSame(404, $antwort->status, 'Eine fremde Datei war ueber die Route erreichbar.');
+        // §3 Regel 2: kein 403 — der verriete, dass es sie gibt.
+        $this->assertNotSame(403, $antwort->status);
     }
 
     /** §5.2: Ein Angebot im Zustand `entwurf` ist fuer den Kunden unsichtbar. */
@@ -412,6 +492,46 @@ final class TenantIsolationTest extends Datenbankfall
             . ' protection_level, status) VALUES (?, ?, ?, ?, ?, ?, ?)'
         );
         $anweisung->execute([$id, $organisationId, $titel, 'wachstum', 2, 'm', 'angebot_offen']);
+
+        return $id;
+    }
+
+    private function rechnungAnlegen(string $projektId, string $nummer): string
+    {
+        $id = \Sartu\Data\Uuid::v4();
+
+        $anweisung = $this->pdo->prepare(
+            'INSERT INTO invoices (id, project_id, number, milestone, status, net_cents, vat_cents,'
+            . ' gross_cents, due_date) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)'
+        );
+        $anweisung->execute([$id, $projektId, $nummer, 'anzahlung', 'gesendet', 100000, 19000, 119000, '2027-01-01']);
+
+        return $id;
+    }
+
+    private function aufgabeAnlegen(string $projektId, string $titel): string
+    {
+        $id = \Sartu\Data\Uuid::v4();
+
+        $anweisung = $this->pdo->prepare(
+            'INSERT INTO tasks (id, project_id, title, kind, status, sort_order) VALUES (?, ?, ?, ?, ?, ?)'
+        );
+        $anweisung->execute([$id, $projektId, $titel, 'angabe', 'offen', 1]);
+
+        return $id;
+    }
+
+    private function dateiAnlegen(string $aufgabeId, string $organisationId): string
+    {
+        $id = \Sartu\Data\Uuid::v4();
+
+        $anweisung = $this->pdo->prepare(
+            'INSERT INTO task_files (id, task_id, organization_id, original_name, stored_name,'
+            . ' mime_type, size_bytes, rights_confirmed) VALUES (?, ?, ?, ?, ?, ?, ?, 1)'
+        );
+        $anweisung->execute([
+            $id, $aufgabeId, $organisationId, 'bild.png', \Sartu\Data\Uuid::v4(), 'image/png', 1234,
+        ]);
 
         return $id;
     }

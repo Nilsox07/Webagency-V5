@@ -151,12 +151,22 @@ abstract class Datenbankfall extends TestCase
         return $id;
     }
 
-    /** Versetzt die Sitzung in den Zustand „Kunde angemeldet". */
+    /**
+     * Versetzt die Sitzung in den Zustand „Kunde angemeldet".
+     *
+     * Dazu gehoert — wie beim Admin — eine echte Zeile in `sessions`. Der Router prueft
+     * nicht nur den Sitzungszustand, sondern auch, dass die Anmeldung serverseitig noch
+     * gilt (§3 Regel 6). Ohne die Zeile ist der Zustand kein angemeldeter, und jede
+     * Kundenroute leitet auf `/login`.
+     */
     protected function alsKunde(string $organisationId, string $benutzerId): void
     {
         $_SESSION[Sitzung::BENUTZER]     = $benutzerId;
         $_SESSION[Sitzung::ROLLE]        = 'kunde';
         $_SESSION[Sitzung::ORGANISATION] = $organisationId;
+
+        $sitzung = (new \Sartu\Data\SitzungsSpeicher($this->pdo))->anlegen($benutzerId, 'Testlauf', '127.0.0.1');
+        $_SESSION[\Sartu\Services\AnmeldeDienst::SITZUNGSTOKEN] = $sitzung['token'];
     }
 
     /**

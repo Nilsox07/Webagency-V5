@@ -2,8 +2,11 @@
 
 declare(strict_types=1);
 
+use Sartu\Ansicht;
+use Sartu\Helpers\Csrf;
 use Sartu\Helpers\Format;
 use Sartu\Helpers\Html;
+use Sartu\Services\Angebotsannahme;
 use Sartu\Services\Preise;
 
 /**
@@ -12,13 +15,16 @@ use Sartu\Services\Preise;
  * Zeigt **alle** Felder aus `offers` in der dort vorgegebenen Reihenfolge. Ein Angebot ist
  * die vertragliche Grundlage; was hier fehlt, fehlt spaeter im Streitfall.
  *
- * **Der Annahmeblock ist noch nicht gebaut.** Die Annahme ist ein Zustandswechsel mit
- * Anzahlungsrechnung dahinter (§5.1a) und gehoert damit zu A2 (`REIHENFOLGE.md`, Testfaelle
- * 11 bis 13). Statt einer gesperrten Schaltflaeche steht ein Satz, der sagt, was als
- * Naechstes passiert — §0.3b verbietet ausgegraute Knoepfe.
+ * **Der Annahmeblock erscheint nur bei `status = gesendet` und `valid_until >= heute`**
+ * (§8.2). In allen anderen Faellen steht kein ausgegrauter Knopf da, sondern ein Satz, der
+ * sagt, woran es liegt — §0.3b.
+ *
+ * Nach der Annahme verschwindet der Block, der Angebotsinhalt bleibt dauerhaft einsehbar.
  *
  * @var array<string,mixed>|null $angebot
  * @var array<string,mixed>|null $preise
+ * @var bool $annehmbar
+ * @var list<string> $fehler
  */
 
 $zahlungsplan = [
@@ -29,6 +35,8 @@ $zahlungsplan = [
 
 ?>
 <h1>Ihr Angebot</h1>
+
+<?= Ansicht::teil('partials/meldungen', ['fehler' => $fehler, 'hinweise' => []]) ?>
 
 <?php if ($angebot === null): ?>
 <div class="karte">
@@ -132,5 +140,51 @@ $ust = (int) round($einmalig * Preise::UST_PROZENT / 100);
 
 <p class="fussnote">Alle Preise netto zzgl. gesetzlicher Umsatzsteuer. Ausschließlich für
 Unternehmer.</p>
-<p class="fussnote">Zur Beauftragung melden wir uns bei Ihnen. Sie müssen jetzt nichts tun.</p>
+
+<?php if ((string) $angebot['status'] === 'angenommen'): ?>
+<div class="karte karte--betont">
+  <p>Angenommen am <?= Html::e(Format::datum((string) $angebot['accepted_at'])) ?> durch
+  <?= Html::e((string) $angebot['accepted_name']) ?>.</p>
+  <p>Als Nächstes erhalten Sie die Anzahlungsrechnung in Ihrem Bereich.</p>
+</div>
+<?php elseif ((string) $angebot['status'] === 'abgelaufen' || Angebotsannahme::abgelaufen($angebot)): ?>
+<div class="karte">
+  <p>Dieses Angebot ist am <?= Html::e(Format::datum((string) $angebot['valid_until'])) ?>
+  abgelaufen. Schreiben Sie uns über „Hilfe" — wir stellen es neu aus.</p>
+</div>
+<?php elseif ($annehmbar): ?>
+<div class="karte karte--betont">
+  <h2>Angebot annehmen</h2>
+  <ul class="pruefliste">
+    <li><span>Einmalpreis netto</span><span><?= Html::e(Format::euro($einmalig)) ?></span></li>
+    <li><span>Umsatzsteuer</span><span><?= Html::e(Format::euro($ust)) ?></span></li>
+    <li><span>Bruttobetrag</span><span><?= Html::e(Format::euro($einmalig + $ust)) ?></span></li>
+    <li><span>Betrieb monatlich netto</span><span><?= Html::e(Format::euro((int) $angebot['protection_monthly_net_cents'])) ?></span></li>
+    <li><span>Mindestlaufzeit</span><span><?= Html::e((string) $angebot['protection_min_term_months']) ?> Monate</span></li>
+    <li><span>Erstjahreswert netto</span><span><?= Html::e(Format::euro((int) $angebot['first_year_net_cents'])) ?></span></li>
+    <li><span>Zahlungsplan</span><span><?= Html::e((string) $angebot['payment_plan'] === 'custom'
+        ? 'nach eigenem Plan' : ($zahlungsplan[(string) $angebot['payment_plan']] ?? '')) ?></span></li>
+  </ul>
+
+  <form method="post" action="/portal/angebot/<?= Html::e((string) $angebot['id']) ?>/annehmen">
+    <?= Csrf::feld() ?>
+<?php foreach (Angebotsannahme::BESTAETIGUNGEN as $feld => $text): ?>
+    <p class="haken">
+      <input type="checkbox" id="feld-<?= Html::e($feld) ?>" name="<?= Html::e($feld) ?>" value="1">
+      <label for="feld-<?= Html::e($feld) ?>"><?= Html::e($text) ?></label>
+    </p>
+<?php endforeach; ?>
+    <div class="feld">
+      <label for="feld-accepted_name">Ihr Name</label>
+      <input type="text" id="feld-accepted_name" name="accepted_name" value="" required>
+    </div>
+    <button type="submit" class="knopf">Kostenpflichtig beauftragen</button>
+  </form>
+</div>
+<?php else: ?>
+<div class="karte">
+  <p>Dieses Angebot ist noch nicht vollständig. Wir stellen es Ihnen in Kürze fertig bereit —
+  Sie müssen nichts tun.</p>
+</div>
+<?php endif; ?>
 <?php endif; ?>

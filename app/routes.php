@@ -22,13 +22,17 @@ use Sartu\Admin\AnfragenSteuerung;
 use Sartu\Admin\AnmeldeSteuerung;
 use Sartu\Admin\BetriebSteuerung;
 use Sartu\Admin\ProjekteSteuerung;
+use Sartu\Admin\RechnungenSteuerung;
 use Sartu\Admin\RechtstexteSteuerung;
 use Sartu\Admin\SetupSteuerung;
 use Sartu\Admin\TestmailSteuerung;
 use Sartu\BedarfsscheckSteuerung;
 use Sartu\OeffentlicheSeiten;
 use Sartu\Portal\AnmeldeSteuerung as KundenAnmeldeSteuerung;
+use Sartu\Portal\AngebotSteuerung;
+use Sartu\Portal\AufgabenSteuerung;
 use Sartu\Portal\PortalSteuerung;
+use Sartu\Portal\RechnungenSteuerung as KundenRechnungenSteuerung;
 use Sartu\Route;
 
 return [
@@ -97,6 +101,15 @@ return [
     new Route(Route::BEREICH_ADMIN, 'POST', '/admin/projekte/{id}/angebot', [ProjekteSteuerung::class, 'angebotAnlegen']),
     new Route(Route::BEREICH_ADMIN, 'GET', '/admin/projekte/{id}', [ProjekteSteuerung::class, 'einzeln']),
     new Route(Route::BEREICH_ADMIN, 'POST', '/admin/angebote/{id}/senden', [ProjekteSteuerung::class, 'angebotSenden']),
+    new Route(Route::BEREICH_ADMIN, 'POST', '/admin/projekte/{id}/rechnung', [RechnungenSteuerung::class, 'anlegen']),
+    // Rechnungen (§12). Der Zahlungsstatus wird von Hand gesetzt — es gibt hier bewusst
+    // KEINE Rueckkehrroute vom Zahlungsdienst.
+    new Route(Route::BEREICH_ADMIN, 'GET', '/admin/rechnungen', [RechnungenSteuerung::class, 'liste']),
+    new Route(Route::BEREICH_ADMIN, 'POST', '/admin/rechnungen/{id}/senden', [RechnungenSteuerung::class, 'senden']),
+    new Route(Route::BEREICH_ADMIN, 'POST', '/admin/rechnungen/{id}/zahlung', [RechnungenSteuerung::class, 'zahlungEintragen']),
+    new Route(Route::BEREICH_ADMIN, 'POST', '/admin/rechnungen/{id}/stornieren', [RechnungenSteuerung::class, 'stornieren']),
+    new Route(Route::BEREICH_ADMIN, 'POST', '/admin/rechnungen/{id}/zahlungslink', [RechnungenSteuerung::class, 'zahlungslink']),
+    new Route(Route::BEREICH_ADMIN, 'GET', '/admin/rechnungen/{id}', [RechnungenSteuerung::class, 'einzeln']),
     new Route(Route::BEREICH_ADMIN, 'GET', '/admin/testmail', [TestmailSteuerung::class, 'formular']),
     new Route(Route::BEREICH_ADMIN, 'POST', '/admin/testmail', [TestmailSteuerung::class, 'senden']),
 
@@ -114,6 +127,18 @@ return [
     new Route(Route::BEREICH_PORTAL, 'POST', '/portal/abmelden', [KundenAnmeldeSteuerung::class, 'abmelden']),
     new Route(Route::BEREICH_PORTAL, 'GET', '/portal', [PortalSteuerung::class, 'uebersicht']),
     new Route(Route::BEREICH_PORTAL, 'GET', '/portal/angebot', [PortalSteuerung::class, 'angebot']),
+    new Route(Route::BEREICH_PORTAL, 'POST', '/portal/angebot/{id}/annehmen', [AngebotSteuerung::class, 'annehmen']),
+    // Aufgaben und Dateien (§8.3, §11). Feste Pfade vor dem Muster.
+    new Route(Route::BEREICH_PORTAL, 'GET', '/portal/aufgaben', [AufgabenSteuerung::class, 'liste']),
+    new Route(Route::BEREICH_PORTAL, 'POST', '/portal/aufgaben/{id}/abschliessen', [AufgabenSteuerung::class, 'abschliessen']),
+    new Route(Route::BEREICH_PORTAL, 'POST', '/portal/aufgaben/{id}/datei', [AufgabenSteuerung::class, 'hochladen']),
+    new Route(Route::BEREICH_PORTAL, 'GET', '/portal/aufgaben/{id}', [AufgabenSteuerung::class, 'einzeln']),
+    // §11: Auslieferung nur ueber eine Route, die Sitzung UND Organisation prueft.
+    new Route(Route::BEREICH_PORTAL, 'GET', '/portal/dateien/{id}', [AufgabenSteuerung::class, 'datei']),
+    new Route(Route::BEREICH_PORTAL, 'GET', '/portal/rechnungen', [KundenRechnungenSteuerung::class, 'liste']),
+    new Route(Route::BEREICH_PORTAL, 'GET', '/portal/vertrag', [PortalSteuerung::class, 'vertrag']),
+    new Route(Route::BEREICH_PORTAL, 'GET', '/portal/hilfe', [KundenRechnungenSteuerung::class, 'hilfe']),
+    new Route(Route::BEREICH_PORTAL, 'POST', '/portal/hilfe', [KundenRechnungenSteuerung::class, 'nachrichtSenden']),
     new Route(Route::BEREICH_PORTAL, 'POST', '/willkommen/fertig', [PortalSteuerung::class, 'willkommenFertig']),
     new Route(Route::BEREICH_PORTAL, 'GET', '/willkommen/{nummer}', [PortalSteuerung::class, 'willkommen']),
 ];

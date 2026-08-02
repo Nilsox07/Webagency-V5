@@ -8,7 +8,9 @@ use Sartu\Ansicht;
 use Sartu\Antwort;
 use Sartu\Data\Customer\KundenAngebote;
 use Sartu\Data\Customer\KundenBereich;
+use Sartu\Data\Customer\KundenAufgaben;
 use Sartu\Data\Customer\KundenProjekte;
+use Sartu\Data\Customer\KundenRechnungen;
 use Sartu\Services\KundenAnmeldung;
 use Sartu\Services\Preise;
 use Sartu\Services\Projektstatus;
@@ -24,9 +26,9 @@ use Sartu\Sitzung;
  *
  * ## Was in A1 sichtbar ist — und was nicht
  *
- * §8 nennt neun Navigationspunkte. In dieser Etappe gibt es `projects` und `offers`, mehr
- * nicht: `invoices`, `tasks` und `feedback_rounds` entstehen in A2 und A3
- * (`REIHENFOLGE.md`). Die Navigation zeigt deshalb **Übersicht** und **Angebot**.
+ * §8 nennt neun Navigationspunkte. Nach A2 gibt es sechs davon: Übersicht, Angebot,
+ * Aufgaben, Rechnungen und Hilfe. `Vorschau` und `Domain` entstehen in A3, `Inhalte` in B,
+ * `Vertrag` mit den freigegebenen Rechtstexten ebenfalls.
  *
  * §8 sagt „Menüpunkte, für die es noch nichts gibt, werden angezeigt und erklärt". §0.3b
  * sagt „Was nicht existiert, ist nicht sichtbar — auch nicht ausgegraut". Beide haben eine
@@ -49,17 +51,25 @@ final class PortalSteuerung
         $projekt = (new KundenProjekte($bereich))->aktuelles();
         $angebot = (new KundenAngebote($bereich))->aktuelles();
 
+        $offeneAufgaben = (new KundenAufgaben($bereich))->offeneGesamt();
+        $offeneRechnung = (new KundenRechnungen($bereich))->aeltesteOffene();
+
         return Antwort::html(Ansicht::seite('portal', 'portal-uebersicht', [
             'titel'        => 'Übersicht',
             'angemeldet'   => true,
             'projekt'      => $projekt,
             'angebot'      => $angebot,
-            'naechsterSchritt' => self::naechsterSchritt($projekt, $angebot),
+            'offeneAufgaben' => $offeneAufgaben,
+            'offeneRechnung' => $offeneRechnung,
+            'naechsterSchritt' => self::naechsterSchritt($projekt, $angebot, $offeneAufgaben, $offeneRechnung),
         ]));
     }
 
-    /** @param array<string,string> $parameter */
-    public function angebot(array $parameter = []): Antwort
+    /**
+     * @param array<string,string> $parameter
+     * @param list<string> $fehler
+     */
+    public function angebot(array $parameter = [], array $fehler = []): Antwort
     {
         $bereich = KundenBereich::ausSitzung();
         $angebot = (new KundenAngebote($bereich))->aktuelles();
@@ -69,10 +79,22 @@ final class PortalSteuerung
             'angemeldet' => true,
             'angebot'    => $angebot,
             'preise'     => $angebot === null ? null : Preise::zeile((string) $angebot['package']),
+            'annehmbar'  => \Sartu\Services\Angebotsannahme::annehmbar($angebot),
+            'fehler'     => $fehler,
         ]));
     }
 
     // ------------------------------------------------------------------ §7 Willkommen
+
+    /** §8.6: `/vertrag` — die Rechtstexte mit `audience = kunde`. */
+    public function vertrag(array $parameter = []): Antwort
+    {
+        return Antwort::html(Ansicht::seite('portal', 'portal-vertrag', [
+            'titel'      => 'Vertrag',
+            'angemeldet' => true,
+            'texte'      => (new \Sartu\Data\RechtstexteSpeicher())->alleFuerKunden(),
+        ]));
+    }
 
     /** @param array<string,string> $parameter */
     public function willkommen(array $parameter = []): Antwort
@@ -118,8 +140,12 @@ final class PortalSteuerung
      *
      * @return array{text:string,ziel:?string,knopf:?string}
      */
-    private static function naechsterSchritt(?array $projekt, ?array $angebot): array
-    {
+    private static function naechsterSchritt(
+        ?array $projekt,
+        ?array $angebot,
+        int $offeneAufgaben = 0,
+        ?array $offeneRechnung = null,
+    ): array {
         $gesetzt = $projekt['next_step_text'] ?? null;
 
         if (is_string($gesetzt) && trim($gesetzt) !== '') {
@@ -137,6 +163,24 @@ final class PortalSteuerung
                 'text'  => 'Ihr Angebot liegt bereit. Sehen Sie es sich in Ruhe an.',
                 'ziel'  => '/portal/angebot',
                 'knopf' => 'Angebot ansehen',
+            ];
+        }
+
+        if ($offeneRechnung !== null) {
+            return [
+                'text'  => 'Ihre Rechnung ' . (string) $offeneRechnung['number'] . ' ist offen.',
+                'ziel'  => '/portal/rechnungen',
+                'knopf' => 'Rechnung ansehen',
+            ];
+        }
+
+        if ($offeneAufgaben > 0) {
+            return [
+                'text'  => $offeneAufgaben === 1
+                    ? 'Eine Aufgabe wartet auf Sie.'
+                    : $offeneAufgaben . ' Aufgaben warten auf Sie.',
+                'ziel'  => '/portal/aufgaben',
+                'knopf' => 'Aufgaben ansehen',
             ];
         }
 

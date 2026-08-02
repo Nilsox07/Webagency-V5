@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Sartu\Services;
 
+use Sartu\Data\BetreiberdatenSpeicher;
 use Sartu\Helpers\Env;
 
 /**
@@ -16,14 +17,16 @@ use Sartu\Helpers\Env;
  * Mehr steht nicht drin — weder Antworttexte noch die Telefonnummer. Wer die Anfrage
  * ansehen will, meldet sich an; dort greift die Zugriffsprüfung. Eine Mail greift nirgends.
  *
- * ## Der Empfänger ist eine Lücke, die nicht erfunden wird
+ * ## Der Empfänger — seit dem 02.08.2026 ein Feld in den Betreiberdaten
  *
- * `ADMIN_NOTIFY_EMAIL` steht in Portal-Lastenheft §1.5 unter „Erforderliche Werte", wird
- * aber in **keinem** der acht Einrichtungsschritte erhoben — gemeldet in
- * `OFFENE_PRUEFUNGEN.md`, seit A0. Ist der Wert leer, wird **nicht** ersatzweise an die
- * Impressumsadresse geschickt: Das wäre eine erfundene Festlegung.
+ * `ADMIN_NOTIFY_EMAIL` stand in Portal-Lastenheft §1.5 unter „Erforderliche Werte", wurde
+ * aber in keinem der acht Einrichtungsschritte erhoben. Der Betreiber hat entschieden:
+ * `operator_settings.benachrichtigung_email`, gepflegt unter `/admin/einstellungen/betrieb`
+ * (`migrations/019`).
  *
- * Stattdessen: nichts senden, `false` zurückgeben, Anfrage bleibt gespeichert.
+ * Ist das Feld leer, unterbleibt **nur diese eine** Benachrichtigung, und `/admin` führt die
+ * Zeile unter „fehlt noch". Kein erfundener Vorgabewert, kein Ersatz durch die
+ * Impressumsadresse. Die `.env` bleibt als Rückfall für Bestandsinstallationen.
  *
  * ## Eine gescheiterte Mail darf die Anfrage nie kosten
  *
@@ -40,16 +43,18 @@ final class Anfragebenachrichtigung
         'rot'      => 'Rot — Sonderprojekt',
     ];
 
-    public function __construct(private readonly ?Mailversand $versand = null)
-    {
+    public function __construct(
+        private readonly ?Mailversand $versand = null,
+        private readonly ?\PDO $pdo = null,
+    ) {
     }
 
     /** @return bool `false`, wenn kein Empfänger hinterlegt ist oder der Versand scheitert. */
     public function senden(string $unternehmen, string $paket, string $ampel): bool
     {
-        $empfaenger = trim((string) Env::get('ADMIN_NOTIFY_EMAIL', ''));
+        $empfaenger = $this->empfaenger();
 
-        if ($empfaenger === '') {
+        if ($empfaenger === null) {
             return false;
         }
 
@@ -66,6 +71,30 @@ final class Anfragebenachrichtigung
         }
 
         return true;
+    }
+
+    /**
+     * Die Betreiberdaten zuerst, die `.env` als Rückfall.
+     *
+     * Die Reihenfolge ist nicht beliebig: Was ein Mensch im Adminbereich gepflegt hat,
+     * gewinnt gegen einen Wert, den vielleicht niemand mehr kennt.
+     */
+    public function empfaenger(): ?string
+    {
+        try {
+            $daten = (new BetreiberdatenSpeicher($this->pdo))->lesen();
+            $ausDenDaten = $daten['benachrichtigung_email'] ?? null;
+
+            if (is_string($ausDenDaten) && trim($ausDenDaten) !== '') {
+                return trim($ausDenDaten);
+            }
+        } catch (\Throwable) {
+            // Keine Datenbankverbindung: dann entscheidet die .env allein.
+        }
+
+        $ausDerUmgebung = trim((string) Env::get('ADMIN_NOTIFY_EMAIL', ''));
+
+        return $ausDerUmgebung === '' ? null : $ausDerUmgebung;
     }
 
     /** §10: `Neue Anfrage: {Unternehmen}` — der Wortlaut steht dort gebunden. */

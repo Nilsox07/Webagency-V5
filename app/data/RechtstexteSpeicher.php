@@ -76,6 +76,24 @@ final class RechtstexteSpeicher
     }
 
     /** Nur angemeldet: fuer `avv` und `tom` unter /portal/vertrag. */
+    /**
+     * Alle freigegebenen Texte mit `audience = kunde` — §8.6 `/vertrag`.
+     *
+     * Nur freigegebene: Ein Entwurf im Kundenbereich waere ein halb veroeffentlichter
+     * Rechtstext (§1.4a).
+     *
+     * @return list<array<string,mixed>>
+     */
+    public function alleFuerKunden(): array
+    {
+        $anweisung = $this->pdo()->prepare(
+            'SELECT * FROM legal_texts WHERE status = ? AND audience = ? ORDER BY slug ASC'
+        );
+        $anweisung->execute(['freigegeben', 'kunde']);
+
+        return $anweisung->fetchAll();
+    }
+
     public function fuerKunden(string $slug): ?array
     {
         $anweisung = $this->pdo()->prepare(
