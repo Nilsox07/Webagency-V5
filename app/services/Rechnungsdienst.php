@@ -61,7 +61,7 @@ final class Rechnungsdienst
         private readonly AdminNachweis $nachweis,
         private readonly ?AdminRechnungen $rechnungen = null,
         private readonly ?AuditProtokoll $audit = null,
-        private readonly ?Mailversand $mail = null,
+        private readonly ?Versender $mail = null,
         private readonly ?\PDO $pdo = null,
     ) {
     }

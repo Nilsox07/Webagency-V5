@@ -4,43 +4,61 @@ declare(strict_types=1);
 
 namespace Sartu\Services;
 
-use Sartu\Data\AnfrageSpeicher;
 use Sartu\Helpers\Validate;
 
 /**
- * Das Rückfrageformular auf `/kontakt` — Website-Lastenheft §11.
+ * Das Rückfrageformular auf `/kontakt` — Portal-Lastenheft §4b.6, Website-Lastenheft §11.
  *
- * ## Warum eine Rückfrage in `leads` landet
+ * ## Die Regel, an der sich alles hier entscheidet
  *
- * **Für das Kontaktformular gibt es keine eigene Tabelle im Datenmodell.** Portal-Lastenheft
- * §4 kennt `leads` für den Bedarfsscheck und `support_messages` für Nachrichten
- * **angemeldeter Kunden**. Wer über `/kontakt` schreibt, ist beides nicht.
+ * §4b.6, wörtlich:
  *
- * Geprüft nach der Regel aus dem Auftrag §6: Nennt eine andere Passage die Tabelle? Nein.
- * Also wird sie nicht erfunden. `leads` ist die vorhandene Anfragetabelle, sie trägt
- * Absender, Herkunft, Löschfrist und Freitext in `payload` — eine Rückfrage passt hinein,
- * ohne dass ein Feld seine Bedeutung ändert. `recommended_package` bleibt `NULL`: Es gab
- * keinen Bedarfsscheck, also gibt es keine Empfehlung.
+ * > „Das allgemeine Kontaktformular ist **nicht** der Bedarfsscheck. Es versendet
+ * > ausschließlich eine E-Mail an SARTU und erzeugt **keinen** Datensatz. Honigtopf,
+ * > Zeitregel und Rate-Limit gelten dort gleichermaßen."
  *
- * ## Die B2B-Bestätigung steht im Formular, obwohl §11 sie nicht aufzählt
+ * **Kein Datensatz.** Nicht in `leads`, nicht in `support_messages`, nirgends. Die vorige
+ * Fassung legte die Rückfrage in `leads` ab — sie hatte §4b.6 nicht gefunden und aus dem
+ * Fehlen einer Tabelle geschlossen, dass eine gesucht werden müsse. Gesucht war das
+ * Gegenteil.
  *
- * §11 nennt sieben Felder und darunter nur die Datenschutz-Bestätigung. Die
- * Prüfbedingung `chk_leads_bestaetigungen` verlangt **beide**.
+ * **Das ist keine Kleinigkeit.** Löschfrist, Rechtsgrundlage und Verarbeitungsverzeichnis
+ * von `leads` sind für den Bedarfsscheck geschrieben. Eine Rückfrage dort abzulegen heisst,
+ * personenbezogene Daten unter einer Zweckbestimmung zu speichern, die sie nicht deckt.
  *
- * Zwei Wege standen offen, und einer davon war keiner:
+ * ## Drei Folgen, die aus „keine Speicherung" zwingend entstehen
  *
- * | Weg | Folge |
- * |---|---|
- * | `b2b_confirmed = 1` schreiben, ohne zu fragen | Eine Erklärung fälschen, die der Absender nie abgegeben hat |
- * | Das Feld ins Formular aufnehmen | Eine Abweichung von §11, die im Bericht steht |
+ * ### 1. Die Mail trägt den vollständigen Inhalt
  *
- * Der zweite Weg ist gewählt. Website-Lastenheft §2 macht die Beschränkung auf Unternehmer
- * ohnehin zur harten Regel — „Ausschließlich für Unternehmer" steht unter jeder Preisnennung.
- * Ein Formular, das das nicht abfragt, widerspricht der Seite, auf der es steht.
+ * Beim Bedarfsscheck ist die Benachrichtigung eine **Kurzmeldung ohne Datenauszug** (§10) —
+ * sie darf knapp sein, weil der Datensatz alles trägt und im Adminbereich hinter der
+ * Zugriffsprüfung liegt.
  *
- * ## Dieselbe Abwehr wie beim Bedarfsscheck
+ * Hier gibt es keinen Datensatz. Die Mail **ist** die Rückfrage. Stünde nur „Es ist eine
+ * Rückfrage eingegangen" darin, wäre die Rückfrage weg.
  *
- * §17 verlangt sie für **beide** Formulare. Sie steht in `Formularschutz`, einmal.
+ * ### 2. Eine gescheiterte Mail wird gemeldet, nicht verschwiegen
+ *
+ * Überall sonst gilt: Eine gescheiterte Mail nimmt keinen Vorgang zurück, weil der Vorgang
+ * in der Datenbank steht. Hier steht er nirgends. Geht die Mail nicht raus, ist die
+ * Rückfrage verloren — und dann eine Bestätigungsseite zu zeigen, wäre eine Lüge.
+ *
+ * Deshalb ist das der **einzige** Fall im Projekt, in dem ein Mailfehler den Absender
+ * erreicht. Er bekommt den Hinweis samt Ausweichweg.
+ *
+ * ### 3. Die Doppelklicksperre liegt in der Sitzung, nicht in der Datenbank
+ *
+ * `leads.submission_id` ist eindeutig — daran erkennt der Bedarfsscheck die zweite
+ * Einreichung. Ohne Zeile gibt es nichts zu vergleichen. Die verbrauchten Kennungen liegen
+ * deshalb in der Sitzung; eine Tabelle dafür zu erfinden verstiesse gegen §4b.6 genauso wie
+ * die alte Fassung.
+ *
+ * ## Was **nicht** abgefragt wird
+ *
+ * Die **B2B-Bestätigung ist raus**. Sie stand im Formular allein deshalb, weil
+ * `chk_leads_bestaetigungen` beide Häkchen verlangte. Ohne `leads`-Zeile gibt es die
+ * Prüfbedingung nicht — und Website-Lastenheft §11 zählt sieben Felder mit **einer**
+ * Bestätigung auf. Ein Häkchen, das keinen Zweck mehr hat, ist eine Hürde ohne Grund.
  */
 final class Kontaktanfrage
 {
@@ -55,33 +73,41 @@ final class Kontaktanfrage
     /** §11: „Nachricht (Pflicht, min. 20 Zeichen)". */
     public const NACHRICHT_MINDESTLAENGE = 20;
 
+    /** §11, Wortlaut gebunden. */
     public const BESTAETIGUNG = 'Danke — Ihre Nachricht ist angekommen. Wir antworten '
         . 'schriftlich, in der Regel innerhalb eines Werktags.';
 
+    /** Der Sitzungsschlüssel für die verbrauchten Einreichungskennungen. */
+    private const VERBRAUCHT = '_kontakt_verbraucht';
+
     public function __construct(
-        private readonly ?AnfrageSpeicher $speicher = null,
         private readonly ?Ratenbegrenzung $begrenzung = null,
         private readonly ?Projektmail $mail = null,
     ) {
     }
 
     /**
+     * Nimmt eine Rückfrage an und verschickt sie.
+     *
      * @param array<string,mixed> $eingabe
-     * @param array<string,string|null> $herkunft aus `Herkunft::ausSitzung()`
      */
-    public function anlegen(array $eingabe, array $herkunft = [], ?string $ip = null): AnfrageErgebnis
+    public function senden(array $eingabe, ?string $ip = null): AnfrageErgebnis
     {
         if (Formularschutz::zuGross($eingabe)) {
             return AnfrageErgebnis::abgewiesen(['Ihre Nachricht ist zu lang. Bitte kürzen Sie sie.']);
         }
 
+        // §4b.6: Rate-Limit gilt „gleichermaßen" — dieselbe Zahl je IP und Stunde wie beim
+        // Bedarfsscheck.
         $schluessel = 'kontakt-ip:' . (string) $ip;
 
         if (!$this->begrenzung()->erlaubt($schluessel, AnfrageService::VERSUCHE_JE_IP, Formularschutz::FENSTER_SEKUNDEN)) {
             return AnfrageErgebnis::begrenzt();
         }
 
-        // Still — der Absender sieht die Bestätigungsseite, nicht den Grund.
+        // §4b.6: Honigtopf und Zeitregel. Beide still — der Absender sieht die
+        // Bestätigungsseite, nicht den Grund. Wer erfährt, dass er aufgefallen ist, macht es
+        // beim nächsten Mal besser.
         if (Formularschutz::honigtopfGefuellt($eingabe)) {
             return AnfrageErgebnis::stillVerworfen();
         }
@@ -90,13 +116,9 @@ final class Kontaktanfrage
             return AnfrageErgebnis::stillVerworfen();
         }
 
-        $submissionId = self::text($eingabe, 'submission_id');
+        $einreichung = self::text($eingabe, 'submission_id');
 
-        if (!Formularschutz::istUuid($submissionId)) {
-            return AnfrageErgebnis::stillVerworfen();
-        }
-
-        if ($this->speicher()->kenntEinreichung($submissionId)) {
+        if (!Formularschutz::istUuid($einreichung) || self::schonVerschickt($einreichung)) {
             return AnfrageErgebnis::stillVerworfen();
         }
 
@@ -108,47 +130,83 @@ final class Kontaktanfrage
 
         $this->begrenzung()->vermerken($schluessel, Formularschutz::FENSTER_SEKUNDEN);
 
-        $jetzt = new \DateTimeImmutable('now', new \DateTimeZone('UTC'));
-        $anliegen = self::text($eingabe, 'anliegen');
-        $name = self::text($eingabe, 'name');
+        if (!$this->hinausschicken($eingabe)) {
+            // Kein Datensatz, keine Mail — die Rückfrage ist weg. Das sagen wir.
+            return AnfrageErgebnis::abgewiesen([
+                'Ihre Nachricht konnte gerade nicht zugestellt werden. Bitte versuchen Sie es '
+                . 'in einigen Minuten noch einmal oder schreiben Sie uns direkt.',
+            ]);
+        }
 
-        $id = $this->speicher()->anlegen([
-            'submission_id' => $submissionId,
-            'submitted_at'  => $jetzt->format('Y-m-d H:i:s'),
-            'payload'       => json_encode([
-                'formular' => 'kontakt',
-                'anliegen' => $anliegen,
-                'nachricht' => self::text($eingabe, 'nachricht'),
-            ], JSON_UNESCAPED_UNICODE | JSON_THROW_ON_ERROR),
-            // §11 fragt einen Namen ab, nicht Vor- und Nachname getrennt. `leads` verlangt
-            // beide Spalten — der ganze Name steht deshalb im Vornamensfeld, und der
-            // Nachname bleibt leer. Ihn zu raten, indem man am letzten Leerzeichen trennt,
-            // geht bei „van der Berg" und bei „Dr. Meier" schief.
-            'first_name'          => $name,
-            'last_name'           => '',
-            'company'             => self::text($eingabe, 'company'),
-            'email'               => mb_strtolower(self::text($eingabe, 'email')),
-            'phone'               => self::textOderNull($eingabe, 'phone'),
-            'preferred_contact'   => 'email',
-            'recommended_package' => null,
-            'flag'                => 'standard',
-            'status'              => 'neu',
-            'b2b_confirmed'       => 1,
-            'privacy_confirmed'   => 1,
-            'source_ip'           => $ip,
-            'delete_after'        => $jetzt->modify('+' . AnfrageService::FRIST_MONATE_OFFEN . ' months')
-                ->format('Y-m-d'),
-            ...self::herkunftsfelder($herkunft),
-        ]);
+        self::alsVerschicktVermerken($einreichung);
 
-        $this->betreuerBenachrichtigen($name, $anliegen);
+        // Kein Datensatz — also auch keine Kennung, kein Paket, keine Ampel.
+        return AnfrageErgebnis::verschickt();
+    }
 
-        return AnfrageErgebnis::angelegt($id, null, 'standard', []);
+    /**
+     * Ist ein Empfänger hinterlegt?
+     *
+     * **Ohne ihn kann das Formular nichts.** §4b.6 nimmt ihm den Datensatz; bleibt die
+     * Mail aus, ist die Rückfrage weg. Ein Formular, das sichtbar dasteht und jede Eingabe
+     * verliert, ist schlimmer als keins — §0.3b verbietet genau solche toten Funktionen.
+     *
+     * Die Seite zeigt deshalb den Ausweichweg statt des Formulars, solange
+     * `operator_settings.benachrichtigung_email` leer ist und auch `ADMIN_NOTIFY_EMAIL`
+     * nichts hergibt.
+     *
+     * **Das ändert die Tragweite einer früheren Entscheidung.** Am 02.08.2026 stand in
+     * `OFFENE_ENTSCHEIDUNGEN.md`: Ist das Feld leer, unterbleibt „**nur diese eine**
+     * Benachrichtigung". Mit §4b.6 stimmt das nicht mehr — dann steht auch `/kontakt` still.
+     */
+    public function empfaengerVorhanden(): bool
+    {
+        return (new Anfragebenachrichtigung(null, null))->empfaenger() !== null;
     }
 
     // ------------------------------------------------------------------ intern
 
-    /** @return array<string,string> je Feldname eine Meldung — §11 nennt die Nachrichtenmeldung wörtlich. */
+    /**
+     * Die Mail an SARTU — §4b.6: „versendet ausschließlich eine E-Mail an SARTU".
+     *
+     * **Sie trägt alles.** Anders als beim Bedarfsscheck gibt es keinen Datensatz, den man
+     * im Adminbereich nachlesen könnte. Was hier fehlt, ist verloren.
+     */
+    private function hinausschicken(array $eingabe): bool
+    {
+        // Der Betreff traegt NUR die feste Beschriftung aus `ANLIEGEN`, nie den Rohwert.
+        // `pflichtfelderPruefen()` hat den Schluessel bereits gegen die Liste geprueft — ein
+        // Rueckfall auf die Eingabe koennte hier also gar nicht auslaufen. Er stand trotzdem
+        // da, und ein Zeilenumbruch in einem Mailbetreff ist der Anfang jeder
+        // Kopfzeilen-Einschleusung. Was nicht ausloesen kann, muss auch nicht dastehen.
+        $anliegen = self::ANLIEGEN[self::text($eingabe, 'anliegen')];
+        $telefon = self::textOderNull($eingabe, 'phone');
+
+        return ($this->mail ?? new Projektmail())->anBetreuer(
+            // Ohne Projekt: `Projektmail` lässt die Zeile „Diese Nachricht bezieht sich auf
+            // Ihr Projekt …" dann weg. Eine Rückfrage gehört zu keinem Projekt.
+            ['title' => ''],
+            'Rückfrage über die Website: ' . $anliegen,
+            'Über das Kontaktformular ist eine Rückfrage eingegangen.' . "\n\n"
+            . 'Name: ' . self::text($eingabe, 'name') . "\n"
+            . 'Unternehmen: ' . self::text($eingabe, 'company') . "\n"
+            . 'E-Mail: ' . mb_strtolower(self::text($eingabe, 'email')) . "\n"
+            . 'Telefon: ' . ($telefon ?? 'nicht angegeben') . "\n"
+            . 'Anliegen: ' . $anliegen . "\n\n"
+            . 'Nachricht:' . "\n"
+            . self::text($eingabe, 'nachricht') . "\n\n"
+            . 'Diese Rückfrage ist nirgends gespeichert (§4b.6). Antworten Sie direkt auf '
+            . "diese Mail.\n",
+        );
+    }
+
+    /**
+     * @return array<string,string> je Feldname eine Meldung
+     *
+     * §11 zählt sieben Felder auf. Pflicht sind Name, Unternehmen, E-Mail, Anliegen,
+     * Nachricht und die Datenschutz-Bestätigung. Telefon ist ausdrücklich optional, und eine
+     * Pflicht-Telefonnummer ist dort ausdrücklich verboten.
+     */
     private function pflichtfelderPruefen(array $eingabe): array
     {
         $fehler = [];
@@ -174,11 +232,6 @@ final class Kontaktanfrage
             $fehler['nachricht'] = 'Bitte beschreiben Sie Ihr Anliegen in ein bis zwei Sätzen.';
         }
 
-        if (!self::wahr($eingabe, 'b2b_confirmed')) {
-            $fehler['b2b_confirmed'] = 'Bitte bestätigen Sie, dass Sie als Unternehmen anfragen. '
-                . 'SARTU arbeitet ausschließlich für Unternehmer.';
-        }
-
         if (!self::wahr($eingabe, 'privacy_confirmed')) {
             $fehler['privacy_confirmed'] = 'Bitte bestätigen Sie die Datenschutzhinweise.';
         }
@@ -187,35 +240,28 @@ final class Kontaktanfrage
     }
 
     /**
-     * Die interne Kurzmeldung — wie beim Bedarfsscheck: **kein Datenauszug**.
+     * Die Doppelklicksperre — in der Sitzung, weil es keine Zeile gibt.
      *
-     * Weder Nachricht noch E-Mail-Adresse stehen darin. Wer die Anfrage lesen will, meldet
-     * sich an; dort greift die Zugriffsprüfung. Eine Mail greift nirgends.
+     * Sie hält nur, solange die Sitzung hält. Das genügt: Doppelklick, Neuladen und die
+     * Zurück-Taste passieren innerhalb einer Sitzung. Gegen jemanden, der eine Stunde später
+     * bewusst dasselbe Formular noch einmal schickt, hilft das Rate-Limit.
      */
-    private function betreuerBenachrichtigen(string $name, string $anliegen): void
+    private static function schonVerschickt(string $einreichung): bool
     {
-        ($this->mail ?? new Projektmail())->anBetreuer(
-            ['title' => ''],
-            'Neue Rückfrage über die Website',
-            'Über das Kontaktformular ist eine Rückfrage eingegangen.' . "\n\n"
-            . 'Absender: ' . $name . "\n"
-            . 'Anliegen: ' . (self::ANLIEGEN[$anliegen] ?? $anliegen) . "\n\n"
-            . 'Die vollständige Anfrage steht unter /admin/anfragen' . "\n",
-        );
+        $verbraucht = $_SESSION[self::VERBRAUCHT] ?? [];
+
+        return is_array($verbraucht) && in_array($einreichung, $verbraucht, true);
     }
 
-    /** @return array<string,string|null> */
-    private static function herkunftsfelder(array $herkunft): array
+    private static function alsVerschicktVermerken(string $einreichung): void
     {
-        $felder = [];
+        $verbraucht = $_SESSION[self::VERBRAUCHT] ?? [];
+        $verbraucht = is_array($verbraucht) ? $verbraucht : [];
+        $verbraucht[] = $einreichung;
 
-        foreach (['landing_page', 'referrer_host', 'utm_source', 'utm_medium', 'utm_campaign',
-                  'utm_term', 'utm_content', 'click_id'] as $feld) {
-            $wert = $herkunft[$feld] ?? null;
-            $felder[$feld] = is_string($wert) && $wert !== '' ? $wert : null;
-        }
-
-        return $felder;
+        // Die Liste bleibt kurz. Eine Sitzung, die zehn Rückfragen abschickt, hat ein
+        // anderes Problem als die Länge dieses Feldes.
+        $_SESSION[self::VERBRAUCHT] = array_slice($verbraucht, -10);
     }
 
     private static function text(array $eingabe, string $feld): string
@@ -235,11 +281,6 @@ final class Kontaktanfrage
     private static function wahr(array $eingabe, string $feld): bool
     {
         return in_array($eingabe[$feld] ?? null, ['1', 'ja', 'on', true], true);
-    }
-
-    private function speicher(): AnfrageSpeicher
-    {
-        return $this->speicher ?? new AnfrageSpeicher();
     }
 
     private function begrenzung(): Ratenbegrenzung

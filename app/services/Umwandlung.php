@@ -60,7 +60,7 @@ final class Umwandlung
 {
     public function __construct(
         private readonly AdminNachweis $nachweis,
-        private readonly ?Mailversand $mail = null,
+        private readonly ?Versender $mail = null,
         private readonly ?AuditProtokoll $audit = null,
         private readonly ?\PDO $pdo = null,
     ) {

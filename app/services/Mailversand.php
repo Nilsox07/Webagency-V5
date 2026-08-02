@@ -16,8 +16,12 @@ use PHPMailer\PHPMailer\PHPMailer;
  * Die Ersteinrichtung nutzt dieselbe Klasse (§1.5 Schritt 5) — mit den gerade eingegebenen
  * Zugangsdaten, bevor sie in der .env stehen. Deshalb sind sie Parameter und keine
  * Konfigurationsabfrage im Innern.
+ *
+ * **Die einzige Umsetzung von `Versender` im Anwendungscode.** Die Schnittstelle gibt es,
+ * damit ein Test nachweisen kann, dass eine Mail rausgeht — nicht, damit es einen zweiten
+ * Weg nach draussen gibt. Deshalb bleibt diese Klasse `final`.
  */
-final class Mailversand
+final class Mailversand implements Versender
 {
     public function __construct(
         private readonly ?SmtpZugang $zugang = null,

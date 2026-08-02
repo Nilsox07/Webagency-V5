@@ -57,7 +57,7 @@ final class Angebotsannahme
         private readonly ?AngebotAnnahme $annahme = null,
         private readonly ?Projektwechsel $wechsel = null,
         private readonly ?AuditProtokoll $audit = null,
-        private readonly ?Mailversand $mail = null,
+        private readonly ?Versender $mail = null,
         private readonly ?\PDO $pdo = null,
     ) {
     }

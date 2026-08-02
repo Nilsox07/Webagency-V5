@@ -36,8 +36,18 @@ Zusätzlich gespeichert werden: der Zeitpunkt, die IP-Adresse und Herkunftsangab
 ## 4. Kontaktformular
 
 Wer das Formular auf `/kontakt` abschickt, übermittelt: Name, Unternehmen, E-Mail-Adresse,
-wahlweise Telefonnummer, das gewählte Anliegen und die Nachricht. Es gelten dieselben
-Löschfristen wie unter 3.
+wahlweise Telefonnummer, das gewählte Anliegen und die Nachricht.
+
+**Diese Angaben werden nicht gespeichert.** Sie werden ausschließlich als E-Mail an SARTU
+versandt; in der Datenbank entsteht kein Datensatz. Es gibt hier deshalb keine Löschfrist —
+die Nachricht liegt allein im Postfach und wird dort nach den üblichen Regeln der
+Geschäftskorrespondenz aufbewahrt.
+
+Verarbeitet, aber nicht dauerhaft gespeichert wird zusätzlich die IP-Adresse: Sie dient dem
+Schutz vor Formularmissbrauch (höchstens zehn Absendungen je Stunde) und liegt dafür als
+Zähler ohne Bezug zum Inhalt vor.
+
+*Rechtsgrundlage und Aufbewahrung im Postfach sind zu bestimmen.*
 
 ## 5. Kundenbereich
 

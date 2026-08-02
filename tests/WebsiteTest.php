@@ -9,7 +9,10 @@ use Sartu\Helpers\Csrf;
 use Sartu\Router;
 use Sartu\Services\Branchenseiten;
 use Sartu\Services\InstallationsSperre;
+use Sartu\Data\Uuid;
+use Sartu\Services\AnfrageService;
 use Sartu\Services\Kontaktanfrage;
+use Sartu\Services\Projektmail;
 use Sartu\Services\Launchadressen;
 use Sartu\Services\Preise;
 use Sartu\Services\Wartungsmodus;
@@ -34,6 +37,29 @@ final class WebsiteTest extends Datenbankfall
         $_GET = [];
 
         touch($this->arbeitsverzeichnis . '/' . InstallationsSperre::DATEINAME);
+
+        $this->betreiberdatenAnlegen();
+    }
+
+    /**
+     * Eine Betreiberzeile mit hinterlegtem Empfänger.
+     *
+     * **Ohne sie kann `/kontakt` nichts** — §4b.6 nimmt dem Formular den Datensatz, und ohne
+     * `benachrichtigung_email` geht auch keine Mail raus. Genau dieser Zustand hat den Test
+     * beim ersten Lauf scheitern lassen, und er ist ein echter: Die Seite zeigt dann den
+     * Ausweichweg statt des Formulars.
+     */
+    private function betreiberdatenAnlegen(): void
+    {
+        $anweisung = $this->pdo->prepare(
+            'INSERT INTO operator_settings (id, firmenname, strasse, plz, ort, land, email,'
+            . ' benachrichtigung_email, steuernummer, inhaltlich_verantwortlich)'
+            . ' VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)'
+        );
+        $anweisung->execute([
+            \Sartu\Data\Uuid::v4(), 'Betreiber', 'Strasse 1', '01067', 'Ort', 'DE',
+            'betreiber@example.org', 'eingang@example.org', '337/5804/1234', 'Verantwortlich',
+        ]);
     }
 
     // ---------------------------------------------------------------- §17 Technik und SEO
@@ -423,34 +449,71 @@ final class WebsiteTest extends Datenbankfall
         }
     }
 
-    // ---------------------------------------------------------------- §11 Kontaktformular
+    // ---------------------------------------------------------------- §4b.6 Kontaktformular
 
     /**
-     * §17: „Beide Formulare senden nachweislich."
+     * §4b.6, der Kern: „erzeugt **keinen** Datensatz."
      *
-     * Der Bedarfsscheck ist in `BedarfsscheckTest` geprüft. Hier das zweite.
+     * Null Zeilen in `leads`, genau eine Mail. Die vorige Fassung legte die Rückfrage in
+     * `leads` ab — dieser Test hätte das gefunden, wenn es ihn gegeben hätte.
      */
-    public function testDasKontaktformularLegtEinenDatensatzAn(): void
+    public function testEineRueckfrageErzeugtKeinenDatensatzUndGenauEineMail(): void
     {
-        $ergebnis = (new Kontaktanfrage())->anlegen($this->kontakteingabe(), [], '127.0.0.1');
+        $postfach = new Postfach();
+
+        $ergebnis = (new Kontaktanfrage(mail: new Projektmail($postfach)))
+            ->senden($this->kontakteingabe(), '127.0.0.1');
 
         $this->assertTrue($ergebnis->dankeSeite);
-        $this->assertNotNull($ergebnis->anfrageId);
+        $this->assertFalse($ergebnis->wurdeGespeichert(), 'Es wurde ein Datensatz gemeldet.');
 
-        $zeile = $this->pdo->query('SELECT * FROM leads')->fetch(\PDO::FETCH_ASSOC);
+        $this->assertSame(0, (int) $this->pdo->query('SELECT COUNT(*) FROM leads')->fetchColumn());
+        $this->assertSame(0, (int) $this->pdo->query('SELECT COUNT(*) FROM support_messages')->fetchColumn());
 
-        $this->assertIsArray($zeile);
-        $this->assertSame('Erika Mustermann', (string) $zeile['first_name']);
-        $this->assertSame('mustermann-sanitaer.example', (string) $zeile['company']);
-        // §11 kennt keinen Bedarfsscheck — also gibt es keine Empfehlung.
-        $this->assertNull($zeile['recommended_package']);
-        $this->assertSame('standard', (string) $zeile['flag']);
+        $this->assertCount(1, $postfach->mails, 'Es ging nicht genau eine Mail raus.');
+    }
 
-        $inhalt = json_decode((string) $zeile['payload'], true);
+    /**
+     * Die Mail trägt den vollständigen Inhalt.
+     *
+     * Ohne Datensatz ist sie der einzige Träger. Fehlt darin etwas, ist es weg — anders als
+     * beim Bedarfsscheck, wo §10 bewusst eine Kurzmeldung ohne Datenauszug verlangt.
+     */
+    public function testDieMailTraegtDieGanzeRueckfrage(): void
+    {
+        $postfach = new Postfach();
 
-        $this->assertSame('kontakt', $inhalt['formular']);
-        $this->assertSame('domain', $inhalt['anliegen']);
-        $this->assertStringContainsString('Heizung', $inhalt['nachricht']);
+        (new Kontaktanfrage(mail: new Projektmail($postfach)))
+            ->senden($this->kontakteingabe(), '127.0.0.1');
+
+        $mail = $postfach->mails[0];
+
+        $this->assertStringContainsString('Domain und Launch', $mail['betreff']);
+
+        foreach ([
+            'Erika Mustermann',
+            'mustermann-sanitaer.example',
+            'erika@example.org',
+            'Unsere Heizung soll auf die neue Website',
+        ] as $inhalt) {
+            $this->assertStringContainsString($inhalt, $mail['text'], $inhalt);
+        }
+    }
+
+    /**
+     * Geht die Mail nicht raus, sieht der Absender **keine** Bestätigung.
+     *
+     * Der einzige Fall im Projekt, in dem ein Mailfehler den Absender erreicht — und der
+     * richtige: Es gibt keinen Datensatz, der die Rückfrage auffängt.
+     */
+    public function testEineGescheiterteMailWirdGemeldetUndNichtVerschwiegen(): void
+    {
+        $ergebnis = (new Kontaktanfrage(mail: new Projektmail(new Postfach(scheitert: true))))
+            ->senden($this->kontakteingabe(), '127.0.0.1');
+
+        $this->assertFalse($ergebnis->dankeSeite, 'Der Absender sieht eine Bestätigung, obwohl nichts ankam.');
+        $this->assertNotNull($ergebnis->meldung);
+        $this->assertSame(0, (int) $this->pdo->query('SELECT COUNT(*) FROM leads')->fetchColumn());
     }
 
     /** §11: die Nachricht braucht mindestens 20 Zeichen, mit dem Wortlaut aus §11. */
@@ -459,58 +522,103 @@ final class WebsiteTest extends Datenbankfall
         $eingabe = $this->kontakteingabe();
         $eingabe['nachricht'] = 'Zu kurz.';
 
-        $ergebnis = (new Kontaktanfrage())->anlegen($eingabe, [], '127.0.0.1');
+        $postfach = new Postfach();
+        $ergebnis = (new Kontaktanfrage(mail: new Projektmail($postfach)))->senden($eingabe, '127.0.0.1');
 
         $this->assertFalse($ergebnis->dankeSeite);
         $this->assertSame(
             'Bitte beschreiben Sie Ihr Anliegen in ein bis zwei Sätzen.',
             $ergebnis->feldfehler['nachricht'] ?? null,
         );
-        $this->assertSame(0, (int) $this->pdo->query('SELECT COUNT(*) FROM leads')->fetchColumn());
+        $this->assertSame([], $postfach->mails, 'Es ging trotz Fehler eine Mail raus.');
     }
 
     /**
-     * §17: Honigtopf, Zeitregel und Doppeleinreichung greifen — und der Absender sieht
-     * trotzdem die normale Bestätigung.
+     * §4b.6: „Honigtopf, Zeitregel und Rate-Limit gelten dort gleichermaßen."
+     *
+     * Alle drei still — der Absender sieht die normale Bestätigung, und es geht keine Mail
+     * raus. Dazu die Doppelklicksperre, die ohne Datensatz in der Sitzung liegt.
      */
-    public function testHonigtopfZeitregelUndDoppeleinreichungGreifenStill(): void
+    public function testHonigtopfZeitregelUndDoppelklickGreifenStill(): void
     {
+        $postfach = new Postfach();
+        $dienst = new Kontaktanfrage(mail: new Projektmail($postfach));
+
         $mitHonig = $this->kontakteingabe();
         $mitHonig['hp_website'] = 'https://spam.example';
 
-        $ergebnis = (new Kontaktanfrage())->anlegen($mitHonig, [], '127.0.0.1');
-        $this->assertTrue($ergebnis->dankeSeite, 'Der Absender sieht nicht die Bestätigungsseite.');
-        $this->assertSame(0, (int) $this->pdo->query('SELECT COUNT(*) FROM leads')->fetchColumn());
+        $this->assertTrue($dienst->senden($mitHonig, '127.0.0.1')->dankeSeite);
 
         $zuSchnell = $this->kontakteingabe();
         $zuSchnell['form_started_at'] = (string) time();
 
-        $this->assertTrue((new Kontaktanfrage())->anlegen($zuSchnell, [], '127.0.0.1')->dankeSeite);
-        $this->assertSame(0, (int) $this->pdo->query('SELECT COUNT(*) FROM leads')->fetchColumn());
+        $this->assertTrue($dienst->senden($zuSchnell, '127.0.0.1')->dankeSeite);
+        $this->assertSame([], $postfach->mails, 'Honigtopf oder Zeitregel haben eine Mail durchgelassen.');
 
-        // Doppeleinreichung: dieselbe `submission_id` zweimal ergibt einen Datensatz.
+        // Doppelklick: dieselbe Kennung zweimal ergibt eine Mail, nicht zwei.
         $eingabe = $this->kontakteingabe();
 
-        (new Kontaktanfrage())->anlegen($eingabe, [], '127.0.0.1');
-        (new Kontaktanfrage())->anlegen($eingabe, [], '127.0.0.1');
+        $dienst->senden($eingabe, '127.0.0.1');
+        $dienst->senden($eingabe, '127.0.0.1');
 
-        $this->assertSame(1, (int) $this->pdo->query('SELECT COUNT(*) FROM leads')->fetchColumn());
+        $this->assertCount(1, $postfach->mails);
     }
 
-    /** §11 und §2: ohne die beiden Bestätigungen wird nichts gespeichert. */
-    public function testOhneBestaetigungenWirdNichtsGespeichert(): void
+    /** §4b.6: das Rate-Limit greift, mit derselben Zahl wie beim Bedarfsscheck. */
+    public function testDasRatelimitGreiftAbDemElftenVersuch(): void
     {
-        foreach (['b2b_confirmed', 'privacy_confirmed'] as $feld) {
+        $postfach = new Postfach();
+        $dienst = new Kontaktanfrage(mail: new Projektmail($postfach));
+
+        for ($i = 0; $i < AnfrageService::VERSUCHE_JE_IP; $i++) {
             $eingabe = $this->kontakteingabe();
-            unset($eingabe[$feld]);
+            $eingabe['submission_id'] = Uuid::v4();
 
-            $ergebnis = (new Kontaktanfrage())->anlegen($eingabe, [], '127.0.0.1');
-
-            $this->assertFalse($ergebnis->dankeSeite, $feld);
-            $this->assertArrayHasKey($feld, $ergebnis->feldfehler);
+            $this->assertTrue($dienst->senden($eingabe, '127.0.0.1')->dankeSeite, 'Versuch ' . ($i + 1));
         }
 
-        $this->assertSame(0, (int) $this->pdo->query('SELECT COUNT(*) FROM leads')->fetchColumn());
+        $eingabe = $this->kontakteingabe();
+        $eingabe['submission_id'] = Uuid::v4();
+
+        $ergebnis = $dienst->senden($eingabe, '127.0.0.1');
+
+        $this->assertFalse($ergebnis->dankeSeite);
+        $this->assertCount(AnfrageService::VERSUCHE_JE_IP, $postfach->mails);
+    }
+
+    /** §11: ohne die Datenschutz-Bestätigung geht nichts raus. */
+    public function testOhneDatenschutzbestaetigungGehtNichtsRaus(): void
+    {
+        $eingabe = $this->kontakteingabe();
+        unset($eingabe['privacy_confirmed']);
+
+        $postfach = new Postfach();
+        $ergebnis = (new Kontaktanfrage(mail: new Projektmail($postfach)))->senden($eingabe, '127.0.0.1');
+
+        $this->assertFalse($ergebnis->dankeSeite);
+        $this->assertArrayHasKey('privacy_confirmed', $ergebnis->feldfehler);
+        $this->assertSame([], $postfach->mails);
+    }
+
+    /**
+     * §11 zählt sieben Felder auf — die B2B-Bestätigung ist keins davon.
+     *
+     * Sie stand hier, weil `chk_leads_bestaetigungen` sie verlangte. Ohne `leads`-Zeile gibt
+     * es die Prüfbedingung nicht, und ein Häkchen ohne Zweck ist eine Hürde ohne Grund.
+     */
+    public function testDasFormularVerlangtKeineB2bBestaetigungMehr(): void
+    {
+        $html = (string) $this->router()->behandeln('GET', '/kontakt')->rumpf;
+
+        $this->assertStringNotContainsString('b2b_confirmed', $html);
+
+        // Und die Prüfung dahinter verlangt sie auch nicht.
+        $eingabe = $this->kontakteingabe();
+        unset($eingabe['b2b_confirmed']);
+
+        $this->assertTrue(
+            (new Kontaktanfrage(mail: new Projektmail(new Postfach())))->senden($eingabe, '127.0.0.1')->dankeSeite,
+        );
     }
 
     /** §11: das Formular läuft über die Route, mit CSRF und ohne JavaScript. */
@@ -522,7 +630,7 @@ final class WebsiteTest extends Datenbankfall
         $this->assertStringContainsString(Csrf::FELD, $html);
         $this->assertSame(0, preg_match('/\son[a-z]+\s*=/i', $html), 'Ein on…-Attribut im Formular.');
 
-        // Ohne CSRF-Feld: 419, kein Datensatz.
+        // Ohne CSRF-Feld: 419, und nichts geht raus.
         $_POST = $this->kontakteingabe();
 
         $this->assertSame(419, $this->router()->behandeln('POST', '/kontakt')->status);
@@ -541,7 +649,6 @@ final class WebsiteTest extends Datenbankfall
             'phone'             => '',
             'anliegen'          => 'domain',
             'nachricht'         => 'Unsere Heizung soll auf die neue Website. Wie lange dauert das?',
-            'b2b_confirmed'     => '1',
             'privacy_confirmed' => '1',
             'hp_website'        => '',
             'form_started_at'   => (string) (time() - 60),

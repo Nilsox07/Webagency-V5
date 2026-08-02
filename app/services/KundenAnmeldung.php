@@ -58,7 +58,7 @@ final class KundenAnmeldung
 
     public function __construct(
         private readonly ?AnmeldeTokenSpeicher $tokens = null,
-        private readonly ?Mailversand $mail = null,
+        private readonly ?Versender $mail = null,
         private readonly ?Ratenbegrenzung $begrenzung = null,
         private readonly ?AuditProtokoll $audit = null,
         private readonly ?AnmeldeKonten $konten = null,

@@ -10,7 +10,6 @@ use Sartu\Helpers\Http;
 use Sartu\Services\Auftragslage;
 use Sartu\Services\Branchenseiten;
 use Sartu\Services\Firmenseitentexte;
-use Sartu\Services\Herkunft;
 use Sartu\Services\Kontaktanfrage;
 use Sartu\Services\Lexikon;
 use Sartu\Services\Ratgeber;
@@ -197,6 +196,10 @@ final class Website
             // Zeitregel und Doppeleinreichung aus §4b — dieselben Felder wie im Bedarfsscheck.
             'zeitstempel'  => (string) time(),
             'einreichung'  => $werte['submission_id'] ?? Uuid::v4(),
+            // §0.3b: kein Formular, das nichts bewirken kann. Begründung im Kopf von
+            // `Kontaktanfrage::empfaengerVorhanden()`.
+            'formularOffen' => (new Kontaktanfrage())->empfaengerVorhanden(),
+            'ausweichweg'   => $this->betriebsdaten()['email'],
         ]);
     }
 
@@ -206,13 +209,18 @@ final class Website
      * **Alle stillen Ausgänge führen auf dieselbe Bestätigungsseite.** Honigtopf, Zeitregel
      * und Doppeleinreichung sehen für den Absender aus wie ein Erfolg (§4b.2).
      *
+     * **Ein Ausgang tut das nicht:** Geht die Mail nicht raus, ist die Rückfrage verloren —
+     * es gibt keinen Datensatz, der sie auffängt (§4b.6). Dann bekommt der Absender die
+     * Meldung und keine Bestätigung.
+     *
      * @param array<string,string> $parameter
      */
     public function kontaktSenden(array $parameter = []): Antwort
     {
-        $ergebnis = (new Kontaktanfrage())->anlegen(
+        // §4b.6: Es entsteht KEIN Datensatz. Deshalb auch keine Herkunftsfelder — die
+        // gehoeren zu einem `lead`, und den gibt es hier nicht.
+        $ergebnis = (new Kontaktanfrage())->senden(
             $_POST,
-            Herkunft::ausSitzung(),
             Http::gegenstelle() === '' ? null : Http::gegenstelle(),
         );
 
@@ -449,10 +457,12 @@ final class Website
             'werte'            => [],
             'fehler'           => [],
             'meldung'          => null,
+            'formularOffen'    => true,
+            'ausweichweg'      => null,
         ]);
     }
 
-    /** @return array{auftragslage:?string,kleinunternehmer:bool} */
+    /** @return array{auftragslage:?string,kleinunternehmer:bool,email:?string} */
     private function betriebsdaten(): array
     {
         try {
@@ -465,9 +475,14 @@ final class Website
 
         $lage = $zeile['auftragslage'] ?? null;
 
+        $email = $zeile['email'] ?? null;
+
         return [
             'auftragslage'     => is_string($lage) && $lage !== '' ? $lage : null,
             'kleinunternehmer' => (int) ($zeile['kleinunternehmer'] ?? 0) === 1,
+            // §9.5a: „Eine Kontaktalternative steht zusätzlich da." Sie kommt aus den
+            // Betreiberdaten, nie aus dem Quelltext.
+            'email'            => is_string($email) && trim($email) !== '' ? trim($email) : null,
         ];
     }
 }

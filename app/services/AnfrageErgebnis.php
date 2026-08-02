@@ -12,6 +12,7 @@ namespace Sartu\Services;
  * | Ausgang | Was der Absender sieht |
  * |---|---|
  * | `angelegt` | Danke-Seite |
+ * | `verschickt` | Danke-Seite — Mail raus, **kein** Datensatz (§4b.6, Kontaktformular) |
  * | `stillVerworfen` | **dieselbe** Danke-Seite — Honigtopf, Zeitregel, Doppeleinreichung |
  * | `abgewiesen` | den Schritt erneut, Meldung am Feld |
  * | `begrenzt` | Hinweis mit Kontaktalternative, keine technischen Details |
@@ -47,6 +48,18 @@ final class AnfrageErgebnis
     }
 
     public static function stillVerworfen(): self
+    {
+        return new self(true);
+    }
+
+    /**
+     * Verschickt, aber **nicht gespeichert** — das Kontaktformular (§4b.6).
+     *
+     * Es gibt keine Kennung, kein Paket und keine Ampel, weil es keinen Datensatz gibt.
+     * `wurdeGespeichert()` bleibt deshalb `false` — und das ist die richtige Antwort, nicht
+     * eine ungenaue: Wer danach fragt, will wissen, ob etwas in der Datenbank steht.
+     */
+    public static function verschickt(): self
     {
         return new self(true);
     }

@@ -52,7 +52,7 @@ final class Zahlungslauf
     public function __construct(
         private readonly ?Faelligkeiten $faelligkeiten = null,
         private readonly ?AuditProtokoll $audit = null,
-        private readonly ?Mailversand $mail = null,
+        private readonly ?Versender $mail = null,
         private readonly ?\PDO $pdo = null,
     ) {
     }

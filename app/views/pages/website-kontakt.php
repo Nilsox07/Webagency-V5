@@ -17,9 +17,10 @@ use Sartu\Services\Websitetexte;
  *
  * **Kein Dateiupload, keine Pflicht-Telefonnummer** (§11). Beides fehlt hier.
  *
- * **Eine Abweichung von der Feldliste in §11:** Die B2B-Bestätigung steht zusätzlich im
- * Formular. Begründung im Kopf von `Kontaktanfrage` — die Prüfbedingung auf `leads`
- * verlangt sie, und sie zu setzen, ohne zu fragen, hieße eine Erklärung zu fälschen.
+ * **Sieben Felder, eine Bestätigung** — genau die Liste aus §11. Die B2B-Bestätigung stand
+ * hier bis zum 02.08.2026 zusätzlich; sie war nur nötig, weil die Rückfrage in `leads`
+ * abgelegt wurde und `chk_leads_bestaetigungen` beide Häkchen verlangt. §4b.6 verbietet die
+ * Ablage — damit entfällt die Prüfbedingung und mit ihr das Häkchen.
  *
  * **Der Honigtopf** heißt wie beim Bedarfsscheck `hp_website` und wird über das Stylesheet
  * verborgen, nicht über `type="hidden"` — ein verstecktes Feld füllt kein Automat aus, und
@@ -30,6 +31,8 @@ use Sartu\Services\Websitetexte;
  * @var string|null $meldung
  * @var string $zeitstempel
  * @var string $einreichung
+ * @var bool $formularOffen
+ * @var string|null $ausweichweg
  * @var array<string,string>|null $auftragslage
  * @var string $preishinweis
  */
@@ -72,8 +75,25 @@ $ersterFehler = array_key_first($fehler);
   <div class="bahn schmal">
     <h2>Rückfrage stellen</h2>
 
+<?php if (!$formularOffen): ?>
+    <?php /* §0.3b: kein Formular, das jede Eingabe verliert. Begruendung im Kopf von
+             `Kontaktanfrage::empfaengerVorhanden()`. */ ?>
+    <p>Das Formular steht gerade nicht bereit.
+<?php if ($ausweichweg !== null): ?>
+    Schreiben Sie uns bitte an <a href="mailto:<?= Html::e($ausweichweg) ?>"><?= Html::e($ausweichweg) ?></a>.
+<?php else: ?>
+    Bitte nutzen Sie so lange den Bedarfsscheck.
+<?php endif; ?>
+    </p>
+<?php else: ?>
+
 <?php if ($meldung !== null): ?>
-    <div class="meldung" role="alert"><p><?= Html::e($meldung) ?></p></div>
+    <div class="meldung" role="alert">
+      <p><?= Html::e($meldung) ?></p>
+<?php if ($ausweichweg !== null): ?>
+      <p>Oder schreiben Sie uns an <a href="mailto:<?= Html::e($ausweichweg) ?>"><?= Html::e($ausweichweg) ?></a>.</p>
+<?php endif; ?>
+    </div>
 <?php endif; ?>
 
     <form method="post" action="/kontakt">
@@ -147,19 +167,6 @@ $ersterFehler = array_key_first($fehler);
           <?= $ersterFehler === 'nachricht' ? 'autofocus' : '' ?>><?= Html::e($wert('nachricht')) ?></textarea>
       </div>
 
-      <div class="frage<?= isset($fehler['b2b_confirmed']) ? ' frage--fehler' : '' ?>">
-<?php if (isset($fehler['b2b_confirmed'])): ?>
-        <p class="frage__fehler" id="feld-b2b-fehler"><?= Html::e($fehler['b2b_confirmed']) ?></p>
-<?php endif; ?>
-        <p class="haken">
-          <input type="checkbox" id="feld-b2b" name="b2b_confirmed" value="1"
-            <?= $wert('b2b_confirmed') === '1' ? 'checked' : '' ?>
-            <?= isset($fehler['b2b_confirmed']) ? 'aria-describedby="feld-b2b-fehler"' : '' ?>>
-          <label for="feld-b2b">Ich handle für mein Unternehmen bzw. in Ausübung meiner
-            beruflichen oder gewerblichen Tätigkeit.</label>
-        </p>
-      </div>
-
       <div class="frage<?= isset($fehler['privacy_confirmed']) ? ' frage--fehler' : '' ?>">
 <?php if (isset($fehler['privacy_confirmed'])): ?>
         <p class="frage__fehler" id="feld-datenschutz-fehler"><?= Html::e($fehler['privacy_confirmed']) ?></p>
@@ -180,6 +187,7 @@ $ersterFehler = array_key_first($fehler);
 
       <button type="submit" class="knopf">Nachricht senden</button>
     </form>
+<?php endif; ?>
 
     <p class="fussnote"><?= Html::e(Websitetexte::ABSCHLUSSHINWEIS) ?> <?= Html::e($preishinweis) ?></p>
   </div>

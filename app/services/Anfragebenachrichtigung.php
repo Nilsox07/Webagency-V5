@@ -44,7 +44,7 @@ final class Anfragebenachrichtigung
     ];
 
     public function __construct(
-        private readonly ?Mailversand $versand = null,
+        private readonly ?Versender $versand = null,
         private readonly ?\PDO $pdo = null,
     ) {
     }

@@ -55,7 +55,7 @@ final class AngebotDienst
         private readonly ?AdminAngebote $angebote = null,
         private readonly ?AdminProjekte $projekte = null,
         private readonly ?AuditProtokoll $audit = null,
-        private readonly ?Mailversand $mail = null,
+        private readonly ?Versender $mail = null,
         private readonly ?\PDO $pdo = null,
     ) {
     }
