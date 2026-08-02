@@ -19,11 +19,15 @@ use Sartu\Services\Projektstatus;
  * `approvals` gibt es seit A2. Welche Zeilen entstehen, entscheidet `PortalSteuerung`; diese
  * Datei setzt sie nur. Ist keine offen, steht der Block nicht da (§0.3b: kein leerer Kasten).
  *
- * Block 4 (letzte Aktivitaet) fehlt weiterhin — siehe `OFFENE_PRUEFUNGEN.md`.
+ * Block 4 „Letzte Aktivitaet" steht seit dem 02.08.2026 hier. Welche fuenf Ereignisse
+ * zaehlen und wie ihr Klartext lautet, entscheidet `KundenAktivitaet` — diese Datei
+ * bekommt Text und Datum und sonst nichts. Aus `audit_events` wird nie ein Feldwert, eine
+ * Begruendung oder eine IP durchgereicht.
  *
  * @var array<string,mixed>|null $projekt
  * @var array<string,mixed>|null $angebot
  * @var list<array{text:string,zusatz:?string,ziel:string}> $offenePunkte
+ * @var list<array{text:string,datum:string}> $aktivitaet
  * @var array{text:string,ziel:?string,knopf:?string} $naechsterSchritt
  */
 
@@ -77,5 +81,16 @@ use Sartu\Services\Projektstatus;
     <li data-stand="<?= Html::e($station['stand']) ?>"><?= Html::e($station['name']) ?></li>
 <?php endforeach; ?>
   </ol>
+</div>
+<?php endif; ?>
+
+<?php if ($aktivitaet !== []): ?>
+<div class="karte">
+  <h2>Letzte Aktivität</h2>
+  <ul class="pruefliste">
+<?php foreach ($aktivitaet as $eintrag): ?>
+    <li><span><?= Html::e($eintrag['text']) ?></span><span><?= Html::e(Format::datum($eintrag['datum'])) ?></span></li>
+<?php endforeach; ?>
+  </ul>
 </div>
 <?php endif; ?>

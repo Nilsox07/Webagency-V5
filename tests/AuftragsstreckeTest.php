@@ -501,6 +501,77 @@ final class AuftragsstreckeTest extends Datenbankfall
         $this->assertStringNotContainsString('Offene Punkte', $rumpf);
     }
 
+    // ---------------------------------------------------------------- §8.1 Block 4
+
+    /**
+     * §8.1 Block 4 — die letzten fünf Ereignisse in Klartext, mit Datum.
+     *
+     * **Genau die fünf aus §8.1, keine sechste.** Geprüft wird deshalb beides: dass die
+     * genannten erscheinen **und** dass ein Ereignis daneben — hier `rechnung_gesendet` und
+     * `angebot_gesendet` — nicht erscheint. Ein Test, der nur die Treffer zählt, würde eine
+     * zu weite Bedingung nicht bemerken.
+     */
+    public function testDasCockpitZeigtNurDieFuenfEreignisseAusAchtEinsUndKeinesDaneben(): void
+    {
+        $this->alsKunde($this->organisationId, $this->kundeId);
+        (new Angebotsannahme($this->bereich()))
+            ->annehmen($this->angebotId, $this->annahmeeingabe(), $this->kundeId, null);
+
+        $rechnungId = $this->rechnungAnlegen();
+        $this->alsAdmin($this->adminId);
+        (new Rechnungsdienst($this->nachweis()))->senden($rechnungId, null);
+        (new Rechnungsdienst($this->nachweis()))
+            ->zahlungEintragen($rechnungId, 119000, 'Kontoauszug', null);
+
+        $this->alsKunde($this->organisationId, $this->kundeId);
+        $rumpf = $this->router()->behandeln('GET', '/portal')->rumpf;
+
+        $this->assertStringContainsString('Letzte Aktivität', $rumpf);
+        $this->assertStringContainsString('Angebot angenommen', $rumpf);
+        $this->assertStringContainsString('Zahlung eingegangen', $rumpf);
+
+        // Kein Systemcode, keine Begründung, keine IP — §3 Regel 12.
+        $this->assertStringNotContainsString('zahlungsstatus_geaendert', $rumpf);
+        $this->assertStringNotContainsString('Kontoauszug', $rumpf);
+        $this->assertStringNotContainsString('127.0.0.1', $rumpf);
+
+        // Und die Klartexte, die §8.1 nicht nennt, stehen nicht da.
+        $this->assertStringNotContainsString('Rechnung gesendet', $rumpf);
+        $this->assertStringNotContainsString('Angebot gesendet', $rumpf);
+    }
+
+    /**
+     * Höchstens fünf — und nur die eigene Organisation.
+     *
+     * Der Filter kommt aus der Sitzung (§3 Regel 1). Ein Ereignis einer fremden Organisation
+     * darf nicht auftauchen, auch wenn es dieselbe Aktion trägt.
+     */
+    public function testBlockVierZeigtHoechstensFuenfUndNichtsFremdes(): void
+    {
+        $fremd = $this->organisationAnlegen('Fremdbetrieb GmbH', 'fremd@example.org');
+
+        for ($i = 0; $i < 7; ++$i) {
+            $this->ereignisAnlegen($this->organisationId, 'angebot_angenommen', null);
+        }
+
+        $this->ereignisAnlegen($fremd, 'angebot_angenommen', null);
+
+        $this->alsKunde($this->organisationId, $this->kundeId);
+        $eintraege = (new \Sartu\Data\Customer\KundenAktivitaet($this->bereich()))->letzte();
+
+        $this->assertCount(\Sartu\Data\Customer\KundenAktivitaet::ANZAHL, $eintraege);
+
+        foreach ($eintraege as $eintrag) {
+            $this->assertSame('Angebot angenommen', $eintrag['text']);
+        }
+
+        // Gegenprobe: Die fremde Organisation sieht ihr eigenes Ereignis — und nur das.
+        $fremderKunde = $this->kundeAnlegen($fremd, 'fremd@example.org');
+        $this->alsKunde($fremd, $fremderKunde);
+
+        $this->assertCount(1, (new \Sartu\Data\Customer\KundenAktivitaet($this->bereich()))->letzte());
+    }
+
     // ---------------------------------------------------------------- Aufgaben und Uploads
 
     /** Testfall 16 — eine Aufgabe mit Pflichtantwort lässt sich nicht ohne Antwort abschließen. */
@@ -891,6 +962,18 @@ final class AuftragsstreckeTest extends Datenbankfall
         $anweisung->execute([$this->projektId]);
 
         return (string) $anweisung->fetchColumn();
+    }
+
+    /** Ein Prüfprotokoll-Ereignis von Hand — für die Grenzfälle von Block 4. */
+    private function ereignisAnlegen(string $organisationId, string $aktion, ?string $neuerWert): void
+    {
+        (new \Sartu\Data\AuditProtokoll($this->pdo))->schreiben(
+            aktion: $aktion,
+            objektart: 'project',
+            objektId: $this->projektId,
+            organisationId: $organisationId,
+            neuerWert: $neuerWert,
+        );
     }
 
     private function faelligkeitVerschieben(string $rechnungId, string $verschiebung): void

@@ -6,6 +6,7 @@ namespace Sartu\Portal;
 
 use Sartu\Ansicht;
 use Sartu\Antwort;
+use Sartu\Data\Customer\KundenAktivitaet;
 use Sartu\Data\Customer\KundenAngebote;
 use Sartu\Data\Customer\KundenBereich;
 use Sartu\Data\Customer\KundenAufgaben;
@@ -64,6 +65,7 @@ final class PortalSteuerung
             'projekt'      => $projekt,
             'angebot'      => $angebot,
             'offenePunkte' => self::offenePunkte($offeneAufgaben, $offeneRechnung, $freigabeOffen),
+            'aktivitaet'   => (new KundenAktivitaet($bereich))->letzte(),
             'naechsterSchritt' => self::naechsterSchritt($projekt, $angebot, $offeneAufgaben, $offeneRechnung),
         ]));
     }
@@ -132,17 +134,6 @@ final class PortalSteuerung
 
     // ------------------------------------------------------------------ intern
 
-    /**
-     * Block 1 aus §8.1 — der eine nächste Schritt.
-     *
-     * §5.6 leitet ihn aus dem Zustand ab, solange `next_step_text` leer ist. In A1 gibt es
-     * genau zwei Fälle: Ein Angebot liegt bereit, oder es ist nichts zu tun.
-     *
-     * @param array<string,mixed>|null $projekt
-     * @param array<string,mixed>|null $angebot
-     *
-     * @return array{text:string,ziel:?string,knopf:?string}
-     */
     /**
      * Steht eine Freigabe des Kunden aus? — die dritte Zeile aus §8.1 Block 3.
      *
@@ -221,6 +212,17 @@ final class PortalSteuerung
         return $punkte;
     }
 
+    /**
+     * Block 1 aus §8.1 — der eine nächste Schritt.
+     *
+     * §5.6 leitet ihn aus dem Zustand ab, solange `next_step_text` leer ist.
+     *
+     * @param array<string,mixed>|null $projekt
+     * @param array<string,mixed>|null $angebot
+     * @param array<string,mixed>|null $offeneRechnung
+     *
+     * @return array{text:string,ziel:?string,knopf:?string}
+     */
     private static function naechsterSchritt(
         ?array $projekt,
         ?array $angebot,
