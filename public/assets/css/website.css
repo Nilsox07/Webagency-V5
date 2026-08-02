@@ -1,0 +1,637 @@
+/* ============================================================
+   SARTU — Bauteile der oeffentlichen Website
+
+   Reihenfolge der Einbindung: tokens.css, anwendung.css, diese
+   Datei. tokens.css steht zuerst — Website-Lastenheft §1 und
+   SARTU_DESIGNSYSTEM.md.
+
+   Keine Zahl, wo eine Variable existiert. Farben, Radien und
+   Abstaende kommen ausschliesslich aus tokens.css; eine
+   geschriebene Zahl ist ein Abgabefehler.
+
+   Die vier Zahlen in Medienabfragen sind die Ausnahme: CSS
+   kennt dort keine Variablen. Verwendet werden nur Werte aus
+   der Haltepunktliste am Ende von tokens.css — 620, 860, 900,
+   940. Es werden keine weiteren erfunden.
+
+   Lime ist Flaeche, nie Schrift auf hellem Grund (1,32:1).
+   Auf Lime steht immer --ink. Jede Lime-Flaeche auf hellem
+   Grund traegt 1px --line.
+
+   Kein Aufbaumuster kommt mehr als zweimal vor
+   (Design-Briefing §3.7). Deshalb wechselt der Grund zwischen
+   --cream, --sand und --ink, und die dunklen Abschnitte sind
+   genau zwei: .zusage und .abschluss.
+   ============================================================ */
+
+/* ---- Sprungmarke ----------------------------------------- */
+
+.sprungmarke {
+  position: absolute;
+  left: -9999px;
+  top: 0;
+  background: var(--ink);
+  color: var(--paper);
+  padding: var(--s-2) var(--s-3);
+  border-radius: 0 0 var(--r-s) 0;
+  z-index: 100;
+}
+
+.sprungmarke:focus { left: 0; }
+
+/* ---- Kopfzeile ------------------------------------------- */
+
+.seitenkopf {
+  background: var(--cream);
+  border-bottom: 1px solid var(--line);
+  position: sticky;
+  top: 0;
+  z-index: 20;
+}
+
+.seitenkopf__reihe {
+  display: flex;
+  align-items: center;
+  gap: var(--s-4);
+  padding-top: var(--s-3);
+  padding-bottom: var(--s-3);
+}
+
+.wortmarke {
+  font-weight: var(--fw-head);
+  letter-spacing: var(--ls-mono);
+  text-decoration: none;
+  color: var(--ink);
+}
+
+.hauptnavigation { flex: 1; }
+
+.hauptnavigation ul,
+.menue__blatt ul,
+.seitenfuss ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.hauptnavigation ul {
+  display: flex;
+  gap: var(--s-3);
+  flex-wrap: wrap;
+}
+
+.hauptnavigation a {
+  color: var(--text);
+  text-decoration: none;
+  padding-bottom: var(--s-1);
+  border-bottom: 2px solid transparent;
+}
+
+.hauptnavigation a:hover,
+.hauptnavigation a:focus-visible { border-bottom-color: var(--line); }
+
+/* Der aktive Punkt wird markiert — ohne Fettung, damit die Zeile
+   nicht springt (Website-Lastenheft §3). */
+.hauptnavigation a[aria-current="page"] { border-bottom-color: var(--ink); }
+
+.seitenkopf__handlung {
+  display: flex;
+  align-items: center;
+  gap: var(--s-3);
+}
+
+/* ---- Mobilmenue ------------------------------------------ */
+
+.menue { display: none; }
+
+.menue summary {
+  list-style: none;
+  cursor: pointer;
+  border: 1px solid var(--line);
+  border-radius: var(--r-pill);
+  padding: var(--s-2) var(--s-3);
+  min-height: 44px;
+  min-width: 44px;
+  display: inline-flex;
+  align-items: center;
+}
+
+.menue summary::-webkit-details-marker { display: none; }
+
+.menue[open] .menue__blatt {
+  position: fixed;
+  inset: 0;
+  background: var(--cream);
+  padding: var(--s-6) var(--gut);
+  overflow-y: auto;
+  z-index: 30;
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-4);
+}
+
+.menue__blatt ul {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-3);
+}
+
+.menue__blatt a { font-size: var(--fs-lede); color: var(--text); }
+
+/* ---- Brotkrumen ------------------------------------------ */
+
+.brotkrumen { padding-top: var(--s-3); }
+
+.brotkrumen ol {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--s-2);
+  font-size: var(--fs-small);
+  color: var(--muted);
+}
+
+.brotkrumen li + li::before { content: "› "; }
+
+/* ---- Abschnitte ------------------------------------------ */
+
+.abschnitt {
+  padding-top: var(--s-7);
+  padding-bottom: var(--s-7);
+}
+
+.abschnitt--sand { background: var(--sand); }
+
+.abschnitt h2,
+.abschluss h2 {
+  font-size: var(--fs-h2);
+  line-height: var(--lh-head);
+  letter-spacing: var(--ls-head);
+  font-weight: var(--fw-head);
+  max-width: 22ch;
+  margin-top: 0;
+}
+
+.lede {
+  font-size: var(--fs-lede);
+  line-height: var(--lh-lede);
+  max-width: 60ch;
+}
+
+.abschnitt p,
+.aufmacher p { max-width: 68ch; }
+
+.vorzeile {
+  font-family: var(--font-mono);
+  font-size: var(--fs-mono);
+  letter-spacing: var(--ls-mono);
+  text-transform: uppercase;
+  color: var(--label);
+  margin-bottom: var(--s-2);
+}
+
+.leise { color: var(--muted); font-size: var(--fs-small); }
+
+.hervor {
+  border-left: 2px solid var(--ink);
+  padding-left: var(--s-3);
+  font-size: var(--fs-lede);
+}
+
+.anteil {
+  border-top: 1px solid var(--line);
+  padding-top: var(--s-3);
+  margin-bottom: 0;
+}
+
+.marken {
+  font-family: var(--font-mono);
+  font-size: var(--fs-mono);
+  letter-spacing: var(--ls-mono);
+  color: var(--label);
+}
+
+/* ---- Aufmacher ------------------------------------------- */
+
+.aufmacher {
+  padding-top: var(--s-6);
+  padding-bottom: var(--s-7);
+}
+
+.aufmacher__reihe {
+  display: grid;
+  grid-template-columns: 55fr 45fr;
+  gap: var(--s-5);
+  align-items: start;
+}
+
+.aufmacher h1 {
+  font-size: var(--fs-h1);
+  line-height: var(--lh-head);
+  letter-spacing: var(--ls-h1);
+  font-weight: var(--fw-head);
+  margin-top: 0;
+}
+
+.vertrauenszeile {
+  list-style: none;
+  margin: var(--s-4) 0 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--s-2);
+  font-size: var(--fs-small);
+}
+
+.vertrauenszeile li::before { content: "· "; color: var(--label); }
+
+/* Die vier Branchen fuehren nirgendwohin und duerfen deshalb nicht
+   anklickbar aussehen — Website-Lastenheft §5 Sektion 1, Auflösung 1:
+   kein Rand, keine Flaeche, keine Rundung. Reine Typografie. */
+.branchenzeile {
+  margin-top: var(--s-3);
+  color: var(--muted);
+  font-size: var(--fs-small);
+}
+
+/* ---- Handlungsblock -------------------------------------- */
+
+.handlung { margin-top: var(--s-4); }
+
+.handlung__knoepfe {
+  display: flex;
+  align-items: center;
+  gap: var(--s-3);
+  flex-wrap: wrap;
+  margin: 0 0 var(--s-2);
+}
+
+.preishinweis {
+  font-size: var(--fs-small);
+  color: var(--muted);
+  margin: var(--s-2) 0 0;
+}
+
+.handlung--dunkel .preishinweis,
+.handlung--dunkel .lage { color: var(--label-dark); }
+
+/* Die Auftragslage — §5a. Der Zustand wird nie allein ueber Farbe
+   unterschieden: Fuellung des Punktes PLUS Text. */
+.lage {
+  display: flex;
+  align-items: center;
+  gap: var(--s-2);
+  font-size: var(--fs-small);
+  color: var(--muted);
+  margin: 0;
+}
+
+.lage--betont {
+  border: 1px solid var(--line);
+  border-radius: var(--r-s);
+  padding: var(--s-2) var(--s-3);
+  margin-bottom: var(--s-3);
+  color: var(--text);
+}
+
+.lage__punkt {
+  width: 12px;
+  height: 12px;
+  border-radius: var(--r-pill);
+  border: 1px solid var(--ink);
+  flex: none;
+}
+
+.lage__punkt--voll { background: var(--lime); }
+
+/* Halb gefuellt, ohne zweite Farbe: die Fuellung endet in der Mitte. */
+.lage__punkt--halb {
+  background: linear-gradient(90deg, var(--lime) 50%, transparent 50%);
+}
+
+.lage__punkt--ring { background: transparent; }
+
+/* ---- Zweispalten, Dreispalten ---------------------------- */
+
+.zweispalten,
+.dreispalten {
+  display: grid;
+  gap: var(--s-4);
+  margin-top: var(--s-5);
+}
+
+.zweispalten { grid-template-columns: 1fr 1fr; }
+.dreispalten { grid-template-columns: repeat(3, 1fr); }
+
+.hakenliste {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.hakenliste li {
+  padding-left: var(--s-3);
+  position: relative;
+  margin-bottom: var(--s-2);
+}
+
+.hakenliste li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: .7em;
+  width: 8px;
+  height: 8px;
+  border-radius: var(--r-pill);
+  background: var(--lime);
+  border: 1px solid var(--line);
+}
+
+/* ---- Zeitstrahl ------------------------------------------ */
+
+.zeitstrahl {
+  list-style: none;
+  margin: var(--s-5) 0 var(--s-5);
+  padding: 0;
+  border-left: 1px solid var(--line);
+}
+
+.zeitstrahl > li {
+  padding-left: var(--s-4);
+  padding-bottom: var(--s-4);
+  position: relative;
+}
+
+.zeitstrahl > li::before {
+  content: "";
+  position: absolute;
+  left: -5px;
+  top: .8em;
+  width: 9px;
+  height: 9px;
+  border-radius: var(--r-pill);
+  background: var(--cream);
+  border: 1px solid var(--ink);
+}
+
+.zeitstrahl h3 { margin: 0 0 var(--s-1); font-size: var(--fs-h3); }
+.zeitstrahl p { margin: 0; }
+
+/* ---- Preisstufen ----------------------------------------- */
+
+.preisstufen {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--s-4);
+  margin: var(--s-5) 0 var(--s-4);
+  align-items: start;
+}
+
+.stufe,
+.sonderprojekt {
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: var(--r-m);
+  padding: var(--s-4);
+}
+
+.stufe--empfehlung {
+  border-color: var(--ink);
+  box-shadow: var(--shadow-soft);
+}
+
+.stufe h3,
+.sonderprojekt h3 { margin: 0 0 var(--s-2); font-size: var(--fs-h3); }
+
+.preis {
+  font-size: var(--fs-price);
+  line-height: var(--lh-head);
+  letter-spacing: var(--ls-head);
+  font-weight: var(--fw-head);
+  margin: 0;
+}
+
+.preis__zusatz { margin: 0; }
+.preis__jahr { margin: 0 0 var(--s-3); color: var(--muted); }
+.umfang { font-weight: var(--fw-head); }
+
+/* Abgesetzt, nicht abgeschwaecht (UX-Audit 28.07.2026, Vorgabe 1):
+   volle Textfarbe, durchgezogener Rahmen, gleiche Schriftgroesse
+   fuer den Betrag. Anders ist nur die Form — eine Zeile statt einer
+   Karte. */
+.sonderprojekt {
+  margin-bottom: var(--s-4);
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--s-3) var(--s-4);
+}
+
+.preisrahmen {
+  font-family: var(--font-mono);
+  font-size: var(--fs-mono);
+  letter-spacing: var(--ls-mono);
+  text-transform: uppercase;
+  color: var(--label);
+}
+
+/* ---- Leistungszeilen ------------------------------------- */
+
+.leistungszeilen {
+  list-style: none;
+  margin: var(--s-5) 0 var(--s-4);
+  padding: 0;
+}
+
+.leistungszeilen > li {
+  border-top: 1px solid var(--line);
+  padding: var(--s-4) 0;
+}
+
+.leistungszeilen h3 { margin: 0 0 var(--s-1); font-size: var(--fs-h3); }
+.leistungszeilen p { margin: 0 0 var(--s-1); }
+
+/* ---- Zusage und Abschluss: die einzigen dunklen Abschnitte -- */
+
+.zusage {
+  background: var(--ink);
+  color: var(--paper);
+  padding-top: var(--s-8);
+  padding-bottom: var(--s-8);
+}
+
+.zusage p {
+  font-size: var(--fs-pledge);
+  line-height: var(--lh-head);
+  letter-spacing: var(--ls-head);
+  font-weight: var(--fw-head);
+  margin: 0;
+  max-width: 24ch;
+}
+
+.abschluss {
+  background: var(--ink);
+  color: var(--paper);
+  padding-top: var(--s-7);
+  padding-bottom: var(--s-7);
+}
+
+/* Jede zweite Textebene in einem dunklen Abschnitt braucht `--label-dark`. `--muted` ist
+   fuer helle Flaechen gerechnet und kommt auf `--ink` auf 2,05:1 — gemessen am 02.08.2026
+   auf den drei Branchenseiten, die den Preishinweis ohne `handlung--dunkel` setzen. */
+.abschluss .lede,
+.abschluss .preishinweis,
+.abschluss .marken { color: var(--label-dark); }
+
+.abschluss .textlink { color: var(--lime); }
+
+/* ---- Bildplatz ------------------------------------------- */
+
+.bildplatz {
+  margin: var(--s-4) 0;
+  border: 2px dashed var(--line);
+  border-radius: var(--r-s);
+  padding: var(--s-4);
+  background: var(--paper);
+}
+
+.bildplatz__marke {
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-size: var(--fs-mono);
+  letter-spacing: var(--ls-mono);
+  text-transform: uppercase;
+  background: var(--lime);
+  color: var(--ink);
+  border: 1px solid var(--line);
+  border-radius: var(--r-pill);
+  padding: var(--s-1) var(--s-2);
+  margin: 0 0 var(--s-2);
+}
+
+.bildplatz__kennung {
+  font-family: var(--font-mono);
+  font-size: var(--fs-mono);
+  letter-spacing: var(--ls-mono);
+  color: var(--label);
+  margin: 0 0 var(--s-1);
+}
+
+.bildplatz figcaption { color: var(--muted); font-size: var(--fs-small); }
+
+/* ---- Fragen ---------------------------------------------- */
+
+.fragen { margin-top: var(--s-4); }
+
+.fragen details {
+  border-bottom: 1px solid var(--line);
+  padding: var(--s-3) 0;
+}
+
+.fragen summary {
+  cursor: pointer;
+  font-weight: var(--fw-head);
+  font-size: var(--fs-lede);
+}
+
+.fragen p { margin: var(--s-2) 0 0; }
+
+/* ---- Tabellen -------------------------------------------- */
+
+.tabellenrolle { overflow-x: auto; margin: var(--s-4) 0; }
+
+.zahlentabelle {
+  border-collapse: collapse;
+  width: 100%;
+  min-width: 32rem;
+}
+
+.zahlentabelle th,
+.zahlentabelle td {
+  border-bottom: 1px solid var(--line);
+  padding: var(--s-2) var(--s-3);
+  text-align: left;
+}
+
+.zahlentabelle td.zahl,
+.zahlentabelle th.zahl {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+.zahlentabelle tr.betont td { font-weight: var(--fw-head); }
+
+/* ---- Fussbereich ----------------------------------------- */
+
+.seitenfuss {
+  background: var(--ink);
+  color: var(--paper);
+  padding-top: var(--s-6);
+  padding-bottom: var(--s-4);
+  margin-top: var(--s-7);
+}
+
+.seitenfuss a { color: var(--paper); }
+
+.seitenfuss__spalten {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1fr 1fr;
+  gap: var(--s-4);
+}
+
+.seitenfuss h2 {
+  font-size: var(--fs-small);
+  text-transform: uppercase;
+  letter-spacing: var(--ls-mono);
+  color: var(--label-dark);
+  margin: 0 0 var(--s-2);
+}
+
+.seitenfuss li { margin-bottom: var(--s-1); }
+
+.seitenfuss__marke .wortmarke { color: var(--paper); }
+.seitenfuss__marke p { max-width: 34ch; }
+
+.seitenfuss__zeile {
+  border-top: 1px solid var(--line-dark);
+  margin-top: var(--s-5);
+  padding-top: var(--s-3);
+  display: flex;
+  justify-content: space-between;
+  gap: var(--s-3);
+  flex-wrap: wrap;
+  font-size: var(--fs-small);
+  color: var(--label-dark);
+}
+
+/* ---- Haltepunkte ------------------------------------------
+   Nur Werte aus der Liste in tokens.css. Keine erfundenen. */
+
+@media (max-width: 940px) {
+  .hauptnavigation { display: none; }
+  .menue { display: block; margin-left: auto; }
+  .seitenkopf__handlung { display: none; }
+}
+
+@media (max-width: 900px) {
+  .aufmacher__reihe { grid-template-columns: 1fr; }
+  /* Mobil zuerst die H1 und die Knoepfe, dann das Bild — §5 Sektion 1. */
+  .aufmacher__bild { order: 2; }
+  .aufmacher__text { order: 1; }
+}
+
+@media (max-width: 860px) {
+  .preisstufen { grid-template-columns: 1fr; }
+  .dreispalten { grid-template-columns: 1fr; }
+  .zweispalten { grid-template-columns: 1fr; }
+  .sonderprojekt { grid-template-columns: 1fr; }
+  .seitenfuss__spalten { grid-template-columns: 1fr 1fr; }
+  /* Mobil: Platzhirsch zuerst, dann Wachstum, Start — §5 Sektion 4. */
+  .preisstufen .stufe--empfehlung { order: -1; }
+}
+
+@media (max-width: 620px) {
+  .vertrauenszeile { grid-template-columns: 1fr; }
+  .seitenfuss__spalten { grid-template-columns: 1fr; }
+}

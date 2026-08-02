@@ -297,7 +297,7 @@ System selbst ein. Kein Bearbeiten von Konfigurationsdateien auf dem Server, kei
 SQL-Dateien von Hand.
 
 **Ablauf beim ersten Aufruf**, solange die Installation nicht abgeschlossen ist: Jeder Aufruf
-außer der Einrichtung leitet auf `/admin/setup`. Sechs Schritte, jeder einzeln prüfbar:
+außer der Einrichtung leitet auf `/admin/setup`. **Acht Schritte**, jeder einzeln prüfbar:
 
 > **Neu gefasst am 01.08.2026 nach externer Prüfung.** Die vorige Fassung war in dieser Form
 > nicht ausführbar. Drei Fehler, alle in der Reihenfolge:
@@ -322,6 +322,15 @@ außer der Einrichtung leitet auf `/admin/setup`. Sechs Schritte, jeder einzeln 
 | 7 | **Erstes Adminkonto** | E-Mail, Name, **selbst vergebenes Passwort** (Argon2id, mindestens 12 Zeichen), TOTP einrichten und **einen Code bestätigen**. Kein Vorgabepasswort, kein Standardkonto |
 | 8 | **Abschluss** | Cron-Befehl zum Kopieren anzeigen, `operator_settings.setup_completed_at` setzen, Sperrdatei schreiben, Einrichtung sperren |
 
+> **Nummern nachgezogen am 02.08.2026.** Die Neufassung vom 01.08.2026 hat aus sechs Schritten
+> acht gemacht, aber sieben Verweise auf die alte Zählung stehen lassen: Der Fließtext sagte weiter
+> „Sechs Schritte", und „Schritt 3" meinte an fünf Stellen die **Migrationen** — die sind seither
+> Schritt **4**. Dazu nannte die HTTP-Tabelle „Schritt 6" als den Punkt, ab dem eine `.env`
+> existiert; geschrieben wird sie seit der Neufassung in Schritt **2**.
+>
+> **Inhaltlich ändert sich nichts.** Korrigiert sind allein die Nummern — die Beschreibungen
+> daneben waren immer eindeutig. Betroffen: Zeilen 300, 345, 400, 424, 450, 481 und Testfall 69.
+
 **Ergebnis:** `.env` liegt geschrieben vor, das Schema steht, die Betreiberdaten stehen, ein
 Adminkonto mit Passwort und geprüftem TOTP existiert, eine Testmail ist nachweislich angekommen.
 
@@ -342,7 +351,7 @@ Adminkonto mit Passwort und geprüftem TOTP existiert, eine Testmail ist nachwei
 > **`/admin/setup` liefert 404, sobald einer von beiden gesetzt ist.** Nicht beide — einer genügt,
 > sonst hebt ein gelöschtes Lockfile die Sperre auf. Zurücksetzen ist über das Netz nicht möglich.
 
-#### Schritt 3 im Detail — warum „wird zurückgerollt" hier falsch wäre
+#### Schritt 4 im Detail — warum „wird zurückgerollt" hier falsch wäre
 
 **Der technische Sachverhalt:** MySQL und MariaDB führen bei schemaverändernden Befehlen —
 `CREATE TABLE`, `ALTER TABLE`, `DROP TABLE`, `CREATE INDEX` — ein **implizites Commit** aus. Eine
@@ -397,7 +406,7 @@ hinzufügt. Diese Lücke stammt aus der Fassung vom 30.07.2026 und wird hier ges
 | `up` | Spielt alle offenen Migrationen ein, einzeln, mit Protokolleintrag nach jedem Erfolg |
 | `verify` | Prüft nur die Prüfsummen aller eingetragenen Migrationen gegen die Dateien |
 
-**Die Regeln aus „Schritt 3 im Detail" gelten unverändert weiter:** Prüfsummenabgleich vor dem
+**Die Regeln aus „Schritt 4 im Detail" gelten unverändert weiter:** Prüfsummenabgleich vor dem
 Start, Einzelausführung, Eintrag unmittelbar nach Erfolg, Abbruch mit Nennung der Datei.
 
 **Zusätzlich, weil hier echte Daten liegen:**
@@ -421,7 +430,7 @@ Eine Einrichtungsstrecke ist die klassische Angriffsfläche. Wer sie erreicht, �
 - [ ] Zugangsdaten werden **nie** angezeigt, nie protokolliert, nie in eine Fehlermeldung geschrieben — auch nicht teilweise
 - [ ] **Rate-Limit** auf jeden Schritt, damit die Strecke nicht als Passwortprobierfläche dient
 - [ ] Läuft die Einrichtung über unverschlüsseltes HTTP, wird sie **abgebrochen** — nicht gewarnt. Zugangsdaten gehen nicht im Klartext über die Leitung. **Eine einzige Ausnahme**, siehe unten
-- [ ] Schlägt Schritt 3 fehl, gilt der Ablauf aus „Schritt 3 im Detail": Abbruch bei der gescheiterten Migration, Wiederanlauf oder neue leere Datenbank. **Keine Rücknahme versprechen**
+- [ ] Schlägt Schritt 4 fehl, gilt der Ablauf aus „Schritt 4 im Detail": Abbruch bei der gescheiterten Migration, Wiederanlauf oder neue leere Datenbank. **Keine Rücknahme versprechen**
 - [ ] Die Einrichtung legt **kein** Beispielkonto und **keine** Beispieldaten in der produktiven Umgebung an
 
 #### Die HTTP-Ausnahme — eng begrenzt, sonst blockiert sich die Entwicklung selbst
@@ -447,7 +456,7 @@ fortfahren".
 | `X-Forwarded-Proto: https` | Frei setzbar, solange keine Liste vertrauenswürdiger Zwischenstellen konfiguriert ist. Ohne diese Liste wird die Kopfzeile **ignoriert** |
 | `X-Forwarded-For` für die Loopback-Prüfung | Ebenso frei setzbar. Bedingung 2 prüft ausschließlich `REMOTE_ADDR` |
 | Ein Hostname, der `localhost` nur enthält | `localhost.angreifer.de` ist nicht `localhost`. Verglichen wird der **vollständige** Hostname, nicht ein Teilstring |
-| `APP_ENV` aus der `.env`, wenn die `.env` noch gar nicht existiert | Vor Schritt 6 gibt es keine `.env`. Fehlt `APP_ENV` in der Serverumgebung, gilt **produktiv** — also HTTPS-Zwang |
+| `APP_ENV` aus der `.env`, wenn die `.env` noch gar nicht existiert | Vor Schritt 2 gibt es keine `.env`. Fehlt `APP_ENV` in der Serverumgebung, gilt **produktiv** — also HTTPS-Zwang |
 
 **Der Test dazu gehört in die Testfälle:** Aufruf von `/admin/setup` über HTTP mit `APP_ENV=production`
 muss abbrechen, auch wenn die Anfrage von `127.0.0.1` kommt.
@@ -478,7 +487,7 @@ Damit keine falsche Erwartung entsteht:
 - [ ] Cronlauf schreibt nachweislich
 - [ ] Einrichtung gegen eine **nicht leere** Datenbank gestartet → bricht ab, migriert nicht hinein
 - [ ] Eine Migrationsdatei nachträglich geändert → Prüfsummenabgleich schlägt an, Abbruch mit Nennung der Datei
-- [ ] Abbruch mitten in Schritt 3, dann erneut aufgerufen → setzt bei der ersten nicht eingetragenen Migration fort
+- [ ] Abbruch mitten in Schritt 4, dann erneut aufgerufen → setzt bei der ersten nicht eingetragenen Migration fort
 - [ ] `/admin/setup` über HTTP mit `APP_ENV=production` von `127.0.0.1` → **bricht ab** (die Loopback-Ausnahme greift nur bei `APP_ENV=local`)
 - [ ] `/admin/setup` über HTTP mit `APP_ENV=local` von einer fremden Adresse → bricht ab
 - [ ] `X-Forwarded-Proto: https` bei tatsächlichem HTTP → wird ignoriert, bricht ab
@@ -2044,7 +2053,7 @@ Anwendung.
 **Ersteinrichtung (§1.5):**
 67. Einrichtung gegen eine **nicht leere** Datenbank bricht vor der ersten Migration ab
 68. Eine nachträglich geänderte Migrationsdatei löst beim Start einen Prüfsummenabbruch aus, mit Nennung der Datei
-69. Nach einem Abbruch mitten in Schritt 3 setzt der erneute Aufruf bei der **ersten nicht eingetragenen** Migration fort und wiederholt keine bereits eingetragene
+69. Nach einem Abbruch mitten in Schritt 4 setzt der erneute Aufruf bei der **ersten nicht eingetragenen** Migration fort und wiederholt keine bereits eingetragene
 70. `/admin/setup` über HTTP mit `APP_ENV=production` von `127.0.0.1` bricht ab
 71. `/admin/setup` über HTTP mit `APP_ENV=local` von einer **nicht** loopback-Adresse bricht ab
 72. `X-Forwarded-Proto: https` bei tatsächlichem HTTP wird ignoriert, solange keine vertrauenswürdige Zwischenstelle konfiguriert ist

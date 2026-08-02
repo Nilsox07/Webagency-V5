@@ -1,0 +1,42 @@
+{
+    "name": "sartu/portal",
+    "description": "SARTU — Website mit geschuetztem Kundenbereich",
+    "type": "project",
+    "license": "proprietary",
+    "require": {
+        "php": ">=8.3",
+        "ext-fileinfo": "*",
+        "ext-intl": "*",
+        "ext-mbstring": "*",
+        "ext-openssl": "*",
+        "ext-pdo_mysql": "*",
+        "ext-sodium": "*",
+        "phpmailer/phpmailer": "^6.9",
+        "spomky-labs/otphp": "^11.2",
+        "vlucas/phpdotenv": "^5.6"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^11.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Sartu\\Helpers\\": "app/helpers/",
+            "Sartu\\Data\\Customer\\": "app/data/customer/",
+            "Sartu\\Data\\Admin\\": "app/data/admin/",
+            "Sartu\\Data\\": "app/data/",
+            "Sartu\\Services\\": "app/services/",
+            "Sartu\\Admin\\": "admin/",
+            "Sartu\\Portal\\": "portal/",
+            "Sartu\\Api\\": "api/",
+            "Sartu\\": "app/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Sartu\\Tests\\": "tests/"
+        }
+    },
+    "config": {
+        "sort-packages": true
+    }
+}
