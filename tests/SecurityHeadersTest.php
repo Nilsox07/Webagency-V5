@@ -176,19 +176,27 @@ final class SecurityHeadersTest extends Datenbankfall
     /**
      * Keine Ausgabe der Anwendung enthaelt ein eingebettetes Skript — sonst braeche die CSP.
      *
-     * **Eine Ausnahme, und nur diese eine:** `<script type="application/ld+json">`. Das ist
-     * kein Skript, sondern ein Datenblock — der Browser fuehrt ihn nie aus, und `script-src`
-     * greift auf ihn nicht zu. Website-Lastenheft §16 verlangt strukturierte Daten, und es
-     * gibt keine andere Form, sie auszuliefern.
+     * **Zwei Ausnahmen, und nur diese zwei.**
      *
-     * **Der Test wird dadurch schaerfer, nicht weicher.** Bisher pruefte er eine Zeichenkette.
-     * Jetzt prueft er zusaetzlich, dass jeder erlaubte Datenblock **gueltiges JSON ohne rohe
-     * spitze Klammern** enthaelt — die Stelle, an der ein `</` das `<script>` vorzeitig
-     * beenden und den Rest als Markup auf die Seite bringen wuerde. Genau davor schuetzt
-     * `JSON_HEX_TAG` in `Strukturdaten`, und genau das wird hier nachgewiesen.
+     * 1. `<script type="application/ld+json">` ist kein Skript, sondern ein Datenblock — der
+     *    Browser fuehrt ihn nie aus, und `script-src` greift auf ihn nicht zu.
+     *    Website-Lastenheft §16 verlangt strukturierte Daten, und es gibt keine andere Form.
+     * 2. `<script src="/assets/js/…" defer></script>` — eine eigene Datei aus dem eigenen
+     *    Verzeichnis, geladen ueber `script-src 'self'`. Website-Lastenheft §3 verlangt die
+     *    Fokusfalle im mobilen Menue; ohne JavaScript ist sie nicht zu haben.
+     *
+     * **Der Test wird durch die zweite Ausnahme schaerfer, nicht weicher.** Erlaubt ist nur
+     * die genaue Form: absoluter eigener Pfad, `defer`, **leerer Rumpf**. Eine relative oder
+     * fremde Adresse faellt durch, ein `src` ohne `defer` faellt durch, und ein `<script>`
+     * mit Inhalt faellt durch — auch dann, wenn sein `src` stimmt. Genau das prueft der
+     * zweite Durchgang unten, der jedes erlaubte Vorkommen einzeln nachmisst.
+     *
+     * Der Nachweis, dass die geladene Datei ohne Wirkung ausfaellt — also dass jeder
+     * Kernablauf ohne JavaScript funktioniert —, steht in `LivegangTest`.
      */
     public function testKeineAnsichtEnthaeltEingebettetesSkript(): void
     {
+        $erlaubt = '#<script src="/assets/js/[a-z0-9\-]+\.js" defer></script>#';
         $treffer = [];
 
         $lauf = new \RecursiveIteratorIterator(
@@ -200,15 +208,29 @@ final class SecurityHeadersTest extends Datenbankfall
                 continue;
             }
 
-            // Der eine erlaubte Datenblock faellt raus, jedes andere <script bleibt stehen.
-            $inhalt = preg_replace(
-                '/<script type="application\/ld\+json">/',
+            $roh = (string) file_get_contents($datei->getPathname());
+
+            // Die beiden erlaubten Formen fallen raus, jedes andere <script bleibt stehen.
+            $inhalt = (string) preg_replace(
+                ['/<script type="application\/ld\+json">/', $erlaubt],
                 '',
-                (string) file_get_contents($datei->getPathname()),
-            ) ?? '';
+                $roh,
+            );
 
             if (preg_match('/<script\b/i', $inhalt) === 1 || preg_match('/\son[a-z]+\s*=\s*"/i', $inhalt) === 1) {
                 $treffer[] = $datei->getPathname();
+            }
+
+            // Gegenprobe: Jede erlaubte Datei existiert wirklich unter /public.
+            preg_match_all($erlaubt, $roh, $gefunden);
+
+            foreach ($gefunden[0] as $tag) {
+                preg_match('#src="([^"]+)"#', $tag, $pfad);
+
+                $this->assertFileExists(
+                    SARTU_WURZEL . '/public' . $pfad[1],
+                    $datei->getPathname() . ' laedt eine Datei, die es nicht gibt.',
+                );
             }
         }
 

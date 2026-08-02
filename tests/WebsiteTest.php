@@ -637,6 +637,90 @@ final class WebsiteTest extends Datenbankfall
         $this->assertSame(0, (int) $this->pdo->query('SELECT COUNT(*) FROM leads')->fetchColumn());
     }
 
+    // ---------------------------------------------------------------- §17 Bestätigungsdatei
+
+    /**
+     * `KEYWORD_VALIDATION.md` führt **jede** Launch-Adresse — Website-Lastenheft §17.
+     *
+     * §17 nennt die Datei „vor dem Livegang zwingend"; ohne sie sind Titel, H1 und URL nicht
+     * bestätigt. Eine Datei, die zwei Adressen später nicht mehr vollständig ist, hilft dabei
+     * nicht. Dieser Test schlägt an, sobald eine Adresse dazukommt — dann wird
+     * `php bin/keywords.php` neu ausgeführt, nicht die Datei nachgetippt.
+     *
+     * **Geprüft wird die Vollständigkeit, nicht die Bestätigung.** Ob eine Zeile bestätigt
+     * ist, entscheidet ein Mensch (Keywordstrategie §1.1). Kein Test setzt ein Häkchen, das
+     * ein Mensch setzen muss.
+     */
+    public function testDieBestaetigungsdateiFuehrtJedeLaunchadresse(): void
+    {
+        $datei = SARTU_WURZEL . '/KEYWORD_VALIDATION.md';
+
+        $this->assertFileExists($datei, 'KEYWORD_VALIDATION.md fehlt — `php bin/keywords.php`.');
+
+        $inhalt = (string) file_get_contents($datei);
+        $fehlend = [];
+
+        foreach (array_keys(Launchadressen::alle()) as $pfad) {
+            if (!str_contains($inhalt, '| `' . $pfad . '` |')) {
+                $fehlend[] = $pfad;
+            }
+        }
+
+        $this->assertSame([], $fehlend, 'Adressen ohne Zeile — `php bin/keywords.php` erneut ausführen.');
+
+        // Die Kennzeichnung aus §1.1 für den Fall ohne Volumenwerkzeug muss dastehen,
+        // sonst liest sich eine leere Spalte wie ein gemessener Wert von null.
+        $this->assertStringContainsString('ohne Volumendaten', $inhalt);
+    }
+
+    // ---------------------------------------------------------------- §3 Fokusfalle
+
+    /**
+     * Die Fokusfalle kommt aus einer eigenen Datei — und das Menü lebt ohne sie weiter.
+     *
+     * Website-Lastenheft §3 verlangt „Fokus wird im Overlay gehalten"; §1 verlangt volle
+     * Nutzbarkeit ohne JavaScript. Beides gilt, weil das Menü ein `details` ist und das
+     * Skript nur etwas **hinzufügt**.
+     *
+     * Geprüft wird deshalb nicht, was das Skript tut — das kann nur ein Browser sagen und
+     * steht in `OFFENE_PRUEFUNGEN.md` —, sondern dass es **weglassbar** ist: Das Menü hat
+     * kein `hidden`, keinen Öffnungsknopf ausserhalb eines `summary` und keinen einzigen
+     * Verweis, der ohne Skript ins Leere ginge.
+     */
+    public function testDasMenueBleibtOhneSkriptBedienbar(): void
+    {
+        $mitMenue = 0;
+
+        foreach ($this->seiten() as $pfad => $html) {
+            $hatMenue = preg_match('#<details class="menue">(.*?)</details>#s', $html, $treffer) === 1;
+            $hatSkript = preg_match('#<script src="/assets/js/menue\.js" defer></script>#', $html) === 1;
+
+            // Beides oder keines. `/briefing` traegt das Layout `oeffentlich` ohne Kopfband
+            // und braucht die Falle deshalb nicht — ein Skript ohne Menue waere Ballast.
+            $this->assertSame($hatMenue, $hatSkript, $pfad . ': Menü und Fokusfalle passen nicht zusammen.');
+
+            if (!$hatMenue) {
+                continue;
+            }
+
+            ++$mitMenue;
+
+            $this->assertStringContainsString('<summary', $treffer[1], $pfad . ' hat keinen Öffner.');
+
+            // Ein Menüpunkt, der ohne Skript nirgends hinführt, wäre ein toter Punkt.
+            $this->assertSame(0, preg_match('/href\s*=\s*"#"/', $treffer[1]), $pfad . ' hat einen Verweis ins Leere.');
+            $this->assertSame(0, preg_match('/\son[a-z]+\s*=/i', $treffer[1]), $pfad . ' hat ein on…-Attribut.');
+        }
+
+        $this->assertGreaterThan(0, $mitMenue, 'Keine einzige Seite trägt das mobile Menü.');
+
+        // Die Datei bleibt klein genug, dass sie niemand nachlädt statt sie zu lesen.
+        $skript = SARTU_WURZEL . '/public/assets/js/menue.js';
+
+        $this->assertFileExists($skript);
+        $this->assertLessThan(2048, filesize($skript), 'Die Fokusfalle ist über 2 KB gewachsen.');
+    }
+
     // ---------------------------------------------------------------- Hilfsmittel
 
     /** @return array<string,mixed> eine gültige Rückfrage — §11, alle Pflichtfelder. */

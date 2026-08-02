@@ -14,9 +14,9 @@ wurde — mit der Stelle, die entschieden hat.
 
 ## Offen — gemeldet, nicht erfunden
 
-Die Nummern bleiben, auch wo eine Zeile verschwindet. **2 und 4 sind am 02.08.2026
-entschieden worden** und stehen unten, 6 ebenfalls; wer die alte Nummer sucht, findet sie
-dort und nicht als Lücke, die er sich erklären muss.
+Die Nummern bleiben, auch wo eine Zeile verschwindet. **2, 4, 6, 7 und 8 sind am 02.08.2026
+entschieden worden** und stehen unten; wer die alte Nummer sucht, findet sie dort und nicht
+als Lücke, die er sich erklären muss. Offen sind noch drei: 1, 3 und 5.
 
 | # | Punkt | Was fehlt | Was stattdessen gebaut wurde |
 |---|---|---|---|
@@ -24,8 +24,6 @@ dort und nicht als Lücke, die er sich erklären muss.
 | 3 | **Zwei weitere Ampelbedingungen** (§4b.4) | Die Ampel kennt vier Stufen; für `orange` nennt der Text zwei Auslöser und deutet weitere an, ohne sie zu benennen | Die zwei benannten Auslöser sind gebaut und deterministisch geprüft (Testfall 39) |
 | 5 | **Antwortfeld je Rückmeldung** (§9.2 „Feedback") | §9.2 nennt „je Eintrag Antwortfeld und Statuswechsel". `feedback_items` hat in §4 **kein** Antwortfeld und keinen Status je Eintrag | Die Rückmeldungen stehen im internen Bereich vollständig lesbar unter ihrer Runde. Die Runde wird als Ganzes als eingearbeitet vermerkt — das ist der Weg, den §5.6a beschreibt. Ein Antwortfeld bräuchte zwei Spalten, die im Datenmodell fehlen |
 | ~~6~~ | ~~**Tabelle für das Kontaktformular**~~ | **Erledigt am 02.08.2026 — und die alte Antwort war falsch.** Portal-Lastenheft **§4b.6** regelt den Fall ausdrücklich: „Es versendet ausschließlich eine E-Mail an SARTU und erzeugt **keinen** Datensatz." Die Stelle war beim ersten Bau nicht gefunden worden. Es fehlte keine Tabelle — es sollte gar keine geben | Siehe „Entschieden und eingebaut" |
-| 7 | **Fokusfalle im mobilen Menü** (Website §3) | §3 verlangt sie. Ohne JavaScript ist sie nicht zu haben — `details` liefert Öffnen, Schließen, `Esc` und Tastaturbedienung, aber keine Falle | Das Menü ist ein `details`-Element und ohne Skript vollständig bedienbar. Ob rund 1 KB JavaScript für die Falle nachgerüstet wird, ist eine Entscheidung des Betreibers: §1 verlangt Nutzbarkeit ohne Skript, §3 die Falle |
-| 8 | **`KEYWORD_VALIDATION.md`** (Website §17) | Die Datei wird als „vor dem Livegang zwingend" genannt und **existiert nicht**. Ohne sie sind Titel, H1 und URL formal nicht bestätigt | Titel, H1 und Adressen sind nach §16 gebaut und im Test auf Eindeutigkeit geprüft. Die Bestätigungsdatei ist eine Betreiberhandlung, kein Bauschritt |
 
 ---
 
@@ -52,6 +50,8 @@ dort und nicht als Lücke, die er sich erklären muss.
 | **Testfall 18 stand in der falschen Etappe** | Er verlangt `approvals` mit `kind = abnahme`; geprüft war die Faktenfreigabe (`kind = inhalte`) — das ist Fall 27. `REIHENFOLGE.md` ordnet 18 der Etappe A3 zu | `tests/LivegangTest.php`, Kommentar in `tests/AuftragsstreckeTest.php` |
 | **Schwelle für „knappe Frist"** (§8.1) | **Drei Tage.** Dieselbe Zahl wie beim Angebotsablauf in §10 — eine zweite Vorwarnzeit daneben wäre eine Zahl ohne Grund, und zwei davon im selben Bereich lernt niemand. Der Hinweis erscheint, sobald `due_date` in drei Tagen oder weniger erreicht ist | Entscheidung des Betreibers vom 02.08.2026. `Zahlungsstatus::KNAPP_TAGE`, `fristKnapp()`. Mit ihr entstand **Block 3 des Cockpits** (§8.1), der bis dahin fehlte |
 | **Anhebung der Speichergrenze je Kunde** | **Bleibt, wie sie ist:** 500 MB je Organisation, hart. Ein Adminfeld dafür bräuchte eine Obergrenze, die niemand festgelegt hat | Entscheidung des Betreibers vom 02.08.2026. Testfall 79 prüft die Grenze unverändert |
+| **Fokusfalle im mobilen Menü** (Website §3) | **Gebaut.** Eigene Datei `/public/assets/js/menue.js`, 1,8 KB, mit `defer` geladen, kein Zeileninhalt. `script-src 'self'` deckt sie ab — die CSP bleibt unverändert. Das Menü bleibt ein `details` und ohne Skript vollständig bedienbar; das Skript **fügt nur hinzu** | Entscheidung des Betreibers vom 02.08.2026. Der Satz dazu steht wörtlich im Kopf der Datei. `SecurityHeadersTest` erlaubt genau diese eine Form und wird dadurch schärfer, `WebsiteTest` prüft die Paarung Menü ↔ Skript und die Größe |
+| **`KEYWORD_VALIDATION.md`** (Website §17) | **Erzeugt, nicht getippt:** `php bin/keywords.php` fährt jede Adresse aus `Launchadressen::alle()` durch den echten Router und liest Titel, H1 und Beschreibung aus der Antwort. Volumen, SERP-Typen und verwandte Fragen bleiben **leer** — Keywordstrategie §1.1: „nie geschätzt". Die Spalte „Bestätigt" füllt ein Mensch | Entscheidung des Betreibers vom 02.08.2026. `bin/keywords.php`, `KEYWORD_VALIDATION.md`. `WebsiteTest` prüft, dass keine Adresse ohne Zeile bleibt |
 | **Kontaktformular ohne Datensatz** (§4b.6) | Es versendet **ausschließlich** eine E-Mail. Kein Eintrag in `leads`, keiner in `support_messages`. Honigtopf, Zeitregel und Rate-Limit bleiben — §4b.6 verlangt sie ausdrücklich | `Kontaktanfrage`. `WebsiteTest` prüft: null Zeilen, genau eine Mail |
 | ~~**B2B-Bestätigung im Kontaktformular**~~ | **Zurückgenommen am 02.08.2026.** Sie stand dort nur, weil `chk_leads_bestaetigungen` beide Häkchen verlangte. Ohne `leads`-Zeile gibt es die Prüfbedingung nicht, und §11 zählt sieben Felder mit **einer** Bestätigung auf. Ein Häkchen ohne Zweck ist eine Hürde ohne Grund | `website-kontakt.php`, Kopfkommentar |
 | **Die Mail trägt die ganze Rückfrage** | Beim Bedarfsscheck ist die Benachrichtigung eine Kurzmeldung **ohne** Datenauszug (§10) — der Datensatz trägt alles. Hier gibt es keinen. Stünde nur „Es ist eine Rückfrage eingegangen" darin, wäre sie weg | `Kontaktanfrage::hinausschicken()` |

@@ -19,12 +19,15 @@ use Sartu\Helpers\Html;
  * selbst · Breadcrumb. Die H1 steht in der Seitenansicht, alles andere hier — dadurch kann
  * eine Seite es nicht vergessen.
  *
- * ## Kein Skript, keine fremde Verbindung
+ * ## Ein Skript, aus dem eigenen Verzeichnis
  *
- * §1: „Kein externes CDN für Schriften, CSS oder JS." Es gibt hier kein ausführbares Skript
- * und keine Adresse, die auf eine fremde Domain zeigt. Das mobile Menü ist ein
- * `details`-Element — es öffnet und schließt ohne JavaScript, hält den Fokus von sich aus
- * und schließt mit `Esc`.
+ * §1: „Kein externes CDN für Schriften, CSS oder JS." Keine Adresse hier zeigt auf eine
+ * fremde Domain. Das mobile Menü ist ein `details`-Element und öffnet, schließt und lässt
+ * sich mit der Tastatur bedienen, **ohne** dass ein Skript läuft.
+ *
+ * `menue.js` fügt allein die Fokusfalle aus §3 hinzu — mit `defer`, ohne Zeileninhalt, über
+ * `script-src 'self'`. Fällt es aus, bleibt das Menü vollständig bedienbar. Die Begründung
+ * steht im Kopf der Datei; die Entscheidung, sie zu bauen, in `OFFENE_ENTSCHEIDUNGEN.md`.
  *
  * **Der eine Datenblock unten ist kein Skript.** `application/ld+json` wird nie ausgeführt;
  * `script-src` greift darauf nicht zu. §16 verlangt strukturierte Daten, und es gibt keine
@@ -82,5 +85,6 @@ $basis = rtrim((string) Env::get('BASE_URL', ''), '/');
 <?= $inhalt ?>
 </main>
 <?= Ansicht::teil('partials/websitefuss', ['kleinunternehmer' => $kleinunternehmer ?? false]) ?>
+<script src="/assets/js/menue.js" defer></script>
 </body>
 </html>

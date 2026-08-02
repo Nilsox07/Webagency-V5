@@ -14,9 +14,15 @@ use Sartu\Services\Websitetexte;
  *
  * **Das mobile Menü ist ein `<details>`.** §3 verlangt Vollbild-Overlay, Schließen per X,
  * `Esc` und Klick außerhalb, dazu Fokus im Overlay. Ein `<details>` liefert Öffnen,
- * Schließen, `Esc` und die Tastaturbedienung vom Browser — ohne eine Zeile JavaScript, und
- * §1 verlangt volle Nutzbarkeit ohne. Was ein `<details>` nicht kann, ist die Fokusfalle;
- * das steht als offener Punkt in `OFFENE_PRUEFUNGEN.md`.
+ * Schließen und die Tastaturbedienung vom Browser — ohne eine Zeile JavaScript, und §1
+ * verlangt volle Nutzbarkeit ohne.
+ *
+ * Was ein `<details>` nicht kann, ist die Fokusfalle. Sie kommt seit dem 02.08.2026 aus
+ * `/public/assets/js/menue.js` und **fügt nur hinzu**: Fällt das Skript aus, bleibt das
+ * Menü vollständig bedienbar. Der Layoutkopf begründet, warum das die CSP nicht berührt.
+ *
+ * **Ob `Esc` wirklich schließt, ist eine Messung, keine Behauptung** — sie steht in
+ * `OFFENE_PRUEFUNGEN.md` und wird im Browser nachgeholt, nicht hier zugesichert.
  *
  * @var string $pfad
  */
