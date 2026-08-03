@@ -325,6 +325,16 @@ h1 .accent{background-image:linear-gradient(var(--lime),var(--lime));background-
    keine Preise." Ein Satz je Zeile — nicht drei. Die Tags tragen das Ueberfliegen,
    der Satz die Antwort. Keine Nummern: die acht gelten gleichzeitig. */
 .lz-lede{margin-top:18px;max-width:62ch;font-size:18px;line-height:1.6;color:#c6bfb1}
+/* Statt acht Tabellenzeilen: EIN Satz, der die acht Leistungen der Reihe nach
+   nennt — jede in Alltagssprache, jede fett. Wer ueberfliegt, liest nur die
+   fetten Stellen und hat alle acht. Wer liest, liest einen Satz. Die
+   Fachbegriffe stehen leise darunter, fuer die, die sie kennen. */
+.satz{margin-top:32px;max-width:880px;font-size:clamp(20px,2.3vw,30px);line-height:1.44;
+  letter-spacing:-.016em;color:#948d81}
+.satz b{color:var(--cream);font-weight:650}
+.stichworte{margin-top:var(--s-5);padding-top:19px;border-top:1px solid var(--line-dark);
+  max-width:940px;font-family:var(--font-mono);font-size:11.5px;letter-spacing:.1em;
+  text-transform:uppercase;color:#6d685e;line-height:2.05}
 .lz-liste{margin-top:var(--s-5);border-top:1px solid var(--line-dark)}
 .lz{display:grid;grid-template-columns:minmax(0,302px) minmax(0,1fr);gap:clamp(14px,3vw,48px);
   padding:19px clamp(6px,1.4vw,18px);border-bottom:1px solid var(--line-dark);
@@ -792,16 +802,8 @@ html:has(#g-kalk:checked),html:has(#g-weiss:checked){background:var(--cream)}
       <p class="tag rise-3">Im Preis enthalten</p>
       <h2 class="sec-head rise" style="margin-top:20px">Es gibt keine Aufpreisliste.</h2>
       <p class="lz-lede rise-2">Das alles steckt in jedem Angebot — Sie stellen es nicht selbst zusammen und zahlen nichts davon extra. Wir gewichten die Bausteine passend zu Ihrem Ziel.</p>
-      <div class="lz-liste">
-        <div class="lz rise"><h3>Strategie und Seitenstruktur</h3><div class="lz-in"><p>Wir legen fest, welche Seiten Ihr Ziel wirklich brauchen — und welche nicht.</p><p class="lz-tags">Sitemap · Nutzerführung · Suchintention</p></div></div>
-        <div class="lz rise"><h3>Webdesign und Programmierung</h3><div class="lz-in"><p>Individuell aus unserem Designsystem programmiert, ohne WordPress und ohne Baukasten.</p><p class="lz-tags">kein WordPress · responsive · schnell</p></div></div>
-        <div class="lz rise"><h3>Website-Texte</h3><div class="lz-in"><p>Wir schreiben die Texte aus Ihren Fakten und Stichpunkten — Sie liefern keinen fertigen Webtext.</p><p class="lz-tags">aus Stichpunkten · Faktenprüfung</p></div></div>
-        <div class="lz rise"><h3>SEO-Grundlage</h3><div class="lz-in"><p>Jede Seite startet mit klarem Thema, sauberen Metadaten und strukturierten Daten.</p><p class="lz-tags">Titles · Schema · interne Links</p></div></div>
-        <div class="lz rise"><h3>Lokale Sichtbarkeit</h3><div class="lz-in"><p>Echte Unternehmensdaten statt dünner Ortsseiten mit ausgetauschtem Stadtnamen.</p><p class="lz-tags">Local SEO · konsistente Daten</p></div></div>
-        <div class="lz rise"><h3>Domain und Launch</h3><div class="lz-in"><p>Wir prüfen, verbinden und schalten live — Ihre bestehende E-Mail bleibt dabei erreichbar.</p><p class="lz-tags">DNS · E-Mail-Schutz · Weiterleitungen</p></div></div>
-        <div class="lz rise"><h3>Kundenbereich und Freigaben</h3><div class="lz-in"><p>Angebot, Briefing, Vorschau und Feedback laufen an einem Ort statt in E-Mail-Ketten.</p><p class="lz-tags">Briefing · Feedback · Pflege</p></div></div>
-        <div class="lz rise"><h3>Rundum-Schutz</h3><div class="lz-in"><p>Wir betreiben die Website danach: Hosting, Sicherheit, Backups, Monitoring.</p><p class="lz-tags">Betrieb · Backups · Monitoring</p></div></div>
-      </div>
+      <p class="satz rise">Wir legen fest, <b>welche Seiten Sie wirklich brauchen</b>. Schreiben <b>Ihre Texte aus Ihren Stichpunkten</b>. Programmieren die Website — <b>ohne WordPress, ohne Baukasten</b>. Bereiten jede Seite <b>für Suchmaschinen</b> vor. Sorgen dafür, dass man Sie <b>in Ihrer Region findet</b>. Ziehen <b>Ihre Domain um, ohne dass Ihre E-Mail ausfällt</b>. Zeigen Ihnen alles <b>vorab im Kundenbereich</b>. Und <b>betreiben sie danach weiter</b> — über die Monatspauschale.</p>
+      <p class="stichworte rise-2">Sitemap · Nutzerführung · Suchintention · kein WordPress · responsive · schnell · aus Stichpunkten · Faktenprüfung · Titles · Schema · interne Links · Local SEO · konsistente Daten · DNS · E-Mail-Schutz · Weiterleitungen · Briefing · Feedback · Pflege · Betrieb · Backups · Monitoring</p>
       <a class="btn btn-hell rise" href="/leistungen" style="margin-top:var(--s-5)">Alle Leistungen im Überblick <span class="ar">→</span></a>
       </div>
     </div>

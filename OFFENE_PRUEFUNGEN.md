@@ -405,3 +405,38 @@ Geprüft, weil gefragt. Drei Vorgaben stehen dagegen, alle verbindlich:
 Zur Indexierung: Ein Schieber aus `scroll-snap` hält alle acht Zeilen im Quelltext und ist damit
 indexierbar; ein JavaScript-Karussell, das nur die sichtbare Karte einhängt, ist es nicht. Die
 Frage entscheidet aber nicht die Bauform — die drei Punkte oben tun es.
+
+## Sektion 7 — Bauform weicht von §7 ab (acht Sätze statt acht Zeilen)
+
+§7 gibt **„acht breite Zeilen (Titel · ein Satz · Tags)"** vor. Gebaut ist stattdessen **ein
+Absatz aus acht kurzen Sätzen** — je ein Satz für eine der acht Leistungen, in derselben
+Reihenfolge, jeder mit der Kernaussage fett. Die Fachbegriffe aus der Tags-Spalte stehen
+vollständig, aber leise, als Monozeile darunter.
+
+**Warum abgewichen wurde** — auf Anweisung des Betreibers, mit zwei Begründungen:
+
+1. Die Tabellenform „sieht aus wie KI-Ausschuss". Titel-Spalte, Text-Spalte, Tag-Spalte in acht
+   gleichen Zeilen ist genau die Form, die Generatoren ausgeben.
+2. Die Tags sind für die Zielgruppe **unverständlich**. `Suchintention`, `Schema`, `DNS`,
+   `Local SEO` sagt einem Dachdecker nichts. §7 stellt sie aber gleichrangig neben den Satz.
+
+Die neue Form löst beides: Wer überfliegt, liest nur die fetten Stellen und hat alle acht
+Leistungen in Alltagssprache. Wer liest, liest einen Absatz. Wer die Fachbegriffe kennt, findet
+sie unten. Textmaße: 8 Sätze, 61 Wörter, längster Satz 9 Wörter, Schnitt 7,6.
+
+**Zu entscheiden:** §7 auf diese Form ziehen, oder zurück zu acht Zeilen.
+
+## Reibung: „zahlen nichts davon extra" gegen „über die Monatspauschale"
+
+Beim Umbau ist der Rundum-Schutz-Satz um „— über die Monatspauschale" ergänzt worden, um die in
+diesem Dokument bereits gemeldete Lücke zu schliessen. Damit steht er nun im selben Blickfeld wie
+die von §7 wörtlich vorgegebene Einleitung: *„Sie stellen es nicht selbst zusammen und zahlen
+nichts davon extra."*
+
+Beides ist einzeln richtig — „nichts davon extra" meint: keine Einzelposten zum Dazubuchen; die
+Pauschale steht in jedem Angebot und im Erstjahreswert. **Nebeneinander gelesen wirkt es
+widersprüchlich.**
+
+Die vorgegebene Einleitung ist **nicht** angetastet worden. **Zu entscheiden:** Einleitung um den
+Zusatz schärfen (etwa „nichts davon einzeln dazubuchen") oder den Pauschalen-Hinweis an eine
+andere Stelle des Abschnitts setzen.
