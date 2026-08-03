@@ -53,8 +53,28 @@ Editor öffnen, Inhalt kopieren, einfügen. Das ist verlustfrei und braucht kein
 | `sartu-logo.svg` | Zeichen **+ Wortmarke**, waagerecht | Fußbereich, Angebote, E-Mail-Signatur |
 | `sartu-logo-stapel.svg` | Zeichen über Wortmarke | schmale Flächen, Quadratformate |
 
-Einfarbig heißt: **alle Pfade in einer Farbe.** Dann genügt eine Datei für hell und dunkel,
-weil die Seite die Farbe setzt (`fill="currentColor"`).
+### Korrektur zur Farbangabe in der Datei (03.08.2026, nach Prüfung im Browser)
+
+Die Frage „ist eine SVG nicht immer schwarz?" ist berechtigt — **manchmal ja**, und es hängt
+allein daran, wie sie eingebunden wird. Sechs Wege getestet, siehe `design/svg-einbindung.html`:
+
+| Einbindung | Ergebnis |
+|---|---|
+| `<img src="logo.svg">` mit **fest eingetragenen** Farben | Farben bleiben, zweifarbig |
+| **inline** im HTML mit fest eingetragenen Farben | Farben bleiben |
+| `<img>` mit `fill="currentColor"` | **schwarz** — im `<img>` gibt es kein CSS, das die Farbe liefert |
+| Datei **ganz ohne** `fill` | **schwarz** — die Vorgabe von SVG ist Schwarz |
+| **inline** mit `fill="currentColor"` | nimmt die CSS-Farbe |
+| dieselbe Datei inline auf dunklem Grund | Lime, **ohne zweite Datei** |
+
+**Daraus die korrigierte Anweisung:** Liefern Sie die Datei mit **fest eingetragenen echten
+Farben** (`fill="#a3e635"` usw.), nicht mit `currentColor`. Gründe:
+
+- So ist sie überall richtig — in E-Mails, bei Druckereien, bei Partnern, in jedem Programm
+- `currentColor` ist eine reine Webseiten-Technik und **wird schwarz**, sobald jemand die Datei
+  normal öffnet oder als Bild einbindet
+- Das Umfärben für die Seite mache **ich** beim Einbetten. Aus einer Datei mit echten Farben
+  lässt sich `currentColor` erzeugen; umgekehrt sind die Farben verloren
 
 ---
 

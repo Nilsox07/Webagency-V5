@@ -1,0 +1,47 @@
+<meta charset="utf-8"><title>SVG-Einbindung — sechs Wege</title>
+<style>
+body{margin:0;background:#f6f6f4;font:14px/1.5 system-ui,sans-serif;color:#1f2120;padding:28px}
+h1{font-size:20px;margin:0 0 4px} p.i{color:#4a4d4b;margin:0 0 24px;max-width:86ch}
+.g{display:grid;grid-template-columns:repeat(auto-fit,minmax(215px,1fr));gap:18px}
+figure{margin:0;background:#fff;border:1px solid #dfdfda;border-radius:20px;padding:20px}
+figure.dark{background:#14110d;border-color:#2e302e}
+.box{height:96px;display:flex;align-items:center;justify-content:center}
+.box>*{width:76px;height:76px}
+figcaption{margin-top:12px;font-family:ui-monospace,monospace;font-size:10.5px;line-height:1.55;color:#5a5d5b}
+figure.dark figcaption{color:#9ca09d}
+b{color:#14110d} figure.dark b{color:#f6f1e6}
+.ok{color:#3d7a12} .no{color:#8a3b12}
+.lime{color:#a3e635} .ink{color:#14110d}
+.maske{background:#a3e635;-webkit-mask:url(currentcolor.svg) center/contain no-repeat;
+  mask:url(currentcolor.svg) center/contain no-repeat}
+</style>
+<h1>Ist eine SVG immer schwarz? Sechs Einbindungen, dieselben Dateien</h1>
+<p class="i">Getestet mit drei Dateien: eine mit fest eingetragenen Farben, eine mit
+<code>fill="currentColor"</code>, eine ganz ohne <code>fill</code>.</p>
+<div class="g">
+
+<figure><div class="box"><img src="farbig.svg" alt=""></div>
+<figcaption><b>1 &nbsp;&lt;img&gt; + feste Farben</b><br><span class="ok">▲ Farben bleiben</span><br>
+Zweifarbig, wie gezeichnet. Nicht umfärbbar.</figcaption></figure>
+
+<figure><div class="box"><svg viewBox="0 0 100 100"><rect x="4" y="4" width="92" height="92" rx="18" fill="#a3e635"/><path d="M30 34 h40 v12 H42 v8 h28 v24 H30 V66 h28 v-8 H30 Z" fill="#14110d"/></svg></div>
+<figcaption><b>2 &nbsp;inline + feste Farben</b><br><span class="ok">▲ Farben bleiben</span><br>
+Kein Abruf. Einzelne Teile per CSS änderbar.</figcaption></figure>
+
+<figure><div class="box"><img src="currentcolor.svg" alt=""></div>
+<figcaption><b>3 &nbsp;&lt;img&gt; + currentColor</b><br><span class="no">▼ WIRD SCHWARZ</span><br>
+Hier kommt der Eindruck her: im &lt;img&gt; gibt es kein CSS, das die Farbe liefert.</figcaption></figure>
+
+<figure><div class="box"><img src="ohnefill.svg" alt=""></div>
+<figcaption><b>4 &nbsp;ganz ohne fill</b><br><span class="no">▼ WIRD SCHWARZ</span><br>
+Ohne Angabe ist die Vorgabe schwarz — überall, auch inline.</figcaption></figure>
+
+<figure><div class="box"><svg class="ink" viewBox="0 0 100 100"><path d="M20 20 h60 v16 H36 v12 h44 v32 H20 V64 h44 v-12 H20 Z" fill="currentColor"/></svg></div>
+<figcaption><b>5 &nbsp;inline + currentColor</b><br><span class="ok">▲ nimmt die CSS-Farbe</span><br>
+Eine Datei, hier Tinte für hellen Grund.</figcaption></figure>
+
+<figure class="dark"><div class="box"><svg class="lime" viewBox="0 0 100 100"><path d="M20 20 h60 v16 H36 v12 h44 v32 H20 V64 h44 v-12 H20 Z" fill="currentColor"/></svg></div>
+<figcaption><b>6 &nbsp;dieselbe Datei, dunkler Grund</b><br><span class="ok">▲ Lime, ohne zweite Datei</span><br>
+Identische Datei wie 5 — nur die CSS-Farbe wechselt.</figcaption></figure>
+
+</div>
