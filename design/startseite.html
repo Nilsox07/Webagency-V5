@@ -449,7 +449,10 @@ footer{background:var(--ink);color:#b9b2a4;padding:0}
 .foot-note{font-size:16px;color:#a49d8f;max-width:38ch;line-height:1.6}
 .wordmark{position:relative;overflow:hidden;padding-top:var(--s-4);margin-top:var(--s-3)}
 .wordmark span{display:block;font-size:clamp(84px,20.5vw,300px);font-weight:700;letter-spacing:-.055em;
-  line-height:.78;color:color-mix(in oklab,var(--ink),#fff 8%);user-select:none;margin-bottom:-.1em}
+  line-height:.78;color:color-mix(in oklab,var(--ink),#fff 8%);user-select:none;margin-bottom:-.1em;
+  transition:color .3s ease}
+.wordmark:hover span{color:var(--lime)}
+@media (prefers-reduced-motion:reduce){.wordmark span{transition:none}}
 .foot-legal{display:flex;flex-wrap:wrap;gap:6px 26px;justify-content:space-between;
   padding:var(--s-3) 0 var(--s-4);font-family:var(--font-mono);font-size:11.5px;letter-spacing:.1em;
   text-transform:uppercase;color:#7d766a;border-top:1px solid var(--line-dark)}
@@ -544,8 +547,10 @@ html:has(#l-karten:checked) .cta-field::after{content:"";position:absolute;
 details summary::after{transition:background-color .25s ease}
 details:hover summary::after,details[open] summary::after{background-color:var(--lime)}
 
-/* 5 — die Kennzeichnung der Musterprojekte ist eine echte Auszeichnung */
-.sample-flag{background:var(--lime-soft);color:var(--ink)}
+/* 5 — die Kennzeichnung der Musterprojekte ist eine echte Auszeichnung.
+   Volles Lime statt --lime-soft: Lime ist Flaeche, auf Lime steht --ink,
+   und die vorgeschriebene 1px --line-Kante traegt sie unten bereits. */
+.sample-flag{background:var(--lime);color:var(--ink)}
 
 /* ============================================================
    GRUNDTON-UMSCHALTER — nur zum Entscheiden, nicht zum Ausliefern.
