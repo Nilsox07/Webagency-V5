@@ -144,11 +144,11 @@ h2{font-size:clamp(31px,4.3vw,50px)}
   border-bottom:1px solid var(--line)}
 .top-in{display:flex;align-items:center;justify-content:space-between;gap:var(--s-4);
   padding:16px var(--gut);max-width:var(--wrap);margin:0 auto}
-/* Bildmarke. Die Wortmarke bleibt die Schrift der Seite — massiv, nicht hohl:
-   eine Kontur verschluckt es auf hellem Grund und bei 23px erst recht. */
-.mark{width:26px;height:28px;flex:none;color:var(--lime)}
-.brand>span{display:flex;align-items:baseline;gap:8px}
-.brand{display:flex;align-items:center;gap:11px;background-image:none;font-size:23px;
+/* Platz fuer die Bildmarke, sobald die Originaldatei vorliegt:
+   <svg class="mark" viewBox="…"><path d="…" fill="currentColor"/></svg>
+   davor, .brand auf align-items:center und gap:11px. Bis dahin steht die
+   Wortmarke allein — ein nachgeratenes Zeichen waere eine Erfindung. */
+.brand{display:flex;align-items:baseline;gap:8px;background-image:none;font-size:23px;
   font-weight:700;letter-spacing:-.04em}
 .brand em{font-family:var(--font-mono);font-style:normal;font-size:10.5px;font-weight:500;
   letter-spacing:.16em;color:var(--label);text-transform:uppercase}
@@ -619,7 +619,7 @@ html:has(#g-kalk:checked),html:has(#g-weiss:checked){background:var(--cream)}
 
 <header class="top">
   <div class="top-in">
-    <a class="brand" href="#top"><svg class="mark" viewBox="0 0 100 108" aria-hidden="true"><path d="M96 6 L40 6 L6 40 L34 68 L56 46 L44 34 L58 20 L96 20 Z M4 102 L60 102 L94 68 L66 40 L44 62 L56 74 L42 88 L4 88 Z" fill="currentColor"/></svg><span>SARTU <em>Webdesign</em></span></a>
+    <a class="brand" href="#top">SARTU <em>Webdesign</em></a>
     <nav class="nav">
       <a href="/leistungen">Leistungen</a>
       <a href="#preise">Preise</a>
