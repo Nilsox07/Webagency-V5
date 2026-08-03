@@ -58,6 +58,25 @@ h2{font-size:clamp(31px,4.3vw,50px)}
    ueberlesen. Sie bekommt jetzt eigenen Grund: Sand, zwischen der dunklen
    Zusage und der cremefarbenen Musterstrecke. */
 .sec.sand{background:var(--sand)}
+
+/* §5 woertlich: „Ein randlos dunkler Streifen mit einem einzigen grossen Satz.
+   Sonst nichts: kein Bild, keine Aufzaehlung, kein Knopf." Gebaut waren drei
+   nummerierte Spalten — genau die Aufzaehlung, die §5 ausschliesst. */
+.pledge{padding:clamp(90px,11vw,168px) 0;border-radius:0}
+.zusage-satz{max-width:19em;margin:0 auto;text-align:center;
+  font-size:clamp(30px,5vw,74px);line-height:1.06;letter-spacing:-.038em;
+  font-weight:700;color:var(--cream)}
+.zusage-satz span{color:#8d8578}
+
+/* Sektion 7 als EINE Flaeche: ein Kasten, ein Preis, alles drin.
+   Lime ist Flaeche (nie Schrift), auf Lime steht --ink, und die Flaeche
+   traegt auf hellem Grund die vorgeschriebene 1px --line als Kante. */
+.paket{margin-top:var(--s-5);padding:clamp(26px,3.2vw,50px);
+  background:var(--lime);border:1px solid var(--line);border-radius:var(--r-xl)}
+.paket .lbs{margin-top:0}
+.paket .lb{border-top:2px solid var(--ink)}
+.paket .lb h3{color:var(--ink)}
+.paket .lb p{color:rgba(20,17,13,.76)}
 .sec.sand+.sec{padding-top:var(--s-6)}
 
 /* Knöpfe */
@@ -340,7 +359,7 @@ h1 .accent{background-image:linear-gradient(var(--lime),var(--lime));background-
    Keine Kachelwand mit Rahmen — nur eine Lime-Kante je Block, damit Sektion 8
    (Karten mit Bild) daneben nicht dieselbe Bauform bekommt. */
 .lbs{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));
-  gap:clamp(24px,3vw,40px) clamp(28px,3.6vw,56px);margin-top:var(--s-5)}
+  gap:clamp(26px,3.2vw,44px) clamp(28px,3.6vw,56px);margin-top:var(--s-5)}
 .lb{padding-top:16px;border-top:2px solid var(--ink)}
 .lb h3{font-size:20px;letter-spacing:-.015em;color:var(--ink)}
 .lb p{margin-top:8px;font-size:16.5px;line-height:1.55;color:var(--muted);max-width:34ch}
@@ -785,28 +804,11 @@ html:has(#g-kalk:checked),html:has(#g-weiss:checked){background:var(--cream)}
     </div>
   </section>
 
-  <!-- ===== Die Zusage — drei Punkte auf Tinte, statt einem Ausruf ===== -->
-  <section class="sec dark round-top round-bot pledge" id="zusage">
+  <!-- ===== Die Zusage — §5: EIN Satz, randlos, sonst nichts.
+       „Die Wirkung entsteht aus der Leere ringsum." ===== -->
+  <section class="sec dark pledge" id="zusage">
     <div class="wrap">
-      <p class="tag rise-3">Die Zusage</p>
-      <h2 class="sec-head rise" style="margin-top:20px">Was der Preis bedeutet.</h2>
-      <div class="pledge-grid">
-        <div class="pledge-item rise">
-          <span class="num">01</span>
-          <h3>Der Preis steht vor dem Start</h3>
-          <p>Sie erhalten Umfang und Preis schriftlich, bevor wir anfangen. Es gibt keine Stundenabrechnung und keine Nachforderung für das, was im Angebot steht.</p>
-        </div>
-        <div class="pledge-item rise-2">
-          <span class="num">02</span>
-          <h3>Die Rechte gehen an Sie</h3>
-          <p>Nach vollständiger Zahlung gehören Ihnen die Nutzungsrechte am gelieferten Stand. Die Domain läuft auf Ihren Namen, nicht auf unseren.</p>
-        </div>
-        <div class="pledge-item rise-3">
-          <span class="num">03</span>
-          <h3>Sie können jederzeit gehen</h3>
-          <p>Nach dem ersten Jahr können Sie kündigen. Auf Wunsch bekommen Sie Ihren Stand als Export, mit einer Anleitung, wie er ohne uns weiterläuft.</p>
-        </div>
-      </div>
+      <p class="zusage-satz rise">Ein Preis. Ein Ergebnis.<br><span>Keine Stundenabrechnung, keine Nachforderung.</span></p>
     </div>
   </section>
 
@@ -816,13 +818,15 @@ html:has(#g-kalk:checked),html:has(#g-weiss:checked){background:var(--cream)}
       <p class="tag rise-3">Im Preis enthalten</p>
       <h2 class="sec-head rise" style="margin-top:20px">Es gibt keine Aufpreisliste.</h2>
       <p class="lz-lede rise-2">Das alles steckt in jedem Angebot — Sie stellen es nicht selbst zusammen und zahlen nichts davon extra. Wir gewichten die Bausteine passend zu Ihrem Ziel.</p>
-      <div class="lbs">
+      <div class="paket rise-2">
+        <div class="lbs">
         <div class="lb rise"><h3>Strategie</h3><p>Wir legen fest, welche Seiten Sie wirklich brauchen.</p></div>
         <div class="lb rise"><h3>Design und Programmierung</h3><p>Individuell gebaut — ohne WordPress, ohne Baukasten.</p></div>
         <div class="lb rise"><h3>Texte</h3><p>Wir schreiben sie aus Ihren Stichpunkten. Sie lesen gegen.</p></div>
         <div class="lb rise"><h3>Sichtbarkeit</h3><p>Vorbereitet für Suchmaschinen, auffindbar in Ihrer Region.</p></div>
         <div class="lb rise"><h3>Domain und Start</h3><p>Wir ziehen um, ohne dass Ihre E-Mail ausfällt.</p></div>
         <div class="lb rise"><h3>Betrieb</h3><p>Hosting, Sicherheit, Backups — über die Monatspauschale.</p></div>
+        </div>
       </div>
       <p class="stichworte rise-2">Sitemap · Nutzerführung · Suchintention · kein WordPress · responsive · schnell · aus Stichpunkten · Faktenprüfung · Titles · Schema · interne Links · Local SEO · konsistente Daten · DNS · E-Mail-Schutz · Weiterleitungen · Briefing · Feedback · Pflege · Betrieb · Backups · Monitoring</p>
       <a class="btn btn-ghost rise" href="/leistungen" style="margin-top:var(--s-5)">Alle Leistungen im Überblick <span class="ar">→</span></a>

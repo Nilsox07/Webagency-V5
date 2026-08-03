@@ -518,3 +518,42 @@ unsinnig ist.
 **Noch offen, gleiche Ursache:** `#portal` und `#ablauf` sind ebenfalls beide dunkel und liegen
 direkt hintereinander. `#muster`, `#fragen` und `#abschluss` sind alle drei creme. Beide Strecken
 brauchen denselben Schnitt.
+
+## Sektion 5 war das Gegenteil ihrer Vorgabe — behoben
+
+§5 wörtlich:
+
+> Ein **randlos dunkler Streifen** mit einem einzigen großen Satz. Sonst nichts: kein Bild, keine
+> Aufzählung, kein Knopf. […] Er wird **nicht** um Unterpunkte, Symbole oder einen zweiten Satz
+> ergänzt — **die Wirkung entsteht aus der Leere ringsum**.
+>
+> `Ein Preis. Ein Ergebnis. Keine Stundenabrechnung, keine Nachforderung.`
+
+Gebaut war: H2 „Was der Preis bedeutet." plus **drei nummerierte Spalten** mit je einem Absatz.
+Der Kommentar im Quelltext sagte es sogar selbst — *„drei Punkte auf Tinte, statt einem Ausruf"*.
+Damit war der Abschnitt genau die Aufzählung, gegen die §5 ihn stellt: „das wirksamste Mittel
+gegen den Eindruck einer durchgehenden Liste" war selbst zur Liste geworden.
+
+Jetzt: der vorgegebene Satz, gross, mittig, randlos, sonst nichts. Zweite Zeile in `#8d8578`
+(5,16 : 1 gegen Tinte).
+
+**Ein Inhalt sucht noch eine Heimat.** Der entfernte Punkt 02 lautete: *„Nach vollständiger
+Zahlung gehören Ihnen die Nutzungsrechte am gelieferten Stand. Die Domain läuft auf Ihren Namen,
+nicht auf unseren."* Punkt 01 sagt dasselbe wie der Zusage-Satz, Punkt 03 steht bereits in den
+häufigen Fragen („Was passiert, wenn ich kündige?"). **Punkt 02 steht nirgends sonst.**
+Vorschlag: als weitere Frage in Sektion 9. **Nicht eigenmächtig verschoben.**
+
+## Sektion 7 als eine Lime-Fläche
+
+Der Abschnitt wurde überscrollt, weil er nur aus Text bestand. Die sechs Blöcke stehen jetzt in
+**einem** Lime-Kasten mit `--r-xl` und der vorgeschriebenen `1px --line`-Kante.
+
+Die Form ist die Aussage: ein Kasten, ein Preis, alles darin. Damit ist sie zugleich
+regelkonform — Lime ist Fläche, nie Schrift; auf Lime steht `--ink`. Gemessene Kontraste:
+Titel 12,48 : 1, Fliesstext rund 5,5 : 1.
+
+Es ist die **einzige grosse Lime-Fläche der Seite**. Sonst trägt Lime nur Knöpfe und Haarlinien.
+Genau deshalb wirkt sie.
+
+**Ungeprüft:** ob eine Fläche dieser Größe im Ausdruck und auf kalibrierten Schirmen angenehm
+bleibt. Auf Verlangen lässt sie sich auf `--sand` mit Lime-Kante zurücknehmen.
