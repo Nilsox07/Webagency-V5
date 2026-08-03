@@ -196,3 +196,59 @@ nicht — das haben zwei Versuche gezeigt.
 - Inkscape, *Vektorisieren von Rastergrafiken* — inkscape.org/doc/tracing/tutorial-tracing.de.html
 - SVGVector, *SVG vs PNG: When to Use Each* — svgvector.com/blog/svg-vs-png-when-to-use.html
 - CSS-Tricks, *SVG Favicons in Action* — css-tricks.com/svg-favicons-in-action/
+
+---
+
+## 7. Nachtrag: Wortmarke als Text oder als Grafik? (03.08.2026)
+
+Ein früherer Rat in diesem Blatt lautete, das **Icon allein** genüge und „SARTU" bleibe
+lebender Text. Nach Prüfung an echten Seiten wird das **eingeschränkt**.
+
+### Was die Agenturen tatsächlich tun
+
+| Agentur | Umsetzung | Schriftzug |
+|---|---|---|
+| Wee Media | `<img src="logo.svg">` | Grafik im SVG |
+| Kopf & Stift | `<img src="…logo.svg">` | Grafik im SVG |
+| Hahnsinn | inline `<svg>`, nur Icon | **Wortmarke als normaler Text** |
+
+Zwei von drei nehmen den Schriftzug als Grafik.
+
+### Der Einwand „dann ist es kopierbar" — und was wirklich dahintersteckt
+
+**Kopierbarkeit ist kein Argument.** Ein Firmenname lässt sich nicht dadurch schützen, dass man
+ihn zum Bild macht: Er steht ohnehin im Seitentitel, in der Adresse, im Impressum, im Fußbereich,
+in der Suchmaschinen-Beschreibung und im `alt`-Text. Wer ihn will, hat ihn. Ein Logo ist
+markenrechtlich geschützt, nicht durch Nicht-Markierbarkeit.
+
+**Der echte Grund, den Schriftzug als Vektor zu nehmen, ist ein anderer: die Buchstabenform.**
+Eine Wortmarke ist meist *gezeichnet* — eigene Laufweite, angepasste Buchstaben, eine bestimmte
+Schrift. Lebender Text bildet das nur nach, wenn genau diese Schrift geladen ist, und selbst dann
+weichen Laufweite und optische Korrekturen ab.
+
+**Daraus die Entscheidungsregel:**
+
+- Ist „SARTU" im Logo **eine gezeichnete Wortmarke** — eigene Laufweite, besondere Schrift —
+  dann **als Vektor**, sonst sieht die Kopfleiste anders aus als jedes andere Auftreten der Marke
+- Ist es **schlicht der Name in einer normalen Schrift**, genügt lebender Text
+
+Nach dem eingereichten Bild zu urteilen — weit gesperrte, geometrische Versalien — ist es
+**Fall eins**. Also: **die vollständige Sperrung als SVG mitliefern**, nicht nur das Icon.
+
+### Wie es dann eingebaut wird
+
+**Nicht** als `<img>`, sondern **direkt in die Seite geschrieben**. Der Unterschied ist
+entscheidend, weil die Startseite helle **und** dunkle Abschnitte hat:
+
+| | `<img src="logo.svg">` | inline `<svg>` |
+|---|---|---|
+| Buchstabenform | exakt | exakt |
+| Umfärben je Abschnitt | **nein** — zwei Dateien nötig | ja, über CSS |
+| zusätzlicher Abruf | ja | **nein** |
+
+Damit der Name trotzdem für Suchmaschinen und Vorleseprogramme lesbar bleibt, bekommt das
+eingebettete SVG `role="img"` und ein `<title>SARTU</title>` — dieselbe Wirkung wie ein
+`alt`-Text, ohne sichtbaren Text.
+
+**Gebraucht wird also:** `sartu-logo.svg` (Icon + Schriftzug, waagerecht) **und**
+`sartu-mark.svg` (Icon allein, für Favicon und App-Symbol).
