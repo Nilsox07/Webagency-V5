@@ -311,3 +311,36 @@ Sie stehen hier, damit sie nicht als übersehen gelten. Begründung je Punkt in
 | `EinrichtungsStand` aus `Ersteinrichtung` herauslösen — Prädikate von Mutationen trennen | Anfang A1 |
 | Betreiberdaten-Formular als gemeinsames Partial für Setup-Schritt 6 und Adminmaske | wenn A1 die dritte Fassung braucht |
 | ~~Arbeitsverzeichnis und Aufräumen der Tests in `Datenbankfall` zusammenziehen~~ | **erledigt** am 02.08.2026. Sechs Testklassen hielten je eine eigene Fassung, und **eine davon setzte `STORAGE_DIR` nicht** — die Ratenbegrenzung zählte über alle Läufe hinweg mit und liess den zehnten Testlauf an einer fremden Grenze scheitern |
+
+## Abweichung vom Website-Lastenheft §5 Sektion 1 — Branchenangabe entfernt
+
+§5 Sektion 1 führt als letztes Element des Aufmachers eine **Branchenangabe**
+(`Handwerk` · `Praxen` · `Kanzleien` · `Ladengeschäfte`) samt eigenem Korrekturblock
+dazu, dass sie nicht anklickbar aussehen darf.
+
+Sie ist am 03.08.2026 auf Anweisung des Betreibers **ersatzlos entfernt** worden — als
+Pillen wie als ruhige Monozeile. Begründung: Der Aufmacher trug unter den Knöpfen fünf
+kleine, gleich leise Textzeilen übereinander; die Branchenangabe war die fünfte und liess
+die Kapazitätszeile darüber untergehen.
+
+**Zu entscheiden, bevor Sektion 1 gebaut wird:** Entweder §5 wird angepasst und die
+Branchenangabe fällt dort weg, oder sie kehrt an anderer Stelle zurück. Solange beides
+offen ist, baut der nächste Durchgang sie nach Lastenheft wieder ein.
+
+Ungeklärt bleibt damit auch der Zweck, den §5 ihr zuschreibt: dass ein Betrieb erkennt,
+ob er gemeint ist. `Bundesweit, ohne Termin` in der Trust-Zeile deckt die *Reichweite* ab,
+nicht die *Branche*.
+
+## Aufmacher — was gemessen ist und was nicht
+
+Gemessen mit Chromium bei 1512×982, 1440×900, 1280×800, 1366×768 und 390×844:
+Kapazitätszeile und Trust-Zeile stehen überall über der Bildschirmkante; der von §5
+verlangte Anschnitt der nächsten Sektion beträgt 197 / 120 / 53 / 4 / 0 px.
+
+**Ungeprüft:** echte Geräte, Safari und Firefox, Zoomstufen über 100 %, sowie die
+Frage, ob der Anschnitt unter ~790 px Fensterhöhe überhaupt erreichbar ist, ohne den
+Aufmacher unter das Erträgliche zu kürzen.
+
+**Vorbestehend, nicht von diesem Umbau:** bei 390 px Breite ist `scrollWidth` 401 gegen
+`clientWidth` 390 — 11 px Querlauf aus den Zierbändern und dem Laptopfuss. `overflow-x:hidden`
+am `body` fängt ihn ab, die Ursache steht noch.
