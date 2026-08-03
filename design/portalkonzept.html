@@ -1,0 +1,1146 @@
+<title>SARTU — Zeichen und Flächen in den beiden Bereichen</title>
+<style>
+/* ============================================================
+   SARTU — Kundenbereich und interner Bereich, Fassung 2
+   Neu gegenüber Fassung 1: eine Zeichenfamilie, die Stationen
+   als Bahn, der beschriftete Bildplatz, der Bildschirm Vorschau.
+   Keine neue Farbe, kein neuer Radius, keine externe Schrift,
+   keine externe Verbindung.
+   ============================================================ */
+:root{
+  --papier:#f6f6f4; --weiss:#ffffff; --ink:#14110d; --ink-2:#1e201e; --ink-3:#2a2c2a;
+  --text:#1f2120; --muted:#4a4d4b; --line:#dfdfda; --line-dark:#2e302e; --sand:#eaeae6;
+  --lime:#a3e635; --lime-hover:#8dc92a; --lime-soft:#e4f5b8;
+  --label:#5a5d5b; --label-dark:#9ca09d; --rail-text:#cfd0ce;
+  --r-xs:8px; --r-s:14px; --r-m:22px; --r-l:34px; --r-xl:52px; --r-pill:999px;
+  --s-1:6px; --s-2:12px; --s-3:20px; --s-4:32px; --s-5:48px; --s-6:72px;
+  --font:-apple-system,BlinkMacSystemFont,"Segoe UI",system-ui,"Helvetica Neue",Helvetica,sans-serif;
+  --mono:ui-monospace,"SFMono-Regular",Menlo,Consolas,monospace;
+  --schatten:0 18px 44px -26px rgba(20,17,13,.3);
+  --schatten-hoch:0 30px 70px -32px rgba(20,17,13,.45);
+  color-scheme:light;
+}
+/* Kein Dunkelmodus — er steht auf der Nicht-bauen-Liste. Das ist eine
+   Entscheidung, kein vergessener Zweig. */
+:root[data-theme="dark"],:root[data-theme="light"]{color-scheme:light}
+*{box-sizing:border-box}
+html{background:var(--sand)}
+body{margin:0;background:var(--sand);color:var(--text);font-family:var(--font);
+  font-size:17px;line-height:1.6;text-wrap:pretty}
+h1,h2,h3,h4{margin:0;font-weight:650;letter-spacing:-.025em;line-height:1.06;color:var(--ink);text-wrap:balance}
+p{margin:0} ul,ol{margin:0;padding:0;list-style:none}
+a:focus-visible,button:focus-visible{outline:2px solid var(--ink);outline-offset:3px}
+.mono{font-family:var(--mono);letter-spacing:.12em;text-transform:uppercase}
+.zahlen{font-variant-numeric:tabular-nums}
+
+/* ---------- Die Zeichenfamilie ----------
+   24er Raster, 2 px Kontur, runde Enden — die Geometrie von Lucide.
+   Damit lässt sich das echte Set später eins zu eins einsetzen,
+   ohne dass eine einzige Fläche verrutscht. Farbe immer currentColor:
+   ein Zeichen hat nie eine eigene Farbe. */
+.ik{flex:none;width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:2;
+  stroke-linecap:round;stroke-linejoin:round;display:block}
+.ik-kl{width:14px;height:14px}
+.ik-gr{width:26px;height:26px;stroke-width:1.6}
+.ik-xl{width:40px;height:40px;stroke-width:1.4}
+
+/* ---------- Rahmen des Dokuments ---------- */
+.doc{max-width:1320px;margin:0 auto;padding:clamp(28px,5vw,72px) clamp(16px,4vw,40px) 96px}
+.kopf{max-width:62ch;margin-bottom:var(--s-5)}
+.kopf .mono{font-size:12.5px;color:var(--label);display:block;margin-bottom:18px}
+.kopf h1{font-size:clamp(34px,4.6vw,54px);letter-spacing:-.035em}
+.kopf p{margin-top:20px;font-size:19px;color:var(--muted);max-width:56ch}
+.abs{margin-top:var(--s-6)}
+.abs>.mono{font-size:12px;color:var(--label);display:block;margin-bottom:12px}
+.abs>h2{font-size:clamp(24px,3vw,34px);margin-bottom:10px}
+.abs>.hin{font-size:17px;color:var(--muted);max-width:64ch;margin-bottom:var(--s-4)}
+.notiz{margin-top:var(--s-3);padding:18px 22px;background:var(--weiss);border:1px solid var(--line);
+  border-radius:var(--r-m);font-size:15.5px;color:var(--muted);max-width:72ch}
+.notiz b{color:var(--ink)}
+.notiz .quelle{display:block;margin-top:10px;font-family:var(--mono);font-size:10.5px;
+  letter-spacing:.1em;text-transform:uppercase;color:var(--label)}
+
+/* Block, in dem etwas zu entscheiden ist */
+.frage{margin-top:var(--s-4);background:var(--weiss);border:1px solid var(--line);
+  border-left:4px solid var(--ink);border-radius:var(--r-m);padding:26px 28px}
+.frage>.mono{display:flex;align-items:center;gap:8px;font-size:11px;color:var(--label);margin-bottom:14px}
+.frage h3{font-size:21px;margin-bottom:12px}
+.frage p{font-size:16px;color:var(--muted);max-width:70ch}
+.frage p+p{margin-top:12px}
+.frage .beleg{margin-top:18px;display:grid;gap:12px}
+.beleg>div{background:var(--papier);border:1px solid var(--line);border-radius:var(--r-s);padding:14px 16px}
+.beleg .wo{display:block;font-family:var(--mono);font-size:10px;letter-spacing:.1em;
+  text-transform:uppercase;color:var(--label);margin-bottom:6px}
+.beleg .satz{font-size:15.5px;color:var(--ink)}
+
+/* ============================================================
+   DER RAHMEN — Seitenleiste links, Kopfzeile oben, Inhalt rechts
+   ============================================================ */
+.app{display:grid;grid-template-columns:252px minmax(0,1fr);
+  background:var(--papier);border-radius:var(--r-l);overflow:hidden;
+  box-shadow:var(--schatten-hoch);border:1px solid var(--line);min-height:660px}
+.app.intern{grid-template-rows:auto 1fr;grid-template-columns:228px minmax(0,1fr)}
+
+/* --- Seitenleiste --- */
+.rail{background:var(--ink);color:var(--rail-text);padding:24px 14px;
+  display:flex;flex-direction:column;gap:24px;min-width:0}
+.rail-marke{display:flex;align-items:baseline;gap:8px;padding:0 10px 4px;
+  font-size:21px;font-weight:700;letter-spacing:-.04em;color:#f6f6f4}
+.rail-marke em{font-family:var(--mono);font-style:normal;font-size:9.5px;font-weight:500;
+  letter-spacing:.16em;color:var(--label-dark);text-transform:uppercase}
+.rail-gruppe>.mono{display:block;font-size:9.5px;color:#757875;padding:0 12px;margin-bottom:8px}
+.rail a{display:flex;align-items:center;gap:11px;padding:9px 12px;border-radius:var(--r-s);
+  color:var(--rail-text);text-decoration:none;font-size:15.5px;
+  transition:background .2s ease,color .2s ease}
+.rail a:hover{background:var(--ink-3);color:#fff}
+.rail a .ik{color:#9ca09d;transition:color .2s ease}
+.rail a:hover .ik{color:#fff}
+.rail a.an{background:var(--ink-3);color:#fff;font-weight:600}
+/* Auf Tinte darf Lime Schriftfarbe sein — 12,48:1. Auf hellem Grund nie. */
+.rail a.an .ik{color:var(--lime)}
+.rail a .zahl{margin-left:auto;font-family:var(--mono);font-size:11px;color:#8d908d;
+  font-variant-numeric:tabular-nums}
+.rail a.an .zahl{color:#fff}
+.rail-fuss{margin-top:auto;padding:16px 12px 0;border-top:1px solid var(--line-dark);font-size:14px}
+.rail-fuss .wer{color:#f6f6f4;font-weight:600}
+.rail-fuss .was{display:flex;align-items:center;gap:7px;color:#8d908d;font-size:13px;margin-top:3px}
+.rail-fuss .was .ik{color:#8d908d}
+
+/* --- Inhaltsbereich --- */
+.haupt{display:flex;flex-direction:column;min-width:0}
+.leiste{display:flex;align-items:center;justify-content:space-between;gap:20px;
+  padding:18px 28px;background:color-mix(in oklab,var(--papier),#fff 55%);
+  border-bottom:1px solid var(--line)}
+.leiste h2{display:flex;align-items:center;gap:13px;font-size:23px}
+.leiste .rechts{display:flex;align-items:center;gap:12px;flex-wrap:wrap;justify-content:flex-end}
+/* Das Zeichen der Seite, in Sand gefasst — es wiederholt den Eintrag
+   der Seitenleiste und beantwortet die Frage „wo bin ich". */
+.titelzeichen{flex:none;width:36px;height:36px;border-radius:var(--r-s);background:var(--sand);
+  border:1px solid var(--line);display:flex;align-items:center;justify-content:center;color:var(--ink)}
+.inhalt{padding:26px 28px 30px;display:flex;flex-direction:column;gap:20px}
+
+/* --- Bauteile --- */
+.knopf{display:inline-flex;align-items:center;gap:10px;padding:12px 22px;border-radius:var(--r-pill);
+  background:var(--lime);color:var(--ink);border:1px solid var(--line);font-size:15.5px;
+  font-weight:600;line-height:1;text-decoration:none;cursor:pointer;
+  transition:background .25s ease,transform .25s ease,box-shadow .25s ease}
+.knopf:hover{background:var(--lime-hover);transform:translateY(-2px);
+  box-shadow:0 12px 26px -12px rgba(20,17,13,.45)}
+.knopf .ik{transition:transform .25s ease}
+.knopf:hover .ik{transform:translateX(3px)}
+.knopf-still{background:transparent;border:1.5px solid var(--line);color:var(--ink);padding:11px 20px}
+.knopf-still:hover{background:var(--sand);box-shadow:none}
+.knopf-still:hover .ik{transform:none}
+
+.karte{background:var(--weiss);border:1px solid var(--line);border-radius:var(--r-l);padding:24px;
+  container-type:inline-size}
+.karte>.mono{display:flex;align-items:center;gap:8px;font-size:10.5px;color:var(--label);margin-bottom:14px}
+.karte>.mono .ik{color:var(--label)}
+.karte h3{font-size:19px;margin-bottom:6px}
+.karte .fliess{font-size:16px;color:var(--muted);max-width:62ch}
+
+/* Block 1 — der nächste Schritt. Das eine dunkle Element je Bildschirm. */
+.schritt{background:var(--ink);color:#e6e7e5;border-radius:var(--r-l);padding:30px 32px;
+  display:grid;grid-template-columns:minmax(0,1fr) auto;gap:24px;align-items:center;
+  box-shadow:var(--schatten)}
+.schritt .mono{display:block;font-size:10.5px;color:var(--lime);margin-bottom:14px}
+.schritt .gross{font-size:clamp(24px,2.6vw,32px);font-weight:650;letter-spacing:-.03em;
+  line-height:1.1;color:#f8f8f6}
+.schritt .dazu{margin-top:12px;font-size:16px;color:#a4a7a4;max-width:52ch}
+@media (max-width:820px){.schritt{grid-template-columns:1fr}}
+
+/* ---------- Die Bahn über die sieben Stationen ----------
+   Vorgabe: Portal-Lastenheft §8.1 Block 2. Die aktuelle Station ist markiert.
+   Der Zustand steckt in der Füllung des Knotens, nicht in einer Farbe. */
+.bahn{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));margin-top:24px}
+.bahn li{position:relative;display:flex;flex-direction:column;align-items:center;gap:10px;
+  text-align:center;min-width:0}
+.bahn li::before{content:"";position:absolute;top:13px;left:-50%;right:50%;height:2px;
+  background:var(--line)}
+.bahn li:first-child::before{display:none}
+.bahn li.fertig::before,.bahn li.jetzt::before{background:var(--ink)}
+.knoten{position:relative;z-index:1;width:28px;height:28px;border-radius:var(--r-pill);
+  background:var(--weiss);border:2px solid var(--line);
+  display:flex;align-items:center;justify-content:center;color:transparent}
+.bahn li.fertig .knoten{background:var(--ink);border-color:var(--ink);color:var(--lime)}
+/* Lime allein erreicht gegen Weiß 1,30:1 und wäre als Grafik unsichtbar.
+   Deshalb der Ring in Tinte — dieselbe Lösung wie beim Punkt der Website. */
+.bahn li.jetzt .knoten{background:var(--lime);border-color:var(--ink);color:var(--ink)}
+.bahn .nam{font-family:var(--mono);font-size:9.5px;letter-spacing:.08em;text-transform:uppercase;
+  color:var(--label);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:100%}
+.bahn li.jetzt .nam,.bahn li.fertig .nam{color:var(--ink)}
+.bahn li.jetzt .nam{font-weight:700}
+@container (max-width:520px){
+  .bahn{grid-template-columns:1fr;gap:14px}
+  .bahn li{flex-direction:row;align-items:center;justify-content:flex-start;gap:14px;text-align:left}
+  .bahn li::before{top:-14px;bottom:auto;left:13px;right:auto;width:2px;height:14px}
+  .bahn .nam{font-size:11px;white-space:normal}
+}
+/* Musterstück für die schmale Fassung, damit sie nachprüfbar ist */
+.schmal{max-width:300px;margin-top:var(--s-3);padding:20px;border-radius:var(--r-m)}
+
+/* Rundenanzeige — Portal-Lastenheft §8.4 */
+.runden{display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+.runden .segs{display:flex;gap:5px}
+.runden .segs span{width:38px;height:7px;border-radius:var(--r-pill);background:var(--sand)}
+.runden .segs span.an{background:var(--lime);border:1px solid var(--line)}
+.runden .txt{font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--label)}
+
+/* ---------- Der beschriftete Bildplatz ----------
+   Corporate Design §6: 2 px gestrichelt, eine Monospace-Zeile und ein Satz,
+   der sagt, was dort später steht. Ein leerer Rahmen ist ausdrücklich verboten. */
+.rahmen{margin:0;border:1px solid var(--line);border-radius:var(--r-m);overflow:hidden;
+  background:var(--papier)}
+.rahmen-kopf{display:flex;align-items:center;gap:8px;padding:11px 14px;background:var(--sand);
+  border-bottom:1px solid var(--line)}
+.rahmen-kopf i{width:9px;height:9px;border-radius:var(--r-pill);border:1.5px solid var(--label);
+  display:block}
+.rahmen-kopf .adresse{margin-left:8px;flex:1;min-width:0;background:var(--weiss);
+  border:1px solid var(--line);border-radius:var(--r-pill);padding:5px 12px;
+  font-family:var(--mono);font-size:10.5px;letter-spacing:.06em;color:var(--label);
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.bildplatz{margin:14px;border:2px dashed var(--line);border-radius:var(--r-s);
+  min-height:196px;display:flex;flex-direction:column;align-items:center;justify-content:center;
+  gap:10px;padding:28px 24px;text-align:center;color:var(--label)}
+.bildplatz .mono{font-size:10.5px;letter-spacing:.14em}
+.bildplatz p{font-size:15px;color:var(--muted);max-width:44ch}
+
+/* Zeilen und Listen */
+.zeilen{border-top:1px solid var(--line)}
+.zeile{display:grid;align-items:center;gap:16px;padding:15px 8px;border-bottom:1px solid var(--line);
+  border-radius:var(--r-m);transition:background .2s ease}
+.zeile:hover{background:var(--papier)}
+.zeile:last-child{border-bottom:none}
+.zeile .haupttext{font-weight:600;font-size:16px;color:var(--ink)}
+.zeile .neben{font-size:14.5px;color:var(--muted)}
+.zeile.ruhig .haupttext{font-weight:500;color:var(--muted)}
+.aufgaben .zeile{grid-template-columns:26px minmax(0,1fr) 132px 108px}
+.rechnungen .zeile{grid-template-columns:minmax(0,1fr) 104px 116px 118px 132px}
+.anfragen .zeile{grid-template-columns:16px minmax(0,1fr) 132px 104px 104px}
+@media (max-width:980px){
+  .aufgaben .zeile,.rechnungen .zeile,.anfragen .zeile{grid-template-columns:1fr;gap:7px}
+}
+
+/* Zustand: nie über Farbe, immer über Form. Es gibt nur einen Akzent. */
+.mrk{display:inline-flex;align-items:center;gap:7px;padding:6px 13px;border-radius:var(--r-pill);
+  font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;
+  border:1px solid var(--line);background:var(--weiss);color:var(--muted);white-space:nowrap}
+.mrk::before{content:"";width:7px;height:7px;border-radius:var(--r-pill);
+  border:1.5px solid var(--ink);background:transparent;flex:none}
+.mrk.voll{background:var(--sand);color:var(--ink)}
+.mrk.voll::before{background:var(--ink)}
+.mrk.jetzt{background:var(--lime);border-color:var(--line);color:var(--ink);font-weight:600}
+.mrk.jetzt::before{background:var(--ink)}
+.mrk.halb::before{background:linear-gradient(90deg,var(--ink) 0 50%,transparent 50%)}
+
+.haken{flex:none;width:22px;height:22px;border-radius:var(--r-xs);border:1.5px solid var(--line);
+  background:var(--weiss);display:flex;align-items:center;justify-content:center;color:transparent}
+.haken.ab{background:var(--ink);border-color:var(--ink);color:var(--lime)}
+.pkt{flex:none;width:9px;height:9px;border-radius:var(--r-pill);
+  border:1.5px solid var(--ink);background:transparent}
+.pkt.voll{background:var(--ink)}
+.pkt.jetzt{background:var(--lime)}
+.pkt.halb{background:linear-gradient(90deg,var(--ink) 0 50%,transparent 50%)}
+.pkt.leer{border-color:var(--line)}
+
+.paar{display:grid;grid-template-columns:minmax(0,1.6fr) minmax(0,1fr);gap:20px;align-items:start}
+@media (max-width:980px){.paar{grid-template-columns:1fr}}
+.verlauf .erg{display:grid;grid-template-columns:78px minmax(0,1fr);gap:14px;padding:11px 0;font-size:15px}
+.verlauf .erg+.erg{border-top:1px solid var(--line)}
+.verlauf .wann{font-family:var(--mono);font-size:11px;color:var(--label);letter-spacing:.06em;
+  padding-top:3px;font-variant-numeric:tabular-nums}
+.fuss-hin{font-size:13.5px;color:var(--label);padding:2px 8px 0;max-width:78ch}
+
+/* Filterreihe — Portal-Lastenheft §4b.5: Filter nach Status, neueste zuerst */
+.filter{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.filter .fk{display:inline-flex;align-items:center;gap:7px;padding:6px 14px;border-radius:var(--r-pill);
+  border:1px solid var(--line);background:var(--weiss);font-size:13.5px;color:var(--muted);
+  text-decoration:none}
+.filter .fk.an{background:var(--sand);color:var(--ink);font-weight:600}
+.filter .fk:hover{background:var(--papier)}
+
+/* --- interner Bereich: dichter, mit eigenem Kopfband --- */
+.app.intern .band{grid-column:1 / -1;background:var(--ink);color:var(--rail-text);
+  display:flex;align-items:center;justify-content:space-between;gap:16px;padding:11px 22px;
+  border-bottom:1px solid var(--line-dark)}
+.app.intern .band .mono{display:flex;align-items:center;gap:8px;font-size:10px;
+  letter-spacing:.18em;color:var(--lime)}
+.app.intern .band .rechts{font-size:13px;color:#8d908d}
+.app.intern .rail{background:var(--ink-2);padding-top:18px}
+.app.intern{font-size:15.5px}
+.app.intern .inhalt{padding:20px 22px 24px;gap:16px}
+.app.intern .leiste{padding:13px 22px}
+.app.intern .leiste h2{font-size:20px;gap:11px}
+.app.intern .titelzeichen{width:31px;height:31px;border-radius:var(--r-xs)}
+.app.intern .titelzeichen .ik{width:16px;height:16px}
+.app.intern .karte{padding:20px;border-radius:var(--r-m)}
+.app.intern .zeile{padding:11px 8px}
+.app.intern .zeile .haupttext{font-size:15px}
+.app.intern .rail a{font-size:15px;padding:8px 12px}
+.app.intern .rail a .ik{width:17px;height:17px}
+
+/* Der Musterbildschirm ist die Aufnahme einer Arbeitsfläche. Auf schmalen
+   Geräten wird er geschoben, nicht beschnitten — wie die Leiste dort später
+   aussieht, ist noch nicht entschieden. */
+.buehne{overflow-x:auto;overscroll-behavior-x:contain;padding-bottom:4px}
+@media (max-width:860px){
+  .buehne>.app{min-width:820px}
+  .buehne>.app.intern{min-width:800px}
+}
+
+/* ---------- Die Zeichentafel ---------- */
+.tafel{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));
+  background:var(--weiss);border:1px solid var(--line);border-radius:var(--r-m);overflow:hidden}
+.tafel div{padding:18px 14px;display:flex;flex-direction:column;
+  align-items:center;gap:10px;text-align:center;
+  box-shadow:1px 0 0 var(--line),0 1px 0 var(--line)}
+.tafel .ik{color:var(--ink)}
+.tafel span{font-family:var(--mono);font-size:9.5px;letter-spacing:.09em;text-transform:uppercase;
+  color:var(--label);line-height:1.4}
+
+/* ---------- Gegenüberstellung zweier Leisten ---------- */
+.zweileisten{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-top:var(--s-4)}
+.zweileisten figure{margin:0}
+.zweileisten figcaption{display:flex;align-items:center;gap:8px;margin-bottom:10px;
+  font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--label)}
+.zweileisten .rail{border-radius:var(--r-m);min-height:0;gap:18px;padding:20px 12px}
+.zweileisten .rail-fuss{margin-top:18px}
+@media (max-width:720px){.zweileisten{grid-template-columns:1fr}}
+
+/* Gegenüberstellung in Text */
+.gegen{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-top:var(--s-4)}
+.gegen>div{background:var(--weiss);border:1px solid var(--line);border-radius:var(--r-m);padding:22px}
+.gegen h4{display:flex;align-items:center;gap:9px;font-size:16px;margin-bottom:12px}
+.gegen li{padding:7px 0 7px 20px;position:relative;font-size:15.5px;color:var(--muted)}
+.gegen li::before{content:"";position:absolute;left:0;top:16px;width:8px;height:8px;
+  border-radius:var(--r-xs);background:var(--label)}
+.gegen li b{color:var(--ink)}
+@media (max-width:820px){.gegen{grid-template-columns:1fr}}
+
+/* Liste „wo bewusst nichts steht" */
+.ohne{display:grid;grid-template-columns:repeat(auto-fit,minmax(290px,1fr));gap:2px;
+  background:var(--line);border:1px solid var(--line);border-radius:var(--r-m);overflow:hidden}
+.ohne>div{background:var(--weiss);padding:20px 22px}
+.ohne h4{font-size:15.5px;margin-bottom:7px}
+.ohne p{font-size:14.5px;color:var(--muted)}
+.ohne .quelle{display:block;margin-top:9px;font-family:var(--mono);font-size:9.5px;
+  letter-spacing:.1em;text-transform:uppercase;color:var(--label)}
+
+/* Prüfbericht */
+.bericht{margin-top:var(--s-3);background:var(--ink);color:#cfd0ce;border-radius:var(--r-m);
+  padding:22px 24px;overflow-x:auto}
+.bericht pre{margin:0;font-family:var(--mono);font-size:12.5px;line-height:1.75;
+  letter-spacing:.02em;white-space:pre}
+.bericht b{color:var(--lime);font-weight:500}
+
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false"><defs>
+  <symbol id="i-uebersicht" viewBox="0 0 24 24"><rect x="3" y="3" width="7.5" height="9" rx="1.5"/><rect x="13.5" y="3" width="7.5" height="5.5" rx="1.5"/><rect x="13.5" y="12" width="7.5" height="9" rx="1.5"/><rect x="3" y="15.5" width="7.5" height="5.5" rx="1.5"/></symbol>
+  <symbol id="i-angebot" viewBox="0 0 24 24"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5"/><path d="M9 13h6"/><path d="M9 17h4"/></symbol>
+  <symbol id="i-aufgaben" viewBox="0 0 24 24"><path d="m3 6.5 1.8 1.8L8.2 5"/><path d="m3 17.5 1.8 1.8L8.2 16"/><path d="M12 7h9"/><path d="M12 12h9"/><path d="M12 17.5h9"/></symbol>
+  <symbol id="i-vorschau" viewBox="0 0 24 24"><rect x="2.5" y="3.5" width="19" height="13.5" rx="2"/><path d="M8.5 21h7"/><path d="M12 17v4"/></symbol>
+  <symbol id="i-rechnungen" viewBox="0 0 24 24"><path d="M5 3v18l2.6-1.6L10.2 21l2.6-1.6L15.4 21l2.6-1.6L20 21V3H5z"/><path d="M9 8.5h7"/><path d="M9 12.5h7"/><path d="M9 16.5h4"/></symbol>
+  <symbol id="i-domain" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M3 12h18"/><path d="M12 3c2.4 2.6 3.6 5.6 3.6 9s-1.2 6.4-3.6 9c-2.4-2.6-3.6-5.6-3.6-9S9.6 5.6 12 3z"/></symbol>
+  <symbol id="i-inhalte" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 6.8V12l3.4 2"/></symbol>
+  <symbol id="i-vertrag" viewBox="0 0 24 24"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5"/><path d="m9 15.2 1.9 1.9 3.6-3.6"/></symbol>
+  <symbol id="i-hilfe" viewBox="0 0 24 24"><path d="M20.5 11.6c0 4.6-3.8 8.3-8.5 8.3-1.4 0-2.7-.3-3.9-.9L3.5 20.5l1.5-4.4a8.1 8.1 0 0 1-1.5-4.5c0-4.6 3.8-8.3 8.5-8.3s8.5 3.7 8.5 8.3z"/></symbol>
+  <symbol id="i-anfragen" viewBox="0 0 24 24"><path d="M22 12.5h-5.4l-1.6 2.8H9l-1.6-2.8H2"/><path d="M5.6 4.8 2 12.5V19a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-6.5l-3.6-7.7A2 2 0 0 0 16.6 3.6H7.4a2 2 0 0 0-1.8 1.2z"/></symbol>
+  <symbol id="i-kunden" viewBox="0 0 24 24"><path d="M6 21V4.5A1.5 1.5 0 0 1 7.5 3h9A1.5 1.5 0 0 1 18 4.5V21"/><path d="M2.5 21h19"/><path d="M9.5 7.5h1.5M13 7.5h1.5M9.5 11.5h1.5M13 11.5h1.5"/><path d="M10 21v-4h4v4"/></symbol>
+  <symbol id="i-projekte" viewBox="0 0 24 24"><path d="M3 7a2 2 0 0 1 2-2h3.6l2 2.6H19a2 2 0 0 1 2 2V18a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7z"/></symbol>
+  <symbol id="i-audit" viewBox="0 0 24 24"><path d="M3.2 12a8.8 8.8 0 1 0 2.9-6.6L3 8.4"/><path d="M3 3.4v5h5"/><path d="M12 7.6V12l3.4 2"/></symbol>
+  <symbol id="i-betreiberdaten" viewBox="0 0 24 24"><path d="M4 6.5h9"/><path d="M17.5 6.5H20"/><circle cx="15.2" cy="6.5" r="2.2"/><path d="M4 17.5h9"/><path d="M17.5 17.5H20"/><circle cx="15.2" cy="17.5" r="2.2"/><path d="M4 12h2.5"/><path d="M11 12h9"/><circle cx="8.8" cy="12" r="2.2"/></symbol>
+  <symbol id="i-rechtstexte" viewBox="0 0 24 24"><path d="M12 3.5v17"/><path d="M7.5 20.5h9"/><path d="M4.5 7h15"/><path d="M4.5 7 2 13h5L4.5 7z"/><path d="M19.5 7 17 13h5l-2.5-6z"/></symbol>
+  <symbol id="i-testmail" viewBox="0 0 24 24"><rect x="2.5" y="4.5" width="19" height="15" rx="2"/><path d="m3 6.5 9 6.5 9-6.5"/></symbol>
+  <symbol id="i-stand" viewBox="0 0 24 24"><circle cx="6" cy="19" r="2.8"/><circle cx="18" cy="5" r="2.8"/><path d="M8.8 19H15a3.5 3.5 0 0 0 0-7H9a3.5 3.5 0 0 1 0-7h6.2"/></symbol>
+  <symbol id="i-hinweis" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 11.2v5"/><path d="M12 7.7v.2"/></symbol>
+  <symbol id="i-filter" viewBox="0 0 24 24"><path d="M3.5 6h17"/><path d="M7 12h10"/><path d="M10.5 18h3"/></symbol>
+  <symbol id="i-bild" viewBox="0 0 24 24"><rect x="3" y="4.5" width="18" height="15" rx="2"/><circle cx="8.5" cy="10" r="1.6"/><path d="m3.6 17.6 4.9-4.9 3.4 3.4 3-3 6.1 6.1"/></symbol>
+  <symbol id="i-pfeil" viewBox="0 0 24 24"><path d="M4 12h15"/><path d="m13 5.6 6.4 6.4-6.4 6.4"/></symbol>
+  <symbol id="i-export" viewBox="0 0 24 24"><path d="M12 3.5v11.5"/><path d="m7 10.5 5 5 5-5"/><path d="M4.5 20h15"/></symbol>
+  <symbol id="i-haken" viewBox="0 0 24 24"><path d="m5 12.6 4.6 4.6L19 7.2"/></symbol>
+  <symbol id="i-abmelden" viewBox="0 0 24 24"><path d="M9.5 21H6a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h3.5"/><path d="m15.5 16.5 4.5-4.5-4.5-4.5"/><path d="M20 12H9.5"/></symbol>
+  <symbol id="i-fenster" viewBox="0 0 24 24"><path d="M14 4h6v6"/><path d="M20 4 11 13"/><path d="M18 14.5V19a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4.5"/></symbol>
+</defs></svg>
+
+<div class="doc" lang="de">
+
+  <header class="kopf">
+    <span class="mono">Designkonzept · Fassung 2 · 03.08.2026</span>
+    <h1>Fünfundzwanzig Zeichen, eine Familie.</h1>
+    <p>Sie wollten mehr Zeichen in der Seitenleiste und Grafik im Inhalt. Beides steht hier —
+      zusammen mit der Liste der Stellen, an denen ich bewusst keins gesetzt habe.</p>
+  </header>
+
+  <div class="frage">
+    <span class="mono"><svg class="ik ik-kl"><use href="#i-hinweis"/></svg>Bitte entscheiden</span>
+    <h3>Zwei Ihrer Unterlagen sagen zu Zeichen etwas Verschiedenes.</h3>
+    <p>Das Corporate Design verbietet Symbole. Das Design-Briefing verlangt ein Symbolset und nennt
+      fünf Kandidaten. Beides steht schriftlich, beides trägt eine Begründung. Die Rangfolge in
+      <b>UEBERGABE_DATEILISTE.md</b> löst den Fall nicht auf, weil das Briefing dort nicht steht.</p>
+    <p>Ich habe gebaut, worum Sie gebeten haben, und lege die Gegenprobe direkt daneben. Meine
+      Lesart: der verbotene Schmuck ist das wiederkehrende Markenzeichen, nicht das Zeichen mit
+      Aufgabe. Dafür spricht die Farbtabelle im Corporate Design selbst — sie verbietet Lime für
+      <b>Icons ohne Funktion</b>. Diese Formulierung setzt voraus, dass es welche mit Funktion gibt.
+      Entscheiden müssen Sie.</p>
+
+    <div class="beleg">
+      <div>
+        <span class="wo">SARTU_CORPORATE_DESIGN.md · §5 Es gibt kein Motiv</span>
+        <span class="satz">„Der Auftritt hat damit gar keinen Schmuck. Keine Symbole, keine
+          Illustrationen, keine Verläufe."</span>
+      </div>
+      <div>
+        <span class="wo">CLAUDE_SARTU_DESIGN_BRIEFING_AUSFUEHRUNG.md · §3.4 Icons</span>
+        <span class="satz">„Lucide · Phosphor · Tabler · Remix Icon · Heroicons. Ein Set für die
+          gesamte Seite, selbst gehostet, als Inline-SVG. Nie Sets mischen."</span>
+      </div>
+      <div>
+        <span class="wo">SARTU_CORPORATE_DESIGN.md · §3 Wo Lime auftaucht, und wo nicht</span>
+        <span class="satz">Spalte „Lime nein": „Icons ohne Funktion"</span>
+      </div>
+    </div>
+
+    <div class="zweileisten">
+      <figure>
+        <figcaption><svg class="ik ik-kl"><use href="#i-haken"/></svg>Mit Zeichen — gebaut</figcaption>
+        <nav class="rail">
+          <div class="rail-gruppe">
+            <span class="mono">Projekt</span>
+            <a href="#" class="an"><svg class="ik"><use href="#i-uebersicht"/></svg>Übersicht</a>
+            <a href="#"><svg class="ik"><use href="#i-angebot"/></svg>Angebot</a>
+            <a href="#"><svg class="ik"><use href="#i-aufgaben"/></svg>Aufgaben <span class="zahl">3</span></a>
+            <a href="#"><svg class="ik"><use href="#i-vorschau"/></svg>Vorschau</a>
+          </div>
+          <div class="rail-gruppe">
+            <span class="mono">Verwaltung</span>
+            <a href="#"><svg class="ik"><use href="#i-rechnungen"/></svg>Rechnungen <span class="zahl">1</span></a>
+            <a href="#"><svg class="ik"><use href="#i-domain"/></svg>Domain</a>
+          </div>
+        </nav>
+      </figure>
+      <figure>
+        <figcaption>Ohne Zeichen — Fassung 1</figcaption>
+        <nav class="rail">
+          <div class="rail-gruppe">
+            <span class="mono">Projekt</span>
+            <a href="#" class="an"><span class="pkt jetzt"></span>Übersicht</a>
+            <a href="#"><span class="pkt leer"></span>Angebot</a>
+            <a href="#"><span class="pkt leer"></span>Aufgaben <span class="zahl">3</span></a>
+            <a href="#"><span class="pkt leer"></span>Vorschau</a>
+          </div>
+          <div class="rail-gruppe">
+            <span class="mono">Verwaltung</span>
+            <a href="#"><span class="pkt leer"></span>Rechnungen <span class="zahl">1</span></a>
+            <a href="#"><span class="pkt leer"></span>Domain</a>
+          </div>
+        </nav>
+      </figure>
+    </div>
+  </div>
+
+  <!-- ===================== DIE ZEICHENFAMILIE ===================== -->
+  <section class="abs">
+    <span class="mono">Die Zeichen</span>
+    <h2>Ein Raster, eine Strichstärke, keine Ausnahme.</h2>
+    <p class="hin">Alle Zeichen sitzen auf 24 × 24 Feldern mit 2 Punkt Kontur und runden Enden —
+      der Geometrie von Lucide. Ihre Farbe kommt immer vom Text daneben. Wenn Sie sich für Lucide entscheiden, tausche ich sie eins zu eins aus.</p>
+
+    <div class="tafel">
+      <div><svg class="ik ik-gr"><use href="#i-uebersicht"/></svg><span>Übersicht</span></div>
+      <div><svg class="ik ik-gr"><use href="#i-angebot"/></svg><span>Angebot</span></div>
+      <div><svg class="ik ik-gr"><use href="#i-aufgaben"/></svg><span>Aufgaben</span></div>
+      <div><svg class="ik ik-gr"><use href="#i-vorschau"/></svg><span>Vorschau</span></div>
+      <div><svg class="ik ik-gr"><use href="#i-rechnungen"/></svg><span>Rechnungen</span></div>
+      <div><svg class="ik ik-gr"><use href="#i-domain"/></svg><span>Domain</span></div>
+      <div><svg class="ik ik-gr"><use href="#i-inhalte"/></svg><span>Inhalte</span></div>
+      <div><svg class="ik ik-gr"><use href="#i-vertrag"/></svg><span>Vertrag</span></div>
+      <div><svg class="ik ik-gr"><use href="#i-hilfe"/></svg><span>Hilfe · Nachrichten</span></div>
+      <div><svg class="ik ik-gr"><use href="#i-anfragen"/></svg><span>Anfragen</span></div>
+      <div><svg class="ik ik-gr"><use href="#i-kunden"/></svg><span>Kunden</span></div>
+      <div><svg class="ik ik-gr"><use href="#i-projekte"/></svg><span>Projekte</span></div>
+      <div><svg class="ik ik-gr"><use href="#i-audit"/></svg><span>Audit · Verlauf</span></div>
+      <div><svg class="ik ik-gr"><use href="#i-betreiberdaten"/></svg><span>Betreiberdaten</span></div>
+      <div><svg class="ik ik-gr"><use href="#i-rechtstexte"/></svg><span>Rechtstexte</span></div>
+      <div><svg class="ik ik-gr"><use href="#i-testmail"/></svg><span>Testmail</span></div>
+      <div><svg class="ik ik-gr"><use href="#i-stand"/></svg><span>Projektstand</span></div>
+      <div><svg class="ik ik-gr"><use href="#i-hinweis"/></svg><span>Offene Punkte</span></div>
+      <div><svg class="ik ik-gr"><use href="#i-filter"/></svg><span>Filter</span></div>
+      <div><svg class="ik ik-gr"><use href="#i-bild"/></svg><span>Bildplatz</span></div>
+      <div><svg class="ik ik-gr"><use href="#i-fenster"/></svg><span>Neues Fenster</span></div>
+      <div><svg class="ik ik-gr"><use href="#i-pfeil"/></svg><span>Weiter</span></div>
+      <div><svg class="ik ik-gr"><use href="#i-export"/></svg><span>Export</span></div>
+      <div><svg class="ik ik-gr"><use href="#i-haken"/></svg><span>Erledigt</span></div>
+      <div><svg class="ik ik-gr"><use href="#i-abmelden"/></svg><span>Abmelden</span></div>
+    </div>
+
+    <div class="notiz">
+      <b>Nachrichten und Hilfe teilen sich ein Zeichen.</b> Im Kundenbereich heißt der Punkt
+      <b>Hilfe</b>, im internen Bereich <b>Nachrichten</b>. Es ist dieselbe Sache aus zwei
+      Richtungen, also bekommt sie dasselbe Zeichen. Neunzehn Menüpunkte kommen so mit sechzehn
+      Formen aus, neun weitere tragen Knöpfe und Beschriftungen.
+      <span class="quelle">Selbst gezeichnet · keine externe Verbindung · 4.3 KB im Dokument</span>
+    </div>
+  </section>
+
+  <!-- ===================== ÜBERSICHT ===================== -->
+  <section class="abs">
+    <span class="mono">Kundenbereich · Bildschirm 1 von 4</span>
+    <h2>Übersicht</h2>
+    <p class="hin">Der Bildschirm beantwortet eine Frage: <b>Was ist als Nächstes zu tun?</b>
+      Deshalb steht die Antwort ganz oben, dunkel und allein. Die sieben Stationen darunter sind
+      jetzt eine Bahn. Fassung 1 hatte dort eine Balkenreihe.</p>
+
+    <div class="buehne">
+      <div class="app">
+        <nav class="rail">
+          <div class="rail-marke">SARTU <em>Ihr Bereich</em></div>
+          <div class="rail-gruppe">
+            <span class="mono">Projekt</span>
+            <a href="#" class="an"><svg class="ik"><use href="#i-uebersicht"/></svg>Übersicht</a>
+            <a href="#"><svg class="ik"><use href="#i-angebot"/></svg>Angebot</a>
+            <a href="#"><svg class="ik"><use href="#i-aufgaben"/></svg>Aufgaben <span class="zahl">3</span></a>
+            <a href="#"><svg class="ik"><use href="#i-vorschau"/></svg>Vorschau</a>
+          </div>
+          <div class="rail-gruppe">
+            <span class="mono">Verwaltung</span>
+            <a href="#"><svg class="ik"><use href="#i-rechnungen"/></svg>Rechnungen</a>
+            <a href="#"><svg class="ik"><use href="#i-domain"/></svg>Domain</a>
+            <a href="#"><svg class="ik"><use href="#i-inhalte"/></svg>Inhalte</a>
+            <a href="#"><svg class="ik"><use href="#i-vertrag"/></svg>Vertrag</a>
+          </div>
+          <div class="rail-gruppe">
+            <span class="mono">Kontakt</span>
+            <a href="#"><svg class="ik"><use href="#i-hilfe"/></svg>Hilfe</a>
+          </div>
+          <div class="rail-fuss">
+            <div class="wer">Dachdeckerei Muster</div>
+            <div class="was"><svg class="ik ik-kl"><use href="#i-abmelden"/></svg>Max Muster · Abmelden</div>
+          </div>
+        </nav>
+
+        <div class="haupt">
+          <div class="leiste">
+            <h2><span class="titelzeichen"><svg class="ik"><use href="#i-uebersicht"/></svg></span>Übersicht</h2>
+            <div class="rechts"><span class="mrk voll">Wachstum</span></div>
+          </div>
+
+          <div class="inhalt">
+            <div class="schritt">
+              <div>
+                <span class="mono">Nächster Schritt</span>
+                <p class="gross">Fakten und Umfang final freigeben</p>
+                <p class="dazu">Danach beginnt die Produktion. Der genannte Zeitraum läuft ab dem Tag
+                  Ihrer Freigabe.</p>
+              </div>
+              <a class="knopf" href="#">Zur Freigabe <svg class="ik"><use href="#i-pfeil"/></svg></a>
+            </div>
+
+            <div class="karte">
+              <span class="mono"><svg class="ik ik-kl"><use href="#i-stand"/></svg>Projektstand</span>
+              <h3>Website Dachdeckerei Muster</h3>
+              <p class="fliess">Wir warten auf Ihre Freigabe der Fakten. Sobald sie vorliegt, bauen
+                wir die Seiten.</p>
+              <ol class="bahn">
+                <li class="fertig"><span class="knoten"><svg class="ik ik-kl"><use href="#i-haken"/></svg></span><span class="nam">Angebot</span></li>
+                <li class="fertig"><span class="knoten"><svg class="ik ik-kl"><use href="#i-haken"/></svg></span><span class="nam">Zahlung</span></li>
+                <li class="jetzt"><span class="knoten"><svg class="ik ik-kl"><use href="#i-pfeil"/></svg></span><span class="nam">Angaben</span></li>
+                <li><span class="knoten"></span><span class="nam">Produktion</span></li>
+                <li><span class="knoten"></span><span class="nam">Vorschau</span></li>
+                <li><span class="knoten"></span><span class="nam">Abnahme</span></li>
+                <li><span class="knoten"></span><span class="nam">Online</span></li>
+              </ol>
+            </div>
+
+            <div class="paar">
+              <div class="karte">
+                <span class="mono"><svg class="ik ik-kl"><use href="#i-hinweis"/></svg>Offene Punkte</span>
+                <div class="zeilen" style="border-top:none">
+                  <a class="zeile" href="#" style="grid-template-columns:minmax(0,1fr) auto auto;text-decoration:none;color:inherit">
+                    <span class="haupttext">3 offene Aufgaben</span>
+                    <span class="mrk">Zwei mit Frist</span>
+                    <svg class="ik" style="color:var(--label)"><use href="#i-pfeil"/></svg>
+                  </a>
+                  <a class="zeile" href="#" style="grid-template-columns:minmax(0,1fr) auto auto;text-decoration:none;color:inherit">
+                    <span class="haupttext">Freigabe der Fakten steht aus</span>
+                    <span class="mrk jetzt">Offen</span>
+                    <svg class="ik" style="color:var(--label)"><use href="#i-pfeil"/></svg>
+                  </a>
+                </div>
+              </div>
+
+              <div class="karte">
+                <span class="mono"><svg class="ik ik-kl"><use href="#i-audit"/></svg>Letzte Aktivität</span>
+                <div class="verlauf">
+                  <div class="erg"><span class="wann">28.07.</span><span>Angebot angenommen</span></div>
+                  <div class="erg"><span class="wann">28.07.</span><span>Zahlung eingegangen</span></div>
+                  <div class="erg"><span class="wann">30.07.</span><span>Aufgaben bereitgestellt</span></div>
+                  <div class="erg"><span class="wann">01.08.</span><span>Firmendaten bestätigt</span></div>
+                  <div class="erg"><span class="wann">02.08.</span><span>Leistungen beschrieben</span></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="notiz">
+      <b>Warum die Bahn und nicht der Balken.</b> Sieben Balken zeigen, wie weit es ist. Die Bahn
+      zeigt zusätzlich, was schon abgehakt ist und was als Nächstes kommt. Der Haken steht für
+      erledigt, der Pfeil für die laufende Station, der leere Ring für alles davor Liegende. Kein
+      Zustand hängt an einer Farbe.
+      <span class="quelle">Portal-Lastenheft §8.1 Block 2 · sieben Stationen, die aktuelle markiert</span>
+      <div class="karte schmal">
+        <span class="mono"><svg class="ik ik-kl"><use href="#i-stand"/></svg>Schmal</span>
+        <ol class="bahn">
+          <li class="fertig"><span class="knoten"><svg class="ik ik-kl"><use href="#i-haken"/></svg></span><span class="nam">Angebot</span></li>
+          <li class="fertig"><span class="knoten"><svg class="ik ik-kl"><use href="#i-haken"/></svg></span><span class="nam">Zahlung</span></li>
+          <li class="jetzt"><span class="knoten"><svg class="ik ik-kl"><use href="#i-pfeil"/></svg></span><span class="nam">Angaben</span></li>
+          <li><span class="knoten"></span><span class="nam">Produktion</span></li>
+          <li><span class="knoten"></span><span class="nam">Vorschau</span></li>
+          <li><span class="knoten"></span><span class="nam">Abnahme</span></li>
+          <li><span class="knoten"></span><span class="nam">Online</span></li>
+        </ol>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== AUFGABEN ===================== -->
+  <section class="abs">
+    <span class="mono">Kundenbereich · Bildschirm 2 von 4</span>
+    <h2>Ihre Aufgaben</h2>
+    <p class="hin">Listen tragen den größten Teil beider Bereiche. Hier steht bewusst kein Zeichen
+      in der Zeile: Der Haken links und die Marke rechts sagen den Zustand schon. Ein drittes
+      Zeichen sagte dasselbe ein drittes Mal.</p>
+
+    <div class="buehne">
+      <div class="app">
+        <nav class="rail">
+          <div class="rail-marke">SARTU <em>Ihr Bereich</em></div>
+          <div class="rail-gruppe">
+            <span class="mono">Projekt</span>
+            <a href="#"><svg class="ik"><use href="#i-uebersicht"/></svg>Übersicht</a>
+            <a href="#"><svg class="ik"><use href="#i-angebot"/></svg>Angebot</a>
+            <a href="#" class="an"><svg class="ik"><use href="#i-aufgaben"/></svg>Aufgaben <span class="zahl">3</span></a>
+            <a href="#"><svg class="ik"><use href="#i-vorschau"/></svg>Vorschau</a>
+          </div>
+          <div class="rail-gruppe">
+            <span class="mono">Verwaltung</span>
+            <a href="#"><svg class="ik"><use href="#i-rechnungen"/></svg>Rechnungen</a>
+            <a href="#"><svg class="ik"><use href="#i-domain"/></svg>Domain</a>
+            <a href="#"><svg class="ik"><use href="#i-inhalte"/></svg>Inhalte</a>
+            <a href="#"><svg class="ik"><use href="#i-vertrag"/></svg>Vertrag</a>
+          </div>
+          <div class="rail-gruppe">
+            <span class="mono">Kontakt</span>
+            <a href="#"><svg class="ik"><use href="#i-hilfe"/></svg>Hilfe</a>
+          </div>
+          <div class="rail-fuss">
+            <div class="wer">Dachdeckerei Muster</div>
+            <div class="was"><svg class="ik ik-kl"><use href="#i-abmelden"/></svg>Max Muster · Abmelden</div>
+          </div>
+        </nav>
+
+        <div class="haupt">
+          <div class="leiste">
+            <h2><span class="titelzeichen"><svg class="ik"><use href="#i-aufgaben"/></svg></span>Ihre Aufgaben</h2>
+            <div class="rechts">
+              <span class="mrk">3 von 5 offen</span>
+              <a class="knopf" href="#">Fakten freigeben <svg class="ik"><use href="#i-pfeil"/></svg></a>
+            </div>
+          </div>
+
+          <div class="inhalt">
+            <div class="karte">
+              <p class="fliess" style="margin-bottom:18px">Wir haben vorausgefüllt, was wir schon über
+                Ihr Unternehmen wissen. Sie bestätigen es oder korrigieren es. Sie müssen nicht alles
+                auf einmal machen — Ihr Stand wird gespeichert.</p>
+              <div class="zeilen aufgaben">
+                <div class="zeile">
+                  <span class="haken"></span>
+                  <span><span class="haupttext">Bilder hochladen</span><br>
+                    <span class="neben">Mindestens sechs Aufnahmen Ihrer Arbeit</span></span>
+                  <span class="mrk jetzt">Offen</span>
+                  <span class="neben zahlen">bis 08.08.2026</span>
+                </div>
+                <div class="zeile">
+                  <span class="haken"></span>
+                  <span><span class="haupttext">Referenzen benennen</span><br>
+                    <span class="neben">Zwei bis drei Projekte zum Zeigen</span></span>
+                  <span class="mrk">Offen</span>
+                  <span class="neben zahlen">bis 08.08.2026</span>
+                </div>
+                <div class="zeile">
+                  <span class="haken"></span>
+                  <span><span class="haupttext">Fakten und Umfang final freigeben</span><br>
+                    <span class="neben">Danach beginnen wir mit der Produktion</span></span>
+                  <span class="mrk jetzt">Freigabe</span>
+                  <span class="neben zahlen">offen</span>
+                </div>
+                <div class="zeile ruhig">
+                  <span class="haken ab"><svg class="ik ik-kl"><use href="#i-haken"/></svg></span>
+                  <span><span class="haupttext">Firmendaten bestätigen</span><br>
+                    <span class="neben">Anschrift, Telefon, Öffnungszeiten</span></span>
+                  <span class="mrk voll">Erledigt</span>
+                  <span class="neben zahlen">24.07.2026</span>
+                </div>
+                <div class="zeile ruhig">
+                  <span class="haken ab"><svg class="ik ik-kl"><use href="#i-haken"/></svg></span>
+                  <span><span class="haupttext">Leistungen beschreiben</span><br>
+                    <span class="neben">Was Sie anbieten, in Stichpunkten</span></span>
+                  <span class="mrk voll">Erledigt</span>
+                  <span class="neben zahlen">26.07.2026</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="notiz" style="margin-top:0;max-width:none">
+              <b>Erledigtes rutscht nach unten.</b> Das stand im Lastenheft und fehlte in Fassung 1.
+              Dort standen die beiden fertigen Aufgaben oben und nahmen den offenen den Platz.
+              Jetzt stehen sie unten und ruhiger gesetzt.
+              <span class="quelle">Portal-Lastenheft §8.3 · sortiert nach sort_order, Erledigtes zuletzt</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== VORSCHAU ===================== -->
+  <section class="abs">
+    <span class="mono">Kundenbereich · Bildschirm 3 von 4 · neu</span>
+    <h2>Vorschau und Freigabe</h2>
+    <p class="hin">Hier verdient eine Grafik ihren Platz am deutlichsten: Der Kunde soll seine
+      Website sehen, bevor er klickt. Weil es noch keine Aufnahme gibt, steht im Fensterrahmen der
+      beschriftete Bildplatz — die Lösung, die Ihr Corporate Design dafür vorsieht.</p>
+    <p class="hin"><b>Ab hier ein zweiter Musterkunde.</b> Dachdeckerei Muster steht auf Station
+      Angaben und hat weder Vorschau noch offene Rechnung. Elektro Beispiel KG steht auf Station
+      Vorschau, Paket Platzhirsch. Jeder Betrag unten kommt aus der Preistabelle.</p>
+
+    <div class="buehne">
+      <div class="app">
+        <nav class="rail">
+          <div class="rail-marke">SARTU <em>Ihr Bereich</em></div>
+          <div class="rail-gruppe">
+            <span class="mono">Projekt</span>
+            <a href="#"><svg class="ik"><use href="#i-uebersicht"/></svg>Übersicht</a>
+            <a href="#"><svg class="ik"><use href="#i-angebot"/></svg>Angebot</a>
+            <a href="#"><svg class="ik"><use href="#i-aufgaben"/></svg>Aufgaben</a>
+            <a href="#" class="an"><svg class="ik"><use href="#i-vorschau"/></svg>Vorschau</a>
+          </div>
+          <div class="rail-gruppe">
+            <span class="mono">Verwaltung</span>
+            <a href="#"><svg class="ik"><use href="#i-rechnungen"/></svg>Rechnungen <span class="zahl">1</span></a>
+            <a href="#"><svg class="ik"><use href="#i-domain"/></svg>Domain</a>
+            <a href="#"><svg class="ik"><use href="#i-inhalte"/></svg>Inhalte</a>
+            <a href="#"><svg class="ik"><use href="#i-vertrag"/></svg>Vertrag</a>
+          </div>
+          <div class="rail-gruppe">
+            <span class="mono">Kontakt</span>
+            <a href="#"><svg class="ik"><use href="#i-hilfe"/></svg>Hilfe</a>
+          </div>
+          <div class="rail-fuss">
+            <div class="wer">Elektro Beispiel KG</div>
+            <div class="was"><svg class="ik ik-kl"><use href="#i-abmelden"/></svg>A. Beispiel · Abmelden</div>
+          </div>
+        </nav>
+
+        <div class="haupt">
+          <div class="leiste">
+            <h2><span class="titelzeichen"><svg class="ik"><use href="#i-vorschau"/></svg></span>Vorschau und Freigabe</h2>
+            <div class="rechts"><span class="mrk voll">Platzhirsch</span><span class="mrk halb">Runde 1 offen</span></div>
+          </div>
+
+          <div class="inhalt">
+            <div class="paar">
+              <div class="karte">
+                <span class="mono"><svg class="ik ik-kl"><use href="#i-vorschau"/></svg>Ihre Website</span>
+                <figure class="rahmen">
+                  <div class="rahmen-kopf">
+                    <i></i><i></i><i></i>
+                    <span class="adresse">vorschau.sartu.de/elektro-beispiel</span>
+                  </div>
+                  <div class="bildplatz">
+                    <svg class="ik ik-xl"><use href="#i-bild"/></svg>
+                    <span class="mono">Bildplatz</span>
+                    <p>Hier steht die Aufnahme Ihrer Startseite, sobald die erste Fassung fertig ist.</p>
+                  </div>
+                </figure>
+                <p class="fliess" style="margin-top:18px">So sieht Ihre Website aktuell aus. Sehen Sie
+                  sich in Ruhe alles an und sammeln Sie Ihre Rückmeldungen — es ist einfacher für
+                  beide Seiten, wenn alles gebündelt kommt.</p>
+                <p style="margin-top:18px;display:flex;gap:12px;flex-wrap:wrap">
+                  <a class="knopf" href="#">Vorschau öffnen <svg class="ik"><use href="#i-fenster"/></svg></a>
+                </p>
+                <p class="fuss-hin" style="margin-top:14px">Die Vorschau ist noch nicht öffentlich und
+                  für Suchmaschinen gesperrt.</p>
+              </div>
+
+              <div class="karte">
+                <span class="mono"><svg class="ik ik-kl"><use href="#i-aufgaben"/></svg>Ihre Rückmeldung</span>
+                <div class="runden" style="margin-bottom:18px">
+                  <div class="segs"><span class="an"></span><span></span></div>
+                  <span class="txt">Korrekturrunde 1 von 2</span>
+                </div>
+                <p class="fliess">Sie können mehrere Rückmeldungen senden. Wir bearbeiten sie
+                  gebündelt.</p>
+                <div class="zeilen" style="border-top:none;margin-top:16px">
+                  <div class="zeile" style="grid-template-columns:minmax(0,1fr) auto">
+                    <span><span class="haupttext">Telefonnummer im Kopf</span><br>
+                      <span class="neben">Betrifft: Startseite</span></span>
+                    <span class="mrk voll">Erledigt</span>
+                  </div>
+                  <div class="zeile" style="grid-template-columns:minmax(0,1fr) auto">
+                    <span><span class="haupttext">Zwei Bilder tauschen</span><br>
+                      <span class="neben">Betrifft: Leistungen</span></span>
+                    <span class="mrk halb">In Arbeit</span>
+                  </div>
+                </div>
+                <p style="margin-top:18px">
+                  <a class="knopf knopf-still" href="#">Rückmeldungen einreichen
+                    <svg class="ik"><use href="#i-pfeil"/></svg></a>
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="notiz">
+      <b>Warum kein nachgebautes Bildschirmfoto.</b> Eine gezeichnete Musterwebsite im Rahmen sähe
+      besser aus und zeigte etwas, das es nicht gibt. Ihr Corporate Design nennt dafür die Regel:
+      erlaubt ist der beschriftete Bildplatz, verboten der leere Platzhalterrahmen. Zwei Punkt
+      gestrichelt, eine Monospace-Zeile, ein Satz über das, was dort später steht.
+      <span class="quelle">SARTU_CORPORATE_DESIGN.md §6 Bildsprache · Portal-Lastenheft §8.4</span>
+    </div>
+  </section>
+
+  <!-- ===================== RECHNUNGEN ===================== -->
+  <section class="abs">
+    <span class="mono">Kundenbereich · Bildschirm 4 von 4</span>
+    <h2>Rechnungen</h2>
+    <p class="hin">Wo Beträge stehen, laufen die Ziffern in einer Spalte. Jedes Zeichen ist gleich breit,
+      das Vergleichen geht ohne Rechnen. Die drei Zahlenkarten aus Fassung 1 sind weg.</p>
+
+    <div class="buehne">
+      <div class="app">
+        <nav class="rail">
+          <div class="rail-marke">SARTU <em>Ihr Bereich</em></div>
+          <div class="rail-gruppe">
+            <span class="mono">Projekt</span>
+            <a href="#"><svg class="ik"><use href="#i-uebersicht"/></svg>Übersicht</a>
+            <a href="#"><svg class="ik"><use href="#i-angebot"/></svg>Angebot</a>
+            <a href="#"><svg class="ik"><use href="#i-aufgaben"/></svg>Aufgaben <span class="zahl">3</span></a>
+            <a href="#"><svg class="ik"><use href="#i-vorschau"/></svg>Vorschau</a>
+          </div>
+          <div class="rail-gruppe">
+            <span class="mono">Verwaltung</span>
+            <a href="#" class="an"><svg class="ik"><use href="#i-rechnungen"/></svg>Rechnungen <span class="zahl">1</span></a>
+            <a href="#"><svg class="ik"><use href="#i-domain"/></svg>Domain</a>
+            <a href="#"><svg class="ik"><use href="#i-inhalte"/></svg>Inhalte</a>
+            <a href="#"><svg class="ik"><use href="#i-vertrag"/></svg>Vertrag</a>
+          </div>
+          <div class="rail-gruppe">
+            <span class="mono">Kontakt</span>
+            <a href="#"><svg class="ik"><use href="#i-hilfe"/></svg>Hilfe</a>
+          </div>
+          <div class="rail-fuss">
+            <div class="wer">Elektro Beispiel KG</div>
+            <div class="was"><svg class="ik ik-kl"><use href="#i-abmelden"/></svg>A. Beispiel · Abmelden</div>
+          </div>
+        </nav>
+
+        <div class="haupt">
+          <div class="leiste">
+            <h2><span class="titelzeichen"><svg class="ik"><use href="#i-rechnungen"/></svg></span>Rechnungen</h2>
+            <div class="rechts"><span class="mrk voll">Platzhirsch</span><span class="mrk jetzt">Eine offen</span></div>
+          </div>
+
+          <div class="inhalt">
+            <div class="karte">
+              <div class="zeilen rechnungen">
+                <div class="zeile">
+                  <span><span class="haupttext">RE-2026-014</span><br>
+                    <span class="neben">Zwischenrate · 30 %</span></span>
+                  <span class="neben zahlen">2.820,30 €</span>
+                  <span class="neben zahlen">12.08.2026</span>
+                  <span class="mrk jetzt">Offen</span>
+                  <a class="knopf" href="#" style="padding:9px 16px;font-size:14px">Jetzt bezahlen
+                    <svg class="ik ik-kl"><use href="#i-fenster"/></svg></a>
+                </div>
+                <div class="zeile ruhig">
+                  <span><span class="haupttext">RE-2026-009</span><br>
+                    <span class="neben">Anzahlung · 40 %</span></span>
+                  <span class="neben zahlen">3.760,40 €</span>
+                  <span class="neben zahlen">24.07.2026</span>
+                  <span class="mrk voll">Bezahlt</span>
+                  <span></span>
+                </div>
+              </div>
+              <p class="fuss-hin" style="margin-top:16px">Nach der Zahlung kann es einen Moment
+                dauern, bis der Status hier aktualisiert ist. Sie müssen nichts weiter tun.</p>
+              <p class="fuss-hin" style="margin-top:8px">Alle Beträge netto zzgl. gesetzlicher
+                Umsatzsteuer, sofern nicht anders angegeben. Zahlungsziel 10 Kalendertage.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="notiz">
+      <b>Drei Zahlenkarten sind entfernt.</b> Fassung 1 zeigte oben Vereinbart,
+      Bezahlt und Offen. Das Lastenheft nennt für diesen Bildschirm sechs Spalten und zwei
+      Pflichtsätze. Summen kommen darin nicht vor. Erfundene Summen sind der einfachste Weg zu einer Zahl, die dem
+      Angebot widerspricht. Der Balken über die Zahlungsanteile fällt damit auch weg.
+      Die Schlussrechnung fehlt in der Liste, weil sie erst nach der Abnahme entsteht.
+      <span class="quelle">Portal-Lastenheft §8.5 · Nummer, Beschreibung, Betrag, fällig am, Status, Aktion</span>
+    </div>
+  </section>
+
+  <!-- ===================== INTERNER BEREICH ===================== -->
+  <section class="abs">
+    <span class="mono">Interner Bereich</span>
+    <h2>Derselbe Rahmen, dichter gestellt.</h2>
+    <p class="hin">Der Kunde ist wenige Minuten hier, Sie den halben Tag. Deshalb rückt im internen
+      Bereich alles enger zusammen und die Zeichen werden einen Punkt kleiner. Dazu ein Kopfband,
+      das ihn auf einen Blick unterscheidbar macht.</p>
+
+    <div class="buehne">
+      <div class="app intern">
+        <div class="band">
+          <span class="mono"><svg class="ik ik-kl"><use href="#i-betreiberdaten"/></svg>Interner Bereich</span>
+          <span class="rechts">Angemeldet mit Passwort und Code · 03.08.2026, 08:12 Uhr</span>
+        </div>
+
+        <nav class="rail">
+          <div class="rail-marke">SARTU <em>Intern</em></div>
+          <div class="rail-gruppe">
+            <span class="mono">Arbeit</span>
+            <a href="#"><svg class="ik"><use href="#i-uebersicht"/></svg>Übersicht</a>
+            <a href="#" class="an"><svg class="ik"><use href="#i-anfragen"/></svg>Anfragen <span class="zahl">7</span></a>
+            <a href="#"><svg class="ik"><use href="#i-kunden"/></svg>Kunden</a>
+            <a href="#"><svg class="ik"><use href="#i-projekte"/></svg>Projekte <span class="zahl">4</span></a>
+            <a href="#"><svg class="ik"><use href="#i-rechnungen"/></svg>Rechnungen <span class="zahl">2</span></a>
+            <a href="#"><svg class="ik"><use href="#i-hilfe"/></svg>Nachrichten <span class="zahl">1</span></a>
+            <a href="#"><svg class="ik"><use href="#i-audit"/></svg>Audit</a>
+          </div>
+          <div class="rail-gruppe">
+            <span class="mono">Einstellungen</span>
+            <a href="#"><svg class="ik"><use href="#i-betreiberdaten"/></svg>Betreiberdaten</a>
+            <a href="#"><svg class="ik"><use href="#i-rechtstexte"/></svg>Rechtstexte</a>
+            <a href="#"><svg class="ik"><use href="#i-testmail"/></svg>Testmail</a>
+          </div>
+          <div class="rail-fuss">
+            <div class="wer">Vorname Nachname</div>
+            <div class="was"><svg class="ik ik-kl"><use href="#i-abmelden"/></svg>Abmelden</div>
+          </div>
+        </nav>
+
+        <div class="haupt">
+          <div class="leiste">
+            <h2><span class="titelzeichen"><svg class="ik"><use href="#i-anfragen"/></svg></span>Anfragen</h2>
+            <div class="rechts">
+              <a class="knopf knopf-still" href="#" style="padding:9px 16px;font-size:14px">Export
+                <svg class="ik ik-kl"><use href="#i-export"/></svg></a>
+            </div>
+          </div>
+
+          <div class="inhalt">
+            <div class="filter">
+              <svg class="ik ik-kl" style="color:var(--label)"><use href="#i-filter"/></svg>
+              <a class="fk an" href="#">Alle <span class="zahlen">12</span></a>
+              <a class="fk" href="#">Neu <span class="zahlen">7</span></a>
+              <a class="fk" href="#">In Bearbeitung <span class="zahlen">3</span></a>
+              <a class="fk" href="#">Abgelehnt <span class="zahlen">2</span></a>
+            </div>
+
+            <div class="karte">
+              <div class="zeilen anfragen">
+                <div class="zeile">
+                  <span class="pkt jetzt"></span>
+                  <span><span class="haupttext">Dachdeckerei Muster GmbH</span><br>
+                    <span class="neben">Bautzen · Empfehlung Wachstum</span></span>
+                  <span class="mrk jetzt">Neu</span>
+                  <span class="neben zahlen">03.08.2026</span>
+                  <span class="neben">vor 2 Std.</span>
+                </div>
+                <div class="zeile">
+                  <span class="pkt voll"></span>
+                  <span><span class="haupttext">Elektro Beispiel KG</span><br>
+                    <span class="neben">Görlitz · Empfehlung Platzhirsch</span></span>
+                  <span class="mrk voll">In Bearbeitung</span>
+                  <span class="neben zahlen">01.08.2026</span>
+                  <span class="neben">vorgestern</span>
+                </div>
+                <div class="zeile">
+                  <span class="pkt halb"></span>
+                  <span><span class="haupttext">Praxis Dr. Beispiel</span><br>
+                    <span class="neben">Dresden · Empfehlung Start</span></span>
+                  <span class="mrk halb">Rückfrage</span>
+                  <span class="neben zahlen">30.07.2026</span>
+                  <span class="neben">vor 4 Tagen</span>
+                </div>
+                <div class="zeile ruhig">
+                  <span class="pkt leer"></span>
+                  <span><span class="haupttext">Tischlerei Beispiel</span><br>
+                    <span class="neben">Kamenz · Sonderprojekt</span></span>
+                  <span class="mrk">Abgelehnt</span>
+                  <span class="neben zahlen">22.07.2026</span>
+                  <span class="neben">vor 12 Tagen</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="notiz" style="margin-top:0;max-width:none">
+              <b>Die Ampel steckt im Punkt links, nicht in einer Farbe.</b> Der Punkt hat vier Füllungen,
+              von ganz bis leer. Sie bleiben auf einem Schwarzweißdruck und bei Farbsehschwäche
+              lesbar. Die Filterreihe darüber ist neu und ersetzt keinen
+              Zähler: Sie steht so im Lastenheft.
+              <span class="quelle">Portal-Lastenheft §4b.5 · Filter nach Status, neueste zuerst</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== WO NICHTS STEHT ===================== -->
+  <section class="abs">
+    <span class="mono">Die Gegenprobe</span>
+    <h2>Sechs Stellen ohne Zeichen und ohne Grafik.</h2>
+    <p class="hin">Sie haben geschrieben: nur wenn es eine Verbesserung ist. Das sind die Stellen,
+      an denen ich geprüft und nichts gesetzt habe — jeweils mit dem Grund.</p>
+
+    <div class="ohne">
+      <div>
+        <h4>In der Listenzeile</h4>
+        <p>Haken links und Marke rechts sagen den Zustand bereits. Ein Zeichen dazwischen wäre die
+          dritte Auskunft über dieselbe Sache.</p>
+      </div>
+      <div>
+        <h4>In der Zustandsmarke</h4>
+        <p>Der Zustand steckt in der Füllung des Punktes. Ein Haken darin verschlüsselte ihn ein
+          zweites Mal und bräche die Regel, dass Form den Zustand trägt.</p>
+        <span class="quelle">Corporate Design §3 · keine zweite Akzentfarbe</span>
+      </div>
+      <div>
+        <h4>Im dunklen Block oben</h4>
+        <p>Der nächste Schritt trägt das einzige Lime der Seite. Ein großes Zeichen daneben nähme
+          dem Knopf die Aufmerksamkeit, die er braucht.</p>
+      </div>
+      <div>
+        <h4>Diagramme im internen Bereich</h4>
+        <p>Verlauf, Kennzahlen und Auswertung gehören zur Stufe 1. In Stufe 0 genügt die filterbare
+          Liste.</p>
+        <span class="quelle">Portal-Lastenheft §4b.4 · Etappe C in CLAUDE.md</span>
+      </div>
+      <div>
+        <h4>Der Zahlungsbalken</h4>
+        <p>Der Zahlungsplan gehört ins Angebot, im Klartext. Als Balken auf dem Rechnungsbildschirm
+          wäre er eine zweite Quelle für dieselbe Zahl.</p>
+        <span class="quelle">Portal-Lastenheft §8.2 Punkt 10</span>
+      </div>
+      <div>
+        <h4>Zeichen ohne Text daneben</h4>
+        <p>Jedes Zeichen hier steht neben seiner Beschriftung. Keins ersetzt sie — auch nicht in der
+          schmalen Leiste.</p>
+        <span class="quelle">Design-Briefing, Prüfliste · neben Inhalt, nie statt Inhalt</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== UNTERSCHIED ===================== -->
+  <section class="abs">
+    <span class="mono">Die Unterscheidung</span>
+    <h2>Was beide Bereiche trennt.</h2>
+    <p class="hin">Das Lastenheft verlangt, dass sie sichtbar auseinanderzuhalten sind. Das lösen
+      wir über Dichte und Kopfband — nicht über eine zweite Farbe, denn es gibt nur einen Akzent.</p>
+
+    <div class="gegen">
+      <div>
+        <h4><svg class="ik"><use href="#i-uebersicht"/></svg>Kundenbereich</h4>
+        <ul>
+          <li><b>Kein Kopfband.</b> Der Bildschirm beginnt mit dem Inhalt</li>
+          <li><b>17 px Grundschrift</b>, große Karten, viel Luft</li>
+          <li><b>18 px Zeichen</b> in der Leiste, 36 px Titelfeld oben</li>
+          <li><b>Ein dunkles Element</b> je Bildschirm: der nächste Schritt</li>
+          <li>Neun Einträge in fester Reihenfolge, drei Gruppen</li>
+          <li>Klartext statt Feldwerten — nie ein Systemcode</li>
+        </ul>
+      </div>
+      <div>
+        <h4><svg class="ik"><use href="#i-betreiberdaten"/></svg>Interner Bereich</h4>
+        <ul>
+          <li><b>Dunkles Kopfband</b> über der ganzen Breite, dauerhaft sichtbar</li>
+          <li><b>15,5 px Grundschrift</b>, flachere Karten, engere Zeilen</li>
+          <li><b>17 px Zeichen</b> in der Leiste, 31 px Titelfeld oben</li>
+          <li><b>Zähler in der Leiste</b> — was offen ist, steht neben dem Eintrag</li>
+          <li>Leiste etwas heller als der Kundenbereich, schmaler</li>
+          <li>Filterreihe über der Liste, mehr Zeilen je Bildschirm</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== OFFEN ===================== -->
+  <section class="abs">
+    <span class="mono">Offen</span>
+    <h2>Vier Punkte für Sie, einer für mich.</h2>
+
+    <div class="ohne">
+      <div>
+        <h4>Zeichen ja oder nein</h4>
+        <p>Der Widerspruch ganz oben. Ohne Ihre Entscheidung geht keine dieser Ansichten in den
+          Code.</p>
+      </div>
+      <div>
+        <h4>Welches Set</h4>
+        <p>Wenn ja: eines der fünf Sets aus §3.4 des Briefings. Meine Formen liegen auf dem
+          Lucide-Raster, der Tausch kostet nichts.</p>
+      </div>
+      <div>
+        <h4>Inhalte oder Öffnungszeiten</h4>
+        <p>Das Lastenheft nennt den Menüpunkt <b>Inhalte</b> und die Seite darunter
+          <b>Öffnungszeiten</b>. Ein Wort für beides wäre klarer.</p>
+        <span class="quelle">Portal-Lastenheft §8 Navigation gegen §8.7</span>
+      </div>
+      <div>
+        <h4>Die Leiste auf dem Telefon</h4>
+        <p>Ausklappbar wie das Menü der Website oder als Reihe oben. Beides geht ohne Skript, beides
+          ist noch nicht entschieden.</p>
+      </div>
+      <div>
+        <h4>Drei Bildschirme fehlen weiter</h4>
+        <p>Angebot, Domain und Hilfe brauchen Inhalte, die es noch nicht gibt. Die zeichne ich, wenn
+          die Zeichenfrage geklärt ist.</p>
+      </div>
+    </div>
+
+    <div class="bericht">
+      <pre>TEXTPRUEFUNG   Seite: Designkonzept Fassung 2   Datum: 03.08.2026
+
+Saetze gesamt                          <b>98</b>
+Laengster Satz                         <b>22</b> Woerter     Grenze 20   <b>begruendet</b>
+Saetze ueber 20 Woertern                <b>1</b>             Grenze 0    <b>begruendet</b>
+Aufzaehlungen >3 Glieder im Satz        <b>0</b>             Grenze 0
+Gegensatzformel                         <b>2</b>             Grenze 2
+Wortliste Fuellwoerter                  <b>0</b>             Grenze 0
+Behauptungen ueber Kunden / Markt       <b>0</b>             Grenze 0
+Sie / Ihr / Ihre / Ihnen               <b>23</b>
+wir / uns / unser                       <b>6</b>             muss kleiner Sie sein
+Erfundene Werte                         <b>0</b>             Grenze 0
+
+Zur begruendeten Ueberschreitung: Der Satz mit 22 Woertern steht im
+Bildschirm Vorschau und ist gebundener Wortlaut aus dem Portal-Lastenheft
+§8.4. Gebundene Texte werden uebernommen, nicht umgeschrieben.
+
+Gezaehlt mit tools/textpruefung.py auf der Prosa dieser Seite.
+Kein Betrag ohne Quelle: Preistabelle Masterkonzept, USt 19 Prozent.</pre>
+    </div>
+  </section>
+
+</div>

@@ -16,13 +16,14 @@ wurde — mit der Stelle, die entschieden hat.
 
 Die Nummern bleiben, auch wo eine Zeile verschwindet. **2, 4, 6, 7 und 8 sind am 02.08.2026
 entschieden worden** und stehen unten; wer die alte Nummer sucht, findet sie dort und nicht
-als Lücke, die er sich erklären muss. Offen sind noch drei: 1, 3 und 5.
+als Lücke, die er sich erklären muss. Offen sind noch vier: 1, 3, 5 und 9.
 
 | # | Punkt | Was fehlt | Was stattdessen gebaut wurde |
 |---|---|---|---|
 | 1 | **Feldliste je Aufgabe der Vorlage** (§9.3) | §9.3 nennt dreizehn Vorlagen mit Titel, Art und „Warum wir das brauchen" — aber nicht, **welche Felder** eine `angabe`-Aufgabe abfragt | Die dreizehn Vorlagen stehen mit genau diesen drei Angaben. Eine `angabe` bekommt ein freies Antwortfeld, kein erfundenes Formular |
 | 3 | **Zwei weitere Ampelbedingungen** (§4b.4) | Die Ampel kennt vier Stufen; für `orange` nennt der Text zwei Auslöser und deutet weitere an, ohne sie zu benennen | Die zwei benannten Auslöser sind gebaut und deterministisch geprüft (Testfall 39) |
 | 5 | **Antwortfeld je Rückmeldung** (§9.2 „Feedback") | §9.2 nennt „je Eintrag Antwortfeld und Statuswechsel". `feedback_items` hat in §4 **kein** Antwortfeld und keinen Status je Eintrag | Die Rückmeldungen stehen im internen Bereich vollständig lesbar unter ihrer Runde. Die Runde wird als Ganzes als eingearbeitet vermerkt — das ist der Weg, den §5.6a beschreibt. Ein Antwortfeld bräuchte zwei Spalten, die im Datenmodell fehlen |
+| 9 | **Zeichen in der Oberfläche** (`SARTU_CORPORATE_DESIGN.md` §5 gegen `CLAUDE_SARTU_DESIGN_BRIEFING_AUSFUEHRUNG.md` §3.4) | §5 schreibt: „Der Auftritt hat damit gar keinen Schmuck. Keine Symbole, keine Illustrationen, keine Verläufe." §3.4 verlangt **ein** Set als Inline-SVG und nennt fünf Kandidaten. Beide Stellen tragen eine Begründung. Die Rangfolge in `UEBERGABE_DATEILISTE.md` entscheidet den Fall nicht, weil das Briefing dort nicht steht | Nichts im Anwendungscode. `design/portalkonzept.html` zeigt beide Fassungen der Seitenleiste nebeneinander, mit Zeichen und ohne. Ein Hinweis darauf: §3 desselben Corporate Design verbietet Lime für „Icons **ohne Funktion**" — die Formulierung setzt voraus, dass es Zeichen mit Funktion gibt |
 | ~~6~~ | ~~**Tabelle für das Kontaktformular**~~ | **Erledigt am 02.08.2026 — und die alte Antwort war falsch.** Portal-Lastenheft **§4b.6** regelt den Fall ausdrücklich: „Es versendet ausschließlich eine E-Mail an SARTU und erzeugt **keinen** Datensatz." Die Stelle war beim ersten Bau nicht gefunden worden. Es fehlte keine Tabelle — es sollte gar keine geben | Siehe „Entschieden und eingebaut" |
 
 ---
