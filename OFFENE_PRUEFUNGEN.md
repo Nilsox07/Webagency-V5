@@ -557,3 +557,46 @@ Genau deshalb wirkt sie.
 
 **Ungeprüft:** ob eine Fläche dieser Größe im Ausdruck und auf kalibrierten Schirmen angenehm
 bleibt. Auf Verlangen lässt sie sich auf `--sand` mit Lime-Kante zurücknehmen.
+
+## CTA-Prüfung: acht von zehn fehlten
+
+Auf Nachfrage geprüft, ob jeder Abschnitt einen Weiterweg hat. Vorher/nachher:
+
+| § | Abschnitt | Vorgabe | war |
+|---|---|---|---|
+| 1 | Aufmacher | `Bedarf prüfen lassen` → `/briefing` · `Preise ansehen` → `/preise` | da, aber **auf Seitenanker** statt auf die Seiten |
+| 2 | Kundenbereich | Textlink `Den Kundenbereich ansehen` → `/leistung-portal` | **fehlte** |
+| 3 | Ablauf | `Ablauf im Detail` → `/ablauf` | **fehlte** |
+| 4 | Preise | je Stufe einer: 2 × `Einschätzen lassen`, `Bedarf prüfen lassen`, `Sonderprojekt besprechen` + Pflichtzeile | **alle vier fehlten** |
+| 5 | Die Zusage | ausdrücklich **kein** Knopf | korrekt leer |
+| 6 | Wer dahintersteckt | Textlink `Mehr über SARTU` → `/ueber-uns` | Abschnitt fehlt ganz (Foto) |
+| 7 | Leistungen | `Alle Leistungen im Überblick` → `/leistungen` | da |
+| 8 | Musterprojekte | `Alle Musterprojekte ansehen` | **fehlte** |
+| 9 | Häufige Fragen | keiner vorgesehen | korrekt leer |
+| 10 | Bedarfsscheck | `Bedarf prüfen lassen` → `/briefing` · Textlink `Preise ansehen` → `/preise` | primär da (**auf `#top`**), sekundär fehlte |
+
+Alle jetzt gesetzt. Lime bleibt im Preisblock **einem** Knopf vorbehalten — Platzhirsch, laut §4
+„sichtbar die Empfehlung". Die Sonderprojekt-Karte ist selbst dunkel, liegt aber in einem hellen
+Abschnitt; `.btn-hell` war an `.dark` gebunden und fiel dort auf Lime zurück.
+
+**Zielseiten laut §5b und den CTA-Zeilen:** `/briefing` · `/preise` · `/leistungen` · `/ablauf` ·
+`/leistung-portal` · `/ueber-uns` · `/musterprojekte`. Keine davon existiert bisher — die Startseite
+verweist ins Leere, bis sie gebaut sind.
+
+## Widerspruch in §5b: `Leistungen` in der Navigation oder im Fußbereich?
+
+§5b sagt an einer Stelle: *„`Leistungen` bleibt damit in der Hauptnavigation statt im Fußbereich —
+es ist die Seite, die auf ‚webdesign' und ‚firmenwebsite erstellen lassen' antwortet."*
+
+Zwei Absätze später im **selben** Abschnitt: *„`Leistungen` bleibt als Seite bestehen
+(Suchmaschinenrelevanz), wandert aber in den Fußbereich, damit die Hauptnavigation nicht
+überläuft."*
+
+Beide tragen eine Begründung. **Gebaut nach der Punkteliste** — sie steht unter der Überschrift
+„Dies ist die einzige gültige Navigation" und führt `Leistungen` an erster Stelle. Der zweite Satz
+wirkt wie ein Rest der abgelösten Fassung. **Zu entscheiden, nicht geraten.**
+
+Die Navigation lautet jetzt wie vorgegeben: `Leistungen · Preise · Ablauf · Kundenbereich ·
+Über uns · Fragen`. `Über uns` fehlte, die Reihenfolge stimmte nicht. Mit sechs Punkten greift das
+Mobilmenü ab 1180 px statt 1040 px — §5b sieht genau das vor: „Wird die Zeile dadurch zu breit,
+greift das Mobilmenü früher — der verständlichere Begriff wird nicht für sechs Pixel geopfert."

@@ -53,6 +53,15 @@ h2{font-size:clamp(31px,4.3vw,50px)}
 .dark .tag{color:var(--label-dark)}
 .round-top{border-radius:var(--r-xl) var(--r-xl) 0 0}
 .round-bot{border-radius:0 0 var(--r-xl) var(--r-xl)}
+/* §4 verlangt je Preisstufe einen Knopf, §2/§3/§8/§10 je einen Weiterweg.
+   Gebaut waren zwei von zehn — der Preisblock hatte keinen einzigen. */
+.plan-cta{width:100%;justify-content:center;margin-top:22px;padding:15px 22px;font-size:16px}
+.plan-hi .plan-cta{background:var(--lime);color:var(--ink);border-color:transparent}
+.plan-pflicht{margin-top:11px;font-size:13.5px;line-height:1.45;color:var(--label-dark);max-width:38ch}
+.txtlink{display:inline-flex;align-items:center;gap:9px;margin-top:var(--s-5);font-size:17px;
+  font-weight:600;color:var(--cream);border-bottom:1.5px solid #4a453c;padding-bottom:3px}
+.txtlink:hover{border-bottom-color:var(--lime)}
+.sec:not(.dark) .txtlink{color:var(--ink);border-bottom-color:var(--line)}
 /* Sektion 5 und 7 waren als EIN dunkler Block gebaut — round-top oben,
    round-bot unten, dazwischen keine Kante. Genau deshalb wurde Sektion 7
    ueberlesen. Sie bekommt jetzt eigenen Grund: Sand, zwischen der dunklen
@@ -91,8 +100,13 @@ h2{font-size:clamp(31px,4.3vw,50px)}
 .btn-ghost{background:transparent;border:1.5px solid var(--ink);padding:17px 28px}
 .btn-ghost:hover{background:var(--ink);color:var(--cream)}
 .dark .btn{border-color:transparent}
-.dark .btn-hell{background:transparent;color:var(--cream);border:1.5px solid #4a453c;padding:16px 26px}
-.dark .btn-hell:hover{background:var(--cream);color:var(--ink);border-color:var(--cream)}
+/* Heller Zweitknopf auf dunklem Grund. Nicht an `.dark` gebunden: die
+   Sonderprojekt-Karte ist selbst dunkel, liegt aber in einem hellen
+   Abschnitt — dort fiel der Knopf sonst auf Lime zurueck und haette mit
+   Platzhirsch konkurriert, der laut §4 die sichtbare Empfehlung ist. */
+.btn-hell,.dark .btn-hell{background:transparent;color:var(--cream);
+  border:1.5px solid #55504a;padding:16px 26px}
+.btn-hell:hover,.dark .btn-hell:hover{background:var(--cream);color:var(--ink);border-color:var(--cream)}
 
 /* Bewegung — scrollgebunden, ohne Unterstützung sofort im Endzustand */
 @keyframes rise{from{opacity:.001;transform:translateY(var(--shift))}to{opacity:1;transform:none}}
@@ -124,12 +138,12 @@ h2{font-size:clamp(31px,4.3vw,50px)}
   font-weight:700;letter-spacing:-.04em}
 .brand em{font-family:var(--font-mono);font-style:normal;font-size:10.5px;font-weight:500;
   letter-spacing:.16em;color:var(--label);text-transform:uppercase}
-.nav{display:flex;gap:4px}
-.nav a{padding:10px 16px;border-radius:var(--r-pill);background-image:none;color:var(--muted);
+.nav{display:flex;gap:2px}
+.nav a{white-space:nowrap;padding:10px 13px;border-radius:var(--r-pill);background-image:none;color:var(--muted);
   font-size:15.5px;font-weight:500;transition:background .2s ease,color .2s ease}
 .nav a:hover{background:var(--sand);color:var(--ink)}
 .top .btn{padding:14px 24px;font-size:16px}
-@media (max-width:1040px){.nav{display:none}}
+@media (max-width:1180px){.nav{display:none}}
 @media (max-width:620px){.top .btn{display:none}}
 
 /* ---------- AUFMACHER ---------- */
@@ -588,13 +602,14 @@ html:has(#g-kalk:checked),html:has(#g-weiss:checked){background:var(--cream)}
   <div class="top-in">
     <a class="brand" href="#top">SARTU <em>Webdesign</em></a>
     <nav class="nav">
-      <a href="#portal">Kundenbereich</a>
-      <a href="#ablauf">Ablauf</a>
+      <a href="/leistungen">Leistungen</a>
       <a href="#preise">Preise</a>
-      <a href="#leistungen">Leistungen</a>
+      <a href="#ablauf">Ablauf</a>
+      <a href="#portal">Kundenbereich</a>
+      <a href="/ueber-uns">Über uns</a>
       <a href="#fragen">Fragen</a>
     </nav>
-    <a class="btn" href="#abschluss">Bedarf prüfen lassen <span class="ar">→</span></a>
+    <a class="btn" href="/briefing">Bedarf prüfen lassen <span class="ar">→</span></a>
   </div>
 </header>
 
@@ -613,8 +628,8 @@ html:has(#g-kalk:checked),html:has(#g-weiss:checked){background:var(--cream)}
         <h1>Individuell programmierte Firmenwebsites <span class="accent">zum Festpreis.</span></h1>
         <p class="hero-lede">Sie erzählen uns, was Ihr Betrieb macht und für wen. Den Rest bauen und betreiben wir. Dafür ist kein einziger Termin nötig.</p>
         <div class="hero-cta">
-          <a class="btn" href="#abschluss">Bedarf prüfen lassen <span class="ar">→</span></a>
-          <a class="btn btn-ghost" href="#preise">Preise ansehen</a>
+          <a class="btn" href="/briefing">Bedarf prüfen lassen <span class="ar">→</span></a>
+          <a class="btn btn-ghost" href="/preise">Preise ansehen</a>
         </div>
         <p class="status-quiet"><span class="dot" aria-hidden="true"></span><span>Freie Kapazitäten</span></p>
         <p class="hero-fine">Alle Preise netto zzgl. USt. Ausschließlich für Unternehmer.</p>
@@ -697,6 +712,7 @@ html:has(#g-kalk:checked),html:has(#g-weiss:checked){background:var(--cream)}
         <p class="mono">Platz für Bildschirmansicht</p>
         <p>Hier steht später eine echte Aufnahme aus dem Kundenbereich. Bis dahin bleibt die Fläche leer, statt eine Oberfläche zu zeigen, die es so nicht gibt.</p>
       </div>
+      <a class="txtlink rise" href="/leistung-portal">Den Kundenbereich ansehen <span class="ar">→</span></a>
     </div>
   </section>
 
@@ -737,6 +753,7 @@ html:has(#g-kalk:checked),html:has(#g-weiss:checked){background:var(--cream)}
           <div class="step-shot"><p class="mono">Platz für Ansicht</p><p>Später: die Domainübersicht.</p></div>
         </div>
       </div>
+      <a class="btn btn-hell rise" href="/ablauf" style="margin-top:var(--s-5)">Ablauf im Detail <span class="ar">→</span></a>
     </div>
   </section>
 
@@ -759,6 +776,7 @@ html:has(#g-kalk:checked),html:has(#g-weiss:checked){background:var(--cream)}
             <li>Kontakt- und Anfrageweg, mobil zuerst gedacht</li>
             <li>SEO-Grundlage ab Livegang</li>
           </ul>
+          <a class="btn plan-cta btn-ghost" href="/briefing">Einschätzen lassen <span class="ar">→</span></a>
         </div>
 
         <div class="plan plan-hi rise">
@@ -773,6 +791,7 @@ html:has(#g-kalk:checked),html:has(#g-weiss:checked){background:var(--cream)}
             <li>Laufende inhaltliche Weiterentwicklung im Betrieb</li>
             <li>SEO-Grundlage je Seite, je Ort</li>
           </ul>
+          <a class="btn plan-cta" href="/briefing">Bedarf prüfen lassen <span class="ar">→</span></a>
         </div>
 
         <div class="plan rise">
@@ -786,6 +805,7 @@ html:has(#g-kalk:checked),html:has(#g-weiss:checked){background:var(--cream)}
             <li>Team-, Referenz- oder Ablaufdarstellung nach Bedarf</li>
             <li>SEO-Grundlage je Seite statt nur für die Startseite</li>
           </ul>
+          <a class="btn plan-cta btn-ghost" href="/briefing">Einschätzen lassen <span class="ar">→</span></a>
         </div>
       </div>
 
@@ -798,6 +818,8 @@ html:has(#g-kalk:checked),html:has(#g-weiss:checked){background:var(--cream)}
         <div>
           <p>Für Vorhaben, die über eine Firmenwebsite hinausgehen: Shop, Buchung, Login-Bereiche, Anbindung an vorhandene Systeme oder mehrere Standorte. Wir prüfen den technischen Umfang und nennen einen Festpreis, bevor Sie sich entscheiden.</p>
           <p class="betont" style="margin-top:16px">Wenn wir ein Vorhaben nicht verantworten können, sagen wir das.</p>
+          <a class="btn btn-hell" href="/briefing" style="margin-top:20px">Sonderprojekt besprechen <span class="ar">→</span></a>
+          <p class="plan-pflicht">Nur Sonderprojekte klären wir vor dem Angebot persönlich.</p>
         </div>
       </div>
       <p class="mono" style="margin-top:var(--s-4);color:var(--label)">Alle Preise netto zzgl. USt. · ausschließlich für Unternehmer</p>
@@ -856,6 +878,7 @@ html:has(#g-kalk:checked),html:has(#g-weiss:checked){background:var(--cream)}
           <div class="sample-in"><h3>Praxis</h3><p>Eine Seite, die trägt: Leistung, Zeiten, Weg zur Terminanfrage.</p></div>
         </div>
       </div>
+      <a class="btn btn-ghost rise" href="/musterprojekte" style="margin-top:var(--s-5)">Alle Musterprojekte ansehen <span class="ar">→</span></a>
     </div>
   </section>
 
@@ -884,7 +907,8 @@ html:has(#g-kalk:checked),html:has(#g-weiss:checked){background:var(--cream)}
           <p style="margin-top:22px;max-width:52ch;font-size:17.5px;line-height:1.65;color:#c3bcae">Wenige Fragen zu Betrieb, Ziel und Umfang. Danach erhalten Sie eine begründete Empfehlung mit Preisspanne — ohne Termin und ohne Verpflichtung.</p>
         </div>
         <div class="cta-field-side">
-          <a class="btn" href="#top">Bedarf prüfen lassen <span class="ar">→</span></a>
+          <a class="btn" href="/briefing">Bedarf prüfen lassen <span class="ar">→</span></a>
+        <a class="txtlink" href="/preise" style="margin-top:0">Preise ansehen <span class="ar">→</span></a>
           <p class="mono" style="color:var(--label-dark);margin-top:20px;max-width:26ch">Zwei Minuten · keine Anmeldung · Antwort innerhalb eines Werktags</p>
         </div>
       </div>
