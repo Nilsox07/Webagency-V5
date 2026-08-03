@@ -600,3 +600,32 @@ Die Navigation lautet jetzt wie vorgegeben: `Leistungen · Preise · Ablauf · K
 Über uns · Fragen`. `Über uns` fehlte, die Reihenfolge stimmte nicht. Mit sechs Punkten greift das
 Mobilmenü ab 1180 px statt 1040 px — §5b sieht genau das vor: „Wird die Zeile dadurch zu breit,
 greift das Mobilmenü früher — der verständlichere Begriff wird nicht für sechs Pixel geopfert."
+
+## Behoben: unsichtbarer CTA im Bedarfsscheck — 1,00 : 1
+
+`Preise ansehen` im Bedarfsscheck war **exakt** unsichtbar: `rgb(20,17,13)` auf `rgb(20,17,13)`.
+
+Ursache war die Klasse `.txtlink`, die ich beim CTA-Einbau angelegt hatte. Sie band die Farbe an
+den **Abschnitt**: `.sec:not(.dark) .txtlink{color:var(--ink)}`. Der Bedarfsscheck ist ein heller
+Abschnitt — aber der Knopf liegt auf einer **dunklen Karte** darin. Die Regel griff also richtig
+und lieferte trotzdem Tinte auf Tinte. Eine Farbe, die am Elternabschnitt hängt statt am Bauteil,
+ist genau diese Fehlerklasse.
+
+`.txtlink` ist ersatzlos entfernt. Jeder Weiterweg ist jetzt eine Pille mit eigener Farbe.
+
+**Vollständige Nachmessung aller dreizehn CTAs** (Grund durch Vorfahren ermittelt, nicht geraten):
+
+| Kontrast | Anzahl |
+|---:|---|
+| 12,48 : 1 | 4 × Lime-Knopf mit Tinte |
+| 15,60 : 1 | 1 × auf Sand |
+| 17,39 : 1 | 6 × heller Umriss auf dunklem Grund |
+| 18,82 : 1 | 2 × Tinte auf Papier |
+
+Keiner unter 4,5 : 1. Die Treffer der Kopfleiste im ersten Durchlauf waren Messartefakte — deren
+Grund ist ein `oklab()`-Wert, den der Parser nicht als RGB lesen konnte.
+
+**Abweichung, gemeldet:** §2 nennt `Den Kundenbereich ansehen` und §10 `Preise ansehen`
+ausdrücklich **Textlink**, nicht Knopf. Beide sind auf Wunsch des Betreibers Pillen geworden. Die
+Rangfolge bleibt erhalten — sekundäre Knöpfe tragen Umriss statt Lime, Lime bleibt dem
+Hauptknopf vorbehalten. **Zu entscheiden:** §2 und §10 nachziehen oder zurück auf Textlink.
