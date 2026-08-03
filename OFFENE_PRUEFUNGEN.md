@@ -361,3 +361,47 @@ Benennung.
 Navigation und Sektion 2 wiegt schwerer als eine einzelne Tabellenzelle. **Zu
 entscheiden:** entweder §7 auf `Kundenbereich` ziehen oder die Außensprache-Regel um
 `Portal` ergänzen. Bis dahin ist das eine bewusste Abweichung, keine Übersetzung.
+
+## Prüfung der Aussage „Es gibt keine Aufpreisliste." — trägt, mit einer Lücke
+
+**Die Aussage selbst ist belegt**, nicht geschönt. Masterkonzept, Preisabschnitt:
+
+> **Bewusst NICHT im Erstangebot** (Scope-Schutz): Add-on-Liste, Extraseiten-Preise, SEO-Stufen,
+> Änderungsminuten, Logo-Pakete, Express, Newsletter/Tracking als Häkchen. Ein Standardangebot
+> endet **exakt** beim veröffentlichten Paketpreis. Neue Ziele nach Auftrag → **ein**
+> konsolidiertes Folgeangebot mit Festpreis, **keine Einzelpreisliste.**
+
+Dazu für den Bedarfsscheck: „Keine Paketwechsel-Buttons, keine Add-ons, keine SEO-Auswahl."
+Mehrbedarf erzeugt also **ein neues Festpreisangebot**, keine Position aus einer Liste. Das Wort
+`Liste` trägt die Aussage — sie ist wörtlich wahr und beschreibt eine bewusste Geschäftsregel.
+
+**Die Lücke liegt in Zeile 8.** `Rundum-Schutz` steht unter der Augenbraue `Im Preis enthalten`
+und unter dem Einleitungssatz „zahlen nichts davon extra". Der Schutz kostet aber **59 / 129 /
+249 € netto im Monat**. Der von §7 vorgegebene Satz — „Wir betreiben die Website danach: Hosting,
+Sicherheit, Backups, Monitoring." — nennt die Pauschale **nicht**. Wer nur diesen Abschnitt liest,
+kann ihn für Teil des Einmalpreises halten.
+
+Das ist nicht nur Genauigkeit, es trifft das Geschäftsmodell. Masterkonzept, Abschnitt
+„Wie der Rundum-Schutz kommuniziert wird (kritisch!)":
+
+> Der häufigste Kommunikationsfehler wäre, die Website als „wartungsarm" zu bewerben – dann fragt
+> der Kunde sofort: *„Warum zahle ich dann 59/129/249 € im Monat?"* Das entwertet die wichtigste
+> Umsatzquelle.
+
+**Zu entscheiden:** §7 gibt den Satz wörtlich vor. Entweder er bleibt und die Pauschale wird an
+anderer Stelle im Abschnitt sichtbar, oder §7 wird um den Halbsatz „über die Monatspauschale"
+ergänzt — so stand es in der freien Fassung vor dem Umbau auf §7. **Nicht eigenmächtig geändert.**
+
+## Slider für Sektion 7 — geprüft und verworfen
+
+Geprüft, weil gefragt. Drei Vorgaben stehen dagegen, alle verbindlich:
+
+1. Bauform-Tabelle §4: Sektion 7 ist `Zeilen — die einzige Liste`, Sektion 8 ist `Karten`.
+2. „**Kein Aufbaumuster kommt mehr als zweimal vor**" (Design-Briefing §3.7). Sektion 7 und 8
+   liegen direkt nebeneinander — gleiche Bauform hieße zweimal dasselbe hintereinander.
+3. Die Begründung der Bauform-Spalte: eine frühere Fassung „bestand von oben bis unten aus
+   demselben Zeilenmuster … eine Seite ohne einen einzigen Gangwechsel".
+
+Zur Indexierung: Ein Schieber aus `scroll-snap` hält alle acht Zeilen im Quelltext und ist damit
+indexierbar; ein JavaScript-Karussell, das nur die sichtbare Karte einhängt, ist es nicht. Die
+Frage entscheidet aber nicht die Bauform — die drei Punkte oben tun es.
