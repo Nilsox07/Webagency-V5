@@ -1,3 +1,5 @@
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="SARTU programmiert Firmenwebsites zum Festpreis — Struktur, Texte, Technik und SEO-Grundlage inklusive. Bundesweit, ohne Termin.">
 <title>SARTU — Startseite, überarbeitete Fassung</title>
 <style>
 /* ============================================================
@@ -29,7 +31,8 @@
 html{background:var(--cream)}
 *{box-sizing:border-box}
 body{margin:0;background:var(--cream);color:var(--text);font-family:var(--font-sans);
-  font-size:18px;line-height:1.62;text-wrap:pretty;overflow-x:hidden}
+  font-size:18px;line-height:1.62;text-wrap:pretty;overflow-x:clip}
+html{overflow-x:clip}
 h1,h2,h3,h4{margin:0;font-weight:650;letter-spacing:-.025em;line-height:1.04;color:var(--ink);text-wrap:balance}
 p{margin:0}
 ul{margin:0;padding:0;list-style:none}
@@ -53,6 +56,13 @@ h2{font-size:clamp(31px,4.3vw,50px)}
 .dark .tag{color:var(--label-dark)}
 .round-top{border-radius:var(--r-xl) var(--r-xl) 0 0}
 .round-bot{border-radius:0 0 var(--r-xl) var(--r-xl)}
+/* §5: „Portal-Cockpit-Screenshot, Badge ‚Musteransicht'." Das Kennzeichen
+   fehlte ganz — die Attrappe zeigte eine Oberflaeche, die es noch nicht gibt,
+   ohne jeden Hinweis darauf. */
+.musteransicht{position:absolute;z-index:3;top:0;left:0;padding:7px 14px;
+  background:var(--lime);color:var(--ink);border:1px solid var(--line);
+  border-radius:var(--r-pill);font-family:var(--font-mono);font-size:11px;
+  letter-spacing:.12em;text-transform:uppercase}
 /* §4 verlangt je Preisstufe einen Knopf, §2/§3/§8/§10 je einen Weiterweg.
    Gebaut waren zwei von zehn — der Preisblock hatte keinen einzigen. */
 .plan-cta{width:100%;justify-content:center;margin-top:22px;padding:15px 22px;font-size:16px}
@@ -240,7 +250,7 @@ h1 .accent{background-image:linear-gradient(var(--lime),var(--lime));background-
   padding:5px 9px;font-size:6.6px;font-weight:700}
 .ui-grid{display:grid;grid-template-columns:1fr 1fr;gap:7px}
 .ui-card{background:var(--paper);border:1px solid var(--line);border-radius:9px;padding:9px 10px}
-.ui-card h5{margin:0 0 5px;font-size:6.4px;letter-spacing:.12em;text-transform:uppercase;
+.ui-card .ui-h{margin:0 0 5px;font-weight:650;font-size:6.4px;letter-spacing:.12em;text-transform:uppercase;
   color:var(--label);font-family:var(--font-mono);font-weight:500}
 .ui-row{display:flex;align-items:center;gap:6px;padding:3.5px 0}
 .ui-row+.ui-row{border-top:1px solid var(--line)}
@@ -441,8 +451,8 @@ footer{background:var(--ink);color:#b9b2a4;padding:0}
 .foot-grid{display:grid;grid-template-columns:minmax(0,1.5fr) minmax(0,1fr) minmax(0,1fr);
   gap:var(--s-5);padding:var(--s-6) 0 var(--s-5);border-top:1px solid var(--line-dark);
   border-bottom:1px solid var(--line-dark)}
-.foot-grid h4{font-family:var(--font-mono);font-size:11.5px;letter-spacing:.16em;text-transform:uppercase;
-  color:#7d766a;margin-bottom:14px;font-weight:500}
+.foot-grid .foot-h{font-family:var(--font-mono);font-size:11.5px;letter-spacing:.16em;
+  text-transform:uppercase;color:#928b7d;margin-bottom:14px;font-weight:500}
 .foot-grid li{font-size:16.5px;padding:5px 0}
 .foot-grid a{color:#fff;background-image:none}
 .foot-grid a:hover{text-decoration:underline;text-underline-offset:4px}
@@ -455,7 +465,7 @@ footer{background:var(--ink);color:#b9b2a4;padding:0}
 @media (prefers-reduced-motion:reduce){.wordmark span{transition:none}}
 .foot-legal{display:flex;flex-wrap:wrap;gap:6px 26px;justify-content:space-between;
   padding:var(--s-3) 0 var(--s-4);font-family:var(--font-mono);font-size:11.5px;letter-spacing:.1em;
-  text-transform:uppercase;color:#7d766a;border-top:1px solid var(--line-dark)}
+  text-transform:uppercase;color:#968f82;border-top:1px solid var(--line-dark)}
 
 
 /* ---------- Lime auf hellem Grund: sparsam, immer Fläche ----------
@@ -650,7 +660,8 @@ html:has(#g-kalk:checked),html:has(#g-weiss:checked){background:var(--cream)}
       </div>
 
       <div class="stage rise-2">
-        <div class="laptop">
+        <span class="musteransicht">Musteransicht</span>
+        <div aria-hidden="true" class="laptop">
           <div class="laptop-lid">
             <div class="screen">
               <div class="ui">
@@ -664,13 +675,13 @@ html:has(#g-kalk:checked),html:has(#g-weiss:checked){background:var(--cream)}
                 </div>
                 <div class="ui-grid">
                   <div class="ui-card">
-                    <h5>Offene Punkte</h5>
+                    <p class="ui-h">Offene Punkte</p>
                     <div class="ui-row"><span class="ui-dot"></span><span class="ui-bar"><i style="width:72%"></i></span></div>
                     <div class="ui-row"><span class="ui-dot off"></span><span class="ui-bar"><i style="width:46%"></i></span></div>
                     <div class="ui-row"><span class="ui-dot off"></span><span class="ui-bar"><i style="width:58%"></i></span></div>
                   </div>
                   <div class="ui-card">
-                    <h5>Letzte Aktivität</h5>
+                    <p class="ui-h">Letzte Aktivität</p>
                     <div class="ui-row"><span class="ui-bar"><i style="width:84%"></i></span></div>
                     <div class="ui-row"><span class="ui-bar"><i style="width:62%"></i></span></div>
                     <div class="ui-row"><span class="ui-bar"><i style="width:70%"></i></span></div>
@@ -694,7 +705,7 @@ html:has(#g-kalk:checked),html:has(#g-weiss:checked){background:var(--cream)}
               </div>
               <div class="ui-grid">
                 <div class="ui-card">
-                  <h5>Offene Punkte</h5>
+                  <p class="ui-h">Offene Punkte</p>
                   <div class="ui-row"><span class="ui-dot"></span><span class="ui-bar"><i style="width:72%"></i></span></div>
                   <div class="ui-row"><span class="ui-dot off"></span><span class="ui-bar"><i style="width:46%"></i></span></div>
                 </div>
@@ -925,11 +936,11 @@ html:has(#g-kalk:checked),html:has(#g-weiss:checked){background:var(--cream)}
   <div class="wrap">
     <div class="foot-grid">
       <div>
-        <h4>SARTU</h4>
+        <p class="foot-h">SARTU</p>
         <p class="foot-note">Individuell programmierte Firmenwebsites zum Festpreis, für regionale Betriebe in Deutschland.</p>
       </div>
       <div>
-        <h4>Leistungen</h4>
+        <p class="foot-h">Leistungen</p>
         <ul>
           <li><a href="#leistungen">Webdesign</a></li>
           <li><a href="#leistungen">Website-Texte</a></li>
@@ -938,7 +949,7 @@ html:has(#g-kalk:checked),html:has(#g-weiss:checked){background:var(--cream)}
         </ul>
       </div>
       <div>
-        <h4>Rechtliches</h4>
+        <p class="foot-h">Rechtliches</p>
         <ul>
           <li><a href="#top">Impressum</a></li>
           <li><a href="#top">Datenschutz</a></li>

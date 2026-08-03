@@ -629,3 +629,50 @@ Grund ist ein `oklab()`-Wert, den der Parser nicht als RGB lesen konnte.
 ausdrücklich **Textlink**, nicht Knopf. Beide sind auf Wunsch des Betreibers Pillen geworden. Die
 Rangfolge bleibt erhalten — sekundäre Knöpfe tragen Umriss statt Lime, Lime bleibt dem
 Hauptknopf vorbehalten. **Zu entscheiden:** §2 und §10 nachziehen oder zurück auf Textlink.
+
+# Vollprüfung der Startseite — 03.08.2026
+
+Auf Wunsch unvoreingenommen geprüft, ausdrücklich auch gegen die eigenen Änderungen dieser
+Sitzung. Gemessen mit Chromium bei 360, 390, 768, 1280 und 1440 px.
+
+## Behoben (8)
+
+| # | Befund | Schwere |
+|---|---|---|
+| 1 | **`meta viewport` fehlte vollständig.** Ein echtes Telefon rendert die Seite dann auf ~980 px und zoomt heraus. Alle bisherigen Mobilprüfungen waren dadurch geschönter als die Wirklichkeit — Playwright setzt den Viewport direkt und übergeht den fehlenden Tag | **schwer** |
+| 2 | Aufmacher-Visual ohne das von §5 verlangte Kennzeichen **`Musteransicht`** — null Vorkommen auf der Seite. Die Attrappe zeigte eine Oberfläche, die es noch nicht gibt, ohne jeden Hinweis | **schwer** |
+| 3 | `meta description` fehlte | mittel |
+| 4 | Überschriftensprünge **1→5** und **2→4**. Ursache: drei `<h5>` in der Geräteattrappe, drei `<h4>` als Fußbereichsspalten. Beide sind keine Dokumentabschnitte | mittel |
+| 5 | Text mit **1,51 : 1** bei 7 px in der Attrappe („Öffnen"). Jetzt trägt die Attrappe `aria-hidden`; das Kennzeichen bleibt bewusst außerhalb, es ist eine Aussage, keine Zierde | mittel |
+| 6 | Fußbereichs-Beschriftungen bei **4,19 : 1**, nötig sind 4,5 | mittel |
+| 7 | `.foot-grid` trug **zwei** `color`-Angaben in derselben Regel; die zweite hob die erste auf | klein |
+| 8 | Querlauf **401 px bei 390 px Breite**. Kein Element stand ungeklippt über — `overflow-x:hidden` am `body` macht diesen zum Scrollbehälter, der Überstand blieb am `html`. `overflow-x:clip` an beiden klippt, ohne Scrollbehälter zu werden, und bricht die klebende Kopfleiste nicht (geprüft: bleibt bei y=0) | klein |
+
+## Gemeldet, nicht eigenmächtig geändert (6)
+
+1. **Zwei Design-Umschalter im Dokument** — `<aside class="gt">` „Lime im Grund" und „Grundton
+   probieren", zusammen **14 Formularfelder**, fest positioniert über allem. Für den Entwurf
+   nützlich, in der ausgelieferten Seite ein Fremdkörper. **Müssen beim Bau der PHP-Fassung
+   entfallen.**
+2. **Sechs Radien außerhalb der Skala** — alle in der Geräteattrappe: `4px` `6px` `9px` `19px`
+   `26px` (`laptop-lid`, `screen`, `ui-next`, `ui-card`, `phone`). Die Regel sagt „keine achte
+   Form daneben" und nennt `border-radius:30px` einen Abgabefehler. Meine Einschätzung: eine
+   Hardware-Nachbildung ist eine Illustration, kein Bauteil — die Regel trifft dazu keine
+   Ausnahme. **Entscheidung nötig.**
+3. **Sektion 6 „Wer dahintersteckt" fehlt** — blockiert auf Name, Rolle, echtes Foto.
+4. **Sektion 2 ist laut Bauform-Tabelle „bildgeführt" und hat null Visuals.** §2 verlangt eine
+   Ansicht aus dem Kundenbereich mit Vermerk `Musteransicht`, ersatzweise einen ehrlich
+   beschrifteten Bildplatz. Auch der fehlt.
+5. **`<!doctype html>` und `<html lang="de">` fehlen.** Sie können in dieser Datei nicht stehen —
+   sie wird zur Veröffentlichung in ein Grundgerüst eingebettet. **Gehören in das PHP-Layout**,
+   dort zwingend mit `lang="de"`.
+6. **Sieben Zielseiten existieren nicht** — `/briefing` `/preise` `/leistungen` `/ablauf`
+   `/leistung-portal` `/ueber-uns` `/musterprojekte`.
+
+## Geprüft und ohne Befund
+
+Abschnittsfolge gegen die Bauform-Tabelle (stimmt, bis auf die fehlende 6) · Lime **nie** als
+Schriftfarbe auf hellem Grund · keine `prefers-color-scheme`-Regel · Konsole sauber ·
+`:focus-visible` vorhanden · verbotene Außenwörter: keine — die zwei Treffer auf „System" meinen
+Kundensysteme und WordPress, nicht das eigene Angebot · **alle Textkontraste jetzt über der
+Schwelle** (4,5 : 1, bzw. 3 : 1 ab 24 px oder 18,66 px fett).
