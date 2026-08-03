@@ -474,3 +474,47 @@ Kachelraster lädt zum Auswählen ein. Bei SARTU ist alles in jedem Angebot enth
 Kacheln würden dem Scope-Schutz widersprechen.
 
 **Zu entscheiden:** §7 auf sechs Blöcke ziehen, oder zurück auf acht Zeilen.
+
+## Sektion 6 „Wer dahintersteckt" fehlt vollständig — und sie ist der Grund
+
+Gemessen wurde die Abfolge der Abschnitte. Ergebnis:
+
+| # | Abschnitt | Grund | Visuals |
+|---|---|---|---:|
+| 2 | Kundenbereich | dunkel | **0** (§4 verlangt „bildgeführt") |
+| 3 | Ablauf | dunkel | 0 |
+| 4 | Preise | creme | 0 |
+| 5 | Die Zusage | dunkel | 0 |
+| — | **Wer dahintersteckt** | — | **fehlt ganz** |
+| 7 | Leistungen | war dunkel | 0 |
+| 8 | Musterprojekte | creme | 3 |
+
+**Zwischen Zusage und Leistungen gehört Sektion 6.** Sie ist laut §6 der **Belegersatz** — das
+einzige Gesicht der Seite, an der Stelle, wo bei anderen Agenturen Kundenlogos stehen. Ohne sie
+stoßen zwei Abschnitte ohne Bild aneinander, und der Leser rutscht durch.
+
+**Sie ist blockiert, nicht vergessen.** §6 verlangt ein **echtes Foto** von `[GRUENDER_NAME]` und
+schreibt ausdrücklich: *„Steht das Foto nicht zur Verfügung, entfällt die Sektion vollständig — ein
+leerer Rahmen an einer Vertrauensstelle ist schlechter als gar nichts."* Name und Foto liegen nicht
+vor, und Erfinden ist verboten. **Gebraucht werden: Name, Rolle, ein echtes Foto.**
+
+Nebenbefund: Die vier Punkte `kein Baukasten` · `kein WordPress-Hoster` ·
+`keine Billig-Seitenschleuder` · `kein Anbieter für Privat- und Hobbyseiten` gehören laut §6 in
+**diese** Sektion — nicht zu den Leistungen. Der früher verworfene Entwurf „Gibt es hier nicht"
+hatte also den richtigen Inhalt an der falschen Stelle.
+
+## Behoben: Sektion 5 und 7 waren ein einziger dunkler Block
+
+`#zusage` trug `round-top`, `#leistungen` trug `round-bot` — zwischen beiden lag **keine Kante**.
+Zwei Abschnitte, eine durchgehende dunkle Fläche. Das war der eigentliche Grund, warum die
+Leistungen überlesen wurden.
+
+Jetzt: Die Zusage ist ein abgeschlossener Block (`round-top round-bot`), die Leistungen stehen auf
+**Sand** — zwischen der dunklen Zusage und der cremefarbenen Musterstrecke. Auf hellem Grund sind
+die Kanten der sechs Blöcke von Lime auf `--ink` gewechselt; eine 2 px starke Lime-Fläche auf
+hellem Grund bräuchte laut Gestaltungsregel eine `1px --line`-Kante, was bei einer Haarlinie
+unsinnig ist.
+
+**Noch offen, gleiche Ursache:** `#portal` und `#ablauf` sind ebenfalls beide dunkel und liegen
+direkt hintereinander. `#muster`, `#fragen` und `#abschluss` sind alle drei creme. Beide Strecken
+brauchen denselben Schnitt.
