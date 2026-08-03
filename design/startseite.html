@@ -329,9 +329,17 @@ h1 .accent{background-image:linear-gradient(var(--lime),var(--lime));background-
    nennt — jede in Alltagssprache, jede fett. Wer ueberfliegt, liest nur die
    fetten Stellen und hat alle acht. Wer liest, liest einen Satz. Die
    Fachbegriffe stehen leise darunter, fuer die, die sie kennen. */
-.satz{margin-top:32px;max-width:880px;font-size:clamp(20px,2.3vw,30px);line-height:1.44;
-  letter-spacing:-.016em;color:#948d81}
-.satz b{color:var(--cream);font-weight:650}
+/* Sechs Bloecke statt acht Zeilen. Recherche an vier Agenturseiten: alle
+   zeigen 2 bis 6 Leistungen, nie acht; Titel 1-3 Woerter; ein Satz je Punkt.
+   Keine Kachelwand mit Rahmen — nur eine Lime-Kante je Block, damit Sektion 8
+   (Karten mit Bild) daneben nicht dieselbe Bauform bekommt. */
+.lbs{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:clamp(24px,3vw,40px) clamp(28px,3.6vw,56px);margin-top:var(--s-5)}
+.lb{padding-top:17px;border-top:2px solid var(--lime)}
+.lb h3{font-size:20px;letter-spacing:-.015em}
+.lb p{margin-top:8px;font-size:16.5px;line-height:1.55;color:#b5aea1;max-width:34ch}
+@media (max-width:1000px){.lbs{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:620px){.lbs{grid-template-columns:1fr;gap:22px}}
 .stichworte{margin-top:var(--s-5);padding-top:19px;border-top:1px solid var(--line-dark);
   max-width:940px;font-family:var(--font-mono);font-size:11.5px;letter-spacing:.1em;
   text-transform:uppercase;color:#6d685e;line-height:2.05}
@@ -802,7 +810,14 @@ html:has(#g-kalk:checked),html:has(#g-weiss:checked){background:var(--cream)}
       <p class="tag rise-3">Im Preis enthalten</p>
       <h2 class="sec-head rise" style="margin-top:20px">Es gibt keine Aufpreisliste.</h2>
       <p class="lz-lede rise-2">Das alles steckt in jedem Angebot — Sie stellen es nicht selbst zusammen und zahlen nichts davon extra. Wir gewichten die Bausteine passend zu Ihrem Ziel.</p>
-      <p class="satz rise">Wir legen fest, <b>welche Seiten Sie wirklich brauchen</b>. Schreiben <b>Ihre Texte aus Ihren Stichpunkten</b>. Programmieren die Website — <b>ohne WordPress, ohne Baukasten</b>. Bereiten jede Seite <b>für Suchmaschinen</b> vor. Sorgen dafür, dass man Sie <b>in Ihrer Region findet</b>. Ziehen <b>Ihre Domain um, ohne dass Ihre E-Mail ausfällt</b>. Zeigen Ihnen alles <b>vorab im Kundenbereich</b>. Und <b>betreiben sie danach weiter</b> — über die Monatspauschale.</p>
+      <div class="lbs">
+        <div class="lb rise"><h3>Strategie</h3><p>Wir legen fest, welche Seiten Sie wirklich brauchen.</p></div>
+        <div class="lb rise"><h3>Design und Programmierung</h3><p>Individuell gebaut — ohne WordPress, ohne Baukasten.</p></div>
+        <div class="lb rise"><h3>Texte</h3><p>Wir schreiben sie aus Ihren Stichpunkten. Sie lesen gegen.</p></div>
+        <div class="lb rise"><h3>Sichtbarkeit</h3><p>Vorbereitet für Suchmaschinen, auffindbar in Ihrer Region.</p></div>
+        <div class="lb rise"><h3>Domain und Start</h3><p>Wir ziehen um, ohne dass Ihre E-Mail ausfällt.</p></div>
+        <div class="lb rise"><h3>Betrieb</h3><p>Hosting, Sicherheit, Backups — über die Monatspauschale.</p></div>
+      </div>
       <p class="stichworte rise-2">Sitemap · Nutzerführung · Suchintention · kein WordPress · responsive · schnell · aus Stichpunkten · Faktenprüfung · Titles · Schema · interne Links · Local SEO · konsistente Daten · DNS · E-Mail-Schutz · Weiterleitungen · Briefing · Feedback · Pflege · Betrieb · Backups · Monitoring</p>
       <a class="btn btn-hell rise" href="/leistungen" style="margin-top:var(--s-5)">Alle Leistungen im Überblick <span class="ar">→</span></a>
       </div>

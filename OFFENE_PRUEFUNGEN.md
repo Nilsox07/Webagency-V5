@@ -440,3 +440,37 @@ widersprüchlich.**
 Die vorgegebene Einleitung ist **nicht** angetastet worden. **Zu entscheiden:** Einleitung um den
 Zusatz schärfen (etwa „nichts davon einzeln dazubuchen") oder den Pauschalen-Hinweis an eine
 andere Stelle des Abschnitts setzen.
+
+## Recherche: wie vier echte Agenturen ihre Leistungen zeigen (03.08.2026)
+
+Abgerufen und ausgewertet, weil der Betreiber danach gefragt hat:
+
+| Agentur | Anzahl | Bauform | Text je Punkt | Anker |
+|---|---:|---|---|---|
+| Wee Media | 5 | Kacheln | 1–2 Sätze, 20–30 W. | SVG-Symbol |
+| Kopf & Stift | 6 | Kacheln, 3 je Reihe, klickbar | 1–2 Sätze | SVG-Symbol |
+| Exovia | 3 | Karten mit Foto, nummeriert | 2–3 Sätze + Stichpunkte | Großfoto |
+| Hahnsinn | 2 | zwei große Karten | Überschrift + ein Satz | keiner |
+
+**Drei Befunde, die sich decken:**
+
+1. **Keine zeigt acht.** Die Spanne ist zwei bis sechs. §7 verlangt acht — das liegt über allem,
+   was der Markt für zumutbar hält.
+2. **Titel sind kurz**, ein bis drei Wörter (`Webdesign`, `SEO`, `Webentwicklung`). §7 hat
+   Titel wie `Strategie und Seitenstruktur`.
+3. **Ein Satz je Punkt**, nie Fachbegriffslisten daneben.
+
+**Gebaut wurde daraufhin:** sechs Blöcke, Titel ein bis drei Wörter, je ein Satz in
+Alltagssprache, 3 × 2 im Raster. Die acht Vorgabepunkte sind darin enthalten — `SEO-Grundlage`
+und `Lokale Sichtbarkeit` sind zu `Sichtbarkeit` zusammengefasst, `Kundenbereich und Freigaben`
+und `Rundum-Schutz` zu `Betrieb`. Die Fachbegriffe aus der Tags-Spalte stehen vollständig als
+leise Monozeile darunter, gehen also weder Leser noch Index verloren.
+
+**Bewusst NICHT wie die Vier gebaut:** keine Rahmen-Kacheln, keine Symbole, nicht klickbar.
+Gründe: §7 verbietet die Kachelwand ausdrücklich; Sektion 8 nutzt daneben bereits Karten mit
+Bild, und „kein Aufbaumuster kommt mehr als zweimal vor". Jeder Block trägt nur eine Lime-Kante
+oben. Zweiter Grund, inhaltlich: Die vier Agenturen **verkaufen** ihre Leistungen einzeln — ein
+Kachelraster lädt zum Auswählen ein. Bei SARTU ist alles in jedem Angebot enthalten; anklickbare
+Kacheln würden dem Scope-Schutz widersprechen.
+
+**Zu entscheiden:** §7 auf sechs Blöcke ziehen, oder zurück auf acht Zeilen.
