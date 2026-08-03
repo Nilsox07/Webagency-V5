@@ -82,12 +82,16 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--ink);outline-offset
    DER RAHMEN — Seitenleiste links, Kopfzeile oben, Inhalt rechts
    ============================================================ */
 .app{display:grid;grid-template-columns:252px minmax(0,1fr);
-  background:var(--papier);border-radius:var(--r-l);overflow:hidden;
+  background:var(--papier);overflow:hidden;
   box-shadow:var(--schatten-hoch);border:1px solid var(--line);min-height:660px}
 .app.intern{grid-template-rows:auto 1fr;grid-template-columns:228px minmax(0,1fr)}
 
 /* --- Seitenleiste --- */
+/* Die Aussenkante bleibt rechtwinklig — ein Browserfenster ist ein Rechteck.
+   Die Rundung sitzt innen, an der rechten Kante des Menuebands: dort trennt
+   sie zwei Flaechen und hat eine Aufgabe. Aussen haette sie keine. */
 .rail{background:var(--ink);color:var(--rail-text);padding:24px 14px;
+  border-radius:0 var(--r-l) var(--r-l) 0;
   display:flex;flex-direction:column;gap:24px;min-width:0}
 .rail-marke{display:flex;align-items:baseline;gap:8px;padding:0 10px 4px;
   font-size:21px;font-weight:700;letter-spacing:-.04em;color:#f6f6f4}
@@ -601,6 +605,14 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--ink);outline-offset
           </div>
         </div>
       </div>
+    </div>
+
+    <div class="notiz">
+      <b>Die Außenkante ist rechtwinklig.</b> Ein Browserfenster ist ein Rechteck, und der Bereich
+      füllt es ganz aus. Eine Rundung außen herum gäbe es dort gar nicht zu sehen. Sie sitzt
+      deshalb innen, an der rechten Kante des Menübands: Dort trennt sie zwei Flächen und hat eine
+      Aufgabe. Der Schatten auf dieser Seite gehört zum Dokument und fehlt im Bereich selbst.
+      <span class="quelle">Radius <b>--r-l</b> · 34 px · dieselbe Stufe wie die große Karte</span>
     </div>
 
     <div class="notiz">
@@ -1147,14 +1159,14 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--ink);outline-offset
     <div class="bericht">
       <pre>TEXTPRUEFUNG   Seite: Designkonzept Fassung 2   Datum: 03.08.2026
 
-Saetze gesamt                         <b>106</b>
+Saetze gesamt                         <b>113</b>
 Laengster Satz                         <b>22</b> Woerter     Grenze 20   <b>begruendet</b>
 Saetze ueber 20 Woertern                <b>1</b>             Grenze 0    <b>begruendet</b>
 Aufzaehlungen >3 Glieder im Satz        <b>0</b>             Grenze 0
 Gegensatzformel                         <b>2</b>             Grenze 2
 Wortliste Fuellwoerter                  <b>0</b>             Grenze 0
 Behauptungen ueber Kunden / Markt       <b>0</b>             Grenze 0
-Sie / Ihr / Ihre / Ihnen               <b>23</b>
+Sie / Ihr / Ihre / Ihnen               <b>24</b>
 wir / uns / unser                       <b>6</b>             muss kleiner Sie sein
 Erfundene Werte                         <b>0</b>             Grenze 0
 
