@@ -344,3 +344,20 @@ Aufmacher unter das Erträgliche zu kürzen.
 **Vorbestehend, nicht von diesem Umbau:** bei 390 px Breite ist `scrollWidth` 401 gegen
 `clientWidth` 390 — 11 px Querlauf aus den Zierbändern und dem Laptopfuss. `overflow-x:hidden`
 am `body` fängt ihn ab, die Ursache steht noch.
+
+## Widerspruch: „Portal" gegen „Kundenbereich" in Sektion 7
+
+Website-Lastenheft §7 nennt die siebte Leistungszeile **`Portal und Freigaben`**
+(ebenso die Leistungsübersicht in Zeile 171: `… Rundum-Schutz · Portal`).
+
+`CLAUDE.md` legt für die Außensprache dagegen fest: *Kundenbereich · Ihr Bereich ·
+Anmeldung · Ihr Projekt*, und die gesamte übrige Startseite folgt dem — die
+Hauptnavigation heißt `Kundenbereich`, Sektion 2 heißt `Der Kundenbereich`.
+`Portal` steht zwar nicht auf der ausdrücklichen Verbotsliste (App · Software · SaaS ·
+Plattform · Tool · Dashboard · System · Instanz), widerspricht aber der gesetzten
+Benennung.
+
+**Vorläufig gebaut als `Kundenbereich und Freigaben`** — Begründung: Konsistenz mit
+Navigation und Sektion 2 wiegt schwerer als eine einzelne Tabellenzelle. **Zu
+entscheiden:** entweder §7 auf `Kundenbereich` ziehen oder die Außensprache-Regel um
+`Portal` ergänzen. Bis dahin ist das eine bewusste Abweichung, keine Übersetzung.
