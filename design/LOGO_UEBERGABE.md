@@ -118,3 +118,81 @@ Sobald die Datei vorliegt:
 
 Ohne die Datei baue ich nichts ein. Ein nachgezeichnetes Zeichen wäre eine Erfindung — und
 „nichts erfinden" gilt für ein Logo so gut wie für eine Anschrift oder eine Zahl.
+
+---
+
+## 6. Wie Profis es wirklich machen — und warum die Konverter scheitern
+
+Recherchiert am 03.08.2026, weil beide Fragen berechtigt waren.
+
+### Der Befund zum Einbinden
+
+Die Praxis ist eindeutig: **SVG für das Logo, direkt in die Seite geschrieben.** SVG-Logos sind
+gegenüber PNG rund **89–94 % kleiner**, bleiben auf jedem Bildschirm scharf und lassen sich per
+CSS umfärben. Für Favicons gilt: SVG plus eine 16 × 16-Rückfallebene deckt praktisch alles ab.
+
+Für **eine** Marke braucht es kein Sprite-System — das lohnt erst ab vielen Symbolen.
+
+### Warum Adobe an der Stelle scheitert — und Codex und ich auch
+
+Das ist kein Bedienfehler. Inkscapes eigene Anleitung sagt es unumwunden:
+
+> Der Ansatz eines Vektorisierungsprogramms kann weder die exakte Reproduktion des Originalbildes
+> sein, noch ist beabsichtigt, ein hundertprozentiges Endergebnis zu erhalten — **kein
+> automatisiertes Vektorisierungsprogramm ist dazu in der Lage**, sondern erstellt einen Satz an
+> Kurven, den Sie als **Ausgangsmaterial** nutzen können.
+
+Der Grund liegt in der Kantenglättung: Was im PNG eine gerade 45°-Kante ist, besteht aus
+Mischpixeln. Der Nachzeichner setzt darauf Dutzende leicht versetzter Punkte. Bei einem Foto
+fällt das nicht auf, bei einem **geometrischen Logo** sieht man jede Delle.
+
+Dasselbe gilt für das Nachzeichnen nach Augenmaß — meines wie das von Codex. Ein Zeichen aus
+geraden Kanten hat exakte Winkel und Längen; die schätzt niemand aus einem Bild ab.
+
+**Beide Wege sind für diese Aufgabe schlicht die falschen Werkzeuge.**
+
+### Die drei Wege, die wirklich funktionieren — in dieser Reihenfolge
+
+**1. Die Vektor-Ursprungsdatei besorgen.** Jedes gestaltete Logo **existiert** als Vektor —
+in Illustrator (`.ai`), als `.eps`, `.pdf`, in Figma oder Affinity. Wer es gemacht hat, hat
+die Datei. Bei Logo-Generatoren steckt der SVG-Download meist im Bezahlpaket.
+
+**Das ist in fast allen Fällen die Antwort, und sie kostet nichts.** Fragen Sie zuerst hier,
+bevor Sie irgendetwas konvertieren.
+
+**2. Neu zeichnen statt nachzeichnen lassen.** Existiert wirklich kein Vektor, zeichnet man das
+Zeichen **von Hand nach** — bei gerader Geometrie in **10 bis 20 Minuten**:
+
+- **Figma** (kostenlos, im Browser): PNG einfügen, Ebene sperren, mit dem Zeichenstift die Ecken
+  abklicken. **`Shift` gedrückt halten** rastet auf 45°/90° ein — genau das, was das Zeichen
+  braucht. Dann `Export → SVG`
+- **Inkscape** (kostenlos): dasselbe mit `B` (Bezier), Winkelrasterung in den Einstellungen
+
+Weil das Zeichen nur gerade Kanten hat, ist das Ergebnis **exakt**, nicht ungefähr — und die
+Datei wird winzig, weil sie aus zwölf Punkten besteht statt aus dreihundert.
+
+**3. Automatisch nachzeichnen — nur als Rohmaterial.** Wenn es sein muss:
+
+- **Inkscape → `Pfad → Bitmap nachzeichnen`**, für ein einfarbiges Zeichen `Helligkeitsschwelle`,
+  bei mehrfarbigem `Farbquantisierung` mit **4–8 Farben**
+- Danach **zwingend** von Hand aufräumen: überzählige Punkte löschen, Kanten gerade ziehen
+- Vorher hilft: das PNG **so groß wie möglich** exportieren, Kantenglättung aus
+
+### Wenn Sie beim Aufräumen nicht weiterkommen
+
+Exportieren Sie **irgendein** Ergebnis als SVG — auch einen unsauberen Nachzeichnungsversuch —
+und fügen Sie mir den **Quelltext als Text** ein. Eine SVG ist eine Textdatei.
+
+Daraus kann ich rechnerisch machen, was von Hand mühsam ist: Punkte auf ein Raster runden,
+fast-gerade Strecken zu geraden zusammenfassen, Winkel auf 45°/90° ziehen, doppelte Punkte
+entfernen. **Aus einer wackeligen Nachzeichnung wird so ein sauberes Polygon** — weil ich dann
+mit Zahlen arbeite statt mit einem Bild.
+
+Das ist der Punkt, an dem ich wirklich helfen kann. Ein Bild anschauen und Formen raten ist es
+nicht — das haben zwei Versuche gezeigt.
+
+### Quellen
+
+- Inkscape, *Vektorisieren von Rastergrafiken* — inkscape.org/doc/tracing/tutorial-tracing.de.html
+- SVGVector, *SVG vs PNG: When to Use Each* — svgvector.com/blog/svg-vs-png-when-to-use.html
+- CSS-Tricks, *SVG Favicons in Action* — css-tricks.com/svg-favicons-in-action/
