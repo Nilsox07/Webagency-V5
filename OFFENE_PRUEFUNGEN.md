@@ -757,3 +757,36 @@ kippt die Sperrung bei jeder anderen Verwendung genauso.
 soll die Sperrung ohne Zusatz von der Person neu gesetzt werden, die das Logo gezeichnet hat?
 Eine eigene Sperrung ohne Zusatz ist bei Marken mit Zusatz der Normalfall — nur wird sie
 üblicherweise gestaltet und nicht gerechnet.
+
+## Abweichung: Kennzeichen „Musteransicht" im Aufmacher entfernt
+
+§5 Sektion 1 verlangt am Aufmacher-Visual wörtlich: *„Portal-Cockpit-Screenshot, Badge
+‚Musteransicht'."* Das Kennzeichen war bei der Vollprüfung als fehlend gemeldet und ergänzt
+worden. Es ist am 03.08.2026 **auf Anweisung des Betreibers wieder entfernt** worden.
+
+**Warum das mehr ist als eine Formfrage:** Das Visual zeigt eine **nachgebaute Oberfläche** des
+Kundenbereichs. Den gibt es noch nicht — der Bau steht auf Stufe A0. Ohne Kennzeichnung wirkt
+eine Bildschirmansicht wie eine Aufnahme eines vorhandenen Produkts.
+
+Dieselbe Regel greift an anderer Stelle bereits: Die Musterprojekte tragen
+`Musterprojekt — kein Kundenauftrag`, und §2 verlangt für das Kundenbereich-Bild ausdrücklich
+*„ehrlich beschrifteter Bildplatz, keine nachgebaute Oberfläche"*.
+
+**Vor dem Livegang zu klären:** entweder das Kennzeichen zurück, oder das Visual durch eine
+echte Aufnahme ersetzen, sobald der Kundenbereich läuft. Die Startsperre nach §1.4a verhindert
+getrennt davon, dass mit Platzhaltern nach außen gegangen wird — dieser Punkt gehört auf ihre
+Liste.
+
+## Entschieden: eine Lime-Farbe
+
+Die drei Grüntöne sind aufgelöst. Das Logozeichen läuft jetzt auf `--lime` `#a3e635` statt auf
+`#BDDD4A`. Begründung: Das Designsystem verwendet die Farbe hundertfach — Knöpfe, Kanten, Punkte,
+den Lime-Kasten —, das Logo einmal. Die Regel „**eine** Akzentfarbe" ist damit wieder erfüllt.
+
+Die abgelegten SVG-Dateien behalten `#BDDD4A`: Sie sind die Markenfassung für Druck, E-Mail und
+Partner. Nur die eingebettete Fassung in der Seite ist umgefärbt.
+
+## Logo im Fußbereich
+
+Über der Beschreibung, 30 px hoch, Zeichen auf `--lime`, Wortmarke auf `--cream` über
+`currentColor` — dieselbe Datei wie oben, kein zweiter Satz.
