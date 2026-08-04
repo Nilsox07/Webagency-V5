@@ -252,3 +252,62 @@ eingebettete SVG `role="img"` und ein `<title>SARTU</title>` — dieselbe Wirkun
 
 **Gebraucht wird also:** `sartu-logo.svg` (Icon + Schriftzug, waagerecht) **und**
 `sartu-mark.svg` (Icon allein, für Favicon und App-Symbol).
+
+---
+
+## 8. Logoschrift und Webseitenschrift — zwei verschiedene Aufgaben
+
+### Darf die Logoschrift eine andere sein als die der Seite?
+
+**Ja — das ist sogar der Normalfall, nicht die Ausnahme.** Beide erledigen verschiedene Jobs:
+
+| | Wortmarke | Fließtextschrift |
+|---|---|---|
+| Wie oft | **einmal** je Seite, in **einer** Größe | tausende Zeichen, 14–20 px |
+| Was sie braucht | Eigenart, eigene Laufweite, Wiedererkennung | Lesbarkeit, viele Schnitte, Ziffern, Umlaute |
+| Wird sie gesetzt | nein — sie ist **gezeichnet** und liegt als Kurven vor | ja, live vom Browser |
+
+Eine Wortmarke darf weit gesperrt sein und ungewöhnliche Buchstaben haben — sie muss nie
+einen Absatz tragen. Eine Fließtextschrift muss genau das, und deshalb ist sie neutraler.
+
+**Die einzige Bedingung: Die beiden dürfen sich nicht streiten.** Gleiche Großfamilie genügt —
+zwei Groteske vertragen sich, eine geometrische Wortmarke neben einer Serifenschrift im Text
+wäre ein Bruch. Ihre Wortmarke ist eine geometrische Grotesk; die Seite gehört damit ebenfalls
+auf eine Grotesk.
+
+**Was Sie also nicht tun sollten:** die Logoschrift auch als Webseitenschrift einsetzen. Weit
+gesperrte Versalien sind im Fließtext unlesbar, und die Lizenz für Webschriften kostet
+gesondert.
+
+> **Anschluss an eine offene Entscheidung:** Das Masterkonzept führt unter „Typografie final"
+> noch als offen: *reine Grotesk (Inter / Instrument Sans) vs. Grotesk + dezente editorial
+> Serif für H1*. Die Seite läuft derzeit auf dem Systemschrift-Stapel — ein Platzhalter.
+> **Sobald die Logoschrift feststeht, sollte die Fließtextschrift dazu passend gewählt werden**,
+> nicht umgekehrt.
+
+### Der Zusatz „Digital" — zwei Gründe dagegen, einer davon neu
+
+**1. Er überlebt die Kopfleiste nicht.** Der Zusatz ist rund ein Viertel so groß wie der
+Schriftzug. Bei 21 px Schriftzughöhe — der echten Größe in der Kopfleiste — landet er bei
+**gut 5 px**. Das ist keine Schrift mehr, das ist ein grauer Strich.
+
+Das ist kein Fehler Ihres Logos, sondern normal: Deshalb haben Marken mit Zusatz fast immer
+**zwei Sperrungen** — eine mit Zusatz für Briefkopf, Fahrzeug und Druck, eine ohne für
+Kopfleiste, Favicon und App-Symbol.
+
+**2. Die Kopfleiste trägt bereits einen Zusatz.** Dort steht `SARTU · Webdesign`. Mit einem
+Logo, das `Digital` mitbringt, stünden **zwei Zusätze nebeneinander**. Einer muss weg.
+
+**Empfehlung:** `Webdesign` behalten, `Digital` streichen. Begründung steht in §5b der
+Website-Vorgabe — *„im Zweifel die konkretere Bezeichnung wählen, nicht die elegantere"* —
+und `webdesign` ist zusätzlich der Begriff, auf den die Seite ranken soll. `Digital` sagt
+nichts und zieht die Marke zurück in die austauschbare Kategorie, aus der das ganze Konzept
+sie heraushält.
+
+**Gebraucht wird also:**
+
+| Datei | Inhalt |
+|---|---|
+| `sartu-logo.svg` | Icon + Schriftzug, **ohne** Zusatz — Kopfleiste, Fußbereich |
+| `sartu-mark.svg` | Icon allein — Favicon, App-Symbol |
+| `sartu-logo-zusatz.svg` | Icon + Schriftzug + Zusatz — Druck, Briefkopf, große Flächen |
