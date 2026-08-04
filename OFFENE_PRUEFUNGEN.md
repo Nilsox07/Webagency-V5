@@ -676,3 +676,57 @@ Schriftfarbe auf hellem Grund · keine `prefers-color-scheme`-Regel · Konsole s
 `:focus-visible` vorhanden · verbotene Außenwörter: keine — die zwei Treffer auf „System" meinen
 Kundensysteme und WordPress, nicht das eigene Angebot · **alle Textkontraste jetzt über der
 Schwelle** (4,5 : 1, bzw. 3 : 1 ab 24 px oder 18,66 px fett).
+
+## Logo eingebaut — und drei verschiedene Grüntöne gefunden
+
+Die Originaldatei ist am 03.08.2026 als SVG-Quelltext eingegangen und verarbeitet. Alle Pfade im
+Browser über `getBBox()` vermessen, nicht geschätzt:
+
+| Teil | Breite × Höhe (Einheiten) |
+|---|---|
+| Zeichen | 42,8 × 41,8 |
+| Wortmarke `SARTU` | 167,9 × 25,3 |
+| Zusatz `DIGITAL` | 106,0 × 8,0 |
+
+### Bereinigt wurde
+
+- **`<style>`-Block und Klassen entfernt** — beim direkten Einbetten kollidieren `.cls-0`
+  bis `.cls-3` mit allem anderen im Dokument. Farben stehen jetzt als `fill` am Pfad
+- `enable-background:new` entfernt — toter Rest aus dem Zeichenprogramm, hat seit Jahren
+  keine Wirkung
+- Die **Haarlinie** `stroke:#DADBD2` mit 0,25 an der Wortmarke entfernt. Sie war der Grund,
+  warum die Marke auf hellem Grund als Umriss erschien: Die Füllung ist `#FFFFFF`
+- `role="img"` und `<title>SARTU</title>` ergänzt, damit der Name für Suchmaschinen und
+  Vorleseprogramme lesbar bleibt
+
+Dateigrößen: Zeichen **349 Byte**, Sperrung **1.034 Byte**, mit Zusatz **1.784 Byte**.
+
+### Befund 1 — drei Grüntöne, die sich um Haaresbreite unterscheiden
+
+| | Farbe | auf Creme | auf Tinte |
+|---|---|---:|---:|
+| Zeichen im Logo | `#BDDD4A` | 1,43 : 1 | 12,19 : 1 |
+| Zusatz im Logo | `#ABC957` | 1,73 : 1 | 10,06 : 1 |
+| **Seite** `--lime` | `#a3e635` | 1,39 : 1 | 12,48 : 1 |
+
+Drei Töne für dieselbe Markenfarbe. Nebeneinander liest sich das als Unsauberkeit, und die
+Gestaltungsregel sagt: **„Eine Akzentfarbe."**
+
+**Vorläufig gebaut mit der Farbe der Originaldatei** (`#BDDD4A`), über
+`--logo-lime` an einer Stelle änderbar. **Zu entscheiden:** Logo auf `--lime` ziehen, oder
+`--lime` im gesamten Designsystem auf `#BDDD4A` ändern. Ersteres ist ein Pfad, letzteres
+betrifft jeden Knopf, jede Kante und den Lime-Kasten.
+
+### Befund 2 — der Zusatz, jetzt mit Zahl
+
+`DIGITAL` ist **8,0 Einheiten** hoch, die Wortmarke **25,3** — der Zusatz ist **32 %**.
+Bei 21 px Wortmarkenhöhe in der Kopfleiste landet er bei **6,6 px**. Das bestätigt die
+Empfehlung von vorher mit einem gemessenen Wert statt einer Schätzung.
+
+### Befund 3 — die Wortmarke war für dunklen Grund gezeichnet
+
+Füllung `#FFFFFF`. In der Seite steht sie deshalb auf `currentColor`: Tinte auf hellen
+Abschnitten, Creme auf dunklen — **eine Datei, kein zweiter Satz.**
+
+Der Zusatz `Webdesign` neben dem Logo ist entfallen: Seit die Wortmarke Grafik ist, stand der
+Name zweimal, und die Breite fehlte dem Hauptknopf, der dadurch auf drei Zeilen brach.
