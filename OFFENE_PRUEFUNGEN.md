@@ -730,3 +730,30 @@ Abschnitten, Creme auf dunklen — **eine Datei, kein zweiter Satz.**
 
 Der Zusatz `Webdesign` neben dem Logo ist entfallen: Seit die Wortmarke Grafik ist, stand der
 Name zweimal, und die Breite fehlte dem Hauptknopf, der dadurch auf drei Zeilen brach.
+
+## Nachtrag: Die Sperrung ist für den Zusatz gezeichnet
+
+Der Betreiber bemängelte, die Wortmarke „klebe oben". Nachgemessen — er hat recht, und der
+Grund liegt **nicht** in der Kopfleiste:
+
+| | oben | unten | Mitte |
+|---|---:|---:|---:|
+| Zeichen | 59,0 | 100,8 | **79,90** |
+| Wortmarke allein | 61,5 | 86,8 | 74,15 → **5,75 zu hoch** |
+| Wortmarke **+ Zusatz** | 61,5 | 101,4 | 81,45 → **1,55 daneben** |
+
+Die Kopfleiste selbst war symmetrisch (22 px über, 23 px unter dem Logo). Der Versatz steckt im
+Logo: **Ohne den Zusatz ist die Sperrung kopflastig, weil sie mit ihm entworfen wurde.** Das
+Zeichen reicht tiefer als die Wortmarke; der Zusatz füllte genau diesen Raum.
+
+**Gebaut ist jetzt Fassung B** (`design/logo-achse.html` zeigt alle drei): Wortmarke um 5,75
+Einheiten gesenkt, damit sie die Mittelachse des Zeichens trifft. Gemessen nach dem Umbau:
+Abweichung **0,00 px**. Logo von 30 auf 34 px vergrößert, Wortmarke damit 20,6 statt 18,2 px.
+
+Dieselbe Korrektur ist in `sartu-logo-hell.svg` und `sartu-logo-dunkel.svg` eingetragen — sonst
+kippt die Sperrung bei jeder anderen Verwendung genauso.
+
+**Zu entscheiden bleibt:** Ist die gesenkte Wortmarke als Fassung-ohne-Zusatz akzeptabel, oder
+soll die Sperrung ohne Zusatz von der Person neu gesetzt werden, die das Logo gezeichnet hat?
+Eine eigene Sperrung ohne Zusatz ist bei Marken mit Zusatz der Normalfall — nur wird sie
+üblicherweise gestaltet und nicht gerechnet.
