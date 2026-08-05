@@ -686,13 +686,37 @@ Satz ergänzt — die Wirkung entsteht aus der Leere ringsum.
 | Strategie und Seitenstruktur | Wir legen fest, welche Seiten Ihr Ziel wirklich brauchen — und welche nicht. | Sitemap · Nutzerführung · Suchintention |
 | Webdesign und Programmierung | Individuell aus unserem Designsystem programmiert, ohne WordPress und ohne Baukasten. | kein WordPress · responsive · schnell |
 | Website-Texte | Wir schreiben die Texte aus Ihren Fakten und Stichpunkten — Sie liefern keinen fertigen Webtext. | aus Stichpunkten · Faktenprüfung |
-| SEO-Grundlage | Jede Seite startet mit klarem Thema, sauberen Metadaten und strukturierten Daten. | Titles · Schema · interne Links |
+| SEO- und GEO-Grundlage | Jede Seite startet mit klarem Thema, sauberen Metadaten, strukturierten Daten und Antwort-zuerst-Texten. | Titles · Schema · Antwort-zuerst · interne Links |
 | Lokale Sichtbarkeit | Echte Unternehmensdaten statt dünner Ortsseiten mit ausgetauschtem Stadtnamen. | Local SEO · konsistente Daten |
 | Domain und Launch | Wir prüfen, verbinden und schalten live — Ihre bestehende E-Mail bleibt dabei erreichbar. | DNS · E-Mail-Schutz · Weiterleitungen |
 | Portal und Freigaben | Angebot, Briefing, Vorschau und Feedback laufen an einem Ort statt in E-Mail-Ketten. | Briefing · Feedback · Pflege |
 | Rundum-Schutz | Wir betreiben die Website danach: Hosting, Sicherheit, Backups, Monitoring. | Betrieb · Backups · Monitoring |
 
 - **CTA:** `Alle Leistungen im Überblick` → `/leistungen`
+
+> **`GEO` ergänzt am 03.08.2026.** Die Zeile hieß `SEO-Grundlage` und nannte GEO mit keinem Wort —
+> obwohl **dasselbe Dokument** in der Seitenübersicht (Abschnitt 5) die Leistungsseite als
+> `Sichtbarkeit (SEO/GEO)` führt und das Masterkonzept das **SEO-/GEO-Startsystem** ausdrücklich
+> als „in jedem Paket enthalten" auflistet. Ein Widerspruch im eigenen Haus.
+>
+> **Zeitpunkt und Preis stehen bereits fest** (Masterkonzept §16) und werden hier **nicht** neu
+> entschieden, nur wiedergegeben:
+>
+> | | |
+> |---|---|
+> | **Im Websitepreis, ab Launch** | Suchintention und Thema je Seite · Antwort-zuerst-Texte aus bestätigten Fakten · sprechende URLs · genau eine H1 · Title/Description/Canonical/OG/Robots · Breadcrumb · `Organization`+`WebSite` global · XML-Sitemap, robots.txt, 404, Redirect-Plan · echte NAP · Search Console und Bing eingereicht |
+> | **Laufend im Betrieb** | `Schutz M` monatlicher Technik-/Suchstatus · `Schutz L` engmaschiger SEO-/GEO-/Conversion-Technikcheck. `Schutz S` hat beides **nicht** |
+> | **Später** | Sichtbarkeitsausbau als **ein** datenbasiertes Folgeangebot. Ausdrücklich: „**Kein** SEO-Menü, keine Stufen, keine Minuten" |
+>
+> **GEO ist also kein Zusatz und nichts, was erst im Kundenbereich kommt — es liegt ab Start im
+> Paketpreis, genau wie SEO.** Das ist auch der Grund, warum es auf die Startseite gehört: Der
+> USP im Masterkonzept lautet wörtlich *„Festpreis. Portal. Kein WordPress. **SEO-/GEO-Basis ab
+> Start**."* — eines von vier Merkmalen fehlte in der Leistungsliste.
+>
+> **Grenze der Aussage:** §16 verbietet jede Garantie auf Rankings, Anfragen oder KI-Nennungen
+> und hält fest, dass GEO „**kein** magischer Zusatz und **kein** Spezial-Schema" ist. Die Zeile
+> nennt deshalb ein Verfahren (`Antwort-zuerst`), kein Ergebnis. `llms.txt` wird angelegt, aber
+> **nie** als Rankingfaktor beworben.
 
 - **H2:** `Ihre Website ist ab dem ersten Tag für Suchmaschinen vorbereitet.`
 
