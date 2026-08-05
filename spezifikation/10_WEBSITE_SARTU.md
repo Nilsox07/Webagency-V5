@@ -499,9 +499,10 @@ kein nachgebauter Bildschirm**. Benennungsregeln: `08_TEXTREGELN.md`.
 > **Verworfen:** eine Seite `/webdesign-handwerk`. „Handwerk" ist genau die Sammelbezeichnung,
 > die dieses Projekt sonst überall verbietet. Gerankt wird über eigene Seiten je Gewerk.
 
-Feldgenaue Vorgaben zu `/briefing`, den Leistungs- und Branchenseiten, der Bild- und
-Screenshotliste sowie der vollständigen SEO-URL-Liste stehen bis zur weiteren Zusammenführung
-in `CLAUDE_SARTU_WEBSITE_LASTENHEFT_BAUFINAL.md` §9 bis §16.
+**Jede dieser Seiten ist feldgenau in `17_SEITEN_SARTU.md` beschrieben** — Bedarfsscheck,
+Leistungsseiten, Branchenseiten, `/ueber-uns`, `/kontakt`, Transparenzseiten, Ratgeber, Lexikon,
+Pflichtseiten und die Bildliste. Indexierung, Schema und Sitemap-Priorität je Adresse:
+`16_SEO_GEO_SARTU.md`.
 
 ---
 
@@ -511,3 +512,47 @@ in `CLAUDE_SARTU_WEBSITE_LASTENHEFT_BAUFINAL.md` §9 bis §16.
 - **Definition of Done** je Seite, inklusive ausgefülltem **Prüfbericht mit Zahlen**
 - Was **erst nach** dem Livegang geprüft wird: echte Core Web Vitals inklusive INP als
   Feldmessung
+
+### Die Startsperre — die Veröffentlichung muss **scheitern**, nicht warnen
+
+Ein Platzhalter, der versehentlich live geht, ist bei Impressum und Datenschutz ein
+**Rechtsverstoß**, kein Schönheitsfehler. **Eine Warnung im Protokoll reicht nicht — sie wird
+überlesen.**
+
+**Der Veröffentlichungsvorgang für Produktion (`APP_ENV=production`) bricht mit Fehler ab, wenn
+eine dieser Bedingungen zutrifft:**
+
+1. `/impressum` oder `/datenschutz` enthält `[[PLATZHALTER]]` **oder ist kürzer als 500 Zeichen**
+2. `/agb` existiert **und** ist irgendwo verlinkt **und** enthält `[[PLATZHALTER]]`
+3. Eine Seite mit `noindex` steht in der `sitemap.xml`
+4. Ein Bildplatz für Aufnahmen aus dem Kundenbereich ist leer oder trägt `[[SCREENSHOT-FEHLT]]`
+4a. **Die Sektion „Wer dahintersteckt" enthält einen Platzhalter** — kein Foto hinterlegt, oder
+    der Text enthält `Name wird nachgereicht`, `[[PLATZHALTER]]` oder `[[FOTO-FEHLT]]`
+5. Eine Zeichenkette aus der Verbotsliste in `08_TEXTREGELN.md` steht im ausgelieferten Text
+6. Eine Datei außerhalb von `/public` ist über den Webserver erreichbar
+7. Ein Ortsname erscheint in Title, H1 oder Adresse, obwohl die Standortfrage in `20_OFFEN.md`
+   noch auf `offen` steht
+8. **Ein Rechtstext in `legal_texts` steht auf `entwurf` oder `in_pruefung`** — geprüft werden
+   **alle fünf** Slugs: `impressum` · `datenschutz` · `agb` · `avv` · `tom`
+9. Ein Pflichtfeld der Betreiberdaten ist leer, oder **weder** Umsatzsteuer-Identifikationsnummer
+   **noch** Steuernummer ist gesetzt (`12_ADMINBEREICH.md`)
+
+> **Zu 4a — eine echte Lücke, von außen gemeldet.** Bedingung 4 sperrte nur Aufnahmen aus dem
+> Kundenbereich. Das Gründerfoto ist keine davon, und `Name wird nachgereicht` stand in keiner
+> Verbotsliste — **die Sektion wäre mit leerem Rahmen und ohne Namen live gegangen.** Ohne
+> Referenzen ist die Person hinter SARTU der Vertrauensanker; ein leerer Rahmen an dieser Stelle
+> wirkt **schlechter als gar keine Sektion**.
+
+> **Zu 8 — ergänzt nach dem Audit.** Die Sperre kannte nur drei Rechtstexte. Der
+> Auftragsverarbeitungsvertrag und die technischen und organisatorischen Maßnahmen fehlten im
+> Datenmodell vollständig — obwohl SARTU als Auftragsverarbeiter **nach Art. 28 DSGVO ohne sie
+> nicht arbeiten darf**.
+
+**Die Fehlermeldung nennt die Ursache**, nicht nur den Abbruch — welche Datei, welche Bedingung.
+
+**Der Staging-Vorgang bricht nicht ab**, sondern listet dieselben Punkte als Warnung. So lässt
+sich alles vorbereiten und ansehen, **ohne dass etwas Unfertiges live gehen kann**.
+
+Alle Platzhalter tragen **eine** einheitliche, suchbare Markierung: `[[PLATZHALTER]]`,
+`[[SCREENSHOT-FEHLT]]`, `[[FOTO-FEHLT]]`. **Keine freien Formulierungen wie „TODO" oder
+„Lorem ipsum"** — die findet niemand wieder.

@@ -37,11 +37,22 @@ Inhaberdaten bestätigen.
    normalen Mahnweg
 2. **Bei laufendem Schutzvertrag** verlängert SARTU eine ablaufende Domain zur Schadensvermeidung
    und berechnet die Fremdkosten nach
-3. **Vor jedem Ablauf** mindestens **drei** dokumentierte Hinweise — 60, 30 und 7 Tage
+3. **Vor jedem Ablauf** dokumentierte Hinweise — Fristen in der Tabelle unten
 4. **Bei Kündigung** rechtzeitig aktiv Auth-Code und Transfer anbieten
 5. **Keine Verlängerung auf SARTU-Kosten** nach beendetem Vertrag — der Übergabeweg muss
    nachweislich offen gestanden haben
 6. Gehört **wortgleich** in Vertrag, AGB und Kundenbereich
 
-Weitere Fälle (Kündigung, wer zahlt die Verlängerung, Premiumdomain, fehlender Kundenzugriff,
-Betriebsende) sind in Masterkonzept §6 tabellarisch geregelt und anwaltlich zu prüfen.
+### Die sechs Grenzfälle
+
+**Vorschlag, anwaltlich zu prüfen** — `20_OFFEN.md`. Gebaut wird die Anzeige, nicht die
+Rechtsfolge.
+
+| Fall | Regel |
+|---|---|
+| **Kündigung des Schutzes** | Die Domain bleibt Eigentum des Kunden. SARTU stellt auf Anforderung **Auth-Code/AuthInfo** und eine dokumentierte DNS-Übergabe bereit — einmalig, innerhalb einer definierten Frist (Vorschlag: **10 Werktage** nach der letzten erfüllten Zahlung) |
+| **Wer zahlt die Verlängerung nach Kündigung** | Ab Vertragsende trägt der Kunde die Domainkosten selbst. **SARTU verlängert nicht stillschweigend weiter**; der Kunde wird rechtzeitig auf den Transfer hingewiesen |
+| **Erinnerungen vor Ablauf** | mindestens **drei** dokumentierte Hinweise — 60, 30 und 7 Tage vor Ablauf — im Kundenbereich **und** per E-Mail. **Das Ablaufdatum ist dauerhaft sichtbar** |
+| **Premiumdomain, fehlgeschlagener Transfer, Redemption** | Fremdkosten trägt der Kunde und werden **vorher** ausgewiesen. **Wiederherstellungsgebühren sind nie in der Jahrespauschale enthalten** |
+| **Kunde hat keinen Zugriff auf Altdomain oder Alt-E-Mail** | **Kein Blindflug:** Das Projekt läuft auf einer Übergangsdomain weiter, **das Launch-Gate bleibt zu**, bis Inhaberschaft und Zugriff nachgewiesen sind. Aufwand für Recherche und Wiederbeschaffung ist **nicht** im Festpreis enthalten |
+| **Betriebsende ohne Transfer** | Nach dokumentierter Frist und Hinweisen darf SARTU die Verwaltung beenden; die Verantwortung geht an den Kunden über — **keine Löschung und kein Ablaufenlassen ohne vorherige Ankündigung** |

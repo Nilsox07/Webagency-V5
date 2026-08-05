@@ -38,7 +38,8 @@ Stand 03.08.2026 · Aufbau nach `KONSOLIDIERUNG_RUNDE1.md`
 | `13_DATENMODELL.md` | 20 Tabellen, Typabbildung, Formate, Konventionen | **fertig** |
 | `14_SICHERHEIT.md` | Architektur, dreizehn eiserne Regeln, Ersteinrichtung, Migrationen | **fertig** |
 | `15_TESTFAELLE.md` | Verteilung, **alle 88 Fälle** in 14 Gruppen, Ausführung | **fertig** |
-| `16_SEO_GEO_SARTU.md` | Suchintentionen, Launch-Reihenfolge, was nicht gebaut wird | **fertig** |
+| `16_SEO_GEO_SARTU.md` | Suchintentionen, Launch-Reihenfolge, **alle Adressen mit Index und Schema** | **fertig** |
+| `17_SEITEN_SARTU.md` | Bedarfsscheck, Leistungs- und Branchenseiten, Ratgeber, Lexikon, Pflichtseiten, Bilder | **fertig** |
 
 ### Teil 3
 
@@ -46,8 +47,12 @@ Stand 03.08.2026 · Aufbau nach `KONSOLIDIERUNG_RUNDE1.md`
 |---|---|---|
 | `20_OFFEN.md` | offene Entscheidungen, Platzhalter, daraus folgende Sperren | **fertig** |
 
-> **Alle Themendateien stehen.** Wo eine Datei noch feldgenaue Restvorgaben in ihrer Quelle
-> lässt, ist das in ihrem Schlussabschnitt benannt — es entsteht keine stille Lücke.
+> **Die Zusammenführung ist abgeschlossen** (05.08.2026). Alle vier Lastenhefte sind
+> ausgewertet; **keine Themendatei verweist mehr für Bauwissen auf ihre Quelle.**
+>
+> Die Lastenhefte bleiben liegen — wegen ihrer **Begründungsblöcke** („Ersetzt am 01.08.2026,
+> weil …"). Die sind kein Bauwissen, verhindern aber, dass eine zurückgezogene Fassung wieder
+> eingebaut wird. **Gebaut wird nach `spezifikation/`.**
 
 ---
 

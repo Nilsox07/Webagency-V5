@@ -97,7 +97,47 @@ Kunden als solche verkauft werden.
 > **Verworfen: `/webdesign-handwerk`.** „Handwerk" ist genau die Sammelbezeichnung, die dieses
 > Projekt sonst überall verbietet. Gerankt wird über **eigene Seiten je Gewerk**.
 
-Branchenseiten sind **vollständige Zielseiten, keine Durchgangsstationen**.
+Branchenseiten sind **vollständige Zielseiten, keine Durchgangsstationen**. Aufbau, die drei
+harten Prüfungen und die Wellenplanung: `17_SEITEN_SARTU.md`.
+
+---
+
+## Alle Launch-Adressen — Indexierung, Schema, Priorität
+
+| Adresse | Index | Schema | Priorität Sitemap |
+|---|---|---|---|
+| `/` | index | `Organization`, `WebSite` | 1.0 |
+| `/leistungen` | index | `Service`, `BreadcrumbList` | 0.9 |
+| `/preise` | index | `Service`, `BreadcrumbList` | **1.0** |
+| `/ablauf` | index | `BreadcrumbList` | 0.8 |
+| `/briefing` — Einstiegsseite | index | `BreadcrumbList` | 0.7 |
+| `/briefing/1` … `/briefing/n` — die Schritte | **noindex** | – | – |
+| die **fünf** `/leistung-*` | index | `Service`, `BreadcrumbList` | 0.7 |
+| `/ratgeber` + die **drei** Transparenzseiten | index | `Article`, `BreadcrumbList` | **0.9** |
+| `/ratgeber` + die **zwei** Vergleichsartikel | index | `Article`, `BreadcrumbList` | 0.7 |
+| `/ueber-uns` | index | `Person` oder `Organization`, `BreadcrumbList` | 0.6 |
+| `/kontakt` | index | `BreadcrumbList` | 0.6 |
+| `/lexikon` + **acht** Begriffe | index | `DefinedTerm`, `BreadcrumbList` | 0.5 |
+| `/impressum`, `/datenschutz` | index | – | 0.3 |
+| `/agb` | **noindex bis final** | – | – |
+| Danke-Seiten, 404 | **noindex** | – | – |
+
+**Root-Dateien:** `/sitemap.xml` · `/robots.txt` · `/llms.txt` (**ohne Ranking-Behauptung**) ·
+`/favicon.ico` samt PNG-Größen · das Open-Graph-Bild.
+
+> **Warum `/preise` und die Transparenzseiten die höchste Priorität haben:** Sie tragen den
+> einzigen Sichtbarkeitsvorteil, den SARTU gegenüber etablierten Agenturen hat — **veröffentlichte,
+> überprüfbare Zahlen in einem Markt, der „Preis auf Anfrage" schreibt.**
+
+> **Warum `FAQPage` nicht in der Tabelle steht:** Google hat FAQ-Rich-Results im September 2023
+> auf staatliche und medizinische Seiten beschränkt und nach Dokumentationsstand vom
+> **15.06.2026** ganz eingestellt. Das Markup schadet nicht, bringt aber **keine** Sichtbarkeit
+> mehr. **Die FAQ-Blöcke selbst bleiben Pflicht** — als Inhalt für Leser und als zitierfähiger
+> Absatz für KI-Antworten, **nicht wegen des Schemas.** Wer `FAQPage` trotzdem ausliefert, darf
+> es **nicht als Maßnahme führen**.
+
+**`LocalBusiness` wird erst ausgeliefert, wenn der Standort entschieden und real ist**
+(`20_OFFEN.md`).
 
 ---
 
