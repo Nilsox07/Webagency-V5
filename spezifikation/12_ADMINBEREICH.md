@@ -29,7 +29,7 @@ Admins haben bewusst **keine** `organization_id`. Wählt ein Admin einen Kunden 
 | Pfad | Inhalt |
 |---|---|
 | `/admin` | Cockpit: **neue Anfragen**, Projekte nach Status gruppiert, offene Rechnungen, unbeantwortete Nachrichten, eingereichte Korrekturrunden, wartende Öffnungszeit-Änderungen |
-| `/admin/anfragen` | Eingegangene Bedarfsschecks, Umwandlung in Kunde und Projekt |
+| `/admin/anfragen` | Eingegangene Bedarfsschecks, Umwandlung in Kunde und Projekt — **vollständig in `09_ANFRAGEEINGANG.md`** |
 | `/admin/kunden` | Liste, Suche nach Name und E-Mail; Anlegen und Bearbeiten von Organisation und Benutzer; Knopf `Einladung senden` |
 | `/admin/projekte` | Liste mit Filter nach Status |
 | `/admin/projekte/{id}` | **Arbeitsplatz je Projekt** |
@@ -46,7 +46,9 @@ Alles in Abschnitten auf **einer** Seite:
 - **Kopf** — Kunde, Paket, Status (Auswahlfeld + `Status setzen`), Felder `Nächster Schritt` und
   `Ziel-Pfad`
 - **Angebot** — Formular für alle Felder aus `offers`, Knopf `Angebot senden` (setzt `sent_at`,
-  Status `gesendet`, verschickt E-Mail). **Nach Annahme schreibgeschützt**
+  Status `gesendet`, verschickt E-Mail). **Nach Annahme schreibgeschützt**.
+  Die **festen Angebotstexte**, die Vorbelegung und die **BFSG-Pflichtprüfung, die das Senden
+  sperren kann**, stehen in `11_KUNDENBEREICH.md`
 - **Rechnungen** — Anlegen mit Nummer, Meilenstein, Beträgen, Fälligkeit, Feld
   `Mollie-Zahlungslink`. Aktionen `Senden` und `Als bezahlt markieren` **mit Pflicht-Bestätigung**
 - **Aufgaben** — einzeln oder **aus Vorlage**, sortierbar, bearbeitbar, deaktivierbar. Anzeige der

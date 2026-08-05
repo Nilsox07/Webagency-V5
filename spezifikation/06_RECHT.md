@@ -27,8 +27,10 @@
 - **Zufriedenheits-/Geld-zurück-Garantie nicht übernehmen**, solange nicht sauber formuliert —
   EuGH C-133/22: auch eine Zufriedenheitsgarantie ist eine gewerbliche Garantie mit Pflichtangaben
 - **BFSG seit 28.06.2025:** reine B2B-Firmenwebsites und Kleinstunternehmen (< 10 MA und
-  ≤ 2 Mio. € Umsatz) sind i. d. R. **nicht** verpflichtet. Sobald Shop, Buchung oder
-  B2C-Vertragsschluss dabei ist, **greift WCAG 2.1 AA**. Barrierefreiheits-**Basis** immer bauen
+  ≤ 2 Mio. € Umsatz oder Bilanzsumme) sind i. d. R. **nicht** verpflichtet. Sobald Shop, Buchung
+  oder B2C-Vertragsschluss dabei ist, **greift WCAG 2.1 AA**. Barrierefreiheits-**Basis** immer
+  bauen. **Bußgeldrahmen bis 100.000 €** — deshalb sperrt der Adminbereich das Angebot, statt zu
+  warnen (`11_KUNDENBEREICH.md`). Die Angabe zur Betriebsgröße trifft **der Kunde**, nicht SARTU
 - **Rechte und Export:** nach vollständiger Zahlung Nutzungsrechte am konkreten Website-Stand,
   an den SARTU-Texten und am kundenspezifischen Design. Domaininhaber = Kunde. Dokumentiert
   **baubarer** Export ohne Abhängigkeit vom SARTU-Master — **Exportweg vor dem ersten Verkauf

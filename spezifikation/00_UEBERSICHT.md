@@ -31,12 +31,13 @@ Stand 03.08.2026 · Aufbau nach `KONSOLIDIERUNG_RUNDE1.md`
 
 | Datei | Inhalt | Stand |
 |---|---|---|
+| `09_ANFRAGEEINGANG.md` | Bedarfsscheck-Annahme, Spamabwehr, Herkunft, Anfrageliste, Löschfristen | **fertig** |
 | `10_WEBSITE_SARTU.md` | `sartu.de` — technischer Rahmen, Navigation, alle zehn Sektionen, übrige Seiten | **fertig** |
-| `11_KUNDENBEREICH.md` | Navigation, Anmeldung, Statuslogik, Uploads, Zahlungen | **fertig**, Screen-Details noch in der Quelle |
+| `11_KUNDENBEREICH.md` | Anmeldung, Willkommensstrecke, Statuslogik, **alle Seiten**, Angebotstexte, Uploads, E-Mails | **fertig** |
 | `12_ADMINBEREICH.md` | Zugang, Screens, Projekt-Arbeitsplatz, Audit | **fertig** |
 | `13_DATENMODELL.md` | 20 Tabellen, Typabbildung, Formate, Konventionen | **fertig** |
 | `14_SICHERHEIT.md` | Architektur, dreizehn eiserne Regeln, Ersteinrichtung, Migrationen | **fertig** |
-| `15_TESTFAELLE.md` | Verteilung, Mandantentrennung, Anmeldung, Ausführung | **fertig**, Restgruppen in der Quelle |
+| `15_TESTFAELLE.md` | Verteilung, **alle 88 Fälle** in 14 Gruppen, Ausführung | **fertig** |
 | `16_SEO_GEO_SARTU.md` | Suchintentionen, Launch-Reihenfolge, was nicht gebaut wird | **fertig** |
 
 ### Teil 3

@@ -21,6 +21,10 @@ entscheidet und verwaltet die **technische Infrastruktur**.
   **Bestehende E-Mail darf durch den Launch nie ausfallen**
 - **E-Mail-Postfächer** sind ein eigener Drittanbieterdienst. Bei Erstbedarf **eine** Ja/Nein-Frage,
   dann Empfehlung **genau eines** Anbieters plus Fremdkosten. Kein Anbieterkarussell
+- **Domaingebühr:** eine übliche Domain **bis 30 € netto pro Jahr** ist bei Verwaltung durch SARTU
+  in der Betriebspauschale enthalten. Darüber hinaus (Sonderendungen, Premiumnamen) werden die
+  Fremdkosten nachberechnet. **Endet der Vertrag**, überträgt SARTU die Domain kostenfrei an den
+  Kunden oder einen Anbieter seiner Wahl; ab dann trägt der Kunde die Gebühr selbst
 - **Hosting:** statische Auslieferung über Managed Hosting in **DE/EU**. Der Kunde wählt kein Hosting
 
 **Nur diese fünf Kundenfragen:** 1) Domain vorhanden? 2) Wenn ja: welche, wer hat Zugriff?

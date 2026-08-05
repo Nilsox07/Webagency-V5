@@ -41,7 +41,7 @@ stammen aus dem abgelösten Stack und sind **ungültig**.
 | Freitext ohne Index | `TEXT` | |
 | Binärdaten | `VARBINARY(n)` | |
 | Strukturierte Ablage | `JSON` | MySQL 8 nativ, MariaDB geprüfter Textwert — derselbe Ausdruck |
-| IP-Adresse | `VARCHAR(45)` | fasst die längste IPv6-Schreibweise. Bewusst Text, weil das Feld nach 30 Tagen geleert und nie berechnet wird |
+| IP-Adresse | `VARCHAR(45)` | fasst die längste IPv6-Schreibweise. Bewusst Text, weil das Feld nach der Frist aus `09_ANFRAGEEINGANG.md` geleert und nie berechnet wird |
 | Wahrheitswert | `TINYINT(1)` | |
 | `now()` | `CURRENT_TIMESTAMP` | |
 
@@ -77,7 +77,7 @@ stammen aus dem abgelösten Stack und sind **ungültig**.
 | **Umsatzsteuer** | **19 %**. `vat_cents = round(net_cents * 0.19)`, `gross_cents = net_cents + vat_cents`. **Der Satz liegt als Konstante im Code, nicht verstreut** |
 | **Preisangaben** | öffentlich **netto**, jede Anzeige mit `zzgl. gesetzlicher Umsatzsteuer` |
 | **Zahlungsplan** | fest `50_50` und `40_30_30`. **Ausnahme Sonderprojekt:** `custom` |
-| **Zahlungsziel** | **10 Kalendertage** ab Rechnungsdatum als Vorbelegung für `due_date` |
+| **Zahlungsziel** | Vorbelegung für `due_date` ab Rechnungsdatum — die Frist steht in `02_PREISE_UND_ZAHLUNG.md` |
 | **Dateigrößen** | `12,4 MB` — deutsch, eine Nachkommastelle |
 | **Nummernkreise** | Angebot `AN-JJJJ-NNN`, Rechnung `RE-JJJJ-NNN`, je Jahr fortlaufend. In Stufe 0 vom Admin eingegeben, **Eindeutigkeit erzwingt die Datenbank** |
 | **Telefonnummern** | Anzeige wie eingegeben, **keine** automatische Umformatierung |
