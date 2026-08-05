@@ -45,8 +45,8 @@ Gesamtfestpreis, plant, textet, programmiert und betreibt** die Website.
 | **Kein WordPress** | **kein** primärer Kaufgrund — Kunden interessiert kein CMS. Aber „nie wieder Plugin-Updates, gehackte Seite, Agenturabhängigkeit" ist ein realer Schmerz. Also **Beweis unter dem Hauptnutzen**, nicht Überschrift |
 | **KI-gestützt** | transparent im Produktionsabschnitt genannt, **nie** zum Hauptnutzen gemacht. KI-Optik ist ein Vertrauensrisiko |
 
-**Verboten:** „wartungsarm", „wartungsfrei" — entwertet den Rundum-Schutz (siehe 1.3).
-**Richtig:** *„Keine Wartung für Sie. SARTU betreibt Ihre Website laufend."*
+**Verbotene Wörter und Aussagen: `08_TEXTREGELN.md`.** Der wichtigste Fall betrifft die
+Wartung — er entwertet sonst den Rundum-Schutz (`02_PREISE_UND_ZAHLUNG.md`).
 
 **Abgrenzung nach außen:** kein Baukasten · kein WordPress-Hoster · keine Billig-Seitenschleuder ·
 kein Anbieter für Privat- und Hobbyseiten.

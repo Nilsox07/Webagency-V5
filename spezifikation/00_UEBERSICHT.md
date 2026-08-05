@@ -25,28 +25,28 @@ Stand 03.08.2026 · Aufbau nach `KONSOLIDIERUNG_RUNDE1.md`
 |---|---|---|
 | `03_KUNDENPRODUKT.md` | Leistungsumfang, Scope-Schutz, Kundenablauf, Designprinzipien Kundenwebsites | **fertig** |
 | `04_DOMAIN_HOSTING_MAIL.md` | Domainregeln, Domain-Schutzregel, Hosting, E-Mail | **fertig** |
-| `05_SEO_GEO.md` | SEO-/GEO-Startsystem — **Kundenleistung** | offen |
+| `05_SEO_GEO.md` | SEO-/GEO-Startsystem — **Kundenleistung** | **fertig** |
 
 ### Teil 2 — was **SARTU für sich selbst** baut
 
-| Datei | Inhalt | Quelle bis dahin |
+| Datei | Inhalt | Stand |
 |---|---|---|
-| `10_WEBSITE_SARTU.md` | `sartu.de` — alle Seiten, Sektion für Sektion | `CLAUDE_SARTU_WEBSITE_LASTENHEFT_BAUFINAL.md` |
-| `11_KUNDENBEREICH.md` | Screens, Status, Anmeldung, E-Mails, Uploads | `CLAUDE_SARTU_PORTAL_LASTENHEFT_BAUFINAL.md` |
-| `12_ADMINBEREICH.md` | Adminschicht | dito |
-| `13_DATENMODELL.md` | 20 Tabellen, Konventionen, Migrationen | dito |
-| `14_SICHERHEIT.md` | Mandantentrennung, CSRF, Audit, Ersteinrichtung | dito |
-| `15_TESTFAELLE.md` | 88 Testfälle | dito + `REIHENFOLGE.md` |
-| `16_SEO_GEO_SARTU.md` | Suchintentionen, URL-Liste der **eigenen** Seite | `SARTU_SEO_GEO_KEYWORDSTRATEGIE.md` |
+| `10_WEBSITE_SARTU.md` | `sartu.de` — technischer Rahmen, Navigation, alle zehn Sektionen, übrige Seiten | **fertig** |
+| `11_KUNDENBEREICH.md` | Navigation, Anmeldung, Statuslogik, Uploads, Zahlungen | **fertig**, Screen-Details noch in der Quelle |
+| `12_ADMINBEREICH.md` | Zugang, Screens, Projekt-Arbeitsplatz, Audit | **fertig** |
+| `13_DATENMODELL.md` | 20 Tabellen, Typabbildung, Formate, Konventionen | **fertig** |
+| `14_SICHERHEIT.md` | Architektur, dreizehn eiserne Regeln, Ersteinrichtung, Migrationen | **fertig** |
+| `15_TESTFAELLE.md` | Verteilung, Mandantentrennung, Anmeldung, Ausführung | **fertig**, Restgruppen in der Quelle |
+| `16_SEO_GEO_SARTU.md` | Suchintentionen, Launch-Reihenfolge, was nicht gebaut wird | **fertig** |
 
 ### Teil 3
 
-| Datei | Inhalt | Quelle bis dahin |
+| Datei | Inhalt | Stand |
 |---|---|---|
-| `20_OFFEN.md` | offene Entscheidungen, Platzhalter | `SARTU_ENTSCHEIDUNGEN_OFFEN.md` |
+| `20_OFFEN.md` | offene Entscheidungen, Platzhalter, daraus folgende Sperren | **fertig** |
 
-> **Solange eine Datei „offen" steht, gilt ihre Quelle unverändert weiter.** Es entsteht
-> keine Lücke.
+> **Alle Themendateien stehen.** Wo eine Datei noch feldgenaue Restvorgaben in ihrer Quelle
+> lässt, ist das in ihrem Schlussabschnitt benannt — es entsteht keine stille Lücke.
 
 ---
 

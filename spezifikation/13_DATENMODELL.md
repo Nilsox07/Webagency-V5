@@ -73,7 +73,7 @@ stammen aus dem abgelösten Stack und sind **ungültig**.
 | **Datum** | `TT.MM.JJJJ` — z. B. `04.08.2026`. **Nie ISO in der Oberfläche** |
 | **Datum mit Uhrzeit** | `TT.MM.JJJJ, HH:MM Uhr` |
 | **Wochentage** | ausgeschrieben, Woche beginnt **Montag** |
-| **Geldbeträge** | Speicherung integer in Cent. Anzeige `7.900,00 €` |
+| **Geldbeträge** | Speicherung integer in Cent. Anzeige `1.234,50 €` |
 | **Umsatzsteuer** | **19 %**. `vat_cents = round(net_cents * 0.19)`, `gross_cents = net_cents + vat_cents`. **Der Satz liegt als Konstante im Code, nicht verstreut** |
 | **Preisangaben** | öffentlich **netto**, jede Anzeige mit `zzgl. gesetzlicher Umsatzsteuer` |
 | **Zahlungsplan** | fest `50_50` und `40_30_30`. **Ausnahme Sonderprojekt:** `custom` |

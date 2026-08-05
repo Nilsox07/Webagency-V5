@@ -45,7 +45,8 @@ Kunde definierte Geschäftsdaten selbst.
 technische Pflege, technische Suchgesundheit, Formularprüfung, Versionsstand, Zugang zum
 Kundenbereich inkl. Rechnungs- und Zahlungsstatus, Reaktionsbereitschaft.
 
-> **Kommunikationsfehler, der das Modell entwertet:** die Website als „wartungsarm" bewerben.
+> **Kommunikationsfehler, der das Modell entwertet** (Wortliste in `08_TEXTREGELN.md`):
+> die Website mit einem der dort verbotenen Wartungswörter bewerben.
 > Dann fragt der Kunde sofort *„Warum zahle ich dann 59/129/249 € im Monat?"* — **Der Aufwand
 > verschwindet für den Kunden, nicht in der Welt.** Genau dafür ist die Pauschale da.
 

@@ -40,7 +40,7 @@ Intern darf „Adminbereich" stehen.
 | Prozentversprechen wie „spart 80 % Zeit" | keine eigenen Daten | qualitativ formulieren |
 | „Paket wählen", „konfigurieren", „Extras hinzufügen", „SEO buchen" | widerspricht der Angebotslogik | „Bedarf prüfen lassen", „einschätzen lassen" |
 | „günstig", „billig", „Schnäppchen" | falsche Positionierung | „Festpreis", „klarer Gesamtpreis" |
-| „unser Team", solange eine Einzelperson arbeitet | Ehrlichkeit | **„gründergeführt"** |
+| „unser Team", solange eine Einzelperson arbeitet | Ehrlichkeit — Regel in `06_RECHT.md` | die dort festgelegte Bezeichnung |
 | „Ihre Website ist ab dem ersten Tag auffindbar" | ist „garantierte Sichtbarkeit" in weichen Worten | „ab dem ersten Tag **für Suchmaschinen vorbereitet**" |
 
 ## Pflichthinweis bei jeder Preisnennung
@@ -50,9 +50,9 @@ Intern darf „Adminbereich" stehen.
 ## Darstellungsregeln
 
 - Der Kunde sieht **nie** einen Systemcode wie `qa_failed`, immer Klartext
-- Leere Werte: **`Noch nicht hinterlegt`** — nie `null`, `–` oder `undefined`
-- Datum in **Europe/Berlin**, Format `TT.MM.JJJJ, HH:MM Uhr`, **nie** ISO
-- Geld: `7.900,00 €`
+- Leere Werte nie als `null`, `–` oder `undefined` — Ersatztext in `13_DATENMODELL.md`
+- Datum, Uhrzeit, Geld und Dateigrößen: **Format in `13_DATENMODELL.md`**, nie ISO in der Oberfläche
+- Geld: deutsches Format mit Punkt und Komma — Regeln in `13_DATENMODELL.md`
 
 ## Benennung von Beispielen
 

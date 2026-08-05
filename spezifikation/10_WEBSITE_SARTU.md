@@ -212,7 +212,7 @@ Satz ergänzt — **die Wirkung entsteht aus der Leere ringsum.**
 - **Echtes Foto** von `[GRUENDER_NAME]`, keine Bestandsaufnahme, kein Platzhalter, der wie ein
   Foto wirkt. **Steht das Foto nicht zur Verfügung, entfällt die Sektion vollständig** — ein
   leerer Rahmen an einer Vertrauensstelle ist schlechter als gar nichts
-- **Name und Rolle:** `[GRUENDER_NAME]`, gründergeführt
+- **Name und Rolle:** `[GRUENDER_NAME]`, Bezeichnung nach `06_RECHT.md`
 - **Zwei bis drei Sätze Haltung.** Kein Lebenslauf, keine Erfolgsgeschichte, keine Zahlen
 - **`Was SARTU bewusst nicht ist`** — vier Punkte: `kein Baukasten` · `kein WordPress-Hoster` ·
   `keine Billig-Seitenschleuder` · `kein Anbieter für Privat- und Hobbyseiten`
