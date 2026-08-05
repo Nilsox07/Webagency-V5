@@ -195,7 +195,7 @@ der Stelle, an der der Fehler passiert.
 - *Aufgabe:* Produkt und Preismodell in einem Satz. Der Leser muss danach wissen, was er kauft und dass der Preis vorher feststeht
 - *Grenze:* keine erfundene Zahl; nicht „günstig"; **kein unbestimmtes Eigenschaftswort** — der Satz trägt über `programmiert` und `Festpreis`, beides nachprüfbar
 - *Umfang:* **ein Satz, höchstens acht Wörter.** Zusätzlich: **kein Wort über 14 Zeichen**, und die drei Sinnabschnitte sollen ähnlich lang sein
-- *Bau:* **Versalien, dreizeilig, erste Zeile kursiv und leichter** (`07_MARKE_UND_GESTALTUNG.md`). Die Dreizeiligkeit ist keine Einstellung, sondern eine Eigenschaft des Satzes; die Auszeichnung der ersten Zeile bricht den Block, den drei gleich lange Versalzeilen sonst bilden
+- *Bau:* **Gemischtsatz, dreizeilig, erste Zeile kursiv und leichter** (`07_MARKE_UND_GESTALTUNG.md`). Die Dreizeiligkeit ist keine Einstellung, sondern eine Eigenschaft des Satzes; die Auszeichnung der ersten Zeile bricht den Block, den drei gleich lange Zeilen sonst bilden. **Keine Versalien** — sie waren am 05.08.2026 eingebaut und sind gemessen *kleiner*
 
 > **Warum die Zeichenzahl jetzt in der Vorgabe steht.** Die H1 steht in der 55-%-Spalte; ihr
 > Schriftgrad ist ein fester Anteil davon. **Damit bestimmt die längste Zeile den Schriftgrad —
@@ -222,6 +222,32 @@ der Stelle, an der der Fehler passiert.
 - Preishinweis in der **langen** Fassung aus `08_TEXTREGELN.md`
 - Trust-Zeile: `Festpreis vorab` · `Texte inklusive` · `Bundesweit, ohne Termin` · `SEO-Basis ab Launch`
 - Branchenangabe: `Handwerk` · `Praxen` · `Kanzleien` · `Ladengeschäfte`
+
+**Aufbau: drei Gruppen, nicht sieben Bausteine.**
+
+| Gruppe | Inhalt |
+|---|---|
+| **1 — Aussage** | Eyebrow · H1 · Vorspann |
+| **2 — Handlung** | Primär-Knopf · Sekundärziel **als Textlink** · Kapazitätszeile leise darunter |
+| **3 — Pflichtangaben** | eine ruhige Leiste am Fuß: Trust-Zeile, darunter der Preishinweis |
+
+**Der Abstand markiert die Gruppe** — eng innerhalb, weit dazwischen —, und die Gruppenabstände
+hängen an der **Fensterhöhe**, nicht an der Breite. Der Engpass im Aufmacher ist senkrecht.
+
+> **Warum das eine Regel ist.** Die Fassung vom 05.08.2026 stapelte **sieben** Blöcke in der
+> Lesespalte: Eyebrow, H1, Vorspann, zwei gleich starke Knöpfe, Kapazitätspille, Preishinweis,
+> Vertrauensraster. Nachgesehen bei **Instrument**, **Work & Co**, **Dept** und **BASIC/DEPT**:
+> dort stehen im ersten Bild Überschrift, höchstens ein kurzer Absatz und **genau ein** Knopf —
+> sonst nichts. Keine der vier hat einen zweiten gleichwertigen Knopf, keine eine Vorzeile.
+>
+> **Übernommen wurde die Gruppierung, nicht die Kargheit.** Alle vier gebundenen Angaben stehen
+> weiter im ersten Bild; SARTU kann auf sie nicht verzichten, weil es die Beweise einer Agentur
+> ohne Referenzen sind. **Zwei gleich starke Knöpfe sind trotzdem ein Fehler** — der Leser wählt
+> dann zwischen Knöpfen statt zwischen Angeboten. `Preise ansehen` bleibt gebunden und steht
+> weiter im Aufmacher, aber als Textlink.
+>
+> **Die Kapazitätszeile war eine umrandete Pille.** §5 verlangt sie **leise**; eine Pille mit
+> Rand und Füllung ist das Gegenteil und machte aus einer Randnotiz einen eigenen Baustein.
 
 **Bau:** Branchenangabe **darf nicht anklickbar aussehen** — eine Form, die Interaktion verspricht
 und keine liefert, ist ein Bedienfehler. Visual rechts mit Kennzeichen **`Musteransicht`**

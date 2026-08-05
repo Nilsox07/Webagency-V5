@@ -168,7 +168,7 @@ h2{font-size:clamp(27px,calc(3vw - 6px),54px)}
      ragte die naechste Sektion 366px herein; §5 verlangt einen ANSCHNITT.
      Die Hoehe folgt jetzt dem Fenster, der Inhalt steht mittig darin. */
   min-height:clamp(560px,79vh,1060px);
-  padding:clamp(24px,4vh,56px) 0 clamp(22px,3.4vh,48px)}
+  padding:clamp(18px,3vh,56px) 0 clamp(16px,2.6vh,48px)}
 .hero>.wrap{width:100%}
 .ribbons{position:absolute;inset:0;z-index:0;overflow:hidden;pointer-events:none;
   -webkit-mask-image:linear-gradient(90deg,transparent 0,#000 14%,#000 86%,transparent 100%);
@@ -203,16 +203,24 @@ h2{font-size:clamp(27px,calc(3vw - 6px),54px)}
    ihr nicht folgen, eine cqw-Angabe braucht es gar nicht erst zu versuchen. */
 .hero-grid>div:first-child{grid-column:1;grid-row:1;container-type:inline-size}
 .stage{grid-column:2;grid-row:1 / span 2;align-self:center}
-.hero-trust{grid-column:1;grid-row:2;margin-top:clamp(18px,1.6vw,38px);padding-top:clamp(16px,1.4vw,32px);border-top:1px solid var(--line);max-width:47ch}
-/* VERSALIEN, dreizeilig. Der Grad ist an die Spalte gebunden, nicht ans
-   Fenster: 9.9cqw sind 95 % des gemessenen Hoechstwerts, bei dem der Satz
-   noch dreizeilig in seine Spalte passt. Gemessen wurde mit DejaVu Sans —
-   der breitesten Schrift der Ersatzkette; auf SF Pro und Segoe UI bleibt
-   mehr Luft, nie weniger.
-   Versalien tragen weniger Unterschneidung als Gemischtsatz (-.018 statt
-   -.033) und weniger Zeilenabstand, weil keine Unterlaengen entstehen. */
-h1{font-size:clamp(32px,9.9cqw,92px);letter-spacing:-.018em;line-height:.95;
-  text-transform:uppercase}
+/* Dritte Gruppe: die Pflichtangaben aus §5 als EINE ruhige Leiste am Fuss des
+   Aufmachers, nicht als zwei weitere Bloecke in der Lesespalte. */
+.hero-trust{grid-column:1;grid-row:2;margin-top:clamp(24px,4.2vh,64px);
+  padding-top:clamp(16px,2.2vh,34px);border-top:1px solid var(--line);max-width:47ch}
+/* Dreizeilig, GEMISCHTSATZ. Der Grad ist an die Spalte gebunden, nicht ans
+   Fenster: 11cqw fuellen die Spalte bis auf einen kleinen Rest. Gemessen mit
+   DejaVu Sans, der breitesten Schrift der Ersatzkette — auf SF Pro und Segoe
+   UI bleibt mehr Luft, nie weniger.
+   Versalien waren hier und sind wieder raus: Kleinbuchstaben sind schmaler,
+   derselbe Platz traegt deshalb 75,7 statt 65,8 px. Die Versalfassung war
+   KLEINER, nicht groesser — und drei Versalzeilen gleicher Laenge lesen sich
+   als Block. Ober- und Unterlaengen geben den Zeilen von selbst Rhythmus.
+   Instrument, Work & Co und Dept setzen Aufmacher ueber vier Woerter
+   ausnahmslos gemischt; Versalien stehen dort nur auf Vierwortzeilen. */
+/* min(): der Grad folgt der Spalte, aber NIE hoeher als das Fenster hergibt.
+   Ohne die Hoehengrenze frass die H1 auf 1366x768 den Anschnitt der naechsten
+   Sektion auf (gemessen: 1px statt 33). Greift nur auf flachen Schirmen. */
+h1{font-size:clamp(34px,min(11cqw,8.6vh),104px);letter-spacing:-.03em;line-height:1.0}
 /* Drei Versalzeilen von fast gleicher Laenge lesen sich als Block, nicht als
    Satz — genau das war an der ausgeglichenen Fassung falsch. Die erste Zeile
    bricht ihn in ZWEI Richtungen auf: Neigung und Gewicht. Sie traegt die
@@ -220,14 +228,37 @@ h1{font-size:clamp(32px,9.9cqw,92px);letter-spacing:-.018em;line-height:.95;
    und Preis. <em> und nicht <span>, weil das Wort wirklich betont ist. */
 h1 em{font-style:italic;font-weight:400}
 h1 .accent{background-image:linear-gradient(var(--lime),var(--lime));background-repeat:no-repeat;
-  background-position:0 .95em;background-size:100% .2em;padding-right:.04em}
-.hero-lede{margin-top:clamp(14px,1.3vw,30px);max-width:44ch;color:var(--muted);font-size:clamp(19px,1.4vw,25px);line-height:1.55}
-.hero-cta{display:flex;flex-wrap:wrap;gap:clamp(11px,.9vw,18px);margin-top:clamp(20px,1.8vw,42px)}
+  background-position:0 .84em;background-size:100% .22em;padding-right:.04em}
+/* AUFBAU DES AUFMACHERS — drei Gruppen, nicht sieben Bausteine.
+   Gemessen an Instrument, Work & Co, Dept und BASIC/DEPT: dort stehen im
+   ersten Bild Ueberschrift, hoechstens ein kurzer Absatz und GENAU EIN
+   Knopf. Unsere Fassung stapelte sieben Bloecke untereinander — Vorzeile,
+   H1, Vorspann, zwei gleich starke Knoepfe, Kapazitaetspille, Preishinweis,
+   Vertrauensraster. Das ist der Grund, warum sie unruhig wirkt.
+   Geaendert wurde die GRUPPIERUNG, nichts entfernt: alle vier gebundenen
+   Angaben aus §5 Sektion 1 stehen weiter im ersten Bild.
+   Der Abstand markiert die Gruppe: eng innerhalb, weit dazwischen. */
+/* Der Vorspann haengt an derselben Spalte wie die H1 (3.5 gegen 9.9 cqw) —
+   das Verhaeltnis bleibt damit auf jeder Breite 2,8. Vorher lief er auf vw
+   und riss auf grossen Schirmen auf 1:3,5 auf; die H1 stand dann allein da. */
+.hero-lede{margin-top:clamp(16px,1.5vw,32px);max-width:44ch;color:var(--muted);
+  font-size:clamp(19px,3.5cqw,30px);line-height:1.5}
+/* Die Gruppenabstaende haengen an der FENSTERHOEHE, nicht an der Breite.
+   Der Engpass ist senkrecht: auf 1366x768 frisst ein breitenabhaengiger
+   Abstand den Anschnitt der naechsten Sektion auf (gemessen: 4px statt 30). */
+.hero-cta{display:flex;flex-wrap:wrap;align-items:center;gap:clamp(14px,1.4vw,28px);
+  margin-top:clamp(22px,3.6vh,56px)}
 .hero-cta .btn{padding:16px 26px;font-size:17px}
+/* Der zweite Weg bleibt (§5 bindet `Preise ansehen`), hoert aber auf, wie ein
+   gleichwertiger Knopf auszusehen. Zwei gleich starke Knoepfe sind der
+   haeufigste Aufmacherfehler — der Leser waehlt dann zwischen Knoepfen statt
+   zwischen Angeboten. */
+.btn-text{display:inline-flex;align-items:center;gap:9px;font-weight:600;font-size:17px;
+  color:var(--ink)}
 /* Preishinweis, Trust-Zeile und Branchenangabe — §5 Sektion 1.
    Die vier Branchen sind BEWUSST keine Pillen mehr: „Eine Form, die
    Interaktion verspricht und keine liefert, ist ein Bedienfehler." */
-.hero-fine{margin-top:clamp(9px,.7vw,16px);font-size:clamp(14px,1.05vw,17px);color:var(--label)}
+.hero-fine{margin-top:clamp(12px,1vw,20px);font-size:clamp(14px,1.05vw,17px);color:var(--label)}
 .trust{display:grid;grid-template-columns:repeat(2,minmax(0,auto));justify-content:start;
   gap:clamp(10px,.8vw,18px) clamp(30px,2.4vw,56px);font-size:clamp(15.5px,1.15vw,19px);color:var(--text)}
 .trust li{position:relative;padding-left:19px}
@@ -237,10 +268,12 @@ h1 .accent{background-image:linear-gradient(var(--lime),var(--lime));background-
 .hero-note{display:flex;flex-wrap:wrap;gap:9px;margin-top:var(--s-4)}
 .chip{padding:8px 16px;border-radius:var(--r-pill);background:var(--paper);border:1px solid var(--line);
   font-family:var(--font-mono);font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
-.status-quiet{display:flex;width:fit-content;align-items:center;gap:9px;margin-top:clamp(14px,1.3vw,30px);
-  padding:9px 16px 9px 13px;background:var(--paper);border:1px solid var(--line);
-  border-radius:var(--r-pill);font-size:15px;color:var(--ink);font-weight:500}
-.dot{flex:none;width:13px;height:13px;border-radius:var(--r-pill);border:1.5px solid var(--ink);background:var(--lime)}
+/* §5: „Kapazitaetszeile bei freien Kapazitaeten LEISE unter dem Knopf."
+   Sie war eine umrandete Pille mit Fuellung — das ist das Gegenteil von leise
+   und machte aus einer Randnotiz einen eigenen Baustein. Jetzt eine Zeile. */
+.status-quiet{display:flex;width:fit-content;align-items:center;gap:9px;
+  margin-top:clamp(13px,1.1vw,22px);font-size:15px;color:var(--label);font-weight:500}
+.dot{flex:none;width:10px;height:10px;border-radius:var(--r-pill);border:1px solid var(--ink);background:var(--lime)}
 
 /* Gerätepaar — der Gegenstand, der dem Aufmacher gefehlt hat */
 .stage{position:relative;padding-bottom:44px}
@@ -263,7 +296,7 @@ h1 .accent{background-image:linear-gradient(var(--lime),var(--lime));background-
      Derselbe Faktor ergaebe bei 768px eine H1 von 70px — sie erschlaegt
      Vorspann und Knoepfe. Der Faktor faellt deshalb an der Umbruchstelle
      mit, die Deckelung haelt den Sprung bei 900px klein. */
-  h1{font-size:clamp(34px,7.4cqw,54px)}
+  h1{font-size:clamp(38px,10cqw,58px)}
   .stage{grid-column:1;grid-row:2;margin-top:var(--s-4)}
   .hero-trust{grid-column:1;grid-row:3;padding-top:var(--s-4)}
 }
@@ -683,10 +716,9 @@ html:has(#g-kalk:checked),html:has(#g-weiss:checked){background:var(--cream)}
         <p class="hero-lede">Sie erzählen uns, was Ihr Betrieb macht und für wen. Den Rest bauen und betreiben wir. Dafür ist kein einziger Termin nötig.</p>
         <div class="hero-cta">
           <a class="btn" href="/briefing">Bedarf prüfen lassen <span class="ar">→</span></a>
-          <a class="btn btn-ghost" href="/preise">Preise ansehen</a>
+          <a class="btn-text" href="/preise">Preise ansehen <span class="ar">→</span></a>
         </div>
         <p class="status-quiet"><span class="dot" aria-hidden="true"></span><span>Freie Kapazitäten</span></p>
-        <p class="hero-fine">Alle Preise netto zzgl. USt. Ausschließlich für Unternehmer.</p>
       </div>
 
       <div class="hero-trust">
@@ -696,6 +728,7 @@ html:has(#g-kalk:checked),html:has(#g-weiss:checked){background:var(--cream)}
           <li>Bundesweit, ohne Termin</li>
           <li>SEO-Basis ab Launch</li>
         </ul>
+        <p class="hero-fine">Alle Preise netto zzgl. USt. Ausschließlich für Unternehmer.</p>
       </div>
 
       <div class="stage rise-2">

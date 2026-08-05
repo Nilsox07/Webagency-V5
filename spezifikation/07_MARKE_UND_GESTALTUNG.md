@@ -87,7 +87,7 @@ Aufmacher-Visual und die Überschriften.
 
 | | Regel | Spanne |
 |---|---|---|
-| **H1** | `clamp(32px, 9.9cqw, 92px)` in Versalien · einspaltig `clamp(34px, 7.4cqw, 54px)` | 34 → 89 px |
+| **H1** | `clamp(34px, min(11cqw, 8.6vh), 104px)` · einspaltig `clamp(38px, 10cqw, 58px)` | 38 → 99 px |
 | **H2** | `clamp(27px, calc(3vw − 6px), 54px)` | 27 → 54 px |
 | H3 | 20 · 21 · 24 · 27 · 32 px je Bauteil | — |
 
@@ -101,11 +101,11 @@ Auflösung eines Fehlers, der zweimal auftrat.
 > an der nächsten zu steil. Genau das zeigten die beiden verworfenen Fassungen: `3.6vw` holte den
 > Vierzeiler zwischen 1024 und 1280 px zurück, `3.5vw − 6px` bei 1600 und 1800 px. **Nicht der
 > Wert war falsch, die Bezugsgröße war es.** Mit `cqw` ist der Schriftgrad ein fester Anteil der
-> Spalte — 9,9 % — und der Knick verschwindet, weil er gar nicht erst auftaucht.
+> Spalte — 11 % — und der Knick verschwindet, weil er gar nicht erst auftaucht.
 
 **Woran die H1 gebunden ist.** Sie steht in der 55-%-Spalte des Aufmachers, nicht über der vollen
 Breite — **ihre Obergrenze ist die Spalte, nicht der Geschmack.** Der Anteil ist gemessen, nicht
-gewählt: bei 10,4 cqw füllt die längste Zeile die Spalte genau aus, bei 9,9 cqw bleiben 5 %
+gewählt: bei 11,4 cqw füllt die längste Zeile die Spalte genau aus, bei 11 cqw bleiben rund 6 %
 Rest. **Die Prüfung ist mechanisch: entstehen vier Zeilen, ist die Schrift für ihre Spalte zu
 groß.**
 
@@ -114,10 +114,23 @@ groß.**
 > (Windows) sind dieselben Zeilen schmaler, der Schriftgrad bleibt gleich. **Die Messung kann
 > also zu wenig Platz melden, nie zu viel.**
 
-**Versalien.** Die H1 der Startseite steht in Großbuchstaben, gesetzt über `text-transform`
-— **der Quelltext bleibt gemischt**, damit Vorlesewerkzeuge, Suchmaschinen und das Kopieren
-normalen Text bekommen. Versalien brauchen weniger Unterschneidung (`-.018em` statt `-.033em`)
-und weniger Zeilenabstand (`.95` statt `1.04`), weil keine Unterlängen entstehen.
+**Gemischtsatz, keine Versalien.**
+
+> **Versalien waren am 05.08.2026 eingebaut und sind am selben Tag wieder heraus.** Sie waren
+> ausdrücklich gewünscht („3 Zeilen und große Buchstaben wären top"), und die Absicht dahinter
+> war eine größere H1. **Gemessen erreichen sie das Gegenteil:** Großbuchstaben sind breiter,
+> derselbe Platz trägt in Versalien **65,8 px**, im Gemischtsatz **73,1 px**. Dazu fehlt ihnen,
+> was drei gleich lange Zeilen rettet — Ober- und Unterlängen geben dem Satz von selbst
+> Rhythmus. **Nicht wieder verwenden, ohne beides nachzumessen.**
+
+**Die zweite Schranke ist die Fensterhöhe.** `min(11cqw, 8.6vh)` — der Grad folgt der Spalte,
+wird aber nie höher, als der Bildschirm hergibt. Ohne sie fraß die H1 auf 1366 × 768 den
+Anschnitt der nächsten Sektion auf (gemessen: 1 px statt 33). Die Schranke greift **nur** auf
+flachen Bildschirmen; ab 1440 × 900 ist sie wirkungslos.
+
+**Der Vorspann hängt an derselben Spalte** — `3.5cqw` gegen `11cqw`, Verhältnis konstant **3,1**.
+Vorher lief er auf `vw` und riss auf großen Bildschirmen auf 1 : 3,5 auf; die H1 stand dann
+allein da.
 
 **Die Deckelung bei 900 px ist kein Feinschliff.** Einspaltig ist die Spalte nicht mehr 55 %,
 sondern das ganze Fenster; derselbe Faktor ergäbe bei 768 px eine H1 von **70 px**, die Vorspann
@@ -129,37 +142,38 @@ Reparatur eines echten Fehlers: Die H2 stand auf `clamp(31px, 4.3vw, 50px)` und 
 die Rangfolge war umgekehrt.
 
 > **Ersetzt am 05.08.2026.** Der feste Faktor unterstellte, beide Überschriften lebten im selben
-> Satzspiegel. Das stimmt nicht mehr: Die H1 ist eine Versalzeile in der 55-%-Spalte, die H2
-> gemischter Satz über die volle Breite. **Gebunden ist ab jetzt die Rangfolge, nicht der
-> Faktor** — H1 > H2 auf **jeder** geprüften Breite, gemessen 1,26 bis 1,94. Die H2 bleibt
+> Satzspiegel. Das stimmt nicht: Die H1 steht in der 55-%-Spalte und misst sich an ihr, die H2
+> über die volle Breite und misst sich am Fenster. **Gebunden ist ab jetzt die Rangfolge, nicht
+> der Faktor** — H1 > H2 auf **jeder** geprüften Breite, gemessen 1,41 bis 2,15. Die H2 bleibt
 > unverändert; sie war nie das Problem.
 
 > **Der 55/45-Aufmacher bleibt** (`10_WEBSITE_SARTU.md`). Er war nicht zur Wahl gestellt; die
 > Rechnung oben ist unter dieser Bindung gemacht.
 
-### Gemessen am 05.08.2026 — vorher / nachher
+### Gemessen am 05.08.2026 — Ausgangsstand / heute
 
-| Fenster | H1 vorher | H1 nachher | Zeilen vorher | Zeilen nachher | H1 : H2 |
-|---|---:|---:|:---:|:---:|---:|
-| 390 | 32,0 | **34,0** | **4** | **3** | 1,26 |
-| 768 | 32,0 | **52,3** | **2** | **3** | 1,94 |
-| 1024 | 32,0 | **49,1** | 3 | 3 | 1,82 |
-| 1280 | 38,4 | **61,3** | 3 | 3 | 1,89 |
-| 1366 | 41,5 | **65,5** | 3 | 3 | 1,87 |
-| 1440 | 44,1 | **65,9** | 3 | 3 | 1,77 |
-| 1512 | 46,7 | **65,8** | 3 | 3 | 1,67 |
-| 1920 | 61,2 | **84,7** | 3 | 3 | 1,64 |
-| 2240 | 64,0 | **88,6** | 3 | 3 | 1,64 |
-| 2560 | 64,0 | **88,6** | 3 | 3 | 1,64 |
+| Fenster | H1 vorher | H1 heute | Zeilen vorher | Zeilen heute | H1 : H2 | Anschnitt |
+|---|---:|---:|:---:|:---:|---:|---:|
+| 390 | 32,0 | **38,0** | **4** | **3** | 1,41 | — |
+| 768 | 32,0 | **58,0** | **2** | **3** | 2,15 | — |
+| 1024 | 32,0 | **54,5** | 3 | 3 | 2,02 | 82 |
+| 1280 | 38,4 | **68,1** | 3 | 3 | 2,10 | 53 |
+| 1366 | 41,5 | **66,0** | 3 | 3 | 1,89 | **21** |
+| 1440 | 44,1 | **73,2** | 3 | 3 | 1,97 | 103 |
+| 1512 | 46,7 | **73,1** | 3 | 3 | 1,86 | 127 |
+| 1920 | 61,2 | **92,9** | 3 | 3 | 1,80 | 134 |
+| 2240 | 64,0 | **98,5** | 3 | 3 | 1,82 | 186 |
+| 2560 | 64,0 | **98,5** | 3 | 3 | 1,82 | 301 |
 
 **Drei Zeilen auf jeder Breite, kein waagerechter Überlauf, H1 > H2 durchgehend.**
 
 ### Die erste Zeile ist kursiv und leichter — gegen den Block
 
 **Gleich lange Zeilen sind die Voraussetzung für den großen Schriftgrad und zugleich sein
-Preis.** Drei Versalzeilen von 13 · 14 · 14 Zeichen, alle im selben Gewicht, lesen sich als
-**Block**, nicht als Satz. Der Einwand kam vom Betreiber und war richtig: *„das sieht hässlich
-aus, weil das ein Block ist und jede Zeile der H1 gleich lang ist."*
+Preis.** Drei Zeilen von 13 · 14 · 14 Zeichen im selben Gewicht lesen sich als **Block**, nicht
+als Satz. Der Einwand kam vom Betreiber und war richtig: *„das sieht hässlich aus, weil das ein
+Block ist und jede Zeile der H1 gleich lang ist."* **In Versalien war das akut** — dort fehlen
+Ober- und Unterlängen ganz. Im Gemischtsatz mildert der Wortbau es, weg ist es nicht.
 
 > **Ein Messwert ist kein Gestaltungsziel.** Der Ausgleich der Zeilenlängen war ein
 > **Hilfsmaß** — er sagt, wie groß die Schrift werden darf. Ich hatte ihn zum Ziel gemacht und
