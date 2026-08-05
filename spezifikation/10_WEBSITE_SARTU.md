@@ -80,6 +80,52 @@ Bezeichnung wählen, nicht die elegantere.**
 > zwei Absätze später, es wandere in den Fußbereich. Beide tragen eine Begründung. Gebaut ist die
 > Punkteliste oben. **Entscheidung nötig** — siehe Dublettenregister im Wegweiser.
 
+### Verhalten und Maße
+
+**Desktop ab 1024 px:** Wortmarke links · die sechs Punkte mittig · `Kontakt` als Textlink und
+**`Bedarf prüfen lassen`** als Knopf rechts.
+
+- Höhe **72–80 px**. Beim Scrollen kompakt haftend (**56–60 px**), **deckender Hintergrund**,
+  dünne Trennlinie unten
+- Der aktive Punkt wird markiert — **Unterstrich oder Farbe, keine Fettung**: die verschiebt die
+  Zeile
+
+**Mobil bis 1023 px:** Wortmarke links, Menüzeichen rechts mit **44 × 44 px Trefferfläche**.
+
+- Das Menü öffnet als **Vollbild-Overlay**, nicht als Klappliste
+- Reihenfolge: die sechs Punkte, danach `Kontakt`, dann großflächig `Bedarf prüfen lassen`
+- Schließen per **X, `Esc` und Klick außerhalb**. Der Fokus bleibt im Overlay und springt beim
+  Schließen **zurück auf das Menüzeichen**
+- **Kein haftender Knopfbalken am unteren Rand** — er verdeckt Inhalte und wirkt aufdringlich
+
+> **`Über uns` steht in der Hauptnavigation**, obwohl eine frühere Fassung es ausdrücklich
+> ausschloss. Grund für die Änderung: **Ohne Referenzen trägt die Person hinter SARTU den
+> Vertrauensaufbau.** Sie darf nicht nur im Fußbereich stehen.
+
+---
+
+## 2a. Fußbereich
+
+**Fünf Spalten auf Desktop, gestapelt auf Mobil in dieser Reihenfolge:**
+
+| Spalte | Inhalt (`gebunden`) |
+|---|---|
+| **1 — Marke** | Wortmarke + Kurzpositionierung |
+| **2 — Leistungen** | Webdesign · Website-Texte · Sichtbarkeit (SEO/GEO) · Rundum-Schutz · Kundenbereich |
+| **3 — Wissen** | Ratgeber · Lexikon |
+| **4 — Unternehmen** | Ablauf · Preise · Über uns · Kontakt |
+| **5 — Rechtliches** | Impressum · Datenschutz — **AGB nur, wenn anwaltlich final** |
+
+**Kurzpositionierung in Spalte 1** — *Aufgabe:* in einem Satz sagen, was SARTU baut **und dass
+alle Schritte aus einer Hand kommen**. *Grenze:* keine Aufzählung von mehr als vier Gliedern.
+*Umfang:* **höchstens 15 Wörter**
+
+**Fußzeile darunter, `gebunden`:** `© {Jahr} SARTU` ·
+der Pflichthinweis in der **kurzen** Fassung aus `08_TEXTREGELN.md`
+
+**Verboten im Fußbereich:** Ortslisten · Keyword-Linklisten · Symbole sozialer Netzwerke **ohne
+echtes gepflegtes Profil** · „Made with"-Hinweise.
+
 ---
 
 ## 3. Startseite — zehn Sektionen
@@ -158,7 +204,7 @@ der Stelle, an der der Fehler passiert.
 
 **Gebunden:**
 - Primär-CTA `Bedarf prüfen lassen` → `/briefing` · Sekundär-CTA `Preise ansehen` → `/preise`
-- Preishinweis `Alle Preise netto zzgl. USt. Ausschließlich für Unternehmer.`
+- Preishinweis in der **langen** Fassung aus `08_TEXTREGELN.md`
 - Trust-Zeile: `Festpreis vorab` · `Texte inklusive` · `Bundesweit, ohne Termin` · `SEO-Basis ab Launch`
 - Branchenangabe: `Handwerk` · `Praxen` · `Kanzleien` · `Ladengeschäfte`
 

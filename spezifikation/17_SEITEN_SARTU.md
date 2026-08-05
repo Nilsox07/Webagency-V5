@@ -3,7 +3,7 @@
 > **Diese Datei ist die einzige Quelle für ihr Thema.** Steht etwas hier, steht es nirgends
 > sonst. Wo ein anderes Thema den Wert braucht, verweist es hierher statt ihn zu wiederholen.
 >
-> Zusammengeführt am 05.08.2026 aus `CLAUDE_SARTU_WEBSITE_LASTENHEFT_BAUFINAL.md` §9 bis §15.
+> Zusammengeführt am 05.08.2026 aus `CLAUDE_SARTU_WEBSITE_LASTENHEFT_BAUFINAL.md` §6 bis §15.
 > Wegweiser: `spezifikation/00_UEBERSICHT.md`
 
 > **Startseite, technischer Rahmen und Navigation:** `10_WEBSITE_SARTU.md`.
@@ -17,7 +17,116 @@ Umfangsgrenzen — **nicht** Titles, Metas, H1 und Fließtext. Die schreibt
 
 ---
 
-## 1. `/briefing` — der Bedarfsscheck
+## 1. Die drei Hauptseiten
+
+Sie hängen an der Hauptnavigation und beantworten je eine der drei Fragen, mit denen ein Betrieb
+auf die Seite kommt: **was bekomme ich, was kostet es, wie läuft das ab.**
+
+**Für alle drei gilt:** genau eine `H1` · **Antwortabsatz oben** — die ersten 40–60 Wörter
+beantworten die Titelfrage, bevor der Leser scrollt · CTA-Band am Ende · alle Zahlen aus
+`02_PREISE_UND_ZAHLUNG.md`, **nie eigenständig gepflegt**.
+
+### 1.1 `/leistungen` — **Umfang 700–850 Wörter**
+
+**Aufbau `gebunden`:** Aufmacher → `Kurz gesagt` → Leistungslandkarte → was der Kunde **nicht**
+entscheiden muss → wie tief es je Lösung geht → drei häufige Fragen → CTA-Band
+
+| Block | *Aufgabe* | *Grenze* |
+|---|---|---|
+| **Aufmacher** | klarmachen, dass es **ein Ergebnis** ist und kein Bündel einzelner Leistungen | nicht die acht Zeilen vorwegnehmen |
+| **`Kurz gesagt`** | die Leistungen als **ein** Festpreisergebnis benennen **und** wer die Tiefe entscheidet: SARTU im Angebot, nicht der Kunde im Bestellformular | **45 Wörter** |
+| **Leistungslandkarte** | **dieselben acht Zeilen wie auf der Startseite**, hier mit **je 3–4 Sätzen** statt einem, plus Link auf die Leistungsseite | Titel und Tags dürfen von `10_WEBSITE_SARTU.md` **nicht abweichen** |
+| **Wie tief je Lösung** | Tabelle Start / Wachstum / Platzhirsch / Sonderprojekt **mit Ergebnis-Spalte** | **keine Häkchenmatrix.** Ein Häkchen sagt nicht, was herauskommt |
+
+**Liste „was Sie nicht entscheiden müssen" — `gebunden`, sieben Punkte:** System und Technik ·
+Seitenzahl · Designstil · SEO-Stufe · Hosting · Registrar · Wartungsminuten
+
+**Die drei Fragen — Einwände `gebunden`:** Einzelne Leistungen dazubuchen · später mehr brauchen ·
+bestehende Websites übernehmen
+
+### 1.2 `/preise` — **Umfang 650–800 Wörter**
+
+**Die wichtigste Seite der Website.** Sie trägt den einzigen Sichtbarkeitsvorteil gegenüber
+etablierten Agenturen — **veröffentlichte, überprüfbare Zahlen** (`16_SEO_GEO_SARTU.md`).
+
+**Aufbau `gebunden`:** Aufmacher → Preisübersicht → **Erstjahrestabelle** → was jedes Projekt
+enthält → Rundum-Schutz → Domain und E-Mail → Zahlung → **sechs** häufige Fragen → CTA-Band
+
+| Block | *Aufgabe* | *Grenze* |
+|---|---|---|
+| **Aufmacher** | sagen, dass der Kunde **kein Paket auswählt**, und den Weg beschreiben: Bedarfseinschätzung zeigt die wahrscheinliche Lösung, SARTU prüft persönlich | nie „Paket wählen", „konfigurieren", „Extras" — `08_TEXTREGELN.md` |
+| **Preisübersicht** | **Platzhirsch groß**, Start und Wachstum kompakt, Sonderprojekt als Abzweig | die Empfehlung nicht verstecken und nicht aufdrängen |
+| **Erstjahrestabelle** | Einmalpreis, Monatsbetrag und **Erstjahreswert** je Lösung | **tabellarische Ziffern**, mobil waagerecht scrollbar. Zahlen aus `02_PREISE_UND_ZAHLUNG.md` |
+| **Rundum-Schutz** | Framing zwingend als **Entlastung**, nicht als Wartungspaket | siehe Pflichtsatz auf `/leistung-wartung`, Abschnitt 3 |
+| **Domain und E-Mail** | Inhaberschaft, enthaltene Gebühr, Schutz der bestehenden E-Mail | Werte aus `04_DOMAIN_HOSTING_MAIL.md` |
+| **Zahlung** | Zahlungsplan je Lösung, Zahlungsziel, Zahlung im Kundenbereich, **Produktionsslot erst nach erster Zahlung** | Werte aus `02_PREISE_UND_ZAHLUNG.md` |
+
+**Rundum-Schutz, dreigeteilt und `gebunden`:**
+
+| | Inhalt |
+|---|---|
+| **enthalten** | Hosting · SSL · Backups · Monitoring · technische Updates · technische Suchgesundheit · Formularprüfung · Zugang zum Kundenbereich |
+| **nicht enthalten** | unbegrenzte Text- oder Designänderungen · neue Seiten · neue Ziele |
+| **selbst pflegbar** | Öffnungszeiten · Kontaktdaten · vorhandene Einträge · Seitenstatus |
+
+**Die sechs Fragen — Einwände `gebunden`:** netto oder brutto · später erweitern · warum der
+Betrieb verpflichtend ist · versteckte Kosten · Domainkosten · Sonderfunktionen
+
+**Bildregel:** **keine großen Fotos.** Preise brauchen Scanbarkeit. Erlaubt ist eine kleine
+Musteransicht der Zahlungsseite — **ohne** realistische Rechnungsnummern und ohne echte Namen.
+
+### 1.3 `/ablauf` — **Umfang 700–850 Wörter**
+
+**Aufbau `gebunden`:** Aufmacher → Vergleichstabelle → **acht** Schritte → Ansichten aus dem
+Kundenbereich → was der Kunde tun muss → was SARTU entscheidet → Zeitrahmen → CTA-Band
+
+**Aufmacher** — *Aufgabe:* sagen, dass Standardprojekte digital und gebündelt laufen, **und im
+selben Atemzug**, dass ein Gespräch jederzeit möglich, aber nicht Pflicht ist. *Grenze:* die
+Erreichbarkeit **muss** vorkommen — sonst entsteht „nicht erreichbar".
+
+**Vergleichstabelle, zwei Spalten — die fünf Gegenüberstellungen sind `gebunden`:**
+
+| klassisches Projekt | bei SARTU |
+|---|---|
+| Erstgespräch als Pflichttermin | Bedarfsscheck in wenigen Minuten |
+| Kickoff-Termin und Fragebogen | der Kundenbereich übernimmt bekannte Fakten und fragt nur die Lücken |
+| Feedback verteilt über E-Mails und Anrufe | gebündeltes Feedback an einer Stelle |
+| viele offene Entscheidungen beim Kunden | Struktur, Design und Technik entscheidet SARTU |
+| der Preis wird im Verlauf konkret | Festpreis steht vor dem Auftrag |
+
+> **Grenze: keine Prozentangaben.** Über den Zeitaufwand klassischer Projekte liegt SARTU keine
+> eigene Messung vor — eine Zahl daneben wäre erfunden.
+
+**Acht Schritte, je 2–3 Sätze — die Stationen sind `gebunden`:** Bedarfsscheck · unsere Prüfung ·
+Angebot im Kundenbereich · Annahme und erste Zahlung · Domain und Einrichtung · Produktion mit
+Prüfung · Vorschau, Feedback, Abnahme · Launch und Betrieb
+
+> **Warum hier acht Schritte stehen und auf der Startseite sechs.** Dieselbe Strecke, zwei
+> Auflösungen: Die Startseite fasst Prüfung und Angebot zusammen und nennt Zahlung und
+> Einrichtung nicht einzeln, weil dort der Überblick zählt. **Beide Listen sind richtig und
+> werden nicht angeglichen** — wer sie vereinheitlicht, macht die eine zu lang oder die andere
+> zu grob.
+>
+> **Die Reihenfolge muss übereinstimmen.** Ein Schritt, der hier vor einem anderen steht, steht
+> auch auf der Startseite vorher.
+
+**Was der Kunde tun muss — `gebunden`, fünf Punkte:** Fakten bestätigen · Material hochladen ·
+Domain bestätigen · Vorschau prüfen · freigeben
+
+**Was SARTU entscheidet — `gebunden`, acht Punkte:** Empfehlung · Seitenstruktur · Nutzerführung ·
+Design · SEO-Grundlage · Technik · Hosting · DNS-Plan
+
+**Zeitrahmen** — *Aufgabe:* die Lieferkorridore je Lösung nennen **und wann die Frist zu laufen
+beginnt**: erst wenn Zahlung, Briefing und Material vorliegen. *Zahlen:*
+`03_KUNDENPRODUKT.md`. *Grenze:* **der Startzeitpunkt darf nicht fehlen** — sonst ist die Frist
+eine Zusage ab Anfrage.
+
+**Fünf Ansichten aus dem Kundenbereich** mit Bildunterschrift: Angebot · Briefing · Domain ·
+Vorschau und Feedback · Pflege. Maße und Regeln: Abschnitt 10.
+
+---
+
+## 2. `/briefing` — der Bedarfsscheck
 
 **Der Bedarfsscheck ist der einzige Weg zu einem Angebot.** Was danach passiert — Annahme,
 Spamabwehr, Herkunft, Löschfristen — steht in `09_ANFRAGEEINGANG.md`.
@@ -28,7 +137,7 @@ Spamabwehr, Herkunft, Löschfristen — steht in `09_ANFRAGEEINGANG.md`.
 **H1** — *Aufgabe:* die Frage stellen, die der Bedarfsscheck beantwortet. *Grenze:* keine
 Aufforderung, kein „Jetzt". *Umfang:* **eine Frage, höchstens acht Wörter**
 
-### 1.1 Einstiegsbildschirm
+### 2.1 Einstiegsbildschirm
 
 **Vorspann** — *Aufgabe:* dem Leser die Angst vor Fachfragen nehmen: er muss **weder Paket noch
 Seitenzahl, Designrichtung noch SEO-Stufe kennen** — und danach sagen, was er bekommt.
@@ -38,7 +147,7 @@ Seitenzahl, Designrichtung noch SEO-Stufe kennen** — und danach sagen, was er 
 `Dauert etwa 3 Minuten` · `Preis vor Kontaktdaten` · `Kein Pflichttermin` ·
 `Keine Auswahl von Zusatzoptionen` · `Unverbindlich bis zum geprüften Angebot`
 
-### 1.2 Die Felder
+### 2.2 Die Felder
 
 **Feldnamen, Typen, Pflichtstatus und Optionslisten sind `gebunden`** — sie bestimmen, was
 gefragt wird. **Label, Hilfetext und Fehlermeldung werden geschrieben.**
@@ -101,7 +210,7 @@ Wege nennen, nicht nur den Fehler.
 > Machbarkeit wird im Angebot bestätigt. Ohne diesen Satz entsteht eine Zusage aus einem
 > Formularfeld.
 
-### 1.3 Ergebnis **vor** den Kontaktdaten
+### 2.3 Ergebnis **vor** den Kontaktdaten
 
 **Das ist die Stelle, an der SARTU sich vom Markt unterscheidet: der Preis kommt vor der
 Adresse.**
@@ -114,8 +223,9 @@ Adresse.**
 - *Zahlen `gebunden`:* Einmalpreis, Monatsbetrag und **Erstjahreswert** aus
   `02_PREISE_UND_ZAHLUNG.md`
 
-**Pflichthinweis darunter, `gebunden`:**
-> `Alle Preise netto zzgl. gesetzlicher Umsatzsteuer. Ausschließlich für Unternehmer. Verbindlich ist erst das von SARTU geprüfte Angebot.`
+**Pflichthinweis darunter, `gebunden`:** die **lange** Fassung aus `08_TEXTREGELN.md`,
+**einschließlich des dritten Satzes**, der nur hier hinzutritt — dass erst das geprüfte Angebot
+verbindlich ist. **Ohne ihn wird die Empfehlung zum Angebot.**
 
 **Knopf `gebunden`:** `Empfehlung unverbindlich prüfen lassen`
 
@@ -126,7 +236,7 @@ Adresse.**
 | **Sonderprojekt-Gate** | sagen, dass eine besondere Funktion dabei ist, den **Einstiegspreis** nennen und ankündigen, was folgt: ein kurzes Fachmodul, dann ein geprüfter Gesamtpreis | den Einstiegspreis als **Untergrenze** kennzeichnen, nicht als Preis |
 | **Unklarheit** | sagen, dass der Bedarf voraussichtlich in eine der drei Lösungen passt und **höchstens eine gebündelte Rückfrage** kommt | nicht nach Unsicherheit klingen — die Rückfrage ist der Standard, keine Ausnahme |
 
-### 1.4 Kontaktdaten — erst danach
+### 2.4 Kontaktdaten — erst danach
 
 | Feld | Pflicht |
 |---|---|
@@ -144,7 +254,7 @@ Adresse.**
 > Die Fehlermeldung zur B2B-Erklärung muss **den Grund nennen** — SARTU arbeitet ausschließlich
 > für Unternehmer. Ohne Grund liest sie sich wie eine Schikane.
 
-### 1.5 Verhalten
+### 2.5 Verhalten
 
 - **Zwischenstand wird gesichert**, Wiederaufnahme möglich
 - **Zurück jederzeit, ohne Datenverlust**
@@ -153,7 +263,7 @@ Adresse.**
 - Mobil: ein Sachverhalt je Bildschirm, Knöpfe in Daumenreichweite, **passender Tastaturtyp**
   (E-Mail, Telefon, Zahl)
 
-### 1.6 Bedienbarkeit ohne JavaScript — verbindlich, keine Kann-Regel
+### 2.6 Bedienbarkeit ohne JavaScript — verbindlich, keine Kann-Regel
 
 **Der Bedarfsscheck darf an abgeschaltetem JavaScript nicht scheitern.** Gebaut wird **zuerst**
 die Fassung ohne JavaScript; der Komfort kommt darüber.
@@ -174,7 +284,7 @@ die Fassung ohne JavaScript; der Komfort kommt darüber.
 **Kein Ersatz durch „Schreiben Sie uns einfach eine E-Mail".** Eine Kontaktalternative steht
 zusätzlich da, **ersetzt den Bedarfsscheck aber nicht.**
 
-### 1.7 Danke-Seite
+### 2.7 Danke-Seite
 
 - *Aufgabe:* Eingang bestätigen · persönliche Prüfung und schriftliche Antwort zusagen ·
   ankündigen, dass **höchstens eine gebündelte Rückfrage** kommt · sagen, was danach kommt
@@ -184,7 +294,7 @@ zusätzlich da, **ersetzt den Bedarfsscheck aber nicht.**
 
 ---
 
-## 2. Die fünf Leistungsseiten
+## 3. Die fünf Leistungsseiten
 
 **Gemeinsamer Aufbau, `gebunden`, in dieser Reihenfolge:**
 
@@ -221,7 +331,7 @@ Seite 3 in getrennte SEO- und Local-SEO-Seiten.
 
 ---
 
-## 3. Branchenseiten — vollständige Zielseiten, keine Durchgangsstationen
+## 4. Branchenseiten — vollständige Zielseiten, keine Durchgangsstationen
 
 ### Warum das eine harte Grenze ist
 
@@ -363,7 +473,7 @@ Fundstelle · eine Seite veröffentlichen, die eine der drei Prüfungen reißt.
 
 ---
 
-## 4. `/ueber-uns` und `/kontakt`
+## 5. `/ueber-uns` und `/kontakt`
 
 ### `/ueber-uns` — **Umfang 400–550 Wörter**
 
@@ -410,7 +520,7 @@ Datensatz — `09_ANFRAGEEINGANG.md`.
 
 ---
 
-## 5. Transparenzseiten — der Pflichtblock
+## 6. Transparenzseiten — der Pflichtblock
 
 **Diese Seiten sind kein Beiwerk.** Sie sind der Grund, warum SARTU in Suchergebnissen und
 KI-Antworten überhaupt zitiert wird: **Fast jede Agentur schreibt „Preis auf Anfrage" — SARTU
@@ -446,7 +556,7 @@ nennt Zahlen. Das ist die Lücke.**
 
 ---
 
-## 6. Ratgeber — zwei Vergleichsartikel
+## 7. Ratgeber — zwei Vergleichsartikel
 
 > **Abgrenzung:** Wo **Zahlen** im Mittelpunkt stehen, ist es eine Transparenzseite (Abschnitt 5).
 > Hier geht es um **Entscheidungen** zwischen Optionen.
@@ -486,7 +596,7 @@ eignet, als Entscheidungstabelle → wie SARTU es löst → CTA `/leistung-webde
 
 ---
 
-## 7. Lexikon — acht Startbegriffe
+## 8. Lexikon — acht Startbegriffe
 
 **Hub `/lexikon`:** H1 · Kurzintro · alphabetische Liste mit **einer** Definition je Begriff ·
 **kein Suchfeld** bei acht Begriffen (erst ab etwa 40).
@@ -517,7 +627,7 @@ Begriffe **erst dann**.
 
 ---
 
-## 8. Pflicht- und Systemseiten
+## 9. Pflicht- und Systemseiten
 
 | Seite | Regel |
 |---|---|
@@ -532,7 +642,7 @@ Begriffe **erst dann**.
 
 ---
 
-## 9. Bilder und Bildschirmaufnahmen
+## 10. Bilder und Bildschirmaufnahmen
 
 **Alle Bilder:** WebP (AVIF optional) · `srcset` mit 1× und 2× · **feste `width`/`height`** ·
 echter Alt-Text · sprechender Dateiname. **Der Aufmacher wird nicht lazy geladen**

@@ -45,7 +45,23 @@ Intern darf „Adminbereich" stehen.
 
 ## Pflichthinweis bei jeder Preisnennung
 
-> Alle Preise netto zzgl. gesetzlicher Umsatzsteuer. Ausschließlich für Unternehmer.
+**Wo eine Zahl steht, steht dieser Hinweis.** Es gibt **genau zwei zulässige Fassungen** und
+keine dritte:
+
+| Fassung | Wortlaut | wo |
+|---|---|---|
+| **lang** | `Alle Preise netto zzgl. gesetzlicher Umsatzsteuer. Ausschließlich für Unternehmer.` | überall, wo Platz ist — Aufmacher, Preisblock, Angebot, Ergebnisseite des Bedarfsschecks |
+| **kurz** | `Alle Preise netto zzgl. USt. · Ausschließlich für Unternehmer` | **nur** in der Fußzeile, wo der Platz eine Zeile ist |
+
+**Auf der Ergebnisseite des Bedarfsschecks tritt ein dritter Satz hinzu** — er gehört zum
+Hinweis und darf dort nicht fehlen:
+
+> `Verbindlich ist erst das von SARTU geprüfte Angebot.`
+
+> **Warum das hier festgelegt wird und nicht je Seite:** Der Hinweis stand in drei verschiedenen
+> Fassungen im Umlauf — mit „USt.", mit „gesetzlicher Umsatzsteuer", einmal mit Punkt und einmal
+> mit Mittelpunkt. Bei einem **Pflichthinweis** ist die Frage „welche gilt?" keine
+> Geschmacksfrage. Er wird an **einer** Stelle im Code gepflegt und von dort ausgegeben.
 
 ## Darstellungsregeln
 

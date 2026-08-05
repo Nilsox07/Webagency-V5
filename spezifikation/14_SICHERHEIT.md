@@ -4,8 +4,49 @@
 > sonst. Wo ein anderes Thema den Wert braucht, verweist es hierher statt ihn zu wiederholen.
 >
 > Zusammengeführt am 03.08.2026 aus: `CLAUDE_SARTU_PORTAL_LASTENHEFT_BAUFINAL.md` §1, §3,
-> `CLAUDE.md`
+> `CLAUDE.md`, ergänzt am 05.08.2026 um §2 und §14.
 > Wegweiser: `spezifikation/00_UEBERSICHT.md`
+
+---
+
+## Rollen und Rechte
+
+| Rolle | Anmeldung | sieht |
+|---|---|---|
+| **Kunde** | **Anmeldelink, kein Passwort** | ausschließlich Daten der **eigenen** Organisation |
+| **Admin** | E-Mail + Passwort (**Argon2id**) + **TOTP** | alles |
+
+- **Stufe 0 kennt genau einen Benutzer je Kundenorganisation.** Mehrere Ansprechpartner sind
+  Stufe 1 und stehen auf der Nicht-bauen-Liste
+- **Es gibt keine Selbstregistrierung.** Der Admin legt Organisation und Benutzer an; der Kunde
+  bekommt eine Einladung per E-Mail
+- **Admins haben keine `organization_id`** — eine Datenbankbedingung erzwingt das
+
+---
+
+## Barrierefreiheit und Leistung — gilt für alle vier Bereiche
+
+Öffentliche Website, Kundenbereich, Adminbereich und Fehlerseiten. **Keine Ausnahme für den
+Adminbereich** — er wird täglich benutzt.
+
+- **Semantisches HTML**, sinnvolle Überschriftenhierarchie, Landmarks, Skip-Link
+- **Vollständige Tastaturbedienung, sichtbarer Fokus — nie entfernt**
+- Alle Felder mit `<label>`, Fehler über `aria-describedby` verknüpft, `aria-invalid` gesetzt
+- **Kontrast mindestens 4,5 : 1.** Ein Status wird **nie allein über Farbe** ausgedrückt, immer
+  zusätzlich als Text
+- `prefers-reduced-motion` wird beachtet
+- **Ohne JavaScript vollständig bedienbar**
+- **Serverantwort unter 300 ms** bei typischer Last · **keine Seite über 150 KB** inklusive
+  aller Bestandteile
+- **Mobil vollwertig:** ein Sachverhalt je Bildschirm, Bedienelemente in Daumenreichweite,
+  passender Tastaturtyp (E-Mail, Telefon, Zahl)
+
+> Die **Ladezeit-Schwellen vor dem Livegang** (LCP, TBT, CLS) stehen in `05_SEO_GEO.md` für
+> Kundenwebsites und in `10_WEBSITE_SARTU.md` für die eigene Seite. **Gekoppelt:** Es sind
+> dieselben Werte, weil derselbe Anspruch gilt.
+
+**Farben, Schriften und Formen werden hier nicht festgelegt** — `07_MARKE_UND_GESTALTUNG.md`.
+**Kunden- und Adminbereich müssen visuell unterscheidbar sein.**
 
 ---
 
