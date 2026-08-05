@@ -60,13 +60,24 @@ Wahrheit. Einstieg: **`spezifikation/00_UEBERSICHT.md`**. Dort steht auch das
 **Dublettenregister**: wo dieselbe Sache früher mehrfach mit abweichenden Werten stand, welche
 Fassung gilt und warum.
 
-Die alten Lastenhefte bleiben liegen. Sie tragen die **Begründungsblöcke** („Ersetzt am
-01.08.2026, weil …"), die verhindern, dass eine zurückgezogene Fassung wieder eingebaut wird.
-Wo eine Themendatei noch feldgenaue Restvorgaben in ihrer Quelle lässt, sagt sie das in ihrem
-Schlussabschnitt.
+**Die Zusammenführung ist seit 05.08.2026 abgeschlossen.** Alle vier Lastenhefte sind
+ausgewertet; **keine Themendatei verweist mehr für Bauwissen auf ihre Quelle.**
 
-**Abgelöst und nach `archiv/` verschoben:** das alte Website-Konzept, die Marktanalyse und
-`archiv/konzepte/`. Begründung je Datei in `archiv/LIESMICH.md`.
+Die alten Lastenhefte bleiben trotzdem liegen. Sie tragen die **Begründungsblöcke** („Ersetzt am
+01.08.2026, weil …"), die verhindern, dass eine zurückgezogene Fassung wieder eingebaut wird.
+**Nachschlagen ja, danach bauen nein.**
+
+**Abgelöst und nach `archiv/` verschoben:** das alte Website-Konzept, die Marktanalyse,
+`archiv/konzepte/` und der wörtliche Startseitentext. Begründung je Datei in `archiv/LIESMICH.md`.
+
+### Die 18 Themendateien
+
+| | |
+|---|---|
+| **Grundlage** | `01` Geschäftsmodell · `02` Preise und Zahlung · `06` Recht · `07` Marke und Gestaltung · `08` Textregeln |
+| **Was der Kunde kauft** | `03` Kundenprodukt · `04` Domain, Hosting, Mail · `05` SEO und GEO |
+| **Was SARTU für sich baut** | `09` Anfrageeingang · `10` Startseite · `11` Kundenbereich · `12` Adminbereich · `13` Datenmodell · `14` Sicherheit · `15` Testfälle · `16` SEO der eigenen Seite · `17` die übrigen Seiten |
+| **Offen** | `20` offene Entscheidungen und die daraus folgenden Sperren |
 
 ## Rangfolge der Dokumente
 
@@ -79,13 +90,18 @@ Bei **jedem** Widerspruch gilt diese Reihenfolge. Sie steht allein in `UEBERGABE
 | 2 | `REIHENFOLGE.md` | **nur den Zeitpunkt** — was jetzt gebaut wird, was wartet |
 | 3 | `SARTU_TEXTREGELN.md` | **nur die Form** jedes Textes |
 | 3a | `.claude/skills/sartu-texter/SKILL.md` | den Wortlaut |
-| 4 | `CLAUDE_SARTU_PORTAL_LASTENHEFT_BAUFINAL.md` | Stack, Datenmodell, Sicherheit, 88 Testfälle |
-| 5 | `CLAUDE_SARTU_WEBSITE_LASTENHEFT_BAUFINAL.md` | öffentliche Seiten |
-| 7 | `CLAUDE_SARTU_MASTERKONZEPT_FINAL.md` | Geschäftsmodell — **die Preistabelle ist die Quelle jeder Zahl** |
+| **4** | **`spezifikation/`** | **alles Fachliche** — Stack, Datenmodell, Seiten, Sicherheit, 88 Testfälle |
+| — | die vier Lastenhefte | **Begründungsarchiv, keine Bauvorlage.** Bei Widerspruch gewinnt `spezifikation/` |
 
 Sechs Dateien tragen „FINAL" im Namen; das sagt nichts über ihr Alter. Widersprechen sich zwei
 Stellen **im selben** Dokument, gilt die mit der Begründung — steht bei keiner eine, **melden**,
 nicht auswählen.
+
+**Texthoheit:** Gebunden ist nur, was der Texter-Skill als **Klasse 1** führt — jede Zahl,
+vertragliche Erklärungen, Rechtstexte, Pflichthinweise, Knopf- und Navigationsbeschriftungen,
+Statusnamen, Betreffzeilen und die vier Positionierungssätze. **Alles andere ist Auftrag, kein
+Wortlaut:** Die Themendateien notieren *Aufgabe*, *Grenze* und *Umfang* — **absichtlich ohne
+Beispielsatz**, weil ein fertiger Satz übernommen und nicht getroffen wird.
 
 `archiv/konzepte/` (~360 KB) und `archiv/CLAUDE_MARKTANALYSE_KRITIK_OPTIMIERUNG.md` sind historisch: veraltete
 Preise, abgelöste Stacks. **Nie vorsorglich einlesen**, nur gezielt nachschlagen.

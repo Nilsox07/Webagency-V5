@@ -77,13 +77,25 @@ zulässt:
 | 2 | `REIHENFOLGE.md` | **nur der Zeitpunkt** — was jetzt gebaut wird und was wartet |
 | 3 | `SARTU_TEXTREGELN.md` | **nur die Form** jedes Textes — Satzlänge, Wortlisten, Prüfbericht |
 | 3a | `.claude/skills/sartu-texter/SKILL.md` | **den Wortlaut selbst.** Gebunden bleibt nur Klasse 1: Zahlen, vertragliche Erklärungen, Pflichthinweise, wiederkehrende Beschriftungen |
-| 4 | `CLAUDE_SARTU_PORTAL_LASTENHEFT_BAUFINAL.md` | Stack, Datenmodell, Kundenbereich, Sicherheit, Testfälle |
-| 5 | `CLAUDE_SARTU_WEBSITE_LASTENHEFT_BAUFINAL.md` | öffentliche Seiten, Struktur, Wortlaut |
-| 6 | `CLAUDE_SARTU_DESIGN_BRIEFING_AUSFUEHRUNG.md` | visuelle Ausführung |
-| 7 | `CLAUDE_SARTU_MASTERKONZEPT_FINAL.md` | Geschäftsmodell und Preise — **die Preistabelle ist die Quelle jeder Zahl** |
-| — | `archiv/CLAUDE_SARTU_WEBSITE_KONZEPT_FINAL.md` | **Nachschlagewerk, keine Bauvorlage.** §5 Sektionsdramaturgie ist ausdrücklich abgelöst |
-| — | `archiv/CLAUDE_MARKTANALYSE_KRITIK_OPTIMIERUNG.md` | Bewertung für den Menschen. Enthält als `[ABGELÖST]` markierte Empfehlungen |
-| — | `archiv/konzepte/` | historisch |
+| **4** | **`spezifikation/`** | **alles Fachliche.** Ein Thema, eine Datei, eine Wahrheit. Einstieg `spezifikation/00_UEBERSICHT.md` |
+| — | `CLAUDE_SARTU_PORTAL_LASTENHEFT_BAUFINAL.md` | **Begründungsarchiv**, keine Bauvorlage mehr |
+| — | `CLAUDE_SARTU_WEBSITE_LASTENHEFT_BAUFINAL.md` | **Begründungsarchiv**, keine Bauvorlage mehr |
+| — | `CLAUDE_SARTU_DESIGN_BRIEFING_AUSFUEHRUNG.md` | **Begründungsarchiv**, keine Bauvorlage mehr |
+| — | `CLAUDE_SARTU_MASTERKONZEPT_FINAL.md` | **Begründungsarchiv**, keine Bauvorlage mehr |
+| — | `archiv/` | historisch. `LIESMICH.md` sagt je Datei, warum |
+
+> **Geändert am 05.08.2026, weil die Rangfolge sonst gegen `CLAUDE.md` stand.** Die vier
+> Lastenhefte belegten die Ränge 4 bis 7, obwohl ihr Fachinhalt seit dem 03.08.2026 vollständig
+> in `spezifikation/` steht. Wer nach dieser Tabelle baut, hätte aus der Quelle gebaut statt aus
+> der geltenden Fassung — **und genau die Widersprüche zurückgeholt, deren Auflösung dort
+> dokumentiert ist.**
+>
+> **Warum die Lastenhefte trotzdem liegen bleiben:** Sie tragen die Begründungsblöcke („Ersetzt
+> am 01.08.2026, weil …"). Die sind kein Bauwissen, verhindern aber, dass eine zurückgezogene
+> Fassung wieder eingebaut wird. **Nachschlagen ja, danach bauen nein.**
+>
+> **Bei Widerspruch zwischen einem Lastenheft und `spezifikation/` gewinnt `spezifikation/`** —
+> und der Widerspruch wird gemeldet, nicht stillschweigend aufgelöst.
 
 **Zwei Regeln dazu:**
 
@@ -92,11 +104,16 @@ zulässt:
 2. **Widersprechen sich zwei Stellen im selben Dokument, gilt die mit der Begründung.** Steht bei
    keiner eine, ist es ein Fehler — **melden, nicht auswählen**
 
-## Nur `main` ist gültig
+## Wo der Stand liegt
 
-**Der Stand liegt auf `main`.** Ältere Zweige — insbesondere `claude/sartu-concept-review-pdhb5t`
-— sind unvollständig: Dort fehlen `REIHENFOLGE.md`, `SARTU_TEXTREGELN.md` und alle Umfangszahlen
-in den Preisen.
+**Der vollständige Stand liegt auf `claude/sartu-concept-review-pdhb5t`.** Dieser Zweig enthält
+alles aus `main` und darüber hinaus die Zusammenführung nach `spezifikation/`.
+
+> **Korrigiert am 05.08.2026.** Hier stand bis dahin, dieser Zweig sei unvollständig, es fehlten
+> `REIHENFOLGE.md`, `SARTU_TEXTREGELN.md` und die Umfangszahlen. **Das galt einmal und gilt
+> nicht mehr:** beide Dateien liegen hier, und der Zweig ist `main` um die gesamte
+> Zusammenführung voraus. Der Satz war zum Zeitpunkt des Lesens falsch und hätte in die falsche
+> Quelle geführt.
 
 **Drei externe Prüfungen haben bereits einen alten Zweig bewertet** und Befunde gemeldet, die auf
 `main` längst behoben waren. Wer prüft oder baut, prüft `main`.

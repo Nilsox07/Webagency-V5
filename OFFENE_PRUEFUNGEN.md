@@ -790,3 +790,23 @@ Partner. Nur die eingebettete Fassung in der Seite ist umgefärbt.
 
 Über der Beschreibung, 30 px hoch, Zeichen auf `--lime`, Wortmarke auf `--cream` über
 `currentColor` — dieselbe Datei wie oben, kein zweiter Satz.
+
+---
+
+## Zusammenführung abgeschlossen — 05.08.2026
+
+**Was gebaut wurde:** `spezifikation/` umfasst jetzt **18 Themendateien, rund 4.000 Zeilen**.
+Alle vier Lastenhefte sind ausgewertet; keine Themendatei liest noch Bauwissen aus ihrer Quelle.
+
+**Was daran ungeprüft ist — und womit es zu prüfen wäre:**
+
+| Befund | ungeprüft | Prüfmittel |
+|---|---|---|
+| Die 88 Testfälle stehen jetzt in `15_TESTFAELLE.md` mit **unveränderter Nummerierung** | ob `REIHENFOLGE.md` je Stufe **exakt dieselben Nummern** führt | Abgleich der Nummernmengen beider Dateien, Zeile für Zeile |
+| `11_KUNDENBEREICH.md` führt **25 E-Mail-Auslöser** | ob jeder Auslöser einen Statusübergang oder Lauf hat, der ihn tatsächlich auslöst | Abgleich Auslöserliste gegen Übergangstabelle und täglichen Lauf |
+| `17_SEITEN_SARTU.md` nennt **acht Schritte** auf `/ablauf`, `10_WEBSITE_SARTU.md` **sechs** auf der Startseite | ob die Reihenfolge beider Listen wirklich deckungsgleich ist | nebeneinanderlegen, Schritt für Schritt |
+| Die Startsperre hat **neun** Bedingungen | ob Testfall 66 alle neun abdeckt — er nennt nur zwei | Testfall gegen die Bedingungsliste stellen |
+| Dublettenprüfung lief über **13 Zahlenwerte** und alle Dateiverweise | ob es Dubletten in **Formulierungen** gibt, die keine Zahl enthalten | Textabgleich über alle 18 Dateien |
+
+**Nicht ausgeführt:** Es wurde keine Zeile Anwendungscode gebaut und kein Test ausgeführt. Diese
+Sitzung hat ausschließlich Spezifikation zusammengeführt.
