@@ -221,17 +221,6 @@ h2{font-size:clamp(27px,calc(3vw - 6px),54px)}
    Ohne die Hoehengrenze frass die H1 auf 1366x768 den Anschnitt der naechsten
    Sektion auf (gemessen: 1px statt 33). Greift nur auf flachen Schirmen. */
 h1{font-size:clamp(34px,min(11cqw,8.6vh),104px);letter-spacing:-.03em;line-height:1.0}
-/* AUSZEICHNUNG — gilt fuer JEDE Ueberschrift, nicht nur den Aufmacher.
-   Kursiv und leichter bricht die Flaeche in zwei Richtungen auf.
-   <em> und nicht <span>, weil das Wort wirklich betont ist.
-
-   WELCHES Wort, ist nicht festgelegt und darf es nicht sein. Es ist das Wort,
-   an dem die Aussage haengt — mal ein Zahlwort ("keine", "einem"), mal eine
-   Abgrenzung ("kein Paket"), mal ein Zeitpunkt ("vorher"). Eine mechanische
-   Regel ("immer das erste") ergaebe wieder ein Muster, und ein Muster ist
-   genau das, was hier gebrochen werden soll. In sieben von acht
-   Ueberschriften steht es NICHT an erster Stelle. */
-h1 em,h2 em,h3 em{font-style:italic;font-weight:400}
 h1 .accent{background-image:linear-gradient(var(--lime),var(--lime));background-repeat:no-repeat;
   background-position:0 .84em;background-size:100% .22em;padding-right:.04em}
 /* AUFBAU DES AUFMACHERS — drei Gruppen, nicht sieben Bausteine.
@@ -720,7 +709,7 @@ html:has(#g-kalk:checked),html:has(#g-weiss:checked){background:var(--cream)}
     <div class="wrap hero-grid">
       <div>
         <p class="tag" style="margin-bottom:15px">Webdesign-Agentur für Firmenwebsites</p>
-        <h1><em>Programmierte</em> Firmenwebsites <span class="accent">zum Festpreis.</span></h1>
+        <h1>Programmierte Firmenwebsites <span class="accent">zum Festpreis.</span></h1>
         <p class="hero-lede">Sie erzählen uns, was Ihr Betrieb macht und für wen. Den Rest bauen und betreiben wir. Dafür ist kein einziger Termin nötig.</p>
         <div class="hero-cta">
           <a class="btn" href="/briefing">Bedarf prüfen lassen <span class="ar">→</span></a>
@@ -801,7 +790,7 @@ html:has(#g-kalk:checked),html:has(#g-weiss:checked){background:var(--cream)}
   <section class="sec dark round-top" id="portal">
     <div class="wrap">
       <p class="tag rise-3">Kundenbereich</p>
-      <h2 class="sec-head rise" style="margin-top:20px">Ihr Projekt bleibt an <em>einem</em> Ort.</h2>
+      <h2 class="sec-head rise" style="margin-top:20px">Ihr Projekt bleibt an einem Ort.</h2>
       <p class="lede rise-2" style="max-width:60ch;margin-top:24px;color:#e2dbcd">Angebot, Briefing, Vorschau, Freigabe und die spätere Pflege laufen über Ihren Kundenbereich — statt über verstreute Telefonate und E-Mail-Ketten. Der Zugang gehört zu jeder Lösung.</p>
       <div class="portal-shot rise">
         <p class="mono">Platz für Bildschirmansicht</p>
@@ -815,7 +804,7 @@ html:has(#g-kalk:checked),html:has(#g-weiss:checked){background:var(--cream)}
   <section class="sec dark round-bot" id="ablauf" style="padding-top:0">
     <div class="wrap" style="padding-top:var(--s-5)">
       <p class="tag rise-3">Ablauf</p>
-      <h2 class="sec-head rise" style="margin-top:20px">Sie liefern die Fakten. <em>Alles andere</em> machen wir.</h2>
+      <h2 class="sec-head rise" style="margin-top:20px">Sie liefern die Fakten. Alles andere machen wir.</h2>
       <div class="steps">
         <div class="step">
           <span class="bub">01</span>
@@ -856,7 +845,7 @@ html:has(#g-kalk:checked),html:has(#g-weiss:checked){background:var(--cream)}
   <section class="sec" id="preise">
     <div class="wrap">
       <p class="tag rise-3">Vier Stufen</p>
-      <h2 class="sec-head rise" style="margin-top:20px">Sie wählen <em>kein Paket</em>. Wir sagen Ihnen, welcher Umfang passt.</h2>
+      <h2 class="sec-head rise" style="margin-top:20px">Sie wählen kein Paket. Wir sagen Ihnen, welcher Umfang passt.</h2>
       <p class="plans-note rise-2"><span class="dot" aria-hidden="true"></span><span>Nach dem Bedarfsscheck ordnen wir zu und schreiben die Begründung dazu. Sie sehen, warum es diese Stufe wurde und keine andere.</span></p>
 
       <div class="plans">
@@ -936,7 +925,7 @@ html:has(#g-kalk:checked),html:has(#g-weiss:checked){background:var(--cream)}
   <section class="sec sand" id="leistungen">
     <div class="wrap">
       <p class="tag rise-3">Im Preis enthalten</p>
-      <h2 class="sec-head rise" style="margin-top:20px">Es gibt <em>keine</em> Aufpreisliste.</h2>
+      <h2 class="sec-head rise" style="margin-top:20px">Es gibt keine Aufpreisliste.</h2>
       <p class="lz-lede rise-2">Das alles steckt in jedem Angebot — Sie stellen es nicht selbst zusammen und zahlen nichts davon extra. Wir gewichten die Bausteine passend zu Ihrem Ziel.</p>
       <div class="paket rise-2">
         <div class="lbs">
@@ -958,7 +947,7 @@ html:has(#g-kalk:checked),html:has(#g-weiss:checked){background:var(--cream)}
   <section class="sec" id="muster">
     <div class="wrap">
       <p class="tag rise-3">Statt Referenzen</p>
-      <h2 class="sec-head rise" style="margin-top:20px">Noch <em>keine</em> Kunden. Deshalb zeigen wir Musterprojekte.</h2>
+      <h2 class="sec-head rise" style="margin-top:20px">Noch keine Kunden. Deshalb zeigen wir Musterprojekte.</h2>
       <div class="samples">
         <div class="sample rise">
           <span class="sample-flag">Musterprojekt — kein Kundenauftrag</span>
@@ -984,7 +973,7 @@ html:has(#g-kalk:checked),html:has(#g-weiss:checked){background:var(--cream)}
   <section class="sec" id="fragen">
     <div class="wrap">
       <p class="tag rise-3">Häufige Fragen</p>
-      <h2 class="sec-head rise" style="margin-top:20px">Was Unternehmer <em>vorher</em> wissen wollen.</h2>
+      <h2 class="sec-head rise" style="margin-top:20px">Was Unternehmer vorher wissen wollen.</h2>
       <div class="faq">
         <details><summary>Wie lange dauert das?</summary><p>Nach Ihrer Faktenfreigabe rechnen wir mit sieben bis zehn Werktagen im Umfang Start, zehn bis fünfzehn bei Wachstum und fünfzehn bis fünfundzwanzig bei Platzhirsch. Die Zeit läuft erst, wenn Ihre Angaben vollständig sind.</p></details>
         <details><summary>Was passiert, wenn ich kündige?</summary><p>Nach dem ersten Jahr können Sie zum Monatsende kündigen. Die Domain übertragen wir kostenfrei an Sie oder an einen Anbieter Ihrer Wahl. Auf Wunsch bekommen Sie den vollständigen Stand als Export.</p></details>
@@ -1001,7 +990,7 @@ html:has(#g-kalk:checked),html:has(#g-weiss:checked){background:var(--cream)}
       <div class="cta-field rise">
         <div>
           <p class="tag" style="color:var(--label-dark)">Bedarfsscheck</p>
-          <h2 style="margin-top:20px;max-width:20ch;color:#f6f1e6">Welche Website passt zu <em>Ihrem</em> Unternehmen?</h2>
+          <h2 style="margin-top:20px;max-width:20ch;color:#f6f1e6">Welche Website passt zu Ihrem Unternehmen?</h2>
           <p style="margin-top:22px;max-width:52ch;font-size:17.5px;line-height:1.65;color:#c3bcae">Wenige Fragen zu Betrieb, Ziel und Umfang. Danach erhalten Sie eine begründete Empfehlung mit Preisspanne — ohne Termin und ohne Verpflichtung.</p>
         </div>
         <div class="cta-field-side">

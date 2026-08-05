@@ -167,54 +167,25 @@ die Rangfolge war umgekehrt.
 
 **Drei Zeilen auf jeder Breite, kein waagerechter Überlauf, H1 > H2 durchgehend.**
 
-### Ein Wort je Überschrift kursiv und leichter — gegen den Block
+### Verworfen: ein kursives Wort je Überschrift
 
-**Gleich lange Zeilen sind die Voraussetzung für den großen Schriftgrad und zugleich sein
-Preis.** Drei Zeilen von 13 · 14 · 14 Zeichen im selben Gewicht lesen sich als **Block**, nicht
-als Satz. Der Einwand kam vom Betreiber und war richtig: *„das sieht hässlich aus, weil das ein
-Block ist und jede Zeile der H1 gleich lang ist."* **In Versalien war das akut** — dort fehlen
-Ober- und Unterlängen ganz. Im Gemischtsatz mildert der Wortbau es, weg ist es nicht.
+**Gebaut am 05.08.2026, am selben Tag wieder entfernt.** `h1 em, h2 em, h3 em { font-style:
+italic; font-weight: 400 }` sollte den Block brechen, den drei gleich lange Zeilen bilden — erst
+im Aufmacher, dann auf jeder Überschrift der Seite. **Vom Betreiber verworfen.**
 
-> **Ein Messwert ist kein Gestaltungsziel.** Der Ausgleich der Zeilenlängen war ein
-> **Hilfsmaß** — er sagt, wie groß die Schrift werden darf. Ich hatte ihn zum Ziel gemacht und
-> auf 92 % hin gebaut. **Was messbar besser wird, wird nicht dadurch schöner.** Die Zeilen
-> bleiben gleich lang; gebrochen wird stattdessen die Fläche.
+**Kein Messwert hing daran.** Die ausgezeichneten Wörter standen nie in der breitesten Zeile;
+Schriftgrad, Zeilenzahl, Rest und Anschnitt sind vorher wie nachher identisch.
 
-`h1 em, h2 em, h3 em { font-style: italic; font-weight: 400 }` — **jede** Überschrift der Seite,
-nicht nur der Aufmacher. Die Auszeichnung bricht die Fläche in **zwei** Richtungen: Neigung
-**und** Gewicht.
+> **Was von dem Versuch bleibt, ist der Nebenbefund — und der wiegt mehr als die Auszeichnung.**
+> Die Frage „welches Wort trägt die Aussage?" musste je Überschrift beantwortet werden. Bei
+> **vier von sechs** Sektionsüberschriften war die Antwort genau das unbestimmte Wort, das der
+> Texter-Skill verwirft: `wenigen` · `passende` · `könnte`. **Ein Gestaltungsmittel hat ein
+> Textproblem sichtbar gemacht.** Drei Überschriften tragen seitdem die im Skill dokumentierten
+> Ersatzfassungen; sie bleiben, auch ohne die Auszeichnung.
 
-| | |
-|---|---|
-| Auszeichnung | `<em>`, nicht `<span>` — das Wort ist wirklich betont |
-| Warum **leichter** statt nur kursiv | Neigung allein bricht die Fläche schwächer. Geprüft an beiden Fassungen |
-| Kein Messwert ändert sich | Im Aufmacher ist die breiteste Zeile die **zweite** und bleibt aufrecht. Schriftgrad, Zeilenzahl und Rest sind identisch |
-
-**Welches Wort ausgezeichnet wird, ist nicht festgelegt — und darf es nicht sein.** Es ist das
-Wort, an dem die Aussage hängt: mal ein Zahlwort (`keine`, `einem`), mal eine Abgrenzung
-(`kein Paket`), mal ein Zeitpunkt (`vorher`). **Eine mechanische Regel — „immer das erste Wort" —
-ergäbe wieder ein Muster, und ein Muster ist genau das, was hier gebrochen werden soll.**
-
-| Überschrift | ausgezeichnet | Stelle |
-|---|---|---:|
-| Programmierte Firmenwebsites zum Festpreis. | `Programmierte` | 1. |
-| Ihr Projekt bleibt an einem Ort. | `einem` | 5. |
-| Sie liefern die Fakten. Alles andere machen wir. | `Alles andere` | 5. |
-| Sie wählen kein Paket. Wir sagen Ihnen, welcher Umfang passt. | `kein Paket` | 3. |
-| Es gibt keine Aufpreisliste. | `keine` | 3. |
-| Noch keine Kunden. Deshalb zeigen wir Musterprojekte. | `keine` | 2. |
-| Was Unternehmer vorher wissen wollen. | `vorher` | 3. |
-| Welche Website passt zu Ihrem Unternehmen? | `Ihrem` | 5. |
-
-**In sieben von acht Fällen steht es nicht an erster Stelle.** Der Aufmacher ist die Ausnahme,
-weil `Programmierte` dort das Unterscheidungsmerkmal trägt — und weil der Lime-Balken auf der
-**dritten** Zeile sitzt: zwei Anker, oben und unten, statt zweier Auszeichnungen an derselben
-Stelle.
-
-> **Kursiv setzt einen echten Schnitt voraus.** Fehlt er, stellt der Browser die aufrechte Schrift
-> mechanisch schräg — das ist keine Kursive, sondern eine Verzerrung. SF Pro und Segoe UI bringen
-> einen mit. **Wird die offene Schriftfrage entschieden, gehört der Kursivschnitt zum Umfang** und
-> ist kein Zusatz.
+**Der Block bleibt damit ungelöst — aber kleiner.** Im Gemischtsatz geben Ober- und Unterlängen
+den drei Zeilen von selbst Rhythmus; in Versalien war er akut. **Wer ihn erneut angeht, misst
+vorher nach, ob er noch stört.**
 
 > **Die vier Einwortzeilen unter 768 px sind weg — und das lag nicht an der Einstellung.** Die
 > vorige Fassung notierte sie als „Grenze des Satzes, nicht der Einstellung". Das war richtig
