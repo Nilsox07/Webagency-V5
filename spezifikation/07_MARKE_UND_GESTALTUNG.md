@@ -67,33 +67,56 @@ Radienskala, skaliert über `--rk`. **Es gibt keine achte Form daneben.**
 
 | | |
 |---|---|
-| `--wrap` | **1300 px** — die Außenkante des Inhalts |
+| `--wrap` | **1380 px** — die Außenkante des Inhalts |
 | `--gut` | `clamp(20px, 4vw, 56px)` — Rand links und rechts |
-| **nutzbare Inhaltsbreite** | **1188 px** am Anschlag |
+| **nutzbare Inhaltsbreite** | **1268 px** am Anschlag |
 
-**Warum 1300 und nicht 1180.** Üblich ist heute ein Inhaltsbereich von **1140 bis 1200 px**,
-moderne Systeme gehen bis 1280. Die Seite lief auf `--wrap: 1180` — abzüglich der Ränder blieben
-**1068 px Inhalt und damit unter dem üblichen Band.** Der Eindruck „zusammengequetscht" war
-messbar, nicht gefühlt.
+**Warum nicht 1180.** Üblich ist heute ein Inhaltsbereich von **1140 bis 1200 px**, moderne
+Systeme gehen bis 1280. Die Seite lief auf `--wrap: 1180` — abzüglich der Ränder blieben **1068 px
+Inhalt und damit unter dem üblichen Band.** Der Eindruck „zusammengequetscht" war messbar, nicht
+gefühlt.
 
-**Die Breite allein war aber nicht die Ursache.** Gemessen am 05.08.2026: Die H1 stand bei 54 px
-in einer 554 px breiten Spalte und brach in **vier Zeilen mit je einem Wort** um — sie las sich
-als Liste, nicht als Satz. Die beiden längsten Wörter hätten bei 54 px **746 px** in einer Zeile
-gebraucht; das ist bei einem 55/45-Aufmacher erst ab etwa 1530 px Satzspiegel zu haben und damit
-weit außerhalb jedes Standards.
+## Schriftgrade der Überschriften
 
-**Deshalb beides zusammen:** `--wrap` auf 1300 **und** die H1-Obergrenze von 54 auf **44 px**.
-Ergebnis: drei Zeilen, die erste trägt zwei Wörter. Der Aufmacher-Bildbereich wächst von 455 auf
-**620 px**, die Leistungsblöcke von 290 auf **325 px**.
+| | Regel | am Anschlag |
+|---|---|---|
+| **H1** | `clamp(32px, 3.45vw, 47px)` | 47 px |
+| **H2** | `clamp(27px, 2.9vw, 40px)` | 40 px |
+| H3 | 20 · 21 · 24 · 27 · 32 px je Bauteil | — |
 
-> **Die H1-Grenze ist an diesem einen Satz gemessen** — dem gebundenen H1-Auftrag der Startseite
-> mit „Firmenwebsites" als längstem Wort (453 px bei 54 px Schriftgrad). **Ändert sich die H1,
-> wird nachgemessen, nicht geschätzt.**
+**Beide Regeln hängen zusammen und werden nur gemeinsam geändert.**
+
+**Warum die H1 kleiner ist, als sie aussehen dürfte.** Sie steht in der 55-%-Spalte des
+Aufmachers, nicht über der vollen Breite. Gemessen am 05.08.2026: bei 54 px in einer 554-px-Spalte
+brach sie in **vier Zeilen mit je einem Wort** um — sie las sich als Liste, nicht als Satz. Die
+beiden längsten Wörter brauchen bei 54 px **746 px** in einer Zeile; das ist bei 55/45 erst ab
+etwa **1530 px** Satzspiegel zu haben und damit weit außerhalb jedes Standards.
+
+**`3.45vw` ist kein gewählter, sondern ein gerechneter Wert.** Ränder und Spalte skalieren mit
+`4vw`; wächst die Schrift schneller, holt der Vierzeiler bei mittleren Breiten zurück. Bei
+`3.6vw` trat er zwischen 1024 und 1280 px wieder auf. **Die Kurve der Schrift muss der Kurve der
+Spalte folgen.**
+
+**Warum die H2 heruntergezogen wurde.** Sie stand auf `clamp(31px, 4.3vw, 50px)` — **größer als
+die H1 und schneller wachsend.** Bei 1000 px Fensterbreite ergab das 43 px H2 gegen 33 px H1: die
+Rangfolge war umgekehrt. Nicht die H1 war zu klein, **die H2 war zu groß.**
+
+> **Die H1-Grenze ist an einem konkreten Satz gemessen** — dem H1-Auftrag der Startseite mit
+> „Firmenwebsites" als längstem Wort. **Ändert der Texter-Skill die H1, wird nachgemessen, nicht
+> geschätzt.** Die Prüfung ist mechanisch: bricht die erste Zeile auf **ein** Wort um, ist die
+> Schrift für ihre Spalte zu groß.
 
 > **Der 55/45-Aufmacher bleibt** (`10_WEBSITE_SARTU.md`). Er war nicht zur Wahl gestellt; die
 > Rechnung oben ist unter dieser Bindung gemacht.
 
-**Geprüft ohne Überlauf bei** 390 · 430 · 768 · 1024 · 1180 · 1280 · 1440 · 1728 · 1920 px.
+**Gemessenes Ergebnis:** Aufmacher-Bild von 455 auf **655 px**, Leistungsblöcke von 290 auf
+**345 px**, H1 durchgehend **drei Zeilen ab 1024 px**, erste Zeile immer mit zwei Wörtern.
+**Unter 768 px bleiben vier Einwortzeilen** — bei rund 330 px Spaltenbreite bräuchte die erste
+Zeile 24 px Schriftgrad, das wäre keine H1 mehr. **Das ist die Grenze des Satzes, nicht der
+Einstellung.**
+
+**Geprüft: H1 > H2 und kein waagerechter Überlauf** bei 390 · 430 · 768 · 900 · 1024 · 1100 ·
+1180 · 1280 · 1366 · 1440 · 1512 · 1920 px.
 
 ## Logo
 

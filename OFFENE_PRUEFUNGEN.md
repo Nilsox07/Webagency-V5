@@ -875,10 +875,23 @@ Gegenprobe, dass der Staging-Vorgang **nicht** abbricht. Die Zerlegung erhöht d
 **es bleibt bei 88**, und die Zuordnung in `REIHENFOLGE.md` bleibt unverändert, weil alle
 Teilfälle in A0 entstehen wie 66 heute. Gegengerechnet: 88 = 88, keine Abweichung.
 
-## Satzspiegel geändert — 05.08.2026
+## Satzspiegel und Schriftgrade geändert — 05.08.2026
 
-`--wrap` von 1180 auf **1300 px**, H1-Obergrenze von 54 auf **44 px**. Gemessene Begründung und
-die verworfenen Alternativen: `spezifikation/07_MARKE_UND_GESTALTUNG.md`, Abschnitt „Satzspiegel".
+`--wrap` von 1180 auf **1380 px**, H1 von `clamp(32px,3.72vw,54px)` auf
+`clamp(32px,3.45vw,47px)`, H2 von `clamp(31px,4.3vw,50px)` auf `clamp(27px,2.9vw,40px)`.
+Gemessene Begründung: `spezifikation/07_MARKE_UND_GESTALTUNG.md`.
 
-**Geprüft:** kein waagerechter Überlauf bei 390 · 430 · 768 · 1024 · 1180 · 1280 · 1440 · 1728 ·
-1920 px. **Ungeprüft:** das Verhalten außerhalb von Chromium.
+**Zwei Fehler gefunden, beide behoben:**
+
+1. **Die H2 war größer als die H1** — 50 gegen 44 px am Anschlag, und bei 1000 px Fensterbreite
+   43 gegen 33 px. Die Rangfolge war umgekehrt. Vom Auftraggeber gemeldet
+2. **Die H1 wuchs schneller als ihre Spalte.** Der erste Versuch mit `3.6vw` holte den
+   Vierzeiler zwischen 1024 und 1280 px zurück. Ränder und Spalte skalieren mit `4vw` — die
+   Schriftkurve muss folgen, sonst überholt sie die Spalte
+
+**Geprüft an zwölf Breiten:** H1 > H2 überall, kein waagerechter Überlauf, H1 dreizeilig ab
+1024 px mit zwei Wörtern in der ersten Zeile.
+
+**Ungeprüft:** das Verhalten außerhalb von Chromium. **Bekannte Grenze:** unter 768 px bleibt die
+H1 vierzeilig mit je einem Wort — bei rund 330 px Spaltenbreite nicht auflösbar, ohne die H1 auf
+24 px zu drücken.
