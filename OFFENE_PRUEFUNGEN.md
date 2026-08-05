@@ -822,9 +822,42 @@ Alle vier Lastenhefte sind ausgewertet; keine Themendatei liest noch Bauwissen a
 
 | Befund | ungeprüft | Prüfmittel |
 |---|---|---|
-| Die **Startsperre** hat neun Bedingungen | ob **Testfall 66** alle neun abdeckt — er nennt nur zwei | Testfall gegen die Bedingungsliste stellen. **Vermutlich muss der Fall geteilt werden**, wie 53 → 53a/53b |
+| **Die Startsperre hat zehn Bedingungen, geprüft werden zwei.** Analyse ausgeführt, Behebung nicht — sie verändert die 88 | siehe eigener Abschnitt unten | **Entscheidung des Auftraggebers** |
 | Die Dublettenprüfung lief über **13 Zahlenwerte** und alle Dateiverweise | ob es Dubletten in **Formulierungen** ohne Zahl gibt | Textabgleich über alle 18 Dateien |
 | Die Startseite nennt die **Zahlung nicht als Schritt**, `/ablauf` schon | ob die sechs Schritte um die Zahlung ergänzt werden sollen | **Entscheidung des Auftraggebers.** Die sechs Schritte sind eine abgenommene Gestaltungsentscheidung — nicht selbst ändern |
 
 **Nicht ausgeführt:** Es wurde keine Zeile Anwendungscode gebaut und kein Test ausgeführt. Diese
 Sitzung hat ausschließlich Spezifikation zusammengeführt.
+
+
+### Die Startsperre — analysiert, nicht behoben
+
+`10_WEBSITE_SARTU.md` führt **zehn** Bedingungen, unter denen die produktive Veröffentlichung
+abbricht. Geprüft werden davon **zwei**:
+
+| Bedingung | Testfall |
+|---|---|
+| 1 — `[[PLATZHALTER]]` in Impressum oder Datenschutz, oder unter 500 Zeichen | **keiner** |
+| 2 — `/agb` verlinkt und mit Platzhalter | **keiner** |
+| 3 — eine `noindex`-Seite steht in der `sitemap.xml` | **keiner** |
+| 4 — leerer Bildplatz oder `[[SCREENSHOT-FEHLT]]` | **keiner** |
+| 4a — Platzhalter in „Wer dahintersteckt" | **keiner** |
+| 5 — verbotene Zeichenkette im ausgelieferten Text | **keiner** |
+| 6 — Datei außerhalb `/public` erreichbar | **49** (prüft die Erreichbarkeit, **nicht** den Abbruch) |
+| 7 — Ortsname bei offener Standortfrage | **keiner** |
+| 8 — Rechtstext auf `entwurf` oder `in_pruefung` | **66** und **81** |
+| 9 — Pflichtfeld der Betreiberdaten leer | **66** |
+
+**Warum das zählt:** Die Sperre existiert, weil eine Warnung überlesen wird. **Eine ungeprüfte
+Sperre ist eine Warnung** — sie fällt beim ersten Umbau aus, ohne dass jemand es merkt. Sieben
+der zehn Bedingungen schützen vor einem Rechtsverstoß oder einem sichtbaren Platzhalter live.
+
+**Warum es nicht einfach behoben wurde:** Sieben neue Testfälle machen aus 88 → 95. Die Zahl 88
+steht in `CLAUDE.md`, `REIHENFOLGE.md`, `15_TESTFAELLE.md` und der Zuordnung von 88 Einzelzeilen.
+Sie war **laut `CLAUDE.md` schon viermal falsch**. Sie ohne Auftrag zu ändern wäre genau der
+Fehler, den die Zuordnungstabelle verhindern soll.
+
+**Vorschlag zur Entscheidung:** Testfall 66 nach dem Muster von 53 → 53a/53b in **66a bis 66j**
+teilen — je eine Bedingung. Das hält die Zählung bei **88 durchnummerierten**, so wie 5a, 5b,
+40a, 40b und 53a/53b es schon tun, und die Zuordnung in `REIHENFOLGE.md` ändert sich nicht: alle
+zehn entstehen in **A0**, wie 66 heute.
