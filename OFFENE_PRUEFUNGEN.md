@@ -895,3 +895,27 @@ Gemessene Begründung: `spezifikation/07_MARKE_UND_GESTALTUNG.md`.
 **Ungeprüft:** das Verhalten außerhalb von Chromium. **Bekannte Grenze:** unter 768 px bleibt die
 H1 vierzeilig mit je einem Wort — bei rund 330 px Spaltenbreite nicht auflösbar, ohne die H1 auf
 24 px zu drücken.
+
+## Aufmacherhöhe — 05.08.2026
+
+Der Aufmacher war **630 px hoch, unabhängig vom Bildschirm**. Auf 1366 × 768 ergab das den in
+`10_WEBSITE_SARTU.md` §5 geforderten Anschnitt von 68 px, auf 1920 × 1080 aber **366 px**.
+**Dieselbe Seite wirkte auf dem größeren Bildschirm kleiner.** Vom Auftraggeber gemeldet.
+
+**Behoben:** Mindesthöhe 78 % der Fensterhöhe (560–1000 px), Inhalt mittig. Füllung jetzt
+durchgehend 78 %, Anschnitt zwischen 41 und 159 px.
+
+**Bewusst nichts hinzugefügt.** Geprüft: Alles, was §5 für den Aufmacher vorschreibt, ist
+gebaut — Eyebrow, H1, Vorspann, beide Knöpfe, Pflichthinweis, Trust-Zeile, Kapazitätszeile,
+Visual. Es fehlt nur, was auf ausdrückliche Anweisung entfernt wurde (Branchenangabe,
+`Musteransicht`-Kennzeichen, beide unten als offen geführt). **Ein Preisanker wäre der
+naheliegende Zusatz gewesen und ist ausdrücklich falsch:** Die Sektionsreihenfolge begründet,
+dass die Zahl erst nach Unterscheidungsmerkmal und Vorhersehbarkeit fällt.
+
+### Dabei gefunden, **nicht** behoben
+
+| Befund | Lage |
+|---|---|
+| **Mobil entsteht kein Anschnitt.** Bei 390 × 844 ist der Aufmacher 1086 px hoch, bei 768 × 1024 sind es 1126 px — beide höher als das Fenster | Folge des gestapelten Visuals, **nicht** der Höhenregel; galt vorher genauso. Auflösbar nur, indem das Visual mobil kleiner wird. **Gestaltungsentscheidung, nicht selbst getroffen** |
+| Auf sehr hohen Bildschirmen (2560 × 1440) greift die Obergrenze von 1000 px, Anschnitt 361 px | bewusst gedeckelt — ohne Deckel entstünde Leerraum **im** Aufmacher statt darunter |
+| Der Prototyp führt als H2 der zweiten Sektion `Ihr Projekt bleibt an einem Ort.` | Dieser Satz steht im Texter-Skill unter den **verworfenen** Fassungen. Gebunden wäre dort der Positionierungssatz `Ohne einen einzigen Termin zur fertigen Website.` **Text, kein Layout** — gehört in den Durchgang des Skills |

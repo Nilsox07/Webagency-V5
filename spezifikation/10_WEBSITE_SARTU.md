@@ -218,6 +218,30 @@ Knöpfe direkt darunter, Visual danach**, Trust-Zeile als 2 × 2-Raster. Das Vis
 horizontal. **Der untere Rand des ersten Viewports zeigt bereits einen Anschnitt der nächsten
 Sektion.**
 
+**Die Höhe folgt dem Fenster, nicht dem Inhalt.** Der Aufmacher bekommt eine Mindesthöhe von
+**78 % der Fensterhöhe** (Untergrenze 560 px, Obergrenze 1000 px), der Inhalt steht **mittig**
+darin.
+
+> **Warum das eine Regel ist und keine Feineinstellung.** Ohne sie ist der Aufmacher **immer
+> gleich hoch** — der Inhalt bestimmt die Höhe, das Fenster nicht. Gemessen am 05.08.2026:
+> 630 px bei jedem Bildschirm. Auf 1366 × 768 ergab das den vorgeschriebenen Anschnitt von 68 px,
+> auf 1920 × 1080 aber **366 px** — das ist kein Anschnitt mehr, sondern eine zweite Sektion im
+> ersten Bild. **Dieselbe Seite wirkte auf dem größeren Bildschirm kleiner.**
+>
+> Mit der Regel liegt die Füllung durchgehend bei **78 %** und der Anschnitt zwischen 41 und
+> 159 px.
+
+> **Der Aufmacher bekommt nichts hinzu, um höher zu werden.** Geprüft am 05.08.2026: Alles, was
+> §5 für ihn vorschreibt, ist gebaut. **Ein Preis im Aufmacher wäre der naheliegende Zusatz und
+> ist ausdrücklich falsch** — die Sektionsreihenfolge oben begründet, warum die Zahl erst nach
+> Unterscheidungsmerkmal und Vorhersehbarkeit fällt. Wer sie nach vorn zieht, hebt diese
+> Begründung auf.
+
+> **Offen, mobil:** Auf schmalen Geräten ist der Aufmacher einspaltig und dadurch **höher als das
+> Fenster** — der geforderte Anschnitt entsteht dort **nicht**. Das ist keine Folge der Höhenregel,
+> sondern des gestapelten Visuals, und war vorher genauso. Auflösbar nur, indem das Visual mobil
+> kleiner wird. Siehe `OFFENE_PRUEFUNGEN.md`.
+
 ---
 
 ### Sektion 2 — Der Kundenbereich
