@@ -213,6 +213,12 @@ h2{font-size:clamp(27px,calc(3vw - 6px),54px)}
    -.033) und weniger Zeilenabstand, weil keine Unterlaengen entstehen. */
 h1{font-size:clamp(32px,9.9cqw,92px);letter-spacing:-.018em;line-height:.95;
   text-transform:uppercase}
+/* Drei Versalzeilen von fast gleicher Laenge lesen sich als Block, nicht als
+   Satz — genau das war an der ausgeglichenen Fassung falsch. Die erste Zeile
+   bricht ihn in ZWEI Richtungen auf: Neigung und Gewicht. Sie traegt die
+   Einschraenkung ("wie gebaut"), die beiden aufrechten Zeilen tragen Produkt
+   und Preis. <em> und nicht <span>, weil das Wort wirklich betont ist. */
+h1 em{font-style:italic;font-weight:400}
 h1 .accent{background-image:linear-gradient(var(--lime),var(--lime));background-repeat:no-repeat;
   background-position:0 .95em;background-size:100% .2em;padding-right:.04em}
 .hero-lede{margin-top:clamp(14px,1.3vw,30px);max-width:44ch;color:var(--muted);font-size:clamp(19px,1.4vw,25px);line-height:1.55}
@@ -673,7 +679,7 @@ html:has(#g-kalk:checked),html:has(#g-weiss:checked){background:var(--cream)}
     <div class="wrap hero-grid">
       <div>
         <p class="tag" style="margin-bottom:15px">Webdesign-Agentur für Firmenwebsites</p>
-        <h1>Programmierte Firmenwebsites <span class="accent">zum Festpreis.</span></h1>
+        <h1><em>Programmierte</em> Firmenwebsites <span class="accent">zum Festpreis.</span></h1>
         <p class="hero-lede">Sie erzählen uns, was Ihr Betrieb macht und für wen. Den Rest bauen und betreiben wir. Dafür ist kein einziger Termin nötig.</p>
         <div class="hero-cta">
           <a class="btn" href="/briefing">Bedarf prüfen lassen <span class="ar">→</span></a>

@@ -974,3 +974,27 @@ Bildschirmfotos bei 390 · 768 · 1024 · 1512 · 2560.
 „Grenze des Satzes, nicht der Einstellung". Richtig beobachtet, falsch geschlossen — es war die
 Grenze **dieses** Satzes. **Wo eine Einstellung an eine Grenze stößt, lohnt die Frage, ob der Text
 die Grenze setzt.**
+
+### Nachtrag: erste H1-Zeile kursiv — 05.08.2026
+
+**Einwand des Betreibers an der ausgeglichenen Fassung:** „das sieht hässlich aus, weil das ein
+Block ist und jede Zeile der H1 gleich lang ist. ich denke wenn wir so ein wort oder so kursiv
+machen sieht es besser aus und die aktuelle schriftart lassen."
+
+**Gebaut:** `h1 em { font-style: italic; font-weight: 400 }` auf der ersten Zeile. Vier Fassungen
+gerendert und verglichen (erste, zweite, dritte Zeile kursiv; kursiv allein gegen kursiv +
+leichter). **Die Schrift bleibt unverändert** — die Frage aus `20_OFFEN.md` ist damit nicht
+beantwortet und wurde nicht angefasst.
+
+**Ausgeführt:** dieselben zehn Breiten erneut gemessen. Schriftgrad, Zeilenzahl, breiteste Zeile
+und Rest sind **identisch** — die breiteste Zeile ist die zweite und bleibt aufrecht.
+
+| Befund | Lage |
+|---|---|
+| **Der Kursivschnitt ist hier nicht echt.** DejaVu Sans führt nur `Book` und `Bold`; Chromium stellt die aufrechte Schrift mechanisch schräg | Auf macOS (SF Pro) und Windows (Segoe UI) liegt ein **echter** Schnitt vor und sieht besser aus als das Bildschirmfoto. **Ungeprüft**, weil hier keine Schrift mit echtem Kursivschnitt in der Kette steht. Zur Beurteilung wurde ersatzweise Liberation Sans gerendert — das ist ein Stellvertreter, kein Nachweis. Prüfmittel: `design/startseite.html` auf einem Mac oder Windows-Rechner öffnen |
+| **Wird die Schriftfrage aus `20_OFFEN.md` entschieden, gehört der Kursivschnitt zum Umfang** | Sonst fällt die H1 auf die mechanische Schrägstellung zurück. Betrifft Inter und Instrument Sans gleichermaßen — beide haben einen, er muss nur mitgeladen werden |
+| Die H1 hat auf einer echten Schrift **90 px Rest** statt 19 | Gemessen mit Inter und Instrument Sans bei 1512 px. Der Faktor 9,9 cqw ist an DejaVu kalibriert; nach der Schriftentscheidung ist er **neu einzumessen** und dürfte auf rund 11 cqw steigen |
+
+**Die Lehre:** Der Ausgleich der Zeilenlängen war ein **Hilfsmaß** — er sagt, wie groß die Schrift
+werden darf. Ich hatte ihn zum Ziel gemacht und auf 92 % hin gebaut. **Was messbar besser wird,
+wird nicht dadurch schöner.**

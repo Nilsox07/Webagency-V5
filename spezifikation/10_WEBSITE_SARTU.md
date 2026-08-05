@@ -195,7 +195,7 @@ der Stelle, an der der Fehler passiert.
 - *Aufgabe:* Produkt und Preismodell in einem Satz. Der Leser muss danach wissen, was er kauft und dass der Preis vorher feststeht
 - *Grenze:* keine erfundene Zahl; nicht „günstig"; **kein unbestimmtes Eigenschaftswort** — der Satz trägt über `programmiert` und `Festpreis`, beides nachprüfbar
 - *Umfang:* **ein Satz, höchstens acht Wörter.** Zusätzlich: **kein Wort über 14 Zeichen**, und die drei Sinnabschnitte sollen ähnlich lang sein
-- *Bau:* **Versalien, dreizeilig** (`07_MARKE_UND_GESTALTUNG.md`). Die Dreizeiligkeit ist keine Einstellung, sondern eine Eigenschaft des Satzes
+- *Bau:* **Versalien, dreizeilig, erste Zeile kursiv und leichter** (`07_MARKE_UND_GESTALTUNG.md`). Die Dreizeiligkeit ist keine Einstellung, sondern eine Eigenschaft des Satzes; die Auszeichnung der ersten Zeile bricht den Block, den drei gleich lange Versalzeilen sonst bilden
 
 > **Warum die Zeichenzahl jetzt in der Vorgabe steht.** Die H1 steht in der 55-%-Spalte; ihr
 > Schriftgrad ist ein fester Anteil davon. **Damit bestimmt die längste Zeile den Schriftgrad —

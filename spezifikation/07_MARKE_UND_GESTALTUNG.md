@@ -154,6 +154,35 @@ die Rangfolge war umgekehrt.
 
 **Drei Zeilen auf jeder Breite, kein waagerechter Überlauf, H1 > H2 durchgehend.**
 
+### Die erste Zeile ist kursiv und leichter — gegen den Block
+
+**Gleich lange Zeilen sind die Voraussetzung für den großen Schriftgrad und zugleich sein
+Preis.** Drei Versalzeilen von 13 · 14 · 14 Zeichen, alle im selben Gewicht, lesen sich als
+**Block**, nicht als Satz. Der Einwand kam vom Betreiber und war richtig: *„das sieht hässlich
+aus, weil das ein Block ist und jede Zeile der H1 gleich lang ist."*
+
+> **Ein Messwert ist kein Gestaltungsziel.** Der Ausgleich der Zeilenlängen war ein
+> **Hilfsmaß** — er sagt, wie groß die Schrift werden darf. Ich hatte ihn zum Ziel gemacht und
+> auf 92 % hin gebaut. **Was messbar besser wird, wird nicht dadurch schöner.** Die Zeilen
+> bleiben gleich lang; gebrochen wird stattdessen die Fläche.
+
+`h1 em { font-style: italic; font-weight: 400 }` — die erste Zeile bricht den Block in **zwei**
+Richtungen: Neigung **und** Gewicht. Damit steht die Einschränkung („wie gebaut") gegen die beiden
+aufrechten Zeilen, die Produkt und Preis tragen. **Das folgt dem Satzbau, es ist keine
+Verzierung.**
+
+| | |
+|---|---|
+| Auszeichnung | `<em>`, nicht `<span>` — das Wort ist wirklich betont |
+| Warum die **erste** Zeile | Der Lime-Balken sitzt auf der **dritten**. Zwei Anker, oben und unten, statt zweier Auszeichnungen an derselben Stelle |
+| Warum **leichter** statt nur kursiv | Neigung allein bricht die Fläche schwächer. Geprüft an beiden Fassungen |
+| Kein Messwert ändert sich | Die breiteste Zeile ist die **zweite** und bleibt aufrecht. Schriftgrad, Zeilenzahl und Rest sind identisch |
+
+> **Kursiv setzt einen echten Schnitt voraus.** Fehlt er, stellt der Browser die aufrechte Schrift
+> mechanisch schräg — das ist keine Kursive, sondern eine Verzerrung. SF Pro und Segoe UI bringen
+> einen mit. **Wird die offene Schriftfrage entschieden, gehört der Kursivschnitt zum Umfang** und
+> ist kein Zusatz.
+
 > **Die vier Einwortzeilen unter 768 px sind weg — und das lag nicht an der Einstellung.** Die
 > vorige Fassung notierte sie als „Grenze des Satzes, nicht der Einstellung". Das war richtig
 > beobachtet und falsch geschlossen: **Es war die Grenze *dieses* Satzes.** Mit `Programmierte
