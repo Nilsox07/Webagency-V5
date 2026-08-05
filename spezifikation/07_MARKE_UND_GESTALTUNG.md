@@ -63,6 +63,38 @@ Radienskala, skaliert über `--rk`. **Es gibt keine achte Form daneben.**
 `--s-1` 6 · `--s-2` 12 · `--s-3` 20 · `--s-4` 32 · `--s-5` 48 · `--s-6` 72 · `--s-7` 104 ·
 `--s-8` 140 (px).
 
+## Satzspiegel
+
+| | |
+|---|---|
+| `--wrap` | **1300 px** — die Außenkante des Inhalts |
+| `--gut` | `clamp(20px, 4vw, 56px)` — Rand links und rechts |
+| **nutzbare Inhaltsbreite** | **1188 px** am Anschlag |
+
+**Warum 1300 und nicht 1180.** Üblich ist heute ein Inhaltsbereich von **1140 bis 1200 px**,
+moderne Systeme gehen bis 1280. Die Seite lief auf `--wrap: 1180` — abzüglich der Ränder blieben
+**1068 px Inhalt und damit unter dem üblichen Band.** Der Eindruck „zusammengequetscht" war
+messbar, nicht gefühlt.
+
+**Die Breite allein war aber nicht die Ursache.** Gemessen am 05.08.2026: Die H1 stand bei 54 px
+in einer 554 px breiten Spalte und brach in **vier Zeilen mit je einem Wort** um — sie las sich
+als Liste, nicht als Satz. Die beiden längsten Wörter hätten bei 54 px **746 px** in einer Zeile
+gebraucht; das ist bei einem 55/45-Aufmacher erst ab etwa 1530 px Satzspiegel zu haben und damit
+weit außerhalb jedes Standards.
+
+**Deshalb beides zusammen:** `--wrap` auf 1300 **und** die H1-Obergrenze von 54 auf **44 px**.
+Ergebnis: drei Zeilen, die erste trägt zwei Wörter. Der Aufmacher-Bildbereich wächst von 455 auf
+**620 px**, die Leistungsblöcke von 290 auf **325 px**.
+
+> **Die H1-Grenze ist an diesem einen Satz gemessen** — dem gebundenen H1-Auftrag der Startseite
+> mit „Firmenwebsites" als längstem Wort (453 px bei 54 px Schriftgrad). **Ändert sich die H1,
+> wird nachgemessen, nicht geschätzt.**
+
+> **Der 55/45-Aufmacher bleibt** (`10_WEBSITE_SARTU.md`). Er war nicht zur Wahl gestellt; die
+> Rechnung oben ist unter dieser Bindung gemacht.
+
+**Geprüft ohne Überlauf bei** 390 · 430 · 768 · 1024 · 1180 · 1280 · 1440 · 1728 · 1920 px.
+
 ## Logo
 
 **Bestandteile:** Zeichen (Bildmarke) · Wortmarke `SARTU` · Zusatz `DIGITAL`.

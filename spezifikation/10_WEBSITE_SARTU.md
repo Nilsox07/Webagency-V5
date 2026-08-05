@@ -303,7 +303,7 @@ wird geschrieben.**
 |---|---|---|
 | 1 | **Bedarfsscheck** | dass wenige Fragen gestellt werden, und welche Felder: Unternehmen, Ziel, Umfang, Domain |
 | 2 | **Geprüftes Angebot** | dass Umfang, Preis und Zahlungsplan **schriftlich** kommen |
-| 3 | **Ihre Angaben** | dass SARTU vorbelegt, was schon bekannt ist, und den Rest im Kundenbereich abfragt |
+| 3 | **Ihre Angaben** | dass SARTU vorbelegt, was schon bekannt ist, und den Rest im Kundenbereich abfragt — **und dass es nach der ersten Zahlung losgeht** |
 | 4 | **Produktion** | dass SARTU baut — und dass **KI hilft, aber ein Mensch prüft und freigibt** |
 | 5 | **Vorschau und Freigabe** | dass der Kunde die fertige Seite sieht und Änderungen **sammelt**, nicht einzeln schickt |
 | 6 | **Start und Betrieb** | Livegang **und** dass es danach weitergeht |
@@ -311,6 +311,19 @@ wird geschrieben.**
 > Schritt 4 ist die einzige Stelle der Startseite, an der der KI-Einsatz benannt wird. **Er wird
 > benannt, nicht umschrieben** — und immer zusammen mit der menschlichen Prüfung. Ohne sie liest
 > sich der Festpreis als Automatenpreis.
+
+> **Warum die Zahlung kein eigener Schritt ist — entschieden am 05.08.2026.** `/ablauf` führt sie
+> als eigenen Schritt (`17_SEITEN_SARTU.md`), die Startseite nicht. **Das bleibt so.**
+>
+> **Ein Schritt „Zahlung" behauptet einen Zeitpunkt, den es nicht gibt.** Gezahlt wird je nach
+> Plan **zwei- oder dreimal** — bei `50_50` zweimal, bei `40_30_30` dreimal, beim Sonderprojekt
+> frei (`02_PREISE_UND_ZAHLUNG.md`). Ein einzelner Kasten wäre in zwei von drei Fällen falsch,
+> und eine Sechserliste auf sieben zu verlängern kauft sich das für nichts.
+>
+> **Was trotzdem stehen muss:** dass die Arbeit erst **nach der ersten Zahlung** beginnt. Das
+> ist keine Zahlungsstufe, sondern eine **Bedingung** — fachlich führt der einzige Weg nach
+> `briefing` über den bestätigten Zahlungseingang (`11_KUNDENBEREICH.md`). Deshalb steht es in
+> Schritt 3, wo es wirkt, und nicht als eigener Kasten.
 
 **Gebunden:** CTA `Ablauf im Detail` → `/ablauf`
 

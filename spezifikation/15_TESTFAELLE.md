@@ -190,8 +190,27 @@ Vorgaben: `12_ADMINBEREICH.md` · Felder: `13_DATENMODELL.md`
 65. `ust_id = ''` **und** `steuernummer = ''` wird abgewiesen
     > **Leer ist nicht gesetzt.** Die Prüfbedingung darf nicht nur auf `NULL` prüfen — `NOT NULL`
     > erlaubt `''`.
-66. **Startsperre greift:** Bei leerem Pflichtfeld oder Rechtstext im Zustand `entwurf` bricht
-    die produktive Veröffentlichung ab
+**66 — die Startsperre, zehn Bedingungen, zehn Prüfungen.** Bedingungsliste:
+`10_WEBSITE_SARTU.md`. Jeder Fall prüft **den Abbruch**, nicht nur den Zustand — und dass die
+Fehlermeldung **die Ursache nennt**.
+
+66a. `[[PLATZHALTER]]` in `/impressum` oder `/datenschutz` bricht ab — ebenso ein Text **unter
+     500 Zeichen** ohne Platzhalter
+66b. `/agb` verlinkt **und** mit Platzhalter bricht ab. **Nicht verlinkt bricht nicht ab**
+66c. Eine Seite mit `noindex` in der `sitemap.xml` bricht ab
+66d. Leerer Bildplatz oder `[[SCREENSHOT-FEHLT]]` bricht ab
+66e. Platzhalter in „Wer dahintersteckt" bricht ab — **alle drei Marker** geprüft: fehlendes
+     Foto, `Name wird nachgereicht`, `[[FOTO-FEHLT]]`
+66f. Eine Zeichenkette aus der Verbotsliste in `08_TEXTREGELN.md` im ausgelieferten Text bricht ab
+66g. Eine über den Webserver erreichbare Datei außerhalb `/public` bricht ab
+     > Ergänzt Fall **49**: der prüft die Erreichbarkeit, dieser den **Abbruch**
+66h. Ein Ortsname in Title, H1 oder Adresse bricht ab, solange die Standortfrage `offen` ist
+66i. Ein Rechtstext auf `entwurf` oder `in_pruefung` bricht ab — geprüft für **alle fünf** Slugs
+66j. Leeres Pflichtfeld der Betreiberdaten bricht ab — ebenso **weder USt-IdNr. noch Steuernummer**
+
+**Und die Gegenprobe, ohne die die Sperre wertlos wäre:** Der **Staging**-Vorgang bricht bei
+**keiner** dieser zehn Bedingungen ab, sondern listet sie als Warnung. Diese Gegenprobe gehört zu
+jedem der zehn Fälle, nicht als elfter dazu.
 
 ---
 
@@ -245,11 +264,26 @@ Vorgaben: `14_SICHERHEIT.md`
 
 ## Zur Anzahl
 
-**83 durchnummerierte plus fünf mit Buchstabenzusatz** — 5a, 5b, 40a, 40b sowie 53a/53b als
-Teilung von 53. Zusammen **88**.
+**83 durchnummerierte Fälle.** Sechs davon sind in Teilfälle mit Buchstabenzusatz zerlegt —
+5 → 5a/5b · 40 → 40/40a/40b · 53 → 53a/53b · **66 → 66a bis 66j**. Die Zerlegung **erhöht die
+Zahl nicht**: ein Fall bleibt ein Fall, er wird nur an mehreren Bedingungen geprüft.
+
+**Es bleibt bei 88.**
 
 > Frühere Fassungen sprachen von „59"; das war schon damals um vier Fälle zu niedrig.
 > **Maßgeblich ist die Liste, nicht die Zahl.**
+
+> **Warum 66 am 05.08.2026 zerlegt wurde.** Die Startsperre hat **zehn** Bedingungen, Fall 66
+> prüfte **zwei**. Sieben der ungeprüften verhindern, dass ein Rechtsverstoß oder ein sichtbarer
+> Platzhalter live geht.
+>
+> **Eine ungeprüfte Sperre ist eine Warnung** — sie fällt beim ersten Umbau aus, ohne dass es
+> jemand merkt. Genau deshalb existiert die Sperre: weil eine Warnung überlesen wird.
+>
+> **Die Zerlegung statt neuer Nummern ist Absicht.** Sieben neue Fälle hätten aus 88 → 95
+> gemacht; die Zahl steht in `CLAUDE.md`, `REIHENFOLGE.md`, hier und in 88 Einzelzeilen der
+> Zuordnung. **Die Zuordnung in `REIHENFOLGE.md` ändert sich nicht:** 66 entsteht in **A0**, alle
+> zehn Teilfälle entstehen dort mit.
 
 ---
 

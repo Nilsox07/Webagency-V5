@@ -822,9 +822,8 @@ Alle vier Lastenhefte sind ausgewertet; keine Themendatei liest noch Bauwissen a
 
 | Befund | ungeprüft | Prüfmittel |
 |---|---|---|
-| **Die Startsperre hat zehn Bedingungen, geprüft werden zwei.** Analyse ausgeführt, Behebung nicht — sie verändert die 88 | siehe eigener Abschnitt unten | **Entscheidung des Auftraggebers** |
-| Die Dublettenprüfung lief über **13 Zahlenwerte** und alle Dateiverweise | ob es Dubletten in **Formulierungen** ohne Zahl gibt | Textabgleich über alle 18 Dateien |
-| Die Startseite nennt die **Zahlung nicht als Schritt**, `/ablauf` schon | ob die sechs Schritte um die Zahlung ergänzt werden sollen | **Entscheidung des Auftraggebers.** Die sechs Schritte sind eine abgenommene Gestaltungsentscheidung — nicht selbst ändern |
+| Die Dublettenprüfung lief über Zahlenwerte und Dateiverweise | ob es Dubletten in **Formulierungen** ohne Zahl gibt | Textabgleich über alle 18 Dateien |
+| Der neue Satzspiegel (1300 px) ist an **neun Breiten** auf Überlauf geprüft | wie er sich in **echten Browsern** verhält — gemessen wurde nur in Chromium | Gegenprobe in Firefox und Safari |
 
 **Nicht ausgeführt:** Es wurde keine Zeile Anwendungscode gebaut und kein Test ausgeführt. Diese
 Sitzung hat ausschließlich Spezifikation zusammengeführt.
@@ -861,3 +860,25 @@ Fehler, den die Zuordnungstabelle verhindern soll.
 teilen — je eine Bedingung. Das hält die Zählung bei **88 durchnummerierten**, so wie 5a, 5b,
 40a, 40b und 53a/53b es schon tun, und die Zuordnung in `REIHENFOLGE.md` ändert sich nicht: alle
 zehn entstehen in **A0**, wie 66 heute.
+
+---
+
+## Beide vorgelegten Entscheidungen sind getroffen — 05.08.2026
+
+**Zahlung als Ablaufschritt: nein.** Begründung des Auftraggebers, und sie trägt: Gezahlt wird je
+nach Plan zwei- oder dreimal, ein einzelner Kasten wäre in zwei von drei Fällen falsch. Was
+stattdessen gebaut wird: Schritt 3 der Startseite trägt die **Bedingung**, dass es nach der
+ersten Zahlung losgeht. Festgehalten in `10_WEBSITE_SARTU.md` und `17_SEITEN_SARTU.md`.
+
+**Startsperre: Fall 66 in 66a bis 66j zerlegt.** Zehn Bedingungen, zehn Prüfungen, dazu die
+Gegenprobe, dass der Staging-Vorgang **nicht** abbricht. Die Zerlegung erhöht die Zahl nicht —
+**es bleibt bei 88**, und die Zuordnung in `REIHENFOLGE.md` bleibt unverändert, weil alle
+Teilfälle in A0 entstehen wie 66 heute. Gegengerechnet: 88 = 88, keine Abweichung.
+
+## Satzspiegel geändert — 05.08.2026
+
+`--wrap` von 1180 auf **1300 px**, H1-Obergrenze von 54 auf **44 px**. Gemessene Begründung und
+die verworfenen Alternativen: `spezifikation/07_MARKE_UND_GESTALTUNG.md`, Abschnitt „Satzspiegel".
+
+**Geprüft:** kein waagerechter Überlauf bei 390 · 430 · 768 · 1024 · 1180 · 1280 · 1440 · 1728 ·
+1920 px. **Ungeprüft:** das Verhalten außerhalb von Chromium.

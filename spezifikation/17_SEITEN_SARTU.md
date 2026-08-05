@@ -116,15 +116,13 @@ Prüfung · Vorschau, Feedback, Abnahme · Launch und Betrieb
 > | Vorschau, Feedback, Abnahme | Vorschau und Freigabe |
 > | Launch und Betrieb | Start und Betrieb |
 >
-> **Die Reihenfolge stimmt überein, die Abdeckung nicht ganz:** Die Startseite nennt die
-> **Zahlung als Schritt nicht**. Sie erwähnt den Zahlungsplan nur als Bestandteil des Angebots.
-> Fachlich gilt aber: **ohne bestätigten Zahlungseingang beginnt das Briefing nicht**
-> (`11_KUNDENBEREICH.md`) — und der Lieferkorridor läuft erst danach.
+> **Die Reihenfolge stimmt überein. Dass die Startseite die Zahlung nicht als Schritt führt, ist
+> entschieden und kein Versehen** (05.08.2026): Gezahlt wird je nach Plan **zwei- oder dreimal**,
+> ein einzelner Kasten wäre in zwei von drei Fällen falsch. Begründung in `10_WEBSITE_SARTU.md`.
 >
-> **Offen, Entscheidung nötig:** Ob die Startseite die Zahlung als eigenen Schritt aufnimmt und
-> damit sieben statt sechs zeigt, oder ob Schritt 2 sie in den Satz mitnimmt. **Nicht selbst
-> entscheiden** — die sechs Schritte sind eine abgenommene Gestaltungsentscheidung. Siehe
-> `OFFENE_PRUEFUNGEN.md`.
+> **Hier ist die Zahlung dagegen ein eigener Schritt**, weil `/ablauf` die ausführliche Fassung
+> ist und den Zahlungsplan ohnehin erklären muss. **Der Schritt nennt den Plan, nicht einen
+> Zeitpunkt** — *Grenze:* keine Formulierung, die nach **einer** Zahlung klingt.
 
 **Was der Kunde tun muss — `gebunden`, fünf Punkte:** Fakten bestätigen · Material hochladen ·
 Domain bestätigen · Vorschau prüfen · freigeben
