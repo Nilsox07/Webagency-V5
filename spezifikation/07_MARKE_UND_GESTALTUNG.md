@@ -99,16 +99,16 @@ Aufmacher-Visual und die Überschriften.
 > schon 37 px — beinahe gleich. **Ein Typenmaß muss gleichmäßig sein, nicht maximal.** Die H1
 > gibt dafür im mittleren Bereich rund 6 px ab.
 
-**Warum die H1 kleiner ist, als sie aussehen dürfte.** Sie steht in der 55-%-Spalte des
-Aufmachers, nicht über der vollen Breite. Gemessen am 05.08.2026: bei 54 px in einer 554-px-Spalte
-brach sie in **vier Zeilen mit je einem Wort** um — sie las sich als Liste, nicht als Satz. Die
-beiden längsten Wörter brauchen bei 54 px **746 px** in einer Zeile; das ist bei 55/45 erst ab
-etwa **1530 px** Satzspiegel zu haben und damit weit außerhalb jedes Standards.
+**Woran die H1 gebunden ist.** Sie steht in der 55-%-Spalte des Aufmachers, nicht über der vollen
+Breite — **ihre Obergrenze ist die Spalte, nicht der Geschmack.** Gemessen am 05.08.2026: bei
+54 px in einer 554-px-Spalte brach sie in **vier Zeilen mit je einem Wort** um; sie las sich als
+Liste, nicht als Satz.
 
-**`3.45vw` ist kein gewählter, sondern ein gerechneter Wert.** Ränder und Spalte skalieren mit
-`4vw`; wächst die Schrift schneller, holt der Vierzeiler bei mittleren Breiten zurück. Bei
-`3.6vw` trat er zwischen 1024 und 1280 px wieder auf. **Die Kurve der Schrift muss der Kurve der
-Spalte folgen.**
+**Die Steigung ist gerechnet, nicht gewählt.** Ränder und Spalte skalieren mit `4vw` bzw. `90vw`;
+wächst die Schrift schneller, holt der Vierzeiler bei mittleren Breiten zurück. Zweimal
+nachgewiesen: mit `3.6vw` trat er zwischen 1024 und 1280 px wieder auf, mit `3.5vw − 6px` bei
+1600 und 1800 px. **Die Kurve der Schrift muss der Kurve der Spalte folgen — jede Änderung wird
+nachgemessen.**
 
 **Warum die H2 heruntergezogen wurde.** Sie stand auf `clamp(31px, 4.3vw, 50px)` — **größer als
 die H1 und schneller wachsend.** Bei 1000 px Fensterbreite ergab das 43 px H2 gegen 33 px H1: die
