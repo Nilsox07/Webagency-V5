@@ -43,7 +43,19 @@ final class Startseitentexte
         . 'einzigen Termin. Geplant, geschrieben, programmiert und betrieben von SARTU. '
         . 'Ab 1.490 € netto.';
 
-    public const H1 = 'Individuell programmierte Firmenwebsites zum Festpreis.';
+    /**
+     * §5 Sektion 1 — Auftrag: Produkt und Preismodell in einem Satz.
+     *
+     * `Individuell` ist am 05.08.2026 entfallen. Zwei Gruende, beide belegt:
+     * Der Texter-Skill verwirft unbestimmte Eigenschaftswoerter an der Stelle,
+     * an der etwas Nachpruefbares stehen muss — `individuell` ist von derselben
+     * Art wie `passend` und `wenige`; `programmiert` traegt die Aussage allein.
+     * Und die Spezifikation selbst band das Wort bereits an das andere
+     * (`individuell` nur, wenn durch `programmiert` gedeckt).
+     * Gemessen: der kuerzere Satz erlaubt in der Aufmacherspalte 41 % mehr
+     * Schriftgrad, weil er dreizeilig mit fast gleich langen Zeilen umbricht.
+     */
+    public const H1 = 'Programmierte Firmenwebsites zum Festpreis.';
 
     // -------------------------------------------------------------- 1 Aufmacher
 

@@ -945,3 +945,32 @@ davon gewann die Seite nur Rand — sie wurde auf dem größeren Bildschirm **kl
 
 **Die Lehre:** Ein zu leerer Bereich wird nicht durch mehr Fläche voller. Erst als Container,
 Schrift, Visual und Abstände **gemeinsam** mitwuchsen, trug er.
+
+## Versalien-H1 im Aufmacher — 05.08.2026
+
+**Auftrag des Betreibers:** „die h1 ist zu klein und geht unter … zu lange wörter, ich denke
+3 zeilen und große buchstaben wären top."
+
+**Gebaut:** H1-Wortlaut auf `Programmierte Firmenwebsites zum Festpreis.` gekürzt, Versalien über
+`text-transform`, Schriftgrad an die Spalte gebunden (`cqw` statt `vw`), Zeilenabstand und
+Unterschneidung für Großbuchstaben angepasst, Lime-Balken unter die Versalgrundlinie gesetzt.
+
+**Ausgeführt und bestanden:** zehn Breiten von 390 bis 2560 px, je Breite Schriftgrad,
+Zeilenzahl, Zeilenbreiten, waagerechter Überlauf, Aufmacherfüllung und Anschnitt. Dazu
+Bildschirmfotos bei 390 · 768 · 1024 · 1512 · 2560.
+
+| Befund | Lage |
+|---|---|
+| **Gemessen wurde ausschließlich mit DejaVu Sans** — die Schriftkette (`-apple-system`, `Segoe UI`, `system-ui`) löst in diesem Container darauf auf | DejaVu ist die **breiteste** Schrift der Kette. Auf macOS und Windows bleibt mehr Rest, nie weniger — die Messung kann zu wenig Platz melden, nie zu viel. **Ungeprüft ist die Gegenrichtung: ob 9,9 cqw auf schmaleren Schriften zu klein wirkt.** Prüfmittel: dieselbe Seite auf einem Mac und einem Windows-Rechner öffnen |
+| **`KEYWORD_VALIDATION.md` führt noch den alten H1-Wortlaut** | Die Datei wird von `bin/keywords.php` **erzeugt**, nicht getippt — das Skript fährt jede Adresse durch den echten Router und braucht dafür die Datenbank. Ohne laufenden Container nicht ausführbar. Prüfmittel: `docker compose exec app php bin/keywords.php`. **Von Hand nachtippen ist ausdrücklich falsch** (Begründung im Docblock von `WebsiteTest::testDieBestaetigungsdateiFuehrtJedeLaunchadresse`) |
+| **Kein Test ausgeführt** — kein Datenbankdienst erreichbar (`SQLSTATE[HY000] [2002]`) | Geändert wurde eine Zeichenkettenkonstante; die H1-Tests zählen `<h1>`-Elemente, sie prüfen keinen Wortlaut. Risiko gering, **aber ungeprüft**. Prüfmittel: `docker compose exec app vendor/bin/phpunit` |
+| **Anschnitt bei 1366 × 768 von 82 auf 30 px gefallen** | Dort bestimmt jetzt der Inhalt die Höhe statt der Mindesthöhe. Sichtbar bleibt er. **Bewusst hingenommen** — eine größere H1 kostet senkrechten Platz |
+| **Mobil ist der Aufmacher 82 px höher geworden** (768 × 1024: 1114 → 1196 px) | Er war schon vorher höher als das Fenster; der bekannte Befund oben wird dadurch **tiefer**, nicht neu. Auflösbar nur über die Größe des gestapelten Visuals — **Gestaltungsentscheidung, nicht selbst getroffen** |
+| **Die Angabe „Anschnitt 41 bis 159 px" war schon vor dieser Änderung falsch** | Nachgemessen: 2240 × 1260 → 186 px, 2560 × 1440 → 301 px, beide unverändert gegenüber vorher. In `10_WEBSITE_SARTU.md` korrigiert. **Offen bleibt die Frage dahinter:** ob 301 px noch ein Anschnitt sind oder schon eine zweite Sektion im ersten Bild |
+| **Die Anwendung unter `/public` hat die Änderung nicht bekommen** | `public/assets/css/tokens.css` steht weiter auf `--wrap:1180px` und `--fs-h1:clamp(40px,6.4vw,80px)`; `app/views/pages/website-start.php` kennt keine Versalien. **Diese Abweichung ist älter als diese Sitzung** — schon die drei vorangegangenen Aufmacher-Eingriffe gingen nur in den Entwurf. Angeglichen wurde nur der **Wortlaut** der H1, damit Entwurf und Anwendung nicht zwei verschiedene Sätze führen |
+| **Der Fußzeilensatz führt weiter `Individuell programmierte Firmenwebsites zum Festpreis, …`** | Absicht: Er gibt das Kernversprechen aus `01_GESCHAEFTSMODELL.md` wieder, das unverändert gilt. Nur die H1 ist längenbeschränkt, die Fußzeile nicht |
+
+**Die Lehre dieses Durchgangs:** Die vorige Fassung hielt vier Einwortzeilen unter 768 px für die
+„Grenze des Satzes, nicht der Einstellung". Richtig beobachtet, falsch geschlossen — es war die
+Grenze **dieses** Satzes. **Wo eine Einstellung an eine Grenze stößt, lohnt die Frage, ob der Text
+die Grenze setzt.**

@@ -196,12 +196,25 @@ h2{font-size:clamp(27px,calc(3vw - 6px),54px)}
 .hero-grid{position:relative;z-index:1;display:grid;
   grid-template-columns:minmax(0,55fr) minmax(0,45fr);
   gap:0 clamp(28px,4vw,60px);align-items:center}
-.hero-grid>div:first-child{grid-column:1;grid-row:1}
+/* Die Textspalte ist BEHAELTER fuer die H1: der Schriftgrad folgt damit der
+   Spalte selbst, nicht dem Fenster. Zwei frueher gescheiterte vw-Formeln
+   (3.6vw und 3.5vw-6px) lagen genau daran — die Spalte waechst stueckweise,
+   weil --wrap und --gut eigene Knickpunkte haben. Eine gerade vw-Kurve kann
+   ihr nicht folgen, eine cqw-Angabe braucht es gar nicht erst zu versuchen. */
+.hero-grid>div:first-child{grid-column:1;grid-row:1;container-type:inline-size}
 .stage{grid-column:2;grid-row:1 / span 2;align-self:center}
 .hero-trust{grid-column:1;grid-row:2;margin-top:clamp(18px,1.6vw,38px);padding-top:clamp(16px,1.4vw,32px);border-top:1px solid var(--line);max-width:47ch}
-h1{font-size:clamp(32px,calc(3.55vw - 7px),64px);letter-spacing:-.033em}
+/* VERSALIEN, dreizeilig. Der Grad ist an die Spalte gebunden, nicht ans
+   Fenster: 9.9cqw sind 95 % des gemessenen Hoechstwerts, bei dem der Satz
+   noch dreizeilig in seine Spalte passt. Gemessen wurde mit DejaVu Sans —
+   der breitesten Schrift der Ersatzkette; auf SF Pro und Segoe UI bleibt
+   mehr Luft, nie weniger.
+   Versalien tragen weniger Unterschneidung als Gemischtsatz (-.018 statt
+   -.033) und weniger Zeilenabstand, weil keine Unterlaengen entstehen. */
+h1{font-size:clamp(32px,9.9cqw,92px);letter-spacing:-.018em;line-height:.95;
+  text-transform:uppercase}
 h1 .accent{background-image:linear-gradient(var(--lime),var(--lime));background-repeat:no-repeat;
-  background-position:0 .84em;background-size:100% .28em;padding-right:.04em}
+  background-position:0 .95em;background-size:100% .2em;padding-right:.04em}
 .hero-lede{margin-top:clamp(14px,1.3vw,30px);max-width:44ch;color:var(--muted);font-size:clamp(19px,1.4vw,25px);line-height:1.55}
 .hero-cta{display:flex;flex-wrap:wrap;gap:clamp(11px,.9vw,18px);margin-top:clamp(20px,1.8vw,42px)}
 .hero-cta .btn{padding:16px 26px;font-size:17px}
@@ -240,6 +253,11 @@ h1 .accent{background-image:linear-gradient(var(--lime),var(--lime));background-
 @media (max-width:900px){
   .hero-grid{grid-template-columns:1fr}
   .hero-grid>div:first-child{grid-column:1;grid-row:1}
+  /* Einspaltig ist die Spalte nicht mehr 55 %, sondern das ganze Fenster.
+     Derselbe Faktor ergaebe bei 768px eine H1 von 70px — sie erschlaegt
+     Vorspann und Knoepfe. Der Faktor faellt deshalb an der Umbruchstelle
+     mit, die Deckelung haelt den Sprung bei 900px klein. */
+  h1{font-size:clamp(34px,7.4cqw,54px)}
   .stage{grid-column:1;grid-row:2;margin-top:var(--s-4)}
   .hero-trust{grid-column:1;grid-row:3;padding-top:var(--s-4)}
 }
@@ -655,7 +673,7 @@ html:has(#g-kalk:checked),html:has(#g-weiss:checked){background:var(--cream)}
     <div class="wrap hero-grid">
       <div>
         <p class="tag" style="margin-bottom:15px">Webdesign-Agentur für Firmenwebsites</p>
-        <h1>Individuell programmierte Firmenwebsites <span class="accent">zum Festpreis.</span></h1>
+        <h1>Programmierte Firmenwebsites <span class="accent">zum Festpreis.</span></h1>
         <p class="hero-lede">Sie erzählen uns, was Ihr Betrieb macht und für wen. Den Rest bauen und betreiben wir. Dafür ist kein einziger Termin nötig.</p>
         <div class="hero-cta">
           <a class="btn" href="/briefing">Bedarf prüfen lassen <span class="ar">→</span></a>

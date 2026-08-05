@@ -193,8 +193,23 @@ der Stelle, an der der Fehler passiert.
 
 **H1**
 - *Aufgabe:* Produkt und Preismodell in einem Satz. Der Leser muss danach wissen, was er kauft und dass der Preis vorher feststeht
-- *Grenze:* keine erfundene Zahl; nicht „günstig"; „individuell" nur, wenn es durch „programmiert" gedeckt ist
-- *Umfang:* **ein Satz, höchstens acht Wörter**
+- *Grenze:* keine erfundene Zahl; nicht „günstig"; **kein unbestimmtes Eigenschaftswort** — der Satz trägt über `programmiert` und `Festpreis`, beides nachprüfbar
+- *Umfang:* **ein Satz, höchstens acht Wörter.** Zusätzlich: **kein Wort über 14 Zeichen**, und die drei Sinnabschnitte sollen ähnlich lang sein
+- *Bau:* **Versalien, dreizeilig** (`07_MARKE_UND_GESTALTUNG.md`). Die Dreizeiligkeit ist keine Einstellung, sondern eine Eigenschaft des Satzes
+
+> **Warum die Zeichenzahl jetzt in der Vorgabe steht.** Die H1 steht in der 55-%-Spalte; ihr
+> Schriftgrad ist ein fester Anteil davon. **Damit bestimmt die längste Zeile den Schriftgrad —
+> und die längste Zeile bestimmt der Text.** `Individuell programmierte Firmenwebsites zum
+> Festpreis.` brach in Zeilen von 24 · 14 · 14 Zeichen um; die erste füllte die Spalte allein
+> und deckelte den Grad, die anderen beiden ließen ein Drittel leer. Gemessen am 05.08.2026:
+> Zeilenbreiten 895 · 544 · 501 px in einer 895-px-Spalte. **Der Aufmacher wirkte nicht zu klein
+> gesetzt, sondern ungleich gefüllt.**
+>
+> **Ersetzt am 05.08.2026, nicht wieder verwenden:** `Individuell programmierte Firmenwebsites
+> zum Festpreis.` — `individuell` ist ein unbestimmtes Eigenschaftswort derselben Art wie
+> `passend` und `wenige`, die der Texter-Skill verwirft; die Vorgabe band es ohnehin an
+> `programmiert`. Ohne das Wort sind die drei Zeilen 13 · 14 · 14 Zeichen lang und der
+> Schriftgrad steigt um **41 %**.
 
 **Vorspann**
 - *Aufgabe:* Die Arbeitsteilung erklären und den Termin-Einwand vorwegnehmen
@@ -230,6 +245,19 @@ darin.
 >
 > Mit der Regel liegt die Füllung durchgehend bei **78 %** und der Anschnitt zwischen 41 und
 > 159 px.
+>
+> **Diese Spanne war schon bei der Aufnahme falsch — nachgemessen am 05.08.2026.** Sie stimmt
+> nur bis 1920 px. Darüber greift die Obergrenze von 1060 px, das Fenster wächst aber weiter:
+> bei 2240 × 1260 sind es **186 px**, bei 2560 × 1440 **301 px**. Beide Werte sind **vor** der
+> Versalien-H1 gemessen und danach unverändert — der Aufmacher ist dort so hoch, wie die
+> Obergrenze ihn lässt, nicht so hoch wie sein Inhalt. **Die richtige Spanne lautet 30 bis
+> 301 px.** Ob 301 px noch ein Anschnitt sind oder schon eine zweite Sektion, ist eine offene
+> Frage; sie steht in `OFFENE_PRUEFUNGEN.md`.
+>
+> **Bei 1366 × 768 ist der Anschnitt auf 30 px gefallen** (vorher 82). Dort bestimmt seit der
+> Versalien-H1 der Inhalt die Höhe, nicht die Mindesthöhe: 603 px Inhalt passen nicht mehr in
+> 607 px. **Das ist der Preis der größeren H1 und war die Absicht** — der Anschnitt bleibt
+> sichtbar, aber knapp.
 
 > **Der Aufmacher bekommt nichts hinzu, um höher zu werden.** Geprüft am 05.08.2026: Alles, was
 > §5 für ihn vorschreibt, ist gebaut. **Ein Preis im Aufmacher wäre der naheliegende Zusatz und

@@ -87,46 +87,79 @@ Aufmacher-Visual und die Überschriften.
 
 | | Regel | Spanne |
 |---|---|---|
-| **H1** | `clamp(32px, calc(3.55vw − 7px), 64px)` | 32 → 64 px |
+| **H1** | `clamp(32px, 9.9cqw, 92px)` in Versalien · einspaltig `clamp(34px, 7.4cqw, 54px)` | 34 → 89 px |
 | **H2** | `clamp(27px, calc(3vw − 6px), 54px)` | 27 → 54 px |
 | H3 | 20 · 21 · 24 · 27 · 32 px je Bauteil | — |
 
-**Beide hängen an derselben Kurve — das Verhältnis H1 : H2 liegt über den ganzen Bereich bei
-1,19.** Sie werden nur gemeinsam geändert.
+**`cqw`, nicht `vw` — die H1 misst sich an ihrer Spalte, nicht am Fenster.** Die Textspalte des
+Aufmachers ist dafür `container-type: inline-size`. Das ist keine Schreibweise, sondern die
+Auflösung eines Fehlers, der zweimal auftrat.
 
-> **Warum nicht je Breite das Maximum.** Eine Formel, die an jeder Stelle so groß wird wie
-> möglich, lässt das Verhältnis wackeln: bei 1280 px hätte die H1 44 px erlaubt, die H2 aber
-> schon 37 px — beinahe gleich. **Ein Typenmaß muss gleichmäßig sein, nicht maximal.** Die H1
-> gibt dafür im mittleren Bereich rund 6 px ab.
+> **Warum jede vw-Formel scheitern musste.** Die Spalte wächst **stückweise**: `--gut` steht ab
+> 1400 px still, `--wrap` erst bei 2000 px, dazwischen liegt der Knick bei 1380 px. Eine gerade
+> vw-Kurve kann einer geknickten Spaltenkurve nicht folgen — sie ist an einer Stelle zu flach und
+> an der nächsten zu steil. Genau das zeigten die beiden verworfenen Fassungen: `3.6vw` holte den
+> Vierzeiler zwischen 1024 und 1280 px zurück, `3.5vw − 6px` bei 1600 und 1800 px. **Nicht der
+> Wert war falsch, die Bezugsgröße war es.** Mit `cqw` ist der Schriftgrad ein fester Anteil der
+> Spalte — 9,9 % — und der Knick verschwindet, weil er gar nicht erst auftaucht.
 
 **Woran die H1 gebunden ist.** Sie steht in der 55-%-Spalte des Aufmachers, nicht über der vollen
-Breite — **ihre Obergrenze ist die Spalte, nicht der Geschmack.** Gemessen am 05.08.2026: bei
-54 px in einer 554-px-Spalte brach sie in **vier Zeilen mit je einem Wort** um; sie las sich als
-Liste, nicht als Satz.
+Breite — **ihre Obergrenze ist die Spalte, nicht der Geschmack.** Der Anteil ist gemessen, nicht
+gewählt: bei 10,4 cqw füllt die längste Zeile die Spalte genau aus, bei 9,9 cqw bleiben 5 %
+Rest. **Die Prüfung ist mechanisch: entstehen vier Zeilen, ist die Schrift für ihre Spalte zu
+groß.**
 
-**Die Steigung ist gerechnet, nicht gewählt.** Ränder und Spalte skalieren mit `4vw` bzw. `90vw`;
-wächst die Schrift schneller, holt der Vierzeiler bei mittleren Breiten zurück. Zweimal
-nachgewiesen: mit `3.6vw` trat er zwischen 1024 und 1280 px wieder auf, mit `3.5vw − 6px` bei
-1600 und 1800 px. **Die Kurve der Schrift muss der Kurve der Spalte folgen — jede Änderung wird
-nachgemessen.**
+> **Womit gemessen wurde, und warum das die Untergrenze ist.** Alle Werte stammen aus Chromium
+> mit **DejaVu Sans** — der breitesten Schrift der Ersatzkette. Auf SF Pro (macOS) und Segoe UI
+> (Windows) sind dieselben Zeilen schmaler, der Schriftgrad bleibt gleich. **Die Messung kann
+> also zu wenig Platz melden, nie zu viel.**
 
-**Warum die H2 heruntergezogen wurde.** Sie stand auf `clamp(31px, 4.3vw, 50px)` — **größer als
-die H1 und schneller wachsend.** Bei 1000 px Fensterbreite ergab das 43 px H2 gegen 33 px H1: die
-Rangfolge war umgekehrt. Nicht die H1 war zu klein, **die H2 war zu groß.**
+**Versalien.** Die H1 der Startseite steht in Großbuchstaben, gesetzt über `text-transform`
+— **der Quelltext bleibt gemischt**, damit Vorlesewerkzeuge, Suchmaschinen und das Kopieren
+normalen Text bekommen. Versalien brauchen weniger Unterschneidung (`-.018em` statt `-.033em`)
+und weniger Zeilenabstand (`.95` statt `1.04`), weil keine Unterlängen entstehen.
 
-> **Die H1-Grenze ist an einem konkreten Satz gemessen** — dem H1-Auftrag der Startseite mit
-> „Firmenwebsites" als längstem Wort. **Ändert der Texter-Skill die H1, wird nachgemessen, nicht
-> geschätzt.** Die Prüfung ist mechanisch: bricht die erste Zeile auf **ein** Wort um, ist die
-> Schrift für ihre Spalte zu groß.
+**Die Deckelung bei 900 px ist kein Feinschliff.** Einspaltig ist die Spalte nicht mehr 55 %,
+sondern das ganze Fenster; derselbe Faktor ergäbe bei 768 px eine H1 von **70 px**, die Vorspann
+und Knöpfe erschlägt. Der Faktor fällt deshalb an der Umbruchstelle mit.
+
+**Warum das Verhältnis H1 : H2 nicht mehr festgeschrieben ist.** Es lag bei **1,19** und war die
+Reparatur eines echten Fehlers: Die H2 stand auf `clamp(31px, 4.3vw, 50px)` und war damit
+**größer als die H1 und schneller wachsend** — bei 1000 px Fensterbreite 43 px H2 gegen 33 px H1,
+die Rangfolge war umgekehrt.
+
+> **Ersetzt am 05.08.2026.** Der feste Faktor unterstellte, beide Überschriften lebten im selben
+> Satzspiegel. Das stimmt nicht mehr: Die H1 ist eine Versalzeile in der 55-%-Spalte, die H2
+> gemischter Satz über die volle Breite. **Gebunden ist ab jetzt die Rangfolge, nicht der
+> Faktor** — H1 > H2 auf **jeder** geprüften Breite, gemessen 1,26 bis 1,94. Die H2 bleibt
+> unverändert; sie war nie das Problem.
 
 > **Der 55/45-Aufmacher bleibt** (`10_WEBSITE_SARTU.md`). Er war nicht zur Wahl gestellt; die
 > Rechnung oben ist unter dieser Bindung gemacht.
 
-**Gemessenes Ergebnis:** Das Aufmacher-Visual wächst von 406 auf **733 px**, die H1 von 32 auf
-**64 px**. H1 durchgehend **drei Zeilen ab 1024 px**, erste Zeile immer mit zwei Wörtern.
-**Unter 768 px bleiben vier Einwortzeilen** — bei rund 330 px Spaltenbreite bräuchte die erste
-Zeile 24 px Schriftgrad, das wäre keine H1 mehr. **Das ist die Grenze des Satzes, nicht der
-Einstellung.**
+### Gemessen am 05.08.2026 — vorher / nachher
+
+| Fenster | H1 vorher | H1 nachher | Zeilen vorher | Zeilen nachher | H1 : H2 |
+|---|---:|---:|:---:|:---:|---:|
+| 390 | 32,0 | **34,0** | **4** | **3** | 1,26 |
+| 768 | 32,0 | **52,3** | **2** | **3** | 1,94 |
+| 1024 | 32,0 | **49,1** | 3 | 3 | 1,82 |
+| 1280 | 38,4 | **61,3** | 3 | 3 | 1,89 |
+| 1366 | 41,5 | **65,5** | 3 | 3 | 1,87 |
+| 1440 | 44,1 | **65,9** | 3 | 3 | 1,77 |
+| 1512 | 46,7 | **65,8** | 3 | 3 | 1,67 |
+| 1920 | 61,2 | **84,7** | 3 | 3 | 1,64 |
+| 2240 | 64,0 | **88,6** | 3 | 3 | 1,64 |
+| 2560 | 64,0 | **88,6** | 3 | 3 | 1,64 |
+
+**Drei Zeilen auf jeder Breite, kein waagerechter Überlauf, H1 > H2 durchgehend.**
+
+> **Die vier Einwortzeilen unter 768 px sind weg — und das lag nicht an der Einstellung.** Die
+> vorige Fassung notierte sie als „Grenze des Satzes, nicht der Einstellung". Das war richtig
+> beobachtet und falsch geschlossen: **Es war die Grenze *dieses* Satzes.** Mit `Programmierte
+> Firmenwebsites zum Festpreis.` bricht er auch bei 350 px Spaltenbreite dreizeilig um, weil die
+> drei Sinnabschnitte fast gleich lang sind (13 · 14 · 14 Zeichen). **Wo eine Einstellung an eine
+> Grenze stößt, lohnt die Frage, ob der Text die Grenze setzt.**
 
 ## Innenabstände des Aufmachers
 
