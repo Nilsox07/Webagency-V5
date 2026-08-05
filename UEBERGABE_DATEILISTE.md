@@ -28,7 +28,7 @@ merkt es, bevor gebaut wird.
 | 6bb | `SARTU_KUNDENMOTIVE_BELEGT.md` | **warum ein Betrieb kauft** — fünf belegte Motive mit Zahlen und Quelle, dazu was sich nicht belegen ließ | **Abbruch.** Sonst wird das Argument geraten, und der Prüfbericht bleibt trotzdem grün |
 | 6c | `.claude/skills/sartu-texter/SKILL.md` | **schreibt den Wortlaut.** Die Lastenhefte geben die Aussage vor, dieser Skill die Formulierung — Briefing, Bauformen je Abschnitt, Kalibrierung, drei Bindungsklassen | **Abbruch.** Ohne ihn wird jede Formulierung geraten |
 | 7 | `CLAUDE_SARTU_WEBSITE_LASTENHEFT_BAUFINAL.md` | nur §2 Sprachregeln | Melden, mit Rest fortfahren |
-| 8 | `konzepte/` (20 Dateien) | historische Quellen, **veraltete Preise und abgelöste Stacks** | Melden, mit Rest fortfahren |
+| 8 | `archiv/konzepte/` (20 Dateien) | historische Quellen, **veraltete Preise und abgelöste Stacks** | Melden, mit Rest fortfahren |
 
 ## Für den Websiteauftrag
 
@@ -37,7 +37,7 @@ merkt es, bevor gebaut wird.
 | 1 | `CODEX_AUFTRAG_WEBSITE.md` | die Anweisung selbst | — |
 | 2 | `CLAUDE_SARTU_WEBSITE_LASTENHEFT_BAUFINAL.md` | **Hauptdokument** — Struktur, fertige Texte, Felder, SEO, Abnahme | **Abbruch.** Nicht baubar |
 | 3 | `CLAUDE_SARTU_DESIGN_BRIEFING_AUSFUEHRUNG.md` | Vorgehen für die visuelle Ebene | Abbruch |
-| 4 | `CLAUDE_SARTU_WEBSITE_KONZEPT_FINAL.md` | Architektur und Begründungen | Melden, mit Rest fortfahren |
+| 4 | `archiv/CLAUDE_SARTU_WEBSITE_KONZEPT_FINAL.md` | Architektur und Begründungen | Melden, mit Rest fortfahren |
 | 5 | `CLAUDE_SARTU_MASTERKONZEPT_FINAL.md` | Geschäftsmodell, Preise, §10a, §16a | Abbruch |
 | 6 | `CLAUDE_SARTU_PORTAL_LASTENHEFT_BAUFINAL.md` | **§1 Stack, Struktur, Hosting** + §4b Anfrageeingang | **Abbruch.** Ohne §1 ist die Architektur unbekannt |
 | 7 | `SARTU_SEO_GEO_KEYWORDSTRATEGIE.md` | welche Seite welche Suchintention bedient, Baureihenfolge | **Abbruch.** Sonst entstehen Texte ohne Zielrichtung |
@@ -55,8 +55,8 @@ merkt es, bevor gebaut wird.
 | Was | Warum |
 |---|---|
 | `design/_verworfen/` | verworfene Entwürfe, keine Vorgabe, auch nicht als Anregung |
-| `konzepte/` **vollständig lesen** | ~360 KB historische Quellen mit veralteten Preisen und abgelösten Stacks. **Nur gezielt nachschlagen**, wenn eine bestimmte Frage es verlangt — nie vorsorglich am Anfang einlesen. Das kostet mehr Kontingent als alle Bauunterlagen zusammen und bringt nichts |
-| `CLAUDE_MARKTANALYSE_KRITIK_OPTIMIERUNG.md` | Bewertung vom 24.07.2026 für den Menschen, **keine Bauvorlage**. Enthält bewusst überholte Empfehlungen (alter Stack, alte Palette, alter Launch-Umfang) — sie dokumentieren die Entscheidungshistorie und sind im Dokument als `[ABGELÖST]` gekennzeichnet. **Wer daraus baut, baut einen überholten Stand.** |
+| `archiv/konzepte/` **vollständig lesen** | ~360 KB historische Quellen mit veralteten Preisen und abgelösten Stacks. **Nur gezielt nachschlagen**, wenn eine bestimmte Frage es verlangt — nie vorsorglich am Anfang einlesen. Das kostet mehr Kontingent als alle Bauunterlagen zusammen und bringt nichts |
+| `archiv/CLAUDE_MARKTANALYSE_KRITIK_OPTIMIERUNG.md` | Bewertung vom 24.07.2026 für den Menschen, **keine Bauvorlage**. Enthält bewusst überholte Empfehlungen (alter Stack, alte Palette, alter Launch-Umfang) — sie dokumentieren die Entscheidungshistorie und sind im Dokument als `[ABGELÖST]` gekennzeichnet. **Wer daraus baut, baut einen überholten Stand.** |
 
 ---
 
@@ -81,9 +81,9 @@ zulässt:
 | 5 | `CLAUDE_SARTU_WEBSITE_LASTENHEFT_BAUFINAL.md` | öffentliche Seiten, Struktur, Wortlaut |
 | 6 | `CLAUDE_SARTU_DESIGN_BRIEFING_AUSFUEHRUNG.md` | visuelle Ausführung |
 | 7 | `CLAUDE_SARTU_MASTERKONZEPT_FINAL.md` | Geschäftsmodell und Preise — **die Preistabelle ist die Quelle jeder Zahl** |
-| — | `CLAUDE_SARTU_WEBSITE_KONZEPT_FINAL.md` | **Nachschlagewerk, keine Bauvorlage.** §5 Sektionsdramaturgie ist ausdrücklich abgelöst |
-| — | `CLAUDE_MARKTANALYSE_KRITIK_OPTIMIERUNG.md` | Bewertung für den Menschen. Enthält als `[ABGELÖST]` markierte Empfehlungen |
-| — | `konzepte/` | historisch |
+| — | `archiv/CLAUDE_SARTU_WEBSITE_KONZEPT_FINAL.md` | **Nachschlagewerk, keine Bauvorlage.** §5 Sektionsdramaturgie ist ausdrücklich abgelöst |
+| — | `archiv/CLAUDE_MARKTANALYSE_KRITIK_OPTIMIERUNG.md` | Bewertung für den Menschen. Enthält als `[ABGELÖST]` markierte Empfehlungen |
+| — | `archiv/konzepte/` | historisch |
 
 **Zwei Regeln dazu:**
 

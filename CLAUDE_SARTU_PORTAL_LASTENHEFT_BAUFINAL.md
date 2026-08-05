@@ -8,7 +8,7 @@
 - `CLAUDE_SARTU_DESIGN_BRIEFING_AUSFUEHRUNG.md` — **wie die visuelle Ebene entsteht** (Farben/Schriften sind hier bewusst nicht vorgegeben)
 - `CLAUDE_SARTU_WEBSITE_LASTENHEFT_BAUFINAL.md` — Sprachregeln (§2) gelten unverändert auch hier
 
-**Nicht verwenden:** `design/_verworfen/` (verworfene Designentwürfe), veraltete Preise in `konzepte/`.
+**Nicht verwenden:** `design/_verworfen/` (verworfene Designentwürfe), veraltete Preise in `archiv/konzepte/`.
 
 ---
 

@@ -65,7 +65,7 @@ Festpreis plus eine Monatspauschale.
 | 7 | `design/tokens.css` | jede Farbe, jeder Radius, jeder Abstand |
 | 8 | `SARTU_TEXTREGELN.md` | wie jeder Text formuliert sein muss, mit Pflicht-Prüfbericht |
 
-**`konzepte/` nicht vorsorglich lesen.** 360 KB historische Quellen mit veralteten Preisen und
+**`archiv/konzepte/` nicht vorsorglich lesen.** 360 KB historische Quellen mit veralteten Preisen und
 abgelösten Stacks. Dort wird nur gezielt nachgeschlagen.
 
 ## 3. Startprüfung, einmal, dann läufst du

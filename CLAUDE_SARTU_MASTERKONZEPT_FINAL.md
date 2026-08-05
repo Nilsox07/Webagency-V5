@@ -1,9 +1,9 @@
 # SARTU – Masterkonzept (final, umsetzbar)
 
 **Erstellt von:** Claude (Opus) · **Stand:** 24.07.2026
-**Grundlage:** alle Konzeptdateien in `konzepte/` (Wahrheitsquelle: `GESCHAEFTSMODELL.md`, konkretisiert durch `SARTU_ANGEBOT_PORTAL_DETAILKONZEPT.md`, `SARTU_KONTAKTLOSER_VERTRIEB_LUMI_PORTAL.md`, `SARTU_DESIGNSYSTEM_PORTAL_ARCHITEKTUR.md`, `SARTU_WEBSEITENKONZEPT_FINAL_SEO_GEO.md`).
+**Grundlage:** alle Konzeptdateien in `archiv/konzepte/` (Wahrheitsquelle: `GESCHAEFTSMODELL.md`, konkretisiert durch `SARTU_ANGEBOT_PORTAL_DETAILKONZEPT.md`, `SARTU_KONTAKTLOSER_VERTRIEB_LUMI_PORTAL.md`, `SARTU_DESIGNSYSTEM_PORTAL_ARCHITEKTUR.md`, `SARTU_WEBSEITENKONZEPT_FINAL_SEO_GEO.md`).
 
-> Dieses Dokument ist die konsolidierte, widerspruchsbereinigte Bauvorlage für Website **und** Portal. Wo die Quelldateien sich widersprechen (drei Preisstände, drei Tech-Stacks, mehrere Paletten), trifft dieses Dokument eine Entscheidung und begründet sie. Die kritische Herleitung steht in `CLAUDE_MARKTANALYSE_KRITIK_OPTIMIERUNG.md`.
+> Dieses Dokument ist die konsolidierte, widerspruchsbereinigte Bauvorlage für Website **und** Portal. Wo die Quelldateien sich widersprechen (drei Preisstände, drei Tech-Stacks, mehrere Paletten), trifft dieses Dokument eine Entscheidung und begründet sie. Die kritische Herleitung steht in `archiv/CLAUDE_MARKTANALYSE_KRITIK_OPTIMIERUNG.md`.
 
 ---
 
@@ -491,7 +491,7 @@ Alle fachlich wichtigen Statuswechsel erzeugen ein **Audit-Ereignis**. Jobstatus
 >
 > **Warum PHP:** SARTU ist eine Website mit geschütztem Kundenbereich, keine App. Ein Projekt statt zwei bedeutet ein Deployment, eine Betriebsumgebung, ein Abhängigkeitsstand und **keine** Schnittstelle mit gemeinsamem Geheimnis. Für einen Betrieb, der von einer Person gepflegt wird, ist das die belastbarere Lösung. Der Preis: bei Mollie-Rückrufen und Domainprozessen (Stufe 1+) braucht es eine Umgebung mit stabilen eingehenden Aufrufen — ein einfaches Hosting-Paket reicht dafür meist nicht (Portal-Lastenheft §1.4).
 
-> **Template-Altlasten bewusst verworfen:** Folex Lite, ScrewFast, AstroWind, Studio Admin, Tailwind-Studio, Lume und shadcn-`dashboard-01` waren **Recherche-/Prototypenstände, keine Vorgabe**. Die Design-/Basisentscheidung wird frei und neu getroffen – siehe `CLAUDE_SARTU_WEBSITE_KONZEPT_FINAL.md`.
+> **Template-Altlasten bewusst verworfen:** Folex Lite, ScrewFast, AstroWind, Studio Admin, Tailwind-Studio, Lume und shadcn-`dashboard-01` waren **Recherche-/Prototypenstände, keine Vorgabe**. Die Design-/Basisentscheidung wird frei und neu getroffen – siehe `archiv/CLAUDE_SARTU_WEBSITE_KONZEPT_FINAL.md`.
 
 ### Deployment-Realität: was per FTP geht und was nicht
 
@@ -523,7 +523,7 @@ die belastbarere Wahl: Der Umzug ist ein Kopiervorgang, keine Neuentwicklung.
 
 ## 13. Eigene SARTU-Website – ausgelagert (Autoritätsregel)
 
-> **Für die eigene SARTU-Verkaufswebsite gilt ausschließlich `CLAUDE_SARTU_WEBSITE_KONZEPT_FINAL.md`.**
+> **Für die eigene SARTU-Verkaufswebsite gilt ausschließlich `archiv/CLAUDE_SARTU_WEBSITE_KONZEPT_FINAL.md`.**
 > Dort stehen verbindlich: Sitemap, Startseiten-Dramaturgie, Seitenkonzepte, Leistungsseiten, Ratgeber-/Lexikon-Startumfang, Content-Cluster, Bild- und Screenshotliste, Trust/FAQ und Abnahmekriterien. Die **fertigen Texte** stehen in `CLAUDE_SARTU_WEBSITE_LASTENHEFT_BAUFINAL.md`.
 >
 > **Gestaltung ist in keinem dieser Dokumente vorgegeben.** Farben, Schriften und Formen entstehen ausschließlich über `CLAUDE_SARTU_DESIGN_BRIEFING_AUSFUEHRUNG.md`.
@@ -536,7 +536,7 @@ die belastbarere Wahl: Der Umzug ist ein Kopiervorgang, keine Neuentwicklung.
 
 ## 14.–15. (verschoben) Startseite und Leistungsseiten
 
-Siehe `CLAUDE_SARTU_WEBSITE_KONZEPT_FINAL.md`, Abschnitte 4–6.
+Siehe `archiv/CLAUDE_SARTU_WEBSITE_KONZEPT_FINAL.md`, Abschnitte 4–6.
 
 ---
 
@@ -631,7 +631,7 @@ Siehe `CLAUDE_SARTU_WEBSITE_KONZEPT_FINAL.md`, Abschnitte 4–6.
 
 ## 17.–19. (verschoben) Ratgeber, Lexikon, Content-Cluster, Bild-/Screenshotkonzept
 
-Siehe `CLAUDE_SARTU_WEBSITE_KONZEPT_FINAL.md`, Abschnitte 7 und 9.
+Siehe `archiv/CLAUDE_SARTU_WEBSITE_KONZEPT_FINAL.md`, Abschnitte 7 und 9.
 **Korrigierter Startumfang: 3 Transparenzseiten, 2 Vergleichsartikel im Ratgeber-Bereich und 8 Lexikonbegriffe.** Die früher genannten 40–60 Begriffe bzw. 3–6 Ratgeber gelten **nicht** mehr für den Launch, sondern sind Stufe 2. **Die Transparenzseiten sind der Kern** — sie tragen den einzigen Sichtbarkeitsvorteil, den SARTU gegenüber etablierten Agenturen hat (`SARTU_SEO_GEO_KEYWORDSTRATEGIE.md` §3.4).
 
 **Weiterhin im Master gültig – Bildprinzip für Kundenwebsites:** echte Betriebs-, Team-, Projekt- und Produktbilder haben Vorrang; gezielt lizenzierte Bilder nur, wenn reale Motive fehlen; KI-Bilder nie als Dokumentation des Unternehmens. Keine austauschbaren Handschlag-/Laptop-/Callcenter-Stockbilder. Bildrechte und zulässige Verwendung werden **pro Datei im Portal bestätigt**.
@@ -640,7 +640,7 @@ Siehe `CLAUDE_SARTU_WEBSITE_KONZEPT_FINAL.md`, Abschnitte 7 und 9.
 
 ## 20. Designprinzipien (Kundenwebsites)
 
-> Die **Markenpalette, Typografie und Designrichtung der SARTU-Website** sind ausgelagert: `CLAUDE_SARTU_WEBSITE_KONZEPT_FINAL.md`, Abschnitt 3 (drei bewertete Richtungen zur finalen Entscheidung) und Abschnitt 10 (Website-Designsystem).
+> Die **Markenpalette, Typografie und Designrichtung der SARTU-Website** sind ausgelagert: `archiv/CLAUDE_SARTU_WEBSITE_KONZEPT_FINAL.md`, Abschnitt 3 (drei bewertete Richtungen zur finalen Entscheidung) und Abschnitt 10 (Website-Designsystem).
 
 Für die **Kundenwebsites** (das verkaufte Produkt) gilt das versionierte SARTU-Designsystem:
 
@@ -1003,7 +1003,7 @@ Kostet ~15 Minuten, positioniert SARTU als ehrlichen Fachmann und funktioniert n
 ## 24. Konkrete nächste Umsetzungsschritte
 
 **A. Fundament klären (diese Woche):**
-1. **Einen** Preis-/Scope-Stand als Single Source of Truth festlegen (`pricing.json`/`prices.js`) und `sartupaketepreise.md` + `sartulastenheftwebsite.md` in `konzepte/_archiv/` verschieben (als **veraltet** markieren) – gegen Wiederverwendung.
+1. **Einen** Preis-/Scope-Stand als Single Source of Truth festlegen (`pricing.json`/`prices.js`) und `sartupaketepreise.md` + `sartulastenheftwebsite.md` in `archiv/konzepte/_archiv/` verschieben (als **veraltet** markieren) – gegen Wiederverwendung.
 2. ~~Stack-Entscheidung~~ **entschieden:** ein modulares PHP-Projekt mit `/portal/` und `/admin/`, MySQL/MariaDB, serverseitig gerendert. Verbindlich: Portal-Lastenheft §1. Offen bleibt nur der konkrete Hosting-Anbieter (`SARTU_ENTSCHEIDUNGEN_OFFEN.md` §4).
 3. **Design-Briefing starten.** Jetzt schon festlegen: Ansprache „Sie", Verbotsliste und Anti-KI-Regeln als prüfbarer QA-Check. **Palette, Schrift und Logo erst nach der Variantenentscheidung** — sie vorher zu fixieren würde das Gate aushebeln, für das die Varianten überhaupt gebaut werden.
 
@@ -1033,8 +1033,8 @@ Kostet ~15 Minuten, positioniert SARTU als ehrlichen Fachmann und funktioniert n
 7. **Designrichtung final:** eine der 2–3 Varianten aus dem Design-Briefing. **Keine** Template-Basis — die Umsetzung ist immer ein eigenes PHP-Layout mit zentralen Variablen (`CLAUDE_SARTU_DESIGN_BRIEFING_AUSFUEHRUNG.md`).
 8. **Pilotkonditionen:** Werden 2–3 verdeckte Referenzslots angeboten – als Rabatt (5.900–6.500 € statt 7.900 €) oder als Zusatzwert zum vollen Preis?
 9. **Hosting-Anbieter und Tarif:** offen (`SARTU_ENTSCHEIDUNGEN_OFFEN.md` §4). Die Anforderungen stehen fest (Portal-Lastenheft §1.4). **Vor** der Umsetzung praktisch prüfen: Kommt eine Testmail im Posteingang an, nicht im Spam? Läuft ein Cronjob? Fehlt eines von beidem, ist der Tarif ungeeignet.
-10. **Eigenes finales Website-Lastenheft** vor dem Bau erstellen (empfohlen: ja – `CLAUDE_SARTU_WEBSITE_KONZEPT_FINAL.md` ist die Grundlage dafür).
+10. **Eigenes finales Website-Lastenheft** vor dem Bau erstellen (empfohlen: ja – `archiv/CLAUDE_SARTU_WEBSITE_KONZEPT_FINAL.md` ist die Grundlage dafür).
 
 ---
 
-*Ende Masterkonzept. Die kritische Bewertung und die Herleitung mit Quellen — **Stand 24.07.2026, teils überholt, nicht maßgeblich für den Bau** — stehen in `CLAUDE_MARKTANALYSE_KRITIK_OPTIMIERUNG.md`.*
+*Ende Masterkonzept. Die kritische Bewertung und die Herleitung mit Quellen — **Stand 24.07.2026, teils überholt, nicht maßgeblich für den Bau** — stehen in `archiv/CLAUDE_MARKTANALYSE_KRITIK_OPTIMIERUNG.md`.*

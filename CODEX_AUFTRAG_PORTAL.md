@@ -157,7 +157,7 @@ Screenshots aus dieser Oberfläche (Abschnitt 7a); gezeichnete Attrappen sind au
 4. **`CLAUDE_SARTU_MASTERKONZEPT_FINAL.md`** im Übrigen — nur nachschlagen: Portalvision, Einführungskonzept, Stufenmodell, Datenmodell
 5. `CLAUDE_SARTU_WEBSITE_LASTENHEFT_BAUFINAL.md` — nur §2 (Sprachregeln), die auch hier gelten
 6. **`SARTU_ENTSCHEIDUNGEN_OFFEN.md`** — alle Platzhalter und Sperren
-7. `konzepte/` — historische Quellen. **Nur nachschlagen**, enthält veraltete Preise und abgelöste Modelle
+7. `archiv/konzepte/` — historische Quellen. **Nur nachschlagen**, enthält veraltete Preise und abgelöste Modelle
 8. `design/_verworfen/` — **ignorieren**
 
 > **Zu Abschnittsverweisen:** Im Lastenheft stehen Paragraphenzeichen wie `§4b`. Sie sind eine

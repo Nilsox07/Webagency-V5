@@ -37,7 +37,7 @@
 ## 2. Die Wortmarke
 
 **Bis eine Bildmarke entschieden ist, gilt die reine Wortmarke.** Das ist eine gültige Lösung und
-kein Zwischenstand — so festgehalten in `CLAUDE_SARTU_WEBSITE_KONZEPT_FINAL.md`.
+kein Zwischenstand — so festgehalten in `archiv/CLAUDE_SARTU_WEBSITE_KONZEPT_FINAL.md`.
 
 ### Klein — Kopfzeile, Absender, Signatur
 

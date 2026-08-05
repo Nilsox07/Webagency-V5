@@ -53,6 +53,21 @@ Container liegt das Projekt unter `/var/www/html`. `.env` wird nie committet.
 Tests. Die Tests leeren Tabellen. Tests gegen SQLite sind ausdrücklich verboten
 (Portal-Lastenheft §16) — SQLite verhält sich bei Transaktionen und Fremdschlüsseln anders.
 
+## Wo die Spezifikation steht
+
+**`spezifikation/` ist seit 03.08.2026 die geltende Fassung** — ein Thema, eine Datei, eine
+Wahrheit. Einstieg: **`spezifikation/00_UEBERSICHT.md`**. Dort steht auch das
+**Dublettenregister**: wo dieselbe Sache früher mehrfach mit abweichenden Werten stand, welche
+Fassung gilt und warum.
+
+Die alten Lastenhefte bleiben liegen. Sie tragen die **Begründungsblöcke** („Ersetzt am
+01.08.2026, weil …"), die verhindern, dass eine zurückgezogene Fassung wieder eingebaut wird.
+Wo eine Themendatei noch feldgenaue Restvorgaben in ihrer Quelle lässt, sagt sie das in ihrem
+Schlussabschnitt.
+
+**Abgelöst und nach `archiv/` verschoben:** das alte Website-Konzept, die Marktanalyse und
+`archiv/konzepte/`. Begründung je Datei in `archiv/LIESMICH.md`.
+
 ## Rangfolge der Dokumente
 
 Bei **jedem** Widerspruch gilt diese Reihenfolge. Sie steht allein in `UEBERGABE_DATEILISTE.md`;
@@ -72,7 +87,7 @@ Sechs Dateien tragen „FINAL" im Namen; das sagt nichts über ihr Alter. Widers
 Stellen **im selben** Dokument, gilt die mit der Begründung — steht bei keiner eine, **melden**,
 nicht auswählen.
 
-`konzepte/` (~360 KB) und `CLAUDE_MARKTANALYSE_KRITIK_OPTIMIERUNG.md` sind historisch: veraltete
+`archiv/konzepte/` (~360 KB) und `archiv/CLAUDE_MARKTANALYSE_KRITIK_OPTIMIERUNG.md` sind historisch: veraltete
 Preise, abgelöste Stacks. **Nie vorsorglich einlesen**, nur gezielt nachschlagen.
 `design/_verworfen/` ist auch als Anregung tabu.
 

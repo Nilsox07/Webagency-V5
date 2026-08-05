@@ -350,7 +350,7 @@ Geschäftsentscheidung mit Aufwand und Außenwirkung — keine Gestaltungsfrage.
 
 | Datei | Stelle |
 |---|---|
-| `CLAUDE_SARTU_WEBSITE_KONZEPT_FINAL.md` | Bildliste, `nils-arbeitsbild.webp` |
+| `archiv/CLAUDE_SARTU_WEBSITE_KONZEPT_FINAL.md` | Bildliste, `nils-arbeitsbild.webp` |
 | `CLAUDE_SARTU_WEBSITE_LASTENHEFT_BAUFINAL.md` §15 | Bildliste, `sartu-portrait.webp` |
 
 Bildbeschreibungen sind öffentlich. Sie stehen im Quelltext, werden vorgelesen und von

@@ -10,7 +10,7 @@ auf der die Zusammenführung aufsetzt.
 | | Dateien | Zeilen |
 |---|---:|---:|
 | Wurzelverzeichnis | 39 | **15.397** |
-| `konzepte/` (laut `CLAUDE.md` historisch) | 20 | 8.299 |
+| `archiv/konzepte/` (laut `CLAUDE.md` historisch) | 20 | 8.299 |
 | `design/`, `.claude/` | 5 | 1.191 |
 | **gesamt** | **64** | **24.887** |
 
@@ -83,64 +83,25 @@ werden.
 `ABSCHLUSSBERICHT.md` · `MESSUNGEN.md` · `STAND.md` · `TEXTPRUEFUNG_WEBSITE.md` ·
 `KEYWORD_VALIDATION.md` · `OFFENE_ENTSCHEIDUNGEN.md`
 
-### D — Abgelöst: ins Archiv (710 Z. + `konzepte/`)
+### D — Abgelöst: ins Archiv (710 Z. + `archiv/konzepte/`)
 
 | Datei | Z. | warum |
 |---|---:|---|
-| `CLAUDE_SARTU_WEBSITE_KONZEPT_FINAL.md` | 308 | vom Website-Lastenheft abgelöst |
-| `CLAUDE_MARKTANALYSE_KRITIK_OPTIMIERUNG.md` | 402 | `CLAUDE.md` führt sie ausdrücklich als historisch |
-| `konzepte/` | 8299 | `CLAUDE.md`: „historisch: veraltete Preise, abgelöste Stacks" |
+| `archiv/CLAUDE_SARTU_WEBSITE_KONZEPT_FINAL.md` | 308 | vom Website-Lastenheft abgelöst |
+| `archiv/CLAUDE_MARKTANALYSE_KRITIK_OPTIMIERUNG.md` | 402 | `CLAUDE.md` führt sie ausdrücklich als historisch |
+| `archiv/konzepte/` | 8299 | `CLAUDE.md`: „historisch: veraltete Preise, abgelöste Stacks" |
 
 ---
 
-## Die Gliederung der neuen Datei
+## Ergebnis
 
-```
-SARTU_SPEZIFIKATION.md
+Umgesetzt wurde **nicht** ein Monolith, sondern **ein Thema, eine Datei, eine Wahrheit** unter
+`spezifikation/` — 17 Dateien, 1.729 Zeilen, Einstieg über `spezifikation/00_UEBERSICHT.md`.
 
-TEIL 0 — Gemeinsame Grundlage
-  Geschäftsmodell · Positionierung · Zielgruppe · Preise (die einzige Quelle jeder Zahl)
-  Textregeln · Corporate Design · Designsystem · Belege
+Der Grund für die Abkehr vom Monolithen: Das Problem war nie die **Zahl** der Dateien, sondern
+dass dieselbe Sache in dreien mit drei Werten stand. Themendateien mit klarem Besitzer lösen
+das; eine 7.100-Zeilen-Datei hätte es nur umgezogen.
 
-TEIL 1 — WAS DER KUNDE KAUFT   (Kundenwebsites)
-  Leistungsumfang je Paket · Rundum-Schutz · Domain/Hosting/E-Mail
-  SEO-/GEO-Startsystem · Designprinzipien Kundenwebsites · Recht und Vertrag
-  Quellen: Masterkonzept §4 §6 §16 §20 §22, GEO_DISCOVERY_CHECKLIST
-
-TEIL 2 — WAS SARTU FÜR SICH BAUT   (sartu.de)
-  2a Öffentliche Website — alle Seiten, Sektion für Sektion
-  2b Kundenbereich — Screen für Screen, Datenmodell, Status, Sicherheit
-  2c Adminbereich
-  2d SEO/GEO der eigenen Seite — Keywordstrategie, URL-Liste
-  Quellen: Website-Lastenheft, Portal-Lastenheft, Keywordstrategie, Masterkonzept §13
-
-TEIL 3 — Offene Entscheidungen und Platzhalter
-```
-
----
-
-## Eine Grenze, die ich benennen muss
-
-**„Alle Inhalte aus allen Dateien" in **einer** Datei ergibt eine Datei mit rund 7.100 Zeilen.**
-Das Problem der Unauffindbarkeit wäre damit nicht gelöst, nur umgezogen.
-
-Der Grund ist nicht Faulheit: Die Lastenhefte bestehen zur Hälfte aus **Begründungsblöcken**
-(„Ersetzt am 01.08.2026, weil …"). Die sind wertvoll — sie haben mich diese Sitzung mehrfach
-davor bewahrt, eine zurückgezogene Fassung wieder einzubauen — aber sie sind kein Bauwissen.
-
-**Zwei Wege, und das ist die Entscheidung:**
-
-| | Vollständige Zusammenführung | Kanonische Spezifikation |
-|---|---|---|
-| Ergebnis | **eine** Datei, ~7.100 Zeilen | **eine** Datei, ~2.500 Zeilen |
-| Inhalt | alles, auch jede Begründung | jede verbindliche Regel, Zahl, Tabelle, Textvorgabe |
-| Begründungen | drin | bleiben in den Quellen, mit Verweis |
-| Quellen danach | Archiv | bleiben lesbar, sind aber nicht mehr maßgeblich |
-| Widersprüche | **aufgelöst** | **aufgelöst** |
-| Auffindbarkeit | mäßig | gut |
-
-Beide lösen Ihr eigentliches Problem — dass in jeder Datei etwas anderes steht. Der Unterschied
-ist nur, ob die Begründungen mitwandern.
-
-**Runde 2 (Zusammenführen) und Runde 3 (Vollständigkeitsprüfung) folgen, sobald das entschieden
-ist.**
+**Runde 2** hat zusammengeführt, **Runde 3** hat gegengeprüft: sieben echte Dubletten gefunden
+und aufgelöst, zwei bewusste Kopplungen markiert, alle 17 Dateien verweisen aufeinander.
+Register und Begründungen: `spezifikation/00_UEBERSICHT.md`.

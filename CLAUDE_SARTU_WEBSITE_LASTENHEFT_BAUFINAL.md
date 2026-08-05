@@ -3,7 +3,7 @@
 **Stand:** 24.07.2026 · **Zweck:** Umsetzungsreifes Briefing für die **eigene SARTU-Website**. Wer dieses Dokument hat, kann bauen — ohne Rückfragen zu Texten, Struktur, Feldern oder Verhalten.
 
 **Gilt zusammen mit:**
-- `CLAUDE_SARTU_WEBSITE_KONZEPT_FINAL.md` – Architektur, Seitenkonzepte, Begründungen
+- `archiv/CLAUDE_SARTU_WEBSITE_KONZEPT_FINAL.md` – Architektur, Seitenkonzepte, Begründungen
 - `CLAUDE_SARTU_MASTERKONZEPT_FINAL.md` – Geschäftsmodell, Preise, Portal, Recht
 - `CLAUDE_SARTU_DESIGN_BRIEFING_AUSFUEHRUNG.md` – wie die visuelle Ebene recherchiert und ausgewählt wird
 
@@ -230,7 +230,7 @@ Fünf Spalten auf Desktop, gestapelt auf Mobil (Reihenfolge wie unten).
 **Title (54 Z.):** `Firmenwebsite zum Festpreis für regionale Betriebe | SARTU`
 
 > **Geändert am 30.07.2026.** Vorher: `Firmenwebsite zum Festpreis, ohne WordPress | SARTU`. Das
-> verstieß gegen die eigene Positionierung — `CLAUDE_MARKTANALYSE_KRITIK_OPTIMIERUNG.md` sagt
+> verstieß gegen die eigene Positionierung — `archiv/CLAUDE_MARKTANALYSE_KRITIK_OPTIMIERUNG.md` sagt
 > ausdrücklich: *„Nicht ‚ohne WordPress' plakatieren; Entlastung verkaufen."* Ein Meta-Titel ist die
 > plakativste Stelle, die es gibt. Dazu kam: Das Abgrenzungsmerkmal stand im Titel, die Zielgruppe
 > nicht.

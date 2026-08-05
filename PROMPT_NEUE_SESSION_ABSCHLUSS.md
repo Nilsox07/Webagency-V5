@@ -34,7 +34,7 @@ Verfügbar sind `claude-opus-5`, `claude-sonnet-5` und `claude-haiku-4-5-2025100
 | Kundenbereich | Anmeldung per Link bis Abnahme und Onlinegang |
 
 **Lies zuerst:** `STAND.md` · `OFFENE_ENTSCHEIDUNGEN.md` · `OFFENE_PRUEFUNGEN.md`.
-Danach gezielt, was du brauchst. **`konzepte/` bleibt zu.**
+Danach gezielt, was du brauchst. **`archiv/konzepte/` bleibt zu.**
 
 ### Als Erstes: die Zweige zusammenführen
 

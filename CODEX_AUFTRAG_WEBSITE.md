@@ -157,11 +157,11 @@ Lies in dieser Reihenfolge.
 2. **`CLAUDE_SARTU_MASTERKONZEPT_FINAL.md`, Abschnitt „10a. Arbeitsverteilung Codex ↔ Claude Code"** — **verbindlich**, siehe Abschnitt 2a
 3. **`CLAUDE_SARTU_DESIGN_BRIEFING_AUSFUEHRUNG.md`** — wie du die visuelle Ebene recherchierst, prüfst und vorlegst
 4. **`CLAUDE_SARTU_PORTAL_LASTENHEFT_BAUFINAL.md`** — §1 (Stack, Struktur, Hosting) und Abschnitt „4b. Anfrageeingang vom Bedarfsscheck". **Beide verbindlich**
-5. **`CLAUDE_SARTU_WEBSITE_KONZEPT_FINAL.md`** — Begründungen und Architektur, wenn etwas unklar ist
+5. **`archiv/CLAUDE_SARTU_WEBSITE_KONZEPT_FINAL.md`** — Begründungen und Architektur, wenn etwas unklar ist
 6. **`CLAUDE_SARTU_MASTERKONZEPT_FINAL.md`** im Übrigen — Geschäftsmodell, Preise, Recht. Nur nachschlagen
 7. **`SARTU_SEO_GEO_KEYWORDSTRATEGIE.md`** — welche Seite welche Suchintention bedient, in welcher Reihenfolge gebaut wird
 8. **`SARTU_ENTSCHEIDUNGEN_OFFEN.md`** — alle Platzhalter und Sperren
-9. `konzepte/` — historische Quelldateien. **Nur zum Nachschlagen.** Enthalten veraltete Preise und abgelöste Modelle
+9. `archiv/konzepte/` — historische Quelldateien. **Nur zum Nachschlagen.** Enthalten veraltete Preise und abgelöste Modelle
 10. `design/_verworfen/` — **ignorieren.** Verworfene Entwürfe, keine Vorgabe, auch nicht als Anregung
 
 > **Zu Abschnittsverweisen:** Paragraphenzeichen wie `§9.5b` sind eine Abkürzung, kein Beweis.
