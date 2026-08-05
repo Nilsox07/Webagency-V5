@@ -102,13 +102,29 @@ Angebot im Kundenbereich · Annahme und erste Zahlung · Domain und Einrichtung 
 Prüfung · Vorschau, Feedback, Abnahme · Launch und Betrieb
 
 > **Warum hier acht Schritte stehen und auf der Startseite sechs.** Dieselbe Strecke, zwei
-> Auflösungen: Die Startseite fasst Prüfung und Angebot zusammen und nennt Zahlung und
-> Einrichtung nicht einzeln, weil dort der Überblick zählt. **Beide Listen sind richtig und
-> werden nicht angeglichen** — wer sie vereinheitlicht, macht die eine zu lang oder die andere
-> zu grob.
+> Auflösungen. **Beide Listen sind richtig und werden nicht angeglichen** — wer sie
+> vereinheitlicht, macht die eine zu lang oder die andere zu grob. Geprüft am 05.08.2026,
+> Schritt für Schritt:
 >
-> **Die Reihenfolge muss übereinstimmen.** Ein Schritt, der hier vor einem anderen steht, steht
-> auch auf der Startseite vorher.
+> | `/ablauf` | Startseite |
+> |---|---|
+> | Bedarfsscheck | Bedarfsscheck |
+> | unsere Prüfung **+** Angebot im Kundenbereich | Geprüftes Angebot |
+> | **Annahme und erste Zahlung** | *— kommt dort nicht vor* |
+> | Domain und Einrichtung | Ihre Angaben |
+> | Produktion mit Prüfung | Produktion |
+> | Vorschau, Feedback, Abnahme | Vorschau und Freigabe |
+> | Launch und Betrieb | Start und Betrieb |
+>
+> **Die Reihenfolge stimmt überein, die Abdeckung nicht ganz:** Die Startseite nennt die
+> **Zahlung als Schritt nicht**. Sie erwähnt den Zahlungsplan nur als Bestandteil des Angebots.
+> Fachlich gilt aber: **ohne bestätigten Zahlungseingang beginnt das Briefing nicht**
+> (`11_KUNDENBEREICH.md`) — und der Lieferkorridor läuft erst danach.
+>
+> **Offen, Entscheidung nötig:** Ob die Startseite die Zahlung als eigenen Schritt aufnimmt und
+> damit sieben statt sechs zeigt, oder ob Schritt 2 sie in den Satz mitnimmt. **Nicht selbst
+> entscheiden** — die sechs Schritte sind eine abgenommene Gestaltungsentscheidung. Siehe
+> `OFFENE_PRUEFUNGEN.md`.
 
 **Was der Kunde tun muss — `gebunden`, fünf Punkte:** Fakten bestätigen · Material hochladen ·
 Domain bestätigen · Vorschau prüfen · freigeben

@@ -249,16 +249,31 @@ Knopf `gebunden`: `Portal öffnen`
 > `Überfällig seit {Datum} — offen: {Restbetrag}`. **Maßgeblich für die Erinnerung ist der
 > Restbetrag, nicht der Status.**
 
-### Zahlungserinnerung — der tägliche Lauf
+### Der tägliche Lauf — vollständig
 
-| Wann | Was |
-|---|---|
-| `due_date` überschritten, Restbetrag > 0, `reminder_sent_at` leer | **eine** Mail an den Kunden, `reminder_sent_at` setzen |
-| **7 Tage** nach `reminder_sent_at`, Restbetrag weiterhin > 0, `reminder2_sent_at` leer | **zweite** Mail, zusätzlich Hinweis an den Admin, `reminder2_sent_at` setzen |
-| danach | **keine weitere automatische Mail.** Ab hier entscheidet ein Mensch |
+**Ein Lauf, sechs Aufgaben.** Er ist die einzige Stelle, an der ohne menschliches Zutun etwas
+passiert — deshalb steht hier abschließend, **was** er tut.
+
+| # | Bedingung | Was |
+|---|---|---|
+| 1 | `due_date < heute` **und** `paid_cents < gross_cents` | Rechnung auf `ueberfaellig` setzen |
+| 2 | `due_date` überschritten, Restbetrag > 0, `reminder_sent_at` leer | **eine** Mail an den Kunden, `reminder_sent_at` setzen |
+| 3 | **7 Tage** nach `reminder_sent_at`, Restbetrag weiterhin > 0, `reminder2_sent_at` leer | **zweite** Mail, zusätzlich Hinweis an den Admin, `reminder2_sent_at` setzen |
+| 4 | Angebot mit `status = gesendet`, `valid_until` in **3 Tagen** | Mail an den Kunden. **Einmal je Angebot** |
+| 5 | Aufbewahrungsfristen erreicht | Löschläufe für Anfragen, Uploads und `source_ip` — `09_ANFRAGEEINGANG.md` |
+| 6 | Angebot mit `valid_until < heute` | `offers.status = abgelaufen` |
+
+**Jeder Schritt ist wiederholsicher.** Ein zweiter Lauf am selben oder am Folgetag darf **nichts
+doppelt** tun — deshalb die `*_sent_at`-Marken. Testfall 78 prüft genau das.
 
 > **Kein Mahnwesen.** Zwei Erinnerungen, dann übernimmt der Mensch. Mahnstufen, Gebühren und
 > Zinsen bleiben Stufe C.
+
+> **Schritt 4 und 6 ergänzt am 05.08.2026.** Der Abgleich der 24 E-Mail-Auslöser gegen die
+> auslösenden Ereignisse zeigte: Die Mail „Ihr Angebot gilt noch bis {Datum}" stand in der Liste,
+> **aber kein Lauf und kein Übergang hätte sie je ausgelöst.** Dasselbe für den Ablauf selbst —
+> `offers.status = abgelaufen` war ein Zustand ohne Weg dorthin. Ein Angebot wäre stillschweigend
+> verfallen.
 
 ### Ableitung „Nächster Schritt"
 

@@ -51,8 +51,15 @@ Alles in Abschnitten auf **einer** Seite:
   sperren kann**, stehen in `11_KUNDENBEREICH.md`
 - **Rechnungen** — Anlegen mit Nummer, Meilenstein, Beträgen, Fälligkeit, Feld
   `Mollie-Zahlungslink`. Aktionen `Senden` und `Als bezahlt markieren` **mit Pflicht-Bestätigung**
+  und Pflichtfeld `reason`. Dazu **`Zahlung zurücknehmen`** als **eigene** protokollierte Aktion —
+  ebenfalls mit `reason`, und sie **benachrichtigt den Kunden** (`11_KUNDENBEREICH.md`).
+  **Kein stilles Zurücksetzen des Status**
 - **Aufgaben** — einzeln oder **aus Vorlage**, sortierbar, bearbeitbar, deaktivierbar. Anzeige der
-  Kundenantworten und Dateien mit Download
+  Kundenantworten und Dateien mit Download. Knopf **`Aufgaben freigeben`** stellt sie dem Kunden
+  zu und **verschickt die Mail „Es liegen Aufgaben für Sie bereit"** — angelegte Aufgaben sind
+  bis dahin für den Kunden **nicht sichtbar**
+- **Öffnungszeiten** — wartende Änderungen des Kunden mit Knopf `Veröffentlichen`. Setzt
+  `pending_publish = false` und verschickt die Bestätigungsmail an den Kunden
 - **Vorschau** — Feld `Vorschau-URL`, Knopf `Vorschau bereitstellen` (setzt Status `vorschau`,
   öffnet **zugleich** eine neue Korrekturrunde, verschickt E-Mail)
 - **Korrekturrunden** — Liste mit Nummer, Status, Zeitpunkten und Kennzeichen

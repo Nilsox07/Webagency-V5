@@ -800,13 +800,31 @@ Alle vier Lastenhefte sind ausgewertet; keine Themendatei liest noch Bauwissen a
 
 **Was daran ungeprüft ist — und womit es zu prüfen wäre:**
 
+### Ausgeführt und bestanden
+
+| Prüfung | Ergebnis |
+|---|---|
+| **Testfallnummern gegen `REIHENFOLGE.md`** | **88 = 88, keine Abweichung in beide Richtungen.** Die Stufenverteilung aus der Zuordnungstabelle gerechnet: A0 26 · A1 34 · A2 21 · A3 6 · B 1 · C 0 — **deckungsgleich** mit der Tabelle in `15_TESTFAELLE.md` |
+| **Alle Dateiverweise zwischen den 18 Themendateien** | **alle treffen**, kein toter Verweis |
+| **Schrittfolge `/ablauf` gegen Startseite** | **Reihenfolge stimmt überein.** Die Abdeckung nicht ganz — siehe Befund unten |
+
+### Ausgeführt und **nicht** bestanden — behoben
+
+| Befund | Behebung |
+|---|---|
+| Von 24 E-Mail-Auslösern hatten **drei kein auslösendes Ereignis**: „Es liegen Aufgaben für Sie bereit", „Ihre Öffnungszeiten sind aktualisiert", „Ihr Angebot gilt noch bis {Datum}" | `12_ADMINBEREICH.md`: Knöpfe `Aufgaben freigeben` und `Veröffentlichen` ergänzt. `11_KUNDENBEREICH.md`: der tägliche Lauf vollständig beschrieben, **sechs** Aufgaben statt zwei |
+| `offers.status = abgelaufen` war ein **Zustand ohne Weg dorthin** — ein Angebot wäre stillschweigend verfallen | Schritt 6 des täglichen Laufs setzt ihn |
+| `Zahlung zurücknehmen` war als E-Mail und als Testfall 54 vorhanden, **aber nicht als Adminaktion** | in `12_ADMINBEREICH.md` als eigene protokollierte Aktion mit `reason` ergänzt |
+| Der **Pflichthinweis zur Preisnennung** stand in **drei** Fassungen im Umlauf | `08_TEXTREGELN.md` legt genau zwei fest, lang und kurz; alle anderen Stellen verweisen nur noch |
+| Die **Rangfolge** in `UEBERGABE_DATEILISTE.md` führte die vier Lastenhefte auf den Rängen 4 bis 7 — **gegen `CLAUDE.md`** | `spezifikation/` auf Rang 4, Lastenhefte als Begründungsarchiv ohne Rang |
+
+### Noch offen
+
 | Befund | ungeprüft | Prüfmittel |
 |---|---|---|
-| Die 88 Testfälle stehen jetzt in `15_TESTFAELLE.md` mit **unveränderter Nummerierung** | ob `REIHENFOLGE.md` je Stufe **exakt dieselben Nummern** führt | Abgleich der Nummernmengen beider Dateien, Zeile für Zeile |
-| `11_KUNDENBEREICH.md` führt **25 E-Mail-Auslöser** | ob jeder Auslöser einen Statusübergang oder Lauf hat, der ihn tatsächlich auslöst | Abgleich Auslöserliste gegen Übergangstabelle und täglichen Lauf |
-| `17_SEITEN_SARTU.md` nennt **acht Schritte** auf `/ablauf`, `10_WEBSITE_SARTU.md` **sechs** auf der Startseite | ob die Reihenfolge beider Listen wirklich deckungsgleich ist | nebeneinanderlegen, Schritt für Schritt |
-| Die Startsperre hat **neun** Bedingungen | ob Testfall 66 alle neun abdeckt — er nennt nur zwei | Testfall gegen die Bedingungsliste stellen |
-| Dublettenprüfung lief über **13 Zahlenwerte** und alle Dateiverweise | ob es Dubletten in **Formulierungen** gibt, die keine Zahl enthalten | Textabgleich über alle 18 Dateien |
+| Die **Startsperre** hat neun Bedingungen | ob **Testfall 66** alle neun abdeckt — er nennt nur zwei | Testfall gegen die Bedingungsliste stellen. **Vermutlich muss der Fall geteilt werden**, wie 53 → 53a/53b |
+| Die Dublettenprüfung lief über **13 Zahlenwerte** und alle Dateiverweise | ob es Dubletten in **Formulierungen** ohne Zahl gibt | Textabgleich über alle 18 Dateien |
+| Die Startseite nennt die **Zahlung nicht als Schritt**, `/ablauf` schon | ob die sechs Schritte um die Zahlung ergänzt werden sollen | **Entscheidung des Auftraggebers.** Die sechs Schritte sind eine abgenommene Gestaltungsentscheidung — nicht selbst ändern |
 
 **Nicht ausgeführt:** Es wurde keine Zeile Anwendungscode gebaut und kein Test ausgeführt. Diese
 Sitzung hat ausschließlich Spezifikation zusammengeführt.
