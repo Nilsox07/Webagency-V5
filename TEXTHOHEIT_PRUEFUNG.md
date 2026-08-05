@@ -136,20 +136,51 @@ in drei Angaben je Textstelle:
 |---|---|
 | **Aufgabe** | was der Leser danach wissen oder tun können muss |
 | **Grenze** | was der Text nicht behaupten, nicht auflösen, nicht erfinden darf |
-| **Maßstab** | die bisherige, geprüfte Fassung — **Ziel, nicht Vorlage** |
+| **Umfang** | die messbare Schranke — Wörter, Sätze, Glieder |
+
+### Nachbesserung am selben Tag — der Maßstab musste weg
+
+Der erste Wurf ließ die geprüfte Fassung als *Maßstab* neben dem Auftrag stehen, überschrieben
+mit „Ziel, nicht Vorlage". **Das trug nicht.** Ein fertiger, freigegebener Satz direkt unter
+seiner eigenen Aufgabe wird übernommen, nicht getroffen — die Umstellung hätte genau das
+verloren, wofür sie gemacht wurde. Der Einwand kam vom Auftraggeber und ist berechtigt.
+
+**Was an die Stelle trat:**
+
+| statt | jetzt |
+|---|---|
+| der geprüfte Satz | **Umfang** — die an ihm gemessene Wort-, Satz- und Gliedgrenze |
+| Wortlaut als Vorbild | **Kalibrierung im Skill** — vier tragende und fünf verworfene Sätze **mit Begründung**, warum sie tragen oder scheiterten |
+
+Der Unterschied ist der entscheidende: Eine Wortgrenze lässt sich prüfen, aber nicht
+abschreiben. Eine begründete Kalibrierung lässt sich verstehen, aber nicht kopieren — sie steht
+nicht neben der Stelle, an der sie gebraucht wird.
+
+**Wo Sachinhalt im Maßstab steckte, wanderte er in den Auftrag**, nicht ins Archiv: die sechs
+Ablaufschritte behalten ihre Titel und bekommen je eine Spalte *„was der Satz tragen muss"*, die
+acht Leistungszeilen behalten Titel und Tags, die vierzehn Einträge im Kundenbereich behalten den
+Vorgang. **Gebunden ist der Umfang der Leistung, geschrieben wird ihre Benennung.**
+
+Die abgelegten Fassungen stehen in `archiv/STARTSEITE_WORTLAUT_2026-08.md`, dort mit dem
+Vermerk **als Vorlage tabu** — dieselbe Sperre wie bei `design/_verworfen/`.
 
 **Ergebnis, gezählt:**
 
 | | Anzahl |
 |---|---:|
-| Textstellen von Wortlaut auf **Auftrag** umgestellt | **22** |
-| davon mit **Grenze** | 22 |
-| davon mit **Maßstab** (bisherige Fassung erhalten) | 18 |
-| ausdrücklich **`gebunden`** geblieben | 11 |
-| **verworfene** Fassungen als Warnung dokumentiert | 6 |
+| Textstellen als **Auftrag** notiert | **25** |
+| davon mit **Grenze** | 25 |
+| davon mit **Umfang** (messbare Schranke) | 24 |
+| davon mit **Beispielsatz** | **0** |
+| ausdrücklich **`gebunden`** geblieben | 17 Stellen |
+| **verworfene** Fassungen als Warnung dokumentiert | 7 |
 
-Geprüft: Alle **vier Positionierungssätze** sind weiterhin als `gebunden` markiert. Keine H1,
-H2 oder Eyebrow steht mehr als bloße Vorschrift ohne Auftrag.
+Geprüft am fertigen Dokument: Die **vier Positionierungssätze** sind die **einzigen** wörtlich
+vorgeschriebenen Sätze, die noch dastehen — jeder als `gebunden` markiert. Keine H1, H2,
+Eyebrow, Einleitung oder Antwort steht mehr als Wortlaut.
 
-**Der bisherige Wortlaut ist nirgends verloren** — er steht als *Maßstab* neben dem Auftrag.
-Damit bleibt er messbar, ohne den Skill zu ersetzen. Ab jetzt schreibt der Skill.
+**Was verworfen wurde, bleibt sichtbar.** Die sieben Warnblöcke stehen weiter an ihrer Stelle,
+nicht im Archiv: eine Warnung wirkt nur dort, wo der Fehler droht. Sie sind das Gegenteil einer
+Vorlage — niemand schreibt eine Fassung ab, neben der steht, woran sie gescheitert ist.
+
+Ab jetzt schreibt der Skill.

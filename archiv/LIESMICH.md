@@ -10,6 +10,7 @@ Hierher wandert nur, was **nachweislich abgelöst** ist — nicht, was alt aussi
 | `CLAUDE_SARTU_WEBSITE_KONZEPT_FINAL.md` | 308 | vollständig vom Website-Lastenheft abgelöst; führte zudem nur einen Teil der Preise |
 | `CLAUDE_MARKTANALYSE_KRITIK_OPTIMIERUNG.md` | 402 | `CLAUDE.md` führte sie bereits als historisch. Enthält die **ungültigen** Preise 1.290/2.990/5.990 |
 | `konzepte/` | 8.299 | `CLAUDE.md`: „historisch: veraltete Preise, abgelöste Stacks". Nie vorsorglich einlesen |
+| `STARTSEITE_WORTLAUT_2026-08.md` | 96 | **Als Vorlage tabu**, wie `design/_verworfen/`. Der wörtliche Startseitentext vom 01.08.2026. Am 03.08.2026 abgelegt, weil ein fertiger Satz neben dem Auftrag abgeschrieben statt getroffen wird. Was zählt, steht als Wortgrenze in `spezifikation/10_WEBSITE_SARTU.md` |
 
 ## Warum nicht mehr archiviert wurde
 
