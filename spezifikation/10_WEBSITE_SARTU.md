@@ -422,6 +422,20 @@ wird geschrieben.**
 **Alle Zahlen und Merkmale: `gebunden`** — `02_PREISE_UND_ZAHLUNG.md`. Die Zahl steht **zuerst**,
 vor der Zielgruppe: sie ist das, was der Leser vergleichen kann.
 
+**Darstellung: alle vier Stufen nebeneinander.** Sonderprojekt stand als Querblock **unter** den
+drei Paketen, obwohl §4 es als vierte Stufe mit eigenem Knopf führt. Möglich wurde die vierte
+Spalte durch den fließenden Satzspiegel (`07_MARKE_UND_GESTALTUNG.md`): bei `--wrap: 1800`
+sind es **407 px je Karte**, bei 1380 noch **302 px**. Unter 1180 px greift der Zweisatz, unter
+760 px die Einzelspalte.
+
+**Sonderprojekt ist sichtbar kein Paket** — gestrichelte Kante statt Papierfläche. Die
+Pflichtzeile bleibt direkt unter seinem Knopf.
+
+> **Offen gegen `02_PREISE_UND_ZAHLUNG.md`:** Dort steht, Platzhirsch habe die **größte Fläche**.
+> Vier gleiche Spalten geben ihm dieselbe. **Das galt schon vorher** — auch das Dreierraster war
+> `1fr 1fr 1fr`; die Empfehlung trägt Badge und dunkle Fläche, nicht mehr Platz. **Entscheidung
+> nötig:** entweder die Flächenregel streichen oder Platzhirsch eine breitere Spalte geben.
+
 **Gebunden — je Stufe ein Knopf:**
 
 | Stufe | CTA |

@@ -1032,3 +1032,27 @@ wurde nichts.**
 |---|---|
 | §5: Sekundär-CTA `Preise ansehen` | Wortlaut und Ziel **unverändert**, Darstellung vom Knopf zum Textlink. Zwei gleich starke Knöpfe lassen den Leser zwischen Knöpfen statt zwischen Angeboten wählen |
 | Versalien der H1 (Wunsch vom selben Tag) | **Zurückgenommen.** Gemessen tragen sie 65,8 px, der Gemischtsatz 73,1 px — die Versalfassung war **kleiner**, nicht größer, und war der Grund für den Blockeindruck |
+
+### Nachtrag: vier Preisstufen und die Auszeichnung als Seitenmittel — 05.08.2026
+
+**Auftrag:** „bekommen wir jetzt in der preis section alle 4 nebeneinander? … übernimm die hero
+sektion, lege aber nicht fest welches wort kursiv sein soll also nicht immer das erste oder so."
+
+**Gebaut:** Preisraster von drei auf **vier Spalten**, Sonderprojekt aus dem Querblock in die
+vierte Karte. Auszeichnung `em` gilt jetzt für **jede** Überschrift; das ausgezeichnete Wort ist
+je Überschrift nach der Aussage gewählt und steht in **sieben von acht** Fällen nicht an erster
+Stelle.
+
+**Ausgeführt:** Preisraster bei 390 · 1100 · 1366 · 1512 · 1920 · 2560 px gemessen — vier Spalten
+ab 1180, zwei darunter, eine unter 760. Kein waagerechter Überlauf. Aufmacher unverändert
+nachgemessen.
+
+| Befund | Lage |
+|---|---|
+| **Vier der sechs Sektionsüberschriften waren Sätze, die der Texter-Skill ausdrücklich verwirft** | `Von wenigen Angaben …`, `… das passende Ergebnis`, `So könnte ein Projekt aussehen` und `Ihr Projekt bleibt an einem Ort`. **Die Auszeichnung hat sie aufgedeckt:** Wer fragt, welches Wort die Aussage trägt, findet bei diesen Sätzen genau das unbestimmte Wort, das der Skill verwirft. Drei sind durch die **im Skill dokumentierten** Ersatzfassungen getauscht und gegen die Umfangsvorgaben aus §3, §4 und §8 geprüft (8 von 9 · 10 von 12 · 7 von 8 Wörtern) |
+| **`Ihr Projekt bleibt an einem Ort.` steht weiter da** | Verworfen, aber der Skill nennt **keine** Ersatzfassung dafür, und §2 gibt nur einen Auftrag. **Nicht erfunden.** Prüfmittel: ein Durchgang des Texter-Skills für Sektion 2 |
+| **Der Überschriftentausch erzeugte eine Dreifachnennung** | Vorzeile `Eine Empfehlung statt Paketwahl`, H2 `Sie wählen kein Paket`, Einleitung `Sie wählen kein Paket — …` sagten dasselbe. Vorzeile auf `Vier Stufen` und Einleitung auf die Zuordnungslogik geändert (21 Wörter, §4 erlaubt 25) |
+| **§8 verlangt eine Einleitung über dem Musterraster** — Gründungsjahr und Anzahl | Fehlt im Entwurf, **schon vor dieser Sitzung**. Nicht ergänzt: das Gründungsjahr ist eine Zahl, die in den Unterlagen fehlt |
+| **Platzhirsch hat nicht mehr Fläche als die anderen** | `02_PREISE_UND_ZAHLUNG.md` verlangt „größte Fläche". **Galt schon vorher nicht** — auch das Dreierraster war gleichspaltig. In `10_WEBSITE_SARTU.md` als Entscheidung notiert |
+| **Karten sind bei 1366 und 1512 px nur 299 bzw. 302 px breit** | Die Preiszeile bricht dort zweizeilig um (`7.900 €` / `einmalig + 249 €/Mon.`). Lesbar, aber eng. Ab 1920 px sind es 389 px und die Zeile passt |
+| **Kein Test ausgeführt, kein PHP angefasst** | Wie in den Einträgen davor: nur `design/startseite.html` und Spezifikationsdateien |

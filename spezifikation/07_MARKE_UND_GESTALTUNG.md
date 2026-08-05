@@ -167,7 +167,7 @@ die Rangfolge war umgekehrt.
 
 **Drei Zeilen auf jeder Breite, kein waagerechter Überlauf, H1 > H2 durchgehend.**
 
-### Die erste Zeile ist kursiv und leichter — gegen den Block
+### Ein Wort je Überschrift kursiv und leichter — gegen den Block
 
 **Gleich lange Zeilen sind die Voraussetzung für den großen Schriftgrad und zugleich sein
 Preis.** Drei Zeilen von 13 · 14 · 14 Zeichen im selben Gewicht lesen sich als **Block**, nicht
@@ -180,17 +180,36 @@ Ober- und Unterlängen ganz. Im Gemischtsatz mildert der Wortbau es, weg ist es 
 > auf 92 % hin gebaut. **Was messbar besser wird, wird nicht dadurch schöner.** Die Zeilen
 > bleiben gleich lang; gebrochen wird stattdessen die Fläche.
 
-`h1 em { font-style: italic; font-weight: 400 }` — die erste Zeile bricht den Block in **zwei**
-Richtungen: Neigung **und** Gewicht. Damit steht die Einschränkung („wie gebaut") gegen die beiden
-aufrechten Zeilen, die Produkt und Preis tragen. **Das folgt dem Satzbau, es ist keine
-Verzierung.**
+`h1 em, h2 em, h3 em { font-style: italic; font-weight: 400 }` — **jede** Überschrift der Seite,
+nicht nur der Aufmacher. Die Auszeichnung bricht die Fläche in **zwei** Richtungen: Neigung
+**und** Gewicht.
 
 | | |
 |---|---|
 | Auszeichnung | `<em>`, nicht `<span>` — das Wort ist wirklich betont |
-| Warum die **erste** Zeile | Der Lime-Balken sitzt auf der **dritten**. Zwei Anker, oben und unten, statt zweier Auszeichnungen an derselben Stelle |
 | Warum **leichter** statt nur kursiv | Neigung allein bricht die Fläche schwächer. Geprüft an beiden Fassungen |
-| Kein Messwert ändert sich | Die breiteste Zeile ist die **zweite** und bleibt aufrecht. Schriftgrad, Zeilenzahl und Rest sind identisch |
+| Kein Messwert ändert sich | Im Aufmacher ist die breiteste Zeile die **zweite** und bleibt aufrecht. Schriftgrad, Zeilenzahl und Rest sind identisch |
+
+**Welches Wort ausgezeichnet wird, ist nicht festgelegt — und darf es nicht sein.** Es ist das
+Wort, an dem die Aussage hängt: mal ein Zahlwort (`keine`, `einem`), mal eine Abgrenzung
+(`kein Paket`), mal ein Zeitpunkt (`vorher`). **Eine mechanische Regel — „immer das erste Wort" —
+ergäbe wieder ein Muster, und ein Muster ist genau das, was hier gebrochen werden soll.**
+
+| Überschrift | ausgezeichnet | Stelle |
+|---|---|---:|
+| Programmierte Firmenwebsites zum Festpreis. | `Programmierte` | 1. |
+| Ihr Projekt bleibt an einem Ort. | `einem` | 5. |
+| Sie liefern die Fakten. Alles andere machen wir. | `Alles andere` | 5. |
+| Sie wählen kein Paket. Wir sagen Ihnen, welcher Umfang passt. | `kein Paket` | 3. |
+| Es gibt keine Aufpreisliste. | `keine` | 3. |
+| Noch keine Kunden. Deshalb zeigen wir Musterprojekte. | `keine` | 2. |
+| Was Unternehmer vorher wissen wollen. | `vorher` | 3. |
+| Welche Website passt zu Ihrem Unternehmen? | `Ihrem` | 5. |
+
+**In sieben von acht Fällen steht es nicht an erster Stelle.** Der Aufmacher ist die Ausnahme,
+weil `Programmierte` dort das Unterscheidungsmerkmal trägt — und weil der Lime-Balken auf der
+**dritten** Zeile sitzt: zwei Anker, oben und unten, statt zweier Auszeichnungen an derselben
+Stelle.
 
 > **Kursiv setzt einen echten Schnitt voraus.** Fehlt er, stellt der Browser die aufrechte Schrift
 > mechanisch schräg — das ist keine Kursive, sondern eine Verzerrung. SF Pro und Segoe UI bringen

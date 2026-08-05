@@ -58,7 +58,7 @@ h2{font-size:clamp(27px,calc(3vw - 6px),54px)}
 .round-bot{border-radius:0 0 var(--r-xl) var(--r-xl)}
 /* §4 verlangt je Preisstufe einen Knopf, §2/§3/§8/§10 je einen Weiterweg.
    Gebaut waren zwei von zehn — der Preisblock hatte keinen einzigen. */
-.plan-cta{width:100%;justify-content:center;margin-top:22px;padding:15px 22px;font-size:16px}
+.plan-cta{width:100%;justify-content:center;margin-top:auto;padding:15px 22px;font-size:16px}
 .plan-hi .plan-cta{background:var(--lime);color:var(--ink);border-color:transparent}
 .plan-pflicht{margin-top:11px;font-size:13.5px;line-height:1.45;color:var(--label-dark);max-width:38ch}
 /* Frueher .txtlink — ein unterstrichener Link, dessen Farbe der Abschnitt
@@ -221,12 +221,17 @@ h2{font-size:clamp(27px,calc(3vw - 6px),54px)}
    Ohne die Hoehengrenze frass die H1 auf 1366x768 den Anschnitt der naechsten
    Sektion auf (gemessen: 1px statt 33). Greift nur auf flachen Schirmen. */
 h1{font-size:clamp(34px,min(11cqw,8.6vh),104px);letter-spacing:-.03em;line-height:1.0}
-/* Drei Versalzeilen von fast gleicher Laenge lesen sich als Block, nicht als
-   Satz — genau das war an der ausgeglichenen Fassung falsch. Die erste Zeile
-   bricht ihn in ZWEI Richtungen auf: Neigung und Gewicht. Sie traegt die
-   Einschraenkung ("wie gebaut"), die beiden aufrechten Zeilen tragen Produkt
-   und Preis. <em> und nicht <span>, weil das Wort wirklich betont ist. */
-h1 em{font-style:italic;font-weight:400}
+/* AUSZEICHNUNG — gilt fuer JEDE Ueberschrift, nicht nur den Aufmacher.
+   Kursiv und leichter bricht die Flaeche in zwei Richtungen auf.
+   <em> und nicht <span>, weil das Wort wirklich betont ist.
+
+   WELCHES Wort, ist nicht festgelegt und darf es nicht sein. Es ist das Wort,
+   an dem die Aussage haengt — mal ein Zahlwort ("keine", "einem"), mal eine
+   Abgrenzung ("kein Paket"), mal ein Zeitpunkt ("vorher"). Eine mechanische
+   Regel ("immer das erste") ergaebe wieder ein Muster, und ein Muster ist
+   genau das, was hier gebrochen werden soll. In sieben von acht
+   Ueberschriften steht es NICHT an erster Stelle. */
+h1 em,h2 em,h3 em{font-style:italic;font-weight:400}
 h1 .accent{background-image:linear-gradient(var(--lime),var(--lime));background-repeat:no-repeat;
   background-position:0 .84em;background-size:100% .22em;padding-right:.04em}
 /* AUFBAU DES AUFMACHERS — drei Gruppen, nicht sieben Bausteine.
@@ -373,10 +378,15 @@ h1 .accent{background-image:linear-gradient(var(--lime),var(--lime));background-
 /* ---------- Preise: die Empfehlung bricht aus dem Raster ---------- */
 .plans-note{display:flex;align-items:center;gap:12px;margin-top:22px;
   font-size:17.5px;color:var(--muted)}
-.plans{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:var(--s-3);
+/* VIER Stufen nebeneinander. §4 fuehrt Sonderprojekt als vierte Stufe mit
+   eigenem Knopf — es war nur als Querblock gebaut. Moeglich wurde das durch
+   den fliessenden Satzspiegel: bei --wrap 1800 sind es 407px je Karte.
+   Unter 1180px greift der Zweisatz, unter 760 die Einzelspalte. */
+.plans{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:var(--s-3);
   margin-top:calc(var(--s-6) + 18px);align-items:stretch}
+@media (max-width:1180px){.plans{grid-template-columns:repeat(2,minmax(0,1fr))}}
 .plan{position:relative;background:var(--paper);border:1px solid var(--line);border-radius:var(--r-l);
-  padding:clamp(24px,2.6vw,34px);display:flex;flex-direction:column;gap:var(--s-3);
+  padding:clamp(22px,1.9vw,30px);display:flex;flex-direction:column;gap:var(--s-2);
   transition:transform .3s cubic-bezier(.22,.61,.36,1),box-shadow .3s ease,border-color .3s ease}
 .plan:hover{transform:translateY(-8px);box-shadow:var(--shadow-soft);border-color:var(--ink)}
 .plan-hi:hover{transform:translateY(-8px) scale(1.012);
@@ -402,7 +412,11 @@ h1 .accent{background-image:linear-gradient(var(--lime),var(--lime));background-
 .price small{font-size:16.5px;font-weight:500;letter-spacing:0;color:var(--muted)}
 .plan-hi .price small{color:#c3bcae}
 .plan-body{font-size:17px;line-height:1.55;color:var(--muted)}
-.plan-list{border-top:1px solid var(--line);margin-top:auto;padding-top:2px}
+/* Bei drei Karten schob `margin-top:auto` die Liste an den Fuss und alle
+   Listen standen auf einer Linie. Bei vier Karten unterschiedlicher Laenge
+   riss dasselbe auto ein Loch in die Mitte der kuerzeren. Jetzt folgt die
+   Liste dem Text, und der KNOPF haelt die Grundlinie. */
+.plan-list{border-top:1px solid var(--line);margin-top:0;padding-top:2px}
 .plan-list li{padding:12px 0 12px 24px;border-bottom:1px solid var(--line);font-size:16.5px;
   color:var(--text);position:relative}
 .plan-list li::before{content:"";position:absolute;left:0;top:21px;width:9px;height:9px;
@@ -412,18 +426,12 @@ h1 .accent{background-image:linear-gradient(var(--lime),var(--lime));background-
   .plans{grid-template-columns:1fr;margin-top:var(--s-5)}
   .plan-hi{margin-top:0;order:-1}
 }
-.special{margin-top:var(--s-6);display:grid;grid-template-columns:minmax(0,.85fr) minmax(0,1.15fr);
-  gap:clamp(24px,4vw,64px);align-items:center;padding:clamp(32px,4vw,56px);
-  background:var(--ink);color:#e9e3d6;border-radius:var(--r-l);box-shadow:var(--shadow-lift);
-  transition:transform .3s cubic-bezier(.22,.61,.36,1),box-shadow .3s ease}
-.special:hover{transform:translateY(-6px);box-shadow:0 46px 96px -30px rgba(20,17,13,.55)}
-.special h3{font-size:32px;margin-bottom:10px;color:#f8f3e8}
-.special .plan-kicker{color:var(--label-dark)}
-.special .price{font-size:32px;color:#f8f3e8}
-.special .price small{color:#c3bcae}
-.special p{font-size:17.5px;line-height:1.62;color:#c3bcae}
-.special .betont{color:#f6f1e6;font-weight:600}
-@media (max-width:760px){.special{grid-template-columns:1fr}}
+/* Sonderprojekt: vierte Karte im selben Raster, aber sichtbar KEIN Paket —
+   heller Rahmen statt Papierflaeche, gestrichelte Kante. §4 gibt ihm einen
+   eigenen Knopf und eine Pflichtzeile; beide bleiben. */
+.plan-spec{background:transparent;border-style:dashed;border-color:#c9c8c1}
+.plan-spec:hover{border-color:var(--ink);border-style:solid}
+.plan-spec .betont{color:var(--ink);font-weight:600;font-size:16px;line-height:1.5}
 
 /* ---------- Die Zusage: drei Punkte statt einem Ausruf ---------- */
 .pledge{padding:clamp(96px,15vh,170px) 0 var(--s-6)}
@@ -793,7 +801,7 @@ html:has(#g-kalk:checked),html:has(#g-weiss:checked){background:var(--cream)}
   <section class="sec dark round-top" id="portal">
     <div class="wrap">
       <p class="tag rise-3">Kundenbereich</p>
-      <h2 class="sec-head rise" style="margin-top:20px">Ihr Projekt bleibt an einem Ort.</h2>
+      <h2 class="sec-head rise" style="margin-top:20px">Ihr Projekt bleibt an <em>einem</em> Ort.</h2>
       <p class="lede rise-2" style="max-width:60ch;margin-top:24px;color:#e2dbcd">Angebot, Briefing, Vorschau, Freigabe und die spätere Pflege laufen über Ihren Kundenbereich — statt über verstreute Telefonate und E-Mail-Ketten. Der Zugang gehört zu jeder Lösung.</p>
       <div class="portal-shot rise">
         <p class="mono">Platz für Bildschirmansicht</p>
@@ -807,7 +815,7 @@ html:has(#g-kalk:checked),html:has(#g-weiss:checked){background:var(--cream)}
   <section class="sec dark round-bot" id="ablauf" style="padding-top:0">
     <div class="wrap" style="padding-top:var(--s-5)">
       <p class="tag rise-3">Ablauf</p>
-      <h2 class="sec-head rise" style="margin-top:20px">Von wenigen Angaben zur fertigen Website.</h2>
+      <h2 class="sec-head rise" style="margin-top:20px">Sie liefern die Fakten. <em>Alles andere</em> machen wir.</h2>
       <div class="steps">
         <div class="step">
           <span class="bub">01</span>
@@ -847,9 +855,9 @@ html:has(#g-kalk:checked),html:has(#g-weiss:checked){background:var(--cream)}
   <!-- ===== Preise ===== -->
   <section class="sec" id="preise">
     <div class="wrap">
-      <p class="tag rise-3">Eine Empfehlung statt Paketwahl</p>
-      <h2 class="sec-head rise" style="margin-top:20px">Sie beschreiben Ihr Geschäft. Wir empfehlen das passende Ergebnis.</h2>
-      <p class="plans-note rise-2"><span class="dot" aria-hidden="true"></span><span>Sie wählen kein Paket — wir ordnen zu und begründen die Zuordnung.</span></p>
+      <p class="tag rise-3">Vier Stufen</p>
+      <h2 class="sec-head rise" style="margin-top:20px">Sie wählen <em>kein Paket</em>. Wir sagen Ihnen, welcher Umfang passt.</h2>
+      <p class="plans-note rise-2"><span class="dot" aria-hidden="true"></span><span>Nach dem Bedarfsscheck ordnen wir zu und schreiben die Begründung dazu. Sie sehen, warum es diese Stufe wurde und keine andere.</span></p>
 
       <div class="plans">
         <div class="plan rise">
@@ -862,6 +870,20 @@ html:has(#g-kalk:checked),html:has(#g-weiss:checked){background:var(--cream)}
             <li>Texte von uns geschrieben, auf Ihre Leistung zugeschnitten</li>
             <li>Kontakt- und Anfrageweg, mobil zuerst gedacht</li>
             <li>SEO-Grundlage ab Livegang</li>
+          </ul>
+          <a class="btn plan-cta btn-ghost" href="/briefing">Einschätzen lassen <span class="ar">→</span></a>
+        </div>
+
+        <div class="plan rise">
+          <span class="plan-kicker">Für mehrere Leistungen</span>
+          <h3>Wachstum</h3>
+          <p class="price">3.900 € <small>einmalig + 129 €/Mon.</small></p>
+          <p class="plan-body">Jede Leistung bekommt ihre eigene Seite.</p>
+          <ul class="plan-list">
+            <li>Mehrseitiger Aufbau, eigene Seite je Leistung</li>
+            <li>Redaktioneller Text für jede Leistungsseite</li>
+            <li>Team-, Referenz- oder Ablaufdarstellung nach Bedarf</li>
+            <li>SEO-Grundlage je Seite statt nur für die Startseite</li>
           </ul>
           <a class="btn plan-cta btn-ghost" href="/briefing">Einschätzen lassen <span class="ar">→</span></a>
         </div>
@@ -881,34 +903,23 @@ html:has(#g-kalk:checked),html:has(#g-weiss:checked){background:var(--cream)}
           <a class="btn plan-cta" href="/briefing">Bedarf prüfen lassen <span class="ar">→</span></a>
         </div>
 
-        <div class="plan rise">
-          <span class="plan-kicker">Für mehrere Leistungen</span>
-          <h3>Wachstum</h3>
-          <p class="price">3.900 € <small>einmalig + 129 €/Mon.</small></p>
-          <p class="plan-body">Jede Leistung bekommt ihre eigene Seite.</p>
-          <ul class="plan-list">
-            <li>Mehrseitiger Aufbau, eigene Seite je Leistung</li>
-            <li>Redaktioneller Text für jede Leistungsseite</li>
-            <li>Team-, Referenz- oder Ablaufdarstellung nach Bedarf</li>
-            <li>SEO-Grundlage je Seite statt nur für die Startseite</li>
-          </ul>
-          <a class="btn plan-cta btn-ghost" href="/briefing">Einschätzen lassen <span class="ar">→</span></a>
-        </div>
-      </div>
-
-      <div class="special rise-2">
-        <div>
-          <span class="plan-kicker" style="display:block;margin-bottom:10px">Kein Paket, sondern eine Vorprüfung</span>
+        <div class="plan plan-spec rise">
+          <span class="plan-kicker">Kein Paket, sondern eine Vorprüfung</span>
           <h3>Sonderprojekt</h3>
           <p class="price">ab 12.500 € <small>einmalig + mind. 249 €/Mon.</small></p>
-        </div>
-        <div>
-          <p>Für Vorhaben, die über eine Firmenwebsite hinausgehen: Shop, Buchung, Login-Bereiche, Anbindung an vorhandene Systeme oder mehrere Standorte. Wir prüfen den technischen Umfang und nennen einen Festpreis, bevor Sie sich entscheiden.</p>
-          <p class="betont" style="margin-top:16px">Wenn wir ein Vorhaben nicht verantworten können, sagen wir das.</p>
-          <a class="btn btn-hell" href="/briefing" style="margin-top:20px">Sonderprojekt besprechen <span class="ar">→</span></a>
+          <p class="plan-body">Für Vorhaben, die über eine Firmenwebsite hinausgehen.</p>
+          <ul class="plan-list">
+            <li>Shop, Buchung oder Login-Bereiche</li>
+            <li>Anbindung an vorhandene Systeme</li>
+            <li>Mehrere Standorte oder Marken</li>
+            <li>Festpreis erst nach technischer Prüfung</li>
+          </ul>
+          <p class="betont">Wenn wir ein Vorhaben nicht verantworten können, sagen wir das.</p>
+          <a class="btn plan-cta btn-ghost" href="/briefing">Sonderprojekt besprechen <span class="ar">→</span></a>
           <p class="plan-pflicht">Nur Sonderprojekte klären wir vor dem Angebot persönlich.</p>
         </div>
       </div>
+
       <p class="mono" style="margin-top:var(--s-4);color:var(--label)">Alle Preise netto zzgl. USt. · ausschließlich für Unternehmer</p>
     </div>
   </section>
@@ -925,7 +936,7 @@ html:has(#g-kalk:checked),html:has(#g-weiss:checked){background:var(--cream)}
   <section class="sec sand" id="leistungen">
     <div class="wrap">
       <p class="tag rise-3">Im Preis enthalten</p>
-      <h2 class="sec-head rise" style="margin-top:20px">Es gibt keine Aufpreisliste.</h2>
+      <h2 class="sec-head rise" style="margin-top:20px">Es gibt <em>keine</em> Aufpreisliste.</h2>
       <p class="lz-lede rise-2">Das alles steckt in jedem Angebot — Sie stellen es nicht selbst zusammen und zahlen nichts davon extra. Wir gewichten die Bausteine passend zu Ihrem Ziel.</p>
       <div class="paket rise-2">
         <div class="lbs">
@@ -946,8 +957,8 @@ html:has(#g-kalk:checked),html:has(#g-weiss:checked){background:var(--cream)}
   <!-- ===== Musterprojekte auf Sand — bricht die Cremestrecke ===== -->
   <section class="sec" id="muster">
     <div class="wrap">
-      <p class="tag rise-3">Musterprojekte</p>
-      <h2 class="sec-head rise" style="margin-top:20px">So könnte ein Projekt aussehen.</h2>
+      <p class="tag rise-3">Statt Referenzen</p>
+      <h2 class="sec-head rise" style="margin-top:20px">Noch <em>keine</em> Kunden. Deshalb zeigen wir Musterprojekte.</h2>
       <div class="samples">
         <div class="sample rise">
           <span class="sample-flag">Musterprojekt — kein Kundenauftrag</span>
@@ -973,7 +984,7 @@ html:has(#g-kalk:checked),html:has(#g-weiss:checked){background:var(--cream)}
   <section class="sec" id="fragen">
     <div class="wrap">
       <p class="tag rise-3">Häufige Fragen</p>
-      <h2 class="sec-head rise" style="margin-top:20px">Was Unternehmer vorher wissen wollen.</h2>
+      <h2 class="sec-head rise" style="margin-top:20px">Was Unternehmer <em>vorher</em> wissen wollen.</h2>
       <div class="faq">
         <details><summary>Wie lange dauert das?</summary><p>Nach Ihrer Faktenfreigabe rechnen wir mit sieben bis zehn Werktagen im Umfang Start, zehn bis fünfzehn bei Wachstum und fünfzehn bis fünfundzwanzig bei Platzhirsch. Die Zeit läuft erst, wenn Ihre Angaben vollständig sind.</p></details>
         <details><summary>Was passiert, wenn ich kündige?</summary><p>Nach dem ersten Jahr können Sie zum Monatsende kündigen. Die Domain übertragen wir kostenfrei an Sie oder an einen Anbieter Ihrer Wahl. Auf Wunsch bekommen Sie den vollständigen Stand als Export.</p></details>
@@ -990,7 +1001,7 @@ html:has(#g-kalk:checked),html:has(#g-weiss:checked){background:var(--cream)}
       <div class="cta-field rise">
         <div>
           <p class="tag" style="color:var(--label-dark)">Bedarfsscheck</p>
-          <h2 style="margin-top:20px;max-width:20ch;color:#f6f1e6">Welche Website passt zu Ihrem Unternehmen?</h2>
+          <h2 style="margin-top:20px;max-width:20ch;color:#f6f1e6">Welche Website passt zu <em>Ihrem</em> Unternehmen?</h2>
           <p style="margin-top:22px;max-width:52ch;font-size:17.5px;line-height:1.65;color:#c3bcae">Wenige Fragen zu Betrieb, Ziel und Umfang. Danach erhalten Sie eine begründete Empfehlung mit Preisspanne — ohne Termin und ohne Verpflichtung.</p>
         </div>
         <div class="cta-field-side">
