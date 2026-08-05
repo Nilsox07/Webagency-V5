@@ -919,3 +919,29 @@ dass die Zahl erst nach Unterscheidungsmerkmal und Vorhersehbarkeit fällt.
 | **Mobil entsteht kein Anschnitt.** Bei 390 × 844 ist der Aufmacher 1086 px hoch, bei 768 × 1024 sind es 1126 px — beide höher als das Fenster | Folge des gestapelten Visuals, **nicht** der Höhenregel; galt vorher genauso. Auflösbar nur, indem das Visual mobil kleiner wird. **Gestaltungsentscheidung, nicht selbst getroffen** |
 | Auf sehr hohen Bildschirmen (2560 × 1440) greift die Obergrenze von 1000 px, Anschnitt 361 px | bewusst gedeckelt — ohne Deckel entstünde Leerraum **im** Aufmacher statt darunter |
 | Der Prototyp führt als H2 der zweiten Sektion `Ihr Projekt bleibt an einem Ort.` | Dieser Satz steht im Texter-Skill unter den **verworfenen** Fassungen. Gebunden wäre dort der Positionierungssatz `Ohne einen einzigen Termin zur fertigen Website.` **Text, kein Layout** — gehört in den Durchgang des Skills |
+
+
+## Nachtrag zur Aufmacherhöhe — 05.08.2026
+
+**Der erste Eingriff war falsch.** Ich hatte dem Aufmacher nur Höhe gegeben (Mindesthöhe 78 % der
+Fensterhöhe). Auf breiten Bildschirmen wurde die Leere dadurch **größer**: bei 2560 × 1440 füllte
+der Inhalt nur **53 %** des Aufmachers, der Container **54 %** der Breite. Vom Auftraggeber mit
+Bildschirmfoto belegt.
+
+**Ursache:** Container, Schrift und Visual waren **alle bei rund 1380 px gedeckelt**. Jenseits
+davon gewann die Seite nur Rand — sie wurde auf dem größeren Bildschirm **kleiner**, nicht größer.
+
+**Behoben durch vier Änderungen zusammen:**
+
+| | vorher | jetzt |
+|---|---|---|
+| `--wrap` | 1380 px fest | `clamp(1380px, 90vw, 1800px)` |
+| H1 | `clamp(32px, 3.45vw, 47px)` | `clamp(32px, calc(3.55vw − 7px), 64px)` |
+| H2 | `clamp(27px, 2.9vw, 40px)` | `clamp(27px, calc(3vw − 6px), 54px)` |
+| Innenabstände Aufmacher | 17 · 23 · 21 px fest | `clamp()`, wachsen mit |
+
+**Gemessen bei 2560 × 1440:** Inhaltshöhe 555 → **743 px**, Füllung 53 % → **70 %**, Visual
+544 → **733 px**. **Im mittleren Bereich (1512) unverändert** — H1 47, H2 39, wie abgenommen.
+
+**Die Lehre:** Ein zu leerer Bereich wird nicht durch mehr Fläche voller. Erst als Container,
+Schrift, Visual und Abstände **gemeinsam** mitwuchsen, trug er.

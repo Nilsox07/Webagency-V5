@@ -63,28 +63,41 @@ Radienskala, skaliert über `--rk`. **Es gibt keine achte Form daneben.**
 `--s-1` 6 · `--s-2` 12 · `--s-3` 20 · `--s-4` 32 · `--s-5` 48 · `--s-6` 72 · `--s-7` 104 ·
 `--s-8` 140 (px).
 
-## Satzspiegel
+## Satzspiegel — fließend, nicht fest
 
 | | |
 |---|---|
-| `--wrap` | **1380 px** — die Außenkante des Inhalts |
+| `--wrap` | `clamp(1380px, 90vw, 1800px)` |
 | `--gut` | `clamp(20px, 4vw, 56px)` — Rand links und rechts |
-| **nutzbare Inhaltsbreite** | **1268 px** am Anschlag |
 
-**Warum nicht 1180.** Üblich ist heute ein Inhaltsbereich von **1140 bis 1200 px**, moderne
+**Warum nicht 1180 fest.** Üblich ist ein Inhaltsbereich von **1140 bis 1200 px**, moderne
 Systeme gehen bis 1280. Die Seite lief auf `--wrap: 1180` — abzüglich der Ränder blieben **1068 px
-Inhalt und damit unter dem üblichen Band.** Der Eindruck „zusammengequetscht" war messbar, nicht
-gefühlt.
+Inhalt und damit unter dem üblichen Band.**
+
+**Warum überhaupt fließend.** Ein fester Deckel führt dazu, dass die Seite jenseits davon **nur
+noch Rand gewinnt**. Gemessen am 05.08.2026 mit `--wrap: 1380`: auf 1920 nutzte der Inhalt 72 %
+der Breite, auf 2560 nur **54 %** — bei 590 px leerem Rand je Seite. Zugleich blieben Schrift und
+Visual gedeckelt. **Die Seite wurde auf dem größeren Bildschirm nicht größer, sondern kleiner.**
+
+**Der Lesefluss leidet nicht**, weil jeder Fließtext seine Zeilenlänge in `ch` begrenzt (26 · 34 ·
+44 · 60 · 62 · 64 · 70 ch). **Breiter wird nur, was breiter werden soll:** Kartenraster, das
+Aufmacher-Visual und die Überschriften.
 
 ## Schriftgrade der Überschriften
 
-| | Regel | am Anschlag |
+| | Regel | Spanne |
 |---|---|---|
-| **H1** | `clamp(32px, 3.45vw, 47px)` | 47 px |
-| **H2** | `clamp(27px, 2.9vw, 40px)` | 40 px |
+| **H1** | `clamp(32px, calc(3.55vw − 7px), 64px)` | 32 → 64 px |
+| **H2** | `clamp(27px, calc(3vw − 6px), 54px)` | 27 → 54 px |
 | H3 | 20 · 21 · 24 · 27 · 32 px je Bauteil | — |
 
-**Beide Regeln hängen zusammen und werden nur gemeinsam geändert.**
+**Beide hängen an derselben Kurve — das Verhältnis H1 : H2 liegt über den ganzen Bereich bei
+1,19.** Sie werden nur gemeinsam geändert.
+
+> **Warum nicht je Breite das Maximum.** Eine Formel, die an jeder Stelle so groß wird wie
+> möglich, lässt das Verhältnis wackeln: bei 1280 px hätte die H1 44 px erlaubt, die H2 aber
+> schon 37 px — beinahe gleich. **Ein Typenmaß muss gleichmäßig sein, nicht maximal.** Die H1
+> gibt dafür im mittleren Bereich rund 6 px ab.
 
 **Warum die H1 kleiner ist, als sie aussehen dürfte.** Sie steht in der 55-%-Spalte des
 Aufmachers, nicht über der vollen Breite. Gemessen am 05.08.2026: bei 54 px in einer 554-px-Spalte
@@ -109,14 +122,26 @@ Rangfolge war umgekehrt. Nicht die H1 war zu klein, **die H2 war zu groß.**
 > **Der 55/45-Aufmacher bleibt** (`10_WEBSITE_SARTU.md`). Er war nicht zur Wahl gestellt; die
 > Rechnung oben ist unter dieser Bindung gemacht.
 
-**Gemessenes Ergebnis:** Aufmacher-Bild von 455 auf **655 px**, Leistungsblöcke von 290 auf
-**345 px**, H1 durchgehend **drei Zeilen ab 1024 px**, erste Zeile immer mit zwei Wörtern.
+**Gemessenes Ergebnis:** Das Aufmacher-Visual wächst von 406 auf **733 px**, die H1 von 32 auf
+**64 px**. H1 durchgehend **drei Zeilen ab 1024 px**, erste Zeile immer mit zwei Wörtern.
 **Unter 768 px bleiben vier Einwortzeilen** — bei rund 330 px Spaltenbreite bräuchte die erste
 Zeile 24 px Schriftgrad, das wäre keine H1 mehr. **Das ist die Grenze des Satzes, nicht der
 Einstellung.**
 
-**Geprüft: H1 > H2 und kein waagerechter Überlauf** bei 390 · 430 · 768 · 900 · 1024 · 1100 ·
-1180 · 1280 · 1366 · 1440 · 1512 · 1920 px.
+## Innenabstände des Aufmachers
+
+**Auch sie sind fließend, und das ist kein Feinschliff.** Mit festen Werten (17 · 23 · 21 px)
+blieb der Inhaltsblock bei jeder Bildschirmgröße gleich hoch: auf 2560 × 1440 füllte er **53 %**
+des Aufmachers, der Rest war Luft. Mit `clamp()`-Abständen sind es **70 %**, bei unverändertem
+Bild auf mittleren Größen.
+
+> **Die Reihenfolge der Eingriffe war falsch und ist lehrreich.** Der erste Versuch gab dem
+> Aufmacher nur mehr **Höhe** — dadurch wurde die Leere größer, nicht kleiner. **Ein zu leerer
+> Bereich wird nicht durch mehr Fläche voller.** Erst Container, Schrift, Visual und Abstände
+> zusammen tragen ihn.
+
+**Geprüft: H1 > H2, kein waagerechter Überlauf, Füllung 70–83 %** bei 390 · 1024 · 1280 · 1366 ·
+1440 · 1512 · 1920 · 2240 · 2560 px.
 
 ## Logo
 

@@ -19,7 +19,7 @@
   --r-xs:calc(8px*var(--rk)); --r-s:calc(14px*var(--rk)); --r-m:calc(22px*var(--rk));
   --r-l:calc(34px*var(--rk)); --r-xl:calc(52px*var(--rk)); --r-pill:999px;
   --s-1:6px; --s-2:12px; --s-3:20px; --s-4:32px; --s-5:48px; --s-6:72px; --s-7:104px; --s-8:140px;
-  --wrap:1380px; --gut:clamp(20px,4vw,56px);
+  --wrap:clamp(1380px,90vw,1800px); --gut:clamp(20px,4vw,56px);
   --font-sans:-apple-system,BlinkMacSystemFont,"Segoe UI",system-ui,"Helvetica Neue",Helvetica,sans-serif;
   --font-mono:ui-monospace,"SFMono-Regular",Menlo,Consolas,monospace;
   --shadow-soft:0 24px 60px -30px rgba(20,17,13,.28);
@@ -49,7 +49,7 @@ a:focus-visible,summary:focus-visible{outline:2px solid var(--ink);outline-offse
   letter-spacing:.14em;text-transform:uppercase}
 .sec{padding:var(--s-7) 0}
 .sec-head{max-width:26ch}
-h2{font-size:clamp(27px,2.9vw,40px)}
+h2{font-size:clamp(27px,calc(3vw - 6px),54px)}
 .dark{background:var(--ink);color:#efe9dd}
 .dark h2,.dark h3,.dark h4{color:#f6f1e6}
 .dark .body{color:#c3bcae}
@@ -167,7 +167,7 @@ h2{font-size:clamp(27px,2.9vw,40px)}
   /* Der Aufmacher war 630px hoch — unabhaengig vom Bildschirm. Auf 1080p
      ragte die naechste Sektion 366px herein; §5 verlangt einen ANSCHNITT.
      Die Hoehe folgt jetzt dem Fenster, der Inhalt steht mittig darin. */
-  min-height:clamp(560px,78vh,1000px);
+  min-height:clamp(560px,79vh,1060px);
   padding:clamp(24px,4vh,56px) 0 clamp(22px,3.4vh,48px)}
 .hero>.wrap{width:100%}
 .ribbons{position:absolute;inset:0;z-index:0;overflow:hidden;pointer-events:none;
@@ -198,19 +198,19 @@ h2{font-size:clamp(27px,2.9vw,40px)}
   gap:0 clamp(28px,4vw,60px);align-items:center}
 .hero-grid>div:first-child{grid-column:1;grid-row:1}
 .stage{grid-column:2;grid-row:1 / span 2;align-self:center}
-.hero-trust{grid-column:1;grid-row:2;margin-top:21px;padding-top:19px;border-top:1px solid var(--line);max-width:47ch}
-h1{font-size:clamp(32px,3.45vw,47px);letter-spacing:-.033em}
+.hero-trust{grid-column:1;grid-row:2;margin-top:clamp(18px,1.6vw,38px);padding-top:clamp(16px,1.4vw,32px);border-top:1px solid var(--line);max-width:47ch}
+h1{font-size:clamp(32px,calc(3.55vw - 7px),64px);letter-spacing:-.033em}
 h1 .accent{background-image:linear-gradient(var(--lime),var(--lime));background-repeat:no-repeat;
   background-position:0 .84em;background-size:100% .28em;padding-right:.04em}
-.hero-lede{margin-top:17px;max-width:44ch;color:var(--muted);font-size:19px;line-height:1.55}
-.hero-cta{display:flex;flex-wrap:wrap;gap:11px;margin-top:23px}
+.hero-lede{margin-top:clamp(14px,1.3vw,30px);max-width:44ch;color:var(--muted);font-size:clamp(19px,1.4vw,25px);line-height:1.55}
+.hero-cta{display:flex;flex-wrap:wrap;gap:clamp(11px,.9vw,18px);margin-top:clamp(20px,1.8vw,42px)}
 .hero-cta .btn{padding:16px 26px;font-size:17px}
 /* Preishinweis, Trust-Zeile und Branchenangabe — §5 Sektion 1.
    Die vier Branchen sind BEWUSST keine Pillen mehr: „Eine Form, die
    Interaktion verspricht und keine liefert, ist ein Bedienfehler." */
-.hero-fine{margin-top:9px;font-size:14px;color:var(--label)}
+.hero-fine{margin-top:clamp(9px,.7vw,16px);font-size:clamp(14px,1.05vw,17px);color:var(--label)}
 .trust{display:grid;grid-template-columns:repeat(2,minmax(0,auto));justify-content:start;
-  gap:10px 30px;font-size:15.5px;color:var(--text)}
+  gap:clamp(10px,.8vw,18px) clamp(30px,2.4vw,56px);font-size:clamp(15.5px,1.15vw,19px);color:var(--text)}
 .trust li{position:relative;padding-left:19px}
 .trust li::before{content:"";position:absolute;left:0;top:11px;width:10px;height:2px;
   border-radius:2px;background:var(--ink);opacity:.34}
@@ -218,7 +218,7 @@ h1 .accent{background-image:linear-gradient(var(--lime),var(--lime));background-
 .hero-note{display:flex;flex-wrap:wrap;gap:9px;margin-top:var(--s-4)}
 .chip{padding:8px 16px;border-radius:var(--r-pill);background:var(--paper);border:1px solid var(--line);
   font-family:var(--font-mono);font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
-.status-quiet{display:flex;width:fit-content;align-items:center;gap:9px;margin-top:17px;
+.status-quiet{display:flex;width:fit-content;align-items:center;gap:9px;margin-top:clamp(14px,1.3vw,30px);
   padding:9px 16px 9px 13px;background:var(--paper);border:1px solid var(--line);
   border-radius:var(--r-pill);font-size:15px;color:var(--ink);font-weight:500}
 .dot{flex:none;width:13px;height:13px;border-radius:var(--r-pill);border:1.5px solid var(--ink);background:var(--lime)}
