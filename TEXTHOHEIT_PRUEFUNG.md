@@ -127,9 +127,29 @@ zurückkehrt — in dieser Sitzung mehrfach nachgewiesen.
 
 ---
 
-## Was das für den Bau bedeutet
+## Umgesetzt am 03.08.2026
 
-**Solange Punkt 2 nicht umgesetzt ist, schreibt faktisch das Lastenheft, nicht der Skill.**
-Das ist kein Unglück — die vorhandenen Texte sind geprüft und tragen. Aber es ist nicht das,
-was ursprünglich gewollt war, und es erklärt, warum die Seite an manchen Stellen nach
-Vorschrift klingt statt nach jemandem, der etwas zu sagen hat.
+Punkt 1 und 2 sind gebaut. `spezifikation/10_WEBSITE_SARTU.md` notiert die Startseite jetzt
+in drei Angaben je Textstelle:
+
+| | |
+|---|---|
+| **Aufgabe** | was der Leser danach wissen oder tun können muss |
+| **Grenze** | was der Text nicht behaupten, nicht auflösen, nicht erfinden darf |
+| **Maßstab** | die bisherige, geprüfte Fassung — **Ziel, nicht Vorlage** |
+
+**Ergebnis, gezählt:**
+
+| | Anzahl |
+|---|---:|
+| Textstellen von Wortlaut auf **Auftrag** umgestellt | **22** |
+| davon mit **Grenze** | 22 |
+| davon mit **Maßstab** (bisherige Fassung erhalten) | 18 |
+| ausdrücklich **`gebunden`** geblieben | 11 |
+| **verworfene** Fassungen als Warnung dokumentiert | 6 |
+
+Geprüft: Alle **vier Positionierungssätze** sind weiterhin als `gebunden` markiert. Keine H1,
+H2 oder Eyebrow steht mehr als bloße Vorschrift ohne Auftrag.
+
+**Der bisherige Wortlaut ist nirgends verloren** — er steht als *Maßstab* neben dem Auftrag.
+Damit bleibt er messbar, ohne den Skill zu ersetzen. Ab jetzt schreibt der Skill.
