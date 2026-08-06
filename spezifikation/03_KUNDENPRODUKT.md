@@ -82,3 +82,18 @@ und Rhythmus passend zur Branche · Bewegungsintensität `none`/`subtle`/`expres
 drei Hero-Kompositionen, drei Leistungsdarstellungen, zwei Navigationsmuster. Der Agent darf nur
 **freigegebene** Varianten kombinieren; neue Varianten durchlaufen Review, Dokumentation, Tests
 und Versionierung.
+
+> **Der Katalog existiert nicht — festgestellt am 06.08.2026.** Die Zahlen oben stehen mit
+> „etwa" da; **welche** drei Hero-Kompositionen, **welche** drei Leistungsdarstellungen und
+> **welche** zwei Navigationsmuster es sind, steht in keiner Datei. Solange das so bleibt, ist
+> „der Agent darf nur freigegebene Varianten kombinieren" **eine Regel ohne Menge** — sie kann
+> weder befolgt noch verletzt werden.
+>
+> **Die drei Musterprojekte sind seine erste Anwendung** (`17_SEITEN_SARTU.md` §4a). Wer sie
+> baut, muss den Katalog anlegen — das ist genau der „Belastungstest des Produktionswegs", den
+> `SARTU_ENTSCHEIDUNGEN_OFFEN.md` §5 als einen der drei Gründe für Demoprojekte nennt.
+
+**Die drei Achsen sind dagegen geschlossen** — `compact`/`balanced`/`editorial` ·
+`precise`/`human`/`bold` · `none`/`subtle`/`expressive`. Sie können **jetzt** je Projekt gesetzt
+werden, auch ohne Komponentenkatalog. **Sie tragen den sichtbaren Unterschied**, nicht die
+Komponentenwahl.

@@ -72,7 +72,8 @@ Rechtstexte werden **technisch eingebunden, nicht rechtlich erstellt** — `06_R
 | **`Leistungen` in der Navigation** | §5b widerspricht sich selbst, beide Stellen begründet — Dublettenregister im Wegweiser |
 | **`LocalBusiness`** in strukturierten Daten | gesperrt, bis eine Anschrift feststeht |
 | **Echte Fallstudie** | erst wenn ein echter Kunde schriftlich freigegeben hat |
-| **Ein bis zwei Demoprojekte** | *offen* — gebaute Beispielwebsites für erfundene, als solche benannte Betriebe. **Betrifft nur die Bilder**, nicht die drei Musterprojekt-Karten — `SARTU_ENTSCHEIDUNGEN_OFFEN.md` §5 |
+| **Ein bis zwei Demoprojekte** | *offen* — gebaute Beispielwebsites für erfundene, als solche benannte Betriebe. **Betrifft nur die Bilder**, nicht die drei Musterprojekt-Karten — `SARTU_ENTSCHEIDUNGEN_OFFEN.md` §5. **Zusatzfrage seit 06.08.2026:** ein bis zwei genügen für Bildmaterial, für den Beleg *„kein Baukasten"* braucht es **drei** — `17_SEITEN_SARTU.md` §4a |
+| **Komponentenkatalog für Kundenwebsites** | *offen* — `03_KUNDENPRODUKT.md` verlangt, dass nur **freigegebene** Varianten kombiniert werden, nennt die Varianten aber nur beispielhaft („etwa drei Hero-Kompositionen …"). **Welche** es sind, steht nirgends. Ohne den Katalog ist die Regel eine Menge ohne Inhalt |
 
 ---
 

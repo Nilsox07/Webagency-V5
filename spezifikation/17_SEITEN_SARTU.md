@@ -516,6 +516,32 @@ nächstkleinere.**
 - Über jedem Fall: `Musterprojekt — kein Kundenauftrag`
 - Der Preishinweis in der **langen** Fassung, sobald eine Zahl fällt — `08_TEXTREGELN.md`
 
+### Die drei müssen sichtbar verschieden aussehen
+
+**Sonst beweisen sie das Gegenteil dessen, wofür sie da sind.** SARTU verkauft
+*individuell programmiert, kein Baukasten* (`01_GESCHAEFTSMODELL.md`). Drei Musterprojekte, die
+sich nur im Text unterscheiden, sind der Beleg dafür, dass es **doch** ein Baukasten ist —
+vorgelegt von SARTU selbst, an der Stelle, an der der Leser nach Beweisen sucht.
+
+**Je Musterprojekt ein festes Wertetripel** aus den geschlossenen Achsen in
+`03_KUNDENPRODUKT.md`. Die Werte folgen der Branche, **nicht dem Wunsch nach Abwechslung** —
+dass alle drei Stufen jeder Achse einmal vorkommen, ist das Ergebnis, nicht die Vorgabe:
+
+| Musterprojekt | Inhaltsdichte | Formcharakter | Bewegung | Woraus es folgt |
+|---|---|---|---|---|
+| **Malerbetrieb** | `compact` | `bold` | `subtle` | Die Arbeiten sind das Argument — große Flächen, wenig Text. Gelesen wird oft mobil auf der Baustelle. Die eine sinnvolle Bewegung ist der Vorher-nachher-Wechsel |
+| **Physiotherapiepraxis** | `balanced` | `human` | `none` | Eine Seite trägt Leistung, Zeiten und Terminweg zugleich — sie braucht Gleichgewicht, keine Verdichtung. Weiche Formen, weil Härte im Gesundheitskontext falsch wirkt. Ältere Zielgruppe, also Ruhe |
+| **Arbeitsrechtskanzlei** | `editorial` | `precise` | `none` | Verkauft über Text und Genauigkeit. Zwei Zielgruppen mit gegensätzlichem Anliegen brauchen Gliederung, nicht Bewegung |
+
+**Beide sichtbaren Achsen decken ihre volle Spanne ab** — Dichte und Formcharakter je einmal in
+jeder Stufe. Bewegung tut das nicht, und das bleibt so: **eine Bewegungsstufe zu wählen, damit
+die Tabelle vollständig aussieht, wäre Gestaltung für die Vorlage statt für den Kunden.** Auf
+einer Bildschirmaufnahme ist sie ohnehin die unsichtbarste der drei.
+
+> **Was noch fehlt, um das zu bauen:** der Komponentenkatalog aus `03_KUNDENPRODUKT.md` — welche
+> Hero-Komposition, welche Leistungsdarstellung, welches Navigationsmuster. Er existiert nicht.
+> **Die Wertetripel oben gelten trotzdem schon**, weil die drei Achsen geschlossen sind.
+
 **Sperren — dieselben wie in §8, sie gelten hier schärfer**, weil die Seite mehr Platz zum
 Ausschmücken hätte: keine erfundenen Firmennamen · keine erfundenen Zahlen, Ergebnisse oder
 Steigerungen · **kein nachgebauter Bildschirm**, solange kein Demoprojekt gebaut ist

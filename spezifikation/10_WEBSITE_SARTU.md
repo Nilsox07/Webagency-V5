@@ -597,6 +597,17 @@ Frage, *was* jeweils fehlt:
 | **1** | die drei Fälle sind ausgeschrieben (Ausgangslage, Lösung, Struktur, was der Kunde liefert) | **Sektion mit ehrlich beschriftetem Bildplatz.** Der Inhalt trägt sie auch ohne Bild |
 | **2** | ein bis zwei Demoprojekte sind gebaut (`SARTU_ENTSCHEIDUNGEN_OFFEN.md` §5) | echte Aufnahmen ersetzen die Bildplätze |
 
+**Ab Stufe 2 gilt zusätzlich: die drei Aufnahmen müssen sichtbar verschieden aussehen.** Drei
+Musterprojekte in derselben Gestaltung belegen, dass SARTU einen Baukasten betreibt — an genau
+der Stelle, an der der Leser nach dem Gegenteil sucht. Die Wertetripel je Projekt stehen in
+`17_SEITEN_SARTU.md` §4a.
+
+> **Damit wächst der Umfang der Demoprojekt-Entscheidung.** „Ein bis zwei" reicht für
+> Bildmaterial und Arbeitsbeleg. **Für den Beweis, dass es kein Baukasten ist, braucht es
+> drei** — zwei Seiten nebeneinander zeigen einen Unterschied, drei zeigen eine Spanne.
+> **Das ist eine Frage an den Betreiber, keine Ableitung:** `SARTU_ENTSCHEIDUNGEN_OFFEN.md` §5
+> hält die Zahl offen, und der Aufwand steigt um die Hälfte.
+
 **Der Satz „bis dahin bleibt die Sektion ungebaut" meint Stufe 0, nicht Stufe 1.** Er wurde
 geschrieben, als weder Fälle noch Bilder vorlagen; damals fielen beide zusammen.
 

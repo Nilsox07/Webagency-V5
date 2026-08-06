@@ -1083,3 +1083,30 @@ nachgemessen.
 | **Der Text der drei Fälle** | Geschrieben ist eine erste Fassung im Entwurf. Sie ist **nicht durch den Texter-Skill gelaufen** und trägt keinen Prüfbericht. Prüfmittel: ein Durchgang des Skills für Sektion 8 und `/musterprojekte` |
 | **`/musterprojekte` ist spezifiziert, nicht gebaut** | Bewusst **nicht** in `Launchadressen` aufgenommen: `WebsiteTest` verlangt für jede Launchadresse eine Zeile in `KEYWORD_VALIDATION.md`, und die Datei lässt sich hier nicht erzeugen (keine Datenbank). Reihenfolge: erst Seite bauen, dann Adresse eintragen, dann `bin/keywords.php` |
 | **`Ihr Projekt bleibt an einem Ort.`** | Unverändert offen aus dem Eintrag davor — verworfener Satz ohne dokumentierte Ersatzfassung |
+
+### Nachtrag: die drei Musterprojekte müssen verschieden aussehen — 06.08.2026
+
+**Einwand des Betreibers:** „da müssen wir aber auch verschiedene Designs machen oder um zu
+zeigen was so möglich ist."
+
+**Der Einwand ist gedeckt — die Regel stand schon da.** `03_KUNDENPRODUKT.md` führt unter
+*Varianten statt Einheitswebsite* drei geschlossene Achsen: Inhaltsdichte
+`compact`/`balanced`/`editorial` · Formcharakter `precise`/`human`/`bold` · Bewegungsintensität
+`none`/`subtle`/`expressive`. **Sie war nur nie auf die Musterprojekte angewandt.**
+
+**Festgeschrieben:** je Musterprojekt ein Wertetripel, hergeleitet aus der Branche
+(`17_SEITEN_SARTU.md` §4a). Beide **sichtbaren** Achsen — Dichte und Formcharakter — decken dabei
+ihre volle Spanne ab, je einmal pro Stufe. Bewegung tut das nicht und soll es nicht: eine Stufe
+zu wählen, damit die Tabelle vollständig aussieht, wäre Gestaltung für die Vorlage statt für den
+Kunden.
+
+| Befund | Lage |
+|---|---|
+| **Der Komponentenkatalog existiert nicht** | `03_KUNDENPRODUKT.md` sagt „der Agent darf nur **freigegebene** Varianten kombinieren" und nennt die Varianten nur beispielhaft („etwa drei Hero-Kompositionen …"). **Welche** es sind, steht in keiner Datei. **Eine Regel ohne Menge** — sie kann weder befolgt noch verletzt werden. In `20_OFFEN.md` aufgenommen |
+| **Die Wertetripel gelten trotzdem schon** | Die drei Achsen sind geschlossen, ihre Werte stehen fest. Sie tragen den sichtbaren Unterschied; die Komponentenwahl verfeinert ihn nur |
+| **Der Umfang der Demoprojekt-Entscheidung wächst** | „Ein bis zwei" genügt für Bildmaterial und Arbeitsbeleg. **Für den Beleg, dass es kein Baukasten ist, braucht es drei** — zwei zeigen einen Unterschied, drei eine Spanne. **Nicht abgeleitet, sondern als Frage notiert:** der Aufwand steigt um die Hälfte, das entscheidet der Betreiber |
+| **Nichts davon ist gebaut** | Es sind Vorgaben, keine Bildschirme. Die Bildplätze im Entwurf bleiben ehrlich beschriftet (Stufe 1 nach `10_WEBSITE_SARTU.md` §8) |
+
+**Warum das keine Geschmacksfrage ist.** SARTU verkauft *individuell programmiert, kein
+Baukasten*. Drei Musterprojekte in derselben Gestaltung wären der Gegenbeweis — vorgelegt von
+SARTU selbst, an genau der Stelle, an der der Leser nach Belegen sucht.
