@@ -585,6 +585,26 @@ liefern müsste.
 Steigerungen · solange die Beispielseiten nicht gebaut sind: **ehrlich beschrifteter Bildplatz,
 kein nachgebauter Bildschirm**. Benennungsregeln: `08_TEXTREGELN.md`.
 
+#### Wann die Sektion gebaut wird — aufgelöst am 06.08.2026
+
+**Das Lastenheft sagte an einer Stelle „ehrlich beschrifteter Bildplatz", vier Zeilen später
+„bis dahin bleibt die Sektion ungebaut".** Beides gleichzeitig geht nicht. Aufgelöst über die
+Frage, *was* jeweils fehlt:
+
+| Stufe | Was vorliegt | Was gebaut wird |
+|---|---|---|
+| **0** | nichts — die drei Fälle sind nicht ausgeschrieben | **keine Sektion.** Eine Musterprojekt-Sektion ohne Musterprojekte ist schlechter als keine |
+| **1** | die drei Fälle sind ausgeschrieben (Ausgangslage, Lösung, Struktur, was der Kunde liefert) | **Sektion mit ehrlich beschriftetem Bildplatz.** Der Inhalt trägt sie auch ohne Bild |
+| **2** | ein bis zwei Demoprojekte sind gebaut (`SARTU_ENTSCHEIDUNGEN_OFFEN.md` §5) | echte Aufnahmen ersetzen die Bildplätze |
+
+**Der Satz „bis dahin bleibt die Sektion ungebaut" meint Stufe 0, nicht Stufe 1.** Er wurde
+geschrieben, als weder Fälle noch Bilder vorlagen; damals fielen beide zusammen.
+
+> **Warum Stufe 1 trägt.** Die Karte beantwortet „was kommt dabei heraus" über **Struktur und
+> Arbeitsteilung**, nicht über ein Bild. Ein Leser, der liest *Vier Leistungen → eine eigene Seite
+> je Leistung → das liefern Sie dazu*, weiß danach mehr als von einem Bildschirmfoto. **Der
+> Bildplatz ist der Zusatz, nicht der Inhalt.**
+
 ---
 
 ### Sektion 9 — Häufige Fragen

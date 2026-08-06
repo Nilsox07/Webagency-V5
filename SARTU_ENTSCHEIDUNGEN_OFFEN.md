@@ -331,8 +331,8 @@ durchbaut, hat das Gate verletzt.
 | Punkt | Stand |
 |---|---|
 | Ansichten aus dem Kundenbereich | entstehen mit Sitzung 2 — die zwei Bildplätze der Startseite hängen daran |
-| `[GRUENDER_NAME]` | *offen* — Name für Startseite §5 Sektion 8 und `/ueber-uns` |
-| Foto des Gründers | *offen* — echtes Foto nötig, kein Bestandsfoto, kein Platzhalter, der wie ein Foto wirkt. **Fehlt es, entfällt Sektion 8 der Startseite vollständig** — kein leerer Rahmen an einer Vertrauensstelle |
+| `[GRUENDER_NAME]` | *offen* — Name für Startseite §5 **Sektion 6** und `/ueber-uns` |
+| Foto des Gründers | *offen* — echtes Foto nötig, kein Bestandsfoto, kein Platzhalter, der wie ein Foto wirkt. **Fehlt es, entfällt Sektion 6 der Startseite vollständig** — kein leerer Rahmen an einer Vertrauensstelle |
 | **Ein bis zwei gekennzeichnete Demoprojekte** | *offen, zu entscheiden* — vollständige Beispielseiten für erfundene, **als solche benannte** Betriebe. Liefert Bildmaterial, Arbeitsbeleg und einen Belastungstest des Produktionswegs in einem |
 | Bestandsfotos | **ausgeschlossen** (Design-Briefing §3.2a) |
 
@@ -342,6 +342,37 @@ Ein leerer Platzhalterrahmen an einer Vertrauensstelle ist ausdrücklich unzulä
 
 **Warum das hier steht und nicht im Design-Briefing:** Ob es Demoprojekte gibt, ist eine
 Geschäftsentscheidung mit Aufwand und Außenwirkung — keine Gestaltungsfrage.
+
+### Aufgelöst am 06.08.2026 — es sind zwei Dinge, nicht eins
+
+**Der Widerspruch war scheinbar.** Diese Tabelle nennt *„ein bis zwei"* Demoprojekte,
+`10_WEBSITE_SARTU.md` §8 bindet **drei** Gattungen und die Zahl **drei** im Einleitungssatz. Beide
+Zahlen sind richtig, weil sie **verschiedene Gegenstände** zählen:
+
+| | Was es ist | Woran es hängt | Stand |
+|---|---|---|---|
+| **Musterprojekt-Karte** | eine *Beschreibung* auf der Startseite: Ausgangslage, empfohlene Lösung, Seitenstruktur, Bildplatz, was der Kunde liefern müsste | **Text.** Entsteht am Schreibtisch | **drei — gebunden, entsperrt** |
+| **Demoprojekt** | eine *gebaute* Beispielwebsite für einen erfundenen, als solchen benannten Betrieb | Produktionsaufwand, Hosting, Pflege | **ein bis zwei — weiterhin offen** |
+
+**Die drei Karten hingen nie an der Demoprojekt-Entscheidung.** Sie brauchen keinen gebauten
+Betrieb, sondern drei ausgeschriebene Fälle — und die Gattungen dafür stehen seit dem 01.08.2026
+fest: **Malerbetrieb · Physiotherapiepraxis · Arbeitsrechtskanzlei**.
+
+**Was die Demoprojekt-Entscheidung weiterhin sperrt:** echte Bildschirmaufnahmen für die
+Bildplätze und die Seite `/musterprojekte` in ihrer *ausgebauten* Form. Bis dahin gilt der
+ehrlich beschriftete Bildplatz — **kein nachgebauter Bildschirm** (`10_WEBSITE_SARTU.md` §8).
+
+> **Wer entscheidet:** weiterhin der Betreiber, und weiterhin nur über die **Demoprojekte**. Die
+> Frage lautet nicht mehr „gibt es die Sektion", sondern „bauen wir ein bis zwei der drei
+> beschriebenen Fälle wirklich".
+
+### Die Verwechslung, die dazu geführt hat
+
+**Zwei Zeilen weiter oben stand zweimal „Sektion 8", gemeint war Sektion 6.** Sektion 8 ist
+**Musterprojekte**, Sektion 6 ist **Wer dahintersteckt** — in beiden Fassungen des Lastenhefts.
+Wer die Zeile wörtlich nahm, sperrte die Musterprojekte auf ein **Gründerfoto**, das dort nichts
+zu suchen hat. **Am 06.08.2026 korrigiert.** `spezifikation/20_OFFEN.md` führte die Sperre schon
+richtig auf Sektion 6 — dieser Rang-1-Text war der einzige mit dem Fehler.
 
 ### 5.1 Der Klarname ist gleichzeitig offen und schon vergeben
 

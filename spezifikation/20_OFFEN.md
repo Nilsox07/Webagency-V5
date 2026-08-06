@@ -72,6 +72,7 @@ Rechtstexte werden **technisch eingebunden, nicht rechtlich erstellt** — `06_R
 | **`Leistungen` in der Navigation** | §5b widerspricht sich selbst, beide Stellen begründet — Dublettenregister im Wegweiser |
 | **`LocalBusiness`** in strukturierten Daten | gesperrt, bis eine Anschrift feststeht |
 | **Echte Fallstudie** | erst wenn ein echter Kunde schriftlich freigegeben hat |
+| **Ein bis zwei Demoprojekte** | *offen* — gebaute Beispielwebsites für erfundene, als solche benannte Betriebe. **Betrifft nur die Bilder**, nicht die drei Musterprojekt-Karten — `SARTU_ENTSCHEIDUNGEN_OFFEN.md` §5 |
 
 ---
 
@@ -81,6 +82,10 @@ Rechtstexte werden **technisch eingebunden, nicht rechtlich erstellt** — `06_R
 - **Ohne Gründerfoto:** keine Sektion 6 auf der Startseite
 - **Ohne echten Kunden:** keine Referenzen, keine Fallstudien, keine Logos.
   Es gilt `Musterprojekt — kein Kundenauftrag`
+- **Ohne gebautes Demoprojekt:** keine echten Bildschirmaufnahmen in Sektion 8 und auf
+  `/musterprojekte` — es gilt der **ehrlich beschriftete Bildplatz**. Die Sektion selbst ist
+  **nicht** gesperrt: sie hängt an den drei ausgeschriebenen Fällen, nicht an gebauten Seiten
+  (aufgelöst am 06.08.2026, `10_WEBSITE_SARTU.md` §8)
 - **Ohne `KEYWORD_VALIDATION.md`:** Title, H1 und URL einer Launch-Seite sind **nicht bestätigt**
 
 ---

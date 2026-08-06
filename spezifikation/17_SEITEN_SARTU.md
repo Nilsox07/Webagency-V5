@@ -487,6 +487,55 @@ Fundstelle · eine Seite veröffentlichen, die eine der drei Prüfungen reißt.
 
 ---
 
+## 4a. `/musterprojekte` — die Zielseite des gebundenen CTA
+
+> **Ergänzt am 06.08.2026.** Die Seite fehlte in dieser Datei vollständig, obwohl
+> `10_WEBSITE_SARTU.md` §8 den CTA `Alle Musterprojekte ansehen` **bindet**. Ein gebundener Knopf
+> ohne Zielseite ist ein Bruch, kein offener Punkt.
+
+**Umfang 700–1.000 Wörter.** Sie ist die Langfassung von Sektion 8 der Startseite, keine
+Wiederholung: dort **drei Karten nebeneinander**, hier **drei Fälle nacheinander mit Begründung**.
+
+**Aufbau `gebunden`:**
+
+| # | Block | Inhalt |
+|---|---|---|
+| 1 | `H1` | benennt, dass es Muster sind — **kein** `Referenzen`, `Arbeiten`, `Projekte` |
+| 2 | Einleitung | wie auf der Startseite: Gründungsjahr und Anzahl. **Zahlen `gebunden`:** Gründung **2026**, **drei** Beispiele |
+| 3 | **Warum es Muster sind und keine Kunden** | der ehrliche Absatz, den die Startseite aus Platzgründen nicht führt |
+| 4–6 | **je Fall ein Abschnitt** | die drei gebundenen Gattungen, Reihenfolge wie auf der Startseite |
+| 7 | Übergang zum Bedarfsscheck | CTA `Bedarf prüfen lassen` → `/briefing` |
+
+**Je Fall — dieselben fünf Bestandteile wie auf der Karte, nur ausgeschrieben:**
+Ausgangslage · empfohlene Lösung · Seitenstruktur · Bildplatz · was der Kunde selbst liefern
+müsste. Dazu **ein** Block, den die Karte nicht trägt: **warum diese Stufe und nicht die
+nächstkleinere.**
+
+**Gebunden:**
+- Die drei Gattungen: **Malerbetrieb · Physiotherapiepraxis · Arbeitsrechtskanzlei**
+- Über jedem Fall: `Musterprojekt — kein Kundenauftrag`
+- Der Preishinweis in der **langen** Fassung, sobald eine Zahl fällt — `08_TEXTREGELN.md`
+
+**Sperren — dieselben wie in §8, sie gelten hier schärfer**, weil die Seite mehr Platz zum
+Ausschmücken hätte: keine erfundenen Firmennamen · keine erfundenen Zahlen, Ergebnisse oder
+Steigerungen · **kein nachgebauter Bildschirm**, solange kein Demoprojekt gebaut ist
+(`SARTU_ENTSCHEIDUNGEN_OFFEN.md` §5).
+
+> **Der Fall darf nicht zur Fallstudie werden.** Eine Fallstudie behauptet ein *Ergebnis* — mehr
+> Anfragen, bessere Sichtbarkeit. Ein Musterprojekt beschreibt eine *Entscheidung*: dieser
+> Ausgangslage entspricht diese Struktur. **Sobald ein Ergebnis behauptet wird, ist es eine
+> erfundene Fallstudie**, und die ist in `20_OFFEN.md` gesperrt, bis ein echter Kunde schriftlich
+> freigibt.
+
+**Suchmaschinen:** eigene Adresse, eigener Title, eigene Beschreibung, `index,follow`.
+Zielbegriff aus `KEYWORD_VALIDATION.md` — **die Datei wird neu erzeugt, wenn diese Adresse in
+`Launchadressen` aufgenommen wird**, nicht von Hand ergänzt.
+
+**Verlinkt aus:** Startseite §8 (`Alle Musterprojekte ansehen`) · je Branchenseite aus Block 6
+(„ein Beispiel — das Musterprojekt dieser Branche"), sofern die Gattung passt.
+
+---
+
 ## 5. `/ueber-uns` und `/kontakt`
 
 ### `/ueber-uns` — **Umfang 400–550 Wörter**

@@ -487,6 +487,17 @@ h1 .accent{background-image:linear-gradient(var(--lime),var(--lime));background-
 .sample-in{padding:0 22px 24px}
 .sample-in h3{font-size:21px;margin-bottom:6px}
 .sample-in p{font-size:16.5px;line-height:1.55;color:var(--muted)}
+/* §8 schreibt je Karte FUENF Bestandteile vor: Ausgangslage, empfohlene
+   Loesung, Seitenstruktur, Bildplatz und was der Kunde selbst liefern
+   muesste. Gebaut waren zwei. Als Beschreibungsliste, weil es genau das
+   ist — Begriff und Erlaeuterung, nicht Fliesstext. */
+.sample-teile{margin-top:16px;border-top:1px solid var(--line);font-size:15px;line-height:1.5}
+.sample-teile div{display:grid;grid-template-columns:1fr;gap:2px;
+  padding:11px 0;border-bottom:1px solid var(--line)}
+.sample-teile div:last-child{border-bottom:none;padding-bottom:0}
+.sample-teile dt{font-family:var(--font-mono);font-size:11px;letter-spacing:.13em;
+  text-transform:uppercase;color:var(--label)}
+.sample-teile dd{margin:0;color:var(--text)}
 @media (max-width:880px){.samples{grid-template-columns:1fr}.sample-shot{aspect-ratio:16/9}}
 
 /* ---------- Fragen ---------- */
@@ -952,18 +963,42 @@ html:has(#g-kalk:checked),html:has(#g-weiss:checked){background:var(--cream)}
       <div class="samples">
         <div class="sample rise">
           <span class="sample-flag">Musterprojekt — kein Kundenauftrag</span>
-          <div class="sample-shot"><p class="mono">Platz für Ansicht</p><p>Dachdeckerbetrieb, Umfang Wachstum</p></div>
-          <div class="sample-in"><h3>Dachdeckerei</h3><p>Drei Leistungen, eigene Seite je Leistung, Anfrageweg auf jeder Seite.</p></div>
+          <div class="sample-shot"><p class="mono">Platz für Ansicht</p><p>Malerbetrieb, Umfang Wachstum</p></div>
+          <div class="sample-in">
+            <h3>Malerbetrieb</h3>
+            <dl class="sample-teile">
+              <div><dt>Ausgangslage</dt><dd>Vier Leistungen, die von außen wie eine aussehen.</dd></div>
+              <div><dt>Empfohlen</dt><dd>Eine eigene Seite je Leistung, jede mit eigenem Text und eigenem Anfrageweg.</dd></div>
+              <div><dt>Seitenstruktur</dt><dd>Start · vier Leistungsseiten · Über uns · Kontakt.</dd></div>
+              <div><dt>Sie liefern</dt><dd>Leistungsliste, Einzugsgebiet, Fotos eigener Arbeiten.</dd></div>
+            </dl>
+          </div>
         </div>
         <div class="sample rise-2">
           <span class="sample-flag">Musterprojekt — kein Kundenauftrag</span>
-          <div class="sample-shot"><p class="mono">Platz für Ansicht</p><p>Elektrobetrieb, Umfang Platzhirsch</p></div>
-          <div class="sample-in"><h3>Elektrotechnik</h3><p>Inhalte je Leistung und Ort, Team und Ablauf sichtbar.</p></div>
+          <div class="sample-shot"><p class="mono">Platz für Ansicht</p><p>Physiotherapiepraxis, Umfang Start</p></div>
+          <div class="sample-in">
+            <h3>Physiotherapiepraxis</h3>
+            <dl class="sample-teile">
+              <div><dt>Ausgangslage</dt><dd>Eine Adresse, feste Zeiten, Terminanfragen laufen übers Telefon.</dd></div>
+              <div><dt>Empfohlen</dt><dd>Eine Seite, die Leistung, Zeiten und den Weg zur Terminanfrage trägt.</dd></div>
+              <div><dt>Seitenstruktur</dt><dd>Eine Seite, rund 1.200 Wörter.</dd></div>
+              <div><dt>Sie liefern</dt><dd>Leistungsspektrum, Öffnungszeiten, Kassenzulassung.</dd></div>
+            </dl>
+          </div>
         </div>
         <div class="sample rise-3">
           <span class="sample-flag">Musterprojekt — kein Kundenauftrag</span>
-          <div class="sample-shot"><p class="mono">Platz für Ansicht</p><p>Praxis, Umfang Start</p></div>
-          <div class="sample-in"><h3>Praxis</h3><p>Eine Seite, die trägt: Leistung, Zeiten, Weg zur Terminanfrage.</p></div>
+          <div class="sample-shot"><p class="mono">Platz für Ansicht</p><p>Arbeitsrechtskanzlei, Umfang Platzhirsch</p></div>
+          <div class="sample-in">
+            <h3>Arbeitsrechtskanzlei</h3>
+            <dl class="sample-teile">
+              <div><dt>Ausgangslage</dt><dd>Zwei Zielgruppen mit gegensätzlichem Anliegen: Arbeitgeber und Arbeitnehmer.</dd></div>
+              <div><dt>Empfohlen</dt><dd>Getrennte Wege je Zielgruppe, Vertrauen über Personen und Ablauf, eigene Stellenseite.</dd></div>
+              <div><dt>Seitenstruktur</dt><dd>Start · je Rechtsgebiet eine Seite · Team · Ablauf · Karriere · Kontakt.</dd></div>
+              <div><dt>Sie liefern</dt><dd>Tätigkeitsschwerpunkte, Werdegang je Person, Pflichtangaben der Kammer.</dd></div>
+            </dl>
+          </div>
         </div>
       </div>
       <a class="btn btn-ghost rise" href="/musterprojekte" style="margin-top:var(--s-5)">Alle Musterprojekte ansehen <span class="ar">→</span></a>

@@ -1056,3 +1056,30 @@ nachgemessen.
 | **Platzhirsch hat nicht mehr Fläche als die anderen** | `02_PREISE_UND_ZAHLUNG.md` verlangt „größte Fläche". **Galt schon vorher nicht** — auch das Dreierraster war gleichspaltig. In `10_WEBSITE_SARTU.md` als Entscheidung notiert |
 | **Karten sind bei 1366 und 1512 px nur 299 bzw. 302 px breit** | Die Preiszeile bricht dort zweizeilig um (`7.900 €` / `einmalig + 249 €/Mon.`). Lesbar, aber eng. Ab 1920 px sind es 389 px und die Zeile passt |
 | **Kein Test ausgeführt, kein PHP angefasst** | Wie in den Einträgen davor: nur `design/startseite.html` und Spezifikationsdateien |
+
+### Nachtrag: Musterprojekte — Unklarheiten aufgelöst, Zielseite ergänzt — 06.08.2026
+
+**Auftrag:** „dann löse die Unklarheiten noch auf und ergänze das."
+
+| Unklarheit | Wie sie aufgelöst wurde |
+|---|---|
+| **„Ein bis zwei" gegen „drei"** | **Scheinwiderspruch.** Die Zahlen zählen Verschiedenes: **drei Karten** sind Beschreibungen und entstehen am Schreibtisch, **ein bis zwei Demoprojekte** sind gebaute Websites. In `SARTU_ENTSCHEIDUNGEN_OFFEN.md` §5 als Tabelle festgehalten. **Die Geschäftsentscheidung über die Demoprojekte bleibt offen** — sie war nie meine |
+| **„ungebaut" gegen „ehrlich beschrifteter Bildplatz"** | Über drei Stufen aufgelöst (`10_WEBSITE_SARTU.md` §8): Stufe 0 keine Fälle → keine Sektion · Stufe 1 Fälle ausgeschrieben → Sektion mit Bildplatz · Stufe 2 Demoprojekt gebaut → echte Aufnahme. Der Satz „bis dahin ungebaut" meinte Stufe 0; damals fielen Fälle und Bilder zusammen |
+| **Falsche Sektionsnummer** | **Sachfehler, keine Entscheidung.** `SARTU_ENTSCHEIDUNGEN_OFFEN.md` §5 sagte zweimal „Sektion 8" für Gründername und Gründerfoto. Richtig ist **Sektion 6**. Korrigiert. `spezifikation/20_OFFEN.md` führte es bereits richtig |
+| **`/musterprojekte` fehlte** | Als `## 4a.` in `17_SEITEN_SARTU.md` ergänzt: Aufbau in sieben Blöcken, 700–1.000 Wörter, gebundene Gattungen und Kennzeichnung, Sperren, Verlinkung |
+
+**Dabei gefunden und behoben — der Entwurf wich von gebundenen Werten ab:**
+
+| Befund | Behoben |
+|---|---|
+| **Die drei Gattungen waren falsch.** Der Entwurf führte `Dachdeckerei · Elektrotechnik · Praxis`, gebunden sind seit 01.08.2026 **`Malerbetrieb · Physiotherapiepraxis · Arbeitsrechtskanzlei`** | ja |
+| **Je Karte fehlten drei der fünf vorgeschriebenen Bestandteile.** Gebaut waren Bildplatz und ein Satz; §8 verlangt Ausgangslage · empfohlene Lösung · Seitenstruktur · Bildplatz · was der Kunde liefert | ja, als Beschreibungsliste |
+
+**Was weiterhin offen ist — und bewusst nicht entschieden wurde:**
+
+| Punkt | Warum nicht von mir |
+|---|---|
+| **Ein bis zwei Demoprojekte bauen?** | `SARTU_ENTSCHEIDUNGEN_OFFEN.md` §5 sagt es selbst: „eine Geschäftsentscheidung mit Aufwand und Außenwirkung — keine Gestaltungsfrage. **Wer entscheidet: der Betreiber**" |
+| **Der Text der drei Fälle** | Geschrieben ist eine erste Fassung im Entwurf. Sie ist **nicht durch den Texter-Skill gelaufen** und trägt keinen Prüfbericht. Prüfmittel: ein Durchgang des Skills für Sektion 8 und `/musterprojekte` |
+| **`/musterprojekte` ist spezifiziert, nicht gebaut** | Bewusst **nicht** in `Launchadressen` aufgenommen: `WebsiteTest` verlangt für jede Launchadresse eine Zeile in `KEYWORD_VALIDATION.md`, und die Datei lässt sich hier nicht erzeugen (keine Datenbank). Reihenfolge: erst Seite bauen, dann Adresse eintragen, dann `bin/keywords.php` |
+| **`Ihr Projekt bleibt an einem Ort.`** | Unverändert offen aus dem Eintrag davor — verworfener Satz ohne dokumentierte Ersatzfassung |
