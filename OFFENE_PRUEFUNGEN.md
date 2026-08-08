@@ -1293,3 +1293,27 @@ nicht in drei Wochen erneut gestellt wird.
 | **Die Phasenzuordnung ist neuer Text** | Acht kurze Kennzeichen, aus dem Ablauf in `03_KUNDENPRODUKT.md` abgeleitet. **Nicht durch den Texter-Skill gelaufen** |
 | **Mögliche Dopplung mit Sektion 3** | Der Ablauf zeigt sechs Prozessschritte, das Phasenkennzeichen ordnet Leistungen einer Zeit zu. Verwandt, nicht dasselbe. **Beim nächsten Durchgang gegenlesen, ob es sich reibt** |
 | **Gemessen:** 390 · 1512 · 2560 px | acht Karten, kein waagerechter Überlauf |
+
+### Fund: Branchenseiten und Musterprojekte haben keine Branche gemeinsam — 06.08.2026
+
+**Gefunden bei der Frage nach der SEO-/GEO-Nische.** Zwei gebundene Listen, die aufeinander
+verweisen, nennen **komplett verschiedene** Branchen:
+
+| Quelle | Branchen |
+|---|---|
+| `16_SEO_GEO_SARTU.md` — drei Launch-Branchenseiten | **Sanitär-Heizung-Klima · Elektrotechnik · Dachdecker** |
+| `10_WEBSITE_SARTU.md` §8 — drei Musterprojekte, `gebunden` | **Malerbetrieb · Physiotherapiepraxis · Arbeitsrechtskanzlei** |
+
+**Keine Überschneidung.** Und `17_SEITEN_SARTU.md` §4 führt als **Block 6 jeder Branchenseite**:
+*„ein Beispiel — das Musterprojekt dieser Branche"*, Spalte **eigen**.
+
+**Folge: Block 6 ist auf keiner der drei Branchenseiten baubar.** Die Branchenseite für
+Dachdecker müsste ein Dachdecker-Musterprojekt zeigen — gebaut ist eines für einen Malerbetrieb.
+
+**Das ist unabhängig von der Nischenentscheidung ein Fehler.** Welche drei Branchen es auch
+werden: **es müssen dieselben drei sein.** Ein Musterprojekt ohne Branchenseite verschenkt seinen
+stärksten Platz, eine Branchenseite ohne Musterprojekt kann ihren vorgeschriebenen Block nicht
+füllen.
+
+**Nicht entschieden, weil es die Nischenfrage vorwegnähme:** welche drei. Beide Listen sind
+`gebunden`, keine trägt Vorrang. **Gemeldet statt ausgewählt.**
