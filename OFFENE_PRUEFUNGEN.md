@@ -1326,3 +1326,51 @@ stärksten Platz, eine Branchenseite ohne Musterprojekt kann ihren Pflichtblock 
 `gebunden`, keine trägt Vorrang. **Gemeldet statt ausgewählt** — die Entscheidungsvorlage mit den
 drei gangbaren Wegen und einer Empfehlung steht als **§7c** in `SARTU_ENTSCHEIDUNGEN_OFFEN.md`,
 dem dafür zuständigen Dokument (Rang 1).
+
+---
+
+## Die Kundengewinnung fehlt in der geltenden Fassung — **Lücke, gemeldet 08.08.2026**
+
+**Gefunden, weil der Betreiber zu Recht widersprach.** Eine Nischenempfehlung stützte sich auf
+`§23b.2`, `§23b.7`, `§23b.9` und `§23b.10`. Alle vier stehen in
+`CLAUDE_SARTU_MASTERKONZEPT_FINAL.md` — nach `UEBERGABE_DATEILISTE.md` **„Begründungsarchiv,
+keine Bauvorlage mehr"**. Sie wurden als Sperren dargestellt. **Das waren sie nicht.**
+
+**Die Gegenprobe über die gesamte geltende Fassung:**
+
+| Suchbegriff | Treffer in `spezifikation/` |
+|---|---|
+| `Angstmache` | **0** |
+| `Spirale` | **0** |
+| `Zweitmeinung` | **0** |
+| `Trigger-Event` | **0** |
+| `verwaiste` | **0** |
+
+**Die gesamte Kundengewinnung ist bei der Zusammenführung am 03.08.2026 nicht übernommen worden.**
+Zehn Kanäle, Branchen-Spirale, Zweitmeinung, Trigger-Events, verwaiste Bestandskunden, die Sequenz
+über zwölf Monate — nichts davon hat einen Ort in `spezifikation/`.
+
+**Warum das kein Formfehler ist:** `CLAUDE.md` sagt, die Zusammenführung sei seit 05.08.2026
+abgeschlossen und **„keine Themendatei verweist mehr für Bauwissen auf ihre Quelle."** Für die
+Kundengewinnung stimmt das nur deshalb, weil sie in **keiner** Themendatei vorkommt. Die 18
+Themendateien decken Produkt, Website, Kundenbereich, Adminbereich, Recht, Sicherheit und Tests
+ab — **nicht, wie ein Kunde entsteht.**
+
+**Folge:** Jede Nischen-, Kanal- oder Akquiseentscheidung hat derzeit **keine geltende Grundlage**,
+auf der sie später nachgelesen werden könnte. Wer sie im Masterkonzept nachschlägt, baut nach
+`UEBERGABE_DATEILISTE.md` „aus der Quelle statt aus der geltenden Fassung".
+
+**Was zu entscheiden ist — nicht von der KI:**
+
+| # | Frage |
+|---|---|
+| 1 | Soll die Kundengewinnung eine **19. Themendatei** bekommen (etwa `18_KUNDENGEWINNUNG.md`)? |
+| 2 | Oder ist sie bewusst draußen, weil sie kein **Bau**wissen ist? Dann gehört genau dieser Satz in `00_UEBERSICHT.md`, sonst sucht der nächste Leser weiter |
+| 3 | Welche Aussagen aus `§23b` sind noch gewollt? Die Zahl „3–5 Referenzen je Branche" etwa ist unbelegt |
+
+**Ungeprüft:** ob weitere Themen dasselbe Schicksal hatten. Geprüft wurden fünf Suchbegriffe aus
+`§23b`, nicht das vollständige Masterkonzept gegen die vollständige `spezifikation/`.
+**Ein systematischer Abgleich steht aus.**
+
+**Berichtigt wurde:** `NISCHEN_IDEEN.md` trennt jetzt „Echte Sperren" (Rang 1 und 4, mit Datei und
+Rang je Zeile) von „Empfehlungen ohne Bindung" aus dem Begründungsarchiv.
