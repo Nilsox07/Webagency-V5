@@ -83,12 +83,19 @@ h2{font-size:clamp(27px,calc(3vw - 6px),54px)}
 /* Sektion 7 als EINE Flaeche: ein Kasten, ein Preis, alles drin.
    Lime ist Flaeche (nie Schrift), auf Lime steht --ink, und die Flaeche
    traegt auf hellem Grund die vorgeschriebene 1px --line als Kante. */
-.paket{margin-top:var(--s-5);padding:clamp(26px,3.2vw,50px);
-  background:var(--lime);border:1px solid var(--line);border-radius:var(--r-xl)}
+/* Die Lime-Flaeche ist raus — gemessen 429.000 px^2, mehr als saemtliches
+   Lime im Aufmacher zusammen. Drei Gruende, keiner davon Geschmack:
+   1. Lime ist die EINZIGE Akzentfarbe (07). Als Flaeche dieser Groesse wird
+      sie zum Grund, und Knopf, Statuspunkt und Musterkennzeichnung verlieren
+      ihre Auszeichnung — sie zeigen dann dasselbe an wie eine Deko-Platte.
+   2. Lime auf Sand steht bei 1,25:1. Die Platte trennte sich aussen kaum vom
+      Grund und war innen maximal laut. Das Schlechteste aus beidem.
+   3. Es war die DRITTE gefuellte Kartenflaeche der Seite, nach Preisen und
+      Musterprojekten. §3: kein Aufbaumuster mehr als zweimal.
+   Die sechs Bloecke tragen sich ueber ihre Ink-Kante selbst; §7 verlangt
+   ohnehin Zeilen und ausdruecklich "keine Kachelwand". */
+.paket{margin-top:var(--s-5)}
 .paket .lbs{margin-top:0}
-.paket .lb{border-top:2px solid var(--ink)}
-.paket .lb h3{color:var(--ink)}
-.paket .lb p{color:rgba(20,17,13,.76)}
 .sec.sand+.sec{padding-top:var(--s-6)}
 
 /* Knöpfe */

@@ -1110,3 +1110,39 @@ Kunden.
 **Warum das keine Geschmacksfrage ist.** SARTU verkauft *individuell programmiert, kein
 Baukasten*. Drei Musterprojekte in derselben Gestaltung wären der Gegenbeweis — vorgelegt von
 SARTU selbst, an genau der Stelle, an der der Leser nach Belegen sucht.
+
+### Nachtrag: Lime-Platte in Sektion 7 entfernt, Kundenseiten-Stack entschieden — 06.08.2026
+
+**Einwand:** „‚Es gibt keine Aufpreisliste' dieser abschnitt sieht optisch nach wie vor komisch
+aus vor allem zu viel lime." · **Entscheidung:** „kundenseiten php".
+
+**Gemessen, bevor etwas geändert wurde:** Die Leistungssektion trug **eine** Lime-Fläche von
+**429.000 px²** — mehr als sämtliches Lime im Aufmacher zusammen (675.000 px², verteilt auf acht
+Flächen, überwiegend Knopf und Gerätepaar). **Sie hielt die Kantenregel ein und war trotzdem
+falsch.** Entfernt; die sechs Blöcke tragen sich über ihre Ink-Kante selbst.
+
+Regel dazu in `07_MARKE_UND_GESTALTUNG.md` ergänzt: **Lime kennzeichnet Handlungen und Zustände,
+keine Bereiche.** Mit der gemessenen Verteilung je Sektion als Bezugsgröße.
+
+**Kundenseiten-Stack:** **PHP**, entschieden vom Betreiber. In `03_KUNDENPRODUKT.md` aufgenommen —
+Setzung **und** die zwei Gründe, samt der ausdrücklichen Klarstellung, dass „PHP ist besser für
+SEO" **nicht** der Grund ist. Damit ist der Widerspruch im Masterkonzept (Zeile 167 „statische
+Auslieferung" gegen Zeile 396 „PHP, serverseitig gerendert") aufgelöst.
+
+**Dabei gefunden, NICHT behoben — Sektion 7 weicht an drei Stellen von `10_WEBSITE_SARTU.md` §7 ab:**
+
+| Vorgabe | Entwurf |
+|---|---|
+| **„Acht breite Zeilen"**, Grenze: „**genau acht Zeilen**" | **sechs** Blöcke in einem 3 × 2-Raster |
+| Titel `gebunden`: `Strategie und Seitenstruktur` · `Webdesign und Programmierung` · `Website-Texte` · `SEO- und GEO-Grundlage` · `Lokale Sichtbarkeit` · `Domain und Launch` … | `Strategie` · `Design und Programmierung` · `Texte` · `Sichtbarkeit` · `Domain und Start` · `Betrieb` — **gekürzt** |
+| Tags `gebunden`, **je Zeile** | alle Tags in **einer** Sammelzeile am Fuß |
+
+**Warum ich das nicht angefasst habe:** Im CSS steht eine Begründung für die Abweichung —
+*„Sechs Blöcke statt acht Zeilen. Recherche an vier Agenturseiten: alle zeigen 2 bis 6
+Leistungen, nie acht."* Eine frühere Sitzung hat das also **bewusst** geändert. Die Titel sind in
+§7 aber `gebunden` und müssen laut derselben Stelle „mit `03_KUNDENPRODUKT.md` deckungsgleich
+bleiben". **Zwei begründete Stände, kein Vorrang erkennbar — gemeldet statt ausgewählt.**
+
+> **Der CSS-Kommentar ist zusätzlich veraltet:** Er nennt als Begründung „nur eine **Lime**-Kante
+> je Block", gebaut ist `border-top: 2px solid var(--ink)`. Die Lime-Kante gibt es nicht und gab
+> es vermutlich nie.

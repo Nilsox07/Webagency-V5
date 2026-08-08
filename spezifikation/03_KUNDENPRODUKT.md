@@ -66,6 +66,29 @@ Meilensteine bleiben fällig.
 
 ---
 
+## Technischer Rahmen der Kundenwebsites — **entschieden 06.08.2026**
+
+**PHP, serverseitig gerendert, öffentliche Seiten cachebar** — dieselbe Bauweise wie SARTUs eigene
+Website (`10_WEBSITE_SARTU.md` §1). **Ein Repository je Kunde**, gemeinsamer versionierter
+SARTU-Starter, versionierte Designwerte.
+
+> **Bis zum 06.08.2026 stand das nur im Masterkonzept** — und dort zweimal verschieden: an einer
+> Stelle „statische Auslieferung", an anderer „PHP, serverseitig gerendert". Der Betreiber hat
+> **PHP** entschieden. Der Querverweis „(s. Abschnitt 10)" der statischen Fassung führte ins Leere.
+
+**Die zwei Gründe, damit die Setzung beim nächsten Vorschlag verteidigt werden kann:**
+
+| Grund | Was er trägt |
+|---|---|
+| **Läuft auf jedem Hoster** | PHP liegt auf praktisch jedem deutschen Paket. Keine Node-Laufzeit, kein Build, kein Container. **Das ist Teil des Verkaufsversprechens, nicht Bequemlichkeit:** Bei Vertragsende soll der Kunde Domain und Seite mitnehmen können. Eine PHP-Seite läuft beim nächsten Hoster weiter; eine Seite mit Build-Schritt bindet ihn faktisch, obwohl der Vertrag das Gegenteil sagt |
+| **Fertiges HTML in der ersten Antwort** | Suchmaschinen bekommen den Inhalt ohne Rendern, **KI-Crawler rendern JavaScript überwiegend gar nicht** (`05_SEO_GEO.md`). Dazu volle Kontrolle über `<head>`, Statuscodes, Weiterleitungen, Canonicals |
+
+> **Nicht der Grund: „PHP ist besser für SEO."** Das ist es nicht — Suchmaschinen sehen nur das
+> ausgelieferte HTML, nicht die Sprache dahinter. **Der Vorteil ist das serverseitig fertig
+> gelieferte HTML, nicht PHP.** Die Unterscheidung ist keine Wortklauberei: Wer „PHP = SEO"
+> glaubt, hält irgendwann eine React-Insel in einer PHP-Seite für unbedenklich. **Sobald der
+> Inhalt erst durch JavaScript entsteht, ist der Vorteil weg — gleich, was ihn ausliefert.**
+
 ## Designprinzipien für Kundenwebsites
 
 **Unveränderlich:** 4-/8-Pixel-Abstandslogik · stabile Container, responsive Raster ·

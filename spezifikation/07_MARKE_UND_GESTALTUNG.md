@@ -34,6 +34,37 @@
 **Lime ist Fläche.** Auf hellem Grund **nie** Schriftfarbe. Auf Lime steht immer `--ink`.
 Jede Lime-Fläche auf hellem Grund braucht `1px --line` als Kante.
 
+### Wie viel Lime — ergänzt am 06.08.2026
+
+**„Lime ist Fläche" sagt, wie es aussieht, nicht wie viel.** Genau daran ist es gescheitert: Die
+Leistungssektion trug eine Lime-Platte von **429.000 px²** — mehr als sämtliches Lime im
+Aufmacher zusammen. Sie hielt die Kantenregel ein und war trotzdem falsch.
+
+**Lime kennzeichnet Handlungen und Zustände, nicht Bereiche.** Knopf · Statuspunkt ·
+Musterkennzeichnung · Textmarker · Empfehlungsabzeichen. **Eine Lime-Fläche, die nichts
+auszeichnet, entwertet alle, die es tun** — der Leser lernt, dass Lime auch bloß Dekoration sein
+kann, und hört auf, ihm zu folgen.
+
+**Gemessen am 06.08.2026, nach dem Rückbau** — als Bezugsgröße für den nächsten Zweifelsfall:
+
+| Sektion | Lime-Flächen | zusammen |
+|---|---:|---:|
+| Aufmacher | 8 | 675.000 px² (überwiegend der Hauptknopf und das Gerätepaar) |
+| Musterprojekte | 3 | 51.000 px² |
+| Preise | 3 | 25.000 px² |
+| Abschluss | 1 | 18.000 px² |
+| Ablauf | 1 | 2.000 px² |
+| **Leistungen** | **0** | — |
+
+**Eine Sektion ohne Lime ist kein Mangel.** Die kleine Lime-Kante unter jeder Vorzeile trägt die
+Wiedererkennung über die ganze Seite; darüber hinaus braucht ein Abschnitt nur dann Lime, wenn
+darin etwas zu tun oder zu unterscheiden ist.
+
+> **Zweite Falle, an derselben Stelle:** Lime auf Sand steht bei **1,25 : 1**. Eine Lime-Platte
+> auf einem Sandabschnitt trennt sich außen kaum vom Grund und ist innen maximal laut — **das
+> Schlechteste aus beidem.** Die Kantenregel rettet das nicht, weil `--line` auf Lime praktisch
+> unsichtbar ist.
+
 **Gemessene Kontraste** — Grundlage jeder Farbentscheidung:
 
 | | auf Creme | auf Papier | auf Sand | auf Tinte |
