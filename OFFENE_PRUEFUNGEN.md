@@ -1259,3 +1259,37 @@ der beim Überfahren über die Kartenoberkante einfährt · Positionsnummer auf 
 | **Der Zeigebalken existiert auf Berührungsgeräten nicht** | Bewusst: er markiert einen Zeigezustand. Die Karte verliert ohne ihn nichts — die Punkte tragen sie |
 | **Gemessen:** 390 · 1512 · 2560 px | acht Karten, kein waagerechter Überlauf |
 | **Text weiterhin ohne Prüfbericht** | unverändert offen |
+
+### Nachtrag: Positionsnummern raus, Icons geprüft und verworfen — 06.08.2026
+
+**Anweisung und Frage:** „die zahlen sind zu groß und sind auch völlig sinnlos. wieder raus damit,
+das verwirrt doch nur. können wir dort vielleicht auch mit icons arbeiten … oder wird es zu
+kitschig?"
+
+**Die Zahlen sind raus.** Der Einwand war richtig, und ich hätte ihn selbst sehen müssen: Ein
+Zähler zählt eine Reihenfolge — die acht Karten haben keine. **`01 / 08` war eine Auszeichnung
+für nichts.**
+
+**An derselben Stelle steht jetzt ein Phasenkennzeichen:** `Vor dem Bau` · `Im Bau` (viermal) ·
+`Zum Start` · `Durchgehend` · `Nach dem Start`. Gleiche Bauform wie der Kicker im Preisraster,
+kein neues Bauteil — aber es beantwortet eine echte Frage statt einer erfundenen.
+
+**Zu den Icons: die Frage war schon beantwortet, bevor sie gestellt wurde.**
+`SARTU_CORPORATE_DESIGN.md` führt drei Stellen:
+
+- Lime-Tabelle, Spalte *Lime nein*: **„Icons ohne Funktion"** und **„Flächen, die nur schmücken"**
+- *„Der Auftritt hat damit gar keinen Schmuck. **Keine Symbole, keine Illustrationen**, keine
+  Verläufe, keine Schlagschatten außer den zwei definierten."*
+- *„**Wenn später doch ein Zeichen soll:** Dann kommt es aus der **Bildmarke** … Das ist der
+  einzige Weg, bei dem ein Zeichen etwas bedeutet, statt nur eine Form zu sein."*
+
+**Acht Themen-Icons scheitern doppelt:** Symbole sind ausgeschlossen, und aus der Bildmarke ergibt
+sich **ein** Zeichen, kein Satz von acht. In `10_WEBSITE_SARTU.md` §7 abgelegt, damit die Frage
+nicht in drei Wochen erneut gestellt wird.
+
+| Befund | Lage |
+|---|---|
+| **Der eine offene Weg wäre ein Zeichen aus der Bildmarke** | Er ergibt **ein** Zeichen für die Marke, nicht acht für acht Themen. Für diese Karten also kein Weg. `design/icon-lesarten.html` und `design/motiv-recherche.html` gehören dazu |
+| **Die Phasenzuordnung ist neuer Text** | Acht kurze Kennzeichen, aus dem Ablauf in `03_KUNDENPRODUKT.md` abgeleitet. **Nicht durch den Texter-Skill gelaufen** |
+| **Mögliche Dopplung mit Sektion 3** | Der Ablauf zeigt sechs Prozessschritte, das Phasenkennzeichen ordnet Leistungen einer Zeit zu. Verwandt, nicht dasselbe. **Beim nächsten Durchgang gegenlesen, ob es sich reibt** |
+| **Gemessen:** 390 · 1512 · 2560 px | acht Karten, kein waagerechter Überlauf |

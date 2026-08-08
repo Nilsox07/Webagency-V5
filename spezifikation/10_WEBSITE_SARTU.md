@@ -510,9 +510,40 @@ benennt, wirkt geprüft; wer nur Vorzüge aufzählt, wirkt beliebig.**
 
 ### Bauform: acht Karten mit Umfangsliste — angeordnet am 06.08.2026
 
-**Je Karte:** Position `01 / 08` · Titel (`gebunden`) · **ein** Satz · Trennlinie ·
-`Das gehört dazu` mit zwei bis vier Punkten in Klartext. Vier Spalten ab 1240 px, zwei darunter,
-eine unter 620 px.
+**Je Karte:** Phasenkennzeichen · Titel (`gebunden`) · **ein** Satz · Trennlinie ·
+`Das gehört dazu` mit zwei bis vier Punkten in Klartext, jeder mit Lime-Marker. Vier Spalten ab
+1240 px, zwei darunter, eine unter 620 px.
+
+**Das Phasenkennzeichen sagt, wann die Leistung greift:** `Vor dem Bau` · `Im Bau` (viermal) ·
+`Zum Start` · `Durchgehend` · `Nach dem Start`.
+
+> **Ersetzt am 06.08.2026 die Positionsnummer `01 / 08`.** Die Nummer war ein Zähler ohne
+> Aussage — acht Karten, die nichts voneinander unterscheidet außer einer Reihenfolge, die es gar
+> nicht gibt. **Ein Zähler, der nichts zählt, verwirrt.** Das Phasenkennzeichen beantwortet an
+> derselben Stelle eine Frage, die der Kunde wirklich hat: wann passiert das, und wie lange
+> begleitet ihr mich.
+
+### Keine Icons — die Frage ist beantwortet, nicht offen
+
+**Gefragt am 06.08.2026: „können wir dort vielleicht auch mit Icons arbeiten … oder wird es zu
+kitschig?"** Die Antwort steht in `SARTU_CORPORATE_DESIGN.md` und ist älter als die Frage:
+
+| Fundstelle | Was dort steht |
+|---|---|
+| Lime-Tabelle | Lime **nein** bei: *Flächen, die nur schmücken* · **Icons ohne Funktion** |
+| Abschnitt Form | *„Der Auftritt hat damit gar keinen Schmuck. **Keine Symbole, keine Illustrationen**, keine Verläufe, keine Schlagschatten außer den zwei definierten."* |
+| derselbe Abschnitt | *„**Wenn später doch ein Zeichen soll:** Dann kommt es aus der **Bildmarke** … Das ist der einzige Weg, bei dem ein Zeichen etwas bedeutet, statt nur eine Form zu sein."* |
+
+**Acht Themen-Icons scheitern damit doppelt:** Sie wären Symbole (ausgeschlossen), und sie
+könnten nicht alle aus der Bildmarke kommen — die ergibt **ein** Zeichen, keinen Satz von acht.
+
+> **Die ehrliche Antwort auf „wird es zu kitschig": ja, und zwar planbar.** Lupe für SEO, Rakete
+> für Launch, Schild für Schutz, Stift für Texte — das ist der am häufigsten gebaute
+> Leistungsraster im Netz. Er sagt nichts, was der Titel nicht schon sagt, und er ist genau das
+> Template-Aussehen, das der Positionierungsschutz in §1 ausschließt.
+
+**Was den Karten stattdessen Struktur gibt:** das Phasenkennzeichen (Typografie), der Lime-Marker
+je Umfangspunkt (Zustand) und der Zeigebalken beim Überfahren. **Drei Mittel, alle ohne Schmuck.**
 
 **Die Punkte sind belegt, nicht erfunden.** Sie stammen aus `03_KUNDENPRODUKT.md`
 (*„In jedem Paket enthalten"*) und für die letzte Karte aus den Schutzstufen in
