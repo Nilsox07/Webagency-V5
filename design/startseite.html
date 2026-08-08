@@ -452,34 +452,55 @@ h1 .accent{background-image:linear-gradient(var(--lime),var(--lime));background-
    zeigen 2 bis 6 Leistungen, nie acht; Titel 1-3 Woerter; ein Satz je Punkt.
    Keine Kachelwand mit Rahmen — nur eine Lime-Kante je Block, damit Sektion 8
    (Karten mit Bild) daneben nicht dieselbe Bauform bekommt. */
-/* ZEILEN, nicht Kacheln. §7 verlangt „acht breite Zeilen" und ausdruecklich
-   „keine Kachelwand" — gebaut waren sechs kleine Kacheln im 3x2-Raster mit
-   20px-Titeln. Das war der Grund fuer „langweilig": nicht die Bauform,
-   sondern ihre Groesse.
+/* LEISTUNGSVERZEICHNIS — die Form, die der Kunde selbst schreibt.
+   Drei Anlaeufe scheiterten, weil sie im selben Rahmen blieben: Die Sektion
+   behauptet "Es gibt keine Aufpreisliste" und zeigte dann eine Liste. Die
+   Form widersprach der Aussage.
 
-   Nachgesehen bei BASIC/DEPT (vier Leistungen, Zaehler „01/04") und Dept
-   (fuenf, „01"-„05"): beide fuehren breite Zeilen mit Zaehler, grossem Titel
-   und einem Satz. Uebernommen ist die Zeile mit Zaehler — nicht die Anzahl.
+   Ein Malermeister, eine Praxis und eine Kanzlei kennen genau EIN Dokument,
+   in dem Leistungen zeilenweise mit Preisen stehen: das Leistungsverzeichnis
+   bzw. das Angebot. Genau dort erwartet er die boese Ueberraschung.
 
-   Der Zaehler ist keine Verzierung: „01/08" sagt, dass die Liste GESCHLOSSEN
-   ist. Das ist genau das Argument der Sektion („Es gibt keine
-   Aufpreisliste"), und es steht sonst nirgends. */
-.lbs{margin-top:var(--s-5);border-top:1px solid var(--line)}
-.lb{display:grid;grid-template-columns:auto clamp(200px,21vw,380px) minmax(0,1fr);
-  gap:clamp(16px,2.2vw,44px);align-items:start;
-  padding:clamp(18px,1.7vw,28px) 0;border-bottom:1px solid var(--line);
-  transition:background .25s ease}
-.lb:hover{background:rgba(20,17,13,.03)}
-.lb-nr{font-family:var(--font-mono);font-size:12px;letter-spacing:.1em;color:var(--label);
-  white-space:nowrap;padding-top:.55em}
-.lb h3{font-size:clamp(21px,1.8vw,27px);letter-spacing:-.02em;color:var(--ink);line-height:1.2}
-.lb p{margin:0;font-size:17px;line-height:1.55;color:var(--muted);max-width:56ch}
-.lb-tags{margin-top:9px;font-family:var(--font-mono);font-size:11px;letter-spacing:.11em;
+   Also steht das Angebot in seinem Dokument — mit acht Positionen und einer
+   Preisspalte, in der achtmal dasselbe steht. Die Wiederholung IST das
+   Argument; sie braucht keinen Satz, der sie erklaert. Unten die Summenzeile,
+   die ein Leistungsverzeichnis immer hat.
+
+   Kein Bauteil der Seite sieht so aus (§3: kein Aufbaumuster mehr als
+   zweimal). Kein Javascript, keine neue Form, keine neue Farbe. */
+.lv{margin-top:var(--s-5);border-top:2px solid var(--ink)}
+.lv ol{list-style:none;margin:0;padding:0}
+.lv-kopf,.lv li{display:grid;
+  grid-template-columns:auto minmax(0,1fr) minmax(0,.85fr) auto;
+  gap:clamp(14px,2vw,40px);align-items:baseline}
+.lv-kopf{padding:11px 0;border-bottom:1px solid var(--line);
+  font-family:var(--font-mono);font-size:11px;letter-spacing:.14em;
   text-transform:uppercase;color:var(--label)}
+.lv li{padding:clamp(16px,1.5vw,24px) 0;border-bottom:1px solid var(--line);
+  transition:background .22s ease}
+.lv li:hover{background:rgba(20,17,13,.03)}
+.lv-pos{font-family:var(--font-mono);font-size:12px;color:var(--label);white-space:nowrap}
+.lv h3{font-size:clamp(19px,1.45vw,23px);letter-spacing:-.015em;line-height:1.25}
+.lv h3+p{margin-top:5px;font-size:15.5px;line-height:1.5;color:var(--muted);max-width:46ch}
+.lv-umfang{font-family:var(--font-mono);font-size:11px;letter-spacing:.1em;
+  text-transform:uppercase;color:var(--label);line-height:1.75}
+.lv-preis{font-family:var(--font-mono);font-size:12.5px;letter-spacing:.1em;
+  text-transform:uppercase;color:var(--ink);text-align:right;white-space:nowrap}
+/* Summenzeile: die eine Stelle, an der ein Leistungsverzeichnis zaehlt. */
+.lv-summe{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:20px;
+  align-items:baseline;margin-top:clamp(18px,1.6vw,28px);padding-top:clamp(16px,1.4vw,24px);
+  border-top:2px solid var(--ink)}
+.lv-summe dt{font-family:var(--font-mono);font-size:12px;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--label)}
+.lv-summe dd{margin:0;font-size:clamp(30px,3.2vw,52px);font-weight:650;
+  letter-spacing:-.03em;color:var(--ink);font-variant-numeric:tabular-nums;
+  background-image:linear-gradient(var(--lime),var(--lime));background-repeat:no-repeat;
+  background-position:0 .84em;background-size:100% .2em;padding-right:.06em}
 @media (max-width:900px){
-  .lb{grid-template-columns:auto minmax(0,1fr);gap:12px 18px}
-  .lb-nr{grid-row:1;padding-top:.35em}
-  .lb>div{grid-column:2}
+  .lv-kopf{display:none}
+  .lv li{grid-template-columns:auto minmax(0,1fr);gap:6px 16px}
+  .lv-umfang,.lv-preis{grid-column:2}
+  .lv-preis{text-align:left;margin-top:4px}
 }
 .stichworte{margin-top:var(--s-5);padding-top:19px;border-top:1px solid var(--line-dark);
   max-width:940px;font-family:var(--font-mono);font-size:11.5px;letter-spacing:.1em;
@@ -967,49 +988,64 @@ html:has(#g-kalk:checked),html:has(#g-weiss:checked){background:var(--cream)}
       <p class="tag rise-3">Im Preis enthalten</p>
       <h2 class="sec-head rise" style="margin-top:20px">Es gibt keine Aufpreisliste.</h2>
       <p class="lz-lede rise-2">Das alles steckt in jedem Angebot — Sie stellen es nicht selbst zusammen und zahlen nichts davon extra. Wir gewichten die Bausteine passend zu Ihrem Ziel.</p>
-      <div class="paket rise-2">
-        <div class="lbs">
-          <div class="lb rise">
-            <span class="lb-nr">01/08</span>
-            <h3>Strategie und Seitenstruktur</h3>
-            <div><p>Wir legen fest, welche Seiten Sie brauchen — und welche nicht.</p><p class="lb-tags">Sitemap · Nutzerführung · Suchintention</p></div>
-          </div>
-          <div class="lb rise">
-            <span class="lb-nr">02/08</span>
-            <h3>Webdesign und Programmierung</h3>
-            <div><p>Individuell programmiert, ohne WordPress und ohne Baukasten.</p><p class="lb-tags">kein WordPress · responsive · schnell</p></div>
-          </div>
-          <div class="lb rise">
-            <span class="lb-nr">03/08</span>
-            <h3>Website-Texte</h3>
-            <div><p>Wir schreiben sie aus Ihren Fakten und Stichpunkten.</p><p class="lb-tags">aus Stichpunkten · Faktenprüfung</p></div>
-          </div>
-          <div class="lb rise">
-            <span class="lb-nr">04/08</span>
-            <h3>SEO- und GEO-Grundlage</h3>
-            <div><p>Ab dem ersten Tag für Suchmaschinen und KI-Antworten vorbereitet.</p><p class="lb-tags">Titles · Schema · Antwort-zuerst · interne Links</p></div>
-          </div>
-          <div class="lb rise">
-            <span class="lb-nr">05/08</span>
-            <h3>Lokale Sichtbarkeit</h3>
-            <div><p>Ihre echten Unternehmensdaten, keine Seiten mit ausgetauschten Stadtnamen.</p><p class="lb-tags">Local SEO · konsistente Daten</p></div>
-          </div>
-          <div class="lb rise">
-            <span class="lb-nr">06/08</span>
-            <h3>Domain und Launch</h3>
-            <div><p>Wir schalten live, ohne dass Ihre bestehende E-Mail ausfällt.</p><p class="lb-tags">DNS · E-Mail-Schutz · Weiterleitungen</p></div>
-          </div>
-          <div class="lb rise">
-            <span class="lb-nr">07/08</span>
-            <h3>Kundenbereich und Freigaben</h3>
-            <div><p>Briefing, Vorschau und Freigabe an einem Ort statt in E-Mail-Ketten.</p><p class="lb-tags">Briefing · Feedback · Pflege</p></div>
-          </div>
-          <div class="lb rise">
-            <span class="lb-nr">08/08</span>
-            <h3>Rundum-Schutz</h3>
-            <div><p>Hosting, Sicherung und Überwachung laufen nach dem Start weiter.</p><p class="lb-tags">Betrieb · Backups · Monitoring</p></div>
-          </div>
-        </div>
+      <div class="lv rise-2">
+        <div class="lv-kopf" aria-hidden="true"><span>Pos.</span><span>Leistung</span><span>Umfang</span><span>Preis</span></div>
+        <ol>
+          <li class="rise">
+            <span class="lv-pos">01</span>
+            <div><h3>Strategie und Seitenstruktur</h3><p>Wir legen fest, welche Seiten Sie brauchen — und welche nicht.</p></div>
+            <p class="lv-umfang">Sitemap · Nutzerführung · Suchintention</p>
+            <p class="lv-preis">enthalten</p>
+          </li>
+          <li class="rise">
+            <span class="lv-pos">02</span>
+            <div><h3>Webdesign und Programmierung</h3><p>Individuell programmiert, ohne WordPress und ohne Baukasten.</p></div>
+            <p class="lv-umfang">kein WordPress · responsive · schnell</p>
+            <p class="lv-preis">enthalten</p>
+          </li>
+          <li class="rise">
+            <span class="lv-pos">03</span>
+            <div><h3>Website-Texte</h3><p>Wir schreiben sie aus Ihren Fakten und Stichpunkten.</p></div>
+            <p class="lv-umfang">aus Stichpunkten · Faktenprüfung</p>
+            <p class="lv-preis">enthalten</p>
+          </li>
+          <li class="rise">
+            <span class="lv-pos">04</span>
+            <div><h3>SEO- und GEO-Grundlage</h3><p>Ab dem ersten Tag für Suchmaschinen und KI-Antworten vorbereitet.</p></div>
+            <p class="lv-umfang">Titles · Schema · Antwort-zuerst · interne Links</p>
+            <p class="lv-preis">enthalten</p>
+          </li>
+          <li class="rise">
+            <span class="lv-pos">05</span>
+            <div><h3>Lokale Sichtbarkeit</h3><p>Ihre echten Unternehmensdaten, keine Seiten mit ausgetauschten Stadtnamen.</p></div>
+            <p class="lv-umfang">Local SEO · konsistente Daten</p>
+            <p class="lv-preis">enthalten</p>
+          </li>
+          <li class="rise">
+            <span class="lv-pos">06</span>
+            <div><h3>Domain und Launch</h3><p>Wir schalten live, ohne dass Ihre bestehende E-Mail ausfällt.</p></div>
+            <p class="lv-umfang">DNS · E-Mail-Schutz · Weiterleitungen</p>
+            <p class="lv-preis">enthalten</p>
+          </li>
+          <li class="rise">
+            <span class="lv-pos">07</span>
+            <div><h3>Kundenbereich und Freigaben</h3><p>Briefing, Vorschau und Freigabe an einem Ort statt in E-Mail-Ketten.</p></div>
+            <p class="lv-umfang">Briefing · Feedback · Pflege</p>
+            <p class="lv-preis">enthalten</p>
+          </li>
+          <li class="rise">
+            <span class="lv-pos">08</span>
+            <div><h3>Rundum-Schutz</h3><p>Hosting, Sicherung und Überwachung laufen nach dem Start weiter.</p></div>
+            <p class="lv-umfang">Betrieb · Backups · Monitoring</p>
+            <p class="lv-preis">enthalten</p>
+          </li>
+        </ol>
+        <dl class="lv-summe">
+          <dt>Aufpreise gesamt</dt>
+          <dd>0,00 €</dd>
+        </dl>
+      </div>
+
       <a class="btn btn-ghost rise" href="/leistungen" style="margin-top:var(--s-5)">Alle Leistungen im Überblick <span class="ar">→</span></a>
       </div>
     </div>

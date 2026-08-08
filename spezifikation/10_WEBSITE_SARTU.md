@@ -508,7 +508,39 @@ benennt, wirkt geprüft; wer nur Vorzüge aufzählt, wirkt beliebig.**
 
 **Acht breite Zeilen** — Titel · **ein** Satz · Tags. **Keine Kachelwand, keine Preise.**
 
-### Bau der Zeile — festgelegt am 06.08.2026
+### Bauform: ein Leistungsverzeichnis — festgelegt am 06.08.2026
+
+**Die acht Zeilen stehen als Leistungsverzeichnis mit Summenzeile.** Vier Spalten:
+`Pos.` · `Leistung` (Titel + Satz) · `Umfang` (die gebundenen Tags) · `Preis`. In der
+Preisspalte steht **achtmal `enthalten`**. Darunter, über einer 2-px-Linie: `Aufpreise gesamt`
+— `0,00 €`.
+
+> **Warum drei Anläufe vorher scheiterten.** Sie blieben im selben Rahmen: **Die Sektion
+> behauptet „Es gibt keine Aufpreisliste" und zeigte dann eine Liste.** Die Form widersprach der
+> Aussage, egal wie gut die Zeilen gesetzt waren.
+
+**Warum ausgerechnet diese Form.** Ein Malermeister, eine Praxis und eine Kanzlei kennen genau
+**ein** Dokument, in dem Leistungen zeilenweise mit Preisen stehen — und genau dort erwarten sie
+die böse Überraschung. **Ein Malermeister schreibt Leistungsverzeichnisse selbst.** Das Angebot in
+seinem eigenen Dokument zu zeigen, holt ihn dort ab, wo sein Misstrauen sitzt.
+
+**Die Wiederholung ist das Argument.** Acht Zeilen, in denen dieselbe Spalte achtmal dasselbe
+Wort trägt — das braucht keinen Satz, der es erklärt. Die Summenzeile, die ein
+Leistungsverzeichnis immer hat, macht daraus eine Zahl.
+
+> **Diese Bauform berührt eine Grenze von §7 — bewusst und einzeln.** Dort steht „keine Preise".
+> Gemeint ist erkennbar: **keine Paketpreise** — die stehen in §4 und würden hier die
+> Sektionsreihenfolge aufheben. `0,00 €` ist **kein Preis für etwas**, sondern die Abwesenheit von
+> Aufpreisen, und es folgt dem Geldformat aus `02_PREISE_UND_ZAHLUNG.md`.
+> **Wer das anders sieht, ersetzt die Zelle durch `keine` — die Form trägt auch ohne die Zahl,
+> nur schwächer.** Der Texter-Skill verlangt an dieser Stelle ausdrücklich die Zahl statt des
+> Eigenschaftsworts.
+
+**Kein anderes Bauteil der Seite sieht so aus** (§3: kein Aufbaumuster mehr als zweimal). Kein
+JavaScript, keine neue Form, keine neue Farbe — die einzige Lime-Stelle ist der Textmarker unter
+der Summe, und der markiert einen Zustand, keine Fläche (`07_MARKE_UND_GESTALTUNG.md`).
+
+### Herkunft der Zeile
 
 **Je Zeile: Zähler · Titel · Satz · Tags**, über die volle Breite, 1 px Trennlinie dazwischen.
 Der Zähler läuft `01/08` bis `08/08`.

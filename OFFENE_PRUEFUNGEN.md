@@ -1180,3 +1180,29 @@ verschmolzen wurden. Damit waren **der Differenzierer und der Deckungsbeitrags-M
 | **Die vier neuen Sätze sind nicht durch den Texter-Skill gelaufen** | Geschrieben nach dem Auftrag aus §7 (je ≤ 15 Wörter, ein Satz, keine Fachbegriffe, keine Wirkung versprechen) und von Hand gegen die Verbotsliste geprüft. **Kein Prüfbericht.** Prüfmittel: ein Durchgang des Skills für Sektion 7 |
 | **Gemessen:** 390 · 900 · 1512 · 2560 px | acht Zeilen überall, kein waagerechter Überlauf, Titel auf ein bis zwei Zeilen, Zeilenhöhen 105–136 px |
 | Die Sektion ist mit 1.488 px deutlich höher als vorher | Folge der acht Zeilen. Bewusst: es ist die einzige Liste der Seite |
+
+### Nachtrag: Leistungen als Leistungsverzeichnis — 06.08.2026
+
+**Einwand:** „nach wie vor katastrophe. das muss spannender sein. sei kreativ und denk dir was
+aus. und kein ai müll sondern irgendwas was den kunden abholt."
+
+**Die Diagnose nach drei Fehlversuchen:** Alle drei blieben im selben Rahmen. **Die Sektion
+behauptet „Es gibt keine Aufpreisliste" und zeigte dann eine Liste.** Nicht die Zeilen waren
+falsch, die Form widersprach der Aussage.
+
+**Gebaut:** ein **Leistungsverzeichnis** — `Pos.` · `Leistung` · `Umfang` · `Preis`, acht
+Positionen, in der Preisspalte achtmal `enthalten`, darunter die Summenzeile
+`Aufpreise gesamt — 0,00 €`.
+
+**Warum diese Form den Kunden abholt:** Ein Malermeister **schreibt Leistungsverzeichnisse
+selbst**. Eine Praxis und eine Kanzlei kennen sie als Angebot. Es ist das eine Dokument, in dem
+Leistungen zeilenweise mit Preisen stehen — und genau dort sitzt das Misstrauen. Die Wiederholung
+derselben Zelle braucht keinen erklärenden Satz.
+
+| Befund | Lage |
+|---|---|
+| **Berührt §7 „keine Preise"** | `0,00 €` ist kein Preis für etwas, sondern die Abwesenheit von Aufpreisen; das Geldformat folgt `02_PREISE_UND_ZAHLUNG.md`. **Einzeln kenntlich gemacht, nicht stillschweigend.** Rückbau ist eine Zelle: `keine` statt `0,00 €` — die Form trägt auch dann, nur schwächer |
+| **Die acht Sätze sind weiterhin nicht durch den Texter-Skill gelaufen** | unverändert offen aus dem Eintrag davor. Kein Prüfbericht |
+| **Gemessen:** 390 und 1512 px | acht Positionen, Summe `0,00 €`, kein waagerechter Überlauf. Unter 900 px stapelt die Zeile, die Kopfzeile entfällt |
+| **Kein JavaScript, keine neue Form, keine neue Farbe** | Die einzige Lime-Stelle ist der Textmarker unter der Summe — er markiert einen **Zustand**, keine Fläche, und hält damit die Regel vom selben Tag ein |
+| **Barrierefreiheit ungeprüft** | Die Kopfzeile ist `aria-hidden`, die Posten stehen als `<ol>`. **Ob ein Vorleseprogramm die Zuordnung Spalte → Wert trägt, ist nicht getestet.** Prüfmittel: ein Durchgang mit VoiceOver oder NVDA. Falls nicht: die Preisspalte braucht je Zeile eine unsichtbare Beschriftung |
