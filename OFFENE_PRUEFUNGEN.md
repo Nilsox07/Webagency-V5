@@ -1307,13 +1307,22 @@ verweisen, nennen **komplett verschiedene** Branchen:
 **Keine Überschneidung.** Und `17_SEITEN_SARTU.md` §4 führt als **Block 6 jeder Branchenseite**:
 *„ein Beispiel — das Musterprojekt dieser Branche"*, Spalte **eigen**.
 
-**Folge: Block 6 ist auf keiner der drei Branchenseiten baubar.** Die Branchenseite für
-Dachdecker müsste ein Dachdecker-Musterprojekt zeigen — gebaut ist eines für einen Malerbetrieb.
+**Berichtigt nach genauerer Prüfung am 06.08.2026.** Die erste Fassung dieses Eintrags sagte,
+Block 6 sei „auf keiner der drei Branchenseiten baubar". Das war zu scharf formuliert:
+`17_SEITEN_SARTU.md` §4 trägt beim Querverweis auf die Musterprojekte den Zusatz **„sofern die
+Gattung passt"** — die Lücke ist dort also **halb** gesehen.
+
+**Was trotzdem offen bleibt, und darin liegt der Fehler:** Die Datei sagt **nicht**, was in
+Block 6 steht, **wenn** die Gattung nicht passt — und bei allen drei Launch-Branchen passt sie
+nicht. Block 6 bleibt in der Zehnerliste als **eigen** geführt, und **Prüfung 3, der
+Herkunftsnachweis**, verlangt ausdrücklich zu Block 6 eine Quellenzeile. Ein Block ohne Inhalt
+hat keine Quelle — und *„Reißt eine der drei Prüfungen: Die Seite wird nicht veröffentlicht."*
 
 **Das ist unabhängig von der Nischenentscheidung ein Fehler.** Welche drei Branchen es auch
 werden: **es müssen dieselben drei sein.** Ein Musterprojekt ohne Branchenseite verschenkt seinen
-stärksten Platz, eine Branchenseite ohne Musterprojekt kann ihren vorgeschriebenen Block nicht
-füllen.
+stärksten Platz, eine Branchenseite ohne Musterprojekt kann ihren Pflichtblock nicht füllen.
 
 **Nicht entschieden, weil es die Nischenfrage vorwegnähme:** welche drei. Beide Listen sind
-`gebunden`, keine trägt Vorrang. **Gemeldet statt ausgewählt.**
+`gebunden`, keine trägt Vorrang. **Gemeldet statt ausgewählt** — die Entscheidungsvorlage mit den
+drei gangbaren Wegen und einer Empfehlung steht als **§7c** in `SARTU_ENTSCHEIDUNGEN_OFFEN.md`,
+dem dafür zuständigen Dokument (Rang 1).

@@ -604,6 +604,73 @@ zieht den größten Rechtsaufwand nach sich und lässt sich später nachrüsten.
 
 ---
 
+## 7c. Drei Branchen für Branchenseiten **und** Musterprojekte — **OFFEN**
+
+> **Gefunden am 06.08.2026** bei der Frage, auf welche Nische SARTU optimiert. Zwei Listen,
+> die aufeinander verweisen, nennen verschiedene Branchen. Beide sind `gebunden`, keine trägt
+> Vorrang — deshalb **gemeldet statt ausgewählt**.
+
+| Quelle | Branchen |
+|---|---|
+| `16_SEO_GEO_SARTU.md`, Abschnitt *Branchenseiten* | **Sanitär-Heizung-Klima · Elektrotechnik · Dachdecker** |
+| `10_WEBSITE_SARTU.md` §8, Block *Gebunden* | **Malerbetrieb · Physiotherapiepraxis · Arbeitsrechtskanzlei** |
+
+**Keine einzige Überschneidung.**
+
+### Warum das mehr ist als eine Unschönheit
+
+`17_SEITEN_SARTU.md` §4 führt als **Block 6** jeder Branchenseite: *„ein Beispiel — das
+Musterprojekt dieser Branche"*, Spalte **eigen**. Zehn Blöcke, Umfang 900–1.300 Wörter.
+
+Die Datei hat die Lücke **halb** gesehen: Der Querverweis in §4 trägt den Zusatz **„sofern die
+Gattung passt"**. Sie sagt aber nicht, **was in Block 6 steht, wenn sie nicht passt** — und bei
+allen drei Launch-Branchen passt sie nicht. Dazu kommt **Prüfung 3, der Herkunftsnachweis**: Sie
+verlangt ausdrücklich zu Block **6** eine Quellenzeile. Ein Block ohne Inhalt hat auch keine
+Quelle, und *„Reißt eine der drei Prüfungen: Die Seite wird nicht veröffentlicht."*
+
+**Unabhängig davon, welche Nische gewählt wird, gilt:** Welche drei Branchen es auch werden —
+**es müssen dieselben drei sein.** Ein Musterprojekt ohne Branchenseite verschenkt seinen
+stärksten Platz; eine Branchenseite ohne Musterprojekt kann ihren Pflichtblock nicht füllen.
+
+### Was zu entscheiden ist
+
+| # | Frage | Folge |
+|---|---|---|
+| 1 | Welche drei Branchen tragen **beides**? | Bestimmt `16` (Branchenseiten), `10` §8 (Musterprojekte) und `17` §4 (Block 6) |
+| 2 | Bleibt die Zielgruppe bei **sieben** Kategorien? | `01_GESCHAEFTSMODELL.md` nennt Handwerk, lokale Dienstleister, Praxen, Kanzleien, Gastronomie, Immobilien, Beratungen. Eine Gewerke-Nische widerspricht dem nicht, verengt aber den Schwerpunkt |
+| 3 | Was steht in Block 6, solange die passende Gattung fehlt? | Bis Frage 1 beantwortet ist, ist **jede** Branchenseite unvollständig |
+
+### Die drei gangbaren Wege
+
+| Weg | Branchen | Was sich ändert | Was es kostet |
+|---|---|---|---|
+| **A** | SHK · Elektro · **Dach** | die drei Gattungen in `10` §8 | Physiotherapie und Kanzlei fallen als Musterprojekte weg |
+| **B** | SHK · Elektro · **Maler** | je eine Zeile in `10` §8 **und** in `16` | Dachdecker fällt als Branchenseite weg |
+| **C** | Maler · Physio · Kanzlei | alle drei Branchenseiten in `16` | drei fachlich unverwandte Welten — jeder Fachtext beginnt bei null |
+
+### Empfehlung: **Weg A**
+
+Vier Gründe, alle aus den vorliegenden Unterlagen:
+
+1. **Der Engpass ist das Schreiben, nicht das Ranken.** Bei drei verwandten Gewerken ist dieselbe
+   Recherche mehrfach verwertbar; bei Weg C ist jede Seite gleich teuer.
+2. **Prüfung 2 verlangt 400 eigene Wörter je Seite**, Prüfung 3 einen Herkunftsnachweis je Block.
+   In einem Feld erfüllbar — über drei Felder verteilt dreimal so aufwendig.
+3. **Recruiting ist bei bau-nahen Gewerken ein echter Kaufgrund.** `01_GESCHAEFTSMODELL.md` führt
+   es im Bedarf der Zielgruppe. Eine Physiotherapiepraxis hat dieses Argument nicht.
+4. **Die drei gebauten Branchenseiten bleiben unangetastet.** Nur `10` §8 zieht nach.
+
+**Weg A ist zugleich der einschneidendste:** Er verengt den Schwerpunkt von sieben Kategorien auf
+ein Feld. Das ist eine **Geschäfts**entscheidung, keine SEO-Entscheidung — deshalb steht sie hier
+und nicht in `16_SEO_GEO_SARTU.md`.
+
+**Sperre:** Solange das offen ist, wird **kein** Musterprojekt ausgeschrieben und **keine**
+Branchenseite über Block 5 hinaus gebaut. Die Musterprojekt-Sektion der Startseite bleibt nach
+`10_WEBSITE_SARTU.md` ohnehin auf **Stufe 0** — keine Sektion, solange die drei Fälle nicht
+ausgeschrieben sind.
+
+---
+
 ## 8. Wie diese Datei benutzt wird
 
 1. Ein Wert wird entschieden → hier eintragen, Status von `offen` auf den Wert ändern
