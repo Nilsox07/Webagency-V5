@@ -1146,3 +1146,37 @@ bleiben". **Zwei begründete Stände, kein Vorrang erkennbar — gemeldet statt 
 > **Der CSS-Kommentar ist zusätzlich veraltet:** Er nennt als Begründung „nur eine **Lime**-Kante
 > je Block", gebaut ist `border-top: 2px solid var(--ink)`. Die Lime-Kante gibt es nicht und gab
 > es vermutlich nie.
+
+### Nachtrag: Leistungen als acht breite Zeilen — 06.08.2026
+
+**Einwand:** „wir müssen unsere leistungen anders darstellen und nicht so langweilig. wie machen
+das andere agenturen?"
+
+**Recherche:** BASIC/DEPT (`/services`) führt **vier** Leistungen als breite Zeilen mit Zähler
+`01/04`, Titel, Satz und Fallbeispielen. Dept (`/services`) führt **fünf** als Zeilen mit `01`–`05`,
+Titel, Satz und Bild. **Beide: Zeilen mit Zähler, kein Kachelraster.** Wie schon beim Aufmacher
+über den Textweg ausgewertet — der Browser erreicht aus dieser Umgebung keine fremden Hosts.
+
+**Gebaut:** acht breite Zeilen, je Zähler · Titel · Satz · Tags, 1 px Trennlinie. Damit sind
+**alle drei** in der letzten Sitzung gemeldeten Abweichungen von §7 behoben:
+
+| vorher | jetzt |
+|---|---|
+| sechs Kacheln im 3 × 2-Raster | **acht Zeilen** |
+| gekürzte Titel (`Strategie`, `Texte`, `Betrieb`) | die **gebundenen** Titel aus §7 |
+| alle Tags in einer Sammelzeile | **Tags je Zeile**, wie §7 verlangt |
+
+**Warum acht und nicht vier bis fünf wie bei den Vorbildern.** Die Agenturlisten beantworten
+*„was verkaufen wir"* — da ist Kürze Schärfe. Diese Sektion beantwortet *„Ist alles dabei?"*.
+**Einschlussliste, nicht Angebotsliste** — dort ist Länge das Argument.
+
+**Was die Zusammenlegung gekostet hatte:** Die sechs Kacheln entstanden, indem `SEO- und
+GEO-Grundlage` mit `Lokale Sichtbarkeit` und `Kundenbereich und Freigaben` mit `Rundum-Schutz`
+verschmolzen wurden. Damit waren **der Differenzierer und der Deckungsbeitrags-Motor** aus
+`01_GESCHAEFTSMODELL.md` in einer Zeile namens „Betrieb" verschwunden.
+
+| Befund | Lage |
+|---|---|
+| **Die vier neuen Sätze sind nicht durch den Texter-Skill gelaufen** | Geschrieben nach dem Auftrag aus §7 (je ≤ 15 Wörter, ein Satz, keine Fachbegriffe, keine Wirkung versprechen) und von Hand gegen die Verbotsliste geprüft. **Kein Prüfbericht.** Prüfmittel: ein Durchgang des Skills für Sektion 7 |
+| **Gemessen:** 390 · 900 · 1512 · 2560 px | acht Zeilen überall, kein waagerechter Überlauf, Titel auf ein bis zwei Zeilen, Zeilenhöhen 105–136 px |
+| Die Sektion ist mit 1.488 px deutlich höher als vorher | Folge der acht Zeilen. Bewusst: es ist die einzige Liste der Seite |

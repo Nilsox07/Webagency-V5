@@ -452,13 +452,35 @@ h1 .accent{background-image:linear-gradient(var(--lime),var(--lime));background-
    zeigen 2 bis 6 Leistungen, nie acht; Titel 1-3 Woerter; ein Satz je Punkt.
    Keine Kachelwand mit Rahmen — nur eine Lime-Kante je Block, damit Sektion 8
    (Karten mit Bild) daneben nicht dieselbe Bauform bekommt. */
-.lbs{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));
-  gap:clamp(26px,3.2vw,44px) clamp(28px,3.6vw,56px);margin-top:var(--s-5)}
-.lb{padding-top:16px;border-top:2px solid var(--ink)}
-.lb h3{font-size:20px;letter-spacing:-.015em;color:var(--ink)}
-.lb p{margin-top:8px;font-size:16.5px;line-height:1.55;color:var(--muted);max-width:34ch}
-@media (max-width:1000px){.lbs{grid-template-columns:repeat(2,minmax(0,1fr))}}
-@media (max-width:620px){.lbs{grid-template-columns:1fr;gap:22px}}
+/* ZEILEN, nicht Kacheln. §7 verlangt „acht breite Zeilen" und ausdruecklich
+   „keine Kachelwand" — gebaut waren sechs kleine Kacheln im 3x2-Raster mit
+   20px-Titeln. Das war der Grund fuer „langweilig": nicht die Bauform,
+   sondern ihre Groesse.
+
+   Nachgesehen bei BASIC/DEPT (vier Leistungen, Zaehler „01/04") und Dept
+   (fuenf, „01"-„05"): beide fuehren breite Zeilen mit Zaehler, grossem Titel
+   und einem Satz. Uebernommen ist die Zeile mit Zaehler — nicht die Anzahl.
+
+   Der Zaehler ist keine Verzierung: „01/08" sagt, dass die Liste GESCHLOSSEN
+   ist. Das ist genau das Argument der Sektion („Es gibt keine
+   Aufpreisliste"), und es steht sonst nirgends. */
+.lbs{margin-top:var(--s-5);border-top:1px solid var(--line)}
+.lb{display:grid;grid-template-columns:auto clamp(200px,21vw,380px) minmax(0,1fr);
+  gap:clamp(16px,2.2vw,44px);align-items:start;
+  padding:clamp(18px,1.7vw,28px) 0;border-bottom:1px solid var(--line);
+  transition:background .25s ease}
+.lb:hover{background:rgba(20,17,13,.03)}
+.lb-nr{font-family:var(--font-mono);font-size:12px;letter-spacing:.1em;color:var(--label);
+  white-space:nowrap;padding-top:.55em}
+.lb h3{font-size:clamp(21px,1.8vw,27px);letter-spacing:-.02em;color:var(--ink);line-height:1.2}
+.lb p{margin:0;font-size:17px;line-height:1.55;color:var(--muted);max-width:56ch}
+.lb-tags{margin-top:9px;font-family:var(--font-mono);font-size:11px;letter-spacing:.11em;
+  text-transform:uppercase;color:var(--label)}
+@media (max-width:900px){
+  .lb{grid-template-columns:auto minmax(0,1fr);gap:12px 18px}
+  .lb-nr{grid-row:1;padding-top:.35em}
+  .lb>div{grid-column:2}
+}
 .stichworte{margin-top:var(--s-5);padding-top:19px;border-top:1px solid var(--line-dark);
   max-width:940px;font-family:var(--font-mono);font-size:11.5px;letter-spacing:.1em;
   text-transform:uppercase;color:var(--label);line-height:2.05;border-top-color:var(--line)}
@@ -947,15 +969,47 @@ html:has(#g-kalk:checked),html:has(#g-weiss:checked){background:var(--cream)}
       <p class="lz-lede rise-2">Das alles steckt in jedem Angebot — Sie stellen es nicht selbst zusammen und zahlen nichts davon extra. Wir gewichten die Bausteine passend zu Ihrem Ziel.</p>
       <div class="paket rise-2">
         <div class="lbs">
-        <div class="lb rise"><h3>Strategie</h3><p>Wir legen fest, welche Seiten Sie wirklich brauchen.</p></div>
-        <div class="lb rise"><h3>Design und Programmierung</h3><p>Individuell gebaut — ohne WordPress, ohne Baukasten.</p></div>
-        <div class="lb rise"><h3>Texte</h3><p>Wir schreiben sie aus Ihren Stichpunkten. Sie lesen gegen.</p></div>
-        <div class="lb rise"><h3>Sichtbarkeit</h3><p>Vorbereitet für Suchmaschinen und KI-Antworten, auffindbar in Ihrer Region.</p></div>
-        <div class="lb rise"><h3>Domain und Start</h3><p>Wir ziehen um, ohne dass Ihre E-Mail ausfällt.</p></div>
-        <div class="lb rise"><h3>Betrieb</h3><p>Hosting, Sicherheit, Backups — über die Monatspauschale.</p></div>
+          <div class="lb rise">
+            <span class="lb-nr">01/08</span>
+            <h3>Strategie und Seitenstruktur</h3>
+            <div><p>Wir legen fest, welche Seiten Sie brauchen — und welche nicht.</p><p class="lb-tags">Sitemap · Nutzerführung · Suchintention</p></div>
+          </div>
+          <div class="lb rise">
+            <span class="lb-nr">02/08</span>
+            <h3>Webdesign und Programmierung</h3>
+            <div><p>Individuell programmiert, ohne WordPress und ohne Baukasten.</p><p class="lb-tags">kein WordPress · responsive · schnell</p></div>
+          </div>
+          <div class="lb rise">
+            <span class="lb-nr">03/08</span>
+            <h3>Website-Texte</h3>
+            <div><p>Wir schreiben sie aus Ihren Fakten und Stichpunkten.</p><p class="lb-tags">aus Stichpunkten · Faktenprüfung</p></div>
+          </div>
+          <div class="lb rise">
+            <span class="lb-nr">04/08</span>
+            <h3>SEO- und GEO-Grundlage</h3>
+            <div><p>Ab dem ersten Tag für Suchmaschinen und KI-Antworten vorbereitet.</p><p class="lb-tags">Titles · Schema · Antwort-zuerst · interne Links</p></div>
+          </div>
+          <div class="lb rise">
+            <span class="lb-nr">05/08</span>
+            <h3>Lokale Sichtbarkeit</h3>
+            <div><p>Ihre echten Unternehmensdaten, keine Seiten mit ausgetauschten Stadtnamen.</p><p class="lb-tags">Local SEO · konsistente Daten</p></div>
+          </div>
+          <div class="lb rise">
+            <span class="lb-nr">06/08</span>
+            <h3>Domain und Launch</h3>
+            <div><p>Wir schalten live, ohne dass Ihre bestehende E-Mail ausfällt.</p><p class="lb-tags">DNS · E-Mail-Schutz · Weiterleitungen</p></div>
+          </div>
+          <div class="lb rise">
+            <span class="lb-nr">07/08</span>
+            <h3>Kundenbereich und Freigaben</h3>
+            <div><p>Briefing, Vorschau und Freigabe an einem Ort statt in E-Mail-Ketten.</p><p class="lb-tags">Briefing · Feedback · Pflege</p></div>
+          </div>
+          <div class="lb rise">
+            <span class="lb-nr">08/08</span>
+            <h3>Rundum-Schutz</h3>
+            <div><p>Hosting, Sicherung und Überwachung laufen nach dem Start weiter.</p><p class="lb-tags">Betrieb · Backups · Monitoring</p></div>
+          </div>
         </div>
-      </div>
-      <p class="stichworte rise-2">Sitemap · Nutzerführung · Suchintention · kein WordPress · responsive · schnell · aus Stichpunkten · Faktenprüfung · Titles · Schema · interne Links · GEO-Grundlage · Antwort-zuerst-Texte · Local SEO · konsistente Daten · DNS · E-Mail-Schutz · Weiterleitungen · Briefing · Feedback · Pflege · Betrieb · Backups · Monitoring</p>
       <a class="btn btn-ghost rise" href="/leistungen" style="margin-top:var(--s-5)">Alle Leistungen im Überblick <span class="ar">→</span></a>
       </div>
     </div>

@@ -508,6 +508,32 @@ benennt, wirkt geprüft; wer nur Vorzüge aufzählt, wirkt beliebig.**
 
 **Acht breite Zeilen** — Titel · **ein** Satz · Tags. **Keine Kachelwand, keine Preise.**
 
+### Bau der Zeile — festgelegt am 06.08.2026
+
+**Je Zeile: Zähler · Titel · Satz · Tags**, über die volle Breite, 1 px Trennlinie dazwischen.
+Der Zähler läuft `01/08` bis `08/08`.
+
+> **Der Zähler ist keine Verzierung.** `01/08` sagt, dass die Liste **geschlossen** ist — und das
+> ist genau das Argument der Sektion (`Es gibt keine Aufpreisliste.`). Es stand vorher nirgends
+> auf der Seite. **Eine bloße Nummerierung wäre falsch**, weil die acht Zeilen keine Reihenfolge
+> haben; der Nenner macht daraus eine Menge statt einer Abfolge.
+
+**Nachgesehen bei BASIC/DEPT und Dept (06.08.2026):** beide führen breite Zeilen mit Zähler,
+großem Titel und einem Satz — BASIC/DEPT vier Leistungen mit `01/04`, Dept fünf mit `01`–`05`.
+**Übernommen ist die Zeile, nicht die Anzahl.**
+
+> **Warum vier bis fünf dort richtig sind und acht hier.** Die Agenturlisten beantworten *„was
+> verkaufen wir"* — da ist Kürze Schärfe. Diese Sektion beantwortet laut Bauform-Tabelle
+> *„Ist alles dabei?"*. **Das ist eine Einschlussliste, keine Angebotsliste** — dort ist Länge das
+> Argument. Eine kurze Einschlussliste schwächt genau die Aussage, die darüber steht.
+
+> **Ersetzt am 06.08.2026, nicht wieder verwenden:** sechs Kacheln in einem 3 × 2-Raster mit
+> 20-px-Titeln. Die Begründung dafür lautete, Agenturen zeigten „2 bis 6 Leistungen, nie acht" —
+> **richtig beobachtet, auf die falsche Liste angewandt.** Dabei gingen zwei Zeilen verloren, die
+> zusammengelegt wurden: **Kundenbereich und Freigaben** und **Rundum-Schutz**. Das sind
+> ausgerechnet der Differenzierer und der Deckungsbeitrags-Motor aus `01_GESCHAEFTSMODELL.md` —
+> sie verschwanden in einer Zeile namens „Betrieb".
+
 **Titel und Tags sind `gebunden`** — sie benennen den Leistungsumfang und müssen mit
 `03_KUNDENPRODUKT.md` deckungsgleich bleiben. Der **Satz je Zeile wird geschrieben.**
 
