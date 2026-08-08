@@ -469,27 +469,42 @@ h1 .accent{background-image:linear-gradient(var(--lime),var(--lime));background-
    Spalten. */
 .lk{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:var(--s-3);
   margin-top:var(--s-5);align-items:stretch;list-style:none;padding:0}
-.lk>li{display:flex;flex-direction:column;gap:11px;
+.lk>li{position:relative;display:flex;flex-direction:column;gap:10px;overflow:hidden;
   background:var(--paper);border:1px solid var(--line);border-radius:var(--r-m);
   padding:clamp(20px,1.7vw,26px);
-  transition:border-color .25s ease,transform .25s cubic-bezier(.22,.61,.36,1)}
-.lk>li:hover{border-color:var(--ink);transform:translateY(-4px)}
-.lk-pos{font-family:var(--font-mono);font-size:11px;letter-spacing:.14em;color:var(--label)}
-.lk h3{font-size:19px;letter-spacing:-.015em;line-height:1.25;color:var(--ink)}
+  transition:border-color .25s ease,transform .25s cubic-bezier(.22,.61,.36,1),
+             box-shadow .25s ease}
+/* Der Lime-Balken ist ein ZEIGEZUSTAND, kein Schmuck: er faehrt beim
+   Ueberfahren ein und markiert die Karte, auf der der Zeiger steht.
+   Damit bleibt er innerhalb der Regel „Lime kennzeichnet Handlungen und
+   Zustaende" — auf Beruehrungsgeraeten ist er schlicht nicht da, und die
+   Karte verliert dadurch nichts. */
+.lk>li::before{content:"";position:absolute;inset:0 auto auto 0;height:4px;width:100%;
+  background:var(--lime);transform:scaleX(0);transform-origin:left;
+  transition:transform .32s cubic-bezier(.22,.61,.36,1)}
+.lk>li:hover{border-color:var(--ink);transform:translateY(-5px);box-shadow:var(--shadow-soft)}
+.lk>li:hover::before{transform:scaleX(1)}
+/* Die Positionsnummer traegt die Karte optisch. Sie bleibt Tinte — acht
+   Lime-Zahlen waeren acht Auszeichnungen fuer etwas, das nur zaehlt. */
+.lk-pos{display:flex;align-items:baseline;gap:6px;font-family:var(--font-mono);
+  font-size:26px;font-weight:500;letter-spacing:-.02em;color:var(--ink);line-height:1}
+.lk-pos span{font-size:11px;letter-spacing:.14em;color:var(--label)}
+.lk h3{margin-top:2px;font-size:19px;letter-spacing:-.015em;line-height:1.25;color:var(--ink)}
 .lk-satz{font-size:15.5px;line-height:1.5;color:var(--muted)}
-/* KEIN margin-top:auto. Es richtet die Trennlinien ueber die Zeile aus und
-   reisst dafuer ein Loch in die Mitte der kurzen Karten — derselbe Fehler wie
-   zuvor im Preisraster. Ein Rest am Fuss faellt weniger auf als eine Luecke
-   in der Mitte. */
 .lk-dazu{margin-top:2px;padding-top:13px;border-top:1px solid var(--line)}
 .lk-dazu dt{font-family:var(--font-mono);font-size:10.5px;letter-spacing:.13em;
-  text-transform:uppercase;color:var(--label);margin-bottom:7px}
+  text-transform:uppercase;color:var(--label);margin-bottom:9px}
 .lk-dazu dd{margin:0}
-.lk-dazu ul{display:flex;flex-direction:column;gap:6px;font-size:14.5px;line-height:1.45;
+.lk-dazu ul{display:flex;flex-direction:column;gap:7px;font-size:14.5px;line-height:1.45;
   color:var(--text)}
-.lk-dazu li{position:relative;padding-left:16px}
-.lk-dazu li::before{content:"";position:absolute;left:0;top:8px;width:7px;height:7px;
-  border-radius:var(--r-pill);border:1px solid var(--ink)}
+.lk-dazu li{position:relative;padding-left:19px}
+/* Jeder Punkt traegt einen Lime-Marker. Er sagt „enthalten" — ein Zustand,
+   und zwar genau der, um den es in dieser Sektion geht. Zweiundzwanzigmal
+   dasselbe Zeichen ist deshalb kein Zuviel, sondern die Aussage.
+   1px Tinte als Kante: die Flaechenregel aus 07 verlangt eine Kante, und
+   --line waere auf diesem Durchmesser unsichtbar. */
+.lk-dazu li::before{content:"";position:absolute;left:0;top:6px;width:9px;height:9px;
+  border-radius:var(--r-pill);background:var(--lime);border:1px solid var(--ink)}
 @media (max-width:1240px){.lk{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media (max-width:620px){.lk{grid-template-columns:1fr}}
 .stichworte{margin-top:var(--s-5);padding-top:19px;border-top:1px solid var(--line-dark);
@@ -980,49 +995,49 @@ html:has(#g-kalk:checked),html:has(#g-weiss:checked){background:var(--cream)}
       <p class="lz-lede rise-2">Das alles steckt in jedem Angebot — Sie stellen es nicht selbst zusammen und zahlen nichts davon extra. Wir gewichten die Bausteine passend zu Ihrem Ziel.</p>
       <ul class="lk rise-2">
         <li class="rise">
-          <span class="lk-pos">01 / 08</span>
+          <p class="lk-pos">01<span>/ 08</span></p>
           <h3>Strategie und Seitenstruktur</h3>
           <p class="lk-satz">Wir legen fest, welche Seiten Sie brauchen — und welche nicht.</p>
           <dl class="lk-dazu"><dt>Das gehört dazu</dt><dd><ul><li>Bedarfsprüfung mit begründeter Empfehlung</li><li>Strategische Sitemap, bevor gebaut wird</li></ul></dd></dl>
         </li>
         <li class="rise">
-          <span class="lk-pos">02 / 08</span>
+          <p class="lk-pos">02<span>/ 08</span></p>
           <h3>Webdesign und Programmierung</h3>
           <p class="lk-satz">Individuell programmiert, ohne WordPress und ohne Baukasten.</p>
           <dl class="lk-dazu"><dt>Das gehört dazu</dt><dd><ul><li>Individuelles Design im SARTU-Designsystem</li><li>Geprüfte Programmierung ohne WordPress</li><li>Responsiv, Barrierefreiheits-Basis, Performance</li><li>Kontaktweg und Anfrageformular</li></ul></dd></dl>
         </li>
         <li class="rise">
-          <span class="lk-pos">03 / 08</span>
+          <p class="lk-pos">03<span>/ 08</span></p>
           <h3>Website-Texte</h3>
           <p class="lk-satz">Wir schreiben sie aus Ihren Fakten und Stichpunkten.</p>
           <dl class="lk-dazu"><dt>Das gehört dazu</dt><dd><ul><li>Texte aus bestätigten Fakten</li><li>Sie lesen gegen und geben frei</li></ul></dd></dl>
         </li>
         <li class="rise">
-          <span class="lk-pos">04 / 08</span>
+          <p class="lk-pos">04<span>/ 08</span></p>
           <h3>SEO- und GEO-Grundlage</h3>
           <p class="lk-satz">Ab dem ersten Tag für Suchmaschinen und KI-Antworten vorbereitet.</p>
           <dl class="lk-dazu"><dt>Das gehört dazu</dt><dd><ul><li>SEO- und GEO-Startsystem</li><li>Titel und strukturierte Daten je Seite</li><li>Interne Verlinkung</li></ul></dd></dl>
         </li>
         <li class="rise">
-          <span class="lk-pos">05 / 08</span>
+          <p class="lk-pos">05<span>/ 08</span></p>
           <h3>Lokale Sichtbarkeit</h3>
           <p class="lk-satz">Ihre echten Unternehmensdaten, keine Seiten mit ausgetauschten Stadtnamen.</p>
           <dl class="lk-dazu"><dt>Das gehört dazu</dt><dd><ul><li>Einheitliche Unternehmensdaten überall</li><li>Regionale Struktur statt Ortsseiten</li></ul></dd></dl>
         </li>
         <li class="rise">
-          <span class="lk-pos">06 / 08</span>
+          <p class="lk-pos">06<span>/ 08</span></p>
           <h3>Domain und Launch</h3>
           <p class="lk-satz">Wir schalten live, ohne dass Ihre bestehende E-Mail ausfällt.</p>
           <dl class="lk-dazu"><dt>Das gehört dazu</dt><dd><ul><li>Domainprüfung und -verbindung</li><li>Absicherung der bestehenden E-Mail</li><li>Weiterleitungen alter Adressen</li></ul></dd></dl>
         </li>
         <li class="rise">
-          <span class="lk-pos">07 / 08</span>
+          <p class="lk-pos">07<span>/ 08</span></p>
           <h3>Kundenbereich und Freigaben</h3>
           <p class="lk-satz">Briefing, Vorschau und Freigabe an einem Ort statt in E-Mail-Ketten.</p>
           <dl class="lk-dazu"><dt>Das gehört dazu</dt><dd><ul><li>Vorschau mit gebündeltem Feedback</li><li>Korrekturrunden je nach Paket</li><li>Zugang zum Kundenbereich</li></ul></dd></dl>
         </li>
         <li class="rise">
-          <span class="lk-pos">08 / 08</span>
+          <p class="lk-pos">08<span>/ 08</span></p>
           <h3>Rundum-Schutz</h3>
           <p class="lk-satz">Hosting, Sicherung und Überwachung laufen nach dem Start weiter.</p>
           <dl class="lk-dazu"><dt>Das gehört dazu</dt><dd><ul><li>Managed Hosting in DE/EU mit SSL</li><li>Tägliche externe Sicherungen</li><li>Uptime- und Sicherheitsüberwachung</li><li>Technische Updates</li></ul></dd></dl>

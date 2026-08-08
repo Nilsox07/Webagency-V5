@@ -1232,3 +1232,30 @@ enthalten") und für den Rundum-Schutz aus den Schutzstufen in `02_PREISE_UND_ZA
 `Aufpreise gesamt — 0,00 €`. Begründung des Betreibers war die Zahl; ohne sie verliert die Form
 ihre Pointe. In `10_WEBSITE_SARTU.md` §7 mit Herleitung abgelegt, damit die Idee auffindbar
 bleibt, falls die Zahl später doch gewollt ist.
+
+### Nachtrag: mehr Lime in den Leistungskarten — 06.08.2026
+
+**Anweisung:** „gestalte die felder jetzt noch ein bisschen spannender irgendwie mehr lime."
+
+**Am selben Tag hatte derselbe Betreiber „zu viel lime" gemeldet.** Kein Widerspruch — es sind
+zwei verschiedene Dinge, und die Regel von heute Vormittag trägt beide:
+
+| | |
+|---|---|
+| **Fläche** (429.337 px², entfernt) | zeichnet nichts aus und entwertet jede Lime-Stelle, die es tut |
+| **Marke** (32 Stück, 11.601 px²) | sagt jedes Mal dasselbe und wird durch Wiederholung stärker |
+
+**Gebaut:** Lime-Punkt vor jedem Umfangspunkt (22 Stück, jeder sagt „enthalten") · Lime-Zeigebalken,
+der beim Überfahren über die Kartenoberkante einfährt · Positionsnummer auf 26 px vergrößert,
+**in Tinte** — acht Lime-Zahlen wären acht Auszeichnungen für etwas, das nur zählt.
+
+**37-mal weniger Lime-Fläche, 32-mal mehr Lime-Momente.** Dauerhaft sichtbar sind davon nur rund
+1.900 px²; die acht Zeigebalken sind im Ruhezustand auf null skaliert.
+
+| Befund | Lage |
+|---|---|
+| **Meine Messtabelle von heute Vormittag war falsch** | Das erste Zählwerk lief über `querySelectorAll('*')` und **sah keine Pseudoelemente** — genau dort sitzt der Großteil des Lime. Zählwerk erweitert, Tabelle in `07_MARKE_UND_GESTALTUNG.md` korrigiert. Die Aussage von damals stimmte trotzdem: die eine große Platte war der Ausreißer |
+| **Kante bei 9-px-Punkten ist `--ink`, nicht `--line`** | Die Flächenregel verlangt eine Kante; `--line` wäre auf diesem Durchmesser unsichtbar und die Regel nur formal erfüllt. **Abweichung vom Buchstaben, im Sinne der Regel** |
+| **Der Zeigebalken existiert auf Berührungsgeräten nicht** | Bewusst: er markiert einen Zeigezustand. Die Karte verliert ohne ihn nichts — die Punkte tragen sie |
+| **Gemessen:** 390 · 1512 · 2560 px | acht Karten, kein waagerechter Überlauf |
+| **Text weiterhin ohne Prüfbericht** | unverändert offen |

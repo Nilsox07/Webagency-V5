@@ -45,16 +45,44 @@ Musterkennzeichnung · Textmarker · Empfehlungsabzeichen. **Eine Lime-Fläche, 
 auszeichnet, entwertet alle, die es tun** — der Leser lernt, dass Lime auch bloß Dekoration sein
 kann, und hört auf, ihm zu folgen.
 
-**Gemessen am 06.08.2026, nach dem Rückbau** — als Bezugsgröße für den nächsten Zweifelsfall:
+**Zweimal am 06.08.2026 gemessen — die erste Zahl war falsch.** Das erste Zählwerk lief über
+`querySelectorAll('*')` und **sah damit keine Pseudoelemente**. Genau dort sitzt aber der Großteil
+des Lime: Marker, Textmarker, Vorzeilenkanten. Die Tabelle unten zählt `::before` und `::after`
+mit.
 
-| Sektion | Lime-Flächen | zusammen |
+| Sektion | Lime-Marken | zusammen |
 |---|---:|---:|
-| Aufmacher | 8 | 675.000 px² (überwiegend der Hauptknopf und das Gerätepaar) |
-| Musterprojekte | 3 | 51.000 px² |
-| Preise | 3 | 25.000 px² |
-| Abschluss | 1 | 18.000 px² |
-| Ablauf | 1 | 2.000 px² |
-| **Leistungen** | **0** | — |
+| Aufmacher | 8 | 675.468 px² (überwiegend Hauptknopf und Gerätepaar) |
+| Musterprojekte | 4 | 51.004 px² |
+| Preise | 8 | 25.224 px² |
+| Abschluss | 2 | 17.857 px² |
+| **Leistungen** | **32** | **11.601 px²** |
+| Ablauf | 1 | 1.936 px² |
+| Fragen | 1 | 138 px² |
+
+### Viele kleine Marken statt einer großen Fläche
+
+**Die Leistungssektion ist der Beleg für die Regel.** Sie trug am Morgen **eine** Fläche von
+429.337 px². Jetzt trägt sie **32 Marken** mit zusammen 11.601 px² — und davon sind nur rund
+**1.900 px² dauerhaft sichtbar**; der Rest sind acht Zeigebalken, die im Ruhezustand auf null
+skaliert sind.
+
+**37-mal weniger Lime-Fläche, 32-mal mehr Lime-Momente.** Der Betreiber hatte am selben Tag erst
+„zu viel Lime" und dann „mehr Lime" verlangt — **beides war richtig**, weil es zwei verschiedene
+Dinge sind:
+
+| | |
+|---|---|
+| **Fläche** | eine Platte, die nichts auszeichnet. Sie entwertet jede Lime-Stelle, die etwas auszeichnet |
+| **Marke** | ein Punkt, ein Balken, ein Textmarker. Er sagt jedes Mal dasselbe und wird durch Wiederholung **stärker**, nicht schwächer |
+
+**Zweiundzwanzig gleiche Lime-Punkte sind kein Zuviel, sondern eine Aussage** — jeder sagt
+„enthalten", und genau darum geht es in dieser Sektion. **Eine einzige Lime-Platte hätte dasselbe
+gesagt und dabei nichts bedeutet.**
+
+> **Kante bei kleinen Marken:** Ein 9-px-Punkt bekommt `1px --ink` statt `1px --line`. Die
+> Flächenregel verlangt eine Kante; auf diesem Durchmesser wäre `--line` unsichtbar und die Regel
+> damit nur formal erfüllt.
 
 **Eine Sektion ohne Lime ist kein Mangel.** Die kleine Lime-Kante unter jeder Vorzeile trägt die
 Wiedererkennung über die ganze Seite; darüber hinaus braucht ein Abschnitt nur dann Lime, wenn
