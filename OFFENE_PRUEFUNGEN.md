@@ -1206,3 +1206,29 @@ derselben Zelle braucht keinen erklärenden Satz.
 | **Gemessen:** 390 und 1512 px | acht Positionen, Summe `0,00 €`, kein waagerechter Überlauf. Unter 900 px stapelt die Zeile, die Kopfzeile entfällt |
 | **Kein JavaScript, keine neue Form, keine neue Farbe** | Die einzige Lime-Stelle ist der Textmarker unter der Summe — er markiert einen **Zustand**, keine Fläche, und hält damit die Regel vom selben Tag ein |
 | **Barrierefreiheit ungeprüft** | Die Kopfzeile ist `aria-hidden`, die Posten stehen als `<ol>`. **Ob ein Vorleseprogramm die Zuordnung Spalte → Wert trägt, ist nicht getestet.** Prüfmittel: ein Durchgang mit VoiceOver oder NVDA. Falls nicht: die Preisspalte braucht je Zeile eine unsichtbare Beschriftung |
+
+### Nachtrag: Leistungen als Karten, Summenzeile entfernt — 06.08.2026
+
+**Anweisung:** „0,00 € wieder weg. mach das mal in kartenform wie unten die musterprojekte. und
+erklärung was alles dazu gehört."
+
+**Gebaut:** acht Karten, je Position `01 / 08`, Titel, ein Satz und `Das gehört dazu` mit zwei bis
+vier Punkten. Vier Spalten ab 1240 px, zwei darunter, eine unter 620 px. Die Summenzeile ist
+vollständig raus — im ausgelieferten Text steht kein `0,00` mehr.
+
+**Die Umfangspunkte sind belegt, nicht erfunden:** aus `03_KUNDENPRODUKT.md` („In jedem Paket
+enthalten") und für den Rundum-Schutz aus den Schutzstufen in `02_PREISE_UND_ZAHLUNG.md`.
+
+| Befund | Lage |
+|---|---|
+| **Drei Vorgaben stehen dagegen** | §7 „keine Kachelwand" · §3 Bauform-Tabelle „Zeilen — die einzige Liste" · §3 „kein Aufbaumuster mehr als zweimal". Karten sind nach Preisen und Musterprojekten die **dritte** Kartenfläche. **Auf Anweisung gebaut und in §7 vermerkt**, nicht stillschweigend |
+| **Die Seite hat jetzt keine Sektion in Zeilenform mehr** | Das war der Gangwechsel, den die Bauform-Tabelle erzwingen sollte. **Der Verlust ist real und nicht durch die Kartenvariante aufgehoben** — sie mildert ihn nur |
+| **Gegenmaßnahme gegen die dritte Wiederholung** | keine Bildfläche, keine Kopfleiste, kein Knopf; dafür Positionsnummer und echte Liste, vier statt drei Spalten |
+| **Gemessen:** 390 · 1512 · 2560 px | acht Karten, kein waagerechter Überlauf, Sektion 1.248–3.183 px |
+| **`margin-top:auto` vermieden** | Es hätte die Trennlinien über die Zeile ausgerichtet und dafür ein Loch in die Mitte der kurzen Karten gerissen — derselbe Fehler wie zuvor im Preisraster |
+| **Text weiterhin ohne Prüfbericht** | Acht Sätze und rund zwanzig Umfangspunkte, nicht durch den Texter-Skill gelaufen. Von Hand gegen die Verbotsliste geprüft, mehr nicht |
+
+**Nicht wieder verwenden ohne neuen Anlass:** das Leistungsverzeichnis mit Summenzeile
+`Aufpreise gesamt — 0,00 €`. Begründung des Betreibers war die Zahl; ohne sie verliert die Form
+ihre Pointe. In `10_WEBSITE_SARTU.md` §7 mit Herleitung abgelegt, damit die Idee auffindbar
+bleibt, falls die Zahl später doch gewollt ist.

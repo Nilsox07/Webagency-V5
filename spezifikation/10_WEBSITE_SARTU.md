@@ -142,7 +142,7 @@ einen einzigen Gangwechsel. **Kein Aufbaumuster kommt mehr als zweimal vor.**
 | 4 | Preise | „Was kostet es?" — und der Belegersatz | Stufen, eine dunkel |
 | 5 | Die Zusage | Luft holen | **randlos dunkel, ein Satz** |
 | 6 | Wer dahintersteckt | „Wem vertraue ich hier?" | Porträt |
-| 7 | Leistungen | „Ist alles dabei?" | Zeilen — die einzige Liste |
+| 7 | Leistungen | „Ist alles dabei?" | Karten mit Umfangsliste — **siehe Vermerk in §7** |
 | 8 | Musterprojekte | „Was kommt dabei heraus?" | Karten |
 | 9 | Häufige Fragen | die letzten Einwände | Akkordeon |
 | 10 | Bedarfsscheck | die Handlung — **zuletzt** | dunkel |
@@ -508,39 +508,38 @@ benennt, wirkt geprüft; wer nur Vorzüge aufzählt, wirkt beliebig.**
 
 **Acht breite Zeilen** — Titel · **ein** Satz · Tags. **Keine Kachelwand, keine Preise.**
 
-### Bauform: ein Leistungsverzeichnis — festgelegt am 06.08.2026
+### Bauform: acht Karten mit Umfangsliste — angeordnet am 06.08.2026
 
-**Die acht Zeilen stehen als Leistungsverzeichnis mit Summenzeile.** Vier Spalten:
-`Pos.` · `Leistung` (Titel + Satz) · `Umfang` (die gebundenen Tags) · `Preis`. In der
-Preisspalte steht **achtmal `enthalten`**. Darunter, über einer 2-px-Linie: `Aufpreise gesamt`
-— `0,00 €`.
+**Je Karte:** Position `01 / 08` · Titel (`gebunden`) · **ein** Satz · Trennlinie ·
+`Das gehört dazu` mit zwei bis vier Punkten in Klartext. Vier Spalten ab 1240 px, zwei darunter,
+eine unter 620 px.
 
-> **Warum drei Anläufe vorher scheiterten.** Sie blieben im selben Rahmen: **Die Sektion
-> behauptet „Es gibt keine Aufpreisliste" und zeigte dann eine Liste.** Die Form widersprach der
-> Aussage, egal wie gut die Zeilen gesetzt waren.
+**Die Punkte sind belegt, nicht erfunden.** Sie stammen aus `03_KUNDENPRODUKT.md`
+(*„In jedem Paket enthalten"*) und für die letzte Karte aus den Schutzstufen in
+`02_PREISE_UND_ZAHLUNG.md`. **Ändert sich dort etwas, ändert es sich hier mit.**
 
-**Warum ausgerechnet diese Form.** Ein Malermeister, eine Praxis und eine Kanzlei kennen genau
-**ein** Dokument, in dem Leistungen zeilenweise mit Preisen stehen — und genau dort erwarten sie
-die böse Überraschung. **Ein Malermeister schreibt Leistungsverzeichnisse selbst.** Das Angebot in
-seinem eigenen Dokument zu zeigen, holt ihn dort ab, wo sein Misstrauen sitzt.
+> **Diese Bauform widerspricht drei Vorgaben — auf ausdrückliche Anweisung des Betreibers, und
+> deshalb hier vermerkt statt stillschweigend gebaut:**
+>
+> | Vorgabe | Stand |
+> |---|---|
+> | §7: **keine Kachelwand** | Es sind Karten |
+> | §3, Bauform-Tabelle: **Zeilen, die einzige Liste** | Die Seite hat jetzt **keine** Sektion in Zeilenform mehr |
+> | §3: **kein Aufbaumuster mehr als zweimal** | Karten sind nach Preisen (4) und Musterprojekten (3) die **dritte** Kartenfläche |
+>
+> **Was dagegen unternommen wurde:** Die Leistungskarte ist bewusst anders gebaut als die beiden
+> anderen — **keine Bildfläche, keine Kopfleiste, kein Knopf**, dafür eine Positionsnummer und
+> eine echte Liste. Sie **erklärt**, statt zu präsentieren, und steht in vier statt drei Spalten.
+> **Das mildert die Wiederholung, hebt sie aber nicht auf.**
 
-**Die Wiederholung ist das Argument.** Acht Zeilen, in denen dieselbe Spalte achtmal dasselbe
-Wort trägt — das braucht keinen Satz, der es erklärt. Die Summenzeile, die ein
-Leistungsverzeichnis immer hat, macht daraus eine Zahl.
+> **Verworfen am 06.08.2026, auf Ansage des Betreibers:** ein **Leistungsverzeichnis** mit vier
+> Spalten und der Summenzeile `Aufpreise gesamt — 0,00 €`. Die Form nahm die Sprache des Kunden
+> auf — ein Malermeister schreibt Leistungsverzeichnisse selbst — und die achtmal identische
+> Preisspalte war das Argument. **Die Zahl war ausdrücklich unerwünscht**, und ohne sie verliert
+> die Form ihre Pointe. Beides zusammen zurückgenommen. Hier abgelegt, damit die Idee auffindbar
+> bleibt, falls die Zahl später doch gewollt ist.
 
-> **Diese Bauform berührt eine Grenze von §7 — bewusst und einzeln.** Dort steht „keine Preise".
-> Gemeint ist erkennbar: **keine Paketpreise** — die stehen in §4 und würden hier die
-> Sektionsreihenfolge aufheben. `0,00 €` ist **kein Preis für etwas**, sondern die Abwesenheit von
-> Aufpreisen, und es folgt dem Geldformat aus `02_PREISE_UND_ZAHLUNG.md`.
-> **Wer das anders sieht, ersetzt die Zelle durch `keine` — die Form trägt auch ohne die Zahl,
-> nur schwächer.** Der Texter-Skill verlangt an dieser Stelle ausdrücklich die Zahl statt des
-> Eigenschaftsworts.
-
-**Kein anderes Bauteil der Seite sieht so aus** (§3: kein Aufbaumuster mehr als zweimal). Kein
-JavaScript, keine neue Form, keine neue Farbe — die einzige Lime-Stelle ist der Textmarker unter
-der Summe, und der markiert einen Zustand, keine Fläche (`07_MARKE_UND_GESTALTUNG.md`).
-
-### Herkunft der Zeile
+### Herkunft der Zeile### Herkunft der Zeile
 
 **Je Zeile: Zähler · Titel · Satz · Tags**, über die volle Breite, 1 px Trennlinie dazwischen.
 Der Zähler läuft `01/08` bis `08/08`.

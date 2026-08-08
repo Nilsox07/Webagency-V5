@@ -452,56 +452,46 @@ h1 .accent{background-image:linear-gradient(var(--lime),var(--lime));background-
    zeigen 2 bis 6 Leistungen, nie acht; Titel 1-3 Woerter; ein Satz je Punkt.
    Keine Kachelwand mit Rahmen — nur eine Lime-Kante je Block, damit Sektion 8
    (Karten mit Bild) daneben nicht dieselbe Bauform bekommt. */
-/* LEISTUNGSVERZEICHNIS — die Form, die der Kunde selbst schreibt.
-   Drei Anlaeufe scheiterten, weil sie im selben Rahmen blieben: Die Sektion
-   behauptet "Es gibt keine Aufpreisliste" und zeigte dann eine Liste. Die
-   Form widersprach der Aussage.
+/* LEISTUNGSKARTEN — acht Karten mit „was dazugehoert".
+   Vom Betreiber so verlangt: Kartenform wie die Musterprojekte, dazu je
+   Karte eine Erklaerung des Umfangs. Die Summenzeile mit 0,00 EUR ist raus.
 
-   Ein Malermeister, eine Praxis und eine Kanzlei kennen genau EIN Dokument,
-   in dem Leistungen zeilenweise mit Preisen stehen: das Leistungsverzeichnis
-   bzw. das Angebot. Genau dort erwartet er die boese Ueberraschung.
+   ANMERKUNG, damit die Abweichung nicht stillschweigend passiert: §7 sagt
+   „keine Kachelwand", die Bauform-Tabelle in §3 sagt „Zeilen — die einzige
+   Liste", und Karten sind nach Preisen und Musterprojekten die DRITTE
+   Kartenflaeche der Seite. §3: kein Aufbaumuster mehr als zweimal.
+   Gebaut auf ausdrueckliche Anweisung.
 
-   Also steht das Angebot in seinem Dokument — mit acht Positionen und einer
-   Preisspalte, in der achtmal dasselbe steht. Die Wiederholung IST das
-   Argument; sie braucht keinen Satz, der sie erklaert. Unten die Summenzeile,
-   die ein Leistungsverzeichnis immer hat.
-
-   Kein Bauteil der Seite sieht so aus (§3: kein Aufbaumuster mehr als
-   zweimal). Kein Javascript, keine neue Form, keine neue Farbe. */
-.lv{margin-top:var(--s-5);border-top:2px solid var(--ink)}
-.lv ol{list-style:none;margin:0;padding:0}
-.lv-kopf,.lv li{display:grid;
-  grid-template-columns:auto minmax(0,1fr) minmax(0,.85fr) auto;
-  gap:clamp(14px,2vw,40px);align-items:baseline}
-.lv-kopf{padding:11px 0;border-bottom:1px solid var(--line);
-  font-family:var(--font-mono);font-size:11px;letter-spacing:.14em;
-  text-transform:uppercase;color:var(--label)}
-.lv li{padding:clamp(16px,1.5vw,24px) 0;border-bottom:1px solid var(--line);
-  transition:background .22s ease}
-.lv li:hover{background:rgba(20,17,13,.03)}
-.lv-pos{font-family:var(--font-mono);font-size:12px;color:var(--label);white-space:nowrap}
-.lv h3{font-size:clamp(19px,1.45vw,23px);letter-spacing:-.015em;line-height:1.25}
-.lv h3+p{margin-top:5px;font-size:15.5px;line-height:1.5;color:var(--muted);max-width:46ch}
-.lv-umfang{font-family:var(--font-mono);font-size:11px;letter-spacing:.1em;
-  text-transform:uppercase;color:var(--label);line-height:1.75}
-.lv-preis{font-family:var(--font-mono);font-size:12.5px;letter-spacing:.1em;
-  text-transform:uppercase;color:var(--ink);text-align:right;white-space:nowrap}
-/* Summenzeile: die eine Stelle, an der ein Leistungsverzeichnis zaehlt. */
-.lv-summe{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:20px;
-  align-items:baseline;margin-top:clamp(18px,1.6vw,28px);padding-top:clamp(16px,1.4vw,24px);
-  border-top:2px solid var(--ink)}
-.lv-summe dt{font-family:var(--font-mono);font-size:12px;letter-spacing:.14em;
-  text-transform:uppercase;color:var(--label)}
-.lv-summe dd{margin:0;font-size:clamp(30px,3.2vw,52px);font-weight:650;
-  letter-spacing:-.03em;color:var(--ink);font-variant-numeric:tabular-nums;
-  background-image:linear-gradient(var(--lime),var(--lime));background-repeat:no-repeat;
-  background-position:0 .84em;background-size:100% .2em;padding-right:.06em}
-@media (max-width:900px){
-  .lv-kopf{display:none}
-  .lv li{grid-template-columns:auto minmax(0,1fr);gap:6px 16px}
-  .lv-umfang,.lv-preis{grid-column:2}
-  .lv-preis{text-align:left;margin-top:4px}
-}
+   Unterscheidung zu den beiden anderen Kartenarten, damit es keine dritte
+   Wiederholung derselben Karte wird: keine Bildflaeche, keine Kopfleiste,
+   kein Knopf. Die Karte traegt eine Positionsnummer und eine echte Liste —
+   sie erklaert, statt zu praesentieren. Dichter gesetzt, vier statt drei
+   Spalten. */
+.lk{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:var(--s-3);
+  margin-top:var(--s-5);align-items:stretch;list-style:none;padding:0}
+.lk>li{display:flex;flex-direction:column;gap:11px;
+  background:var(--paper);border:1px solid var(--line);border-radius:var(--r-m);
+  padding:clamp(20px,1.7vw,26px);
+  transition:border-color .25s ease,transform .25s cubic-bezier(.22,.61,.36,1)}
+.lk>li:hover{border-color:var(--ink);transform:translateY(-4px)}
+.lk-pos{font-family:var(--font-mono);font-size:11px;letter-spacing:.14em;color:var(--label)}
+.lk h3{font-size:19px;letter-spacing:-.015em;line-height:1.25;color:var(--ink)}
+.lk-satz{font-size:15.5px;line-height:1.5;color:var(--muted)}
+/* KEIN margin-top:auto. Es richtet die Trennlinien ueber die Zeile aus und
+   reisst dafuer ein Loch in die Mitte der kurzen Karten — derselbe Fehler wie
+   zuvor im Preisraster. Ein Rest am Fuss faellt weniger auf als eine Luecke
+   in der Mitte. */
+.lk-dazu{margin-top:2px;padding-top:13px;border-top:1px solid var(--line)}
+.lk-dazu dt{font-family:var(--font-mono);font-size:10.5px;letter-spacing:.13em;
+  text-transform:uppercase;color:var(--label);margin-bottom:7px}
+.lk-dazu dd{margin:0}
+.lk-dazu ul{display:flex;flex-direction:column;gap:6px;font-size:14.5px;line-height:1.45;
+  color:var(--text)}
+.lk-dazu li{position:relative;padding-left:16px}
+.lk-dazu li::before{content:"";position:absolute;left:0;top:8px;width:7px;height:7px;
+  border-radius:var(--r-pill);border:1px solid var(--ink)}
+@media (max-width:1240px){.lk{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:620px){.lk{grid-template-columns:1fr}}
 .stichworte{margin-top:var(--s-5);padding-top:19px;border-top:1px solid var(--line-dark);
   max-width:940px;font-family:var(--font-mono);font-size:11.5px;letter-spacing:.1em;
   text-transform:uppercase;color:var(--label);line-height:2.05;border-top-color:var(--line)}
@@ -988,63 +978,56 @@ html:has(#g-kalk:checked),html:has(#g-weiss:checked){background:var(--cream)}
       <p class="tag rise-3">Im Preis enthalten</p>
       <h2 class="sec-head rise" style="margin-top:20px">Es gibt keine Aufpreisliste.</h2>
       <p class="lz-lede rise-2">Das alles steckt in jedem Angebot — Sie stellen es nicht selbst zusammen und zahlen nichts davon extra. Wir gewichten die Bausteine passend zu Ihrem Ziel.</p>
-      <div class="lv rise-2">
-        <div class="lv-kopf" aria-hidden="true"><span>Pos.</span><span>Leistung</span><span>Umfang</span><span>Preis</span></div>
-        <ol>
-          <li class="rise">
-            <span class="lv-pos">01</span>
-            <div><h3>Strategie und Seitenstruktur</h3><p>Wir legen fest, welche Seiten Sie brauchen — und welche nicht.</p></div>
-            <p class="lv-umfang">Sitemap · Nutzerführung · Suchintention</p>
-            <p class="lv-preis">enthalten</p>
-          </li>
-          <li class="rise">
-            <span class="lv-pos">02</span>
-            <div><h3>Webdesign und Programmierung</h3><p>Individuell programmiert, ohne WordPress und ohne Baukasten.</p></div>
-            <p class="lv-umfang">kein WordPress · responsive · schnell</p>
-            <p class="lv-preis">enthalten</p>
-          </li>
-          <li class="rise">
-            <span class="lv-pos">03</span>
-            <div><h3>Website-Texte</h3><p>Wir schreiben sie aus Ihren Fakten und Stichpunkten.</p></div>
-            <p class="lv-umfang">aus Stichpunkten · Faktenprüfung</p>
-            <p class="lv-preis">enthalten</p>
-          </li>
-          <li class="rise">
-            <span class="lv-pos">04</span>
-            <div><h3>SEO- und GEO-Grundlage</h3><p>Ab dem ersten Tag für Suchmaschinen und KI-Antworten vorbereitet.</p></div>
-            <p class="lv-umfang">Titles · Schema · Antwort-zuerst · interne Links</p>
-            <p class="lv-preis">enthalten</p>
-          </li>
-          <li class="rise">
-            <span class="lv-pos">05</span>
-            <div><h3>Lokale Sichtbarkeit</h3><p>Ihre echten Unternehmensdaten, keine Seiten mit ausgetauschten Stadtnamen.</p></div>
-            <p class="lv-umfang">Local SEO · konsistente Daten</p>
-            <p class="lv-preis">enthalten</p>
-          </li>
-          <li class="rise">
-            <span class="lv-pos">06</span>
-            <div><h3>Domain und Launch</h3><p>Wir schalten live, ohne dass Ihre bestehende E-Mail ausfällt.</p></div>
-            <p class="lv-umfang">DNS · E-Mail-Schutz · Weiterleitungen</p>
-            <p class="lv-preis">enthalten</p>
-          </li>
-          <li class="rise">
-            <span class="lv-pos">07</span>
-            <div><h3>Kundenbereich und Freigaben</h3><p>Briefing, Vorschau und Freigabe an einem Ort statt in E-Mail-Ketten.</p></div>
-            <p class="lv-umfang">Briefing · Feedback · Pflege</p>
-            <p class="lv-preis">enthalten</p>
-          </li>
-          <li class="rise">
-            <span class="lv-pos">08</span>
-            <div><h3>Rundum-Schutz</h3><p>Hosting, Sicherung und Überwachung laufen nach dem Start weiter.</p></div>
-            <p class="lv-umfang">Betrieb · Backups · Monitoring</p>
-            <p class="lv-preis">enthalten</p>
-          </li>
-        </ol>
-        <dl class="lv-summe">
-          <dt>Aufpreise gesamt</dt>
-          <dd>0,00 €</dd>
-        </dl>
-      </div>
+      <ul class="lk rise-2">
+        <li class="rise">
+          <span class="lk-pos">01 / 08</span>
+          <h3>Strategie und Seitenstruktur</h3>
+          <p class="lk-satz">Wir legen fest, welche Seiten Sie brauchen — und welche nicht.</p>
+          <dl class="lk-dazu"><dt>Das gehört dazu</dt><dd><ul><li>Bedarfsprüfung mit begründeter Empfehlung</li><li>Strategische Sitemap, bevor gebaut wird</li></ul></dd></dl>
+        </li>
+        <li class="rise">
+          <span class="lk-pos">02 / 08</span>
+          <h3>Webdesign und Programmierung</h3>
+          <p class="lk-satz">Individuell programmiert, ohne WordPress und ohne Baukasten.</p>
+          <dl class="lk-dazu"><dt>Das gehört dazu</dt><dd><ul><li>Individuelles Design im SARTU-Designsystem</li><li>Geprüfte Programmierung ohne WordPress</li><li>Responsiv, Barrierefreiheits-Basis, Performance</li><li>Kontaktweg und Anfrageformular</li></ul></dd></dl>
+        </li>
+        <li class="rise">
+          <span class="lk-pos">03 / 08</span>
+          <h3>Website-Texte</h3>
+          <p class="lk-satz">Wir schreiben sie aus Ihren Fakten und Stichpunkten.</p>
+          <dl class="lk-dazu"><dt>Das gehört dazu</dt><dd><ul><li>Texte aus bestätigten Fakten</li><li>Sie lesen gegen und geben frei</li></ul></dd></dl>
+        </li>
+        <li class="rise">
+          <span class="lk-pos">04 / 08</span>
+          <h3>SEO- und GEO-Grundlage</h3>
+          <p class="lk-satz">Ab dem ersten Tag für Suchmaschinen und KI-Antworten vorbereitet.</p>
+          <dl class="lk-dazu"><dt>Das gehört dazu</dt><dd><ul><li>SEO- und GEO-Startsystem</li><li>Titel und strukturierte Daten je Seite</li><li>Interne Verlinkung</li></ul></dd></dl>
+        </li>
+        <li class="rise">
+          <span class="lk-pos">05 / 08</span>
+          <h3>Lokale Sichtbarkeit</h3>
+          <p class="lk-satz">Ihre echten Unternehmensdaten, keine Seiten mit ausgetauschten Stadtnamen.</p>
+          <dl class="lk-dazu"><dt>Das gehört dazu</dt><dd><ul><li>Einheitliche Unternehmensdaten überall</li><li>Regionale Struktur statt Ortsseiten</li></ul></dd></dl>
+        </li>
+        <li class="rise">
+          <span class="lk-pos">06 / 08</span>
+          <h3>Domain und Launch</h3>
+          <p class="lk-satz">Wir schalten live, ohne dass Ihre bestehende E-Mail ausfällt.</p>
+          <dl class="lk-dazu"><dt>Das gehört dazu</dt><dd><ul><li>Domainprüfung und -verbindung</li><li>Absicherung der bestehenden E-Mail</li><li>Weiterleitungen alter Adressen</li></ul></dd></dl>
+        </li>
+        <li class="rise">
+          <span class="lk-pos">07 / 08</span>
+          <h3>Kundenbereich und Freigaben</h3>
+          <p class="lk-satz">Briefing, Vorschau und Freigabe an einem Ort statt in E-Mail-Ketten.</p>
+          <dl class="lk-dazu"><dt>Das gehört dazu</dt><dd><ul><li>Vorschau mit gebündeltem Feedback</li><li>Korrekturrunden je nach Paket</li><li>Zugang zum Kundenbereich</li></ul></dd></dl>
+        </li>
+        <li class="rise">
+          <span class="lk-pos">08 / 08</span>
+          <h3>Rundum-Schutz</h3>
+          <p class="lk-satz">Hosting, Sicherung und Überwachung laufen nach dem Start weiter.</p>
+          <dl class="lk-dazu"><dt>Das gehört dazu</dt><dd><ul><li>Managed Hosting in DE/EU mit SSL</li><li>Tägliche externe Sicherungen</li><li>Uptime- und Sicherheitsüberwachung</li><li>Technische Updates</li></ul></dd></dl>
+        </li>
+      </ul>
 
       <a class="btn btn-ghost rise" href="/leistungen" style="margin-top:var(--s-5)">Alle Leistungen im Überblick <span class="ar">→</span></a>
       </div>
