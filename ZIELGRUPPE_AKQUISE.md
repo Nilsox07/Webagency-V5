@@ -174,6 +174,117 @@ Neuausrichtung nach, und Neuausrichtung heißt neue Selbstdarstellung.
 
 ---
 
+## Die kaufkräftigen Branchen — einzeln geprüft
+
+> **Ergänzt am 09.08.2026** auf Nachfrage des Betreibers: Energie, Solar, Erneuerbare,
+> Halbleiter und was sonst noch Geld hat.
+
+### Der Denkfehler bei „kaufkräftig"
+
+Kaufkraft allein wählt keine Nische aus. Vier Bedingungen müssen zusammenkommen:
+
+| Bedingung | Frage |
+|---|---|
+| **Kaufkraft** | Kann der Betrieb 1.490–7.900 € netto ohne Nachdenken ausgeben? |
+| **Kaufanlass** | Hat er gerade einen Grund? |
+| **Kanalpassung** | Wird er über eine Website gewonnen — oder über Ausschreibung, Messe und Beziehung? |
+| **Branchengröße** | Gibt es genug Betriebe, damit sich eine eigene Seite mit 400 eigenen Wörtern lohnt? |
+
+**Die dritte Bedingung erledigt die meisten „heißen" Branchen.** Wo über Beschaffungsportale,
+Zertifizierung und Jahrzehntbeziehungen verkauft wird, feuert SARTUs stärkster Hebel — der
+veröffentlichte Preis samt Bedarfsscheck — überhaupt nicht.
+
+### Halbleiter und Silicon Saxony — der wichtigste Fund, aber nicht als Zielbranche
+
+| Zahl | Wert |
+|---|---|
+| Unternehmen im Cluster | **2.500** |
+| Beschäftigte in Mikroelektronik und Software | **82.500** (30.09.2025), Vorjahr 81.000 |
+| Zuwachs in einem Jahr | **+1.500 Stellen** — Sachsens Hightech-Sektor wächst **gegen den Bundestrend** |
+| Anteil an der europäischen Chipfertigung | **jeder dritte** EU-Chip kommt aus Dresden |
+| ESMC — TSMC, Bosch, Infineon, NXP | über **10 Mrd. €** Investition, bis **5 Mrd. €** Bundesförderung, 45.000 m² Reinraum, 480.000 Wafer im Jahr, fertig **2027** |
+| GlobalFoundries Dresden | über **1 Mrd. €** |
+| Infineon Smart Power Fab | Produktionsstart **Herbst 2026** |
+| Investitionen der Region insgesamt | über **20 Mrd. €**, knapp **7 Mrd. €** Förderung, bis Ende **2028** |
+
+**Als Zielbranche fällt der Cluster durch — an drei der vier Bedingungen:**
+
+- **Betriebsgröße:** Infineon, GlobalFoundries, Bosch, TSMC sowie die zugezogenen Zulieferer
+  (Air Liquide, Exyte, Mitutoyo, SMC, EBARA) sind Konzerne. `spezifikation/01` begrenzt auf
+  **1–50 Mitarbeitende, inhabergeführt**
+- **Kanal:** Ein Halbleiterzulieferer verkauft an eine Handvoll Fabriken — über Qualifizierung und
+  Beziehung, nicht über Suche
+- **Branchengröße:** Zu wenige mittelständische Betriebe für eine eigene Branchenseite
+
+**Und trotzdem ist das der wichtigste Fund dieses Screenings — auf dem Umweg:**
+
+> Über 20 Mrd. € fließen bis 2028 in **die Region Dresden**. Dieses Geld kauft keine Websites bei
+> den Fabriken — es fließt in die **regionale Wirtschaft**: Reinraumbau, Elektroinstallation,
+> Lüftung, Sicherheitsdienst, Reinigung, Entsorgung, Logistik, Wohnen, Gastronomie.
+>
+> **Das heißt: Die bundesweiten Handwerkszahlen — Klima 107, Auslastung 75 % — beschreiben Dresden
+> vermutlich zu schlecht.** Sachsen wächst gegen den Bundestrend. Und der **eine** ortsgebundene
+> Kanal, den SARTU hat, liegt genau dort.
+>
+> Silicon Saxony ist keine Zielbranche. Es ist der Grund, warum die Dresdner Zielbranchen Geld haben.
+
+**Gegenstimme, die ich nicht unterschlage:** Es gibt eine Berichterstattung mit dem Tenor
+*„Angst ums Silicon Saxony — wir fallen de facto zurück"*. Der Cluster wächst, aber im
+internationalen Vergleich wird über Rückstand diskutiert. Intel Magdeburg wurde gestrichen.
+
+### Solar und Photovoltaik — die klarste Absage
+
+| Zahl | Wert |
+|---|---|
+| Zubau 1. Halbjahr 2026 | **7,4 GWp**, **+9 %** gegenüber Vorjahreszeitraum |
+| private Neuregistrierungen | **388.000**, **−18 %** |
+| Eigenheim-Segment (BSW-Solar) | **−28 %** |
+| Strukturverschiebung | Großanlagen über 1 MWp wachsen, das private Segment schrumpft |
+
+**Die Insolvenzen sind namentlich belegt:** der Modulhersteller **SoLuxTec** nach rund 15 Jahren
+Produktion, fünf Tochterfirmen der **Sun-Contracting**-Gruppe, dazu **Eigensonne, Envoltec,
+Enersol, Wegatech, Solarmax**. Ursachen: Preisdruck aus China, vorgezogene Investitionen als
+Sondereffekt — und geplante Änderungen bei der Solarförderung, die **ab 2027** belasten könnten.
+
+> **Das ist die klarste Absage im ganzen Screening.** Der Gesamtmarkt wächst, aber genau das
+> Segment, in dem regionale KMU arbeiten — Eigenheim und Kleinanlage — bricht um bis zu 28 % ein,
+> und die Anbieter gehen reihenweise insolvent. Wer jetzt Solarbetrieben Websites verkauft,
+> verkauft an eine Branche, deren Kunden gerade verschwinden.
+>
+> **Das bestätigt zugleich die Elektro-Empfehlung:** Der Rückzug der Elektrobetriebe aus PV
+> — von 57,1 % auf 52,1 % — war kein Zufall, sondern eine vernünftige Reaktion. Deshalb steht in
+> der Zieldefinition ausdrücklich *„nicht auf PV spezialisiert"*.
+
+### Windenergie und Netzausbau — wächst, aber falscher Kanal
+
+| Zahl | Wert |
+|---|---|
+| Zubau 1. Halbjahr 2026 | **423 Anlagen**, **2.363 MW**, **+7 %** |
+| installierte Leistung an Land (30.06.2026) | **69.952 MW** — fast ein Viertel der Stromversorgung |
+| neu genehmigt im Halbjahr | **9,1 GW**; genehmigtes Gesamtvolumen **48,1 GW** |
+| davon ohne Förderzuschlag | rund **19 GW** |
+
+Die Verbände sehen in der geplanten **EEG-Novelle** und im **Netzanschlusspaket** ein
+Investitionsrisiko für bereits genehmigte Projekte.
+
+**Urteil:** Projektierer sind meist keine 1–50-Personen-Betriebe, und Netzbau-Dienstleister sind
+Nachunternehmer der Übertragungsnetzbetreiber — beauftragt über Ausschreibung, nicht über Google.
+Dazu ein regulatorisches Risiko, das niemand abschätzen kann. **Kein Kandidat.**
+
+### Was sonst noch Geld hat — und warum es meist am Kanal scheitert
+
+| Branche | Kaufkraft | Woran es scheitert |
+|---|---|---|
+| Sondermaschinen- und Werkzeugbau | hoch | Beziehungsvertrieb, Messen, kaum Suchnachfrage |
+| Medizintechnik-Zulieferer | hoch | Zulassung und Qualifizierung statt Suche |
+| Prüflabore, Kalibrierdienste | hoch | sehr kleine Grundgesamtheit |
+| **Zahntechnische Labore** | mittel–hoch | **B2B an Zahnärzte, regional, kein Shop — brauchbarer Kandidat** |
+| Gewerbeversicherungsmakler | hoch | reguliertes Marketing |
+| IT-Systemhäuser | hoch | bauen selbst — `spezifikation/01` schließt sie aus |
+| Bestatter | hoch, konjunkturunabhängig | kleine Grundgesamtheit, heikle Textarbeit |
+
+---
+
 ## Revidierte Empfehlung
 
 **Die Empfehlung aus Fassung 1 — Elektrotechnik — bleibt bestehen, aber ihr Rang ändert sich.**
@@ -195,6 +306,27 @@ ist ein Fenster; KRITIS ist ein Trend.
 Branchenseite und kein Musterprojekt.** Die drei gebauten Gewerkeseiten helfen nicht. Wer
 Sicherheitsdienste wählt, schreibt eine vierte Branchenseite und muss `§7c` neu denken — die
 Entscheidung über *drei* Branchen wird dann eine über *vier* oder über einen Austausch.
+
+### Die regionale Ebene, die durch das Halbleiter-Screening dazugekommen ist
+
+Bisher wurde in dieser Datei bundesweit gerechnet, weil `spezifikation/16` die lokale
+Suchintention sperrt und `§1` nur `/webdesign-dresden` erlaubt. **Das Silicon-Saxony-Ergebnis
+fügt eine zweite Ebene hinzu, die nichts kostet:**
+
+| Beobachtung | Folge |
+|---|---|
+| über **20 Mrd. €** Investitionen in der Region bis 2028 | die Dresdner Zielbranchen sind wirtschaftlich besser dran, als die Bundeszahlen vermuten lassen |
+| Sachsens Hightech-Sektor wächst **gegen den Bundestrend** | die Region trägt, während das Handwerk bundesweit fällt |
+| **Ostdeutschland** steht namentlich in der Digital-Nachzüglerliste | das Angebot trifft dort auf den größten Rückstand |
+| das Unternehmensprofil ist der **einzige** ortsgebundene Kanal — und kostet nichts | mitnehmen, nicht ausbauen |
+
+**Was daraus folgt und was nicht.** Es folgt **nicht**, dass jetzt Ortsseiten gebaut werden —
+`§1` und `spezifikation/16` gelten unverändert. Es folgt, dass das **Google-Unternehmensprofil**
+in Dresden mehr wert ist als die bundesweite Betrachtung nahelegte. Blockiert wird es allein durch
+`[GESCHAEFTSADRESSE_STATUS]` aus `§1`, der weiterhin auf **offen** steht.
+
+> **Damit ist die Adressfrage aus `§1` nicht mehr nur eine Formalie.** Sie hält den einzigen
+> kostenlosen Kanal in der einzigen Region zu, in der die Konjunktur gerade für SARTU arbeitet.
 
 ---
 
@@ -239,6 +371,11 @@ Nach Regel S5 aus `SARTU_BRANCHENFAKTEN.md`:
 | Logistikwachstum 2026 | Branchenprognosen Logistik | 2026 | Jahresende 2026 |
 | Gebäudereinigung Unternehmenszahl | Statistisches Bundesamt über Statista | 2023 | bei Neuerhebung |
 | Verteidigung: 15.000 Unternehmen, 40 %, 108 Mrd. € | IfM Bonn | Mai 2026 | Mai 2027 |
+| Silicon Saxony: 2.500 Unternehmen, 82.500 Beschäftigte, +1.500 Stellen | Silicon Saxony e. V. / Wirtschaftsförderung Sachsen | Stand 30.09.2025, Meldung 2026 | Jahresende 2026 |
+| ESMC, GlobalFoundries, Infineon: Investitionssummen und Termine | BMWE, Unternehmensmeldungen | 2024–2026 | mit Baufortschritt |
+| PV-Zubau 7,4 GWp, privat −18 %, Eigenheim −28 % | BSW-Solar, Bundesnetzagentur-Auswertungen | 1. Halbjahr 2026 | Jahresende 2026 |
+| Solar-Insolvenzen mit Firmennamen | Branchenpresse, Insolvenzstatistik | ab Januar 2026 | laufend, **schnell veraltend** |
+| Windzubau 423 Anlagen, 2.363 MW, 48,1 GW genehmigt | BWE / Fachagentur Wind und Solar | 1. Halbjahr 2026 | Jahresende 2026 |
 | Digitalisierungsindex je Branchengruppe | IW Köln, Digitalisierungsindex | 2024 | Ausgabe 2026 |
 | Gesundheitswirtschaft: 42 %, Investitionsfelder | Trendbarometer Gesundheitswirtschaft, >150 Befragte | März–April 2026 | Frühjahr 2027 |
 | Website-Anteil, Digitalisierungshürden KMU | YouGov für IONOS, ~1.000 Befragte | Jan–März 2026 | Jan 2027 |
