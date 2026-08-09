@@ -109,6 +109,19 @@ final class AdminRechnungen
     }
 
     /**
+     * Aendert das Faelligkeitsdatum — Fall 53a.
+     *
+     * Eigene Anweisung statt eines Anhaengsels an `zahlungSetzen`: Die Frist zu verschieben
+     * ist kein Zahlungsvorgang, und ein gemeinsamer Schreibweg haette irgendwann beides
+     * zugleich geaendert, ohne dass ein Protokolleintrag beides nennt.
+     */
+    public function faelligkeitSetzen(string $id, string $datum): void
+    {
+        $anweisung = $this->pdo()->prepare('UPDATE invoices SET due_date = ? WHERE id = ?');
+        $anweisung->execute([$datum, $id]);
+    }
+
+    /**
      * Der taegliche Lauf steht NICHT hier, sondern in `Data\Faelligkeiten`.
      *
      * Er ist eine Systemaufgabe ohne Akteur und greift bewusst ueber alle Organisationen.

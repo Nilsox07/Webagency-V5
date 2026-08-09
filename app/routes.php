@@ -156,6 +156,8 @@ return [
     new Route(Route::BEREICH_ADMIN, 'POST', '/admin/rechnungen/{id}/senden', [RechnungenSteuerung::class, 'senden']),
     new Route(Route::BEREICH_ADMIN, 'POST', '/admin/rechnungen/{id}/zahlung', [RechnungenSteuerung::class, 'zahlungEintragen']),
     new Route(Route::BEREICH_ADMIN, 'POST', '/admin/rechnungen/{id}/stornieren', [RechnungenSteuerung::class, 'stornieren']),
+    new Route(Route::BEREICH_ADMIN, 'POST', '/admin/rechnungen/{id}/zahlung-zurueck', [RechnungenSteuerung::class, 'zahlungZurueck']),
+    new Route(Route::BEREICH_ADMIN, 'POST', '/admin/rechnungen/{id}/faelligkeit', [RechnungenSteuerung::class, 'faelligkeit']),
     new Route(Route::BEREICH_ADMIN, 'POST', '/admin/rechnungen/{id}/zahlungslink', [RechnungenSteuerung::class, 'zahlungslink']),
     new Route(Route::BEREICH_ADMIN, 'GET', '/admin/rechnungen/{id}', [RechnungenSteuerung::class, 'einzeln']),
     new Route(Route::BEREICH_ADMIN, 'GET', '/admin/testmail', [TestmailSteuerung::class, 'formular']),

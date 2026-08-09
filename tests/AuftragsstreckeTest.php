@@ -501,6 +501,161 @@ final class AuftragsstreckeTest extends Datenbankfall
         $this->assertStringNotContainsString('Offene Punkte', $rumpf);
     }
 
+    // ------------------------------------------- §12: Grundlagentext, Rücknahme, Frist
+
+    /** Testfall 51 — manuelles Setzen auf `bezahlt` **ohne** Grundlagentext scheitert. */
+    public function testZahlungOhneGrundlagentextScheitert(): void
+    {
+        $rechnungId = $this->rechnungAnlegen();
+        $this->alsAdmin($this->adminId);
+        $dienst = new Rechnungsdienst($this->nachweis());
+
+        foreach (['', '  ', 'ab'] as $zuKurz) {
+            $fehler = $dienst->zahlungEintragen($rechnungId, 119000, $zuKurz, '127.0.0.1');
+
+            $this->assertNotSame([], $fehler, 'Mit „' . $zuKurz . '" ging es durch.');
+            $this->assertSame(0, (int) $this->rechnung($rechnungId)['paid_cents']);
+            $this->assertSame(Zahlungsstatus::GESENDET, (string) $this->rechnung($rechnungId)['status']);
+        }
+
+        // Drei Zeichen genügen — die Grenze steht als Konstante, nicht im Test.
+        $this->assertSame(3, Rechnungsdienst::GRUNDLAGE_MINDESTLAENGE);
+        $this->assertSame([], $dienst->zahlungEintragen($rechnungId, 119000, 'abc', '127.0.0.1'));
+    }
+
+    /**
+     * Testfall 52 — das Audit-Ereignis trägt **alle sechs** Angaben.
+     *
+     * Akteur, Zeitpunkt, alter Wert, neuer Wert, Grundlagentext und IP. Ein Test, der nur
+     * das Vorhandensein des Ereignisses prüft, prüft den Fall nicht.
+     */
+    public function testDasAuditEreignisZurZahlungTraegtAlleSechsAngaben(): void
+    {
+        $rechnungId = $this->rechnungAnlegen();
+        $this->alsAdmin($this->adminId);
+
+        $this->assertSame([], (new Rechnungsdienst($this->nachweis()))->zahlungEintragen(
+            $rechnungId,
+            119000,
+            'Mollie-Zahlung tr_abc vom 09.08.2026',
+            '203.0.113.7',
+        ));
+
+        $ereignis = $this->letztesEreignis('zahlungsstatus_geaendert');
+
+        $this->assertSame($this->adminId, (string) $ereignis['actor_user_id'], 'Akteur fehlt.');
+        $this->assertNotNull($ereignis['created_at'], 'Zeitpunkt fehlt.');
+        $this->assertSame('gesendet', (string) $ereignis['old_value'], 'Alter Wert fehlt.');
+        $this->assertSame('bezahlt', (string) $ereignis['new_value'], 'Neuer Wert fehlt.');
+        $this->assertSame('Mollie-Zahlung tr_abc vom 09.08.2026', (string) $ereignis['reason']);
+        $this->assertSame('203.0.113.7', (string) $ereignis['ip'], 'IP fehlt.');
+    }
+
+    /** Testfall 53a — die Änderung von `due_date` erzeugt ein Audit-Ereignis mit Grundlagentext. */
+    public function testDieFristVerschiebenIstEineProtokollierteHandlung(): void
+    {
+        $rechnungId = $this->rechnungAnlegen();
+        $vorher = (string) $this->rechnung($rechnungId)['due_date'];
+        $neu = Format::inTagen(30);
+
+        $this->alsAdmin($this->adminId);
+        $dienst = new Rechnungsdienst($this->nachweis());
+
+        // Ohne Grundlagentext geht nichts, und das Datum bleibt stehen.
+        $this->assertNotSame([], $dienst->faelligkeitAendern($rechnungId, $neu, '', '127.0.0.1'));
+        $this->assertSame($vorher, (string) $this->rechnung($rechnungId)['due_date']);
+
+        // Ein Datum, das keines ist, ebenfalls nicht.
+        $this->assertNotSame([], $dienst->faelligkeitAendern(
+            $rechnungId, '2026-02-30', 'Zahlungsaufschub nach Absprache', '127.0.0.1'));
+
+        $this->assertSame([], $dienst->faelligkeitAendern(
+            $rechnungId, $neu, 'Zahlungsaufschub nach Absprache vom 09.08.2026', '127.0.0.1'));
+
+        $this->assertSame($neu, (string) $this->rechnung($rechnungId)['due_date']);
+
+        $ereignis = $this->letztesEreignis('faelligkeit_geaendert');
+
+        $this->assertSame($this->adminId, (string) $ereignis['actor_user_id']);
+        $this->assertSame($vorher, (string) $ereignis['old_value']);
+        $this->assertSame($neu, (string) $ereignis['new_value']);
+        $this->assertSame('Zahlungsaufschub nach Absprache vom 09.08.2026', (string) $ereignis['reason']);
+
+        // Und kein neuer Beleg — die Frist ist keine Pflichtangabe nach § 14 UStG.
+        $this->assertSame(
+            1,
+            (int) $this->pdo->query('SELECT COUNT(*) FROM invoices')->fetchColumn(),
+            'Die Friständerung hat einen zweiten Beleg erzeugt.',
+        );
+    }
+
+    /**
+     * Testfall 54 — die Rücknahme ist eine **eigene** protokollierte Aktion und
+     * benachrichtigt den Kunden.
+     *
+     * Geprüft wird beides, was den Fall ausmacht: eine eigene Aktion im Protokoll (nicht
+     * eine Buchung über null) und genau eine Nachricht an den Kunden, die die Grundlage nennt.
+     */
+    public function testDieRuecknahmeIstEineEigeneHandlungUndErreichtDenKunden(): void
+    {
+        $rechnungId = $this->rechnungAnlegen();
+        $this->alsAdmin($this->adminId);
+
+        $postfach = new Postfach();
+        $dienst = new Rechnungsdienst($this->nachweis(), mail: $postfach);
+
+        $dienst->zahlungEintragen($rechnungId, 119000, 'Kontoauszug 08/2026', '127.0.0.1');
+        $postfach->mails = [];
+
+        // Ohne Grundlagentext nicht.
+        $this->assertNotSame([], $dienst->zahlungZuruecknehmen($rechnungId, '', '127.0.0.1'));
+        $this->assertSame(Zahlungsstatus::BEZAHLT, (string) $this->rechnung($rechnungId)['status']);
+        $this->assertSame([], $postfach->mails);
+
+        $this->assertSame([], $dienst->zahlungZuruecknehmen(
+            $rechnungId, 'Rücklastschrift vom 09.08.2026', '203.0.113.7'));
+
+        $rechnung = $this->rechnung($rechnungId);
+
+        $this->assertSame(0, (int) $rechnung['paid_cents']);
+        $this->assertNull($rechnung['paid_at']);
+        $this->assertNull($rechnung['marked_paid_by_user_id']);
+        $this->assertSame(Zahlungsstatus::GESENDET, (string) $rechnung['status']);
+
+        // Eine eigene Aktion — nicht `zahlungsstatus_geaendert` mit Betrag null.
+        $ereignis = $this->letztesEreignis('zahlung_zurueckgenommen');
+
+        $this->assertSame($this->adminId, (string) $ereignis['actor_user_id']);
+        $this->assertSame('bezahlt', (string) $ereignis['old_value']);
+        $this->assertSame('gesendet', (string) $ereignis['new_value']);
+        $this->assertSame('Rücklastschrift vom 09.08.2026', (string) $ereignis['reason']);
+        $this->assertSame('203.0.113.7', (string) $ereignis['ip']);
+
+        // Genau eine Nachricht, an den Kunden, mit der Grundlage darin (§10).
+        $this->assertCount(1, $postfach->mails);
+        $this->assertSame('erika@example.org', $postfach->mails[0]['an']);
+        $this->assertSame('Korrektur zu Rechnung RE-2026-001', $postfach->mails[0]['betreff']);
+        $this->assertStringContainsString('Rücklastschrift vom 09.08.2026', $postfach->mails[0]['text']);
+
+        // Ein zweites Mal geht nicht — es ist nichts mehr zurückzunehmen.
+        $this->assertNotSame([], $dienst->zahlungZuruecknehmen($rechnungId, 'Noch einmal', null));
+        $this->assertCount(1, $postfach->mails);
+    }
+
+    /** Eine überfällige Rechnung ist nach der Rücknahme wieder überfällig, nicht `gesendet`. */
+    public function testDieRuecknahmeRechnetDenZustandUndSetztIhnNicht(): void
+    {
+        $rechnungId = $this->rechnungAnlegen();
+        $this->alsAdmin($this->adminId);
+        $dienst = new Rechnungsdienst($this->nachweis(), mail: new Postfach());
+
+        $dienst->zahlungEintragen($rechnungId, 119000, 'Kontoauszug 08/2026', null);
+        $this->faelligkeitVerschieben($rechnungId, '-1 day');
+
+        $this->assertSame([], $dienst->zahlungZuruecknehmen($rechnungId, 'Rücklastschrift', null));
+        $this->assertSame(Zahlungsstatus::UEBERFAELLIG, (string) $this->rechnung($rechnungId)['status']);
+    }
+
     // ---------------------------------------------------------------- §8.1 Block 4
 
     /**

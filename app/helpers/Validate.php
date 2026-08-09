@@ -98,4 +98,23 @@ final class Validate
     {
         return $wert !== null && mb_strlen($wert) >= 12;
     }
+
+    /**
+     * Ein Kalendertag in der Speicherform `JJJJ-MM-TT`.
+     *
+     * **Gegen `DateTimeImmutable` geprueft, nicht nur gegen ein Muster.** `2026-02-30` passt
+     * auf jedes Muster und ist trotzdem kein Tag; `checkdate` faengt das. Die Oberflaeche
+     * zeigt `TT.MM.JJJJ` (`13_DATENMODELL.md`) — hier steht die Form, in der gespeichert
+     * wird, und die kommt aus einem `<input type="date">`.
+     */
+    public static function datum(?string $wert): bool
+    {
+        if ($wert === null || preg_match('/^\d{4}-\d{2}-\d{2}$/', $wert) !== 1) {
+            return false;
+        }
+
+        [$jahr, $monat, $tag] = array_map('intval', explode('-', $wert));
+
+        return checkdate($monat, $tag, $jahr);
+    }
 }

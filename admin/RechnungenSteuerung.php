@@ -131,6 +131,35 @@ final class RechnungenSteuerung
             'Die Rechnung ist storniert und der Vorgang protokolliert.');
     }
 
+    /**
+     * §12, Fall 54 — die Ruecknahme ist eine eigene Handlung, kein Betrag von null.
+     *
+     * @param array<string,string> $parameter
+     */
+    public function zahlungZurueck(array $parameter = []): Antwort
+    {
+        return $this->aktion($parameter, static fn (Rechnungsdienst $d, string $id): array
+            => $d->zahlungZuruecknehmen($id, Http::getrimmteEingabe('grundlage'), Http::gegenstelle()),
+            'Die Zahlung ist zurueckgenommen, der Kunde ist benachrichtigt.');
+    }
+
+    /**
+     * §12, Fall 53a — die Frist verschieben. Kein neuer Beleg.
+     *
+     * @param array<string,string> $parameter
+     */
+    public function faelligkeit(array $parameter = []): Antwort
+    {
+        return $this->aktion($parameter, static fn (Rechnungsdienst $d, string $id): array
+            => $d->faelligkeitAendern(
+                $id,
+                Http::getrimmteEingabe('due_date'),
+                Http::getrimmteEingabe('grundlage'),
+                Http::gegenstelle(),
+            ),
+            'Die neue Frist steht und ist protokolliert.');
+    }
+
     /** @param array<string,string> $parameter */
     public function zahlungslink(array $parameter = []): Antwort
     {

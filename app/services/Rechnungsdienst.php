@@ -41,6 +41,11 @@ use Sartu\Helpers\Validate;
  * §12: „Ein einmal auf `bezahlt` gesetzter Status lässt sich **nicht stillschweigend**
  * zurücknehmen — die Rücknahme ist eine eigene protokollierte Aktion mit eigenem
  * Grundlagentext und erzeugt eine Benachrichtigung an den Kunden."
+ *
+ * Sie heißt `zahlungZuruecknehmen()` und trägt eine **eigene** Protokollaktion. Bis zum
+ * 09.08.2026 beschrieb dieser Kommentar sie, ohne dass es sie gab — wer sie brauchte, trug
+ * eine Zahlung über null ein, und im Protokoll war das von einer Buchung nicht zu
+ * unterscheiden. Dasselbe galt für `faelligkeitAendern()`.
  */
 final class Rechnungsdienst
 {
@@ -343,6 +348,143 @@ final class Rechnungsdienst
             organisationId: $projekt === null ? null : (string) $projekt['organization_id'],
             alterWert: $vorher,
             neuerWert: Zahlungsstatus::STORNIERT,
+            grund: trim($grundlage),
+            ip: $ip,
+        );
+
+        return [];
+    }
+
+    /**
+     * Nimmt eine eingetragene Zahlung zurück — §12, Fall 54.
+     *
+     * ## Warum das nicht „Betrag 0 eintragen" ist
+     *
+     * Beides landete am selben Feld, und das ist genau der Fehler. §12: „Ein einmal auf
+     * `bezahlt` gesetzter Status lässt sich **nicht stillschweigend** zurücknehmen — die
+     * Rücknahme ist eine eigene protokollierte Aktion mit eigenem Grundlagentext und erzeugt
+     * eine Benachrichtigung an den Kunden."
+     *
+     * Eine Rücknahme, die als Buchung über null erscheint, ist im Protokoll nicht von einer
+     * Buchung zu unterscheiden. Sie trägt deshalb ihre eigene Aktion — wer das Protokoll
+     * nach Rücknahmen durchsieht, findet sie, ohne Beträge lesen zu müssen.
+     *
+     * @return list<string> leer bei Erfolg
+     */
+    public function zahlungZuruecknehmen(string $rechnungId, string $grundlage, ?string $ip): array
+    {
+        $rechnung = $this->rechnungen()->finden($rechnungId);
+
+        if ($rechnung === null) {
+            return ['Diese Rechnung gibt es nicht.'];
+        }
+
+        if ((int) $rechnung['paid_cents'] === 0) {
+            return ['Zu dieser Rechnung ist keine Zahlung eingetragen.'];
+        }
+
+        if (mb_strlen(trim($grundlage)) < self::GRUNDLAGE_MINDESTLAENGE) {
+            return ['Bitte halten Sie fest, warum die Zahlung zurückgenommen wird — zum '
+                . 'Beispiel „Rücklastschrift vom 09.08.2026" oder „Betrag doppelt gebucht".'];
+        }
+
+        $vorher = (string) $rechnung['status'];
+
+        // Zurück auf null. Der Zustand wird gerechnet, nicht gesetzt — dieselbe Rechnung wie
+        // bei der Buchung, damit eine überfällige Rechnung nach der Rücknahme wieder
+        // überfällig ist und nicht `gesendet`.
+        //
+        // **Gerechnet wird mit dem Stand nach der Rücknahme, nicht mit dem davor.**
+        // `istUeberfaellig()` verlangt `paid_cents < gross_cents`; solange die Zahlung noch
+        // dasteht, ist das falsch, und eine längst überfällige Rechnung käme als `gesendet`
+        // zurück. Die Kopie mit `paid_cents = 0` ist genau der Zustand, den wir schreiben.
+        $ueberfaellig = self::istUeberfaellig(['paid_cents' => 0] + $rechnung);
+        $zustand = Zahlungsstatus::ausBetrag(0, (int) $rechnung['gross_cents'], $ueberfaellig);
+
+        $this->rechnungen()->zahlungSetzen($rechnungId, 0, $zustand, null, null);
+
+        $projekt = (new AdminProjekte($this->nachweis, $this->pdo))->finden((string) $rechnung['project_id']);
+
+        $this->audit()->schreiben(
+            aktion: 'zahlung_zurueckgenommen',
+            objektart: 'invoice',
+            objektId: $rechnungId,
+            akteurBenutzerId: $this->nachweis->adminBenutzerId,
+            organisationId: $projekt === null ? null : (string) $projekt['organization_id'],
+            alterWert: $vorher,
+            neuerWert: $zustand,
+            grund: trim($grundlage),
+            detail: ['zurueckgenommen_cents' => (int) $rechnung['paid_cents']],
+            ip: $ip,
+        );
+
+        if ($projekt !== null) {
+            // §10, Zeile „Zahlungsstatus zurückgenommen" — der Grundlagentext steht im
+            // Wortlaut mit drin. Der Kunde erfährt sonst, **dass** korrigiert wurde, aber
+            // nicht warum, und ruft an.
+            $this->kundenmailSenden(
+                $projekt,
+                'Korrektur zu Rechnung ' . (string) $rechnung['number'],
+                'Wir haben den Zahlungsstatus der Rechnung ' . (string) $rechnung['number']
+                . ' korrigiert. Grund: ' . trim($grundlage) . ". Bitte prüfen Sie den Stand\n"
+                . "in Ihrem Bereich.\n",
+            );
+        }
+
+        return [];
+    }
+
+    /**
+     * Verschiebt das Fälligkeitsdatum — §12, Fall 53a.
+     *
+     * **Kein neuer Beleg.** `18_BELEGE_UND_ZAHLUNG.md` Abschnitt 5: „Das Fälligkeitsdatum
+     * steht zwar auf der Rechnung, ist aber keine Pflichtangabe nach § 14." Eine
+     * Stornorechnung dafür wäre ein zweiter Beleg ohne Anlass.
+     *
+     * Protokolliert wird trotzdem mit Grundlagentext — eine Frist ist Geld mit Datum.
+     *
+     * @return list<string> leer bei Erfolg
+     */
+    public function faelligkeitAendern(
+        string $rechnungId,
+        string $neuesDatum,
+        string $grundlage,
+        ?string $ip,
+    ): array {
+        $rechnung = $this->rechnungen()->finden($rechnungId);
+
+        if ($rechnung === null) {
+            return ['Diese Rechnung gibt es nicht.'];
+        }
+
+        if (mb_strlen(trim($grundlage)) < self::GRUNDLAGE_MINDESTLAENGE) {
+            return ['Bitte halten Sie fest, warum die Frist verschoben wird.'];
+        }
+
+        $neuesDatum = trim($neuesDatum);
+
+        if (!Validate::datum($neuesDatum)) {
+            return ['Bitte geben Sie ein gültiges Datum an.'];
+        }
+
+        $vorher = is_string($rechnung['due_date'] ?? null) ? (string) $rechnung['due_date'] : '';
+
+        if ($vorher === $neuesDatum) {
+            return ['Dieses Datum steht bereits auf der Rechnung.'];
+        }
+
+        $this->rechnungen()->faelligkeitSetzen($rechnungId, $neuesDatum);
+
+        $projekt = (new AdminProjekte($this->nachweis, $this->pdo))->finden((string) $rechnung['project_id']);
+
+        $this->audit()->schreiben(
+            aktion: 'faelligkeit_geaendert',
+            objektart: 'invoice',
+            objektId: $rechnungId,
+            akteurBenutzerId: $this->nachweis->adminBenutzerId,
+            organisationId: $projekt === null ? null : (string) $projekt['organization_id'],
+            alterWert: $vorher,
+            neuerWert: $neuesDatum,
             grund: trim($grundlage),
             ip: $ip,
         );

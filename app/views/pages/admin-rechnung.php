@@ -101,6 +101,43 @@ $bezahlt = (int) $rechnung['paid_cents'];
 </div>
 
 <div class="karte">
+  <h2>Frist verschieben</h2>
+  <p>Das Fälligkeitsdatum ändern. Es entsteht <strong>kein</strong> neuer Beleg — die Frist
+  steht auf der Rechnung, ist aber keine Pflichtangabe nach § 14 UStG.</p>
+  <form method="post" action="/admin/rechnungen/<?= Html::e($id) ?>/faelligkeit">
+    <?= Csrf::feld() ?>
+    <div class="feld">
+      <label for="feld-due_date">Neue Fälligkeit</label>
+      <input type="date" id="feld-due_date" name="due_date"
+        value="<?= Html::e(is_string($rechnung['due_date'] ?? null) ? (string) $rechnung['due_date'] : '') ?>" required>
+    </div>
+    <div class="feld">
+      <label for="feld-frist-grundlage">Grundlage</label>
+      <input type="text" id="feld-frist-grundlage" name="grundlage" value="" required minlength="3"
+        placeholder="Zahlungsaufschub nach Absprache vom 09.08.2026">
+    </div>
+    <button type="submit" class="knopf knopf--ruhig">Frist verschieben</button>
+  </form>
+</div>
+
+<?php if ($bezahlt > 0): ?>
+<div class="karte">
+  <h2>Zahlung zurücknehmen</h2>
+  <p>Eine eigene Handlung, kein Betrag von null. Sie wird protokolliert, und der Kunde
+  bekommt eine Nachricht mit der Grundlage.</p>
+  <form method="post" action="/admin/rechnungen/<?= Html::e($id) ?>/zahlung-zurueck">
+    <?= Csrf::feld() ?>
+    <div class="feld">
+      <label for="feld-zurueck-grundlage">Grundlage</label>
+      <input type="text" id="feld-zurueck-grundlage" name="grundlage" value="" required minlength="3"
+        placeholder="Rücklastschrift vom 09.08.2026">
+    </div>
+    <button type="submit" class="knopf knopf--ruhig">Zahlung zurücknehmen</button>
+  </form>
+</div>
+<?php endif; ?>
+
+<div class="karte">
   <h2>Stornieren</h2>
   <form method="post" action="/admin/rechnungen/<?= Html::e($id) ?>/stornieren">
     <?= Csrf::feld() ?>
