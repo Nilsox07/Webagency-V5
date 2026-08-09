@@ -1701,3 +1701,60 @@ SARTU Stufe 3 nicht anbietet. Damit wird aus einer Absage ein Argument.
 | 1 | Stufe 2 anbieten oder ganz weglassen? Dekorative KI-Flächen sind zulässig, aber sie lösen das eigentliche Problem — fehlende Bilder echter Arbeiten — **nicht** |
 | 2 | Falls Aufbereitung bezahlt werden soll: über das Folgeangebot, oder enthalten wie beim Logo? |
 | 3 | Soll `06_RECHT.md` um eine Zeile zu KI-Bildern ergänzt werden? Die Regel greift schon, benennt den Fall aber nicht |
+
+### Berichtigt am 09.08.2026 — der Einwand des Betreibers trifft
+
+**Der Betreiber hielt entgegen:** Stockfotos sind seit Jahren Standard auf Firmenwebsites. Dann
+kann ein KI-Bild auch kein Problem sein.
+
+**Das trifft zu. Meine Stufe 3 war zu breit gezogen.**
+
+#### Der Maßstab ist der Eindruck, nicht die Technik
+
+Nach § 5 UWG ist maßgeblich *„der Eindruck, den die Werbung beim Publikum erweckt"*. Ein
+**Symbolbild** erzeugt keinen falschen Eindruck über eine wesentliche Tatsache — deshalb sind
+Stockfotos seit zwanzig Jahren zulässig, und deshalb ist ein generisches KI-Bild es ebenso.
+
+**Die Grenze verlief nie zwischen echt und erzeugt. Sie verläuft zwischen Symbolbild und
+Identitätsbehauptung — und sie galt für Stockfotos genauso:**
+
+| | zulässig | nicht zulässig |
+|---|---|---|
+| **Stockfoto** | ein Dach, eine Werkstatt, Hände bei der Arbeit — als Symbolbild | dasselbe Bild mit der Unterschrift `Unser Team` oder `Unsere Referenz` |
+| **KI-Bild** | genau dasselbe | genau dasselbe |
+
+**Ein Stockfoto als Teamfoto war immer eine Irreführung.** Die Regel in `06_RECHT.md` —
+*„Keine Fake-Teamfotos"* — richtet sich gegen die **Behauptung**, nicht gegen die Bildquelle. Sie
+trifft Stockfotos und KI-Bilder gleichermaßen und keins von beiden pauschal.
+
+#### Was sich am 02.08.2026 tatsächlich geändert hat — und was nicht
+
+| | Stockfoto | KI-Bild |
+|---|---|---|
+| Symbolbild zulässig? | ja, seit jeher | **ja, genauso** |
+| als Identitätsbehauptung? | **nein, seit jeher** | nein |
+| **Kennzeichnungspflicht** | keine | **neu**: sichtbar, wenn real wirkende Personen, Orte oder Ereignisse gezeigt werden — Art. 50 Abs. 4 KI-VO |
+
+**Das ist der einzige echte Unterschied.** KI-Bilder sind nicht weniger erlaubt als Stockfotos —
+sie sind nur zusätzlich **kennzeichnungspflichtig**, sobald sie real wirken.
+
+#### Korrigierte Stufen
+
+| Stufe | Was | Bewertung |
+|---|---|---|
+| **1 — Aufbereitung echter Fotos** | freistellen, aufhellen, Störendes entfernen | zulässig, **keine** Kennzeichnungspflicht |
+| **2 — Symbolbilder, ob Stock oder KI** | Dach, Werkstatt, Fahrzeug, Arbeitssituation — **ohne Identitätsbezug** | **zulässig, wie seit zwanzig Jahren.** Bei KI mit sichtbarer Kennzeichnung, sobald real wirkend |
+| **3 — Identitätsbilder** | `Unser Team` · `Unsere Werkstatt` · `Unsere Referenz` · `vorher/nachher` | **müssen echt sein — Stock wie KI** |
+
+> **Der eigentliche Hebel liegt bei SARTU selbst: SARTU schreibt die Texte.** Ein Bild wird erst
+> durch seine Beschriftung zur Behauptung. Wer Bild **und** Bildunterschrift aus einer Hand
+> liefert, kontrolliert genau die Stelle, an der aus einem zulässigen Symbolbild eine Irreführung
+> wird. Das kann eine Agentur, die nur ein CMS übergibt, nicht.
+
+**Folge für das Angebot:** KI-Bilderstellung ist **anbietbar** — für Stufe 1 und 2. Was nicht geht,
+ist ein erzeugtes Bild als eigene Arbeit auszugeben. Das ist eine **Beschriftungsregel**, keine
+Techniksperre.
+
+**Für den Ratgeber-Artikel ist das die bessere Geschichte:** nicht „KI-Bilder sind heikel", sondern
+*„die Regel ist dieselbe wie bei Stockfotos — neu ist nur die Kennzeichnung"*. Das ist wahr,
+beruhigend und nützlich zugleich.
