@@ -1537,3 +1537,64 @@ Dieselbe Kombinationsregel wie bei 3.1 und 4.1. **`Thema {n} von 5` bleibt unber
 
 **Nicht eingebaut** — Fund 2 und 3 sind Vorschläge, keine Mängel. Fund 1 ist ein Mangel gegen eine
 Rang-1-Vorgabe und sollte unabhängig davon geschlossen werden.
+
+### Antworten des Betreibers vom 09.08.2026 — geprüft
+
+#### Zu Fund 1: „Wir können einfach immer BFSG-gerecht bauen"
+
+**Sie bauen es bereits immer.** `§6` Regel 1: *„Der technische Grundstand ist immer enthalten"* —
+Kontrast ab 4,5:1, volle Tastaturbedienung, sichtbarer Fokus, sinnvolle Beschriftungen,
+semantisches HTML, `prefers-reduced-motion`.
+
+**Aber „immer bauen" ist nicht „immer zusagen" — und genau das wurde in `§6` geprüft und
+verworfen:**
+
+> | Verworfen | Grund |
+> | **Immer enthalten** | SARTU kann Beschäftigtenzahl und Umsatz nicht prüfen, und beide ändern sich. Eine Konformitätszusage steht gegen ein Bußgeld bis 100.000 €. Für einen Einzelbetrieb am Anfang das falsche Risiko |
+
+**Drei Gründe, warum sauberes Bauen die Frage nicht ersetzt:**
+
+1. **BFSG-Konformität ist mehr als guter Code** — sie verlangt zusätzlich eine Erklärung zur
+   Barrierefreiheit und einen Rückmeldemechanismus. Das ist ein Nachweis, kein Baustandard
+2. **Konformität muss erhalten bleiben.** Was der Kunde später einstellt, kann sie brechen
+3. `§6` selbst: *„Beschäftigtenzahl und Umsatz muss der Kunde beantworten — er ist der Einzige,
+   der sie kennt."*
+
+**Was dagegen geht — und das Formular kurz hält:** `§6` verlangt die Fragen *„vor dem Angebot"*,
+**nicht im Bedarfsscheck**. Sie können in die **gebündelte Rückfrage** wandern, die
+`17_SEITEN_SARTU.md` §2.3 ohnehin für unklare Fälle vorsieht. Damit bleibt der Bedarfsscheck
+unverändert, und die Rang-1-Vorgabe ist erfüllt.
+
+**Empfehlung:** so lösen. Kein neues Feld, aber ein fester Punkt in der Rückfrage, sobald 4.1 einen
+Vertragsweg enthält.
+
+#### Zu Fund 2: „Bildmaterial schon Aufpreis?"
+
+**Als Aufpreis nicht** — das bricht zwei gebundene Stellen: *„Es gibt keine Aufpreisliste"*
+(Klasse 1, Startseite) und `Keine Auswahl von Zusatzoptionen` (gebunden, Bedarfsscheck).
+
+**Der schwerere Einwand ist aber ein anderer: Fotografie erzwingt einen Termin vor Ort.** Das
+bricht das Kernversprechen — *„ohne einen einzigen Termin"* und *„bundesweit"*. Ein Betrieb in
+Kassel lässt sich von Dresden aus nicht fotografieren. Wer Fotografie anbietet, wird entweder
+regional oder muss reisen; beides widerspricht `01_GESCHAEFTSMODELL.md`.
+
+**Drei Wege, die das nicht brechen:**
+
+| Weg | Bewertung |
+|---|---|
+| **Fotoanleitung** — nicht fotografieren, sondern sagen, welche Bilder gebraucht werden und wie man sie mit dem Handy macht | **Empfohlen.** Einmal erstellt, skaliert bundesweit, löst vermutlich die Mehrzahl der Fälle. Passt in die Betriebsfragen im Kundenbereich |
+| **Partnerempfehlung** — ein Fotograf vor Ort | wie beim Logo, Fall C. Baut zugleich einen Multiplikator |
+| **Folgeangebot** nach `03_KUNDENPRODUKT.md` | der einzige Preisweg, der keine Regel bricht — *„ein konsolidiertes Folgeangebot mit Festpreis, keine Einzelpreisliste"* |
+
+#### Zu Fund 3: „Rechtstexte gehen den Kunden im Erstkontakt nichts an"
+
+**Zugestimmt — der Fund war schwächer als die beiden anderen.**
+
+Rechtstexte ändern **weder Preis noch Paket noch Weg** noch die Frage, ob SARTU den Auftrag
+annimmt. Anders als beim Logo gibt es **keine Verzweigung**: Es gibt genau eine Behandlung — der
+Kunde liefert sie. Sie blockieren allein den Livegang.
+
+**Damit gehören sie in den Kundenbereich**, Vorgang 2 und 3. Keine Frage im Bedarfsscheck.
+
+**Eine Einschränkung bleibt:** Sie sollten im **Angebot** als Mitwirkungspflicht stehen, damit sie
+beim Livegang keine Überraschung sind. Das ist Angebotstext, keine Formularfrage.
