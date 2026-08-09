@@ -185,6 +185,7 @@ der Zustand, in dem der Betrieb ist. **Der Aufhänger ist der Rückgang, nicht d
 | **Zahlungsplan beachten** | Bei Gastronomie und Photovoltaik ist das Insolvenzrisiko real — `02_PREISE_UND_ZAHLUNG.md` schützt über die Vorauszahlung. **Hier nicht davon abweichen** |
 | **`§7b` gilt unverändert** | Bei Friseuren und Pflege ist Fachkräftemangel das stärkste Motiv — **es darf nicht angesprochen werden.** Die Seite verkauft über Anfragen und Vertrauen |
 | **Selbstpflege bleibt ausgeschlossen** | Eine Speisekarte, die wöchentlich wechselt, ist ein Fall für die Ausschlussliste — das gehört auf die Seite, nicht ins Kleingedruckte |
+| **Der Austauschtest ist hier schwerer** | Ein Absatz über „sinkende Anfragen" klingt bei Friseur und Fahrschule fast gleich — genau das entlarvt eine Vorlage. **Gegenmittel: Der Rückgang ist der Aufhänger, aber die 400 eigenen Wörter kommen aus dem Gewerk** — was genau zurückgeht, warum, und was der Betrieb bisher versucht hat. Reißt der Test, wird die Seite nicht veröffentlicht |
 | **Buchung ist zulässig** | `spezifikation/03` erlaubt eine einfache Ein-Kalender-Buchung — für Praxen, Fahrschulen und Kosmetik der entscheidende Punkt |
 
 ### Was trotzdem draußen bleibt
