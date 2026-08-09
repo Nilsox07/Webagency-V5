@@ -1,229 +1,249 @@
-# Zielgruppe für die Akquise — wer jetzt zahlt
+# Zielgruppe für die Akquise — Screening über alle Wirtschaftsbereiche
 
-> **Interne Zieldefinition, keine Bauvorlage und kein Seiteninhalt.** Die Zahlen hier sind
-> Konjunkturindikatoren zur *Auswahl* der Zielgruppe. Sie gehören **nicht** auf eine Branchenseite —
-> `SARTU_BRANCHENFAKTEN.md` Regel S1 verlangt Zahlen, bei denen der Leser nickt, und
-> „Auftragsbestandsindikator −19" ist keine.
+> **Interne Zieldefinition, keine Bauvorlage und kein Seiteninhalt.** Konjunkturindikatoren dienen
+> der *Auswahl*. Sie gehören nicht auf eine Branchenseite — `SARTU_BRANCHENFAKTEN.md` Regel S1
+> verlangt Zahlen, bei denen der Betrieb nickt, und „Auftragsbestandsindikator −19" ist keine.
 >
-> Erstellt am 09.08.2026. Anlass: Der Betreiber hat keinen persönlichen Zugang zu einem Gewerk,
-> also muss die Wirtschaftslage entscheiden.
+> **Fassung 2 vom 09.08.2026.** Fassung 1 verglich nur SHK, Elektro und Dachdecker — ein
+> Zirkelschluss, weil genau diese drei Seiten gebaut sind. Der Betreiber hat widersprochen. Diese
+> Fassung screent **alle 21 Abschnitte der Wirtschaftszweigsystematik**.
 >
-> **Die Zielgruppe selbst steht in `spezifikation/01_GESCHAEFTSMODELL.md` (Rang 4) und wird hier
-> nicht geändert** — regionale KMU, B2B, 1–50 Mitarbeitende, inhabergeführt. Diese Datei wählt
-> daraus aus, wo zuerst verkauft wird. Die Entscheidung gehört nach
-> `SARTU_ENTSCHEIDUNGEN_OFFEN.md`.
+> Die Zielgruppe selbst steht in `spezifikation/01_GESCHAEFTSMODELL.md` (Rang 4) und wird hier
+> **nicht geändert** — regionale KMU, B2B, 1–50 Mitarbeitende, inhabergeführt. Hier wird daraus
+> ausgewählt. Die Entscheidung gehört nach `SARTU_ENTSCHEIDUNGEN_OFFEN.md`.
 
 ---
 
-## Das Paradox, an dem die Frage hängt
+## Der Filter — was die eigene Spezifikation ausschließt
 
-Die Frage lautete: *Wer ist am zahlungsbereitesten und investiert gerade in eine neue Website?*
+Bevor irgendeine Branche bewertet wird, fallen nach `spezifikation/01_GESCHAEFTSMODELL.md`
+strukturell heraus:
 
-Die Antwort ist nicht „der Reichste". Die Daten zeigen zwei Gruppen, die **beide nicht kaufen**:
-
-| Lage | Geld | Grund | Kauft |
-|---|---|---|---|
-| **Voll ausgelastet** — Wärmepumpe, PV, Ladeinfrastruktur, Dachdämmung. Wartelisten bis weit ins 2. Halbjahr 2026 | **ja** | **nein** | **nein** — wer Aufträge ablehnt, wirbt nicht |
-| **In Not** — 27 % der Sanitär- und 28 % der Heizungsbetriebe haben höchstens **einen Monat** Auftragsbestand | nein | ja | **nein** — kein Budget |
-| **Dazwischen** — Rücklagen aus den Boomjahren, Auftragsreichweite fällt, aber noch keine Not | **ja** | **ja** | **ja** |
-
-**Der Zielkunde ist keine Branche, sondern eine Position im Zyklus.** Und die entscheidende
-Beobachtung aus allen drei Gewerken: **Der Riss verläuft *innerhalb* der Gewerke, nicht zwischen
-ihnen.** Die Spezialisten sind überall voll, die Allgemeinbetriebe verlieren überall Reichweite.
-
----
-
-## Die Lage im Handwerk insgesamt
-
-**ZDH-Konjunkturbericht 1/2026** — die Gesamtlage ist der Rahmen, nicht die Auswahl:
-
-| Indikator | Wert | Veränderung |
-|---|---|---|
-| Geschäftsklima | **107** | −6 Zähler |
-| Geschäftslage | **13** | −7 Zähler |
-| Geschäftserwartungen | **2** | −5 Zähler |
-| Auftragsbestand | **−19** | I/2025: −18 |
-| Auftragsreichweite | **8,9 Wochen** | — |
-| Kapazitätsauslastung | **75 %** | −2 Prozentpunkte |
-| Beschäftigung | **−9** | unverändert |
-
-Als Ursache nennt der ZDH die geopolitische Lage, steigende Energiepreise, unsichere Lieferketten
-und gedämpfte globale Nachfrage. Dazu: **Insolvenzen 2025 +13,3 % auf knapp 5.000** — Höchststand
-seit über zehn Jahren, bei **1.038.126** Betrieben (31.12.2025).
-
-> **Was das für die Auswahl heißt:** Die Aufwärtsentwicklung der beiden Vorjahre ist aufgebraucht.
-> Das ist kein Grund, das Handwerk zu meiden — es ist der Grund, **innerhalb** des Handwerks genau
-> hinzusehen.
-
----
-
-## Die drei gebauten Gewerke im Vergleich
-
-### Sanitär, Heizung, Klima — größter Schmerz, unsicherste Zahler
-
-| Zahl | Stand |
+| Ausschluss | Was damit wegfällt |
 |---|---|
-| Auftragsbestand | **11,5 Wochen** — rund **4 Wochen unter Vorjahr** |
-| davon Sanitär / Heizung | 10,8 / 10,4 Wochen |
-| Betriebe mit höchstens 1 Monat Auftragsbestand | **27 % / 28 %** |
-| Anteil Renovierungsgeschäft am Branchenumsatz | **83 %**, Investitionsdynamik fehlt |
-| Wärmepumpe und Biomasse | 2025 positiv, für 2026 steigende Nachfrage erwartet |
+| Privatpersonen und Hobbyprojekte | reines B2C ohne Unternehmereigenschaft |
+| Shops, Buchung, Mitgliederbereiche, komplexe Schnittstellen **als Standardfall** | Einzelhandel, E-Commerce, Gastgewerbe, Plattformen |
+| Kunden, die selbst CMS, Layouts oder Plugins verwalten wollen | Agenturen, IT-Häuser, Medienbetriebe |
+| Unternehmen ohne stabile Angebotsstruktur | Projektgeschäft ohne wiederkehrendes Leistungsbild |
+| über 50 Mitarbeitende, nicht inhabergeführt | Konzerne, Ketten, öffentliche Träger |
 
-**Gespalten.** Wer Wärmepumpe kann, ist voll. Wer klassisch Bad und Heizung macht, verliert.
-Der Schmerz ist am größten — aber ein Viertel der Betriebe ist zu nah an der Kante, um vierstellig
-zu investieren.
+Dazu kommt die eigene Sperre `§7b`: **Recruiting- und Stellenseiten sind tabu.** Das schließt jede
+Branche als *erste* Nische aus, deren Hauptschmerz Personalgewinnung ist — dort wäre das stärkste
+Argument nicht sagbar.
 
-### Elektrotechnik — bestes Verhältnis aus Geld und Grund
+---
 
-| Zahl | 2025 | 2024 |
-|---|---|---|
-| installierte PV-Anlagen | **355.000** | 395.000 |
-| Betriebe, die überhaupt PV installieren | **52,1 %** | 57,1 % |
-| installierte Ladepunkte | **360.000** | 377.000 |
-| Anteil PV und Speicher am Umsatz | **6 %** | — |
+## Das Screening — alle 21 Abschnitte
 
-Dazu aus der ZVEH-Frühjahrsumfrage 2026: **38 %** erwarten stabile oder bessere Geschäfte,
-**29 %** melden rückläufige Umsätze. Die Schlagzeile der Branchenpresse lautet
-**„Aufträge stabil, Zukunftsangst wächst"**. ZVEH-Geschäftsführer Alexander Neuhäuser:
-*„Betriebe ziehen sich aus diesen Zukunftsfeldern zurück."*
+| WZ | Abschnitt | Passt der Filter? | Lage 2026 | Urteil |
+|---|---|---|---|---|
+| **A** | Land- und Forstwirtschaft | teilweise — Lohnunternehmer, Agrarservice ja, Direktvermarkter nein (Shop) | stabil | **klein** |
+| **B** | Bergbau | ja, aber kaum Betriebe in Deutschland | — | **raus** |
+| **C** | Verarbeitendes Gewerbe | **ja** — Metallbau, Zerspanung, Kunststoff, Elektronikfertigung | **gespalten**: Automobil, Papier, Textil unter Druck · **Verteidigung im Aufbau** | **stark, gespalten** |
+| **D** | Energieversorgung | teilweise — Contracting, Energiedienstleister | Gewinnerbranche | **klein, gut** |
+| **E** | Wasser, Abwasser, **Entsorgung** | **ja** — Entsorger, Recycling, Containerdienste | reguliert, stabil · **größter Digitalrückstand** | **stark** |
+| **F** | Baugewerbe | **ja** — das aktuelle Feld | Talsohle, Klima 107 (−6) | **gebaut, schwächelnd** |
+| **G** | Handel, KFZ-Instandhaltung | teilweise — B2B-Großhandel und freie Werkstätten ja, Einzelhandel nein | schwach | **gespalten** |
+| **H** | **Verkehr und Lagerei** | **ja** — Speditionen, Kurier, Lagerlogistik | **+2 bis 4 %** · hoher Digitalrückstand | **stark** |
+| **I** | Gastgewerbe | nein — Buchung, B2C | schwach | **raus** |
+| **J** | Information und Kommunikation | nein — bauen selbst | Spitzenreiter Digitalisierung | **raus** |
+| **K** | Finanz- und Versicherungsdienstleistungen | teilweise — Makler, aber stark reguliertes Marketing | stabil | **mittel** |
+| **L** | Grundstücks- und Wohnungswesen | teilweise — **Hausverwaltungen ja**, Makler nein (Objektlisten) | Finanzierungskosten belasten | **Teilsegment gut** |
+| **M** | **Freiberufliche, wissenschaftliche, technische DL** | **ja** — Ingenieur- und Planungsbüros, Sachverständige, Kanzleien, Vermessung | stabil, hochwertig | **sehr stark** |
+| **N** | **Sonstige wirtschaftliche DL** | **ja** — Gebäudereinigung, **Sicherheitsdienste**, GaLaBau-Pflege, Personaldienstleister | **Sicherheit +6,7 bis 7,6 % p. a. bis 2030** | **sehr stark** |
+| **O** | Öffentliche Verwaltung | nein — kein KMU | — | **raus** |
+| **P** | Erziehung und Unterricht | teilweise — private Bildungsträger; Fahrschulen buchungsnah | stabil | **mittel** |
+| **Q** | Gesundheits- und Sozialwesen | ja formal — **aber** Hauptschmerz ist Personal | **42 % schlechte Lage** | **raus, siehe unten** |
+| **R** | Kunst, Unterhaltung, Erholung | nein — klein, B2C | schwach | **raus** |
+| **S** | Sonstige Dienstleistungen | teilweise — Bestatter, Reparatur, Wäschereien | stabil | **mittel** |
+| **T/U** | Private Haushalte, exterritoriale Organisationen | nein | — | **raus** |
 
-**Das ist das Profil, das kauft.** Stabile Aufträge bedeuten Zahlungsfähigkeit. Wegbrechende
-Zukunftsfelder bedeuten, dass Umsatz **ersetzt** werden muss — und Umsatz ersetzen heißt
-Neukunden. Zukunftsangst bei stabiler Lage ist genau der Zustand, in dem investiert wird: früh
-genug, um es sich zu leisten, spät genug, um es zu wollen.
+---
 
-### Dachdecker — solideste Finanzen, schwächstes Motiv
+## Warum das Gesundheitswesen ausscheidet, obwohl es groß ist
 
-| Beobachtung | Stand 2026 |
+**Trendbarometer Gesundheitswirtschaft, Frühjahr 2026** — über 150 befragte Fachleute, März und
+April 2026:
+
+| Zahl | Wert |
 |---|---|
-| Wohnungsneubau | Talsohle erreicht, moderates Wachstum erwartet |
-| energetische Sanierung | **über 50 %** des Marktes, wichtigster Bereich |
-| Betriebe mit Schwerpunkt Dämmung und PV | **stärkster Rückenwind** — GEG-Pflichten, Energiepreise, Förderung |
-| Wohnungsfertigstellungen bis 2028 | 280.000–300.000 jährlich, unter dem politischen Ziel |
-| finanzielle Lage | **solide** trotz sinkender preisbereinigter Umsätze |
+| bewerten die eigene Lage als **schlecht oder sehr schlecht** | **42 %** |
+| bewerten sie als gut oder sehr gut | 34 % |
+| wichtigstes Investitionsfeld: **Personal** | **76 %** (+7 Prozentpunkte) |
+| Geschäftsmodellentwicklung | 49 % (**+25 Prozentpunkte**) |
+| Immobilieninvestitionen | 20 % (**−35 Prozentpunkte**), 51 % stellen zurück |
 
-Die Gründe für die solide Lage sind aufschlussreich: anhaltend hohe Nachfrage, sinkende relative
-Material- und Personalkosten **und eine schrumpfende Zahl an Betrieben**. Wer übrig bleibt, hat
-mehr Markt.
-
-**Gutes Geld, aber der Sog fehlt.** Wer Rückenwind spürt und dessen Wettbewerber verschwinden,
-hat den geringsten Anlass, in Neukundengewinnung zu investieren.
+**Zwei Gründe für den Ausschluss:** Die Lage ist schlecht — und das mit Abstand wichtigste
+Investitionsfeld ist **Personal**. Genau darüber darf SARTU wegen `§7b` nicht sprechen. Man würde
+in eine Branche verkaufen, deren stärkstes Kaufmotiv man nicht ansprechen darf.
 
 ---
 
-## Was für das Produkt selbst spricht
+## Wo der Website-Rückstand tatsächlich liegt
 
-**YouGov für IONOS, Januar bis März 2026, rund 1.000 Befragte in Deutschland:**
+**IW-Digitalisierungsindex** — der Abstand ist größer als erwartet:
 
-| Zahl | Wert | Vorjahr |
-|---|---|---|
-| Unternehmen mit eigener Website | **60 %** | 52 % — **+8 Prozentpunkte in einem Jahr** |
-| Geschäfts-E-Mail mit eigener Domain | **62 %** | 52 % |
-| berichten steigende Investitionen | **53 %** | — |
-| davon Familienunternehmen | **60 %** | — |
-| größte Digitalisierungshürde: **Bürokratie** | **55 %** | — |
-| zweitgrößte Hürde: **Kosten** | **52 %** | — |
-
-**Zwei Zahlen tragen die ganze Positionierung:**
-
-1. **40 % haben noch keine Website** — und der Anteil mit Website ist in einem Jahr um acht Punkte
-   gestiegen. Der Markt bewegt sich gerade, nicht irgendwann.
-2. **Kosten sind 2026 erstmals nicht die größte Hürde.** Der Engpass ist **Aufwand**, nicht Preis.
-   Das ist exakt das, was SARTU wegnimmt: kein Termin, keine Selbstpflege, ein Festpreis. Das
-   Modell zielt auf die Hürde, die tatsächlich oben steht.
-
----
-
-## Der Gegencheck: müsste es überhaupt Handwerk sein?
-
-`spezifikation/01_GESCHAEFTSMODELL.md` nennt sieben Kategorien. Geprüft wurde die
-naheliegendste Alternative:
-
-**Steuerkanzleien 2026:** Lage **stabil**, selbstständige Steuerberater erwirtschaften im Schnitt
-**80.000–150.000 €** Gewinn vor Steuern. Gewinner sind laut Branchenanalysen die Kanzleien, die
-digital erreichbar sind und schnell reagieren.
-
-| | |
+| Branchengruppe | Indexpunkte 2024 |
 |---|---|
-| **Dafür** | Höchste Zahlungsfähigkeit aller geprüften Gruppen, stabile Lage, klares Wettbewerbsnarrativ |
-| **Dagegen** | Konservativ, oft an Verbundsysteme gebunden. Und: Steuerberater sind als **Multiplikator** (Achse 10) mehr wert denn als Kunde — sie sitzen an Nachfolge und Gründung ihrer eigenen Mandanten |
+| Informations- und Kommunikationstechnologie | **285,1** |
+| Baugewerbe, Ver- und Entsorgung | **67,6** |
 
-**Ergebnis:** Kanzleien bleiben in der Zielgruppe, aber nicht als erste Akquisenische. Als
-Partnerkanal sind sie wertvoller.
+Als Nachzügler gelten ausdrücklich **Handwerk, Bau, Transport und lokale Dienstleistungen** sowie
+**ländliche und ostdeutsche Bundesländer**. Schlusslichter insgesamt: Tourismus und sonstiges
+produzierendes Gewerbe. Als Ursachen werden fehlendes Know-how, Fachkräftemangel, Datenschutz,
+Zeit und Geld genannt.
+
+> **Zwei Folgerungen.** Erstens: Der Rückstand liegt genau dort, wo SARTU ohnehin hinzielt — das
+> bestätigt das Produkt, nicht die Branchenwahl. Zweitens: **Ostdeutschland ist ausdrücklich
+> genannt.** Für den einzigen ortsgebundenen Kanal, das Unternehmensprofil in Dresden, ist das ein
+> echter Vorteil — und kostet nichts.
 
 ---
 
-## Die Zielgruppendefinition
+## Die Überlebenden des Screenings
 
-**Wer gemeint ist — alle fünf Merkmale zusammen:**
+### Cluster 1 — Bau und Gewerk *(gebaut)*
 
-| # | Merkmal | Warum |
+SHK · Elektrotechnik · Dachdecker. Größter Digitalrückstand, aber die Konjunktur fällt:
+Geschäftsklima **107** (−6), Auftragsbestand **−19**, Auslastung **75 %**, Reichweite
+**8,9 Wochen**. Insolvenzen 2025 **+13,3 %** auf knapp 5.000.
+
+Innerhalb des Clusters bleibt die Rangfolge aus Fassung 1 gültig: **Elektrotechnik** hat als
+einziges Gewerk Geld *und* Grund — Aufträge stabil, aber PV-Anlagen fielen von 395.000 auf
+**355.000**, Ladepunkte von 377.000 auf **360.000**, der Anteil der Betriebe mit PV-Geschäft von
+57,1 % auf **52,1 %**. Weggebrochener Umsatz muss ersetzt werden.
+
+### Cluster 2 — B2B-Dienstleistung mit Ausschreibungsgeschäft *(neu, ungebaut)*
+
+**Das ist der eigentliche Fund dieses Screenings.** Sicherheitsdienste · Gebäudereinigung ·
+Entsorgung · Spedition und Lagerlogistik · Hausverwaltung.
+
+| Merkmal | Warum es zählt |
+|---|---|
+| **Rein B2B** | keine Verbraucherverträge → BFSG-Frage entfällt regelmäßig (`§6`) |
+| **Kein Shop, keine Buchung, keine Objektliste** | passt ohne Sonderlogik ins Produkt |
+| **Ausschreibungs- und Vertragsgeschäft** | die Website muss *qualifizieren*, nicht verkaufen — genau das kann eine 8-Seiten-Firmenwebsite |
+| **Gemeinsamer Job** | „glaubwürdig genug wirken, um einen Auftrag zu gewinnen" — dieselbe Textarbeit über fünf Branchen |
+| **Digitalrückstand belegt** | „Transport und lokale Dienstleistungen" stehen namentlich in der Nachzüglerliste |
+
+**Zahlen zum Cluster:**
+
+| Branche | Lage |
+|---|---|
+| **Sicherheitsdienste** | Top 25 **+4,6 %** Umsatz 2025; Erwartung **+6,7 bis 7,6 % jährlich 2026–2030**, getrieben von der **KRITIS-Regulatorik** |
+| **Logistik und Spedition** | **+2 bis 4 %** für 2026 erwartet; Treiber E-Commerce, Lieferkettenumbau, Infrastrukturinvestitionen |
+| **Gebäudereinigung** | rund **30.200** Unternehmen (2023, ab 17.500 € Jahresumsatz) |
+| **Entsorgung** | reguliert und konjunkturunabhängiger; zugleich Teil der Gruppe mit **67,6** Indexpunkten |
+
+> **Warum dieses Cluster die Branchen-Spirale genauso trägt wie die Gewerke:** Nicht die Technik
+> ist verwandt, sondern der **Kaufanlass**. Wer für eine Reinigungsfirma die Frage „warum sollte
+> ein Verwalter Ihnen ein Objekt anvertrauen" beantwortet hat, hat 80 % der Arbeit für den
+> Sicherheitsdienst und den Entsorger schon getan.
+
+### Cluster 3 — Technische Freiberufler *(ungebaut, hochwertig)*
+
+Ingenieur- und Planungsbüros, Sachverständige, Vermessung.
+
+**Reines Vertrauens- und Textgeschäft** — kein Bildmaterial nötig, was SARTUs offenen Punkt
+„Bildmaterial und Demoprojekte" (`§5`) entschärft. Hohe Zahlungsbereitschaft, stabile Lage.
+**Schwäche:** kein akuter Anlass; diese Büros haben selten Not.
+
+### Einzelfund — Verteidigungszulieferer *(WZ C)*
+
+**IfM Bonn, Mai 2026:**
+
+| Zahl | Wert |
+|---|---|
+| Unternehmen bereits im Sicherheits- und Verteidigungssektor aktiv | **15.000** |
+| erwägen ein Engagement | rund **40 %**, davon **40,4 %** Mittelstand |
+| Anteil der Metallerzeugung und -bearbeitung in der Lieferkette | **30 %** |
+| Verteidigungshaushalt 2026 | über **108 Mrd. €**, 2,2–2,3 % des BIP |
+| BDSV-Mitglieder | in einem Jahr **fast verdoppelt**, zwei Drittel der Neuen sind Mittelständler |
+
+**Das ist ein Trigger-Event von seltener Größe:** 40 % einer Branche denken über eine
+Neuausrichtung nach, und Neuausrichtung heißt neue Selbstdarstellung.
+
+**Aber zwei Einwände, die ich nicht überspiele:**
+
+1. **Der Kanal passt nicht.** Der Einstieg in eine Rüstungslieferkette läuft über Zertifizierung,
+   Messen und Beschaffungsportale — nicht über Google. Die Website *qualifiziert*, sie *akquiriert*
+   nicht. Damit fällt SARTUs stärkster Hebel, der veröffentlichte Preis, weitgehend aus.
+2. **Das ist eine Wertefrage, keine Marktfrage.** Ob SARTU Zulieferer der Verteidigungsindustrie
+   bewirbt, entscheidet der Betreiber. Ich führe es auf, weil es die Datenlage hergibt, und
+   empfehle es nicht von mir aus.
+
+---
+
+## Revidierte Empfehlung
+
+**Die Empfehlung aus Fassung 1 — Elektrotechnik — bleibt bestehen, aber ihr Rang ändert sich.**
+
+| | Nische | Begründung |
 |---|---|---|
-| 1 | **Elektrotechnikbetrieb**, 5–30 Mitarbeitende, inhabergeführt | Aufträge stabil genug zum Zahlen, Zukunftsfelder brechen weg |
-| 2 | **Nicht** auf PV oder Ladeinfrastruktur spezialisiert | Spezialisten haben Wartelisten und brauchen keine Werbung |
-| 3 | Umsatzschwerpunkt **Gewerbe, Service, Installation** — nicht Neubau allein | Neubau hängt am Wohnungsbau, der schwach bleibt |
-| 4 | Website vorhanden, aber **älter als fünf Jahre** oder aus einem Baukasten | 40 % haben gar keine; die mit alter Seite sind leichter zu überzeugen als die ohne |
-| 5 | **Kein eigenes Marketingpersonal** | `01_GESCHAEFTSMODELL.md` führt das als Merkmal der Zielgruppe |
+| **1** | **Sicherheitsdienste** *(WZ N)* | Einzige geprüfte Branche mit **belegtem mehrjährigem Wachstum**: +6,7 bis 7,6 % jährlich bis 2030, getrieben von einer Regulierung, die nicht verhandelbar ist. Rein B2B, kein Shop, kein Buchungsweg, Ausschreibungsgeschäft. Verband **BDSW** als Multiplikator |
+| **2** | **Elektrotechnik** *(WZ F)* | Seite ist **gebaut**. Geld und Grund fallen zusammen. Aber: schrumpfender Gesamtmarkt |
+| **3** | **Spedition und Lagerlogistik** *(WZ H)* | Wachstum +2–4 %, namentlich in der Digital-Nachzüglerliste, reines B2B |
+| **4** | **Entsorgung** *(WZ E)* | Größter Digitalrückstand, reguliert, konjunkturunabhängig. Kleiner Markt |
+| **5** | Ingenieur- und Planungsbüros *(WZ M)* | Höchste Zahlungsbereitschaft, kein Bildbedarf — aber kein Anlass |
 
-**Wer ausdrücklich nicht gemeint ist:** Betriebe mit Wartelisten · Betriebe mit höchstens einem
-Monat Auftragsbestand · reine Neubauzulieferer · alles, was `01_GESCHAEFTSMODELL.md` bereits
-ausschließt.
+**Warum Sicherheitsdienste vor Elektrotechnik:** Elektrotechnik hat den besseren *Moment*,
+Sicherheitsdienste haben den besseren *Markt*. Ein Betrieb, dessen Branche fünf Jahre lang um
+7 % jährlich wächst, kauft nicht einmal — er wächst in weitere Leistungen hinein. Die Elektro-Welle
+ist ein Fenster; KRITIS ist ein Trend.
 
----
-
-## Empfehlung
-
-**Elektrotechnik als erste Akquisenische.** Vier Gründe:
-
-1. **Zahlungsfähig** — Aufträge stabil, 38 % erwarten stabile oder bessere Geschäfte
-2. **Motiviert** — PV und Ladeinfrastruktur brechen weg, der Umsatz muss ersetzt werden
-3. **Im richtigen Moment** — „Aufträge stabil, Zukunftsangst wächst" ist der Zustand, in dem
-   investiert wird, nicht der, in dem gespart wird
-4. **Die Seite ist gebaut** — `/website-elektrotechnik` existiert
-
-**Reihenfolge danach:** Dachdecker als zweites (solide Finanzen, wenn der Sog steigt), SHK als
-drittes — dort ist der Markt am stärksten gespalten und die Auswahl am aufwendigsten.
-
-### Ein Fund, der sofort umgesetzt werden sollte
-
-`/website-elektrotechnik` wirbt laut `KEYWORD_VALIDATION.md` mit:
-
-> *„eigene Seiten für **Photovoltaik, Ladepunkte**, Gewerbe und Neubau"*
-
-**Zwei der vier genannten Felder schrumpfen gerade** — PV-Installationen von 395.000 auf 355.000,
-Ladepunkte von 377.000 auf 360.000, und der Anteil der Betriebe, die PV überhaupt noch anbieten,
-ist von 57,1 % auf 52,1 % gefallen.
-
-Die Seite spricht damit ausgerechnet die beiden Themen an, aus denen sich die Zielgruppe gerade
-zurückzieht. **Gewerbe, Service und Gebäudetechnik gehören nach vorn, PV nach hinten.** Das ändert
-Beschreibung und Seitenstruktur, nicht die Adresse.
+**Der Preis dieser Empfehlung, offen gesagt:** Für Sicherheitsdienste existiert **keine
+Branchenseite und kein Musterprojekt.** Die drei gebauten Gewerkeseiten helfen nicht. Wer
+Sicherheitsdienste wählt, schreibt eine vierte Branchenseite und muss `§7c` neu denken — die
+Entscheidung über *drei* Branchen wird dann eine über *vier* oder über einen Austausch.
 
 ---
 
-## Was diese Datei nicht entscheidet
+## Was gemessen ist und was ich geschlossen habe
 
-- **`§7c` bleibt offen.** Welche drei Branchen Branchenseite *und* Musterprojekt tragen, ist
-  weiterhin eine Entscheidung des Betreibers. Diese Datei liefert nur das wirtschaftliche Argument
-- **Die Zielgruppe in `spezifikation/01` bleibt unverändert.** Hier wird ausgewählt, nicht ersetzt
-- **Nichts davon ersetzt den fehlenden Bedarfsscheck.** Er ist Stufe **A1**, der Code steht bei
-  **A0**. Ohne Anfrageweg ist jede Akquise Handarbeit
+| Aussage | Grundlage |
+|---|---|
+| Wachstumszahlen Sicherheit, Logistik, Elektro, SHK, Handwerk gesamt | **gemessen** — Verbands- und Institutserhebungen, unten belegt |
+| Digitalrückstand je Branchengruppe | **gemessen** — IW-Digitalisierungsindex |
+| Lage im Gesundheitswesen | **gemessen** — Trendbarometer, über 150 Befragte |
+| Verteidigungszahlen | **gemessen** — IfM Bonn, Mai 2026 |
+| „Ausschreibungsgeschäft macht die Website zum Qualifikationsnachweis" | **geschlossen**, nicht gemessen |
+| „Cluster 2 teilt dieselbe Textarbeit" | **geschlossen** — plausibel, aber unbelegt bis zur ersten Seite |
+| Zahlungsbereitschaft für 1.490–7.900 € je Branche | **nicht gemessen.** Für keine der Branchen liegen Preisdaten vor |
+
+**Die letzte Zeile ist die wichtigste Lücke.** Ich habe wirtschaftliche Lage und Digitalrückstand
+belegt — nicht, was ein Sicherheitsdienst für eine Website zahlt. Das lässt sich nur durch
+Gespräche klären, nicht durch Recherche.
+
+---
+
+## Was das nicht entscheidet
+
+- **`§7c` bleibt offen** und wird durch dieses Screening eher schwieriger: Wenn Cluster 2 gewinnt,
+  passen die drei gebauten Gewerkeseiten nicht mehr zur Akquisenische
+- **`spezifikation/01` bleibt unverändert.** Hier wird ausgewählt, nicht ersetzt
+- **Der Bedarfsscheck fehlt weiterhin.** Stufe **A1**, Code bei **A0**
 
 ---
 
 ## Quellen und Verfallsdaten
 
-Nach Regel S5 aus `SARTU_BRANCHENFAKTEN.md` — jede Zahl mit Quelle, Jahr und Verfallsdatum:
+Nach Regel S5 aus `SARTU_BRANCHENFAKTEN.md`:
 
 | Zahlen | Quelle | Erhebung | Verfällt |
 |---|---|---|---|
-| Geschäftsklima, Auftragsbestand, Auslastung, Reichweite | ZDH-Konjunkturbericht 1/2026 | Q1 2026 | mit Bericht 2/2026 |
-| SHK-Auftragsbestand, Wochen, Anteil ≤ 1 Monat | ZVSHK / SHK-Branchenpresse | April 2026 | Q4 2026 |
-| PV-Anlagen, Ladepunkte, Betriebsanteile | ZVEH-Frühjahrskonjunkturumfrage 2026 | März 2026 | Frühjahr 2027 |
-| Dachdeckerlage, Sanierungsanteil, Fertigstellungen | Branchenausblick Dachdeckerhandwerk 2026 | 2026 | Jahresende 2026 |
-| Website-Anteil, Investitionen, Digitalisierungshürden | YouGov für IONOS, ~1.000 Befragte | Jan–März 2026 | Jan 2027 |
-| Betriebszahl, Insolvenzen, Nachfolge | ZDH, IfM Bonn, Nachfolgemonitor | 2025 | Jahresende 2026 |
-| Kanzleigewinne, Marktlage | Branchenanalysen Steuerberatung 2026 | 2026 | Jahresende 2026 |
+| BIP-Prognosen, Gewinner- und Verliererbranchen | BDI, IW, DIW | 2026 | Jahresende 2026 |
+| Geschäftsklima, Auftragsbestand, Auslastung Handwerk | ZDH-Konjunkturbericht 1/2026 | Q1 2026 | mit Bericht 2/2026 |
+| SHK-Auftragsbestand, Anteil ≤ 1 Monat | ZVSHK / SHK-Branchenpresse | April 2026 | Q4 2026 |
+| PV-Anlagen, Ladepunkte, Betriebsanteile | ZVEH-Frühjahrskonjunkturumfrage | März 2026 | Frühjahr 2027 |
+| Sicherheitsdienstleister, Wachstumserwartung, KRITIS | Lünendonk-Liste | Geschäftsjahr 2025 | Liste 2026 |
+| Logistikwachstum 2026 | Branchenprognosen Logistik | 2026 | Jahresende 2026 |
+| Gebäudereinigung Unternehmenszahl | Statistisches Bundesamt über Statista | 2023 | bei Neuerhebung |
+| Verteidigung: 15.000 Unternehmen, 40 %, 108 Mrd. € | IfM Bonn | Mai 2026 | Mai 2027 |
+| Digitalisierungsindex je Branchengruppe | IW Köln, Digitalisierungsindex | 2024 | Ausgabe 2026 |
+| Gesundheitswirtschaft: 42 %, Investitionsfelder | Trendbarometer Gesundheitswirtschaft, >150 Befragte | März–April 2026 | Frühjahr 2027 |
+| Website-Anteil, Digitalisierungshürden KMU | YouGov für IONOS, ~1.000 Befragte | Jan–März 2026 | Jan 2027 |
+| Betriebszahl Handwerk, Insolvenzen, Nachfolge | ZDH, IfM Bonn, Nachfolgemonitor | 2025 | Jahresende 2026 |
 
-> **Keine dieser Zahlen ist für eine Kundenseite freigegeben.** Wer eine davon verwenden will,
-> führt sie zuerst nach `SARTU_BRANCHENFAKTEN.md` über und prüft sie gegen die sechs Regeln —
-> insbesondere S1 („Er muss nicken können") und S4 (Quelle, Jahr und Stichprobe an der Zahl).
+> **Keine dieser Zahlen ist für eine Kundenseite freigegeben.** Wer eine verwenden will, führt sie
+> zuerst nach `SARTU_BRANCHENFAKTEN.md` über und prüft gegen Regel S1 („Er muss nicken können")
+> und S4 (Quelle, Jahr und Stichprobe an der Zahl).
