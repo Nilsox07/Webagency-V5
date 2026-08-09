@@ -1823,3 +1823,32 @@ Summe, keine Quote, keine Zusage.
 **Ungeprüft:** Ob eine Firmenwebsite unter der SAB-Richtlinie überhaupt förderfähig ist, wurde
 **nicht** in der Richtlinie selbst nachgelesen — nur in Sekundärquellen, die „E-Business" nennen.
 **Das ist die Kernfrage des ganzen Themas und steht noch aus.**
+
+### Förderung bundesweit — entschieden 09.08.2026, mit einer offenen Lücke
+
+**Der Betreiber hat entschieden: deutschlandweit statt auf Sachsen begrenzt.** Die Umsetzung läuft
+über eine Architektur, die keine fremden Beträge kopiert — Programmname, Link zur Landesförderbank
+und **Status**, sonst nichts. Begründung in `FOERDERUNG_KONZEPT.md` Abschnitt 4a.
+
+**Der Grund für diese Bauweise ist ein Rechercheergebnis:** Für dieselben Programme nennen
+verschiedene Übersichtsseiten **verschiedene Zahlen** — Bayern Standard 10.000 gegen 7.500 €, NRW
+15.000/70.000 gegen 80.000 gegen 60.000 €, Sachsen 10.000 gegen 50.000 €. Die Wettbewerberseiten
+schreiben voneinander ab; daher die Widersprüche. **Wer davon abschreibt, veröffentlicht mit hoher
+Wahrscheinlichkeit eine falsche Zahl.**
+
+**Offene Lücke — fünf von sechzehn Ländern nicht ermittelt:**
+
+> **Hamburg · Bremen · Schleswig-Holstein · Mecklenburg-Vorpommern · Sachsen-Anhalt**
+
+Für diese fünf liegt **kein Programmname** vor. Saarland und Rheinland-Pfalz sind in den Quellen
+nur pauschal erwähnt. **Eine Übersicht mit elf von sechzehn Ländern darf nicht veröffentlicht
+werden** — sie sähe vollständig aus und wäre es nicht.
+
+**Ungeprüft geblieben:**
+
+| # | Punkt |
+|---|---|
+| 1 | **Kein einziger Programmname wurde in der Primärquelle geprüft.** Alle stammen aus Sekundärübersichten — genau den Quellen, deren Widersprüche oben dokumentiert sind |
+| 2 | **Ob eine Firmenwebsite förderfähig ist**, ist weiterhin in keiner Richtlinie nachgelesen. Das ist die Kernfrage des gesamten Themas |
+| 3 | **Thüringen zeigt, warum der Status zählt:** Das Programm existiert, die Mittel sind derzeit ausgeschöpft. Ohne Statusspalte hätte eine Tabelle den Kunden ins Leere geschickt |
+| 4 | Baden-Württemberg läuft offenbar als **Darlehen mit Tilgungszuschuss**, nicht als Zuschuss. Darf nicht in dieselbe Spalte wie Zuschussprogramme |

@@ -151,6 +151,89 @@ Positionierung — und es ist das Gegenteil dessen, was Förderberater schreiben
 
 ---
 
+## 4a. Deutschlandweit — entschieden am 09.08.2026
+
+**Der Betreiber hat entschieden: bundesweit, nicht auf Sachsen begrenzt.** Damit ist meine
+Empfehlung zur regionalen Begrenzung überholt. Was folgt, ist die Bauweise, die das tragfähig
+macht — denn die Recherche hat ein Problem offengelegt, das die Architektur bestimmt.
+
+### Der Befund: die Sekundärquellen widersprechen sich
+
+Für **dieselben** Programme nennen verschiedene Übersichtsseiten verschiedene Zahlen:
+
+| Programm | gefundene Angaben |
+|---|---|
+| Bayern, Digitalbonus Standard | **10.000 €** · **7.500 €** |
+| NRW, Mittelstand Innovativ & Digital | **15.000 / 70.000 €** · **80.000 €** · **60.000 €** |
+| Sachsen, E-Business | **10.000 €** · **50.000 €** |
+| Baden-Württemberg | **Zuschuss bis 10.000 €** · **Darlehen bis 100.000 € mit Tilgungszuschuss** |
+
+> **Drei Sekundärquellen, drei Zahlen für dasselbe Programm.** Wer davon abschreibt, veröffentlicht
+> mit hoher Wahrscheinlichkeit eine falsche Zahl — und alle Wettbewerberseiten schreiben
+> voneinander ab. **Genau daher kommen die Widersprüche.**
+
+### Die Bauweise, die daraus folgt: verweisen statt kopieren
+
+**SARTU nennt keine fremden Förderbeträge.** Die Übersicht führt je Land:
+
+| Spalte | Ändert sich |
+|---|---|
+| Bundesland | nie |
+| Programmname | selten |
+| **Link zur Förderbank des Landes** | selten |
+| **Status:** läuft · Mittel gestoppt · ausgelaufen | gelegentlich — **ein Wort** |
+| Stand der letzten Prüfung | bei jeder Prüfung |
+
+**Damit sinkt die Pflege von „16 Länder × mehrere Zahlen" auf „16 Länder × ein Status".** Das ist
+der Unterschied zwischen unmöglich und einer Stunde im Quartal.
+
+**Drei Vorteile, die dabei zusammenfallen:**
+
+1. **Es kann nicht falsch werden.** Wo keine Zahl steht, veraltet keine Zahl
+2. **Es ist zitierfähig.** Eine korrekte Liste der sechzehn Förderbanken mit Status ist genau das,
+   was in KI-Antworten übernommen wird — und sie hält, weil sie keine Behauptung enthält
+3. **Es ist der ehrlichere Auftritt.** *„Die Summe steht bei Ihrer Förderbank, hier ist der Link,
+   geprüft am …"* — das schlägt jede abgeschriebene Tabelle, und es ist genau die Positionierung
+
+### Was die Recherche an Programmen ergeben hat — Namen, keine Beträge
+
+**Bundesweit gilt vorab:** `Digital Jetzt` und `go-digital` sind **ausgelaufen**. Ein
+Bundesprogramm für Firmenwebsites gibt es nicht mehr; die **Länder** sind das Hauptinstrument.
+Die Fördersätze liegen je nach Programm etwa zwischen **40 und 60 %**, in den **neuen Ländern
+tendenziell höher** — ein struktureller Vorteil für den Erstmarkt Dresden.
+
+| Land | Programm (Name unbestätigt bis zur Primärquelle) | Anmerkung |
+|---|---|---|
+| Bayern | Digitalbonus (Standard und Plus) | **aktiv**, Laufzeit bis 31.12.2027 |
+| Sachsen | SAB — Digitalisierung in KMU / E-Business | aktiv |
+| Nordrhein-Westfalen | Mittelstand Innovativ & Digital (MID) | kein klassischer Digitalbonus mehr |
+| Niedersachsen | Digitalbonus.Niedersachsen – innovativ | |
+| Brandenburg | BIG Digital | modularer Aufbau |
+| Berlin | Transferbonus (Investitionsbank Berlin) | |
+| Hessen | DIGI-Zuschuss | |
+| Baden-Württemberg | Digitalisierungsprämie (L-Bank) | **Darlehensform** — nicht mit Zuschüssen vermischen |
+| **Thüringen** | Digitalbonus | **Mittel derzeit ausgeschöpft** |
+| Saarland · Rheinland-Pfalz | eigene Programme | in den Quellen nur pauschal genannt |
+| **Hamburg · Bremen · Schleswig-Holstein · Mecklenburg-Vorpommern · Sachsen-Anhalt** | **nicht ermittelt** | **Lücke — fünf von sechzehn** |
+
+> **Thüringen ist das Lehrstück:** Das Programm existiert, zahlt aber gerade nicht. Eine Tabelle
+> ohne Statusspalte hätte den Kunden ins Leere geschickt. **Deshalb ist der Status die wichtigste
+> Spalte** — wichtiger als jeder Betrag.
+
+### Was daraus für die Seiten wird
+
+| Seite | Inhalt | Veraltet? |
+|---|---|---|
+| **`/ratgeber/foerderung-website-antrag-vor-auftrag`** | die Regel, die überall gilt | **nie** |
+| **`/ratgeber/foerderung-digitalisierung-bundeslaender`** | die Übersicht: Land, Programm, Link, Status, Prüfdatum | nur der Status |
+| **`/ratgeber/ist-eine-website-foerderfaehig`** | was Förderbanken typischerweise als förderfähig ansehen — **ohne Zusage** | selten |
+| **`/ratgeber/was-foerderung-wirklich-kostet`** | Zeit, Bindung, Sperrfristen, Nachweispflichten | **nie** |
+
+**Drei von vier Artikeln veralten nicht.** Nur die Übersicht braucht Pflege — und dort nur eine
+Spalte.
+
+---
+
 ## 5. Die Wartungsfrage — ehrlich gerechnet
 
 Der Betreiber hat sie selbst benannt. Sie ist der entscheidende Einwand gegen ein großes
@@ -169,9 +252,9 @@ Förderangebot.
 2. **Quelle je Aussage verlinkt** — bei Sachsen die SAB-Richtlinie selbst, nicht ein Blog
 3. **Kein Betrag ohne Quelle.** Die 10.000-gegen-50.000-Unklarheit oben ist das Musterbeispiel
 4. **Fester Prüftermin, vierteljährlich** — eine Stunde, alle Förderseiten gegen die Quelle
-5. **Regional begrenzen.** Sachsen tief, andere Länder nur als Hinweis mit Verweis auf die
-   jeweilige Landesbank. **16 Bundesländer zu pflegen ist unmöglich**, und ein veralteter
-   Bayern-Absatz schadet mehr als er nützt
+5. **Bundesweit, aber ohne fremde Beträge** — überholt die frühere Empfehlung zur regionalen
+   Begrenzung, siehe Abschnitt 4a. Sechzehn Länder **mit Zahlen** sind nicht pflegbar; sechzehn
+   Länder **mit Programmname, Link und Status** sind es. Die Beträge bleiben bei der Förderbank
 6. **Zeitlose Artikel bevorzugen.** *„Antrag vor Auftrag"* gilt dauerhaft. *„Der Fördersatz beträgt
    X"* gilt bis morgen. **Der Nutzwert liegt in der Regel, nicht in der Zahl** — und zeitlose
    Artikel sind auch für KI-Antworten die besseren
@@ -198,7 +281,7 @@ Förderangebot.
 | # | Frage | Folge |
 |---|---|---|
 | 1 | Wird die Beantragungshilfe auf Stufe 1 und 2 begrenzt? | Stufe 3 bräuchte einen Partner und eine Änderung an `03_KUNDENPRODUKT.md` |
-| 2 | Regional begrenzen — Sachsen tief statt bundesweit flach? | Bestimmt Wartungslast und Glaubwürdigkeit |
+| 2 | ~~Regional begrenzen?~~ | **Entschieden 09.08.2026: bundesweit.** Umgesetzt über die Verweis-statt-Kopie-Architektur, Abschnitt 4a |
 | 3 | Kommt das Förderfeld in den Bedarfsscheck? | Betrifft `17` §2.2 und die Angebotsgültigkeit in `02` |
 | 4 | Wer prüft vierteljährlich? | Ohne festen Termin verrottet der Inhalt — und dann schadet er |
 
