@@ -29,11 +29,36 @@
 | 7 | Setup: **„sechs Schritte"** im Fließtext gegen **„acht"** im Korrekturblock | steht so in `CLAUDE.md` |
 | 8 | Ich zitierte das Masterkonzept als bindend, obwohl es Begründungsarchiv ist | musste berichtigt werden |
 
-**Der Mechanismus dahinter ist arithmetisch, nicht stilistisch:**
+### Nachgemessen am 09.08.2026 — und das Ergebnis widerlegt die eigene Diagnose
 
-> **Widersprüche wachsen quadratisch mit gebundenen Werten.** Bei 147 gebundenen Stellen gibt es
-> rund **10.700 Paare**, die sich widersprechen *können*. Jeder gefundene Widerspruch kostet eine
-> Sitzung: finden, prüfen, melden, entscheiden. **Und es werden immer neue auftauchen.**
+**Der Satz „Widersprüche wachsen quadratisch mit 147 gebundenen Werten" stand hier zuerst. Er war
+rhetorisch wirksam und analytisch falsch.** Die Auszählung ergibt:
+
+| Was gezählt wurde | Anzahl |
+|---|---|
+| Stellen mit `gebunden` insgesamt | 147 |
+| davon **gebundene Anzahlen** (Punkte, Stück, Sätze, Wörter, Blöcke …) | **12** |
+| davon **ohne Begründung** im Umfeld | **10** |
+| davon **echte Auswahlfixierungen**, die wachsen könnten | **rund 4** |
+
+**Die übrigen 135 sind etwas anderes** — und dort ist die Bindung richtig:
+
+| Art | Beispiele | Bindung korrekt, weil |
+|---|---|---|
+| **Beschriftungen** | `H1: Anmelden` · `Ihr Angebot` · `Übersicht` | Wiedererkennbarkeit; ein Modell würde sie sonst variieren |
+| **Rechtstexte und Pflichthinweise** | B2B-Erklärung · vier Pflicht-Bestätigungen | rechtlich, nicht gestalterisch |
+| **Beträge und Fristen** | Preise · Login-Token **15 Minuten, einmalig** | Vertrag bzw. Sicherheitsparameter |
+| **Feldnamen und Optionslisten** | Bedarfsscheck, Statusnamen | Datenmodell hängt daran |
+
+**Und die zehn Anzahlen ohne Begründung sind größtenteils Umfangsgrenzen** — `42 Wörter`,
+`zwei Sätze`, `drei Sätze`. **Dort ist eine Zahl genau richtig:** „kurz" wäre unbrauchbar, „zwei
+Sätze" ist prüfbar. Sie sind keine Fehlbindung, sondern der Zweck der Bindung.
+
+> **Es bleiben rund vier Stellen**, an denen eine Zahl eine Auswahl fixiert, die wachsen könnte:
+> die **sechs** Navigationspunkte · die **drei** Transparenzseiten zum Launch ·
+> `Thema {n} von 5` · die **drei** Musterprojektgattungen.
+>
+> **Vier. Nicht 147.**
 
 ---
 
@@ -173,6 +198,40 @@ Ihr Vorschlag: eine Beschreibung, SEO/GEO-Strategie, Preisliste, Startseiten-HTM
 | 3 | Bleiben die vier Lastenhefte als Begründungsarchiv liegen? **Empfehlung: ja** — sie tragen die Gründe, die Stufe B braucht |
 | 4 | Soll `CLAUDE.md` den Satz bekommen, dass eine Zahl ohne danebenstehenden Grund **kein** bindender Wert ist? Das wäre die kürzeste wirksame Änderung überhaupt |
 
-> **Frage 4 ist die mit dem besten Verhältnis von Aufwand zu Wirkung.** Ein Satz in `CLAUDE.md`
-> — und die 147 Stellen sind ab sofort daran messbar, ohne dass eine einzige umgeschrieben werden
-> muss.
+## 9. Entscheidung zu Frage 4 — nach der Messung: **nicht einbauen**
+
+**Der Betreiber hat den Satz unter eine Bedingung gestellt: nur einbauen, wenn er die Sache
+deutlich lockert. Die Messung zeigt, dass er das nicht tut.**
+
+| Dagegen | |
+|---|---|
+| **Er löst 4 Fälle** | und stellt dafür **147 Bindungen** unter Auslegungsvorbehalt |
+| **Er trifft die Falschen** | Beschriftungen, Pflichthinweise und Umfangsgrenzen haben selten ein „weil" danebenstehen — sie würden mitgelockert, obwohl sie bleiben sollen |
+| **Er erzeugt Unschärfe, wo heute Klarheit ist** | Die Frage „gilt das noch?" bei jeder Bindung kostet mehr als vier Einzelfälle |
+
+**Stattdessen, und das ist ein Nachmittag statt einer Doktrin:** die vier Stellen einzeln von Wert
+auf Grund umstellen.
+
+| Stelle | Heute | Vorschlag |
+|---|---|---|
+| Hauptnavigation | „die **sechs** Punkte" | „bleibt in einer Zeile lesbar; kommt einer dazu, weicht einer" |
+| Transparenzseiten | „zum Launch verbindlich, **drei Stück**" | „zum Launch die, die fertig sind — mindestens die drei genannten" |
+| Bedarfsscheck | `Thema {n} von 5` | „Fortschritt in Themen, nicht in Fragen; **unter drei Minuten**" |
+| Musterprojekte | „**drei** Gattungen" | „je Branchenseite eines — die Gattungen folgen den Branchen" |
+
+> **Die letzte Zeile löst zugleich `§7c`.** Der Widerspruch entstand nicht aus einer Zahl, sondern
+> daraus, dass **zwei Listen unabhängig voneinander gebunden** wurden. Wer die Kopplung benennt
+> statt beide Seiten einzeln festzuschreiben, kann sie nicht mehr auseinanderlaufen lassen.
+
+### Was die Messung darüber hinaus zeigt
+
+**Die Überspezifikation ist geringer als beide Seiten dachten.** Die acht Reibungspunkte dieser
+Sitzung stammen überwiegend **nicht** aus zu vielen Zahlen, sondern aus:
+
+1. **gekoppelten Listen ohne benannte Kopplung** — `§7c`, Block 6
+2. **Rangfolge, die nicht mitgelesen wurde** — mein Fehler mit dem Masterkonzept
+3. **Vorgaben, die die Wirtschaftslage überholt hat** — Gastronomie in der Zielgruppe
+
+**Keiner dieser drei Fälle wird durch Lockerung besser.** Fall 1 braucht eine benannte Kopplung,
+Fall 2 war Sorgfalt, Fall 3 braucht ein Verfallsdatum an fachlichen Aussagen — nicht weniger
+Bindung, sondern **eine andere Art davon**.
