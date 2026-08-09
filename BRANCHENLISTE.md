@@ -1,11 +1,29 @@
 # Branchenliste — 49 Kandidaten mit Selbstbezeichnung
 
-> **Was diese Liste ist:** eine **Prioritätsschlange über Jahre**, kein Bauplan. Die Zahl 49 kommt
-> aus der Kapazitätsrechnung — 148 freie Seiten bei drei Seiten je Branche. Nach der eigenen
-> Keywordstrategie sind **20–40 Seiten in zwei bis drei Jahren** realistisch, also **7 bis 13
-> Branchen**. Der Rest der Liste ist Vorrat, keine Zusage.
+> **Was diese Liste ist:** eine **Prioritätsschlange über Jahre**, kein Bauplan.
+> **75 Branchen in sechs Stufen.**
 >
-> Erstellt am 09.08.2026. Entschieden wird vom Betreiber; `§7c` bleibt davon unberührt.
+> Erstellt am 09.08.2026, **erweitert am selben Tag auf Entscheidung des Betreibers** — die zuvor
+> ausgeschlossenen Branchen sind als **Stufe 6** aufgenommen. Begründung und Rechnung unten.
+> Entschieden wird vom Betreiber; `§7c` bleibt davon unberührt.
+
+## Die Rechnung, die 75 Branchen möglich macht
+
+**Nicht jede Branche bekommt drei Seiten.** Das war die stillschweigende Annahme hinter der
+früheren Zahl 49 — und sie war zu starr.
+
+| | Branchen | Seiten je Branche | Summe |
+|---|---|---|---|
+| **Kernbranchen** — Stufe 1 und Spitze von 2 | 13 | **3** (Branche · SEO · Texte) | 39 |
+| **Weitere** — Rest der Stufen 2 bis 5 | 36 | **1** (nur Branchenseite) | 36 |
+| **Abdeckung** — Stufe 6 | 26 | **1** | 26 |
+| | **75** | | **101** |
+
+Dazu die 32 vergebenen Adressen: **133 von 180.** Es bleiben 47 Seiten Luft.
+
+> **Die Staffelung ist der Trick.** Eine Branchenseite allein kostet 400 eigene Wörter und einen
+> Herkunftsnachweis — das ist tragbar. Drei Seiten je Branche sind es nur dort, wo die Recherche
+> ohnehin tief geht.
 
 ---
 
@@ -113,19 +131,70 @@ Bildfrage aus `§5` entschärft. Hohe Zahlungsbereitschaft. **Schwäche:** selte
 
 ---
 
-## Was ausdrücklich **nicht** auf der Liste steht — und warum
+## Stufe 6 — Abdeckung: die zuvor ausgeschlossenen Branchen
+
+> **Aufgenommen am 09.08.2026 auf Entscheidung des Betreibers.** Sein Argument hat die frühere
+> Bewertung gekippt — und es ist gut:
+>
+> **„Vielleicht denkt ja auch mancher: Umsatz geht zurück, was kann ich tun — ah, neue Website."**
+>
+> **Das ist ein Kaufanlass, kein Ausschlussgrund.** Eine schrumpfende Branche produziert *mehr*
+> entschlossene Käufer, nicht weniger. Meine frühere Ablehnung maß die Branche an ihrer
+> Durchschnittslage — gekauft wird aber von einzelnen Betrieben, und die entschlossensten sitzen
+> oft genau dort, wo es gerade weh tut. Das ist **Achse 4 (Anlass)** aus `NISCHEN_IDEEN.md`,
+> angewendet auf die Branchen, die ich weggelassen hatte.
+
+**Diese Seiten werden anders geschrieben als Stufe 1 bis 5.** Nicht „Website für Friseure", sondern
+der Zustand, in dem der Betrieb ist. **Der Aufhänger ist der Rückgang, nicht das Gewerk.**
+
+| # | Selbstbezeichnung | Suchform *(Vermutung)* | Was sie hierher bringt |
+|---|---|---|---|
+| 50 | **Friseursalon** | „friseur", „friseursalon" | 53.516 Betriebe — die größte Grundgesamtheit überhaupt |
+| 51 | **Restaurant**, Gaststätte | „restaurant", „gaststätte" | sechstes Verlustjahr — der Leidensdruck ist der Anlass |
+| 52 | **Bäckerei** | „bäckerei" | Filialsterben, Handwerksbäcker grenzen sich ab |
+| 53 | **Fleischerei**, Metzgerei | „fleischerei", „metzgerei" | dito · **Nord/Süd-Variante beachten** |
+| 54 | **Konditorei**, Café | „konditorei", „café" | |
+| 55 | **Photovoltaik-Fachbetrieb** | „photovoltaik", „solarteur" | Eigenheim −28 % — **Überlebende positionieren sich neu** |
+| 56 | **Physiotherapie**, Praxis für Physiotherapie | „physiotherapie" | steht in `spezifikation/10` §8 als Musterprojekt |
+| 57 | **Ergotherapie** · **Logopädie** | „ergotherapie", „logopädie" | Praxen mit Zuweiserbezug |
+| 58 | **Zahnarztpraxis** | „zahnarzt" | hohe Zahlungsbereitschaft, Vertrauensgeschäft |
+| 59 | **Arztpraxis**, Facharztpraxis | „hausarzt", „facharzt" | Terminlast — Buchung ist zulässig (`spezifikation/03`) |
+| 60 | **Tierarztpraxis** | „tierarzt" | |
+| 61 | **Ambulanter Pflegedienst** | „pflegedienst" | 42 % schlechte Lage — Anlass vorhanden |
+| 62 | **Rechtsanwaltskanzlei** | „rechtsanwalt", „kanzlei" | steht in `spezifikation/10` §8 als Musterprojekt |
+| 63 | **Steuerkanzlei**, Steuerberater | „steuerberater" | **zugleich Multiplikator** — Achse 10 |
+| 64 | **Bestattungsunternehmen** | „bestatter", „bestattungsinstitut" | konjunkturunabhängig, hohe Marge, Vertrauensgeschäft |
+| 65 | **Immobilienmakler** | „immobilienmakler" | Objektlisten bleiben außen vor, Vertrauensseite geht |
+| 66 | **Versicherungsmakler**, Gewerbeversicherung | „versicherungsmakler" | reguliertes Marketing beachten |
+| 67 | **Fahrschule** | „fahrschule" | |
+| 68 | **Kosmetikstudio** · **Nagelstudio** | „kosmetikstudio", „nagelstudio" | |
+| 69 | **Fotostudio**, Fotograf | „fotograf" | **zugleich Multiplikator** — liefert, was SARTU nicht liefert |
+| 70 | **Hotel**, Pension, Ferienwohnung | „hotel", „pension" | **Vorsicht: Buchungserwartung** |
+| 71 | **Fitnessstudio** | „fitnessstudio" | Mitgliederbereich = Sonderprojekt |
+| 72 | **Umzugsunternehmen** | „umzugsunternehmen", „umzugsfirma" | B2B-Anteil bei Firmenumzügen |
+| 73 | **Schlüsseldienst** | „schlüsseldienst" | Notdienstgeschäft, Vertrauensproblem der Branche |
+| 74 | **Taxiunternehmen**, Mietwagen | „taxi", „mietwagen" | |
+| 75 | **Nachhilfe**, Musikschule | „nachhilfe", „musikschule" | |
+
+### Was bei Stufe 6 zusätzlich gilt
+
+| Regel | Warum |
+|---|---|
+| **Eine Seite je Branche, nicht drei** | Der Ertrag rechtfertigt keine SEO- und Textseite obendrauf |
+| **Auf den Anlass texten, nicht auf das Gewerk** | Block 3 führt mit dem Rückgang, nicht mit einer Selbstbeschreibung |
+| **Zahlungsplan beachten** | Bei Gastronomie und Photovoltaik ist das Insolvenzrisiko real — `02_PREISE_UND_ZAHLUNG.md` schützt über die Vorauszahlung. **Hier nicht davon abweichen** |
+| **`§7b` gilt unverändert** | Bei Friseuren und Pflege ist Fachkräftemangel das stärkste Motiv — **es darf nicht angesprochen werden.** Die Seite verkauft über Anfragen und Vertrauen |
+| **Selbstpflege bleibt ausgeschlossen** | Eine Speisekarte, die wöchentlich wechselt, ist ein Fall für die Ausschlussliste — das gehört auf die Seite, nicht ins Kleingedruckte |
+| **Buchung ist zulässig** | `spezifikation/03` erlaubt eine einfache Ein-Kalender-Buchung — für Praxen, Fahrschulen und Kosmetik der entscheidende Punkt |
+
+### Was trotzdem draußen bleibt
 
 | Branche | Grund |
 |---|---|
-| **Friseure** | 144.000 € Umsatz je Betrieb — **Faktor 5** unter dem Handwerksschnitt. Hauptmotiv Fachkräfte, durch `§7b` gesperrt |
-| **Gastronomie, Bäcker, Fleischer, Konditor** | sechstes reales Verlustjahr, 2.900 Insolvenzen (+29,6 %); dazu Speisekarte = Selbstpflege |
-| **Photovoltaik-Betriebe** | Eigenheimsegment **−28 %**, namentliche Insolvenzwelle, Förderrisiko ab 2027 |
-| **Einzelhandel, Optiker mit Shop** | Shop-Erwartung, `spezifikation/01` schließt aus |
-| **Pflegedienste, Praxen** | 42 % bewerten die Lage als schlecht; Hauptinvestition Personal — `§7b` |
-| Schornsteinfeger | Kehrbezirke zugewiesen, kein Kundengewinnungsbedarf |
-| Schuhmacher, Böttcher, Seiler, Orgelbauer u. a. | zu wenige Betriebe für eine eigene Seite |
-
----
+| **Einzelhandel mit Warenverkauf** | Shop ist nach `spezifikation/01` Sonderprojekt oder Absage — kein Standardfall |
+| **Schornsteinfeger** | Kehrbezirke sind zugewiesen. **Es gibt keinen Kundengewinnungsbedarf** — die einzige Branche ohne jeden Anlass |
+| Böttcher, Seiler, Orgelbauer, Elfenbeinschnitzer u. a. | zu wenige Betriebe in Deutschland für eine eigene Seite |
+| Privatpersonen, Vereine ohne Unternehmereigenschaft | `spezifikation/01`, Ausschluss ist Pflicht |
 
 ## Die drei Regeln, die beim Bauen gelten
 
@@ -144,7 +213,7 @@ Seite, Herkunftsnachweis —, dann messen, dann die nächste. Das ist die Spiral
 trägt: dieselbe Recherche wirkt in Stufe 1 über sieben verwandte Branchen, in Stufe 2 über die
 Bau-Nachbarschaft.
 
-**Bei zwei bis drei Branchen im Jahr ist diese Liste für die nächsten fünfzehn Jahre gefüllt.**
+**Bei zwei bis drei Branchen im Jahr reicht diese Liste weit über zwanzig Jahre.**
 Das ist kein Mangel — es heißt, dass die Auswahl nie der Engpass sein wird. Der Engpass ist die
 Tiefe je Seite.
 

@@ -2079,3 +2079,40 @@ Seiten in zwei bis drei Jahren**, also **7 bis 13 Branchen**. Der Rest ist Vorra
 | 2 | **Verbände sind als mögliche Multiplikatoren genannt, nicht kontaktiert** — und nicht geprüft, ob sie Anbieterempfehlungen überhaupt aussprechen |
 | 3 | **Regionale Wortvarianten** sind nur bei Tischlerei/Schreinerei berücksichtigt. Weitere sind wahrscheinlich |
 | 4 | Bei Stufe 4 und 5 ist der **B2B-Anteil geschätzt**, nicht belegt — insbesondere bei Sanitätshaus, Hörakustik und Augenoptik |
+
+### Stufe 6 ergänzt — 09.08.2026, auf Entscheidung des Betreibers
+
+**Sein Argument hat meine Bewertung gekippt:** *„Vielleicht denkt ja auch mancher — Umsatz geht
+zurück, was kann ich tun, ah, neue Website."*
+
+**Das ist ein Kaufanlass, kein Ausschlussgrund.** Meine frühere Ablehnung maß Branchen an ihrer
+**Durchschnittslage** — gekauft wird aber von **einzelnen Betrieben**, und die entschlossensten
+sitzen oft dort, wo es gerade weh tut. Es ist Achse 4 aus `NISCHEN_IDEEN.md`, angewendet auf genau
+die Branchen, die ich weggelassen hatte.
+
+**26 Branchen aufgenommen**, `BRANCHENLISTE.md` führt jetzt **75 in sechs Stufen**.
+
+**Die Kapazitätsfrage ist über die Staffelung gelöst — nicht jede Branche bekommt drei Seiten:**
+
+| | Branchen | Seiten je Branche | Summe |
+|---|---|---|---|
+| Kernbranchen | 13 | 3 | 39 |
+| Weitere | 36 | 1 | 36 |
+| Abdeckung, Stufe 6 | 26 | 1 | 26 |
+| **gesamt** | **75** | | **101** |
+
+Plus 32 vergebene Adressen: **133 von 180.** 47 Seiten Luft.
+
+**Fünf Regeln bleiben für Stufe 6 verbindlich** — sie stehen in der Liste: eine Seite statt drei ·
+auf den Anlass texten statt auf das Gewerk · Zahlungsplan bei Gastronomie und Photovoltaik nicht
+aufweichen (**Insolvenzrisiko ist real**) · `§7b` gilt unverändert, bei Friseuren und Pflege darf
+der Fachkräftemangel **nicht** angesprochen werden · Selbstpflege bleibt ausgeschlossen.
+
+**Draußen bleiben nur noch vier Gruppen:** Einzelhandel mit Warenverkauf (Shop = Sonderprojekt) ·
+**Schornsteinfeger** (Kehrbezirke zugewiesen — die einzige Branche ohne jeden Anlass) ·
+Kleinstgewerke mit zu wenigen Betrieben · Privatpersonen und Vereine ohne Unternehmereigenschaft.
+
+**Ungeprüft:** Ob die Anlass-Texte für Stufe 6 die drei Prüfungen aus `spezifikation/17` §4
+bestehen. Ein Text über „sinkende Anfragen" ist branchenübergreifend ähnlich — **der Austauschtest
+ist hier schwerer zu bestehen als bei einem Gewerk.** Das entscheidet sich am ersten geschriebenen
+Beispiel, nicht vorher.
