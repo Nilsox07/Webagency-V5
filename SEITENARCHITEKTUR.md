@@ -89,9 +89,28 @@ großzügig.** Bei genauem Hinsehen zerfällt es in zwei Fälle, die beide nicht
 | Kombination | Problem |
 |---|---|
 | „**Webdesign** für Friseure" | Das ist die Branchenseite. Zwei Seiten auf dieselbe Absicht — sie schwächen sich gegenseitig |
-| „**SEO** für Friseure" | Zieht die falsche Kaufabsicht an. Wer das sucht, will eine laufende Dienstleistung — und die gibt es bei SARTU nur gebündelt. Genau der Einwand aus `NISCHEN_IDEEN.md`, nur eine Ebene tiefer |
+| „**SEO** für Friseure" | siehe die Berichtigung direkt darunter — **mein Einwand dagegen war falsch** |
 
-**Es bleibt also nicht viel übrig.** Und das ist kein schlechtes Ergebnis, sondern das eigentliche.
+#### Berichtigt am 09.08.2026 — der Einwand gegen die SEO-Variante trug nicht
+
+Ich hatte geschrieben, „SEO für Friseure" ziehe die falsche Kaufabsicht an. **Der Betreiber hat
+widersprochen, und zwar zu Recht:** SEO gibt es bei SARTU ohnehin **nur gebündelt** mit einer
+Website — das ist seine eigene Entscheidung aus `POSITIONIERUNG_GEO.md`. Eine Seite, die genau das
+sagt, weist die falsche Absicht selbst ab.
+
+**Mehr noch — der Trichter funktioniert:** *„SEO auf einer Seite von 2012 ist rausgeworfenes Geld"*
+ist wahr und überzeugend. Er verwandelt einen SEO-Sucher in einen Website-Käufer, ohne dass
+irgendetwas beschönigt werden müsste.
+
+**Was von meinem Einwand übrig bleibt, ist etwas anderes:** Dieses Argument ist
+**branchenunabhängig**. „SEO ohne neue Seite bringt wenig" gilt für Friseure wie für
+Sicherheitsdienste. Es ist **ein** Argument, nicht fünf — und es steht bereits auf
+`/leistung-seo-lokal`.
+
+Ob es zusätzlich je Branche gebaut werden sollte, hängt allein daran, ob „SEO für [Branche]"
+tatsächlich gesucht wird. **Das lässt sich derzeit nicht prüfen** — `KEYWORD_VALIDATION.md` hält
+fest, dass kein Volumenwerkzeug vorliegt. Deshalb: **bauen, messen, dann entscheiden** — nicht
+umgekehrt.
 
 ### Die Regel, die daraus folgt
 
