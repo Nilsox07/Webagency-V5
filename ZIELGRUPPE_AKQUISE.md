@@ -45,7 +45,7 @@ Argument nicht sagbar.
 | **F** | Baugewerbe | **ja** — das aktuelle Feld | Talsohle, Klima 107 (−6) | **gebaut, schwächelnd** |
 | **G** | Handel, KFZ-Instandhaltung | teilweise — B2B-Großhandel und freie Werkstätten ja, Einzelhandel nein | schwach | **gespalten** |
 | **H** | **Verkehr und Lagerei** | **ja** — Speditionen, Kurier, Lagerlogistik | **+2 bis 4 %** · hoher Digitalrückstand | **stark** |
-| **I** | Gastgewerbe | nein — Buchung, B2C | schwach | **raus** |
+| **I** | Gastgewerbe | **formal ja** — steht in `spezifikation/01` in der Zielgruppe, und `spezifikation/03` erlaubt eine einfache Ein-Kalender-Buchung | **Krise**, siehe unten | **raus aus wirtschaftlichen Gründen** |
 | **J** | Information und Kommunikation | nein — bauen selbst | Spitzenreiter Digitalisierung | **raus** |
 | **K** | Finanz- und Versicherungsdienstleistungen | teilweise — Makler, aber stark reguliertes Marketing | stabil | **mittel** |
 | **L** | Grundstücks- und Wohnungswesen | teilweise — **Hausverwaltungen ja**, Makler nein (Objektlisten) | Finanzierungskosten belasten | **Teilsegment gut** |
@@ -282,6 +282,126 @@ Dazu ein regulatorisches Risiko, das niemand abschätzen kann. **Kein Kandidat.*
 | Gewerbeversicherungsmakler | hoch | reguliertes Marketing |
 | IT-Systemhäuser | hoch | bauen selbst — `spezifikation/01` schließt sie aus |
 | Bestatter | hoch, konjunkturunabhängig | kleine Grundgesamtheit, heikle Textarbeit |
+
+---
+
+## Geld × Website-Defizit — die Achse, um die es eigentlich geht
+
+> **Ergänzt am 09.08.2026** auf Einwand des Betreibers: gesucht sind Branchen, die **Geld haben**
+> und **keine oder eine veraltete Website**. Der Schnitt ist richtig. Die Daten drehen aber die
+> Richtung um.
+
+### „Kein Defizit" zerfällt in zwei entgegengesetzte Verkäufe
+
+|  | **Keine Website** | **Veraltete Website** |
+|---|---|---|
+| Zustand | **problemunbewusst** — hat zehn Jahre ohne überlebt | **problembewusst** — weiß es und ärgert sich |
+| Zu verkaufen ist | erst die Notwendigkeit, dann der Anbieter | **nur der Anbieter** |
+| Nötiger Vertriebsweg | Ansprache von außen, Überzeugung, Wiedervorlage | er sucht selbst |
+| Passt zu SARTU | **nein** | **ja, exakt** |
+
+**Warum das Modell den ersten Fall nicht bedient.** Veröffentlichter Preis, Bedarfsscheck, kein
+Termin, kein Telefonat — das ist ein **Hol**-Modell. Es funktioniert für jemanden, der bereits
+sucht. Wer noch nicht weiß, dass er ein Problem hat, muss angesprochen werden — und kalte
+Massenansprache ist ausgeschlossen. Bei einem Ein-Personen-Betrieb ist Überzeugungsarbeit zudem
+nicht skalierbar.
+
+Dazu kommt eine Korrelation, die selten ausgesprochen wird: **Wer keine Website hat, ist meist der
+kleinste Betrieb** — Soloselbstständige und Kleinstbetriebe. Genau die Gruppe mit dem wenigsten
+Geld. „Keine Website" und „kein Budget" fallen häufig zusammen.
+
+### Der veraltete Bestand ist drei- bis viermal größer als der fehlende
+
+**SIINDA-Studie, rund 190.000 untersuchte KMU-Websites:**
+
+| Zahl | Wert |
+|---|---|
+| Betriebe **mit** eigenem Internetauftritt | **72 %** |
+| davon mit **Optimierungspotenzial** | **95 %** |
+| **mobiloptimiert** | nur **65 %** — über ein Drittel auf dem Smartphone schlecht nutzbar |
+| **seit mindestens einem Jahr kein Update** | **42 %** |
+| Anteil der Website-Besuche vom Smartphone | über **60 %** |
+
+Eine regionale Erhebung fällt noch schärfer aus: **83 %** der vorhandenen Auftritte sind technisch
+veraltet oder nicht für Smartphones optimiert; **jeder fünfte Betrieb** hat gar keine Website.
+
+> **Rechnung:** Von 100 Betrieben haben rund 72 eine Website. Davon sind gut 25 nicht
+> mobiltauglich und rund 30 seit über einem Jahr unangetastet. Dem stehen 28 Betriebe **ohne**
+> Website gegenüber — von denen die meisten zu klein sind, um zu zahlen.
+>
+> **Der ansprechbare Markt ist der veraltete Bestand, nicht die Lücke.** Und er hat den
+> entscheidenden Vorteil: Diese Betriebe haben die Notwendigkeit einer Website bereits akzeptiert.
+> Sie müssen nur den Anbieter wechseln.
+
+**Das ist zugleich die Bestätigung für die Achse „Relaunch"**, die im Nischenpapier als frei
+markiert ist: `/lexikon/relaunch` existiert, eine Leistungsseite dazu nicht.
+
+### Die beiden genannten Beispiele — geprüft
+
+#### Friseure
+
+| Zahl | Wert |
+|---|---|
+| umsatzsteuerpflichtige Friseurunternehmen | **53.516** |
+| Branchenumsatz 2024 | rund **7,7 Mrd. €** (+3,2 %) |
+| Umsatzentwicklung 2025 | **+2,2 %** |
+| **Umsatz je Betrieb** | **rund 144.000 €** |
+
+**Zum Vergleich, aus denselben Quellenfamilien:** Das Handwerk insgesamt setzte 2025 rund
+**783,2 Mrd. €** bei **1.038.126** Betrieben um — **rund 754.000 € je Betrieb**. Das ist der
+**Faktor 5**.
+
+Die Branche wächst leicht, aber die Lage bleibt angespannt: Personalkosten, Produkte, Energie.
+Der Zentralverband erwartet für 2026 steigende Kosten und anhaltenden **Fachkräftemangel** —
+und genau das, das stärkste Kaufmotiv, darf SARTU wegen `§7b` nicht ansprechen.
+
+**Urteil:** Das Defizit ist real, das Geld nicht. Bei 144.000 € Jahresumsatz ist ein Angebot ab
+1.490 € netto plus 59 € monatlich keine Nebensache, sondern eine Investitionsentscheidung. Dazu
+kommt, dass ein Salon über Kartenergebnisse und Bewertungen gefunden wird — dort ist das
+Unternehmensprofil wirksamer als jede Website.
+
+#### Restaurants und Gastronomie
+
+| Zahl | Wert |
+|---|---|
+| Mehrwertsteuer auf Speisen | seit **01.01.2026 dauerhaft 7 %** |
+| Umsatz Gastgewerbe 2025 | nominal **+1,4 %**, **real −2,1 %** |
+| Gastronomie preisbereinigt | **−2,2 %** — **sechstes Verlustjahr in Folge** |
+| Insolvenzen 2025 | rund **2.900**, **+29,6 %** — höchster Stand seit **2011**, viertes Jahr steigend |
+| Insolvenzen seit 2020 insgesamt | über **11.000** |
+| Kostenanstieg Waren, Personal, Energie seit 2022 | teils **+40 %** |
+
+**Der schärfste Befund:** Die Steuersenkung auf 7 % kam zum 01.01.2026 — **und die Umsätze fielen
+real trotzdem.** Wenn eine dauerhafte Entlastung von zwölf Prozentpunkten den Rückgang nicht
+stoppt, ist das Problem struktureller Natur.
+
+**Urteil:** raus. Nicht wegen der Buchung — `spezifikation/03` erlaubt ausdrücklich eine
+**einfache Ein-Kalender-Buchung** — sondern wegen der Wirtschaftslage. Dazu ein zweites Problem:
+Eine Speisekarte ändert sich wöchentlich. Das verlangt Selbstpflege, und die schließt
+`spezifikation/01` aus.
+
+> **Zu melden:** `spezifikation/01` führt **Gastronomie** in der primären Zielgruppe. Das ist kein
+> Widerspruch zur Produktdefinition — aber die wirtschaftliche Grundlage dieser Nennung trägt nach
+> aktueller Datenlage nicht mehr. Die Zeile gehört überprüft, entschieden wird das vom Betreiber.
+
+### Was daraus für das Auswahlkriterium folgt
+
+Das Kriterium heißt nicht „Geld **und keine** Website", sondern:
+
+> **Geld × veraltete Website × sucht bereits.**
+
+Und dafür ist der belastbarste Filter **Umsatz je Betrieb**. Er ist öffentlich verfügbar, ändert
+sich langsam und trennt schärfer als jedes Bauchgefühl:
+
+| Branche | Umsatz je Betrieb | Trägt 1.490–7.900 €? |
+|---|---|---|
+| Friseurhandwerk | rund **144.000 €** | schwer |
+| Handwerk insgesamt | rund **754.000 €** | **ja** |
+| Sicherheitsdienste, Spedition, Entsorgung | keine belastbare Zahl ermittelt | **offen — zu prüfen** |
+
+**Die letzte Zeile ist die nächste Rechercheaufgabe.** Für die empfohlenen Nischen aus Cluster 2
+liegt mir kein Umsatz je Betrieb vor. Ohne diese Zahl bleibt ihre Zahlungsfähigkeit eine
+begründete Vermutung.
 
 ---
 
