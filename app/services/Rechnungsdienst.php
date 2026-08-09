@@ -67,6 +67,7 @@ final class Rechnungsdienst
         private readonly ?AdminRechnungen $rechnungen = null,
         private readonly ?AuditProtokoll $audit = null,
         private readonly ?Versender $mail = null,
+        private readonly ?Nummernkreis $nummernkreis = null,
         private readonly ?\PDO $pdo = null,
     ) {
     }
@@ -87,14 +88,13 @@ final class Rechnungsdienst
         }
 
         $fehler = [];
-        $nummer = self::text($eingabe, 'number');
         $meilenstein = self::text($eingabe, 'milestone');
         $netto = self::zahl($eingabe, 'net_cents');
 
-        if (preg_match('/^RE-\d{4}-\d{3,}$/', $nummer) !== 1) {
-            // §4a Nummernkreis. In Stufe 0 vom Admin eingegeben.
-            $fehler[] = 'Die Rechnungsnummer hat das Format RE-JJJJ-NNN, zum Beispiel RE-2026-001.';
-        }
+        // **Die Nummer wird nicht mehr eingegeben.** Bis zum 09.08.2026 stand hier eine
+        // Musterprüfung auf ein Feld aus dem Formular; `18_BELEGE_UND_ZAHLUNG.md` Abschnitt 4
+        // hat das abgelöst: „Bis heute tippte der Admin die Nummer ein. Das fällt."
+        // Sie entsteht weiter unten, in derselben Transaktion wie die Zeile.
 
         if (!isset(self::MEILENSTEINE[$meilenstein])) {
             $fehler[] = 'Bitte wählen Sie, worauf sich die Rechnung bezieht.';
@@ -118,18 +118,30 @@ final class Rechnungsdienst
             $faellig = Format::inTagen(self::ZAHLUNGSZIEL_TAGE);
         }
 
-        $id = $this->rechnungen()->anlegen([
-            'project_id'         => $projektId,
-            'number'             => $nummer,
-            'milestone'          => $meilenstein,
-            'status'             => Zahlungsstatus::ENTWURF,
-            'net_cents'          => $netto,
-            'vat_cents'          => $ust,
-            'gross_cents'        => $netto + $ust,
-            'due_date'           => $faellig,
-            'mollie_payment_url' => self::textOderNull($eingabe, 'mollie_payment_url'),
-            'note'               => self::textOderNull($eingabe, 'note'),
-        ]);
+        // §4: Nummer und Beleg entstehen in **einer** Transaktion. Die Klammer gibt die
+        // Nummer nur nach innen — es gibt keinen Weg, sie zu bekommen und den Beleg später
+        // anzulegen.
+        $nummer = '';
+
+        $id = $this->nummernkreis()->vergeben(
+            'RE',
+            function (string $vergeben) use (&$nummer, $projektId, $meilenstein, $netto, $ust, $faellig, $eingabe): string {
+                $nummer = $vergeben;
+
+                return $this->rechnungen()->anlegen([
+                    'project_id'         => $projektId,
+                    'number'             => $vergeben,
+                    'milestone'          => $meilenstein,
+                    'status'             => Zahlungsstatus::ENTWURF,
+                    'net_cents'          => $netto,
+                    'vat_cents'          => $ust,
+                    'gross_cents'        => $netto + $ust,
+                    'due_date'           => $faellig,
+                    'mollie_payment_url' => self::textOderNull($eingabe, 'mollie_payment_url'),
+                    'note'               => self::textOderNull($eingabe, 'note'),
+                ]);
+            },
+        );
 
         $this->audit()->schreiben(
             aktion: 'rechnung_angelegt',
@@ -615,6 +627,11 @@ final class Rechnungsdienst
     private function rechnungen(): AdminRechnungen
     {
         return $this->rechnungen ?? new AdminRechnungen($this->nachweis, $this->pdo);
+    }
+
+    private function nummernkreis(): Nummernkreis
+    {
+        return $this->nummernkreis ?? new Nummernkreis(pdo: $this->pdo);
     }
 
     private function audit(): AuditProtokoll

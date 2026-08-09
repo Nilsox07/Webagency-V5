@@ -97,10 +97,7 @@ $zustaende = [
   <form method="post" action="/admin/projekte/<?= Html::e((string) $projekt['id']) ?>/rechnung">
     <?= Csrf::feld() ?>
     <div class="feldpaar">
-      <div class="feld">
-        <label for="feld-re-number">Rechnungsnummer</label>
-        <input type="text" id="feld-re-number" name="number" value="" placeholder="RE-2026-001" required>
-      </div>
+      
       <div class="feld">
         <label for="feld-milestone">Betreff</label>
         <select id="feld-milestone" name="milestone">
@@ -385,10 +382,7 @@ $rundentext = ['offen' => 'offen', 'eingereicht' => 'eingereicht', 'bearbeitet' 
     <input type="hidden" name="included_feedback_rounds" value="<?= Html::e((string) $vorbelegung['included_feedback_rounds']) ?>">
 
     <div class="feldpaar">
-      <div class="feld">
-        <label for="feld-number">Angebotsnummer</label>
-        <input type="text" id="feld-number" name="number" value="" placeholder="AN-2026-001" required>
-      </div>
+      
       <div class="feld">
         <label for="feld-valid_until">Gültig bis</label>
         <input type="date" id="feld-valid_until" name="valid_until"

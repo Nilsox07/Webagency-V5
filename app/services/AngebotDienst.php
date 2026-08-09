@@ -32,8 +32,9 @@ use Sartu\Helpers\Validate;
  *
  * ## Was der Dienst NICHT tut
  *
- * **Er erfindet keine Angebotsnummer.** §4a: Nummernkreis `AN-JJJJ-NNN`, „in Stufe 0 vom
- * Admin eingegeben, Eindeutigkeit erzwingt die Datenbank".
+ * **Er erfindet keine Angebotsnummer — er vergibt sie.** Bis zum 09.08.2026 tippte der Admin
+ * sie ein. `18_BELEGE_UND_ZAHLUNG.md` Abschnitt 4 hat das abgelöst: Sie kommt aus
+ * `number_sequences`, unter Zeilensperre, in derselben Transaktion wie das Angebot.
  *
  * **Das Gültigkeitsdatum ist seit dem 02.08.2026 entschieden:** 30 Kalendertage ab Versand,
  * im Adminbereich änderbar. Vorher stand im Lastenheft keine Zahl dafür — sie war als
@@ -56,6 +57,7 @@ final class AngebotDienst
         private readonly ?AdminProjekte $projekte = null,
         private readonly ?AuditProtokoll $audit = null,
         private readonly ?Versender $mail = null,
+        private readonly ?Nummernkreis $nummernkreis = null,
         private readonly ?\PDO $pdo = null,
     ) {
     }
@@ -118,9 +120,43 @@ final class AngebotDienst
             return ['fehler' => $fehler, 'id' => null];
         }
 
-        $id = $this->angebote()->anlegen([
+        // §4: Nummer und Beleg in **einer** Transaktion, unter Zeilensperre auf dem Zähler.
+        $id = $this->nummernkreis()->vergeben('AN', fn (string $nummer): string
+            => $this->angebote()->anlegen($this->zeile($projektId, $nummer, $eingabe)));
+
+        $angelegt = $this->angebote()->finden($id);
+
+        $this->audit()->schreiben(
+            aktion: 'angebot_angelegt',
+            objektart: 'offer',
+            objektId: $id,
+            akteurBenutzerId: $this->nachweis->adminBenutzerId,
+            organisationId: (string) $projekt['organization_id'],
+            neuerWert: 'entwurf',
+            // Die vergebene Nummer gehört ins Protokoll: Sie ist der Beleg dafür, dass der
+            // Zähler an dieser Stelle weitergelaufen ist.
+            grund: 'Angebot ' . ($angelegt === null ? '' : (string) $angelegt['number']) . ' angelegt',
+            ip: $ip,
+        );
+
+        return ['fehler' => [], 'id' => $id];
+    }
+
+    /**
+     * Die Zeile für `offers`, aus Eingabe und vergebener Nummer.
+     *
+     * Getrennt von `anlegen()`, weil sie **innerhalb** der Nummernklammer entsteht: Der
+     * Rumpf darf dort nichts tun, was scheitern und den Zähler mit sich reissen könnte,
+     * ausser dem Anlegen selbst.
+     *
+     * @param array<string,mixed> $eingabe
+     * @return array<string,mixed>
+     */
+    private function zeile(string $projektId, string $nummer, array $eingabe): array
+    {
+        return [
             'project_id'                   => $projektId,
-            'number'                       => self::text($eingabe, 'number'),
+            'number'                       => $nummer,
             'status'                       => 'entwurf',
             'package'                      => self::text($eingabe, 'package'),
             'summary'                      => self::text($eingabe, 'summary'),
@@ -147,19 +183,7 @@ final class AngebotDienst
             'valid_until'                  => self::text($eingabe, 'valid_until'),
             'bfsg_vertragsabschluss'       => self::text($eingabe, 'bfsg_vertragsabschluss'),
             'bfsg_kleinstunternehmen'      => self::text($eingabe, 'bfsg_kleinstunternehmen'),
-        ]);
-
-        $this->audit()->schreiben(
-            aktion: 'angebot_angelegt',
-            objektart: 'offer',
-            objektId: $id,
-            akteurBenutzerId: $this->nachweis->adminBenutzerId,
-            organisationId: (string) $projekt['organization_id'],
-            neuerWert: 'entwurf',
-            ip: $ip,
-        );
-
-        return ['fehler' => [], 'id' => $id];
+        ];
     }
 
     /**
@@ -243,8 +267,10 @@ final class AngebotDienst
 
         // §4: NOT NULL erlaubt ''. Für jedes Pflichtfeld zusätzlich: nach trim() mindestens
         // ein Zeichen.
+        // `number` steht hier nicht mehr. Sie wird seit dem 09.08.2026 vergeben, nicht
+        // eingegeben (`18_BELEGE_UND_ZAHLUNG.md` Abschnitt 4) — ein Pflichtfeld für einen
+        // Wert, den niemand tippt, wäre eine Prüfung gegen die eigene Vergabe.
         foreach ([
-            'number'                   => 'Die Angebotsnummer fehlt.',
             'summary'                  => 'Die Zusammenfassung fehlt.',
             'sitemap'                  => 'Die Seitenstruktur fehlt.',
             'inclusions'               => 'Die Liste „was enthalten ist" fehlt.',
@@ -260,6 +286,9 @@ final class AngebotDienst
         }
 
         // §4a: Nummernkreis AN-JJJJ-NNN.
+        // Die Nummer wird vergeben, nicht eingegeben. Diese Prüfung greift beim Senden, wo
+        // die gespeicherte Zeile durchläuft — sie ist die Gegenprobe zur Vergabe, nicht eine
+        // Eingabeprüfung.
         $nummer = self::text($werte, 'number');
 
         if ($nummer !== '' && preg_match('/^AN-\d{4}-\d{3,}$/', $nummer) !== 1) {
@@ -435,6 +464,11 @@ final class AngebotDienst
     private function projekte(): AdminProjekte
     {
         return $this->projekte ?? new AdminProjekte($this->nachweis, $this->pdo);
+    }
+
+    private function nummernkreis(): Nummernkreis
+    {
+        return $this->nummernkreis ?? new Nummernkreis(pdo: $this->pdo);
     }
 
     private function audit(): AuditProtokoll
