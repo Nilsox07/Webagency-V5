@@ -20,6 +20,7 @@ declare(strict_types=1);
 
 use Sartu\Admin\AnfragenSteuerung;
 use Sartu\Admin\BelegeSteuerung;
+use Sartu\Admin\ErsteinrichtungSteuerung;
 use Sartu\Api\ZahlungenSteuerung;
 use Sartu\Admin\AnmeldeSteuerung;
 use Sartu\Admin\BetriebSteuerung;
@@ -117,6 +118,12 @@ return [
     // Zweifaktor-Anmeldung (§3 Regel 2a). Testfälle 43 und 44 pruefen diese Liste vollstaendig.
     new Route(Route::BEREICH_ADMIN, 'POST', '/admin/abmelden', [AnmeldeSteuerung::class, 'abmelden']),
     new Route(Route::BEREICH_ADMIN, 'GET', '/admin', [BetriebSteuerung::class, 'uebersicht']),
+    // §1.4a und `18_BELEGE_UND_ZAHLUNG.md` §6: was vor dem Onlinegang noch fehlt, und die
+    // beiden Einstellungen, die es sonst nirgends gibt. **Nicht** der neunte Setup-Schritt —
+    // die Ersteinrichtung hat acht und ist danach 404. Die Begruendung steht an der Klasse.
+    new Route(Route::BEREICH_ADMIN, 'GET', '/admin/ersteinrichtung', [ErsteinrichtungSteuerung::class, 'zeigen']),
+    new Route(Route::BEREICH_ADMIN, 'POST', '/admin/ersteinrichtung/zahlungsschluessel', [ErsteinrichtungSteuerung::class, 'zahlungsschluessel']),
+    new Route(Route::BEREICH_ADMIN, 'POST', '/admin/ersteinrichtung/zahlungsschluessel-entfernen', [ErsteinrichtungSteuerung::class, 'zahlungsschluesselEntfernen']),
     new Route(Route::BEREICH_ADMIN, 'GET', '/admin/einstellungen/betrieb', [BetriebSteuerung::class, 'formular']),
     new Route(Route::BEREICH_ADMIN, 'POST', '/admin/einstellungen/betrieb', [BetriebSteuerung::class, 'speichern']),
     new Route(Route::BEREICH_ADMIN, 'GET', '/admin/rechtstexte', [RechtstexteSteuerung::class, 'liste']),

@@ -31,5 +31,6 @@ use Sartu\Helpers\Html;
     <li><a href="/admin/einstellungen/betrieb">Betreiberdaten pflegen</a><span class="leise">Impressum, Rechnungen, Anmeldeseite</span></li>
     <li><a href="/admin/rechtstexte">Rechtstexte verwalten</a><span class="leise">Entwurf, Prüfung, Freigabe</span></li>
     <li><a href="/admin/testmail">Testnachricht senden</a><span class="leise">Prüft den Mailversand</span></li>
+    <li><a href="/admin/ersteinrichtung">Ersteinrichtung</a><span class="leise">Offene Punkte, Zahlungsschlüssel, Logo</span></li>
   </ul>
 </div>

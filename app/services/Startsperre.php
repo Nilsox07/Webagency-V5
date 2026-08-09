@@ -73,4 +73,61 @@ final class Startsperre
     {
         return $this->hindernisse() === [];
     }
+
+    /**
+     * Punkte, die **nicht** sperren — Stufe C, `18_BELEGE_UND_ZAHLUNG.md` §6 und §2.
+     *
+     * ## Warum sie nicht in `hindernisse()` stehen
+     *
+     * §1.4a zaehlt abschliessend auf, was die Veroeffentlichung anhaelt: leere Pflichtfelder,
+     * fehlende Steuernummer, nicht freigegebene Rechtstexte. Etwas dazuzunehmen hiesse, die
+     * Sperre zu verschaerfen, ohne dass eine Vorgabe das verlangt — ein Betrieb, der seine
+     * Rechnungen per Ueberweisung stellt, braucht keinen Zahlungsdienst und darf trotzdem
+     * online gehen.
+     *
+     * Sie hier zu verschweigen waere aber die andere Haelfte des Fehlers: Wer den
+     * Zahlungsschluessel nie hinterlegt, merkt es erst, wenn die erste Rechnung ohne
+     * Zahlungsweg beim Kunden liegt.
+     *
+     * Deshalb: eine zweite Liste, sichtbar an derselben Stelle, ohne Sperrwirkung.
+     *
+     * @return list<string>
+     */
+    public function weiterePunkte(): array
+    {
+        $punkte = [];
+
+        if (!(new Zahlungsschluessel($this->betreiberdaten))->hinterlegt()) {
+            $punkte[] = 'Für diese Umgebung ist kein Zahlungsschlüssel hinterlegt. '
+                . 'Rechnungen gehen dann ohne Zahlungsweg hinaus — die Bankverbindung steht darauf.';
+        }
+
+        if (!self::logoAusgeliefert()) {
+            $punkte[] = 'Das Logo fehlt im ausgelieferten Verzeichnis. '
+                . 'Rechnungsbelege entstehen dann ohne Logo.';
+        }
+
+        return $punkte;
+    }
+
+    /**
+     * Liegt das Logo dort, wo Auslieferung und Belegerzeugung es suchen?
+     *
+     * **Es wird nicht hochgeladen.** `07_MARKE_UND_GESTALTUNG.md` legt die Marke fest; die
+     * Dateien liegen in `design/` und werden nach `public/assets/bild/` ausgeliefert. Ein
+     * Feld zum Hochladen waere ein Weg, die Marke zu ersetzen — geprueft wird deshalb nur,
+     * ob die Auslieferung stattgefunden hat.
+     */
+    public static function logoAusgeliefert(): bool
+    {
+        $wurzel = dirname(__DIR__, 2);
+
+        foreach (['sartu-logo-hell.svg', 'sartu-logo-dunkel.svg', 'sartu-mark.svg'] as $datei) {
+            if (!is_file($wurzel . '/public/assets/bild/' . $datei)) {
+                return false;
+            }
+        }
+
+        return true;
+    }
 }
