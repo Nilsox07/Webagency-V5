@@ -6,11 +6,13 @@ namespace Sartu\Portal;
 
 use Sartu\Ansicht;
 use Sartu\Antwort;
+use Sartu\Data\Customer\KundenBelege;
 use Sartu\Data\Customer\KundenBereich;
 use Sartu\Data\Customer\KundenNachrichten;
 use Sartu\Data\Customer\KundenProjekte;
 use Sartu\Data\Customer\KundenRechnungen;
 use Sartu\Helpers\Http;
+use Sartu\Services\Belegerzeugung;
 use Sartu\Helpers\Validate;
 use Sartu\Sitzung;
 
@@ -34,8 +36,70 @@ final class RechnungenSteuerung
             'titel'      => 'Ihre Rechnungen',
             'angemeldet' => true,
             'rechnungen' => (new KundenRechnungen($bereich))->liste(),
+            'belege'     => self::belegeJeRechnung($bereich),
             'projekt'    => $projekt,
         ]));
+    }
+
+    /**
+     * Der Beleg zu einer Rechnung — `18_BELEGE_UND_ZAHLUNG.md` Abschnitt 9.
+     *
+     * **Die Pruefung ist doppelt und steht in einer Abfrage** (`KundenBelege`): Gibt es den
+     * Beleg, und gehoert er zur Sitzungsorganisation? Sonst **404**, nicht 403 — 403 verriete,
+     * dass es ihn gibt.
+     *
+     * Die Datei kommt ueber `Belegerzeugung::inhalt()` und damit durch den
+     * Pruefsummenvergleich (§7). Weicht sie ab, ist das ein Fehler und keine Warnung; der
+     * Kunde bekommt dann keine veraenderte Datei, sondern eine Fehlerseite.
+     *
+     * @param array<string,string> $parameter
+     */
+    public function beleg(array $parameter = []): Antwort
+    {
+        $bereich = KundenBereich::ausSitzung();
+        $beleg = (new KundenBelege($bereich))->finden((string) ($parameter['id'] ?? ''));
+
+        if ($beleg === null) {
+            return Antwort::nichtGefunden();
+        }
+
+        try {
+            $inhalt = (new Belegerzeugung())->inhalt($beleg);
+        } catch (\RuntimeException) {
+            // Kein Systemtext nach aussen (§3 Regel 12). Der Kunde kann an einer abweichenden
+            // Pruefsumme nichts aendern; fuer ihn ist der Beleg gerade nicht abrufbar.
+            return Antwort::html(Ansicht::seite('oeffentlich', 'fehler', [
+                'titel'   => 'Der Beleg ist gerade nicht abrufbar',
+                'meldung' => 'Bitte melden Sie sich kurz bei uns — wir schicken ihn Ihnen zu.',
+                'kennung' => null,
+            ]), 500);
+        }
+
+        $art = (string) $beleg['kind'] === 'storno' ? 'Stornorechnung' : 'Rechnung';
+
+        return Antwort::datei($inhalt, 'application/pdf', $art . '-' . (string) $beleg['number'] . '.pdf');
+    }
+
+    /**
+     * Die Belege, nach Rechnung geordnet — damit die Liste je Zeile weiss, ob es einen gibt.
+     *
+     * @return array<string,array<string,mixed>>
+     */
+    private static function belegeJeRechnung(KundenBereich $bereich): array
+    {
+        $nachRechnung = [];
+
+        foreach ((new KundenBelege($bereich))->liste() as $beleg) {
+            $rechnungId = (string) ($beleg['invoice_id'] ?? '');
+
+            // Der **neueste** gewinnt: §7 laesst eine zweite Erzeugung ausdruecklich zu, und
+            // die Liste ist absteigend sortiert.
+            if ($rechnungId !== '' && !isset($nachRechnung[$rechnungId])) {
+                $nachRechnung[$rechnungId] = $beleg;
+            }
+        }
+
+        return $nachRechnung;
     }
 
     /**

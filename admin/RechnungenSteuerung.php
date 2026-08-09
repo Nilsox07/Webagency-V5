@@ -6,6 +6,7 @@ namespace Sartu\Admin;
 
 use Sartu\Ansicht;
 use Sartu\Antwort;
+use Sartu\Data\Admin\AdminBelege;
 use Sartu\Data\Admin\AdminNachweis;
 use Sartu\Data\Admin\AdminProjekte;
 use Sartu\Data\Admin\AdminRechnungen;
@@ -74,6 +75,9 @@ final class RechnungenSteuerung
             'titel'      => 'Rechnung ' . (string) $rechnung['number'],
             'angemeldet' => true,
             'rechnung'   => $rechnung,
+            // §9: Der Beleg gehoert auf die Seite, auf der die Rechnung steht — sonst sucht
+            // ihn niemand. Mehrere sind moeglich; §7 laesst eine zweite Erzeugung zu.
+            'belege'     => (new AdminBelege($nachweis))->zuRechnung((string) $rechnung['id']),
             'projekt'    => (new AdminProjekte($nachweis))->finden((string) $rechnung['project_id']),
             'fehler'     => $fehler,
             'hinweise'   => $hinweise,

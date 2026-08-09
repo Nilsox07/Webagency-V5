@@ -27,7 +27,18 @@ namespace Sartu\Services;
 interface Versender
 {
     /**
+     * @param array{name:string,inhalt:string,typ:string}|null $anhang
+     *        Genau **ein** Anhang, nicht eine Liste. `18_BELEGE_UND_ZAHLUNG.md` Abschnitt 9
+     *        kennt einen Fall: „Ein Knopf je Beleg, der die Mail mit dem Beleg im Anhang
+     *        verschickt." Ein Feld fuer beliebig viele waere ein Feld, das jemand fuellt.
+     *
      * @throws MailversandFehler wenn die Mail nicht hinausgeht
      */
-    public function senden(string $an, string $betreff, string $klartext, ?string $html = null): void;
+    public function senden(
+        string $an,
+        string $betreff,
+        string $klartext,
+        ?string $html = null,
+        ?array $anhang = null,
+    ): void;
 }

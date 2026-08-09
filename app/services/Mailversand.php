@@ -28,8 +28,13 @@ final class Mailversand implements Versender
     ) {
     }
 
-    public function senden(string $an, string $betreff, string $klartext, ?string $html = null): void
-    {
+    public function senden(
+        string $an,
+        string $betreff,
+        string $klartext,
+        ?string $html = null,
+        ?array $anhang = null,
+    ): void {
         $zugang = $this->zugang ?? SmtpZugang::ausKonfiguration();
 
         $mailer = new PHPMailer(true);
@@ -61,6 +66,18 @@ final class Mailversand implements Versender
                 $mailer->isHTML(true);
                 $mailer->Body = $html;
                 $mailer->AltBody = $klartext;
+            }
+
+            if ($anhang !== null) {
+                // `addStringAttachment` und nicht `addAttachment`: Der Beleg wird vorher
+                // gegen seine Pruefsumme geprueft (§7). Ein zweites Mal von der Platte zu
+                // lesen hiesse, etwas anderes zu versenden, als geprueft wurde.
+                $mailer->addStringAttachment(
+                    $anhang['inhalt'],
+                    $anhang['name'],
+                    PHPMailer::ENCODING_BASE64,
+                    $anhang['typ'],
+                );
             }
 
             $mailer->send();

@@ -48,6 +48,7 @@ final class TenantIsolationTest extends Datenbankfall
             'GET /portal/angebot',
             'GET /portal/aufgaben',
             'GET /portal/aufgaben/{id}',
+            'GET /portal/belege/{id}',
             'GET /portal/dateien/{id}',
             'GET /portal/domain',
             'GET /portal/hilfe',

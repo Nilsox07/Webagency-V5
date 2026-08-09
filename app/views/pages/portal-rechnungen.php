@@ -16,6 +16,7 @@ use Sartu\Services\Zahlungsstatus;
  * geprueft hat.
  *
  * @var list<array<string,mixed>> $rechnungen
+ * @var array<string,array<string,mixed>> $belege
  * @var array<string,mixed>|null $projekt
  */
 
@@ -34,6 +35,7 @@ $brutto = (int) $rechnung['gross_cents'];
 $bezahlt = (int) $rechnung['paid_cents'];
 $rest = Zahlungsstatus::restbetrag($bezahlt, $brutto);
 $link = $rechnung['mollie_payment_url'] ?? null;
+$beleg = $belege[(string) $rechnung['id']] ?? null;
 ?>
 <div class="karte">
   <h2><?= Html::e((string) $rechnung['number']) ?></h2>
@@ -57,6 +59,12 @@ $link = $rechnung['mollie_payment_url'] ?? null;
 <?php else: ?>
   <p class="leise">Den Zahlungsweg stellen wir Ihnen in Kürze hier bereit.</p>
 <?php endif; ?>
+<?php endif; ?>
+
+<?php if ($beleg !== null): ?>
+  <p class="knopfreihe">
+    <a class="knopf knopf--ruhig" href="/portal/belege/<?= Html::e((string) $beleg['id']) ?>">Rechnung herunterladen</a>
+  </p>
 <?php endif; ?>
 </div>
 <?php endforeach; ?>

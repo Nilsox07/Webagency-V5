@@ -41,9 +41,13 @@ final class Projektmail
 
     /**
      * @param array<string,mixed> $projekt braucht `organization_id` und `title`
+     * @param array{name:string,inhalt:string,typ:string}|null $anhang
+     *        Nur der Belegversand nutzt ihn (`18_BELEGE_UND_ZAHLUNG.md` Abschnitt 9). Er
+     *        steht hier und nicht in einem zweiten Weg nach draussen, damit auch die Mail
+     *        mit Anhang denselben Rahmen aus §10 traegt.
      * @return bool `false`, wenn keine Adresse hinterlegt ist oder der Versand scheitert
      */
-    public function anKunden(array $projekt, string $betreff, string $kern): bool
+    public function anKunden(array $projekt, string $betreff, string $kern, ?array $anhang = null): bool
     {
         $empfaenger = $this->kundenadresse((string) ($projekt['organization_id'] ?? ''));
 
@@ -51,7 +55,7 @@ final class Projektmail
             return false;
         }
 
-        return $this->raus($empfaenger, $betreff, "Guten Tag,\n\n" . $kern . $this->fuss($projekt));
+        return $this->raus($empfaenger, $betreff, "Guten Tag,\n\n" . $kern . $this->fuss($projekt), $anhang);
     }
 
     /**
@@ -72,10 +76,11 @@ final class Projektmail
 
     // ------------------------------------------------------------------ intern
 
-    private function raus(string $empfaenger, string $betreff, string $text): bool
+    /** @param array{name:string,inhalt:string,typ:string}|null $anhang */
+    private function raus(string $empfaenger, string $betreff, string $text, ?array $anhang = null): bool
     {
         try {
-            ($this->versand ?? new Mailversand())->senden($empfaenger, $betreff, $text);
+            ($this->versand ?? new Mailversand())->senden($empfaenger, $betreff, $text, null, $anhang);
         } catch (\Throwable) {
             return false;
         }

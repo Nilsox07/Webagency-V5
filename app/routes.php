@@ -19,6 +19,7 @@ declare(strict_types=1);
  */
 
 use Sartu\Admin\AnfragenSteuerung;
+use Sartu\Admin\BelegeSteuerung;
 use Sartu\Api\ZahlungenSteuerung;
 use Sartu\Admin\AnmeldeSteuerung;
 use Sartu\Admin\BetriebSteuerung;
@@ -161,6 +162,12 @@ return [
     new Route(Route::BEREICH_ADMIN, 'POST', '/admin/rechnungen/{id}/faelligkeit', [RechnungenSteuerung::class, 'faelligkeit']),
     new Route(Route::BEREICH_ADMIN, 'POST', '/admin/rechnungen/{id}/zahlungslink', [RechnungenSteuerung::class, 'zahlungslink']),
     new Route(Route::BEREICH_ADMIN, 'GET', '/admin/rechnungen/{id}', [RechnungenSteuerung::class, 'einzeln']),
+    // Belege, Belegversand und Steueruebergabe (`18_BELEGE_UND_ZAHLUNG.md` §8 und §9).
+    // Die festen Pfade stehen vor dem Muster — `{id}` wuerde sonst auf `/export` passen.
+    new Route(Route::BEREICH_ADMIN, 'GET', '/admin/belege', [BelegeSteuerung::class, 'uebersicht']),
+    new Route(Route::BEREICH_ADMIN, 'POST', '/admin/belege/export', [BelegeSteuerung::class, 'export']),
+    new Route(Route::BEREICH_ADMIN, 'POST', '/admin/belege/{id}/senden', [BelegeSteuerung::class, 'senden']),
+    new Route(Route::BEREICH_ADMIN, 'GET', '/admin/belege/{id}', [BelegeSteuerung::class, 'datei']),
     new Route(Route::BEREICH_ADMIN, 'GET', '/admin/testmail', [TestmailSteuerung::class, 'formular']),
     new Route(Route::BEREICH_ADMIN, 'POST', '/admin/testmail', [TestmailSteuerung::class, 'senden']),
 
@@ -193,6 +200,9 @@ return [
     new Route(Route::BEREICH_PORTAL, 'POST', '/portal/vorschau/einreichen', [VorschauSteuerung::class, 'einreichen']),
     new Route(Route::BEREICH_PORTAL, 'POST', '/portal/vorschau/abnehmen', [VorschauSteuerung::class, 'abnehmen']),
     new Route(Route::BEREICH_PORTAL, 'GET', '/portal/rechnungen', [KundenRechnungenSteuerung::class, 'liste']),
+    // §9: Auslieferung nur ueber eine Route, die Sitzung UND Organisation prueft — wie bei
+    // den Dateien. Ein Beleg liegt unter `/storage` und ist nie direkt erreichbar.
+    new Route(Route::BEREICH_PORTAL, 'GET', '/portal/belege/{id}', [KundenRechnungenSteuerung::class, 'beleg']),
     new Route(Route::BEREICH_PORTAL, 'GET', '/portal/domain', [VorschauSteuerung::class, 'domain']),
     // Oeffnungszeiten — die eine Pflegefunktion (§8.7), ab Stufe B.
     new Route(Route::BEREICH_PORTAL, 'GET', '/portal/inhalte', [InhalteSteuerung::class, 'formular']),

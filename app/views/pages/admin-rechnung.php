@@ -17,6 +17,7 @@ use Sartu\Services\Zahlungsstatus;
  * `reason` protokolliert und ist spaeter der Nachweis, worauf sich die Buchung stuetzt.
  *
  * @var array<string,mixed> $rechnung
+ * @var list<array<string,mixed>> $belege
  * @var array<string,mixed>|null $projekt
  * @var list<string> $fehler
  * @var list<string> $hinweise
@@ -146,6 +147,31 @@ $bezahlt = (int) $rechnung['paid_cents'];
       <input type="text" id="feld-storno" name="grundlage" value="" required minlength="3">
     </div>
     <button type="submit" class="knopf knopf--ruhig">Rechnung stornieren</button>
+  </form>
+</div>
+<?php endif; ?>
+
+<?php if ($belege !== []): ?>
+<div class="karte">
+  <h2>Beleg</h2>
+  <p>Der Beleg entstand mit dem Versand und wird nie überschrieben. Wurde er mehrfach
+  erzeugt, stehen hier mehrere — die neueste Erzeugung zuoberst.</p>
+  <ul class="pruefliste">
+<?php foreach ($belege as $beleg): ?>
+    <li>
+      <span><?= Html::e(Format::datum(substr((string) $beleg['created_at'], 0, 10))) ?> ·
+        <?= Html::e((string) $beleg['number']) ?></span>
+      <span>
+        <a href="/admin/belege/<?= Html::e((string) $beleg['id']) ?>">Herunterladen</a>
+      </span>
+    </li>
+<?php endforeach; ?>
+  </ul>
+
+  <form method="post" action="/admin/belege/<?= Html::e((string) $belege[0]['id']) ?>/senden">
+    <?= Csrf::feld() ?>
+    <p class="leise">Ein zweiter Versand ist erlaubt und wird ebenso protokolliert.</p>
+    <button type="submit" class="knopf knopf--ruhig">Beleg per Mail an den Kunden</button>
   </form>
 </div>
 <?php endif; ?>

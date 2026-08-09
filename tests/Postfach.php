@@ -24,19 +24,24 @@ use Sartu\Services\Versender;
  */
 final class Postfach implements Versender
 {
-    /** @var list<array{an:string,betreff:string,text:string}> */
+    /** @var list<array{an:string,betreff:string,text:string,anhang:?array{name:string,inhalt:string,typ:string}}> */
     public array $mails = [];
 
     public function __construct(private readonly bool $scheitert = false)
     {
     }
 
-    public function senden(string $an, string $betreff, string $klartext, ?string $html = null): void
-    {
+    public function senden(
+        string $an,
+        string $betreff,
+        string $klartext,
+        ?string $html = null,
+        ?array $anhang = null,
+    ): void {
         if ($this->scheitert) {
             throw new MailversandFehler('Der Mailserver ist im Test absichtlich nicht erreichbar.');
         }
 
-        $this->mails[] = ['an' => $an, 'betreff' => $betreff, 'text' => $klartext];
+        $this->mails[] = ['an' => $an, 'betreff' => $betreff, 'text' => $klartext, 'anhang' => $anhang];
     }
 }
