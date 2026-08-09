@@ -2020,3 +2020,22 @@ der falsche Schnitt:** Ob ein Betrieb antragsberechtigt ist, entscheidet er selb
 > Produktion, Handwerk und Tourismus"* ist genau die nachprüfbare Angabe, die eine Übersicht
 > brauchbar macht — und die sonst niemand hinschreibt. Ein Betrieb, der daran erkennt, dass er
 > nicht antragsberechtigt ist, hat trotzdem eine nützliche Antwort bekommen.
+
+### Berlin und Schleswig-Holstein geklärt — 09.08.2026
+
+| Land | Ergebnis |
+|---|---|
+| **Berlin** | Die **Digitalprämie Berlin ist tot.** Antragstellung lief im Windhundverfahren, letzte Frist **31.12.2023**. Es bleibt der **Transfer BONUS** (technologieorientiert) und der Berliner InvestitionsBONUS |
+| **Schleswig-Holstein** | **Neue Richtlinie:** „Förderung von **Digitalisierungsmaßnahmen in kleinen Unternehmen (DKU)**", Amtsblatt **2026/190 vom 05.06.2026**, befristet bis **30.06.2027**. Gefördert werden Vorhaben, die in einem **schriftlichen Beratungsbericht** Lösungen erarbeiten — Medienbrüche, Kundenorientierung, Prozessbeschleunigung, IT-Sicherheit. Das alte „Digibonus I" stammte aus der Periode 2014–2020 |
+
+**Damit steht die Bilanz der Primärquellenprüfung endgültig:** **vier tote Programme** (Berlin,
+Hessen, Niedersachsen, Thüringen), die alle in den Sekundärübersichten als aktiv geführt wurden —
+und **zwei Programme**, die dort gar nicht vorkamen (Rheinland-Pfalz DigiBoost,
+Schleswig-Holstein DKU).
+
+**Von sechzehn Sekundärangaben waren sechs schlicht falsch.** Ohne Primärquellenprüfung wäre die
+Übersicht zu über einem Drittel unbrauchbar gewesen.
+
+**Damit ist das Förderthema rechercheseitig abgeschlossen.** Offen bleiben nur noch die Fragen, die
+keine Recherche beantworten kann — insbesondere, ob SARTUs Conversion-Modul oder der Kundenbereich
+im Einzelfall als Prozessdigitalisierung anerkannt werden.

@@ -282,7 +282,7 @@ keiner Kundenseite erscheinen sie** (Begründung unten).
 |---|---|---|---|---|---|---|
 | **BW** | Digitalisierungsprämie Plus | L-Bank | Zuschuss **oder** Darlehen | Zuschuss **3.000 €** | 30 % | läuft |
 | **BY** | Digitalbonus Standard · Plus | Bezirksregierungen | Zuschuss | **7.500 €** · **30.000 €** | bis 50 % | läuft bis **31.12.2027** |
-| **BE** | Transfer BONUS | IBB | Zuschuss | **45.000 €**, Einstieg 15.000 € | bis 70 % | läuft |
+| **BE** | Transfer BONUS *(die **Digitalprämie Berlin** ist tot)* | IBB | Zuschuss | **45.000 €**, Einstieg 15.000 € | bis 70 % | läuft |
 | **BB** | BIG-Digital | ILB | Zuschuss | ab 5.000 € Volumen | — | läuft |
 | **HB** | Digitaler Mittelstand KI | BAB | Zuschuss | **17.000 €** | Anteilfinanzierung | **neu seit 01.04.2026** |
 | **HH** | Hamburg-Kredit Digital | IFB | **Darlehen** + Zuschuss | Darlehen 25.000 €–2,5 Mio. €, Zuschuss max 20.000 € | bis 12 % des Darlehens | läuft |
@@ -294,7 +294,7 @@ keiner Kundenseite erscheinen sie** (Begründung unten).
 | **SL** | DigitalInvest KMU Basis · Plus | Serviceportal, nFMI | Zuschuss | **12.500 €** · **20.000 €** | 50 % klein · 30 % mittel | läuft |
 | **SN** | Digitalisierung in KMU, EFRE | SAB | Zuschuss | Einführung **10.000 €** · Transformation **60.000 €** klein, **100.000 €** mittel | 60 % · 50 % · 35 %, **+10 % Tarifbonus** | läuft |
 | **ST** | DIGITAL INNOVATION | IB Sachsen-Anhalt | Zuschuss | **70.000 €**, Berater max 6.000 € | — | läuft, **Verfahren zum 15.07.2026 geändert** |
-| **SH** | Digibonus | IB.SH | Zuschuss | **17.000 €** | 50 % | **zweifelhaft** — gefunden nur unter Landesprogramm Wirtschaft **2014–2020** |
+| **SH** | **DKU** — Digitalisierungsmaßnahmen in kleinen Unternehmen | Land SH / IB.SH | Zuschuss | — | — | **läuft** — neue Richtlinie vom **05.06.2026**, befristet bis **30.06.2027** |
 | **TH** | Digitalbonus | TAB | Zuschuss | 5.000–150.000 € | — | **MITTEL ERSCHÖPFT — keine Neuauflage geplant** |
 
 ### Was die Primärquellen gegenüber den Sekundärübersichten korrigiert haben
@@ -311,9 +311,12 @@ keiner Kundenseite erscheinen sie** (Begründung unten).
 | **Hessen** | aktiv | **beendet Juni 2026** |
 | **Rheinland-Pfalz** | kein Umsetzungsprogramm | **DigiBoost, bis 15.000 €** |
 | **Sachsen-Anhalt** | Aufrufverfahren, 60 bzw. 90 Anträge | **seit 15.07.2026 Direktantrag** mit Mindestpunktzahl |
+| **Berlin** | Digitalprämie als aktives Programm gelistet | **seit Ende 2023 nicht mehr beantragbar** — Windhundverfahren, letzte Frist 31.12.2023 |
+| **Schleswig-Holstein** | Digi-Zuschuss bis 15.000 € | **neue Richtlinie DKU vom 05.06.2026**, befristet bis 30.06.2027 — das alte Digibonus I stammte aus der Periode 2014–2020 |
 
-> **Drei von sechzehn Programmen sind tot, eines ist zweifelhaft — und alle vier standen in den
-> Übersichten als aktiv.** Wer eine Förderseite aus Sekundärquellen baut, schickt Kunden zu
+> **Vier von sechzehn Programmen sind tot — und alle vier standen in den Übersichten als aktiv.**
+> Ein fünftes, Schleswig-Holstein, war schlicht das falsche: dort gilt seit Juni 2026 eine neue
+> Richtlinie, die keine Sekundärquelle kannte. Wer eine Förderseite aus Sekundärquellen baut, schickt Kunden zu
 > Programmen, die es nicht mehr gibt.
 
 ### Die Ausschlüsse — im Wortlaut der Primärquellen
@@ -360,7 +363,7 @@ keiner Kundenseite erscheinen sie** (Begründung unten).
 |---|---|---|
 | **BW** | Gewerbliche Unternehmen und **Freiberufler**, bis **500** Beschäftigte, bis 500 Mio. € Umsatz | Investition in BW · kein Unternehmen in Schwierigkeiten · Sperrfrist **1 Jahr** nach voriger Förderung |
 | **BY** | **Kleine** Unternehmen der gewerblichen Wirtschaft, **unter 50** Beschäftigte, max. 10 Mio. € | Sitz in Bayern · **Mindestausgaben 4.000 €** · Antrag vor Beginn |
-| **BE** | **Technologieorientierte** KMU — oder Projekte mit „ausgeprägtem Technologiebezug" | Sitz oder Niederlassung in Berlin · Standardvariante max. **3×** in drei Jahren |
+| **BE** | **Technologieorientierte** KMU — oder Projekte mit „ausgeprägtem Technologiebezug" | Sitz oder Niederlassung in Berlin · Standardvariante max. **3×** in drei Jahren · **die Digitalprämie Berlin ist seit Ende 2023 nicht mehr beantragbar** |
 | **BB** | KMU **einschließlich Handwerk** | min. **5.000 €** Projektvolumen · max. **2** parallele Vorhaben · Antrag vor Beginn |
 | **HB** | KMU **und Soloselbstständige im Haupterwerb** | Sitz oder Betriebsstätte im Land Bremen · kein Insolvenzverfahren · **Bearbeitung in Eingangsreihenfolge** |
 | **HH** | KMU nach EU-Definition | Sitz oder Betriebsstätte in Hamburg · **Darlehen ab 25.000 €** · Antrag **über die Hausbank** |
@@ -372,7 +375,7 @@ keiner Kundenseite erscheinen sie** (Begründung unten).
 | **SL** | KMU mit Sitz oder Betriebsstätte im Saarland | klein bis 50 Beschäftigte **50 %** · mittel 51–250 **30 %** · Antrag über nFMI-Portal |
 | **SN** | Kleinstunternehmen, KMU **und Angehörige der freien Berufe** | Betriebsstätte in Sachsen · **zwölf Monate, keine Verlängerung** · Start nicht vor der Bestätigungsmail |
 | **ST** | KMU mit Sitz oder Betriebsstätte in Sachsen-Anhalt | **Innovationsgehalt zwingend** · min. 3.000 € Förderung · zwölf Monate · seit 15.07.2026 Direktantrag mit **Mindestpunktzahl** |
-| **SH** | bis **20** Beschäftigte, **auch Vereine und Freiberufler** | Stand der Förderperiode **2014–2020** — aktueller Status ungeklärt |
+| **SH** | **kleine Unternehmen** | Gefördert werden Vorhaben, die in einem **schriftlichen Beratungsbericht** Lösungen und Handlungsempfehlungen erarbeiten — Medienbrüche reduzieren, Kundenorientierung, Prozessbeschleunigung, neue Geschäftsmodelle, IT-Sicherheit |
 | **TH** | — | **Mittel erschöpft**, keine Neuauflage · Alternative: InnoInvest |
 
 ### Die interne Einschätzung — gehört nicht auf die Kundenseite
