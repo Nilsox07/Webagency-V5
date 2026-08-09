@@ -1789,3 +1789,37 @@ einzige Weg, der keine gebundene Stelle bricht** — dann sind die Zeilen in `03
 **Nicht ausgeführt:** Keine der drei geänderten Dateien wurde gegen den Texter-Skill geprüft; die
 Blöcke sind Bauvorgaben, kein abgegebener Text. Für den Ratgeberartikel steht bewusst **kein
 Wortlaut** — nur Aufgabe, Grenze und Umfang.
+
+---
+
+## Förderung — Sorgfaltspflicht gefunden, gemeldet 09.08.2026
+
+**Beim Ausarbeiten des Förderkonzepts (`FOERDERUNG_KONZEPT.md`) trat ein Punkt hervor, der über
+Marketing hinausgeht:**
+
+> **Ein Förderantrag muss vor Beginn des Vorhabens gestellt werden. Wer zuerst beauftragt, verliert
+> den Anspruch.**
+
+**Damit kann der eigene Verkaufsprozess den Förderanspruch des Kunden zerstören.** Ein Interessent,
+der den Bedarfsscheck durchläuft, das Angebot annimmt und erst danach von der Förderung erfährt,
+bekommt sie nicht mehr — und hat durch SARTU Geld verloren.
+
+**Das ist kein Aufhänger, sondern eine Sorgfaltsfrage.** Sie besteht unabhängig davon, ob das
+Fördermarketing je gebaut wird.
+
+**Sofort möglich, ohne neue Seite:** ein Satz im Bedarfsscheck-Ergebnis und im Angebot — dass eine
+Förderung in Frage kommen kann und der Antrag **vor** der Beauftragung gestellt sein muss. Keine
+Summe, keine Quote, keine Zusage.
+
+**Zu prüfen, bevor irgendetwas veröffentlicht wird:**
+
+| # | Punkt |
+|---|---|
+| 1 | **Die sächsische Höchstsumme ist widersprüchlich belegt** — 10.000 € gegen 50.000 €. Muss in der SAB-Richtlinie selbst nachgelesen werden. Bis dahin **nicht verwendbar** |
+| 2 | **Angebotsgültigkeit** — wenn eine Förderung geplant ist, muss das Angebot den Bewilligungsweg überdauern. Betrifft `02_PREISE_UND_ZAHLUNG.md`, dort steht dazu nichts |
+| 3 | **Beantragungshilfe** ist nicht im Leistungsumfang und wäre als bezahlte Option ein Bruch von `Keine Auswahl von Zusatzoptionen`. Vorschlag: Stufe 1 und 2 enthalten, Stufe 3 über Partner |
+| 4 | **Wer prüft vierteljährlich?** Förderinhalte veralten schneller als alles andere im Projekt. Ohne festen Termin schadet der Inhalt mehr, als er nützt |
+
+**Ungeprüft:** Ob eine Firmenwebsite unter der SAB-Richtlinie überhaupt förderfähig ist, wurde
+**nicht** in der Richtlinie selbst nachgelesen — nur in Sekundärquellen, die „E-Business" nennen.
+**Das ist die Kernfrage des ganzen Themas und steht noch aus.**
