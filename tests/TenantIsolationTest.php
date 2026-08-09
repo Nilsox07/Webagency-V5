@@ -384,6 +384,48 @@ final class TenantIsolationTest extends Datenbankfall
     }
 
     /**
+     * Fall 42 — ein ANGEMELDETER Kunde erreicht keine Adminroute.
+     *
+     * Die Gegenrichtung zu Fall 45. Fall 43 prueft den Abgemeldeten, Fall 44 den Admin
+     * ohne Code — beide lassen die gefaehrlichste Lage offen: eine gueltige Sitzung mit
+     * der falschen Rolle. Genau dort entstuende der gemeinsame Codepfad, den §3 Regel 2a
+     * verbietet.
+     *
+     * Geprueft ueber die vollstaendige Adminroutenliste, nicht ueber eine Auswahl. Die
+     * Ersteinrichtung und die Anmeldung selbst tragen `ohneAnmeldung` und fallen heraus.
+     */
+    public function testAngemeldeterKundeErreichtKeineAdminroute(): void
+    {
+        $organisation = $this->organisationAnlegen('Betrieb A', 'a@example.org');
+        $this->alsKunde($organisation, $this->kundeAnlegen($organisation, 'kunde@example.org'));
+
+        $router = $this->router();
+        $geprueft = 0;
+
+        foreach ($router->routen() as $route) {
+            if ($route->bereich !== Route::BEREICH_ADMIN || $route->ohneAnmeldung) {
+                continue;
+            }
+
+            $antwort = $router->behandeln($route->methode, $route->pfad);
+            ++$geprueft;
+
+            $this->assertSame(
+                302,
+                $antwort->status,
+                sprintf('Die Route %s war fuer einen angemeldeten Kunden erreichbar.', $route->schluessel())
+            );
+            $this->assertSame(
+                '/admin/anmelden',
+                $antwort->kopfzeilen['Location'] ?? null,
+                $route->schluessel()
+            );
+        }
+
+        $this->assertGreaterThan(0, $geprueft, 'Es wurde keine geschuetzte Adminroute geprueft.');
+    }
+
+    /**
      * Fall 43 — ein abgemeldeter Benutzer erreicht KEINE Adminroute.
      *
      * Geprueft ueber die vollstaendige Adminroutenliste, nicht ueber eine Stichprobe

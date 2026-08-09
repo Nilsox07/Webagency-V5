@@ -2157,3 +2157,90 @@ Beispiel, nicht vorher.
 | 1 | **Die 147 `gebunden`-Markierungen in den Themendateien wurden nicht angefasst.** Sie verweisen auf die Klassendefinition, die jetzt enger ist — wirken also automatisch mit. **Ob jede einzelne Stelle das richtig trifft, ist nicht durchgesehen** |
 | 2 | Ob die Auflage „innerhalb einer Fassung identisch" praktisch trägt, zeigt sich erst am ersten Prüfbericht mit Beschriftungsliste |
 | 3 | Die bisherigen Positionierungssätze stehen weiter unter „Kalibrierung" im Skill — **als Maßstab, nicht als Vorschrift.** Ob das in der Praxis unterschieden wird, ist offen |
+
+---
+
+## 09.08.2026 — Bereitschaftsprüfung vor Baubeginn: was läuft, was fehlt, was ich geändert habe
+
+**Anlass:** die Frage, ob Claude Code loslegen kann und ob die beiden Entwürfe im Repository
+liegen. **Beide liegen dort** — `design/startseite.html` (77 KB) und `design/portalkonzept.html`
+(70 KB). Die Prüfung hat aber gefunden, dass die Datei dazwischen nicht mitgezogen war.
+
+### Ausgeführt und grün
+
+| Was | Ergebnis |
+|---|---|
+| `php -l` über den gesamten Anwendungscode | **244 Dateien, 0 Syntaxfehler**, PHP 8.4.19 |
+| `vendor/bin/phpunit` | **277 Tests, 3702 Zusicherungen, 0 Fehler** |
+| Testfallabdeckung gegen `REIHENFOLGE.md` | **84 von 88** zugeordnet |
+| `bin/migrate.php up` gegen leere Datenbank | **korrekt verweigert** — §1.5a verweist auf `/admin/setup` |
+| Fall 49 gegen laufenden Webserver | `/assets/css/tokens.css` → 200 · `/app`, `/.env`, `/storage/`, `/vendor` → 404 |
+| Quelle und Auslieferung von `tokens.css` | identisch (der Test erzwingt das) |
+
+**Abdeckung je Stufe:** A0 **26/26** · A1 **34/34** · A2 **17/21** · A3 **6/6** · B **1/1**.
+
+### Geändert: `design/tokens.css` auf die entschiedene Palette
+
+**Der Befund:** Beide abgenommenen Entwürfe führen seit Anfang August die kühlen Neutralen.
+`design/tokens.css` führte noch die warme Reihe vom 30.07.2026 — und `CLAUDE.md` zitierte sie.
+Da `CLAUDE.md` anordnet, `tokens.css` **als Erstes** einzubinden und keine Zahl im Bauteil zu
+schreiben, wäre jede gebaute Fläche in der abgelösten Palette entstanden.
+
+| Variable | vorher | jetzt | Quelle |
+|---|---|---|---|
+| `--cream` | `#f4efe5` | `#f6f6f4` | `startseite.html` Z. 13, „entschieden am 02.08.2026" |
+| `--paper` | `#fbf8f2` | `#ffffff` | ebenda |
+| `--ink-soft` | `#241f18` | `#222322` | ebenda |
+| `--text` | `#231e17` | `#1f2120` | ebenda |
+| `--muted` | `#4d473d` | `#4a4d4b` | ebenda |
+| `--line` | `#ddd4c4` | `#dfdfda` | ebenda |
+| `--line-dark` | `#332d24` | `#2e302e` | ebenda |
+| `--sand` | `#e8dfcd` | `#eaeae6` | ebenda |
+| `--label` | `#5c554a` | `#5a5d5b` | ebenda |
+| `--label-dark` | `#a89b88` | `#9ca09d` | ebenda |
+| `--band-a` / `--band-b` | fehlten | `#e0e0db` / `#ebebe6` | ebenda |
+| `--ink-2` / `--ink-3` | fehlten | `#1e201e` / `#2a2c2a` | `portalkonzept.html` Z. 11 |
+| `--rail-text` | fehlte | `#cfd0ce` | ebenda Z. 14 |
+
+**Warum das keine eigenmächtige Entscheidung ist:** `SARTU_ENTSCHEIDUNGEN_OFFEN.md` (Rang 1)
+bindet unter „Farbsystem, Fassung 3" **nur die Lime-Reihe und `--ink`** — beide sind unverändert.
+Für die Neutralen nennt Rang 1 keine Werte. `OFFENE_ENTSCHEIDUNGEN.md` hält die Übernahme als
+Betreiberentscheidung vom 03.08.2026 fest und nennt sie ausdrücklich „beim Übertragen die erste
+Änderung". Ausgeführt wurde also eine getroffene Entscheidung, keine neue.
+
+**Risiko war klein und wurde geprüft:** `public/assets/css/website.css` und `anwendung.css`
+enthalten **null** fest verdrahtete Hexwerte — alles läuft über die Variablen.
+
+**Kontrast nachgerechnet:** Lime auf dem neuen Grund `#f6f6f4` ergibt **1,39 : 1** statt 1,32 : 1.
+Beide Werte liegen weit unter 4,5 : 1; das Verbot von Lime als Schriftfarbe auf hellem Grund
+bleibt unberührt. `--ink` auf Lime bleibt bei **12,47 : 1**. Die Zahl in `CLAUDE.md` ist mitgezogen.
+
+### Geändert: Fall 42 gab es nur als Behauptung
+
+Der Klassenkommentar von `tests/TenantIsolationTest.php` führte Fall 42 in seiner Liste — **eine
+Methode dazu gab es nicht.** Geprüft waren der Abgemeldete (43) und der Admin ohne Code (44),
+nicht aber der gefährlichste Fall: **gültige Sitzung, falsche Rolle.**
+`testAngemeldeterKundeErreichtKeineAdminroute` fährt jetzt die vollständige Adminroutenliste ab.
+
+> **Der Test war beim ersten Lauf grün.** Es fehlte der Nachweis, nicht der Schutz. Das ist der
+> bessere von zwei möglichen Ausgängen — aber eine als abgedeckt geführte Lücke ist schlimmer
+> als eine offen geführte, weil niemand danach sucht.
+
+### Nicht geändert, gemeldet — und das ist der Grund, warum A2 nicht fertig ist
+
+| # | Befund |
+|---|---|
+| 1 | **Vier Testfälle in A2 fehlen: 51, 52, 53a, 54** — alle bei der Protokollierung von Zahlungsänderungen |
+| 2 | **Zwei Funktionen fehlen dazu.** `app/services/Rechnungsdienst.php` hat `zahlungEintragen`, `stornieren`, `zahlungslinkSetzen` — **keine Rücknahme einer Zahlung, keine Änderung von `due_date`**. Auch keine Route dafür |
+| 3 | **Der Klassenkommentar beschreibt beide, als gäbe es sie:** „die Rücknahme ist eine eigene protokollierte Aktion mit eigenem Grundlagentext und erzeugt eine Benachrichtigung an den Kunden". Der Kommentar zitiert §12 richtig — der Code setzt ihn nicht um |
+| 4 | **`--wrap` weicht ab:** `tokens.css` `1180px`, `startseite.html` `clamp(1380px,90vw,1800px)`. Das ist eine Breitenentscheidung, zu der **kein Vermerk existiert**. Bewusst nicht angefasst |
+| 5 | **`app/views/partials/kundenband.php` beschriftet den Punkt `Öffnungszeiten`**, die Entscheidung vom 03.08.2026 sagt `Inhalte` (Menüwort) bei Seitentitel `Öffnungszeiten`. Der Dateikommentar argumentiert ausdrücklich **gegen** die Entscheidung |
+| 6 | **Zwei Namen für denselben Wert:** `startseite.html` nennt den Grund `--cream`/`--paper`, `portalkonzept.html` `--papier`/`--weiss`. `tokens.css` behält die englischen Namen und vermerkt die Entsprechung. Sauberer wäre ein Satz — offen |
+
+### Ungeprüft
+
+| # | Punkt | Womit es zu prüfen ist |
+|---|---|---|
+| 1 | **Die Palette wurde nicht angesehen.** Geändert sind Zahlen in einer CSS-Datei; ob die Anwendung damit aussieht wie die beiden Entwürfe, hat niemand im Browser verglichen | `docker compose up -d`, `/` und `/portal` neben `design/startseite.html` und `design/portalkonzept.html` legen |
+| 2 | **Der Lauf fand nicht im Container statt.** Kein Docker-Daemon verfügbar; ersatzweise lokale MariaDB und der eingebaute PHP-Server. Fall 49 prüft damit **die Verzeichnisgrenze, nicht die Apache-Konfiguration** | `docker compose up -d --build`, dann `vendor/bin/phpunit` |
+| 3 | **Die vier Prüfungen der Etappen A2/A3 gegen echte Mailzustellung** sind nicht Teil dieses Laufs | Mailpit unter `localhost:8025` |

@@ -1,8 +1,21 @@
 /* ============================================================
    SARTU — Gestaltungswerte
-   Quelle: Artefakt „SARTU — Individuell programmierte
-   Firmenwebsites zum Festpreis", Stand 30.07.2026,
-   vom Betreiber am 01.08.2026 als verbindlich bestaetigt.
+   Quelle: design/startseite.html (Grundton „Papier",
+   entschieden 02.08.2026) und design/portalkonzept.html
+   (Anwendungsbereich, entschieden 03.08.2026).
+
+   Bis 09.08.2026 stand hier die warme Reihe vom 30.07.2026
+   (--cream #f4efe5, --paper #fbf8f2, --line #ddd4c4,
+   --sand #e8dfcd). Sie ist abgeloest. Beide Entwuerfe fuehren
+   seit Anfang August die kuehlen Neutralen; diese Datei war
+   die letzte Stelle mit den alten Werten und widersprach
+   damit den Vorlagen, aus denen gebaut wird.
+   Vermerk: OFFENE_ENTSCHEIDUNGEN.md, Zeile „Farbwerte des
+   Anwendungsbereichs" — dort ausdruecklich als erste
+   Aenderung beim Uebertragen benannt.
+   Die Lime-Reihe und --ink sind unveraendert; sie sind in
+   SARTU_ENTSCHEIDUNGEN_OFFEN.md (Rang 1) gebunden, die
+   Neutralen dort ausdruecklich nicht.
 
    Diese Datei ist die einzige Stelle, an der ein Farbwert,
    ein Radius oder eine Abstandsstufe steht. Wer im Bauteil
@@ -18,21 +31,32 @@
 :root{
 
   /* ---- Farben -------------------------------------------- */
-  --cream:#f4efe5;        /* Seitengrund */
-  --paper:#fbf8f2;        /* erhoehte Flaechen: Karten, Chips, Zeilen */
+  /* Der Name bleibt --cream, der Wert ist nicht mehr cremefarben.
+     Umbenannt wird nicht: portalkonzept.html nennt dieselbe Flaeche
+     --papier und --weiss, startseite.html --cream und --paper. Zwei
+     Namen fuer denselben Wert sind ertraeglich, zwei Werte hinter
+     demselben Namen nicht. */
+  --cream:#f6f6f4;        /* Seitengrund (portalkonzept: --papier) */
+  --paper:#ffffff;        /* erhoehte Flaechen: Karten, Chips, Zeilen (portalkonzept: --weiss) */
   --ink:#14110d;          /* Schrift und dunkle Abschnitte */
-  --ink-soft:#241f18;     /* Flaechen innerhalb dunkler Abschnitte */
-  --text:#231e17;         /* Fliesstext auf hellem Grund */
-  --muted:#4d473d;        /* zweite Textebene */
-  --line:#ddd4c4;         /* Kante auf hellem Grund */
-  --line-dark:#332d24;    /* Kante auf dunklem Grund */
-  --sand:#e8dfcd;         /* ruhige Fuellflaeche */
+  --ink-soft:#222322;     /* Flaechen innerhalb dunkler Abschnitte */
+  --ink-2:#1e201e;        /* Leiste des internen Bereichs */
+  --ink-3:#2a2c2a;        /* aktiver Eintrag in dieser Leiste */
+  --text:#1f2120;         /* Fliesstext auf hellem Grund */
+  --muted:#4a4d4b;        /* zweite Textebene */
+  --line:#dfdfda;         /* Kante auf hellem Grund */
+  --line-dark:#2e302e;    /* Kante auf dunklem Grund */
+  --sand:#eaeae6;         /* ruhige Fuellflaeche */
+  --band-a:#e0e0db;       /* Abschnittsband, dunklere Stufe */
+  --band-b:#ebebe6;       /* Abschnittsband, hellere Stufe */
 
   /* Akzent. Die einzige Farbe im System.
      Lime ist Flaechenfarbe. Auf hellem Grund NIE Schriftfarbe:
-     gemessen 1,32:1 gegen Creme — unlesbar.
-     Auf Lime steht immer --ink: 12,48:1.
-     Auf dunklen Abschnitten darf Lime Schriftfarbe sein: 12,48:1.
+     gemessen 1,39:1 gegen den Seitengrund #f6f6f4 — unlesbar.
+     (Gegen den abgeloesten Grund #f4efe5 waren es 1,32:1. Die
+     Zahl aendert sich mit dem Grund, das Verbot nicht.)
+     Auf Lime steht immer --ink: 12,47:1.
+     Auf dunklen Abschnitten darf Lime Schriftfarbe sein.
      Jede Lime-Flaeche auf hellem Grund braucht 1px --line als Kante. */
   --lime:#a3e635;
   --lime-hover:#8dc92a;
@@ -40,8 +64,9 @@
   --lime-soft:#e4f5b8;
 
   /* Auszeichnungen. Neutral, nie anklickbar. */
-  --label:#5c554a;
-  --label-dark:#a89b88;
+  --label:#5a5d5b;
+  --label-dark:#9ca09d;
+  --rail-text:#cfd0ce;    /* Schrift auf der dunklen Leiste */
 
   /* ---- Radien -------------------------------------------- */
   /* --rk skaliert die gesamte Formsprache auf einmal.

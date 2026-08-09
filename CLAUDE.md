@@ -9,9 +9,14 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 Bereich unter `/admin/`, Serverfunktionen unter `/api/`. Ein Repository, eine Domain, ein
 Deployment.
 
-**Stand: ~12.000 Zeilen Spezifikation, Anwendungscode im Aufbau (Stufe A0).** Die Spezifikation
-ist die Wahrheit, nicht der Code. Wo beides auseinandergeht, gewinnt die Spezifikation — und der
-Widerspruch wird gemeldet, nicht stillschweigend aufgelöst.
+**Stand 09.08.2026: 26 Migrationen (alle 20 Fachtabellen), 244 PHP-Dateien, 277 Tests grün,
+84 der 88 Testfälle zugeordnet.** A0, A1, A3 und B sind vollständig belegt; **in A2 fehlen vier
+Testfälle und zwei Funktionen** — Rücknahme einer Zahlung und Änderung von `due_date`. Der
+Klassenkommentar von `app/services/Rechnungsdienst.php` beschreibt beide bereits, als gäbe es
+sie. Einzelheiten in `OFFENE_PRUEFUNGEN.md`.
+
+Die Spezifikation ist die Wahrheit, nicht der Code. Wo beides auseinandergeht, gewinnt die
+Spezifikation — und der Widerspruch wird gemeldet, nicht stillschweigend aufgelöst.
 
 Die Oberfläche und alle Dokumente sind **deutsch**. Bezeichner im Datenmodell sind englisch
 (`organizations`, `users`), Statuswerte und `operator_settings` deutsch (`angebot_offen`,
@@ -96,6 +101,27 @@ Bei **jedem** Widerspruch gilt diese Reihenfolge. Sie steht allein in `UEBERGABE
 Sechs Dateien tragen „FINAL" im Namen; das sagt nichts über ihr Alter. Widersprechen sich zwei
 Stellen **im selben** Dokument, gilt die mit der Begründung — steht bei keiner eine, **melden**,
 nicht auswählen.
+
+### Sieben Strategiedateien, die in keinem Rang stehen — und trotzdem gebraucht werden
+
+**Die Rangfolge regelt das Bauen. Sie regelt nicht, für wen gebaut wird.** Zielgruppe, Nische,
+Seitenzuschnitt und Förderthema stehen in eigenen Dateien im Wurzelverzeichnis (August 2026).
+Sie sind **keine** Bauvorlage und stechen `spezifikation/` nicht — aber wer eine Branchen-,
+Leistungs- oder Förderseite baut, findet den Inhalt nur dort.
+
+| Datei | Wofür sie gebraucht wird |
+|---|---|
+| `ZIELGRUPPE_AKQUISE.md` | wer angesprochen wird: 10–50 MA, ab ~750.000 € Umsatz, Kammerbezirk Dresden zuerst |
+| `BRANCHENLISTE.md` | 75 Branchen mit Selbstbezeichnung, Suchform und Verband; gestaffelt 3/1/1 Seiten |
+| `SEITENARCHITEKTUR.md` | welche Seite es gibt und was auf ihr steht — die Matrix Branche × Leistung |
+| `POSITIONIERUNG_GEO.md` | warum GEO Differenzierung ist und **kein** eigenes Produkt |
+| `FOERDERUNG_KONZEPT.md` | alle 16 Länder an der Primärquelle geprüft; **verweisen statt kopieren** |
+| `NISCHEN_IDEEN.md` | 13 Nischenachsen, je mit Herkunft und Rang der Quelle |
+| `SPEZIFIKATIONSTIEFE.md` | wie fest die Vorgaben sind und was bewusst offen bleibt |
+
+> **Die drei harten Prüfungen für jede Branchenseite** stehen in `SEITENARCHITEKTUR.md`:
+> **Austauschtest** (tauscht man die Branche aus und der Text stimmt noch, ist er wertlos) ·
+> **400 eigene Wörter** · **Herkunftsnachweis** für jede Zahl.
 
 **Texthoheit — gelockert am 09.08.2026.** Gebunden ist nur noch, was der Texter-Skill als
 **Klasse 1** führt, und das sind **vier** Gruppen: **jede Zahl** · **vertragliche Erklärungen** ·
@@ -248,13 +274,20 @@ Fehlt `APP_ENV`, gilt produktiv.
 
 ## Gestaltung — entschieden, nichts auszuwählen
 
-`design/tokens.css` wird **als Erstes** eingebunden, vor jedem Bauteil-CSS.
+`design/tokens.css` wird **als Erstes** eingebunden, vor jedem Bauteil-CSS. **Wie es aussehen
+soll, steht nicht hier, sondern in zwei Dateien im Repository:** `design/startseite.html` für
+die öffentliche Seite, `design/portalkonzept.html` für Kunden- und Adminbereich. Beide sind
+vom Betreiber abgenommen (02. bzw. 03.08.2026). **Jeder Text darin ist Platzhalter** — Aufbau,
+Flächen, Farben, Radien und Dichte sind gemeint, nicht der Wortlaut.
 
 - **Keine Zahl im Bauteil, wo eine Variable existiert.** `border-radius:30px` ist ein Abgabefehler
 - Radienskala `--r-xs` bis `--r-pill`, skaliert über `--rk`. **Keine achte Form daneben**
 - **Eine** Akzentfarbe: Lime `--lime` `#a3e635`. Kein Rot für Fehler, kein Grün für Erfolg
-- **Lime ist Fläche.** Auf hellem Grund nie Schriftfarbe (1,32 : 1). Auf Lime steht immer `--ink`.
-  Jede Lime-Fläche auf hellem Grund braucht `1px --line` als Kante
+- **Lime ist Fläche.** Auf hellem Grund nie Schriftfarbe (1,39 : 1 gegen `--cream` `#f6f6f4`).
+  Auf Lime steht immer `--ink` (12,47 : 1). Jede Lime-Fläche auf hellem Grund braucht
+  `1px --line` als Kante
+- Der Grundton heißt `--cream`, ist aber seit dem 02.08.2026 **kein Creme mehr**, sondern
+  Papier `#f6f6f4`. Die warme Reihe vom Juli (`#f4efe5`, `#ddd4c4`, `#e8dfcd`) ist abgelöst
 - Kunden- und Adminbereich müssen visuell unterscheidbar sein
 - Kein Dunkelmodus (steht auf der Nicht-bauen-Liste)
 
