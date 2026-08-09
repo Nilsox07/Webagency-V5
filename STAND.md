@@ -3,7 +3,7 @@
 **Eine Seite. Sie sagt, wo der Bau steht — damit ein abgebrochener Lauf dort weitermacht,
 wo er aufgehört hat, statt von vorn zu beginnen.**
 
-**Letzte Änderung:** 02.08.2026 · **Zweig:** `main`
+**Letzte Änderung:** 09.08.2026 · **Zweig:** `claude/php-a0-modellplan-06duus`
 
 ---
 
@@ -11,13 +11,13 @@ wo er aufgehört hat, statt von vorn zu beginnen.**
 
 | | |
 |---|---|
-| **Fertig** | A0 · A1 · A2 · A3 · **B** |
+| **Fertig** | A0 · A1 · A2 · A3 · B · **C** |
 | **Läuft gerade** | — |
-| **Als Nächstes** | **Stufe C** ist nicht beauftragt. Was jetzt ansteht, steht in `LIVEGANG.md` — und zwei Dinge davon kann nur ein Mensch tun |
-| **Tests** | **276 grün**, 3615 Zusicherungen, gegen echtes MariaDB. Kein SQLite |
-| **Tabellen** | **20 von 20** |
-| **Testfälle** | **88 von 88** gebaut und geprüft |
-| **Migrationen** | 026, lückenlos eingespielt, Prüfsummen stimmen |
+| **Als Nächstes** | `LIVEGANG.md` — und drei Dinge davon kann nur ein Mensch tun: Rechtstexte zur Kanzlei, Hoster, Cronlauf. Dazu die Punkte aus `OFFENE_PRUEFUNGEN.md`, Abschnitt „Stufe C" |
+| **Tests** | **337 grün**, 4231 Zusicherungen, gegen echtes MariaDB. Kein SQLite |
+| **Tabellen** | **23 von 23** |
+| **Testfälle** | **100 von 100** zugeordnet · 99 gebaut und geprüft, **Fall 88 teilweise** (Schema ja, Schematron offen) |
+| **Migrationen** | 036, lückenlos eingespielt, Prüfsummen stimmen |
 
 ---
 

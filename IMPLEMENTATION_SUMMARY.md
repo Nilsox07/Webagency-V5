@@ -413,3 +413,84 @@ Vollständig in `OFFENE_PRUEFUNGEN.md`. Die drei, die vor dem Livegang zwingend 
    es kein TLS gibt
 3. **Rechtstexte** — `legal_texts` ist leer, und die Startsperre lässt deshalb nicht durch. Das
    ist der gewollte Zustand (`SARTU_ENTSCHEIDUNGEN_OFFEN.md` §2)
+
+---
+
+# Stufe C — Belege, Nummernkreis und Zahlungsabgleich (09.08.2026)
+
+Gebaut nach `spezifikation/18_BELEGE_UND_ZAHLUNG.md`, freigegeben durch
+`SARTU_ENTSCHEIDUNGEN_OFFEN.md` §4a. **337 Tests grün**, 4231 Zusicherungen, gegen echtes
+MariaDB. `migrate.php verify` meldet keine Abweichung. Alle **100** Testfälle sind zugeordnet.
+
+## C.1 Was entstanden ist
+
+| Bereich | Dateien |
+|---|---|
+| **Nummernkreis** | `app/data/Nummernkreise.php` · `app/services/Nummernkreis.php` |
+| **Beleg** | `app/services/ERechnung.php` · `Belegerzeugung.php` · `app/data/Belege.php` · `app/views/belege/rechnung.php` |
+| **Zahlung** | `app/services/Zahlungsdienst.php` (Schnittstelle) · `Mollie.php` · `Zahlungsabgleich.php` · `Zahlungsschluessel.php` · `ZahlungsdienstFehler.php` · `app/data/Zahlungseingaenge.php` · `api/ZahlungenSteuerung.php` |
+| **Abruf und Übergabe** | `app/data/customer/KundenBelege.php` · `app/data/admin/AdminBelege.php` · `app/services/Belegversand.php` · `Steuerexport.php` · `admin/BelegeSteuerung.php` |
+| **Ersteinrichtung** | `admin/ErsteinrichtungSteuerung.php` · `app/views/pages/admin-ersteinrichtung.php` · `Startsperre::weiterePunkte()` |
+| **Migrationen** | 027 bis 036, je ein Schemaobjekt |
+| **Tests** | `NummernkreisTest` · `BelegeTest` · `ZahlungsabgleichTest` · `BelegabrufTest` · `ErsteinrichtungMenueTest` |
+| **Dokument** | `VERFAHRENSDOKUMENTATION.md` |
+
+## C.2 Die zwei zusätzlichen Composer-Pakete
+
+Freigegeben waren genau zwei. Es sind zwei geblieben.
+
+| Paket | Fassung | Lizenz | Wofür | Warum dieses |
+|---|---|---|---|---|
+| `horstoeko/zugferd` | 1.0.124 | MIT | XML nach EN 16931 aufbauen, prüfen, ins PDF einbetten | Das einzige gepflegte PHP-Paket, das Profil `EN16931` **und** das Einbetten nach PDF/A-3 abdeckt |
+| `dompdf/dompdf` | 3.1.6 | LGPL-2.1 | HTML nach PDF | mPDF scheidet aus: GPL-2.0 verträgt sich nicht mit einer proprietären Anwendung. TCPDF kann das vorhandene CSS aus `design/tokens.css` nicht verwerten |
+
+**Kein drittes Paket.** Die Anbindung an den Zahlungsdienst sind zwei Aufrufe an eine
+REST-Schnittstelle mit JSON — dafür genügt `ext-curl`, das ohnehin im Bild liegt. Ein
+Anbieter-Paket hätte eine Abhängigkeit für zwei Methoden bedeutet.
+
+`composer.json` bekam zusätzlich `config.platform.php = 8.3.0`: Ohne diese Zeile löste
+Composer auf dem Wirtssystem (PHP 8.4) Abhängigkeiten auf, die im Container (8.3) nicht
+laufen.
+
+## C.3 Die Entscheidungen, die nicht im Text standen
+
+| Frage | Entschieden | Warum |
+|---|---|---|
+| Wo lebt die Stornorechnung? | Als Zeile in `invoices` mit `cancels_invoice_id` und negativen Beträgen | `13_DATENMODELL.md` nennt keine Tabelle `credit_notes`. Eine neue anzulegen hieße, das Datenmodell zu erweitern, statt dem zu folgen, was §5 beschreibt |
+| Wie wird die Nummer vergeben? | Als **Klammer**: `vergeben()` öffnet die Transaktion, sperrt die Zeile und reicht die Nummer nach innen | Die Zusage „Nummer und Zeile in derselben Transaktion" ist damit baulich, nicht diszipliniert. Es gibt keinen Weg, die Nummer zu bekommen und die Zeile später anzulegen |
+| Wer bucht beim Webhook? | Niemand — `marked_paid_by_user_id` bleibt leer | Ein eingetragener Admin wäre eine Behauptung über jemanden, der nichts getan hat |
+| Führt der Export über `documents` oder `invoices`? | Über `invoices` | §7 lässt eine zweite Erzeugung ausdrücklich zu. Über `documents` erschiene die Rechnung dann zweimal — genau das verbietet Fall 95 |
+| Verschwindet die Ersteinrichtungs-**Seite** mit dem Menüpunkt? | Nein, nur der Menüpunkt | Auf ihr steht das einzige Formular für den Zahlungsschlüssel, und der wird beim Übergang von Test auf Produktiv gewechselt — also lange nachdem die Startsperre offen ist |
+| Sperrt ein fehlender Zahlungsschlüssel die Veröffentlichung? | Nein | §1.4a zählt abschließend auf, was sperrt. Ein Betrieb, der per Überweisung stellt, darf online gehen. Er steht stattdessen in `weiterePunkte()` — sichtbar, ohne Sperrwirkung |
+| Wird das Logo hochgeladen? | Nein, nur seine Auslieferung geprüft | `07_MARKE_UND_GESTALTUNG.md` legt die Marke fest. Ein Hochladefeld wäre ein Weg, sie zu ersetzen |
+
+## C.4 Abweichungen von der Vorgabe — beide gemeldet, keine stillschweigend
+
+**1. Der Zahlungs-Webhook prüft kein CSRF-Token.**
+`14_SICHERHEIT.md` Regel 3 lässt keine Ausnahme zu; Abschnitt 6 verlangt den Aufruf durch
+einen fremden Server, der kein Token haben kann. Beides zugleich ist nicht erfüllbar. Die
+Ausnahme hängt an **einer** Route, gilt nur im Bereich `api`, und `TenantIsolationTest`
+schlägt an, sobald eine zweite sie trägt. Sie öffnet nichts: Die Route liest keine Sitzung,
+und aus einem Aufruf folgt nur eine Frage an den Zahlungsdienst. Ausführlich in
+`OFFENE_PRUEFUNGEN.md`.
+
+**2. Geprüft wird gegen das Schema, nicht gegen Schematron.**
+Fall 88 verlangt beides. Echtes Schematron läuft im eingesetzten Paket nur über einen
+Prüfer, der zur Laufzeit ein Java-Archiv nachlädt — eine Netzabhängigkeit mitten im
+Versandweg und faktisch ein drittes Fremdteil. Der Fall gilt deshalb als **teilweise**
+geprüft und steht so in `OFFENE_PRUEFUNGEN.md`, nicht als grün gemeldet.
+
+## C.5 Was der Bau an bestehendem Code korrigiert hat
+
+| Was | Woran es lag |
+|---|---|
+| `Rechnungsdienst` beschrieb im Klassenkommentar zwei Funktionen, die es nicht gab — Rücknahme einer Zahlung und Änderung der Fälligkeit | Sie sind jetzt gebaut (Fälle 53a und 54), statt den Kommentar zu kürzen |
+| Migration 033 legte die Schlüsselspalten als `TEXT` an und behauptete im Kommentar base64 | Der Tresor gibt rohe Bytes zurück; in `utf8mb4` ist das keine gültige Zeichenkette, und die Spalte war nicht beschreibbar. Migration **036** stellt auf `VARBINARY` um — 033 bleibt unverändert, sonst brächen alle Prüfsummen |
+| Die Betreiberzeile lag in fünf Testklassen unterschiedlich vor, in zweien gar nicht | Sie steht jetzt einmal in `Datenbankfall`. Drei Klassen behalten absichtlich abweichende Daten und heißen jetzt danach |
+| `Zahlungsabgleich` hatte SQL in einem Dienst, `BetreiberdatenSpeicher` verkettete einen Spaltennamen | Beides von `PreparedStatementsTest` gefunden und behoben — das SQL steht jetzt in `/app/data`, der Spaltenname kommt aus einem `match` mit festen Anweisungen |
+
+## C.6 Was weiterhin nicht gebaut ist
+
+Die Nicht-bauen-Liste aus Abschnitt 11 gilt unverändert: doppelte Buchführung, Kontenrahmen,
+ELSTER, Bilanz, Mahnwesen, Lastschriftmandate, automatische Verrechnung von Gutschriften,
+Fremdwährungen, Skonto. Aufgehoben war §4a **nur** für die Mollie-Anbindung.

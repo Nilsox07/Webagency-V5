@@ -2295,3 +2295,50 @@ eigenständige Prüfungen an einem neuen Gegenstand, keine Bedingungen derselben
 | 3 | **Fall 85 (Nebenläufigkeit bei der Nummernvergabe) ist im PHPUnit-Rahmen schwer echt zu prüfen.** Ein Test, der zwei Rechnungen nacheinander anlegt, prüft ihn nicht | zwei parallele Verbindungen, sonst als Lücke eintragen |
 | 4 | **Der Mollie-Webhook braucht eine öffentlich erreichbare Adresse.** Lokal bleibt er nachgebildet | erst auf dem Livesystem im Testmodus |
 | 5 | **Die Formatfrage des Steuerberater-Exports ist offen** und bewusst nicht vorweggenommen. Welches Format er will, weiß nur er | Rückfrage beim Steuerberater |
+
+---
+
+## Stufe C — Belege, Nummernkreis und Zahlungsabgleich (09.08.2026)
+
+Gebaut sind die Blöcke 1 bis 9 aus `spezifikation/18_BELEGE_UND_ZAHLUNG.md`. **337 Tests
+grün**, 4231 Zusicherungen, gegen echtes MariaDB. Was davon *nicht* gemessen ist, steht hier.
+
+### Was tatsächlich gelaufen ist
+
+| Was | Wie belegt |
+|---|---|
+| Nummernvergabe unter **echter** Nebenläufigkeit — acht Betriebssystemprozesse, jeder hält seine Transaktion 50 ms | `NummernkreisTest`, Fall 85. Der erste Lauf lief in einen Deadlock; die Ursache stand im `INSERT IGNORE` **innerhalb** der Transaktion und ist behoben |
+| Erzeugung eines PDF/A-3 mit eingebettetem XML, zurückgelesen **aus der abgelegten Datei** | `BelegeTest`, Fälle 87 und 88 |
+| Abbruch vor jedem Schreiben, wenn die Prüfung durchfällt — keine Datei, keine Zeile, kein Zustandswechsel | `BelegeTest`, Fall 89 |
+| Prüfsummenvergleich beim Abruf, mit veränderter und mit fehlender Datei | `BelegeTest`, Fall 94 |
+| Idempotenz des Webhooks samt **ausbleibendem zweiten Abruf** beim Dienst | `ZahlungsabgleichTest`, Fall 91 |
+| Verschlüsselter Zahlungsschlüssel — geprüft an der Datenbankspalte, an der Ansicht, an der Fehlermeldung und über **alle** Protokollzeilen | `ZahlungsabgleichTest` und `ErsteinrichtungMenueTest`, Fall 93 |
+| Migration 036 auf der Arbeitsdatenbank eingespielt, mit Sicherung; `migrate.php verify` meldet keine Abweichung | am 09.08.2026 ausgeführt |
+
+### Ungeprüft — mit Grund und Prüfmittel
+
+| # | Was gebaut wurde | Was daran ungeprüft ist | Womit es zu prüfen ist |
+|---|---|---|---|
+| 1 | Prüfung des strukturierten Teils vor dem Versand | **Nur gegen das XSD-Schema, nicht gegen Schematron.** Fall 88 verlangt „Schema **und** Schematron". Das eingesetzte Paket bringt die Schemadateien mit; echtes Schematron läuft dort nur über `ZugferdKositValidator`, der zur Laufzeit ein Java-Archiv nachlädt — das wäre eine Netzabhängigkeit im Versandweg und ein drittes Fremdteil | KoSIT-Prüfwerkzeug **außerhalb** der Anwendung, einmalig gegen einen erzeugten Beleg. Erst danach ist Fall 88 vollständig |
+| 2 | Der Webhook unter `/api/zahlungen/mollie` | **Nie von Mollie selbst aufgerufen.** Geprüft ist der Ablauf gegen eine Attrappe: Der Abruf holt, was hinterlegt ist, und die Nachricht bewirkt nichts. Ungeprüft bleibt das Verhalten des echten Dienstes — Zustandsnamen, Wiederholungsrhythmus, Zeitgrenzen | Auf dem Livesystem im Testmodus, mit einem Testschlüssel und einer öffentlich erreichbaren Adresse |
+| 3 | `Mollie::zahlungAnlegen()` und `zahlungLesen()` | **Kein Aufruf gegen die echte Schnittstelle.** Feldnamen und Betragsformat stammen aus der Dokumentation des Anbieters, nicht aus einer Antwort | derselbe Durchlauf wie #2 |
+| 4 | Fall 85, Nebenläufigkeit | Geprüft mit **acht** Prozessen auf einer Maschine. Ein Wettlauf, der erst bei höherer Last oder über zwei Datenbankknoten auftritt, bleibt außerhalb | Lasttest gegen die Produktionsdatenbank, falls die Menge das je rechtfertigt — bei einstelligen Rechnungszahlen je Monat eher nicht |
+| 5 | Der Steuerberater-Export | **Das Format ist nicht abgestimmt.** Bewusst so: Welches Format er will, weiß nur er | Rückfrage beim Steuerberater, dann gegebenenfalls eine zweite Spaltenfolge |
+| 6 | Belegversand per Mail mit Anhang | Der Anhang ist gegen die Attrappe geprüft, **nicht durch einen echten Mailserver**. Anhanggrößen um 100 KB sind unkritisch, aber ungemessen | Testversand über Mailpit, danach einmal über den produktiven SMTP-Zugang |
+| 7 | Die Sichtseite des Belegs (`app/views/belege/rechnung.php`) | **Nie von einem Menschen angesehen.** Geprüft ist, dass ein PDF entsteht und das XML stimmt — nicht, ob Umbruch, Schriftgrößen und Logo auf Papier tragen. Der Umbruch ab vier Positionen ist ungeprüft, weil eine Rechnung heute **eine** Position hat | Einen erzeugten Beleg ausdrucken und ansehen |
+| 8 | Aufbewahrung acht Jahre | **Es gibt keinen Ablauf, der sie durchsetzt oder überwacht.** Nichts löscht Belege — das ist die richtige Richtung, ersetzt aber keine Sicherungsstrategie | Sicherungsplan des Hosters, siehe `VERFAHRENSDOKUMENTATION.md` Abschnitt 5 |
+
+### Eine Abweichung, die keine Prüfung nachholt
+
+**Die CSRF-Regel gilt nicht für den Zahlungs-Webhook.** `spezifikation/14_SICHERHEIT.md`
+Regel 3 sagt „Kein Token, keine Ausnahme"; `18_BELEGE_UND_ZAHLUNG.md` Abschnitt 6 verlangt,
+dass ein fremder Server eine Adresse aufruft. Ein fremder Server hat keine Sitzung und kein
+Formular und kann kein Token haben — **beide Vorgaben zugleich sind nicht erfüllbar**.
+
+Aufgelöst so eng wie möglich: Die Ausnahme hängt als Schalter an **einer** Route, greift nur
+im Bereich `api`, und `TenantIsolationTest` schlägt an, sobald eine zweite Route sie trägt.
+Sie öffnet nichts, weil die Route keine Sitzung liest und aus einem Aufruf nur eines folgt —
+eine Frage an den Zahlungsdienst.
+
+**Das ist eine Entscheidung, keine Messung.** Wer sie anders treffen will, findet die
+Begründung an `Route::$ohneCsrf`.

@@ -9,14 +9,17 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 Bereich unter `/admin/`, Serverfunktionen unter `/api/`. Ein Repository, eine Domain, ein
 Deployment.
 
-**Stand 09.08.2026: 26 Migrationen, 244 PHP-Dateien, 277 Tests grün, 84 der 100 Testfälle
-zugeordnet.** A0, A1, A3 und B sind vollständig belegt. **Offen sind 16 Fälle in zwei Blöcken:**
+**Stand 09.08.2026, abends: 36 Migrationen, 337 Tests grün, alle 100 Testfälle zugeordnet.**
+A0, A1, A2, A3, B und C sind gebaut. `migrate.php verify` meldet keine Abweichung.
 
-- **A2, vier Fälle und zwei Funktionen** — Rücknahme einer Zahlung und Änderung von `due_date`.
-  Der Klassenkommentar von `app/services/Rechnungsdienst.php` beschreibt beide bereits, als gäbe
-  es sie
-- **C, zwölf Fälle** — Belegerzeugung, E-Rechnung, Nummernkreise, Mollie-Abgleich. **Am
-  09.08.2026 freigegeben**, noch nichts davon gebaut
+**Zwei Punkte sind nicht grün gemeldet, sondern eingetragen** — `OFFENE_PRUEFUNGEN.md`,
+Abschnitt „Stufe C":
+
+- **Fall 88 ist teilweise geprüft.** Der Beleg läuft gegen das XSD-Schema der Norm, **nicht**
+  gegen Schematron: Das läuft im eingesetzten Paket nur über einen Prüfer, der zur Laufzeit ein
+  Java-Archiv nachlädt
+- **Der Webhook wurde nie von Mollie selbst aufgerufen.** Geprüft ist der Ablauf gegen eine
+  Attrappe; der echte Dienst braucht eine öffentlich erreichbare Adresse
 
 Einzelheiten in `OFFENE_PRUEFUNGEN.md`.
 
@@ -208,6 +211,12 @@ ein Erzeuger für **ZUGFeRD/XRechnung** nach EN 16931 und ein **HTML-nach-PDF-Re
 sind unvermeidbar — ein normkonformes PDF/A-3 mit eingebettetem XML lässt sich nicht sinnvoll
 selbst schreiben. **Eine dritte Ausnahme braucht eine eigene Entscheidung.**
 
+Ausgewählt und eingetragen sind `horstoeko/zugferd` (MIT) und `dompdf/dompdf` (LGPL-2.1); die
+Begründung je Paket steht in `IMPLEMENTATION_SUMMARY.md` §C.2. Die Anbindung an den
+Zahlungsdienst kam **ohne** drittes Paket aus — zwei Aufrufe an eine REST-Schnittstelle sind
+`ext-curl`. `composer.json` pinnt zusätzlich `config.platform.php = 8.3.0`, sonst löst Composer
+auf einem neueren Wirtssystem Abhängigkeiten auf, die im Container nicht laufen.
+
 ## Die Regeln, an denen es scheitert
 
 ### Mandantentrennung
@@ -276,9 +285,15 @@ Fehlt `APP_ENV`, gilt produktiv.
 
 ### Weiteres, das nicht verhandelbar ist
 
-- **CSRF-Token bei jedem `POST`.** Ohne Ausnahme. Jede Aktion ist ein normales Formular —
+- **CSRF-Token bei jedem `POST`.** Die **einzige** Ausnahme ist der Zahlungs-Webhook unter
+  `/api/` — ein fremder Server hat keine Sitzung und kann kein Token haben. Sie hängt an einer
+  Route, ist an `Route::$ohneCsrf` begründet und wird von `TenantIsolationTest` darauf
+  festgenagelt. Sonst gilt: kein Token, keine Ausnahme. Jede Aktion ist ein normales Formular —
   alle Kernabläufe funktionieren mit **deaktiviertem JavaScript**
-- **Zahlungsstatus wird nie aus einer Rückkehr-URL abgeleitet.** Gilt schon vor A2
+- **Zahlungsstatus wird nie aus einer Rückkehr-URL abgeleitet** — und auch nicht aus dem Inhalt
+  einer eingehenden Benachrichtigung. Der Webhook ist ein Klingelzeichen: Der Server ruft den
+  Zustand selbst beim Dienst ab. Die Kennung wird in `payment_events` festgehalten, **bevor**
+  verarbeitet wird
 - **Audit** bei Anmeldung, fehlgeschlagener Anmeldung, Status- und Zahlungswechsel, Rechte-
   änderung, Löschung. Einträge werden nie geändert und nie gelöscht. Bei Geld und Fristen ist
   `reason` **Pflichtfeld**
@@ -344,3 +359,4 @@ es geprüft wird.
 | `OFFENE_PRUEFUNGEN.md` | sobald etwas gebaut, aber nicht ausgeführt wurde |
 | `IMPLEMENTATION_SUMMARY.md` | am Ende — gebaute Struktur, Abweichungen mit Begründung, offene Punkte |
 | `MIGRATION_NOTES.md` | nur falls aus einem Prototyp etwas übernommen wurde |
+| `VERFAHRENSDOKUMENTATION.md` | **mitgeführt, nicht einmal geschrieben.** Wer den Belegfluss, die Ablage, die Berechtigungen oder den Zahlungsabgleich ändert, ändert sie im selben Commit — die GoBD verlangt sie fortlaufend |
