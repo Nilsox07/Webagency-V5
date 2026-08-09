@@ -262,11 +262,12 @@ verbindlich ist. **Ohne ihn wird die Empfehlung zum Angebot.**
 
 **Förderhinweis — ergänzt 09.08.2026, unterhalb des Knopfes**
 
-- *Aufgabe:* darauf hinweisen, dass der genannte Betrag je nach Bundesland förderfähig sein kann —
-  **und dass ein Antrag vor der Beauftragung gestellt sein muss.** Auf `/foerderung` verlinken
-- *Grenze:* **keine Summe, keine Förderquote, kein Bundesland, keine Zusage.** Kein Konjunktiv, der
-  nach Versprechen klingt. **Er darf den Pflichthinweis darüber nicht verdrängen** — kleinere
-  Stufe, eigene Zeile
+- *Aufgabe:* sagen, **dass eine Förderung nur in bestimmten Fällen greift** — und dass ein Antrag
+  dann **vor** der Beauftragung gestellt sein muss. Auf `/foerderung` verlinken
+- *Grenze:* **keine Summe, keine Förderquote, kein Bundesland, keine Zusage.** **Nicht** nahelegen,
+  dass Förderung der Regelfall sei — sie ist es nach der Recherche vom 09.08.2026 **nicht**. Kein
+  Konjunktiv, der nach Versprechen klingt. **Er darf den Pflichthinweis darüber nicht verdrängen**
+  — kleinere Stufe, eigene Zeile
 - *Umfang:* **höchstens zwei Sätze**
 
 > **Warum dieser Hinweis kein Marketing ist, sondern Sorgfalt.** Ein Förderantrag muss **vor**
@@ -685,7 +686,7 @@ dem **Ratgeber-Hub** · dem Fußbereich.
 | 1 | `H1` — die Frage im Klartext | **eigen** |
 | 2 | `Kurz gesagt` — Antwortabsatz, **40–60 Wörter**, mit der Reihenfolgeregel | **eigen** |
 | 3 | **Antrag vor Auftrag** — warum die Reihenfolge über alles entscheidet | **eigen** |
-| 4 | Was Förderbanken typischerweise als förderfähig ansehen — **ohne Zusage** | **eigen** |
+| 4 | **Warum eine reine Firmenwebsite meistens nicht gefördert wird** — und die Fälle, in denen doch | **eigen** |
 | 5 | **Übersicht der sechzehn Länder** — Programmname, Link zur Förderbank, **Status**, Prüfdatum | **eigen** |
 | 6 | Was Förderung wirklich kostet — Zeit, Bindung, Sperrfristen | **eigen** |
 | 7 | Was SARTU dabei tut und was nicht — die drei Stufen | **eigen** |
@@ -699,10 +700,19 @@ dem **Ratgeber-Hub** · dem Fußbereich.
 - *Pflichtangaben:* **sichtbares Prüfdatum** an Block 5, nicht im Fußbereich · Pflichthinweis
   „SARTU leistet keine Rechtsberatung" aus `06_RECHT.md`
 
-> **Sperre bis zur Veröffentlichung:** Block 5 darf **nicht** mit elf von sechzehn Ländern online
-> gehen — eine unvollständige Übersicht sieht vollständig aus. Fehlend: **Hamburg, Bremen,
-> Schleswig-Holstein, Mecklenburg-Vorpommern, Sachsen-Anhalt.** Und **kein** Programmname ist
-> bisher in der Primärquelle geprüft. Siehe `OFFENE_PRUEFUNGEN.md`.
+> **Berichtigt am 09.08.2026 nach vollständiger Recherche.** Alle **sechzehn** Länder liegen
+> inzwischen vor (`FOERDERUNG_KONZEPT.md` §4a), die frühere Lücke von fünf Ländern ist geschlossen.
+>
+> **Die Kernaussage der Seite hat sich dabei umgedreht:** Eine reine Firmenwebsite ist in der Regel
+> **nicht** förderfähig — der Digitalbonus Bayern schließt Standard-Websites, Website-Texte und SEO
+> ausdrücklich aus, und programmübergreifend gelten reine Umsetzungsleistungen als nicht
+> förderfähig. **Block 4 führt deshalb mit dieser Antwort**, nicht mit einer Verheißung.
+>
+> **Die Status-Spalte in Block 5 braucht vier Stufen**, nicht zwei: `läuft` · `Aufrufverfahren` ·
+> `Mittel ausgeschöpft` · `Umsetzung nicht förderfähig`. Ohne sie führt die Übersicht in die Irre.
+>
+> **Sperre bleibt:** **Kein** Programmname ist in der Primärquelle geprüft — alle stammen aus
+> Sekundärübersichten, deren Widersprüche dokumentiert sind. Siehe `OFFENE_PRUEFUNGEN.md`.
 
 **Warum die Seite auch ohne Werbebudget trägt:** Sie beantwortet eine Frage mit echter
 Kaufabsicht, die kaum ein Webdesign-Anbieter beantwortet — und Block 5 ist genau die Art

@@ -9,6 +9,72 @@
 
 ---
 
+## 0. Der Befund, der die Kernaussage umdreht — recherchiert 09.08.2026
+
+> **Eine reine Firmenwebsite ist in der Regel NICHT förderfähig.**
+
+Das ist das Ergebnis der bundesweiten Recherche, und es steht dem entgegen, was hier zuerst geplant
+war. **Die Belege sind eindeutig.**
+
+**Digitalbonus Bayern — ausdrücklich ausgeschlossen:**
+
+| Ausgeschlossen | Wortlaut sinngemäß |
+|---|---|
+| **Standard-Websites** | *„Ein klassischer Website-Relaunch — neues Design, bessere Texte, responsive Darstellung, vielleicht ein Kontaktformular — wird typischerweise nicht gefördert"* |
+| einfache Onlineshops | ohne innovative technische Merkmale |
+| **Website-Texte** | als Marketingmaßnahme |
+| **SEO**, Google Ads, Social-Media-Werbung | Standard-Marketingmaßnahmen |
+| Standardsoftware und Standard-Hardware | ohne Anpassung |
+
+**Und das gilt nicht nur für Bayern.** Programmübergreifend gilt:
+
+> *„Nicht förderfähig sind operative Umsetzungsleistungen wie **Website-Programmierung**, laufende
+> SEO-Optimierungen oder Werbekampagnen."* · *„Nicht förderfähig sind auch reine
+> Umsetzungsleistungen, zum Beispiel **die Erstellung einer Website**."*
+
+**Das Prinzip dahinter:** Gefördert wird **Prozessdigitalisierung** — wie ein Unternehmen intern
+arbeitet oder mit Kunden und Partnern interagiert. **Nicht** die Erstellung einer Firmenwebsite.
+
+### Was das für SARTU bedeutet
+
+**Alle vier Bestandteile des Produkts stehen auf den Ausschlusslisten:** individuell programmierte
+Website · Website-Texte · SEO-Grundlage · laufender Betrieb.
+
+> **Ein auffälliges Förderversprechen wäre damit irreführend** — und zwar nach denselben Maßstäben,
+> die `06_RECHT.md` für Bilder und Referenzen setzt. Wer mit 50 % rechnet und nichts bekommt, hat
+> ein Finanzierungsloch. Und er hat es durch SARTU.
+
+### Die Fälle, in denen es doch greift — die ehrliche Restmenge
+
+| Fall | Warum |
+|---|---|
+| **Die Website ist Teil eines größeren Digitalisierungsvorhabens** | Nicht die Seite wird gefördert, sondern das Vorhaben, zu dem sie gehört |
+| **Prozessfunktionen statt Darstellung** | Das `Platzhirsch`-Paket enthält nach `03_KUNDENPRODUKT.md` **genau ein** Conversion-Modul — Anfrageformular *oder* Ein-Kalender-Buchung *oder* Bewerbungsformular. Eine **Terminbuchung** ist Prozessdigitalisierung, eine Imageseite nicht |
+| **Der Kundenbereich** | Ein geführtes Portal mit Freigaben, Dateien und Aufgaben ist näher an „Prozess" als jede Website |
+| **Beratungsförderung** | BAFA (bis 31.12.2026) und das ISB-Beratungsprogramm in Rheinland-Pfalz fördern **Beratung**, nicht Umsetzung — ein anderer Hebel, der offensteht |
+| **Programme, die weiter gefasst sind als Bayern** | Bremens „Digitaler Mittelstand KI" nennt ausdrücklich Geschäftsprozesse, Automatisierung und IT-Sicherheit — je Land zu prüfen |
+
+### Die daraus folgende Kernaussage — besser als die geplante
+
+**Nicht** *„Förderung für Ihre Website!"*, sondern:
+
+> **„Eine reine Firmenwebsite ist meistens nicht förderfähig. Hier steht, wann doch — und woran Sie
+> es erkennen."**
+
+**Warum das die stärkere Seite ist:**
+
+1. **Sie ist wahr.** Alles andere kollidiert mit `06_RECHT.md`
+2. **Sie schreibt sonst niemand.** Webdesign-Anbieter werben mit dem Gegenteil, um Anfragen zu
+   erzeugen — es ist dieselbe Lücke wie bei `/ratgeber/was-nicht-enthalten-ist`
+3. **Sie erzeugt Vertrauen statt Enttäuschung.** Ein Anbieter, der sagt *„das bekommen Sie
+   wahrscheinlich nicht gefördert"*, ist an jeder anderen Stelle glaubwürdiger
+4. **Sie ist zitierfähig.** Eine echte Antwort auf eine häufig gestellte Frage — genau das Material,
+   das in KI-Antworten landet
+5. **Sie bringt trotzdem Kunden.** Wer nach Förderung sucht, will investieren. Er landet auf einer
+   Seite, die ihn ernst nimmt — und findet dort den Bedarfsscheck
+
+---
+
 ## 1. Der Fund, der alles andere ordnet
 
 **Ein Förderantrag muss vor Beginn des Vorhabens gestellt werden. Wer zuerst beauftragt, verliert
@@ -202,19 +268,46 @@ Bundesprogramm für Firmenwebsites gibt es nicht mehr; die **Länder** sind das 
 Die Fördersätze liegen je nach Programm etwa zwischen **40 und 60 %**, in den **neuen Ländern
 tendenziell höher** — ein struktureller Vorteil für den Erstmarkt Dresden.
 
-| Land | Programm (Name unbestätigt bis zur Primärquelle) | Anmerkung |
+**Vollständig recherchiert am 09.08.2026 — alle sechzehn Länder.** Programmnamen und Förderstellen
+aus Sekundärquellen; **Beträge bewusst nicht aufgenommen** (Begründung oben).
+
+| Land | Programm | Förderstelle | Art | Status |
+|---|---|---|---|---|
+| Baden-Württemberg | Digitalisierungsprämie | **L-Bank** | **Darlehen** mit Tilgungszuschuss | läuft |
+| **Bayern** | Digitalbonus (Standard · Plus) | Bezirksregierungen | Zuschuss | läuft **bis 31.12.2027** — **schließt Standard-Websites, Website-Texte und SEO ausdrücklich aus** |
+| Berlin | Transferbonus | **IBB** | Zuschuss | läuft |
+| Brandenburg | BIG Digital | **ILB** | Zuschuss, modular | läuft |
+| Bremen | **Digitaler Mittelstand KI** | **BAB – Die Förderbank**, BIS Bremerhaven | Zuschuss | **neu ab 01.04.2026**, bis Ende 2027 · auch **Soloselbstständige** |
+| Hamburg | **Hamburg-Kredit Digital** | **IFB Hamburg** | **Darlehen** + ergänzender Zuschuss | läuft |
+| Hessen | DIGI-Zuschuss | WIBank | Zuschuss | läuft |
+| Mecklenburg-Vorpommern | Digitalisierungsförderung Mittelstand | **TBI** Technologie-Beratungs-Institut | Zuschuss | läuft |
+| Niedersachsen | Digitalbonus.Niedersachsen – innovativ | NBank | Zuschuss | läuft |
+| Nordrhein-Westfalen | Mittelstand Innovativ & Digital (**MID**) | — | projektbezogener Zuschuss | läuft — **kein klassischer Digitalbonus mehr** |
+| **Rheinland-Pfalz** | **kein Umsetzungsprogramm.** Beratungsprogramm · InnoTop | **ISB** | Beratung bzw. Innovation | **Umsetzung wird nicht gefördert** |
+| Saarland | **DigitalInvest KMU** (Basis · Plus) | Serviceportal des Landes | Zuschuss | läuft, Antrag rein digital |
+| Sachsen | Digitalisierung in KMU / E-Business | **SAB** | Zuschuss | läuft |
+| **Sachsen-Anhalt** | **DIGITAL INNOVATION** | **IB Sachsen-Anhalt** | Zuschuss | **Aufrufverfahren** — Fenster schließen nach 60 bzw. 90 Anträgen |
+| Schleswig-Holstein | **Digi-Zuschuss** | **IB.SH** | Zuschuss | läuft |
+| **Thüringen** | Digitalbonus | TAB | Zuschuss | **Mittel derzeit ausgeschöpft** |
+
+### Vier Statusarten, nicht zwei
+
+Die Recherche hat gezeigt, dass „läuft / läuft nicht" zu grob ist:
+
+| Status | Beispiel | Was der Kunde wissen muss |
 |---|---|---|
-| Bayern | Digitalbonus (Standard und Plus) | **aktiv**, Laufzeit bis 31.12.2027 |
-| Sachsen | SAB — Digitalisierung in KMU / E-Business | aktiv |
-| Nordrhein-Westfalen | Mittelstand Innovativ & Digital (MID) | kein klassischer Digitalbonus mehr |
-| Niedersachsen | Digitalbonus.Niedersachsen – innovativ | |
-| Brandenburg | BIG Digital | modularer Aufbau |
-| Berlin | Transferbonus (Investitionsbank Berlin) | |
-| Hessen | DIGI-Zuschuss | |
-| Baden-Württemberg | Digitalisierungsprämie (L-Bank) | **Darlehensform** — nicht mit Zuschüssen vermischen |
-| **Thüringen** | Digitalbonus | **Mittel derzeit ausgeschöpft** |
-| Saarland · Rheinland-Pfalz | eigene Programme | in den Quellen nur pauschal genannt |
-| **Hamburg · Bremen · Schleswig-Holstein · Mecklenburg-Vorpommern · Sachsen-Anhalt** | **nicht ermittelt** | **Lücke — fünf von sechzehn** |
+| **läuft** | Sachsen, Bayern | laufend antragsfähig |
+| **Aufrufverfahren** | **Sachsen-Anhalt** | nur in Fenstern — der erste Aufruf endete nach **60** Anträgen, die folgenden nach **90**. Wer zu spät kommt, wartet auf den nächsten |
+| **Mittel ausgeschöpft** | **Thüringen** | Programm existiert, zahlt aber gerade nicht |
+| **Umsetzung nicht förderfähig** | **Rheinland-Pfalz** | nur Beratung und Innovation, keine Umsetzungsleistung |
+
+> **Ohne diese vier Stufen führt eine Übersicht in die Irre.** „Thüringen: Digitalbonus" wäre
+> formal richtig und praktisch falsch.
+
+### Bundesebene — Nachtrag
+
+`Digital Jetzt` ist ausgelaufen; **das Antragsportal wurde zum 31.03.2026 abgeschaltet**, und der
+Bund hat **keinen direkten Nachfolger mit Investitionszuschuss** aufgelegt.
 
 > **Thüringen ist das Lehrstück:** Das Programm existiert, zahlt aber gerade nicht. Eine Tabelle
 > ohne Statusspalte hätte den Kunden ins Leere geschickt. **Deshalb ist der Status die wichtigste
@@ -297,6 +390,13 @@ Förderangebot.
 | SAB E-Business: 50 % Satz, 12 Monate, einmal in drei Jahren, +10 % Tarifbonus, Antrag bei der SAB | SAB, Förderrichtlinie Digitalisierung EFRE 2021–2027 | 2026 | **Q4 2026** |
 | **Höchstsumme je Vorhaben** | **widersprüchlich — 10.000 € gegen 50.000 €** | — | **nicht verwendbar** |
 | Antrag vor Vorhabensbeginn zwingend | Förderübersichten, allgemeiner Grundsatz | 2026 | dauerhaft, aber je Programm prüfen |
+| **Standard-Websites, Website-Texte und SEO vom Digitalbonus Bayern ausgeschlossen** | Digitalbonus Bayern, Programmdarstellung und Fachbeiträge | 2026 | **Q4 2026** |
+| **Reine Umsetzungsleistungen — Websiteerstellung, Website-Programmierung — programmübergreifend nicht förderfähig** | Förderübersichten 2026 | 2026 | **Q4 2026** |
+| Alle sechzehn Landesprogramme: Name, Förderstelle, Art, Status | Sekundärübersichten, Kammer- und Landesseiten | 09.08.2026 | **Q4 2026** |
+| `Digital Jetzt`: Antragsportal zum **31.03.2026** abgeschaltet, kein Nachfolger mit Investitionszuschuss | Förderübersichten | 2026 | dauerhaft |
+| Bremen: Digitaler Mittelstand KI ab 01.04.2026, bis Ende 2027, auch Soloselbstständige | Senatspressestelle Bremen, Handelskammer Bremen | 2026 | **Ende 2027** |
+| Sachsen-Anhalt: DIGITAL INNOVATION im **Aufrufverfahren**, Fenster schließen nach 60 bzw. 90 Anträgen | IB Sachsen-Anhalt, IHK Magdeburg | 2026 | **je Aufruf** |
+| Hamburg und Baden-Württemberg arbeiten mit **Darlehen**, nicht mit reinen Zuschüssen | IFB Hamburg, L-Bank | 2026 | **Q4 2026** |
 
 > **Vor jeder Veröffentlichung:** Zahlen über `SARTU_BRANCHENFAKTEN.md` führen. Bei Förderzahlen ist
 > **Regel S5 (Verfallsdatum)** die kritischste — und die Höchstsumme oben ist der Beleg dafür,

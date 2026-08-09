@@ -1887,3 +1887,58 @@ Er nennt keine Zahl, sondern nur die Reihenfolge. **Er kann also nicht falsch we
 (`php bin/keywords.php`) und zieht nach, sobald die Seite im Router steht. Ebenso ungeprüft, ob der
 zusätzliche Block im Bedarfsscheck-Ergebnis die Aussage *„Preis vor Kontaktdaten"* optisch
 schwächt; das entscheidet sich erst am gebauten Bildschirm.
+
+---
+
+## Förderung bundesweit vollständig recherchiert — 09.08.2026
+
+**Auftrag erledigt:** alle sechzehn Länder plus Bundesebene ermittelt, in `FOERDERUNG_KONZEPT.md`
+§4a eingearbeitet, die frühere Lücke von fünf Ländern ist geschlossen.
+
+### Der Befund dreht die Kernaussage um — und das ist der wichtigste Teil des Ergebnisses
+
+> **Eine reine Firmenwebsite ist in der Regel nicht förderfähig.**
+
+**Digitalbonus Bayern schließt ausdrücklich aus:** Standard-Websites · *„ein klassischer
+Website-Relaunch — neues Design, bessere Texte, responsive Darstellung, vielleicht ein
+Kontaktformular"* · einfache Onlineshops · **Website-Texte** · **SEO**, Google Ads,
+Social-Media-Werbung.
+
+**Programmübergreifend gilt:** *„Nicht förderfähig sind operative Umsetzungsleistungen wie
+Website-Programmierung, laufende SEO-Optimierungen oder Werbekampagnen"* und *„reine
+Umsetzungsleistungen, zum Beispiel die Erstellung einer Website"*.
+
+**Gefördert wird Prozessdigitalisierung, nicht Selbstdarstellung.**
+
+> **Damit stehen alle vier Bestandteile des SARTU-Produkts auf den Ausschlusslisten:** Website ·
+> Texte · SEO-Grundlage · Betrieb. **Ein auffälliges Förderversprechen wäre irreführend** — nach
+> denselben Maßstäben, die `06_RECHT.md` für Bilder und Referenzen setzt.
+
+**Die Umsetzung wurde entsprechend geändert:** `/foerderung` Block 4 führt jetzt mit *„warum eine
+reine Firmenwebsite meistens nicht gefördert wird"*, und der Förderhinweis im Bedarfsscheck-Ergebnis
+darf ausdrücklich **nicht** nahelegen, Förderung sei der Regelfall.
+
+### Vier Statusarten statt zwei — aus der Recherche gelernt
+
+| Status | Beispiel |
+|---|---|
+| läuft | Sachsen, Bayern, Berlin, Hessen, Niedersachsen, Brandenburg, Saarland, Schleswig-Holstein, Mecklenburg-Vorpommern, NRW |
+| **Aufrufverfahren** | **Sachsen-Anhalt** — Fenster schließen nach 60 bzw. 90 Anträgen |
+| **Mittel ausgeschöpft** | **Thüringen** |
+| **Umsetzung nicht förderfähig** | **Rheinland-Pfalz** — nur Beratung und Innovation |
+
+Dazu zwei Länder mit **Darlehen statt Zuschuss**: **Hamburg** (Hamburg-Kredit Digital) und
+**Baden-Württemberg** (Digitalisierungsprämie). Die dürfen nicht in dieselbe Spalte wie
+Zuschussprogramme.
+
+### Was weiterhin offen ist
+
+| # | Punkt | Warum es zählt |
+|---|---|---|
+| 1 | **Kein Programmname ist in der Primärquelle geprüft.** Alle stammen aus Sekundärübersichten | Genau die Quellenart, deren Zahlen sich widersprechen. Vor Veröffentlichung: sechzehn Förderbankseiten, ein halber Tag |
+| 2 | **Ob SARTUs Conversion-Modul oder der Kundenbereich als Prozessdigitalisierung durchgehen**, ist Vermutung | Das ist die einzige Restmenge, in der Förderung realistisch greift — und sie ist unbelegt |
+| 3 | **Die sächsische Höchstsumme** bleibt widersprüchlich (10.000 gegen 50.000 €) | unverändert nicht verwendbar |
+| 4 | **Ob der ehrliche Aufhänger trotzdem Anfragen bringt** | Die Annahme ist plausibel, aber ungeprüft — sie lässt sich nur messen |
+
+**Nicht ausgeführt:** Kein Text wurde geschrieben. `/foerderung` und die vier Ratgeberartikel liegen
+als Aufgabe, Grenze und Umfang vor — der Wortlaut gehört dem Texter-Skill.
