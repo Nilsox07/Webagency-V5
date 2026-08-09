@@ -260,6 +260,25 @@ verbindlich ist. **Ohne ihn wird die Empfehlung zum Angebot.**
 
 **Knopf `gebunden`:** `Empfehlung unverbindlich prüfen lassen`
 
+**Förderhinweis — ergänzt 09.08.2026, unterhalb des Knopfes**
+
+- *Aufgabe:* darauf hinweisen, dass der genannte Betrag je nach Bundesland förderfähig sein kann —
+  **und dass ein Antrag vor der Beauftragung gestellt sein muss.** Auf `/foerderung` verlinken
+- *Grenze:* **keine Summe, keine Förderquote, kein Bundesland, keine Zusage.** Kein Konjunktiv, der
+  nach Versprechen klingt. **Er darf den Pflichthinweis darüber nicht verdrängen** — kleinere
+  Stufe, eigene Zeile
+- *Umfang:* **höchstens zwei Sätze**
+
+> **Warum dieser Hinweis kein Marketing ist, sondern Sorgfalt.** Ein Förderantrag muss **vor**
+> Vorhabensbeginn gestellt werden. Ein Interessent, der hier weiterklickt, annimmt und erst danach
+> von der Förderung erfährt, **verliert den Anspruch** — durch SARTUs eigenen Ablauf. Der Hinweis
+> steht genau an der Stelle, an der er das noch verhindern kann: dort, wo die Zahl steht.
+>
+> **Er ist keine Zusatzoption** im Sinne der Grenze oben. Der Kunde wählt nichts aus; er erfährt
+> etwas. Damit bleibt der gebundene Vertrauenspunkt `Keine Auswahl von Zusatzoptionen` unberührt.
+>
+> **Grundlage und Programmlage:** `FOERDERUNG_KONZEPT.md`.
+
 **Zwei Sonderfälle:**
 
 | Fall | *Aufgabe des Texts* | *Grenze* |
@@ -643,6 +662,51 @@ nennt Zahlen. Das ist die Lücke.**
 **Nach dem Launch:** `/ratgeber/wie-lange-dauert-eine-website` ·
 `/ratgeber/website-festpreis-erkennen` · `/ratgeber/was-eine-korrekturrunde-ist` ·
 **`/ratgeber/bilder-fuer-die-firmenwebsite`**.
+
+### `/foerderung` — eigene Seite, ergänzt 09.08.2026
+
+**Auf Entscheidung des Betreibers: eine eigene Seite, nicht nur ein Ratgeberartikel.** Begründung —
+wer „Förderung Website" sucht, ist **kaufnah**: Er will wissen, ob es Geld gibt, bevor er bestellt.
+Das ist eine kommerzielle Suchintention, keine informatorische, und sie gehört auf eine Seite, die
+in den Bedarfsscheck führt.
+
+**Nicht in der Hauptnavigation.** `10_WEBSITE_SARTU.md` §2 bindet sie auf **sechs Punkte**
+(„Dies ist die einzige gültige Navigation"). Die Seite wird stattdessen verlinkt aus:
+**`/preise`** (thematisch der beste Ort, Sitemap-Priorität 1.0) · dem **Bedarfsscheck-Ergebnis** ·
+dem **Ratgeber-Hub** · dem Fußbereich.
+
+> **Offen, Betreiberentscheidung:** ob `/foerderung` doch in die Hauptnavigation soll. Das änderte
+> `die sechs Punkte` — eine gebundene Zahl und eine Klasse-1-Beschriftung.
+
+**Aufbau**
+
+| # | Block | eigen oder geteilt |
+|---|---|---|
+| 1 | `H1` — die Frage im Klartext | **eigen** |
+| 2 | `Kurz gesagt` — Antwortabsatz, **40–60 Wörter**, mit der Reihenfolgeregel | **eigen** |
+| 3 | **Antrag vor Auftrag** — warum die Reihenfolge über alles entscheidet | **eigen** |
+| 4 | Was Förderbanken typischerweise als förderfähig ansehen — **ohne Zusage** | **eigen** |
+| 5 | **Übersicht der sechzehn Länder** — Programmname, Link zur Förderbank, **Status**, Prüfdatum | **eigen** |
+| 6 | Was Förderung wirklich kostet — Zeit, Bindung, Sperrfristen | **eigen** |
+| 7 | Was SARTU dabei tut und was nicht — die drei Stufen | **eigen** |
+| 8 | Bedarfsscheck eingebettet | geteilt |
+| 9 | drei häufige Fragen | **eigen** |
+
+- *Grenze:* **keine fremden Förderbeträge** — Block 5 nennt Programmname, Link und Status, **keine
+  Summen**. Begründung: Sekundärquellen widersprechen sich, `FOERDERUNG_KONZEPT.md` §4a ·
+  **keine Zusage**, dass ein Antrag bewilligt wird · **keine Rechtsberatung** · keine Angstmache
+- *Umfang:* wie eine Branchenseite, **900–1.300 Wörter**
+- *Pflichtangaben:* **sichtbares Prüfdatum** an Block 5, nicht im Fußbereich · Pflichthinweis
+  „SARTU leistet keine Rechtsberatung" aus `06_RECHT.md`
+
+> **Sperre bis zur Veröffentlichung:** Block 5 darf **nicht** mit elf von sechzehn Ländern online
+> gehen — eine unvollständige Übersicht sieht vollständig aus. Fehlend: **Hamburg, Bremen,
+> Schleswig-Holstein, Mecklenburg-Vorpommern, Sachsen-Anhalt.** Und **kein** Programmname ist
+> bisher in der Primärquelle geprüft. Siehe `OFFENE_PRUEFUNGEN.md`.
+
+**Warum die Seite auch ohne Werbebudget trägt:** Sie beantwortet eine Frage mit echter
+Kaufabsicht, die kaum ein Webdesign-Anbieter beantwortet — und Block 5 ist genau die Art
+Übersicht, die in KI-Antworten zitiert wird, **weil sie keine Zahl behauptet, die veralten kann.**
 
 #### `/ratgeber/bilder-fuer-die-firmenwebsite` — ergänzt 09.08.2026
 

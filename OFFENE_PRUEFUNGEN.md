@@ -1852,3 +1852,38 @@ werden** — sie sähe vollständig aus und wäre es nicht.
 | 2 | **Ob eine Firmenwebsite förderfähig ist**, ist weiterhin in keiner Richtlinie nachgelesen. Das ist die Kernfrage des gesamten Themas |
 | 3 | **Thüringen zeigt, warum der Status zählt:** Das Programm existiert, die Mittel sind derzeit ausgeschöpft. Ohne Statusspalte hätte eine Tabelle den Kunden ins Leere geschickt |
 | 4 | Baden-Württemberg läuft offenbar als **Darlehen mit Tilgungszuschuss**, nicht als Zuschuss. Darf nicht in dieselbe Spalte wie Zuschussprogramme |
+
+### `/foerderung` und der Förderhinweis — eingebaut 09.08.2026
+
+**Auf Entscheidung des Betreibers eingearbeitet:**
+
+| Datei | Was |
+|---|---|
+| `spezifikation/17` §2.3 | **Förderhinweis** unterhalb des Knopfes im Bedarfsscheck-Ergebnis — Aufgabe, Grenze, Umfang. Höchstens zwei Sätze, keine Summe, keine Quote, keine Zusage |
+| `spezifikation/17` | **`/foerderung`** als eigene Seite mit neun Blöcken, 900–1.300 Wörter |
+| `spezifikation/16` | `/foerderung` in den Launch-Adressen, Priorität **0.9** |
+
+**Warum eine eigene Seite und kein Ratgeberartikel:** Wer „Förderung Website" sucht, ist kaufnah —
+er will wissen, ob es Geld gibt, **bevor** er bestellt. Das ist eine kommerzielle Suchintention.
+
+**Nicht in die Hauptnavigation gesetzt.** `10_WEBSITE_SARTU.md` §2 bindet sie auf **sechs Punkte**
+und bezeichnet sich als *„die einzige gültige Navigation"*; Navigationsbeschriftungen sind
+zusätzlich Klasse 1. Verlinkt wird aus `/preise`, dem Bedarfsscheck-Ergebnis, dem Ratgeber-Hub und
+dem Fußbereich. **Ob die Seite doch ins Menü soll, ist eine Betreiberentscheidung** — sie änderte
+eine gebundene Zahl.
+
+**Veröffentlichungssperre für Block 5 (Länderübersicht):**
+
+| # | Grund |
+|---|---|
+| 1 | **Fünf von sechzehn Ländern fehlen** — Hamburg, Bremen, Schleswig-Holstein, Mecklenburg-Vorpommern, Sachsen-Anhalt. Eine unvollständige Übersicht sieht vollständig aus |
+| 2 | **Kein Programmname stammt aus einer Primärquelle.** Alle aus Sekundärübersichten, deren Widersprüche in `FOERDERUNG_KONZEPT.md` §4a dokumentiert sind |
+| 3 | **Ob eine Firmenwebsite überhaupt förderfähig ist**, ist weiterhin in keiner Richtlinie nachgelesen — die Kernfrage des Themas |
+
+**Der Förderhinweis im Ergebnis ist davon unabhängig einsetzbar**, sobald `/foerderung` existiert:
+Er nennt keine Zahl, sondern nur die Reihenfolge. **Er kann also nicht falsch werden.**
+
+**Ungeprüft:** `KEYWORD_VALIDATION.md` kennt `/foerderung` nicht — die Datei wird erzeugt
+(`php bin/keywords.php`) und zieht nach, sobald die Seite im Router steht. Ebenso ungeprüft, ob der
+zusätzliche Block im Bedarfsscheck-Ergebnis die Aussage *„Preis vor Kontaktdaten"* optisch
+schwächt; das entscheidet sich erst am gebauten Bildschirm.

@@ -109,6 +109,7 @@ harten Prüfungen und die Wellenplanung: `17_SEITEN_SARTU.md`.
 | `/` | index | `Organization`, `WebSite` | 1.0 |
 | `/leistungen` | index | `Service`, `BreadcrumbList` | 0.9 |
 | `/preise` | index | `Service`, `BreadcrumbList` | **1.0** |
+| `/foerderung` | index | `Article`, `BreadcrumbList`, `FAQPage` optional | **0.9** — ergänzt 09.08.2026, kaufnahe Suchintention |
 | `/ablauf` | index | `BreadcrumbList` | 0.8 |
 | `/briefing` — Einstiegsseite | index | `BreadcrumbList` | 0.7 |
 | `/briefing/1` … `/briefing/n` — die Schritte | **noindex** | – | – |
