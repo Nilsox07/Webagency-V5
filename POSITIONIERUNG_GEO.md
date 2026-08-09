@@ -257,6 +257,89 @@ Anbieter, der für zweitausend Kombinationen dünn vorkommt, ist Entität für n
 > Positionierung beruht. Und die Breite ist die riskantere der beiden: Sie kostet die ganze Domain,
 > wenn ein Update sie als Muster erkennt.
 
+### Die Paar-Variante — geprüft ohne Rückgriff auf Vorgaben
+
+> **Ergänzt am 09.08.2026.** Der Betreiber schlägt vor, statt Dreierkombinationen nur **Paare** zu
+> bauen — „SEO für Friseure" oder „Webdesign Sebnitz" — und weist darauf hin, dass alles
+> **generiert** wird, der Aufwand also gering ist. Er bittet ausdrücklich darum, die Paragraphen
+> als Hinweis und nicht als Festlegung zu behandeln.
+>
+> **Das ist hier so gehalten.** Die folgenden Argumente stehen für sich; keines beruft sich auf
+> eine Vorgabe als Autorität.
+
+#### Was Paare rechnerisch bringen — weniger als erwartet
+
+| Konfiguration | B×L | B×O | L×O | **Paare gesamt** | Tripel zum Vergleich |
+|---|---|---|---|---|---|
+| 5 Branchen · 4 Leistungen · 10 Orte | 20 | 50 | 40 | **110** | 200 |
+| 10 · 5 · 20 | 50 | 200 | 100 | **350** | 1.000 |
+| 10 · 5 · 40 | 50 | 400 | 200 | **650** | 2.000 |
+
+**Paare reduzieren nur um etwa Faktor drei, nicht um eine Größenordnung.** 350 Seiten sind
+weiterhin mehr als die realistische Pflegemenge.
+
+**Aber die Tabelle zeigt noch etwas Wichtigeres:** Von den 350 Seiten entfallen **300 auf die
+beiden Paare mit Ortskomponente** und nur **50 auf Branche × Leistung**. Die Masse *und* das Risiko
+sitzen beide im Ortsteil.
+
+#### Die drei Paartypen sind nicht gleichwertig
+
+| Paar | Beispiel | Bewertung |
+|---|---|---|
+| **Branche × Leistung** | „SEO für Friseure" | **Gut.** Nicht ortsgebunden, wirkt bundesweit. Über eine Branche lässt sich Wahres und Eigenes schreiben |
+| **Leistung × Ort** | „Webdesign Sebnitz" | **Schlecht** — siehe unten |
+| **Branche × Ort** | „Website für Friseure in Sebnitz" | **Schlecht**, aus denselben Gründen, zusätzlich winziges Volumen |
+
+**Drei Gründe gegen die Ortspaare, keiner davon aus einer Vorgabe:**
+
+1. **Es gibt nichts Wahres zu schreiben.** Eine Website für einen Betrieb in Sebnitz unterscheidet
+   sich in nichts von einer für Pirna. Wer den Ortsnamen tauschen kann, ohne dass der Text falsch
+   wird, hat keinen Inhalt — er hat eine Vorlage. Bei „SEO für Friseure" ist das anders: Bewertungen
+   dominieren die Auswahl, Termine laufen über Portale, der Wettbewerb ist visuell. Darüber lassen
+   sich drei Absätze schreiben, die stimmen.
+2. **Das Volumen ist praktisch null.** Sebnitz hat wenige tausend Einwohner. Selbst Platz eins
+   liefert dort keine nennenswerte Zahl an Anfragen — und Webdesign ist keine Leistung, für die
+   jemand nach Ort sucht, weil niemand seinen Programmierer besuchen fährt.
+3. **Das Risiko trifft die ganze Domain, nicht die Einzelseite.** Bewertet wird das **Muster**.
+   Die Ortsseiten, die nichts bringen, ziehen die Branchenseiten mit, die etwas bringen würden.
+
+#### „Es wird gevibecoded, also wenig Aufwand" — das Argument stimmt, trifft aber die falschen Kosten
+
+**Erzeugung war nie der Engpass.** Drei Kosten bleiben, und keine sinkt durch Generierung:
+
+| Kosten | Warum sie bleibt |
+|---|---|
+| **Prüfung** | Eine generierte Branchenseite über Friseure enthält plausible Details, die niemand geprüft hat. **KI-Erzeugung dreht das Verhältnis um: Schreiben wird billig, Prüfen wird teuer.** 350 Seiten sind an einem Tag erzeugt und in einem Monat nicht nachgeprüft |
+| **Pflege** | Preise, Rechtslage und Branchenfakten veralten. Die Pflegeobergrenze von rund 180 Seiten war nie eine Schreib-, sondern eine **Prüfkapazität** |
+| **Risiko** | Das März-2026-Update nennt KI-Erzeugung ausdrücklich mit. Günstige Erzeugung senkt die Kosten des Fehlers nicht — sie erhöht nur die Menge, mit der man ihn macht |
+
+**Und ein vierter Punkt, der schwerer wiegt als die drei:** SARTU verkauft *„wir erfinden nichts —
+jede Zahl mit Quelle und Verfallsdatum"*. Dreihundert generierte Seiten mit ungeprüften
+Branchenaussagen widersprechen dem. **Das ist kein Regelverstoß, sondern ein Markenwiderspruch** —
+und der fällt genau dem Kunden auf, der sonst gekauft hätte.
+
+#### Der Test, der ohne jede Vorgabe auskommt
+
+> **Kann ich über diese Kombination drei Sätze schreiben, die auf keiner anderen Seite so stehen
+> könnten — und stimmt jeder davon nachprüfbar?**
+
+„SEO für Friseure" besteht ihn. „Webdesign Sebnitz" besteht ihn nicht. Das ist die ganze
+Entscheidungsregel.
+
+#### Empfehlung zur Paar-Variante
+
+**Die Richtung ist richtig, die Auswahl ist es noch nicht.** Nicht *weniger* Kombinationen, sondern
+**nur eine der drei Sorten**:
+
+| | |
+|---|---|
+| **Bauen** | **Branche × Leistung** — 20 bis 50 Seiten, bundesweit wirksam, jede mit echtem Inhalt |
+| **Nicht bauen** | alles mit Ortskomponente, außer der einen Dresden-Seite |
+| **Orte trotzdem nutzen** | als **Vertriebsliste** für Direktansprache — Sebnitz, Bischofswerda, Radeberg und der Rest des Kammerbezirks. Nur eben offline |
+
+Das ergibt eine Seitenzahl, die dauerhaft pflegbar ist, streicht **86 %** der Seiten aus der
+350er-Variante — und entfernt dabei genau den Teil, der das Risiko trägt.
+
 ### Was stattdessen die richtige Bewegung ist
 
 Nicht Branche × Leistung × Ort, sondern **eine Achse tief statt drei Achsen flach**:
