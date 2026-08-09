@@ -1942,3 +1942,62 @@ Zuschussprogramme.
 
 **Nicht ausgeführt:** Kein Text wurde geschrieben. `/foerderung` und die vier Ratgeberartikel liegen
 als Aufgabe, Grenze und Umfang vor — der Wortlaut gehört dem Texter-Skill.
+
+---
+
+## Alle 16 Förderbanken an der Primärquelle geprüft — 09.08.2026
+
+**Auftrag erledigt.** Jedes der sechzehn Landesprogramme wurde an der Förderbank oder am
+Landesportal geprüft, nicht mehr an Sekundärübersichten. Vollständige Tabelle mit Voraussetzungen:
+`FOERDERUNG_KONZEPT.md` §4a.
+
+### Der Prüfbefund: jede geprüfte Sekundärangabe war falsch
+
+| Land | Sekundärquelle | Primärquelle |
+|---|---|---|
+| Bayern Standard | 10.000 € | **7.500 €** |
+| Bayern Plus | 50.000 € | **30.000 €** |
+| Sachsen | 10.000 **oder** 50.000 € | **10.000 €** Einführung · **60.000 / 100.000 €** Transformation — **50.000 € existiert nicht** |
+| Baden-Württemberg | 10.000 € | **3.000 €** |
+| **Niedersachsen** | aktiv | **ausgelaufen** |
+| **Hessen** | aktiv | **beendet Juni 2026, keine weiteren Aufrufe** |
+| **Rheinland-Pfalz** | kein Umsetzungsprogramm | **DigiBoost bis 15.000 €** |
+| **Sachsen-Anhalt** | Aufrufverfahren mit 60/90 Anträgen | **seit 15.07.2026 Direktantrag** mit Mindestpunktzahl |
+
+**Drei Programme sind tot, eines zweifelhaft — alle vier standen in den Übersichten als aktiv:**
+Niedersachsen (ausgelaufen) · Hessen (beendet) · Thüringen (Mittel erschöpft, keine Neuauflage) ·
+Schleswig-Holstein (nur unter Landesprogramm Wirtschaft **2014–2020** auffindbar).
+
+> **Damit ist die Verweis-statt-Kopie-Architektur nicht mehr eine Vorsichtsmaßnahme, sondern
+> belegt notwendig.** Eine Förderseite aus Sekundärquellen hätte Kunden zu vier Programmen
+> geschickt, die es nicht mehr gibt — und mit vier falschen Beträgen.
+
+### Der inhaltliche Befund bestätigt sich über alle sechzehn Länder
+
+**Bayern im Wortlaut:** nicht förderfähig sind *„Standard-Webseiten (herkömmliche Webseiten ohne
+tiefe funktionelle Einbindung in die betrieblichen Abläufe)"*, *„Standard-Online-Marketing-
+Maßnahmen (z. B. Suchmaschinenoptimierung…)"* sowie **grafische und redaktionelle
+Dienstleistungen**. **Sachsen:** ausgeschlossen sind **Websites ohne Geschäftsintegration**.
+
+Alle übrigen verlangen dasselbe in anderen Worten — Technologiebezug (Berlin), Prozessanalyse
+(Brandenburg), Innovationsgehalt (Sachsen-Anhalt, Saarland Plus, Niedersachsen), KI und
+automatisierte Prozesse (Bremen).
+
+**Vier Länder scheiden für die Zielgruppe zusätzlich strukturell aus:** Hamburg
+(**Mindestdarlehen 25.000 €**) · Mecklenburg-Vorpommern (**nur Produktion, Handwerk, Tourismus** —
+Sicherheitsdienste und Reinigung sind nicht antragsberechtigt) · Baden-Württemberg (Zuschuss
+max. 3.000 €) · Berlin (Technologiebezug).
+
+### Was jetzt noch offen ist
+
+| # | Punkt |
+|---|---|
+| 1 | **Schleswig-Holstein ist ungeklärt.** Gefunden wurde nur „Digibonus I" aus der Periode 2014–2020. Ob ein Nachfolger existiert, muss die IB.SH direkt beantworten |
+| 2 | **Der saarländische Förderkatalog** (PDF zur Richtlinie) wurde nicht geöffnet — dort stünde, ob Webauftritte namentlich erfasst sind |
+| 3 | **Ob SARTUs Conversion-Modul oder der Kundenbereich als Prozessdigitalisierung gelten**, ist weiterhin unbelegt. Das ist die einzige Restmenge, in der Förderung realistisch greift — **und sie beantwortet nur die Förderbank im Einzelfall** |
+| 4 | **Berlins „Digitalprämie"** tauchte als eigenes Programm neben dem Transfer BONUS auf; ihr aktueller Status wurde nicht geprüft |
+| 5 | Für **NRW** liegen die konkreten Höchstbeträge je MID-Baustein nicht vor, nur die Quoten (80 / 60 %) |
+
+**Nicht ausgeführt:** Kein Text geschrieben. Die Beträge in `FOERDERUNG_KONZEPT.md` dienen der
+internen Orientierung und sind **für keine Kundenseite freigegeben** — auf `/foerderung` erscheinen
+nach wie vor nur Programmname, Link, Status und Prüfdatum.

@@ -113,19 +113,25 @@ eine Sorgfaltspflicht.**
 
 **SAB, Förderrichtlinie Digitalisierung, EFRE 2021–2027, Programmteil E-Business:**
 
-| Merkmal | Wert |
+| Merkmal | Wert — **an der SAB-Primärquelle geprüft 09.08.2026** |
 |---|---|
-| Antragsberechtigt | KMU **und Existenzgründer** mit Sitz in Sachsen — ausdrücklich **Handwerk, Handel, Dienstleistungen, Kultur- und Kreativwirtschaft, Freie Berufe** |
-| Fördersatz | bis zu **50 %** der förderfähigen Ausgaben |
-| Vorhabensdauer | höchstens **12 Monate** |
-| Häufigkeit | **einmal in drei Jahren** |
-| Bonus | **+10 %** bei Tarifbindung oder tarifgleicher Entlohnung |
+| Antragsberechtigt | Kleinstunternehmen, kleine und mittlere Unternehmen der gewerblichen Wirtschaft **sowie Angehörige der freien Berufe** mit Betriebsstätte in Sachsen |
+| **Fördersatz Kleinstunternehmen**, Einführungsvorhaben | bis **60 %** |
+| Fördersatz kleinst und klein, Transformation | bis **50 %** |
+| Fördersatz mittlere Unternehmen, Transformation | bis **35 %** |
+| **Bonus bei Tarifbindung** | **+10 %**, über die vollen zwölf Monate |
+| **Höchstbetrag Einführungsvorhaben** | **10.000 €** Direktkosten |
+| **Höchstbetrag Transformation** | **60.000 €** kleinst und klein · **100.000 €** mittlere |
+| Vorhabensdauer | **zwölf Monate, keine Verlängerung** |
 | Antragstelle | **SAB — Sächsische Aufbaubank** |
+| Vorhabensbeginn | *„Der Starttermin Ihres Vorhabens darf **nicht vor** dem Eingang der Bestätigungsmail"* liegen |
+| Gefördert wird | ERP, CRM, Datensicherheitskonzepte, Digitalisierung der Lieferkette, Produktionsintegration |
+| **Ausgeschlossen** | Standard-Bürosoftware, Geräte mit integrierter Software — **und Websites ohne Geschäftsintegration** |
 
-> **Warnung zur Höchstsumme:** Zwei Quellen nennen unterschiedliche Werte — einmal **10.000 €**,
-> einmal **50.000 €** je Vorhaben. **Diese Zahl ist damit nicht belegt und darf nirgends
-> erscheinen**, bis sie in der Förderrichtlinie selbst nachgelesen wurde. Regel S4 verlangt Quelle,
-> Jahr und Stichprobe an der Zahl.
+> **Der Widerspruch von 10.000 gegen 50.000 € ist aufgelöst — beide Sekundärangaben waren falsch.**
+> Es gibt **10.000 €** für Einführungsvorhaben und **60.000 bzw. 100.000 €** für Transformation.
+> Einen Wert von 50.000 € kennt die Richtlinie nicht. Das ist der Beleg dafür, warum auf
+> Kundenseiten keine fremden Beträge stehen dürfen.
 
 **Was das für die Zielgruppe bedeutet:** Ein Sicherheitsdienst oder Elektrobetrieb im Kammerbezirk
 Dresden ist antragsberechtigt. Bei 50 % Fördersatz reden wir bei einem Paket zu 3.900 € netto über
@@ -268,27 +274,83 @@ Bundesprogramm für Firmenwebsites gibt es nicht mehr; die **Länder** sind das 
 Die Fördersätze liegen je nach Programm etwa zwischen **40 und 60 %**, in den **neuen Ländern
 tendenziell höher** — ein struktureller Vorteil für den Erstmarkt Dresden.
 
-**Vollständig recherchiert am 09.08.2026 — alle sechzehn Länder.** Programmnamen und Förderstellen
-aus Sekundärquellen; **Beträge bewusst nicht aufgenommen** (Begründung oben).
+**Alle sechzehn Länder am 09.08.2026 an der Primärquelle geprüft** — Förderbank oder
+Landesportal, nicht Sekundärübersicht. **Beträge stehen hier nur zur internen Orientierung; auf
+keiner Kundenseite erscheinen sie** (Begründung unten).
 
-| Land | Programm | Förderstelle | Art | Status |
-|---|---|---|---|---|
-| Baden-Württemberg | Digitalisierungsprämie | **L-Bank** | **Darlehen** mit Tilgungszuschuss | läuft |
-| **Bayern** | Digitalbonus (Standard · Plus) | Bezirksregierungen | Zuschuss | läuft **bis 31.12.2027** — **schließt Standard-Websites, Website-Texte und SEO ausdrücklich aus** |
-| Berlin | Transferbonus | **IBB** | Zuschuss | läuft |
-| Brandenburg | BIG Digital | **ILB** | Zuschuss, modular | läuft |
-| Bremen | **Digitaler Mittelstand KI** | **BAB – Die Förderbank**, BIS Bremerhaven | Zuschuss | **neu ab 01.04.2026**, bis Ende 2027 · auch **Soloselbstständige** |
-| Hamburg | **Hamburg-Kredit Digital** | **IFB Hamburg** | **Darlehen** + ergänzender Zuschuss | läuft |
-| Hessen | DIGI-Zuschuss | WIBank | Zuschuss | läuft |
-| Mecklenburg-Vorpommern | Digitalisierungsförderung Mittelstand | **TBI** Technologie-Beratungs-Institut | Zuschuss | läuft |
-| Niedersachsen | Digitalbonus.Niedersachsen – innovativ | NBank | Zuschuss | läuft |
-| Nordrhein-Westfalen | Mittelstand Innovativ & Digital (**MID**) | — | projektbezogener Zuschuss | läuft — **kein klassischer Digitalbonus mehr** |
-| **Rheinland-Pfalz** | **kein Umsetzungsprogramm.** Beratungsprogramm · InnoTop | **ISB** | Beratung bzw. Innovation | **Umsetzung wird nicht gefördert** |
-| Saarland | **DigitalInvest KMU** (Basis · Plus) | Serviceportal des Landes | Zuschuss | läuft, Antrag rein digital |
-| Sachsen | Digitalisierung in KMU / E-Business | **SAB** | Zuschuss | läuft |
-| **Sachsen-Anhalt** | **DIGITAL INNOVATION** | **IB Sachsen-Anhalt** | Zuschuss | **Aufrufverfahren** — Fenster schließen nach 60 bzw. 90 Anträgen |
-| Schleswig-Holstein | **Digi-Zuschuss** | **IB.SH** | Zuschuss | läuft |
-| **Thüringen** | Digitalbonus | TAB | Zuschuss | **Mittel derzeit ausgeschöpft** |
+| Land | Programm | Stelle | Art | Höchstbetrag | Quote | Status |
+|---|---|---|---|---|---|---|
+| **BW** | Digitalisierungsprämie Plus | L-Bank | Zuschuss **oder** Darlehen | Zuschuss **3.000 €** | 30 % | läuft |
+| **BY** | Digitalbonus Standard · Plus | Bezirksregierungen | Zuschuss | **7.500 €** · **30.000 €** | bis 50 % | läuft bis **31.12.2027** |
+| **BE** | Transfer BONUS | IBB | Zuschuss | **45.000 €**, Einstieg 15.000 € | bis 70 % | läuft |
+| **BB** | BIG-Digital | ILB | Zuschuss | ab 5.000 € Volumen | — | läuft |
+| **HB** | Digitaler Mittelstand KI | BAB | Zuschuss | **17.000 €** | Anteilfinanzierung | **neu seit 01.04.2026** |
+| **HH** | Hamburg-Kredit Digital | IFB | **Darlehen** + Zuschuss | Darlehen 25.000 €–2,5 Mio. €, Zuschuss max 20.000 € | bis 12 % des Darlehens | läuft |
+| **HE** | DIGI-Zuschuss | WIBank | Zuschuss | 10.000 € | bis 50 % | **BEENDET — Juni 2026, keine weiteren Aufrufe** |
+| **MV** | Digitalisierungsförderung Mittelstand | TBI | Zuschuss | Kleinstinvestitionen | bis 50 % | läuft, neu aufgestellt |
+| **NI** | Digitalbonus.Niedersachsen – innovativ | NBank | Zuschuss | 3.000–50.000 € | 35 % · 20 % | **AUSGELAUFEN** |
+| **NW** | MID — Digitalisierung · Digitale Sicherheit · AssistentIn | Land NRW | **Gutschein** | — | **80 % klein · 60 % mittel** | läuft |
+| **RP** | **DigiBoost** · Beratungsprogramm · IBI-EFRE | ISB | Zuschuss | DigiBoost **15.000 €** | IBI 20 % · 10 % | läuft |
+| **SL** | DigitalInvest KMU Basis · Plus | Serviceportal, nFMI | Zuschuss | **12.500 €** · **20.000 €** | 50 % klein · 30 % mittel | läuft |
+| **SN** | Digitalisierung in KMU, EFRE | SAB | Zuschuss | Einführung **10.000 €** · Transformation **60.000 €** klein, **100.000 €** mittel | 60 % · 50 % · 35 %, **+10 % Tarifbonus** | läuft |
+| **ST** | DIGITAL INNOVATION | IB Sachsen-Anhalt | Zuschuss | **70.000 €**, Berater max 6.000 € | — | läuft, **Verfahren zum 15.07.2026 geändert** |
+| **SH** | Digibonus | IB.SH | Zuschuss | **17.000 €** | 50 % | **zweifelhaft** — gefunden nur unter Landesprogramm Wirtschaft **2014–2020** |
+| **TH** | Digitalbonus | TAB | Zuschuss | 5.000–150.000 € | — | **MITTEL ERSCHÖPFT — keine Neuauflage geplant** |
+
+### Was die Primärquellen gegenüber den Sekundärübersichten korrigiert haben
+
+**Jede einzelne geprüfte Zahl war in den Sekundärquellen falsch oder veraltet:**
+
+| Land | Sekundärquelle sagte | Primärquelle sagt |
+|---|---|---|
+| Bayern Standard | 10.000 € | **7.500 €** |
+| Bayern Plus | 50.000 € | **30.000 €** |
+| Sachsen | 10.000 € **oder** 50.000 € | **10.000 €** Einführung, **60.000 / 100.000 €** Transformation — die 50.000 gibt es nicht |
+| Baden-Württemberg | Zuschuss 10.000 € | **3.000 €** |
+| **Niedersachsen** | aktiv | **ausgelaufen** |
+| **Hessen** | aktiv | **beendet Juni 2026** |
+| **Rheinland-Pfalz** | kein Umsetzungsprogramm | **DigiBoost, bis 15.000 €** |
+| **Sachsen-Anhalt** | Aufrufverfahren, 60 bzw. 90 Anträge | **seit 15.07.2026 Direktantrag** mit Mindestpunktzahl |
+
+> **Drei von sechzehn Programmen sind tot, eines ist zweifelhaft — und alle vier standen in den
+> Übersichten als aktiv.** Wer eine Förderseite aus Sekundärquellen baut, schickt Kunden zu
+> Programmen, die es nicht mehr gibt.
+
+### Die Ausschlüsse — im Wortlaut der Primärquellen
+
+**Bayern, `digitalbonus.bayern`:**
+
+> Nicht förderfähig sind *„Standard-Webseiten (herkömmliche Webseiten **ohne tiefe funktionelle
+> Einbindung in die betrieblichen Abläufe**) oder Standard-Webshops"* · *„Standard-Online-Marketing-
+> Maßnahmen (z. B. Suchmaschinenoptimierung, Display-Advertising, Content-Marketing)"* · sowie
+> **grafische und redaktionelle Dienstleistungen**.
+
+**Sachsen, SAB:** ausgeschlossen sind unter anderem *Standard-Bürosoftware* und
+**Websites ohne Geschäftsintegration**.
+
+**Und der Rest verlangt dasselbe in anderen Worten:**
+
+| Land | Anforderung, die eine Imageseite nicht erfüllt |
+|---|---|
+| Berlin | **technologieorientiert** oder „ausgeprägter Technologiebezug" |
+| Brandenburg | Analyse **betrieblicher Abläufe und Prozesse** auf Innovationspotenziale |
+| Niedersachsen *(als es lief)* | bereits **fortgeschrittene Digitalisierung** plus hoher **Innovationsgehalt** |
+| Sachsen-Anhalt | Technologien, die im Unternehmen **vorher nicht genutzt** oder nicht durchgängig vernetzt waren |
+| Saarland Plus | **besonderer Innovationsgehalt**, deutliche Steigerung des digitalen Reifegrads |
+| Hessen *(als es lief)* | Digitalisierungsfortschritt in **Produktion, Verfahren, Strategie oder Organisation** |
+| Bremen | Schwerpunkt **KI, automatisierte digitale Prozesse, Cybersicherheit** |
+
+> **Das Muster ist über alle sechzehn Länder identisch: Gefördert wird, was Abläufe verändert.
+> Nicht, was ein Unternehmen darstellt.**
+
+### Vier Länder scheiden für SARTUs Zielgruppe zusätzlich aus strukturellen Gründen aus
+
+| Land | Grund |
+|---|---|
+| **Hamburg** | **Mindestdarlehen 25.000 €.** Ein Paket zu 3.900 € netto erreicht die Schwelle nicht einmal ansatzweise |
+| **Mecklenburg-Vorpommern** | nur **Produktion, Handwerk, Tourismus** — Sicherheitsdienste, Reinigung, Kanzleien sind **nicht antragsberechtigt** |
+| **Baden-Württemberg** | Zuschussvariante **max. 3.000 €** bei 30 % — deckt einen kleinen Teil, und die Darlehensvariante lohnt für diese Summen nicht |
+| **Berlin** | Technologiebezug als Voraussetzung |
 
 ### Vier Statusarten, nicht zwei
 
