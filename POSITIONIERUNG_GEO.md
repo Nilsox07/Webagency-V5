@@ -176,7 +176,103 @@ steht in `ZIELGRUPPE_AKQUISE.md`.
 
 ---
 
-## 8. Quellen und Verfallsdaten
+## 8. Der Gegenentwurf „volle Hütte" — und warum er die GEO-Positionierung ausschließt
+
+> **Ergänzt am 09.08.2026** auf Frage des Betreibers: alles bespielen — Branchen **mal** Leistungen
+> **mal** Orte. Seine eigene Sorge dabei: *„Google und KI sehen dann nicht: ah ok, das ist Experte."*
+> Und die Gegenfrage: *„Wird das so genau überhaupt gesucht, oder reicht nicht doch einfach alles?"*
+
+### Die Idee ist im eigenen Konzept bereits geprüft und verworfen
+
+Masterkonzept **§16a** trägt sie wörtlich als *geprüfte Idee* — „für jeden Ort mit mehr als 5.000
+Einwohnern eine eigene Local-Landingpage" — mit dem Ergebnis **„nicht umsetzen"** und den
+Google-Richtlinien im Zitat:
+
+| Richtlinie | Wortlaut |
+|---|---|
+| **Doorway Abuse** | *„Having multiple domain names or pages targeted at specific regions or cities that funnel users to one page"* |
+| **Scaled Content Abuse** | *„many pages are generated for the primary purpose of manipulating search rankings and not helping users"* — gilt ausdrücklich **auch, wenn KI die Seiten erzeugt** |
+
+**Verschärfend im konkreten Fall, und das steht ebenfalls schon dort:** Webdesign ist **keine
+ortsgebundene Leistung**. Bei einem Dachdecker rechtfertigt die physische Nähe eine Ortsseite; bei
+einer remote arbeitenden Agentur ist der lokale Mehrwert erst zu beweisen. Der Rechtfertigungsdruck
+ist damit **höher**, nicht niedriger.
+
+> Das Konzept beantwortet auch das „Google merkt das schon nicht": *„Bewertet werden **Muster** —
+> Seitenähnlichkeit, Nutzwert, interne Struktur, Indexierungsverhalten."* Und: *„**20 %
+> Indexierungsquote ist kein Erfolg** — 80 % ignorierte Seiten belasten Crawlbudget, verwässern
+> interne Linkkraft und drücken das Qualitätsurteil über die **gesamte Domain**."*
+
+### Was 2026 dazugekommen ist
+
+Das **März-2026-Core-Update nannte Scaled Content Abuse ausdrücklich als Verstoß.** Seiten, die
+tausende nahezu identische Unterseiten per Vorlage oder KI erzeugt hatten, verloren **60 bis 90 %
+ihrer Rankings — praktisch über Nacht.**
+
+**Was überlebt hat, ist genau benannt:** Seiten mit **echter Datendifferenzierung** — verifizierte
+Verzeichnisse, Vergleichswerkzeuge mit Live-Preisen, Bestandsdaten. Der Unterschied liegt nicht in
+der Technik: *„Google bestraft keine Datenbank-generierte Seite. Google bestraft Seiten, die in
+großer Zahl existieren, ohne jemandem zu helfen."*
+
+### Die Rechnung, die die Frage allein entscheidet
+
+`SARTU_SEO_GEO_KEYWORDSTRATEGIE.md` beziffert die eigene Kapazität als **harte Zahl**: Prüfzyklus
+sechs Monate, realistisch 30 bearbeitbare Seiten im Monat → **Obergrenze rund 180 Seiten**. Danach
+ist die gesamte Kapazität in der Pflege gebunden. Realistische Erwartung dort: **20 bis 40 Seiten
+in zwei bis drei Jahren.**
+
+| Ausbaustufe | Seiten | Dafür nötige **eigene** Wörter (Prüfung 2: 400 je Seite) |
+|---|---|---|
+| 3 Branchen × 5 Leistungen × 10 Orte | **150** | 60.000 |
+| 5 × 5 × 20 | **500** | 200.000 |
+| „volle Hütte": 10 × 5 × 40 | **2.000** | **800.000** |
+
+**Dem stehen gegenüber:** 32 Launch-Adressen sind bereits vergeben, die Obergrenze liegt bei 180 —
+**Spielraum für rund 148 weitere Seiten. Insgesamt. Für immer.**
+
+Schon die kleinste Ausbaustufe sprengt das. Und jede dieser Seiten müsste zusätzlich **Prüfung 3**
+bestehen, den Herkunftsnachweis aus einer zulässigen Quelle.
+
+### Und zur Frage, ob das überhaupt gesucht wird
+
+**Nein — und das lässt sich derzeit nicht einmal prüfen.** `KEYWORD_VALIDATION.md` hält fest, dass
+**kein Volumenwerkzeug vorliegt** und deshalb „nie geschätzt" wird; die Spalte *Bestätigt* ist bei
+allen 32 Adressen leer.
+
+Die Kombinatorik erzeugt ihre eigene Antwort: Je feiner der Schnitt, desto kleiner das Volumen je
+Zelle. „Webdesign Bautzen" ist selten, „Webdesign für Friseure" ist bundesweit dünn — das Produkt
+aus beidem ist praktisch null. **2.000 Seiten wären die Summe sehr vieler Nullen**, gebaut ohne die
+Möglichkeit zu prüfen, welche Zelle überhaupt Nachfrage hat.
+
+### Der neue Einwand: „volle Hütte" und GEO schließen sich gegenseitig aus
+
+Das ist das Argument, das in `§16a` noch nicht stehen konnte, weil es GEO 2026 noch nicht gab:
+
+**Klassisches Ranking belohnt Abdeckung. KI-Zitierung belohnt Eindeutigkeit.** Damit ein
+Sprachmodell einen Anbieter *nennt*, muss es ihn als **Entität** mit einem Thema verbinden. Ein
+Anbieter, der für zweitausend Kombinationen dünn vorkommt, ist Entität für nichts.
+
+> **Beides gleichzeitig geht nicht.** Wer die GEO-Positierung aus den Abschnitten 1 bis 6 will,
+> kann nicht gleichzeitig in die Breite gehen — die Breite zerstört genau das Signal, auf dem die
+> Positionierung beruht. Und die Breite ist die riskantere der beiden: Sie kostet die ganze Domain,
+> wenn ein Update sie als Muster erkennt.
+
+### Was stattdessen die richtige Bewegung ist
+
+Nicht Branche × Leistung × Ort, sondern **eine Achse tief statt drei Achsen flach**:
+
+| Statt | Besser |
+|---|---|
+| 40 Ortsseiten | **eine** Branchenseite, die den Austauschtest besteht |
+| 10 dünne Branchenseiten | 3 Branchenseiten mit je 400 eigenen Wörtern und Herkunftsnachweis |
+| Orte als Seitengenerator | **Orte als Vertriebswerkzeug** — die Keywordstrategie sagt das selbst: *„Der Ortsdatensatz bleibt wertvoll — als Vertriebswerkzeug. Als Seitengenerator taugt er nicht."* |
+
+Der Ortsdatensatz für den Kammerbezirk Dresden ist damit **nicht wertlos** — er ist die Liste, mit
+der die ersten Kunden angesprochen werden. Nur eben offline.
+
+---
+
+## 9. Quellen und Verfallsdaten
 
 Nach Regel S5 aus `SARTU_BRANCHENFAKTEN.md`. **Dieses Feld verfällt schnell** — KI-Suche ändert
 sich monatlich, nicht jährlich.
@@ -192,6 +288,9 @@ sich monatlich, nicht jährlich.
 | GEO-Markt 886 Mio. $ → 7,3 Mrd. $, +34 % jährlich | Marktprognose | 2024–2031 | 2027 |
 | 900 Mio. wöchentliche Nutzer, 2,5 Mrd. Anfragen täglich | OpenAI-Angaben | Februar 2026 | Q4 2026 |
 | *Statistics Addition* +25,9 %, *Cite Sources* +24,9 % | **Aggarwal u. a., ACM KDD 2024**, ~10.000 Anfragen | 2024 | bereits in `SARTU_BRANCHENFAKTEN.md` geführt |
+| Scaled Content Abuse im März-2026-Core-Update, 60–90 % Rankingverlust | Google Search Central, SEO-Fachauswertungen | März 2026 | Q2 2027 |
+| Doorway- und Scaled-Content-Definitionen im Wortlaut | Google Spam Policies — bereits in Masterkonzept §16a geprüft (25.07.2026) | 2024–2026 | bei Richtlinienänderung |
+| Pflegeobergrenze ~180 Seiten, 30 Seiten je Monat | `SARTU_SEO_GEO_KEYWORDSTRATEGIE.md` — eigene Kapazitätsrechnung | 2026 | bei Personalveränderung |
 
 > **Keine dieser Zahlen ist für eine Kundenseite freigegeben.** Wer eine verwenden will, führt sie
 > zuerst nach `SARTU_BRANCHENFAKTEN.md` über und prüft gegen Regel S1 („Er muss nicken können"),
