@@ -196,3 +196,164 @@ Was nicht ausgeführt wurde, kommt nach `OFFENE_PRUEFUNGEN.md` — nicht in den 
 | **Anschrift, Rechtsform, Name** (§1) | offen für die Außendarstellung | Setup-Schritt 6 erhebt sie beim Betreiber. **Ich trage nichts vor** — auch keinen Platzhalter, der wie ein Wert aussieht |
 | **§7b Karriereseite** | Richtung gewählt, eine Lesart offen | Betrifft `leads` (A1). **A0 nicht betroffen**, kein Vorbau |
 | **Cron beim Hoster** (§4) | offen | A0 zeigt in Schritt 8 nur den Befehl an. Kein Lauf in A0 |
+
+---
+---
+
+# IMPLEMENTATION_PLAN — Stufe C und der Rest von A2
+
+**Fortgeschrieben am 09.08.2026.** Der Teil oben beschreibt A0 und bleibt unverändert stehen;
+er ist Bestand, nicht Entwurf. Was hier folgt, gilt für die zwölf Fälle 84 bis 95 und die vier
+offenen Fälle 51, 52, 53a und 54.
+
+**Freigegeben durch `SARTU_ENTSCHEIDUNGEN_OFFEN.md` §4a vom 09.08.2026.** Ohne diese Entscheidung
+stünde die Hälfte dieser Arbeit auf der Nicht-bauen-Liste. Die Bauvorgabe steht in
+`spezifikation/18_BELEGE_UND_ZAHLUNG.md`; hier steht, wie ich sie umsetze.
+
+## C.1 Bestand
+
+| | Stand am 09.08.2026 |
+|---|---|
+| Tests | 277 grün, 3.702 Zusicherungen, gegen MariaDB 11.4 |
+| Migrationen | 26, lückenlos, Prüfsummen stimmen |
+| Fachtabellen | 20 von 23 — die drei aus Stufe C fehlen |
+| Testfälle belegt | 84 von 95 |
+| `/api/` | **existiert nicht.** Der Webhook wird der erste Endpunkt des Projekts |
+| `design/tokens.css` | entschiedene Palette, stimmt mit beiden Entwürfen überein — **unberührt** |
+| Logo | `design/sartu-logo-hell.svg`, `-dunkel.svg`, `sartu-mark.svg`. Noch nicht unter `public/` |
+
+**Was `Rechnungsdienst.php` heute beschreibt und nicht kann.** Der Klassenkommentar nennt die
+Rücknahme einer Zahlung und die Änderung von `due_date` als eigene protokollierte Handlungen.
+Beide gibt es nicht. Ich baue sie, statt den Kommentar zu kürzen — der Kommentar hat recht.
+
+## C.2 Die zwei Composer-Pakete — Wahl und Begründung
+
+§4a erlaubt **genau zwei** zusätzliche Pakete. Ihre Abhängigkeiten kommen mit ihnen; sie sind
+keine dritte Wahl, sondern Bestandteil der ersten beiden.
+
+### `horstoeko/zugferd` — der ZUGFeRD-Erzeuger
+
+| Prüfpunkt | Befund am 09.08.2026 |
+|---|---|
+| Fassung | `v1.0.124`, veröffentlicht am 15.06.2026 |
+| Lizenz | **MIT** — verträgt sich mit einem proprietären Projekt ohne Auflage |
+| Wartung | letzte Veröffentlichung acht Wochen alt, laufende Fassungsfolge über 120 Ausgaben |
+| PHP 8.3 | `php >=7.3`, keine Obergrenze |
+| Erweiterungen | `ext-fileinfo`, `ext-simplexml` — beide im Bild vorhanden |
+
+**Warum dieses und kein anderes.** Es ist die einzige PHP-Bibliothek, die den Weg vollständig
+abdeckt: Aufbau des Datensatzes nach EN 16931, Ausgabe als XML, **Einbettung in ein bestehendes
+PDF nach PDF/A-3** und Prüfung gegen die mitgelieferten Schemata. Ein Erzeuger, der nur XML kann,
+hätte die Einbettung als dritte Abhängigkeit nach sich gezogen.
+
+### `dompdf/dompdf` — HTML nach PDF
+
+| Prüfpunkt | Befund am 09.08.2026 |
+|---|---|
+| Fassung | `v3.1.6`, veröffentlicht am 20.07.2026 |
+| Lizenz | **LGPL-2.1-only** — unveränderte Nutzung über Composer ist zulässig; ich ändere keine Zeile daran |
+| Wartung | letzte Veröffentlichung drei Wochen alt |
+| PHP 8.3 | `php ^7.1 \|\| ^8.0` |
+| Erweiterungen | `ext-dom`, `ext-mbstring` — vorhanden |
+
+**Warum nicht mPDF.** mPDF steht unter **GPL-2.0-only**. Ein proprietäres Projekt, das GPL-Code
+einbindet, gerät in einen Lizenzkonflikt. Das ist kein Geschmacksurteil, sondern der Grund,
+warum mPDF trotz besserer HTML-Abdeckung ausscheidet.
+
+**Warum nicht TCPDF.** Es rendert HTML nur eingeschränkt und kennt `design/tokens.css` nicht
+annähernd. Die Belegvorlage soll aus denselben Gestaltungswerten entstehen wie die Oberfläche.
+
+### Eine Erweiterung, kein Paket: `ext-xsl`
+
+**Das ist die einzige Stelle, an der ich über den Auftrag hinausgehe, und ich sage es vorher.**
+
+§3 und die Fälle 88 und 89 verlangen die Prüfung gegen **Schema und Schematron**. Das Schema
+prüft `libxml`, das im Bild liegt. Schematron ist eine XSLT-Umsetzung und braucht `ext-xsl` — die
+Erweiterung fehlt im Bild.
+
+`ext-xsl` ist **kein Composer-Paket**, sondern eine Standarderweiterung von PHP; die Grenze aus
+§4a ist damit nicht berührt. Sie berührt aber die **Anforderungen an den Hoster** und gehört
+deshalb in `LIVEGANG.md`. Ohne sie ist Fall 88 nicht erfüllbar, und ein Beleg ginge ungeprüft
+hinaus.
+
+**Der Weg der Schematron-Regeln selbst** ist beim Bauen zu klären: Liefert das Paket sie mit,
+werden sie von dort genommen. Liegt nur der KoSIT-Prüfer als Java-Aufruf bei, ist das keine
+gangbare Abhängigkeit — dann steht die Lücke mit Grund und Mittel in `OFFENE_PRUEFUNGEN.md`,
+und die Schemaprüfung greift allein. **Ich melde das, statt es zu überspielen.**
+
+## C.3 Zielstruktur
+
+```
+/app/data       NummernkreisSpeicher · Belegspeicher · Zahlungsereignisse
+                Admin\AdminBelege · Customer\KundenBelege
+/app/services   Nummernkreis · Belegerzeugung · Rechnungsdokument · Angebotsdokument
+                ERechnung (Aufbau, Prüfung) · Stornodienst · Mollie (Anlage, Abruf)
+                Zahlungsabgleich · Steuerexport · Ersteinrichtungsstand
+/api            MollieWebhook — der erste Endpunkt unter /api
+/admin          BelegeSteuerung · ErsteinrichtungSteuerung (Erweiterung der vorhandenen)
+/portal         Belegabruf im Kundenbereich
+/migrations     027 bis 033
+```
+
+**SQL ausschließlich in `/app/data`**, Fachlogik ausschließlich in `/app/services`. Die
+Belegvorlage ist eine Ansicht unter `/app/views` und enthält keine Fachlogik.
+
+## C.4 Migrationsreihenfolge — eine je Schemaobjekt
+
+| Nr. | Objekt | Warum getrennt |
+|---|---|---|
+| `027` | `number_sequences` | `CREATE TABLE` löst ein implizites Commit aus |
+| `028` | `documents` | dito |
+| `029` | `payment_events` | dito |
+| `030` | `invoices.issued_at` | `ALTER TABLE` ebenso |
+| `031` | `invoices.cancels_invoice_id` | eigener Fremdschlüssel, `ON DELETE RESTRICT` |
+| `032` | `invoices.payment_provider_id` | |
+| `033` | `operator_settings.mollie_key_test`, `mollie_key_live` | zwei Spalten **eines** Objekts, ein `ALTER` |
+
+**Kein `down`.** MySQL nimmt eine Schemaänderung nicht zurück. Eintrag in `schema_migrations`
+unmittelbar nach jedem Erfolg.
+
+## C.5 Reihenfolge — welcher lauffähige Stand wann
+
+1. **A2 schließen** — Rücknahme und `due_date`, Fälle 51, 52, 53a, 54
+2. **Migrationen 027 bis 033** — danach liegen alle 23 Tabellen
+3. **Nummernkreise** — Fälle 84, 85. Ab hier wird die Rechnungsnummer nicht mehr getippt
+4. **Belegerzeugung und Prüfung** — Fälle 87, 88, 89, 94
+5. **Storno** — Fall 86
+6. **Mollie** — Fälle 90, 91, 92, 93. Erst hier entsteht `/api`
+7. **Abruf, Versand, Export** — Fall 95
+8. **Menüpunkt Ersteinrichtung**
+9. **`VERFAHRENSDOKUMENTATION.md`**
+
+Nach jedem Schritt läuft die vollständige Testreihe. Ein Schritt gilt als fertig, wenn sie grün
+ist — nicht, wenn der Code steht.
+
+## C.6 Risiken, die ich vorher benenne
+
+| Risiko | Was ich tue |
+|---|---|
+| **Fall 85 verlangt echte Nebenläufigkeit.** Zwei Anlagen nacheinander prüfen ihn nicht | Ich versuche zwei getrennte PDO-Verbindungen mit `FOR UPDATE` gegeneinander. Trägt der Versuch nicht, wird der Zähler trotzdem richtig gebaut, der Test kommt so nah wie möglich heran, und die Lücke steht mit einer Zeile in `OFFENE_PRUEFUNGEN.md` |
+| **Der Webhook braucht eine öffentlich erreichbare Adresse** | Geprüft wird gegen einen nachgebildeten Aufruf mit eingesetztem Mollie-Zugriff. Der echte Zustellweg bleibt ungeprüft und wird eingetragen |
+| **Die Nummer wird bisher vom Admin getippt** und ist Pflichtfeld im Formular | Das Feld entfällt. Vorhandene Tests, die eine Nummer übergeben, werden auf die Vergabe umgestellt — **nicht** die Vergabe auf das Feld |
+| **`stornieren()` setzt heute nur einen Status** | Der Vorgang wird geteilt: Entwurf verwerfen, Stornorechnung, Zahlung zurücknehmen. Drei Wege, drei Prüfungen |
+| **`ext-xsl` fehlt im Bild** | Erweiterung nachziehen und in `LIVEGANG.md` als Hosteranforderung eintragen. Fehlt sie, fällt Fall 88 — nicht die Prüfung |
+
+## C.7 Testplan
+
+| Fall | Wo er entsteht |
+|---|---|
+| 51, 52, 53a, 54 | `tests/AuftragsstreckeTest.php` — die Strecke, an der A2 gemessen wird |
+| 84, 85 | `tests/NummernkreisTest.php` |
+| 86 | `tests/StornoTest.php` |
+| 87, 88, 89, 94 | `tests/BelegeTest.php` |
+| 90, 91, 92, 93 | `tests/ZahlungsabgleichTest.php` |
+| 95 | `tests/SteuerexportTest.php` |
+
+`tests/TenantIsolationTest.php` bekommt jede neue Route eingetragen — auch die unter `/api`.
+**Er wird nicht abgeschwächt**; schlägt er an, ist das seine Aufgabe.
+
+## C.8 Wo ich anhalte
+
+- Ein drittes Composer-Paket wäre nötig
+- Die Schematron-Regeln sind ohne Java nicht zu bekommen → melden, nicht ersetzen
+- Eine Zahl fehlt, ein Dokument widerspricht einem anderen
