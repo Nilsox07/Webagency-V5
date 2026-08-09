@@ -10,7 +10,7 @@
 
 ---
 
-## Die zwanzig Fachtabellen
+## Die dreiundzwanzig Fachtabellen
 
 `schema_migrations` zählt **nicht** mit — es entsteht **vor** allen Fachtabellen.
 
@@ -21,7 +21,31 @@
 | **A2** | `invoices` `tasks` `task_files` `approvals` `support_messages` | 21 |
 | **A3** | `feedback_rounds` `feedback_items` `domain_status` | 6 |
 | **B** | `business_hours` `business_hours_exceptions` | 1 |
-| **C** | — | 0 |
+| **C** | `number_sequences` `documents` `payment_events` | 12 |
+
+> **Bis zum 09.08.2026 waren es zwanzig und Stufe C war leer.** Mit der Entscheidung in
+> `SARTU_ENTSCHEIDUNGEN_OFFEN.md` §4a kommen Belegerzeugung und Zahlungsabgleich hinzu; alles
+> Übrige aus Stufe C bleibt ungebaut.
+
+### Die drei Tabellen der Stufe C
+
+| Tabelle | Schlüsselfelder | Wofür |
+|---|---|---|
+| `number_sequences` | `kind` `year` `last_number` | der lückenlose Zähler je Belegart und Jahr. Vergabe **unter Zeilensperre**, in derselben Transaktion wie der Beleg |
+| `documents` | `kind` `number` `invoice_id` `offer_id` `path` `checksum` `format` `created_at` | jeder erzeugte Beleg mit Ablageort und Prüfsumme. **Wird nie überschrieben** |
+| `payment_events` | `provider_event_id` `received_at` `processed_at` `payload_hash` | jede eingegangene Zahlungsbenachrichtigung. `UNIQUE` auf `provider_event_id` trägt die Idempotenz |
+
+### Felder, die dazukommen
+
+| Feld | Tabelle | Wofür |
+|---|---|---|
+| `issued_at` | `invoices` | Ausstellungsdatum als Pflichtangabe nach § 14 UStG, getrennt von `created_at` |
+| `cancels_invoice_id` | `invoices` | Verweis der Stornorechnung auf die stornierte Rechnung, `ON DELETE RESTRICT` |
+| `payment_provider_id` | `invoices` | Kennung der Zahlung beim Dienst |
+| `mollie_key_test` `mollie_key_live` | `operator_settings` | verschlüsselt über `sodium_*`, wie das TOTP-Geheimnis. **Nie im Klartext** |
+
+**Warum jede dieser Tabellen existiert, steht in `18_BELEGE_UND_ZAHLUNG.md`** — hier steht nur,
+wie sie aussieht.
 
 **Projekte je Organisation:** In Stufe 0 hat eine Organisation **genau ein aktives Projekt**.
 Mehrere sind technisch möglich; die Oberfläche zeigt immer das jüngste.
@@ -79,7 +103,7 @@ stammen aus dem abgelösten Stack und sind **ungültig**.
 | **Zahlungsplan** | fest `50_50` und `40_30_30`. **Ausnahme Sonderprojekt:** `custom` |
 | **Zahlungsziel** | Vorbelegung für `due_date` ab Rechnungsdatum — die Frist steht in `02_PREISE_UND_ZAHLUNG.md` |
 | **Dateigrößen** | `12,4 MB` — deutsch, eine Nachkommastelle |
-| **Nummernkreise** | Angebot `AN-JJJJ-NNN`, Rechnung `RE-JJJJ-NNN`, je Jahr fortlaufend. In Stufe 0 vom Admin eingegeben, **Eindeutigkeit erzwingt die Datenbank** |
+| **Nummernkreise** | Angebot `AN-JJJJ-NNN`, Rechnung `RE-JJJJ-NNN`, Storno `ST-JJJJ-NNN`, je Jahr fortlaufend ab `001`. **Vergeben aus `number_sequences` unter Zeilensperre, nicht eingegeben** — Begründung und Lückenverbot in `18_BELEGE_UND_ZAHLUNG.md`. `UNIQUE` auf der Belegnummer bleibt als Gegenprobe |
 | **Telefonnummern** | Anzeige wie eingegeben, **keine** automatische Umformatierung |
 | **Leere Werte** | nie `null`, `–` oder `undefined`. Stattdessen **`Noch nicht hinterlegt`** |
 

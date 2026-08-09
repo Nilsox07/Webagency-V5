@@ -171,7 +171,7 @@ aus. Ein `ROLLBACK` nach einer gescheiterten Migration nimmt die vorher gelaufen
 Deshalb:
 
 - **Jede Migration verändert genau ein Schemaobjekt**
-- `schema_migrations` wird als Erstes angelegt — es zählt nicht zu den 20 Fachtabellen
+- `schema_migrations` wird als Erstes angelegt — es zählt nicht zu den 23 Fachtabellen
 - Eintrag **unmittelbar nach jedem Erfolg**, nicht am Ende im Block
 - **SHA-256 je Datei**, Abweichung = Abbruch
 - Wiederanlauf bei der ersten nicht eingetragenen Migration

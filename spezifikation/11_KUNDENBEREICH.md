@@ -806,12 +806,25 @@ Texte, Bilder und Seitenstruktur ändert SARTU; das ist im Rundum-Schutz enthalt
 
 ---
 
-## Zahlungen in Stufe 0
+## Zahlungen
 
 - **Der Zahlungsstatus wird nie aus einer Rückkehr-URL abgeleitet.** Das gilt **schon vor A2**
-- In Stufe 0 legt der Admin Rechnungen manuell an; das Portal zeigt Status und Zahlungslink
-- Rechnungsarchiv, Aufbewahrungsfristen und Nummernkreise laufen im Buchhaltungswerkzeug,
-  **nicht** im Portal
+  und gilt nach der Mollie-Anbindung unverändert weiter: Der Webhook ist ein Klingelzeichen,
+  die Aussage holt der Server sich selbst
+- Der Admin legt Rechnungen an; das Portal zeigt Zustand, Zahlungsadresse und den Beleg
+- **Rechnungsarchiv, Aufbewahrungsfristen und Nummernkreise laufen im Portal.**
+  Einzelheiten in `18_BELEGE_UND_ZAHLUNG.md`
+
+> **Der Satz stand hier bis zum 09.08.2026 umgekehrt:** „laufen im Buchhaltungswerkzeug, **nicht**
+> im Portal". Mit der Entscheidung in `SARTU_ENTSCHEIDUNGEN_OFFEN.md` §4a gibt es kein
+> Buchhaltungswerkzeug mehr, in das sich etwas auslagern ließe. **Damit gilt die GoBD für das
+> Portal** — was sie verlangt und was davon schon steht, führt `18_BELEGE_UND_ZAHLUNG.md` auf.
+
+### Belege im Kundenbereich
+
+- Angebote und Rechnungen sind als Liste und als Beleg abrufbar, auch nach Projektende
+- Der Kunde sieht ausschließlich Belege seiner Organisation — sonst **404**, nicht 403
+- Zustände erscheinen in Klartext, nie als Systemcode
 
 ---
 

@@ -2244,3 +2244,54 @@ nicht aber der gefährlichste Fall: **gültige Sitzung, falsche Rolle.**
 | 1 | **Die Palette wurde nicht angesehen.** Geändert sind Zahlen in einer CSS-Datei; ob die Anwendung damit aussieht wie die beiden Entwürfe, hat niemand im Browser verglichen | `docker compose up -d`, `/` und `/portal` neben `design/startseite.html` und `design/portalkonzept.html` legen |
 | 2 | **Der Lauf fand nicht im Container statt.** Kein Docker-Daemon verfügbar; ersatzweise lokale MariaDB und der eingebaute PHP-Server. Fall 49 prüft damit **die Verzeichnisgrenze, nicht die Apache-Konfiguration** | `docker compose up -d --build`, dann `vendor/bin/phpunit` |
 | 3 | **Die vier Prüfungen der Etappen A2/A3 gegen echte Mailzustellung** sind nicht Teil dieses Laufs | Mailpit unter `localhost:8025` |
+
+---
+
+## 09.08.2026 — Zahlung, Belege und Buchhaltung: Entscheidung eingearbeitet
+
+**Der Betreiber hat am 09.08.2026 vier zusammenhängende Fragen entschieden.** Sie standen verteilt
+über drei Dateien und waren einzeln nicht beantwortbar: **Regelbesteuerung** · **Mollie wird
+gebaut** · **kein lexoffice, kein sevDesk** · **zwei zusätzliche Composer-Pakete erlaubt**.
+Vermerk in `SARTU_ENTSCHEIDUNGEN_OFFEN.md` §4a, Bauvorlage in
+`spezifikation/18_BELEGE_UND_ZAHLUNG.md`.
+
+### Was sich in den Unterlagen gedreht hat
+
+| Datei | Vorher | Jetzt |
+|---|---|---|
+| `spezifikation/02` | „Buchhaltung nicht selbst bauen. Rechnungen über lexoffice **oder** sevDesk (Entscheidung offen)" | Rechnungsausgang im Portal, Buchhaltung nicht; Export für den Steuerberater |
+| `spezifikation/11` | „Rechnungsarchiv, Aufbewahrungsfristen und Nummernkreise laufen im Buchhaltungswerkzeug, **nicht** im Portal" | **laufen im Portal** — damit gilt die GoBD für das Portal |
+| `spezifikation/13` | Rechnungsnummer „in Stufe 0 vom Admin **eingegeben**" | **vergeben aus `number_sequences`** unter Zeilensperre, lückenlos |
+| `spezifikation/12` | Nicht-bauen-Liste mit „Zahlungsdienst-Anbindung" | Zahlungsdienst gestrichen, Buchhaltung im engeren Sinn ergänzt |
+| `spezifikation/20` | „Buchhaltung: lexoffice oder sevDesk" als offener Punkt | **geschlossen**, durchgestrichen mit Verweis |
+| `REIHENFOLGE.md` | Stufe C: „— · 0 Testfälle" | Stufe C: drei Tabellen, **12 Testfälle**, Freigabegrenze benannt |
+| `CLAUDE.md` | 20 Tabellen, 88 Testfälle, Zahlungsdienst auf der Nicht-bauen-Liste | **23 Tabellen, 100 Testfälle**, Nicht-bauen-Liste bereinigt, Composer-Ausnahme benannt |
+
+**Neu angelegt:** `spezifikation/18_BELEGE_UND_ZAHLUNG.md` (Bauvorlage) ·
+`PROMPT_NEUE_SESSION_BELEGE.md` (Startprompt für die Bau-Session).
+
+**Zwölf neue Testfälle, 84 bis 95.** Neue Nummern statt einer Zerlegung wie bei Fall 66 — es sind
+eigenständige Prüfungen an einem neuen Gegenstand, keine Bedingungen derselben Sperre.
+
+### An der Primärquelle geprüft
+
+| Aussage | Quelle |
+|---|---|
+| Empfangspflicht seit **01.01.2025**, Versandpflicht **01.01.2027** über 800.000 €, **01.01.2028** alle übrige | BMF, FAQ zur obligatorischen E-Rechnung |
+| Kleinunternehmer nach § 19 UStG **dauerhaft** vom Versand befreit | ebenda |
+| Zulässig **XRechnung** und **ZUGFeRD ab 2.0.1**, ohne MINIMUM und BASIC-WL | ebenda |
+| Strukturierter Teil **acht Jahre** unversehrt aufzubewahren | ebenda |
+| GoBD gilt ausdrücklich für **Rechnungsschreibungssysteme**; Verfahrensdokumentation nach Rz. 151 ff. Pflicht; Programmdokumentation und Änderungsprotokolle unterliegen derselben Frist | BMF-Schreiben GoBD, 2. Änderung vom 14.07.2025 |
+
+> **Regelbesteuerung heißt: die Frist ist der 31.12.2027.** Kein Zeitdruck — aber auch kein Grund,
+> zweimal zu bauen.
+
+### Ungeprüft — nichts davon ist Code
+
+| # | Punkt | Womit es zu prüfen ist |
+|---|---|---|
+| 1 | **Es wurde keine Zeile Anwendungscode geschrieben.** Geändert sind acht Markdown-Dateien; die 277 Tests laufen unverändert grün, weil sie nichts davon berühren | `PROMPT_NEUE_SESSION_BELEGE.md` abarbeiten |
+| 2 | **Die zwei Composer-Pakete sind benannt, aber nicht ausgewählt.** Lizenz, Wartungsstand und PHP-8.3-Eignung sind vor dem Eintragen zu prüfen — das gehört in `IMPLEMENTATION_PLAN.md` der Bau-Session | Recherche im Bau |
+| 3 | **Fall 85 (Nebenläufigkeit bei der Nummernvergabe) ist im PHPUnit-Rahmen schwer echt zu prüfen.** Ein Test, der zwei Rechnungen nacheinander anlegt, prüft ihn nicht | zwei parallele Verbindungen, sonst als Lücke eintragen |
+| 4 | **Der Mollie-Webhook braucht eine öffentlich erreichbare Adresse.** Lokal bleibt er nachgebildet | erst auf dem Livesystem im Testmodus |
+| 5 | **Die Formatfrage des Steuerberater-Exports ist offen** und bewusst nicht vorweggenommen. Welches Format er will, weiß nur er | Rückfrage beim Steuerberater |

@@ -35,11 +35,12 @@ Stand 03.08.2026 · Aufbau nach `KONSOLIDIERUNG_RUNDE1.md`
 | `10_WEBSITE_SARTU.md` | `sartu.de` — technischer Rahmen, Navigation, alle zehn Sektionen, übrige Seiten | **fertig** |
 | `11_KUNDENBEREICH.md` | Anmeldung, Willkommensstrecke, Statuslogik, **alle Seiten**, Angebotstexte, Uploads, E-Mails | **fertig** |
 | `12_ADMINBEREICH.md` | Zugang, Screens, Projekt-Arbeitsplatz, Audit | **fertig** |
-| `13_DATENMODELL.md` | 20 Tabellen, Typabbildung, Formate, Konventionen | **fertig** |
+| `13_DATENMODELL.md` | 23 Tabellen, Typabbildung, Formate, Konventionen | **fertig** |
 | `14_SICHERHEIT.md` | Architektur, dreizehn eiserne Regeln, Ersteinrichtung, Migrationen | **fertig** |
-| `15_TESTFAELLE.md` | Verteilung, **alle 88 Fälle** in 14 Gruppen, Ausführung | **fertig** |
+| `15_TESTFAELLE.md` | Verteilung, **alle 100 Fälle** in 15 Gruppen, Ausführung | **fertig** |
 | `16_SEO_GEO_SARTU.md` | Suchintentionen, Launch-Reihenfolge, **alle Adressen mit Index und Schema** | **fertig** |
 | `17_SEITEN_SARTU.md` | Bedarfsscheck, Leistungs- und Branchenseiten, Ratgeber, Lexikon, Pflichtseiten, Bilder | **fertig** |
+| `18_BELEGE_UND_ZAHLUNG.md` | Rechnungsdokument, E-Rechnung, Nummernkreise, Storno, Mollie-Abgleich, Aufbewahrung, Steuerberater-Export | **fertig** |
 
 ### Teil 3
 

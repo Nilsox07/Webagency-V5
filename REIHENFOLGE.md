@@ -207,12 +207,25 @@ ist irreführend — und bei einem Anbieter, der mit Ehrlichkeit wirbt, der teue
 
 ---
 
-## Stufe C — wenn Handarbeit lästig wird
+## Stufe C — **teilweise freigegeben am 09.08.2026**
 
-- Mollie-Abo, Zahlungsautomatik, Webhooks, Mahnwesen
+**Freigegeben und zu bauen** (`SARTU_ENTSCHEIDUNGEN_OFFEN.md` §4a,
+`spezifikation/18_BELEGE_UND_ZAHLUNG.md`):
+
+- **Belegerzeugung:** Angebot und Rechnung als Dokument, Rechnung als ZUGFeRD nach EN 16931
+- **Nummernkreise** aus `number_sequences`, lückenlos, unter Zeilensperre
+- **Storno und Rücknahme** als eigene Vorgänge statt Statuswechsel
+- **Mollie:** Zahlung anlegen, Webhook, serverseitiger Statusabruf, Idempotenz, Abgleich
+- **Aufbewahrung** acht Jahre mit Prüfsumme, dazu die Verfahrensdokumentation
+- **Export für den Steuerberater**
+
+**Bleibt ungebaut, auch nicht vorbereitend:**
+
+- Mahnwesen und Mahnstufen, wiederkehrende Lastschriften und Mandate
 - **Registrar vollständig:** Verfügbarkeit, Registrierung, Verlängerung, Ablaufwarnung, Übertragung
 - Finanzübersichten, Auswertungen, Massenvorgänge
 - Bereitstellungsautomatik, Rollback
+- Buchhaltung im engeren Sinn: doppelte Buchführung, Kontenrahmen, Voranmeldung, Abschluss
 
 > **Der Unterschied zu A2:** Die **Tabelle** `invoices` und der von Hand gesetzte Zahlungsstatus
 > gehören nach A2 — ohne sie kommt kein Projekt in die Produktion. Nur die **Automatik** wandert
@@ -223,8 +236,9 @@ ist irreführend — und bei einem Anbieter, der mit Ehrlichkeit wirbt, der teue
 > Anfragen, ab A2 echte Rechnungen. Beide Läufe sind jetzt in ihrer Etappe (A1 und A2). **In C
 > bleibt, was darauf aufsetzt** — Mahnstufen, Erinnerungsmails, Zahlungsabgleich.
 >
-> **Kein Testfall hängt mehr an C.** Alle Testfälle aus §16 sind einer Etappe in A oder B
-> zugeordnet, jeder genau einmal (siehe unten).
+> **Bis zum 09.08.2026 hing kein Testfall an C.** Mit der Freigabe der Belegstrecke sind es
+> **zwölf** — die Fälle 84 bis 95. Alle übrigen bleiben in A oder B, jeder genau einmal
+> (siehe unten).
 
 ---
 
@@ -315,7 +329,26 @@ niemand geprüft hätte:
 | 82 | **A0** | Rechtstext mit `audience = kunde` ist öffentlich nicht abrufbar |
 | 83 | **A1** | Anmeldeseite zeigt die Telefonnummer aus den Betreiberdaten |
 
-**Summe:** A0 = **26** · A1 = **34** · A2 = **21** · A3 = **6** · B = 1 · C = 0. **Zusammen 88.**
+**Am 09.08.2026 kamen zwölf weitere dazu** — Stufe C, Belege und Zahlungsabgleich. Sie stehen
+einzeln in `spezifikation/15_TESTFAELLE.md`:
+
+| # | Etappe | Prüft |
+|---|---|---|
+| 84 | **C** | Rechnungsnummer wird vergeben, nicht eingegeben |
+| 85 | **C** | Nebenläufige Anlage vergibt keine Nummer doppelt und lässt keine aus |
+| 86 | **C** | Versendete Rechnung nur über Stornorechnung mit eigener Nummer aufhebbar |
+| 87 | **C** | Alle Pflichtangaben nach § 14 Abs. 4 UStG im strukturierten Teil |
+| 88 | **C** | PDF/A-3 mit eingebettetem XML, gültig gegen EN 16931 |
+| 89 | **C** | Ungültiger Beleg wird nicht versendet |
+| 90 | **C** | Zahlungsstatus aus serverseitigem Abruf, nie aus der Rückkehr-URL |
+| 91 | **C** | Webhook zweimal zugestellt wirkt genau einmal |
+| 92 | **C** | Abweichender Betrag oder Währung ändern nichts |
+| 93 | **C** | Mollie-Schlüssel nie im Klartext |
+| 94 | **C** | Prüfsumme weist den abgelegten Beleg als unverändert nach |
+| 95 | **C** | Steuerberater-Export enthält jeden Vorgang genau einmal |
+
+**Summe:** A0 = **26** · A1 = **34** · A2 = **21** · A3 = **6** · B = 1 · C = **12**.
+**Zusammen 100.**
 
 > **Nachgerechnet am 01.08.2026, vierte Korrektur dieser Zahl.** Eine externe Prüfung hat die
 > Tabelle Zeile für Zeile ausgezählt und kam auf **A0 = 27 · A1 = 34 · A2 = 21 · A3 = 5**. Die
@@ -374,12 +407,12 @@ er grün wird · die vollständige Definition of Done nach Stufe A abhaken.
 
 | Wer | Was |
 |---|---|
-| **Codex, lokal** | Stufe A bauen. Es kann auf dem Entwicklungsrechner ausführen, was es baut — bei 88 Tests gegen eine echte Datenbank wiegt das schwerer als jede Sorgfalt beim Schreiben |
+| **Codex, lokal** | Stufe A bauen. Es kann auf dem Entwicklungsrechner ausführen, was es baut — bei 100 Tests gegen eine echte Datenbank wiegt das schwerer als jede Sorgfalt beim Schreiben |
 | **Claude Code** | Entwürfe der Rechtstexte · Gegenlesen nach jeder Sitzung · Mandantentrennung prüfen · Spezifikation nachziehen, wenn Widersprüche auffallen |
 | **Betreiber** | Die drei offenen Angaben · Foto · Hosting auswählen und **praktisch prüfen** (Testmail an eine Fremdadresse, Cronlauf, der eine Datei schreibt) · Mailserver mit SPF, DKIM, DMARC |
 
 > **Warum Claude Code Stufe A nicht baut:** In seiner Umgebung läuft keine MySQL und kein
-> Docker-Dienst — geprüft am 28.07.2026. Damit sind die 88 Testfälle dort nicht ausführbar, und
+> Docker-Dienst — geprüft am 28.07.2026. Damit sind die 100 Testfälle dort nicht ausführbar, und
 > **nicht ausgeführter Code ist kein fertiger Code.**
 
 ---

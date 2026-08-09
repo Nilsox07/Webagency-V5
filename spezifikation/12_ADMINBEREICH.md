@@ -49,11 +49,13 @@ Alles in Abschnitten auf **einer** Seite:
   Status `gesendet`, verschickt E-Mail). **Nach Annahme schreibgeschützt**.
   Die **festen Angebotstexte**, die Vorbelegung und die **BFSG-Pflichtprüfung, die das Senden
   sperren kann**, stehen in `11_KUNDENBEREICH.md`
-- **Rechnungen** — Anlegen mit Nummer, Meilenstein, Beträgen, Fälligkeit, Feld
-  `Mollie-Zahlungslink`. Aktionen `Senden` und `Als bezahlt markieren` **mit Pflicht-Bestätigung**
-  und Pflichtfeld `reason`. Dazu **`Zahlung zurücknehmen`** als **eigene** protokollierte Aktion —
-  ebenfalls mit `reason`, und sie **benachrichtigt den Kunden** (`11_KUNDENBEREICH.md`).
-  **Kein stilles Zurücksetzen des Status**
+- **Rechnungen** — Anlegen mit Meilenstein, Beträgen und Fälligkeit. **Die Nummer wird vergeben,
+  nicht eingegeben** (`18_BELEGE_UND_ZAHLUNG.md`). Aktionen `Senden` und `Als bezahlt markieren`
+  **mit Pflicht-Bestätigung** und Pflichtfeld `reason`. Dazu **`Zahlung zurücknehmen`** als
+  **eigene** protokollierte Aktion — ebenfalls mit `reason`, und sie **benachrichtigt den Kunden**
+  (`11_KUNDENBEREICH.md`). **Kein stilles Zurücksetzen des Status**.
+  Eine versendete Rechnung wird **nicht** verworfen, sondern über eine **Stornorechnung mit
+  eigener Nummer** aufgehoben. Der Beleg selbst ist herunterladbar und einzeln per Mail versendbar
 - **Aufgaben** — einzeln oder **aus Vorlage**, sortierbar, bearbeitbar, deaktivierbar. Anzeige der
   Kundenantworten und Dateien mit Download. Knopf **`Aufgaben freigeben`** stellt sie dem Kunden
   zu und **verschickt die Mail „Es liegen Aufgaben für Sie bereit"** — angelegte Aufgaben sind
@@ -79,6 +81,13 @@ Projektstatuswechsel, Rechteänderung, Löschung, Anmeldung und **fehlgeschlagen
 
 ## Was hier nicht gebaut wird
 
-Weder jetzt noch vorbereitend: Zahlungsdienst-Anbindung · Domainautomatik · Mahnwesen ·
-Dunkelmodus · mehrere Benutzer je Kunde · Dateiversionierung · Anfragen aus **Kunden**websites ·
-Pipeline- und Kanban-Ansichten · Bewertung · Nachfassketten.
+Weder jetzt noch vorbereitend: Domainautomatik · Mahnwesen · wiederkehrende Lastschriften und
+Mandate · Dunkelmodus · mehrere Benutzer je Kunde · Dateiversionierung · Anfragen aus
+**Kunden**websites · Pipeline- und Kanban-Ansichten · Bewertung · Nachfassketten. Dazu Buchhaltung
+im engeren Sinn: doppelte Buchführung, Kontenrahmen, Umsatzsteuer-Voranmeldung, Abschluss.
+
+> **Die Zahlungsdienst-Anbindung stand bis zum 09.08.2026 in dieser Liste.** Sie ist freigegeben
+> (`SARTU_ENTSCHEIDUNGEN_OFFEN.md` §4a); was zu bauen ist, steht in `18_BELEGE_UND_ZAHLUNG.md`.
+> **Der Adminbereich bekommt dadurch zwei Dinge dazu:** die Hinterlegung des Mollie-Schlüssels
+> und den Menüpunkt `Ersteinrichtung`, der verschwindet, sobald `Startsperre::starterlaubt()`
+> wahr ist. **Die Ersteinrichtung unter `/admin/setup` bleibt bei acht Schritten.**

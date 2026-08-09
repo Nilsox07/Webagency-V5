@@ -11,7 +11,7 @@
 
 ## Verteilung auf die Stufen
 
-**88 Testfälle insgesamt.** Welcher Fall in welcher Stufe entsteht, steht in `REIHENFOLGE.md`
+**100 Testfälle insgesamt.** Welcher Fall in welcher Stufe entsteht, steht in `REIHENFOLGE.md`
 als **eine Zeile je Fall**.
 
 | Stufe | Fälle |
@@ -21,7 +21,7 @@ als **eine Zeile je Fall**.
 | A2 | 21 |
 | A3 | 6 |
 | B | 1 |
-| C | 0 |
+| C | 12 |
 
 > **Nicht schätzen, nachsehen.** Die Zahl war viermal falsch; die Zuordnungstabelle in
 > `REIHENFOLGE.md` ist die Quelle und wird hier **nicht** dupliziert.
@@ -262,13 +262,50 @@ Vorgaben: `14_SICHERHEIT.md`
 
 ---
 
+## Belege und Zahlungsabgleich — `18_BELEGE_UND_ZAHLUNG.md`
+
+*Ergänzt am 09.08.2026 nach der Entscheidung in `SARTU_ENTSCHEIDUNGEN_OFFEN.md` §4a. Alle zwölf
+entstehen in **Stufe C**, die bis dahin leer war.*
+
+84. Die Rechnungsnummer wird **vergeben, nicht eingegeben** — Form `RE-JJJJ-NNN`, im neuen Jahr
+    beginnt der Zähler wieder bei `001`
+85. Zwei gleichzeitig angelegte Rechnungen bekommen **verschiedene** Nummern und lassen **keine**
+    aus — geprüft unter Nebenläufigkeit, nicht nacheinander
+86. Eine **versendete** Rechnung lässt sich nicht verwerfen. Die Aufhebung erzeugt eine
+    **Stornorechnung mit eigener Nummer**; beide Belege bleiben abrufbar
+87. Der erzeugte Beleg trägt **alle Pflichtangaben nach § 14 Abs. 4 UStG** — geprüft am
+    strukturierten Teil, nicht an der Anzeige
+88. Der Beleg ist ein **PDF/A-3 mit eingebettetem XML** und besteht die Prüfung gegen Schema und
+    Schematron der EN 16931 im Profil `EN16931`
+89. Ein Beleg, der die Prüfung **nicht** besteht, wird **nicht versendet** — der Vorgang bricht ab
+    und nennt die verletzte Regel
+90. Der Zahlungsstatus stammt aus dem **serverseitigen Abruf** beim Dienst. Eine Rückkehr-URL mit
+    behauptetem Status ändert **nichts**
+91. Derselbe Webhook zweimal zugestellt ändert den Zustand **genau einmal** und antwortet beim
+    zweiten Mal **ohne Fehler**
+92. Ein abgerufener Betrag oder eine Währung, die nicht zur Rechnung passen, ändern **nichts** —
+    der Vorgang wird protokolliert und im Adminbereich sichtbar
+93. Der Mollie-Schlüssel steht **verschlüsselt** in der Datenbank und erscheint **in keiner**
+    Ansicht, Fehlermeldung oder Protokollzeile im Klartext
+94. Der abgelegte Beleg ist über seine **Prüfsumme** unverändert nachweisbar; eine Abweichung ist
+    ein **Fehler**, keine Warnung
+95. Der Export für den Steuerberater enthält jede Rechnung, jede Stornorechnung und jeden
+    Zahlungseingang des Zeitraums **genau einmal**
+
+---
+
 ## Zur Anzahl
 
-**83 durchnummerierte Fälle.** Sechs davon sind in Teilfälle mit Buchstabenzusatz zerlegt —
+**95 durchnummerierte Fälle.** Sechs davon sind in Teilfälle mit Buchstabenzusatz zerlegt —
 5 → 5a/5b · 40 → 40/40a/40b · 53 → 53a/53b · **66 → 66a bis 66j**. Die Zerlegung **erhöht die
 Zahl nicht**: ein Fall bleibt ein Fall, er wird nur an mehreren Bedingungen geprüft.
 
-**Es bleibt bei 88.**
+**Es sind 100.**
+
+> **Bis zum 09.08.2026 waren es 88.** Die zwölf Fälle 84 bis 95 kamen mit Stufe C dazu; die
+> Zerlegung in Teilfälle blieb unverändert. **Neue Nummern statt einer weiteren Zerlegung** —
+> anders als bei 66 sind es hier eigenständige Prüfungen an einem neuen Gegenstand, keine
+> Bedingungen derselben Sperre.
 
 > Frühere Fassungen sprachen von „59"; das war schon damals um vier Fälle zu niedrig.
 > **Maßgeblich ist die Liste, nicht die Zahl.**

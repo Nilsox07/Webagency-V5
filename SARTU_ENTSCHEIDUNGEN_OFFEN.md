@@ -326,6 +326,69 @@ durchbaut, hat das Gate verletzt.
 
 ---
 
+## 4a. Zahlung, Belege und Buchhaltung — **ENTSCHIEDEN 09.08.2026**
+
+**Vier Fragen, die zusammengehörten und einzeln nie beantwortbar waren.** Sie standen verteilt
+in `spezifikation/02_PREISE_UND_ZAHLUNG.md` („Entscheidung offen"), in der Nicht-bauen-Liste und
+in der Architekturregel „Composer sparsam". Der Betreiber hat sie am 09.08.2026 in einem Zug
+entschieden.
+
+| Frage | Entscheidung |
+|---|---|
+| **Besteuerung** | **Regelbesteuerung.** Nicht Kleinunternehmer nach § 19 UStG. `operator_settings.kleinunternehmer` bleibt als Feld bestehen, steht aber auf `false` |
+| **Zahlungsdienst** | **Mollie wird angebunden** — mit Webhook, serverseitigem Statusabruf und Abgleich. Die Nicht-bauen-Liste ist **an dieser einen Stelle aufgehoben** |
+| **Buchhaltungswerkzeug** | **Weder lexoffice noch sevDesk.** Der Rechnungsausgang entsteht im Portal, für den Steuerberater gibt es einen Export. Die offene Entscheidung ist damit **geschlossen, nicht vertagt** |
+| **Zusätzliche Pakete** | **Zwei Composer-Pakete sind erlaubt** — ein Erzeuger für ZUGFeRD/XRechnung und ein HTML-nach-PDF-Renderer. Bewusste Ausnahme von „Composer sparsam" |
+
+### Was ausdrücklich **nicht** entschieden wurde
+
+**Buchhaltung im engeren Sinn wird nicht gebaut.** Keine doppelte Buchführung, kein Kontenrahmen,
+keine Umsatzsteuer-Voranmeldung über ELSTER, kein Jahresabschluss. Diese Grenze ist Teil der
+Entscheidung und nicht ihr Nebeneffekt.
+
+> **Warum die Grenze genau hier liegt.** Der Rechnungsausgang ist ein abgeschlossener Vorgang mit
+> einer Norm dahinter — EN 16931 sagt Feld für Feld, was hineingehört. Buchhaltung ist kein
+> Vorgang, sondern ein Beruf: Kontenzuordnung, Voranmeldung, Abschluss, Betriebsprüfung. Wer sie
+> selbst baut, übernimmt die Haftung dafür, ohne die Fachkunde zu haben.
+
+### Was die Entscheidung an Verantwortung verschiebt
+
+**Bis heute lag die Aufbewahrung außerhalb.** `spezifikation/11_KUNDENBEREICH.md` schrieb:
+„Rechnungsarchiv, Aufbewahrungsfristen und Nummernkreise laufen im Buchhaltungswerkzeug, **nicht**
+im Portal." Dieser Satz fällt. Damit gilt für das Portal, was für jedes Rechnungsschreibungssystem
+gilt: **die GoBD.**
+
+| Anforderung | Stand |
+|---|---|
+| Unveränderbarkeit | **da** — `audit_events` verbietet `UPDATE` und `DELETE` per Trigger (Migrationen 005, 006) |
+| Nachvollziehbarkeit | **da** — `old_value`, `new_value`, `reason`; `reason` ist bei Geld und Fristen Pflichtfeld |
+| Keine harte Löschung | **da** — `archived_at` statt `DELETE` |
+| Lückenloser Nummernkreis | **fehlt** — die Rechnungsnummer wird heute vom Admin eingetippt |
+| Stornorechnung statt Statuswechsel | **fehlt** — `stornieren()` setzt nur den Status |
+| Aufbewahrung des strukturierten Teils | **fehlt** |
+| Verfahrensdokumentation | **fehlt** — ein Dokument, kein Programm |
+
+**Die Einzelheiten stehen in `spezifikation/18_BELEGE_UND_ZAHLUNG.md`.** Diese Datei hier nennt
+nur die Entscheidung; die Bauvorgabe steht dort.
+
+### Fristen, an der Primärquelle geprüft (09.08.2026)
+
+| Pflicht | Ab wann | Für wen |
+|---|---|---|
+| E-Rechnung **empfangen** können | **01.01.2025** | alle inländischen Unternehmer, auch Kleinunternehmer |
+| E-Rechnung **versenden** | **01.01.2027** | Vorjahresumsatz über 800.000 € |
+| E-Rechnung **versenden** | **01.01.2028** | alle übrigen |
+| Befreiung vom Versenden | dauerhaft | Kleinunternehmer nach § 19 UStG — **für SARTU nicht einschlägig** |
+
+**Zulässige Formate:** XRechnung und ZUGFeRD ab **2.0.1**, beide nach EN 16931; die Profile
+MINIMUM und BASIC-WL sind ausgeschlossen. Unter **250 €** greift die Pflicht nicht. Der
+strukturierte Teil ist **acht Jahre** unversehrt aufzubewahren.
+
+> **Für SARTU heißt das: Frist ist der 31.12.2027.** Es gibt keinen Zeitdruck — aber auch keinen
+> Grund, zweimal zu bauen. Quelle: Bundesfinanzministerium, FAQ zur obligatorischen E-Rechnung.
+
+---
+
 ## 5. Bildmaterial und Demoprojekte — **OFFEN**
 
 | Punkt | Stand |
@@ -683,3 +746,7 @@ ausgeschrieben sind.
 | 25.07.2026 | Entwicklungsumgebung: PHP+Composer verbindlich, Datenbank nachreichbar; Weg A oder B frei (§4) | Betreiber |
 | 25.07.2026 | Designrichtung: weichere Formsprache, etwas Verspieltheit, Bewegung ja, Glaseffekt nein (§3) | Betreiber |
 | 25.07.2026 | Akzentfarbe: Petrol `#1a6165` für Handlung, Lime `#a3e635` für Markierung; Terrakotta abgelöst (§3) | Betreiber |
+| 09.08.2026 | **Regelbesteuerung**, nicht Kleinunternehmer (§4a) | Betreiber |
+| 09.08.2026 | **Mollie wird angebunden** — Nicht-bauen-Liste an dieser Stelle aufgehoben (§4a) | Betreiber |
+| 09.08.2026 | **Kein lexoffice, kein sevDesk.** Rechnungsausgang im Portal, Export für den Steuerberater (§4a) | Betreiber |
+| 09.08.2026 | **Zwei zusätzliche Composer-Pakete erlaubt** — ZUGFeRD-Erzeuger und HTML-nach-PDF (§4a) | Betreiber |

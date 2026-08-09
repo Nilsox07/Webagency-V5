@@ -67,7 +67,7 @@ Rechtstexte werden **technisch eingebunden, nicht rechtlich erstellt** — `06_R
 
 | Sache | Lage |
 |---|---|
-| **Buchhaltung** | lexoffice **oder** sevDesk — Auswahlkriterien in `02_PREISE_UND_ZAHLUNG.md` |
+| ~~**Buchhaltung**~~ | **geschlossen am 09.08.2026.** Weder lexoffice noch sevDesk — der Rechnungsausgang entsteht im Portal, für den Steuerberater gibt es einen Export. `SARTU_ENTSCHEIDUNGEN_OFFEN.md` §4a, Bauvorlage in `18_BELEGE_UND_ZAHLUNG.md` |
 | **Typografie** | reine Grotesk (Inter / Instrument Sans) vs. Grotesk + editorial Serif für H1. Die Seite läuft auf einem Platzhalter — `07_MARKE_UND_GESTALTUNG.md` |
 | **`Leistungen` in der Navigation** | §5b widerspricht sich selbst, beide Stellen begründet — Dublettenregister im Wegweiser |
 | **`LocalBusiness`** in strukturierten Daten | gesperrt, bis eine Anschrift feststeht |

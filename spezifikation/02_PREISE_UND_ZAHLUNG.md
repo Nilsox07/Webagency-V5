@@ -66,12 +66,17 @@ Kundenbereich inkl. Rechnungs- und Zahlungsstatus, Reaktionsbereitschaft.
   **niemals** der Browser-Redirect. Webhooks idempotent, jede Zahlung gegen interne
   Rechnung/Betrag/Währung geprüft
 - **Schutz-Abo:** Mandat beim ersten wiederkehrungsfähigen Vorgang ausdrücklich bestätigt
-- **Buchhaltung nicht selbst bauen.** Rechnungen über lexoffice **oder** sevDesk (Entscheidung
-  offen). Rechnungszahlen dürfen **nie** von KI erzeugt werden
+- **Rechnungszahlen dürfen nie von KI erzeugt werden.** Jeder Betrag stammt aus `invoices`
 
-**E-Rechnung — B2B-Pflicht seit 01.01.2025, nicht optional:**
-Empfangen und revisionssicher archivieren können ist **sofort** Pflicht (XRechnung/ZUGFeRD nach
-EN 16931). Das Buchhaltungstool wird **nur** gewählt, wenn es EN 16931, GoBD-Archivierung,
-Storno/Gutschrift, USt-Behandlung und Mollie-Abgleich beherrscht.
-**Verboten:** selbstgebaute PDFs als alleinige Buchhaltung — ein PDF allein ist **keine**
-E-Rechnung.
+**Rechnungsausgang und Buchhaltung — entschieden am 09.08.2026:**
+**Der Rechnungsausgang entsteht im Portal, die Buchhaltung nicht.** Weder lexoffice noch sevDesk;
+für den Steuerberater gibt es einen Export. Nicht gebaut werden doppelte Buchführung,
+Kontenrahmen, Umsatzsteuer-Voranmeldung, Abschluss und Mahnwesen.
+**Der gesamte Weg vom Beleg bis zum Zahlungsabgleich steht in `18_BELEGE_UND_ZAHLUNG.md`** —
+Format, Nummernkreis, Storno, Mollie-Abgleich, Aufbewahrung, Übergabe. Diese Datei hier nennt
+weiterhin **nur die Beträge und den Zahlungsplan**.
+
+> **Die frühere Fassung wählte ein Buchhaltungswerkzeug und ließ die Wahl offen.** Sie ist am
+> 09.08.2026 abgelöst; die Begründung steht in `SARTU_ENTSCHEIDUNGEN_OFFEN.md` §4a. Was von ihr
+> gilt, gilt weiter: **ein PDF allein ist keine E-Rechnung** — deshalb ist das Format
+> ZUGFeRD, ein PDF/A-3 mit eingebettetem XML nach EN 16931.

@@ -9,11 +9,16 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 Bereich unter `/admin/`, Serverfunktionen unter `/api/`. Ein Repository, eine Domain, ein
 Deployment.
 
-**Stand 09.08.2026: 26 Migrationen (alle 20 Fachtabellen), 244 PHP-Dateien, 277 Tests grün,
-84 der 88 Testfälle zugeordnet.** A0, A1, A3 und B sind vollständig belegt; **in A2 fehlen vier
-Testfälle und zwei Funktionen** — Rücknahme einer Zahlung und Änderung von `due_date`. Der
-Klassenkommentar von `app/services/Rechnungsdienst.php` beschreibt beide bereits, als gäbe es
-sie. Einzelheiten in `OFFENE_PRUEFUNGEN.md`.
+**Stand 09.08.2026: 26 Migrationen, 244 PHP-Dateien, 277 Tests grün, 84 der 100 Testfälle
+zugeordnet.** A0, A1, A3 und B sind vollständig belegt. **Offen sind 16 Fälle in zwei Blöcken:**
+
+- **A2, vier Fälle und zwei Funktionen** — Rücknahme einer Zahlung und Änderung von `due_date`.
+  Der Klassenkommentar von `app/services/Rechnungsdienst.php` beschreibt beide bereits, als gäbe
+  es sie
+- **C, zwölf Fälle** — Belegerzeugung, E-Rechnung, Nummernkreise, Mollie-Abgleich. **Am
+  09.08.2026 freigegeben**, noch nichts davon gebaut
+
+Einzelheiten in `OFFENE_PRUEFUNGEN.md`.
 
 Die Spezifikation ist die Wahrheit, nicht der Code. Wo beides auseinandergeht, gewinnt die
 Spezifikation — und der Widerspruch wird gemeldet, nicht stillschweigend aufgelöst.
@@ -95,7 +100,7 @@ Bei **jedem** Widerspruch gilt diese Reihenfolge. Sie steht allein in `UEBERGABE
 | 2 | `REIHENFOLGE.md` | **nur den Zeitpunkt** — was jetzt gebaut wird, was wartet |
 | 3 | `SARTU_TEXTREGELN.md` | **nur die Form** jedes Textes |
 | 3a | `.claude/skills/sartu-texter/SKILL.md` | den Wortlaut |
-| **4** | **`spezifikation/`** | **alles Fachliche** — Stack, Datenmodell, Seiten, Sicherheit, 88 Testfälle |
+| **4** | **`spezifikation/`** | **alles Fachliche** — Stack, Datenmodell, Seiten, Sicherheit, Belege, 100 Testfälle |
 | — | die vier Lastenhefte | **Begründungsarchiv, keine Bauvorlage.** Bei Widerspruch gewinnt `spezifikation/` |
 
 Sechs Dateien tragen „FINAL" im Namen; das sagt nichts über ihr Alter. Widersprechen sich zwei
@@ -143,8 +148,8 @@ Preise, abgelöste Stacks. **Nie vorsorglich einlesen**, nur gezielt nachschlage
 
 ## Etappen — was jetzt gebaut wird
 
-`REIHENFOLGE.md` schneidet nach dem Zeitpunkt, nicht nach dem Bauteil. **20 Tabellen insgesamt,
-88 Testfälle** — wer das Lastenheft von vorn nach hinten abarbeitet, baut Monate an Automatik vor
+`REIHENFOLGE.md` schneidet nach dem Zeitpunkt, nicht nach dem Bauteil. **23 Tabellen insgesamt,
+100 Testfälle** — wer das Lastenheft von vorn nach hinten abarbeitet, baut Monate an Automatik vor
 dem ersten Kunden.
 
 | Etappe | Tabellen | Testfälle | Inhalt |
@@ -154,16 +159,23 @@ dem ersten Kunden.
 | A2 | `invoices` `tasks` `task_files` `approvals` `support_messages` | 21 | Annahme bis Produktionsstart, Überfälligkeitslauf |
 | A3 | `feedback_rounds` `feedback_items` `domain_status` | 6 | Vorschau bis `live` |
 | B | `business_hours` `business_hours_exceptions` | 1 | Öffnungszeiten selbst pflegen |
-| C | — | 0 | Mollie-Automatik, Mahnwesen, Registrar, Auswertungen |
+| **C** | `number_sequences` `documents` `payment_events` | 12 | **Freigegeben 09.08.2026:** Belege, E-Rechnung, Nummernkreise, Storno, Mollie-Abgleich, Aufbewahrung, Steuerberater-Export. **Mahnwesen, Registrar und Auswertungen bleiben ungebaut** |
 
 `schema_migrations` zählt nicht mit — es entsteht **vor** allen Fachtabellen.
 
 Welcher Testfall in welcher Etappe entsteht, steht in `REIHENFOLGE.md` als **eine Zeile je Fall**.
 Nicht schätzen, nachsehen. Die Zahl war viermal falsch, die Zuordnungstabelle ist die Quelle.
 
-**Nicht bauen, auch nicht vorbereitend** (`CODEX_AUFTRAG_PORTAL.md` §5): Zahlungsdienst-Anbindung,
-Domainautomatik, Mahnwesen, Dunkelmodus, mehrere Benutzer je Kunde, Dateiversionierung,
-Anfragen aus **Kunden**websites, Pipeline-/Kanban-Ansichten, Bewertung, Nachfassketten.
+**Nicht bauen, auch nicht vorbereitend** (`CODEX_AUFTRAG_PORTAL.md` §5): Domainautomatik,
+Mahnwesen, wiederkehrende Lastschriften und Mandate, Dunkelmodus, mehrere Benutzer je Kunde,
+Dateiversionierung, Anfragen aus **Kunden**websites, Pipeline-/Kanban-Ansichten, Bewertung,
+Nachfassketten. Dazu **Buchhaltung im engeren Sinn**: doppelte Buchführung, Kontenrahmen,
+Umsatzsteuer-Voranmeldung, Bilanz, Jahresabschluss.
+
+> **Die Zahlungsdienst-Anbindung stand bis zum 09.08.2026 auf dieser Liste und steht es nicht
+> mehr.** Der Betreiber hat sie freigegeben (`SARTU_ENTSCHEIDUNGEN_OFFEN.md` §4a, Rang 1). Die
+> Liste in `CODEX_AUFTRAG_PORTAL.md` §5 führt sie weiter — **das ist Begründungsarchiv und gewinnt
+> nicht.** Alles Übrige auf jener Liste gilt unverändert.
 
 ## Architektur
 
@@ -190,6 +202,11 @@ nannten Node/Fastify und Supabase — beides ist abgelöst.
 **PHP 8.3+ · MySQL 8 / MariaDB 10.6+ · PDO mit vorbereiteten Anweisungen, ausnahmslos ·
 Argon2id für Adminpasswörter · AES-256-GCM über `sodium_*` für verschlüsselte Felder ·
 Composer sparsam.**
+
+**Zwei Ausnahmen von „sparsam", entschieden am 09.08.2026** (`SARTU_ENTSCHEIDUNGEN_OFFEN.md` §4a):
+ein Erzeuger für **ZUGFeRD/XRechnung** nach EN 16931 und ein **HTML-nach-PDF-Renderer**. Beide
+sind unvermeidbar — ein normkonformes PDF/A-3 mit eingebettetem XML lässt sich nicht sinnvoll
+selbst schreiben. **Eine dritte Ausnahme braucht eine eigene Entscheidung.**
 
 ## Die Regeln, an denen es scheitert
 
@@ -308,7 +325,7 @@ Intern darf „Adminbereich" stehen.
 - In `SARTU_ENTSCHEIDUNGEN_OFFEN.md` steht `offen`
 - Eine gebrauchte Tabelle oder ein Feld fehlt im Datenmodell
 
-**Nie raten.** Es gibt 88 Testfälle und eine Rangfolge, damit niemand raten muss.
+**Nie raten.** Es gibt 100 Testfälle und eine Rangfolge, damit niemand raten muss.
 
 **Nichts erfinden:** keine Rechtstexte, Anschriften, Kundennamen, Referenzen, keine Zahl, die in
 den Unterlagen fehlt. Vorläufige Betreiberdaten aus der Ersteinrichtung sind ausdrücklich erlaubt
