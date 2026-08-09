@@ -1374,3 +1374,30 @@ auf der sie später nachgelesen werden könnte. Wer sie im Masterkonzept nachsch
 
 **Berichtigt wurde:** `NISCHEN_IDEEN.md` trennt jetzt „Echte Sperren" (Rang 1 und 4, mit Datei und
 Rang je Zeile) von „Empfehlungen ohne Bindung" aus dem Begründungsarchiv.
+
+---
+
+## Logoerstellung — Produktfrage, gemeldet 09.08.2026
+
+**Gefunden, weil der Betreiber Seiten der Form „Logoerstellung für Sicherheitsdienste" bauen will.**
+
+`spezifikation/03_KUNDENPRODUKT.md` führt unter **„Bewusst NICHT im Erstangebot — der
+Scope-Schutz"** wörtlich `Logo-Pakete` auf. `spezifikation/10_WEBSITE_SARTU.md` beschreibt den
+umgekehrten Weg: Der Kunde **lädt sein Logo hoch** — Schritt 3 im Kundenbereich.
+
+**Eine Leistungsseite für Logoerstellung bewirbt damit etwas, das SARTU nicht verkauft.**
+
+**Zu entscheiden — vom Betreiber, nicht von der KI:**
+
+| # | Frage | Folge |
+|---|---|---|
+| 1 | Kommt Logoerstellung ins Angebot? | Dann gehört sie nach `spezifikation/03`, in die Preistabelle (`02`) und in den Ablauf — nicht nur auf eine Landingpage |
+| 2 | Oder bleibt es beim Scope-Schutz? | Dann entfällt die Seite ersatzlos |
+| 3 | Falls ja: Wer zeichnet? | `07_MARKE_UND_GESTALTUNG.md` regelt das **SARTU-eigene** Logo, nicht Kundenlogos |
+
+**Sperre bis dahin:** Keine Seite, kein Satz und kein Listenpunkt, der Logoerstellung als Leistung
+nennt. Ein beworbenes Angebot, das im Bedarfsscheck nicht auftaucht, erzeugt genau die Anfrage,
+die abgelehnt werden muss.
+
+**Ungeprüft:** ob weitere Punkte der Scope-Schutz-Liste — `SEO-Stufen`, `Express`,
+`Newsletter/Tracking` — in der geplanten Seitenmatrix auftauchen. Geprüft wurde nur `Logo-Pakete`.

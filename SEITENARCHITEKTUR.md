@@ -121,6 +121,68 @@ umgekehrt.
 
 ---
 
+## Entscheidung des Betreibers vom 09.08.2026 — Leistung × Branche wird gebaut
+
+**Der Betreiber hat entschieden:** je Branche eine eigene Seite pro Leistung. Diskussion beendet;
+was folgt, ist der Bauplan, keine weitere Bewertung.
+
+**Ebenso entschieden — Teil 1:** Das Einzugsgebiet kommt **in die FAQ**, nicht auf eine eigene
+Seite und nicht in einen Fließtext. Eine Frage gibt der Ortsliste einen Grund zu existieren; damit
+fällt der Einwand gegen den reinen Aufzähltext weg. *(Randnotiz: `FAQPage` liefert seit Juni 2026
+keine Rich Results mehr — der Inhalt bleibt sinnvoll, das Schema bringt nichts mehr.)*
+
+### Ein Blocker, der vorher zu klären ist: Logoerstellung
+
+`spezifikation/03_KUNDENPRODUKT.md` führt unter **„Bewusst NICHT im Erstangebot — der
+Scope-Schutz"** wörtlich: *Add-on-Liste · Extraseiten-Preise · SEO-Stufen · **Logo-Pakete** ·
+Express · Newsletter/Tracking als Häkchen.*
+
+Und `spezifikation/10_WEBSITE_SARTU.md` beschreibt den umgekehrten Weg: Der Kunde **lädt sein Logo
+hoch** (Schritt 3 im Kundenbereich).
+
+> **Eine Seite „Logoerstellung für Sicherheitsdienste" bewirbt eine Leistung, die es nicht gibt.**
+> Das ist keine SEO-Entscheidung, sondern eine **Produktentscheidung**: Entweder Logo kommt ins
+> Angebot — dann gehört das nach `spezifikation/03` und in die Preistabelle — oder die Seite
+> entfällt. **Gemeldet, nicht entschieden.**
+
+### Die Matrix je Branche — am Beispiel Sicherheitsdienste
+
+Maßgeblich ist eine Regel, die alle Seiten am Leben hält: **Jede Seite braucht eine eigene Frage.**
+Zwei Seiten, die dieselbe Frage beantworten, nehmen sich gegenseitig die Kraft.
+
+| Adresse | Leistung × Branche | Die Frage dahinter | Urteil |
+|---|---|---|---|
+| `/website-sicherheitsdienst` | Webdesign | *„Welche Website braucht ein Bewachungsunternehmen?"* | **Bauen** — das ist die Branchenseite, 10 Blöcke, 900–1.300 Wörter |
+| `/seo-sicherheitsdienst` | SEO und GEO | *„Warum findet mich niemand — und warum steht mein Wettbewerber in ChatGPT?"* | **Bauen.** Mit dem Bündelungssatz: gibt es nur mit der Seite zusammen |
+| `/website-texte-sicherheitsdienst` | Texte | *„Was schreibe ich über Bewachung, ohne zu übertreiben?"* | **Bauen**, sofern Block 4 der Branchenseite es nicht schon abdeckt — sonst Dublette |
+| `/logo-sicherheitsdienst` | Logo | — | **Gesperrt**, siehe Blocker oben |
+| Wartung × Branche | Betrieb | *keine* — niemand sucht „Website-Wartung für Sicherheitsdienste" | Betreiberentscheidung. Es steht keine Suchanfrage dahinter |
+| Kundenbereich × Branche | Portal | *keine* | dito |
+
+**Ergebnis je Branche: drei tragfähige Seiten**, nicht sechs. Bei fünf Branchen sind das
+**15 Seiten** — innerhalb der Pflegekapazität und mit je eigener Berechtigung.
+
+### Was jede dieser Seiten braucht, damit sie nicht als Vorlage erkannt wird
+
+1. **Eine eigene Frage** in H1 und `Kurz gesagt` — nicht dieselbe mit getauschtem Branchenwort
+2. **Mindestens 400 Wörter, die auf keiner anderen Seite stehen** — bei der SEO-Seite heißt das:
+   was in *dieser* Branche die Sichtbarkeit tatsächlich bestimmt. Bei Bewachung sind das
+   Ausschreibungsportale, Referenzobjekte und § 34a-Nachweise — nicht „mehr Anfragen"
+3. **Eine Quellenzeile** zu jeder Branchenaussage
+4. **Ein eigener Einstieg in den Bedarfsscheck**, Branche vorausgefüllt
+
+### Reihenfolge
+
+| | Was | Warum zuerst |
+|---|---|---|
+| 1 | `/website-sicherheitsdienst` — die Branchenseite | Sie trägt die Recherche, aus der die anderen beiden schöpfen |
+| 2 | `/seo-sicherheitsdienst` | Der Winkel, den der Betreiber ausdrücklich will |
+| 3 | `/website-texte-sicherheitsdienst` | Erst prüfen, ob Block 4 sie überflüssig macht |
+| 4 | FAQ-Eintrag zum Einzugsgebiet | 20 Minuten, unabhängig von allem anderen |
+| — | Logo | **wartet auf die Produktentscheidung** |
+
+---
+
 ## Teil 3 — Was daraus für den Ausbau folgt
 
 ### Die Architektur ist fast fertig
