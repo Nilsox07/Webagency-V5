@@ -68,6 +68,7 @@ final class Rechnungsdienst
         private readonly ?AuditProtokoll $audit = null,
         private readonly ?Versender $mail = null,
         private readonly ?Nummernkreis $nummernkreis = null,
+        private readonly ?Belegerzeugung $belegerzeugung = null,
         private readonly ?\PDO $pdo = null,
     ) {
     }
@@ -180,7 +181,18 @@ final class Rechnungsdienst
             return ['Zu dieser Rechnung gibt es kein Projekt.'];
         }
 
-        $this->rechnungen()->zustandSetzen($rechnungId, Zahlungsstatus::GESENDET);
+        // §2 und §3: Mit dem Versand entsteht das Ausstellungsdatum, und aus ihm der Beleg.
+        // **Erst der Beleg, dann der Zustand.** Fällt die Prüfung nach EN 16931 durch, bleibt
+        // die Rechnung ein Entwurf — §3: „Es gibt keinen Weg, eine ungültige Rechnung zu
+        // senden, auch nicht mit Bestätigung."
+        $ausgestellt = Db::jetzt();
+        $beleg = $this->belegErzeugen(['issued_at' => $ausgestellt] + $rechnung, $projekt);
+
+        if ($beleg['fehler'] !== []) {
+            return $beleg['fehler'];
+        }
+
+        $this->rechnungen()->ausstellen($rechnungId, Zahlungsstatus::GESENDET, $ausgestellt);
 
         $this->audit()->schreiben(
             aktion: 'rechnung_gesendet',
@@ -334,6 +346,27 @@ final class Rechnungsdienst
      *
      * @return list<string> leer bei Erfolg
      */
+    /**
+     * Hebt eine Rechnung auf — `18_BELEGE_UND_ZAHLUNG.md` Abschnitt 5.
+     *
+     * ## Zwei Wege, und der Zustand entscheidet, welcher gilt
+     *
+     * | Zustand | Was geschieht |
+     * |---|---|
+     * | `entwurf` | **verworfen.** Die Nummer bleibt vergeben und wird nie wieder benutzt |
+     * | versendet | **Stornorechnung** mit eigener Nummer und negativen Beträgen. Beide Belege bleiben abrufbar |
+     *
+     * §5: „Eine **versendete** Rechnung lässt sich nicht verwerfen." Bis zum 09.08.2026 setzte
+     * diese Methode in beiden Fällen denselben Status — das genügt für einen Entwurf und
+     * nicht für einen Beleg, den ein Kunde in der Hand hat.
+     *
+     * **Warum die Nummer eines verworfenen Entwurfs vergeben bleibt.** §4: „Ein vergebener
+     * und dann verworfener Beleg ist **kein** Grund, die Nummer zu überspringen." Eine Lücke
+     * im Nummernkreis ist bei einer Betriebsprüfung erklärungsbedürftig; ein verworfener
+     * Beleg ist es nicht.
+     *
+     * @return list<string> leer bei Erfolg
+     */
     public function stornieren(string $rechnungId, string $grundlage, ?string $ip): array
     {
         $rechnung = $this->rechnungen()->finden($rechnungId);
@@ -343,25 +376,128 @@ final class Rechnungsdienst
         }
 
         if (mb_strlen(trim($grundlage)) < self::GRUNDLAGE_MINDESTLAENGE) {
-            return ['Bitte halten Sie fest, warum die Rechnung storniert wird.'];
+            return ['Bitte halten Sie fest, warum die Rechnung aufgehoben wird.'];
         }
 
         $vorher = (string) $rechnung['status'];
 
-        $this->rechnungen()->zustandSetzen($rechnungId, Zahlungsstatus::STORNIERT);
+        if (in_array($vorher, [Zahlungsstatus::VERWORFEN, Zahlungsstatus::STORNIERT], true)) {
+            return ['Diese Rechnung ist bereits aufgehoben.'];
+        }
+
+        return $vorher === Zahlungsstatus::ENTWURF
+            ? $this->entwurfVerwerfen($rechnung, trim($grundlage), $ip)
+            : $this->stornorechnungAnlegen($rechnung, trim($grundlage), $ip);
+    }
+
+    /**
+     * Der erste Weg — ein Entwurf, den nie jemand gesehen hat.
+     *
+     * Kein neuer Beleg, kein Dokument, keine Mail. Er ist nie hinausgegangen.
+     *
+     * @param array<string,mixed> $rechnung
+     * @return list<string>
+     */
+    private function entwurfVerwerfen(array $rechnung, string $grundlage, ?string $ip): array
+    {
+        $rechnungId = (string) $rechnung['id'];
+
+        $this->rechnungen()->zustandSetzen($rechnungId, Zahlungsstatus::VERWORFEN);
 
         $projekt = (new AdminProjekte($this->nachweis, $this->pdo))->finden((string) $rechnung['project_id']);
 
         $this->audit()->schreiben(
-            aktion: 'zahlungsstatus_geaendert',
+            aktion: 'rechnung_verworfen',
             objektart: 'invoice',
             objektId: $rechnungId,
             akteurBenutzerId: $this->nachweis->adminBenutzerId,
             organisationId: $projekt === null ? null : (string) $projekt['organization_id'],
-            alterWert: $vorher,
-            neuerWert: Zahlungsstatus::STORNIERT,
-            grund: trim($grundlage),
+            alterWert: Zahlungsstatus::ENTWURF,
+            neuerWert: Zahlungsstatus::VERWORFEN,
+            grund: $grundlage,
+            // Die Nummer bleibt vergeben. Sie steht im Protokoll, damit später erklärbar
+            // ist, warum sie in keiner Rechnung auftaucht.
+            detail: ['nummer_bleibt_vergeben' => (string) $rechnung['number']],
             ip: $ip,
+        );
+
+        return [];
+    }
+
+    /**
+     * Der zweite Weg — eine versendete Rechnung wird durch einen neuen Beleg aufgehoben.
+     *
+     * Die Stornorechnung ist eine **eigene Zeile** mit eigener Nummer aus dem Kreis `ST`,
+     * negativen Beträgen und einem Verweis auf die aufgehobene Rechnung. Beide bleiben
+     * abrufbar; gelöscht wird nichts.
+     *
+     * @param array<string,mixed> $rechnung
+     * @return list<string>
+     */
+    private function stornorechnungAnlegen(array $rechnung, string $grundlage, ?string $ip): array
+    {
+        $projekt = (new AdminProjekte($this->nachweis, $this->pdo))->finden((string) $rechnung['project_id']);
+
+        if ($projekt === null) {
+            return ['Zu dieser Rechnung gibt es kein Projekt.'];
+        }
+
+        $rechnungId = (string) $rechnung['id'];
+        $ausgestellt = Db::jetzt();
+
+        // Nummer und Zeile in **einer** Transaktion (§4).
+        $stornoId = $this->nummernkreis()->vergeben(
+            'ST',
+            fn (string $nummer): string => $this->rechnungen()->stornoAnlegen([
+                'project_id'         => (string) $rechnung['project_id'],
+                'number'             => $nummer,
+                'milestone'          => (string) $rechnung['milestone'],
+                'status'             => Zahlungsstatus::GESENDET,
+                'issued_at'          => $ausgestellt,
+                'cancels_invoice_id' => $rechnungId,
+                'net_cents'          => -(int) $rechnung['net_cents'],
+                'vat_cents'          => -(int) $rechnung['vat_cents'],
+                'gross_cents'        => -(int) $rechnung['gross_cents'],
+                'due_date'           => null,
+                'note'               => 'Storno zu ' . (string) $rechnung['number'] . ': ' . $grundlage,
+            ]),
+        );
+
+        $storno = $this->rechnungen()->finden($stornoId);
+
+        // Der Beleg zur Stornorechnung — dieselbe Prüfung wie bei jeder Rechnung.
+        if ($storno !== null) {
+            $beleg = $this->belegErzeugen($storno, $projekt);
+
+            if ($beleg['fehler'] !== []) {
+                return $beleg['fehler'];
+            }
+        }
+
+        $this->rechnungen()->zustandSetzen($rechnungId, Zahlungsstatus::STORNIERT);
+
+        $this->audit()->schreiben(
+            aktion: 'rechnung_storniert',
+            objektart: 'invoice',
+            objektId: $rechnungId,
+            akteurBenutzerId: $this->nachweis->adminBenutzerId,
+            organisationId: (string) $projekt['organization_id'],
+            alterWert: (string) $rechnung['status'],
+            neuerWert: Zahlungsstatus::STORNIERT,
+            grund: $grundlage,
+            detail: [
+                'stornorechnung'    => $storno === null ? null : (string) $storno['number'],
+                'stornorechnung_id' => $stornoId,
+            ],
+            ip: $ip,
+        );
+
+        $this->kundenmailSenden(
+            $projekt,
+            'Stornorechnung zu ' . (string) $rechnung['number'],
+            'Wir haben die Rechnung ' . (string) $rechnung['number'] . " aufgehoben.\n"
+            . 'Die Stornorechnung ' . ($storno === null ? '' : (string) $storno['number'])
+            . " liegt in Ihrem Bereich. Ein Betrag ist nicht zu zahlen.\n",
         );
 
         return [];
@@ -627,6 +763,37 @@ final class Rechnungsdienst
     private function rechnungen(): AdminRechnungen
     {
         return $this->rechnungen ?? new AdminRechnungen($this->nachweis, $this->pdo);
+    }
+
+    /**
+     * Erzeugt den Beleg zu einer Rechnung — Abschnitte 2, 3 und 7.
+     *
+     * @param array<string,mixed> $rechnung
+     * @param array<string,mixed> $projekt
+     * @return array{fehler:list<string>,id:?string,pfad:?string}
+     */
+    private function belegErzeugen(array $rechnung, array $projekt): array
+    {
+        $betreiber = (new BetreiberdatenSpeicher($this->pdo))->lesen();
+
+        if ($betreiber === null) {
+            return ['fehler' => ['Die Betreiberdaten fehlen. Ohne sie hat der Beleg keinen Aussteller.'],
+                'id' => null, 'pfad' => null];
+        }
+
+        $organisation = (new \Sartu\Data\Admin\AdminOrganisationen($this->nachweis, $this->pdo))
+            ->finden((string) $projekt['organization_id']);
+
+        if ($organisation === null) {
+            return ['fehler' => ['Zu diesem Projekt gibt es keine Organisation.'], 'id' => null, 'pfad' => null];
+        }
+
+        return $this->belege()->rechnung($rechnung, $betreiber, $organisation, $projekt);
+    }
+
+    private function belege(): Belegerzeugung
+    {
+        return $this->belegerzeugung ?? new Belegerzeugung(pdo: $this->pdo);
     }
 
     private function nummernkreis(): Nummernkreis

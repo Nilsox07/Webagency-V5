@@ -55,7 +55,7 @@ final class ProjektmailsTest extends Datenbankfall
 
         touch($this->arbeitsverzeichnis . '/' . InstallationsSperre::DATEINAME);
 
-        $this->betreiberdatenAnlegen();
+        $this->betreiberdatenAnlegen(self::BETREUER);
 
         $this->adminId = $this->adminAnlegen();
         $this->organisationId = $this->organisationAnlegen('Mustermann Sanitär GmbH', self::KUNDE);
@@ -514,6 +514,7 @@ final class ProjektmailsTest extends Datenbankfall
         return $id;
     }
 
+
     /**
      * Ein vollständiges Angebot im Zustand `entwurf`.
      *
@@ -537,18 +538,5 @@ final class ProjektmailsTest extends Datenbankfall
         $this->assertSame([], $angelegt['fehler']);
 
         return (string) $angelegt['id'];
-    }
-
-    private function betreiberdatenAnlegen(): void
-    {
-        $anweisung = $this->pdo->prepare(
-            'INSERT INTO operator_settings (id, firmenname, strasse, plz, ort, land, email,'
-            . ' benachrichtigung_email, steuernummer, inhaltlich_verantwortlich)'
-            . ' VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)'
-        );
-        $anweisung->execute([
-            Uuid::v4(), 'Betreiber', 'Strasse 1', '01067', 'Ort', 'DE',
-            'betreiber@example.org', self::BETREUER, '337/5804/1234', 'Verantwortlich',
-        ]);
     }
 }

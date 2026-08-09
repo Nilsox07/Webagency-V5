@@ -38,29 +38,9 @@ final class WebsiteTest extends Datenbankfall
 
         touch($this->arbeitsverzeichnis . '/' . InstallationsSperre::DATEINAME);
 
-        $this->betreiberdatenAnlegen();
+        $this->betreiberdatenAnlegen('eingang@example.org');
     }
 
-    /**
-     * Eine Betreiberzeile mit hinterlegtem Empfänger.
-     *
-     * **Ohne sie kann `/kontakt` nichts** — §4b.6 nimmt dem Formular den Datensatz, und ohne
-     * `benachrichtigung_email` geht auch keine Mail raus. Genau dieser Zustand hat den Test
-     * beim ersten Lauf scheitern lassen, und er ist ein echter: Die Seite zeigt dann den
-     * Ausweichweg statt des Formulars.
-     */
-    private function betreiberdatenAnlegen(): void
-    {
-        $anweisung = $this->pdo->prepare(
-            'INSERT INTO operator_settings (id, firmenname, strasse, plz, ort, land, email,'
-            . ' benachrichtigung_email, steuernummer, inhaltlich_verantwortlich)'
-            . ' VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)'
-        );
-        $anweisung->execute([
-            \Sartu\Data\Uuid::v4(), 'Betreiber', 'Strasse 1', '01067', 'Ort', 'DE',
-            'betreiber@example.org', 'eingang@example.org', '337/5804/1234', 'Verantwortlich',
-        ]);
-    }
 
     // ---------------------------------------------------------------- §17 Technik und SEO
 

@@ -35,7 +35,7 @@ use Sartu\Services\Wartungsmodus;
  * Anzahlung, Aufgaben und Faktenfreigabe bis `produktion`. Eine Rechnung mit überschrittenem
  * `due_date` steht am nächsten Tag auf `ueberfaellig`."*
  *
- * Testfälle: 11 · 12 · 13 · 14 · 15 · 16 · 17 · 24 · 26 · 27 · 46 · 51 · 52 · 53a ·
+ * Testfälle: 11 · 12 · 13 · 14 · 15 · 16 · 17 · 24 · 26 · 27 · 46 · 51 · 52 · 53a · 54 ·
  * 61 · 77 · 78 · 79
  *
  * **Fall 18 stand hier falsch.** Er verlangt `approvals` mit `kind = abnahme`; geprüft war
@@ -63,6 +63,10 @@ final class AuftragsstreckeTest extends Datenbankfall
         $_GET = [];
 
         touch($this->arbeitsverzeichnis . '/' . InstallationsSperre::DATEINAME);
+
+        // Ohne Betreiberdaten gibt es keinen Rechnungsaussteller — seit Stufe C bricht der
+        // Versand dort ab, statt einen Beleg ohne Pflichtangaben zu erzeugen.
+        $this->betreiberdatenAnlegen();
 
         $this->adminId = $this->adminAnlegen();
         $this->organisationId = $this->organisationAnlegen('Mustermann Sanitär GmbH', 'erika@example.org');

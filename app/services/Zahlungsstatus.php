@@ -46,6 +46,15 @@ final class Zahlungsstatus
     public const STORNIERT         = 'storniert';
 
     /**
+     * §5: Ein **nie versendeter** Entwurf wird verworfen, nicht storniert.
+     *
+     * Der Unterschied ist kein Wortspiel: Storniert heisst, dass es eine Stornorechnung
+     * gibt. Wer im Nummernkreis nach ihr sucht und keine findet, hat ein Problem zu
+     * erklaeren, das es nie gab.
+     */
+    public const VERWORFEN         = 'verworfen';
+
+    /**
      * Der Zustand, der zu einem Zahlbetrag gehört.
      *
      * @param bool $ueberfaellig ob `due_date` überschritten ist
@@ -99,7 +108,8 @@ final class Zahlungsstatus
                     . ' — offen: ' . Format::euro($rest)
                 : 'Überfällig seit ' . Format::datum(self::wert($rechnung, 'due_date')),
             self::TEILWEISE_BEZAHLT => 'Teilweise bezahlt — offen: ' . Format::euro($rest),
-            self::STORNIERT         => 'Storniert',
+            self::STORNIERT         => 'Aufgehoben durch eine Stornorechnung',
+            self::VERWORFEN         => 'Zurückgezogen',
             default                 => 'Offen — zahlbar bis ' . Format::datum(self::wert($rechnung, 'due_date')),
         };
     }

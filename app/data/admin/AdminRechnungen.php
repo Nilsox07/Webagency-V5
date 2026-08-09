@@ -109,6 +109,57 @@ final class AdminRechnungen
     }
 
     /**
+     * Setzt Zustand und Ausstellungsdatum in **einer** Anweisung — beim Versand.
+     *
+     * `issued_at` ist die Pflichtangabe nach § 14 Abs. 4 UStG und entsteht mit dem Versand,
+     * nicht mit dem Entwurf. Getrennt geschrieben gaebe es einen Moment, in dem die Rechnung
+     * `gesendet` heisst und kein Ausstellungsdatum hat — und genau in dem Moment koennte der
+     * Beleg erzeugt werden.
+     */
+    public function ausstellen(string $id, string $zustand, string $ausgestelltAm): void
+    {
+        $anweisung = $this->pdo()->prepare(
+            'UPDATE invoices SET status = ?, issued_at = ? WHERE id = ?'
+        );
+        $anweisung->execute([$zustand, $ausgestelltAm, $id]);
+    }
+
+    /**
+     * Legt eine Stornorechnung an — §5.
+     *
+     * Sie ist eine Zeile in derselben Tabelle: eigene Nummer, eigenes Ausstellungsdatum,
+     * negative Betraege, Verweis auf die aufgehobene Rechnung.
+     *
+     * @param array<string,mixed> $werte
+     */
+    public function stornoAnlegen(array $werte): string
+    {
+        $id = Uuid::v4();
+
+        $anweisung = $this->pdo()->prepare(
+            'INSERT INTO invoices (id, project_id, number, milestone, status, issued_at,'
+            . ' cancels_invoice_id, net_cents, vat_cents, gross_cents, due_date, note)'
+            . ' VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)'
+        );
+        $anweisung->execute([
+            $id,
+            $werte['project_id'],
+            $werte['number'],
+            $werte['milestone'],
+            $werte['status'],
+            $werte['issued_at'],
+            $werte['cancels_invoice_id'],
+            $werte['net_cents'],
+            $werte['vat_cents'],
+            $werte['gross_cents'],
+            $werte['due_date'],
+            $werte['note'],
+        ]);
+
+        return $id;
+    }
+
+    /**
      * Aendert das Faelligkeitsdatum — Fall 53a.
      *
      * Eigene Anweisung statt eines Anhaengsels an `zahlungSetzen`: Die Frist zu verschieben

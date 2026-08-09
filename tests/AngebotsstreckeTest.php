@@ -216,7 +216,7 @@ final class AngebotsstreckeTest extends Datenbankfall
         $this->assertStringNotContainsString('Kommt der Link nicht an?', $ohne,
             'Ohne hinterlegte Daten steht dort ein Notweg, den niemand gesetzt hat.');
 
-        $this->betreiberdatenAnlegen(telefon: '02571 1234567');
+        $this->betreiberdatenMitTelefon(telefon: '02571 1234567');
 
         $mit = $this->router()->behandeln('GET', '/login')->rumpf;
 
@@ -226,7 +226,7 @@ final class AngebotsstreckeTest extends Datenbankfall
     /** §6.3: Fehlt die Telefonnummer, erscheint die E-Mail-Adresse — nicht nichts. */
     public function testOhneTelefonnummerErscheintDieAdresse(): void
     {
-        $this->betreiberdatenAnlegen(telefon: '');
+        $this->betreiberdatenMitTelefon(telefon: '');
 
         $html = $this->router()->behandeln('GET', '/login')->rumpf;
 
@@ -586,7 +586,7 @@ final class AngebotsstreckeTest extends Datenbankfall
         return is_string($wert) ? $wert : null;
     }
 
-    private function betreiberdatenAnlegen(string $telefon): void
+    private function betreiberdatenMitTelefon(string $telefon): void
     {
         (new BetreiberdatenSpeicher($this->pdo))->anlegen([
             'firmenname'  => 'SARTU',

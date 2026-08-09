@@ -193,7 +193,7 @@ final class MarkupTest extends Datenbankfall
 
         // Zustand 3: angemeldet.
         $this->alsAdmin($this->adminAnlegen());
-        $this->betreiberdatenAnlegen();
+        $this->betreiberdatenVorlaeufigAnlegen();
 
         // Die Anfrageliste einmal leer und einmal gefuellt: Der Leerzustand ist eine eigene
         // Seite mit eigenem Text (§0.3b) und faellt sonst durch jede Pruefung.
@@ -324,7 +324,7 @@ final class MarkupTest extends Datenbankfall
         $speicher->zustandSetzen('impressum', 'freigegeben', 'Testkanzlei');
     }
 
-    private function betreiberdatenAnlegen(): void
+    private function betreiberdatenVorlaeufigAnlegen(): void
     {
         (new BetreiberdatenSpeicher($this->pdo))->anlegen([
             'firmenname'                => 'Vorläufig',

@@ -320,6 +320,24 @@ final class SecurityHeadersTest extends Datenbankfall
         );
     }
 
+    /**
+     * Dasselbe fuer das Logo — die Quelle liegt in `design/`, ausgeliefert wird aus `public/`.
+     *
+     * Zwei Kopien einer Datei driften auseinander, sobald jemand nur eine anfasst. Beim Logo
+     * faellt das spaeter auf als beim CSS: Es steht auf jeder Rechnung, und eine Rechnung
+     * wird nicht noch einmal erzeugt (Abschnitt 7).
+     */
+    public function testDasAusgelieferteLogoIstMitDerQuelleIdentisch(): void
+    {
+        foreach (['sartu-logo-hell', 'sartu-logo-dunkel', 'sartu-mark'] as $name) {
+            $this->assertFileEquals(
+                SARTU_WURZEL . '/design/' . $name . '.svg',
+                SARTU_WURZEL . '/public/assets/bild/' . $name . '.svg',
+                'public/assets/bild/' . $name . '.svg weicht von der Quelle in design/ ab.'
+            );
+        }
+    }
+
     // ------------------------------------------------------------
 
     private function router(bool $gesperrt = true): Router

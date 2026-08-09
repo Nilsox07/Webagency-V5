@@ -115,6 +115,31 @@ abstract class Datenbankfall extends TestCase
         return array_map(static fn (array $z) => (string) $z[0], $zeilen);
     }
 
+    /**
+     * Eine vollstaendige Betreiberzeile.
+     *
+     * **Warum das ab Stufe C zur Grundausstattung gehoert.** Eine Rechnung braucht nach
+     * § 14 Abs. 4 UStG einen Aussteller mit Anschrift und Steuernummer. Ohne diese Zeile
+     * gibt es keinen Beleg — und das ist kein Testproblem, sondern die Regel: Die Startsperre
+     * (§14a) haelt die Veroeffentlichung genau so lange an.
+     *
+     * Bis zum 09.08.2026 legten drei Testklassen sie einzeln an, zwei gar nicht. Sie steht
+     * jetzt hier, damit sie ueberall dieselbe ist.
+     */
+    protected function betreiberdatenAnlegen(?string $benachrichtigung = null): void
+    {
+        $anweisung = $this->pdo->prepare(
+            'INSERT INTO operator_settings (id, firmenname, strasse, plz, ort, land, telefon, email,'
+            . ' benachrichtigung_email, steuernummer, inhaltlich_verantwortlich, bank_institut, bank_iban)'
+            . ' VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)'
+        );
+        $anweisung->execute([
+            \Sartu\Data\Uuid::v4(), 'SARTU', 'Strasse 1', '01067', 'Dresden', 'DE',
+            '0351 0000000', 'betreiber@example.org', $benachrichtigung,
+            '337/5804/1234', 'Verantwortlich', 'Beispielbank', 'DE02120300000000202051',
+        ]);
+    }
+
     protected function organisationAnlegen(string $name, string $email): string
     {
         $id = \Sartu\Data\Uuid::v4();

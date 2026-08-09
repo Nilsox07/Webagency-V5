@@ -24,7 +24,7 @@ final class LegalTextsTest extends Datenbankfall
      */
     public function testAvvImEntwurfBlockiertDieVeroeffentlichung(): void
     {
-        $this->betreiberdatenAnlegen();
+        $this->betreiberdatenVorlaeufigAnlegen();
 
         $speicher = $this->speicher();
 
@@ -48,7 +48,7 @@ final class LegalTextsTest extends Datenbankfall
     /** Ein fehlender Text zaehlt wie ein Entwurf — sonst waere die Sperre durch Weglassen umgehbar. */
     public function testFehlenderRechtstextBlockiertEbenfalls(): void
     {
-        $this->betreiberdatenAnlegen();
+        $this->betreiberdatenVorlaeufigAnlegen();
 
         $this->assertContains('Der Rechtstext „Auftragsverarbeitungsvertrag" ist noch nicht freigegeben.', $this->startsperre()->hindernisse());
         $this->assertContains('Der Rechtstext „Technische und organisatorische Maßnahmen" ist noch nicht freigegeben.', $this->startsperre()->hindernisse());
@@ -145,7 +145,7 @@ final class LegalTextsTest extends Datenbankfall
         return new Startsperre(new BetreiberdatenSpeicher($this->pdo), new RechtstexteSpeicher($this->pdo));
     }
 
-    private function betreiberdatenAnlegen(): void
+    private function betreiberdatenVorlaeufigAnlegen(): void
     {
         (new BetreiberdatenSpeicher($this->pdo))->anlegen([
             'firmenname'                => 'Vorläufig',
