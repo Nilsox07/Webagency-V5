@@ -1598,3 +1598,106 @@ Kunde liefert sie. Sie blockieren allein den Livegang.
 
 **Eine Einschränkung bleibt:** Sie sollten im **Angebot** als Mitwirkungspflicht stehen, damit sie
 beim Livegang keine Überraschung sind. Das ist Angebotstext, keine Formularfrage.
+
+---
+
+## KI-Bilderstellung als Wahlmöglichkeit — geprüft 09.08.2026
+
+**Vorschlag des Betreibers:** Der Kunde wählt zwischen **Fotoanleitung** und **KI-Bilderstellung**,
+letztere gegen Aufpreis, EU-AI-Act-konform. Dazu ein Ratgeber-Artikel über die Wahl und den Act.
+
+**Der Ratgeber-Artikel ist uneingeschränkt zu empfehlen** — siehe unten. Beim Produkt gibt es drei
+Kollisionen.
+
+### Kollision 1 — die eigene Ehrlichkeitsregel, Rang 4
+
+`spezifikation/06_RECHT.md`, Abschnitt **„Ehrlichkeit — gilt für SARTU- **und Kundenwebsites**"**:
+
+> **Keine** Fake-Referenzen, Fake-Bewertungen, Fake-Logos, Fake-Adressen, **Fake-Teamfotos**
+
+**Ein KI-erzeugtes Teamfoto ist ein Fake-Teamfoto. Ein KI-erzeugtes Bild einer Arbeit, die es nie
+gab, ist eine Fake-Referenz.** Die Überschrift stellt ausdrücklich klar, dass die Regel für
+Kundenwebsites gilt — nicht nur für sartu.de.
+
+Dazu der eigene Maßstab aus `spezifikation/10` §8: Solange keine echten Beispiele existieren, gilt
+**„ehrlich beschrifteter Bildplatz, kein nachgebauter Bildschirm"**. SARTU hält sich selbst an den
+Platzhalter. Dem Kunden das Gegenteil zu verkaufen, wäre ein Markenwiderspruch.
+
+### Kollision 2 — die Rechtslage, seit dem 02.08.2026 in Kraft
+
+**EU-KI-Verordnung, Art. 50** — Transparenzpflichten gelten seit **2. August 2026**:
+
+| Punkt | Inhalt |
+|---|---|
+| Deepfake-Offenlegung, Art. 50 Abs. 4 | greift, wenn Material **real wirkende Personen, Orte oder Ereignisse** zeigt |
+| rein synthetisches Bild **ohne realen Bezug** | fällt in der Regel **nicht** darunter |
+| technische Kennzeichnung (Wasserzeichen, Metadaten) | Aufgabe des KI-Anbieters |
+| **sichtbare** Kennzeichnung im veröffentlichten Inhalt | **Aufgabe des Unternehmens** |
+| Bußgeldrahmen | bis **15 Mio. €** |
+
+> **Die Grenze verläuft nicht bei „war KI im Spiel", sondern bei „kann es täuschen".**
+
+**Und der Satz, der die ganze Idee entscheidet — § 5 und § 5a UWG:**
+
+> **Eine Kennzeichnung ersetzt keine wahrheitsgemäße Werbung.**
+
+Ein Bild, das Arbeiten zeigt, die es nie gab, bleibt irreführend — **auch mit Label**. Dazu kommt
+das Abmahnrisiko durch Wettbewerber und Verbände. Ob die Kennzeichnungspflicht eine
+Marktverhaltensregel nach § 3a UWG ist, **ist höchstrichterlich noch nicht geklärt**.
+
+**„EU-AI-Act-konform" ist damit keine ausreichende Bedingung.** Es ist die kleinere der beiden
+Hürden.
+
+### Kollision 3 — der Aufpreis
+
+Wie beim Logo: *„Es gibt keine Aufpreisliste"* (Klasse 1, Startseite) und
+`Keine Auswahl von Zusatzoptionen` (gebunden, Bedarfsscheck). `03_KUNDENPRODUKT.md` führt
+Add-on-Listen ausdrücklich im Scope-Schutz.
+
+**Einziger Preisweg ohne Regelbruch:** das konsolidierte **Folgeangebot** aus `03`.
+
+### Vorschlag — drei Stufen, die die Logo-Systematik fortsetzen
+
+| Stufe | Was | Rechtlich | Empfehlung |
+|---|---|---|---|
+| **1 — Aufbereitung echter Fotos** | freistellen, aufhellen, Störendes entfernen, Hintergrund bereinigen | fällt unter die Ausnahme für Standardbearbeitungen — Eingabedaten werden nicht wesentlich verändert. **Keine Kennzeichnungspflicht, keine Irreführung** | **enthalten**, genau wie die Logo-Aufbereitung |
+| **2 — abstrakte und dekorative KI-Bilder** | Hintergründe, Muster, Illustrationen **ohne realen Bezug** | *„rein synthetisch ohne reale Bezüge"* — in der Regel keine Deepfake-Pflicht. Sichtbare Kennzeichnung trotzdem sicherheitshalber | **möglich** |
+| **3 — KI-Bilder von Arbeiten, Team, Räumen, Ergebnissen** | — | **§ 5 UWG** und `06_RECHT.md` | **gesperrt** |
+
+> **Die Systematik ist dieselbe wie beim Logo: aufbereiten ja, erfinden nein.** Das macht das
+> Produkt in sich stimmig und den Ratgeber-Artikel glaubwürdig — SARTU kann erklären, warum es
+> Stufe 3 nicht anbietet, statt sie mit Kleingedrucktem abzusichern.
+
+**Die Wahl, die der Kunde bekommt, bleibt damit erhalten:** Fotoanleitung **oder** Aufbereitung
+seiner vorhandenen Bilder **oder** dekorative KI-Flächen — nur eben keine erfundenen Arbeiten.
+
+### Der Ratgeber-Artikel — empfohlen, mit Auftrag statt Wortlaut
+
+Nach Projektkonvention: *Aufgabe*, *Grenze*, *Umfang* — **kein Beispielsatz**, den Wortlaut
+schreibt der Texter-Skill.
+
+- **Aufgabe:** Dem Betriebsinhaber erklären, welche Bilder er für seine Website braucht, welche
+  drei Wege es gibt, und wo bei KI-Bildern die rechtliche Grenze verläuft — so, dass er danach
+  selbst entscheiden kann
+- **Grenze:** keine Rechtsberatung · keine Zusage zur Rechtssicherheit · nicht behaupten, eine
+  Kennzeichnung mache jedes Bild zulässig · keine Angstmache — die Zahl 15 Mio. € gehört nur
+  hinein, wenn sie eingeordnet wird
+- **Umfang:** in der Größenordnung der übrigen `/ratgeber/*`-Seiten
+- **Zahlen `gebunden`:** Geltungsbeginn **2. August 2026** · Rechtsgrundlagen Art. 50 KI-VO sowie
+  §§ 5, 5a UWG
+- **Pflichthinweis:** dass SARTU keine Rechtsberatung leistet — `06_RECHT.md`
+
+**Warum der Artikel geschäftlich trägt:** Er beantwortet eine Frage, die Betriebe **seit sieben
+Tagen** stellen, die kaum ein Wettbewerber ehrlich beantwortet — und er erklärt nebenbei, warum
+SARTU Stufe 3 nicht anbietet. Damit wird aus einer Absage ein Argument.
+
+**Zu beachten:** Eine neue Adresse ändert `KEYWORD_VALIDATION.md`. Die Datei wird **erzeugt**
+(`php bin/keywords.php`), nicht von Hand gepflegt.
+
+### Offen — Entscheidung des Betreibers
+
+| # | Frage |
+|---|---|
+| 1 | Stufe 2 anbieten oder ganz weglassen? Dekorative KI-Flächen sind zulässig, aber sie lösen das eigentliche Problem — fehlende Bilder echter Arbeiten — **nicht** |
+| 2 | Falls Aufbereitung bezahlt werden soll: über das Folgeangebot, oder enthalten wie beim Logo? |
+| 3 | Soll `06_RECHT.md` um eine Zeile zu KI-Bildern ergänzt werden? Die Regel greift schon, benennt den Fall aber nicht |
