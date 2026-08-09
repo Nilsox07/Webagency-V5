@@ -174,6 +174,56 @@ final class BetreiberdatenSpeicher
         return is_string($wert) && $wert !== '';
     }
 
+    /**
+     * Die beiden Schluesselfelder des Zahlungsdienstes — `18_BELEGE_UND_ZAHLUNG.md` §6.
+     *
+     * **Sie stehen mit Absicht NICHT in `SCHREIBBARE_FELDER`.** Diese Liste speist das
+     * Betriebsformular; ein Geheimnis darin waere ein Geheimnis in einer Maske, die es
+     * anzeigt, und in einer Fehlermeldung, die den abgewiesenen Wert wiederholt. Sie haben
+     * deshalb ihren eigenen, engen Schreibweg — und keinen eigenen Leseweg, der den Klartext
+     * herausgibt: `schluesselLesen()` gibt den verschluesselten Kasten, entschluesseln kann
+     * ihn nur `Services\Zahlungsschluessel`.
+     */
+    public const SCHLUESSELFELDER = ['mollie_key_test', 'mollie_key_live'];
+
+    /**
+     * **Der Spaltenname wird nicht verkettet, sondern ausgewaehlt.**
+     *
+     * Ein Spaltenname laesst sich nicht als Parameter binden — die uebliche Antwort darauf
+     * ist eine Weissliste und danach eine Verkettung. `PreparedStatementsTest` weist genau
+     * dieses Muster zurueck, und zwar zu Recht: Die Weissliste steht dann eine Zeile ueber
+     * der Verkettung, und beim naechsten Feld steht sie zwei Zeilen darueber.
+     *
+     * Zwei Felder, zwei feste Anweisungen. Kommt ein drittes dazu, faellt es hier auf.
+     */
+    public function schluesselSetzen(string $feld, ?string $kasten): void
+    {
+        // Kein „unbekanntes Feld wird ignoriert": Der Aufrufer glaubte, etwas zu speichern.
+        // Ein stilles Nichts waere ein Geheimnis, das niemand hinterlegt hat.
+        $sql = match ($feld) {
+            'mollie_key_test' => 'UPDATE operator_settings SET mollie_key_test = ? WHERE singleton = 1',
+            'mollie_key_live' => 'UPDATE operator_settings SET mollie_key_live = ? WHERE singleton = 1',
+            default           => throw new \InvalidArgumentException('Unbekanntes Schluesselfeld: ' . $feld),
+        };
+
+        $anweisung = $this->pdo()->prepare($sql);
+        $anweisung->execute([$kasten]);
+    }
+
+    /** Der verschluesselte Kasten, nicht der Schluessel. */
+    public function schluesselLesen(string $feld): ?string
+    {
+        $sql = match ($feld) {
+            'mollie_key_test' => 'SELECT mollie_key_test FROM operator_settings WHERE singleton = 1',
+            'mollie_key_live' => 'SELECT mollie_key_live FROM operator_settings WHERE singleton = 1',
+            default           => throw new \InvalidArgumentException('Unbekanntes Schluesselfeld: ' . $feld),
+        };
+
+        $wert = $this->pdo()->query($sql)->fetchColumn();
+
+        return is_string($wert) && $wert !== '' ? $wert : null;
+    }
+
     private function pdo(): \PDO
     {
         return $this->pdo ?? Db::verbindung();

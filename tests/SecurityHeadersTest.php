@@ -55,6 +55,14 @@ final class SecurityHeadersTest extends Datenbankfall
                 continue;
             }
 
+            // Der Zahlungs-Webhook traegt `ohneCsrf` und ist die **einzige** Route, die das
+            // darf. Das ist keine stille Ausnahme: `TenantIsolationTest` haelt fest, dass es
+            // genau bei dieser einen bleibt, und die Begruendung steht an `Route::$ohneCsrf`.
+            // Hier wird sie uebersprungen, weil sie sonst zwangslaeufig scheitern muesste.
+            if ($route->ohneCsrf) {
+                continue;
+            }
+
             // Die Einrichtungsrouten gibt es nur, solange die Einrichtung offen ist —
             // danach liefern sie 404. Geprueft wird deshalb im jeweils gueltigen Zustand.
             $istEinrichtung = str_starts_with($route->pfad, '/admin/setup');

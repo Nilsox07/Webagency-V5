@@ -142,7 +142,14 @@ final class Router
         }
 
         // 4. CSRF bei jedem POST (§3 Regel 3)
-        if ($methode === 'POST' && !Csrf::pruefen(Http::eingabe(Csrf::FELD))) {
+        //
+        // Die eine Ausnahme ist der Zahlungs-Webhook. Sie steht als Schalter an der Route,
+        // ist dort begruendet und wird von `TenantIsolationTest` auf genau diese eine Route
+        // festgenagelt. Sie greift zusaetzlich nur im Bereich `api` — zwei Bedingungen, damit
+        // ein versehentliches `true` an einer Kunden- oder Adminroute wirkungslos bleibt.
+        $ohneCsrf = $route->ohneCsrf && $route->bereich === Route::BEREICH_API;
+
+        if ($methode === 'POST' && !$ohneCsrf && !Csrf::pruefen(Http::eingabe(Csrf::FELD))) {
             return Antwort::html(
                 Ansicht::seite('oeffentlich', 'fehler', [
                     'titel'   => 'Das Formular ist abgelaufen',

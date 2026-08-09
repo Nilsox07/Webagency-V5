@@ -512,6 +512,83 @@ final class TenantIsolationTest extends Datenbankfall
         }
     }
 
+    /**
+     * Die Routenliste des Bereichs `/api/` ist vollstaendig bekannt.
+     *
+     * Dieselbe Zusage wie fuer den Kundenbereich: Kommt eine Serverfunktion hinzu, ohne dass
+     * dieser Test sie kennt, scheitert er. Bei `/api/` waere das Versehen teurer als
+     * anderswo — hier kommt jemand ohne Sitzung herein.
+     */
+    public function testRoutenlisteDerServerfunktionenIstVollstaendigBekannt(): void
+    {
+        $this->assertSame(
+            ['POST /api/zahlungen/mollie'],
+            $this->router()->schluessel(Route::BEREICH_API),
+            'Es gibt eine Route unter /api/, die dieser Test nicht kennt. Tragen Sie sie hier ein '
+            . 'und pruefen Sie sie — nicht umgekehrt.'
+        );
+    }
+
+    /**
+     * **Genau eine** Route traegt `ohneCsrf` — und sie liegt unter `/api/`.
+     *
+     * `14_SICHERHEIT.md` Regel 3 kennt keine Ausnahme von der CSRF-Pruefung;
+     * `18_BELEGE_UND_ZAHLUNG.md` Abschnitt 6 verlangt einen Aufruf von einem fremden Server,
+     * der kein Token haben kann. Der Widerspruch ist in `IMPLEMENTATION_SUMMARY.md`
+     * festgehalten und hier auf **eine** Route eingegrenzt.
+     *
+     * Dieser Test ist die Eingrenzung. Wer den Schalter ein zweites Mal setzt, sieht ihn
+     * scheitern — und muss erklaeren, warum, statt es beilaeufig zu tun.
+     */
+    public function testNurDerZahlungsWebhookIstVonDerCsrfPruefungAusgenommen(): void
+    {
+        $ohneToken = [];
+
+        foreach ($this->router()->routen() as $route) {
+            if ($route->ohneCsrf) {
+                $ohneToken[] = $route->schluessel();
+            }
+
+            if ($route->ohneCsrf) {
+                $this->assertSame(
+                    Route::BEREICH_API,
+                    $route->bereich,
+                    sprintf('%s ist von der CSRF-Pruefung ausgenommen, liegt aber nicht unter /api/.',
+                        $route->schluessel()),
+                );
+            }
+        }
+
+        $this->assertSame(['POST /api/zahlungen/mollie'], $ohneToken);
+    }
+
+    /**
+     * Der Webhook liest **keine** Sitzung — auch nicht die eines angemeldeten Kunden.
+     *
+     * Der gefaehrliche Fall ist nicht der anonyme Aufruf, sondern der Aufruf aus einem
+     * Browser, in dem gerade jemand angemeldet ist. Genau dagegen schuetzt sonst das
+     * CSRF-Token. Hier schuetzt, dass die Route keine Sitzung anfasst: Sie kann nichts im
+     * Namen des Angemeldeten tun, weil sie nicht weiss, dass es ihn gibt.
+     */
+    public function testDerWebhookHandeltNieImNamenEinerAngemeldetenSitzung(): void
+    {
+        $organisation = $this->organisationAnlegen('Betrieb A', 'a@example.org');
+        $this->alsKunde($organisation, $this->kundeAnlegen($organisation, 'kunde@example.org'));
+
+        $vorher = $_SESSION;
+
+        $_POST = ['id' => 'tr_gibtesnicht'];
+
+        // Ohne hinterlegten Schluessel bricht der Abruf ab — genau das ist die Aussage:
+        // Der Aufruf erreicht nichts, obwohl eine gueltige Kundensitzung besteht.
+        $antwort = $this->router()->behandeln('POST', '/api/zahlungen/mollie');
+
+        $this->assertNotSame(419, $antwort->status, 'Der Webhook haengt an einem CSRF-Token.');
+        $this->assertSame($vorher, $_SESSION, 'Der Webhook hat die Sitzung angefasst.');
+
+        $_POST = [];
+    }
+
     /** Kein Codepfad mit abschaltbarem Organisationsfilter (§3 Regel 2a, ausdrueckliches Verbot). */
     public function testKeinGemeinsamerCodepfadMitAbschaltbaremFilter(): void
     {

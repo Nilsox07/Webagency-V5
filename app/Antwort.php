@@ -62,6 +62,19 @@ final class Antwort
         ]), 404);
     }
 
+    /**
+     * Eine Antwort fuer eine Maschine — `/api/`, `18_BELEGE_UND_ZAHLUNG.md` Abschnitt 6.
+     *
+     * Reiner Text und kein HTML: Am anderen Ende steht kein Browser, sondern der
+     * Zahlungsdienst, und der liest nur den Statuscode. Eine Fehlerseite mit Layout waere
+     * eine Antwort an niemanden — und der Rumpf einer Maschinenantwort ist die letzte
+     * Stelle, an der man eine Ausnahme versehentlich nach draussen schreibt.
+     */
+    public static function text(string $rumpf, int $status = 200): self
+    {
+        return new self($status, ['Content-Type' => 'text/plain; charset=utf-8'], $rumpf);
+    }
+
     public static function weiter(string $ziel, int $status = 302): self
     {
         return new self($status, ['Location' => $ziel], '');

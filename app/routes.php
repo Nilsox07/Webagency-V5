@@ -19,6 +19,7 @@ declare(strict_types=1);
  */
 
 use Sartu\Admin\AnfragenSteuerung;
+use Sartu\Api\ZahlungenSteuerung;
 use Sartu\Admin\AnmeldeSteuerung;
 use Sartu\Admin\BetriebSteuerung;
 use Sartu\Admin\OeffnungszeitenSteuerung;
@@ -201,4 +202,17 @@ return [
     new Route(Route::BEREICH_PORTAL, 'POST', '/portal/hilfe', [KundenRechnungenSteuerung::class, 'nachrichtSenden']),
     new Route(Route::BEREICH_PORTAL, 'POST', '/willkommen/fertig', [PortalSteuerung::class, 'willkommenFertig']),
     new Route(Route::BEREICH_PORTAL, 'GET', '/willkommen/{nummer}', [PortalSteuerung::class, 'willkommen']),
+
+    // ---------------------------------------------------------- Serverfunktionen (/api/)
+    //
+    // Genau eine Route: der Webhook des Zahlungsdienstes
+    // (`18_BELEGE_UND_ZAHLUNG.md` Abschnitt 6). Sie ist die einzige Stelle der Anwendung,
+    // an der ein fremder Rechner ohne Sitzung etwas ausloest — und die einzige mit
+    // `ohneCsrf`. Die Begruendung steht an `Route::$ohneCsrf`, nicht hier, damit sie
+    // dorthin faellt, wo jemand den Schalter ein zweites Mal setzen moechte.
+    //
+    // **Es gibt bewusst keine Rueckkehrroute vom Zahlungsdienst.** Der Kunde landet nach der
+    // Zahlung auf `/portal/rechnungen` — einer gewoehnlichen Seite, die den gespeicherten
+    // Zustand zeigt und aus der Adresse nichts liest (§12).
+    new Route(Route::BEREICH_API, 'POST', '/api/zahlungen/mollie', [ZahlungenSteuerung::class, 'mollie'], false, true),
 ];

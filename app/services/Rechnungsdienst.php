@@ -69,6 +69,7 @@ final class Rechnungsdienst
         private readonly ?Versender $mail = null,
         private readonly ?Nummernkreis $nummernkreis = null,
         private readonly ?Belegerzeugung $belegerzeugung = null,
+        private readonly ?Zahlungsdienst $zahlungsdienst = null,
         private readonly ?\PDO $pdo = null,
     ) {
     }
@@ -193,6 +194,9 @@ final class Rechnungsdienst
         }
 
         $this->rechnungen()->ausstellen($rechnungId, Zahlungsstatus::GESENDET, $ausgestellt);
+
+        // §6 Schritt 1 und 2: Zahlung beim Dienst anlegen, Adresse an der Rechnung merken.
+        $this->zahlungVorbereiten($rechnungId, $rechnung, $ip);
 
         $this->audit()->schreiben(
             aktion: 'rechnung_gesendet',
@@ -789,6 +793,65 @@ final class Rechnungsdienst
         }
 
         return $this->belege()->rechnung($rechnung, $betreiber, $organisation, $projekt);
+    }
+
+    /**
+     * Legt beim Zahlungsdienst eine Zahlung an — §6 Schritt 1 und 2.
+     *
+     * ## Warum ein Fehlschlag den Versand nicht anhält
+     *
+     * Die Rechnung ist zu diesem Zeitpunkt ausgestellt, der Beleg liegt in der Ablage und
+     * trägt eine Nummer aus dem lückenlosen Kreis. Sie danach wieder zurückzunehmen, weil
+     * ein fremder Server nicht antwortet, hieße eine Lücke zu reißen — und die Rechnung ist
+     * ohne Zahlungslink vollständig: Auf ihr steht die Bankverbindung.
+     *
+     * Der Fehlschlag wird protokolliert, nicht verschwiegen. Im Adminbereich steht die
+     * Rechnung dann ohne Zahlungsadresse da, und der Betreiber kann sie nachtragen.
+     *
+     * ## Warum ohne hinterlegten Schlüssel gar nichts passiert
+     *
+     * Vor der Anbindung — und in jeder Umgebung ohne Schlüssel — soll der Versand genau so
+     * laufen wie vorher. Ein Aufruf ins Leere, der jedes Mal einen Protokolleintrag über
+     * einen fehlenden Schlüssel erzeugt, wäre Lärm.
+     *
+     * @param array<string,mixed> $rechnung
+     */
+    private function zahlungVorbereiten(string $rechnungId, array $rechnung, ?string $ip): void
+    {
+        $dienst = $this->zahlungsdienst;
+
+        if ($dienst === null) {
+            if (!(new Zahlungsschluessel())->hinterlegt()) {
+                return;
+            }
+
+            $dienst = new Mollie();
+        }
+
+        try {
+            $zahlung = $dienst->zahlungAnlegen(
+                (int) $rechnung['gross_cents'],
+                ERechnung::WAEHRUNG,
+                (string) $rechnung['number'],
+                Mollie::rueckkehrAdresse(),
+                Mollie::webhookAdresse(),
+            );
+        } catch (ZahlungsdienstFehler $fehler) {
+            $this->audit()->schreiben(
+                aktion: 'zahlung_anlegen_gescheitert',
+                objektart: 'invoice',
+                objektId: $rechnungId,
+                akteurBenutzerId: $this->nachweis->adminBenutzerId,
+                // Der Text der Ausnahme nennt nie einen Schlüssel — dafür sorgt `Mollie`.
+                grund: $fehler->getMessage(),
+                ip: $ip,
+            );
+
+            return;
+        }
+
+        (new \Sartu\Data\Zahlungseingaenge($this->pdo))
+            ->zahlungHinterlegen($rechnungId, $zahlung['kennung'], $zahlung['adresse']);
     }
 
     private function belege(): Belegerzeugung
