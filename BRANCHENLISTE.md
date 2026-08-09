@@ -1,4 +1,4 @@
-# Branchenliste — 49 Kandidaten mit Selbstbezeichnung
+# Branchenliste — 75 Kandidaten mit Selbstbezeichnung
 
 > **Was diese Liste ist:** eine **Prioritätsschlange über Jahre**, kein Bauplan.
 > **75 Branchen in sechs Stufen.**
