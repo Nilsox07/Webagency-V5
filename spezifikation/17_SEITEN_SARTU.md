@@ -211,18 +211,35 @@ Wege nennen, nicht nur den Fehler.
 > Diese Frage entscheidet über **Sonderprojekt** und über die BFSG-Pflichtprüfung im Angebot
 > (`11_KUNDENBEREICH.md`). Sie darf nicht gekürzt werden.
 
-**Thema 5 — Domain und Termin**
+**Thema 5 — Domain, Logo und Termin**
 
 | # | fragt nach | Typ | Pflicht | Optionen (`gebunden`) |
 |---|---|---|---|---|
 | 5.1 | dem Domainstatus | eine Wahl | ja | Domain vorhanden · Neue Domain nötig · Bin unsicher |
-| 5.2 | einem festen Termin | eine Wahl | ja | Nein, der normale Zeitrahmen passt · Ja |
-| 5.3 | Datum und Grund — **nur bei `Ja`** | Datum + Text | ja, bedingt | — |
-| 5.4 | dem, was auf keinen Fall übersehen werden darf | Textfeld | nein | — |
+| 5.2 | dem **Logostatus** | eine Wahl | ja | Logo vorhanden, als Datei · Logo vorhanden, aber nur gedruckt oder als Foto · Kein Logo · Bin unsicher |
+| 5.3 | einem festen Termin | eine Wahl | ja | Nein, der normale Zeitrahmen passt · Ja |
+| 5.4 | Datum und Grund — **nur bei `Ja`** | Datum + Text | ja, bedingt | — |
+| 5.5 | dem, was auf keinen Fall übersehen werden darf | Textfeld | nein | — |
 
-> Der Hilfetext zu 5.3 muss klarstellen: **ein Wunschdatum ist noch keine Zusage.** Die
+> Der Hilfetext zu 5.4 muss klarstellen: **ein Wunschdatum ist noch keine Zusage.** Die
 > Machbarkeit wird im Angebot bestätigt. Ohne diesen Satz entsteht eine Zusage aus einem
 > Formularfeld.
+
+> **Feld 5.2 ergänzt am 09.08.2026 auf Entscheidung des Betreibers.** Die vier Optionen bilden die
+> drei Fälle ab, die unterschiedlich behandelt werden: *als Datei* → nichts weiter, Upload im
+> Kundenbereich (`10_WEBSITE_SARTU.md`, Vorgang 3). *Nur gedruckt oder als Foto* → **Aufbereitung,
+> im Paket enthalten** (`03_KUNDENPRODUKT.md`). *Kein Logo* → der Neuentwurf ist **nicht** Teil des
+> Angebots; wie dieser Fall bedient wird, ist offen (`OFFENE_PRUEFUNGEN.md`).
+>
+> **Warum in Thema 5 und nicht später:** Zwischen Bedarfsscheck und Kundenbereich liegt das
+> **Angebot**. Ein fehlendes Logo ändert Weg und möglicherweise Preis — beides muss vor der
+> Festpreiszusage bekannt sein, nicht erst, wenn im Kundenbereich nichts hochzuladen ist.
+>
+> **Warum kein eigenes Thema:** `Thema {n} von 5` ist gebunden. Ein Feld in einem bestehenden Thema
+> lässt Fortschrittsanzeige und die zugesagten drei Minuten unberührt. Die Form ist von 5.1
+> übernommen — der Domainstatus löst dieselbe Aufgabe und ist ebenfalls keine wählbare Zusatzoption,
+> sondern eine Zustandsabfrage. Damit bleibt der gebundene Vertrauenspunkt
+> `Keine Auswahl von Zusatzoptionen` wahr.
 
 ### 2.3 Ergebnis **vor** den Kontaktdaten
 

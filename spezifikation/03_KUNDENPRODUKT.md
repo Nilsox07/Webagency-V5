@@ -14,8 +14,21 @@ Bedarfsprüfung + begründete Empfehlung · strategische Sitemap · individuelle
 SARTU-Designsystem · KI-gestützte, menschlich geprüfte Programmierung ohne WordPress ·
 responsive + Barrierefreiheits-Basis + Performance · Website-Texte aus bestätigten Fakten ·
 **SEO-/GEO-Startsystem** · Kontaktweg/Formular · technische Einbindung freigegebener Rechtstexte
-+ Consent · Vorschau + gebündeltes Feedback + Korrekturrunden · Domainprüfung, -verbindung,
-Launch · Zugang zum Kundenbereich.
++ Consent · **Aufbereitung eines vorhandenen Logos** · Vorschau + gebündeltes Feedback +
+Korrekturrunden · Domainprüfung, -verbindung, Launch · Zugang zum Kundenbereich.
+
+> **Ergänzt am 09.08.2026 auf Entscheidung des Betreibers — „Aufbereitung eines vorhandenen
+> Logos".** Gemeint ist ausschließlich: ein Logo, das nur gedruckt, fotografiert oder als
+> schlechtes Pixelbild vorliegt, wird für die Website nachgezeichnet und in den benötigten Größen
+> bereitgestellt. **Kein Entwurf, keine Varianten, keine eigenen Korrekturrunden.**
+>
+> **Der Neuentwurf eines Logos bleibt ausgeschlossen** — `Logo-Pakete` stehen unverändert im
+> Scope-Schutz weiter unten. Die Abgrenzung ist die Grenze zwischen *vorhanden* und *nicht
+> vorhanden*, und sie wird im Bedarfsscheck abgefragt (`17_SEITEN_SARTU.md` §2.2, Feld 5.2).
+>
+> **Warum die Unterscheidung nötig war:** Ohne sie fiel jeder Betrieb, dessen Logo nur auf dem
+> Firmenwagen existiert, in denselben Topf wie eine Neugründung ohne Marke. Der erste Fall ist
+> Umsetzungsarbeit, der zweite ein eigenes Gewerk.
 
 **Platzhirsch zusätzlich bedarfsgerecht:** Team-/Karrierebereich · Projekt-, Referenz- und
 Neuigkeitenstruktur · stärkere lokale Struktur · **genau ein** Conversion-Modul (qualifiziertes

@@ -1461,3 +1461,79 @@ zu brechen. Und er löst vermutlich die Mehrzahl der Fälle, die heute als „br
 **Was das nicht löst:** Wenn der Betreiber Fall C ausdrücklich selbst anbieten will, ist das eine
 Änderung an `02_PREISE_UND_ZAHLUNG.md` und `03_KUNDENPRODUKT.md` — **kein Landingpage-Thema.**
 Diese Entscheidung ist offen und gehört dem Betreiber.
+
+---
+
+## Was im Bedarfsscheck sonst noch fehlt — geprüft 09.08.2026
+
+**Anlass:** Nach dem Einbau der Logofrage die Gegenprobe — welche Angabe entscheidet über Preis,
+Weg oder Rechtslage und wird **nicht** vor dem Angebot erhoben? Drei Funde, einer davon ernst.
+
+### 1. Die zweite BFSG-Pflichtfrage fehlt — **Mangel, nicht Vorschlag**
+
+`SARTU_ENTSCHEIDUNGEN_OFFEN.md` §6 (**Rang 1**) verlangt wörtlich **zwei** Pflichtfragen
+*vor dem Angebot*, sobald ein Buchungs-, Bestell- oder Kaufweg dazukommt:
+
+> `Schließen Besucher über die Seite einen Vertrag ab — Buchung, Bestellung oder Abonnement?`
+> `Hat Ihr Betrieb weniger als 10 Beschäftigte und höchstens 2 Mio. € Umsatz oder Bilanzsumme?`
+
+**Feld 4.1 deckt die erste ab** — die Optionen `Einfache Terminbuchung` und `Produkte verkaufen
+oder Zahlungen annehmen` sind genau der Vertragsweg.
+
+**Die zweite steht nirgends im Bedarfsscheck.** Weder in Thema 4 noch sonstwo wird nach
+Beschäftigtenzahl oder Umsatz gefragt.
+
+**Warum das zählt:** §6 sagt *„Beide Antworten werden im Angebot festgehalten. Nur wenn die erste
+`ja` und die zweite `nein` lautet, greift das BFSG."* Ohne die zweite Antwort lässt sich das
+Angebot nicht regelkonform schreiben — und daran hängt ein Bußgeldrisiko bis **100.000 €**.
+
+**Vorschlag:** ein **bedingtes** Feld, das nur erscheint, wenn 4.1 einen Vertragsweg enthält —
+dieselbe Mechanik wie 1.5 (nur bei `Ja`) und 5.4 (nur bei `Ja`). Damit wächst das Formular für den
+Normalfall **um null Felder**.
+
+| # | fragt nach | Typ | Pflicht | Optionen |
+|---|---|---|---|---|
+| 4.2 *(neu, bedingt)* | der Betriebsgröße | eine Wahl | ja, bedingt | Unter 10 Beschäftigte **und** höchstens 2 Mio. € · Darüber · Bin unsicher |
+
+> Der Hilfetext muss sagen, **wozu** gefragt wird — sonst wirkt eine Umsatzfrage im Erstkontakt
+> übergriffig. §6 liefert die Begründung: Es entscheidet, ob eine gesetzliche Pflicht greift.
+
+### 2. Bildmaterial — dieselbe Lücke wie beim Logo, vermutlich größer
+
+**Fotografie ist nicht im Leistungsumfang** — `/ratgeber/was-nicht-enthalten-ist` führt sie in der
+Ausschlussliste, und `03_KUNDENPRODUKT.md` nennt sie nicht unter *In jedem Paket enthalten*.
+Bilder kommen erst im Kundenbereich, Vorgang 3.
+
+**Ein Handwerks- oder Dienstleistungsbetrieb ohne brauchbare Fotos kann keine gute Website
+bekommen.** Das ist genau das Ausschlusskriterium, das der Betreiber beim Logo beschrieben hat —
+nur trifft es mehr Betriebe. Und es fällt heute erst **nach** der Festpreiszusage auf.
+
+**Nicht entschieden:** ob das eine eigene Frage bekommt, ob Fotografie ins Angebot soll oder ob ein
+Partnerweg wie beim Logo genügt. **Dieselbe Struktur, dieselbe offene Frage.**
+
+### 3. Rechtstexte — Startsperre, die niemand vorher abfragt
+
+`03_KUNDENPRODUKT.md` nennt **„technische Einbindung freigegebener Rechtstexte + Consent"** — also
+Einbindung, nicht Erstellung. Impressum und Datenschutzerklärung liefert der Kunde.
+
+**Ohne sie kann nicht live gegangen werden.** Ob der Betrieb sie hat, wird nirgends gefragt.
+
+### 4. Unternehmereigenschaft — geprüft, bewusst später
+
+Der Bedarfsscheck zeigt **Nettopreise vor den Kontaktdaten**. Die B2B-Bestätigung liegt nach
+`01_GESCHAEFTSMODELL.md` erst **bei der Annahme**. Das wirkt spät, ist aber offenbar bewusst so
+gesetzt — das Masterkonzept nennt die PAngV-Frage ausdrücklich. **Als geprüft vermerkt, kein
+Handlungsbedarf abgeleitet.**
+
+### Vorschlag zur Bündelung von Fund 2 und 3
+
+Statt zweier Einzelfragen ein Feld im selben Thema 5:
+
+| # | fragt nach | Typ | Pflicht | Optionen (`gebunden`) |
+|---|---|---|---|---|
+| 5.3 *(neu)* | dem, was bereits vorliegt | **mehrere** Wahlen | ja | Fotos vom Betrieb oder von Arbeiten · Impressum und Datenschutzerklärung · Nichts davon |
+
+Dieselbe Kombinationsregel wie bei 3.1 und 4.1. **`Thema {n} von 5` bleibt unberührt.**
+
+**Nicht eingebaut** — Fund 2 und 3 sind Vorschläge, keine Mängel. Fund 1 ist ein Mangel gegen eine
+Rang-1-Vorgabe und sollte unabhängig davon geschlossen werden.
