@@ -2039,3 +2039,43 @@ Schleswig-Holstein DKU).
 **Damit ist das Förderthema rechercheseitig abgeschlossen.** Offen bleiben nur noch die Fragen, die
 keine Recherche beantworten kann — insbesondere, ob SARTUs Conversion-Modul oder der Kundenbereich
 im Einzelfall als Prozessdigitalisierung anerkannt werden.
+
+---
+
+## Branchenliste mit 49 Kandidaten — erstellt 09.08.2026
+
+**Auf Anforderung des Betreibers.** `BRANCHENLISTE.md` führt 49 Kandidaten in fünf Stufen, je mit
+amtlicher Bezeichnung, Selbstbezeichnung, vermuteter Suchform und Verband.
+
+**Der wichtigste Befund:** Die **amtliche Bezeichnung ist fast nie die Selbstbezeichnung.** Kein
+Betrieb nennt sich „Installateur und Heizungsbauer" — er nennt sich SHK-Betrieb. Wer die Amtsform
+in Titel und H1 schreibt, verfehlt Sprache **und** Suchanfrage.
+
+**Belegt ist:**
+
+| Angabe | Quelle |
+|---|---|
+| Alle 53 Gewerbe der Anlage A in amtlicher Schreibweise | Handwerksordnung über ZDH — **Primärquelle** |
+| Struktur Anlage B1 und B2 | dito |
+| Selbstbezeichnungen | aus Verbands- und Innungsnamen ableitbar |
+
+**Ausdrücklich unbelegt — und als solche gekennzeichnet:**
+
+> **Die Spalte „Suchform" ist eine Vermutung, kein gemessenes Volumen.**
+> `KEYWORD_VALIDATION.md` hält fest, dass kein Volumenwerkzeug vorliegt und deshalb **nie
+> geschätzt** wird. Die Spalte nennt die sprachlich naheliegende Form. **Vor dem Bau einer Seite
+> ist sie je Branche zu bestätigen** — und die Spalte „Bestätigt" ist bei allen 32 vorhandenen
+> Adressen weiterhin leer.
+
+**Was die Liste nicht ist:** kein Bauplan. Die Zahl 49 stammt aus der Kapazitätsrechnung
+(148 freie Seiten ÷ 3 je Branche). Realistisch sind nach der eigenen Keywordstrategie **20–40
+Seiten in zwei bis drei Jahren**, also **7 bis 13 Branchen**. Der Rest ist Vorrat.
+
+**Ungeprüft geblieben:**
+
+| # | Punkt |
+|---|---|
+| 1 | **Betriebszahlen je Branche** wurden nicht erhoben. Ob eine Branche genug Betriebe für eine eigene Seite hat, ist außer bei Sicherheit, Reinigung und Handwerk gesamt **nicht belegt** |
+| 2 | **Verbände sind als mögliche Multiplikatoren genannt, nicht kontaktiert** — und nicht geprüft, ob sie Anbieterempfehlungen überhaupt aussprechen |
+| 3 | **Regionale Wortvarianten** sind nur bei Tischlerei/Schreinerei berücksichtigt. Weitere sind wahrscheinlich |
+| 4 | Bei Stufe 4 und 5 ist der **B2B-Anteil geschätzt**, nicht belegt — insbesondere bei Sanitätshaus, Hörakustik und Augenoptik |
