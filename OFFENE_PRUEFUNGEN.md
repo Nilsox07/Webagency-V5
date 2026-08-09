@@ -1401,3 +1401,63 @@ die abgelehnt werden muss.
 
 **Ungeprüft:** ob weitere Punkte der Scope-Schutz-Liste — `SEO-Stufen`, `Express`,
 `Newsletter/Tracking` — in der geplanten Seitenmatrix auftauchen. Geprüft wurde nur `Logo-Pakete`.
+
+### Nachtrag 09.08.2026 — der Einwand des Betreibers und die drei Fälle
+
+**Der Betreiber wandte ein:** Ohne Logo sei das ein **Ausschlusskriterium** — der Kunde gehe dann
+mit dem ganzen Auftrag zu einer Agentur, die beides macht. Und: Das Logo müsse **vor** die Website,
+lasse sich also nicht in den Kundenbereich verschieben. Zugleich dürfe die Erstabfrage nicht
+wachsen.
+
+**Alle drei Punkte treffen zu.** Was die Prüfung ergänzt:
+
+#### Was auf dem Bedarfsscheck bereits gebunden ist
+
+| Fundstelle | Wert |
+|---|---|
+| `spezifikation/17`, `/briefing` | Fortschrittsanzeige **`Thema {n} von 5`** — `gebunden` |
+| dieselbe Stelle, Vertrauenspunkte | **`Keine Auswahl von Zusatzoptionen`** — `gebunden`, fünf Stück |
+| `spezifikation/10` §… Startseite | *„Es gibt keine Aufpreisliste."* — Klasse 1 |
+| `spezifikation/03` | *„Ein Standardangebot endet exakt beim veröffentlichten Paketpreis. Neue Ziele nach Auftrag → **ein** konsolidiertes Folgeangebot mit Festpreis, keine Einzelpreisliste."* |
+
+> **Daraus folgt die Trennlinie:** Ein Logo als **wählbare Option mit Preis** widerspricht einem
+> gebundenen Text auf **demselben Bildschirm**. Eine Logo-**Frage** widerspricht nichts.
+>
+> **Die Domain ist bereits genau so gelöst:** SARTU fragt danach, prüft und verbindet sie — und
+> verkauft sie nicht als Option. Dieselbe Form trägt für das Logo.
+
+#### Drei Fälle, nicht einer
+
+| Fall | Häufigkeit in der Zielgruppe (10–50 MA, bestehender Betrieb) | Was nötig ist |
+|---|---|---|
+| **A — Logo liegt als brauchbare Datei vor** | die Mehrheit | nichts. Schritt 3 im Kundenbereich, wie bisher |
+| **B — Logo existiert, aber nur als Druck, Foto oder schlechtes Pixelbild** | **häufig und bisher übersehen** | **Nachzeichnen und Aufbereiten** — kein Entwurf, keine Varianten, keine Runden |
+| **C — kein Logo** | Neugründung, Meistergründung, Umfirmierung | echter Entwurf |
+
+**Fall B ist der eigentliche Fund.** Er ist kein „Logo-Paket", sondern Umsetzungsarbeit — begrenzt,
+planbar, ohne Feedbackrunden. Er lässt sich enthalten, **ohne** eine der vier gebundenen Stellen
+zu brechen. Und er löst vermutlich die Mehrzahl der Fälle, die heute als „braucht ein Logo" gelten.
+
+**Fall C ist der, den der Betreiber meint** — und nur dort stellt sich die Frage wirklich.
+
+#### Drei Wege für Fall C
+
+| Weg | Bricht etwas? | Bewertung |
+|---|---|---|
+| **Partnerempfehlung** — ein Grafiker, SARTU baut danach | **nein** | Löst das Ausschlusskriterium ohne Scope-Bruch. Der Grafiker wird zugleich **Multiplikator** und schickt Kunden zurück |
+| **Folgeangebot** nach der Regel aus `spezifikation/03` | **nein** — die Regel sieht genau das vor | Möglich, aber zeitlich falsch: Das Logo muss **vor** die Seite, ein Folgeangebot kommt danach |
+| **Ins Paket aufnehmen** | **ja** — Preistabelle, `Keine Auswahl von Zusatzoptionen`, „keine Aufpreisliste" | Nur mit bewusster Änderung von `02` und `03`. Logo-Entwurf bringt Varianten und Runden mit — genau den Scope-Creep, gegen den der Schutz geschrieben wurde |
+
+#### Vorschlag
+
+1. **Eine Ja/Nein-Frage in Thema 1** („Ihr Unternehmen"), Form wie bei der Domain.
+   **`Thema {n} von 5` bleibt unberührt**, die drei Minuten auch — eine Frage in einem bestehenden
+   Thema verlängert nichts spürbar
+2. **Fall B enthalten** — vorhandene Logos werden aufbereitet, nicht neu entworfen. Das gehört als
+   Zeile in `spezifikation/03` unter den Leistungsumfang
+3. **Fall C über Partner** — Empfehlung statt eigener Leistung
+4. **Kein Logo-Paket in der Preisliste.** Damit bleiben alle vier gebundenen Stellen wahr
+
+**Was das nicht löst:** Wenn der Betreiber Fall C ausdrücklich selbst anbieten will, ist das eine
+Änderung an `02_PREISE_UND_ZAHLUNG.md` und `03_KUNDENPRODUKT.md` — **kein Landingpage-Thema.**
+Diese Entscheidung ist offen und gehört dem Betreiber.
