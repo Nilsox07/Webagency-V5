@@ -2001,3 +2001,22 @@ max. 3.000 €) · Berlin (Technologiebezug).
 **Nicht ausgeführt:** Kein Text geschrieben. Die Beträge in `FOERDERUNG_KONZEPT.md` dienen der
 internen Orientierung und sind **für keine Kundenseite freigegeben** — auf `/foerderung` erscheinen
 nach wie vor nur Programmname, Link, Status und Prüfdatum.
+
+### Berichtigt 09.08.2026 — kein Land wird weggelassen
+
+**Der Betreiber hat widersprochen, und zu Recht.** Eine frühere Fassung ließ Hamburg,
+Mecklenburg-Vorpommern, Baden-Württemberg und Berlin „für die Zielgruppe ausscheiden". **Das war
+der falsche Schnitt:** Ob ein Betrieb antragsberechtigt ist, entscheidet er selbst.
+
+**Geändert:**
+
+| Wo | Was |
+|---|---|
+| `FOERDERUNG_KONZEPT.md` §4a | Neue **Voraussetzungstabelle über alle sechzehn Länder** — wer antragsberechtigt ist und welche weiteren Bedingungen gelten |
+| dieselbe Datei | Die Einschätzung, wo es unwahrscheinlich ist, steht jetzt getrennt und ausdrücklich als **interne Erwartung, nicht für die Kundenseite** |
+| `spezifikation/17`, `/foerderung` Block 5 | Spalte **Bedingung** ergänzt, dazu der Satz, dass kein Land weggelassen wird |
+
+> **Die Bedingungen sind der eigentliche Nutzwert der Seite.** *„Mecklenburg-Vorpommern fördert nur
+> Produktion, Handwerk und Tourismus"* ist genau die nachprüfbare Angabe, die eine Übersicht
+> brauchbar macht — und die sonst niemand hinschreibt. Ein Betrieb, der daran erkennt, dass er
+> nicht antragsberechtigt ist, hat trotzdem eine nützliche Antwort bekommen.

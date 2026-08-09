@@ -687,7 +687,7 @@ dem **Ratgeber-Hub** · dem Fußbereich.
 | 2 | `Kurz gesagt` — Antwortabsatz, **40–60 Wörter**, mit der Reihenfolgeregel | **eigen** |
 | 3 | **Antrag vor Auftrag** — warum die Reihenfolge über alles entscheidet | **eigen** |
 | 4 | **Warum eine reine Firmenwebsite meistens nicht gefördert wird** — und die Fälle, in denen doch | **eigen** |
-| 5 | **Übersicht der sechzehn Länder** — Programmname, Link zur Förderbank, **Status**, Prüfdatum | **eigen** |
+| 5 | **Übersicht aller sechzehn Länder** — Programmname, Link zur Förderbank, **Bedingung**, **Status**, Prüfdatum. **Kein Land wird weggelassen**: ob er antragsberechtigt ist, prüft der Betrieb selbst an der Bedingung | **eigen** |
 | 6 | Was Förderung wirklich kostet — Zeit, Bindung, Sperrfristen | **eigen** |
 | 7 | Was SARTU dabei tut und was nicht — die drei Stufen | **eigen** |
 | 8 | Bedarfsscheck eingebettet | geteilt |

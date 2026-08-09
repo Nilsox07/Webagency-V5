@@ -343,14 +343,53 @@ keiner Kundenseite erscheinen sie** (Begründung unten).
 > **Das Muster ist über alle sechzehn Länder identisch: Gefördert wird, was Abläufe verändert.
 > Nicht, was ein Unternehmen darstellt.**
 
-### Vier Länder scheiden für SARTUs Zielgruppe zusätzlich aus strukturellen Gründen aus
+### Alle sechzehn kommen in die Übersicht — die Bedingung ist der Nutzwert
 
-| Land | Grund |
+> **Berichtigt am 09.08.2026 auf Einwand des Betreibers.** Eine frühere Fassung dieses Abschnitts
+> ließ vier Länder „ausscheiden". **Das war der falsche Schnitt.** Ob ein Betrieb antragsberechtigt
+> ist, entscheidet er selbst — die Übersicht führt **alle sechzehn** und nennt je Land die
+> Bedingung, an der er es prüfen kann.
+>
+> **Die Bedingungen sind sogar der eigentliche Inhalt.** *„Mecklenburg-Vorpommern fördert nur
+> Produktion, Handwerk und Tourismus"* ist genau die konkrete, nachprüfbare Angabe, die eine
+> Übersicht brauchbar macht — und die sonst niemand hinschreibt.
+
+**Voraussetzungen je Land — Stand 09.08.2026, aus den Primärquellen:**
+
+| Land | Wer antragsberechtigt ist | Weitere Bedingungen |
+|---|---|---|
+| **BW** | Gewerbliche Unternehmen und **Freiberufler**, bis **500** Beschäftigte, bis 500 Mio. € Umsatz | Investition in BW · kein Unternehmen in Schwierigkeiten · Sperrfrist **1 Jahr** nach voriger Förderung |
+| **BY** | **Kleine** Unternehmen der gewerblichen Wirtschaft, **unter 50** Beschäftigte, max. 10 Mio. € | Sitz in Bayern · **Mindestausgaben 4.000 €** · Antrag vor Beginn |
+| **BE** | **Technologieorientierte** KMU — oder Projekte mit „ausgeprägtem Technologiebezug" | Sitz oder Niederlassung in Berlin · Standardvariante max. **3×** in drei Jahren |
+| **BB** | KMU **einschließlich Handwerk** | min. **5.000 €** Projektvolumen · max. **2** parallele Vorhaben · Antrag vor Beginn |
+| **HB** | KMU **und Soloselbstständige im Haupterwerb** | Sitz oder Betriebsstätte im Land Bremen · kein Insolvenzverfahren · **Bearbeitung in Eingangsreihenfolge** |
+| **HH** | KMU nach EU-Definition | Sitz oder Betriebsstätte in Hamburg · **Darlehen ab 25.000 €** · Antrag **über die Hausbank** |
+| **HE** | — | **beendet Juni 2026** |
+| **MV** | KMU **unter 100** Beschäftigten aus **Produktion, Handwerk, Tourismus** | Betriebsstätte in MV · Vorhaben überwiegend in MV |
+| **NI** | — | **ausgelaufen** |
+| **NW** | Kleinst-, kleine und mittlere Unternehmen in NRW | **Gutscheinsystem** — externe Fachleute werden beauftragt |
+| **RP** | Kleine und mittlere gewerbliche Unternehmen **einschließlich Beherbergungsbetrieben** | Sitz in RLP · im Antragsverfahren beurteilt ein **Sachverständiger** die Eignung |
+| **SL** | KMU mit Sitz oder Betriebsstätte im Saarland | klein bis 50 Beschäftigte **50 %** · mittel 51–250 **30 %** · Antrag über nFMI-Portal |
+| **SN** | Kleinstunternehmen, KMU **und Angehörige der freien Berufe** | Betriebsstätte in Sachsen · **zwölf Monate, keine Verlängerung** · Start nicht vor der Bestätigungsmail |
+| **ST** | KMU mit Sitz oder Betriebsstätte in Sachsen-Anhalt | **Innovationsgehalt zwingend** · min. 3.000 € Förderung · zwölf Monate · seit 15.07.2026 Direktantrag mit **Mindestpunktzahl** |
+| **SH** | bis **20** Beschäftigte, **auch Vereine und Freiberufler** | Stand der Förderperiode **2014–2020** — aktueller Status ungeklärt |
+| **TH** | — | **Mittel erschöpft**, keine Neuauflage · Alternative: InnoInvest |
+
+### Die interne Einschätzung — gehört nicht auf die Kundenseite
+
+Getrennt davon, und **nur zur eigenen Erwartung**: In vier Ländern ist die Wahrscheinlichkeit
+gering, dass ein SARTU-Vorhaben durchgeht.
+
+| Land | Warum es intern unwahrscheinlich ist |
 |---|---|
-| **Hamburg** | **Mindestdarlehen 25.000 €.** Ein Paket zu 3.900 € netto erreicht die Schwelle nicht einmal ansatzweise |
-| **Mecklenburg-Vorpommern** | nur **Produktion, Handwerk, Tourismus** — Sicherheitsdienste, Reinigung, Kanzleien sind **nicht antragsberechtigt** |
-| **Baden-Württemberg** | Zuschussvariante **max. 3.000 €** bei 30 % — deckt einen kleinen Teil, und die Darlehensvariante lohnt für diese Summen nicht |
-| **Berlin** | Technologiebezug als Voraussetzung |
+| Hamburg | Mindestdarlehen **25.000 €** — ein Paket zu 3.900 € netto liegt weit darunter |
+| Mecklenburg-Vorpommern | Sicherheitsdienste und Gebäudereinigung fallen nicht unter Produktion, Handwerk oder Tourismus |
+| Baden-Württemberg | Zuschussvariante **max. 3.000 €** bei 30 % |
+| Berlin | Technologiebezug ist bei einer Firmenwebsite schwer darstellbar |
+
+> **Das ist eine Erwartung, keine Auskunft.** Sie steuert, wie viel Aufwand SARTU in welches Land
+> steckt — **auf `/foerderung` steht sie nicht**, weil nur die Förderbank im Einzelfall entscheidet.
+> Ein Betrieb in Hamburg mit einem größeren Vorhaben kann sehr wohl antragsberechtigt sein.
 
 ### Vier Statusarten, nicht zwei
 
