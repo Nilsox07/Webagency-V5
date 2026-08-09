@@ -1758,3 +1758,34 @@ Techniksperre.
 **Für den Ratgeber-Artikel ist das die bessere Geschichte:** nicht „KI-Bilder sind heikel", sondern
 *„die Regel ist dieselbe wie bei Stockfotos — neu ist nur die Kennzeichnung"*. Das ist wahr,
 beruhigend und nützlich zugleich.
+
+### Eingebaut am 09.08.2026 — und was daran ungeprüft bleibt
+
+**Auf Freigabe des Betreibers eingearbeitet:**
+
+| Datei | Was |
+|---|---|
+| `spezifikation/03_KUNDENPRODUKT.md` | Bildaufbereitung und Symbolbilder in den Leistungsumfang, mit der Dreistufentabelle und der Fotoanleitung für Betriebe ohne eigene Bilder |
+| `spezifikation/06_RECHT.md` | Abschnitt **Bildherkunft** — die Matrix Symbolbild/Identitätsbehauptung über alle drei Bildquellen, dazu die Kennzeichnungspflicht seit 02.08.2026 |
+| `spezifikation/17_SEITEN_SARTU.md` | `/ratgeber/bilder-fuer-die-firmenwebsite` mit Aufgabe, Grenze, Umfang und gebundenen Zahlen |
+
+**Preisentscheidung — so umgesetzt, Änderung jederzeit möglich:** Stufe 1 und 2 sind **enthalten**,
+nicht kostenpflichtig. Gründe: Der Aufpreis hätte *„Es gibt keine Aufpreisliste"* und
+`Keine Auswahl von Zusatzoptionen` gebrochen, und die Erzeugung kostet je Projekt kaum etwas.
+**Soll die Bilderstellung doch bezahlt werden, ist das konsolidierte Folgeangebot aus `03` der
+einzige Weg, der keine gebundene Stelle bricht** — dann sind die Zeilen in `03` entsprechend zu
+ändern.
+
+**Ungeprüft und offen:**
+
+| # | Punkt |
+|---|---|
+| 1 | **„in vereinbarter Anzahl"** — für Symbolbilder steht keine Zahl fest. Ohne Obergrenze ist es ein offener Posten im Festpreis. Gehört nach `02_PREISE_UND_ZAHLUNG.md` oder als feste Zahl nach `03` |
+| 2 | **Die Fotoanleitung existiert noch nicht.** Sie ist im Leistungsumfang zugesagt, aber nicht geschrieben. Ort wäre `11_KUNDENBEREICH.md`, Vorgang 2 (Betriebsfragen) |
+| 3 | **Wie die sichtbare Kennzeichnung aussieht**, ist nicht festgelegt — Bildunterschrift, Overlay oder Hinweis am Seitenfuß. Das ist eine Gestaltungsfrage für `07_MARKE_UND_GESTALTUNG.md` |
+| 4 | **Ob der Ratgeberartikel in die Launch-Liste vorgezogen wird.** Er steht derzeit unter „Nach dem Launch"; die Launch-Liste trägt die gebundene Zahl `drei Stück` |
+| 5 | **`KEYWORD_VALIDATION.md` kennt die neue Adresse nicht.** Die Datei wird erzeugt (`php bin/keywords.php`), nicht von Hand gepflegt — sie zieht nach, sobald die Seite im Router steht |
+
+**Nicht ausgeführt:** Keine der drei geänderten Dateien wurde gegen den Texter-Skill geprüft; die
+Blöcke sind Bauvorgaben, kein abgegebener Text. Für den Ratgeberartikel steht bewusst **kein
+Wortlaut** — nur Aufgabe, Grenze und Umfang.

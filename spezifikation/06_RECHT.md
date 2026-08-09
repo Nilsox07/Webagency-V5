@@ -41,6 +41,7 @@
 ## Ehrlichkeit — gilt für SARTU- und Kundenwebsites
 
 - **Keine** Fake-Referenzen, Fake-Bewertungen, Fake-Logos, Fake-Adressen, Fake-Teamfotos
+- **Bilder: Symbolbild ja, Identitätsbehauptung nur echt** — siehe den Block unterhalb
 - **Keine Garantie** auf Rankings, Anfragen, Umsätze, KI-Nennungen oder vollständige
   Rechtskonformität
 - „SARTU leistet keine Rechtsberatung" · „KI wird genutzt, Ergebnisse werden geprüft"
@@ -48,3 +49,33 @@
   größer tut, als es ist
 - Echte Referenzen erst, wenn 2–3 Projekte live sind — Bild- und Namensrechte **vor**
   Projektstart schriftlich
+
+### Bildherkunft — ergänzt 09.08.2026
+
+> **Warum diese Ergänzung nötig war.** Die Zeile „Keine Fake-Teamfotos" galt immer, benannte den
+> Fall aber nur für Fotos. Mit erzeugten Bildern stellte sich die Frage neu — und die Prüfung
+> ergab: **Die Regel ändert sich nicht, nur ihr Anwendungsbereich wird deutlicher.**
+
+**Maßgeblich ist nach § 5 UWG der Eindruck beim Publikum, nicht die Herkunft des Bildes.**
+
+| Verwendung | Bilddatenbank | erzeugtes Bild | echtes Foto |
+|---|---|---|---|
+| **Symbolbild** — Dach, Werkstatt, Arbeitssituation, ohne Bezug auf konkrete Personen, Räume oder Arbeiten des Betriebs | zulässig | **zulässig** | zulässig |
+| **Identitätsbehauptung** — `Unser Team`, `Unsere Werkstatt`, `Unsere Referenz`, `vorher/nachher` | **unzulässig** | **unzulässig** | zulässig |
+
+**Ein Bild wird erst durch seine Beschriftung zur Behauptung.** Ein Stockfoto unter der Zeile
+`Unser Team` war immer eine Irreführung; ein erzeugtes Bild ist es aus demselben Grund. Umgekehrt
+ist ein Symbolbild aus beiden Quellen zulässig.
+
+**Kennzeichnungspflicht — neu seit 02.08.2026:** Erzeugte Bilder, die **real wirkende Personen,
+Orte oder Ereignisse** zeigen, werden **sichtbar** gekennzeichnet (Art. 50 Abs. 4 KI-VO). Die
+technische Markierung liegt beim KI-Anbieter, die sichtbare beim Veröffentlichenden — also bei
+SARTU. Rein abstrakte oder dekorative Bilder ohne realen Bezug fallen in der Regel nicht darunter.
+
+> **Und die Kennzeichnung heilt keine Irreführung.** Sie ist eine zusätzliche Pflicht, kein
+> Freibrief: Ein Bild, das Arbeiten zeigt, die es nie gab, bleibt nach §§ 5, 5a UWG unzulässig —
+> auch beschriftet.
+
+**Für den Leistungsumfang gilt `03_KUNDENPRODUKT.md`.** Ob die Einordnung als Marktverhaltensregel
+nach § 3a UWG greift, ist höchstrichterlich noch nicht geklärt — **SARTU leistet keine
+Rechtsberatung** und trifft hier nur eine Entscheidung darüber, was gebaut wird.

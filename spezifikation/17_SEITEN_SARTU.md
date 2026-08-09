@@ -641,7 +641,31 @@ nennt Zahlen. Das ist die Lücke.**
 | `/ratgeber/was-der-betrieb-kostet` | zweithäufigste Rückfrage | was in den drei Schutzstufen enthalten ist, was nicht, **und was bei Vertragsende mit Domain und Website passiert** |
 
 **Nach dem Launch:** `/ratgeber/wie-lange-dauert-eine-website` ·
-`/ratgeber/website-festpreis-erkennen` · `/ratgeber/was-eine-korrekturrunde-ist`.
+`/ratgeber/website-festpreis-erkennen` · `/ratgeber/was-eine-korrekturrunde-ist` ·
+**`/ratgeber/bilder-fuer-die-firmenwebsite`**.
+
+#### `/ratgeber/bilder-fuer-die-firmenwebsite` — ergänzt 09.08.2026
+
+- *Aufgabe:* Dem Betriebsinhaber erklären, welche Bilder seine Website braucht, welche drei Wege
+  es gibt — eigene Fotos, Aufbereitung, Symbolbilder — und wo die rechtliche Grenze verläuft,
+  sodass er danach selbst entscheiden kann
+- *Grenze:* keine Rechtsberatung · keine Zusage zur Rechtssicherheit · **nicht** behaupten, eine
+  Kennzeichnung mache jedes Bild zulässig · **keine Angstmache** — Bußgeldzahlen nur mit
+  Einordnung, sonst gar nicht
+- *Umfang:* wie die übrigen Ratgeberseiten
+- *Zahlen `gebunden`:* Geltungsbeginn **02.08.2026** · Rechtsgrundlagen **Art. 50 Abs. 4 KI-VO**
+  sowie **§§ 5, 5a UWG**
+- *Pflichthinweis:* „SARTU leistet keine Rechtsberatung" — `06_RECHT.md`
+
+> **Die Kernaussage, die den Artikel trägt:** Die Regel ist **dieselbe wie bei Bildern aus einer
+> Datenbank** — Symbolbild ja, Identitätsbehauptung nur echt. **Neu ist allein die Kennzeichnung.**
+> Das ist wahr, beruhigend und nützlich zugleich — und hebt sich von der verbreiteten
+> Abmahnwellen-Darstellung ab.
+>
+> **Zum Zeitpunkt:** Die Rechtslage gilt seit dem 02.08.2026, die Frage wird also **jetzt**
+> gestellt. Ob der Artikel deshalb in die Launch-Liste vorgezogen wird, ist eine
+> Betreiberentscheidung — sie würde dort `drei Stück` auf `vier Stück` ändern, und diese Zahl ist
+> `gebunden`.
 
 **Harte Regeln:**
 

@@ -14,13 +14,41 @@ Bedarfsprüfung + begründete Empfehlung · strategische Sitemap · individuelle
 SARTU-Designsystem · KI-gestützte, menschlich geprüfte Programmierung ohne WordPress ·
 responsive + Barrierefreiheits-Basis + Performance · Website-Texte aus bestätigten Fakten ·
 **SEO-/GEO-Startsystem** · Kontaktweg/Formular · technische Einbindung freigegebener Rechtstexte
-+ Consent · **Aufbereitung eines vorhandenen Logos** · Vorschau + gebündeltes Feedback +
-Korrekturrunden · Domainprüfung, -verbindung, Launch · Zugang zum Kundenbereich.
++ Consent · **Aufbereitung eines vorhandenen Logos** · **Bildaufbereitung und Symbolbilder** ·
+Vorschau + gebündeltes Feedback + Korrekturrunden · Domainprüfung, -verbindung, Launch · Zugang
+zum Kundenbereich.
 
-> **Ergänzt am 09.08.2026 auf Entscheidung des Betreibers — „Aufbereitung eines vorhandenen
-> Logos".** Gemeint ist ausschließlich: ein Logo, das nur gedruckt, fotografiert oder als
-> schlechtes Pixelbild vorliegt, wird für die Website nachgezeichnet und in den benötigten Größen
-> bereitgestellt. **Kein Entwurf, keine Varianten, keine eigenen Korrekturrunden.**
+### Bilder — was enthalten ist und wo die Grenze liegt
+
+**Ergänzt am 09.08.2026 auf Entscheidung des Betreibers.**
+
+| Stufe | Was | Enthalten? |
+|---|---|---|
+| **1 — Bildaufbereitung** | vorhandene Fotos freistellen, aufhellen, Störendes entfernen, Hintergrund bereinigen | **ja** |
+| **2 — Symbolbilder** | Dach, Werkstatt, Fahrzeug, Arbeitssituation — **ohne Bezug auf konkrete Personen, Räume oder Arbeiten des Betriebs.** Ob aus einer Bilddatenbank oder erzeugt, ist gleichgültig | **ja**, in vereinbarter Anzahl |
+| **3 — Identitätsbilder** | `Unser Team` · `Unsere Werkstatt` · `Unsere Referenz` · `vorher/nachher` | **nein — diese Bilder müssen echt sein** |
+
+**Die Grenze verläuft nicht zwischen echt und erzeugt, sondern zwischen Symbolbild und
+Identitätsbehauptung.** Maßgeblich ist nach § 5 UWG der Eindruck beim Publikum. Ein Symbolbild
+erzeugt keinen falschen Eindruck über eine wesentliche Tatsache — deshalb sind Bilddatenbanken
+seit jeher zulässig, und erzeugte Bilder sind es unter derselben Bedingung.
+
+**Ein Bild wird erst durch seine Beschriftung zur Behauptung.** Weil SARTU Bild **und** Text
+liefert, liegt die Kontrolle über diese Stelle im Haus — das ist ein Vorteil gegenüber jeder
+Lösung, bei der der Kunde später selbst beschriftet.
+
+**Kennzeichnung:** Erzeugte Bilder, die real wirkende Personen, Orte oder Ereignisse zeigen,
+werden sichtbar gekennzeichnet — Art. 50 Abs. 4 KI-VO, in Kraft seit **02.08.2026**. Einzelheiten:
+`06_RECHT.md`.
+
+**Wer keine eigenen Fotos hat**, bekommt eine **Fotoanleitung** statt einer Fotoproduktion:
+welche Aufnahmen gebraucht werden und wie sie mit dem Telefon entstehen. **Fotografie vor Ort ist
+nicht enthalten** — sie erzwänge einen Termin und widerspräche `01_GESCHAEFTSMODELL.md`.
+
+> **Zur Logo-Aufbereitung:** Gemeint ist ausschließlich, dass ein Logo, das nur gedruckt,
+> fotografiert oder als schlechtes Pixelbild vorliegt, für die Website nachgezeichnet und in den
+> benötigten Größen bereitgestellt wird. **Kein Entwurf, keine Varianten, keine eigenen
+> Korrekturrunden.**
 >
 > **Der Neuentwurf eines Logos bleibt ausgeschlossen** — `Logo-Pakete` stehen unverändert im
 > Scope-Schutz weiter unten. Die Abgrenzung ist die Grenze zwischen *vorhanden* und *nicht
