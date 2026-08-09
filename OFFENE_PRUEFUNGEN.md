@@ -2116,3 +2116,44 @@ Kleinstgewerke mit zu wenigen Betrieben · Privatpersonen und Vereine ohne Unter
 bestehen. Ein Text über „sinkende Anfragen" ist branchenübergreifend ähnlich — **der Austauschtest
 ist hier schwerer zu bestehen als bei einem Gewerk.** Das entscheidet sich am ersten geschriebenen
 Beispiel, nicht vorher.
+
+---
+
+## Textbindungen gelockert — 09.08.2026, auf Entscheidung des Betreibers
+
+**Auftrag:** alle Text- und Formulierbindungen aufheben.
+
+**Umgesetzt an genau zwei Stellen statt an 147** — der Klassendefinition selbst:
+
+| Datei | Änderung |
+|---|---|
+| `.claude/skills/sartu-texter/SKILL.md` | Klasse 1 von sechs auf **vier** Gruppen reduziert. Zwei Gruppen nach Klasse 2 verschoben, je mit Auflage |
+| `CLAUDE.md`, Abschnitt Texthoheit | dieselbe Änderung, mit Begründung |
+
+**Frei geworden:**
+
+| Was | Auflage in Klasse 2 |
+|---|---|
+| Knopftexte, Navigationspunkte, Meilensteine, Betreffzeilen | **innerhalb einer Fassung identisch**, Liste im Prüfbericht |
+| die **vier Positionierungssätze** | die vier **Aussagen** bleiben, der Wortlaut ist frei, **eine Fassung je Abgabe** |
+
+**Bewusst nicht aufgehoben — und warum das keine Textfrage ist:**
+
+| Bleibt gebunden | Grund |
+|---|---|
+| **Jede Zahl** | Preise sind Vertragsinhalt. Eine geschriebene Zahl ist eine erfundene |
+| **Vertragliche Erklärungen** | die vier Bestätigungen bei der Annahme sind Beweismittel im Streitfall |
+| **Rechtstexte und Pflichthinweise** | Ohne den dritten Satz des Pflichthinweises **wird die Empfehlung zum Angebot**. Das ist die Grenze zwischen Werbung und Willenserklärung |
+| **Statusnamen und Feldnamen** | `angebot_offen`, `qa_failed` stehen als **Spalten in der Datenbank**. Wer sie umformuliert, ändert das Schema |
+
+> **Der Betreiber kann auch diese vier fallen lassen** — dann ist es keine Lockerung des Textes
+> mehr, sondern eine Änderung an Vertrag, Haftung und Datenmodell. **Das wäre getrennt zu
+> entscheiden und hier zu vermerken.**
+
+**Ungeprüft:**
+
+| # | Punkt |
+|---|---|
+| 1 | **Die 147 `gebunden`-Markierungen in den Themendateien wurden nicht angefasst.** Sie verweisen auf die Klassendefinition, die jetzt enger ist — wirken also automatisch mit. **Ob jede einzelne Stelle das richtig trifft, ist nicht durchgesehen** |
+| 2 | Ob die Auflage „innerhalb einer Fassung identisch" praktisch trägt, zeigt sich erst am ersten Prüfbericht mit Beschriftungsliste |
+| 3 | Die bisherigen Positionierungssätze stehen weiter unter „Kalibrierung" im Skill — **als Maßstab, nicht als Vorschrift.** Ob das in der Praxis unterschieden wird, ist offen |

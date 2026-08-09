@@ -97,11 +97,19 @@ Sechs Dateien tragen „FINAL" im Namen; das sagt nichts über ihr Alter. Widers
 Stellen **im selben** Dokument, gilt die mit der Begründung — steht bei keiner eine, **melden**,
 nicht auswählen.
 
-**Texthoheit:** Gebunden ist nur, was der Texter-Skill als **Klasse 1** führt — jede Zahl,
-vertragliche Erklärungen, Rechtstexte, Pflichthinweise, Knopf- und Navigationsbeschriftungen,
-Statusnamen, Betreffzeilen und die vier Positionierungssätze. **Alles andere ist Auftrag, kein
-Wortlaut:** Die Themendateien notieren *Aufgabe*, *Grenze* und *Umfang* — **absichtlich ohne
-Beispielsatz**, weil ein fertiger Satz übernommen und nicht getroffen wird.
+**Texthoheit — gelockert am 09.08.2026.** Gebunden ist nur noch, was der Texter-Skill als
+**Klasse 1** führt, und das sind **vier** Gruppen: **jede Zahl** · **vertragliche Erklärungen** ·
+**Rechtstexte und Pflichthinweise** · **Statusnamen und Feldnamen**. Nichts davon ist Geschmack —
+Zahlen sind Vertrag, Pflichthinweise sind Haftung, Statusnamen sind Datenbankspalten.
+
+**Aus Klasse 1 herausgenommen und jetzt frei formulierbar:** Knopf- und Navigationsbeschriftungen,
+Meilensteine, Betreffzeilen und die **vier Positionierungssätze**. Für sie gilt Klasse 2 mit je
+einer Auflage: Beschriftungen **innerhalb einer Fassung identisch** und als Liste im Prüfbericht ·
+die vier **Aussagen** der Positionierung bleiben, der Wortlaut ist frei, **eine Fassung je Abgabe**.
+
+**Alles andere ist ohnehin Auftrag, kein Wortlaut:** Die Themendateien notieren *Aufgabe*,
+*Grenze* und *Umfang* — **absichtlich ohne Beispielsatz**, weil ein fertiger Satz übernommen und
+nicht getroffen wird.
 
 `archiv/konzepte/` (~360 KB) und `archiv/CLAUDE_MARKTANALYSE_KRITIK_OPTIMIERUNG.md` sind historisch: veraltete
 Preise, abgelöste Stacks. **Nie vorsorglich einlesen**, nur gezielt nachschlagen.

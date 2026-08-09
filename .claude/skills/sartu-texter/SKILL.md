@@ -32,15 +32,35 @@ schreibst. Drei Klassen, und die erste ist unantastbar.
 | **Vertragliche Erklärungen** — die vier Bestätigungen bei der Angebotsannahme, Faktenfreigabe, Abnahme | Das sind Beweismittel im Streitfall, keine Werbetexte |
 | **Rechtstexte** — Impressum, Datenschutz, AGB, AVV, TOM | Kommen aus anwaltlicher Prüfung |
 | **Pflichthinweise** — `Alle Preise netto zzgl. gesetzlicher Umsatzsteuer. Ausschließlich für Unternehmer.` · die Ausschlusszeile zur Barrierefreiheit · `Musterprojekt — kein Kundenauftrag` | Wegfall oder Umformulierung ist ein Rechtsrisiko |
-| **Wiederkehrende Beschriftungen** — Knopftexte, Navigationspunkte, Statusnamen, Meilensteinbezeichnungen | Wer `Bedarf prüfen lassen` auf einer Seite zu `Jetzt starten` macht, lässt die Website unfertig wirken |
-| **Die Positionierungssätze** (unten unter „Kalibrierung") | Vier Fassungen wurden verworfen, bis diese standen |
+| **Statusnamen und Feldnamen** — `angebot_offen`, `qa_failed`, Feldbezeichner des Bedarfsschecks | Sie stehen im **Datenmodell**, nicht im Text. Wer sie ändert, ändert die Datenbank |
 
 **Fehlt dir eine Zahl oder ein gebundener Text: anhalten und melden.** Nicht sinngemäß ersetzen.
+
+> **Gelockert am 09.08.2026 auf Entscheidung des Betreibers.** Zwei Gruppen sind aus Klasse 1
+> heraus und stehen jetzt in Klasse 2: **wiederkehrende Beschriftungen** — Knopftexte,
+> Navigationspunkte, Meilensteine, Betreffzeilen — und die **vier Positionierungssätze**.
+>
+> **Was bleibt, ist nicht Geschmack, sondern Haftung und Datenmodell:** Zahlen sind Vertrag,
+> Pflichthinweise sind Rechtsrisiko, Statusnamen sind Spalten. Die frühere Begründung für die
+> Beschriftungen — *„wer `Bedarf prüfen lassen` zu `Jetzt starten` macht, lässt die Website
+> unfertig wirken"* — bleibt richtig. Sie verlangt aber **Einheitlichkeit**, nicht einen
+> vorgeschriebenen Wortlaut. Genau so steht sie jetzt unten.
 
 ### Klasse 2 — Aussage gebunden, Wortlaut frei
 
 Das Lastenheft sagt, **was** ein Abschnitt leisten muss und **was er nicht behaupten darf**. Wie es
 klingt, entscheidest du. Das ist der Regelfall und betrifft fast allen Fließtext.
+
+**Seit 09.08.2026 gehören zusätzlich hierher — mit je einer Auflage:**
+
+| Was | Auflage |
+|---|---|
+| **Wiederkehrende Beschriftungen** — Knopftexte, Navigationspunkte, Meilensteine, Betreffzeilen | **Innerhalb einer Fassung identisch.** Wer den Knopf einmal benennt, benennt ihn überall so. Die verwendeten Beschriftungen kommen **als Liste in den Prüfbericht** — daran ist Einheitlichkeit prüfbar, ohne den Wortlaut vorzuschreiben |
+| **Die vier Positionierungssätze** | **Die vier Aussagen bleiben** — Festpreis, kein Termin, keine Selbstpflege, klare Grenzen. Der Wortlaut ist frei. **Aber eine Fassung je Abgabe**, nicht vier Varianten nebeneinander. Die bisherigen Fassungen stehen weiter unter „Kalibrierung" — **als Maßstab, nicht als Vorschrift** |
+
+> **Warum das trägt:** Beide Auflagen schützen dasselbe wie die frühere Bindung — dass die Seite
+> nicht zusammengestückelt wirkt. Sie tun es über **Konsistenz statt Diktat**, und damit kann eine
+> Sitzung eine bessere Formulierung finden, ohne gegen eine Regel zu verstoßen.
 
 ### Klasse 3 — frei
 
