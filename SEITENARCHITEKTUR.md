@@ -183,6 +183,52 @@ Zwei Seiten, die dieselbe Frage beantworten, nehmen sich gegenseitig die Kraft.
 
 ---
 
+## Was sofort baubar ist — nachgerechnet 09.08.2026
+
+> **Berichtigung.** Eine frühere Antwort stellte es so dar, als blockiere die offene
+> Branchenentscheidung (`§7c`) den gesamten Bauplan. **Das war zu pauschal.** Die Prüfung zeigt:
+> `§7c` betrifft ausschließlich **Block 6 der Branchenseite** — das Musterprojekt. Nichts sonst.
+
+**Und die Entscheidung für Leistung × Branche macht die Lage zusätzlich günstiger:** Zwei der drei
+Seiten je Branche sind Leistungsseiten und berühren `§7c` überhaupt nicht.
+
+### Für Elektrotechnik ist fast alles frei
+
+Elektrotechnik ist die **einzige Branche, die in allen drei Listen steht** — den gebauten
+Branchenseiten in `16_SEO_GEO_SARTU.md`, der Marktempfehlung in `ZIELGRUPPE_AKQUISE.md` und den
+Kandidaten des Konzepts. Damit gilt:
+
+| Seite | Zustand | Blockiert durch `§7c`? |
+|---|---|---|
+| `/website-elektrotechnik` — Branchenseite, 10 Blöcke | **9 von 10 baubar** | nur **Block 6**, das Musterprojekt |
+| `/seo-elektrotechnik` | **vollständig baubar** | **nein** |
+| `/website-texte-elektrotechnik` | **vollständig baubar** | **nein** |
+
+> **Zwei von drei Seiten sind komplett frei, die dritte zu neunzig Prozent.** Wer auf die
+> `§7c`-Entscheidung wartet, wartet auf **einen Block von dreißig**.
+
+### Was das für die Reihenfolge heißt
+
+1. **Branchenfakten für Elektrotechnik recherchieren** — mit Quelle je Aussage, sonst reißen
+   Prüfung 2 und 3. Das ist der eigentliche Aufwand und er ist **unabhängig von `§7c`**
+2. **Die drei Seiten bauen**, Block 6 zunächst leer lassen
+3. **Messen**, ob sie ranken und Anfragen bringen
+4. **`§7c` danach entscheiden** — dann mit Erfahrungswerten statt mit Vermutungen
+
+**Für die anderen Branchen gilt das nicht:** Bei SHK und Dachdecker besteht der
+Musterprojekt-Konflikt unverändert, und für Sicherheitsdienste gibt es noch gar keine
+Branchenseite. **Elektrotechnik ist der einzige Weg, der heute ohne Entscheidung vorangeht.**
+
+### Was weiterhin wartet
+
+| Punkt | Worauf |
+|---|---|
+| **Block 6** aller Branchenseiten | `§7c` — welche drei Branchen Branchenseite *und* Musterprojekt tragen |
+| `/logo-*`-Seiten | Produktentscheidung Logoerstellung, `OFFENE_PRUEFUNGEN.md` |
+| Block 5 von `/foerderung` | nichts mehr — die Primärquellenprüfung ist abgeschlossen |
+
+---
+
 ## Teil 3 — Was daraus für den Ausbau folgt
 
 ### Die Architektur ist fast fertig
