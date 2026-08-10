@@ -389,6 +389,50 @@ strukturierte Teil ist **acht Jahre** unversehrt aufzubewahren.
 
 ---
 
+## 4b. Das Aufmacherbild — **ENTSCHIEDEN 10.08.2026**
+
+**Der gebaute Aufmacher zeigte einen gestrichelten Platzhalter, der abgenommene Entwurf zeigt ein
+Gerät.** Beide beriefen sich zu Recht auf eine gültige Vorgabe; niemand hatte sie je
+nebeneinandergelegt.
+
+| | |
+|---|---|
+| **Entschieden** | Im Aufmacher steht ein **Gerät in leichter Schrägstellung** — Laptop mit angeschnittenem Telefon davor, wie auf Finanzseiten üblich |
+| **Auf dem Bildschirm** | eine **echte Aufnahme des eigenen Kundenbereichs** mit Musterdaten. Keine nachgezeichnete Oberfläche |
+| **Der Rahmen** | wird **selbst gezeichnet** — CSS und Inline-SVG, keine gekaufte oder heruntergeladene Vorlage |
+| **Der Vermerk `Musteransicht`** | bleibt gebunden und steht am Bild |
+
+### Warum das die Regel nicht bricht, sondern sie schärft
+
+`10_WEBSITE_SARTU.md` verlangte „ehrlich beschrifteter Bildplatz, **keine nachgebaute
+Oberfläche**", `CODEX_AUFTRAG_WEBSITE.md` „Screenshots des Kundenbereichs müssen aus **echter**
+Oberfläche stammen".
+
+**Beide zielen auf dasselbe: Niemand soll eine erfundene Oberfläche für die echte halten.** Der
+Entwurf vom 02.08.2026 zeichnete die Oberfläche in CSS nach — mit erfundenen Zeilen und
+erfundenen Knöpfen. **Das verstieß gegen die Regel, und die Bau-Session hatte recht, ihn nicht
+zu übernehmen.**
+
+**Der Grund ist seit dem 10.08.2026 entfallen: Der Kundenbereich ist gebaut.** Es gibt eine echte
+Oberfläche, von der sich eine echte Aufnahme machen lässt. Damit ist die Regel erfüllt — und der
+Platzhalter überflüssig.
+
+**Die Regel gilt unverändert weiter für alles, was sie eigentlich meint:** Musterprojekte,
+Gründerfoto, Referenzen. Dort bleibt der beschriftete Bildplatz, bis eine echte Aufnahme
+vorliegt (§5, weiterhin **offen**).
+
+> **Der Geräterahmen ist kein Bild im Sinne dieser Regel.** Er behauptet nichts — er ist eine
+> Fläche, auf der die Aufnahme steht. Deshalb wird er gezeichnet und nicht beschafft: Eine
+> gekaufte Vorlage bindet eine Lizenz und friert das Aussehen ein, ein gezeichneter Rahmen nicht.
+
+### Was auf der Aufnahme zu sehen sein darf
+
+**Musterdaten, wie in `17_SEITEN_SARTU.md` ohnehin vorgeschrieben** — keine echten Kundennamen,
+keine realistischen Rechnungsnummern, keine erfundenen Referenzen. Die Aufnahme wird als Datei
+abgelegt und erneuert, wenn sich der Kundenbereich sichtbar ändert.
+
+---
+
 ## 5. Bildmaterial und Demoprojekte — **OFFEN**
 
 | Punkt | Stand |
@@ -750,3 +794,4 @@ ausgeschrieben sind.
 | 09.08.2026 | **Mollie wird angebunden** — Nicht-bauen-Liste an dieser Stelle aufgehoben (§4a) | Betreiber |
 | 09.08.2026 | **Kein lexoffice, kein sevDesk.** Rechnungsausgang im Portal, Export für den Steuerberater (§4a) | Betreiber |
 | 09.08.2026 | **Zwei zusätzliche Composer-Pakete erlaubt** — ZUGFeRD-Erzeuger und HTML-nach-PDF (§4a) | Betreiber |
+| 10.08.2026 | **Aufmacherbild: Gerät in Schrägstellung mit echter Aufnahme des Kundenbereichs**, Rahmen selbst gezeichnet (§4b) | Betreiber |

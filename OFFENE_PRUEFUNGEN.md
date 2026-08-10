@@ -2445,3 +2445,48 @@ Der Umbau auf die Seitenleiste **ist gesperrt, nicht vergessen**: Punkt 9 in
 `OFFENE_ENTSCHEIDUNGEN.md` — ob es in der Oberfläche überhaupt Zeichen geben darf — steht auf
 `offen`. Der Entwurf zeigt die Leiste **mit** Zeichen. Ohne diese Entscheidung lässt sich die
 Leiste nur ohne Zeichen bauen, und dann wäre sie beim Nachziehen ein zweites Mal zu ändern.
+
+---
+
+## 10.08.2026 — Aufmacherbild entschieden, Startseite gegen den Entwurf nachgemessen
+
+**Nachgemessen mit Playwright bei 1440 px**, beide Seiten im selben Browser: `design/startseite.html`
+gegen die laufende Anwendung unter `/`.
+
+### Der Befund, der den Designabgleich derselben Woche korrigiert
+
+Der Eintrag „Designabgleich vom 10.08.2026" meldet **„Öffentliche Website — übertragen"** und
+belegt das mit zwei Messungen: `tokens.css` byteweise identisch, Abschnittsfolge deckungsgleich.
+**Beides stimmt. Beides trägt die Überschrift nicht.** Gemessen wurde die Reihenfolge, nicht das
+Bild — drei Zeilen darunter stehen bereits drei Abweichungen. Der Aufmacher weicht an **neun**
+Stellen ab.
+
+| # | Abweichung | Ursache |
+|---|---|---|
+| 1 | Gerät im Aufmacher fehlt, stattdessen gestrichelter Bildplatz | **Vorgabe befolgt** — `10_WEBSITE_SARTU.md` verbot die nachgebaute Oberfläche. Entschieden am 10.08.2026, siehe unten |
+| 2 | Lime-Akzent auf dem Schluss der H1 fehlt | **Nebenwirkung einer Textbindung.** Die H1 ist eine Konstante und läuft durch `Html::e()`; eine escapte Konstante kann kein Markup im Satz tragen |
+| 3 | Lime als Textmarker auf Links fehlt | **Verstoß gegen eine gebundene Regel** (Rang 1, Farbsystem Fassung 3). `website.css` enthält null `background-image`; Links sind unterstrichen |
+| 4–7 | Pfeile in den Knöpfen · Diagonalbänder hinter dem Aufmacher · Trennlinie über der Vertrauensliste · Aufzählungszeichen | nicht gebaut |
+| 8 | Logo nirgends eingebunden | von der Bau-Session selbst gemeldet |
+| 9 | Navigation zweizeilig bei 1920, 1440, 1024 px | von der Bau-Session selbst gemessen |
+
+> **Nur einer der neun Punkte geht auf eine zu enge Vorgabe zurück — Punkt 2.** Punkt 1 ist eine
+> befolgte Vorgabe, die dem abgenommenen Entwurf widersprach. Die übrigen sieben haben mit
+> Vorgaben nichts zu tun.
+
+### Entschieden: das Aufmacherbild
+
+`SARTU_ENTSCHEIDUNGEN_OFFEN.md` **§4b** — Gerät in leichter Schrägstellung, darauf eine **echte
+Aufnahme des eigenen Kundenbereichs** mit Musterdaten, Rahmen selbst gezeichnet.
+
+**Der Grund für den Platzhalter ist entfallen:** Die Regel verlangte eine echte Oberfläche, und
+seit dem 10.08.2026 gibt es sie. `10_WEBSITE_SARTU.md` ist in Sektion 1 und 2 nachgezogen; für
+Musterprojekte und Gründerfoto bleibt der Bildplatz, weil dort das Bild der **Beleg** ist.
+
+### Ungeprüft
+
+| # | Punkt | Womit es zu prüfen ist |
+|---|---|---|
+| 1 | **Die Aufnahme des Kundenbereichs gibt es noch nicht.** Sie entsteht erst beim Umbau; bis dahin ist der Aufmacher unverändert | `PROMPT_NEUE_SESSION_STARTSEITE.md` abarbeiten |
+| 2 | **Ob die Musterdaten im Bild den Regeln aus `17_SEITEN_SARTU.md` genügen**, ist erst am fertigen Bild prüfbar — keine echten Namen, keine realistischen Rechnungsnummern | Sichtprüfung der Aufnahme |
+| 3 | **Die Schrägstellung ist nicht erprobt.** Ob ein perspektivisch gekipptes Gerät bei 1024 px und darunter noch trägt, zeigt erst der Bau | vier Breiten rendern |

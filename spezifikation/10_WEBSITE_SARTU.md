@@ -251,7 +251,13 @@ hängen an der **Fensterhöhe**, nicht an der Breite. Der Engpass im Aufmacher i
 
 **Bau:** Branchenangabe **darf nicht anklickbar aussehen** — eine Form, die Interaktion verspricht
 und keine liefert, ist ein Bedienfehler. Visual rechts mit Kennzeichen **`Musteransicht`**
-(gebunden). Kapazitätszeile bei freien Kapazitäten **leise** unter dem Knopf, bei `ausgebucht`
+(gebunden).
+
+**Das Visual ist seit dem 10.08.2026 festgelegt** (`SARTU_ENTSCHEIDUNGEN_OFFEN.md` §4b): ein
+**Gerät in leichter Schrägstellung** — Laptop mit angeschnittenem Telefon davor —, auf dessen
+Bildschirm eine **echte Aufnahme des eigenen Kundenbereichs** mit Musterdaten steht. Der Rahmen
+wird selbst gezeichnet, nicht beschafft. **Kein Bildplatz mehr an dieser Stelle:** Der
+Kundenbereich ist gebaut, also gibt es eine echte Oberfläche. Kapazitätszeile bei freien Kapazitäten **leise** unter dem Knopf, bei `ausgebucht`
 abgesetzt **über** dem Knopf.
 
 **Verhalten:** Desktop zweispaltig, Text 55 % / Visual 45 %. Mobil einspaltig — **H1 zuerst,
@@ -355,6 +361,14 @@ Vorgänge genannt werden — je Zeile ein Vorgang, keiner mehr, keiner weniger.
 
 **Bild:** Ansicht aus dem Kundenbereich, Vermerk `Musteransicht` (gebunden). Solange keine echte
 Aufnahme vorliegt: **ehrlich beschrifteter Bildplatz, keine nachgebaute Oberfläche**.
+
+> **Was „nachgebaut" heißt — geschärft am 10.08.2026.** Verboten ist eine **erfundene Oberfläche**,
+> die für die echte gehalten werden könnte: nachgezeichnete Zeilen, erfundene Knöpfe, ein Bild,
+> das eine Fähigkeit behauptet, die es nicht gibt. **Nicht verboten ist ein Geräterahmen**, in dem
+> eine echte Aufnahme steht — er behauptet nichts, er trägt. `SARTU_ENTSCHEIDUNGEN_OFFEN.md` §4b.
+>
+> Für **Musterprojekte, Gründerfoto und Referenzen** bleibt es beim Bildplatz. Dort ist das Bild
+> der Beleg, und einen Beleg kann kein Rahmen ersetzen.
 
 **Gebunden:** Textlink `Den Kundenbereich ansehen` → `/leistung-portal`
 
