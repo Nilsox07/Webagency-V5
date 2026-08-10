@@ -2395,3 +2395,53 @@ einer Eingabe.
 | 1 | **Ein Kunde entsteht nur aus einer eingegangenen Anfrage.** Es gibt keinen Weg im Adminbereich, eine Organisation oder ein Projekt von Hand anzulegen | So gebaut wie vorgegeben (`12_ADMINBEREICH.md`: „Eingegangene Bedarfsschecks, Umwandlung in Kunde und Projekt"). Wer telefonisch gewonnen wird, wird über `/briefing` eingetragen — das dauert ein paar Minuten und funktioniert. Ein eigener Weg wäre eine **neue Anforderung**, keine Korrektur |
 | 2 | Der gleichzeitige Aufruf von „Stornieren" durch **zwei** Admins könnte zwei Stornorechnungen erzeugen | Eine Zeilensperre auf der Rechnung. Bei einem Betreiber mit einem Konto ist der Fall theoretisch |
 | 3 | Der Adminbereich zeigt den Zustand als Systemwort (`teilweise_bezahlt`) | Absicht: Die Regel „kein Systemcode" gilt dem **Kunden**. Falls es stören sollte, steht `Zahlungsstatus::kundentext()` bereit |
+
+---
+
+## Designabgleich vom 10.08.2026 — gebauter Stand gegen die abgenommenen Entwürfe
+
+Gemessen, nicht schriftlich verglichen: beide Entwürfe und die gebauten Seiten im selben
+Browser bei 1440 px gerendert.
+
+### Öffentliche Website — übertragen
+
+| Prüfung | Ergebnis |
+|---|---|
+| `design/tokens.css` gegen `public/assets/css/tokens.css` | **byteweise identisch** |
+| Farbwerte | Papierton `--cream #f6f6f4`, `--ink`, `--lime #a3e635` wie im Entwurf; die warme Reihe vom Juli ist abgelöst |
+| Abschnittsfolge der Startseite | **deckungsgleich**: Aufmacher · Kundenbereich · Ablauf · Preise · Zusage · Leistungen · Muster · Fragen · Abschluss |
+| Schrift, Flächen, Radien, Dichte | wie im Entwurf |
+| Wortlaut | weicht ab — **so vorgesehen**, jeder Text im Entwurf ist Platzhalter |
+
+### Kundenbereich und interner Bereich — Navigation **nicht** übertragen
+
+Der Betreiber hat am 03.08.2026 entschieden: **Seitenleiste links**, drei Gruppen, je mit
+Zeichen, Zähler nur wo etwas offen ist (`OFFENE_ENTSCHEIDUNGEN.md`, „Navigation in beiden
+Bereichen"). Der Vermerk hielt schon damals fest, dass der gebaute Stand noch das waagerechte
+Kopfband trägt.
+
+**Am 10.08.2026 ist es unverändert.** Belege:
+
+| Beleg | Befund |
+|---|---|
+| `app/views/partials/kundenband.php`, `kopfband.php` | bauen weiterhin ein waagerechtes Band |
+| `--ink-2` und `--ink-3` — die beiden Farben **für die Leiste** | in `tokens.css` definiert, in **keiner** Regel benutzt. Das ist der Beleg, dass die Leiste nie entstand |
+| Menüwort des siebten Punktes | steht auf `Öffnungszeiten`; entschieden ist `Inhalte` fürs Menü und `Öffnungszeiten` als Seitentitel |
+
+Die **Inhalte** der Bildschirme sind gebaut: Stationenleiste, offene Punkte, letzte Aktivität
+und die fünf Blöcke aus §8.1 stehen. Es fehlt die Hülle, nicht der Inhalt.
+
+### Drei weitere Abweichungen, gemessen
+
+| # | Was | Beleg |
+|---|---|---|
+| 1 | **Das Logo wird nirgends verwendet.** `sartu-logo-hell.svg`, `-dunkel.svg` und `sartu-mark.svg` liegen unter `public/assets/bild/`, aber **keine Ansicht bindet sie ein** — Kopf und Fuß setzen das Wort „SARTU" als Text. `07_MARKE_UND_GESTALTUNG.md` verlangt in der Kopfleiste Zeichen + Wortmarke, 34 px | `grep -rl "sartu-logo" app/views/` findet nichts |
+| 2 | **Die Hauptnavigation bricht auf zwei Zeilen.** Gemessen bei 1920 px, 1440 px und 1024 px je zwei Zeilen (78 px hoch), nur bei 1280 px eine (29 px). Der Entwurf hat eine Zeile | Playwright, vier Breiten |
+| 3 | Das Aufmacherbild ist der Platzhalter `[[SCREENSHOT-FEHLT]]` | **Absicht** — es gibt noch keine Aufnahme, und die Startsperre sucht genau diese Marke |
+
+### Was daraus folgt
+
+Der Umbau auf die Seitenleiste **ist gesperrt, nicht vergessen**: Punkt 9 in
+`OFFENE_ENTSCHEIDUNGEN.md` — ob es in der Oberfläche überhaupt Zeichen geben darf — steht auf
+`offen`. Der Entwurf zeigt die Leiste **mit** Zeichen. Ohne diese Entscheidung lässt sich die
+Leiste nur ohne Zeichen bauen, und dann wäre sie beim Nachziehen ein zweites Mal zu ändern.
