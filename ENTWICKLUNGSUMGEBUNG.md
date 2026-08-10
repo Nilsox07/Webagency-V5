@@ -1,4 +1,4 @@
-# Entwicklungsumgebung — PHP, Composer und MariaDB auf deinem Rechner
+# Entwicklungsumgebung — PHP, Composer und MySQL auf deinem Rechner
 
 **Warum diese Datei existiert:** Die Bauunterlagen beschreiben lückenlos, *was* gebaut wird, und
 Portal-Lastenheft §1.4 beschreibt, was der spätere **Server** können muss. Was auf dem
@@ -186,7 +186,7 @@ weiterhin fehl — und das ist richtig so. Jeder Befehl bekommt einen Vorsatz:
 | `composer install` | `docker compose exec app composer install` |
 | `vendor/bin/phpunit` | `docker compose exec app vendor/bin/phpunit` |
 | `php -l datei.php` | `docker compose exec app php -l datei.php` |
-| `mysql -u sartu -p` | `docker compose exec db mariadb -u sartu -p` |
+| `mysql -u sartu -p` | `docker compose exec db mysql -u sartu -p` |
 
 **Das muss Codex wissen**, sonst prüft es erneut das Wirtssystem, findet nichts und hält wieder an.
 Der Satz dafür steht unten.
@@ -265,7 +265,7 @@ etwas schiefgeht, ist hinterher unklar, woran es lag.
 ### Nach Weg A (Docker)
 
 > Die Umgebung steht jetzt, aber sie läuft in Docker, nicht auf dem Wirtssystem. PHP, Composer,
-> MariaDB und ein Mailfänger sind über `docker-compose.yml` verfügbar.
+> MySQL und ein Mailfänger sind über `docker-compose.yml` verfügbar.
 >
 > **Führe jeden PHP-, Composer- und Testbefehl im Container aus**, mit dem Vorsatz
 > `docker compose exec app …` — zum Beispiel `docker compose exec app php -v`,
@@ -281,7 +281,7 @@ etwas schiefgeht, ist hinterher unklar, woran es lag.
 
 ### Nach Weg B (natives Paket)
 
-> PHP 8.3, Composer und MariaDB sind jetzt direkt auf dem Rechner installiert und über `PATH`
+> PHP 8.3, Composer und MySQL sind jetzt direkt auf dem Rechner installiert und über `PATH`
 > erreichbar. Zugangsdaten stehen in `.env`, Datenbanken: `sartu` zum Arbeiten, `sartu_test` für
 > die Testfälle.
 >
@@ -320,8 +320,8 @@ Vollwertig, nur mit ein paar Handgriffen mehr. `docker-compose.yml` bleibt liege
 | System | Womit |
 |---|---|
 | **Windows** | **PHP einzeln** (siehe unten — braucht keine Administratorrechte) oder Laragon/XAMPP, wenn zusätzlich MySQL mit soll |
-| **macOS** | `brew install php@8.3 composer mariadb` |
-| **Linux** | über die Paketverwaltung: `php8.3`, `php8.3-mysql`, `php8.3-intl`, `php8.3-mbstring`, `composer`, `mariadb-server` |
+| **macOS** | `brew install php@8.3 composer mysql` |
+| **Linux** | über die Paketverwaltung: `php8.3`, `php8.3-mysql`, `php8.3-intl`, `php8.3-mbstring`, `composer`, `mysql-server` |
 
 #### Windows ohne Administratorrechte
 

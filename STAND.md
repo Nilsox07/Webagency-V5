@@ -3,7 +3,7 @@
 **Eine Seite. Sie sagt, wo der Bau steht — damit ein abgebrochener Lauf dort weitermacht,
 wo er aufgehört hat, statt von vorn zu beginnen.**
 
-**Letzte Änderung:** 09.08.2026 · **Zweig:** `claude/php-a0-modellplan-06duus`
+**Letzte Änderung:** 10.08.2026 · **Zweig:** `claude/php-a0-modellplan-06duus`
 
 ---
 
@@ -14,10 +14,12 @@ wo er aufgehört hat, statt von vorn zu beginnen.**
 | **Fertig** | A0 · A1 · A2 · A3 · B · **C** |
 | **Läuft gerade** | — |
 | **Als Nächstes** | `LIVEGANG.md` — und drei Dinge davon kann nur ein Mensch tun: Rechtstexte zur Kanzlei, Hoster, Cronlauf. Dazu die Punkte aus `OFFENE_PRUEFUNGEN.md`, Abschnitt „Stufe C" |
-| **Tests** | **337 grün**, 4231 Zusicherungen, gegen echtes MariaDB. Kein SQLite |
+| **Tests** | **342 grün**, 4268 Zusicherungen — gegen **MySQL 8.4 und** MariaDB 11.4. Kein SQLite |
 | **Tabellen** | **23 von 23** |
 | **Testfälle** | **100 von 100** zugeordnet · 99 gebaut und geprüft, **Fall 88 teilweise** (Schema ja, Schematron offen) |
 | **Migrationen** | 036, lückenlos eingespielt, Prüfsummen stimmen |
+| **Datenbank** | Die Entwicklungsumgebung fährt seit dem 10.08.2026 **MySQL 8.4** — dieselbe Familie wie das Zielsystem |
+| **Audit** | 10.08.2026: acht Funde behoben, davon zwei, die die Ersteinrichtung auf MySQL angehalten hätten. `OFFENE_PRUEFUNGEN.md`, Abschnitt „Audit vom 10.08.2026" |
 
 ---
 

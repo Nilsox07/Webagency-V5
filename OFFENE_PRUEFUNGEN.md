@@ -2342,3 +2342,56 @@ eine Frage an den Zahlungsdienst.
 
 **Das ist eine Entscheidung, keine Messung.** Wer sie anders treffen will, findet die
 Begründung an `Route::$ohneCsrf`.
+
+---
+
+## Audit vom 10.08.2026 — Sicherheit, Logik, Systemfehler
+
+Anlass: die Frage, ob der Bau auf **MySQL** läuft und ob nach der Anmeldung nur noch Einträge
+fehlen. Beides ist geprüft, nicht eingeschätzt.
+
+### Was tatsächlich ausgeführt wurde
+
+| Prüfung | Wie |
+|---|---|
+| Vollständige Testreihe gegen **MySQL 8.4** mit dem Anwendungsbenutzer | 342 grün |
+| Dieselbe Reihe gegen **MariaDB 11.4** | 342 grün — beide Systeme, nicht eines |
+| **Ersteinrichtung auf leerer Datenbank**, alle acht Schritte über HTTP | am 10.08.2026 durchgespielt, `/admin/setup` danach 404 |
+| **Anmeldung mit Passwort und TOTP**, danach jede Adminseite aufgerufen | zehn Seiten, alle 200 |
+| Öffentliche Seiten | 11 Seiten 200; `/impressum`, `/datenschutz`, `/agb` liefern 404, solange kein Rechtstext freigegeben ist — beabsichtigt |
+| **Abhängigkeiten gegen die Packagist-Meldungen** | 62 Pakete, 53 Meldungen ausgewertet, **keine zutreffend** |
+| `bin/startklar.php` | meldet die sechs offenen Punkte und gibt 1 zurück |
+
+### Gefunden und behoben
+
+| # | Fund | Wirkung ohne Behebung |
+|---|---|---|
+| 1 | `information_schema` gibt die Spaltennamen auf MySQL in Großbuchstaben zurück; der Zugriff lief über den Feldnamen | Die Vorprüfung meldete „Der Zeichensatz ist nicht utf8mb4" auf einer utf8mb4-Datenbank. **Die Ersteinrichtung wäre auf MySQL nie durchgelaufen** |
+| 2 | MySQL verweigert `CREATE TRIGGER` ohne `SUPER`/`SET_USER_ID`, sobald das Binärlog läuft | Abbruch in Schritt 4 mit „Fehler 1419", nach vier bereits angelegten Tabellen |
+| 3 | `TRIGGER` fehlte in der Liste der benötigten Rechte | Die Vorprüfung meldete „in Ordnung" für einen Benutzer, mit dem die Migration nicht durchläuft |
+| 4 | Der Zahlungs-Webhook nahm **jede** Zeichenkette an — eine Zeile in `payment_events` und eine ausgehende Anfrage je Aufruf | Unauthentifiziert, unbegrenzt, verstärkend: Aus einem billigen Aufruf wurde eine teure Handlung |
+| 5 | `AnmeldeTokenSpeicher::abgelaufeneAufraeumen()` rief **niemand** auf | Abgelaufene Anmeldelinks blieben unbegrenzt liegen. Nicht einlösbar, aber eine Datensammlung ohne Zweck |
+| 6 | Auf einer **Stornorechnung** ließ sich eine Zahlung eintragen | `0 >= -119000` ist wahr — die Gutschrift stand sofort auf `bezahlt` |
+| 7 | Eine **Stornorechnung ließ sich stornieren** | Es entstand ein Beleg mit positiven Beträgen, der „Stornorechnung" hieß |
+| 8 | `dompdf` war auf `^3.1` gebunden | Sechs CVEs sind erst in 3.1.6 geschlossen. Ein `composer update` hätte auch 3.1.0 nehmen dürfen |
+
+### Geprüft und in Ordnung
+
+CSRF-Token je Sitzung mit `hash_equals` · Sitzungscookie `httponly`/`SameSite=Lax`/`secure`
+außer lokal, neue Kennung bei jeder Anmeldung, serverseitige Gültigkeit bei **jedem** Aufruf ·
+Argon2id, Blindhash gegen Kontoerkennung, eigener Zähler für den zweiten Faktor, TOTP-Codes
+einmalig · Anmeldelinks nur als SHA-256 gespeichert, 15 Minuten, einmalig, bedingtes `UPDATE`
+gegen das Wettrennen · jede Ausgabe durch `Html::e`, JSON-LD mit `JSON_HEX_TAG` gegen den
+`</script>`-Ausbruch · CSP ohne `unsafe-inline` für Skripte, `nosniff`, `X-Frame-Options: DENY`,
+HSTS in Produktion · `DocumentRoot` auf `/public`, alles darüber verweigert · keine Stacktraces
+nach außen, interne Kennung ins Log · Uploads nach Inhalt geprüft, nicht nach Angabe des
+Browsers, Ablage außerhalb von `/public` · keine offene Weiterleitung, kein Ansichtsname aus
+einer Eingabe.
+
+### Offen — und warum
+
+| # | Punkt | Womit es zu prüfen ist |
+|---|---|---|
+| 1 | **Ein Kunde entsteht nur aus einer eingegangenen Anfrage.** Es gibt keinen Weg im Adminbereich, eine Organisation oder ein Projekt von Hand anzulegen | So gebaut wie vorgegeben (`12_ADMINBEREICH.md`: „Eingegangene Bedarfsschecks, Umwandlung in Kunde und Projekt"). Wer telefonisch gewonnen wird, wird über `/briefing` eingetragen — das dauert ein paar Minuten und funktioniert. Ein eigener Weg wäre eine **neue Anforderung**, keine Korrektur |
+| 2 | Der gleichzeitige Aufruf von „Stornieren" durch **zwei** Admins könnte zwei Stornorechnungen erzeugen | Eine Zeilensperre auf der Rechnung. Bei einem Betreiber mit einem Konto ist der Fall theoretisch |
+| 3 | Der Adminbereich zeigt den Zustand als Systemwort (`teilweise_bezahlt`) | Absicht: Die Regel „kein Systemcode" gilt dem **Kunden**. Falls es stören sollte, steht `Zahlungsstatus::kundentext()` bereit |

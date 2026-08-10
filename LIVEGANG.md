@@ -37,12 +37,39 @@ Die Anwendung braucht:
 
 - PHP 8.3 oder neuer, mit `pdo_mysql`, `sodium`, `mbstring`, `intl`, `fileinfo`, `openssl`
 - MySQL 8 oder MariaDB 10.6 oder neuer
+- einen Datenbankbenutzer, der **Trigger anlegen darf** — siehe unten
 - einen Cron-Eintrag
 - SMTP mit eigener Absenderdomain
 - einen `DocumentRoot`, den man auf ein Unterverzeichnis legen kann
 
 **Ein geteiltes Hosting ohne freien `DocumentRoot` scheidet aus.** Liegt `/app` im Web,
 nützt keine spätere Einstellung etwas.
+
+#### Der Punkt, an dem es auf MySQL scheitert — vor der Buchung klären
+
+Die Migrationen 005 und 006 legen **zwei Trigger** an. Sie sind keine Zierde: Sie halten die
+Audit-Einträge unveränderbar, und die GoBD verlangt genau das
+(`VERFAHRENSDOKUMENTATION.md` Abschnitt 5.3).
+
+**MySQL verweigert `CREATE TRIGGER`**, sobald das Binärlog läuft und der Benutzer weder
+`SUPER` noch `SET_USER_ID` hat. Bei MySQL 8 läuft das Binärlog standardmäßig, und ein
+Hosterzugang hat diese Rechte praktisch nie. Die Einrichtung bricht dann in Schritt 4 ab.
+
+Fragen Sie den Anbieter **vor der Buchung** nach einem von beidem:
+
+| Möglichkeit | Was der Anbieter tut |
+|---|---|
+| Servereinstellung | `log_bin_trust_function_creators = 1` |
+| Recht für den Benutzer | `GRANT SET_USER_ID ON *.* TO 'benutzer'@'%'` |
+
+Dazu braucht der Benutzer die gewöhnlichen Rechte `CREATE`, `ALTER`, `INDEX`, `REFERENCES`
+und **`TRIGGER`**.
+
+> **Sie merken es früh, nicht spät.** `Migrator::vorpruefung()` prüft beides vor der ersten
+> Tabelle und nennt den Handgriff im Klartext. Ein Abbruch mitten in der Migration mit
+> „Fehler 1419" wäre die Alternative gewesen — und die sagt niemandem, was zu tun ist.
+>
+> **MariaDB kennt diese Einschränkung nicht.** Wer dort betreibt, überspringt diesen Punkt.
 
 ---
 

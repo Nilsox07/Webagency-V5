@@ -9,8 +9,13 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 Bereich unter `/admin/`, Serverfunktionen unter `/api/`. Ein Repository, eine Domain, ein
 Deployment.
 
-**Stand 09.08.2026, abends: 36 Migrationen, 337 Tests grün, alle 100 Testfälle zugeordnet.**
+**Stand 10.08.2026: 36 Migrationen, 342 Tests grün, alle 100 Testfälle zugeordnet.**
 A0, A1, A2, A3, B und C sind gebaut. `migrate.php verify` meldet keine Abweichung.
+
+**Die Tests laufen gegen MySQL 8.4 und gegen MariaDB 11.4.** Die Entwicklungsumgebung fährt
+seit dem 10.08.2026 MySQL — wer auf MySQL betreibt und auf MariaDB entwickelt, findet die
+Unterschiede erst beim Kunden. Zwei davon hätten die Ersteinrichtung angehalten; sie stehen
+in `OFFENE_PRUEFUNGEN.md`, Abschnitt „Audit vom 10.08.2026".
 
 **Zwei Punkte sind nicht grün gemeldet, sondern eingetragen** — `OFFENE_PRUEFUNGEN.md`,
 Abschnitt „Stufe C":
@@ -40,7 +45,7 @@ docker compose up -d --build          # Umgebung starten (erster Lauf: einige Mi
 docker compose exec app php -v        # 8.3+
 docker compose exec app php -m        # muss pdo_mysql sodium mbstring intl fileinfo openssl enthalten
 docker compose exec app composer install
-docker compose exec db mariadb -u sartu -p
+docker compose exec db mysql -u sartu -p
 ```
 
 | Zweck | Befehl |
