@@ -1,0 +1,130 @@
+<!-- =============================================================
+     SARTU — Geraeterahmen fuer den Aufmacher
+     Arbeitsstand vom 10.08.2026, entschieden in
+     SARTU_ENTSCHEIDUNGEN_OFFEN.md §4b.
+
+     WAS DAS IST: Ein lauffaehiger Rahmen aus reinem CSS. Kein 3D,
+     kein Bild von aussen, keine Lizenz, kein externer Abruf.
+     Zum Ansehen im Browser oeffnen.
+
+     WAS DEN EINDRUCK MACHT — vier Dinge, nicht die Perspektive:
+       1. Kantenlicht: inset-Schatten hell oben und links,
+          dunkel rechts und unten. Das ist der groesste Effekt.
+       2. Gehaeuseverlauf statt Flaeche: linear-gradient ueber
+          die Kippachse, hell an der zugewandten Kante.
+       3. Glasreflex: ein diagonaler Verlauf ueber dem Schirm,
+          oben stark, zur Mitte verlaufend.
+       4. Zwei Schattenlagen: eine enge harte am Boden, eine
+          weite weiche darunter. Eine Lage allein wirkt flach.
+
+     WAS NOCH ZU TUN IST:
+       - Die Aufnahme auf dem Schirm ist ein PLATZHALTER aus
+         design/portalkonzept.html. Sie wird durch eine echte
+         Aufnahme des laufenden Kundenbereichs ersetzt (§4b).
+       - Die Grau- und Schwarzwerte des Gehaeuses stehen hier
+         noch als Zahlen im Bauteil. Beim Uebernehmen gehoeren
+         sie als eigene Gruppe nach design/tokens.css —
+         CLAUDE.md verbietet Zahlen im Bauteil, wo eine
+         Variable existieren kann.
+       - Unter 1024 px ist die Schraegstellung ungeprueft.
+         Ueblich ist, sie dort zurueckzunehmen.
+     ============================================================= -->
+<style>
+:root{
+  --cream:#f6f6f4; --paper:#fff; --ink:#14110d; --line:#dfdfda; --sand:#eaeae6;
+  --lime:#a3e635; --text:#1f2120; --muted:#4a4d4b;
+  --font-sans:-apple-system,BlinkMacSystemFont,"Segoe UI",system-ui,sans-serif;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--cream);font-family:var(--font-sans);color:var(--text)}
+.raum{padding:120px 90px 190px;display:grid;place-items:center}
+
+/* ============ Bühne ============ */
+.buehne{perspective:2200px;perspective-origin:66% 44%;width:720px}
+.geraete{transform-style:preserve-3d;transform:rotateY(-17deg) rotateX(6deg) rotateZ(-1.2deg);
+         position:relative}
+
+/* ---- Bodenschatten: zwei Lagen, eine hart, eine weit ---- */
+.geraete::before{content:"";position:absolute;left:6%;right:2%;bottom:-30px;height:52px;
+  background:radial-gradient(60% 100% at 50% 0%,rgba(20,17,13,.42),transparent 72%);
+  filter:blur(16px);transform:translateZ(-60px);z-index:0}
+.geraete::after{content:"";position:absolute;left:-6%;right:-10%;bottom:-72px;height:130px;
+  background:radial-gradient(52% 100% at 48% 0%,rgba(20,17,13,.30),transparent 74%);
+  filter:blur(46px);transform:translateZ(-120px);z-index:0}
+
+/* ---- Deckel ---- */
+.deckel{position:relative;z-index:2;
+  background:linear-gradient(148deg,#4a4d4a 0%,#262926 14%,#191b19 46%,#101210 78%,#0a0b0a 100%);
+  border-radius:22px 22px 8px 8px;padding:14px 14px 16px;
+  box-shadow:
+    inset 0 1.5px 0 rgba(255,255,255,.30),
+    inset 1.5px 0 0 rgba(255,255,255,.13),
+    inset -1.5px 0 0 rgba(0,0,0,.65),
+    inset 0 -1px 0 rgba(0,0,0,.7),
+    0 1px 2px rgba(0,0,0,.5);
+}
+.kamera{width:6px;height:6px;border-radius:50%;margin:0 auto 9px;
+  background:radial-gradient(circle at 35% 30%,#3d4a44,#0b0d0c 70%);
+  box-shadow:0 0 0 1px rgba(255,255,255,.07)}
+.glas{position:relative;border-radius:11px;overflow:hidden;background:#0b0d0c;aspect-ratio:16/10;
+  box-shadow:inset 0 0 0 1px rgba(0,0,0,.9), inset 0 2px 12px rgba(0,0,0,.55)}
+.glas img{width:100%;display:block}
+/* Reflex quer über das Glas */
+.glas::after{content:"";position:absolute;inset:0;pointer-events:none;
+  background:linear-gradient(108deg,
+    rgba(255,255,255,.26) 0%,
+    rgba(255,255,255,.10) 13%,
+    rgba(255,255,255,.03) 26%,
+    transparent 46%,
+    rgba(255,255,255,.05) 82%,
+    rgba(255,255,255,.11) 100%)}
+
+/* ---- Sockel: schmaler als der Deckel, mit Anschrägung ---- */
+.sockelraum{position:relative;z-index:1;transform:translateZ(-2px)}
+.sockel{height:15px;margin:0 -30px;
+  background:linear-gradient(#43463f 0%,#2b2e2a 18%,#181a18 62%,#0d0e0d 100%);
+  border-radius:3px 3px 12px 12px;
+  clip-path:polygon(1.6% 0,98.4% 0,100% 100%,0 100%);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.34), 0 16px 26px -14px rgba(0,0,0,.75)}
+.kerbe{width:108px;height:6px;margin:-1px auto 0;position:relative;z-index:3;
+  background:linear-gradient(#0a0b0a,#141614);border-radius:0 0 8px 8px;
+  box-shadow:inset 0 -1px 0 rgba(255,255,255,.08)}
+
+/* ---- Telefon ---- */
+.telefon{position:absolute;right:-9%;bottom:-15%;width:21%;z-index:4;
+  transform:translateZ(120px) rotateY(4deg) rotateZ(.6deg);
+  background:linear-gradient(150deg,#54574f 0%,#2a2d29 12%,#17191７ 44%,#0d0e0d 100%);
+  background:linear-gradient(150deg,#54574f 0%,#2a2d29 12%,#171917 44%,#0d0e0d 100%);
+  border-radius:30px;padding:7px;
+  box-shadow:
+    inset 0 1.5px 0 rgba(255,255,255,.34),
+    inset 1.5px 0 0 rgba(255,255,255,.15),
+    inset -1.5px 0 0 rgba(0,0,0,.7),
+    0 30px 50px -22px rgba(20,17,13,.6),
+    0 6px 12px -6px rgba(20,17,13,.5)}
+.telefon .glas{aspect-ratio:9/17.5;border-radius:24px}
+.telefon .glas img{margin-top:0}
+.insel{position:absolute;left:50%;top:14px;transform:translateX(-50%);width:26%;height:8px;
+  background:#080908;border-radius:999px;z-index:5}
+
+.marke{position:absolute;left:2px;top:-40px;z-index:6;
+  font:600 11px/1 var(--font-sans);letter-spacing:.14em;text-transform:uppercase;
+  background:var(--lime);color:var(--ink);border:1px solid var(--line);
+  border-radius:999px;padding:8px 14px}
+</style>
+<div class="raum">
+  <div class="buehne">
+    <div class="geraete">
+      <span class="marke">Musteransicht</span>
+      <div class="deckel">
+        <div class="kamera"></div>
+        <div class="glas"><img src="schirm-laptop.png" alt=""></div>
+      </div>
+      <div class="sockelraum"><div class="sockel"></div><div class="kerbe"></div></div>
+      <div class="telefon">
+        <div class="insel"></div>
+        <div class="glas"><img src="schirm-telefon.png" alt=""></div>
+      </div>
+    </div>
+  </div>
+</div>

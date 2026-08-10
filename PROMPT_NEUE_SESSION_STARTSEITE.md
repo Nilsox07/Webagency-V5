@@ -16,7 +16,7 @@
 Lies zuerst: SARTU_ENTSCHEIDUNGEN_OFFEN.md §4b (Rang 1, legt das Aufmacherbild fest) · spezifikation/10_WEBSITE_SARTU.md Sektion 1 und 2 · design/startseite.html, Zeilen 770–860 (der Aufmacher) · design/tokens.css. Der Entwurf ist die Vorlage für Aufbau, Flächen und Dichte — jeder Text darin ist Platzhalter.
 
 Das Aufmacherbild, entschieden am 10.08.2026:
-Statt des gestrichelten Bildplatzes steht dort ein Gerät in leichter Schrägstellung — Laptop mit angeschnittenem Telefon davor. Der Rahmen wird selbst gezeichnet: CSS-Perspektive plus Inline-SVG, keine gekaufte oder heruntergeladene Vorlage, kein externer Abruf. Auf dem Bildschirm steht eine echte Aufnahme des eigenen Kundenbereichs mit Musterdaten, abgelegt als WebP unter public/assets/bild/. Kein [[SCREENSHOT-FEHLT]] mehr an dieser Stelle. Der Vermerk Musteransicht bleibt und steht am Bild. Für Musterprojekte und Gründerfoto bleibt der Bildplatz unverändert — dort ist das Bild der Beleg.
+Der Rahmen liegt fertig in design/geraet.html — lauffähiges CSS, im Browser ansehbar. Übernimm ihn, statt neu anzufangen. Der Kopf der Datei nennt die vier Dinge, die den Eindruck tragen, und drei offene Punkte: die Grauwerte des Gehäuses gehören als eigene Gruppe nach tokens.css, unter 1024 px ist die Schrägstellung ungeprüft, und die Aufnahme auf dem Schirm ist ein Platzhalter aus dem Portalkonzept. Ersetz sie durch eine echte Aufnahme des laufenden Kundenbereichs mit Musterdaten, als WebP unter public/assets/bild/. Kein [[SCREENSHOT-FEHLT]] mehr an dieser Stelle. Der Vermerk Musteransicht bleibt und steht am Bild. Für Musterprojekte und Gründerfoto bleibt der Bildplatz unverändert — dort ist das Bild der Beleg.
 
 Die neun Abweichungen:
 1. Aufmacherbild wie oben.
