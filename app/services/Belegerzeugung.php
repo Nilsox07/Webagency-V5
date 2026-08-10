@@ -146,7 +146,10 @@ final class Belegerzeugung
      */
     public function inhalt(array $beleg): string
     {
-        $pfad = self::verzeichnis() . '/' . (string) $beleg['path'];
+        // `basename()` als Tiefenschutz. Der Wert kommt heute aus `documents` und wurde von
+        // `ablegen()` erzeugt — er kann keinen Pfadanteil tragen. Der Schutz kostet nichts
+        // und haelt, falls je ein zweiter Schreibweg dazukommt.
+        $pfad = self::verzeichnis() . '/' . basename(str_replace('\\', '/', (string) $beleg['path']));
 
         if (!is_file($pfad)) {
             throw new \RuntimeException('Der Beleg ' . (string) $beleg['number'] . ' fehlt in der Ablage.');

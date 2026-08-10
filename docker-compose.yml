@@ -25,40 +25,65 @@ services:
       db_test:
         condition: service_healthy
 
+  # MySQL 8.4 — dieselbe Familie wie auf dem Zielsystem.
+  #
+  # **Bis zum 10.08.2026 stand hier MariaDB.** Beide sind nach der Vorgabe zulaessig
+  # („MySQL 8 / MariaDB 10.6+"), und genau deshalb ist die Wahl hier keine Geschmacksfrage:
+  # Wer auf MySQL betreibt und auf MariaDB entwickelt, findet die Unterschiede erst auf dem
+  # Zielsystem. Einer davon ist am 10.08.2026 aufgefallen — `information_schema` gibt die
+  # Spaltennamen auf MySQL in Grossbuchstaben zurueck, und die Vorpruefung der
+  # Ersteinrichtung lief dadurch auf MySQL nie durch.
   db:
-    image: mariadb:11.4
+    image: mysql:8.4
     restart: unless-stopped
+    # Die Migrationen 005 und 006 legen zwei Trigger an — sie halten die Audit-Eintraege
+    # unveraenderbar (§4, GoBD). **MySQL verweigert das**, sobald das Binaerlog laeuft und der
+    # Benutzer weder SUPER noch SET_USER_ID hat; beides trifft auf einen Hosterzugang zu.
+    # Diese Zeile bildet genau den Handgriff ab, den der Anbieter auf dem Zielsystem setzen
+    # muss. `Migrator::ausloeserHindernis()` prueft ihn vor der ersten Tabelle und sagt es im
+    # Klartext, statt mitten in der Migration mit „Fehler 1419" abzubrechen.
+    command: --log-bin-trust-function-creators=1
     environment:
-      MARIADB_DATABASE: ${DB_NAME}
-      MARIADB_USER: ${DB_USER}
-      MARIADB_PASSWORD: ${DB_PASS}
-      MARIADB_ROOT_PASSWORD: ${DB_ROOT_PASSWORD}
+      MYSQL_DATABASE: ${DB_NAME}
+      MYSQL_USER: ${DB_USER}
+      MYSQL_PASSWORD: ${DB_PASS}
+      MYSQL_ROOT_PASSWORD: ${DB_ROOT_PASSWORD}
     ports:
       - "${DB_PORT:-3306}:3306"
     volumes:
       - dbdata:/var/lib/mysql
     healthcheck:
-      test: ["CMD", "healthcheck.sh", "--connect", "--innodb_initialized"]
+      test: ["CMD", "mysqladmin", "ping", "-h", "127.0.0.1", "-uroot", "-p$$MYSQL_ROOT_PASSWORD"]
       interval: 5s
       timeout: 5s
       retries: 30
 
-  # Eigene Datenbank für die 59 Testfälle.
-  # Portal-Lastenheft §16 verlangt Tests gegen ein echtes MariaDB — kein SQLite, kein Ersatz
-  # im Speicher. Getrennt von der Arbeitsdatenbank, damit ein Test nie echte Daten löscht.
-  # Liegt im Arbeitsspeicher: schnell, und bei jedem Neustart garantiert leer.
+  # Eigene Datenbank für die Tests.
+  # Portal-Lastenheft §16 verlangt Tests gegen ein echtes MySQL/MariaDB — kein SQLite, kein
+  # Ersatz im Speicher. Getrennt von der Arbeitsdatenbank, damit ein Test nie echte Daten
+  # löscht. Liegt im Arbeitsspeicher: schnell, und bei jedem Neustart garantiert leer.
+  #
+  # **Dieselbe Fassung wie `db`.** Eine Testdatenbank auf einem anderen System als die
+  # Arbeitsdatenbank prüft das falsche System.
   db_test:
-    image: mariadb:11.4
+    image: mysql:8.4
     restart: unless-stopped
+    # Die Migrationen 005 und 006 legen zwei Trigger an — sie halten die Audit-Eintraege
+    # unveraenderbar (§4, GoBD). **MySQL verweigert das**, sobald das Binaerlog laeuft und der
+    # Benutzer weder SUPER noch SET_USER_ID hat; beides trifft auf einen Hosterzugang zu.
+    # Diese Zeile bildet genau den Handgriff ab, den der Anbieter auf dem Zielsystem setzen
+    # muss. `Migrator::ausloeserHindernis()` prueft ihn vor der ersten Tabelle und sagt es im
+    # Klartext, statt mitten in der Migration mit „Fehler 1419" abzubrechen.
+    command: --log-bin-trust-function-creators=1
     environment:
-      MARIADB_DATABASE: ${DB_NAME_TEST}
-      MARIADB_USER: ${DB_USER}
-      MARIADB_PASSWORD: ${DB_PASS}
-      MARIADB_ROOT_PASSWORD: ${DB_ROOT_PASSWORD}
+      MYSQL_DATABASE: ${DB_NAME_TEST}
+      MYSQL_USER: ${DB_USER}
+      MYSQL_PASSWORD: ${DB_PASS}
+      MYSQL_ROOT_PASSWORD: ${DB_ROOT_PASSWORD}
     tmpfs:
       - /var/lib/mysql
     healthcheck:
-      test: ["CMD", "healthcheck.sh", "--connect", "--innodb_initialized"]
+      test: ["CMD", "mysqladmin", "ping", "-h", "127.0.0.1", "-uroot", "-p$$MYSQL_ROOT_PASSWORD"]
       interval: 5s
       timeout: 5s
       retries: 30

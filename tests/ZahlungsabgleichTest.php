@@ -278,6 +278,90 @@ final class ZahlungsabgleichTest extends Datenbankfall
         $this->assertSame(Zahlungsstatus::GESENDET, $this->rechnung()['status']);
     }
 
+
+    // ------------------------------------------------------------------ Der offene Endpunkt
+
+    /**
+     * Was der Form nach keine Zahlungskennung ist, kostet **nichts**.
+     *
+     * Dieser Endpunkt ist der einzige ohne Sitzung. Ohne Formprüfung schriebe jede erfundene
+     * Zeichenkette eine Zeile in `payment_events` und löste eine ausgehende Anfrage aus —
+     * aus einem billigen Aufruf würde eine teure Handlung.
+     */
+    public function testEineUnsinnigeKennungSchreibtNichtsUndFragtNichtNach(): void
+    {
+        $stelle = new Zahlungsstelle();
+
+        foreach (['../../etc/passwd', 'x', str_repeat('a', 300), '<script>', 'tr_', 'ohneunterstrich'] as $unsinn) {
+            $ergebnis = $this->abgleich($stelle)->verarbeiten($unsinn, 'id=' . $unsinn, '203.0.113.9');
+
+            $this->assertSame(400, $ergebnis['status'], $unsinn);
+            $this->assertSame('ungueltig', $ergebnis['ergebnis'], $unsinn);
+        }
+
+        // Keine Zeile, kein Abruf.
+        $this->assertSame(0, (int) $this->pdo->query('SELECT COUNT(*) FROM payment_events')->fetchColumn());
+        $this->assertSame(0, $stelle->abrufe);
+    }
+
+    /** Eine echte Kennung besteht die Formprüfung — sonst wäre sie eine Sperre. */
+    public function testEineEchteKennungBestehtDieFormpruefung(): void
+    {
+        $stelle = new Zahlungsstelle();
+        $stelle->hinterlegen('tr_wf00001', 'paid', 119000);
+
+        $ergebnis = $this->abgleich($stelle)->verarbeiten('tr_wf00001', 'id=tr_wf00001', '203.0.113.9');
+
+        $this->assertSame(Zahlungseingaenge::ERGEBNIS_GEBUCHT, $ergebnis['ergebnis']);
+        $this->assertSame(1, $stelle->abrufe);
+    }
+
+    /**
+     * Eine Schleife von derselben Gegenstelle wird gebremst — und mit **429** beantwortet.
+     *
+     * Nicht mit 200: Eine Bestätigung wiese die abgewiesene Nachricht als erledigt aus, und
+     * der Dienst stellte sie nie wieder zu.
+     */
+    public function testEineSchleifeVonDerselbenGegenstelleWirdGebremst(): void
+    {
+        $stelle = new Zahlungsstelle();
+        $abgewiesen = 0;
+        $angenommen = 0;
+
+        for ($i = 1; $i <= Zahlungsabgleich::AUFRUFE_JE_STUNDE + 5; ++$i) {
+            $kennung = 'tr_schleife' . str_pad((string) $i, 5, '0', STR_PAD_LEFT);
+            $ergebnis = $this->abgleich($stelle)->verarbeiten($kennung, 'id=' . $kennung, '203.0.113.9');
+
+            $ergebnis['status'] === 429 ? ++$abgewiesen : ++$angenommen;
+        }
+
+        $this->assertSame(Zahlungsabgleich::AUFRUFE_JE_STUNDE, $angenommen);
+        $this->assertSame(5, $abgewiesen);
+
+        // Die abgewiesenen haben weder eine Zeile noch einen Abruf erzeugt.
+        $this->assertSame(
+            Zahlungsabgleich::AUFRUFE_JE_STUNDE,
+            (int) $this->pdo->query('SELECT COUNT(*) FROM payment_events')->fetchColumn(),
+        );
+    }
+
+    /** Eine andere Gegenstelle ist von der Bremse nicht betroffen. */
+    public function testEineAndereGegenstelleWirdNichtMitgebremst(): void
+    {
+        $stelle = new Zahlungsstelle();
+        $stelle->hinterlegen('tr_wf00001', 'paid', 119000);
+
+        for ($i = 1; $i <= Zahlungsabgleich::AUFRUFE_JE_STUNDE; ++$i) {
+            $kennung = 'tr_schleife' . str_pad((string) $i, 5, '0', STR_PAD_LEFT);
+            $this->abgleich($stelle)->verarbeiten($kennung, '', '203.0.113.9');
+        }
+
+        $ergebnis = $this->abgleich($stelle)->verarbeiten('tr_wf00001', '', '198.51.100.4');
+
+        $this->assertSame(200, $ergebnis['status']);
+        $this->assertSame(Zahlungseingaenge::ERGEBNIS_GEBUCHT, $ergebnis['ergebnis']);
+    }
+
     // ------------------------------------------------------------------ Fall 93
 
     /**

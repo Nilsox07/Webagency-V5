@@ -53,11 +53,44 @@ final class Zahlungsabgleich
     /** Die Zustände von Mollie, bei denen Geld geflossen ist. */
     public const BEZAHLT = ['paid', 'authorized'];
 
+    /**
+     * Wie eine Zahlungskennung aussehen darf.
+     *
+     * ## Warum das keine Kosmetik ist
+     *
+     * Dieser Endpunkt ist der **einzige** der Anwendung, den jemand ohne Sitzung erreicht.
+     * Ohne Formprüfung tut er für **jede** eingehende Zeichenkette zwei Dinge: Er schreibt
+     * eine Zeile in `payment_events`, und er ruft den Zahlungsdienst. Wer das in einer
+     * Schleife aufruft, füllt die Tabelle und erzeugt genauso viele ausgehende Anfragen —
+     * aus einem billigen Aufruf wird eine teure Handlung.
+     *
+     * Die Prüfung steht **vor** dem Festhalten. Was nicht wie eine Kennung aussieht, kann
+     * keine sein: Mollie vergibt `tr_` und danach Buchstaben und Ziffern. Eine echte
+     * Benachrichtigung besteht sie immer, eine erfundene meistens nicht.
+     *
+     * Sie ersetzt keine Prüfung des Inhalts — die gibt es hier bewusst nicht, der Server
+     * fragt selbst nach. Sie hält nur das fern, was schon der Form nach nichts sein kann.
+     */
+    public const KENNUNG_MUSTER = '/^[A-Za-z]{2,10}_[A-Za-z0-9]{5,80}$/';
+
+    /**
+     * Wie viele Benachrichtigungen von **einer** Gegenstelle je Stunde angenommen werden.
+     *
+     * Grosszügig gewählt: Bei einstelligen Rechnungszahlen je Monat liegt der echte Bedarf
+     * bei einer Handvoll am Tag, und Mollie wiederholt eine Zustellung nur wenige Male.
+     * Die Grenze trifft deshalb keinen echten Aufruf und bremst eine Schleife trotzdem.
+     *
+     * **Beim Anschlagen wird 429 geantwortet, nicht 200.** Eine Bestätigung würde eine
+     * abgewiesene Nachricht als erledigt ausweisen — Mollie stellt dann nie wieder zu.
+     */
+    public const AUFRUFE_JE_STUNDE = 120;
+
     public function __construct(
         private readonly Zahlungsdienst $dienst,
         private readonly ?Zahlungseingaenge $eingaenge = null,
         private readonly ?AuditProtokoll $audit = null,
         private readonly ?Versender $mail = null,
+        private readonly ?Ratenbegrenzung $begrenzung = null,
         private readonly ?\PDO $pdo = null,
     ) {
     }
@@ -73,6 +106,30 @@ final class Zahlungsabgleich
 
         if ($kennung === '') {
             return ['status' => 400, 'text' => 'Es fehlt die Kennung.', 'ergebnis' => ''];
+        }
+
+        // Schritt 0 — was der Form nach keine Kennung ist, kostet nichts.
+        //
+        // Vor dem Festhalten und vor dem Abruf: Sonst schreibt jede erfundene Zeichenkette
+        // eine Zeile und löst eine ausgehende Anfrage aus. Auch die Länge hängt daran — die
+        // Spalte fasst 100 Zeichen, und ein längerer Wert wäre sonst ein Fehler 500.
+        if (preg_match(self::KENNUNG_MUSTER, $kennung) !== 1) {
+            return ['status' => 400, 'text' => 'Die Kennung hat kein gültiges Format.', 'ergebnis' => 'ungueltig'];
+        }
+
+        // Schritt 0b — dieselbe Überlegung für die Menge.
+        if ($ip !== null && $ip !== '' && !$this->begrenzung()->erlaubt(
+            'zahlungswebhook:' . $ip,
+            self::AUFRUFE_JE_STUNDE,
+            3600,
+        )) {
+            // 429 und nicht 200: Eine Bestätigung würde diese Nachricht als erledigt
+            // ausweisen, und der Dienst stellte sie nie wieder zu.
+            return ['status' => 429, 'text' => 'Zu viele Aufrufe.', 'ergebnis' => 'begrenzt'];
+        }
+
+        if ($ip !== null && $ip !== '') {
+            $this->begrenzung()->vermerken('zahlungswebhook:' . $ip, 3600);
         }
 
         // Schritt 1 und 2 — festhalten, bevor irgendetwas geschieht.
@@ -245,5 +302,10 @@ final class Zahlungsabgleich
     private function audit(): AuditProtokoll
     {
         return $this->audit ?? new AuditProtokoll($this->pdo);
+    }
+
+    private function begrenzung(): Ratenbegrenzung
+    {
+        return $this->begrenzung ?? new Ratenbegrenzung();
     }
 }

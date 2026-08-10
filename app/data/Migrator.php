@@ -163,13 +163,21 @@ final class Migrator
                 . 'Vorhandene Tabellen: ' . implode(', ', $this->tabellen()) . '.';
         }
 
+        // **Die Aliase sind nicht Kosmetik.** MySQL 8 gibt die Spalten von
+        // `information_schema` in GROSSBUCHSTABEN zurueck, MariaDB so, wie sie in der Abfrage
+        // stehen. Ein Zugriff ueber `$zeile['default_character_set_name']` findet auf MySQL
+        // nichts, und die Vorpruefung meldete dann „Der Zeichensatz ist nicht utf8mb4" —
+        // auf einer Datenbank, die utf8mb4 ist. Die Ersteinrichtung waere nie durchgelaufen.
+        //
+        // Mit einem selbst vergebenen Alias heisst die Spalte auf beiden Systemen gleich.
         $zeichensatz = $this->pdo->query(
-            'SELECT default_character_set_name, default_collation_name FROM information_schema.schemata WHERE schema_name = DATABASE()'
+            'SELECT default_character_set_name AS zeichensatz, default_collation_name AS kollation'
+            . ' FROM information_schema.schemata WHERE schema_name = DATABASE()'
         )->fetch();
 
-        if (!is_array($zeichensatz) || (string) $zeichensatz['default_character_set_name'] !== 'utf8mb4') {
+        if (!is_array($zeichensatz) || (string) $zeichensatz['zeichensatz'] !== 'utf8mb4') {
             $fehler[] = 'Der Zeichensatz der Datenbank ist nicht utf8mb4.';
-        } elseif (!str_starts_with((string) $zeichensatz['default_collation_name'], 'utf8mb4_')) {
+        } elseif (!str_starts_with((string) $zeichensatz['kollation'], 'utf8mb4_')) {
             $fehler[] = 'Die Kollation der Datenbank passt nicht zu utf8mb4.';
         }
 
@@ -182,13 +190,84 @@ final class Migrator
             $fehler[] = sprintf('Dem Datenbankbenutzer fehlt das Recht %s.', $recht);
         }
 
+        $ausloeser = $this->ausloeserHindernis();
+
+        if ($ausloeser !== null) {
+            $fehler[] = $ausloeser;
+        }
+
         return $fehler;
+    }
+
+    /**
+     * Darf dieser Benutzer Trigger anlegen? — die Frage, die auf MySQL scheitert.
+     *
+     * ## Warum das hier geprueft wird und nicht erst beim Anlegen
+     *
+     * Die Migrationen 005 und 006 legen zwei Trigger an. Sie sind keine Zierde: §4 verlangt,
+     * dass Audit-Eintraege nie geaendert und nie geloescht werden, und die GoBD verlangt
+     * Unveraenderbarkeit — eine Absicht im Anwendungscode ist dafuer kein Beleg.
+     *
+     * **MySQL verweigert `CREATE TRIGGER`, sobald das Binaerlog laeuft** und der Benutzer
+     * weder `SUPER` noch `SET_USER_ID` hat. Das Binaerlog laeuft bei MySQL 8 standardmaessig,
+     * und ein Datenbankbenutzer beim Hoster hat diese Rechte praktisch nie. Der Fehler kommt
+     * dann als „SQLSTATE[HY000] 1419" mitten in der Migration — nach vier bereits angelegten
+     * Tabellen, mit einer Meldung, die niemandem sagt, was zu tun ist.
+     *
+     * Hier faellt er **vor** der ersten Tabelle auf, mit dem Handgriff im Klartext.
+     *
+     * MariaDB kennt die Einschraenkung nicht; dort gibt die Abfrage nichts zurueck, und die
+     * Pruefung schweigt.
+     */
+    public function ausloeserHindernis(): ?string
+    {
+        try {
+            $binlog = (string) $this->pdo->query('SELECT @@global.log_bin')->fetchColumn();
+        } catch (\PDOException) {
+            // Die Variable gibt es nicht — dann gibt es die Einschraenkung auch nicht.
+            return null;
+        }
+
+        if ($binlog !== '1') {
+            return null;
+        }
+
+        try {
+            $vertraut = (string) $this->pdo->query('SELECT @@global.log_bin_trust_function_creators')->fetchColumn();
+        } catch (\PDOException) {
+            return null;
+        }
+
+        if ($vertraut === '1') {
+            return null;
+        }
+
+        try {
+            $zeilen = $this->pdo->query('SHOW GRANTS FOR CURRENT_USER()')->fetchAll(\PDO::FETCH_NUM);
+        } catch (\PDOException) {
+            return null;
+        }
+
+        $gewaehrt = strtoupper(implode(' ', array_map(static fn (array $z) => (string) $z[0], $zeilen)));
+
+        if (str_contains($gewaehrt, 'SUPER') || str_contains($gewaehrt, 'SET_USER_ID')) {
+            return null;
+        }
+
+        return 'Auf diesem Server laeuft das Binaerlog, und der Datenbankbenutzer darf deshalb keine '
+            . 'Trigger anlegen. Zwei davon sind Pflicht — sie halten die Audit-Eintraege unveraenderbar '
+            . '(GoBD). Bitte lassen Sie beim Anbieter eines von beidem einrichten: '
+            . 'die Servereinstellung log_bin_trust_function_creators = 1 oder das Recht SET_USER_ID '
+            . 'fuer diesen Benutzer.';
     }
 
     /** @return list<string> */
     public function fehlendeRechte(): array
     {
-        $benoetigt = ['CREATE', 'ALTER', 'INDEX', 'REFERENCES'];
+        // TRIGGER fehlte in dieser Liste bis zum 10.08.2026 — die Migrationen 005 und 006
+        // brauchen es, und ohne den Eintrag meldete die Vorpruefung „alles in Ordnung" fuer
+        // einen Benutzer, mit dem die Migration nicht durchlaeuft.
+        $benoetigt = ['CREATE', 'ALTER', 'INDEX', 'REFERENCES', 'TRIGGER'];
 
         try {
             $zeilen = $this->pdo->query('SHOW GRANTS FOR CURRENT_USER()')->fetchAll(\PDO::FETCH_NUM);

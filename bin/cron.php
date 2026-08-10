@@ -18,6 +18,7 @@ declare(strict_types=1);
  * verschiebt sie unbegrenzt.
  */
 
+use Sartu\Data\AnmeldeTokenSpeicher;
 use Sartu\Data\SitzungsSpeicher;
 use Sartu\Services\Loeschlauf;
 use Sartu\Services\Zahlungslauf;
@@ -38,6 +39,18 @@ try {
 } catch (\Throwable $ausnahme) {
     ++$fehler;
     fwrite(STDERR, 'Anmeldungen aufraeumen fehlgeschlagen: ' . $ausnahme->getMessage() . PHP_EOL);
+}
+
+try {
+    // Abgelaufene Anmeldelinks. Sie sind nicht mehr einloesbar — `einloesen()` verlangt
+    // `expires_at > jetzt` —, aber sie blieben bis zum 09.08.2026 unbegrenzt liegen: Die
+    // Methode gab es, und **niemand rief sie auf**. Das ist keine Luecke, sondern eine
+    // Datensammlung ohne Zweck, und die DSGVO nennt das Datenminimierung.
+    $verfallen = (new AnmeldeTokenSpeicher())->abgelaufeneAufraeumen();
+    fwrite(STDOUT, sprintf('Abgelaufene Anmeldelinks entfernt: %d%s', $verfallen, PHP_EOL));
+} catch (\Throwable $ausnahme) {
+    ++$fehler;
+    fwrite(STDERR, 'Anmeldelinks aufraeumen fehlgeschlagen: ' . $ausnahme->getMessage() . PHP_EOL);
 }
 
 try {
