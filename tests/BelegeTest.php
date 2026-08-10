@@ -298,6 +298,56 @@ final class BelegeTest extends Datenbankfall
         $this->assertNotSame((string) $vorher['number'], (string) $zweiteZeile['number']);
     }
 
+
+    /**
+     * Eine Stornorechnung ist kein zweiter Rechnungslauf.
+     *
+     * Beide Wege standen bis zum 10.08.2026 offen, weil eine Stornorechnung eine gewöhnliche
+     * Zeile mit dem Zustand `gesendet` ist:
+     *
+     * - **Zahlung eintragen:** `Zahlungsstatus::ausBetrag(0, -119000, false)` rechnet
+     *   `0 >= -119000` und gab `bezahlt` zurück — die Gutschrift stand sofort auf bezahlt,
+     *   ohne dass ein Cent geflossen war
+     * - **Stornieren:** Der Vorgang lief durch und erzeugte einen Beleg mit **positiven**
+     *   Beträgen, der „Stornorechnung" hieß — eine Rechnung unter falschem Namen
+     */
+    public function testEineStornorechnungNimmtWederZahlungNochStornoAn(): void
+    {
+        $postfach = new Postfach();
+        $rechnungId = $this->rechnungAnlegen($postfach);
+        $dienst = $this->dienst($postfach);
+
+        $this->assertSame([], $dienst->senden($rechnungId, null));
+        $this->assertSame([], $dienst->stornieren($rechnungId, 'Leistung entfällt.', null));
+
+        $storno = $this->stornoZu($rechnungId);
+
+        $this->assertIsArray($storno);
+        $this->assertTrue(\Sartu\Services\Rechnungsdienst::istStorno($storno));
+
+        $stornoId = (string) $storno['id'];
+
+        // Keine Zahlung.
+        $fehler = $dienst->zahlungEintragen($stornoId, 0, 'Kontoauszug 08/2026', null);
+
+        $this->assertNotSame([], $fehler);
+        $this->assertStringContainsString('nimmt keine Zahlung auf', $fehler[0]);
+
+        // Kein Storno auf den Storno.
+        $zweites = $dienst->stornieren($stornoId, 'Doch wieder berechnen.', null);
+
+        $this->assertNotSame([], $zweites);
+        $this->assertStringContainsString('lässt sich nicht aufheben', $zweites[0]);
+
+        // Der Zustand der Gutschrift ist unverändert — insbesondere **nicht** `bezahlt`.
+        $unveraendert = $this->rechnungen()->finden($stornoId);
+
+        $this->assertIsArray($unveraendert);
+        $this->assertSame(Zahlungsstatus::GESENDET, (string) $unveraendert['status']);
+        $this->assertSame(0, (int) $unveraendert['paid_cents']);
+        $this->assertNull($this->stornoZu($stornoId));
+    }
+
     /**
      * Testfall 94 — die Prüfsumme weist den abgelegten Beleg als unverändert nach.
      *

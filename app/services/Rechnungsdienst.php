@@ -244,6 +244,15 @@ final class Rechnungsdienst
             return ['Diese Rechnung gibt es nicht.'];
         }
 
+        if (self::istStorno($rechnung)) {
+            // **Auf eine Stornorechnung wird nichts eingezahlt.** Sie ist eine Gutschrift:
+            // Geld fliesst zum Kunden, nicht von ihm. Ohne diese Sperre rechnet
+            // `Zahlungsstatus::ausBetrag()` mit einem negativen Bruttobetrag — und
+            // `0 >= -119000` ist wahr, die Gutschrift stuende sofort auf `bezahlt`.
+            return ['Eine Stornorechnung nimmt keine Zahlung auf. Sie hebt eine Rechnung auf, '
+                . 'statt einen Betrag zu fordern.'];
+        }
+
         if (mb_strlen(trim($grundlage)) < self::GRUNDLAGE_MINDESTLAENGE) {
             // §12, Pflichtfeld. Ohne Grundlage keine Buchung.
             return ['Bitte halten Sie fest, worauf sich die Prüfung stützt — zum Beispiel '
@@ -387,6 +396,15 @@ final class Rechnungsdienst
 
         if (in_array($vorher, [Zahlungsstatus::VERWORFEN, Zahlungsstatus::STORNIERT], true)) {
             return ['Diese Rechnung ist bereits aufgehoben.'];
+        }
+
+        if (self::istStorno($rechnung)) {
+            // **Eine Stornorechnung wird nicht storniert.** Der Vorgang lief bis zum
+            // 10.08.2026 durch und erzeugte einen Beleg mit **positiven** Betraegen, der
+            // „Stornorechnung" hiess — also eine Rechnung unter falschem Namen. Wer eine
+            // Aufhebung rueckgaengig machen will, stellt die Leistung neu in Rechnung.
+            return ['Eine Stornorechnung lässt sich nicht aufheben. Wenn die Leistung doch '
+                . 'berechnet wird, legen Sie dafür eine neue Rechnung an.'];
         }
 
         return $vorher === Zahlungsstatus::ENTWURF
@@ -672,6 +690,19 @@ final class Rechnungsdienst
     }
 
     // ------------------------------------------------------------------ intern
+
+    /**
+     * Ist diese Zeile eine Stornorechnung?
+     *
+     * Am Verweis, nicht am Vorzeichen: `cancels_invoice_id` ist die Aussage des
+     * Datenmodells. Ein Betrag kann aus anderen Gruenden negativ werden, der Verweis nicht.
+     *
+     * @param array<string,mixed> $rechnung
+     */
+    public static function istStorno(array $rechnung): bool
+    {
+        return ($rechnung['cancels_invoice_id'] ?? null) !== null;
+    }
 
     /** §5.3: überfällig heisst `due_date < heute` und Restbetrag offen. */
     public static function istUeberfaellig(array $rechnung): bool
