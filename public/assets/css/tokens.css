@@ -71,6 +71,14 @@
   --rail-zahl:#8d908d;     /* Zaehler und zweite Ebene in der Leiste */
   --rail-ik:#9ca09d;       /* Zeichen in Ruhe */
 
+  /* ---- Aufmacher: Geraet und Baender ----------------------
+     Quelle: design/startseite.html, Abschnitt „AUFMACHER".
+     Die Werte standen dort als Zahl im Bauteil; hier stehen sie
+     einmal, damit sie sich an einer Stelle aendern lassen. */
+  --geraet-rahmen:#2a2419;   /* Sockel des Laptops, oben */
+  --geraet-sockel:#1a1610;   /* Sockel des Laptops, unten */
+  --geraet-kerbe:#0d0b08;    /* die Kerbe an der Vorderkante */
+
   /* ---- Radien -------------------------------------------- */
   /* --rk skaliert die gesamte Formsprache auf einmal.
      Der entschiedene Wert ist 1. Wer ihn aendert, aendert

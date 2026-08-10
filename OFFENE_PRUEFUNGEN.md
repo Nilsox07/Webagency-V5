@@ -2490,3 +2490,52 @@ Musterprojekte und Gründerfoto bleibt der Bildplatz, weil dort das Bild der **B
 | 1 | **Die Aufnahme des Kundenbereichs gibt es noch nicht.** Sie entsteht erst beim Umbau; bis dahin ist der Aufmacher unverändert | `PROMPT_NEUE_SESSION_STARTSEITE.md` abarbeiten |
 | 2 | **Ob die Musterdaten im Bild den Regeln aus `17_SEITEN_SARTU.md` genügen**, ist erst am fertigen Bild prüfbar — keine echten Namen, keine realistischen Rechnungsnummern | Sichtprüfung der Aufnahme |
 | 3 | **Die Schrägstellung ist nicht erprobt.** Ob ein perspektivisch gekipptes Gerät bei 1024 px und darunter noch trägt, zeigt erst der Bau | vier Breiten rendern |
+
+> **Abgearbeitet am selben Tag.** Die drei offenen Punkte oben sind erledigt: Die Aufnahme gibt
+> es (Punkt 1), sie ist als `Musteransicht` gekennzeichnet und trägt Musterdaten (Punkt 2), und
+> die Schrägstellung ist gebaut — bei 1440 px gemessen, bei den übrigen Breiten **nicht**
+> (Punkt 3, steht unten neu). Der Abschnitt darunter führt den Stand nach dem Umbau.
+
+## Aufmacher der Startseite auf den Entwurf gezogen — 10.08.2026
+
+Anlass: Der Abgleich am selben Tag hatte aus *„`tokens.css` byteweise gleich **und**
+Abschnittsfolge gleich"* geschlossen, die Startseite sei übertragen. **Der Schluss war falsch.**
+Der Aufmacher wich an neun Stellen ab; sie sind abgebaut.
+
+### Was ausgeführt wurde
+
+| Prüfung | Wie |
+|---|---|
+| Entwurf und gebauter Stand **im selben Browser** bei 1440 px gerendert und nebeneinandergelegt | Chromium über Playwright, ein Lauf, ein Bild |
+| Bewegung an **und** aus | `prefers-reduced-motion: reduce` liefert `animation-name: none` für Woge und Band — die globale Regel in `tokens.css` greift |
+| Navigationszeilen bei 1920 · 1440 · 1280 · 1024 px | **überall eine** |
+| Die neun Punkte einzeln | `MarkupTest::testDerAufmacherTraegtDieNeunMerkmaleDesEntwurfs` |
+| Testreihe | **347 grün**, 4304 Zusicherungen |
+
+### Die neun Punkte
+
+| # | Was fehlte | Was jetzt steht |
+|---|---|---|
+| 1 | Gestrichelter Bildplatz | Selbst gezeichnetes Gerät, CSS-Perspektive, darauf eine **echte Aufnahme** des Kundenbereichs als WebP. Vermerk `Musteransicht` am Bild |
+| 2 | Lime-Akzent auf dem Schluss der H1 | `H1_ANFANG` und `H1_SCHLUSS`, der zweite Teil in `<span class="akzent">`. Wortlaut unverändert, `h1Vollstaendig()` hält das fest |
+| 3 | Lime als Textmarker auf Links | `background-image` mit `background-size`, auf volle Höhe beim Überfahren. Kein `text-decoration` |
+| 4 | Pfeile in beiden Knöpfen | `<span class="pfeil" aria-hidden="true">→</span>`, rückt beim Überfahren nach rechts |
+| 5 | Diagonalbänder hinter dem Aufmacher | Drei Bänder in zwei Bewegungen, `aria-hidden`, ohne Inhalt |
+| 6 | Trennlinie über der Vertrauensliste | `.aufmacher__leiste` mit `border-top` — Gruppe 3 aus §5 Sektion 1 |
+| 7 | Mittelpunkte als Aufzählungszeichen | Halbgeviertstrich, 10 × 2 px, wie im Entwurf |
+| 8 | Logo nirgends eingebunden | Kopf 34 px, Fuß 30 px, helle Fassung auf hellem Grund |
+| 9 | Navigation brach auf zwei Zeilen | `flex-wrap: nowrap`, kleinere Abstandsstufe |
+
+**Dabei fiel ein zehnter Punkt auf**, der in der Liste nicht stand: Der Preishinweis stand
+**über** der Vertrauensliste. §5 Sektion 1 Gruppe 3 verlangt *„Trust-Zeile, **darunter** der
+Preishinweis"*. Er steht jetzt darunter; auf allen anderen Seiten bleibt er, wo er war.
+
+### Ungeprüft — mit Grund und Prüfmittel
+
+| # | Punkt | Womit es zu prüfen ist |
+|---|---|---|
+| 1 | **Die Aufnahme zeigt eine Entwicklungsdatenbank.** Organisation `Mustermann Sanitär GmbH`, drei erfundene Aufgaben. Sie ist damit richtig als `Musteransicht` gekennzeichnet — aber sie zeigt nicht, wie ein echtes Projekt nach Wochen aussieht | Nach dem ersten Kundenprojekt neu aufnehmen, weiterhin mit Musterdaten |
+| 2 | **Die Kapazitätszeile stand im Vergleich nur, weil ich `operator_settings.auftragslage` auf `offen` gesetzt habe.** Das ist Betreiberdatum, keine Gestaltung — sie fehlt, solange der Betreiber nichts pflegt | Im Adminbereich unter Betreiberdaten setzen |
+| 3 | **Das Gerät ist nur bei 1440 px gemessen.** Unterhalb von 900 px legt sich der Aufmacher einspaltig; das ist gebaut, aber nicht Bild für Bild geprüft | Durchsehen bei 390 · 768 · 1024 px |
+| 4 | **Die Bänder sind nicht auf Rechenlast gemessen.** Zwei Dauerbewegungen mit `filter: blur()` können auf schwachen Geräten kosten | Messung im Browserwerkzeug auf einem älteren Telefon |
+| 5 | Die WebP-Datei entstand über **Chromium**, nicht über `cwebp` — im Bild ist kein Encoder installiert, und dafür einen aufzunehmen wäre eine Abhängigkeit für einen einmaligen Vorgang | Bei Bedarf mit `cwebp -q 88` gegenprüfen |

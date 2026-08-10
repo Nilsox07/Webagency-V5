@@ -437,7 +437,7 @@ abgelegt und erneuert, wenn sich der Kundenbereich sichtbar ändert.
 
 | Punkt | Stand |
 |---|---|
-| Ansichten aus dem Kundenbereich | entstehen mit Sitzung 2 — die zwei Bildplätze der Startseite hängen daran |
+| ~~Ansichten aus dem Kundenbereich~~ | **Für den Aufmacher am 10.08.2026 entschieden — siehe §4b.** Der Kundenbereich ist gebaut, die Aufnahme zeigt ihn echt. Der Bildplatz für **Musterprojekte** und das **Gründerfoto** bleibt unverändert |
 | `[GRUENDER_NAME]` | *offen* — Name für Startseite §5 **Sektion 6** und `/ueber-uns` |
 | Foto des Gründers | *offen* — echtes Foto nötig, kein Bestandsfoto, kein Platzhalter, der wie ein Foto wirkt. **Fehlt es, entfällt Sektion 6 der Startseite vollständig** — kein leerer Rahmen an einer Vertrauensstelle |
 | **Ein bis zwei gekennzeichnete Demoprojekte** | *offen, zu entscheiden* — vollständige Beispielseiten für erfundene, **als solche benannte** Betriebe. Liefert Bildmaterial, Arbeitsbeleg und einen Belastungstest des Produktionswegs in einem |

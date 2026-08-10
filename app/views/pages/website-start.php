@@ -24,36 +24,50 @@ use Sartu\Services\Websitetexte;
 
 ?>
 <section class="aufmacher">
+  <?php /* Zierde, sonst nichts. `aria-hidden`, kein Text, keine Handlung — und die
+           Bewegung haelt `prefers-reduced-motion` ein (tokens.css, letzter Block).
+           Ohne JavaScript sind die Baender unveraendert da; sie tragen nichts. */ ?>
+  <div class="baender" aria-hidden="true">
+    <span class="woge woge--1"><span class="band band--1"></span></span>
+    <span class="woge woge--2"><span class="band band--2"></span></span>
+    <span class="woge woge--1 woge--spaet"><span class="band band--3"></span></span>
+  </div>
+
   <div class="bahn aufmacher__reihe">
     <div class="aufmacher__text">
       <p class="vorzeile"><?= Html::e(T::EYEBROW) ?></p>
-      <h1><?= Html::e(T::H1) ?></h1>
+      <?php /* Zwei gebundene Teile statt einer Konstante — nur so kann der Lime-Marker
+               am Schluss stehen (`design/startseite.html`, `.accent`). Der Wortlaut ist
+               unveraendert; `Startseitentexte::h1Vollstaendig()` haelt das fest. */ ?>
+      <h1><?= Html::e(T::H1_ANFANG) ?> <span class="akzent"><?= Html::e(T::H1_SCHLUSS) ?></span></h1>
       <p class="lede"><?= Html::e(T::LEAD) ?></p>
 
       <?= Ansicht::teil('partials/handlungsblock', [
           'auftragslage' => $auftragslage,
-          'preishinweis' => $preishinweis,
+          // Leer: Der Hinweis steht unten in der Leiste (§5 Sektion 1, Gruppe 3).
+          'preishinweis' => '',
           'zweitziel'    => '/preise',
           'zweittext'    => 'Preise ansehen',
       ]) ?>
 
-      <ul class="vertrauenszeile">
+      <?php /* Gruppe 3 aus §5 Sektion 1: „eine ruhige Leiste am Fuss". Die Trennlinie
+               darueber markiert den Gruppenwechsel — im Entwurf `border-top` an
+               `.hero-trust`. Sie fehlte bis zum 10.08.2026, und ohne sie standen die
+               Pflichtangaben als vierter gleichrangiger Block da. */ ?>
+      <div class="aufmacher__leiste">
+        <ul class="vertrauenszeile">
 <?php foreach (T::VERTRAUENSPUNKTE as $punkt): ?>
-        <li><?= Html::e($punkt) ?></li>
+          <li><?= Html::e($punkt) ?></li>
 <?php endforeach; ?>
-      </ul>
+        </ul>
 
-      <p class="branchenzeile"><?= Html::e(implode(' · ', T::BRANCHEN)) ?></p>
+        <p class="preishinweis"><?= Html::e($preishinweis) ?></p>
+        <p class="branchenzeile"><?= Html::e(implode(' · ', T::BRANCHEN)) ?></p>
+      </div>
     </div>
 
     <div class="aufmacher__bild">
-      <?= Ansicht::teil('partials/bildplatz', [
-          'name'  => 'sartu-portal-cockpit-muster',
-          'masse' => '720 × 540',
-          'satz'  => 'Hier steht später eine Ansicht aus dem Kundenbereich mit Projektstand '
-              . 'und nächstem Schritt.',
-          'marke' => Websitetexte::MUSTERANSICHT,
-      ]) ?>
+      <?= Ansicht::teil('partials/aufmacherbild', ['marke' => Websitetexte::MUSTERANSICHT]) ?>
     </div>
   </div>
 </section>

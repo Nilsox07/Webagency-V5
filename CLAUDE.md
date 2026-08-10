@@ -9,7 +9,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 Bereich unter `/admin/`, Serverfunktionen unter `/api/`. Ein Repository, eine Domain, ein
 Deployment.
 
-**Stand 10.08.2026: 36 Migrationen, 345 Tests grün, alle 100 Testfälle zugeordnet.**
+**Stand 10.08.2026: 36 Migrationen, 347 Tests grün, alle 100 Testfälle zugeordnet.**
 A0, A1, A2, A3, B und C sind gebaut. `migrate.php verify` meldet keine Abweichung.
 
 **Die Tests laufen gegen MySQL 8.4 und gegen MariaDB 11.4.** Die Entwicklungsumgebung fährt

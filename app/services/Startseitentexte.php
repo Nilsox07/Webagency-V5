@@ -57,6 +57,38 @@ final class Startseitentexte
      */
     public const H1 = 'Programmierte Firmenwebsites zum Festpreis.';
 
+    /**
+     * Dieselbe H1, in zwei Teilen — damit der Lime-Textmarker am Schluss stehen kann.
+     *
+     * ## Warum das nicht eine Formatierungsfrage ist
+     *
+     * Der abgenommene Entwurf setzt den letzten Sinnabschnitt auf einen Lime-Marker
+     * (`design/startseite.html`: `<h1>… <span class="accent">zum Festpreis.</span></h1>`).
+     * Solange die H1 **eine** escapte Konstante war, konnte es ihn nicht geben: Ein `<span>`
+     * im Konstantenwert waere durch `Html::e()` gelaufen und als Text erschienen.
+     *
+     * **Der Wortlaut aendert sich dadurch nicht.** `H1_ANFANG . " " . H1_SCHLUSS` ergibt
+     * Zeichen fuer Zeichen `H1` — `pruefeH1()` unten haelt das fest, damit die drei
+     * Konstanten nicht auseinanderlaufen.
+     *
+     * Getrennt wird am letzten Sinnabschnitt, nicht in der Mitte: Der Marker liegt auf der
+     * Aussage, die den Satz traegt — `Festpreis` ist der nachpruefbare Teil (§5 Sektion 1).
+     */
+    public const H1_ANFANG = 'Programmierte Firmenwebsites';
+
+    public const H1_SCHLUSS = 'zum Festpreis.';
+
+    /**
+     * Die beiden Teile ergeben zusammen die gebundene H1 — sonst Abbruch.
+     *
+     * Aufgerufen von `MarkupTest`. Eine stille Abweichung waere genau der Fall, gegen den
+     * die Bindung von Zahlen und Wortlaut gedacht ist.
+     */
+    public static function h1Vollstaendig(): bool
+    {
+        return self::H1_ANFANG . ' ' . self::H1_SCHLUSS === self::H1;
+    }
+
     // -------------------------------------------------------------- 1 Aufmacher
 
     public const EYEBROW = 'Webdesign-Agentur für Firmenwebsites';

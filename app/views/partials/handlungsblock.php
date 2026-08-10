@@ -39,10 +39,13 @@ $zeile = $auftragslage === null ? '' : '<p class="lage lage--' . Html::e($auftra
   <?= $zeile ?>
 <?php endif; ?>
 
+  <?php /* Der Pfeil steht im Entwurf an beiden Knoepfen (`<span class="ar">→</span>`) und
+           rueckt beim Ueberfahren nach rechts. Er ist Zierde: `aria-hidden`, damit ein
+           Vorleseprogramm nicht „Pfeil nach rechts" hinter jede Beschriftung setzt. */ ?>
   <p class="handlung__knoepfe">
-    <a class="knopf" href="/briefing"><?= Html::e($knopf) ?></a>
+    <a class="knopf" href="/briefing"><?= Html::e($knopf) ?><span class="pfeil" aria-hidden="true">→</span></a>
 <?php if (($zweitziel ?? null) !== null): ?>
-    <a class="textlink" href="<?= Html::e($zweitziel) ?>"><?= Html::e((string) $zweittext) ?></a>
+    <a class="textlink" href="<?= Html::e($zweitziel) ?>"><?= Html::e((string) $zweittext) ?><span class="pfeil" aria-hidden="true">→</span></a>
 <?php endif; ?>
   </p>
 
@@ -50,5 +53,11 @@ $zeile = $auftragslage === null ? '' : '<p class="lage lage--' . Html::e($auftra
   <?= $zeile ?>
 <?php endif; ?>
 
+<?php if (($preishinweis ?? '') !== ''): ?>
+  <?php /* Im **Aufmacher** steht der Hinweis nicht hier, sondern unter der Vertrauensliste:
+           §5 Sektion 1, Gruppe 3 — „eine ruhige Leiste am Fuss: Trust-Zeile, **darunter** der
+           Preishinweis". Die Startseite gibt deshalb einen leeren Wert und setzt ihn selbst.
+           Auf allen anderen Seiten bleibt er, wo er war. */ ?>
   <p class="preishinweis"><?= Html::e($preishinweis) ?></p>
+<?php endif; ?>
 </div>

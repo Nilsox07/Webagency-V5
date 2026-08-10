@@ -244,15 +244,127 @@
 /* ---- Aufmacher ------------------------------------------- */
 
 .aufmacher {
-  padding-top: var(--s-6);
-  padding-bottom: var(--s-7);
+  position: relative;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  /* Die Hoehe folgt dem Fenster, der Inhalt steht mittig darin — im Entwurf
+     `min-height:clamp(560px,79vh,1060px)`. Mit fester Hoehe ragte die naechste
+     Sektion auf 1080p weit herein; §5 verlangt einen **Anschnitt**, keinen Block. */
+  min-height: clamp(560px, 79vh, 1060px);
+  padding-top: var(--s-5);
+  padding-bottom: var(--s-5);
 }
 
 .aufmacher__reihe {
+  position: relative;
+  z-index: 1;
   display: grid;
   grid-template-columns: 55fr 45fr;
   gap: var(--s-5);
-  align-items: start;
+  align-items: center;
+}
+
+/* ---- Die Diagonalbaender hinter dem Aufmacher -------------
+   `design/startseite.html`: `.ribbons` mit `.swell` und `.band`.
+   Sie sind **Zierde** — `aria-hidden`, ohne Text, ohne Handlung.
+   Zwei Bewegungen liegen uebereinander: die Woge kippt langsam,
+   das Band wandert waagerecht. Beide halten unten
+   `prefers-reduced-motion` ein.
+   ---------------------------------------------------------- */
+
+.baender {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+  pointer-events: none;
+  /* `#000` ist hier **keine Farbe**, sondern die deckende Stufe einer Maske: Sie
+     entscheidet, wo etwas sichtbar ist, nicht welchen Ton es hat. Eine Variable dafuer
+     gaebe es nicht zu vergeben — ein `--maske-deckend` waere ein Wert ohne Gestaltung. */
+  -webkit-mask-image: linear-gradient(90deg, transparent 0, #000 14%, #000 86%, transparent 100%);
+  mask-image: linear-gradient(90deg, transparent 0, #000 14%, #000 86%, transparent 100%);
+}
+
+.woge {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+}
+
+.woge--1 { animation-name: woge-a; animation-duration: 19s; }
+.woge--2 { animation-name: woge-b; animation-duration: 14s; animation-delay: -4s; }
+.woge--spaet { animation-duration: 23s; animation-delay: -9s; }
+
+.band {
+  position: absolute;
+  left: -40%;
+  width: 180%;
+  mix-blend-mode: multiply;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  -webkit-mask-image: linear-gradient(to bottom, transparent 0, #000 34%, #000 66%, transparent 100%);
+  mask-image: linear-gradient(to bottom, transparent 0, #000 34%, #000 66%, transparent 100%);
+}
+
+.band--1 {
+  top: 4%;
+  height: 46vh;
+  rotate: -2deg;
+  opacity: .85;
+  filter: blur(6px);
+  animation-name: lauf-360;
+  animation-duration: 78s;
+  background: repeating-linear-gradient(172deg, transparent 0, var(--band-a) 13px,
+    var(--band-a) 26px, transparent 39px, transparent 50px);
+}
+
+.band--2 {
+  top: 44%;
+  height: 40vh;
+  rotate: -3deg;
+  opacity: .75;
+  filter: blur(7px);
+  animation-name: lauf-420;
+  animation-duration: 90s;
+  background: repeating-linear-gradient(169deg, transparent 0, var(--band-b) 16px,
+    var(--band-b) 34px, transparent 50px, var(--band-a) 60px, transparent 70px, transparent 80px);
+}
+
+/* Das einzige Lime hier — stark durchscheinend und unter dem Text.
+   Keine vollflaechige Lime-Bahn (Farbsystem Fassung 3). */
+.band--3 {
+  top: 92%;
+  height: 13vh;
+  rotate: 2deg;
+  opacity: .22;
+  filter: blur(7px);
+  animation-name: lauf-360;
+  animation-duration: 52s;
+  background: repeating-linear-gradient(184deg, transparent 0, var(--lime) 8px,
+    var(--lime) 16px, transparent 24px, transparent 30px);
+}
+
+@keyframes lauf-360 {
+  from { transform: translate3d(0, 0, 0); }
+  to   { transform: translate3d(-360px, 0, 0); }
+}
+
+@keyframes lauf-420 {
+  from { transform: translate3d(0, 0, 0); }
+  to   { transform: translate3d(-420px, 0, 0); }
+}
+
+@keyframes woge-a {
+  0%, 100% { transform: translate3d(0, 0, 0) rotate(0); }
+  50%      { transform: translate3d(0, 1.1%, 0) rotate(.5deg); }
+}
+
+@keyframes woge-b {
+  0%, 100% { transform: translate3d(0, 0, 0) rotate(0); }
+  50%      { transform: translate3d(0, -1.4%, 0) rotate(-.6deg); }
 }
 
 .aufmacher h1 {
@@ -263,9 +375,29 @@
   margin-top: 0;
 }
 
+/* Der Lime-Marker auf dem letzten Sinnabschnitt der H1.
+   Lime liegt als Flaeche **hinter** der Schrift, nie als Schriftfarbe
+   (Farbsystem Fassung 3). Die Schrift bleibt --ink. */
+.akzent {
+  background-image: linear-gradient(var(--lime), var(--lime));
+  background-repeat: no-repeat;
+  background-position: 0 .84em;
+  background-size: 100% .22em;
+  padding-right: .04em;
+}
+
+/* Gruppe 3 aus §5 Sektion 1 — die ruhige Leiste am Fuss, abgesetzt
+   durch eine Trennlinie. */
+.aufmacher__leiste {
+  margin-top: var(--s-5);
+  padding-top: var(--s-3);
+  border-top: 1px solid var(--line);
+  max-width: 47ch;
+}
+
 .vertrauenszeile {
   list-style: none;
-  margin: var(--s-4) 0 0;
+  margin: 0;
   padding: 0;
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -273,7 +405,24 @@
   font-size: var(--fs-small);
 }
 
-.vertrauenszeile li::before { content: "· "; color: var(--label); }
+/* Halbgeviertstrich statt Mittelpunkt — im Entwurf ein kurzer Strich
+   (`.trust li::before`, 10 px breit, 2 px hoch). Der Mittelpunkt las
+   sich als Trennzeichen einer Aufzaehlung in einer Zeile. */
+.vertrauenszeile li {
+  position: relative;
+  padding-left: var(--s-3);
+}
+
+.vertrauenszeile li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: .72em;
+  width: 10px;
+  height: 2px;
+  background: var(--ink);
+  opacity: .34;
+}
 
 /* Die vier Branchen fuehren nirgendwohin und duerfen deshalb nicht
    anklickbar aussehen — Website-Lastenheft §5 Sektion 1, Auflösung 1:
@@ -663,3 +812,163 @@
   .vertrauenszeile { grid-template-columns: 1fr; }
   .seitenfuss__spalten { grid-template-columns: 1fr; }
 }
+
+/* ---- Das Geraet im Aufmacher ------------------------------
+   `SARTU_ENTSCHEIDUNGEN_OFFEN.md` §4b, entschieden 10.08.2026.
+   Selbst gezeichnet: Flaechen, Kanten, eine leichte Schraeg-
+   stellung ueber CSS-Perspektive. Keine Vorlage, kein Abruf.
+   ---------------------------------------------------------- */
+
+.geraet {
+  position: relative;
+  margin: 0;
+  /* Das Geraet fuellt seine Spalte. Im Entwurf steht es in der 45-fr-Spalte und
+     reicht bis an deren Kante; enger gesetzt wirkt es wie ein Beiwerk. */
+  width: 100%;
+  padding-bottom: var(--s-5);
+  /* Die Schraegstellung. `perspective` am Elternteil, Drehung am Kind —
+     sonst kippt der Schatten mit und das Geraet wirkt aufgeklebt. */
+  perspective: 1400px;
+}
+
+.geraet__laptop {
+  position: relative;
+  /* Leichte Schraegstellung, nicht mehr. Bei staerkerer Drehung schrumpft die
+     sichtbare Flaeche so weit, dass die Aufnahme auf dem Bildschirm nicht mehr
+     zu erkennen ist — und sie ist der Grund, warum das Geraet dasteht. */
+  transform: rotateY(-7deg) rotateX(2deg);
+  transform-origin: 65% 50%;
+  filter: drop-shadow(0 40px 60px rgba(20, 17, 13, .32));
+}
+
+.geraet__deckel {
+  background: var(--ink);
+  border: 1px solid var(--line-dark);
+  border-radius: var(--r-xs) var(--r-xs) 0 0;
+  padding: var(--s-1) var(--s-1) var(--s-2);
+}
+
+.geraet__schirm {
+  background: var(--cream);
+  border-radius: var(--r-xs);
+  overflow: hidden;
+  aspect-ratio: 16 / 10.4;
+}
+
+.geraet__schirm img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top left;
+}
+
+.geraet__sockel {
+  height: 13px;
+  margin: 0 -7%;
+  border-radius: 0 0 var(--r-xs) var(--r-xs);
+  background: linear-gradient(180deg, var(--geraet-rahmen), var(--geraet-sockel));
+  border: 1px solid var(--line-dark);
+  border-top: none;
+}
+
+.geraet__sockel::after {
+  content: "";
+  display: block;
+  width: 16%;
+  height: 4px;
+  margin: 2px auto 0;
+  border-radius: 0 0 var(--r-xs) var(--r-xs);
+  background: var(--geraet-kerbe);
+}
+
+/* Angeschnitten, wie im Entwurf: Es ragt unten und rechts aus dem
+   Laptop heraus und wird vom Rand der Sektion beschnitten. */
+.geraet__telefon {
+  position: absolute;
+  /* Es steht **vor** dem Laptop und ragt an der rechten unteren Ecke heraus.
+     Weiter innen verdeckte es die Arbeitsflaeche auf dem Bildschirm — und damit
+     genau das, was die Aufnahme zeigen soll. */
+  right: -7%;
+  bottom: calc(var(--s-4) * -1);
+  width: 21%;
+  min-width: 118px;
+  background: var(--ink);
+  border: 1px solid var(--line-dark);
+  border-radius: var(--r-m);
+  padding: var(--s-1);
+  transform: rotateY(-9deg) rotateX(2deg);
+  filter: drop-shadow(0 26px 40px rgba(20, 17, 13, .4));
+}
+
+.geraet__telefon .geraet__schirm {
+  border-radius: var(--r-s);
+  aspect-ratio: 9 / 17.5;
+}
+
+.geraet__telefon img { object-position: top left; }
+
+/* Der gebundene Vermerk. Lime als Flaeche mit 1px --line als Kante —
+   auf hellem Grund verlaeuft sie sonst (Farbsystem Fassung 3). */
+.geraet__marke {
+  position: absolute;
+  top: var(--s-2);
+  left: var(--s-2);
+  z-index: 2;
+  margin: 0;
+  padding: var(--s-1) var(--s-2);
+  border: 1px solid var(--line);
+  border-radius: var(--r-pill);
+  background: var(--lime);
+  color: var(--ink);
+  font-family: var(--font-mono);
+  font-size: var(--fs-mono);
+  letter-spacing: var(--ls-mono);
+  text-transform: uppercase;
+}
+
+/* ---- Links im Fliesstext: Lime als Textmarker ------------
+   `SARTU_ENTSCHEIDUNGEN_OFFEN.md` §3, Farbsystem Fassung 3:
+   „Text in --ink, Lime als **Textmarker** dahinter
+   (background-image/background-size), beim Ueberfahren waechst
+   er auf volle Hoehe. **Kein** text-decoration: underline in
+   Lime."
+
+   Lime erreicht als Schriftfarbe gegen den Grund 1,30:1 und ist
+   damit verboten. Als Flaeche hinter --ink sind es 12,48:1.
+
+   Ausgenommen sind die Elemente, die schon eine eigene Form
+   haben: der Knopf traegt Lime als Flaeche, der Zweitlink den
+   Pfeil, die Marke ein Bild. Ein Marker darunter waere ein
+   zweites Signal an derselben Stelle.
+   ---------------------------------------------------------- */
+
+main a:not(.knopf):not(.textlink):not(.seitenmarke):not(.sprungmarke) {
+  color: var(--ink);
+  text-decoration: none;
+  background-image: linear-gradient(var(--lime), var(--lime));
+  background-repeat: no-repeat;
+  background-position: 0 88%;
+  background-size: 100% .14em;
+  transition: background-size var(--t-base) var(--ease);
+}
+
+main a:not(.knopf):not(.textlink):not(.seitenmarke):not(.sprungmarke):hover,
+main a:not(.knopf):not(.textlink):not(.seitenmarke):not(.sprungmarke):focus-visible {
+  background-size: 100% 100%;
+}
+
+/* ---- Der Pfeil an den Knoepfen ---------------------------
+   Im Entwurf `<span class="ar">→</span>` an beiden Knoepfen; er
+   rueckt beim Ueberfahren nach rechts. Zierde, deshalb
+   `aria-hidden` im Markup.
+   ---------------------------------------------------------- */
+
+.pfeil {
+  display: inline-block;
+  margin-left: var(--s-1);
+  transition: transform var(--t-base) var(--ease);
+}
+
+.knopf:hover .pfeil,
+.textlink:hover .pfeil { transform: translateX(4px); }

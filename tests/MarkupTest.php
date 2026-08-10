@@ -221,6 +221,85 @@ final class MarkupTest extends Datenbankfall
         $this->assertStringNotContainsString('alt="Logo"', $kopf);
     }
 
+
+    /**
+     * Der Aufmacher trägt die neun Merkmale des abgenommenen Entwurfs.
+     *
+     * Am 10.08.2026 wurde aus „`tokens.css` byteweise gleich **und** Abschnittsfolge gleich"
+     * geschlossen, die Startseite sei übertragen. **Der Schluss war falsch** — der Aufmacher
+     * wich an neun Stellen ab. Dieser Test prüft die neun einzeln, damit derselbe Fehlschluss
+     * nicht ein zweites Mal möglich ist.
+     */
+    public function testDerAufmacherTraegtDieNeunMerkmaleDesEntwurfs(): void
+    {
+        $seite = (string) file_get_contents(SARTU_WURZEL . '/app/views/pages/website-start.php');
+        $bild  = (string) file_get_contents(SARTU_WURZEL . '/app/views/partials/aufmacherbild.php');
+        $block = (string) file_get_contents(SARTU_WURZEL . '/app/views/partials/handlungsblock.php');
+        $kopf  = (string) file_get_contents(SARTU_WURZEL . '/app/views/partials/websiteband.php');
+        $css   = (string) file_get_contents(SARTU_WURZEL . '/public/assets/css/website.css');
+
+        // 1 — Gerät statt Bildplatz, mit echter Aufnahme und gebundenem Vermerk.
+        $this->assertStringContainsString("partials/aufmacherbild", $seite);
+        $this->assertStringNotContainsString('sartu-portal-cockpit-muster', $seite);
+        $this->assertStringContainsString('sartu-kundenbereich-muster.webp', $bild);
+        $this->assertStringContainsString('Websitetexte::MUSTERANSICHT', $seite);
+        $this->assertFileExists(SARTU_WURZEL . '/public/assets/bild/sartu-kundenbereich-muster.webp');
+
+        // 2 — Der Lime-Akzent kann nur existieren, wenn die H1 zweiteilig ist.
+        $this->assertTrue(
+            \Sartu\Services\Startseitentexte::h1Vollstaendig(),
+            'Die beiden H1-Teile ergeben nicht mehr den gebundenen Wortlaut.',
+        );
+        $this->assertStringContainsString('class="akzent"', $seite);
+        $this->assertStringContainsString('.akzent {', $css);
+
+        // 3 — Lime als Textmarker, kein Unterstrich.
+        $this->assertStringContainsString('main a:not(.knopf)', $css);
+        $this->assertMatchesRegularExpression('/main a:not\(\.knopf\).*?background-image: linear-gradient\(var\(--lime\)/s', $css);
+
+        // 4 — Pfeile an beiden Knöpfen.
+        $this->assertSame(2, substr_count($block, 'class="pfeil"'));
+
+        // 5 — Die Bänder, und sie tragen nichts: aria-hidden, kein Text.
+        $this->assertStringContainsString('class="baender" aria-hidden="true"', $seite);
+        $this->assertSame(3, substr_count($seite, 'class="band band--'));
+
+        // 6 — Die Trennlinie über der Vertrauensliste.
+        $this->assertStringContainsString('class="aufmacher__leiste"', $seite);
+        $this->assertMatchesRegularExpression('/\.aufmacher__leiste \{[^}]*border-top: 1px solid var\(--line\)/s', $css);
+
+        // 7 — Halbgeviertstrich statt Mittelpunkt.
+        $this->assertStringNotContainsString('content: "· ";', $css);
+        $this->assertMatchesRegularExpression('/\.vertrauenszeile li::before \{[^}]*content: "";/s', $css);
+
+        // 8 — Das Logo wird eingebunden (siehe auch testDasLogoStehtInKopfUndFuss).
+        $this->assertStringContainsString('sartu-logo-hell.svg', $kopf);
+
+        // 9 — Die Navigation bricht nicht um.
+        $this->assertMatchesRegularExpression('/\.hauptnavigation ul \{[^}]*flex-wrap: nowrap/s', $css);
+    }
+
+    /**
+     * Die Bänder sind Zierde — sie tragen weder Text noch eine Handlung.
+     *
+     * `CLAUDE.md`: „Alle Kernabläufe funktionieren mit **deaktiviertem JavaScript**." Die
+     * Bänder sind reines CSS und damit ohnehin unabhängig davon; dieser Test hält fest, dass
+     * in ihnen auch nichts steht, das jemand bräuchte.
+     */
+    public function testDieBaenderTragenNichts(): void
+    {
+        $seite = (string) file_get_contents(SARTU_WURZEL . '/app/views/pages/website-start.php');
+
+        $this->assertSame(1, preg_match('#<div class="baender"[^>]*>(.*?)</div>#s', $seite, $treffer));
+
+        $inhalt = $treffer[1];
+
+        // Nur die drei Wogen mit ihren Bändern — kein Text, kein Link, kein Knopf.
+        $this->assertSame('', trim(strip_tags($inhalt)));
+        $this->assertStringNotContainsString('<a ', $inhalt);
+        $this->assertStringNotContainsString('<button', $inhalt);
+    }
+
     /**
      * Jedes Formularfeld traegt seinen eigenen Namen.
      *
