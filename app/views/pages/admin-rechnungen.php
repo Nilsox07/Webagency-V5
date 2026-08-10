@@ -25,7 +25,6 @@ $zustaende = [
 ];
 
 ?>
-<h1>Rechnungen</h1>
 <p>Zahlungseingänge werden von Hand eingetragen, nachdem sie im Zahlungsdienst geprüft
 wurden. Jede Eintragung braucht einen Grundlagentext und wird protokolliert.</p>
 

@@ -21,7 +21,6 @@ use Sartu\Services\Zahlungsstatus;
  */
 
 ?>
-<h1>Ihre Rechnungen</h1>
 
 <?php if ($rechnungen === []): ?>
 <div class="karte">

@@ -27,7 +27,6 @@ $enthaltene = $projekt === null ? 0 : (int) $projekt['included_feedback_rounds']
 $vorschauAdresse = $projekt['preview_url'] ?? null;
 
 ?>
-<h1>Vorschau und Freigabe</h1>
 
 <?= Ansicht::teil('partials/meldungen', ['fehler' => $fehler, 'hinweise' => []]) ?>
 

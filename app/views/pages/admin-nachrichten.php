@@ -22,7 +22,6 @@ use Sartu\Helpers\Html;
  */
 
 ?>
-<h1>Nachrichten</h1>
 <p>Der Kunde schreibt in seinem Bereich unter „Hilfe". Die Antwort geht ihm zusätzlich
 per E-Mail zu.</p>
 

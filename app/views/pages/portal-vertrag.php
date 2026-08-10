@@ -15,7 +15,6 @@ use Sartu\Helpers\Html;
  */
 
 ?>
-<h1>Vertrag</h1>
 
 <?php if ($texte === []): ?>
 <div class="karte">

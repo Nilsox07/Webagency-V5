@@ -9,7 +9,6 @@ use Sartu\Helpers\Html;
 /** @var array<string,string> $zustaende */
 
 ?>
-<h1>Rechtstexte</h1>
 <p>Nur freigegebene Texte gehen nach außen. Ein Entwurf bleibt hier im internen Bereich.</p>
 <p>Die Freigabe setzt ein Mensch, mit Datum und Namen der prüfenden Stelle.</p>
 

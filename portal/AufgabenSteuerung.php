@@ -61,7 +61,13 @@ final class AufgabenSteuerung
         $istFreigabe = (string) $aufgabe['kind'] === 'freigabe';
 
         return Antwort::html(Ansicht::seite('portal', 'portal-aufgabe', [
-            'titel'       => (string) $aufgabe['title'],
+            // Die Freigabeaufgabe traegt einen eigenen Titel: Sie heisst in der Vorlage nach
+            // ihrem Gegenstand, in der Ansicht aber nach der Handlung. Bis zum 10.08.2026 stand
+            // diese Fallunterscheidung in der Ansicht — sie gehoert hierher, seit die Titelzeile
+            // des Bereichs die Ueberschrift traegt.
+            'titel'       => $istFreigabe
+                ? 'Fakten und Umfang final freigeben'
+                : (string) $aufgabe['title'],
             'angemeldet'  => true,
             'aufgabe'     => $aufgabe,
             'dateien'     => (new KundenDateien($bereich))->jeAufgabe((string) $aufgabe['id']),

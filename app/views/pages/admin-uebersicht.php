@@ -8,7 +8,6 @@ use Sartu\Helpers\Html;
 /** @var array<string,mixed>|null $betreiber */
 
 ?>
-<h1>Übersicht</h1>
 
 <?php if ($hindernisse === []): ?>
 <div class="meldung meldung--hinweis">

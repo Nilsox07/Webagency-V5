@@ -67,6 +67,9 @@
   --label:#5a5d5b;
   --label-dark:#9ca09d;
   --rail-text:#cfd0ce;    /* Schrift auf der dunklen Leiste */
+  --rail-label:#757875;    /* Gruppenwort in der Leiste */
+  --rail-zahl:#8d908d;     /* Zaehler und zweite Ebene in der Leiste */
+  --rail-ik:#9ca09d;       /* Zeichen in Ruhe */
 
   /* ---- Radien -------------------------------------------- */
   /* --rk skaliert die gesamte Formsprache auf einmal.

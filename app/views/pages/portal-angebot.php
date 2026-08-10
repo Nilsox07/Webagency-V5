@@ -34,7 +34,6 @@ $zahlungsplan = [
 ];
 
 ?>
-<h1>Ihr Angebot</h1>
 
 <?= Ansicht::teil('partials/meldungen', ['fehler' => $fehler, 'hinweise' => []]) ?>
 

@@ -64,6 +64,26 @@
   color: var(--ink);
 }
 
+/* Die Marke als Bild — `07_MARKE_UND_GESTALTUNG.md`: Kopfleiste 34 px,
+   Fussbereich 30 px, beide ohne Zusatz. Der Name ist `seitenmarke` und
+   nicht `marke`: Letzteres ist im Anwendungsbereich die Zustandsmarke an
+   einer Zeile, und zwei Bedeutungen hinter einem Klassennamen laufen
+   auseinander. */
+.seitenmarke {
+  display: inline-flex;
+  align-items: center;
+  flex: none;
+  margin: 0;
+}
+
+.seitenmarke img { display: block; height: 34px; width: auto; }
+
+.seitenfuss .seitenmarke img { height: 30px; }
+
+/* Der Knopf im Kopf bricht nicht um. Ohne diese Zeile stand er bei
+   1440 px dreizeilig, sobald die Navigation den Platz beanspruchte. */
+.seitenkopf__handlung .knopf { white-space: nowrap; }
+
 .hauptnavigation { flex: 1; }
 
 .hauptnavigation ul,
@@ -74,10 +94,18 @@
   padding: 0;
 }
 
+/* **Kein Umbruch.** Unterhalb von 940 px entfaellt die Navigation zugunsten des
+   Menueknopfs — darueber gehoert sie in eine Zeile. Mit `flex-wrap: wrap` und der
+   grossen Abstandsstufe brach sie bei 1920, 1440 und 1024 px auf zwei Zeilen um und
+   passte ausgerechnet bei 1280 px in eine: Der Innenabstand `--gut` waechst mit der
+   Breite, und ab 1360 px steht er auf seinem Hoechstwert, waehrend die Bahn bei
+   1180 px stehenbleibt. Der Kopf hatte damit bei grossen Fenstern **weniger** Platz
+   als bei mittleren. Gemessen und behoben am 10.08.2026. */
 .hauptnavigation ul {
   display: flex;
-  gap: var(--s-3);
-  flex-wrap: wrap;
+  gap: var(--s-2);
+  flex-wrap: nowrap;
+  white-space: nowrap;
 }
 
 .hauptnavigation a {

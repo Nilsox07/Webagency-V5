@@ -16,7 +16,6 @@ use Sartu\Helpers\Html;
  */
 
 ?>
-<h1>Hilfe</h1>
 <p class="lead">Schreiben Sie uns, was unklar ist. Wir antworten schriftlich — meist am
 selben oder nächsten Werktag.</p>
 

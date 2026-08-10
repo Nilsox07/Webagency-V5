@@ -9,7 +9,6 @@ use Sartu\Helpers\Csrf;
 /** @var list<string> $hinweise */
 
 ?>
-<h1>Testnachricht senden</h1>
 <p>Prüft den Mailversand mit den hinterlegten Zugangsdaten.</p>
 <p>Nehmen Sie eine Adresse außerhalb Ihrer eigenen Domain. Sonst sagt der Versand wenig.</p>
 

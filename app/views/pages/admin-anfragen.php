@@ -25,7 +25,6 @@ use Sartu\Services\Preise;
  */
 
 ?>
-<h1>Anfragen</h1>
 <p>Eingegangene Bedarfsschecks, neueste zuerst. Ein Zugang entsteht ausschließlich durch einen
 bewussten Klick, nie automatisch.</p>
 

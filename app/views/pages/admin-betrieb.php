@@ -12,7 +12,6 @@ use Sartu\Helpers\Csrf;
 $wert = static fn (string $feld): string => (string) ($werte[$feld] ?? '');
 
 ?>
-<h1>Betreiberdaten</h1>
 <p>Diese Angaben ziehen Impressum, Fußbereich, Rechnungen und die Anmeldeseite.</p>
 <p>Jede Änderung wird protokolliert. Der Grund ist deshalb ein Pflichtfeld.</p>
 

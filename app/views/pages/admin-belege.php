@@ -20,7 +20,6 @@ use Sartu\Helpers\Html;
  */
 
 ?>
-<h1>Belege und Übergabe</h1>
 
 <?php foreach ($fehler as $meldung): ?>
 <p class="hinweis hinweis--wichtig"><?= Html::e($meldung) ?></p>

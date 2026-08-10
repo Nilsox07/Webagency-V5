@@ -25,7 +25,6 @@ use Sartu\Services\Zahlungsschluessel;
 $istTest = $feld === Zahlungsschluessel::FELD_TEST;
 
 ?>
-<h1>Ersteinrichtung</h1>
 
 <?php foreach ($fehler as $meldung): ?>
 <p class="hinweis hinweis--wichtig"><?= Html::e($meldung) ?></p>

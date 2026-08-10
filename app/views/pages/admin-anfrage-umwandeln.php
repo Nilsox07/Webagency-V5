@@ -20,7 +20,6 @@ $empfohlen = $anfrage['recommended_package'] === null ? '' : (string) $anfrage['
 
 ?>
 <p class="vorzeile"><a href="/admin/anfragen/<?= Html::e((string) $anfrage['id']) ?>">Zurück zur Anfrage</a></p>
-<h1>Anfrage von <?= Html::e(Format::text((string) $anfrage['company'])) ?> umwandeln</h1>
 
 <div class="karte">
   <h2>Was dabei entsteht</h2>

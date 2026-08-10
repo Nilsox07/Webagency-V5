@@ -9,7 +9,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 Bereich unter `/admin/`, Serverfunktionen unter `/api/`. Ein Repository, eine Domain, ein
 Deployment.
 
-**Stand 10.08.2026: 36 Migrationen, 342 Tests grün, alle 100 Testfälle zugeordnet.**
+**Stand 10.08.2026: 36 Migrationen, 345 Tests grün, alle 100 Testfälle zugeordnet.**
 A0, A1, A2, A3, B und C sind gebaut. `migrate.php verify` meldet keine Abweichung.
 
 **Die Tests laufen gegen MySQL 8.4 und gegen MariaDB 11.4.** Die Entwicklungsumgebung fährt
@@ -325,6 +325,10 @@ Flächen, Farben, Radien und Dichte sind gemeint, nicht der Wortlaut.
   `1px --line` als Kante
 - Der Grundton heißt `--cream`, ist aber seit dem 02.08.2026 **kein Creme mehr**, sondern
   Papier `#f6f6f4`. Die warme Reihe vom Juli (`#f4efe5`, `#ddd4c4`, `#e8dfcd`) ist abgelöst
+- **Beide Bereiche tragen die Seitenleiste links** (`design/portalkonzept.html`, abgenommen
+  03.08.2026, gebaut 10.08.2026). Aussenkante rechtwinklig, gerundet ist allein die rechte
+  Kante der Leiste. Die 25 Zeichen stehen in `app/views/partials/zeichen.php` — freigegeben
+  am 10.08.2026, davor war das Punkt 9 in `OFFENE_ENTSCHEIDUNGEN.md`
 - Kunden- und Adminbereich müssen visuell unterscheidbar sein
 - Kein Dunkelmodus (steht auf der Nicht-bauen-Liste)
 

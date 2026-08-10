@@ -58,17 +58,25 @@ Wo das Lastenheft einen Wortlaut **wörtlich vorgibt** — etwa die H1 je Seite 
 Fehlermeldungen in §8.7 —, gilt weiterhin das Lastenheft und nicht das Konzept. Das Konzept hat
 diese Stellen übernommen, ohne sie zu prüfen.
 
-## Was beim Übertragen zuerst zu tun ist
+## Was beim Übertragen zuerst zu tun war — **erledigt am 10.08.2026**
 
-Der gebaute Stand weicht an drei Stellen ab. Alle drei sind in `OFFENE_ENTSCHEIDUNGEN.md` unter
-„Entschieden und eingebaut" mit Datei und Begründung eingetragen:
+Der gebaute Stand wich an drei Stellen ab. Alle drei sind übertragen:
 
-1. `design/tokens.css` und `public/assets/css/tokens.css` führen noch die warmen Neutralen von
-   Ende Juli
-2. `app/views/partials/kundenband.php` und `kopfband.php` bauen ein waagerechtes Kopfband statt
-   der Seitenleiste
-3. `kundenband.php` beschriftet den siebten Menüpunkt mit `Öffnungszeiten`; nach §8 heißt er
-   `Inhalte`
+| # | Was | Wann | Wo |
+|---|---|---|---|
+| 1 | `tokens.css` führte noch die warmen Neutralen von Ende Juli | 09.08.2026 | `design/tokens.css` und `public/assets/css/tokens.css`, byteweise identisch |
+| 2 | Waagerechtes Kopfband statt Seitenleiste | **10.08.2026** | `partials/kundenband.php`, `partials/kopfband.php`, `layouts/portal.php`, `layouts/admin.php`, `anwendung.css` |
+| 3 | Siebter Menüpunkt hieß `Öffnungszeiten` | **10.08.2026** | `partials/kundenband.php`; die Überschrift der Seite bleibt `Öffnungszeiten` |
+
+**Der Vorbehalt zu den Zeichen ist aufgehoben.** Punkt 9 in `OFFENE_ENTSCHEIDUNGEN.md` stand
+auf `offen` und hielt die Leiste zurück, weil der Entwurf sie **mit** Zeichen zeigt. Der
+Betreiber hat am 10.08.2026 entschieden: die Zeichen kommen mit hinein. Alle 25 stehen
+unverändert aus diesem Konzept in `partials/zeichen.php`.
+
+**Was beim Übertragen dazukam und hier nachzutragen ist:** Die Leiste braucht zwei Farbwerte,
+die das Konzept als Zahl führt — das Gruppenwort und den Zähler. Sie stehen jetzt als
+`--rail-label`, `--rail-zahl` und `--rail-ik` in `tokens.css`, weil im Bauteil keine Zahl
+stehen darf.
 
 ## Was das Konzept nicht zeigt
 

@@ -18,7 +18,6 @@ use Sartu\Helpers\Html;
 
 ?>
 <p class="vorzeile">Bildschirm 1 von 3</p>
-<h1>Willkommen bei SARTU<?= $vorname === '' ? '' : ', ' . Html::e($vorname) ?>.</h1>
 
 <p class="lead">Das ist Ihr Kundenbereich. Hier läuft alles zu Ihrer Website an einem Ort:
 Angebot, Zahlung, offene Aufgaben, Vorschau und später kleine Änderungen.</p>

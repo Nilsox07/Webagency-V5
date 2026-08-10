@@ -18,7 +18,6 @@ use Sartu\Services\Domainstand;
  */
 
 ?>
-<h1>Domain</h1>
 
 <?php if ($stand === null): ?>
 <div class="karte">

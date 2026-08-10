@@ -114,11 +114,111 @@ final class MarkupTest extends Datenbankfall
             $verstoesse[] = 'Farbfunktion im Bauteil: ' . implode(', ', $treffer[0]);
         }
 
-        if (preg_match_all('/border-radius\s*:\s*[0-9]/i', $css, $treffer) > 0) {
-            $verstoesse[] = 'Radius als Zahl: ' . implode(', ', $treffer[0]);
+        // **Null ist erlaubt, jede andere Zahl nicht.**
+        //
+        // `0` ist kein Wert aus der Radienskala, sondern deren Abwesenheit — und die verlangt
+        // der abgenommene Entwurf ausdruecklich: „Aussenkante rechtwinklig. Der Bereich fuellt
+        // das Fenster; eine Rundung aussen gaebe es nicht zu sehen."
+        // (`design/PORTAL_DESIGNSTAND.md`). Die Leiste steht deshalb auf
+        // `border-radius: 0 var(--r-l) var(--r-l) 0`.
+        //
+        // Es gibt keine Variable fuer „keine Rundung", und eine zu erfinden hiesse, eine achte
+        // Form neben die sieben zu stellen — genau das verbietet `tokens.css`.
+        if (preg_match_all('/border-radius\s*:\s*[^;}]*/i', $css, $treffer) > 0) {
+            foreach ($treffer[0] as $regel) {
+                $werte = preg_split('/\s+/', trim(substr($regel, strpos($regel, ':') + 1))) ?: [];
+
+                foreach ($werte as $wert) {
+                    if ($wert !== '' && $wert !== '0' && !str_starts_with($wert, 'var(')) {
+                        $verstoesse[] = 'Radius als Zahl: ' . trim($regel);
+
+                        break 2;
+                    }
+                }
+            }
         }
 
         $this->assertSame([], $verstoesse);
+    }
+
+
+    /**
+     * Beide Bereiche tragen die **Seitenleiste**, nicht das alte waagerechte Band.
+     *
+     * Der Betreiber hat sie am 03.08.2026 entschieden; gebaut wurde sie am 10.08.2026. Dieser
+     * Test haelt fest, dass sie bleibt — samt der drei Eigenschaften, an denen der Entwurf
+     * haengt: dunkle Leiste links, Gruppen mit Zeichen, und die **rechtwinklige Aussenkante**
+     * bei gerundeter Innenkante.
+     */
+    public function testBeideBereicheTragenDieSeitenleiste(): void
+    {
+        $css = (string) file_get_contents(SARTU_WURZEL . '/public/assets/css/anwendung.css');
+
+        // Die Huelle: Leiste links, Flaeche rechts.
+        $this->assertStringContainsString('.bereich {', $css);
+        $this->assertStringContainsString('grid-template-columns: 17rem 1fr', $css);
+
+        // Aussen rechtwinklig, innen gerundet — `design/PORTAL_DESIGNSTAND.md`.
+        $this->assertStringContainsString('border-radius: 0 var(--r-l) var(--r-l) 0', $css);
+
+        // Das alte Band gibt es nicht mehr. Beide Namen sind verschwunden, nicht nur einer.
+        $this->assertStringNotContainsString('.kopfband', $css);
+        $this->assertStringNotContainsString('.kundenband', $css);
+
+        // Die Leiste des internen Bereichs steht auf --ink-2. Bis zum 10.08.2026 war der Wert
+        // definiert und wurde von keiner Regel benutzt — genau daran war zu sehen, dass es die
+        // Leiste nicht gab.
+        $this->assertStringContainsString('.rail--intern { background: var(--ink-2); }', $css);
+    }
+
+    /**
+     * Die 25 Zeichen stehen einmal je Seite und werden nur ueber `<use>` eingebunden.
+     *
+     * Entschieden am 10.08.2026 (`OFFENE_ENTSCHEIDUNGEN.md`, Punkt 9). Geprueft wird die
+     * **Zahl**: Wer ein sechsundzwanzigstes braucht, zeichnet es im Konzept und uebertraegt es
+     * — nicht umgekehrt.
+     */
+    public function testDieZeichenStehenVollstaendigUndNurEinmal(): void
+    {
+        $sprite = (string) file_get_contents(SARTU_WURZEL . '/app/views/partials/zeichen.php');
+
+        $this->assertSame(25, preg_match_all('/<symbol id="i-[a-z0-9-]+"/', $sprite));
+
+        // Jedes Zeichen, das eine Leiste benutzt, muss es auch geben.
+        foreach (['kundenband', 'kopfband'] as $leiste) {
+            $quelle = (string) file_get_contents(SARTU_WURZEL . '/app/views/partials/' . $leiste . '.php');
+
+            preg_match_all('/#(i-[a-z0-9-]+)/', $quelle, $benutzt);
+
+            foreach (array_unique($benutzt[1]) as $zeichen) {
+                $this->assertStringContainsString(
+                    '<symbol id="' . $zeichen . '"',
+                    $sprite,
+                    sprintf('%s benutzt das Zeichen %s, das es im Sprite nicht gibt.', $leiste, $zeichen),
+                );
+            }
+        }
+    }
+
+    /**
+     * Das Logo wird eingebunden — nicht nur ausgeliefert.
+     *
+     * Bis zum 10.08.2026 lagen die drei SVG unter `public/assets/bild/`, und **keine Ansicht
+     * band sie ein**; Kopf und Fuss setzten das Wort als Text. `07_MARKE_UND_GESTALTUNG.md`
+     * verlangt in der Kopfleiste Zeichen + Wortmarke.
+     */
+    public function testDasLogoStehtInKopfUndFuss(): void
+    {
+        $kopf = (string) file_get_contents(SARTU_WURZEL . '/app/views/partials/websiteband.php');
+        $fuss = (string) file_get_contents(SARTU_WURZEL . '/app/views/partials/websitefuss.php');
+
+        // Helle Fassung auf hellen Grund, dunkle auf dunklen.
+        $this->assertStringContainsString('/assets/bild/sartu-logo-hell.svg', $kopf);
+        $this->assertStringContainsString('/assets/bild/sartu-logo-dunkel.svg', $fuss);
+
+        // Die Bildbeschreibung nennt die Marke, nicht das Wort „Logo".
+        $this->assertStringContainsString('alt="SARTU"', $kopf);
+        $this->assertStringNotContainsString('alt="Logo"', $kopf);
     }
 
     /**

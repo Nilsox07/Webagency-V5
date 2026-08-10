@@ -14,7 +14,6 @@ use Sartu\Helpers\Html;
 $offen = array_values(array_filter($aufgaben, static fn (array $a) => (string) $a['status'] === 'offen'));
 
 ?>
-<h1>Ihre Aufgaben</h1>
 
 <?php if ($aufgaben === []): ?>
 <div class="karte">

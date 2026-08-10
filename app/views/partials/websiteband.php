@@ -30,7 +30,16 @@ use Sartu\Services\Websitetexte;
 ?>
 <header class="seitenkopf">
   <div class="bahn seitenkopf__reihe">
-    <a class="wortmarke" href="/">SARTU</a>
+    <?php /* `07_MARKE_UND_GESTALTUNG.md`: Kopfleiste traegt Zeichen + Wortmarke, ohne
+             Zusatz, 34 px hoch. Bis zum 10.08.2026 stand hier das Wort als Text — die
+             Logodateien lagen ausgeliefert unter /assets/bild/ und wurden von keiner
+             Ansicht eingebunden.
+             Die helle Fassung traegt die Wortmarke in --ink und gehoert auf hellen Grund;
+             `alt` bleibt der Markenname, nicht „Logo" — Bildbeschreibungen werden
+             vorgelesen. */ ?>
+    <a class="seitenmarke" href="/">
+      <img src="/assets/bild/sartu-logo-hell.svg" alt="SARTU" width="181" height="34">
+    </a>
 
     <nav class="hauptnavigation" aria-label="Hauptnavigation">
       <ul>

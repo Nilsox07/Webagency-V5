@@ -3,56 +3,103 @@
 declare(strict_types=1);
 
 use Sartu\Helpers\Csrf;
+use Sartu\Helpers\Html;
 use Sartu\Services\Startsperre;
 
-/** @var bool $angemeldet */
-
 /**
- * Der Punkt „Ersteinrichtung" steht hier, **solange die Startsperre greift** — und
- * verschwindet, sobald sie es nicht mehr tut. Ein Menuepunkt, der taeglich an etwas
- * Erledigtes erinnert, wird ueberlesen, und mit ihm der naechste, der etwas zu sagen hat.
+ * Die Seitenleiste des internen Bereichs — `design/portalkonzept.html`, abgenommen 03.08.2026.
  *
- * Die Seite bleibt erreichbar und ist von der Uebersicht aus verlinkt: Auf ihr steht das
- * einzige Formular fuer den Zahlungsschluessel, und der wird genau dann gewechselt, wenn
- * die Sperre laengst offen ist.
+ * ## Derselbe Umbau wie im Kundenbereich, am 10.08.2026
  *
- * `starterlaubt()` fragt die Datenbank. Im oeffentlichen Bereich wird dieser Teil nicht
- * gerendert, und ohne Anmeldung auch nicht — die Abfrage laeuft also je Adminseite einmal.
+ * Bis dahin ein waagerechtes Kopfband; der Vermerk in `design/PORTAL_DESIGNSTAND.md` fuehrte
+ * auch diese Datei als „beim Uebertragen ersetzen".
+ *
+ * ## Woran sich die beiden Bereiche unterscheiden
+ *
+ * `CODEX_AUFTRAG_PORTAL.md` §4 verlangt, dass sie **visuell unterscheidbar** sind. Der
+ * Unterschied liegt nicht in einer zweiten Farbwelt, sondern in Flaeche und Dichte:
+ *
+ * | | Kundenbereich | Interner Bereich |
+ * |---|---|---|
+ * | Leiste | `--ink` | `--ink-2`, eine Spur heller |
+ * | Zusatz an der Marke | `Ihr Bereich` | `Intern` |
+ * | Grundschrift | 17 px | 15,5 px |
+ * | Gruppen | Projekt · Verwaltung · Kontakt | Arbeit · Betrieb · Werkzeug |
+ *
+ * Die beiden Toene stehen dafuer seit dem 03.08.2026 in `tokens.css` — und wurden bis zum
+ * 10.08.2026 **von keiner Regel benutzt**, weil es die Leiste nicht gab.
+ *
+ * ## Der Punkt, der verschwindet
+ *
+ * `Ersteinrichtung` steht nur, solange `Startsperre::starterlaubt()` falsch ist. Danach hat er
+ * seine Aufgabe erfuellt; die Seite bleibt ueber die Uebersicht erreichbar. Ein Menuepunkt,
+ * der taeglich an etwas Erledigtes erinnert, wird ueberlesen — und mit ihm der naechste.
+ *
+ * @var bool $angemeldet
+ * @var string $pfad
  */
+
+$pfad ??= '';
+
 $einrichtungOffen = false;
 
 if ($angemeldet) {
     try {
         $einrichtungOffen = !(new Startsperre())->starterlaubt();
     } catch (\Throwable) {
-        // Eine nicht lesbare Startsperre ist kein Grund, das Kopfband zu zerreissen.
+        // Eine nicht lesbare Startsperre ist kein Grund, die Leiste zu zerreissen.
         $einrichtungOffen = false;
     }
 }
 
+$eintrag = static function (string $ziel, string $zeichen, string $wort) use ($pfad): string {
+    $aktiv = $ziel === '/admin'
+        ? $pfad === '/admin'
+        : ($pfad === $ziel || str_starts_with($pfad, $ziel . '/'));
+
+    return '<a href="' . Html::e($ziel) . '"' . ($aktiv ? ' class="an" aria-current="page"' : '') . '>'
+        . '<svg class="ik" aria-hidden="true" focusable="false"><use href="#' . Html::e($zeichen) . '"/></svg>'
+        . Html::e($wort)
+        . '</a>';
+};
+
 ?>
-<header class="kopfband">
-  <div class="bahn kopfband__reihe">
-    <a class="wortmarke" href="/admin">SARTU</a>
-    <?php if ($angemeldet): ?>
-    <nav aria-label="Interner Bereich">
-      <a href="/admin">Übersicht</a>
-<?php if ($einrichtungOffen): ?>
-      <a href="/admin/ersteinrichtung">Ersteinrichtung</a>
-<?php endif; ?>
-      <a href="/admin/anfragen">Anfragen</a>
-      <a href="/admin/projekte">Projekte</a>
-      <a href="/admin/rechnungen">Rechnungen</a>
-      <a href="/admin/belege">Belege</a>
-      <a href="/admin/nachrichten">Nachrichten</a>
-      <a href="/admin/einstellungen/betrieb">Betreiberdaten</a>
-      <a href="/admin/rechtstexte">Rechtstexte</a>
-      <a href="/admin/testmail">Testmail</a>
-      <form method="post" action="/admin/abmelden">
-        <?= Csrf::feld() ?>
-        <button class="knopf knopf--ruhig" type="submit">Abmelden</button>
-      </form>
-    </nav>
-    <?php endif; ?>
+<nav class="rail rail--intern" aria-label="Interner Bereich">
+  <a class="rail-marke" href="/admin">SARTU <em>Intern</em></a>
+
+<?php if ($angemeldet): ?>
+  <div class="rail-gruppe">
+    <span class="mono">Arbeit</span>
+    <?= $eintrag('/admin', 'i-uebersicht', 'Übersicht') ?>
+    <?= $eintrag('/admin/anfragen', 'i-anfragen', 'Anfragen') ?>
+    <?= $eintrag('/admin/projekte', 'i-projekte', 'Projekte') ?>
+    <?= $eintrag('/admin/nachrichten', 'i-hilfe', 'Nachrichten') ?>
   </div>
-</header>
+
+  <div class="rail-gruppe">
+    <span class="mono">Betrieb</span>
+    <?= $eintrag('/admin/rechnungen', 'i-rechnungen', 'Rechnungen') ?>
+    <?= $eintrag('/admin/belege', 'i-export', 'Belege') ?>
+    <?= $eintrag('/admin/einstellungen/betrieb', 'i-betreiberdaten', 'Betreiberdaten') ?>
+    <?= $eintrag('/admin/rechtstexte', 'i-rechtstexte', 'Rechtstexte') ?>
+  </div>
+
+  <div class="rail-gruppe">
+    <span class="mono">Werkzeug</span>
+<?php if ($einrichtungOffen): ?>
+    <?= $eintrag('/admin/ersteinrichtung', 'i-stand', 'Ersteinrichtung') ?>
+<?php endif; ?>
+    <?= $eintrag('/admin/testmail', 'i-testmail', 'Testmail') ?>
+  </div>
+
+  <div class="rail-fuss">
+    <form method="post" action="/admin/abmelden">
+      <?= Csrf::feld() ?>
+      <button type="submit" class="rail-abmelden">
+        <svg class="ik" aria-hidden="true" focusable="false"><use href="#i-abmelden"/></svg>
+        Abmelden
+      </button>
+    </form>
+  </div>
+<?php endif; ?>
+</nav>

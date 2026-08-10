@@ -29,7 +29,6 @@ $bezahlt = (int) $rechnung['paid_cents'];
 
 ?>
 <p class="vorzeile"><a href="/admin/rechnungen">Zurück zur Liste</a></p>
-<h1>Rechnung <?= Html::e((string) $rechnung['number']) ?></h1>
 
 <?= Ansicht::teil('partials/meldungen', ['fehler' => $fehler, 'hinweise' => $hinweise]) ?>
 

@@ -45,38 +45,202 @@ body {
 
 main { padding-top: var(--s-5); padding-bottom: var(--s-7); }
 
-/* ---- Kopfband des internen Bereichs ---------------------- */
+/* ---- Bereichsgeruest: Leiste links, Flaeche rechts -------
+   `design/portalkonzept.html`, abgenommen 03.08.2026. Bis zum
+   10.08.2026 stand hier ein waagerechtes Kopfband ueber volle
+   Breite; der Vermerk in design/PORTAL_DESIGNSTAND.md fuehrte
+   es als „beim Uebertragen ersetzen".
+   ---------------------------------------------------------- */
 
-.kopfband {
+.bereichseite { background: var(--cream); }
+
+/* Die Sprungmarke liegt ausserhalb des Bildes, bis sie den Fokus bekommt.
+   Dieselbe Regel wie in website.css — sie stand dort und fehlte hier, weil
+   der Anwendungsbereich bis zum 10.08.2026 keine hatte. */
+.sprungmarke {
+  position: absolute;
+  left: -9999px;
+  top: 0;
   background: var(--ink);
   color: var(--paper);
-  padding-top: var(--s-3);
-  padding-bottom: var(--s-3);
+  padding: var(--s-2) var(--s-3);
+  border-radius: 0 0 var(--r-s) 0;
+  z-index: 100;
 }
 
-.kopfband a { color: var(--paper); }
+.sprungmarke:focus { left: 0; }
 
-.kopfband__reihe {
+.bereich {
+  display: grid;
+  grid-template-columns: 17rem 1fr;
+  min-height: 100vh;
+  align-items: stretch;
+}
+
+/* Die Aussenkante bleibt rechtwinklig — der Bereich fuellt das
+   Fenster, und eine Rundung aussen gaebe es nicht zu sehen.
+   Gerundet ist allein die rechte Kante der Leiste. */
+.rail {
+  background: var(--ink);
+  color: var(--rail-text);
+  border-radius: 0 var(--r-l) var(--r-l) 0;
+  padding: var(--s-4) var(--s-2);
   display: flex;
-  flex-wrap: wrap;
-  gap: var(--s-3);
-  align-items: baseline;
-  justify-content: space-between;
+  flex-direction: column;
+  gap: var(--s-4);
+  min-width: 0;
 }
 
-.wortmarke {
+.rail--intern { background: var(--ink-2); }
+
+.rail-marke {
+  display: flex;
+  align-items: baseline;
+  gap: var(--s-1);
+  padding: 0 var(--s-2) var(--s-1);
+  font-size: var(--fs-h3);
   font-weight: var(--fw-head);
-  letter-spacing: var(--ls-mono);
-  text-transform: uppercase;
+  letter-spacing: var(--ls-head);
+  color: var(--cream);
   text-decoration: none;
 }
 
-.kopfband nav {
-  display: flex;
-  flex-wrap: wrap;
-  gap: var(--s-3);
-  font-size: var(--fs-small);
+.rail-marke em {
+  font-family: var(--font-mono);
+  font-style: normal;
+  font-size: var(--fs-mono);
+  letter-spacing: var(--ls-mono);
+  color: var(--label-dark);
+  text-transform: uppercase;
 }
+
+.rail-gruppe > .mono {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: var(--fs-mono);
+  letter-spacing: var(--ls-mono);
+  text-transform: uppercase;
+  color: var(--rail-label);
+  padding: 0 var(--s-2);
+  margin-bottom: var(--s-1);
+}
+
+.rail a {
+  display: flex;
+  align-items: center;
+  gap: var(--s-2);
+  padding: var(--s-1) var(--s-2);
+  border-radius: var(--r-s);
+  color: var(--rail-text);
+  text-decoration: none;
+  font-size: var(--fs-small);
+  transition: background var(--t-fast) var(--ease), color var(--t-fast) var(--ease);
+}
+
+.rail a:hover { background: var(--ink-3); color: var(--paper); }
+.rail a.an { background: var(--ink-3); color: var(--paper); font-weight: var(--fw-head); }
+
+/* Lime traegt allein der aktive Eintrag. Ein Zeichen, das nur
+   kennzeichnet, bleibt neutral — SARTU_CORPORATE_DESIGN.md §3
+   verbietet Lime fuer Zeichen ohne Aufgabe. */
+.rail a .ik { color: var(--rail-ik); transition: color var(--t-fast) var(--ease); }
+.rail a:hover .ik { color: var(--paper); }
+.rail a.an .ik { color: var(--lime); }
+
+.rail a .zahl {
+  margin-left: auto;
+  font-family: var(--font-mono);
+  font-size: var(--fs-mono);
+  color: var(--rail-zahl);
+  font-variant-numeric: tabular-nums;
+}
+
+.rail a.an .zahl { color: var(--paper); }
+
+.rail-fuss {
+  margin-top: auto;
+  padding: var(--s-3) var(--s-2) 0;
+  border-top: 1px solid var(--line-dark);
+}
+
+.rail-abmelden {
+  display: flex;
+  align-items: center;
+  gap: var(--s-2);
+  width: 100%;
+  padding: var(--s-1) var(--s-2);
+  border: 0;
+  border-radius: var(--r-s);
+  background: none;
+  color: var(--rail-text);
+  font: inherit;
+  font-size: var(--fs-small);
+  text-align: left;
+  cursor: pointer;
+}
+
+.rail-abmelden:hover { background: var(--ink-3); color: var(--paper); }
+.rail-abmelden .ik { color: var(--rail-ik); }
+.rail-abmelden:hover .ik { color: var(--paper); }
+
+/* Die Zeichen. 24er Raster, 2 Punkt Kontur, Farbe vom Elternteil.
+   Entschieden am 10.08.2026 (OFFENE_ENTSCHEIDUNGEN.md, Punkt 9). */
+.ik {
+  flex: none;
+  width: 1.125rem;
+  height: 1.125rem;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  display: block;
+}
+
+.ik-gr { width: 1.625rem; height: 1.625rem; stroke-width: 1.6; }
+
+/* ---- Arbeitsflaeche mit Titelzeile ----------------------- */
+
+.flaeche { min-width: 0; display: flex; flex-direction: column; }
+
+.titelzeile {
+  display: flex;
+  align-items: center;
+  gap: var(--s-2);
+  padding: var(--s-3) var(--gut);
+  border-bottom: 1px solid var(--line);
+}
+
+.titelzeile h1 { margin: 0; font-size: var(--fs-h3); }
+
+.flaeche__inhalt {
+  padding: var(--s-5) var(--gut) var(--s-7);
+  max-width: var(--wrap);
+  width: 100%;
+}
+
+/* Unter 900 px legt sich die Leiste ueber die volle Breite und
+   die Eintraege laufen als Zeile. Ein ausklappbares Menue waere
+   ein zweiter Bedienweg fuer neun Eintraege. */
+@media (max-width: 900px) {
+  .bereich { grid-template-columns: 1fr; }
+
+  .rail {
+    border-radius: 0;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--s-2);
+    padding: var(--s-2) var(--gut);
+  }
+
+  .rail-gruppe { display: flex; flex-wrap: wrap; gap: var(--s-1); align-items: center; }
+  .rail-gruppe > .mono { display: none; }
+  .rail-fuss { margin: 0; padding: 0; border: 0; }
+  .titelzeile { padding-left: var(--gut); }
+}
+
+
 
 /* ---- Schrift --------------------------------------------- */
 
@@ -596,29 +760,6 @@ input[type="radio"] {
    Dieselben Gestaltungswerte, andere Flaeche — keine zweite
    Farbwelt.
    ============================================================ */
-
-.kundenband {
-  background: var(--paper);
-  border-bottom: var(--s-1) solid var(--lime);
-  padding-top: var(--s-3);
-  padding-bottom: var(--s-3);
-}
-
-.kundenband__reihe {
-  display: flex;
-  flex-wrap: wrap;
-  gap: var(--s-3);
-  align-items: baseline;
-  justify-content: space-between;
-}
-
-.kundenband nav {
-  display: flex;
-  flex-wrap: wrap;
-  gap: var(--s-3);
-  align-items: baseline;
-  font-size: var(--fs-small);
-}
 
 .karte--betont {
   background: var(--lime-soft);

@@ -44,7 +44,6 @@ $herkunft = [
 
 ?>
 <p class="vorzeile"><a href="/admin/anfragen">Zurück zur Liste</a></p>
-<h1>Anfrage von <?= Html::e(Format::text((string) $anfrage['company'])) ?></h1>
 
 <?= Ansicht::teil('partials/meldungen', ['fehler' => $fehler, 'hinweise' => $hinweise]) ?>
 

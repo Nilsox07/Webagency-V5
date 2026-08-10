@@ -40,7 +40,6 @@ $zustaende = [
 
 ?>
 <p class="vorzeile"><a href="/admin/projekte">Zurück zur Liste</a></p>
-<h1><?= Html::e(Format::text((string) $projekt['title'])) ?></h1>
 
 <?= Ansicht::teil('partials/meldungen', ['fehler' => $fehler, 'hinweise' => $hinweise]) ?>
 

@@ -26,7 +26,9 @@ use Sartu\Services\Websitetexte;
 <footer class="seitenfuss">
   <div class="bahn seitenfuss__spalten">
     <div class="seitenfuss__marke">
-      <p class="wortmarke">SARTU</p>
+      <?php /* Fussbereich, Spalte: Zeichen + Wortmarke, 30 px. Dunkler Grund, deshalb
+               die dunkle Fassung mit weisser Wortmarke. */ ?>
+      <p class="seitenmarke"><img src="/assets/bild/sartu-logo-dunkel.svg" alt="SARTU" width="160" height="30"></p>
       <p><?= Html::e(Websitetexte::KURZPOSITIONIERUNG) ?></p>
     </div>
 

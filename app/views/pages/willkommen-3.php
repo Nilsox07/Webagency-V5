@@ -17,7 +17,6 @@ use Sartu\Helpers\Csrf;
 
 ?>
 <p class="vorzeile">Bildschirm 3 von 3</p>
-<h1>Sie sehen immer genau einen nächsten Schritt.</h1>
 
 <p>Oben in Ihrem Bereich steht, was gerade von Ihnen gebraucht wird. Mehr müssen Sie nicht im
 Blick behalten — wir melden uns, wenn etwas ansteht.</p>

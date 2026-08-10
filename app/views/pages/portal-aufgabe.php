@@ -32,12 +32,10 @@ $id = (string) $aufgabe['id'];
 <p class="vorzeile"><a href="/portal/aufgaben">Zurück zu Ihren Aufgaben</a></p>
 
 <?php if ($art === 'freigabe'): ?>
-<h1>Fakten und Umfang final freigeben</h1>
 <p class="lead">Bitte prüfen Sie Ihre Angaben ein letztes Mal. Danach beginnen wir mit der
 Produktion. Spätere Änderungen an Fakten oder Umfang sind dann nicht mehr ohne Weiteres
 möglich.</p>
 <?php else: ?>
-<h1><?= Html::e((string) $aufgabe['title']) ?></h1>
 <?php if ($aufgabe['description'] !== null): ?>
 <p class="lead"><?= nl2br(Html::e((string) $aufgabe['description'])) ?></p>
 <?php endif; ?>

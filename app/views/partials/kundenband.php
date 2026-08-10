@@ -3,44 +3,107 @@
 declare(strict_types=1);
 
 use Sartu\Helpers\Csrf;
+use Sartu\Helpers\Html;
 
 /**
- * Die Kopfzeile des Kundenbereichs.
+ * Die Seitenleiste des Kundenbereichs — `design/portalkonzept.html`, abgenommen 03.08.2026.
  *
- * **Nur gebaute Bereiche stehen im Menue** (§0.3b: keine toten Menuepunkte, nichts
- * Ausgegrautes). Seit Stufe B sind alle acht da.
+ * ## Was sich am 10.08.2026 geaendert hat
  *
- * Der Punkt heisst `Oeffnungszeiten`, nicht `Inhalte`. §8.7 ueberschreibt die Seite so, und
- * das ist auch das, was sie kann — `Inhalte` verspricht Texte und Bilder, die der Kunde
- * nicht selbst pflegt. Die Adresse bleibt `/portal/inhalte`, weil §8.7 sie so nennt.
+ * Bis dahin stand hier ein **waagerechtes Kopfband**. Der Betreiber hatte am 03.08.2026 die
+ * Seitenleiste entschieden; der Vermerk in `design/PORTAL_DESIGNSTAND.md` fuehrte diese Datei
+ * ausdruecklich als „beim Uebertragen ersetzen". Sie ist ersetzt.
  *
- * Die Reihenfolge ist die aus §8 und wird nicht umgestellt: Uebersicht · Angebot · Aufgaben ·
- * Vorschau · Rechnungen · Domain · Inhalte · Vertrag · Hilfe. Was fehlt, faellt heraus; was
- * bleibt, behaelt seinen Platz.
+ * Die zweite Sperre lag an Punkt 9 in `OFFENE_ENTSCHEIDUNGEN.md` — ob es Zeichen geben darf.
+ * Am 10.08.2026 entschieden: **ja**. Deshalb steht vor jedem Eintrag eines.
+ *
+ * ## Die Reihenfolge ist gebunden, der Wortlaut nicht mehr
+ *
+ * §8 gibt die neun Punkte und ihre Reihenfolge vor: Uebersicht · Angebot · Aufgaben ·
+ * Vorschau · Rechnungen · Domain · Inhalte · Vertrag · Hilfe. **Daran wird nicht gedreht.**
+ *
+ * Der Wortlaut ist seit dem 09.08.2026 Klasse 2 (`sartu-texter`): frei formulierbar, aber
+ * **innerhalb einer Fassung identisch** und als Liste im Pruefbericht. Uebernommen sind
+ * deshalb die Woerter aus §8 — sie sind kurz, eindeutig und stehen bereits ueberall so.
+ *
+ * **Der siebte Punkt heisst `Inhalte`, nicht `Oeffnungszeiten`.** Entscheidung des Betreibers
+ * vom 03.08.2026: Das Menuewort ist `Inhalte` (§8), die Ueberschrift der Seite bleibt
+ * `Oeffnungszeiten` (§8.7). Das ist kein Widerspruch, sondern Arbeitsteilung zwischen
+ * Navigation und Seitentitel — bis zum 10.08.2026 stand hier das Wort der Ueberschrift.
+ *
+ * ## Drei Gruppen, und warum die Zahl nur manchmal dasteht
+ *
+ * Projekt · Verwaltung · Kontakt. Ein Zaehler erscheint **nur, wo etwas offen ist** — eine
+ * dauerhafte `0` neben `Aufgaben` waere eine Zahl ohne Aussage, und der Blick lernt sie zu
+ * uebersehen. Genau dann faellt die `3` daneben auch nicht mehr auf.
  *
  * @var bool $angemeldet
+ * @var string $pfad          der aufgerufene Pfad, fuer die Markierung des aktiven Eintrags
+ * @var array<string,int> $zaehler  offene Posten je Punkt, nur gesetzte Schluessel erscheinen
  */
 
+$pfad ??= '';
+$zaehler ??= [];
+
+/**
+ * Ein Eintrag der Leiste.
+ *
+ * Aktiv ist er, wenn der Pfad genau passt oder unterhalb liegt — `/portal/aufgaben/17`
+ * markiert `Aufgaben`. `/portal` waere sonst bei jedem Unterpfad mit aktiv, deshalb dort
+ * der genaue Vergleich.
+ */
+$eintrag = static function (string $ziel, string $zeichen, string $wort) use ($pfad, $zaehler): string {
+    $aktiv = $ziel === '/portal'
+        ? $pfad === '/portal'
+        : ($pfad === $ziel || str_starts_with($pfad, $ziel . '/'));
+
+    $offen = $zaehler[$ziel] ?? 0;
+
+    return '<a href="' . Html::e($ziel) . '"' . ($aktiv ? ' class="an" aria-current="page"' : '') . '>'
+        . '<svg class="ik" aria-hidden="true" focusable="false"><use href="#' . Html::e($zeichen) . '"/></svg>'
+        . Html::e($wort)
+        . ($offen > 0 ? '<span class="zahl">' . (int) $offen . '</span>' : '')
+        . '</a>';
+};
+
 ?>
-<header class="kundenband">
-  <div class="bahn kundenband__reihe">
-    <a class="wortmarke" href="/portal">SARTU</a>
-    <?php if ($angemeldet): ?>
-    <nav aria-label="Ihr Bereich">
-      <a href="/portal">Übersicht</a>
-      <a href="/portal/angebot">Angebot</a>
-      <a href="/portal/aufgaben">Aufgaben</a>
-      <a href="/portal/vorschau">Vorschau</a>
-      <a href="/portal/rechnungen">Rechnungen</a>
-      <a href="/portal/domain">Domain</a>
-      <a href="/portal/inhalte">Öffnungszeiten</a>
-      <a href="/portal/vertrag">Vertrag</a>
-      <a href="/portal/hilfe">Hilfe</a>
-      <form method="post" action="/portal/abmelden">
-        <?= Csrf::feld() ?>
-        <button class="knopf knopf--ruhig" type="submit">Abmelden</button>
-      </form>
-    </nav>
-    <?php endif; ?>
+<nav class="rail" aria-label="Ihr Bereich">
+  <?php /* Wortmarke als Text, wie im abgenommenen Entwurf. Das Bildzeichen steht dort, wo
+           `07_MARKE_UND_GESTALTUNG.md` es verlangt — in der Kopfleiste der Website. In der
+           Leiste stuende es auf 21 px Schriftgroesse neben einem Zusatz von 10,5 px und
+           waere ein drittes Element auf engstem Raum. */ ?>
+  <a class="rail-marke" href="/portal">SARTU <em>Ihr Bereich</em></a>
+
+<?php if ($angemeldet): ?>
+  <div class="rail-gruppe">
+    <span class="mono">Projekt</span>
+    <?= $eintrag('/portal', 'i-uebersicht', 'Übersicht') ?>
+    <?= $eintrag('/portal/angebot', 'i-angebot', 'Angebot') ?>
+    <?= $eintrag('/portal/aufgaben', 'i-aufgaben', 'Aufgaben') ?>
+    <?= $eintrag('/portal/vorschau', 'i-vorschau', 'Vorschau') ?>
   </div>
-</header>
+
+  <div class="rail-gruppe">
+    <span class="mono">Verwaltung</span>
+    <?= $eintrag('/portal/rechnungen', 'i-rechnungen', 'Rechnungen') ?>
+    <?= $eintrag('/portal/domain', 'i-domain', 'Domain') ?>
+    <?= $eintrag('/portal/inhalte', 'i-inhalte', 'Inhalte') ?>
+    <?= $eintrag('/portal/vertrag', 'i-vertrag', 'Vertrag') ?>
+  </div>
+
+  <div class="rail-gruppe">
+    <span class="mono">Kontakt</span>
+    <?= $eintrag('/portal/hilfe', 'i-hilfe', 'Hilfe') ?>
+  </div>
+
+  <div class="rail-fuss">
+    <form method="post" action="/portal/abmelden">
+      <?= Csrf::feld() ?>
+      <button type="submit" class="rail-abmelden">
+        <svg class="ik" aria-hidden="true" focusable="false"><use href="#i-abmelden"/></svg>
+        Abmelden
+      </button>
+    </form>
+  </div>
+<?php endif; ?>
+</nav>

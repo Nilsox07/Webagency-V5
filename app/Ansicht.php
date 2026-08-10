@@ -24,6 +24,29 @@ namespace Sartu;
  */
 final class Ansicht
 {
+    /**
+     * Der aufgerufene Pfad — damit die Leiste weiss, welcher Eintrag der aktive ist.
+     *
+     * **Warum das hier steht und nicht in jeder Steuerung.** Die Markierung ist eine Frage der
+     * Darstellung, keine des Vorgangs; sie durch dreissig Steuerungen zu reichen hiesse,
+     * dreissig Gelegenheiten zu schaffen, sie zu vergessen. Der Router setzt sie einmal.
+     *
+     * **Sie ist keine Eingabe.** Gesetzt wird sie ausschliesslich vom Dispatcher aus dem
+     * bereits aufgeloesten Pfad — nicht aus einem Parameter, nicht aus einer Kopfzeile. Wer
+     * sie faelschen wollte, koennte hoechstens einen Menuepunkt hervorheben.
+     */
+    private static string $pfad = '';
+
+    public static function pfadSetzen(string $pfad): void
+    {
+        self::$pfad = $pfad;
+    }
+
+    public static function pfad(): string
+    {
+        return self::$pfad;
+    }
+
     /** @param array<string,mixed> $werte */
     public static function seite(string $layout, string $seite, array $werte = []): string
     {

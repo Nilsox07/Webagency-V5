@@ -16,7 +16,6 @@ use Sartu\Helpers\Html;
  */
 
 ?>
-<h1>Anmelden</h1>
 <p>Geben Sie Ihre E-Mail-Adresse ein. Wir schicken Ihnen einen Anmeldelink — ein Passwort
 brauchen Sie nicht.</p>
 

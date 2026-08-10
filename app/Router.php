@@ -57,6 +57,10 @@ final class Router
      */
     public function behandeln(string $methode, string $pfad): Antwort
     {
+        // Die Leiste markiert den aktiven Eintrag. Der Pfad kommt aus dem Dispatcher und
+        // nicht aus einer Steuerung — siehe `Ansicht::$pfad`.
+        Ansicht::pfadSetzen($pfad);
+
         return $this->sicherheitskopfzeilen($this->abwickeln($methode, $pfad));
     }
 

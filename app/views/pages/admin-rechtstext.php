@@ -18,7 +18,6 @@ $rumpf = is_array($text) ? (string) $text['body'] : '';
 $zustand = is_array($text) ? (string) $text['status'] : 'entwurf';
 
 ?>
-<h1><?= Html::e($beschriftung) ?></h1>
 
 <?= Ansicht::teil('partials/meldungen', ['fehler' => $fehler, 'hinweise' => $hinweise]) ?>
 

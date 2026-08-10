@@ -32,7 +32,6 @@ use Sartu\Services\Projektstatus;
  */
 
 ?>
-<h1>Übersicht</h1>
 
 <div class="karte karte--betont">
   <p class="vorzeile">Nächster Schritt</p>

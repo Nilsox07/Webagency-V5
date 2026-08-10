@@ -14,7 +14,6 @@ use Sartu\Ansicht;
  */
 
 ?>
-<h1>Prüfen Sie Ihr Postfach</h1>
 <p>Wenn ein Zugang zu dieser Adresse besteht, ist der Anmeldelink unterwegs. Er gilt
 15 Minuten und lässt sich einmal verwenden.</p>
 <p>Nichts angekommen? Sehen Sie im Spam-Ordner nach oder fordern Sie den Link erneut an.</p>

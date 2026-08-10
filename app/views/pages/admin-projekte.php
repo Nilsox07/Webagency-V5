@@ -15,7 +15,6 @@ use Sartu\Services\Projektstatus;
  */
 
 ?>
-<h1>Projekte</h1>
 
 <?php if ($projekte === []): ?>
 <div class="karte">

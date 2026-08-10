@@ -49,8 +49,8 @@ final class ErsteinrichtungMenueTest extends Datenbankfall
         parent::tearDown();
     }
 
-    /** Solange etwas fehlt, steht der Punkt im Kopfband. */
-    public function testDerMenuepunktStehtImKopfbandSolangeDieSperreGreift(): void
+    /** Solange etwas fehlt, steht der Punkt in der Leiste. */
+    public function testDerMenuepunktStehtInDerLeisteSolangeDieSperreGreift(): void
     {
         // Ohne Betreiberdaten ist die Sperre auf jeden Fall zu.
         $this->assertFalse((new Startsperre(new BetreiberdatenSpeicher($this->pdo)))->starterlaubt());
@@ -63,7 +63,7 @@ final class ErsteinrichtungMenueTest extends Datenbankfall
     }
 
     /**
-     * Sobald der Start frei ist, verschwindet der Punkt **aus dem Kopfband** — aber nicht
+     * Sobald der Start frei ist, verschwindet der Punkt **aus der Leiste** — aber nicht
      * die Seite.
      */
     public function testDerMenuepunktVerschwindetSobaldDerStartFreiIst(): void
@@ -76,13 +76,13 @@ final class ErsteinrichtungMenueTest extends Datenbankfall
 
         $this->assertSame(200, $antwort->status);
 
-        // Im Kopfband steht er nicht mehr. Geprüft wird an der Navigation, nicht am ganzen
+        // In der Leiste steht er nicht mehr. Geprüft wird an der Navigation, nicht am ganzen
         // Rumpf — die Übersicht verlinkt die Seite dauerhaft, und das ist Absicht.
-        $kopfband = $this->kopfband($antwort->rumpf);
+        $leiste = $this->leiste($antwort->rumpf);
 
-        $this->assertNotSame('', $kopfband, 'Das Kopfband wurde nicht gefunden.');
-        $this->assertStringNotContainsString('/admin/ersteinrichtung', $kopfband);
-        $this->assertStringContainsString('/admin/rechnungen', $kopfband);
+        $this->assertNotSame('', $leiste, 'Die Leiste wurde nicht gefunden.');
+        $this->assertStringNotContainsString('/admin/ersteinrichtung', $leiste);
+        $this->assertStringContainsString('/admin/rechnungen', $leiste);
     }
 
     /** Die Seite bleibt erreichbar, auch wenn der Start frei ist. */
@@ -104,7 +104,7 @@ final class ErsteinrichtungMenueTest extends Datenbankfall
         $antwort = $this->router()->behandeln('GET', '/admin');
 
         $this->assertStringContainsString('href="/admin/ersteinrichtung"', $antwort->rumpf);
-        $this->assertStringNotContainsString('/admin/ersteinrichtung', $this->kopfband($antwort->rumpf));
+        $this->assertStringNotContainsString('/admin/ersteinrichtung', $this->leiste($antwort->rumpf));
     }
 
     /** Die Seite nennt jedes offene Hindernis im Wortlaut der Startsperre. */
@@ -290,10 +290,16 @@ final class ErsteinrichtungMenueTest extends Datenbankfall
         return $antwort;
     }
 
-    /** Nur der `<nav>`-Block des Kopfbands. */
-    private function kopfband(string $rumpf): string
+    /**
+     * Nur der `<nav>`-Block der Leiste.
+     *
+     * Ueber `aria-label` gesucht und nicht ueber die Klasse: Seit dem Umbau auf die
+     * Seitenleiste am 10.08.2026 stehen dort weitere Klassen, und die Reihenfolge der
+     * Attribute ist keine Zusage. Die Beschriftung fuer Hilfsmittel ist eine.
+     */
+    private function leiste(string $rumpf): string
     {
-        if (preg_match('#<nav aria-label="Interner Bereich">(.*?)</nav>#s', $rumpf, $treffer) !== 1) {
+        if (preg_match('#<nav\b[^>]*aria-label="Interner Bereich"[^>]*>(.*?)</nav>#s', $rumpf, $treffer) !== 1) {
             return '';
         }
 

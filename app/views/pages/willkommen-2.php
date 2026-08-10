@@ -32,7 +32,6 @@ $muessenNicht = [
 
 ?>
 <p class="vorzeile">Bildschirm 2 von 3</p>
-<h1>Das machen Sie hier.</h1>
 
 <div class="spaltenpaar">
   <div>

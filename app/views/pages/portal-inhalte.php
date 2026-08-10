@@ -27,7 +27,6 @@ use Sartu\Services\Oeffnungszeitendienst;
 $leerzeilen = 3;
 
 ?>
-<h1>Öffnungszeiten</h1>
 
 <?= Ansicht::teil('partials/meldungen', ['fehler' => $fehler, 'hinweise' => $hinweise]) ?>
 
