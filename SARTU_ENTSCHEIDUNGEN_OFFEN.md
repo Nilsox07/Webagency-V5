@@ -473,6 +473,58 @@ Begründung und später zwei Demoprojekte kommen vom Betreiber, nicht aus dem Ba
 
 ---
 
+## 4d. Musterprojekte und Gründerabschnitt — **ENTSCHIEDEN 13.08.2026**
+
+**Beide Sektionen kommen in die Startseite, beide zunächst mit gekennzeichnetem Platzhalter, und
+die Musterprojekte werden gebaut.**
+
+| Entschieden | |
+|---|---|
+| **Sektion 6 „Wer dahintersteckt"** | wird gebaut, bis zur Befüllung mit `[[FOTO-FEHLT]]` |
+| **Sektion 8 „Musterprojekte"** | wird gebaut, Aufbau wie im abgenommenen Entwurf, Ansichten bis dahin `[[SCREENSHOT-FEHLT]]` |
+| **Die drei Musterprojekte selbst** | werden als vollständige Beispielseiten gebaut — **Malerbetrieb**, **Physiotherapiepraxis**, **Arbeitsrechtskanzlei**, je ein anderer Umfang |
+| **`/musterprojekte`** | die Übersichtsseite dazu entsteht mit (`17_SEITEN_SARTU.md` §4a) |
+
+### Warum der Platzhalter jetzt zulässig ist und vorher nicht
+
+`10_WEBSITE_SARTU.md` §8 schrieb: „eine Musterprojekt-Sektion ohne Musterprojekte ist schlechter
+als keine." **Der Satz galt, solange offen war, ob es je Musterprojekte gibt.** Ein Platzhalter
+für etwas, das vielleicht nie kommt, ist ein „kommt bald"-Bereich — und die sind nach §0.3b
+verboten.
+
+**Das ist jetzt anders: Die Musterprojekte sind beauftragt.** Der Platzhalter überbrückt einen
+Bautermin, er ersetzt keine Entscheidung.
+
+> **Und die Veröffentlichung ist ohnehin gesperrt.** Die Startsperre sucht `[[FOTO-FEHLT]]` und
+> `[[SCREENSHOT-FEHLT]]` und bricht die produktive Veröffentlichung ab (Bedingungen 4 und 4a).
+> **Beide Sektionen können also gar nicht unfertig nach außen gehen.** Genau dafür gibt es die
+> Sperre — sie erlaubt, im Bau sichtbar zu machen, was noch fehlt, ohne dass es je live geht.
+> Der Entwurf selbst arbeitet an dieser Stelle mit `Platz für Ansicht`.
+
+### §7c löst sich auf, statt entschieden zu werden
+
+**§7c fragte, welche drei Gattungen für Branchenseiten *und* Musterprojekte gelten.** Die Frage
+setzte voraus, dass beide Listen dieselben sein müssen. **Das müssen sie nicht — sie haben
+verschiedene Aufgaben:**
+
+| | Aufgabe | Auswahl folgt |
+|---|---|---|
+| **Branchenseiten** | Suchnachfrage abholen | dem Suchvolumen und der Zielgruppe — SHK, Elektrotechnik, Dachdecker, gebaut |
+| **Musterprojekte** | zeigen, dass SARTU verschiedene Fälle löst | der **Spannweite** — Maler, Physiotherapie, Kanzlei; drei Umfänge, drei Zuschnitte |
+
+**Drei gleiche Gattungen in beiden Listen wären sogar schlechter:** Sie zeigen dreimal denselben
+Fall und belegen die Spannweite nicht, die den Abstand zum Baukasten ausmacht.
+
+**§7c ist damit gegenstandslos.** Es bleibt nichts zu entscheiden — die Frage war falsch gestellt.
+
+### Was das für §5 bedeutet
+
+Der Punkt „ein bis zwei gekennzeichnete Demoprojekte" ist auf **drei** entschieden und damit
+geschlossen. **Offen bleibt allein das Gründerfoto** — Name, Bild und der Absatz zur Gründung
+kommen vom Betreiber (§4c).
+
+---
+
 ## 5. Bildmaterial und Demoprojekte — **OFFEN**
 
 | Punkt | Stand |
@@ -837,6 +889,9 @@ ausgeschrieben sind.
 | 10.08.2026 | **Aufmacherbild: Gerät in Schrägstellung mit echter Aufnahme des Kundenbereichs**, Rahmen selbst gezeichnet (§4b) | Betreiber |
 | 10.08.2026 | **Sperren datengesteuert statt codegesteuert:** `LocalBusiness` und Gründerabschnitt werden gebaut, ausgeliefert nur bei gefüllten Betreiberdaten (§4c) | Betreiber |
 | 10.08.2026 | **Gründerabschnitt ist kein Lebenslauf**, sondern Name, Bild und ein Absatz zur Gründung (§4c) | Betreiber |
+| 13.08.2026 | **Sektion 6 und 8 kommen in die Startseite**, zunächst mit gekennzeichnetem Platzhalter; die Startsperre hält sie zurück (§4d) | Betreiber |
+| 13.08.2026 | **Drei Musterprojekte werden gebaut** — Malerbetrieb, Physiotherapiepraxis, Arbeitsrechtskanzlei (§4d) | Betreiber |
+| 13.08.2026 | **§7c ist gegenstandslos:** Branchenseiten und Musterprojekte folgen verschiedenen Auswahlgründen (§4d) | Betreiber |
 | 13.08.2026 | **Die Kapazitätszeile nennt den nächsten möglichen Projektstart** statt „Nur noch wenige Plätze". Das Terminverbot in `CLAUDE_SARTU_WEBSITE_LASTENHEFT_BAUFINAL.md` §5a ist Begründungsarchiv und sticht nicht; angezeigt wird der **Monat**, kein Tag | Betreiber |
 | 13.08.2026 | **Das Mobilmenü greift ab 1180 px** statt ab 940 px — `design/startseite.html` Zeile 166 setzt diesen Wert, und die Kopfzeile lief von 941 bis 1183 px waagerecht über. `10_WEBSITE_SARTU.md` §2 („Desktop ab 1024 px") ist damit nachzuziehen — **offen** | Bau, gemessen |
 
