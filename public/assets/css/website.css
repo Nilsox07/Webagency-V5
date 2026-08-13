@@ -269,11 +269,20 @@
   padding-bottom: var(--s-5);
 }
 
+/* `minmax(0, …)` und nicht `55fr 45fr` — `design/startseite.html` Zeile 204 setzt
+   es so, und der Grund ist messbar: Ein Rasterelement hat `min-width: auto` und
+   schrumpft nicht unter die Mindestbreite seines Inhalts. Die H1 im linken Feld
+   ist gross; sie zog damit Platz aus dem rechten. Gemessen am 13.08.2026 bei
+   1440 px: **343 px statt 454 px**, ein Viertel zu schmal.
+
+   Aufgefallen ist es erst, als der gezeichnete Geraeterahmen entfiel. Er ragte
+   ueber `margin: 0 -7%` und ein Telefon bei `right: -7%` aus seiner Spalte
+   heraus — die Flaeche sah dadurch richtig aus, obwohl die Spalte es nicht war. */
 .aufmacher__reihe {
   position: relative;
   z-index: 1;
   display: grid;
-  grid-template-columns: 55fr 45fr;
+  grid-template-columns: minmax(0, 55fr) minmax(0, 45fr);
   gap: var(--s-5);
   align-items: center;
 }
@@ -380,12 +389,35 @@
   50%      { transform: translate3d(0, -1.4%, 0) rotate(-.6deg); }
 }
 
+/* Die Textspalte ist **Behaelter** fuer die H1 — `design/startseite.html` Zeile 211.
+   Der Schriftgrad folgt damit der Spalte, nicht dem Fenster.
+
+   Der Entwurf begruendet das an Ort und Stelle, und die Begruendung ist am
+   13.08.2026 zum zweiten Mal bestaetigt worden: „Zwei frueher gescheiterte
+   vw-Formeln lagen genau daran — die Spalte waechst stueckweise, weil --wrap und
+   --gut eigene Knickpunkte haben. Eine gerade vw-Kurve kann ihr nicht folgen."
+
+   Sichtbar wurde es, als die Bildspalte ihre volle Breite bekam: Die H1 stand
+   danach vierzeilig mit „zum" allein auf einer Zeile, weil `--fs-h1` am **Fenster**
+   haengt und von der schmaleren Spalte nichts weiss. */
+.aufmacher__text { container-type: inline-size; }
+
 .aufmacher h1 {
-  font-size: var(--fs-h1);
+  /* `min(…, 8.6vh)` haelt die Zeile auf niedrigen Fenstern klein genug, dass der
+     Anschnitt der naechsten Sektion sichtbar bleibt (§5 Sektion 1). Die drei Werte
+     stehen so im abgenommenen Entwurf, Zeile 230. */
+  font-size: clamp(40px, min(11cqw, 8.6vh), 80px);
   line-height: var(--lh-head);
   letter-spacing: var(--ls-h1);
   font-weight: var(--fw-head);
   margin-top: 0;
+}
+
+/* Ohne Behaelter kein `cqw`: Unterhalb von 900 px legt sich der Aufmacher
+   einspaltig, und die Spalte ist dann die Bahn. Der Wert aus tokens.css traegt
+   dort wieder, weil Spalte und Fenster zusammenfallen. */
+@media (max-width: 900px) {
+  .aufmacher h1 { font-size: var(--fs-h1); }
 }
 
 /* Der Lime-Marker auf dem letzten Sinnabschnitt der H1.
@@ -846,46 +878,46 @@
   .seitenfuss__spalten { grid-template-columns: 1fr; }
 }
 
-/* ---- Das Geraet im Aufmacher ------------------------------
-   `SARTU_ENTSCHEIDUNGEN_OFFEN.md` §4b, entschieden 10.08.2026.
-   Selbst gezeichnet: Flaechen, Kanten, eine leichte Schraeg-
-   stellung ueber CSS-Perspektive. Keine Vorlage, kein Abruf.
+/* ---- Der Aufmacher: die Aufnahme des Kundenbereichs -------
+   Anweisung vom 13.08.2026: Der in CSS gezeichnete Laptop
+   wird durch ein gerendertes Mockup ersetzt, und der dann
+   tote Block wird geloescht statt liegen gelassen.
+
+   **Das Mockup liegt nicht im Repo.** Geloescht ist der
+   Rahmen trotzdem — die Anweisung wurde zweimal bestaetigt.
+   Was bleibt, ist die Sache, um die es geht: die **echte
+   Aufnahme** des eigenen Kundenbereichs mit Musterdaten
+   (§4b) und der gebundene Vermerk daneben. Erfunden ist
+   nichts; es fehlt allein das Gehaeuse darum.
+
+   Entfallen sind `.geraet__laptop`, `.geraet__deckel`,
+   `.geraet__sockel` samt Kerbe und `.geraet__telefon`. Mit
+   ihnen die drei Werte `--geraet-*` in tokens.css, die es
+   nur fuer sie gab.
+
+   Sobald `geraet-aufmacher.webp` abgelegt wird, tritt es an
+   dieselbe Stelle; `MarkupTest` haelt beide Zustaende fest.
    ---------------------------------------------------------- */
 
 .geraet {
   position: relative;
   margin: 0;
-  /* Das Geraet fuellt seine Spalte. Im Entwurf steht es in der 45-fr-Spalte und
+  /* Fuellt seine Spalte. Im Entwurf steht das Bild in der 45-fr-Spalte und
      reicht bis an deren Kante; enger gesetzt wirkt es wie ein Beiwerk. */
   width: 100%;
   padding-bottom: var(--s-5);
-  /* Die Schraegstellung. `perspective` am Elternteil, Drehung am Kind —
-     sonst kippt der Schatten mit und das Geraet wirkt aufgeklebt. */
-  perspective: 1400px;
-}
-
-.geraet__laptop {
-  position: relative;
-  /* Leichte Schraegstellung, nicht mehr. Bei staerkerer Drehung schrumpft die
-     sichtbare Flaeche so weit, dass die Aufnahme auf dem Bildschirm nicht mehr
-     zu erkennen ist — und sie ist der Grund, warum das Geraet dasteht. */
-  transform: rotateY(-7deg) rotateX(2deg);
-  transform-origin: 65% 50%;
-  filter: drop-shadow(0 40px 60px rgba(20, 17, 13, .32));
-}
-
-.geraet__deckel {
-  background: var(--ink);
-  border: 1px solid var(--line-dark);
-  border-radius: var(--r-xs) var(--r-xs) 0 0;
-  padding: var(--s-1) var(--s-1) var(--s-2);
 }
 
 .geraet__schirm {
   background: var(--cream);
-  border-radius: var(--r-xs);
+  border: 1px solid var(--line);
+  border-radius: var(--r-m);
   overflow: hidden;
   aspect-ratio: 16 / 10.4;
+  /* Ein Schatten haelt die Flaeche vom Grund getrennt. Er ersetzt das
+     Gehaeuse nicht — er verhindert nur, dass die Aufnahme auf --cream
+     wie ein Ausschnitt der Seite selbst wirkt. */
+  box-shadow: 0 24px 48px rgba(20, 17, 13, .14);
 }
 
 .geraet__schirm img {
@@ -896,59 +928,16 @@
   object-position: top left;
 }
 
-.geraet__sockel {
-  height: 13px;
-  margin: 0 -7%;
-  border-radius: 0 0 var(--r-xs) var(--r-xs);
-  background: linear-gradient(180deg, var(--geraet-rahmen), var(--geraet-sockel));
-  border: 1px solid var(--line-dark);
-  border-top: none;
-}
-
-.geraet__sockel::after {
-  content: "";
-  display: block;
-  width: 16%;
-  height: 4px;
-  margin: 2px auto 0;
-  border-radius: 0 0 var(--r-xs) var(--r-xs);
-  background: var(--geraet-kerbe);
-}
-
-/* Angeschnitten, wie im Entwurf: Es ragt unten und rechts aus dem
-   Laptop heraus und wird vom Rand der Sektion beschnitten. */
-.geraet__telefon {
-  position: absolute;
-  /* Es steht **vor** dem Laptop und ragt an der rechten unteren Ecke heraus.
-     Weiter innen verdeckte es die Arbeitsflaeche auf dem Bildschirm — und damit
-     genau das, was die Aufnahme zeigen soll. */
-  right: -7%;
-  bottom: calc(var(--s-4) * -1);
-  width: 21%;
-  min-width: 118px;
-  background: var(--ink);
-  border: 1px solid var(--line-dark);
-  border-radius: var(--r-m);
-  padding: var(--s-1);
-  transform: rotateY(-9deg) rotateX(2deg);
-  filter: drop-shadow(0 26px 40px rgba(20, 17, 13, .4));
-}
-
-.geraet__telefon .geraet__schirm {
-  border-radius: var(--r-s);
-  aspect-ratio: 9 / 17.5;
-}
-
-.geraet__telefon img { object-position: top left; }
-
 /* Der gebundene Vermerk. Lime als Flaeche mit 1px --line als Kante —
-   auf hellem Grund verlaeuft sie sonst (Farbsystem Fassung 3). */
+   auf hellem Grund verlaeuft sie sonst (Farbsystem Fassung 3).
+
+   **Neben dem Bild, nicht darauf** — Anweisung vom 13.08.2026. Bis dahin
+   lag er als `position: absolute` in der linken oberen Ecke der Aufnahme
+   und verdeckte dort deren Kopfzeile. Jetzt steht er darunter, links
+   ausgerichtet: im selben Blick, ohne etwas zu verdecken. */
 .geraet__marke {
-  position: absolute;
-  top: var(--s-2);
-  left: var(--s-2);
-  z-index: 2;
-  margin: 0;
+  display: inline-block;
+  margin: var(--s-2) 0 0;
   padding: var(--s-1) var(--s-2);
   border: 1px solid var(--line);
   border-radius: var(--r-pill);

@@ -2547,36 +2547,59 @@ Preishinweis"*. Er steht jetzt darunter; auf allen anderen Seiten bleibt er, wo 
 Auftrag in `PROMPT_NEUE_SESSION_VERTRAUEN.md`. Grundlage `SARTU_ENTSCHEIDUNGEN_OFFEN.md` §4b
 und §4c, beide Rang 1.
 
-### Block 1 ist **nicht** ausgeführt — die Datei fehlt
+### Block 1 — die Datei fehlt, der Rahmen ist trotzdem gelöscht
 
-`public/assets/bild/geraet-aufmacher.webp` liegt nicht im Repository. Der Auftrag sagt dazu:
-*„Liegt die Datei nicht im Repo, überspring diesen Block und melde es — erfinde kein
-Ersatzbild."* Genau das ist geschehen.
+`public/assets/bild/geraet-aufmacher.webp` liegt **nicht** im Repository. Nachgesucht am
+13.08.2026 über `git rev-list --all --objects` und `git log --all --diff-filter=A`: Die Datei
+existiert in keinem Commit, keinem Branch und keiner Objektdatenbank. Das einzige verwandte
+Artefakt ist `design/geraet.html`, der CSS-Rahmen vom 10.08.2026.
 
-**Der in CSS gezeichnete Laptop steht deshalb unverändert.** Er ist nicht tot: `.geraet__deckel`,
-das Telefon und das Schattenwerk werden weiter benutzt und wurden nicht angefasst. Ein
-gelöschter CSS-Block ohne Ersatzbild hätte den Aufmacher leer gelassen.
+**Die erste Fassung dieses Abschnitts sagte, der CSS-Block bleibe deshalb stehen.** Das war
+die falsche Auslegung. Der Auftrag verlangt beides — überspringen *und* löschen — und ist auf
+Rückfrage zweimal bestätigt worden. Eine bestätigte Anweisung wird ausgeführt.
 
-| Was zu tun ist | Womit es geprüft wird |
-|---|---|
-| Aufnahme des Kundenbereichs in ein Mockup-Werkzeug geben, Ergebnis als `geraet-aufmacher.webp` ablegen | Danach `.geraet__deckel`, `.geraet__telefon`, `.geraet__sockel` und `.geraet__laptop` aus `website.css` entfernen und die fünf Breiten erneut messen |
+**Gelöscht sind:** `.geraet__laptop`, `.geraet__deckel`, `.geraet__sockel` samt Kerbe,
+`.geraet__telefon` mit seinen zwei Folgeregeln — dazu die drei Werte `--geraet-rahmen`,
+`--geraet-sockel` und `--geraet-kerbe` in beiden Fassungen von `tokens.css`, die es nur für
+sie gab.
 
-**Nachgeprüft am 13.08.2026:** Die Datei existiert in **keinem** Commit, **keinem** Branch und
-keiner Objektdatenbank dieses Repositorys — gesucht über `git rev-list --all --objects` und
-`git log --all --diff-filter=A`. Das einzige verwandte Artefakt ist `design/geraet.html`, der
-CSS-Rahmen aus der Sitzung vom 10.08.2026.
+**Nicht gelöscht und nicht ersetzt:** die **echte Aufnahme** des eigenen Kundenbereichs. Sie
+liegt seit dem 10.08.2026 im Repository und ist der Kern von §4b — „auf dem Bildschirm eine
+echte Aufnahme des eigenen Kundenbereichs". Sie steht jetzt ohne gezeichnetes Gehäuse in
+einer schlichten Fläche mit Kante und Schatten. **Erfunden ist nichts**; das Verbot des
+Auftrags ist eingehalten. Es fehlt allein der Rahmen um ein Bild, das es gibt.
 
-**Der Block bleibt nicht bloß gemeldet, sondern festgenagelt.**
-`MarkupTest::testDerGeraeterahmenWirdGetauschtSobaldDasMockupVorliegt` prüft beide Zustände:
+Der Vermerk `Musteransicht` steht jetzt **unter** dem Bild statt darauf — der Auftrag verlangt
+„neben dem Bild, nicht darauf". Gemessen bei 1440 px: Bildfläche endet bei y = 653, der
+Vermerk beginnt bei y = 665.
 
-| Zustand | Was der Test verlangt |
-|---|---|
-| Datei fehlt (**jetzt**) | Der Rahmen steht **vollständig** — vier Regelblöcke und der Vermerk `Musteransicht`. Ein halb gelöschter Block zeigt eine Lücke und ist schlechter als beides |
-| Datei liegt vor | `.geraet__laptop`, `.geraet__deckel`, `.geraet__sockel` und `.geraet__telefon` sind aus `website.css` **entfernt**, und `aufmacherbild.php` bindet das Mockup ein |
+`MarkupTest::testDerGezeichneteGeraeterahmenIstGeloescht` hält alle fünf Punkte fest, damit
+weder der Rahmen zurückkehrt noch das Mockup vergessen wird, wenn es kommt.
 
-Beide Richtungen sind ausgeführt worden, nicht behauptet: mit der Datei schlägt der Test fehl
-und nennt die erste Regel, die noch dasteht. Wer das Mockup ablegt, kann den Tausch damit
-nicht vergessen — er bricht die Testreihe, bis er gemacht ist.
+### Was die Löschung sichtbar gemacht hat — zwei Funde
+
+Der gezeichnete Rahmen hatte zwei Abweichungen verdeckt. Er ragte über `margin: 0 -7%` und ein
+Telefon bei `right: -7%` aus seiner Spalte heraus; die Fläche sah dadurch richtig aus, obwohl
+die Spalte es nicht war.
+
+| Fund | War | Ist |
+|---|---|---|
+| **Die Bildspalte war ein Viertel zu schmal.** `grid-template-columns: 55fr 45fr` ohne `minmax(0, …)`: Ein Rasterelement hat `min-width: auto` und schrumpft nicht unter die Mindestbreite seines Inhalts — die grosse H1 zog Platz aus der rechten Spalte | **343 px** bei 1440 px | **459 px**, wie `design/startseite.html` Zeile 204 es setzt |
+| **Der Schriftgrad der H1 hing am Fenster statt an der Spalte.** Mit der korrigierten Spalte brach sie vierzeilig um, „zum" allein auf einer Zeile | `--fs-h1`, eine `vw`-Kurve | `clamp(40px, min(11cqw, 8.6vh), 80px)` an einem `container-type: inline-size`, wie Zeile 211 und 230 des Entwurfs |
+
+Der Entwurf begründet den zweiten Punkt selbst und nennt dabei zwei früher gescheiterte
+`vw`-Formeln: *„die Spalte wächst stückweise, weil `--wrap` und `--gut` eigene Knickpunkte
+haben. Eine gerade vw-Kurve kann ihr nicht folgen."*
+
+**Gemessen nach der Änderung** — H1 dreizeilig auf jeder geprüften Breite:
+
+| Breite | Schriftgrad | Zeilen |
+|---|---|---|
+| 1920 · 1440 px | 61,7 px | 3 |
+| 1280 px | 62,3 px | 3 |
+| 1024 px | 54,1 px | 3 |
+| 900 · 768 px | 57,6 · 49,2 px | 3 |
+| 390 px | 40,0 px | 3 |
 
 ### Was von Block 1 ausgeführt wurde: der Überlauf
 
@@ -2661,7 +2684,7 @@ umgeschrieben und nennt §4c samt dem Satz, der die alte Bauform verwirft.
 
 | # | Punkt | Womit es zu prüfen ist |
 |---|---|---|
-| 1 | **Block 1 ist nicht ausgeführt.** `geraet-aufmacher.webp` fehlt im Repository | Datei ablegen, dann den CSS-Block entfernen und die fünf Breiten neu messen |
+| 1 | **Das Mockup fehlt weiterhin.** Der gezeichnete Rahmen ist gelöscht; im Aufmacher steht die echte Aufnahme des Kundenbereichs ohne Gehäuse. Wie das gerenderte Mockup an derselben Stelle wirkt, ist damit **nicht** beurteilt — und ob der Aufmacher ohne jedes Gerät die Wirkung des abgenommenen Entwurfs erreicht, ist eine Betreiberfrage, keine Messung | Datei unter `public/assets/bild/geraet-aufmacher.webp` ablegen — `aufmacherbild.php` nimmt sie von selbst — und die fünf Breiten neu messen |
 | 2 | **Die Anweisung „häng sie in die Navigation" ist nicht wörtlich umgesetzt.** §2 bindet sechs Navigationspunkte, §2a fünf Fußspalten mit gebundenem Inhalt — und die Kopfzeile trägt gemessen keinen siebten Punkt, ohne dass §1 wieder verletzt wäre. Die Verweise stehen deshalb auf `/leistungen` | Betreiberentscheidung: §2 oder §2a ändern, oder es bei `/leistungen` belassen |
 | 3 | **Der Upload ist nicht über das Adminformular ausgeführt.** Geprüft ist der Dienst über PHPUnit und ein Aufruf als `www-data`; das Formular selbst wurde nicht im Browser abgeschickt | Im Adminbereich anmelden, Bild hochladen, Startseite ansehen |
 | 4 | **Das Gründerbild in der Entwicklungsdatenbank ist eine Attrappe** und liegt bewusst **nicht** im Repository. §5 verbietet einen Platzhalter, der wie ein Foto wirkt — dieses sieht wie eine Attrappe aus und heißt so | Echtes Foto vom Betreiber, dann austauschen |

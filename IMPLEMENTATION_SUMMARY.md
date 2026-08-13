@@ -554,12 +554,26 @@ vergisst.
 | 1 | `10_WEBSITE_SARTU.md` §2: „Desktop **ab 1024 px**" mit sechs Punkten | Mobilmenü **ab 1180 px** | Die Kopfzeile hat 1176 px Eigenbreite und lief von 941 bis 1183 px über; §1 verbietet den Überlauf. Dieselbe Datei erlaubt zwei Absätze höher ausdrücklich, dass „das Mobilmenü früher greift" — und der abgenommene Entwurf setzt exakt 1180 px |
 | 2 | `CLAUDE_SARTU_WEBSITE_LASTENHEFT_BAUFINAL.md` §5a: „Keine Zahlen, **keine Termine**" | `Nächster Projektstart ab <Monat Jahr>` | Betreiberanweisung vom 13.08.2026. Die Datei ist Begründungsarchiv, keine Bauvorlage; `spezifikation/` bindet dort keinen Wortlaut. Gebaut ist ein `DATE`-Feld und die Anzeige nur des **Monats** — ein Starttermin für die Arbeit, keine Zusage über die Fertigstellung |
 
-### D.5 Ein Auftragsteil ist **nicht** ausgeführt
+### D.5 Block 1 — die Datei fehlt, der Rahmen ist gelöscht
 
-**Block 1 — das gerenderte Gerätebild.** `public/assets/bild/geraet-aufmacher.webp` liegt
-nicht im Repository. Der Auftrag regelt den Fall selbst: überspringen und melden, kein
-Ersatzbild erfinden. Der in CSS gezeichnete Laptop steht deshalb unverändert und wurde nicht
-angefasst — ein gelöschter CSS-Block ohne Ersatzbild hätte den Aufmacher leer gelassen.
+`public/assets/bild/geraet-aufmacher.webp` liegt nicht im Repository und hat nie darin
+gelegen — nachgesucht über `git rev-list --all --objects`. Der Auftrag verlangt zweierlei:
+überspringen und melden, **und** den toten CSS-Block löschen statt liegen zu lassen. Auf
+Rückfrage ist er zweimal bestätigt worden.
+
+**Gelöscht sind** `.geraet__laptop`, `.geraet__deckel`, `.geraet__sockel` samt Kerbe und
+`.geraet__telefon` mit Folgeregeln, dazu die drei `--geraet-*`-Werte in beiden Fassungen von
+`tokens.css`. **Nicht ersetzt ist das Bild:** Im Aufmacher steht weiter die echte Aufnahme des
+eigenen Kundenbereichs — der Kern von §4b —, jetzt in einer schlichten Fläche mit Kante und
+Schatten. Der Vermerk `Musteransicht` steht **unter** dem Bild statt darauf, wie angewiesen.
+
+**Die Löschung hat zwei Abweichungen freigelegt**, die der Rahmen verdeckt hatte, weil er über
+`margin: 0 -7%` aus seiner Spalte ragte:
+
+| Fund | War | Ist |
+|---|---|---|
+| Bildspalte ohne `minmax(0, …)` — die H1 zog Platz aus ihr | 343 px bei 1440 px | **459 px**, wie der Entwurf sie setzt |
+| H1-Schriftgrad am Fenster statt an der Spalte | vierzeilig, „zum" allein | **dreizeilig auf sieben geprüften Breiten** |
 
 **Der Überlauf gehört nicht zum Bild** und ist behoben und gemessen: fünf geforderte Breiten
 plus zehn weitere zwischen 941 und 1240 px, alle ohne waagerechten Überlauf.
