@@ -433,6 +433,46 @@ abgelegt und erneuert, wenn sich der Kundenbereich sichtbar ändert.
 
 ---
 
+## 4c. Betreiberdaten statt Sperren — **ENTSCHIEDEN 10.08.2026**
+
+**Zwei Sperren wurden zu wörtlich gebaut.** §1 verbietet, eine Geschäftsadresse zu **erfinden**;
+§5 verbietet einen leeren Rahmen an einer Vertrauensstelle. Daraus wurde im Code, das Feld gar
+nicht erst zu bauen — `app/Strukturdaten.php` begründet das damit, eine ungenutzte Methode sei
+„eine Zeile Arbeit vom Verstoß entfernt".
+
+**Das ist übervorsichtig und kostet mehr, als es schützt.** Die Folge war: Der Betreiber trägt
+die Adresse ein, und trotzdem passiert nichts, weil es die Ausgabe nicht gibt.
+
+| Entschieden | |
+|---|---|
+| **Die Sperre wird datengesteuert, nicht codegesteuert** | Feld leer → nichts wird ausgeliefert. Feld gefüllt → alles läuft. Genau wie die Startsperre es ohnehin macht |
+| **`LocalBusiness` wird gebaut** | ausgeliefert **nur**, wenn Straße, PLZ und Ort in `operator_settings` gefüllt sind. Sonst weiter `Organization` ohne Adressfeld |
+| **Gründerangaben kommen in die Betreiberdaten** | Name, ein Absatz Begründung und ein Bild — im Adminbereich einzutragen und hochzuladen |
+| **Sektion „Wer dahintersteckt" und die Seite dazu werden gebaut** | sichtbar **nur**, wenn Name, Text und Bild vorliegen. Sonst entfällt die Sektion wie bisher |
+
+### Was der Gründerabschnitt ist — und was nicht
+
+**Kein Lebenslauf.** Kein Werdegang, keine Stationen, keine Titel. **Ein Absatz, warum es SARTU
+gibt** — welche Beobachtung dazu geführt hat, dieses Angebot zu bauen. Dazu Name und Bild.
+
+> **Warum das genügt.** Der Vertrauensanker ist, dass eine benennbare Person verantwortlich ist,
+> nicht wie ihr Lebenslauf aussieht. Ein Lebenslauf auf einer Agenturstartseite liest ohnehin
+> niemand; ein Grund schon.
+
+**Was weiterhin gesperrt bleibt:** Musterprojekte und Referenzen (§5, unverändert **offen**).
+Dort ist das Bild der Beleg, und einen Beleg ersetzt kein Feld.
+
+### Was das an der Bewertung ändert — und was nicht
+
+Eine externe Prüfung vom 10.08.2026 gab **4/10 bei Conversion und Vertrauen** bei 8/10 fast
+überall sonst. Die Ursache ist nicht die Gestaltung und nicht die Argumentation: **SARTU verkauft
+persönliche Verantwortung und bleibt anonym.**
+
+**Diese Entscheidung räumt die technische Hürde weg. Sie ersetzt nicht die Inhalte** — Foto, Name,
+Begründung und später zwei Demoprojekte kommen vom Betreiber, nicht aus dem Bau.
+
+---
+
 ## 5. Bildmaterial und Demoprojekte — **OFFEN**
 
 | Punkt | Stand |
@@ -795,3 +835,5 @@ ausgeschrieben sind.
 | 09.08.2026 | **Kein lexoffice, kein sevDesk.** Rechnungsausgang im Portal, Export für den Steuerberater (§4a) | Betreiber |
 | 09.08.2026 | **Zwei zusätzliche Composer-Pakete erlaubt** — ZUGFeRD-Erzeuger und HTML-nach-PDF (§4a) | Betreiber |
 | 10.08.2026 | **Aufmacherbild: Gerät in Schrägstellung mit echter Aufnahme des Kundenbereichs**, Rahmen selbst gezeichnet (§4b) | Betreiber |
+| 10.08.2026 | **Sperren datengesteuert statt codegesteuert:** `LocalBusiness` und Gründerabschnitt werden gebaut, ausgeliefert nur bei gefüllten Betreiberdaten (§4c) | Betreiber |
+| 10.08.2026 | **Gründerabschnitt ist kein Lebenslauf**, sondern Name, Bild und ein Absatz zur Gründung (§4c) | Betreiber |
