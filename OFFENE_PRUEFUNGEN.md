@@ -2893,3 +2893,108 @@ System"*. Die Leiste sieht der Kunde — und sie steht seit heute als Aufnahme a
 | 4 | **Die Aufnahmen zeigen eine Entwicklungsdatenbank.** Ein Projekt, drei Aufgaben, ein Angebot. Nach dem ersten echten Projekt neu aufnehmen — weiterhin mit Musterdaten | Erneut aufnehmen |
 | 5 | **Der Adminbereich ist nach der Leistenänderung nur auf Antwortstatus geprüft**, nicht Bild für Bild | Anmelden und durchsehen |
 | 6 | **Die Texte sind unverändert.** Der Auftrag lautete „nur die Texte solltest du neu denken" — übertragen ist bisher alles **außer** den Texten. Der Textdurchgang steht aus | Mit dem Texter-Skill je Sektion |
+
+---
+
+## 13.08.2026 — die Prüfung der Vorgaben: nicht sie waren zu eng, sondern eine Zahl fehlte
+
+Der Auftrag lautete, die Preissektion weiche vom Entwurf ab, das liege an zu festgefahrenen
+Vorgaben in den MD-Dateien, und die seien zu löschen oder ins Archiv zu schieben — **„prüfe das
+genauestens"**. Geprüft wurde vor jeder Änderung. **Es ist nichts gelöscht und nichts archiviert
+worden**, weil die Prüfung das Gegenteil ergibt.
+
+### Was die Vorgaben zur Preissektion sagen — und was gebaut war
+
+`spezifikation/10_WEBSITE_SARTU.md` Sektion 4, wörtlich:
+
+> **Darstellung: alle vier Stufen nebeneinander.** Sonderprojekt stand als Querblock **unter**
+> den drei Paketen, obwohl §4 es als vierte Stufe mit eigenem Knopf führt.
+
+Gebaut waren drei Karten und darunter ein Querblock — **exakt der Zustand, den die Vorgabe als
+Fehler benennt.** Die Vorgabe war nicht zu eng, sie war nicht umgesetzt.
+
+### Die eigentliche Ursache: ein Wert, der beim Übertragen hängenblieb
+
+`spezifikation/07_MARKE_UND_GESTALTUNG.md`, Abschnitt „Satzspiegel — fließend, nicht fest":
+
+| | Vorgabe | war in `tokens.css` |
+|---|---|---|
+| `--wrap` | `clamp(1380px, 90vw, 1800px)` | `1180px` |
+| H1 | `clamp(34px, min(11cqw, 8.6vh), 104px)` | `clamp(40px, …, 80px)` |
+| H2 | `clamp(27px, calc(3vw − 6px), 54px)` | `clamp(31px, 4.3vw, 50px)` |
+
+Die Vorgabe argumentiert an Ort und Stelle **gegen** genau den Wert, der im Code stand: „Die
+Seite lief auf `--wrap: 1180` — abzüglich der Ränder blieben 1068 px Inhalt und damit unter dem
+üblichen Band."
+
+**Drei Abweichungen hingen an dieser einen Zahl** und waren einzeln als Layoutfehler behandelt
+worden:
+
+| Symptom | bisherige Behandlung | tatsächliche Ursache |
+|---|---|---|
+| Kopfzeile lief zwischen 941 und 1183 px über | Navigation verkleinert, Abstandsstufe gesenkt, Zwischenraum auf 0 | die Bahn wuchs nicht mit, `--gut` schon |
+| vierte Preisstufe passte nicht in die Zeile | als Querblock darunter gebaut | 1068 px Inhalt tragen keine vier Karten |
+| Überschriften deckelten früh | als gewollt hingenommen | die Spannen sind an den fließenden Satzspiegel gerechnet |
+
+Gemessen nach der Korrektur: **302 px je Karte bei 1440 px, 461 px bei 1024 px — dieselben
+Werte wie im abgenommenen Entwurf**, auf 1 px genau.
+
+### Warum nichts archiviert wurde
+
+Was in `spezifikation/` steht, ist zu drei Vierteln **kein Layout**: die Beträge (1.490 / 3.900 /
+7.900 / ab 12.500 €, die Monatssätze, das erste Jahr), die Pflichthinweise, das Verbot der
+Rankingzusage, die Kennzeichnungspflicht nach Art. 50 Abs. 4 KI-VO, das Datenmodell und die 100
+Testfälle. Ein Löschlauf hätte den Satz mitgenommen, der den beanstandeten Zustand behebt.
+
+**Wo die Dateien wirklich Layout festschreiben, stimmen sie mit dem abgenommenen Entwurf
+überein** — Sektionsfolge, Bauform je Sektion, dunkle Flächen, Zeitstrahl, Akkordeon. Es wurde
+Zeile für Zeile verglichen; eine Abweichung zwischen Vorgabe und Entwurf ist nicht gefunden
+worden.
+
+### Was am Wortlaut geändert wurde
+
+Fünf Stellen der Startseite trugen Innensprache oder Anordnungsanweisungen:
+
+| Stelle | vorher | warum es wegmusste |
+|---|---|---|
+| Sektion 2, Abgrenzung | „Kein Terminkalender-Pingpong." | Jargon aus der internen Verständigung |
+| Sektion 2, Antwort | „Was dort geht, steht unten — vollständig." | `unten` beschreibt die Anordnung und stimmt einspaltig nicht mehr; `vollständig` war die **Begründung**, die Liste nicht zu kürzen |
+| Sektion 3, Schritt 4 | „KI hilft, geprüft und freigegeben wird von uns." | Aussage bleibt Pflicht (`06_RECHT.md`), der Satzbau klang wie eine Notiz |
+| Sektion 4, Vorzeile | „Eine Empfehlung. Vier mögliche Ergebnisse." | wiederholte die Überschrift; stand als einzige **unter** ihr |
+| Sektion 10 | „Danach prüfen wir persönlich." | `persönlich` heißt in der Branche **Termin** — die Seite verspricht drei Sektionen höher das Gegenteil |
+
+Von der Preiskarte heruntergenommen: die `Umfang`-Zeile (wiederholte Wort für Wort die ersten
+beiden Listenpunkte), `Erstes Jahr` (dritte Zahl in einer Karte, die eine Zahl vergleichbar
+machen soll — sie steht vollständig in der Tabelle auf `/preise`) und der Lieferkorridor
+(Sektion 4 fordert ihn nicht).
+
+### Ein Prüfmittel war kaputt, und das war der schwerwiegendere Fund
+
+Der Entwicklungsserver lief als `php -S … public/index.php`. Damit beantwortet **die Anwendung**
+jede Anfrage, auch `/assets/css/*` — und die Anwendung kennt keine statischen Dateien. Jede
+Stilvorlage kam mit **404**. Gemessen und fotografiert wurde also eine Seite **ohne CSS**.
+
+Aufgefallen ist es, weil ein Bild mit `width: 100%` in der Messung 1280 px breit war. Der
+Server läuft jetzt über eine Weiche, die vorhandene Dateien unter `/public` durchreicht — wie
+Apache mit der `.htaccess`. Die beiden Fälle aus `SecurityHeadersTest`, die einen laufenden
+Webserver brauchen (Fall 49 und die Gegenprobe), **laufen dadurch erstmals in dieser Umgebung
+wirklich** statt zu scheitern.
+
+### Gemessen
+
+| | |
+|---|---|
+| Waagerechter Überlauf | **1920 · 1440 · 1280 · 1024 · 390 px, alle sauber** — und dasselbe für elf weitere öffentliche Seiten |
+| Preiskarten | 4 Karten in einem Raster, 302 px bei 1440, 461 px bei 1024 — deckungsgleich mit dem Entwurf |
+| Tests | **377 grün, 11.396 Zusicherungen**, darunter zwei neue: `testDerSatzspiegelIstFliessend` und `testDieVierPreisstufenStehenInEinerReihe` |
+| Datenbank | **MariaDB 11.4 stand in dieser Umgebung nicht zur Verfügung; gelaufen ist alles gegen MariaDB 10.11.** Das ist innerhalb der Vorgabe (`MySQL 8 / MariaDB 10.6+`), aber **nicht** die Fassung, gegen die zuletzt geprüft wurde. Gegen MySQL 8.4 ist in diesem Durchgang **nicht** geprüft worden |
+| `migrate.php verify` | **nicht aussagekräftig.** Die Arbeitsdatenbank dieser Umgebung ist leer — der Befehl bestätigt die Prüfsummen von null eingespielten Migrationen. Die Migrationen selbst laufen im Testaufbau und sind dort grün |
+
+### Ungeprüft
+
+| # | Punkt | Womit es zu prüfen ist |
+|---|---|---|
+| 1 | **Der Anwendungsbereich ist mit dem neuen Satzspiegel nicht Bild für Bild gesehen.** Er folgt `--wrap` nicht mehr, sondern den 1320 px aus `design/portalkonzept.html` — geprüft ist die Regel, nicht ihre Wirkung auf jeder Seite | Anmelden und durchsehen |
+| 2 | **Die Aufnahmen des Kundenbereichs auf der Startseite sind vor der Satzspiegeländerung entstanden.** Sie zeigen den Bereich mit dem alten Inhaltsmaß | Nach Punkt 1 neu aufnehmen |
+| 3 | **Der Textdurchgang ist begonnen, nicht abgeschlossen.** Geändert sind die fünf Stellen oben; die übrigen Sektionen und die Unterseiten sind unverändert | Mit dem Texter-Skill je Sektion, Prüfbericht je Seite |
+| 4 | **Zwei Fassungen der Preistexte sind nicht gegeneinander geprüft:** die Karte auf der Startseite und die Tabelle auf `/preise` nennen dieselben Zahlen, aber nicht dieselben Merkmale | `/preise` gegen Sektion 4 lesen |

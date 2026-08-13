@@ -495,7 +495,7 @@
   /* `min(…, 8.6vh)` haelt die Zeile auf niedrigen Fenstern klein genug, dass der
      Anschnitt der naechsten Sektion sichtbar bleibt (§5 Sektion 1). Die drei Werte
      stehen so im abgenommenen Entwurf, Zeile 230. */
-  font-size: clamp(40px, min(11cqw, 8.6vh), 80px);
+  font-size: clamp(34px, min(11cqw, 8.6vh), 104px);
   line-height: var(--lh-head);
   letter-spacing: var(--ls-h1);
   font-weight: var(--fw-head);
@@ -692,51 +692,156 @@
 
 /* ---- Preisstufen ----------------------------------------- */
 
+/* VIER Stufen nebeneinander — `10_WEBSITE_SARTU.md` Sektion 4 wortwoertlich.
+   Gebaut waren drei Karten und darunter ein Querblock; genau den Zustand
+   nennt die Vorgabe als Fehler. Moeglich wurde die vierte Spalte durch den
+   fliessenden Satzspiegel: bei --wrap 1800 sind es 407 px je Karte, bei
+   1380 noch 302. Unter 1180 px greift der Zweisatz, unter 880 die
+   Einzelspalte. */
 .preisstufen {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: var(--s-4);
-  margin: var(--s-5) 0 var(--s-4);
-  align-items: start;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: var(--s-3);
+  margin: calc(var(--s-6) + 18px) 0 var(--s-4);
+  align-items: stretch;
 }
 
-.stufe,
-.sonderprojekt {
+.stufe {
+  position: relative;
   background: var(--paper);
   border: 1px solid var(--line);
-  border-radius: var(--r-m);
-  padding: var(--s-4);
+  border-radius: var(--r-l);
+  padding: clamp(22px, 1.9vw, 30px);
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-2);
 }
 
+/* Die Empfehlung: dunkel und gehoben, auf ihrem Platz in der Preisleiter.
+   `02_PREISE_UND_ZAHLUNG.md` verlangt fuer Platzhirsch die groesste Flaeche,
+   Sektion 4 vier gleiche Spalten — der Widerspruch ist dort als offen
+   vermerkt. Der negative Aussenabstand loest ihn ohne Entscheidung: gleiche
+   Spaltenbreite, aber sichtbar mehr Flaeche. */
 .stufe--empfehlung {
+  background: var(--ink);
   border-color: var(--ink);
-  box-shadow: var(--shadow-soft);
+  color: var(--paper-dark, #e9e3d6);
+  box-shadow: var(--shadow-lift);
+  margin: -40px 0;
+  padding-top: calc(clamp(24px, 2.6vw, 34px) + 30px);
+  padding-bottom: calc(clamp(24px, 2.6vw, 34px) + 30px);
 }
 
-.stufe h3,
-.sonderprojekt h3 { margin: 0 0 var(--s-2); font-size: var(--fs-h3); }
+.stufe--empfehlung h3,
+.stufe--empfehlung .preis { color: #f8f3e8; }
+.stufe--empfehlung .stufe__satz { color: #cbc4b6; }
+.stufe--empfehlung .stufe__kicker { color: var(--label-dark); }
+.stufe--empfehlung .preis small { color: #c3bcae; }
+.stufe--empfehlung .stufe__liste,
+.stufe--empfehlung .stufe__liste li { border-color: #332d24; }
+.stufe--empfehlung .stufe__liste li { color: #ded7c9; }
+.stufe--empfehlung .stufe__liste li::before { background: var(--lime); }
+
+/* Das Badge sitzt auf der Oberkante, nicht in der Karte — sonst kostet es
+   eine Zeile, die die anderen drei nicht haben, und die Namen stehen
+   versetzt. */
+.marke--empfehlung {
+  position: absolute;
+  top: -15px;
+  left: 50%;
+  transform: translateX(-50%);
+  white-space: nowrap;
+  margin: 0;
+  padding: 8px 20px;
+  border-radius: var(--r-pill);
+  background: var(--lime);
+  color: var(--ink);
+  border: 1px solid var(--line);
+  font-family: var(--font-mono);
+  font-size: var(--fs-mono);
+  letter-spacing: var(--ls-mono);
+  text-transform: uppercase;
+}
+
+.stufe h3 { margin: 0; font-size: var(--fs-h3); }
+
+.stufe__kicker {
+  margin: 0;
+  font-family: var(--font-mono);
+  font-size: var(--fs-mono);
+  letter-spacing: var(--ls-mono);
+  text-transform: uppercase;
+  color: var(--label);
+}
 
 .preis {
+  display: flex;
+  align-items: baseline;
+  gap: 9px;
+  flex-wrap: wrap;
   font-size: var(--fs-price);
   line-height: var(--lh-head);
   letter-spacing: var(--ls-head);
   font-weight: var(--fw-head);
+  font-variant-numeric: tabular-nums;
   margin: 0;
 }
 
-.preis__zusatz { margin: 0; }
-.preis__jahr { margin: 0 0 var(--s-3); color: var(--muted); }
-.umfang { font-weight: var(--fw-head); }
+.preis small {
+  font-size: var(--fs-small);
+  font-weight: 500;
+  letter-spacing: 0;
+  color: var(--muted);
+}
 
-/* Abgesetzt, nicht abgeschwaecht (UX-Audit 28.07.2026, Vorgabe 1):
-   volle Textfarbe, durchgezogener Rahmen, gleiche Schriftgroesse
-   fuer den Betrag. Anders ist nur die Form — eine Zeile statt einer
-   Karte. */
-.sonderprojekt {
-  margin-bottom: var(--s-4);
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: var(--s-3) var(--s-4);
+.stufe__satz { margin: 0; color: var(--muted); font-size: var(--fs-copy); }
+
+/* Bei drei Karten schob `margin-top:auto` die Liste an den Fuss und alle
+   Listen standen auf einer Linie. Bei vier Karten unterschiedlicher Laenge
+   riss dasselbe auto ein Loch in die Mitte der kuerzeren. Jetzt folgt die
+   Liste dem Text, und der KNOPF haelt die Grundlinie. */
+.stufe__liste {
+  list-style: none;
+  border-top: 1px solid var(--line);
+  margin: 0;
+  padding: 2px 0 0;
+}
+
+.stufe__liste li {
+  padding: 12px 0 12px 24px;
+  border-bottom: 1px solid var(--line);
+  font-size: var(--fs-small);
+  position: relative;
+}
+
+.stufe__liste li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 21px;
+  width: 9px;
+  height: 9px;
+  border-radius: var(--r-xs);
+  background: var(--label);
+}
+
+.stufe__liste li:last-child { border-bottom: none; }
+
+.stufe__knopf { margin: auto 0 0; }
+.stufe__knopf .knopf { width: 100%; justify-content: center; }
+
+.stufe__pflicht {
+  margin: 11px 0 0;
+  font-size: var(--fs-small);
+  color: var(--muted);
+}
+
+/* Sonderprojekt: vierte Karte im selben Raster, aber sichtbar KEIN Paket —
+   gestrichelte Kante statt Papierflaeche. Sektion 4 gibt ihm einen eigenen
+   Knopf und eine Pflichtzeile; beide bleiben. */
+.stufe--sonder {
+  background: transparent;
+  border-style: dashed;
 }
 
 .preisrahmen {
@@ -992,6 +1097,12 @@
   .hauptnavigation { display: none; }
   .menue { display: block; margin-left: auto; }
   .seitenkopf__handlung { display: none; }
+  /* Vier Karten brauchen 302 px je Spalte; darunter der Zweisatz
+     (`10_WEBSITE_SARTU.md` Sektion 4). Der gehobene Platzhirsch verliert
+     dabei seinen negativen Aussenabstand — sonst haengt er zwischen den
+     Reihen statt neben seinem Nachbarn. */
+  .preisstufen { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .stufe--empfehlung { margin: 0; }
 }
 
 @media (max-width: 900px) {
@@ -1004,10 +1115,9 @@
 @media (max-width: 860px) {
   /* Bild ueber Text, nicht daneben. Die Reihenfolge bleibt: das Gesicht zuerst. */
   .gruender__reihe { grid-template-columns: 1fr; }
-  .preisstufen { grid-template-columns: 1fr; }
+  .preisstufen { grid-template-columns: 1fr; margin-top: var(--s-5); }
   .dreispalten { grid-template-columns: 1fr; }
   .zweispalten { grid-template-columns: 1fr; }
-  .sonderprojekt { grid-template-columns: 1fr; }
   .seitenfuss__spalten { grid-template-columns: 1fr 1fr; }
   /* Mobil: Platzhirsch zuerst, dann Wachstum, Start — §5 Sektion 4. */
   .preisstufen .stufe--empfehlung { order: -1; }
@@ -1419,27 +1529,31 @@ main a:not(.knopf):not(.textlink):not(.seitenmarke):not(.sprungmarke):focus-visi
   border-color: var(--ink);
 }
 
-.stufe .hakenliste li::before { transition: background var(--t-base) var(--ease); }
-.stufe:hover .hakenliste li::before { background: var(--lime); }
+.stufe .stufe__liste li::before { transition: background var(--t-base) var(--ease); }
+.stufe:hover .stufe__liste li::before { background: var(--lime); }
+
+/* Die Empfehlung hebt sich staerker als ihre Nachbarn — sie liegt schon
+   erhoeht, ein gleicher Hub waere unter dem Schatten nicht zu sehen. Der
+   Lime-Ring ist Flaeche, keine Schrift. */
+.stufe--empfehlung:hover {
+  transform: translateY(-5px) scale(1.012);
+  box-shadow: 0 0 0 2.5px var(--lime), 0 46px 96px -30px rgba(20, 17, 13, .55);
+}
+
+/* Beim Ueberfahren wird aus der gestrichelten eine durchgezogene Kante —
+   der Unterschied bleibt sichtbar, die Karte wirkt aber nicht ausgegraut. */
+.stufe--sonder:hover { border-style: solid; }
 
 /* Die Punkte der Hauptnavigation bekommen beim Ueberfahren eine ruhige Flaeche
    statt einer Linie — `design/startseite.html` Zeile 162 und 164.
 
-   **Der Innenabstand wird aus dem Zwischenraum genommen, nicht dazugelegt.**
-   Der Entwurf kann sich beides leisten: Seine Bahn ist 1380 bis 1800 px breit,
-   unsere ist 1180 (tokens.css `--wrap`). Mit `gap: var(--s-2)` **und**
-   Innenabstand waere die Zeile 1201 px breit geworden und bei 1280 px um 22 px
-   uebergelaufen — gemessen am 13.08.2026.
-
-   Mit `gap: 0` und 6 px Innenabstand je Seite bleibt der Abstand zwischen zwei
-   Woertern bei 12 px, also unveraendert; die Zeile waechst um 12 px statt um
-   144. Die Flaechen stossen aneinander, was nicht auffaellt: Es ist immer nur
-   eine eingefaerbt. */
-.hauptnavigation ul { gap: 0; }
-
+   Zwischenraum **und** Innenabstand, wie im Entwurf. Am 13.08.2026 stand hier
+   `gap: 0`, weil die Zeile mit beidem bei 1280 px um 22 px ueberlief: Die Bahn
+   trug damals feste 1180 px, der Entwurf 1380 bis 1800. Mit dem fliessenden
+   Satzspiegel aus `07_MARKE_UND_GESTALTUNG.md` ist der Grund entfallen. */
 .hauptnavigation a {
   border-radius: var(--r-pill);
-  padding: var(--s-1);
+  padding: var(--s-1) var(--s-2);
   transition: background var(--t-base) var(--ease), color var(--t-base) var(--ease);
 }
 

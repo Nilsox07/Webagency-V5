@@ -593,3 +593,47 @@ plus zehn weitere zwischen 941 und 1240 px, alle ohne waagerechten Überlauf.
 | „in einem Gespräch" an **fünf** Stellen, nicht drei | zwei davon standen in Abschnitten, die die Fundliste nicht nannte |
 | `auftragslage` stand in der Datenbank und war **im Adminbereich nicht pflegbar** | §5a verlangt „im internen Bereich gepflegt". Der Wert ließ sich nur mit einem SQL-Befehl setzen |
 | `Launchadressen` baute den Branchenpfad ein zweites Mal zusammen | jetzt `Branchenseiten::pfad()` an einer Stelle |
+
+---
+
+## E. Der Satzspiegel — 13.08.2026
+
+### E.1 Was geprüft werden sollte und was dabei herauskam
+
+Der Betreiber vermutete, die Abweichung der Preissektion vom abgenommenen Entwurf komme von zu
+starr formulierten Vorgaben, und stellte zur Entscheidung, `spezifikation/` zu löschen oder zu
+archivieren. **Die Prüfung ergab das Gegenteil, und es ist nichts gelöscht worden.**
+
+`10_WEBSITE_SARTU.md` Sektion 4 verlangt die vier Stufen **nebeneinander** und benennt den
+gebauten Querblock als Fehler. `07_MARKE_UND_GESTALTUNG.md` gibt den Satzspiegel als
+`clamp(1380px, 90vw, 1800px)` vor und argumentiert ausdrücklich gegen den festen Wert `1180px`,
+der in `tokens.css` stand. Die Vorgaben waren nicht zu eng — sie waren an drei Stellen nicht
+übertragen.
+
+Vollständige Beweisführung mit Messwerten: `OFFENE_PRUEFUNGEN.md`, Abschnitt „Die Prüfung der
+Vorgaben".
+
+### E.2 Was geändert wurde
+
+| Datei | Änderung |
+|---|---|
+| `tokens.css` (beide Kopien) | `--wrap` fließend · `--fs-h1` und `--fs-h2` auf die Spannen der Vorgabe |
+| `website.css` | Preisraster auf vier Spalten, dunkle Empfehlungskarte mit Badge, gestrichelte Sonderprojektkarte, Zweisatz unter 1180 px · Navigationsabstand zurück auf den Wert des Entwurfs |
+| `anwendung.css` | `.flaeche__inhalt` bekommt die **eigenen** 1320 px aus `design/portalkonzept.html`, statt der Website zu folgen |
+| `partials/preisstufen.php` | vier Karten in **einem** Raster; die `Umfang`-Zeile, `Erstes Jahr` und der Lieferkorridor sind von der Karte heruntergenommen |
+| `Preisstufen.php` | `fuer_wen` in `kicker` und `satz` getrennt; vier Merkmale je Stufe |
+| `Startseitentexte.php` | fünf Stellen ohne Innensprache neu gefasst |
+
+### E.3 Zwei neue Prüfungen
+
+`testDerSatzspiegelIstFliessend` hält den Tokenwert fest und zugleich, dass der
+Anwendungsbereich ihm **nicht** folgt. `testDieVierPreisstufenStehenInEinerReihe` prüft nicht
+nur vier Karten, sondern dass sie **ein** Raster teilen — ein zweiter Block darunter wäre
+derselbe Fehler mit anderem Markup.
+
+### E.4 Ein Prüfmittel war kaputt
+
+Der Entwicklungsserver reichte statische Dateien nicht durch; jede Stilvorlage kam mit 404.
+Gemessen und fotografiert wurde eine Seite ohne CSS. Die Weiche steht jetzt, und die beiden
+Fälle aus `SecurityHeadersTest`, die einen laufenden Webserver brauchen, laufen dadurch in
+dieser Umgebung erstmals wirklich.

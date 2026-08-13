@@ -295,6 +295,84 @@ final class MarkupTest extends Datenbankfall
     }
 
     /**
+     * Der Satzspiegel ist fliessend — `07_MARKE_UND_GESTALTUNG.md`, „Satzspiegel".
+     *
+     * Der feste Deckel von 1180 px stand vom Uebertragen des Entwurfs bis zum 13.08.2026 in
+     * `tokens.css` und war die Ursache von drei Abweichungen, die einzeln als Layoutfehler
+     * behandelt wurden: der Kopf lief zwischen 941 und 1183 px ueber, die vierte Preisstufe
+     * passte nicht in ihre Zeile, und die Ueberschriften deckelten frueher als vorgegeben.
+     *
+     * Dieser Test haelt den Wert fest, damit die Ursache nicht ein viertes Mal als Symptom
+     * wiederkommt.
+     */
+    public function testDerSatzspiegelIstFliessend(): void
+    {
+        $tokens = (string) file_get_contents(SARTU_WURZEL . '/public/assets/css/tokens.css');
+
+        $this->assertMatchesRegularExpression(
+            '#--wrap:\s*clamp\(1380px,\s*90vw,\s*1800px\)#',
+            $tokens,
+            'tokens.css setzt --wrap nicht auf den Wert aus 07_MARKE_UND_GESTALTUNG.md. '
+            . 'Ein fester Deckel laesst die Seite jenseits davon nur noch Rand gewinnen.'
+        );
+
+        // Der Anwendungsbereich haengt NICHT daran: `design/portalkonzept.html` Zeile 53
+        // gibt ihm 1320 px.
+        $anwendung = (string) file_get_contents(SARTU_WURZEL . '/public/assets/css/anwendung.css');
+
+        $this->assertSame(
+            1,
+            preg_match('#\.flaeche__inhalt \{(.*?)\}#s', $anwendung, $regel),
+            'Die Flaeche des Anwendungsbereichs fehlt.'
+        );
+        $this->assertStringNotContainsString('var(--wrap)', $regel[1],
+            'Der Kundenbereich folgt dem Satzspiegel der Website. Seine Vorgabe steht im '
+            . 'Portalentwurf, nicht im Startseitenentwurf.');
+    }
+
+    /**
+     * Vier Preisstufen nebeneinander, in **einer** Reihe — `10_WEBSITE_SARTU.md` Sektion 4.
+     *
+     * Die Vorgabe benennt den gebauten Zustand als Fehler: „Sonderprojekt stand als Querblock
+     * unter den drei Paketen, obwohl §4 es als vierte Stufe mit eigenem Knopf fuehrt."
+     * Geprueft wird deshalb nicht nur, dass vier Karten da sind, sondern dass sie **ein**
+     * Raster teilen — ein zweiter Block darunter waere derselbe Fehler mit anderem Markup.
+     */
+    public function testDieVierPreisstufenStehenInEinerReihe(): void
+    {
+        $html = (string) $this->router(gesperrt: true)->behandeln('GET', '/')->rumpf;
+
+        $this->assertSame(1, preg_match('#<div class="preisstufen">(.*?)</div>\s*<p class="preisrahmen"#s',
+            $html, $raster), 'Das Raster der Preisstufen fehlt oder ist nicht mehr geschlossen.');
+
+        $this->assertSame(4, substr_count($raster[1], '<article class="stufe'),
+            'Es stehen nicht vier Stufen im selben Raster.');
+
+        $this->assertStringNotContainsString('class="sonderprojekt"', $html,
+            'Das Sonderprojekt steht wieder als eigener Block ausserhalb des Rasters.');
+
+        // Gebunden: Badge an Platzhirsch, Pflichtzeile unter dem Sonderprojekt-Knopf,
+        // vier Knopfbeschriftungen.
+        $this->assertStringContainsString('stufe--empfehlung', $raster[1]);
+        $this->assertStringContainsString('>Empfehlung<', $raster[1]);
+        $this->assertStringContainsString('stufe--sonder', $raster[1]);
+        $this->assertStringContainsString(
+            'Nur Sonderprojekte klären wir vor dem Angebot persönlich.',
+            $raster[1]
+        );
+
+        foreach (['Einschätzen lassen', 'Bedarf prüfen lassen', 'Sonderprojekt besprechen'] as $knopf) {
+            $this->assertStringContainsString($knopf, $raster[1], 'Der Knopf „' . $knopf . '" fehlt.');
+        }
+
+        $css = (string) file_get_contents(SARTU_WURZEL . '/public/assets/css/website.css');
+
+        $this->assertSame(1, preg_match('#^\.preisstufen \{(.*?)\}#ms', $css, $regel));
+        $this->assertStringContainsString('repeat(4, minmax(0, 1fr))', $regel[1],
+            'Das Raster fuehrt nicht vier gleiche Spalten.');
+    }
+
+    /**
      * Jede Seite mit Abschlussfeld teilt es in Aussage und Handlung.
      *
      * Der Entwurf setzt `grid-template-columns:minmax(0,1.25fr) minmax(0,.75fr)` am

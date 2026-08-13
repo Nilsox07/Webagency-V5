@@ -167,8 +167,12 @@ use Sartu\Services\Websitetexte;
 
 <section class="abschnitt" id="preise">
   <div class="bahn">
-    <h2 class="hebt"><?= Html::e(T::S4_H2) ?></h2>
+    <?php /* Die Vorzeile steht **über** der Ueberschrift, wie in jeder anderen Sektion
+             und wie im Entwurf (`design/startseite.html` Zeile 916). Hier stand sie bis
+             zum 13.08.2026 darunter — dadurch trug die Sektion als einzige zwei
+             Zeilen zwischen Ueberschrift und Inhalt. */ ?>
     <p class="vorzeile hebt-3"><?= Html::e(T::S4_SUBLINE) ?></p>
+    <h2 class="hebt"><?= Html::e(T::S4_H2) ?></h2>
     <p class="lede hebt-2"><?= Html::e(T::S4_EINLEITUNG) ?></p>
 
     <div class="hebt">

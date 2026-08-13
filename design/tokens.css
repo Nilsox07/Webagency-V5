@@ -113,7 +113,20 @@
   --s-8:140px;
 
   /* ---- Masse --------------------------------------------- */
-  --wrap:1180px;
+  /* Fliessend, nicht fest — `07_MARKE_UND_GESTALTUNG.md`, Abschnitt
+     „Satzspiegel". Der Wert stand bis zum 13.08.2026 auf `1180px`; das war
+     beim Uebertragen aus dem Entwurf haengengeblieben und ist genau der
+     Wert, gegen den die Vorgabe argumentiert: „Die Seite lief auf
+     --wrap: 1180 — abzueglich der Raender blieben 1068 px Inhalt und damit
+     unter dem ueblichen Band."
+     Drei gemessene Folgen hatte der feste Deckel:
+     der Kopf hatte bei 1920 px **weniger** Platz als bei 1280 (--gut waechst,
+     die Bahn nicht) · die vierte Preisstufe passte nicht in die Zeile,
+     obwohl `10_WEBSITE_SARTU.md` §4 alle vier nebeneinander verlangt ·
+     jenseits von 1180 px gewann die Seite nur noch Rand.
+     `.bahn` traegt `width:100%` daneben — bei 1024 px steht `--wrap` auf
+     seinem Mindestwert 1380 px und waere sonst breiter als das Fenster. */
+  --wrap:clamp(1380px,90vw,1800px);
   --gut:clamp(20px,4vw,56px);
 
   /* ---- Schrift ------------------------------------------- */
@@ -131,8 +144,15 @@
   --fs-small:16px;
   --fs-mono:13px;          --ls-mono:.1em;
 
-  --fs-h1:clamp(40px,6.4vw,80px);   --ls-h1:-.035em;
-  --fs-h2:clamp(31px,4.3vw,50px);
+  /* Die Spannen stehen in `07_MARKE_UND_GESTALTUNG.md`, „Schriftgrade der
+     Ueberschriften". Beide Formeln waren bis zum 13.08.2026 auf den festen
+     Satzspiegel von 1180 px eingestellt und deckelten daher zu frueh:
+     H1 bei 80 statt 104 px, H2 bei 50 statt 54 px. Mit dem fliessenden
+     Satzspiegel greift die Vorgabe wieder.
+     --fs-h1 ist der einspaltige Fall. Im Aufmacher gilt die cqw-Formel in
+     `website.css`: die H1 steht in der 55-%-Spalte und misst sich an ihr. */
+  --fs-h1:clamp(38px,10cqw,58px);   --ls-h1:-.035em;
+  --fs-h2:clamp(27px,calc(3vw - 6px),54px);
   --fs-h3:24px;
   --fs-price:38px;
   --fs-pledge:clamp(31px,4.6vw,56px);

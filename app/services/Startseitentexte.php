@@ -118,9 +118,16 @@ final class Startseitentexte
 
     public const S2_H2 = Websitetexte::OHNE_TERMIN;
 
+    /**
+     * Der letzte Satz lautete bis zum 13.08.2026 „Was dort geht, steht unten —
+     * vollständig." Zwei Fehler in fünf Wörtern: `unten` beschreibt die Anordnung der
+     * Seite und stimmt nicht mehr, sobald sie einspaltig läuft; `vollständig` war die
+     * Begründung dafür, die Liste nicht zu kürzen — die gehört in den Kommentar unten,
+     * nicht auf die Seite. Was der Leser wissen muss, ist, dass die Liste kein Auszug ist.
+     */
     public const S2_ANTWORT = 'Bei SARTU gibt es keine Abstimmungstermine. Alles läuft über '
         . 'Ihren Kundenbereich. Sie beantworten die Fragen zu Ihrem Betrieb, wann es Ihnen '
-        . 'passt. Was dort geht, steht unten — vollständig.';
+        . 'passt. Diese Liste ist kein Auszug — mehr gibt es dort nicht zu tun.';
 
     /**
      * §5 Sektion 2 — elf Punkte, nicht vierzehn.
@@ -157,7 +164,13 @@ final class Startseitentexte
         ];
     }
 
-    public const S2_UNTERSCHIED = 'Kein Terminkalender-Pingpong. Kein Suchen in alten E-Mails. '
+    /**
+     * `Terminkalender-Pingpong` ist am 13.08.2026 entfallen. Das Wort beschreibt die
+     * Sache treffend und stammt aus der internen Verständigung darüber — auf einer Seite,
+     * die Handwerksbetriebe und Kanzleien liest, ist es Jargon. Die drei Verneinungen
+     * bleiben; sie tragen die Aussage ohne das Bild.
+     */
+    public const S2_UNTERSCHIED = 'Keine Terminsuche. Kein Blättern in alten E-Mails. '
         . 'Kein Anruf, um den Stand zu erfahren.';
 
     // -------------------------------------------------------------- 3 Ablauf
@@ -182,8 +195,16 @@ final class Startseitentexte
                          'alt'   => 'Das Angebot im Kundenbereich: Nummer, Gültigkeit, empfohlener Umfang und die vorgesehene Seitenstruktur.']],
             ['titel' => 'Ihre Angaben', 'bild' => null,
              'satz'  => 'Was wir schon wissen, tragen wir ein. Den Rest fragen wir Sie im Kundenbereich.'],
+            /* Sektion 3, Schritt 4 ist die **einzige** Stelle der Startseite, an der der
+               KI-Einsatz benannt wird — `10_WEBSITE_SARTU.md` Sektion 3 und `06_RECHT.md`
+               („KI wird genutzt, Ergebnisse werden geprüft"). Die Aussage bleibt deshalb
+               stehen; nur der Satzbau ist am 13.08.2026 geändert worden. Vorher:
+               „KI hilft, geprüft und freigegeben wird von uns." — zwei Halbsätze ohne
+               gemeinsames Subjekt, die klangen wie eine interne Notiz. Jetzt steht dort,
+               wobei sie hilft und wer am Ende unterschreibt. */
             ['titel' => 'Produktion', 'bild' => null,
-             'satz'  => 'Wir bauen die Website. KI hilft, geprüft und freigegeben wird von uns.'],
+             'satz'  => 'Wir bauen die Website. Beim Entwurf hilft uns KI; geprüft und '
+                . 'freigegeben wird jede Seite von einem Menschen.'],
             ['titel' => 'Vorschau und Freigabe',
              'satz'  => 'Sie sehen die fertige Website und sammeln Ihre Änderungen.',
              'bild'  => ['datei' => 'sartu-ablauf-5-vorschau.webp', 'breite' => 1280, 'hoehe' => 800,
@@ -203,7 +224,15 @@ final class Startseitentexte
 
     public const S4_H2 = 'Sie wählen kein Paket. Wir sagen Ihnen, welcher Umfang passt.';
 
-    public const S4_SUBLINE = 'Eine Empfehlung. Vier mögliche Ergebnisse.';
+    /**
+     * Die Vorzeile ist eine **Wegmarke**, kein zweiter Satz.
+     *
+     * Sie stand bis zum 13.08.2026 als „Eine Empfehlung. Vier mögliche Ergebnisse."
+     * unter der Überschrift und wiederholte damit deren Aussage in anderen Worten. Ihre
+     * Aufgabe ist eine andere: Wer die Seite überfliegt, soll die Sektion **benennen**
+     * können, bevor er sie liest — so wie `Kundenbereich` und `Ablauf` darüber.
+     */
+    public const S4_SUBLINE = 'Vier Stufen';
 
     public const S4_EINLEITUNG = 'Sie müssen nicht wissen, wie viele Seiten Sie brauchen. Der '
         . 'Bedarfsscheck zeigt, welcher Umfang voraussichtlich passt. Wir prüfen das '
@@ -317,9 +346,16 @@ final class Startseitentexte
 
     public const S10_H2 = 'Welche Website passt zu Ihrem Unternehmen?';
 
+    /**
+     * „Danach prüfen wir persönlich" ist am 13.08.2026 entfallen. `persönlich` heißt im
+     * Sprachgebrauch der Branche **Termin** — und die Seite verspricht drei Sektionen
+     * weiter oben das Gegenteil (`Websitetexte::OHNE_TERMIN`). Gemeint war, dass ein
+     * Mensch die Empfehlung nachrechnet, nicht ein Gespräch. Das steht jetzt da.
+     */
     public const S10_TEXT = 'Der Bedarfsscheck fragt nicht nach Seitenzahlen, Farben oder '
         . 'SEO-Stufen. Sie beantworten wenige Fragen zu Ihrem Geschäft und sehen sofort eine '
-        . 'vorläufige Empfehlung mit Preis. Danach prüfen wir persönlich.';
+        . 'vorläufige Empfehlung mit Preis. Danach rechnen wir sie nach und bestätigen oder '
+        . 'korrigieren sie im Angebot.';
 
     /** Nur Anzeige, nicht anklickbar — §5 Sektion 10. */
     public const S10_CHIPS = ['Branche', 'Region', 'Ziel', 'Umfang', 'Domain', 'Besonderheiten'];

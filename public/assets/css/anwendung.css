@@ -234,9 +234,16 @@ main { padding-top: var(--s-5); padding-bottom: var(--s-7); }
 
 .titelzeile h1 { margin: 0; font-size: var(--fs-h3); }
 
+/* Der Anwendungsbereich hat seinen **eigenen** Satzspiegel und folgt `--wrap`
+   nicht. `design/portalkonzept.html` Zeile 53 setzt ihn auf 1320 px; daneben
+   steht links die Leiste, die von der Fensterbreite schon abgeht. Vor dem
+   13.08.2026 fiel das nicht auf, weil `--wrap` fest auf 1180 px stand und der
+   Unterschied nur 140 px betrug. Mit dem fliessenden Satzspiegel der Website
+   (bis 1800 px) waere der Kundenbereich mitgewachsen — die Vorgabe fuer ihn
+   steht aber im Portalentwurf, nicht im Startseitenentwurf. */
 .flaeche__inhalt {
   padding: var(--s-5) var(--gut) var(--s-7);
-  max-width: var(--wrap);
+  max-width: 1320px;
   width: 100%;
 }
 
