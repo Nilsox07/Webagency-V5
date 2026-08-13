@@ -3010,6 +3010,13 @@ wirklich** statt zu scheitern.
 vollständig vor und ist als **§4d nachgetragen** — mit dem Vermerk, dass sie nachgetragen
 wurde. Erfunden ist daran nichts; abgeleitet wurde nur, wo sie einzuordnen ist.
 
+> **Beim Zusammenführen stellte sich heraus, dass der Betreiber denselben Abschnitt parallel
+> selbst eingetragen hat** (`fdeb657`). **Seine Fassung gilt** — sie ist weiter: Sie schliesst
+> zugleich §5 auf drei Musterprojekte und erklärt §7c für gegenstandslos. Der Nachtrag steht
+> als Anmerkung darunter, weil er **eine Angabe darin richtigstellt**: Der Satz „die Startsperre
+> sucht ohnehin `[[FOTO-FEHLT]]` und `[[SCREENSHOT-FEHLT]]`" beschrieb die Vorgabe, nicht den
+> Code. Seit diesem Commit beschreibt er beides.
+
 **2 — Die Startsperre suchte `[[FOTO-FEHLT]]` und `[[SCREENSHOT-FEHLT]] nicht.`** Der Auftrag
 verlangte den Nachweis, dass sie es tut. Sie tat es nicht:
 
@@ -3140,7 +3147,7 @@ Dazu auf `/musterprojekte` derselbe Fall bei `Physiotherapiepraxis` in der H2 un
 | # | Punkt | Womit es zu prüfen ist |
 |---|---|---|
 | 1 | **Das Höhenziel von 9.000 px bei 1440 px ist nicht erreicht.** Erreicht sind 10.185 px. Die beiden neuen Sektionen messen zusammen 1.625 px; ohne sie läge die Seite bei rund 8.560 px. Die verbliebene Lücke von 1.185 px lässt sich mit den fünf beauftragten Mitteln nicht mehr schließen — jeder weitere Schritt nähme Inhalt weg, und genau das schliesst der Auftrag aus | Entscheidung des Betreibers: Ziel anheben oder eine Sektion inhaltlich kürzen |
-| 2 | **Die drei Musterprojekte sind Stufe 1, nicht Stufe 2.** Es gibt keine gebauten Beispielseiten; die Bildplätze bleiben, bis §5 entschieden ist. Ob es eine, zwei oder drei werden, ist offen — für den Beweis „kein Baukasten" braucht es nach §4a drei | Entscheidung nach `SARTU_ENTSCHEIDUNGEN_OFFEN.md` §5 |
+| 2 | **Die drei Musterprojekte sind Stufe 1, nicht Stufe 2.** Es gibt keine gebauten Beispielseiten; die Bildplätze bleiben, bis sie stehen. **Die Zahl ist inzwischen entschieden** — §4d schliesst §5 auf drei und §7c als gegenstandslos; die Seiten selbst sind eine eigene Sitzung (`PROMPT_NEUE_SESSION_MUSTERPROJEKTE.md`) | Beispielseiten bauen, dann die Bildplätze durch echte Aufnahmen ersetzen |
 | 3 | **Die Wertetripel je Musterprojekt sind eingetragen, aber nicht gebaut.** `17_SEITEN_SARTU.md` §4a bindet Inhaltsdichte, Formcharakter und Bewegung je Fall; sie stehen in `Musterprojekte::alle()` und erscheinen auf `/musterprojekte` als Text. Der Komponentenkatalog aus `03_KUNDENPRODUKT.md`, der sie in Gestaltung übersetzt, existiert nicht | Katalog anlegen, dann Beispielseiten bauen |
 | 4 | **Die Sperre ist gegen die Launch-Adressen geprüft, nicht gegen jede Route.** `Platzhalterpruefung` läuft über `Launchadressen::alle()`. Eine Seite, die nicht in der Sitemap steht, würde einen Platzhalter unbemerkt ausliefern | Liste erweitern, sobald es eine Adresse ausserhalb der Sitemap mit Bildplatz gibt |
 | 5 | **Auf 390 und 320 px ist die Seite länger als vorher**, nicht kürzer — die zwei neuen Sektionen laufen dort einspaltig. Gemessen, nicht behoben | Entscheiden, ob die Musterkarten auf Mobilgeräten als Karussell oder als Auszug laufen sollen |

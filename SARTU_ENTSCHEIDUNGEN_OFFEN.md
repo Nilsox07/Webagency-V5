@@ -473,46 +473,77 @@ Begründung und später zwei Demoprojekte kommen vom Betreiber, nicht aus dem Ba
 
 ---
 
-## 4d. Sektion 6 und 8 werden gebaut, mit gekennzeichnetem Platzhalter — **ENTSCHIEDEN 13.08.2026**
+## 4d. Musterprojekte und Gründerabschnitt — **ENTSCHIEDEN 13.08.2026**
 
-> **Nachgetragen am 13.08.2026.** Der Auftrag zu Sektion 6, Sektion 8 und `/musterprojekte`
-> berief sich auf „§4d". **Diesen Abschnitt gab es nicht** — die Datei führte §4, §4a, §4b und
-> §4c. Die Entscheidung selbst lag in der Anweisung des Betreibers vollständig vor; sie steht
-> hier, damit der Verweis trägt und niemand sie beim nächsten Mal wieder herleiten muss.
+**Beide Sektionen kommen in die Startseite, beide zunächst mit gekennzeichnetem Platzhalter, und
+die Musterprojekte werden gebaut.**
 
 | Entschieden | |
 |---|---|
-| **Sektion 8 „Musterprojekte" wird gebaut** | drei Karten mit Fahne, Bildplatz, Titel und den vier Zeilen Ausgangslage · Empfohlen · Seitenstruktur · Sie liefern. Die drei Gattungen bleiben, wie `10_WEBSITE_SARTU.md` §8 sie bindet |
-| **`/musterprojekte` wird gebaut** | die Zielseite des in §8 gebundenen Knopfes. Aufbau nach `17_SEITEN_SARTU.md` §4a |
-| **Sektion 6 steht auch ohne Daten** | mit `[[FOTO-FEHLT]]` statt zu entfallen |
-| **Die Bildplätze tragen `[[SCREENSHOT-FEHLT]]`** | mit Maßangabe, bis die Beispielseiten stehen |
+| **Sektion 6 „Wer dahintersteckt"** | wird gebaut, bis zur Befüllung mit `[[FOTO-FEHLT]]` |
+| **Sektion 8 „Musterprojekte"** | wird gebaut, Aufbau wie im abgenommenen Entwurf, Ansichten bis dahin `[[SCREENSHOT-FEHLT]]` |
+| **Die drei Musterprojekte selbst** | werden als vollständige Beispielseiten gebaut — **Malerbetrieb**, **Physiotherapiepraxis**, **Arbeitsrechtskanzlei**, je ein anderer Umfang |
+| **`/musterprojekte`** | die Übersichtsseite dazu entsteht mit (`17_SEITEN_SARTU.md` §4a) |
 
-### Warum das §5 nicht bricht, sondern auf die Sperre stützt
+### Warum der Platzhalter jetzt zulässig ist und vorher nicht
 
-§5 verbietet den leeren Rahmen **an einer Vertrauensstelle**, und der Satz gilt weiter. Er gilt
-für die **veröffentlichte** Seite. Für den Bau ist der unsichtbare Zustand der teurere: Wer die
-Sektion nie sieht, prüft ihre Gestaltung erst am Tag der Freigabe.
+`10_WEBSITE_SARTU.md` §8 schrieb: „eine Musterprojekt-Sektion ohne Musterprojekte ist schlechter
+als keine." **Der Satz galt, solange offen war, ob es je Musterprojekte gibt.** Ein Platzhalter
+für etwas, das vielleicht nie kommt, ist ein „kommt bald"-Bereich — und die sind nach §0.3b
+verboten.
 
-`10_WEBSITE_SARTU.md` §5 sieht genau dafür **Bedingung 4 und 4a** der Startsperre vor — die
-produktive Veröffentlichung bricht an `[[SCREENSHOT-FEHLT]]` und `[[FOTO-FEHLT]]` ab. Der
-Platzhalter ist damit eine **Zwischenstufe im Bau** und kein Zustand, der live gehen kann.
+**Das ist jetzt anders: Die Musterprojekte sind beauftragt.** Der Platzhalter überbrückt einen
+Bautermin, er ersetzt keine Entscheidung.
 
-> **Die Bedingung dafür war am 13.08.2026 nicht erfüllt — jetzt ist sie es.** `Startsperre`
-> prüfte ausschließlich Betreiberdaten und Rechtstexte; ihr eigener Klassenkopf sagte es:
-> „Sie prueft nicht auf Platzhalter in Vorlagen." Gleichzeitig versicherte
-> `partials/bildplatz.php`, die Sperre suche die Markierung. **Die Zusage stand im Markup, die
-> Suche nirgends.** `Platzhalterpruefung` und `bin/startklar.php` schließen die Lücke;
-> `tests/PlatzhaltersperreTest.php` hält sie geschlossen.
+> **Und die Veröffentlichung ist ohnehin gesperrt.** Die Startsperre sucht `[[FOTO-FEHLT]]` und
+> `[[SCREENSHOT-FEHLT]]` und bricht die produktive Veröffentlichung ab (Bedingungen 4 und 4a).
+> **Beide Sektionen können also gar nicht unfertig nach außen gehen.** Genau dafür gibt es die
+> Sperre — sie erlaubt, im Bau sichtbar zu machen, was noch fehlt, ohne dass es je live geht.
+> Der Entwurf selbst arbeitet an dieser Stelle mit `Platz für Ansicht`.
 
-### Was das an §5 **nicht** ändert
+### §7c löst sich auf, statt entschieden zu werden
 
-Die drei Musterprojekte sind **Fälle, keine gebauten Seiten**. `10_WEBSITE_SARTU.md` §8 nennt
-dafür Stufe 1 — „Sektion mit ehrlich beschriftetem Bildplatz. Der Inhalt trägt sie auch ohne
-Bild." **Stufe 2 bleibt offen:** ob ein, zwei oder drei Demoprojekte gebaut werden, steht
-weiterhin in §5. Bis dahin bleibt ein nachgebauter Bildschirm verboten.
+**§7c fragte, welche drei Gattungen für Branchenseiten *und* Musterprojekte gelten.** Die Frage
+setzte voraus, dass beide Listen dieselben sein müssen. **Das müssen sie nicht — sie haben
+verschiedene Aufgaben:**
 
-Ebenso unverändert: Name, Text und Foto des Gründers kommen vom Betreiber. Der Platzhalter
-sagt, welche der drei Angaben fehlt — er ersetzt keine davon.
+| | Aufgabe | Auswahl folgt |
+|---|---|---|
+| **Branchenseiten** | Suchnachfrage abholen | dem Suchvolumen und der Zielgruppe — SHK, Elektrotechnik, Dachdecker, gebaut |
+| **Musterprojekte** | zeigen, dass SARTU verschiedene Fälle löst | der **Spannweite** — Maler, Physiotherapie, Kanzlei; drei Umfänge, drei Zuschnitte |
+
+**Drei gleiche Gattungen in beiden Listen wären sogar schlechter:** Sie zeigen dreimal denselben
+Fall und belegen die Spannweite nicht, die den Abstand zum Baukasten ausmacht.
+
+**§7c ist damit gegenstandslos.** Es bleibt nichts zu entscheiden — die Frage war falsch gestellt.
+
+### Was das für §5 bedeutet
+
+Der Punkt „ein bis zwei gekennzeichnete Demoprojekte" ist auf **drei** entschieden und damit
+geschlossen. **Offen bleibt allein das Gründerfoto** — Name, Bild und der Absatz zur Gründung
+kommen vom Betreiber (§4c).
+
+### Nachgetragen am 13.08.2026 — zwei Angaben, die beim Bauen nicht stimmten
+
+**Der Bauauftrag berief sich auf „§4d" als Rang 1, und es gab ihn noch nicht.** Diese Datei
+führte §4, §4a, §4b, §4c. Der Abschnitt oben ist die Fassung, die der Betreiber unmittelbar
+danach eingetragen hat; er gilt. Vermerkt bleibt es, weil eine fehlende Fundstelle beim
+nächsten Mal wieder hergeleitet würde.
+
+**Die Startsperre suchte die beiden Markierungen bis zu diesem Tag nicht.** Der Satz oben —
+„die Startsperre sucht `[[FOTO-FEHLT]]` und `[[SCREENSHOT-FEHLT]]`" — beschreibt, was
+`10_WEBSITE_SARTU.md` §5 als Bedingung 4 und 4a **verlangt**. Gebaut war es nicht:
+
+| | |
+|---|---|
+| `partials/bildplatz.php` | *„Die Startsperre §14a Bedingung 4 sucht genau diese Markierung und bricht die produktive Veröffentlichung ab."* |
+| `app/services/Startsperre.php` | *„Sie prueft nicht auf Platzhalter in Vorlagen, sondern auf den Zustand der Einstellungen."* |
+
+Beide Sätze standen seit dem Bau nebeneinander. **Die Begründung dieses Abschnitts hängt an der
+Sperre**, also ist sie zuerst gebaut worden: `app/services/Platzhalterpruefung.php` rendert die
+Launch-Adressen durch den echten Router, `bin/startklar.php` bricht daran ab,
+`tests/PlatzhaltersperreTest.php` hält es fest. Seither trägt der Satz oben.
+
 
 ---
 
@@ -880,6 +911,9 @@ ausgeschrieben sind.
 | 10.08.2026 | **Aufmacherbild: Gerät in Schrägstellung mit echter Aufnahme des Kundenbereichs**, Rahmen selbst gezeichnet (§4b) | Betreiber |
 | 10.08.2026 | **Sperren datengesteuert statt codegesteuert:** `LocalBusiness` und Gründerabschnitt werden gebaut, ausgeliefert nur bei gefüllten Betreiberdaten (§4c) | Betreiber |
 | 10.08.2026 | **Gründerabschnitt ist kein Lebenslauf**, sondern Name, Bild und ein Absatz zur Gründung (§4c) | Betreiber |
+| 13.08.2026 | **Sektion 6 und 8 kommen in die Startseite**, zunächst mit gekennzeichnetem Platzhalter; die Startsperre hält sie zurück (§4d) | Betreiber |
+| 13.08.2026 | **Drei Musterprojekte werden gebaut** — Malerbetrieb, Physiotherapiepraxis, Arbeitsrechtskanzlei (§4d) | Betreiber |
+| 13.08.2026 | **§7c ist gegenstandslos:** Branchenseiten und Musterprojekte folgen verschiedenen Auswahlgründen (§4d) | Betreiber |
 | 13.08.2026 | **Die Kapazitätszeile nennt den nächsten möglichen Projektstart** statt „Nur noch wenige Plätze". Das Terminverbot in `CLAUDE_SARTU_WEBSITE_LASTENHEFT_BAUFINAL.md` §5a ist Begründungsarchiv und sticht nicht; angezeigt wird der **Monat**, kein Tag | Betreiber |
 | 13.08.2026 | **Das Mobilmenü greift ab 1180 px** statt ab 940 px — `design/startseite.html` Zeile 166 setzt diesen Wert, und die Kopfzeile lief von 941 bis 1183 px waagerecht über. `10_WEBSITE_SARTU.md` §2 („Desktop ab 1024 px") ist damit nachzuziehen — **offen** | Bau, gemessen |
 
