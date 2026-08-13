@@ -174,6 +174,15 @@
 
 .menue summary::-webkit-details-marker { display: none; }
 
+/* **Das geschlossene Menueblatt muss aus dem Satz verschwinden, nicht nur unsichtbar
+   sein.** Chromium laesst dem geschlossenen `<details>`-Inhalt eine Layoutbox: Gemessen
+   am 13.08.2026 stand sie 91 px breit als dritter Fleximmer in der Kopfzeile, und ihre
+   Eintraege ragten mit `overflow: visible` bis 370 px hinaus. Daher der gemeldete
+   waagerechte Ueberlauf bei 320 px (scrollWidth 373) — und daher der Knopf
+   `Bedarf pruefen lassen`, der ab 1024 px abwaerts ueber die Fensterkante stand.
+   Beides war dasselbe Element, in vier Breiten verschieden weit sichtbar. */
+.menue:not([open]) .menue__blatt { display: none; }
+
 .menue[open] .menue__blatt {
   position: fixed;
   inset: 0;
@@ -213,9 +222,14 @@
 
 /* ---- Abschnitte ------------------------------------------ */
 
+/* Der senkrechte Grundrhythmus, enger gezogen am 13.08.2026 (§4d, Block 3d).
+   Gemessen: elf Abschnitte trugen 104 px oben und unten — 2.256 px reiner
+   Innenabstand bei 22 bis 31 % Fuellgrad. Der Entwurf traegt dieselben --s-7,
+   hat aber neun Abschnitte und dichtere darunter. **Kein Wort ist entfallen,
+   nur der Abstand um die Woerter herum.** */
 .abschnitt {
-  padding-top: var(--s-7);
-  padding-bottom: var(--s-7);
+  padding-top: var(--s-5);
+  padding-bottom: var(--s-5);
 }
 
 .abschnitt--sand { background: var(--sand); }
@@ -294,13 +308,27 @@
    die CSP laesst kein `style` zu, und eine Regel gilt auch fuer den dritten. */
 .abschnitt--dunkel + .abschnitt--dunkel { padding-top: 0; }
 
+/* Deutsche Komposita sind laenger als schmale Fenster. `Physiotherapiepraxis`
+   misst bei 320 px im H2-Grad rund 300 px, `Musterprojekte,` in der H1 ebenso —
+   beide standen ueber der Kante (gemessen 13.08.2026 auf `/musterprojekte`).
+   Die Seite traegt `lang="de"`, `hyphens` setzt die Trennstelle nach den Regeln
+   der Sprache; `overflow-wrap` faengt die Faelle ohne Trennwoerterbuch. */
+h1, h2, h3 {
+  hyphens: auto;
+  overflow-wrap: break-word;
+}
+
 .abschnitt h2,
 .abschluss h2 {
   font-size: var(--fs-h2);
   line-height: var(--lh-head);
   letter-spacing: var(--ls-head);
   font-weight: var(--fw-head);
-  max-width: 22ch;
+  /* 26ch, nicht 22 — `design/startseite.html` Zeile 51 (`.sec-head{max-width:26ch}`).
+     Beim Uebertragen war der Wert enger geraten; drei Ueberschriften brachen dadurch
+     auf zwei Zeilen um, die im Entwurf eine sind. Gemessen am 13.08.2026: 58 px je
+     ueberzaehliger Zeile. */
+  max-width: 26ch;
   margin-top: 0;
 }
 
@@ -630,9 +658,12 @@
 .dreispalten {
   display: grid;
   gap: var(--s-4);
-  margin-top: var(--s-5);
+  margin-top: var(--s-4);
 }
 
+/* Zwei Spalten, nicht drei. Der Dreisatz war am 13.08.2026 versucht und ist
+   gemessen zurueckgenommen: Die elf Punkte des Kundenbereichs brechen in
+   schmaleren Spalten auf zwei Zeilen um — die Sektion wurde 40 px **hoeher**. */
 .zweispalten { grid-template-columns: 1fr 1fr; }
 .dreispalten { grid-template-columns: repeat(3, 1fr); }
 
@@ -702,7 +733,7 @@
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: var(--s-3);
-  margin: calc(var(--s-6) + 18px) 0 var(--s-4);
+  margin: calc(var(--s-5) + 18px) 0 var(--s-3);
   align-items: stretch;
 }
 
@@ -711,10 +742,10 @@
   background: var(--paper);
   border: 1px solid var(--line);
   border-radius: var(--r-l);
-  padding: clamp(22px, 1.9vw, 30px);
+  padding: clamp(18px, 1.6vw, 26px);
   display: flex;
   flex-direction: column;
-  gap: var(--s-2);
+  gap: var(--s-1);
 }
 
 /* Die Empfehlung: dunkel und gehoben, auf ihrem Platz in der Preisleiter.
@@ -808,7 +839,7 @@
 }
 
 .stufe__liste li {
-  padding: 12px 0 12px 24px;
+  padding: 9px 0 9px 24px;
   border-bottom: 1px solid var(--line);
   font-size: var(--fs-small);
   position: relative;
@@ -818,7 +849,7 @@
   content: "";
   position: absolute;
   left: 0;
-  top: 21px;
+  top: 18px;
   width: 9px;
   height: 9px;
   border-radius: var(--r-xs);
@@ -844,6 +875,21 @@
   border-style: dashed;
 }
 
+/* Die Monatspauschale als **Zeile**, nicht als Flaeche. Der Titel traegt die
+   Betonung, die vorher der Lime-Grund trug — und traegt sie dort, wo Lime
+   erlaubt ist: als Textmarker, nicht als Band. */
+.pauschale {
+  margin: var(--s-4) 0 var(--s-1);
+  font-size: var(--fs-copy);
+  color: var(--muted);
+}
+
+.pauschale__titel {
+  font-weight: var(--fw-head);
+  color: var(--ink);
+  box-shadow: inset 0 -.42em 0 var(--lime);
+}
+
 .preisrahmen {
   font-family: var(--font-mono);
   font-size: var(--fs-mono);
@@ -854,30 +900,72 @@
 
 /* ---- Leistungszeilen ------------------------------------- */
 
+/* Acht Karten in vier Spalten — `design/startseite.html` Zeile 470, `.lk`.
+   `10_WEBSITE_SARTU.md` §7 nennt die Bauform „Karten mit Umfangsliste"; gebaut
+   waren acht Zeilen ueber die volle Breite. Gemessen am 13.08.2026: 1.841 px
+   fuer acht Zeilen, 26 % Fuellgrad. Dieselben Woerter in zwei Reihen zu vier
+   Karten brauchen weniger als die Haelfte — **kein Wort ist dafuer entfallen.** */
 .leistungszeilen {
   list-style: none;
-  margin: var(--s-5) 0 var(--s-4);
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: var(--s-3);
+  margin: var(--s-4) 0 var(--s-3);
   padding: 0;
+  align-items: stretch;
 }
 
 .leistungszeilen > li {
-  border-top: 1px solid var(--line);
-  padding: var(--s-4) 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-1);
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: var(--r-m);
+  padding: clamp(20px, 1.7vw, 26px);
 }
 
-.leistungszeilen h3 { margin: 0 0 var(--s-1); font-size: var(--fs-h3); }
-.leistungszeilen p { margin: 0 0 var(--s-1); }
+.leistungszeilen h3 { margin: 0; font-size: var(--fs-copy); line-height: 1.25; }
+.leistungszeilen p { margin: 0; font-size: var(--fs-small); color: var(--muted); }
+
+.leistungszeilen .marken {
+  margin: auto 0 0;
+  padding-top: var(--s-2);
+  border-top: 1px solid var(--line);
+}
+
+@media (max-width: 1180px) { .leistungszeilen { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 620px)  { .leistungszeilen { grid-template-columns: 1fr; } }
 
 /* ---- Zusage und Abschluss: die einzigen dunklen Abschnitte -- */
 
+/* Die Zusage traegt weiterhin **mehr** Luft als ihre Nachbarn — „die Wirkung
+   entsteht aus der Leere ringsum" (§5 Sektion 5). Eine Stufe mehr genuegt
+   dafuer; --s-8 waren 280 px Abstand fuer einen Satz von 175 px. */
+/* Die Zusage traegt weiterhin **mehr** Luft als ihre Nachbarn — „die Wirkung
+   entsteht aus der Leere ringsum" (§5 Sektion 5). Sie steht eine Stufe ueber
+   dem Grundrhythmus, nicht zwei: --s-8 waren 280 px Abstand fuer einen Satz
+   von 175 px Hoehe. */
 .zusage {
   background: var(--ink);
   color: var(--paper);
-  padding-top: var(--s-8);
-  padding-bottom: var(--s-8);
+  padding-top: var(--s-6);
+  padding-bottom: var(--s-6);
 }
 
+/* `Stundenabrechnung` misst bei 320 px Fensterbreite und 31 px Schriftgrad rund
+   290 px und stand damit ueber der Kante — das war der gemeldete waagerechte
+   Ueberlauf (scrollWidth 373). Getrennt statt gebrochen: Die Seite traegt
+   `lang="de"`, `hyphens: auto` setzt die Trennstelle nach den Regeln der
+   Sprache. Ein harter Umbruch mitten im Wort waere an dem einen Satz, der die
+   Positionierung traegt, das schlechtere Mittel. */
 .zusage p {
+  /* `hyphens` allein genuegt nicht: Es braucht ein Trennwoerterbuch, und ob eines
+     vorliegt, entscheidet das System des Lesers. `overflow-wrap` greift nur, wenn
+     ein Wort sonst ueber die Kante stuende — mit Woerterbuch bleibt die saubere
+     Trennung, ohne bricht es hart statt hinauszuragen. */
+  hyphens: auto;
+  overflow-wrap: break-word;
   font-size: var(--fs-pledge);
   line-height: var(--lh-head);
   letter-spacing: var(--ls-head);
@@ -901,8 +989,8 @@
    ---------------------------------------------------------- */
 
 .abschluss {
-  padding-top: var(--s-7);
-  padding-bottom: var(--s-7);
+  padding-top: var(--s-5);
+  padding-bottom: var(--s-5);
 }
 
 .handlungsfeld {
@@ -910,7 +998,7 @@
   color: var(--paper);
   border-radius: var(--r-xl);
   box-shadow: var(--shadow-lift);
-  padding: var(--s-6);
+  padding: var(--s-5);
   /* Zwei Spalten wie im Entwurf: links die Aussage, rechts die Handlung, unten
      buendig. Welches Kind wohin gehoert, entscheidet die Reihenfolge — der
      Handlungsblock steht auf jeder der neun Seiten zuletzt. Damit braucht keine
@@ -983,9 +1071,96 @@
   letter-spacing: var(--ls-mono);
   color: var(--label);
   margin: 0 0 var(--s-1);
+  /* Ein Dateiname hat keine Trennstelle. `sartu-muster-physiotherapiepraxis.webp`
+     misst in Monoschrift rund 290 px und stand damit bei 320 px Fensterbreite
+     ueber der Kante — das war der gemeldete waagerechte Ueberlauf (scrollWidth
+     373). `anywhere` bricht ihn an beliebiger Stelle; bei einer Kennung, die
+     ohnehin nur zum Wiederfinden da ist, kostet das nichts. */
+  overflow-wrap: anywhere;
 }
 
 .bildplatz figcaption { color: var(--muted); font-size: var(--fs-small); }
+
+/* ---- Musterprojekte (Sektion 8) ---------------------------
+   Drei Karten nebeneinander — `design/startseite.html`, `id="muster"`.
+   Unter 880 px eine Spalte: Bei zwei Spalten stuende die dritte
+   Karte allein und die Fahne daneben leer.
+   ---------------------------------------------------------- */
+
+.muster {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--s-3);
+  margin: var(--s-4) 0 var(--s-3);
+  align-items: stretch;
+}
+
+.musterkarte {
+  display: flex;
+  flex-direction: column;
+  /* Ohne `min-width: 0` traegt eine Rasterzelle die Mindestbreite ihres Inhalts.
+     Bei 320 px ragte die Karte deshalb 13 px hinaus — die Fahne
+     `Musterprojekt — kein Kundenauftrag` ist laenger als die Spalte. */
+  min-width: 0;
+  gap: var(--s-2);
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: var(--r-l);
+  padding: clamp(18px, 1.6vw, 26px);
+}
+
+.musterkarte h3 { margin: 0; font-size: var(--fs-h3); }
+
+/* Der Bildplatz sitzt in der Karte und traegt dort keinen eigenen Aussenabstand:
+   Die Karte setzt ihre Abstaende ueber `gap`, und zwei Abstandsquellen
+   uebereinander ergeben einen doppelten. */
+.musterkarte .bildplatz {
+  margin: 0;
+  padding: var(--s-2);
+  background: var(--sand);
+}
+
+/* Beschriftung und Angabe sind ein Paar, kein Aufzaehlungspunkt — deshalb `dl`.
+   Die Beschriftung steht in Monoschrift ueber der Angabe: nebeneinander braucht
+   sie eine feste Spalte, und die ist bei 302 px Kartenbreite nicht da. */
+.musterteile { margin: 0; display: grid; gap: var(--s-1); }
+
+.musterteile > div {
+  border-top: 1px solid var(--line);
+  padding-top: var(--s-1);
+}
+
+.musterteile dt {
+  font-family: var(--font-mono);
+  font-size: var(--fs-mono);
+  letter-spacing: var(--ls-mono);
+  text-transform: uppercase;
+  color: var(--label);
+}
+
+.musterteile dd { margin: var(--s-1) 0 0; font-size: var(--fs-small); }
+
+/* Nebeneinander gestellt und gemessen zurueckgenommen: Bei 302 px Kartenbreite
+   bleiben der Angabe 200 px, und sie bricht auf mehr Zeilen um, als die
+   Beschriftung einspart — die Sektion wurde 21 px **hoeher** (13.08.2026).
+   Auf `/musterprojekte` traegt `.musterteile--breit` es, dort ist die Spalte
+   dreimal so breit. */
+
+/* Auf `/musterprojekte` steht je Fall mehr Platz zur Verfuegung: dort tragen die
+   Paare zwei Spalten, weil die Beschriftung dann eine eigene Spalte hat. */
+.musterteile--breit { gap: var(--s-3); margin-top: var(--s-4); }
+
+@media (min-width: 760px) {
+  .musterteile--breit > div {
+    display: grid;
+    grid-template-columns: minmax(0, 30fr) minmax(0, 70fr);
+    gap: var(--s-3);
+  }
+
+  .musterteile--breit dd { margin: 0; font-size: var(--fs-copy); }
+}
+
+.musterfall .marke { margin-bottom: var(--s-2); }
 
 /* ---- Fragen ---------------------------------------------- */
 
@@ -993,7 +1168,7 @@
 
 .fragen details {
   border-bottom: 1px solid var(--line);
-  padding: var(--s-3) 0;
+  padding: var(--s-2) 0;
 }
 
 .fragen summary {
@@ -1115,6 +1290,7 @@
 @media (max-width: 860px) {
   /* Bild ueber Text, nicht daneben. Die Reihenfolge bleibt: das Gesicht zuerst. */
   .gruender__reihe { grid-template-columns: 1fr; }
+  .muster { grid-template-columns: 1fr; }
   .preisstufen { grid-template-columns: 1fr; margin-top: var(--s-5); }
   .dreispalten { grid-template-columns: 1fr; }
   .zweispalten { grid-template-columns: 1fr; }
@@ -1208,12 +1384,22 @@
 
 .gruender__reihe {
   display: grid;
-  grid-template-columns: minmax(0, 34fr) minmax(0, 66fr);
+  grid-template-columns: minmax(0, 28fr) minmax(0, 72fr);
   gap: var(--s-5);
   align-items: center;
 }
 
 .gruender__bild { margin: 0; }
+
+/* Der Platzhalter tritt an die Stelle des Fotos und traegt dessen Form —
+   sonst springt die Sektion in dem Moment um, in dem das Bild kommt, und
+   niemand haette den Zustand gesehen, den er ersetzt. */
+.gruender__bild.bildplatz {
+  aspect-ratio: 4 / 5;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
 
 .gruender__bild img {
   display: block;
@@ -1460,9 +1646,12 @@ main a:not(.knopf):not(.textlink):not(.seitenmarke):not(.sprungmarke):focus-visi
 
   .ablaufschritt {
     display: grid;
-    grid-template-columns: 1fr 104px 1fr;
+    grid-template-columns: minmax(0, 1fr) 104px minmax(0, 1fr);
     align-items: start;
-    padding-bottom: var(--s-6);
+    /* War --s-6. Mit nur noch einer Ansicht im Ablauf (Block 3b) sind fuenf der
+       sechs Schritte reiner Text; 72 px Abstand darunter waren fuer Zeilen
+       bemessen, die eine Bildhoehe hatten. */
+    padding-bottom: var(--s-4);
   }
 
   .ablaufschritt__nummer { position: static; grid-column: 2; justify-self: center; }
@@ -1474,7 +1663,10 @@ main a:not(.knopf):not(.textlink):not(.seitenmarke):not(.sprungmarke):focus-visi
     padding-right: var(--s-2);
   }
 
-  .ablaufschritt__bild { grid-column: 3; grid-row: 1; margin-top: 0; }
+  /* Gedeckelt: Die eine verbliebene Ansicht (Block 3b) fuellte sonst die halbe
+     Bahn und bestimmte die Hoehe ihrer Zeile allein — 364 px fuer einen Schritt,
+     dessen Text 110 px braucht. */
+  .ablaufschritt__bild { grid-column: 3; grid-row: 1; margin-top: 0; max-width: 460px; }
 
   /* Jeder zweite Schritt tauscht die Seiten — und kommt von der anderen Seite. */
   .ablaufschritt:nth-child(even) .ablaufschritt__text {

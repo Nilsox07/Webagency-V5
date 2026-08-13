@@ -2998,3 +2998,150 @@ wirklich** statt zu scheitern.
 | 2 | **Die Aufnahmen des Kundenbereichs auf der Startseite sind vor der Satzspiegeländerung entstanden.** Sie zeigen den Bereich mit dem alten Inhaltsmaß | Nach Punkt 1 neu aufnehmen |
 | 3 | **Der Textdurchgang ist begonnen, nicht abgeschlossen.** Geändert sind die fünf Stellen oben; die übrigen Sektionen und die Unterseiten sind unverändert | Mit dem Texter-Skill je Sektion, Prüfbericht je Seite |
 | 4 | **Zwei Fassungen der Preistexte sind nicht gegeneinander geprüft:** die Karte auf der Startseite und die Tabelle auf `/preise` nennen dieselben Zahlen, aber nicht dieselben Merkmale | `/preise` gegen Sektion 4 lesen |
+
+---
+
+## 13.08.2026 — Sektion 6 und 8, `/musterprojekte`, und ein Drittel Höhe
+
+### Zwei Funde vor dem ersten Handgriff — beide gemeldet, keiner überschrieben
+
+**1 — `SARTU_ENTSCHEIDUNGEN_OFFEN.md` §4d gab es nicht.** Der Auftrag nannte ihn als Grundlage
+(Rang 1). Die Datei führte §4, §4a, §4b, §4c. Die Entscheidung selbst lag in der Anweisung
+vollständig vor und ist als **§4d nachgetragen** — mit dem Vermerk, dass sie nachgetragen
+wurde. Erfunden ist daran nichts; abgeleitet wurde nur, wo sie einzuordnen ist.
+
+**2 — Die Startsperre suchte `[[FOTO-FEHLT]]` und `[[SCREENSHOT-FEHLT]] nicht.`** Der Auftrag
+verlangte den Nachweis, dass sie es tut. Sie tat es nicht:
+
+| | |
+|---|---|
+| `partials/bildplatz.php`, Zeile 25 | *„Die Startsperre §14a Bedingung 4 sucht genau diese Markierung und bricht die produktive Veröffentlichung ab."* |
+| `app/services/Startsperre.php`, Zeile 14 | *„Sie prueft nicht auf Platzhalter in Vorlagen, sondern auf den Zustand der Einstellungen."* |
+
+Beide Sätze standen seit dem Bau nebeneinander. **Solange niemand die Markierung sucht, ist ein
+Bildplatz kein Zwischenstand, sondern ein Risiko** — er sieht aus wie eine bewusste
+Zwischenstufe, und die Zusicherung daneben sorgt dafür, dass niemand mehr nachsieht.
+
+Gebaut ist `app/services/Platzhalterpruefung.php`: Sie rendert die Launch-Adressen durch den
+echten Router und sucht die drei Markierungen aus §5 plus den Wortlaut `Name wird nachgereicht`,
+den Bedingung 4a ausdrücklich nennt. `bin/startklar.php` bricht daran ab.
+
+**Warum nicht in `Startsperre::hindernisse()`:** Die Methode läuft bei **jedem** Aufruf einer
+Adminseite — `partials/kopfband.php` fragt damit, ob der Einrichtungshinweis erscheint. Ein
+Dutzend gerenderte Seiten gehören nicht in einen Seitenkopf, sondern an das
+Veröffentlichungsgatter.
+
+Nachweis, ausgeführt:
+
+```
+$ php bin/startklar.php
+Nicht startklar — 11 Hindernisse:
+  - / liefert den Platzhalter „[[SCREENSHOT-FEHLT]]" aus. …
+  - / liefert den Platzhalter „[[FOTO-FEHLT]]" aus. …
+  - /ueber-uns liefert den Platzhalter „[[FOTO-FEHLT]]" aus. …
+  - /musterprojekte liefert den Platzhalter „[[SCREENSHOT-FEHLT]]" aus. …
+```
+
+`tests/PlatzhaltersperreTest.php` hält das fest — je ein Fall für Bedingung 4 und 4a, dazu die
+Gegenprobe, dass eine Seite **ohne** Platzhalter nichts meldet. Ohne die Gegenprobe wäre der
+Test von einer Sperre, die immer meldet, nicht zu unterscheiden.
+
+### Ein Testfall wurde umgedreht — mit Begründung, nicht um grün zu werden
+
+`VertrauensangabenTest::testOhneGruenderangabenEntfaelltDieSektionVollstaendig` verlangte das
+Gegenteil dessen, was §4d entscheidet. Er heißt jetzt
+`testOhneGruenderangabenStehtDerGekennzeichnetePlatzhalter` und ist **schärfer** als vorher: Er
+prüft nicht nur, dass die Markierung dasteht, sondern dass die Startsperre daran anhält. Die
+alte Zusicherung — kein leerer Rahmen an der Vertrauensstelle — ist damit nicht gefallen,
+sondern hat einen Prüfer bekommen.
+
+### Block 3 — die Messung vorher und nachher
+
+**Gesamthöhe und Überlauf**, sechs Breiten, Bewegung aus:
+
+| Breite | vorher | nachher | Differenz | Überlauf vorher | Überlauf nachher |
+|---|---:|---:|---:|---:|---:|
+| 1920 px | 13.518 px | 10.298 px | **−24 %** | 0 | 0 |
+| 1440 px | 12.928 px | 10.185 px | **−21 %** | 0 | 0 |
+| 1024 px | 12.713 px | 10.751 px | −15 % | 0 | 0 |
+| 768 px | 15.522 px | 14.488 px | −7 % | 0 | 0 |
+| 390 px | 17.745 px | 19.495 px | +10 % | 0 | 0 |
+| 320 px | 19.550 px | 21.769 px | +11 % | **+53 px** | 0 |
+
+Die beiden schmalen Breiten wachsen, weil die zwei neuen Sektionen dort einspaltig laufen: drei
+Musterkarten untereinander sind auf 390 px rund 2.400 px. Das ist der Preis der Sektion, nicht
+verlorener Abstand — der Füllgrad steigt dort mit.
+
+**Füllgrad je Abschnitt bei 1440 px** — Anteil der Fläche, den Text und Bild wirklich einnehmen:
+
+| Abschnitt | vorher | nachher |
+|---|---:|---:|
+| Aufmacher | 16 % | 16 % |
+| Kundenbereich | 53 % | 34 % |
+| Ablauf | 30 % | 29 % |
+| **Preise** | 31 % | **30 %** |
+| **Zusage** | 25 % | **36 %** |
+| Wer dahintersteckt | — | 31 % |
+| Leistungen | 26 % | 36 % |
+| **SEO-Band** | 29 % | **36 %** |
+| Musterprojekte | — | 38 % |
+| **Häufige Fragen** | 50 % | **67 %** |
+| **Abschluss** | 22 % | **29 %** |
+
+Kundenbereich fällt von 53 auf 34 %, weil die 793 px hohe Portalansicht entfallen ist — die
+Fläche zählte als Inhalt. Die Sektion ist trotzdem 981 px kürzer.
+
+**Was die Höhe abgebaut hat, Punkt für Punkt:**
+
+| | Maßnahme | Ersparnis |
+|---|---|---:|
+| b | Von vier Portalansichten zwei entfernt (Kundenbereich, Ablauf-Schritte 1 und 5) | ~1.900 px |
+| a/e | Acht Leistungen von Zeilen über die volle Breite auf **vier Spalten × zwei Reihen** — die Bauform, die §7 ohnehin nennt | ~900 px |
+| c | `karte--betont` in `--lime-soft` (1.268 × 476 px) durch **eine Zeile** ersetzt | ~480 px |
+| d | Grundrhythmus der Abschnitte `--s-7` → `--s-5`, Zusage `--s-8` → `--s-6` | ~1.200 px |
+| d | Abstände zwischen Überschrift, Vorspann und Inhalt eine Stufe enger | ~340 px |
+| — | H2-Zeilenlänge von 22ch auf **26ch** — der Wert aus `design/startseite.html` Zeile 51, beim Übertragen enger geraten. Drei Überschriften standen dadurch zweizeilig, die im Entwurf einzeilig sind | ~170 px |
+
+**Kein Wort ist dafür entfallen.** Der Wortbestand der Startseite steigt von 934 auf 1.164 —
+die beiden neuen Sektionen bringen 230 dazu. Aufzählungspunkte fallen von 56 auf 53, und die
+drei sind keine gestrichenen Punkte, sondern die sieben Ein-Wort-Punkte der Monatspauschale,
+die jetzt als Zeile stehen, gegen vier neue in der Gründersektion.
+
+**Zwei Versuche sind gemessen zurückgenommen worden**, statt sie stehen zu lassen: der Dreisatz
+im dunklen Block machte die Sektion 40 px **höher** (elf kurze Punkte brechen in schmaleren
+Spalten um), und Beschriftung neben Angabe auf der Musterkarte 21 px höher (bei 302 px
+Kartenbreite bleiben der Angabe 200 px). Beide Stellen tragen den Messwert als Kommentar.
+
+### Die beiden gemeldeten Überläufe — dieselbe Ursache, zwei Symptome
+
+**Der Knopf ab 1024 px abwärts und der Überlauf bei 320 px waren nicht dasselbe Element**, wie
+zunächst vermutet:
+
+| Symptom | Ursache |
+|---|---|
+| `A.knopf` ragt ab 1024 px abwärts über die Kante | Das **geschlossene** Menüblatt behält in Chromium eine Layoutbox. Es stand 91 px breit als dritter Flexpartner in der Kopfzeile, seine Einträge ragten mit `overflow: visible` bis 370 px hinaus. `.menue:not([open]) .menue__blatt { display: none }` |
+| Waagerechter Überlauf bei 320 px, scrollWidth 373 | `Stundenabrechnung` im Zusagesatz misst bei 31 px Schriftgrad rund 290 px. `hyphens: auto` **und** `overflow-wrap: break-word` — das erste braucht ein Trennwörterbuch, und ob eines vorliegt, entscheidet das System des Lesers |
+
+Dazu auf `/musterprojekte` derselbe Fall bei `Physiotherapiepraxis` in der H2 und
+`Musterprojekte,` in der H1 — dieselbe Regel, jetzt an `h1, h2, h3`.
+
+### Belege
+
+| Was | Wie geprüft |
+|---|---|
+| Sektion 8 mit drei Karten und drei Bildplätzen | Bildschirmaufnahme bei 1440 px |
+| Sektion 6 mit `[[FOTO-FEHLT]]` und der Liste der fehlenden Angaben | Bildschirmaufnahme bei 1440 px |
+| `/musterprojekte` | 805 Wörter im Inhaltsbereich — `17_SEITEN_SARTU.md` §4a bindet 700 bis 1.000 |
+| Zwölf öffentliche Seiten an fünf Breiten | kein waagerechter Überlauf |
+| Tests | **381 grün, 11.773 Zusicherungen** |
+
+### Ungeprüft
+
+| # | Punkt | Womit es zu prüfen ist |
+|---|---|---|
+| 1 | **Das Höhenziel von 9.000 px bei 1440 px ist nicht erreicht.** Erreicht sind 10.185 px. Die beiden neuen Sektionen messen zusammen 1.625 px; ohne sie läge die Seite bei rund 8.560 px. Die verbliebene Lücke von 1.185 px lässt sich mit den fünf beauftragten Mitteln nicht mehr schließen — jeder weitere Schritt nähme Inhalt weg, und genau das schliesst der Auftrag aus | Entscheidung des Betreibers: Ziel anheben oder eine Sektion inhaltlich kürzen |
+| 2 | **Die drei Musterprojekte sind Stufe 1, nicht Stufe 2.** Es gibt keine gebauten Beispielseiten; die Bildplätze bleiben, bis §5 entschieden ist. Ob es eine, zwei oder drei werden, ist offen — für den Beweis „kein Baukasten" braucht es nach §4a drei | Entscheidung nach `SARTU_ENTSCHEIDUNGEN_OFFEN.md` §5 |
+| 3 | **Die Wertetripel je Musterprojekt sind eingetragen, aber nicht gebaut.** `17_SEITEN_SARTU.md` §4a bindet Inhaltsdichte, Formcharakter und Bewegung je Fall; sie stehen in `Musterprojekte::alle()` und erscheinen auf `/musterprojekte` als Text. Der Komponentenkatalog aus `03_KUNDENPRODUKT.md`, der sie in Gestaltung übersetzt, existiert nicht | Katalog anlegen, dann Beispielseiten bauen |
+| 4 | **Die Sperre ist gegen die Launch-Adressen geprüft, nicht gegen jede Route.** `Platzhalterpruefung` läuft über `Launchadressen::alle()`. Eine Seite, die nicht in der Sitemap steht, würde einen Platzhalter unbemerkt ausliefern | Liste erweitern, sobald es eine Adresse ausserhalb der Sitemap mit Bildplatz gibt |
+| 5 | **Auf 390 und 320 px ist die Seite länger als vorher**, nicht kürzer — die zwei neuen Sektionen laufen dort einspaltig. Gemessen, nicht behoben | Entscheiden, ob die Musterkarten auf Mobilgeräten als Karussell oder als Auszug laufen sollen |
+| 6 | **Gelaufen ist alles gegen MariaDB 10.11**, nicht gegen MySQL 8.4 oder MariaDB 11.4. In dieser Umgebung stand nichts anderes zur Verfügung | Auf der Zielumgebung erneut laufen lassen |

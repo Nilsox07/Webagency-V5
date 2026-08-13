@@ -6,6 +6,7 @@ use Sartu\Ansicht;
 use Sartu\Helpers\Html;
 use Sartu\Services\Auftragslage;
 use Sartu\Services\Leistungszeilen;
+use Sartu\Services\Musterprojekte;
 use Sartu\Services\Startseitentexte as T;
 use Sartu\Services\Websitetexte;
 
@@ -107,18 +108,11 @@ use Sartu\Services\Websitetexte;
 
     <p class="hervor hebt-2"><?= Html::e(T::S2_UNTERSCHIED) ?></p>
 
-    <?php /* Seit dem 13.08.2026 eine **echte Aufnahme** statt eines Bildplatzes: Der
-             Kundenbereich ist gebaut, und §4b hat den Grund fuer den Platzhalter damit
-             aufgehoben. Zu sehen ist `/portal/aufgaben` mit Musterdaten. */ ?>
-    <?= Ansicht::teil('partials/aufnahme', [
-        'datei'  => 'sartu-portal-aufgaben.webp',
-        'alt'    => 'Die Aufgabenliste im Kundenbereich: drei offene Punkte mit je einem Satz, '
-                  . 'was zu tun ist, und der Seitenleiste mit Angebot, Aufgaben und Vorschau.',
-        'breite' => 1920,
-        'hoehe'  => 1200,
-        'marke'  => Websitetexte::MUSTERANSICHT,
-    ]) ?>
-
+    <?php /* **Hier stand bis zum 13.08.2026 eine zweite Portalansicht** —
+             `sartu-portal-aufgaben.webp`, allein 1.268 × 793 px. Sie ist entfallen, weil die
+             Seite vier davon trug: das Geraet im Aufmacher und drei im Ablauf. Vier Ansichten
+             belegen nicht mehr als eine gute und kosten die vierfache Hoehe (§4d, Block 3b).
+             Der Weg zur vollen Ansicht bleibt: der Knopf darunter. */ ?>
     <?php /* Im Entwurf steht hier ein **Knopf**, nicht ein Textlink: `<a class="btn
              btn-hell" href="/leistung-portal">`. Auf dunklem Grund traegt der
              Lime-Textmarker nicht, und ein zweiter Lime-Knopf neben dem Hauptweg
@@ -179,15 +173,18 @@ use Sartu\Services\Websitetexte;
       <?= Ansicht::teil('partials/preisstufen', ['preishinweis' => $preishinweis]) ?>
     </div>
 
-    <div class="karte karte--betont">
-      <h3>Was die Monatspauschale abdeckt</h3>
-      <ul class="hakenliste">
-<?php foreach (T::MONATSPAUSCHALE as $punkt): ?>
-        <li><?= Html::e($punkt) ?></li>
-<?php endforeach; ?>
-      </ul>
-      <p class="leise"><?= Html::e(T::SEO_GRUNDLAGE) ?></p>
-    </div>
+    <?php /* **Sieben Ein-Wort-Punkte brauchen keine Karte.** Bis zum 13.08.2026 standen sie
+             als `karte--betont` — 1.268 × 476 px in `--lime-soft`. Zwei Gruende, beide
+             belegt: Rang 1, Farbsystem Fassung 3, laesst keine vollflaechigen Lime-Baender
+             („Lime bleibt auf Knoepfe, Badges, Textmarker und kleine Bloecke"); und eine
+             Aufzaehlung, deren laengster Punkt `Sicherheitsaktualisierungen` ist, traegt
+             sieben Zeilen fuer sieben Woerter. **Kein Wort ist entfallen** — sie stehen
+             jetzt in einer Zeile. */ ?>
+    <p class="pauschale">
+      <span class="pauschale__titel">Was die Monatspauschale abdeckt:</span>
+      <?= Html::e(implode(' · ', T::MONATSPAUSCHALE)) ?>
+    </p>
+    <p class="leise"><?= Html::e(T::SEO_GRUNDLAGE) ?></p>
   </div>
 </section>
 
@@ -235,6 +232,21 @@ use Sartu\Services\Websitetexte;
     </div>
 
     <p class="leise"><?= Html::e(Websitetexte::KEINE_RANKINGZUSAGE) ?></p>
+  </div>
+</section>
+
+<?php /* Sektion 8 — Musterprojekte. Stufe 1 nach `10_WEBSITE_SARTU.md` §8: die drei Faelle
+         sind ausgeschrieben, die Beispielseiten nicht gebaut. Also Karten mit ehrlich
+         beschriftetem Bildplatz, kein nachgebauter Bildschirm. */ ?>
+<section class="abschnitt abschnitt--sand" id="muster">
+  <div class="bahn">
+    <p class="vorzeile hebt-3"><?= Html::e(T::S8_VORZEILE) ?></p>
+    <h2 class="hebt"><?= Html::e(T::S8_H2) ?></h2>
+    <p class="lede hebt-2"><?= Html::e(T::s8Einleitung()) ?></p>
+
+    <?= Ansicht::teil('partials/musterkarten') ?>
+
+    <p><a class="knopf knopf--ruhig hebt" href="<?= Html::e(Musterprojekte::PFAD) ?>"><?= Html::e(Musterprojekte::KNOPF) ?><span class="pfeil" aria-hidden="true">→</span></a></p>
   </div>
 </section>
 

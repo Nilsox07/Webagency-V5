@@ -637,3 +637,52 @@ Der Entwicklungsserver reichte statische Dateien nicht durch; jede Stilvorlage k
 Gemessen und fotografiert wurde eine Seite ohne CSS. Die Weiche steht jetzt, und die beiden
 Fälle aus `SecurityHeadersTest`, die einen laufenden Webserver brauchen, laufen dadurch in
 dieser Umgebung erstmals wirklich.
+
+---
+
+## F. Sektion 6 und 8, `/musterprojekte`, Höhenabbau — 13.08.2026
+
+### F.1 Was entstanden ist
+
+| Datei | Was sie tut |
+|---|---|
+| `app/services/Platzhalterpruefung.php` | **Startsperre, Bedingung 4 und 4a.** Rendert die Launch-Adressen durch den echten Router und sucht die drei Markierungen aus §5 plus `Name wird nachgereicht` |
+| `app/services/Musterprojekte.php` | die drei Fälle mit Wertetripel je Projekt (`17_SEITEN_SARTU.md` §4a) |
+| `app/services/Musterprojektetexte.php` | der Wortlaut von `/musterprojekte`, 805 Wörter im Inhaltsbereich |
+| `app/views/partials/musterkarten.php` | die drei Karten aus Sektion 8 |
+| `app/views/pages/website-musterprojekte.php` | die Zielseite, sieben Blöcke in gebundener Reihenfolge |
+| `tests/PlatzhaltersperreTest.php` | vier Fälle: Bedingung 4, Bedingung 4a, Gegenprobe, Vollständigkeit der Markierungsliste |
+
+Geändert: `Startseitentexte` (Sektion 8, zwei Ansichten entfernt), `Gruenderangaben`
+(`fehlendeAngaben()`, `MARKIERUNG`), `partials/gruender.php` (Platzhalterzweig),
+`Launchadressen` und `Websitetexte::fussspalten()` (`/musterprojekte`), `bin/startklar.php`,
+`website.css` (Musterkarten, Leistungsraster, Rhythmus, zwei Überlaufkorrekturen).
+
+### F.2 Zwei Funde, die vor dem Bauen zu melden waren
+
+**§4d gab es nicht.** Der Auftrag berief sich darauf als Rang 1. Die Datei führte §4 bis §4c.
+Die Entscheidung lag in der Anweisung vollständig vor und ist als §4d nachgetragen — mit dem
+Vermerk, dass sie nachgetragen wurde.
+
+**Die Startsperre suchte die Platzhaltermarkierungen nicht.** `bildplatz.php` versicherte seit
+seinem Bau das Gegenteil. Der Auftrag verlangte den Nachweis; der Nachweis war negativ, also
+ist die Prüfung gebaut worden, bevor die beiden Sektionen einen Platzhalter bekamen.
+
+### F.3 Ein umgedrehter Testfall
+
+`VertrauensangabenTest` verlangte, dass Sektion 6 ohne Daten **entfällt**. §4d entscheidet das
+Gegenteil. Der Fall ist umgedreht **und verschärft**: Er prüft jetzt zusätzlich, dass die
+Startsperre am Platzhalter anhält. Die alte Zusicherung ist nicht gefallen, sie hat einen
+Prüfer bekommen.
+
+### F.4 Höhe
+
+12.928 → 10.185 px bei 1440 px (−21 %), **mit** zwei zusätzlichen Sektionen von zusammen
+1.625 px und 230 Wörtern mehr. Kein Wort wurde dafür gestrichen. Das Ziel von 9.000 px ist
+**nicht erreicht** — die Begründung mit Zahlen steht in `OFFENE_PRUEFUNGEN.md`, Abschnitt
+„Ungeprüft", Punkt 1. Zwei Kürzungsversuche sind gemessen zurückgenommen worden, statt sie
+stehen zu lassen.
+
+Die beiden gemeldeten Überläufe sind behoben und hatten **verschiedene** Ursachen: das
+geschlossene Menüblatt behält in Chromium eine Layoutbox, und `Stundenabrechnung` passt bei
+320 px nicht in eine Zeile.

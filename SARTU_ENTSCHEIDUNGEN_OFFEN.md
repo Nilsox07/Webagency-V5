@@ -473,13 +473,56 @@ Begründung und später zwei Demoprojekte kommen vom Betreiber, nicht aus dem Ba
 
 ---
 
+## 4d. Sektion 6 und 8 werden gebaut, mit gekennzeichnetem Platzhalter — **ENTSCHIEDEN 13.08.2026**
+
+> **Nachgetragen am 13.08.2026.** Der Auftrag zu Sektion 6, Sektion 8 und `/musterprojekte`
+> berief sich auf „§4d". **Diesen Abschnitt gab es nicht** — die Datei führte §4, §4a, §4b und
+> §4c. Die Entscheidung selbst lag in der Anweisung des Betreibers vollständig vor; sie steht
+> hier, damit der Verweis trägt und niemand sie beim nächsten Mal wieder herleiten muss.
+
+| Entschieden | |
+|---|---|
+| **Sektion 8 „Musterprojekte" wird gebaut** | drei Karten mit Fahne, Bildplatz, Titel und den vier Zeilen Ausgangslage · Empfohlen · Seitenstruktur · Sie liefern. Die drei Gattungen bleiben, wie `10_WEBSITE_SARTU.md` §8 sie bindet |
+| **`/musterprojekte` wird gebaut** | die Zielseite des in §8 gebundenen Knopfes. Aufbau nach `17_SEITEN_SARTU.md` §4a |
+| **Sektion 6 steht auch ohne Daten** | mit `[[FOTO-FEHLT]]` statt zu entfallen |
+| **Die Bildplätze tragen `[[SCREENSHOT-FEHLT]]`** | mit Maßangabe, bis die Beispielseiten stehen |
+
+### Warum das §5 nicht bricht, sondern auf die Sperre stützt
+
+§5 verbietet den leeren Rahmen **an einer Vertrauensstelle**, und der Satz gilt weiter. Er gilt
+für die **veröffentlichte** Seite. Für den Bau ist der unsichtbare Zustand der teurere: Wer die
+Sektion nie sieht, prüft ihre Gestaltung erst am Tag der Freigabe.
+
+`10_WEBSITE_SARTU.md` §5 sieht genau dafür **Bedingung 4 und 4a** der Startsperre vor — die
+produktive Veröffentlichung bricht an `[[SCREENSHOT-FEHLT]]` und `[[FOTO-FEHLT]]` ab. Der
+Platzhalter ist damit eine **Zwischenstufe im Bau** und kein Zustand, der live gehen kann.
+
+> **Die Bedingung dafür war am 13.08.2026 nicht erfüllt — jetzt ist sie es.** `Startsperre`
+> prüfte ausschließlich Betreiberdaten und Rechtstexte; ihr eigener Klassenkopf sagte es:
+> „Sie prueft nicht auf Platzhalter in Vorlagen." Gleichzeitig versicherte
+> `partials/bildplatz.php`, die Sperre suche die Markierung. **Die Zusage stand im Markup, die
+> Suche nirgends.** `Platzhalterpruefung` und `bin/startklar.php` schließen die Lücke;
+> `tests/PlatzhaltersperreTest.php` hält sie geschlossen.
+
+### Was das an §5 **nicht** ändert
+
+Die drei Musterprojekte sind **Fälle, keine gebauten Seiten**. `10_WEBSITE_SARTU.md` §8 nennt
+dafür Stufe 1 — „Sektion mit ehrlich beschriftetem Bildplatz. Der Inhalt trägt sie auch ohne
+Bild." **Stufe 2 bleibt offen:** ob ein, zwei oder drei Demoprojekte gebaut werden, steht
+weiterhin in §5. Bis dahin bleibt ein nachgebauter Bildschirm verboten.
+
+Ebenso unverändert: Name, Text und Foto des Gründers kommen vom Betreiber. Der Platzhalter
+sagt, welche der drei Angaben fehlt — er ersetzt keine davon.
+
+---
+
 ## 5. Bildmaterial und Demoprojekte — **OFFEN**
 
 | Punkt | Stand |
 |---|---|
 | ~~Ansichten aus dem Kundenbereich~~ | **Für den Aufmacher am 10.08.2026 entschieden — siehe §4b.** Der Kundenbereich ist gebaut, die Aufnahme zeigt ihn echt. Der Bildplatz für **Musterprojekte** und das **Gründerfoto** bleibt unverändert |
 | `[GRUENDER_NAME]` | *offen* — Name für Startseite §5 **Sektion 6** und `/ueber-uns` |
-| Foto des Gründers | *offen* — echtes Foto nötig, kein Bestandsfoto, kein Platzhalter, der wie ein Foto wirkt. **Fehlt es, entfällt Sektion 6 der Startseite vollständig** — kein leerer Rahmen an einer Vertrauensstelle |
+| Foto des Gründers | *offen* — echtes Foto nötig, kein Bestandsfoto, kein Platzhalter, der wie ein Foto wirkt. ~~Fehlt es, entfällt Sektion 6 der Startseite vollständig~~ **Seit dem 13.08.2026 steht dort statt dessen ein gekennzeichneter Platzhalter, an dem die Veröffentlichung scheitert — §4d.** Was unverändert gilt: Ohne echtes Foto geht die Seite nicht live |
 | **Ein bis zwei gekennzeichnete Demoprojekte** | *offen, zu entscheiden* — vollständige Beispielseiten für erfundene, **als solche benannte** Betriebe. Liefert Bildmaterial, Arbeitsbeleg und einen Belastungstest des Produktionswegs in einem |
 | Bestandsfotos | **ausgeschlossen** (Design-Briefing §3.2a) |
 

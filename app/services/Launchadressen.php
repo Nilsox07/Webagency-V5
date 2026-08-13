@@ -45,6 +45,10 @@ final class Launchadressen
             '/briefing'   => '0.7',
             '/ueber-uns'  => '0.6',
             '/kontakt'    => '0.6',
+            // `17_SEITEN_SARTU.md` §4a — die Zielseite des in §8 gebundenen Knopfes
+            // `Alle Musterprojekte ansehen`. Sie steht auf der Stufe der Leistungsseiten:
+            // eine vollständige Zielseite, aber kein Einstieg.
+            '/musterprojekte' => '0.7',
         ];
 
         foreach (array_keys(Leistungsseiten::alle()) as $schluessel) {

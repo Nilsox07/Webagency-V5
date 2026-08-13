@@ -53,6 +53,21 @@ final class Gruenderangaben
     /** Die Adresse, unter der das hinterlegte Bild ausgeliefert wird. */
     public const BILD_PFAD = '/bild/gruender';
 
+    /**
+     * Die Markierung im Platzhalter — `10_WEBSITE_SARTU.md` §5, Bedingung 4a.
+     *
+     * Sie steht im **ausgelieferten Markup** und nicht nur im Kommentar. Genau daran findet
+     * `Platzhalterpruefung` sie, und `bin/startklar.php` bricht daran ab. Eine freie
+     * Formulierung wie „Foto folgt" fände niemand wieder — §5: „**Keine freien
+     * Formulierungen wie ‚TODO' oder ‚Lorem ipsum'**."
+     */
+    public const MARKIERUNG = '[[FOTO-FEHLT]]';
+
+    /** Der Satz neben der Markierung — er sagt, wo die Angaben herkommen. */
+    public const PLATZHALTERSATZ = 'Name, Foto und der Absatz stehen in den Betreiberdaten '
+        . 'unter Einstellungen. Solange eine der drei Angaben fehlt, geht die Seite nicht '
+        . 'produktiv.';
+
     public function __construct(private readonly ?BetreiberdatenSpeicher $betrieb = null)
     {
     }
@@ -84,6 +99,50 @@ final class Gruenderangaben
         }
 
         return ['name' => $name, 'text' => $text, 'bild' => self::BILD_PFAD];
+    }
+
+    /**
+     * Was an der Sektion noch fehlt — eine Zeile je fehlender Angabe, leer heisst vollständig.
+     *
+     * ## Warum die Sektion seit dem 13.08.2026 auch ohne Daten steht
+     *
+     * §4c liess sie entfallen, solange eine der drei Angaben fehlte. Der Betreiber hat das am
+     * 13.08.2026 geändert (§4d): Sie steht mit **gekennzeichnetem Platzhalter**.
+     *
+     * **Das ist kein Rückschritt hinter §5, sondern die Auflösung, die §5 des
+     * Website-Lastenhefts selbst vorsieht.** Bedingung 4a der Startsperre nennt genau diesen
+     * Fall — „kein Foto hinterlegt, oder der Text enthält `[[FOTO-FEHLT]]`" — und bricht die
+     * produktive Veröffentlichung daran ab. Der leere Rahmen ist damit eine **Zwischenstufe
+     * im Bau**, nicht ein Zustand, der live gehen kann.
+     *
+     * Vorausgesetzt, jemand sucht die Markierung wirklich. Bis zum 13.08.2026 tat das
+     * niemand; `Platzhalterpruefung` und `bin/startklar.php` schliessen die Lücke.
+     *
+     * @return list<string>
+     */
+    public function fehlendeAngaben(): array
+    {
+        try {
+            $zeile = ($this->betrieb ?? new BetreiberdatenSpeicher())->lesen();
+        } catch (\Throwable) {
+            $zeile = null;
+        }
+
+        $felder = [
+            'gruender_name' => 'der Name',
+            'gruender_text' => 'der Absatz, warum es SARTU gibt',
+            'gruender_bild' => 'das Foto',
+        ];
+
+        $fehlend = [];
+
+        foreach ($felder as $feld => $beschriftung) {
+            if (self::gefuellt($zeile[$feld] ?? null) === null) {
+                $fehlend[] = $beschriftung;
+            }
+        }
+
+        return $fehlend;
     }
 
     /**

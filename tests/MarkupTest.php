@@ -400,7 +400,9 @@ final class MarkupTest extends Datenbankfall
             }
         }
 
-        $this->assertSame(9, $gefunden, 'Es gibt neun Seiten mit Abschlussfeld.');
+        // Zehn seit dem 13.08.2026: `/musterprojekte` ist dazugekommen
+        // (`17_SEITEN_SARTU.md` §4a, Block 7 — Übergang zum Bedarfsscheck).
+        $this->assertSame(10, $gefunden, 'Es gibt zehn Seiten mit Abschlussfeld.');
     }
 
     /**

@@ -16,6 +16,8 @@ use Sartu\Services\Kontaktanfrage;
 use Sartu\Services\Lexikon;
 use Sartu\Services\Ratgeber;
 use Sartu\Services\Leistungsseiten;
+use Sartu\Services\Musterprojekte;
+use Sartu\Services\Musterprojektetexte;
 use Sartu\Services\Startseitentexte;
 use Sartu\Services\Unterseitentexte;
 use Sartu\Services\Websitetexte;
@@ -158,6 +160,33 @@ final class Website
                 ),
                 Strukturdaten::brotkrumen($krumen),
             ),
+        ]);
+    }
+
+    /**
+     * `/musterprojekte` — `17_SEITEN_SARTU.md` §4a.
+     *
+     * **Die Seite ist die Langfassung von Sektion 8, keine Wiederholung:** dort drei Karten
+     * nebeneinander, hier drei Fälle nacheinander mit Begründung. Den einen Block, den die
+     * Karte nicht trägt, hat nur diese Seite — *warum diese Stufe und nicht die
+     * nächstkleinere.*
+     *
+     * Sie entstand am 13.08.2026. §4a hielt seit dem 06.08.2026 fest, dass ihr Fehlen ein
+     * Bruch ist und kein offener Punkt: „Ein gebundener Knopf ohne Zielseite ist ein Bruch."
+     * Der Knopf `Alle Musterprojekte ansehen` ist in §8 gebunden.
+     *
+     * @param array<string,string> $parameter
+     */
+    public function musterprojekte(array $parameter = []): Antwort
+    {
+        $krumen = [[Musterprojekte::PFAD, 'Musterprojekte']];
+
+        return $this->seite('website-musterprojekte', [
+            'titel'        => Musterprojektetexte::TITEL,
+            'beschreibung' => Musterprojektetexte::BESCHREIBUNG,
+            'pfad'         => Musterprojekte::PFAD,
+            'brotkrumen'   => $krumen,
+            'schema'       => Strukturdaten::brotkrumen($krumen),
         ]);
     }
 

@@ -93,8 +93,12 @@ final class Websitetexte
                 '/leistung-portal'    => 'Kundenbereich',
             ],
             'Wissen' => [
-                '/ratgeber' => 'Ratgeber',
-                '/lexikon'  => 'Lexikon',
+                '/ratgeber'       => 'Ratgeber',
+                '/lexikon'        => 'Lexikon',
+                // `17_SEITEN_SARTU.md` §4a nennt als eingehende Verweise die Startseite und
+                // die Branchenseiten. Beide zeigen nur aus einem Abschnitt heraus; ohne den
+                // Fusseintrag ist die Seite von jeder anderen Adresse aus unerreichbar.
+                '/musterprojekte' => 'Musterprojekte',
             ],
             'Unternehmen' => [
                 '/ablauf'    => 'Ablauf',

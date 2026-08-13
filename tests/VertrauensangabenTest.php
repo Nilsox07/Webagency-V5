@@ -43,24 +43,57 @@ final class VertrauensangabenTest extends Datenbankfall
 
     // ------------------------------------------------- Sektion 6, „Wer dahintersteckt"
 
-    /** §4c: Ohne die drei Angaben entfällt die Sektion — auf beiden Seiten. */
-    public function testOhneGruenderangabenEntfaelltDieSektionVollstaendig(): void
+    /**
+     * §4d: Ohne die drei Angaben steht die Sektion mit **gekennzeichnetem Platzhalter**.
+     *
+     * ## Warum dieser Fall am 13.08.2026 umgedreht wurde
+     *
+     * Bis dahin verlangte er das Gegenteil: „Ohne die drei Angaben entfällt die Sektion."
+     * Das war §4c und stand nicht zur Debatte, solange niemand die Markierung suchte — ein
+     * leerer Rahmen an der Vertrauensstelle, der live gehen kann, ist schlechter als keine
+     * Sektion (§5).
+     *
+     * **Der Betreiber hat das geändert (§4d, Rang 1), und die Bedingung dafür ist erfüllt:**
+     * `10_WEBSITE_SARTU.md` §5 Bedingung 4a bricht die produktive Veröffentlichung an
+     * `[[FOTO-FEHLT]]` ab, und seit demselben Tag tut sie das wirklich.
+     *
+     * **Der Fall ist damit nicht abgeschwächt, sondern verschoben** — und zwar auf eine
+     * schärfere Prüfung: `PlatzhaltersperreTest` verlangt nicht nur, dass die Markierung da
+     * steht, sondern dass die Sperre sie findet. Der Nachweis, dass die Seite so nicht
+     * veröffentlicht werden kann, wird hier mitgeführt, damit beide Hälften der Entscheidung
+     * an derselben Stelle stehen.
+     */
+    public function testOhneGruenderangabenStehtDerGekennzeichnetePlatzhalter(): void
     {
         foreach (['/', '/ueber-uns'] as $pfad) {
             $html = (string) $this->router()->behandeln('GET', $pfad)->rumpf;
 
-            $this->assertStringNotContainsString('id="dahinter"', $html, $pfad);
-            $this->assertStringNotContainsString(Gruenderangaben::H2, $html, $pfad);
-            $this->assertStringNotContainsString(Gruenderangaben::BILD_PFAD, $html, $pfad);
+            $this->assertStringContainsString('id="dahinter"', $html, $pfad);
+            $this->assertStringContainsString(Gruenderangaben::H2, $html, $pfad);
+            $this->assertStringContainsString(Gruenderangaben::MARKIERUNG, $html, $pfad);
+
+            // Kein Bild: Die Ausspielroute liefert ohne Datei 404, ein `<img>` darauf wäre
+            // ein kaputtes Bild an der Vertrauensstelle.
+            $this->assertStringNotContainsString('src="' . Gruenderangaben::BILD_PFAD . '"', $html, $pfad);
         }
+
+        // Die zweite Hälfte: So kommt die Seite nicht heraus.
+        $hindernisse = (new \Sartu\Services\Platzhalterpruefung(['/', '/ueber-uns']))->hindernisse();
+
+        $this->assertNotSame([], $hindernisse,
+            'Der Platzhalter steht, aber die Startsperre haelt die Veroeffentlichung nicht an. '
+            . 'Genau dann ist er ein Risiko statt einer Zwischenstufe.');
     }
 
     /**
-     * §4c: Zwei von drei genügen nicht.
+     * §4c/§4d: Zwei von drei genügen nicht — die Sektion bleibt im Platzhalterzustand.
      *
-     * Das ist der Fall, der von selbst eintritt — der Betreiber trägt Name und Text ein und
-     * lädt das Bild später hoch. Stünde die Sektion dann schon da, stünde dort ein Absatz
-     * ohne Gesicht: der halbe Rahmen, den §5 verbietet.
+     * Das ist der Fall, der von selbst eintritt: Der Betreiber trägt Name und Text ein und
+     * lädt das Bild später hoch. Stünde die Sektion dann als **fertig** da, stünde dort ein
+     * Absatz ohne Gesicht — der halbe Rahmen, den §5 verbietet.
+     *
+     * Geprüft wird deshalb, dass die Markierung stehen bleibt, solange **eine** der drei
+     * Angaben fehlt. Der Platzhalter verschwindet erst, wenn alle drei da sind.
      */
     public function testZweiVonDreiAngabenGenuegenNicht(): void
     {
@@ -77,8 +110,10 @@ final class VertrauensangabenTest extends Datenbankfall
 
             $html = (string) $this->router()->behandeln('GET', '/')->rumpf;
 
-            $this->assertStringNotContainsString('id="dahinter"', $html,
-                'Die Sektion steht da, obwohl nur „' . $bezeichnung . '" vorliegt.');
+            $this->assertStringContainsString(Gruenderangaben::MARKIERUNG, $html,
+                'Die Sektion gilt als fertig, obwohl nur „' . $bezeichnung . '" vorliegt.');
+            $this->assertStringNotContainsString('src="' . Gruenderangaben::BILD_PFAD . '"', $html,
+                'Es steht ein Bild da, obwohl nur „' . $bezeichnung . '" vorliegt.');
         }
     }
 

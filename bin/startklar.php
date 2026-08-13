@@ -32,6 +32,7 @@ declare(strict_types=1);
  */
 
 use Sartu\Helpers\Env;
+use Sartu\Services\Platzhalterpruefung;
 use Sartu\Services\Startsperre;
 
 if (PHP_SAPI !== 'cli') {
@@ -43,6 +44,18 @@ $wurzel = require dirname(__DIR__) . '/app/bootstrap.php';
 restore_exception_handler();
 
 $hindernisse = (new Startsperre())->hindernisse();
+
+// Bedingung 4 und 4a — die Platzhaltermarkierungen im ausgelieferten Markup.
+//
+// Sie stehen hier und nicht in `Startsperre::hindernisse()`, weil dort jede Adminseite
+// vorbeikommt: `partials/kopfband.php` fragt bei jedem Aufruf, ob der Einrichtungshinweis
+// erscheint. Diese Pruefung rendert ein Dutzend oeffentliche Seiten — das gehoert an den
+// Veroeffentlichungsbefehl, nicht in einen Seitenkopf.
+//
+// Bis zum 13.08.2026 gab es sie ueberhaupt nicht. `partials/bildplatz.php` behauptete
+// trotzdem, die Startsperre suche die Markierung — die Zusage stand im Markup, die Suche
+// nirgends.
+$hindernisse = [...$hindernisse, ...(new Platzhalterpruefung())->hindernisse()];
 
 // Drei Werte, die nur auf dem Zielserver stimmen koennen.
 $umgebung = Env::get('APP_ENV');

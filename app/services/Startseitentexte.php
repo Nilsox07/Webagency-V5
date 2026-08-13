@@ -13,15 +13,19 @@ namespace Sartu\Services;
  * der Ansicht lässt sich nicht zählen, nicht prüfen und nicht wiederverwenden. Der
  * Prüfbericht aus `SARTU_TEXTREGELN.md` §2 braucht die laufende Prosa an einer Stelle.
  *
- * ## Zwei Sektionen fehlen, und beide fehlen mit Grund
+ * ## Beide fehlenden Sektionen stehen seit dem 13.08.2026 — §4d
  *
- * | Sektion | Warum sie nicht gebaut ist |
+ * Hier stand bis dahin, warum Sektion 6 und Sektion 8 fehlen. Beide Begründungen sind
+ * abgelöst, und keine der beiden ist einfach übergangen worden:
+ *
+ * | Sektion | Was sich geändert hat |
  * |---|---|
- * | **6 — Wer dahintersteckt** | `SARTU_ENTSCHEIDUNGEN_OFFEN.md` §5: Foto und Name des Gründers stehen auf `offen`. „Fehlt es, entfällt Sektion 8 der Startseite vollständig — kein leerer Rahmen an einer Vertrauensstelle." Die Startsperre §14a Bedingung 4a hält sie zusätzlich zurück |
- * | **8 — Musterprojekte** | Dieselbe Datei, §5: „Ein bis zwei gekennzeichnete Demoprojekte — offen, zu entscheiden." §5 Sektion 8 des Lastenhefts: „Bis dahin bleibt die Sektion ungebaut — eine Musterprojekt-Sektion ohne Musterprojekte ist schlechter als keine" |
+ * | **6 — Wer dahintersteckt** | §4c hat die Sperre von „nicht gebaut" auf „nicht gefüllt" umgestellt, §4d auf „gekennzeichneter Platzhalter". Der leere Rahmen bleibt verboten — er kann nur nicht mehr live gehen: Startsperre Bedingung 4a bricht an `[[FOTO-FEHLT]]` ab, und seit dem 13.08.2026 tut sie das wirklich |
+ * | **8 — Musterprojekte** | `10_WEBSITE_SARTU.md` §8 kennt drei Stufen. Der Satz „bis dahin bleibt die Sektion ungebaut" meint **Stufe 0** — keine ausgeschriebenen Fälle. Die drei Fälle sind ausgeschrieben, also gilt Stufe 1: Sektion mit ehrlich beschriftetem Bildplatz |
  *
- * Beide sind gemeldet, nicht ersetzt. Es steht kein Platzhalter dort und keine abgeschwächte
- * Fassung — §0.3b verbietet „kommt bald"-Bereiche.
+ * Was weiterhin gilt: §0.3b verbietet „kommt bald"-Bereiche. Ein Platzhalter mit
+ * Maßangabe, Fundort und Veröffentlichungssperre ist keiner — er sagt, was fehlt, wo es
+ * einzutragen ist und dass ohne es nichts hinausgeht.
  *
  * ## Ein Ortsname fehlt, und das ist kein Versehen
  *
@@ -185,10 +189,15 @@ final class Startseitentexte
     public static function ablauf(): array
     {
         return [
-            ['titel' => 'Bedarfsscheck',
-             'satz'  => 'Wenige Fragen zu Unternehmen, Ziel, Umfang und Domain.',
-             'bild'  => ['datei' => 'sartu-ablauf-1-bedarfsscheck.webp', 'breite' => 1280, 'hoehe' => 800,
-                         'alt'   => 'Der erste Schritt des Bedarfsschecks: die Fragen zum Unternehmen.']],
+            /* **Von vier Portalansichten sind zwei geblieben** — das Gerät im Aufmacher und
+               diese eine hier (§4d, Block 3b, 13.08.2026). Vorher trugen die Schritte 1, 2
+               und 5 je eine, dazu kam die Aufgabenliste in Sektion 2.
+
+               Geblieben ist das **Angebot**, nicht der Bedarfsscheck: Der Bedarfsscheck steht
+               als Formular ohnehin einen Klick entfernt, das Angebot dagegen sieht nur, wer
+               schon Kunde ist — und genau das ist die Ansicht, die den Unterschied belegt. */
+            ['titel' => 'Bedarfsscheck', 'bild' => null,
+             'satz'  => 'Wenige Fragen zu Unternehmen, Ziel, Umfang und Domain.'],
             ['titel' => 'Geprüftes Angebot',
              'satz'  => 'Sie bekommen Umfang, Preis und Zahlungsplan schriftlich.',
              'bild'  => ['datei' => 'sartu-ablauf-2-angebot.webp', 'breite' => 1280, 'hoehe' => 800,
@@ -205,10 +214,8 @@ final class Startseitentexte
             ['titel' => 'Produktion', 'bild' => null,
              'satz'  => 'Wir bauen die Website. Beim Entwurf hilft uns KI; geprüft und '
                 . 'freigegeben wird jede Seite von einem Menschen.'],
-            ['titel' => 'Vorschau und Freigabe',
-             'satz'  => 'Sie sehen die fertige Website und sammeln Ihre Änderungen.',
-             'bild'  => ['datei' => 'sartu-ablauf-5-vorschau.webp', 'breite' => 1280, 'hoehe' => 800,
-                         'alt'   => 'Die Vorschau im Kundenbereich mit dem Weg zur Rückmeldung und zur Freigabe.']],
+            ['titel' => 'Vorschau und Freigabe', 'bild' => null,
+             'satz'  => 'Sie sehen die fertige Website und sammeln Ihre Änderungen.'],
             ['titel' => 'Start und Betrieb', 'bild' => null,
              'satz'  => 'Wir schalten live und halten die Seite am Laufen.'],
         ];
@@ -289,6 +296,39 @@ final class Startseitentexte
             ['titel' => 'KI-Antworten einordnen',
              'satz'  => 'Konsistente Unternehmensfakten, beantwortete Fragen, klare Definitionen.'],
         ];
+    }
+
+    // -------------------------------------------------------------- 8 Musterprojekte
+
+    /** Die Wegmarke über der Überschrift — wie `Kundenbereich` und `Vier Stufen`. */
+    public const S8_VORZEILE = 'Statt Referenzen';
+
+    /**
+     * §8 H2 — *Aufgabe:* die fehlenden Referenzen offen benennen, statt sie zu umschreiben.
+     * *Grenze:* **kein Konjunktiv**, eine Zahl nennen, auch wenn sie null ist.
+     * *Umfang:* zwei Sätze, zusammen höchstens acht Wörter. Hier sind es sieben.
+     *
+     * **Jede `könnte`-Fassung ist verworfen** — §8 führt sie ausdrücklich als gescheitert.
+     * Konjunktiv ist keine Aussage, und an der Stelle, an der ein Leser nach Belegen sucht,
+     * liest er ihn als Ausweichen.
+     */
+    public const S8_H2 = 'Noch keine Kunden. Deshalb zeigen wir Musterprojekte.';
+
+    /**
+     * §8 Einleitung — *Aufgabe:* Gründungsjahr und Anzahl nennen und klarstellen, dass es
+     * Muster sind. *Umfang:* zwei Sätze, höchstens 14 Wörter.
+     *
+     * **Beide Zahlen sind `gebunden`** und kommen deshalb aus `Musterprojekte`: das
+     * Gründungsjahr als Konstante, die Anzahl gezählt. Eine abgeschriebene Drei wäre falsch,
+     * sobald ein vierter Fall dazukommt — und niemand würde es hier suchen.
+     */
+    public static function s8Einleitung(): string
+    {
+        return sprintf(
+            'SARTU ist %d gestartet. Die %s Beispiele unten sind Muster, keine Kundenaufträge.',
+            Musterprojekte::GRUENDUNG,
+            Musterprojekte::anzahlWort()
+        );
     }
 
     // -------------------------------------------------------------- 9 Häufige Fragen
