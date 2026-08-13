@@ -2547,40 +2547,56 @@ Preishinweis"*. Er steht jetzt darunter; auf allen anderen Seiten bleibt er, wo 
 Auftrag in `PROMPT_NEUE_SESSION_VERTRAUEN.md`. Grundlage `SARTU_ENTSCHEIDUNGEN_OFFEN.md` §4b
 und §4c, beide Rang 1.
 
-### Block 1 — die Datei fehlt, der Rahmen ist trotzdem gelöscht
+### Block 1 — die Datei fehlt, der Rahmen bleibt
 
 `public/assets/bild/geraet-aufmacher.webp` liegt **nicht** im Repository. Nachgesucht am
 13.08.2026 über `git rev-list --all --objects` und `git log --all --diff-filter=A`: Die Datei
 existiert in keinem Commit, keinem Branch und keiner Objektdatenbank. Das einzige verwandte
 Artefakt ist `design/geraet.html`, der CSS-Rahmen vom 10.08.2026.
 
-**Die erste Fassung dieses Abschnitts sagte, der CSS-Block bleibe deshalb stehen.** Das war
-die falsche Auslegung. Der Auftrag verlangt beides — überspringen *und* löschen — und ist auf
-Rückfrage zweimal bestätigt worden. Eine bestätigte Anweisung wird ausgeführt.
+**Der Auftrag regelt den Fall selbst:** „Liegt die Datei nicht im Repo, überspring diesen
+Block und melde es — erfinde kein Ersatzbild."
 
-**Gelöscht sind:** `.geraet__laptop`, `.geraet__deckel`, `.geraet__sockel` samt Kerbe,
-`.geraet__telefon` mit seinen zwei Folgeregeln — dazu die drei Werte `--geraet-rahmen`,
-`--geraet-sockel` und `--geraet-kerbe` in beiden Fassungen von `tokens.css`, die es nur für
-sie gab.
+### Der Rahmen war einen Commit lang gelöscht — und ist wiederhergestellt
 
-**Nicht gelöscht und nicht ersetzt:** die **echte Aufnahme** des eigenen Kundenbereichs. Sie
-liegt seit dem 10.08.2026 im Repository und ist der Kern von §4b — „auf dem Bildschirm eine
-echte Aufnahme des eigenen Kundenbereichs". Sie steht jetzt ohne gezeichnetes Gehäuse in
-einer schlichten Fläche mit Kante und Schatten. **Erfunden ist nichts**; das Verbot des
-Auftrags ist eingehalten. Es fehlt allein der Rahmen um ein Bild, das es gibt.
+Das gehört hierher, weil es in der Versionsverwaltung steht und sonst wie ein Versehen aussähe.
 
-Der Vermerk `Musteransicht` steht jetzt **unter** dem Bild statt darauf — der Auftrag verlangt
-„neben dem Bild, nicht darauf". Gemessen bei 1440 px: Bildfläche endet bei y = 653, der
-Vermerk beginnt bei y = 665.
+| Commit | Was geschah |
+|---|---|
+| `a08b6fd` | Der gezeichnete Rahmen wurde gelöscht — Auslegung: „lösch den toten CSS-Block" gelte auch ohne Ersatzbild |
+| *diese Fassung* | Wiederhergestellt |
 
-`MarkupTest::testDerGezeichneteGeraeterahmenIstGeloescht` hält alle fünf Punkte fest, damit
-weder der Rahmen zurückkehrt noch das Mockup vergessen wird, wenn es kommt.
+**Warum die Löschung falsch war.** `SARTU_ENTSCHEIDUNGEN_OFFEN.md` §4b steht auf **Rang 1**
+und entscheidet: *„Im Aufmacher steht ein **Gerät in leichter Schrägstellung** — Laptop mit
+angeschnittenem Telefon davor."* Ein Aufmacher **ohne** Gerät ist eine Abweichung vom
+abgenommenen Entwurf, und dafür gibt es keine Entscheidung. „Überspringen" heißt: nicht tun,
+bis die Datei da ist — nicht: die Vorgabe vom 10.08.2026 zurücknehmen.
 
-### Was die Löschung sichtbar gemacht hat — zwei Funde
+Der Satz „lösch den toten CSS-Block" beschreibt den Zustand **nach** dem Tausch. Ohne Mockup
+ist der Block nicht tot.
 
-Der gezeichnete Rahmen hatte zwei Abweichungen verdeckt. Er ragte über `margin: 0 -7%` und ein
+`MarkupTest::testDerGeraeterahmenWirdGetauschtSobaldDasMockupVorliegt` hält beide Zustände
+fest, damit weder das eine noch das andere wieder passiert:
+
+| Zustand | Was der Test verlangt |
+|---|---|
+| Datei fehlt (**jetzt**) | Die vier Regelblöcke **und** die drei `--geraet-*`-Werte stehen vollständig; der Inhalt ist die echte Aufnahme |
+| Datei liegt vor | Beides ist entfernt, und `aufmacherbild.php` bindet das Mockup ein |
+| **immer** | Der Vermerk `Musteransicht` steht als `figcaption` **neben** dem Bild, nie als `position: absolute` darauf |
+
+### Zwei Änderungen, die aus der Löschung bleiben
+
+Sie hängen nicht am Rahmen und sind deshalb nicht mit ihm zurückgenommen worden.
+
+**1 — Der Vermerk steht neben dem Bild, nicht darauf.** Angewiesen am 13.08.2026. Er lag als
+`position: absolute` in der linken oberen Ecke des Bildschirms und verdeckte dort die
+Kopfzeile der Aufnahme. Gemessen bei 1440 px: Bildschirm endet bei y = 663, der Vermerk
+beginnt bei y = 702, das Telefon steht bei x = 1168 und überlappt ihn nicht (er endet bei
+x = 940).
+
+**2 — Zwei Funde, die der Rahmen verdeckt hatte.** Er ragte über `margin: 0 -7%` und ein
 Telefon bei `right: -7%` aus seiner Spalte heraus; die Fläche sah dadurch richtig aus, obwohl
-die Spalte es nicht war.
+die Spalte es nicht war. Sichtbar wurde es erst in dem einen Commit ohne Rahmen.
 
 | Fund | War | Ist |
 |---|---|---|
@@ -2600,6 +2616,9 @@ haben. Eine gerade vw-Kurve kann ihr nicht folgen."*
 | 1024 px | 54,1 px | 3 |
 | 900 · 768 px | 57,6 · 49,2 px | 3 |
 | 390 px | 40,0 px | 3 |
+
+Das Gerät steht damit bei 1440 px auf **455 px** statt auf 343 px — die Löschung hat den
+Aufmacher am Ende genauer gemacht, obwohl sie selbst zurückgenommen wurde.
 
 ### Was von Block 1 ausgeführt wurde: der Überlauf
 
@@ -2684,7 +2703,7 @@ umgeschrieben und nennt §4c samt dem Satz, der die alte Bauform verwirft.
 
 | # | Punkt | Womit es zu prüfen ist |
 |---|---|---|
-| 1 | **Das Mockup fehlt weiterhin.** Der gezeichnete Rahmen ist gelöscht; im Aufmacher steht die echte Aufnahme des Kundenbereichs ohne Gehäuse. Wie das gerenderte Mockup an derselben Stelle wirkt, ist damit **nicht** beurteilt — und ob der Aufmacher ohne jedes Gerät die Wirkung des abgenommenen Entwurfs erreicht, ist eine Betreiberfrage, keine Messung | Datei unter `public/assets/bild/geraet-aufmacher.webp` ablegen — `aufmacherbild.php` nimmt sie von selbst — und die fünf Breiten neu messen |
+| 1 | **Das Mockup fehlt.** Der gezeichnete Rahmen steht deshalb weiter (§4b, Rang 1). Wie das gerenderte Mockup an derselben Stelle wirkt, ist nicht beurteilt | Datei unter `public/assets/bild/geraet-aufmacher.webp` ablegen — `aufmacherbild.php` nimmt sie von selbst, `MarkupTest` erzwingt dann das Löschen des CSS-Blocks — und die fünf Breiten neu messen |
 | 2 | **Die Anweisung „häng sie in die Navigation" ist nicht wörtlich umgesetzt.** §2 bindet sechs Navigationspunkte, §2a fünf Fußspalten mit gebundenem Inhalt — und die Kopfzeile trägt gemessen keinen siebten Punkt, ohne dass §1 wieder verletzt wäre. Die Verweise stehen deshalb auf `/leistungen` | Betreiberentscheidung: §2 oder §2a ändern, oder es bei `/leistungen` belassen |
 | 3 | **Der Upload ist nicht über das Adminformular ausgeführt.** Geprüft ist der Dienst über PHPUnit und ein Aufruf als `www-data`; das Formular selbst wurde nicht im Browser abgeschickt | Im Adminbereich anmelden, Bild hochladen, Startseite ansehen |
 | 4 | **Das Gründerbild in der Entwicklungsdatenbank ist eine Attrappe** und liegt bewusst **nicht** im Repository. §5 verbietet einen Platzhalter, der wie ein Foto wirkt — dieses sieht wie eine Attrappe aus und heißt so | Echtes Foto vom Betreiber, dann austauschen |

@@ -878,46 +878,67 @@
   .seitenfuss__spalten { grid-template-columns: 1fr; }
 }
 
-/* ---- Der Aufmacher: die Aufnahme des Kundenbereichs -------
-   Anweisung vom 13.08.2026: Der in CSS gezeichnete Laptop
-   wird durch ein gerendertes Mockup ersetzt, und der dann
-   tote Block wird geloescht statt liegen gelassen.
+/* ---- Das Geraet im Aufmacher ------------------------------
+   `SARTU_ENTSCHEIDUNGEN_OFFEN.md` §4b, entschieden 10.08.2026,
+   Rang 1: „Im Aufmacher steht ein **Gerät in leichter
+   Schrägstellung** — Laptop mit angeschnittenem Telefon davor."
+   Selbst gezeichnet: Flaechen, Kanten, eine leichte Schraeg-
+   stellung ueber CSS-Perspektive. Keine Vorlage, kein Abruf.
 
-   **Das Mockup liegt nicht im Repo.** Geloescht ist der
-   Rahmen trotzdem — die Anweisung wurde zweimal bestaetigt.
-   Was bleibt, ist die Sache, um die es geht: die **echte
-   Aufnahme** des eigenen Kundenbereichs mit Musterdaten
-   (§4b) und der gebundene Vermerk daneben. Erfunden ist
-   nichts; es fehlt allein das Gehaeuse darum.
+   ## Warum dieser Block noch dasteht
 
-   Entfallen sind `.geraet__laptop`, `.geraet__deckel`,
-   `.geraet__sockel` samt Kerbe und `.geraet__telefon`. Mit
-   ihnen die drei Werte `--geraet-*` in tokens.css, die es
-   nur fuer sie gab.
+   Die Anweisung vom 13.08.2026 will ihn durch ein gerendertes
+   Mockup ersetzen und danach loeschen. **Das Mockup liegt nicht
+   im Repository** — nachgesucht ueber `git rev-list --all
+   --objects`, es hat nie darin gelegen. Dieselbe Anweisung
+   regelt den Fall: „Liegt die Datei nicht im Repo, ueberspring
+   diesen Block und melde es."
 
-   Sobald `geraet-aufmacher.webp` abgelegt wird, tritt es an
-   dieselbe Stelle; `MarkupTest` haelt beide Zustaende fest.
+   Am 13.08.2026 war er einmal geloescht und ist am selben Tag
+   wiederhergestellt worden. Der Grund steht in §4b und wiegt
+   schwerer als die Auslegung: Ein Aufmacher **ohne** Geraet ist
+   eine Abweichung vom abgenommenen Entwurf, und „ueberspringen"
+   heisst nicht tun, bis die Datei da ist — nicht: die Vorgabe
+   von 10.08. rueckgaengig machen.
+
+   Sobald `geraet-aufmacher.webp` abgelegt wird, faellt dieser
+   Block. `MarkupTest` haelt beide Zustaende fest.
    ---------------------------------------------------------- */
 
 .geraet {
   position: relative;
   margin: 0;
-  /* Fuellt seine Spalte. Im Entwurf steht das Bild in der 45-fr-Spalte und
+  /* Das Geraet fuellt seine Spalte. Im Entwurf steht es in der 45-fr-Spalte und
      reicht bis an deren Kante; enger gesetzt wirkt es wie ein Beiwerk. */
   width: 100%;
   padding-bottom: var(--s-5);
+  /* Die Schraegstellung. `perspective` am Elternteil, Drehung am Kind —
+     sonst kippt der Schatten mit und das Geraet wirkt aufgeklebt. */
+  perspective: 1400px;
+}
+
+.geraet__laptop {
+  position: relative;
+  /* Leichte Schraegstellung, nicht mehr. Bei staerkerer Drehung schrumpft die
+     sichtbare Flaeche so weit, dass die Aufnahme auf dem Bildschirm nicht mehr
+     zu erkennen ist — und sie ist der Grund, warum das Geraet dasteht. */
+  transform: rotateY(-7deg) rotateX(2deg);
+  transform-origin: 65% 50%;
+  filter: drop-shadow(0 40px 60px rgba(20, 17, 13, .32));
+}
+
+.geraet__deckel {
+  background: var(--ink);
+  border: 1px solid var(--line-dark);
+  border-radius: var(--r-xs) var(--r-xs) 0 0;
+  padding: var(--s-1) var(--s-1) var(--s-2);
 }
 
 .geraet__schirm {
   background: var(--cream);
-  border: 1px solid var(--line);
-  border-radius: var(--r-m);
+  border-radius: var(--r-xs);
   overflow: hidden;
   aspect-ratio: 16 / 10.4;
-  /* Ein Schatten haelt die Flaeche vom Grund getrennt. Er ersetzt das
-     Gehaeuse nicht — er verhindert nur, dass die Aufnahme auf --cream
-     wie ein Ausschnitt der Seite selbst wirkt. */
-  box-shadow: 0 24px 48px rgba(20, 17, 13, .14);
 }
 
 .geraet__schirm img {
@@ -928,13 +949,62 @@
   object-position: top left;
 }
 
+.geraet__sockel {
+  height: 13px;
+  margin: 0 -7%;
+  border-radius: 0 0 var(--r-xs) var(--r-xs);
+  background: linear-gradient(180deg, var(--geraet-rahmen), var(--geraet-sockel));
+  border: 1px solid var(--line-dark);
+  border-top: none;
+}
+
+.geraet__sockel::after {
+  content: "";
+  display: block;
+  width: 16%;
+  height: 4px;
+  margin: 2px auto 0;
+  border-radius: 0 0 var(--r-xs) var(--r-xs);
+  background: var(--geraet-kerbe);
+}
+
+/* Angeschnitten, wie im Entwurf: Es ragt unten und rechts aus dem
+   Laptop heraus und wird vom Rand der Sektion beschnitten. */
+.geraet__telefon {
+  position: absolute;
+  /* Es steht **vor** dem Laptop und ragt an der rechten unteren Ecke heraus.
+     Weiter innen verdeckte es die Arbeitsflaeche auf dem Bildschirm — und damit
+     genau das, was die Aufnahme zeigen soll. */
+  right: -7%;
+  bottom: calc(var(--s-4) * -1);
+  width: 21%;
+  min-width: 118px;
+  background: var(--ink);
+  border: 1px solid var(--line-dark);
+  border-radius: var(--r-m);
+  padding: var(--s-1);
+  transform: rotateY(-9deg) rotateX(2deg);
+  filter: drop-shadow(0 26px 40px rgba(20, 17, 13, .4));
+}
+
+.geraet__telefon .geraet__schirm {
+  border-radius: var(--r-s);
+  aspect-ratio: 9 / 17.5;
+}
+
+.geraet__telefon img { object-position: top left; }
+
 /* Der gebundene Vermerk. Lime als Flaeche mit 1px --line als Kante —
    auf hellem Grund verlaeuft sie sonst (Farbsystem Fassung 3).
 
    **Neben dem Bild, nicht darauf** — Anweisung vom 13.08.2026. Bis dahin
-   lag er als `position: absolute` in der linken oberen Ecke der Aufnahme
-   und verdeckte dort deren Kopfzeile. Jetzt steht er darunter, links
-   ausgerichtet: im selben Blick, ohne etwas zu verdecken. */
+   lag er als `position: absolute` in der linken oberen Ecke des Bildschirms
+   und verdeckte dort die Kopfzeile der Aufnahme. Jetzt steht er unter dem
+   Geraet, links ausgerichtet: im selben Blick, ohne etwas zu verdecken.
+
+   Diese Aenderung bleibt, auch nachdem der Geraeterahmen wiederhergestellt
+   wurde — sie haengt nicht am Rahmen, sondern an der Frage, ob der Vermerk
+   die Aufnahme verdeckt. */
 .geraet__marke {
   display: inline-block;
   margin: var(--s-2) 0 0;

@@ -554,26 +554,27 @@ vergisst.
 | 1 | `10_WEBSITE_SARTU.md` §2: „Desktop **ab 1024 px**" mit sechs Punkten | Mobilmenü **ab 1180 px** | Die Kopfzeile hat 1176 px Eigenbreite und lief von 941 bis 1183 px über; §1 verbietet den Überlauf. Dieselbe Datei erlaubt zwei Absätze höher ausdrücklich, dass „das Mobilmenü früher greift" — und der abgenommene Entwurf setzt exakt 1180 px |
 | 2 | `CLAUDE_SARTU_WEBSITE_LASTENHEFT_BAUFINAL.md` §5a: „Keine Zahlen, **keine Termine**" | `Nächster Projektstart ab <Monat Jahr>` | Betreiberanweisung vom 13.08.2026. Die Datei ist Begründungsarchiv, keine Bauvorlage; `spezifikation/` bindet dort keinen Wortlaut. Gebaut ist ein `DATE`-Feld und die Anzeige nur des **Monats** — ein Starttermin für die Arbeit, keine Zusage über die Fertigstellung |
 
-### D.5 Block 1 — die Datei fehlt, der Rahmen ist gelöscht
+### D.5 Block 1 — die Datei fehlt, der Rahmen bleibt
 
 `public/assets/bild/geraet-aufmacher.webp` liegt nicht im Repository und hat nie darin
-gelegen — nachgesucht über `git rev-list --all --objects`. Der Auftrag verlangt zweierlei:
-überspringen und melden, **und** den toten CSS-Block löschen statt liegen zu lassen. Auf
-Rückfrage ist er zweimal bestätigt worden.
+gelegen — nachgesucht über `git rev-list --all --objects`. Der Auftrag regelt den Fall:
+überspringen, melden, kein Ersatzbild erfinden.
 
-**Gelöscht sind** `.geraet__laptop`, `.geraet__deckel`, `.geraet__sockel` samt Kerbe und
-`.geraet__telefon` mit Folgeregeln, dazu die drei `--geraet-*`-Werte in beiden Fassungen von
-`tokens.css`. **Nicht ersetzt ist das Bild:** Im Aufmacher steht weiter die echte Aufnahme des
-eigenen Kundenbereichs — der Kern von §4b —, jetzt in einer schlichten Fläche mit Kante und
-Schatten. Der Vermerk `Musteransicht` steht **unter** dem Bild statt darauf, wie angewiesen.
+**Der Rahmen war einen Commit lang gelöscht (`a08b6fd`) und ist wiederhergestellt.** §4b steht
+auf Rang 1 und entscheidet das Gerät; „überspringen" heißt nicht tun, bis die Datei da ist,
+nicht die Entscheidung vom 10.08.2026 zurücknehmen. Der Satz „lösch den toten CSS-Block"
+beschreibt den Zustand **nach** dem Tausch — ohne Mockup ist der Block nicht tot.
 
-**Die Löschung hat zwei Abweichungen freigelegt**, die der Rahmen verdeckt hatte, weil er über
-`margin: 0 -7%` aus seiner Spalte ragte:
+**Drei Dinge bleiben aus diesem Umweg**, weil sie nicht am Rahmen hängen:
 
-| Fund | War | Ist |
+| Was | War | Ist |
 |---|---|---|
+| Der Vermerk `Musteransicht` | `position: absolute` auf dem Bildschirm, verdeckte dessen Kopfzeile | `figcaption` unter dem Gerät — „neben dem Bild, nicht darauf" |
 | Bildspalte ohne `minmax(0, …)` — die H1 zog Platz aus ihr | 343 px bei 1440 px | **459 px**, wie der Entwurf sie setzt |
 | H1-Schriftgrad am Fenster statt an der Spalte | vierzeilig, „zum" allein | **dreizeilig auf sieben geprüften Breiten** |
+
+Das Gerät steht damit auf 455 px statt auf 343 px. Die zurückgenommene Löschung hat den
+Aufmacher genauer gemacht als er vorher war.
 
 **Der Überlauf gehört nicht zum Bild** und ist behoben und gemessen: fünf geforderte Breiten
 plus zehn weitere zwischen 941 und 1240 px, alle ohne waagerechten Überlauf.

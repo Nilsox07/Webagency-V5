@@ -71,14 +71,18 @@
   --rail-zahl:#8d908d;     /* Zaehler und zweite Ebene in der Leiste */
   --rail-ik:#9ca09d;       /* Zeichen in Ruhe */
 
-  /* ---- Aufmacher ------------------------------------------
-     Hier standen bis zum 13.08.2026 drei Grauwerte fuer den
-     selbst gezeichneten Laptop: `--geraet-rahmen`,
-     `--geraet-sockel`, `--geraet-kerbe`. Der Rahmen ist auf
-     Anweisung entfallen (`OFFENE_PRUEFUNGEN.md`, 13.08.2026),
-     und mit ihm die drei Werte — ein Gestaltungswert, den kein
-     Bauteil mehr benutzt, ist keine Vorgabe, sondern Ballast,
-     den die naechste Sitzung fuer verbindlich haelt. */
+  /* ---- Aufmacher: Geraet und Baender ----------------------
+     Quelle: design/startseite.html, Abschnitt „AUFMACHER".
+     Die Werte standen dort als Zahl im Bauteil; hier stehen sie
+     einmal, damit sie sich an einer Stelle aendern lassen.
+
+     Am 13.08.2026 waren sie kurzzeitig entfernt, weil der
+     Geraeterahmen geloescht war. Beides ist am selben Tag
+     wiederhergestellt: §4b (Rang 1) haelt das Geraet fest, bis
+     das gerenderte Mockup vorliegt. */
+  --geraet-rahmen:#2a2419;   /* Sockel des Laptops, oben */
+  --geraet-sockel:#1a1610;   /* Sockel des Laptops, unten */
+  --geraet-kerbe:#0d0b08;    /* die Kerbe an der Vorderkante */
 
   /* ---- Radien -------------------------------------------- */
   /* --rk skaliert die gesamte Formsprache auf einmal.

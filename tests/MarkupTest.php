@@ -231,68 +231,77 @@ final class MarkupTest extends Datenbankfall
      * nicht ein zweites Mal möglich ist.
      */
     /**
-     * Der gezeichnete Geraeterahmen ist geloescht — Anweisung vom 13.08.2026.
+     * Der Geraeterahmen und sein Tausch gegen das gerenderte Mockup.
      *
-     * ## Was angewiesen war und was daraus folgte
+     * ## Der Stand, den dieser Test festhaelt
      *
-     * *„Ersetze den in CSS gezeichneten Laptop durch `geraet-aufmacher.webp` … Das Bild
-     * ersetzt `.geraet__deckel` samt Telefon und Schattenwerk; loesch den toten CSS-Block,
-     * statt ihn liegen zu lassen."*
+     * `SARTU_ENTSCHEIDUNGEN_OFFEN.md` §4b (Rang 1, 10.08.2026): „Im Aufmacher steht ein
+     * **Gerät in leichter Schrägstellung** — Laptop mit angeschnittenem Telefon davor."
      *
-     * **Das Mockup liegt nicht im Repository** — es entsteht ausserhalb, in einem
-     * Mockup-Werkzeug. Der Rahmen ist trotzdem geloescht: Die Anweisung wurde zweimal
-     * bestaetigt, und eine bestaetigte Anweisung wird ausgefuehrt, nicht weiter bestritten.
+     * Die Anweisung vom 13.08.2026 will den gezeichneten Rahmen durch
+     * `geraet-aufmacher.webp` ersetzen und danach loeschen. **Die Datei liegt nicht im
+     * Repository**, und dieselbe Anweisung regelt den Fall: „Liegt die Datei nicht im Repo,
+     * ueberspring diesen Block und melde es."
      *
-     * ## Was **nicht** geschehen ist
+     * Am 13.08.2026 war der Rahmen einmal geloescht und ist am selben Tag wiederhergestellt
+     * worden. **Ueberspringen heisst nicht tun, bis die Datei da ist** — nicht: die
+     * Entscheidung vom 10.08.2026 zuruecknehmen. Ein Aufmacher ohne Geraet ist eine
+     * Abweichung vom abgenommenen Entwurf, und dafuer gibt es keine Entscheidung.
      *
-     * Es ist kein Ersatzbild erfunden worden — das verbietet derselbe Auftrag. Im Aufmacher
-     * steht weiter die **echte Aufnahme** des eigenen Kundenbereichs, die seit dem
-     * 10.08.2026 im Repository liegt und der Kern von §4b ist. Entfallen ist allein das
-     * gezeichnete Gehaeuse darum.
+     * ## Was der Test prueft
      *
-     * ## Beide Zustaende
-     *
-     * Der Test haelt fest, dass die vier Regelbloecke weg **bleiben**, und dass das Mockup
-     * eingebunden wird, sobald es da ist. So kann weder der Rahmen zurueckkehren noch der
-     * Tausch vergessen werden.
+     * Beide Zustaende, damit weder der Rahmen verschwindet noch der Tausch vergessen wird.
+     * Zwei Dinge gelten in **jedem** Zustand: die echte Aufnahme bleibt der Inhalt (§4b),
+     * und der Vermerk steht neben dem Bild, nicht darauf.
      */
-    public function testDerGezeichneteGeraeterahmenIstGeloescht(): void
+    public function testDerGeraeterahmenWirdGetauschtSobaldDasMockupVorliegt(): void
     {
         $mockup = SARTU_WURZEL . '/public/assets/bild/geraet-aufmacher.webp';
         $css = (string) file_get_contents(SARTU_WURZEL . '/public/assets/css/website.css');
         $tokens = (string) file_get_contents(SARTU_WURZEL . '/public/assets/css/tokens.css');
         $bild = (string) file_get_contents(SARTU_WURZEL . '/app/views/partials/aufmacherbild.php');
 
-        // 1 — die vier Regelbloecke sind weg und bleiben weg.
-        foreach (['.geraet__laptop', '.geraet__deckel', '.geraet__sockel', '.geraet__telefon'] as $regel) {
-            $this->assertStringNotContainsString($regel . ' {', $css,
-                $regel . ' steht wieder in website.css. Der gezeichnete Rahmen ist am '
-                . '13.08.2026 auf Anweisung entfallen.');
-        }
+        $regeln = ['.geraet__laptop', '.geraet__deckel', '.geraet__sockel', '.geraet__telefon'];
 
-        // 2 — mit ihnen die drei Werte, die es nur fuer sie gab. Ein Gestaltungswert ohne
-        //     Benutzer ist keine Vorgabe, sondern Ballast.
-        foreach (['--geraet-rahmen:', '--geraet-sockel:', '--geraet-kerbe:'] as $wert) {
-            $this->assertStringNotContainsString($wert, $tokens,
-                $wert . ' steht noch in tokens.css, wird aber von keiner Regel mehr benutzt.');
-        }
-
-        // 3 — kein Ersatzbild. Die echte Aufnahme steht weiter da (§4b).
-        $this->assertStringContainsString('sartu-kundenbereich-muster.webp', $bild,
-            'Die echte Aufnahme des Kundenbereichs ist der Kern von §4b und darf nicht '
-            . 'verschwinden, nur weil der Rahmen darum entfallen ist.');
-
-        // 4 — der Vermerk bleibt gebunden und steht **neben** dem Bild, nicht darauf.
+        // Gilt in beiden Zustaenden: Der Vermerk steht **neben** dem Bild, nicht darauf.
         $this->assertStringContainsString('<figcaption class="geraet__marke">', $bild);
         $this->assertSame(1, preg_match('#\.geraet__marke \{(.*?)\}#s', $css, $treffer));
         $this->assertStringNotContainsString('position: absolute', $treffer[1],
             'Der Vermerk liegt wieder auf dem Bild. Angewiesen ist „neben dem Bild, nicht darauf".');
 
-        // 5 — sobald das Mockup vorliegt, wird es genommen.
-        if (is_file($mockup)) {
-            $this->assertStringContainsString('geraet-aufmacher.webp', $bild,
-                'Das Mockup liegt vor und wird nicht eingebunden.');
+        if (!is_file($mockup)) {
+            // Der gezeichnete Rahmen steht **vollstaendig** — §4b, bis das Mockup vorliegt.
+            foreach ($regeln as $regel) {
+                $this->assertStringContainsString($regel . ' {', $css,
+                    $regel . ' fehlt in website.css, und das Mockup liegt nicht vor. §4b haelt '
+                    . 'das Geraet fest, bis es da ist — ein halber Rahmen zeigt eine Luecke.');
+            }
+
+            foreach (['--geraet-rahmen:', '--geraet-sockel:', '--geraet-kerbe:'] as $wert) {
+                $this->assertStringContainsString($wert, $tokens,
+                    $wert . ' fehlt in tokens.css, wird aber von einer Regel gebraucht.');
+            }
+
+            // Kein Ersatzbild: der Inhalt bleibt die echte Aufnahme.
+            $this->assertStringContainsString('sartu-kundenbereich-muster.webp', $bild);
+
+            return;
         }
+
+        // Ab hier liegt das Mockup vor. Der selbst gezeichnete Rahmen ist damit tot.
+        foreach ($regeln as $regel) {
+            $this->assertStringNotContainsString($regel . ' {', $css,
+                'geraet-aufmacher.webp liegt vor, aber ' . $regel . ' steht noch in website.css. '
+                . 'Der Auftrag vom 13.08.2026: „loesch den toten CSS-Block, statt ihn liegen zu lassen."');
+        }
+
+        foreach (['--geraet-rahmen:', '--geraet-sockel:', '--geraet-kerbe:'] as $wert) {
+            $this->assertStringNotContainsString($wert, $tokens,
+                $wert . ' steht noch in tokens.css, wird aber von keiner Regel mehr benutzt.');
+        }
+
+        $this->assertStringContainsString('geraet-aufmacher.webp', $bild,
+            'Das Mockup liegt vor und wird nicht eingebunden.');
     }
 
     public function testDerAufmacherTraegtDieNeunMerkmaleDesEntwurfs(): void
