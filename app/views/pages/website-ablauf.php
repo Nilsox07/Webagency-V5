@@ -133,13 +133,20 @@ use Sartu\Services\Websitetexte;
 
 <section class="abschluss">
   <div class="bahn">
-    <h2>Der erste Schritt dauert etwa drei Minuten.</h2>
-    <?= Ansicht::teil('partials/handlungsblock', [
-        'auftragslage' => $auftragslage,
-        'preishinweis' => Websitetexte::ABSCHLUSSHINWEIS . ' ' . $preishinweis,
-        'zweitziel'    => '/preise',
-        'zweittext'    => 'Preise ansehen',
-        'dunkel'       => true,
-    ]) ?>
+    <div class="handlungsfeld">
+      <div class="handlungsfeld__text">
+        <h2>Der erste Schritt dauert etwa drei Minuten.</h2>
+      </div>
+
+      <div class="handlungsfeld__handlung">
+        <?= Ansicht::teil('partials/handlungsblock', [
+            'auftragslage' => $auftragslage,
+            'preishinweis' => Websitetexte::ABSCHLUSSHINWEIS . ' ' . $preishinweis,
+            'zweitziel'    => '/preise',
+            'zweittext'    => 'Preise ansehen',
+            'dunkel'       => true,
+        ]) ?>
+      </div>
+    </div>
   </div>
 </section>

@@ -152,13 +152,20 @@ use Sartu\Services\Websitetexte;
 
 <section class="abschluss">
   <div class="bahn">
-    <h2>Welcher Umfang passt zu Ihrem Betrieb?</h2>
-    <?= Ansicht::teil('partials/handlungsblock', [
-        'auftragslage' => $auftragslage,
-        'preishinweis' => Websitetexte::ABSCHLUSSHINWEIS . ' ' . $preishinweis,
-        'zweitziel'    => '/leistungen',
-        'zweittext'    => 'Leistungen ansehen',
-        'dunkel'       => true,
-    ]) ?>
+    <div class="handlungsfeld">
+      <div class="handlungsfeld__text">
+        <h2>Welcher Umfang passt zu Ihrem Betrieb?</h2>
+      </div>
+
+      <div class="handlungsfeld__handlung">
+        <?= Ansicht::teil('partials/handlungsblock', [
+            'auftragslage' => $auftragslage,
+            'preishinweis' => Websitetexte::ABSCHLUSSHINWEIS . ' ' . $preishinweis,
+            'zweitziel'    => '/leistungen',
+            'zweittext'    => 'Leistungen ansehen',
+            'dunkel'       => true,
+        ]) ?>
+      </div>
+    </div>
   </div>
 </section>

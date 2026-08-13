@@ -2724,3 +2724,78 @@ umgeschrieben und nennt §4c samt dem Satz, der die alte Bauform verwirft.
 | 6 | **Das Favicon ist nicht in einem Browsertab angesehen worden.** Erzeugt, ausgeliefert (200, `image/vnd.microsoft.icon`) und verlinkt — die Darstellung bei 16 px auf hellem und dunklem Systemthema ist nicht beurteilt | In Chrome, Firefox und Safari öffnen |
 | 7 | **`sameAs` steht auf keiner echten Profiladresse.** Das Feld ist gebaut und geprüft, gefüllt ist es mit `https://example.org/sartu` in der Entwicklungsdatenbank | Sobald es Profile gibt, im Adminbereich eintragen |
 | 8 | **Die neuen Metaangaben sind nicht gegen einen Validierer gelaufen.** Die strukturierten Daten sind gegen das eigene Schema geprüft, nicht gegen Googles Rich-Results-Test — der braucht eine öffentlich erreichbare Adresse | Nach dem Livegang |
+
+---
+
+## 13.08.2026 — die dunklen Flächen des Entwurfs fehlten
+
+**Befund des Betreibers:** „wo sind die dunklen bereiche wie im vorgegebnen artefakt."
+
+Nachgemessen im Browser, Grund je Sektion aus `getComputedStyle`, Entwurf und gebauter Stand
+nebeneinander bei 1440 px:
+
+| # | Sektion | Entwurf | Gebaut (vorher) |
+|---|---|---|---|
+| 1 | Aufmacher | hell | hell ✓ |
+| 2 | Kundenbereich | **dunkel**, `--r-xl` oben gerundet | hell ✗ |
+| 3 | Ablauf | **dunkel**, `--r-xl` unten gerundet | `--sand` ✗ |
+| 4 | Preise | hell | hell ✓ |
+| 5 | Zusage | **dunkel**, randlos | dunkel ✓ |
+| 7 | Leistungen | `--sand` | hell ✗ |
+| — | SEO-Band | (gibt es nicht) | `--sand` ✗ |
+| 9 | Fragen | hell | hell ✓ |
+| 10 | Abschluss | **hell** mit dunkler gerundeter Fläche darin | ganz dunkel ✗ |
+
+### Der Fehler, den keine Prüfung finden konnte
+
+Der Kopf von `website.css` behauptete: *„die dunklen Abschnitte sind genau zwei: `.zusage` und
+`.abschluss`."* Der Entwurf hat **drei** dunkle Flächen, und die grösste fehlte ganz — Sektion 2
+und 3 bilden dort **einen durchgehenden Block**.
+
+**Jede Sektion war für sich richtig gebaut.** Die Seite hatte eine H1, alle Kontraste stimmten,
+die Testreihe war grün. Falsch war nur die **Folge** der Gründe — und dafür gab es keine
+Prüfung. Ohne den Block läuft die Startseite von oben bis unten hell durch, genau das, was
+Design-Briefing §3.7 mit „kein Aufbaumuster mehr als zweimal" verhindern soll.
+
+### Was übertragen wurde
+
+| Aus dem Entwurf | Wohin |
+|---|---|
+| `.dark{background:var(--ink);color:#efe9dd}` (Zeile 53) | `.abschnitt--dunkel` — die beiden Rohwerte als `--paper` und `--label-dark`, beide auf `--ink` gerechnet |
+| `.round-top` / `.round-bot` (Zeile 57/58) | `.abschnitt--rundoben` / `.abschnitt--rundunten` |
+| `style="padding-top:0"` am zweiten dunklen Abschnitt (Zeile 873) | `.abschnitt--dunkel + .abschnitt--dunkel { padding-top: 0 }` — als Regel, weil die CSP kein `style`-Attribut zulässt |
+| `.sec.sand` an `#leistungen` (Zeile 994) | Sektion 7 trägt den Sandgrund, das SEO-Band darunter nicht mehr |
+| `.cta-field` (Zeile 575) | `.handlungsfeld` — dunkel, `--r-xl`, `--shadow-lift`, zwei Spalten `1.25fr / .75fr` |
+
+### Was am Entwurf nicht wörtlich übernommen ist — und warum
+
+**`align-items: end` am Abschlussfeld.** Der Entwurf hat dort genau zwei Kinder; „end" lässt
+beide unten bündig abschliessen. Unsere Seiten bringen links bis zu vier eigenständige Absätze
+mit — „end" schob den Text nach unten und den Knopf allein nach oben, gemessen **110 px**
+Versatz zwischen den Spaltenanfängen. Übernommen ist damit die Absicht (beide Spalten beginnen
+auf einer Linie), nicht der Buchstabe.
+
+**Zwei Hüllen je Feld statt einer CSS-Regel.** Der Versuch, ohne Markup auszukommen, ist zweimal
+gescheitert: Ein über alle Reihen gespanntes Element streckt sie, und auf der Branchenseite ist
+das letzte Kind der Preishinweis, nicht der Knopf. Neun Seiten haben jetzt
+`handlungsfeld__text` und `handlungsfeld__handlung`.
+
+### Gemessen
+
+| Was | Ergebnis |
+|---|---|
+| Grundfolge Entwurf gegen gebaut | **deckungsgleich**, Sektion für Sektion |
+| Kontraste im dunklen Block | H2, Fliesstext, Hakenliste, Zeitstrahl, Textlink **18,8 : 1** · Vorspann und Vorzeile **7,1 : 1** — alle über 4,5 : 1 |
+| Fünf Breiten | 1920 · 1440 · 1280 · 1024 · 390 px, **kein waagerechter Überlauf** |
+| Testreihe | **375 grün**, 11.379 Zusicherungen |
+
+Festgehalten in `MarkupTest::testDieGrundfolgeDerStartseiteStimmtMitDemEntwurf` und
+`testJedesAbschlussfeldHatBeideSpalten`.
+
+### Ungeprüft
+
+| # | Punkt | Womit es zu prüfen ist |
+|---|---|---|
+| 1 | **Der Entwurf hat keine Sektion 6.** „Wer dahintersteckt" ist am 13.08.2026 dazugekommen (§4c) und steht zwischen der dunklen Zusage und dem Sandgrund von Sektion 7. Ob die Folge hell-dunkel-hell dort trägt, ist nicht am Entwurf zu prüfen — er kennt die Sektion nicht | Betreiberurteil |
+| 2 | **Das SEO-Band steht im Entwurf nicht als eigene Sektion.** Es trägt jetzt keinen Grund mehr, damit der Sandgrund an Sektion 7 sitzt wie im Entwurf. Ob es dort überhaupt hingehört, ist eine Inhaltsfrage | `10_WEBSITE_SARTU.md` §5, Sektionsliste |
+| 3 | **Die acht Unterseiten sind nur auf Antwortstatus geprüft**, nicht Bild für Bild. Sie tragen dasselbe Abschlussfeld, aber eigene Sektionsfolgen | Durchsehen bei 1440 und 390 px |

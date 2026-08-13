@@ -14,7 +14,14 @@ use Sartu\Services\Websitetexte;
  *
  * **Die Reihenfolge ist verbindlich**, ebenso die Bauform je Sektion. Kein Aufbaumuster kommt
  * mehr als zweimal vor (Design-Briefing §3.7) — deshalb wechselt der Grund zwischen hell,
- * `--sand` und randlos dunkel, und die Sektionen 5 und 10 sind die einzigen dunklen.
+ * `--sand` und dunkel.
+ *
+ * **Der Grund je Sektion ist am 13.08.2026 gegen `design/startseite.html` nachgemessen
+ * worden.** Hier stand vorher, die Sektionen 5 und 10 seien die einzigen dunklen; der
+ * Entwurf hat drei dunkle Flächen, und die grösste fehlte ganz: Sektion 2 und 3 bilden dort
+ * **einen** durchgehenden Block, oben und unten mit `--r-xl` gerundet. Sektion 10 ist im
+ * Entwurf **hell** und trägt die dunkle Fläche als `.handlungsfeld` in sich.
+ * `MarkupTest::testDieGrundfolgeDerStartseiteStimmtMitDemEntwurf` hält die Folge fest.
  *
  * **Sektion 8 fehlt mit Grund.** Begründung im Kopf von `Startseitentexte`.
  *
@@ -76,7 +83,9 @@ use Sartu\Services\Websitetexte;
   </div>
 </section>
 
-<section class="abschnitt" id="kundenbereich">
+<?php /* Sektion 2 und 3 sind im Entwurf **ein** dunkler Block, oben und unten mit
+         --r-xl gerundet (`design/startseite.html` Zeile 859 und 873). */ ?>
+<section class="abschnitt abschnitt--dunkel abschnitt--rundoben" id="kundenbereich">
   <div class="bahn">
     <p class="vorzeile">Kundenbereich</p>
     <h2><?= Html::e(T::S2_H2) ?></h2>
@@ -109,7 +118,7 @@ use Sartu\Services\Websitetexte;
   </div>
 </section>
 
-<section class="abschnitt abschnitt--sand" id="ablauf">
+<section class="abschnitt abschnitt--dunkel abschnitt--rundunten" id="ablauf">
   <div class="bahn">
     <h2><?= Html::e(T::S3_H2) ?></h2>
 
@@ -167,7 +176,7 @@ use Sartu\Services\Websitetexte;
          entfaellt sonst vollstaendig (§4c). Die Pruefung liegt im Partial, nicht hier. */ ?>
 <?= Ansicht::teil('partials/gruender', ['gruender' => $gruender]) ?>
 
-<section class="abschnitt" id="leistungen">
+<section class="abschnitt abschnitt--sand" id="leistungen">
   <div class="bahn">
     <h2><?= Html::e(T::S7_H2) ?></h2>
     <p class="lede"><?= Html::e(T::S7_EINLEITUNG) ?></p>
@@ -186,7 +195,7 @@ use Sartu\Services\Websitetexte;
   </div>
 </section>
 
-<section class="abschnitt abschnitt--sand">
+<section class="abschnitt">
   <div class="bahn">
     <h2><?= Html::e(T::S7_SEO_H2) ?></h2>
     <p class="lede"><?= Html::e(T::S7_SEO_TEXT) ?></p>
@@ -213,23 +222,29 @@ use Sartu\Services\Websitetexte;
 
 <section class="abschluss" id="bedarfsscheck">
   <div class="bahn">
-    <h2><?= Html::e(T::S10_H2) ?></h2>
-    <p class="lede"><?= Html::e(T::S10_TEXT) ?></p>
+    <div class="handlungsfeld">
+      <div class="handlungsfeld__text">
+        <h2><?= Html::e(T::S10_H2) ?></h2>
+        <p class="lede"><?= Html::e(T::S10_TEXT) ?></p>
 
-    <p class="marken"><?= Html::e(implode(' · ', T::S10_CHIPS)) ?></p>
+        <p class="marken"><?= Html::e(implode(' · ', T::S10_CHIPS)) ?></p>
 
-    <ul class="vertrauenszeile">
-<?php foreach (T::S10_VERTRAUEN as $punkt): ?>
-      <li><?= Html::e($punkt) ?></li>
-<?php endforeach; ?>
-    </ul>
+        <ul class="vertrauenszeile">
+    <?php foreach (T::S10_VERTRAUEN as $punkt): ?>
+          <li><?= Html::e($punkt) ?></li>
+    <?php endforeach; ?>
+        </ul>
+      </div>
 
-    <?= Ansicht::teil('partials/handlungsblock', [
-        'auftragslage' => $auftragslage,
-        'preishinweis' => Websitetexte::ABSCHLUSSHINWEIS . ' ' . $preishinweis,
-        'zweitziel'    => '/preise',
-        'zweittext'    => 'Preise ansehen',
-        'dunkel'       => true,
-    ]) ?>
+      <div class="handlungsfeld__handlung">
+        <?= Ansicht::teil('partials/handlungsblock', [
+            'auftragslage' => $auftragslage,
+            'preishinweis' => Websitetexte::ABSCHLUSSHINWEIS . ' ' . $preishinweis,
+            'zweitziel'    => '/preise',
+            'zweittext'    => 'Preise ansehen',
+            'dunkel'       => true,
+        ]) ?>
+      </div>
+    </div>
   </div>
 </section>

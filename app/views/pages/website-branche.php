@@ -137,23 +137,29 @@ use Sartu\Services\Websitetexte;
 
 <section class="abschluss" id="bedarfsscheck">
   <div class="bahn">
-    <h2>Welche Website passt zu Ihrem Betrieb?</h2>
-    <p class="lede"><?= Html::e(Startseitentexte::S10_TEXT) ?></p>
+    <div class="handlungsfeld">
+      <div class="handlungsfeld__text">
+        <h2>Welche Website passt zu Ihrem Betrieb?</h2>
+        <p class="lede"><?= Html::e(Startseitentexte::S10_TEXT) ?></p>
 
-    <ul class="vertrauenszeile">
-<?php foreach (Startseitentexte::S10_VERTRAUEN as $punkt): ?>
-      <li><?= Html::e($punkt) ?></li>
-<?php endforeach; ?>
-    </ul>
+        <ul class="vertrauenszeile">
+    <?php foreach (Startseitentexte::S10_VERTRAUEN as $punkt): ?>
+          <li><?= Html::e($punkt) ?></li>
+    <?php endforeach; ?>
+        </ul>
+      </div>
 
-    <?php /* §10a: derselbe Endpunkt wie ueberall, nur mit vorbelegter Branche. */ ?>
-    <form method="post" action="/briefing/start">
-      <?= Csrf::feld() ?>
-      <input type="hidden" name="branche_vorbelegt" value="<?= Html::e($schluessel) ?>">
-      <button type="submit" class="knopf"><?= Html::e(Auftragslage::knopf($auftragslage['knopf'] ?? null)) ?></button>
-    </form>
+      <div class="handlungsfeld__handlung">
+        <?php /* §10a: derselbe Endpunkt wie ueberall, nur mit vorbelegter Branche. */ ?>
+        <form method="post" action="/briefing/start">
+          <?= Csrf::feld() ?>
+          <input type="hidden" name="branche_vorbelegt" value="<?= Html::e($schluessel) ?>">
+          <button type="submit" class="knopf"><?= Html::e(Auftragslage::knopf($auftragslage['knopf'] ?? null)) ?></button>
+        </form>
 
-    <p class="preishinweis"><?= Html::e(Websitetexte::ABSCHLUSSHINWEIS) ?> <?= Html::e($preishinweis) ?></p>
+        <p class="preishinweis"><?= Html::e(Websitetexte::ABSCHLUSSHINWEIS) ?> <?= Html::e($preishinweis) ?></p>
+      </div>
+    </div>
   </div>
 </section>
 

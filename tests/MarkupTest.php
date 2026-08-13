@@ -231,6 +231,99 @@ final class MarkupTest extends Datenbankfall
      * nicht ein zweites Mal möglich ist.
      */
     /**
+     * Die Grundfolge der Startseite stimmt mit dem abgenommenen Entwurf ueberein.
+     *
+     * ## Warum das ein eigener Test ist
+     *
+     * Bis zum 13.08.2026 lief die Startseite von oben bis unten hell durch. Der Kopf von
+     * `website.css` behauptete, es gebe „genau zwei" dunkle Abschnitte — der Entwurf hat
+     * drei Flaechen, und die groesste fehlte ganz: **Sektion 2 und 3 bilden dort einen
+     * durchgehenden dunklen Block**, oben und unten mit `--r-xl` gerundet.
+     *
+     * Das ist der Fehler, den keine der bisherigen Pruefungen finden konnte: Jede Sektion
+     * war fuer sich richtig gebaut, die Seite hatte eine H1, alle Kontraste stimmten, und
+     * die Testreihe war gruen. Nur die **Folge** der Gruende war eine andere.
+     *
+     * Geprueft wird deshalb die Folge, nicht die einzelne Regel — an den Klassen, die den
+     * Grund tragen. Die Farbe selbst prueft `testBauteilCssBenutztNurVariablen`.
+     */
+    public function testDieGrundfolgeDerStartseiteStimmtMitDemEntwurf(): void
+    {
+        $seite = (string) file_get_contents(SARTU_WURZEL . '/app/views/pages/website-start.php');
+
+        preg_match_all('#<section class="([^"]*)"[^>]*>#', $seite, $treffer);
+        $klassen = $treffer[1];
+
+        // Sektion 2 und 3: ein Block, oben und unten gerundet. Der Entwurf setzt das an
+        // `#portal` und `#ablauf` (Zeile 859 und 873).
+        $this->assertStringContainsString('abschnitt--dunkel', $klassen[1] ?? '');
+        $this->assertStringContainsString('abschnitt--rundoben', $klassen[1] ?? '');
+        $this->assertStringContainsString('abschnitt--dunkel', $klassen[2] ?? '');
+        $this->assertStringContainsString('abschnitt--rundunten', $klassen[2] ?? '');
+
+        // Sektion 4 traegt keinen Grund, Sektion 5 ist die randlose dunkle Zusage.
+        $this->assertSame('abschnitt', $klassen[3] ?? '');
+        $this->assertSame('zusage', $klassen[4] ?? '');
+
+        // Sektion 7 traegt den Sandgrund — im Entwurf `<section class="sec sand"
+        // id="leistungen">`. Bis zum 13.08.2026 stand er am SEO-Band darunter.
+        $leistungen = null;
+        foreach ($treffer[0] as $nummer => $ganz) {
+            if (str_contains($ganz, 'id="leistungen"')) {
+                $leistungen = $klassen[$nummer];
+            }
+        }
+
+        $this->assertNotNull($leistungen, 'Die Leistungssektion fehlt.');
+        $this->assertStringContainsString('abschnitt--sand', $leistungen);
+
+        // Sektion 10: **helle** Sektion mit dunkler gerundeter Flaeche darin.
+        $this->assertStringContainsString('<section class="abschluss"', $seite);
+        $this->assertStringContainsString('<div class="handlungsfeld">', $seite);
+
+        $css = (string) file_get_contents(SARTU_WURZEL . '/public/assets/css/website.css');
+
+        $this->assertSame(1, preg_match('#^\.abschluss \{(.*?)\}#ms', $css, $regel));
+        $this->assertStringNotContainsString('background', $regel[1],
+            'Die Abschlusssektion traegt wieder einen eigenen Grund. Im Entwurf ist sie hell, '
+            . 'und die dunkle Flaeche liegt als `.handlungsfeld` darin.');
+
+        // Der Block darf nicht auseinanderfallen: zwei dunkle Abschnitte in Folge sind einer.
+        $this->assertStringContainsString('.abschnitt--dunkel + .abschnitt--dunkel', $css);
+    }
+
+    /**
+     * Jede Seite mit Abschlussfeld teilt es in Aussage und Handlung.
+     *
+     * Der Entwurf setzt `grid-template-columns:minmax(0,1.25fr) minmax(0,.75fr)` am
+     * Abschlussfeld. Ohne die beiden Huellen faellt das auf eine Spalte zurueck — und der
+     * Versuch, die Kinder per `:last-child` zu verteilen, ist am 13.08.2026 gescheitert:
+     * Auf der Branchenseite ist das letzte Kind der Preishinweis, nicht der Knopf.
+     */
+    public function testJedesAbschlussfeldHatBeideSpalten(): void
+    {
+        $seiten = glob(SARTU_WURZEL . '/app/views/pages/*.php') ?: [];
+        $gefunden = 0;
+
+        foreach ($seiten as $datei) {
+            $inhalt = (string) file_get_contents($datei);
+
+            if (!str_contains($inhalt, '<div class="handlungsfeld">')) {
+                continue;
+            }
+
+            ++$gefunden;
+
+            foreach (['handlungsfeld__text', 'handlungsfeld__handlung'] as $huelle) {
+                $this->assertStringContainsString('<div class="' . $huelle . '">', $inhalt,
+                    basename($datei) . ' hat ein Abschlussfeld ohne ' . $huelle . '.');
+            }
+        }
+
+        $this->assertSame(9, $gefunden, 'Es gibt neun Seiten mit Abschlussfeld.');
+    }
+
+    /**
      * Der Geraeterahmen und sein Tausch gegen das gerenderte Mockup.
      *
      * ## Der Stand, den dieser Test festhaelt
