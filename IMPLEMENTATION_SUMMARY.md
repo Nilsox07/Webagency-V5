@@ -494,3 +494,82 @@ geprüft und steht so in `OFFENE_PRUEFUNGEN.md`, nicht als grün gemeldet.
 Die Nicht-bauen-Liste aus Abschnitt 11 gilt unverändert: doppelte Buchführung, Kontenrahmen,
 ELSTER, Bilanz, Mahnwesen, Lastschriftmandate, automatische Verrechnung von Gutschriften,
 Fremdwährungen, Skonto. Aufgehoben war §4a **nur** für die Mollie-Anbindung.
+
+---
+
+## D. Vertrauensangaben — 13.08.2026
+
+Grundlage: `SARTU_ENTSCHEIDUNGEN_OFFEN.md` §4b und §4c, beide Rang 1.
+
+### D.1 Der Grundgedanke: die Sperre wandert von der Methode ins Feld
+
+Drei Stellen waren **gar nicht gebaut**, weil das dazugehörige Feld leer bleiben könnte:
+Sektion 6 der Startseite, der Gründerabschnitt auf `/ueber-uns` und `LocalBusiness` in den
+strukturierten Daten. Die Begründung stand jeweils sauber im Quelltext — und war trotzdem
+falsch herum: Der Betreiber konnte nichts eintragen, also blieb das Feld leer, also wurde
+nicht gebaut.
+
+§4c dreht das um. **Jede dieser Ausgaben existiert jetzt und prüft ihre eigene Bedingung.**
+Was §5 verbietet — der leere Rahmen an einer Vertrauensstelle — wird dadurch nicht
+aufgeweicht: `Gruenderangaben::angaben()` gibt `null`, solange nicht **alle drei** Angaben
+stehen, und `partials/gruender` gibt dann nichts aus. Zwei von drei genügen nicht, und
+`VertrauensangabenTest` prüft fünf Kombinationen einzeln.
+
+### D.2 Was entstanden ist
+
+| Was | Wo |
+|---|---|
+| `gruender_name`, `gruender_text`, `gruender_bild` | Migration **037** |
+| `naechster_projektstart` | Migration **038** |
+| `profil_adressen` für `sameAs` | Migration **039** |
+| `Services\Gruenderangaben` — Sichtbarkeitsregel, gebundene H2, Absatzzerlegung | neu |
+| `Services\Gruenderbild` — Annahme, Ablage, Austausch, Ausspielung | neu |
+| `Uploaddienst::bildPruefen()` — dieselben Prüfungen, ohne die vier, die an einer Kundenorganisation hängen | ergänzt |
+| `partials/gruender.php` | neu |
+| `partials/markenzeichen.php`, `partials/teilenkarte.php` | neu |
+| `/bild/gruender` · `/admin/einstellungen/gruenderbild` · `…/gruenderbild-entfernen` | drei Routen |
+| `public/favicon.ico`, vier PNG, `sartu-og.png` | aus `sartu-mark.svg` und `sartu-logo-dunkel.svg` erzeugt |
+
+### D.3 Drei Entscheidungen, die im Auftrag nicht standen
+
+**Das Gründerbild liegt außerhalb von `public/`.** §11 verlangt das für jede hochgeladene
+Datei, und der Satz kennt keine Ausnahme für den Betreiber: Ein beschreibbares Verzeichnis
+unter `/public` bleibt eines, gleich wer es füllt. Ausgeliefert wird über `/bild/gruender`,
+**inline** und nicht als Anhang — die Regel `Content-Disposition: attachment` schützt vor
+SVG, und SVG kommt hier nicht herein.
+
+**`sameAs` hat ein eigenes Feld bekommen.** §4c verlangt es „nur bei gefüllten Feldern",
+nannte aber kein Feld dafür. Ohne eines wäre die Bedingung dauerhaft unerfüllbar gewesen —
+genau die Bauform, die §4c abschafft.
+
+**Die Kapazitätszeile fällt bei `knapp` ohne Datum ganz weg.** `offen` und `ausgebucht` haben
+einen Text, der ohne Monat trägt; `knapp` hatte nur den, der ersetzt wurde. Auf die alte
+Fassung zurückzufallen hätte die Korrektur rückgängig gemacht, sobald jemand das Datum
+vergisst.
+
+### D.4 Abweichungen — beide gemeldet
+
+| Nr. | Vorgabe | Was gebaut ist | Warum |
+|---|---|---|---|
+| 1 | `10_WEBSITE_SARTU.md` §2: „Desktop **ab 1024 px**" mit sechs Punkten | Mobilmenü **ab 1180 px** | Die Kopfzeile hat 1176 px Eigenbreite und lief von 941 bis 1183 px über; §1 verbietet den Überlauf. Dieselbe Datei erlaubt zwei Absätze höher ausdrücklich, dass „das Mobilmenü früher greift" — und der abgenommene Entwurf setzt exakt 1180 px |
+| 2 | `CLAUDE_SARTU_WEBSITE_LASTENHEFT_BAUFINAL.md` §5a: „Keine Zahlen, **keine Termine**" | `Nächster Projektstart ab <Monat Jahr>` | Betreiberanweisung vom 13.08.2026. Die Datei ist Begründungsarchiv, keine Bauvorlage; `spezifikation/` bindet dort keinen Wortlaut. Gebaut ist ein `DATE`-Feld und die Anzeige nur des **Monats** — ein Starttermin für die Arbeit, keine Zusage über die Fertigstellung |
+
+### D.5 Ein Auftragsteil ist **nicht** ausgeführt
+
+**Block 1 — das gerenderte Gerätebild.** `public/assets/bild/geraet-aufmacher.webp` liegt
+nicht im Repository. Der Auftrag regelt den Fall selbst: überspringen und melden, kein
+Ersatzbild erfinden. Der in CSS gezeichnete Laptop steht deshalb unverändert und wurde nicht
+angefasst — ein gelöschter CSS-Block ohne Ersatzbild hätte den Aufmacher leer gelassen.
+
+**Der Überlauf gehört nicht zum Bild** und ist behoben und gemessen: fünf geforderte Breiten
+plus zehn weitere zwischen 941 und 1240 px, alle ohne waagerechten Überlauf.
+
+### D.6 Was der Bau an bestehendem Code korrigiert hat
+
+| Fund | War |
+|---|---|
+| Die Kopfzeile war bei **jeder** Desktopbreite breiter als die Bahn | Bei 1920 px stand der Knopf 67 px weiter rechts als jede Kante darunter — sichtbar nur als schiefe Flucht, nie als Fehler |
+| Markdown im Fließtext an **drei** Stellen, nicht zwei | `Lexikon.php` zweimal, `Ratgeber.php` einmal. Ein Durchlauf über alle 68 Dienstdateien fand keine vierte |
+| „in einem Gespräch" an **fünf** Stellen, nicht drei | zwei davon standen in Abschnitten, die die Fundliste nicht nannte |
+| `auftragslage` stand in der Datenbank und war **im Adminbereich nicht pflegbar** | §5a verlangt „im internen Bereich gepflegt". Der Wert ließ sich nur mit einem SQL-Befehl setzen |
+| `Launchadressen` baute den Branchenpfad ein zweites Mal zusammen | jetzt `Branchenseiten::pfad()` an einer Stelle |

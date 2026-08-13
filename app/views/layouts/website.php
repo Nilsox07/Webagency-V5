@@ -61,6 +61,13 @@ $basis = rtrim((string) Env::get('BASE_URL', ''), '/');
 <meta name="robots" content="noindex, follow">
 <?php endif; ?>
 <link rel="canonical" href="<?= Html::e($basis . $pfad) ?>">
+<?= Ansicht::teil('partials/markenzeichen') ?>
+<?= Ansicht::teil('partials/teilenkarte', [
+    'titel'        => $titel,
+    'beschreibung' => $beschreibung ?? null,
+    'adresse'      => $basis . $pfad,
+    'basis'        => $basis,
+]) ?>
 <link rel="stylesheet" href="/assets/css/tokens.css">
 <link rel="stylesheet" href="/assets/css/anwendung.css">
 <link rel="stylesheet" href="/assets/css/website.css">

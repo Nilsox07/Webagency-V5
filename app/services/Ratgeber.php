@@ -35,6 +35,17 @@ final class Ratgeber
 {
     public const STAND = '2026-08-02';
 
+    /**
+     * Der Tag der Veröffentlichung — `datePublished` im `Article`-Block (§16).
+     *
+     * **Er ist derselbe wie `STAND`, und das ist kein Versehen.** Die Artikel sind an diesem
+     * Tag entstanden und seither nicht inhaltlich geändert worden. Ein früheres Datum wäre
+     * erfunden, ein späteres unmöglich. Sobald ein Artikel überarbeitet wird, wandert `STAND`
+     * nach vorn und diese Zahl bleibt stehen — das ist der Unterschied, den die beiden Felder
+     * abbilden sollen.
+     */
+    public const VEROEFFENTLICHT = '2026-08-02';
+
     public const HUB_TITEL = 'Ratgeber für Firmenwebsites | SARTU';
 
     public const HUB_BESCHREIBUNG = 'Was eine Firmenwebsite kostet, was der Betrieb kostet, '
@@ -100,8 +111,12 @@ final class Ratgeber
                      'absaetze' => [
                         'Wir nennen keine fremden Preise. Wir kennen sie nicht, und eine '
                             . 'geschätzte Zahl wäre eine erfundene Zahl.',
-                        'Was sich sagen lässt, ist, **woraus** der Preis bei den einzelnen '
-                            . 'Anbieterarten entsteht. Das steht in der Tabelle.',
+                        // Die Betonung lag auf `woraus` und stand als Markdown da — das
+                        // wird nirgends ausgewertet und landete als Sternchen im Fliesstext.
+                        // Sie steckt jetzt in der Wortstellung: Das betonte Wort beginnt
+                        // den Satz. Dieselbe Aussage, ohne ein Zeichen, das nichts tut.
+                        'Woraus der Preis bei den einzelnen Anbieterarten entsteht, lässt '
+                            . 'sich dagegen sagen. Das steht in der Tabelle.',
                      ]],
                 ],
                 'tabelle' => [

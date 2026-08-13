@@ -14,12 +14,13 @@ wo er aufgehört hat, statt von vorn zu beginnen.**
 | **Fertig** | A0 · A1 · A2 · A3 · B · **C** |
 | **Läuft gerade** | — |
 | **Als Nächstes** | `LIVEGANG.md` — und drei Dinge davon kann nur ein Mensch tun: Rechtstexte zur Kanzlei, Hoster, Cronlauf. Dazu die Punkte aus `OFFENE_PRUEFUNGEN.md`, Abschnitt „Stufe C" |
-| **Tests** | **347 grün**, 4304 Zusicherungen — gegen **MySQL 8.4 und** MariaDB 11.4. Kein SQLite |
+| **Tests** | **372 grün**, 11.329 Zusicherungen — gegen **MySQL 8.4 und** MariaDB 11.4. Kein SQLite |
 | **Tabellen** | **23 von 23** |
 | **Testfälle** | **100 von 100** zugeordnet · 99 gebaut und geprüft, **Fall 88 teilweise** (Schema ja, Schematron offen) |
-| **Migrationen** | 036, lückenlos eingespielt, Prüfsummen stimmen |
+| **Migrationen** | 039, lückenlos eingespielt, Prüfsummen stimmen |
 | **Datenbank** | Die Entwicklungsumgebung fährt seit dem 10.08.2026 **MySQL 8.4** — dieselbe Familie wie das Zielsystem |
 | **Design** | 10.08.2026: Kunden- und Adminbereich auf die abgenommene **Seitenleiste** umgebaut, Zeichen freigegeben, Logo eingebunden. Danach der **Aufmacher der Startseite** — neun Abweichungen abgebaut, Gerät mit echter Aufnahme statt Bildplatz (§4b). `TEXTPRUEFUNG_BEREICHE.md` |
+| **Vertrauen** | 13.08.2026: Die Sperren hängen an den Daten statt am Code (§4c). Gründerangaben, Sektion 6, `LocalBusiness`, Favicon und Vorschaukarte — alles sichtbar, sobald der Betreiber das Feld füllt. `TEXTPRUEFUNG_VERTRAUEN.md` |
 | **Audit** | 10.08.2026: acht Funde behoben, davon zwei, die die Ersteinrichtung auf MySQL angehalten hätten. `OFFENE_PRUEFUNGEN.md`, Abschnitt „Audit vom 10.08.2026" |
 
 ---

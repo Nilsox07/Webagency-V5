@@ -16,9 +16,13 @@ use Sartu\Services\Websitetexte;
  * mehr als zweimal vor (Design-Briefing §3.7) — deshalb wechselt der Grund zwischen hell,
  * `--sand` und randlos dunkel, und die Sektionen 5 und 10 sind die einzigen dunklen.
  *
- * **Sektion 6 und 8 fehlen mit Grund.** Begründung im Kopf von `Startseitentexte`.
+ * **Sektion 8 fehlt mit Grund.** Begründung im Kopf von `Startseitentexte`.
+ *
+ * **Sektion 6 steht seit dem 13.08.2026 da — wenn die Daten sie tragen.** §4c hat die Sperre
+ * von „nicht gebaut" auf „nicht gefüllt" umgestellt; `partials/gruender` entscheidet das.
  *
  * @var array<string,string>|null $auftragslage
+ * @var array{name:string,text:string,bild:string}|null $gruender
  * @var string $preishinweis
  */
 
@@ -158,6 +162,10 @@ use Sartu\Services\Websitetexte;
     <p><?= Html::e(T::S5_ZUSAGE) ?></p>
   </div>
 </section>
+
+<?php /* Sektion 6 — steht hier, wenn Name, Text und Bild in den Betreiberdaten stehen, und
+         entfaellt sonst vollstaendig (§4c). Die Pruefung liegt im Partial, nicht hier. */ ?>
+<?= Ansicht::teil('partials/gruender', ['gruender' => $gruender]) ?>
 
 <section class="abschnitt" id="leistungen">
   <div class="bahn">

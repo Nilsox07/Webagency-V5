@@ -55,7 +55,7 @@ final class Launchadressen
         // sie stehen deshalb auf derselben Stufe wie die Leistungsseiten, denen sie
         // entsprechen.
         foreach (array_keys(Branchenseiten::alle()) as $schluessel) {
-            $adressen['/website-' . $schluessel] = '0.7';
+            $adressen[Branchenseiten::pfad($schluessel)] = '0.7';
         }
 
         // §16: Transparenzseiten 0.9, Vergleichsartikel 0.7. Die Unterscheidung steht in

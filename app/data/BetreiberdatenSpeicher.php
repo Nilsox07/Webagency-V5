@@ -46,6 +46,17 @@ final class BetreiberdatenSpeicher
         'bank_bic',
         'bank_institut',
         'kleinunternehmer',
+        // §4c (10.08.2026): Die Gruenderangaben sind Betreiberdaten. `gruender_bild` steht
+        // absichtlich NICHT hier — es traegt einen erzeugten Ablagenamen, keinen Text, den
+        // jemand tippt. Sein Schreibweg ist `gruenderbildSetzen()` weiter unten.
+        'gruender_name',
+        'gruender_text',
+        'profil_adressen',
+        // §5a: „Der Wert wird im internen Bereich gepflegt und nie im Quelltext erfunden."
+        // Bis zum 13.08.2026 stand die Spalte da und liess sich nur mit einem SQL-Befehl
+        // beschreiben — gepflegt war sie damit nirgends.
+        'auftragslage',
+        'naechster_projektstart',
     ];
 
     /**
@@ -74,6 +85,12 @@ final class BetreiberdatenSpeicher
         'bank_bic'                  => 'BIC',
         'bank_institut'             => 'Bank',
         'kleinunternehmer'          => 'Kleinunternehmer nach § 19 UStG',
+        'gruender_name'             => 'Name der Person hinter SARTU',
+        'gruender_text'             => 'Warum es SARTU gibt',
+        'gruender_bild'             => 'Bild der Person hinter SARTU',
+        'profil_adressen'           => 'Profilseiten',
+        'auftragslage'              => 'Auftragslage',
+        'naechster_projektstart'    => 'Nächster möglicher Projektstart',
     ];
 
     public static function beschriftung(string $feld): string
@@ -222,6 +239,26 @@ final class BetreiberdatenSpeicher
         $wert = $this->pdo()->query($sql)->fetchColumn();
 
         return is_string($wert) && $wert !== '' ? $wert : null;
+    }
+
+    /**
+     * Der Ablagename des Gruenderbildes — §4c.
+     *
+     * **Eigener Weg, nicht `SCHREIBBARE_FELDER`.** Die Liste speist das Betriebsformular;
+     * stuende der Name darin, koennte ein Formularfeld ihn frei setzen. Er zeigt aber auf
+     * eine Datei im Ablageverzeichnis, und ein frei gesetzter Dateiname ist ein Pfad, den
+     * jemand anderes bestimmt. Geschrieben wird er nur von `Services\Gruenderbild`, und dort
+     * ist er eine in PHP erzeugte UUID.
+     *
+     * `null` loescht den Verweis. Die Datei selbst raeumt der Dienst weg — die Datenschicht
+     * fasst kein Dateisystem an.
+     */
+    public function gruenderbildSetzen(?string $ablagename): void
+    {
+        $anweisung = $this->pdo()->prepare(
+            'UPDATE operator_settings SET gruender_bild = ? WHERE singleton = 1'
+        );
+        $anweisung->execute([$ablagename]);
     }
 
     private function pdo(): \PDO

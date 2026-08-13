@@ -55,7 +55,19 @@ use Sartu\Services\Websitetexte;
     </div>
 
     <details class="menue">
-      <summary aria-label="Menü öffnen">Menü</summary>
+      <?php /* **Kein `aria-label`.** Bis zum 13.08.2026 stand hier `Menü öffnen`. Das ist
+               falsch, sobald das Menü offen ist: Ein Screenreader liest dann „Menü öffnen,
+               erweitert" — eine Aufforderung, die dem Zustand widerspricht.
+
+               Ein `<details>` kann das nicht lösen, indem es umbenannt wird: Der Zustand
+               steht ohne Skript nicht zur Verfügung, und §1 verlangt volle Bedienbarkeit
+               ohne. Er muss auch nicht — der Browser gibt `summary` von sich aus
+               `aria-expanded`, und das ist die Angabe, die den Zustand traegt.
+
+               Uebrig bleibt der Name, und der lautet in beiden Zustaenden gleich: `Menü`.
+               Ohne `aria-label` ist der sichtbare Text der Name — sie sind damit auch nicht
+               mehr zwei verschiedene Dinge, was Sprachsteuerung sonst aushebelt. */ ?>
+      <summary>Menü</summary>
       <div class="menue__blatt">
         <ul>
 <?php foreach (Websitetexte::NAVIGATION as $ziel => $beschriftung): ?>

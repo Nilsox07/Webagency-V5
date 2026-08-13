@@ -64,6 +64,42 @@ final class Format
         return ($tage === 0 ? $tag : $tag->modify('+' . $tage . ' days'))->format('Y-m-d');
     }
 
+    /**
+     * Die zwölf Monatsnamen. `IntlDateFormatter` waere die naheliegende Wahl und wird hier
+     * nicht genommen: `intl` liest die Namen aus den Gebietsdaten des Betriebssystems, und
+     * die unterscheiden sich zwischen Container und Wirtssystem. Zwoelf feste Woerter
+     * koennen das nicht.
+     */
+    private const MONATE = [
+        1 => 'Januar', 'Februar', 'März', 'April', 'Mai', 'Juni',
+        'Juli', 'August', 'September', 'Oktober', 'November', 'Dezember',
+    ];
+
+    /**
+     * Monat und Jahr aus einem Kalendertag — `September 2026`.
+     *
+     * **Ohne Tag mit Absicht.** Der naechste moegliche Projektstart ist eine Angabe zur
+     * Auslastung, keine Terminzusage; ein Datum auf den Tag genau wuerde als Termin gelesen.
+     * Der Betreiber traegt trotzdem einen Tag ein, weil sich ein Datumsfeld pruefen laesst
+     * und eine Freitextzeile nicht.
+     *
+     * `$tag` ist ein Kalendertag in `Y-m-d`, keine UTC-Zeit — deshalb keine Umrechnung.
+     */
+    public static function monatJahr(?string $tag): string
+    {
+        if ($tag === null || trim($tag) === '') {
+            return self::LEER;
+        }
+
+        try {
+            $zeit = new \DateTimeImmutable(trim($tag));
+        } catch (\Exception) {
+            return self::LEER;
+        }
+
+        return self::MONATE[(int) $zeit->format('n')] . ' ' . $zeit->format('Y');
+    }
+
     public static function text(?string $wert): string
     {
         $wert = $wert === null ? '' : trim($wert);

@@ -301,6 +301,154 @@ final class MarkupTest extends Datenbankfall
     }
 
     /**
+     * Keine Auszeichnungssprache im ausgelieferten Text.
+     *
+     * Am 13.08.2026 standen drei Stellen so da: `**woraus**` in einem Ratgeberabsatz und
+     * zweimal Schrägstriche um eine Domain im Lexikon. Nichts davon wird irgendwo
+     * ausgewertet — es erschien als Zeichen im Fließtext **und** in den Beschreibungen für
+     * Suchmaschinen, weil dieselben Felder beides speisen.
+     *
+     * Geprüft werden die Textquellen selbst und nicht die fertige Seite: In der fertigen
+     * Seite steht auch Markup, das dort hingehört.
+     */
+    public function testKeineAuszeichnungsspracheImAusgeliefertenText(): void
+    {
+        $quellen = glob(SARTU_WURZEL . '/app/services/*.php') ?: [];
+        $geprueft = 0;
+
+        foreach ($quellen as $datei) {
+            $zeilen = explode("\n", (string) file_get_contents($datei));
+            $imKommentar = false;
+
+            foreach ($zeilen as $nummer => $zeile) {
+                $sauber = trim($zeile);
+
+                if (str_starts_with($sauber, '/*')) {
+                    $imKommentar = true;
+                }
+
+                if ($imKommentar) {
+                    if (str_contains($sauber, '*/')) {
+                        $imKommentar = false;
+                    }
+                    continue;
+                }
+
+                if ($sauber === '' || str_starts_with($sauber, '*') || str_starts_with($sauber, '//')) {
+                    continue;
+                }
+
+                // Nur Zeilen mit einer Zeichenkette — Auszeichnung im Quelltext selbst
+                // (etwa ein regulaerer Ausdruck) ist kein ausgelieferter Text.
+                if (!str_contains($zeile, "'")) {
+                    continue;
+                }
+
+                $geprueft++;
+
+                foreach (['**' => 'Fettung als Sternchen', '`' => 'Schrägstriche um ein Wort'] as $zeichen => $was) {
+                    $this->assertStringNotContainsString(
+                        $zeichen,
+                        $zeile,
+                        basename($datei) . ':' . ($nummer + 1) . ' trägt ' . $was
+                            . ' in einer Zeichenkette. Das wird nirgends ausgewertet und '
+                            . 'landet als Zeichen im Fliesstext.',
+                    );
+                }
+            }
+        }
+
+        $this->assertGreaterThan(500, $geprueft, 'Der Test hat fast nichts gelesen — die Auswahl stimmt nicht.');
+    }
+
+    /**
+     * §16 verlangt `/favicon.ico` samt PNG-Groessen und das Open-Graph-Bild.
+     *
+     * Beides fehlte bis zum 13.08.2026 vollstaendig — die Dateien **und** die Verweise.
+     * Geprueft wird deshalb beides: dass die Dateien liegen und dass jede Seite sie nennt.
+     */
+    public function testJedeSeiteTraegtBildmarkeUndVorschaukarte(): void
+    {
+        foreach (['/favicon.ico', '/assets/bild/sartu-favicon-16.png', '/assets/bild/sartu-favicon-32.png',
+                  '/assets/bild/sartu-favicon-180.png', '/assets/bild/sartu-og.png'] as $datei) {
+            $this->assertFileExists(SARTU_WURZEL . '/public' . $datei);
+        }
+
+        foreach (['/', '/preise', '/ratgeber', '/lexikon', '/kontakt'] as $pfad) {
+            $html = (string) $this->router(gesperrt: true)->behandeln('GET', $pfad)->rumpf;
+
+            $this->assertStringContainsString('rel="icon" href="/favicon.ico"', $html, $pfad);
+            $this->assertStringContainsString('rel="apple-touch-icon"', $html, $pfad);
+            $this->assertStringContainsString('property="og:image"', $html, $pfad);
+            $this->assertStringContainsString('name="twitter:card" content="summary_large_image"', $html, $pfad);
+
+            // Die Karte traegt denselben Titel wie das Dokument — nicht eine zweite Fassung.
+            $this->assertSame(1, preg_match('~<title>(.*?)</title>~', $html, $titel), $pfad);
+            $this->assertStringContainsString(
+                'property="og:title" content="' . $titel[1] . '"',
+                $html,
+                $pfad . ': og:title weicht vom <title> ab.',
+            );
+        }
+
+        // Auch die geschlossenen Bereiche tragen das Zeichen — sonst ist der Tabstreifen leer.
+        $anmeldung = (string) $this->router(gesperrt: true)->behandeln('GET', '/admin/anmelden')->rumpf;
+        $this->assertStringContainsString('rel="icon" href="/favicon.ico"', $anmeldung);
+    }
+
+    /**
+     * Das Menuezeichen behauptet nicht im offenen Zustand, es sei zu oeffnen.
+     *
+     * Bis zum 13.08.2026 stand `aria-label="Menü öffnen"` fest am `summary`. Ein
+     * `<details>` kennt seinen Zustand ohne Skript nicht; ein Name, der eine Handlung
+     * nennt, ist deshalb in genau der Haelfte der Faelle falsch. Der Zustand kommt vom
+     * Browser ueber `aria-expanded` — der Name muss ihn nicht tragen.
+     */
+    public function testDasMenuezeichenBehauptetKeinenZustand(): void
+    {
+        $band = (string) file_get_contents(SARTU_WURZEL . '/app/views/partials/websiteband.php');
+
+        $this->assertSame(1, preg_match('#<summary[^>]*>#', $band, $treffer));
+        $this->assertStringNotContainsString('aria-label', $treffer[0],
+            'Der Name des Menuezeichens darf keine Handlung nennen — er gilt in beiden Zustaenden.');
+
+        $html = (string) $this->router(gesperrt: true)->behandeln('GET', '/')->rumpf;
+        $this->assertStringNotContainsString('Menü öffnen', $html);
+    }
+
+    /**
+     * Die drei Branchenseiten haben eingehende Verweise.
+     *
+     * Am 13.08.2026 hatten sie null — sie standen nur in der Sitemap. Eine Seite, auf die
+     * nichts zeigt, wird als unwichtig gelesen, und der Test faellt sonst nicht auf: Sie
+     * antwortet ja mit 200.
+     */
+    public function testJedeBranchenseiteHatEingehendeVerweise(): void
+    {
+        $quellen = ['/leistungen'];
+        $treffer = [];
+
+        foreach ($quellen as $quelle) {
+            $html = (string) $this->router(gesperrt: true)->behandeln('GET', $quelle)->rumpf;
+
+            foreach (array_keys(\Sartu\Services\Branchenseiten::alle()) as $schluessel) {
+                $ziel = \Sartu\Services\Branchenseiten::pfad($schluessel);
+
+                if (str_contains($html, 'href="' . $ziel . '"')) {
+                    $treffer[$ziel] = true;
+                }
+            }
+        }
+
+        foreach (array_keys(\Sartu\Services\Branchenseiten::alle()) as $schluessel) {
+            $ziel = \Sartu\Services\Branchenseiten::pfad($schluessel);
+
+            $this->assertArrayHasKey($ziel, $treffer,
+                'Auf ' . $ziel . ' zeigt kein interner Verweis. Sie steht dann nur in der Sitemap.');
+        }
+    }
+
+    /**
      * Jedes Formularfeld traegt seinen eigenen Namen.
      *
      * Dieser Test steht hier wegen eines Fehlers, den keiner der anderen 81 Tests bemerkt

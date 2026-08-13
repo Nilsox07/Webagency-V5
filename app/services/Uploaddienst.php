@@ -162,6 +162,67 @@ final class Uploaddienst
     private const TYPFEHLER = 'Diese Dateiart können wir nicht verarbeiten. Erlaubt sind Bilder, '
         . 'PDF, Word-Dateien und ZIP-Archive.';
 
+    /**
+     * Die vier Endungen, die als Bild durchgehen — `SARTU_ENTSCHEIDUNGEN_OFFEN.md` §4c:
+     * „erlaubt sind jpg, png und webp".
+     *
+     * `jpeg` steht daneben, weil es dieselbe Datei ist: `ERLAUBT` fuehrt beide Schreibweisen
+     * auf `image/jpeg`. Eine Datei abzulehnen, weil ihr Name auf `.jpeg` endet, waere eine
+     * Regel ueber Buchstaben, nicht ueber Inhalte.
+     *
+     * **SVG fehlt mit Absicht.** Es ist XML und kann Skript enthalten; §11 verbietet deshalb
+     * das Einbetten. Das Gruenderbild wird eingebettet — es steht in einem `<img>` auf der
+     * Startseite. Fuer Kundenuploads bleibt SVG erlaubt, weil sie nur als Download hinausgehen.
+     */
+    public const BILDARTEN = ['jpg', 'jpeg', 'png', 'webp'];
+
+    /**
+     * Prueft eine hochgeladene Bilddatei mit denselben Schritten wie `annehmen()` — nur ohne
+     * die vier Prufungen, die an einer Kundenorganisation haengen (Platz je Organisation,
+     * Anzahl je Aufgabe, Rechtebestaetigung, Aufgabenbezug). Die Groessengrenze ist dieselbe.
+     *
+     * **Warum nicht `annehmen()` selbst:** Das Gruenderbild gehoert dem Betreiber, nicht einem
+     * Mandanten. `annehmen()` verlangt einen `KundenBereich`, und einen mitzuliefern, den es
+     * nicht gibt, waere genau der gemeinsame Codepfad, den §3 Regel 1 verbietet.
+     *
+     * @param array<string,mixed> $datei ein Eintrag aus `$_FILES`
+     * @return array{fehler:?string,mime:?string,endung:?string}
+     */
+    public static function bildPruefen(array $datei): array
+    {
+        if ((int) ($datei['error'] ?? UPLOAD_ERR_NO_FILE) !== UPLOAD_ERR_OK) {
+            return ['fehler' => 'Bitte wählen Sie eine Bilddatei aus.', 'mime' => null, 'endung' => null];
+        }
+
+        $pfad = (string) ($datei['tmp_name'] ?? '');
+        $groesse = (int) ($datei['size'] ?? 0);
+
+        if ($pfad === '' || $groesse <= 0) {
+            return ['fehler' => 'Bitte wählen Sie eine Bilddatei aus.', 'mime' => null, 'endung' => null];
+        }
+
+        if ($groesse > self::MAX_BYTES_JE_DATEI) {
+            return ['fehler' => 'Die Datei ist zu groß. Bitte höchstens 20 MB.', 'mime' => null, 'endung' => null];
+        }
+
+        $endung = mb_strtolower(pathinfo(self::sicherername((string) ($datei['name'] ?? '')), PATHINFO_EXTENSION));
+
+        if (!in_array($endung, self::BILDARTEN, true)) {
+            return ['fehler' => self::BILDFEHLER, 'mime' => null, 'endung' => null];
+        }
+
+        $tatsaechlich = self::mimeTypAusInhalt($pfad);
+
+        if ($tatsaechlich === null || !in_array($tatsaechlich, self::ERLAUBT[$endung], true)) {
+            return ['fehler' => self::BILDFEHLER, 'mime' => null, 'endung' => null];
+        }
+
+        return ['fehler' => null, 'mime' => $tatsaechlich, 'endung' => $endung];
+    }
+
+    private const BILDFEHLER = 'Diese Dateiart können wir nicht verwenden. '
+        . 'Erlaubt sind JPG, PNG und WebP.';
+
     public function ablageverzeichnis(): string
     {
         // §11: ausserhalb des oeffentlich ausgelieferten Verzeichnisses. `Speicher` löst

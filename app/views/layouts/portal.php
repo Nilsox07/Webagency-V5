@@ -36,6 +36,7 @@ use Sartu\Helpers\Html;
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex, nofollow">
 <title><?= Html::e($titel) ?> — SARTU-Kundenbereich</title>
+<?= Ansicht::teil('partials/markenzeichen') ?>
 <link rel="stylesheet" href="/assets/css/tokens.css">
 <link rel="stylesheet" href="/assets/css/anwendung.css">
 </head>

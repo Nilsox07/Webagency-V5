@@ -165,6 +165,16 @@ seine Existenz.
 **Zugang zum internen Bereich** verlangt Passwort (Argon2id) **und** einen Zeitcode (TOTP).
 Die zweite Stufe ist auch in der Entwicklung nicht abschaltbar.
 
+> **`/storage/betrieb` ist keine Belegablage.** Seit dem 13.08.2026 liegt dort **eine** Datei:
+> das Bild der Person hinter SARTU, das der Betreiber im internen Bereich hochlädt und das die
+> öffentliche Website anzeigt. Es ist kein Beleg, unterliegt keiner Aufbewahrungsfrist und
+> trägt keine Prüfsumme in `documents`.
+>
+> Es steht hier, weil ein Prüfer beim Blick in `/storage` ein zweites Verzeichnis neben
+> `belege` findet und wissen muss, dass es nicht dazugehört. Ersetzt der Betreiber das Bild,
+> wird die vorige Datei entfernt — das ist zulässig, weil die Regel „keine harte Löschung"
+> fachliche Vorgänge schützt, nicht ersetzte Bilddateien.
+
 ---
 
 ## 5. Sicherung, Wiederherstellung und Unveränderbarkeit
@@ -239,6 +249,7 @@ ist einem Commit mit Begründung zugeordnet. Für den Prüfer die Stationen des 
 | 09.08.2026 | Eine versendete Rechnung wird nur noch über eine Stornorechnung aufgehoben; ein nie versendeter Entwurf wird verworfen |
 | 09.08.2026 | Zahlungsabgleich über einen Webhook mit serverseitigem Abruf und Idempotenz über `payment_events` |
 | 09.08.2026 | Belegabruf für Kunde und Betreiber, Belegversand per Mail, Übergabe an den Steuerberater |
+| 13.08.2026 | **Am Belegfluss nichts.** Ergänzt wurde `/storage/betrieb` für ein Bild der öffentlichen Website — kein Beleg, keine Frist, keine Prüfsumme. Aufgeführt, damit das zweite Verzeichnis in `/storage` erklärt ist |
 
 **Vor diesem Datum** gab es keine Belegerzeugung: Rechnungen bestanden aus Datenbankzeilen und
 einer Anzeige im Kundenbereich, die Nummer wurde von Hand eingetragen, und der Zahlungsstatus

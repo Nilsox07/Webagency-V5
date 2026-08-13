@@ -83,7 +83,61 @@ final class BetreiberdatenDienst
             $fehler[] = 'Die IBAN stimmt rechnerisch nicht. Bitte prüfen Sie die Ziffern.';
         }
 
+        // Die Datenbank prueft dasselbe (`chk_operator_settings_auftragslage`). Sie meldet es
+        // aber als Verstoss gegen eine Bedingung mit einem Namen, den niemand kennt.
+        $lage = trim($eingabe['auftragslage'] ?? '');
+
+        if ($lage !== '' && !in_array($lage, Auftragslage::WERTE, true)) {
+            $fehler[] = 'Die Auftragslage kennt nur die drei Werte aus der Auswahl.';
+        }
+
+        $start = trim($eingabe['naechster_projektstart'] ?? '');
+
+        if ($start !== '' && !self::istKalendertag($start)) {
+            $fehler[] = 'Der nächste mögliche Projektstart wird als Datum angegeben, zum Beispiel 01.09.2026.';
+        }
+
+        foreach (self::zeilen($eingabe['profil_adressen'] ?? '') as $adresse) {
+            if (!str_starts_with($adresse, 'https://') || filter_var($adresse, FILTER_VALIDATE_URL) === false) {
+                $fehler[] = sprintf(
+                    'Die Zeile „%s" ist keine vollständige Adresse. Jede Zeile beginnt mit https://.',
+                    mb_substr($adresse, 0, 60)
+                );
+            }
+        }
+
         return $fehler;
+    }
+
+    /**
+     * @return list<string>
+     */
+    private static function zeilen(string $wert): array
+    {
+        $zeilen = [];
+
+        foreach (preg_split('/\R+/', trim($wert)) ?: [] as $zeile) {
+            $zeile = trim((string) $zeile);
+
+            if ($zeile !== '') {
+                $zeilen[] = $zeile;
+            }
+        }
+
+        return $zeilen;
+    }
+
+    /**
+     * Ein Kalendertag in `Y-m-d` — die Form, die ein `<input type="date">` schickt.
+     *
+     * `strtotime` waere kuerzer und nimmt auch `morgen` und `+3 weeks` an. In einer Spalte
+     * vom Typ `DATE` landet danach irgendein Tag, und niemand weiss welcher.
+     */
+    private static function istKalendertag(string $wert): bool
+    {
+        $tag = \DateTimeImmutable::createFromFormat('!Y-m-d', $wert);
+
+        return $tag !== false && $tag->format('Y-m-d') === $wert;
     }
 
     /**

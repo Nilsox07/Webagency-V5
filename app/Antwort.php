@@ -47,6 +47,27 @@ final class Antwort
     }
 
     /**
+     * Ein Bild zum Anzeigen — `SARTU_ENTSCHEIDUNGEN_OFFEN.md` §4c, das Gruenderbild.
+     *
+     * **Eigene Fabrik und ausdruecklich nicht `datei()`.** Jene setzt
+     * `Content-Disposition: attachment`, weil Kundenuploads auch SVG sein koennen und ein
+     * SVG im Browser Skript ausfuehrt. Hier kommen nur JPG, PNG und WebP herein, jedes am
+     * Inhalt geprueft — und ein Anhang fuellt kein `<img>`.
+     *
+     * `nosniff` bleibt: Der Browser soll den Typ nicht selbst erraten, sondern den nehmen,
+     * den die Pruefung beim Hochladen festgestellt hat.
+     *
+     * @param array<string,string> $kopfzeilen
+     */
+    public static function bild(string $rumpf, string $inhaltstyp, array $kopfzeilen = []): self
+    {
+        return new self(200, [
+            'Content-Type'           => $inhaltstyp,
+            'X-Content-Type-Options' => 'nosniff',
+        ] + $kopfzeilen, $rumpf);
+    }
+
+    /**
      * Die 404-Seite.
      *
      * Sie steht hier und nicht in drei Steuerungen: Ein abweichender Wortlaut verraet, dass

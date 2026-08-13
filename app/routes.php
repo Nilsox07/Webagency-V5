@@ -76,6 +76,9 @@ return [
     new Route(Route::BEREICH_OEFFENTLICH, 'GET', '/leistung-wartung', [Website::class, 'wartung']),
     new Route(Route::BEREICH_OEFFENTLICH, 'GET', '/leistung-portal', [Website::class, 'portal']),
     new Route(Route::BEREICH_OEFFENTLICH, 'GET', '/ueber-uns', [Website::class, 'ueberUns']),
+    // Das Gruenderbild (§4c). Es liegt in der Ablage, nicht unter /public — §11 verlangt
+    // das fuer jede hochgeladene Datei. Ausgeliefert wird es deshalb ueber eine Route.
+    new Route(Route::BEREICH_OEFFENTLICH, 'GET', '/bild/gruender', [Website::class, 'gruenderbild']),
     new Route(Route::BEREICH_OEFFENTLICH, 'GET', '/kontakt', [Website::class, 'kontakt']),
     new Route(Route::BEREICH_OEFFENTLICH, 'POST', '/kontakt', [Website::class, 'kontaktSenden']),
     // Branchenseiten, Welle 1 (§10a). Vollstaendige Zielseiten mit eingebettetem Konfigurator.
@@ -126,6 +129,9 @@ return [
     new Route(Route::BEREICH_ADMIN, 'POST', '/admin/ersteinrichtung/zahlungsschluessel-entfernen', [ErsteinrichtungSteuerung::class, 'zahlungsschluesselEntfernen']),
     new Route(Route::BEREICH_ADMIN, 'GET', '/admin/einstellungen/betrieb', [BetriebSteuerung::class, 'formular']),
     new Route(Route::BEREICH_ADMIN, 'POST', '/admin/einstellungen/betrieb', [BetriebSteuerung::class, 'speichern']),
+    // Das Gruenderbild (§4c) — eigener Weg, weil ein Upload `multipart/form-data` braucht.
+    new Route(Route::BEREICH_ADMIN, 'POST', '/admin/einstellungen/gruenderbild', [BetriebSteuerung::class, 'gruenderbild']),
+    new Route(Route::BEREICH_ADMIN, 'POST', '/admin/einstellungen/gruenderbild-entfernen', [BetriebSteuerung::class, 'gruenderbildEntfernen']),
     new Route(Route::BEREICH_ADMIN, 'GET', '/admin/rechtstexte', [RechtstexteSteuerung::class, 'liste']),
     new Route(Route::BEREICH_ADMIN, 'GET', '/admin/rechtstexte/{slug}', [RechtstexteSteuerung::class, 'einzeln']),
     new Route(Route::BEREICH_ADMIN, 'POST', '/admin/rechtstexte/{slug}', [RechtstexteSteuerung::class, 'speichern']),

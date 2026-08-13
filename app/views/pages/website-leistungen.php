@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 use Sartu\Ansicht;
 use Sartu\Helpers\Html;
+use Sartu\Services\Branchenseiten;
 use Sartu\Services\Leistungszeilen;
 use Sartu\Services\Preise;
 use Sartu\Services\Unterseitentexte as T;
@@ -95,6 +96,34 @@ use Sartu\Services\Websitetexte;
     </div>
 
     <p><a class="textlink" href="/preise">Preise ansehen</a></p>
+  </div>
+</section>
+
+<?php /* Die drei Branchenseiten hatten null eingehende Verweise — sie standen nur in der
+         Sitemap, und eine Seite, auf die nichts zeigt, wird als unwichtig gelesen.
+
+         Sie stehen hier und nicht in der Hauptnavigation: §2 bindet dort sechs Punkte, und
+         die Zeile ist am 13.08.2026 nachgemessen worden — sie traegt keinen siebten, ohne
+         dass §1 wieder verletzt waere. Der Fussbereich ist nach §2a auf fuenf Spalten mit
+         gebundenem Inhalt festgelegt.
+
+         `/leistungen` ist der Navigationspunkt fuer genau diese Frage und damit von jeder
+         Seite einen Klick entfernt. Der Widerspruch zur Anweisung „haeng sie in die
+         Navigation" steht in `OFFENE_PRUEFUNGEN.md`. */ ?>
+<section class="abschnitt" id="branchen">
+  <div class="bahn">
+    <h2>Drei Branchen haben eine eigene Seite.</h2>
+    <p class="lede">Dort steht, welche Seiten ein Betrieb dieser Art braucht und was auf
+    jede davon gehört — mit den Zahlen der jeweiligen Branche.</p>
+
+    <ul class="leistungszeilen">
+<?php foreach (Branchenseiten::alle() as $schluessel => $seite): ?>
+      <li>
+        <h3><a href="<?= Html::e(Branchenseiten::pfad($schluessel)) ?>"><?= Html::e((string) $seite['h1']) ?></a></h3>
+        <p><?= Html::e((string) $seite['kurz']) ?></p>
+      </li>
+<?php endforeach; ?>
+    </ul>
   </div>
 </section>
 

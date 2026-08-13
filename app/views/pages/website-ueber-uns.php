@@ -10,11 +10,12 @@ use Sartu\Services\Websitetexte;
 /**
  * `/ueber-uns` — Website-Lastenheft §11.
  *
- * **Ohne Hero-Foto und ohne Gründernamen.** Begründung im Kopf von `Firmenseitentexte`.
- * §11 nennt die Sektion mit echtem Foto; das Foto steht auf `offen`, und ein Platzhalter,
- * der wie ein Foto wirkt, ist ausdrücklich unzulässig.
+ * **Der Gründerabschnitt hängt an den Daten, nicht am Code** — `SARTU_ENTSCHEIDUNGEN_OFFEN.md`
+ * §4c, 10.08.2026. Stehen Name, Text und Bild in den Betreiberdaten, steht er hier; fehlt
+ * eines davon, entfällt er. Ein Platzhalter, der wie ein Foto wirkt, bleibt unzulässig.
  *
  * @var array<string,string>|null $auftragslage
+ * @var array{name:string,text:string,bild:string}|null $gruender
  * @var string $preishinweis
  */
 
@@ -40,6 +41,16 @@ use Sartu\Services\Websitetexte;
     </ul>
   </div>
 </section>
+
+<?php /* §11 verlangt hier den Abschnitt mit echtem Foto. Er steht, sobald Name, Text und
+         Bild in den Betreiberdaten stehen — sonst entfaellt er (§4c).
+         Ohne die vier Abgrenzungen und ohne den Textlink: beide stehen auf dieser Seite
+         schon, und ein Link auf die Seite, die man gerade liest, ist keiner. */ ?>
+<?= Ansicht::teil('partials/gruender', [
+    'gruender'      => $gruender,
+    'mitAbgrenzung' => false,
+    'mitLink'       => false,
+]) ?>
 
 <section class="abschnitt abschnitt--sand">
   <div class="bahn schmal">

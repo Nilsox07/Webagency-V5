@@ -26,6 +26,16 @@ use Sartu\Helpers\Html;
 <?php if (isset($pfad)): ?>
 <link rel="canonical" href="<?= Html::e(rtrim((string) \Sartu\Helpers\Env::get('BASE_URL', ''), '/') . $pfad) ?>">
 <?php endif; ?>
+<?= Ansicht::teil('partials/markenzeichen') ?>
+<?php /* Die Vorschaukarte auch hier: Ein Impressum wird geteilt — in einer Rueckfrage, in
+         einer Pruefung. Der Titel traegt hier den Zusatz „| SARTU", weil dieses Layout ihn
+         selbst anhaengt; die Karte bekommt deshalb dieselbe Fassung wie das `<title>`. */ ?>
+<?= Ansicht::teil('partials/teilenkarte', [
+    'titel'        => $titel . ' | SARTU',
+    'beschreibung' => $beschreibung ?? null,
+    'adresse'      => rtrim((string) \Sartu\Helpers\Env::get('BASE_URL', ''), '/') . ($pfad ?? '/'),
+    'basis'        => rtrim((string) \Sartu\Helpers\Env::get('BASE_URL', ''), '/'),
+]) ?>
 <link rel="stylesheet" href="/assets/css/tokens.css">
 <link rel="stylesheet" href="/assets/css/anwendung.css">
 </head>

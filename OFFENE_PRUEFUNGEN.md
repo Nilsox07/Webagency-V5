@@ -2539,3 +2539,116 @@ Preishinweis"*. Er steht jetzt darunter; auf allen anderen Seiten bleibt er, wo 
 | 3 | **Das Gerät ist nur bei 1440 px gemessen.** Unterhalb von 900 px legt sich der Aufmacher einspaltig; das ist gebaut, aber nicht Bild für Bild geprüft | Durchsehen bei 390 · 768 · 1024 px |
 | 4 | **Die Bänder sind nicht auf Rechenlast gemessen.** Zwei Dauerbewegungen mit `filter: blur()` können auf schwachen Geräten kosten | Messung im Browserwerkzeug auf einem älteren Telefon |
 | 5 | Die WebP-Datei entstand über **Chromium**, nicht über `cwebp` — im Bild ist kein Encoder installiert, und dafür einen aufzunehmen wäre eine Abhängigkeit für einen einmaligen Vorgang | Bei Bedarf mit `cwebp -q 88` gegenprüfen |
+
+---
+
+## 13.08.2026 — Gerätebild, Vertrauensangaben, neun Kleinfehler
+
+Auftrag in `PROMPT_NEUE_SESSION_VERTRAUEN.md`. Grundlage `SARTU_ENTSCHEIDUNGEN_OFFEN.md` §4b
+und §4c, beide Rang 1.
+
+### Block 1 ist **nicht** ausgeführt — die Datei fehlt
+
+`public/assets/bild/geraet-aufmacher.webp` liegt nicht im Repository. Der Auftrag sagt dazu:
+*„Liegt die Datei nicht im Repo, überspring diesen Block und melde es — erfinde kein
+Ersatzbild."* Genau das ist geschehen.
+
+**Der in CSS gezeichnete Laptop steht deshalb unverändert.** Er ist nicht tot: `.geraet__deckel`,
+das Telefon und das Schattenwerk werden weiter benutzt und wurden nicht angefasst. Ein
+gelöschter CSS-Block ohne Ersatzbild hätte den Aufmacher leer gelassen.
+
+| Was zu tun ist | Womit es geprüft wird |
+|---|---|
+| Aufnahme des Kundenbereichs in ein Mockup-Werkzeug geben, Ergebnis als `geraet-aufmacher.webp` ablegen | Danach `.geraet__deckel`, `.geraet__telefon`, `.geraet__sockel` und `.geraet__laptop` aus `website.css` entfernen und die fünf Breiten erneut messen |
+
+### Was von Block 1 ausgeführt wurde: der Überlauf
+
+Der gemeldete Punkt war „bei 1024 px läuft die Seite über". **Gemessen war es mehr.** Die
+Kopfzeile hat eine feste Eigenbreite von 1176 px und lief von **941 bis 1183 px** waagerecht
+über — bei 1024 px um 152 px. Oberhalb davon lief sie weiter über die Bahn hinaus in den
+Außenrand: Bei 1920 px stand der Knopf 67 px weiter rechts als jede Kante darunter, sichtbar
+nur als schiefe Flucht.
+
+| Was geändert wurde | Wirkung |
+|---|---|
+| `.seitenkopf__reihe` Abstand `--s-4` → `--s-3` | 24 px |
+| `.hauptnavigation a` auf `--fs-small` — der Entwurf setzt die Navigation auf 15,5 px gegen 18 px Fließtext | 54 px |
+| Mobilmenü ab **1180 px** statt ab 940 px — `design/startseite.html` Zeile 166 setzt genau diesen Wert | der Rest |
+
+**Gemessen nach der Änderung**, im selben Chromium:
+
+| Breite | scrollWidth | Versatz Kopfelement gegen Inhaltskante |
+|---|---|---|
+| 1920 px | 1920 — sauber | 0 px |
+| 1440 px | 1440 — sauber | 0 px |
+| 1280 px | 1280 — sauber | 0 px |
+| 1024 px | 1024 — sauber | 0 px (Menüknopf, 91 × 55 px) |
+| 390 px | 390 — sauber | 0 px (Menüknopf, 91 × 55 px) |
+
+Zusätzlich nachgemessen: 941 · 960 · 1000 · 1060 · 1100 · 1140 · 1180 · 1200 · 1220 · 1240 px —
+alle sauber.
+
+> **Ein Widerspruch, der gemeldet und nicht stillschweigend aufgelöst wird.**
+> `10_WEBSITE_SARTU.md` §2 sagt „**Desktop ab 1024 px:** … die sechs Punkte mittig". Mit dem
+> Mobilmenü ab 1180 px gilt das nicht mehr zwischen 1024 und 1180 px.
+>
+> Dieselbe Datei löst es zwei Absätze höher selbst auf: *„Wird die Zeile zu breit, greift das
+> Mobilmenü früher — der verständlichere Begriff wird nicht für sechs Pixel geopfert."* Diese
+> Stelle trägt eine Begründung, die Zahl 1024 trägt keine — `CLAUDE.md`: „Widersprechen sich
+> zwei Stellen im selben Dokument, gilt die mit der Begründung."
+>
+> Der abgenommene Entwurf setzt denselben Wert. **Zu entscheiden bleibt trotzdem**, ob §2
+> nachgezogen wird.
+
+### Block 2 — die Sperren hängen jetzt an den Daten
+
+| Gebaut | Sichtbar, wenn |
+|---|---|
+| `gruender_name`, `gruender_text`, `gruender_bild` in `operator_settings` (037) | — |
+| Sektion 6 „Wer dahintersteckt" auf der Startseite und der Abschnitt auf `/ueber-uns` | **alle drei** Angaben stehen. Zwei von drei genügen nicht |
+| `/bild/gruender` — Ausspielroute, Ablage außerhalb von `public/` | ein Bild hinterlegt ist, sonst **404** statt Ersatzbild |
+| `LocalBusiness` statt `Organization` | Straße, PLZ **und** Ort gefüllt sind |
+| `logo`, `founder`, `sameAs` in `Organization` | Logodateien liegen · `gruender_name` steht · `profil_adressen` (039) gefüllt ist |
+| `naechster_projektstart` (038), im Adminbereich pflegbar | er in der Zukunft liegt |
+
+`app/Strukturdaten.php` begründete im Klassenkommentar das Gegenteil — der Kommentar ist
+umgeschrieben und nennt §4c samt dem Satz, der die alte Bauform verwirft.
+
+### Block 3 — die neun Punkte
+
+| # | Was war | Beleg |
+|---|---|---|
+| 1 | Favicon fehlte vollständig | `public/favicon.ico` (16 · 32 · 48 px) und vier PNG, aus `sartu-mark.svg` erzeugt. `MarkupTest::testJedeSeiteTraegtBildmarkeUndVorschaukarte` |
+| 2 | Kein Open Graph, keine `twitter:card` | `partials/teilenkarte.php` in beiden öffentlichen Layouts, `sartu-og.png` 1200 × 630. Derselbe Test prüft zusätzlich, dass `og:title` und `<title>` nicht auseinanderlaufen |
+| 3 | `Article` ohne `datePublished`, Autor, Bild | `Strukturdaten::artikel()`; Autor ist eine **Person**, sobald `gruender_name` steht, sonst die Organisation. `VertrauensangabenTest` prüft beide Richtungen |
+| 4 | Branchenseiten mit null eingehenden Verweisen | Block „Drei Branchen haben eine eigene Seite." auf `/leistungen`. `MarkupTest::testJedeBranchenseiteHatEingehendeVerweise` |
+| 5 | Markdown im Fließtext | Drei Stellen — nicht zwei. `Ratgeber.php` (`**woraus**`), `Lexikon.php` zweimal. Die Betonung steckt jetzt in der Wortstellung. `MarkupTest::testKeineAuszeichnungsspracheImAusgeliefertenText` liest alle 68 Dienstdateien |
+| 6 | „ab 1.490 € — mit einer eigenen Seite je Leistung" | Das Startpaket hat **1 Seite**. Beide Zahlen stehen jetzt getrennt: Einstieg 1.490 €, eine Seite je Leistung ab **3.900 €** (Wachstum). Sechs Stellen, drei Branchenseiten |
+| 7 | Dreimal „Fakten in einem Gespräch" | Fünf Stellen, nicht drei. Ersetzt durch Bedarfsscheck und Kundenbereich — das ist gebaut und widerspricht „ohne einen einzigen Termin" nicht |
+| 8 | `aria-label="Menü öffnen"` blieb im offenen Zustand | Entfernt. Der sichtbare Text `Menü` ist der Name, `aria-expanded` kommt vom Browser. `MarkupTest::testDasMenuezeichenBehauptetKeinenZustand` |
+| 9 | „Nur noch wenige Plätze" ohne Zeitraum | `Nächster Projektstart ab <Monat Jahr>`, aus `operator_settings`. Ohne Datum entfällt die Zeile; ein vergangener Monat wird nicht angezeigt |
+
+> **Zu Punkt 9 ein zweiter gemeldeter Widerspruch.**
+> `CLAUDE_SARTU_WEBSITE_LASTENHEFT_BAUFINAL.md` §5a verbietet Termine wörtlich: *„Keine
+> Zahlen, keine Termine. Weder ,3 Plätze frei' noch ,ab Q3'."*
+>
+> Diese Datei ist Begründungsarchiv und keine Bauvorlage (`CLAUDE.md`, Rangfolge);
+> `spezifikation/` bindet zur Kapazitätszeile nur Stelle und Gewicht, keinen Wortlaut und kein
+> Terminverbot. Die Betreiberanweisung vom 13.08.2026 sticht das Archiv.
+>
+> Die Sorge dahinter ist trotzdem gebaut: Es steht ein **Monat**, kein Tag — ein Starttermin
+> für die Arbeit, keine Zusage über die Fertigstellung. Das Feld ist ein `DATE`, damit sich
+> „ab Q3" nicht hineinschreiben lässt.
+
+### Ungeprüft — mit Grund und Prüfmittel
+
+| # | Punkt | Womit es zu prüfen ist |
+|---|---|---|
+| 1 | **Block 1 ist nicht ausgeführt.** `geraet-aufmacher.webp` fehlt im Repository | Datei ablegen, dann den CSS-Block entfernen und die fünf Breiten neu messen |
+| 2 | **Die Anweisung „häng sie in die Navigation" ist nicht wörtlich umgesetzt.** §2 bindet sechs Navigationspunkte, §2a fünf Fußspalten mit gebundenem Inhalt — und die Kopfzeile trägt gemessen keinen siebten Punkt, ohne dass §1 wieder verletzt wäre. Die Verweise stehen deshalb auf `/leistungen` | Betreiberentscheidung: §2 oder §2a ändern, oder es bei `/leistungen` belassen |
+| 3 | **Der Upload ist nicht über das Adminformular ausgeführt.** Geprüft ist der Dienst über PHPUnit und ein Aufruf als `www-data`; das Formular selbst wurde nicht im Browser abgeschickt | Im Adminbereich anmelden, Bild hochladen, Startseite ansehen |
+| 4 | **Das Gründerbild in der Entwicklungsdatenbank ist eine Attrappe** und liegt bewusst **nicht** im Repository. §5 verbietet einen Platzhalter, der wie ein Foto wirkt — dieses sieht wie eine Attrappe aus und heißt so | Echtes Foto vom Betreiber, dann austauschen |
+| 5 | **Das Open-Graph-Bild ist nie von einem Vorschaudienst geholt worden.** Geprüft ist, dass die Angaben im Kopf stehen und die Datei ausgeliefert wird — nicht, wie LinkedIn oder WhatsApp sie darstellen | Nach dem Livegang mit den Debug-Werkzeugen der Dienste |
+| 6 | **Das Favicon ist nicht in einem Browsertab angesehen worden.** Erzeugt, ausgeliefert (200, `image/vnd.microsoft.icon`) und verlinkt — die Darstellung bei 16 px auf hellem und dunklem Systemthema ist nicht beurteilt | In Chrome, Firefox und Safari öffnen |
+| 7 | **`sameAs` steht auf keiner echten Profiladresse.** Das Feld ist gebaut und geprüft, gefüllt ist es mit `https://example.org/sartu` in der Entwicklungsdatenbank | Sobald es Profile gibt, im Adminbereich eintragen |
+| 8 | **Die neuen Metaangaben sind nicht gegen einen Validierer gelaufen.** Die strukturierten Daten sind gegen das eigene Schema geprüft, nicht gegen Googles Rich-Results-Test — der braucht eine öffentlich erreichbare Adresse | Nach dem Livegang |

@@ -1,0 +1,28 @@
+-- Die Kapazitaetszeile bekommt einen ueberpruefbaren Wert: den naechsten moeglichen
+-- Projektstart. Betreiberentscheidung vom 13.08.2026.
+--
+-- ## Was daran ersetzt wird
+--
+-- `Nur noch wenige Plaetze` sagt nichts, was sich nachpruefen liesse. Wer es liest, kann
+-- weder feststellen, ob es stimmt, noch wann es sich aendert — und genau das macht eine
+-- Knappheitsangabe zur Behauptung. Ein Datum kann der Leser gegen die Wirklichkeit halten:
+-- Wer im Oktober anfragt und „ab September" liest, weiss, dass der Wert steht.
+--
+-- ## Der Widerspruch, der dabei aufgeloest wird — und wie
+--
+-- `CLAUDE_SARTU_WEBSITE_LASTENHEFT_BAUFINAL.md` §5a verbietet Termine ausdruecklich:
+-- „Keine Zahlen, keine Termine. Weder ,3 Plaetze frei' noch ,ab Q3' — beides waere eine
+-- ungepruefte Zusage."
+--
+-- Diese Datei ist Begruendungsarchiv, keine Bauvorlage (`CLAUDE.md`, Rangfolge). In
+-- `spezifikation/` steht zur Kapazitaetszeile nur, dass sie leise unter dem Knopf steht —
+-- kein Wortlaut, kein Terminverbot. Das Archiv sticht die Betreiberentscheidung nicht.
+--
+-- Die Sorge dahinter bleibt trotzdem richtig, und deshalb ist das Feld ein DATE und keine
+-- Freitextzeile: „ab Q3" liesse sich hineinschreiben, ein Datum nicht. Es steht im
+-- Adminbereich, wird bei jeder Aenderung protokolliert, und ist es leer, entfaellt die
+-- Zeile — genau wie `auftragslage` selbst (025).
+--
+-- Vermerkt in `OFFENE_PRUEFUNGEN.md`, nicht stillschweigend gewaehlt.
+ALTER TABLE operator_settings
+  ADD COLUMN naechster_projektstart DATE NULL AFTER auftragslage;

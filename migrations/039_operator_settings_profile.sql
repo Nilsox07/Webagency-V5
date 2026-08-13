@@ -1,0 +1,23 @@
+-- `operator_settings.profil_adressen` — die Profiladressen fuer `sameAs`.
+-- Quelle: `SARTU_ENTSCHEIDUNGEN_OFFEN.md` §4c: „Organization um Logo, Gruender und sameAs
+-- ergaenzen, ebenfalls nur bei gefuellten Feldern."
+--
+-- ## Warum dafuer ein Feld noetig ist
+--
+-- Logo und Gruender haengen an Werten, die es schon gibt: die ausgelieferte Logodatei und
+-- `gruender_name` aus 037. `sameAs` haengt an nichts — es gab keinen Ort, an dem eine
+-- Profiladresse steht. Ohne Feld waere die Bedingung „nur bei gefuellten Feldern" dauerhaft
+-- unerfuellbar, und genau diese Bauform hat §4c abgeschafft: eine Ausgabe, die es gibt, die
+-- aber nie etwas ausgibt.
+--
+-- ## Warum eine Textspalte und keine eigene Tabelle
+--
+-- Es sind null bis vier Adressen, sie gehoeren einem Betreiber, und niemand fragt sie
+-- einzeln ab. Eine Tabelle mit Fremdschluessel auf eine Zeile, die es genau einmal gibt,
+-- waere Aufwand ohne Gegenwert.
+--
+-- Eine Adresse je Zeile. Was keine Adresse mit `https://` ist, wird beim Speichern
+-- abgewiesen — `Services\BetreiberdatenDienst`. `sameAs` erlaubt nur Adressen; eine
+-- Zeichenkette wie „Instagram: sartu" waere gueltiges JSON und ungueltiges Schema.
+ALTER TABLE operator_settings
+  ADD COLUMN profil_adressen TEXT NULL AFTER gruender_bild;

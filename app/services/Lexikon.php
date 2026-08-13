@@ -96,8 +96,11 @@ final class Lexikon
 
             'domain' => [
                 'begriff' => 'Domain',
+                // Ohne Schrägstriche um die Adresse: Das Feld `kurz` ist zugleich die
+                // Beschreibung für Suchmaschinen und die Definition im `DefinedTerm`-Block.
+                // Dort stünden die Zeichen als Zeichen — Markdown wird nirgends ausgewertet.
                 'kurz' => 'Eine Domain ist die Adresse, unter der eine Website erreichbar ist — '
-                    . 'zum Beispiel `ihr-betrieb.de`. Sie wird gemietet, nicht gekauft, und '
+                    . 'zum Beispiel ihr-betrieb.de. Sie wird gemietet, nicht gekauft, und '
                     . 'gehört demjenigen, der als Inhaber eingetragen ist.',
                 'warum' => 'An der Domain hängen auch Ihre E-Mail-Adressen. Wer sie ohne '
                     . 'Vorbereitung umzieht, schaltet damit die Firmenpost ab.',
@@ -119,7 +122,7 @@ final class Lexikon
                 'warum' => 'Bei einem Relaunch entscheidet sich, ob die Seite ihre Auffindbarkeit '
                     . 'behält. Wer alte Adressen ersatzlos abschaltet, verliert jeden Verweis, '
                     . 'der darauf zeigt.',
-                'beispiel' => 'Aus `betrieb.de/leistungen.html` wird `betrieb.de/fassade`. Die '
+                'beispiel' => 'Aus betrieb.de/leistungen.html wird betrieb.de/fassade. Die '
                     . 'alte Adresse leitet dauerhaft auf die neue weiter.',
                 'fehler' => 'Neue Seite, neue Adressen, keine Weiterleitungen. Die Seite '
                     . 'verschwindet für einige Wochen aus den Ergebnissen — und manchmal länger.',

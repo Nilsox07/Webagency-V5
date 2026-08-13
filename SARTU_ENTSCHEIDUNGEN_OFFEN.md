@@ -837,3 +837,13 @@ ausgeschrieben sind.
 | 10.08.2026 | **Aufmacherbild: Gerät in Schrägstellung mit echter Aufnahme des Kundenbereichs**, Rahmen selbst gezeichnet (§4b) | Betreiber |
 | 10.08.2026 | **Sperren datengesteuert statt codegesteuert:** `LocalBusiness` und Gründerabschnitt werden gebaut, ausgeliefert nur bei gefüllten Betreiberdaten (§4c) | Betreiber |
 | 10.08.2026 | **Gründerabschnitt ist kein Lebenslauf**, sondern Name, Bild und ein Absatz zur Gründung (§4c) | Betreiber |
+| 13.08.2026 | **Die Kapazitätszeile nennt den nächsten möglichen Projektstart** statt „Nur noch wenige Plätze". Das Terminverbot in `CLAUDE_SARTU_WEBSITE_LASTENHEFT_BAUFINAL.md` §5a ist Begründungsarchiv und sticht nicht; angezeigt wird der **Monat**, kein Tag | Betreiber |
+| 13.08.2026 | **Das Mobilmenü greift ab 1180 px** statt ab 940 px — `design/startseite.html` Zeile 166 setzt diesen Wert, und die Kopfzeile lief von 941 bis 1183 px waagerecht über. `10_WEBSITE_SARTU.md` §2 („Desktop ab 1024 px") ist damit nachzuziehen — **offen** | Bau, gemessen |
+
+### Offen aus der Sitzung vom 13.08.2026
+
+| Punkt | Was zu entscheiden ist |
+|---|---|
+| **§2 nachziehen** | „Desktop ab 1024 px" stimmt nicht mehr. Entweder die Zahl auf 1180 ändern oder die Kopfzeile so kürzen, dass sie bei 1024 px passt — dafür müsste eine Beschriftung weichen, und §2 verbietet genau das („nicht für sechs Pixel geopfert") |
+| **Branchenseiten in der Navigation** | Die Anweisung lautete „häng sie in die Navigation". §2 bindet sechs Punkte, §2a fünf Fußspalten mit gebundenem Inhalt, und die Kopfzeile trägt gemessen keinen siebten. Gebaut ist ein Verweisblock auf `/leistungen`. Zu entscheiden: §2 oder §2a ändern, oder dabei belassen |
+| **`geraet-aufmacher.webp`** | Die Datei fehlt. Bis sie da ist, steht der in CSS gezeichnete Laptop |

@@ -97,7 +97,20 @@ final class WebsiteTest extends Datenbankfall
             preg_match_all('~href="(/[^"#?]*)~', $html, $treffer);
 
             foreach (array_unique($treffer[1]) as $ziel) {
-                if (isset($geprueft[$ziel]) || str_starts_with($ziel, '/assets/')) {
+                if (isset($geprueft[$ziel])) {
+                    continue;
+                }
+
+                // Ausgelieferte Dateien sind keine Routen. Bis zum 13.08.2026 stand hier nur
+                // `/assets/`; mit dem Favicon kam die erste Datei im Wurzelverzeichnis dazu.
+                // Geprueft wird deshalb, ob die Datei wirklich liegt — eine Ausnahme nach
+                // Namen haette auch einen Tippfehler durchgelassen.
+                if (str_starts_with($ziel, '/assets/') || is_file(SARTU_WURZEL . '/public' . $ziel)) {
+                    $geprueft[$ziel] = true;
+
+                    $this->assertFileExists(SARTU_WURZEL . '/public' . $ziel,
+                        'Verwiesene Datei fehlt: ' . $ziel . ' (von ' . $pfad . ').');
+
                     continue;
                 }
 
@@ -238,27 +251,119 @@ final class WebsiteTest extends Datenbankfall
 
     // ---------------------------------------------------------------- §0 Ortssperre
 
+    /** Die Orte aus `SARTU_ENTSCHEIDUNGEN_OFFEN.md` §1, Einzugsgebiet. */
+    private const ORTE = ['Dresden', 'Meißen', 'Radebeul', 'Coswig', 'Radeberg', 'Pirna',
+        'Heidenau', 'Freital', 'Dippoldiswalde', 'Bischofswerda', 'Bautzen', 'Sebnitz',
+        'Sachsen'];
+
     /**
-     * §0 und §17: Kein Ortsname erscheint, solange `[GESCHAEFTSADRESSE_STATUS]` offen ist.
+     * §0 und §17: Kein Ortsname erscheint **im sichtbaren Text**, solange
+     * `[GESCHAEFTSADRESSE_STATUS]` offen ist.
      *
-     * Geprüft wird der **ganze** ausgelieferte Text, nicht nur Titel und H1. §0 nennt
-     * ausdrücklich auch den Fließtext.
+     * ## Was sich am 13.08.2026 geändert hat — und was nicht
+     *
+     * `SARTU_ENTSCHEIDUNGEN_OFFEN.md` §4c (Rang 1) liefert `LocalBusiness` aus, sobald
+     * Straße, PLZ und Ort in `operator_settings` stehen. Damit steht der Ort der
+     * Geschäftsadresse in den strukturierten Daten — und der Test schlug an.
+     *
+     * **Er wird nicht abgeschwächt, sondern getrennt.** §0 verbietet den Ortsnamen dort, wo
+     * er eine Aussage über das Einzugsgebiet macht: in Überschriften, Fließtext, Titeln,
+     * Beschreibungen. Die Geschäftsadresse in `LocalBusiness` ist etwas anderes — sie ist
+     * dieselbe Angabe, die im Impressum ohnehin Pflicht ist, und sie kommt aus den
+     * Betreiberdaten statt aus dem Quelltext.
+     *
+     * Der sichtbare Text wird deshalb weiterhin **vollständig** geprüft. Neu ist nur, dass
+     * der eine `ld+json`-Block vorher herausgeschnitten wird — und der zweite Test unten
+     * nagelt fest, dass dort auch wirklich nur die Adresse steht.
      */
     public function testKeinOrtsnameStehtAufDerWebsite(): void
     {
-        // Die Orte aus SARTU_ENTSCHEIDUNGEN_OFFEN.md §1, Einzugsgebiet.
-        $orte = ['Dresden', 'Meißen', 'Radebeul', 'Coswig', 'Radeberg', 'Pirna', 'Heidenau',
-                 'Freital', 'Dippoldiswalde', 'Bischofswerda', 'Bautzen', 'Sebnitz', 'Sachsen'];
-
         foreach ($this->seiten() as $pfad => $html) {
-            foreach ($orte as $ort) {
+            $sichtbar = self::ohneStrukturdaten($html);
+
+            foreach (self::ORTE as $ort) {
                 $this->assertStringNotContainsString(
                     $ort,
-                    $html,
+                    $sichtbar,
                     $pfad . ' nennt „' . $ort . '", obwohl die Standortentscheidung offen ist (§0).',
                 );
             }
         }
+    }
+
+    /**
+     * §4c: Der Ortsname darf in den strukturierten Daten **nur** im Adressblock stehen.
+     *
+     * Ohne diesen Test wäre der Ausschnitt oben ein Loch: Jede Zeichenkette im
+     * `ld+json`-Block wäre dann von der Ortssperre ausgenommen — auch eine Beschreibung, ein
+     * Name oder ein Suchwort. Geprüft wird deshalb, dass jeder Ortsname, der im Block
+     * vorkommt, unter `addressLocality` steht und nirgends sonst.
+     */
+    public function testDerOrtsnameStehtNurInDerGeschaeftsadresse(): void
+    {
+        $gefunden = false;
+
+        foreach ($this->seiten() as $pfad => $html) {
+            preg_match_all('~<script type="application/ld\+json">(.*?)</script>~s', $html, $treffer);
+
+            foreach ($treffer[1] as $block) {
+                $daten = json_decode($block, true);
+                $this->assertIsArray($daten, $pfad . ' liefert einen ld+json-Block, der kein JSON ist.');
+
+                // Der Adressblock wird herausgenommen; was danach noch einen Ortsnamen
+                // enthaelt, steht an einer Stelle, an der er nichts zu suchen hat.
+                $ohneAdresse = (string) json_encode(
+                    self::ohneSchluessel($daten, 'address'),
+                    JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES,
+                );
+
+                foreach (self::ORTE as $ort) {
+                    if (str_contains($block, '"addressLocality":"' . $ort . '"')) {
+                        $gefunden = true;
+                    }
+
+                    $this->assertStringNotContainsString(
+                        $ort,
+                        $ohneAdresse,
+                        $pfad . ' nennt „' . $ort . '" in den strukturierten Daten ausserhalb der Anschrift (§0).',
+                    );
+                }
+            }
+        }
+
+        // Der Test wäre sonst auch dann grün, wenn `LocalBusiness` gar nicht mehr entstünde.
+        $this->assertTrue($gefunden,
+            'Kein Ort in einem Adressblock — dann prüft dieser Test nichts. '
+            . 'Stehen Strasse, PLZ und Ort in den Betreiberdaten, muss LocalBusiness entstehen (§4c).');
+    }
+
+    /** Der sichtbare Teil einer Seite — ohne die `ld+json`-Bloecke. */
+    private static function ohneStrukturdaten(string $html): string
+    {
+        return (string) preg_replace(
+            '~<script type="application/ld\+json">.*?</script>~s',
+            '',
+            $html,
+        );
+    }
+
+    /**
+     * @param array<mixed> $daten
+     * @return array<mixed>
+     */
+    private static function ohneSchluessel(array $daten, string $schluessel): array
+    {
+        $rest = [];
+
+        foreach ($daten as $name => $wert) {
+            if ($name === $schluessel) {
+                continue;
+            }
+
+            $rest[$name] = is_array($wert) ? self::ohneSchluessel($wert, $schluessel) : $wert;
+        }
+
+        return $rest;
     }
 
     /** §17: keine Ortsseite in der produktiven Veröffentlichung, auch nicht unverlinkt. */

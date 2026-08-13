@@ -158,7 +158,10 @@
              laeuft der Zeitstrahl zweispaltig
      880px   Musterprojekte einspaltig
      900px   Aufmacher einspaltig
-     940px   Navigation entfaellt
+     1180px  Navigation entfaellt — `startseite.html` Zeile 166.
+             Hier stand bis zum 13.08.2026 940px; der Wert war beim
+             Uebertragen geraten und liess die Kopfzeile von 941 bis
+             1183px waagerecht ueberlaufen
    ---------------------------------------------------------------- */
 
 /* ---- Bewegung abschaltbar ------------------------------------- */

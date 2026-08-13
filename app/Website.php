@@ -10,6 +10,8 @@ use Sartu\Helpers\Http;
 use Sartu\Services\Auftragslage;
 use Sartu\Services\Branchenseiten;
 use Sartu\Services\Firmenseitentexte;
+use Sartu\Services\Gruenderangaben;
+use Sartu\Services\Gruenderbild;
 use Sartu\Services\Kontaktanfrage;
 use Sartu\Services\Lexikon;
 use Sartu\Services\Ratgeber;
@@ -51,7 +53,7 @@ final class Website
             'titel'        => Startseitentexte::TITEL,
             'beschreibung' => Startseitentexte::BESCHREIBUNG,
             'pfad'         => '/',
-            'schema'       => Strukturdaten::organisationUndWebsite(),
+            'schema'       => Strukturdaten::organisationUndWebsite($this->betreiberzeile()),
         ]);
     }
 
@@ -171,6 +173,38 @@ final class Website
             'brotkrumen'   => $krumen,
             'schema'       => Strukturdaten::brotkrumen($krumen),
         ]);
+    }
+
+    /**
+     * `/bild/gruender` — liefert das hinterlegte Bild aus, sonst 404.
+     *
+     * ## Warum keine `Content-Disposition: attachment`
+     *
+     * `Antwort::datei()` setzt sie bei jedem Kundenupload, und das ist dort richtig: Ein SVG
+     * ist XML und kann Skript tragen. Hier kommen nur JPG, PNG und WebP herein, jedes am
+     * Inhalt geprüft — und das Bild gehört in ein `<img>`, das ein Anhang nicht füllt.
+     * `nosniff` bleibt, damit der Browser den Typ nicht selbst errät.
+     *
+     * ## 404 statt eines Ersatzbildes
+     *
+     * Ist nichts hinterlegt, gibt es die Adresse nicht. Ein Ersatzbild wäre der leere Rahmen
+     * an der Vertrauensstelle, den §5 verbietet — nur eben als Datei. Die Sektion, die auf
+     * diese Adresse zeigt, wird ohne Bild ohnehin nicht ausgeliefert.
+     *
+     * @param array<string,string> $parameter
+     */
+    public function gruenderbild(array $parameter = []): Antwort
+    {
+        $bild = (new Gruenderbild($this->betrieb))->ausliefern();
+
+        if ($bild === null) {
+            return Antwort::nichtGefunden();
+        }
+
+        // Öffentliche Seiten sind cachebar (§1). Eine Stunde ist der Kompromiss: kurz genug,
+        // dass ein Austausch durchschlägt, lang genug, dass die Startseite das Bild nicht
+        // bei jedem Aufruf neu holt.
+        return Antwort::bild($bild['inhalt'], $bild['typ'], ['Cache-Control' => 'public, max-age=3600']);
     }
 
     /**
@@ -334,6 +368,8 @@ final class Website
                     (string) $artikel['beschreibung'],
                     $pfad,
                     Ratgeber::STAND,
+                    Ratgeber::VEROEFFENTLICHT,
+                    $this->betreiberzeile(),
                 ),
                 Strukturdaten::brotkrumen($krumen),
             ),
@@ -451,7 +487,10 @@ final class Website
             'brotkrumen'       => [],
             'noindex'          => false,
             'schema'           => null,
-            'auftragslage'     => Auftragslage::anzeige($daten['auftragslage']),
+            'auftragslage'     => Auftragslage::anzeige($daten['auftragslage'], $daten['naechster_projektstart']),
+            // §4c: Die Sektion „Wer dahintersteckt" haengt an den Daten. `null` heisst,
+            // dass sie entfaellt — jede Ansicht prueft das selbst, damit keine sie vergisst.
+            'gruender'         => (new Gruenderangaben($this->betrieb))->angaben(),
             'preishinweis'     => Websitetexte::preishinweis($daten['kleinunternehmer']),
             'kleinunternehmer' => $daten['kleinunternehmer'],
             'werte'            => [],
@@ -462,7 +501,27 @@ final class Website
         ]);
     }
 
-    /** @return array{auftragslage:?string,kleinunternehmer:bool,email:?string} */
+    /**
+     * Die rohe Zeile aus `operator_settings` für die strukturierten Daten — oder `null`.
+     *
+     * **Getrennt von `betriebsdaten()`**, das eine geprüfte Auswahl liefert. Die
+     * strukturierten Daten brauchen mehr Felder als die Ansicht, und sie brauchen sie roh:
+     * `Strukturdaten` entscheidet selbst, was gefüllt ist und was entfällt (§4c).
+     *
+     * @return array<string,mixed>|null
+     */
+    private function betreiberzeile(): ?array
+    {
+        try {
+            return ($this->betrieb ?? new BetreiberdatenSpeicher())->lesen();
+        } catch (\Throwable) {
+            // Ohne Datenbank stehen die Seiten trotzdem — dann eben mit dem Knoten, der
+            // ohne Betreiberdaten auskommt.
+            return null;
+        }
+    }
+
+    /** @return array{auftragslage:?string,naechster_projektstart:?string,kleinunternehmer:bool,email:?string} */
     private function betriebsdaten(): array
     {
         try {
@@ -474,11 +533,13 @@ final class Website
         }
 
         $lage = $zeile['auftragslage'] ?? null;
+        $start = $zeile['naechster_projektstart'] ?? null;
 
         $email = $zeile['email'] ?? null;
 
         return [
             'auftragslage'     => is_string($lage) && $lage !== '' ? $lage : null,
+            'naechster_projektstart' => is_string($start) && $start !== '' ? $start : null,
             'kleinunternehmer' => (int) ($zeile['kleinunternehmer'] ?? 0) === 1,
             // §9.5a: „Eine Kontaktalternative steht zusätzlich da." Sie kommt aus den
             // Betreiberdaten, nie aus dem Quelltext.

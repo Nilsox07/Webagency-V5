@@ -50,6 +50,18 @@ final class Branchenseiten
      *     quellen:list<string>
      * }>
      */
+    /**
+     * Die Adresse einer Branchenseite.
+     *
+     * Sie stand an zwei Stellen ausgeschrieben — in `routes.php` und in
+     * `Launchadressen::alle()`. Eine dritte kam am 13.08.2026 mit der Verweisliste auf
+     * `/leistungen` dazu, und drei ausgeschriebene Adressen laufen auseinander.
+     */
+    public static function pfad(string $schluessel): string
+    {
+        return '/website-' . $schluessel;
+    }
+
     public static function alle(): array
     {
         return [
@@ -57,13 +69,13 @@ final class Branchenseiten
                 'branche' => 'Sanitär-, Heizungs- und Klimabetriebe',
                 'h1'      => 'Website für Sanitär-, Heizungs- und Klimabetriebe',
                 'titel'   => 'Website für SHK-Betriebe zum Festpreis | SARTU',
-                'beschreibung' => 'Website für Sanitär, Heizung und Klima ab 1.490 € netto: je '
-                    . 'eine Seite für Badsanierung, Heizungstausch und Wartung, Texte '
-                    . 'inklusive, Betrieb ab 59 € im Monat.',
-                'kurz' => 'Wir bauen Ihre SHK-Website zum Festpreis ab 1.490 € netto — mit einer '
-                    . 'eigenen Seite je Leistung, geschriebenen Texten und Betrieb ab 59 € netto '
-                    . 'im Monat. Sie liefern die Fakten in einem Gespräch, danach ist kein '
-                    . 'Termin nötig.',
+                'beschreibung' => 'Website für Sanitär, Heizung und Klima ab 1.490 € netto. Je '
+                    . 'eine Seite für Badsanierung, Heizungstausch und Wartung ab 3.900 €. '
+                    . 'Betrieb ab 59 € im Monat.',
+                'kurz' => 'Wir bauen Ihre SHK-Website zum Festpreis ab 1.490 € netto, Betrieb ab '
+                    . '59 € netto im Monat. Eine eigene Seite je Leistung — Badsanierung, '
+                    . 'Heizungstausch, Wartung — beginnt bei 3.900 € netto. Die Fakten liefern '
+                    . 'Sie im Bedarfsscheck und in Ihrem Kundenbereich, ohne einen Termin.',
 
                 'probleme' => [
                     ['titel' => 'Badsanierung und Heizungstausch stehen auf derselben Seite',
@@ -115,8 +127,9 @@ final class Branchenseiten
                 'beispiel' => [
                     'titel' => 'Ein Betrieb mit zwölf Beschäftigten, Umfang Wachstum',
                     'text'  => 'Bis zu 8 Seiten, rund 3.500 Wörter, 2 Korrekturrunden für '
-                        . '3.900 € netto einmalig und 129 € netto im Monat. Der Betrieb liefert '
-                        . 'Fakten in einem Gespräch und Bilder aus dem Telefon.',
+                        . '3.900 € netto einmalig und 129 € netto im Monat. Der Betrieb '
+                        . 'beantwortet die Fragen in seinem Kundenbereich und lädt Bilder aus '
+                        . 'dem Telefon hoch.',
                     'seiten' => [
                         'Startseite',
                         'Badsanierung',
@@ -163,12 +176,14 @@ final class Branchenseiten
                 'branche' => 'Elektrobetriebe',
                 'h1'      => 'Website für Elektrobetriebe',
                 'titel'   => 'Website für Elektrobetriebe zum Festpreis | SARTU',
-                'beschreibung' => 'Website für Elektrotechnik ab 1.490 € netto: eigene Seiten '
-                    . 'für Photovoltaik, Ladepunkte, Gewerbe und Neubau. Texte inklusive, '
-                    . 'Betrieb ab 59 € im Monat.',
-                'kurz' => 'Wir bauen Ihre Elektro-Website zum Festpreis ab 1.490 € netto — mit '
-                    . 'einer eigenen Seite je Arbeitsgebiet, geschriebenen Texten und Betrieb ab '
-                    . '59 € netto im Monat. Sie liefern die Fakten in einem Gespräch.',
+                'beschreibung' => 'Website für Elektrotechnik ab 1.490 € netto. Eigene Seiten '
+                    . 'für Photovoltaik, Ladepunkte, Gewerbe und Neubau ab 3.900 €. Betrieb ab '
+                    . '59 € im Monat.',
+                'kurz' => 'Wir bauen Ihre Elektro-Website zum Festpreis ab 1.490 € netto, '
+                    . 'Betrieb ab 59 € netto im Monat. Eine eigene Seite je Arbeitsgebiet — '
+                    . 'Photovoltaik, Ladepunkte, Gewerbe — beginnt bei 3.900 € netto. Die '
+                    . 'Fakten liefern Sie im Bedarfsscheck und in Ihrem Kundenbereich, ohne '
+                    . 'einen Termin.',
 
                 'probleme' => [
                     ['titel' => 'Drei Arbeitsgebiete, eine Seite',
@@ -189,8 +204,9 @@ final class Branchenseiten
                     ['titel' => 'Für die Digitalisierung ist keine Zeit',
                      'text'  => '72 % der Betriebe geben an, zu viel zu tun zu haben (Bitkom '
                         . '2025, n=504). Eine Website, die drei Wochen Ihrer Zeit kostet, '
-                        . 'entsteht deshalb nicht. Bei uns liefern Sie die Fakten in einem '
-                        . 'Gespräch und lesen später eine Vorschau — mehr ist nicht Ihr Anteil.'],
+                        . 'entsteht deshalb nicht. Bei uns beantworten Sie die Fragen in Ihrem '
+                        . 'Kundenbereich, wann es Ihnen passt, und lesen später eine Vorschau — '
+                        . 'mehr ist nicht Ihr Anteil.'],
                     ['titel' => 'Die Anmeldung beim Netzbetreiber steht nirgends',
                      'text'  => 'Wer eine Anlage anmeldet, will drei Dinge wissen: wer den Antrag '
                         . 'stellt, welche Unterlagen nötig sind, wie lange es dauert. Das '
@@ -286,12 +302,13 @@ final class Branchenseiten
                 'branche' => 'Dachdeckerbetriebe',
                 'h1'      => 'Website für Dachdeckerbetriebe',
                 'titel'   => 'Website für Dachdecker zum Festpreis | SARTU',
-                'beschreibung' => 'Website für Dachdeckerbetriebe ab 1.490 € netto: eigene '
-                    . 'Seiten für Steildach, Flachdach, Abdichtung und Sanierung. Texte '
-                    . 'inklusive, Betrieb ab 59 € im Monat.',
-                'kurz' => 'Wir bauen Ihre Dachdecker-Website zum Festpreis ab 1.490 € netto — '
-                    . 'mit einer eigenen Seite je Dachart, geschriebenen Texten und Betrieb ab '
-                    . '59 € netto im Monat. Sie liefern die Fakten in einem Gespräch.',
+                'beschreibung' => 'Website für Dachdeckerbetriebe ab 1.490 € netto. Eigene '
+                    . 'Seiten für Steildach, Flachdach, Abdichtung und Sanierung ab 3.900 €. '
+                    . 'Betrieb ab 59 € im Monat.',
+                'kurz' => 'Wir bauen Ihre Dachdecker-Website zum Festpreis ab 1.490 € netto, '
+                    . 'Betrieb ab 59 € netto im Monat. Eine eigene Seite je Dachart — Steildach, '
+                    . 'Flachdach, Abdichtung — beginnt bei 3.900 € netto. Die Fakten liefern Sie '
+                    . 'im Bedarfsscheck und in Ihrem Kundenbereich, ohne einen Termin.',
 
                 'probleme' => [
                     ['titel' => 'Der Wettbewerb im Umkreis sieht genauso aus',

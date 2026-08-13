@@ -49,10 +49,17 @@
   z-index: 20;
 }
 
+/* Die Abstandsstufe zwischen den drei Blöcken ist --s-3, nicht --s-4.
+   Gemessen am 13.08.2026: Mit --s-4 war die Zeile 1135 px breit und damit
+   breiter als die Bahn selbst — die traegt bei --wrap 1180 px und --gut auf
+   Hoechstwert nur 1068 px Inhalt. Der Knopf ragte deshalb bei **jeder**
+   Desktopbreite in den Aussenrand, oben also weiter rechts als jede Kante
+   darunter. Sichtbar wurde es erst bei 1024 px, wo der Aussenrand schmal
+   genug ist, dass der Ueberlauf bis ins Fenster durchschlaegt. */
 .seitenkopf__reihe {
   display: flex;
   align-items: center;
-  gap: var(--s-4);
+  gap: var(--s-3);
   padding-top: var(--s-3);
   padding-bottom: var(--s-3);
 }
@@ -108,9 +115,15 @@
   white-space: nowrap;
 }
 
+/* Die Punkte stehen eine Stufe unter dem Fliesstext — `design/startseite.html`
+   setzt die Navigation auf 15,5 px, waehrend der Fliesstext auf 18 px steht.
+   Uebernommen ist die *Stufe*, nicht die Zahl: --fs-small traegt im Kopf schon
+   den Knopf, damit steht die ganze Zeile auf einem Grad. Das ist zugleich der
+   groessere Teil der Breite, die der Zeile fehlte — 54 der 67 px. */
 .hauptnavigation a {
   color: var(--text);
   text-decoration: none;
+  font-size: var(--fs-small);
   padding-bottom: var(--s-1);
   border-bottom: 2px solid transparent;
 }
@@ -785,7 +798,25 @@
 /* ---- Haltepunkte ------------------------------------------
    Nur Werte aus der Liste in tokens.css. Keine erfundenen. */
 
-@media (max-width: 940px) {
+/* Die Navigation entfaellt unter 1180 px, nicht unter 940 px.
+
+   `design/startseite.html` Zeile 166 setzt genau diesen Wert:
+   `@media (max-width:1180px){.nav{display:none}}`. Der Entwurf ist am
+   02.08.2026 abgenommen; die 940 px waren beim Uebertragen geraten.
+
+   Die Messung vom 13.08.2026 gibt ihm recht. Die Kopfzeile braucht nach den
+   beiden Aenderungen oben 1057 px. Die Bahn traegt bei 1140 px Fensterbreite
+   1049 px, bei 1180 px dann 1085 px — dazwischen liegt die Schwelle. Von
+   941 bis 1183 px lief die Zeile bisher waagerecht ueber, bei 1024 px um
+   152 px. §1 verbietet den Ueberlauf ausdruecklich.
+
+   **Das widerspricht `10_WEBSITE_SARTU.md` §2, „Desktop ab 1024 px".** Der
+   Widerspruch steht in derselben Datei und ist dort schon aufgeloest: Zwei
+   Absaetze hoeher heisst es „Wird die Zeile zu breit, greift das Mobilmenue
+   frueher — der verstaendlichere Begriff wird nicht fuer sechs Pixel
+   geopfert." Diese Stelle traegt die Begruendung, die 1024 nicht. Gemeldet
+   in `OFFENE_PRUEFUNGEN.md`, nicht stillschweigend gewaehlt. */
+@media (max-width: 1180px) {
   .hauptnavigation { display: none; }
   .menue { display: block; margin-left: auto; }
   .seitenkopf__handlung { display: none; }
@@ -799,6 +830,8 @@
 }
 
 @media (max-width: 860px) {
+  /* Bild ueber Text, nicht daneben. Die Reihenfolge bleibt: das Gesicht zuerst. */
+  .gruender__reihe { grid-template-columns: 1fr; }
   .preisstufen { grid-template-columns: 1fr; }
   .dreispalten { grid-template-columns: 1fr; }
   .zweispalten { grid-template-columns: 1fr; }
@@ -925,6 +958,57 @@
   font-size: var(--fs-mono);
   letter-spacing: var(--ls-mono);
   text-transform: uppercase;
+}
+
+/* ---- Sektion 6: Wer dahintersteckt -----------------------
+   `SARTU_ENTSCHEIDUNGEN_OFFEN.md` §4c. Bild links, Text
+   rechts — die Sektion steht zwischen zwei ganzflaechigen
+   Abschnitten und braucht eine eigene Bauform, sonst kaeme
+   das Aufbaumuster „Text ueber Liste" ein drittes Mal
+   (Design-Briefing §3.7 erlaubt zwei).
+   ---------------------------------------------------------- */
+
+.gruender__reihe {
+  display: grid;
+  grid-template-columns: minmax(0, 34fr) minmax(0, 66fr);
+  gap: var(--s-5);
+  align-items: center;
+}
+
+.gruender__bild { margin: 0; }
+
+.gruender__bild img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: var(--r-m);
+  border: 1px solid var(--line);
+  /* Das Bild kommt vom Betreiber und hat ein unbekanntes Seitenverhaeltnis. Ohne die
+     feste Form steht neben einem Hochformat eine leere Spalte und neben einem
+     Querformat ein Streifen. */
+  aspect-ratio: 4 / 5;
+  object-fit: cover;
+}
+
+.gruender__name {
+  font-family: var(--font-mono);
+  font-size: var(--fs-mono);
+  letter-spacing: var(--ls-mono);
+  text-transform: uppercase;
+  color: var(--label);
+  margin: 0 0 var(--s-3);
+}
+
+.gruender .hakenliste { margin-top: var(--s-4); }
+
+/* Die Vorschau im Adminbereich. Sie steht hier und nicht in anwendung.css, weil sie
+   dasselbe Bild in derselben Form zeigt wie die Sektion oben — zwei Formen fuer ein
+   Bild waeren zwei Wahrheiten darueber, wie es beschnitten wird. */
+.bildprobe {
+  border-radius: var(--r-s);
+  border: 1px solid var(--line);
+  aspect-ratio: 4 / 5;
+  object-fit: cover;
 }
 
 /* ---- Links im Fliesstext: Lime als Textmarker ------------
