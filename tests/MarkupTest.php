@@ -230,6 +230,67 @@ final class MarkupTest extends Datenbankfall
      * wich an neun Stellen ab. Dieser Test prüft die neun einzeln, damit derselbe Fehlschluss
      * nicht ein zweites Mal möglich ist.
      */
+    /**
+     * Der Tausch des Geraeterahmens gegen das gerenderte Mockup — offen seit 13.08.2026.
+     *
+     * ## Warum dieser Test aussieht, als pruefe er nichts
+     *
+     * Der Auftrag vom 13.08.2026 wollte `.geraet__deckel` samt Telefon und Schattenwerk
+     * durch `public/assets/bild/geraet-aufmacher.webp` ersetzen und den dann toten CSS-Block
+     * loeschen. **Die Datei liegt nicht im Repository** — sie entsteht ausserhalb, in einem
+     * Mockup-Werkzeug. Derselbe Auftrag regelt den Fall: „Liegt die Datei nicht im Repo,
+     * ueberspring diesen Block und melde es — erfinde kein Ersatzbild."
+     *
+     * Der CSS-Block ist deshalb **nicht** tot: Ohne ihn gaebe es im Aufmacher kein Geraet,
+     * sondern eine Luecke. Ihn vorab zu loeschen hiesse, den Aufmacher zu zerstoeren, um
+     * einen Auftrag formal zu erfuellen.
+     *
+     * ## Was der Test dann tut
+     *
+     * Er wartet. Sobald jemand die Datei ablegt, schlaegt er an und nennt die vier
+     * Regelbloecke, die dann zu entfernen sind. Damit kann der Tausch nicht vergessen
+     * werden — und der offene Punkt steht nicht nur in `OFFENE_PRUEFUNGEN.md`, wo er
+     * ueberlesen wird, sondern in der Testreihe, wo er auffaellt.
+     *
+     * **Solange die Datei fehlt, prueft er trotzdem etwas:** dass der Rahmen vollstaendig
+     * dasteht. Ein halb geloeschter Block waere schlimmer als beides.
+     */
+    public function testDerGeraeterahmenWirdGetauschtSobaldDasMockupVorliegt(): void
+    {
+        $mockup = SARTU_WURZEL . '/public/assets/bild/geraet-aufmacher.webp';
+        $css = (string) file_get_contents(SARTU_WURZEL . '/public/assets/css/website.css');
+        $bild = (string) file_get_contents(SARTU_WURZEL . '/app/views/partials/aufmacherbild.php');
+
+        $regeln = ['.geraet__laptop', '.geraet__deckel', '.geraet__sockel', '.geraet__telefon'];
+
+        if (!is_file($mockup)) {
+            // Der Rahmen steht vollstaendig, solange er gebraucht wird.
+            foreach ($regeln as $regel) {
+                $this->assertStringContainsString($regel . ' {', $css,
+                    'Der Geraeterahmen ist unvollstaendig, und das Mockup liegt nicht vor. '
+                    . 'Entweder beides oder keines — ein halber Rahmen zeigt eine Luecke.');
+            }
+
+            $this->assertStringContainsString('geraet__marke', $bild,
+                'Der Vermerk „Musteransicht" gehoert an das Bild (§4b).');
+
+            return;
+        }
+
+        // Ab hier liegt das Mockup vor. Der selbst gezeichnete Rahmen ist damit tot.
+        foreach ($regeln as $regel) {
+            $this->assertStringNotContainsString($regel . ' {', $css,
+                'geraet-aufmacher.webp liegt vor, aber ' . $regel . ' steht noch in website.css. '
+                . 'Der Auftrag vom 13.08.2026: „loesch den toten CSS-Block, statt ihn liegen zu lassen."');
+        }
+
+        $this->assertStringContainsString('geraet-aufmacher.webp', $bild,
+            'Das Mockup liegt vor und wird nicht eingebunden.');
+
+        // Der Vermerk bleibt gebunden — und steht neben dem Bild, nicht darauf.
+        $this->assertStringContainsString('geraet__marke', $bild);
+    }
+
     public function testDerAufmacherTraegtDieNeunMerkmaleDesEntwurfs(): void
     {
         $seite = (string) file_get_contents(SARTU_WURZEL . '/app/views/pages/website-start.php');

@@ -2561,6 +2561,23 @@ gelöschter CSS-Block ohne Ersatzbild hätte den Aufmacher leer gelassen.
 |---|---|
 | Aufnahme des Kundenbereichs in ein Mockup-Werkzeug geben, Ergebnis als `geraet-aufmacher.webp` ablegen | Danach `.geraet__deckel`, `.geraet__telefon`, `.geraet__sockel` und `.geraet__laptop` aus `website.css` entfernen und die fünf Breiten erneut messen |
 
+**Nachgeprüft am 13.08.2026:** Die Datei existiert in **keinem** Commit, **keinem** Branch und
+keiner Objektdatenbank dieses Repositorys — gesucht über `git rev-list --all --objects` und
+`git log --all --diff-filter=A`. Das einzige verwandte Artefakt ist `design/geraet.html`, der
+CSS-Rahmen aus der Sitzung vom 10.08.2026.
+
+**Der Block bleibt nicht bloß gemeldet, sondern festgenagelt.**
+`MarkupTest::testDerGeraeterahmenWirdGetauschtSobaldDasMockupVorliegt` prüft beide Zustände:
+
+| Zustand | Was der Test verlangt |
+|---|---|
+| Datei fehlt (**jetzt**) | Der Rahmen steht **vollständig** — vier Regelblöcke und der Vermerk `Musteransicht`. Ein halb gelöschter Block zeigt eine Lücke und ist schlechter als beides |
+| Datei liegt vor | `.geraet__laptop`, `.geraet__deckel`, `.geraet__sockel` und `.geraet__telefon` sind aus `website.css` **entfernt**, und `aufmacherbild.php` bindet das Mockup ein |
+
+Beide Richtungen sind ausgeführt worden, nicht behauptet: mit der Datei schlägt der Test fehl
+und nennt die erste Regel, die noch dasteht. Wer das Mockup ablegt, kann den Tausch damit
+nicht vergessen — er bricht die Testreihe, bis er gemacht ist.
+
 ### Was von Block 1 ausgeführt wurde: der Überlauf
 
 Der gemeldete Punkt war „bei 1024 px läuft die Seite über". **Gemessen war es mehr.** Die
