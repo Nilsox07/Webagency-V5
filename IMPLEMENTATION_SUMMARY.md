@@ -686,3 +686,31 @@ stehen zu lassen.
 Die beiden gemeldeten Überläufe sind behoben und hatten **verschiedene** Ursachen: das
 geschlossene Menüblatt behält in Chromium eine Layoutbox, und `Stundenabrechnung` passt bei
 320 px nicht in eine Zeile.
+
+---
+
+## G. Vier gemessene Fehler — 13.08.2026, zweiter Lauf
+
+| Fehler | Was geändert wurde |
+|---|---|
+| **1 — mobil länger geworden** | Siebzehn Karten werden unter 860 px zu Zeilen: Rahmen und Innenabstand entfallen, eine Trennlinie bleibt. Dazu engerer Rhythmus unter 620 px. 390 px: 19.495 → 16.899, 320 px: 21.858 → 18.941 — **kürzer als vor dem letzten Lauf**, mit zwei zusätzlichen Sektionen |
+| **2 — Sprungziele unter dem Kopf** | `--kopfhoehe` und `--sprungabstand` in `tokens.css`, Regel über `main [id]` statt über eine Liste der sechs Namen. Alle sechs einzeln nachgemessen |
+| **3 — Bildplätze ohne Seitenverhältnis** | `data-verhaeltnis` am Element, je Verhältnis eine Regel. **Nicht als `style`** — die eigene CSP führt `style-src 'self'` ohne `unsafe-inline` |
+| **4 — Gattung doppelt** | Die Nennung im Bildplatz entfällt, der Umfang steht an der Karte |
+| **a — Marke sichtbar** | Dateiname und Maße stehen als `data-fehlt`, sichtbar ist `Platz für Ansicht` und ein Satz. Die Startsperre findet sie unverändert |
+| **b — Aufzählungspunkte** | 53 → 49. Vier Abgrenzungen sind eine Zeile geworden |
+| **c — Füllgrad bei 1440 px** | **nicht weiter umgesetzt.** Der Abstand ist dort nicht mehr die Ursache; die gebundene Zeilenlänge ist es |
+
+**Neu:** `app/helpers/Bildmasse.php`. Vier neue Prüffälle in `MarkupTest`.
+
+**Ein Fehler, der nicht im Auftrag stand:** `.gruender__reihe` wurde mobil nie einspaltig — die
+Medienregel stand 95 Zeilen vor der Basisregel und verlor bei gleicher Spezifität. Ein Prüflauf
+über alle Medienblöcke hat gezeigt, dass es die einzige solche Stelle war.
+
+**Zwei Verschlechterungen, beide gemeldet:** Bei 1440 und 1920 px ist die Seite 136 bzw. 226 px
+länger — die maßgetreuen Bildplätze sind der Zweck von Fehler 3. Und der Füllgrad der
+Gründersektion fällt von 31 auf 20 %, weil die Textseite kürzer wurde und die Bildseite nicht.
+
+**Zwei Ziele gerissen:** 390 px sollte unter 14.000 (erreicht 16.899), 320 px unter 16.000
+(erreicht 18.941). Die Rechnung steht in `OFFENE_PRUEFUNGEN.md`; der verbleibende Weg wäre ein
+Akkordeon, und das legt Inhalt hinter einen Klick.

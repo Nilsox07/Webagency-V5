@@ -373,6 +373,138 @@ final class MarkupTest extends Datenbankfall
     }
 
     /**
+     * Jeder Bildplatz nimmt den Raum ein, den sein späteres Bild braucht.
+     *
+     * Gemessen am 13.08.2026: Acht Bildplätze richteten sich nach ihrem Text — einer 427 px
+     * hoch, wo das Bild 213 px braucht, andere 42 px. **An jeder dieser Stellen wäre das
+     * Layout gesprungen, sobald die Aufnahme kommt.**
+     *
+     * Geprüft wird beides: dass jeder Platz ein Verhältnis trägt, **und** dass `website.css`
+     * dafür eine Regel führt. Ohne den zweiten Teil wäre ein drittes Seitenverhältnis
+     * unbemerkt ohne `aspect-ratio` — das Attribut stünde da, die Wirkung fehlte.
+     */
+    public function testJederBildplatzTraegtSeinSeitenverhaeltnis(): void
+    {
+        $css = (string) file_get_contents(SARTU_WURZEL . '/public/assets/css/website.css');
+        $geprueft = 0;
+
+        foreach ($this->seitenMitBildplatz() as $bezeichnung => $html) {
+            preg_match_all('#<figure class="[^"]*bildplatz[^"]*"([^>]*)>#', $html, $treffer);
+
+            foreach ($treffer[1] as $attribute) {
+                ++$geprueft;
+
+                $this->assertSame(1, preg_match('#data-verhaeltnis="([^"]+)"#', $attribute, $wert),
+                    $bezeichnung . ': ein Bildplatz ohne Seitenverhältnis.');
+
+                $this->assertStringContainsString(
+                    '.bildplatz[data-verhaeltnis="' . $wert[1] . '"]',
+                    $css,
+                    $bezeichnung . ': für das Verhältnis ' . $wert[1] . ' gibt es keine Regel in '
+                    . 'website.css. Das Attribut steht da, die Wirkung fehlt.'
+                );
+            }
+        }
+
+        $this->assertGreaterThanOrEqual(8, $geprueft, 'Es wurden zu wenige Bildplätze geprüft.');
+    }
+
+    /**
+     * Die Platzhaltermarkierung steht im Markup, nicht auf der Seite.
+     *
+     * Der Besucher las bis zum 13.08.2026 `[[SCREENSHOT-FEHLT]] sartu-muster-malerbetrieb.webp
+     * · 1280 × 800`, dreimal untereinander. Dateiname und Pixelmaße sind Bauwissen.
+     *
+     * **Beide Hälften gehören zusammen:** Verschwindet die Markierung aus dem Markup, findet
+     * `Platzhalterpruefung` sie nicht mehr und die Startsperre hält nichts mehr an. Steht sie
+     * im sichtbaren Text, liest der Kunde sie. Dieser Fall hält beides fest.
+     */
+    public function testDiePlatzhaltermarkierungStehtImMarkupUndNichtImText(): void
+    {
+        $geprueft = 0;
+
+        foreach ($this->seitenMitBildplatz() as $bezeichnung => $html) {
+            if (!str_contains($html, 'class="bildplatz')) {
+                continue;
+            }
+
+            ++$geprueft;
+
+            $this->assertMatchesRegularExpression('#data-fehlt="\[\[[A-Z-]+\]\]#', $html,
+                $bezeichnung . ': der Bildplatz trägt keine Markierung im Markup.');
+
+            // Der sichtbare Text: alles ausserhalb der Auszeichnung.
+            $sichtbar = strip_tags($html);
+
+            $this->assertStringNotContainsString('[[', $sichtbar,
+                $bezeichnung . ': eine Platzhaltermarkierung steht im sichtbaren Text.');
+            $this->assertStringNotContainsString('.webp', $sichtbar,
+                $bezeichnung . ': ein Dateiname steht im sichtbaren Text.');
+        }
+
+        $this->assertGreaterThanOrEqual(3, $geprueft, 'Es wurden zu wenige Seiten geprüft.');
+    }
+
+    /**
+     * Kein Sprungziel verschwindet hinter der klebenden Kopfzeile.
+     *
+     * Gemessen am 13.08.2026: Alle sechs Ziele der Hauptnavigation trugen
+     * `scroll-margin-top: 0px`, und der Kopf ist 93 px hoch. Jeder Klick schob die
+     * Überschrift dahinter.
+     *
+     * Geprüft wird die Regel, nicht die sechs Namen: Ein siebtes Ziel wäre sonst wieder
+     * falsch. Die Zahl selbst steht in `tokens.css` — im Bauteil hätte sie nichts zu suchen.
+     */
+    public function testJedesSprungzielHaeltAbstandZurKopfzeile(): void
+    {
+        $css = (string) file_get_contents(SARTU_WURZEL . '/public/assets/css/website.css');
+
+        $this->assertSame(1, preg_match('#main \[id\][^{]*\{([^}]*)\}#s', $css, $regel),
+            'Es gibt keine Regel, die allen Sprungzielen Abstand zur Kopfzeile gibt.');
+
+        $this->assertStringContainsString('scroll-margin-top', $regel[1]);
+        $this->assertStringContainsString('var(--sprungabstand)', $regel[1],
+            'Der Abstand steht als Zahl im Bauteil statt als Variable.');
+
+        $tokens = (string) file_get_contents(SARTU_WURZEL . '/public/assets/css/tokens.css');
+
+        $this->assertStringContainsString('--kopfhoehe:', $tokens);
+        $this->assertStringContainsString('--sprungabstand:', $tokens);
+
+        // Die sechs Ziele aus der Hauptnavigation gibt es auch wirklich.
+        $html = (string) $this->router(gesperrt: true)->behandeln('GET', '/')->rumpf;
+
+        foreach (['muster', 'preise', 'ablauf', 'fragen', 'leistungen', 'kundenbereich'] as $ziel) {
+            $this->assertStringContainsString('id="' . $ziel . '"', $html,
+                'Das Sprungziel #' . $ziel . ' fehlt.');
+        }
+    }
+
+    /**
+     * Die Gattung eines Musterprojekts steht einmal, nicht zweimal untereinander.
+     *
+     * Im Bildplatz stand `Malerbetrieb, Umfang Wachstum`, direkt darunter die Überschrift
+     * `Malerbetrieb` — dreimal auf der Startseite und dreimal auf `/musterprojekte`.
+     * Weggefallen ist die Nennung im Bildplatz; der Umfang steht jetzt an der Karte.
+     */
+    public function testDieGattungStehtNichtZweimalUntereinander(): void
+    {
+        foreach (['/', \Sartu\Services\Musterprojekte::PFAD] as $pfad) {
+            $html = (string) $this->router(gesperrt: true)->behandeln('GET', $pfad)->rumpf;
+
+            foreach (\Sartu\Services\Musterprojekte::alle() as $schluessel => $projekt) {
+                $gattung = (string) $projekt['gattung'];
+
+                $this->assertSame(1, substr_count($html, '>' . $gattung . '<'),
+                    $pfad . ': „' . $gattung . '" steht mehr als einmal als eigener Textknoten.');
+            }
+
+            $this->assertStringContainsString('musterkarte__umfang', $html,
+                $pfad . ': der empfohlene Umfang fehlt an der Karte.');
+        }
+    }
+
+    /**
      * Jede Seite mit Abschlussfeld teilt es in Aussage und Handlung.
      *
      * Der Entwurf setzt `grid-template-columns:minmax(0,1.25fr) minmax(0,.75fr)` am
@@ -754,6 +886,27 @@ final class MarkupTest extends Datenbankfall
     }
 
     /** @return array<string,string> */
+    /**
+     * Die drei oeffentlichen Seiten mit Bildplaetzen.
+     *
+     * `seiten()` daneben fuehrt die Einrichtung, den Adminbereich und den Bedarfsscheck —
+     * dort gibt es keine. Sie hier mitzuschleppen hiesse, fuenfzehn Seiten zu rendern, um
+     * drei zu pruefen.
+     *
+     * @return array<string,string>
+     */
+    private function seitenMitBildplatz(): array
+    {
+        $router = $this->router(gesperrt: true);
+        $seiten = [];
+
+        foreach (['/', '/ablauf', '/ueber-uns', \Sartu\Services\Musterprojekte::PFAD] as $pfad) {
+            $seiten['GET ' . $pfad] = (string) $router->behandeln('GET', $pfad)->rumpf;
+        }
+
+        return $seiten;
+    }
+
     private function seiten(): array
     {
         $seiten = [];

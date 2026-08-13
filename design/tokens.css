@@ -129,6 +129,17 @@
   --wrap:clamp(1380px,90vw,1800px);
   --gut:clamp(20px,4vw,56px);
 
+  /* Die Hoehe der klebenden Kopfzeile — gemessen 93 px bei jeder Desktopbreite,
+     84 px mobil (Marke 34 px, Innenabstand 2x --s-3, Trennlinie).
+     Sie steht hier und nicht als Zahl im Bauteil, weil zwei Stellen sie
+     brauchen: das Sprungziel unter der Kopfzeile und der Sprungmarken-Link. */
+  --kopfhoehe:93px;
+
+  /* Sprungziel plus Luft. Ohne diesen Wert schiebt jeder Sprung aus der
+     Hauptnavigation die Ueberschrift hinter die Kopfzeile — gemessen am
+     13.08.2026 an allen sechs Zielen: `scroll-margin-top` stand ueberall auf 0. */
+  --sprungabstand:calc(var(--kopfhoehe) + var(--s-4));
+
   /* ---- Schrift ------------------------------------------- */
   /* Systemschriften. Keine externe Schriftdatei, kein CDN.
      Eigene Schrift spaeter so einhaengen:

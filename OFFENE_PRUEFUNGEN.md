@@ -3152,3 +3152,206 @@ Dazu auf `/musterprojekte` derselbe Fall bei `Physiotherapiepraxis` in der H2 un
 | 4 | **Die Sperre ist gegen die Launch-Adressen geprüft, nicht gegen jede Route.** `Platzhalterpruefung` läuft über `Launchadressen::alle()`. Eine Seite, die nicht in der Sitemap steht, würde einen Platzhalter unbemerkt ausliefern | Liste erweitern, sobald es eine Adresse ausserhalb der Sitemap mit Bildplatz gibt |
 | 5 | **Auf 390 und 320 px ist die Seite länger als vorher**, nicht kürzer — die zwei neuen Sektionen laufen dort einspaltig. Gemessen, nicht behoben | Entscheiden, ob die Musterkarten auf Mobilgeräten als Karussell oder als Auszug laufen sollen |
 | 6 | **Gelaufen ist alles gegen MariaDB 10.11**, nicht gegen MySQL 8.4 oder MariaDB 11.4. In dieser Umgebung stand nichts anderes zur Verfügung | Auf der Zielumgebung erneut laufen lassen |
+
+
+---
+
+## 13.08.2026 — vier gemessene Fehler, und was am Bericht davor falsch war
+
+### Zuerst zur Berichtspflicht
+
+Der Vorwurf lautet, der letzte Bericht habe vier gemessene Werte weggelassen. **Er hat sie
+genannt** — die Tabelle führte 390 px mit 17.745 → 19.495 und 320 px mit 19.550 → 21.769, und
+`OFFENE_PRUEFUNGEN.md` trug den Punkt „Auf 390 und 320 px ist die Seite länger als vorher, nicht
+kürzer". **Was fehlte, war die Einordnung:** Die Verschlechterung stand in einer Zeile unter
+zwei Verbesserungen, statt als Verschlechterung benannt zu werden. Der Unterschied ist nicht
+formal. Wer eine Tabelle liest, sieht sechs Zahlen; wer einen Bericht liest, soll wissen, welche
+davon ein Problem ist.
+
+Dieser Abschnitt nennt deshalb jede Verschlechterung mit eigener Überschrift, auch die, die an
+anderer Stelle aufgewogen wird.
+
+### Die Messung, sechs Breiten
+
+| Breite | vorher | nachher | Differenz | scrollWidth | Überlauf | Kandidaten |
+|---|---:|---:|---:|---:|---:|---|
+| 1920 px | 10.298 | 10.524 | **+226** | 1920 | 0 | `SPAN.band` (im Aufmacher geclippt) |
+| 1440 px | 10.185 | 10.321 | **+136** | 1440 | 0 | `SPAN.band` |
+| 1024 px | 10.776 | 10.724 | −52 | 1024 | 0 | `SPAN.band`, `g` (Gerätezeichnung, geclippt) |
+| 768 px | 14.488 | 14.289 | −199 | 768 | 0 | `SPAN.band`, `g` |
+| 390 px | 19.495 | **16.899** | **−2.596** | 390 | 0 | `SPAN.band`, `g` |
+| 320 px | 21.858 | **18.941** | **−2.917** | 320 | 0 | `SPAN.band`, `g` |
+
+**Die Kandidaten sind keine Überläufe.** `SPAN.band` sind die drei Zierbänder im Aufmacher, `g`
+ist eine Gruppe der Inline-SVG-Gerätezeichnung; beide liegen in einem Elternteil mit
+`overflow: hidden`. Der scrollWidth entspricht an allen sechs Breiten der Fensterbreite.
+
+### Verschlechterung 1 — am Schreibtisch ist die Seite länger geworden
+
+**+136 px bei 1440, +226 px bei 1920.** Die Ursache ist Fehler 3, und sie ist gewollt: Die acht
+Bildplätze tragen jetzt das Seitenverhältnis ihres späteren Bildes. Auf der Startseite wächst
+`muster` dadurch von 1.102 auf 1.238 px — drei Plätze von je 110 px Texthöhe auf je 226 px
+Bildhöhe.
+
+**Der Zuwachs ist der Zweck.** Der Platz nimmt heute den Raum ein, den das Bild später braucht;
+ohne ihn springt das Layout an dem Tag, an dem die Aufnahme kommt. Wer ihn zurückhaben will,
+bekommt den Sprung zurück.
+
+### Verschlechterung 2 — der Füllgrad der Gründersektion fällt
+
+Bei 1440 px von 31 auf **20 %**. Die Textseite ist kürzer geworden (vier Aufzählungspunkte sind
+zu einer Zeile geworden, Auftrag b), die Bildseite trägt unverändert 427 px. Die Sektion selbst
+ist gleich hoch geblieben — es steht dieselbe Fläche für weniger Text.
+
+**Das löst sich, sobald das Foto da ist:** Dann trägt die Bildseite ein Bild statt eines leeren
+Rahmens, und der Rahmen zählt heute nicht als Inhalt.
+
+### Fehler 1 — mobil, behoben und überkompensiert
+
+| | 390 px | 320 px |
+|---|---:|---:|
+| vor dem letzten Lauf | 17.745 | 19.550 |
+| nach dem letzten Lauf | 19.495 | 21.858 |
+| **jetzt** | **16.899** | **18.941** |
+
+Die Seite ist mobil jetzt kürzer als vor dem letzten Lauf — **mit zwei zusätzlichen Sektionen**
+(`dahinter` 735 px, `muster` 2.536 px bei 390 px) und 249 Wörtern mehr.
+
+**Was mobil wuchs, war der Rahmen um die Wörter, nicht der Text.** Siebzehn Karten, die am
+Schreibtisch nebeneinander stehen, stapeln sich mobil, und jede bringt Rahmen, Innenabstand und
+Zwischenraum mit. Die Karte ist am Schreibtisch eine Abgrenzung gegen den Nachbarn **daneben**;
+untereinander gibt es keinen Nachbarn daneben, und eine Linie trennt genauso gut.
+
+| Maßnahme | bei 390 px |
+|---|---:|
+| Acht Leistungskarten zu Zeilen (Rahmen und Innenabstand weg) | −399 px |
+| Vier Preisstufen und drei Musterkarten ebenso | −580 px |
+| Beschriftung und Angabe der Musterkarten in einer Zeile | −302 px |
+| Grundrhythmus der Abschnitte von 96 auf 40 px | −616 px |
+| Vorspann auf Fließtextgrad, Abstände in Listen und Ablauf | −440 px |
+| Gründerreihe: Portrait auf 240 px gedeckelt | −259 px |
+
+**Ein Fehler, der dabei aufgefallen ist und nicht im Auftrag stand:** `.gruender__reihe` wurde
+mobil nie einspaltig. Die Regel `@media (max-width: 860px) { .gruender__reihe {
+grid-template-columns: 1fr } }` stand **95 Zeilen vor** der Basisregel — gleiche Spezifität, die
+spätere gewinnt. Bei 390 px stand deshalb ein 98 px breites Foto neben einer 252 px breiten
+Textspalte. Die Reihe ist jetzt mobile-first gebaut. Ein Prüflauf über alle Medienblöcke hat
+gezeigt, dass es die **einzige** Stelle mit diesem Fehler war.
+
+### Ziel gerissen — 390 px unter 14.000, 320 px unter 16.000
+
+**Erreicht sind 16.899 und 18.941 px. Die Ziele sind um 2.899 bzw. 2.941 px verfehlt.**
+
+Die Rechnung, warum: Bei 390 px bleiben nach den Rändern 350 px Textspalte. Die Seite trägt
+1.183 Wörter; bei rund 45 Zeichen je Zeile sind das etwa 170 Zeilen Fließtext zu 29 px —
+**rund 4.900 px reiner Text.** Dazu 11 Überschriften, 49 Aufzählungspunkte, 17 Karten mit je
+einem Knopf, sechs Ablaufschritte, neun Fragen und vier Bildplätze.
+
+Die verbliebenen Abstände sind gemessen: 11 Abschnitte à 40 px Innenabstand sind 440 px, alle
+Lücken zwischen Überschrift, Vorspann und Inhalt zusammen rund 600 px. **Selbst wenn beides auf
+null ginge, fehlten noch 1.900 px** — und die Seite hätte keinen Rhythmus mehr.
+
+Unter 14.000 px käme die Seite mobil nur auf einem Weg: Inhalt hinter einen Klick legen. Ein
+Akkordeon für die drei Musterkarten spart rund 1.350 px, eines für die vier Preisstufen rund
+1.200. **Das ist eine Entscheidung, keine Ableitung** — der Preis ist bei SARTU der Belegersatz
+für fehlende Referenzen, und ihn aufklappbar zu machen, kehrt seinen Zweck um. Sie steht unten
+unter „Ungeprüft".
+
+### Fehler 2 — die sechs Sprungziele, jedes einzeln geprüft
+
+`--kopfhoehe` und `--sprungabstand` stehen in `tokens.css`, die Regel greift über `main [id]`
+statt über eine Liste der sechs Namen — ein siebtes Ziel wäre sonst wieder falsch.
+
+| Ziel | Kopfkante | Überschrift bei | Luft |
+|---|---:|---:|---:|
+| `#muster` | 93 px | 220 px | 127 px |
+| `#preise` | 93 px | 220 px | 127 px |
+| `#ablauf` | 93 px | 125 px | **32 px** |
+| `#fragen` | 93 px | 173 px | 80 px |
+| `#leistungen` | 93 px | 173 px | 80 px |
+| `#kundenbereich` | 93 px | 206 px | 113 px |
+
+Bei 390 px dieselbe Messung mit 96 px Kopfkante, alle sichtbar. `#ablauf` hat die geringste
+Luft, weil die Sektion als zweite Hälfte des dunklen Doppelblocks `padding-top: 0` trägt — die
+Überschrift steht dort ohne eigenen Vorlauf.
+
+### Fehler 3 — acht Bildplätze, jetzt maßgetreu
+
+| Vorkommen | Verhältnis | vorher | nachher (1440 px) |
+|---|---|---|---|
+| 3 × Musterkarte auf der Startseite | 8:5 | Texthöhe, rund 110 px | 361 × 226 px |
+| 3 × auf `/musterprojekte` | 8:5 | Texthöhe | maßgetreu |
+| 1 × Gründerfoto | 4:5 | 342 × 427 px | 342 × 427 px |
+| 5 × auf `/ablauf` | 8:5 | 42 px | maßgetreu |
+
+Das Verhältnis steht als `data-verhaeltnis="8-5"` am Element, **nicht als `style`**: Die eigene
+CSP führt `style-src 'self'` ohne `unsafe-inline`, ein Inline-Attribut wäre wirkungslos.
+Derselbe Fehler hatte am 13.08.2026 schon einmal 29 px weissen Rand über der Portalleiste
+gekostet. `MarkupTest::testJederBildplatzTraegtSeinSeitenverhaeltnis` prüft beide Hälften: dass
+jeder Platz ein Verhältnis trägt **und** dass `website.css` dafür eine Regel führt — sonst stünde
+das Attribut da und die Wirkung fehlte.
+
+### Fehler 4 und Auftrag a — der Bildplatz
+
+`Malerbetrieb, Umfang Wachstum` stand im Bildplatz, `Malerbetrieb` einen Zeilenabstand darunter
+als Überschrift. Die Nennung im Bildplatz ist weg, der **Umfang** steht jetzt als Monozeile an
+der Karte. Sichtbar ist dort `Platz für Ansicht` und ein Satz, was hinkommt — der Wortlaut des
+abgenommenen Entwurfs.
+
+Dateiname, Pixelmaße und `[[SCREENSHOT-FEHLT]]` stehen als `data-fehlt` am Element: nicht
+sichtbar, nicht vorgelesen, maschinell auffindbar. **Die Startsperre findet sie unverändert** —
+nachgeprüft mit `php bin/startklar.php`, vier Meldungen für `/`, `/ablauf`, `/ueber-uns` und
+`/musterprojekte`. `PlatzhaltersperreTest` bleibt grün.
+
+### Auftrag b — Aufzählungspunkte
+
+**53 → 49 auf der Startseite.** Weggefallen sind die vier Punkte „kein Baukasten · kein
+WordPress-Hoster · keine Billig-Seitenschleuder · kein Anbieter für Privat- und Hobbyseiten";
+sie stehen als eine Zeile. Derselbe Wortlaut, dieselbe Quelle (`Firmenseitentexte::NICHT`).
+
+**Was bewusst stehen bleibt:** die elf Punkte des Kundenbereichs (§5 Sektion 2 bindet sie
+ausdrücklich: „Die Liste wird nicht gekürzt und nicht zu ‚unter anderem' zusammengefasst"), die
+sechzehn Merkmale der vier Preisstufen (Zahlen, Klasse 1), die sechs Ablaufschritte (Bauform
+Zeitstrahl), die acht Leistungen und die beiden Vertrauenszeilen à vier Punkten — letztere sind
+im abgenommenen Entwurf ein Gestaltungselement mit eigenem Strichmarker (`.trust li::before`).
+
+### Auftrag c — Füllgrad, nicht weiter umgesetzt
+
+| Abschnitt (1440 px) | vorher | nachher |
+|---|---:|---:|
+| Preise | 30 % | 30 % |
+| Zusage | 36 % | 36 % |
+| SEO-Band | 36 % | 36 % |
+| Fragen | 67 % | 67 % |
+| Abschluss | 29 % | 29 % |
+
+**Bei 1440 px ist der Abstand nicht mehr das Problem.** Der Grundrhythmus steht seit dem letzten
+Lauf auf 48 px oben und unten — der abgenommene Entwurf trägt 104. Was den Füllgrad deckelt, ist
+die **Zeilenlänge**: `07_MARKE_UND_GESTALTUNG.md` begrenzt jeden Fließtext auf 26 bis 70 `ch`.
+Ein 62-`ch`-Absatz in einer 1.268 px breiten Bahn füllt rund 60 % der Zeile; der Rest ist Rand
+und ist Vorgabe, nicht Nachlässigkeit. **Ein Absatz kann unter dieser Regel gar nicht über etwa
+50 % Flächenanteil kommen.**
+
+Der Beleg steht in derselben Messung: Bei 390 px, wo Spalte und Bahn zusammenfallen, liegt der
+Füllgrad jetzt bei 42 bis 64 % — bei denselben Texten.
+
+### Belege
+
+| Was | Wie geprüft |
+|---|---|
+| Sechs Sprungziele | einzeln angesprungen, Abstand zur Kopfkante gemessen, bei 1440 und 390 px |
+| Acht Bildplätze | Verhältnis und tatsächliche Maße im Browser gemessen |
+| Marke unsichtbar, aber im Markup | `strip_tags` des ausgelieferten HTML enthält weder `[[` noch `.webp`; `startklar.php` meldet weiter |
+| Zwölf öffentliche Seiten, fünf Breiten | kein waagerechter Überlauf |
+| Tests | **385 grün, 11.836 Zusicherungen** — vier neue Fälle |
+
+### Ungeprüft
+
+| # | Punkt | Womit es zu prüfen ist |
+|---|---|---|
+| 1 | **Die Höhenziele für 390 und 320 px sind gerissen** — 16.899 statt 14.000, 18.941 statt 16.000. Die Rechnung steht oben; der verbleibende Weg wäre ein Akkordeon für Musterkarten oder Preisstufen, und beides legt Inhalt hinter einen Klick | Entscheidung des Betreibers: Ziel anheben oder Aufklappen freigeben |
+| 2 | **Bei 1440 und 1920 px ist die Seite 136 bzw. 226 px länger geworden.** Ursache sind die maßgetreuen Bildplätze — der Zuwachs ist der Zweck von Fehler 3 und verschwindet, sobald echte Aufnahmen an ihre Stelle treten | Nach den Aufnahmen erneut messen |
+| 3 | **Auftrag c ist bei 1440 px nicht weiter umgesetzt.** Der Füllgrad hängt dort an der gebundenen Zeilenlänge, nicht am Abstand | Entscheidung, ob Fließtext zweispaltig laufen soll — das wäre eine Gestaltungsänderung ohne Vorlage |
+| 4 | **Die mobile Kartendarstellung ist nur in Chromium gesehen.** Die Umstellung von Karte auf Zeile hängt an `@media (max-width: 860px)`; das ist unkritisch, die Lime-Fläche der Empfehlung dort aber nicht mehr vorhanden | In Firefox und Safari öffnen |
+| 5 | **Der Gründerplatzhalter füllt seine Sektion bei 1440 px nur zu 20 %** — die Textseite ist kürzer geworden, die Bildseite trägt unverändert 427 px | Löst sich mit dem echten Foto |
+| 6 | **Gelaufen ist alles gegen MariaDB 10.11**, nicht gegen MySQL 8.4 oder MariaDB 11.4 | Auf der Zielumgebung erneut laufen lassen |

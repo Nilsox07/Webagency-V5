@@ -37,12 +37,17 @@ use Sartu\Services\Musterprojekte;
     <p class="marke"><?= Html::e(Musterprojekte::FAHNE) ?></p>
 
     <?= Ansicht::teil('partials/bildplatz', [
-        'name'  => Musterprojekte::bildname($schluessel),
-        'masse' => '1280 × 800',
-        'satz'  => Musterprojekte::bildsatz($schluessel),
+        'name'   => Musterprojekte::bildname($schluessel),
+        'breite' => 1280,
+        'hoehe'  => 800,
+        'satz'   => Musterprojekte::bildsatz($schluessel),
     ]) ?>
 
     <h3><?= Html::e($projekt['gattung']) ?></h3>
+    <?php /* Der Umfang steht seit dem 13.08.2026 hier und nicht mehr im Bildplatz —
+             dort stand er hinter der Gattung, und die Gattung stand einen Zeilenabstand
+             weiter unten schon als Ueberschrift. */ ?>
+    <p class="musterkarte__umfang"><?= Html::e(Musterprojekte::umfangszeile($schluessel)) ?></p>
 
     <dl class="musterteile">
 <?php foreach (Musterprojekte::zeilen() as $feld => $beschriftung): ?>

@@ -64,6 +64,20 @@
   z-index: 20;
 }
 
+/* **Jedes Sprungziel haelt Abstand zur klebenden Kopfzeile.**
+   Gemessen am 13.08.2026: Alle sechs Ziele der Hauptnavigation — `muster`,
+   `preise`, `ablauf`, `fragen`, `leistungen`, `kundenbereich` — trugen
+   `scroll-margin-top: 0px`. Jeder Klick schob die Ueberschrift hinter den
+   93 px hohen Kopf; der Leser landete mitten im Vorspann.
+
+   Die Regel greift ueber `[id]` statt ueber eine Aufzaehlung der sechs Namen:
+   Ein siebtes Ziel waere sonst wieder falsch, und niemand suchte hier danach.
+   Der Wert kommt aus `tokens.css` — Kopfhoehe plus eine Abstandsstufe. */
+main [id],
+main :target {
+  scroll-margin-top: var(--sprungabstand);
+}
+
 /* Die Abstandsstufe zwischen den drei Blöcken ist --s-3, nicht --s-4.
    Gemessen am 13.08.2026: Mit --s-4 war die Zeile 1135 px breit und damit
    breiter als die Bahn selbst — die traegt bei --wrap 1180 px und --gut auf
@@ -878,6 +892,17 @@ h1, h2, h3 {
 /* Die Monatspauschale als **Zeile**, nicht als Flaeche. Der Titel traegt die
    Betonung, die vorher der Lime-Grund trug — und traegt sie dort, wo Lime
    erlaubt ist: als Textmarker, nicht als Band. */
+/* Vier Stichworte als Zeile statt als vier Aufzaehlungspunkte (§4d, Auftrag b).
+   Derselbe Bau wie `.pauschale`: der Titel traegt den Textmarker, die Punkte
+   stehen durch Mittelpunkte getrennt dahinter. */
+.abgrenzung {
+  margin: var(--s-4) 0 var(--s-2);
+  font-size: var(--fs-copy);
+  color: var(--muted);
+}
+
+.abgrenzung span { color: var(--ink); }
+
 .pauschale {
   margin: var(--s-4) 0 var(--s-1);
   font-size: var(--fs-copy);
@@ -1043,13 +1068,29 @@ h1, h2, h3 {
 
 /* ---- Bildplatz ------------------------------------------- */
 
+/* **Der Platz nimmt heute den Raum ein, den sein Bild spaeter braucht.**
+   Ohne `aspect-ratio` richtete er sich nach seinem Text — gemessen am
+   13.08.2026: einer 427 px hoch, wo das Bild 213 px braucht, andere 42 px.
+   An acht Stellen waere das Layout gesprungen, sobald die Aufnahmen kommen.
+
+   Das Verhaeltnis kommt als `data-verhaeltnis` vom Bauteil, nicht als
+   `style`: Die eigene CSP fuehrt `style-src 'self'` ohne `unsafe-inline`,
+   ein Inline-Attribut waere wirkungslos. `Bildmasse::verhaeltnis()` kuerzt
+   den Bruch; kommt ein drittes Verhaeltnis dazu, faellt es hier auf. */
 .bildplatz {
   margin: var(--s-4) 0;
   border: 2px dashed var(--line);
   border-radius: var(--r-s);
   padding: var(--s-4);
   background: var(--paper);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  overflow: hidden;
 }
+
+.bildplatz[data-verhaeltnis="8-5"] { aspect-ratio: 8 / 5; }
+.bildplatz[data-verhaeltnis="4-5"] { aspect-ratio: 4 / 5; }
 
 .bildplatz__marke {
   display: inline-block;
@@ -1110,6 +1151,20 @@ h1, h2, h3 {
 }
 
 .musterkarte h3 { margin: 0; font-size: var(--fs-h3); }
+
+/* Der empfohlene Umfang, seit dem 13.08.2026 an der Karte statt im Bildplatz —
+   dort stand er hinter der Gattung, die einen Zeilenabstand weiter unten schon
+   als Ueberschrift steht. */
+.musterkarte__umfang {
+  margin: 0;
+  font-family: var(--font-mono);
+  font-size: var(--fs-mono);
+  letter-spacing: var(--ls-mono);
+  text-transform: uppercase;
+  color: var(--label);
+}
+
+.musterfall .musterkarte__umfang { margin-bottom: var(--s-3); }
 
 /* Der Bildplatz sitzt in der Karte und traegt dort keinen eigenen Aussenabstand:
    Die Karte setzt ihre Abstaende ueber `gap`, und zwei Abstandsquellen
@@ -1288,8 +1343,11 @@ h1, h2, h3 {
 }
 
 @media (max-width: 860px) {
-  /* Bild ueber Text, nicht daneben. Die Reihenfolge bleibt: das Gesicht zuerst. */
-  .gruender__reihe { grid-template-columns: 1fr; }
+  /* `.gruender__reihe` stand hier bis zum 13.08.2026 und war **wirkungslos**: Die
+     Basisregel steht 95 Zeilen weiter unten, gleiche Spezifitaet, und die spaetere
+     gewinnt. Bei 390 px stand deshalb ein 98 px breites Foto neben einer 252 px
+     breiten Textspalte. Die Reihe ist jetzt mobile-first gebaut — der Zweisatz
+     steht als `min-width`-Regel bei der Definition selbst. */
   .muster { grid-template-columns: 1fr; }
   .preisstufen { grid-template-columns: 1fr; margin-top: var(--s-5); }
   .dreispalten { grid-template-columns: 1fr; }
@@ -1384,21 +1442,33 @@ h1, h2, h3 {
 
 .gruender__reihe {
   display: grid;
-  grid-template-columns: minmax(0, 28fr) minmax(0, 72fr);
-  gap: var(--s-5);
+  /* Einspaltig als Grundzustand, zweispaltig erst ab 861 px. Andersherum — Zweisatz
+     als Grundzustand und `max-width` als Ausnahme — war es bis zum 13.08.2026, und
+     die Ausnahme stand vor der Regel und griff nie. */
+  grid-template-columns: 1fr;
+  gap: var(--s-4);
   align-items: center;
 }
 
 .gruender__bild { margin: 0; }
 
-/* Der Platzhalter tritt an die Stelle des Fotos und traegt dessen Form —
-   sonst springt die Sektion in dem Moment um, in dem das Bild kommt, und
-   niemand haette den Zustand gesehen, den er ersetzt. */
-.gruender__bild.bildplatz {
-  aspect-ratio: 4 / 5;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
+/* Der Platzhalter tritt an die Stelle des Fotos und traegt dessen Form ueber
+   dieselbe Regel wie jeder andere Bildplatz — `data-verhaeltnis="4-5"`. Die
+   eigene `aspect-ratio` stand hier bis zum 13.08.2026 doppelt. */
+.gruender__bild.bildplatz { margin: 0; }
+
+@media (min-width: 861px) {
+  .gruender__reihe {
+    grid-template-columns: minmax(0, 28fr) minmax(0, 72fr);
+    gap: var(--s-5);
+  }
+}
+
+/* Mobil traegt das Portraet nicht die volle Bahnbreite: Bei 350 px Breite und dem
+   Verhaeltnis 4:5 waeren es 437 px Hoehe fuer ein Bild, das ueber dem Text steht.
+   Gedeckelt auf 240 px bleibt es ein Portraet und kostet 300 statt 437. */
+@media (max-width: 860px) {
+  .gruender__bild { max-width: 240px; }
 }
 
 .gruender__bild img {
@@ -1820,4 +1890,147 @@ main a:not(.knopf):not(.textlink):not(.seitenmarke):not(.sprungmarke):focus-visi
   font-size: var(--fs-mono);
   letter-spacing: var(--ls-mono);
   text-transform: uppercase;
+}
+
+
+/* ============================================================
+   MOBIL — die Karten werden zu Zeilen
+   ============================================================
+   Gemessen am 13.08.2026 bei 390 px: 19.495 px Gesamthoehe, gegen
+   17.745 px vor dem letzten Lauf. **Die Seite ist auf dem Telefon
+   laenger geworden, waehrend sie am Schreibtisch kuerzer wurde** —
+   siebzehn Karten, die am Schreibtisch nebeneinander stehen,
+   stapeln sich mobil, und jede bringt Rahmen, Innenabstand und
+   Zwischenraum mit.
+
+   Die Karte ist am Schreibtisch eine Abgrenzung gegen den Nachbarn
+   **daneben**. Untereinander gibt es keinen Nachbarn daneben; dort
+   trennt eine Linie genauso gut und kostet 60 px weniger je Stueck.
+
+   **Kein Wort faellt dafuer weg.** Was sich aendert, ist der Rahmen
+   um die Woerter.
+   ---------------------------------------------------------- */
+
+@media (max-width: 860px) {
+  /* 860 px, nicht 760: Genau dort werden alle vier Raster einspaltig
+     (`.muster`, `.preisstufen`, `.dreispalten`, `.zweispalten`). Bei 768 px
+     stand die Regel bis zum 13.08.2026 auf 760 und griff nicht — die Seite
+     war dort 15.602 statt 14.488 px hoch, also **laenger** als vor dem Umbau.
+
+     Acht Leistungen: 218 px je Karte, davon 52 Innenabstand und 2 Rahmen. */
+  .leistungszeilen {
+    gap: 0;
+    margin-top: var(--s-4);
+  }
+
+  .leistungszeilen > li {
+    background: none;
+    border: 0;
+    border-top: 1px solid var(--line);
+    border-radius: 0;
+    padding: var(--s-3) 0;
+  }
+
+  /* Drei Musterkarten und vier Preisstufen: dieselbe Rechnung. Der Bildplatz
+     bleibt — er ist seit heute massgetreu und zeigt, was dort hinkommt. */
+  .musterkarte,
+  .stufe {
+    background: none;
+    border: 0;
+    border-top: 1px solid var(--line);
+    border-radius: 0;
+    padding: var(--s-4) 0;
+  }
+
+  .muster,
+  .preisstufen { gap: 0; }
+
+  /* Die Empfehlung bleibt erkennbar — aber ueber Flaeche am Namen, nicht ueber
+     eine dunkle Karte mit 64 px Innenabstand oben und unten. */
+  .stufe--empfehlung {
+    background: none;
+    color: inherit;
+    box-shadow: none;
+    padding: var(--s-4) 0;
+  }
+
+  .stufe--empfehlung h3,
+  .stufe--empfehlung .preis { color: var(--ink); }
+  .stufe--empfehlung .stufe__satz { color: var(--muted); }
+  .stufe--empfehlung .stufe__kicker { color: var(--label); }
+  .stufe--empfehlung .preis small { color: var(--muted); }
+  .stufe--empfehlung .stufe__liste,
+  .stufe--empfehlung .stufe__liste li { border-color: var(--line); }
+  .stufe--empfehlung .stufe__liste li { color: var(--text); }
+  .stufe--empfehlung .stufe__liste li::before { background: var(--label); }
+
+  .marke--empfehlung {
+    position: static;
+    transform: none;
+    align-self: flex-start;
+  }
+
+  .stufe--sonder { border-top-style: dashed; }
+
+  /* Die Merkmalslisten: 9 px oben und unten je Punkt sind am Schreibtisch die
+     Trennung zwischen vier Zeilen, mobil das Vierfache davon. */
+  .stufe__liste li { padding: 6px 0 6px 24px; }
+  .stufe__liste li::before { top: 15px; }
+
+  /* Das Abschlussfeld traegt mobil keinen 48-px-Rand mehr. */
+  .handlungsfeld { padding: var(--s-4); }
+
+  /* Der Bildplatz braucht innen keinen 32-px-Rand, wenn er ohnehin
+     massgetreu ist. */
+  .bildplatz { padding: var(--s-3); }
+
+  /* Massgetreu heisst nicht bahnbreit: Bei 312 px Breite und 8:5 sind es
+     195 px Hoehe je Musterkarte, dreimal untereinander. Gedeckelt auf 240 px
+     bleibt das Verhaeltnis und die Karte kostet 150 statt 195. */
+  .musterkarte .bildplatz { max-width: 240px; }
+
+  /* Beschriftung und Angabe in eine Zeile: Bei vier Paaren je Karte spart der
+     Zeilenumbruch zwischen dt und dd rund 100 px, dreimal auf der Startseite
+     und dreimal auf `/musterprojekte`. */
+  .musterteile > div { padding-top: var(--s-1); }
+  .musterteile dt { display: inline; }
+  .musterteile dt::after { content: ":"; }
+  .musterteile dd { display: inline; margin: 0; }
+
+  /* Der Ablauf laeuft mobil einspaltig — 72 px unter jedem Schritt waren fuer
+     Zeilen bemessen, die eine Bildhoehe hatten. */
+  .ablaufschritt { padding-bottom: var(--s-3); }
+}
+
+@media (max-width: 620px) {
+  /* Der Grundrhythmus zwei Stufen enger: elf Abschnitte a 96 px sind mobil
+     1.056 px, und der Wechsel hell/dunkel traegt die Gliederung schon. */
+  .abschnitt,
+  .abschluss {
+    padding-top: var(--s-3);
+    padding-bottom: var(--s-3);
+  }
+
+  .zusage {
+    padding-top: var(--s-5);
+    padding-bottom: var(--s-5);
+  }
+
+  /* Der Vorspann steht mobil auf Fliesstextgrad. 20 px sind am Schreibtisch
+     der Unterschied zwischen Vorspann und Absatz; auf 350 px Spaltenbreite
+     kosten sie zwei Zeilen je Vorspann und tragen ihn nicht besser. */
+  .lede { font-size: var(--fs-copy); line-height: var(--lh-copy); }
+
+  .handlungsfeld { padding: var(--s-3); }
+
+  /* Der Aufmacher folgt demselben Rhythmus wie die Abschnitte darunter. */
+  .aufmacher { padding-top: var(--s-3); padding-bottom: var(--s-3); }
+
+  /* Abstaende zwischen gleichartigen Zeilen: mobil eine Stufe enger. */
+  .hakenliste li { margin-bottom: var(--s-1); }
+  .zweispalten,
+  .dreispalten { gap: var(--s-3); }
+  .anteil { padding-top: var(--s-2); }
+  .ablaufstrahl { margin: var(--s-3) 0; }
+  .fragen details { padding: var(--s-1) 0; }
 }

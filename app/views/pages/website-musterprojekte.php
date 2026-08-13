@@ -56,15 +56,17 @@ use Sartu\Services\Preisstufen;
   <div class="bahn schmal">
     <p class="marke"><?= Html::e(Musterprojekte::FAHNE) ?></p>
     <h2><?= Html::e($projekt['gattung']) ?></h2>
+    <p class="musterkarte__umfang"><?= Html::e(Musterprojekte::umfangszeile($schluessel)) ?></p>
 
 <?php foreach ($projekt['ausfuehrlich'] as $absatz): ?>
     <p><?= Html::e($absatz) ?></p>
 <?php endforeach; ?>
 
     <?= Ansicht::teil('partials/bildplatz', [
-        'name'  => Musterprojekte::bildname($schluessel),
-        'masse' => '1280 × 800',
-        'satz'  => Musterprojekte::bildsatz($schluessel),
+        'name'   => Musterprojekte::bildname($schluessel),
+        'breite' => 1280,
+        'hoehe'  => 800,
+        'satz'   => Musterprojekte::bildsatz($schluessel),
     ]) ?>
 
     <dl class="musterteile musterteile--breit">

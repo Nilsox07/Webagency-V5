@@ -57,8 +57,13 @@ $fehlend = $gruender === null ? (new Gruenderangaben())->fehlendeAngaben() : [];
            width="640" height="800" loading="lazy" decoding="async">
     </figure>
 <?php else: ?>
-    <figure class="gruender__bild bildplatz">
-      <p class="bildplatz__kennung"><?= Html::e(Gruenderangaben::MARKIERUNG) ?> gruender.webp · 640 × 800</p>
+    <?php /* Dieselbe Bauform wie jeder andere Bildplatz — die Markierung im Markup, nicht
+             auf der Seite. Bis zum 13.08.2026 las der Besucher hier `[[FOTO-FEHLT]]
+             gruender.webp · 640 × 800`; Dateiname und Pixelmasse sind Bauwissen. */ ?>
+    <figure class="gruender__bild bildplatz"
+            data-verhaeltnis="<?= Html::e(\Sartu\Helpers\Bildmasse::verhaeltnis(640, 800)) ?>"
+            data-fehlt="<?= Html::e(Gruenderangaben::MARKIERUNG) ?> gruender.webp · 640 × 800">
+      <p class="bildplatz__kennung">Platz für das Foto</p>
       <figcaption><?= Html::e(Gruenderangaben::PLATZHALTERSATZ) ?></figcaption>
     </figure>
 <?php endif; ?>
@@ -73,16 +78,15 @@ $fehlend = $gruender === null ? (new Gruenderangaben())->fehlendeAngaben() : [];
       <p><?= Html::e($absatz) ?></p>
 <?php endforeach; ?>
 <?php else: ?>
-      <p class="gruender__name"><?= Html::e(Gruenderangaben::MARKIERUNG) ?></p>
-      <p>Es fehlt noch: <?= Html::e(implode(' · ', $fehlend)) ?>.</p>
+      <p class="leise">Es fehlt noch: <?= Html::e(implode(' · ', $fehlend)) ?>.</p>
 <?php endif; ?>
 
 <?php if ($mitAbgrenzung): ?>
-      <ul class="hakenliste">
-<?php foreach (Firmenseitentexte::NICHT as $punkt): ?>
-        <li><?= Html::e($punkt) ?></li>
-<?php endforeach; ?>
-      </ul>
+      <?php /* Vier Stichworte ergeben eine Zeile, keine vier Aufzaehlungspunkte
+               (§4d, Auftrag b vom 13.08.2026). Der Wortlaut ist unveraendert — es
+               ist dieselbe Liste aus `Firmenseitentexte::NICHT`. */ ?>
+      <p class="abgrenzung">Was SARTU bewusst nicht ist:
+        <span><?= Html::e(implode(' · ', Firmenseitentexte::NICHT)) ?></span></p>
 <?php endif; ?>
 
 <?php if ($mitLink): ?>

@@ -197,10 +197,33 @@ final class Musterprojekte
     }
 
     /**
-     * Die Bildunterschrift des Bildplatzes: Gattung und empfohlener Umfang.
+     * Der empfohlene Umfang als Zeile — **an der Karte, nicht im Bildplatz**.
+     *
+     * Bis zum 13.08.2026 stand hier `Malerbetrieb, Umfang Wachstum` und war die
+     * Bildunterschrift des Platzhalters. Direkt darunter folgte die Überschrift
+     * `Malerbetrieb`: **dieselbe Gattung zweimal untereinander**, dreimal auf der Startseite
+     * und dreimal auf `/musterprojekte`.
+     *
+     * Weggefallen ist die Nennung im Bildplatz, nicht die Angabe: Der Umfang ist die Aussage,
+     * um die es geht — er steht jetzt neben dem Titel, wo er zur Karte gehört.
      *
      * Der Paketname kommt aus `Preise`, nicht aus einer zweiten Liste. Ein umbenanntes Paket
      * hiesse sonst auf dieser Seite weiter, wie es einmal hiess.
+     */
+    public static function umfangszeile(string $schluessel): string
+    {
+        $projekt = self::alle()[$schluessel] ?? null;
+
+        return $projekt === null ? '' : 'Umfang ' . Preise::name($projekt['paket']);
+    }
+
+    /**
+     * Was auf dem Bildplatz stehen wird — ohne die Gattung, die darunter als Überschrift
+     * steht.
+     *
+     * Der abgenommene Entwurf schreibt an dieser Stelle `Platz für Ansicht` und einen Satz,
+     * was dort hinkommt. Der Satz sagt, **was** zu sehen sein wird, nicht **wessen** Seite es
+     * ist — das steht schon in der Überschrift.
      */
     public static function bildsatz(string $schluessel): string
     {
@@ -210,7 +233,7 @@ final class Musterprojekte
             return '';
         }
 
-        return sprintf('%s, Umfang %s', $projekt['gattung'], Preise::name($projekt['paket']));
+        return 'Die Startseite, sobald das Musterprojekt gebaut ist.';
     }
 
     /** Der Dateiname, den die spätere Aufnahme tragen wird — im Bildplatz sichtbar. */

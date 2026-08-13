@@ -83,9 +83,10 @@ use Sartu\Services\Websitetexte;
     ['sartu-portal-pflege-muster', 'Öffnungszeiten, die Sie selbst pflegen'],
 ] as $bild): ?>
       <?= Ansicht::teil('partials/bildplatz', [
-          'name'  => $bild[0],
-          'masse' => '960 × 600',
-          'satz'  => $bild[1],
+          'name'   => $bild[0],
+          'breite' => 960,
+          'hoehe'  => 600,
+          'satz'   => $bild[1],
           'marke' => Websitetexte::MUSTERANSICHT,
       ]) ?>
 <?php endforeach; ?>
