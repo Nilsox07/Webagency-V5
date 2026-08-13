@@ -76,6 +76,11 @@ $basis = rtrim((string) Env::get('BASE_URL', ''), '/');
 <?php endif; ?>
 </head>
 <body>
+<?php /* Der Fortschrittsbalken aus `design/startseite.html` Zeile 751. Er laeuft ueber
+         `animation-timeline: scroll(root block)` — eine scrollgetriebene Animation des
+         Browsers, kein Skript. `aria-hidden`, weil ein Vorleseprogramm die Position
+         ohnehin kennt und ein zweiter Hinweis darauf nur stoert. */ ?>
+<div class="fortschritt" aria-hidden="true"></div>
 <a class="sprungmarke" href="#inhalt">Zum Inhalt springen</a>
 <?= Ansicht::teil('partials/websiteband', ['pfad' => $pfad]) ?>
 <main id="inhalt">

@@ -1184,3 +1184,334 @@ main a:not(.knopf):not(.textlink):not(.seitenmarke):not(.sprungmarke):focus-visi
 
 .knopf:hover .pfeil,
 .textlink:hover .pfeil { transform: translateX(4px); }
+
+/* ============================================================
+   Bewegung und Zierde aus dem abgenommenen Entwurf
+   `design/startseite.html`, uebertragen am 13.08.2026.
+
+   **Alles ohne JavaScript.** Der Entwurf loest die Einblendungen
+   ueber `animation-timeline: view()` und den Fortschrittsbalken
+   ueber `animation-timeline: scroll(root block)` — beides sind
+   scrollgetriebene Animationen des Browsers, kein Skript und
+   kein Beobachter. Damit gilt §1 unveraendert: „Ohne JavaScript
+   vollstaendig nutzbar."
+
+   **Kein Inhalt wird erst durch das Scrollen sichtbar** (§1).
+   Wo der Browser `animation-timeline` nicht kennt, faellt die
+   Angabe weg; `animation: hebt linear both` **ohne Dauer** laeuft
+   dann mit 0 s und steht sofort auf dem Endzustand. Das Ergebnis
+   ist dieselbe Seite ohne Bewegung — nicht eine leere Seite.
+
+   `prefers-reduced-motion: reduce` schaltet in tokens.css jede
+   Animation global ab; der Fortschrittsbalken verschwindet dort
+   zusaetzlich, weil eine Flaeche ohne Bewegung nichts aussagt.
+   ============================================================ */
+
+@keyframes hebt {
+  from { opacity: .001; transform: translateY(var(--shift)); }
+  to   { opacity: 1; transform: none; }
+}
+
+@keyframes hebt-sanft {
+  from { opacity: .001; transform: translateY(calc(var(--shift) * .55)); }
+  to   { opacity: 1; transform: none; }
+}
+
+@keyframes linie-waechst { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+@keyframes linie-faellt  { from { transform: scaleY(0); } to { transform: scaleY(1); } }
+
+@keyframes von-links  { from { opacity: .001; transform: translateX(-22px); } to { opacity: 1; transform: none; } }
+@keyframes von-rechts { from { opacity: .001; transform: translateX(22px); }  to { opacity: 1; transform: none; } }
+
+/* Die drei Stufen der Einblendung. Der Entwurf staffelt sie, damit in einem
+   Abschnitt nicht alles gleichzeitig ankommt: Ueberschrift zuerst, Vorspann
+   kurz danach, die Marke zuletzt. */
+.hebt   { animation: hebt linear both; animation-timeline: view(); animation-range: entry 0% cover 26%; }
+.hebt-2 { animation: hebt-sanft linear both; animation-timeline: view(); animation-range: entry 0% cover 32%; }
+.hebt-3 { animation: hebt-sanft linear both; animation-timeline: view(); animation-range: entry 0% cover 40%; }
+
+/* Der Fortschrittsbalken am oberen Rand. Er zeigt, wie weit die Seite gelesen
+   ist — auf einer Seite dieser Laenge eine Angabe, keine Zierde. `aria-hidden`
+   traegt er im Markup: Ein Vorleseprogramm kennt die Position ohnehin. */
+.fortschritt {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: var(--lime);
+  border-bottom: 1px solid var(--line);
+  z-index: 90;
+  transform-origin: left;
+  transform: scaleX(0);
+  animation: fortschritt linear both;
+  animation-timeline: scroll(root block);
+}
+
+@keyframes fortschritt { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+
+/* Unter jeder Abschnittsmarke waechst beim Scrollen ein kurzer Lime-Balken.
+   Nur auf hellen Abschnitten — auf --ink traegt Lime als schmale Linie nicht,
+   und der Entwurf setzt es dort ebenfalls nicht (`.sec:not(.dark) .tag`). */
+.abschnitt:not(.abschnitt--dunkel) .vorzeile,
+.aufmacher .vorzeile { position: relative; padding-bottom: 14px; }
+
+.abschnitt:not(.abschnitt--dunkel) .vorzeile::after,
+.aufmacher .vorzeile::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 46px;
+  height: 3px;
+  border-radius: var(--r-pill);
+  background: var(--lime);
+  transform-origin: left;
+  animation: linie-waechst linear both;
+  animation-timeline: view();
+  animation-range: entry 0% cover 22%;
+}
+
+/* ---- Der Ablauf als Zeitstrahl mit Wechselseiten ----------
+   `design/startseite.html` Zeile 341–372. Bis zum 13.08.2026
+   stand hier eine einspaltige Liste mit Punkten am linken Rand.
+
+   Ab 860 px steht die Linie in der **Mitte**, die Nummer als
+   Kreis darauf, und Text und Ansicht wechseln je Schritt die
+   Seite. Die zweite Linie darueber zeichnet sich beim Scrollen
+   nach — sie zeigt, wie weit der Ablauf gelesen ist.
+   ---------------------------------------------------------- */
+
+.ablaufstrahl {
+  position: relative;
+  list-style: none;
+  margin: var(--s-5) 0 0;
+  padding: 0 0 0 52px;
+}
+
+/* Zwei Linien uebereinander: die ruhende und die, die sich nachzeichnet. */
+.ablaufstrahl::before,
+.ablaufstrahl::after {
+  content: "";
+  position: absolute;
+  left: 29px;
+  top: 8px;
+  bottom: 8px;
+  width: 2px;
+}
+
+.ablaufstrahl::before { background: var(--line-dark); }
+
+.ablaufstrahl::after {
+  background: var(--label-dark);
+  transform-origin: top;
+  animation: linie-faellt linear both;
+  animation-timeline: view();
+  animation-range: entry 30% cover 70%;
+}
+
+.ablaufschritt { position: relative; padding-bottom: var(--s-5); }
+.ablaufschritt:last-child { padding-bottom: 0; }
+
+.ablaufschritt__nummer {
+  position: absolute;
+  left: -52px;
+  top: 0;
+  width: 44px;
+  height: 44px;
+  border-radius: var(--r-pill);
+  background: var(--ink-soft);
+  color: var(--label-dark);
+  border: 2px solid var(--ink);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-mono);
+  font-size: var(--fs-small);
+  z-index: 1;
+}
+
+/* Der erste Schritt ist der, den der Leser tun soll — er traegt Lime. */
+.ablaufschritt:first-child .ablaufschritt__nummer { background: var(--lime); color: var(--ink); }
+
+.ablaufschritt h3 { font-size: var(--fs-h3); margin: 0 0 var(--s-1); }
+.ablaufschritt p { margin: 0; max-width: 60ch; }
+
+.ablaufschritt__text {
+  animation: von-links linear both;
+  animation-timeline: view();
+  animation-range: entry 0% cover 30%;
+}
+
+@media (min-width: 860px) {
+  .ablaufstrahl { padding-left: 0; }
+  .ablaufstrahl::before,
+  .ablaufstrahl::after { left: calc(50% - 1px); }
+
+  .ablaufschritt {
+    display: grid;
+    grid-template-columns: 1fr 104px 1fr;
+    align-items: start;
+    padding-bottom: var(--s-6);
+  }
+
+  .ablaufschritt__nummer { position: static; grid-column: 2; justify-self: center; }
+
+  .ablaufschritt__text {
+    grid-column: 1;
+    grid-row: 1;
+    text-align: right;
+    padding-right: var(--s-2);
+  }
+
+  .ablaufschritt__bild { grid-column: 3; grid-row: 1; margin-top: 0; }
+
+  /* Jeder zweite Schritt tauscht die Seiten — und kommt von der anderen Seite. */
+  .ablaufschritt:nth-child(even) .ablaufschritt__text {
+    grid-column: 3;
+    text-align: left;
+    padding-right: 0;
+    padding-left: var(--s-2);
+    animation-name: von-rechts;
+  }
+
+  .ablaufschritt:nth-child(even) .ablaufschritt__bild { grid-column: 1; grid-row: 1; }
+
+  .ablaufschritt__text p { max-width: none; }
+  .ablaufschritt:nth-child(odd) .ablaufschritt__text p { margin-left: auto; }
+}
+
+/* ---- Heller Knopf auf dunklem Grund -----------------------
+   `design/startseite.html` Zeile 117. Der Lime-Knopf ist der
+   **eine** Hauptweg je Bildschirm; auf den dunklen Abschnitten
+   steht daneben ein zweiter, und der darf ihn nicht wiederholen.
+   ---------------------------------------------------------- */
+
+.knopf--hell {
+  background: transparent;
+  color: var(--paper);
+  border: 1.5px solid var(--paper);
+}
+
+.knopf--hell:hover {
+  background: var(--paper);
+  color: var(--ink);
+  border-color: var(--paper);
+}
+
+/* ---- Was sich beim Ueberfahren bewegt ---------------------
+   Vier Stellen, alle klein (Entwurf, Abschnitt „Lime an vier
+   Stellen"). Lime bleibt Flaeche und wird nie Schrift auf hellem
+   Grund.
+   ---------------------------------------------------------- */
+
+.stufe,
+.leistungszeilen > li {
+  transition: transform var(--t-base) var(--ease),
+              box-shadow var(--t-base) var(--ease),
+              border-color var(--t-base) var(--ease);
+}
+
+.stufe:hover,
+.leistungszeilen > li:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--shadow-soft);
+  border-color: var(--ink);
+}
+
+.stufe .hakenliste li::before { transition: background var(--t-base) var(--ease); }
+.stufe:hover .hakenliste li::before { background: var(--lime); }
+
+/* Die Punkte der Hauptnavigation bekommen beim Ueberfahren eine ruhige Flaeche
+   statt einer Linie — `design/startseite.html` Zeile 162 und 164.
+
+   **Der Innenabstand wird aus dem Zwischenraum genommen, nicht dazugelegt.**
+   Der Entwurf kann sich beides leisten: Seine Bahn ist 1380 bis 1800 px breit,
+   unsere ist 1180 (tokens.css `--wrap`). Mit `gap: var(--s-2)` **und**
+   Innenabstand waere die Zeile 1201 px breit geworden und bei 1280 px um 22 px
+   uebergelaufen — gemessen am 13.08.2026.
+
+   Mit `gap: 0` und 6 px Innenabstand je Seite bleibt der Abstand zwischen zwei
+   Woertern bei 12 px, also unveraendert; die Zeile waechst um 12 px statt um
+   144. Die Flaechen stossen aneinander, was nicht auffaellt: Es ist immer nur
+   eine eingefaerbt. */
+.hauptnavigation ul { gap: 0; }
+
+.hauptnavigation a {
+  border-radius: var(--r-pill);
+  padding: var(--s-1);
+  transition: background var(--t-base) var(--ease), color var(--t-base) var(--ease);
+}
+
+.hauptnavigation a:hover { background: var(--sand); color: var(--ink); }
+
+/* ---- Die Wortmarke am Fuss --------------------------------
+   `design/startseite.html` Zeile 1165: Am Fuss steht die
+   Wortmarke gross und unten angeschnitten.
+
+   Der Entwurf begruendet, warum dort die **Wortmarke** steht und
+   nicht das Zeichen: „Das Zeichen ist ein kompakter Koerper;
+   angeschnitten wirkt er beschaedigt, nicht fortgesetzt."
+   ---------------------------------------------------------- */
+
+.wortriese {
+  position: relative;
+  overflow: hidden;
+  padding-top: var(--s-4);
+  margin-top: var(--s-3);
+}
+
+.wortriese svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  margin-bottom: -1.6%;
+  color: var(--ink-soft);
+}
+
+/* `prefers-reduced-motion` schaltet in tokens.css jede Animation ab. Der
+   Fortschrittsbalken braucht zusaetzlich diese Zeile: Ohne Bewegung stuende er
+   dauerhaft auf `scaleX(0)` — ein Lime-Streifen, der nichts anzeigt. Der Entwurf
+   setzt dieselbe Regel (`design/startseite.html` Zeile 747). */
+@media (prefers-reduced-motion: reduce) {
+  .fortschritt { display: none; }
+}
+
+/* ---- Echte Aufnahmen aus dem Kundenbereich ----------------
+   `partials/aufnahme.php`. Sie treten an die Stelle der
+   Bildplaetze, seit der Kundenbereich gebaut ist (§4b).
+
+   Dieselbe Form wie das Geraet im Aufmacher: Kante, Rundung,
+   ein Schatten, der die Flaeche vom Grund trennt. Zwei Formen
+   fuer dieselbe Sache waeren zwei Aussagen darueber, was eine
+   Aufnahme ist.
+   ---------------------------------------------------------- */
+
+.aufnahme { margin: var(--s-4) 0 0; }
+
+.aufnahme img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border: 1px solid var(--line);
+  border-radius: var(--r-m);
+  box-shadow: 0 24px 48px rgba(20, 17, 13, .14);
+}
+
+/* Auf dunklem Grund traegt die helle Kante nicht. */
+.abschnitt--dunkel .aufnahme img { border-color: var(--line-dark); }
+
+/* Der gebundene Vermerk — neben dem Bild, nicht darauf. */
+.aufnahme__marke {
+  display: inline-block;
+  margin: var(--s-2) 0 0;
+  padding: var(--s-1) var(--s-2);
+  border: 1px solid var(--line);
+  border-radius: var(--r-pill);
+  background: var(--lime);
+  color: var(--ink);
+  font-family: var(--font-mono);
+  font-size: var(--fs-mono);
+  letter-spacing: var(--ls-mono);
+  text-transform: uppercase;
+}

@@ -279,7 +279,9 @@ final class MarkupTest extends Datenbankfall
 
         // Sektion 10: **helle** Sektion mit dunkler gerundeter Flaeche darin.
         $this->assertStringContainsString('<section class="abschluss"', $seite);
-        $this->assertStringContainsString('<div class="handlungsfeld">', $seite);
+        // `class="handlungsfeld` ohne schliessendes Anfuehrungszeichen: Die Huelle traegt
+        // auf der Startseite zusaetzlich die Einblendung `hebt`.
+        $this->assertStringContainsString('<div class="handlungsfeld', $seite);
 
         $css = (string) file_get_contents(SARTU_WURZEL . '/public/assets/css/website.css');
 
@@ -308,14 +310,14 @@ final class MarkupTest extends Datenbankfall
         foreach ($seiten as $datei) {
             $inhalt = (string) file_get_contents($datei);
 
-            if (!str_contains($inhalt, '<div class="handlungsfeld">')) {
+            if (!str_contains($inhalt, '<div class="handlungsfeld')) {
                 continue;
             }
 
             ++$gefunden;
 
             foreach (['handlungsfeld__text', 'handlungsfeld__handlung'] as $huelle) {
-                $this->assertStringContainsString('<div class="' . $huelle . '">', $inhalt,
+                $this->assertStringContainsString('<div class="' . $huelle . '"', $inhalt,
                     basename($datei) . ' hat ein Abschlussfeld ohne ' . $huelle . '.');
             }
         }

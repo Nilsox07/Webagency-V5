@@ -70,6 +70,15 @@ main { padding-top: var(--s-5); padding-bottom: var(--s-7); }
 
 .sprungmarke:focus { left: 0; }
 
+/* Das Zeichen-Sprite liegt ausserhalb des Textflusses. Es traegt `width=0`
+   und `height=0`, aber ein Inline-Element erzeugt trotzdem eine Zeilenbox —
+   und die schob den ganzen Bereich am 13.08.2026 um 29 px nach unten. Sichtbar
+   war es als weisser Streifen ueber der dunklen Leiste.
+
+   Die Angabe stand vorher als `style`-Attribut im Markup und war wirkungslos:
+   Die CSP setzt `style-src 'self'` ohne `unsafe-inline`. */
+.zeichensatz { position: absolute; }
+
 .bereich {
   display: grid;
   grid-template-columns: 17rem 1fr;
@@ -93,16 +102,24 @@ main { padding-top: var(--s-5); padding-bottom: var(--s-7); }
 
 .rail--intern { background: var(--ink-2); }
 
+/* Logo oben, Bereichsname darunter — Betreiberentscheidung vom 13.08.2026.
+   Vorher standen beide **nebeneinander** auf einer Grundlinie; das Logo ist
+   ein Bild von 160 px Breite und haette den Zusatz aus der 17-rem-Leiste
+   gedraengt. Untereinander tragen beide ihre volle Groesse. */
 .rail-marke {
   display: flex;
-  align-items: baseline;
+  flex-direction: column;
+  align-items: flex-start;
   gap: var(--s-1);
   padding: 0 var(--s-2) var(--s-1);
-  font-size: var(--fs-h3);
-  font-weight: var(--fw-head);
-  letter-spacing: var(--ls-head);
   color: var(--cream);
   text-decoration: none;
+}
+
+.rail-marke img {
+  display: block;
+  width: auto;
+  height: 26px;
 }
 
 .rail-marke em {
@@ -125,7 +142,11 @@ main { padding-top: var(--s-5); padding-bottom: var(--s-7); }
   margin-bottom: var(--s-1);
 }
 
-.rail a {
+/* `:not(.rail-marke)` — diese Regel meint die **Menueeintraege**. Sie stand
+   ohne den Ausschluss da und war damit spezifischer als `.rail-marke`, das
+   weiter oben steht: Logo und Bereichsname wurden zentriert statt links
+   gesetzt, obwohl `.rail-marke` `align-items: flex-start` verlangt. */
+.rail a:not(.rail-marke) {
   display: flex;
   align-items: center;
   gap: var(--s-2);
@@ -137,7 +158,7 @@ main { padding-top: var(--s-5); padding-bottom: var(--s-7); }
   transition: background var(--t-fast) var(--ease), color var(--t-fast) var(--ease);
 }
 
-.rail a:hover { background: var(--ink-3); color: var(--paper); }
+.rail a:not(.rail-marke):hover { background: var(--ink-3); color: var(--paper); }
 .rail a.an { background: var(--ink-3); color: var(--paper); font-weight: var(--fw-head); }
 
 /* Lime traegt allein der aktive Eintrag. Ein Zeichen, das nur

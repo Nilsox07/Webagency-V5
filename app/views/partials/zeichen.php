@@ -30,7 +30,13 @@ declare(strict_types=1);
  */
 
 ?>
-<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+<?php /* **Kein `style`-Attribut.** Bis zum 13.08.2026 stand hier
+         `style="position:absolute"` — und die eigene CSP verwirft es: `style-src
+         'self'` ohne `unsafe-inline`. Das Sprite blieb damit im Textfluss und nahm
+         eine Zeilenhoehe ein: **29 px weisser Rand ueber der Seitenleiste**, auf
+         jeder Seite des Kunden- und Adminbereichs. Die Regel steht in
+         anwendung.css als `.zeichensatz`. */ ?>
+<svg class="zeichensatz" width="0" height="0" aria-hidden="true" focusable="false">
   <symbol id="i-uebersicht" viewBox="0 0 24 24"><rect x="3" y="3" width="7.5" height="9" rx="1.5"/><rect x="13.5" y="3" width="7.5" height="5.5" rx="1.5"/><rect x="13.5" y="12" width="7.5" height="9" rx="1.5"/><rect x="3" y="15.5" width="7.5" height="5.5" rx="1.5"/></symbol>
   <symbol id="i-angebot" viewBox="0 0 24 24"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5"/><path d="M9 13h6"/><path d="M9 17h4"/></symbol>
   <symbol id="i-aufgaben" viewBox="0 0 24 24"><path d="m3 6.5 1.8 1.8L8.2 5"/><path d="m3 17.5 1.8 1.8L8.2 16"/><path d="M12 7h9"/><path d="M12 12h9"/><path d="M12 17.5h9"/></symbol>

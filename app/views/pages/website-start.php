@@ -77,7 +77,7 @@ use Sartu\Services\Websitetexte;
       </div>
     </div>
 
-    <div class="aufmacher__bild">
+    <div class="aufmacher__bild hebt-2">
       <?= Ansicht::teil('partials/aufmacherbild', ['marke' => Websitetexte::MUSTERANSICHT]) ?>
     </div>
   </div>
@@ -87,12 +87,12 @@ use Sartu\Services\Websitetexte;
          --r-xl gerundet (`design/startseite.html` Zeile 859 und 873). */ ?>
 <section class="abschnitt abschnitt--dunkel abschnitt--rundoben" id="kundenbereich">
   <div class="bahn">
-    <p class="vorzeile">Kundenbereich</p>
-    <h2><?= Html::e(T::S2_H2) ?></h2>
-    <p class="lede"><?= Html::e(T::S2_ANTWORT) ?></p>
+    <p class="vorzeile hebt-3">Kundenbereich</p>
+    <h2 class="hebt"><?= Html::e(T::S2_H2) ?></h2>
+    <p class="lede hebt-2"><?= Html::e(T::S2_ANTWORT) ?></p>
     <p><?= Html::e(Websitetexte::TROTZDEM_ERREICHBAR) ?></p>
 
-    <div class="zweispalten">
+    <div class="zweispalten hebt">
 <?php foreach (T::kundenbereich() as $ueberschrift => $punkte): ?>
       <div>
         <h3><?= Html::e($ueberschrift) ?></h3>
@@ -105,35 +105,54 @@ use Sartu\Services\Websitetexte;
 <?php endforeach; ?>
     </div>
 
-    <p class="hervor"><?= Html::e(T::S2_UNTERSCHIED) ?></p>
+    <p class="hervor hebt-2"><?= Html::e(T::S2_UNTERSCHIED) ?></p>
 
-    <?= Ansicht::teil('partials/bildplatz', [
-        'name'  => 'sartu-portal-briefing-muster',
-        'masse' => '960 × 600',
-        'satz'  => 'Hier steht später eine Ansicht der Aufgaben im Kundenbereich.',
-        'marke' => Websitetexte::MUSTERANSICHT,
+    <?php /* Seit dem 13.08.2026 eine **echte Aufnahme** statt eines Bildplatzes: Der
+             Kundenbereich ist gebaut, und §4b hat den Grund fuer den Platzhalter damit
+             aufgehoben. Zu sehen ist `/portal/aufgaben` mit Musterdaten. */ ?>
+    <?= Ansicht::teil('partials/aufnahme', [
+        'datei'  => 'sartu-portal-aufgaben.webp',
+        'alt'    => 'Die Aufgabenliste im Kundenbereich: drei offene Punkte mit je einem Satz, '
+                  . 'was zu tun ist, und der Seitenleiste mit Angebot, Aufgaben und Vorschau.',
+        'breite' => 1920,
+        'hoehe'  => 1200,
+        'marke'  => Websitetexte::MUSTERANSICHT,
     ]) ?>
 
-    <p><a class="textlink" href="/leistung-portal">Den Kundenbereich ansehen</a></p>
+    <?php /* Im Entwurf steht hier ein **Knopf**, nicht ein Textlink: `<a class="btn
+             btn-hell" href="/leistung-portal">`. Auf dunklem Grund traegt der
+             Lime-Textmarker nicht, und ein zweiter Lime-Knopf neben dem Hauptweg
+             waere ein zweites gleich starkes Ziel. */ ?>
+    <p><a class="knopf knopf--hell hebt" href="/leistung-portal">Den Kundenbereich ansehen<span class="pfeil" aria-hidden="true">→</span></a></p>
   </div>
 </section>
 
 <section class="abschnitt abschnitt--dunkel abschnitt--rundunten" id="ablauf">
   <div class="bahn">
-    <h2><?= Html::e(T::S3_H2) ?></h2>
+    <h2 class="hebt"><?= Html::e(T::S3_H2) ?></h2>
 
-    <ol class="zeitstrahl">
+    <?php /* Der Ablauf mit Wechselseiten — `design/startseite.html` Zeile 877.
+             Ab 860 px steht die Linie in der Mitte, die Nummer als Kreis darauf, und
+             Text und Ansicht tauschen je Schritt die Seite. Die Nummer steht im
+             Markup **vor** dem Text: Sie ist die Ordnungszahl, und ein Vorleseprogramm
+             liest sie in dieser Reihenfolge. */ ?>
+    <ol class="ablaufstrahl">
 <?php foreach (T::ablauf() as $nummer => $schritt): ?>
-      <li>
-        <h3><?= (int) $nummer + 1 ?>. <?= Html::e($schritt['titel']) ?></h3>
-        <p><?= Html::e($schritt['satz']) ?></p>
-<?php if ($schritt['bild']): ?>
-        <?= Ansicht::teil('partials/bildplatz', [
-            'name'  => 'sartu-ablauf-' . ($nummer + 1),
-            'masse' => '640 × 400',
-            'satz'  => 'Hier steht später eine Aufnahme zu diesem Schritt.',
-            'marke' => null,
-        ]) ?>
+      <li class="ablaufschritt">
+        <span class="ablaufschritt__nummer" aria-hidden="true"><?= str_pad((string) ($nummer + 1), 2, '0', STR_PAD_LEFT) ?></span>
+
+        <div class="ablaufschritt__text">
+          <?php /* Ohne Ziffer im Text: Der Kreis auf der Linie traegt sie schon, und
+                   der Entwurf setzt die Ueberschrift blank (`<h3>Bedarfsscheck</h3>`).
+                   Zweimal dieselbe Zahl nebeneinander liest sich als Fehler. */ ?>
+          <h3><?= Html::e($schritt['titel']) ?></h3>
+          <p><?= Html::e($schritt['satz']) ?></p>
+        </div>
+
+<?php if ($schritt['bild'] !== null): ?>
+        <div class="ablaufschritt__bild">
+          <?= Ansicht::teil('partials/aufnahme', $schritt['bild'] + ['marke' => Websitetexte::MUSTERANSICHT]) ?>
+        </div>
 <?php endif; ?>
       </li>
 <?php endforeach; ?>
@@ -142,17 +161,19 @@ use Sartu\Services\Websitetexte;
     <p class="anteil"><?= Html::e(T::S3_IHR_ANTEIL) ?></p>
     <p class="anteil"><?= Html::e(T::S3_UNSER_ANTEIL) ?></p>
 
-    <p><a class="textlink" href="/ablauf">Ablauf im Detail</a></p>
+    <p><a class="knopf knopf--hell hebt" href="/ablauf">Ablauf im Detail<span class="pfeil" aria-hidden="true">→</span></a></p>
   </div>
 </section>
 
 <section class="abschnitt" id="preise">
   <div class="bahn">
-    <h2><?= Html::e(T::S4_H2) ?></h2>
-    <p class="vorzeile"><?= Html::e(T::S4_SUBLINE) ?></p>
-    <p class="lede"><?= Html::e(T::S4_EINLEITUNG) ?></p>
+    <h2 class="hebt"><?= Html::e(T::S4_H2) ?></h2>
+    <p class="vorzeile hebt-3"><?= Html::e(T::S4_SUBLINE) ?></p>
+    <p class="lede hebt-2"><?= Html::e(T::S4_EINLEITUNG) ?></p>
 
-    <?= Ansicht::teil('partials/preisstufen', ['preishinweis' => $preishinweis]) ?>
+    <div class="hebt">
+      <?= Ansicht::teil('partials/preisstufen', ['preishinweis' => $preishinweis]) ?>
+    </div>
 
     <div class="karte karte--betont">
       <h3>Was die Monatspauschale abdeckt</h3>
@@ -178,8 +199,8 @@ use Sartu\Services\Websitetexte;
 
 <section class="abschnitt abschnitt--sand" id="leistungen">
   <div class="bahn">
-    <h2><?= Html::e(T::S7_H2) ?></h2>
-    <p class="lede"><?= Html::e(T::S7_EINLEITUNG) ?></p>
+    <h2 class="hebt"><?= Html::e(T::S7_H2) ?></h2>
+    <p class="lede hebt-2"><?= Html::e(T::S7_EINLEITUNG) ?></p>
 
     <ul class="leistungszeilen">
 <?php foreach (Leistungszeilen::alle() as $zeile): ?>
@@ -197,10 +218,10 @@ use Sartu\Services\Websitetexte;
 
 <section class="abschnitt">
   <div class="bahn">
-    <h2><?= Html::e(T::S7_SEO_H2) ?></h2>
-    <p class="lede"><?= Html::e(T::S7_SEO_TEXT) ?></p>
+    <h2 class="hebt"><?= Html::e(T::S7_SEO_H2) ?></h2>
+    <p class="lede hebt-2"><?= Html::e(T::S7_SEO_TEXT) ?></p>
 
-    <div class="dreispalten">
+    <div class="dreispalten hebt">
 <?php foreach (T::seoSpalten() as $spalte): ?>
       <div>
         <h3><?= Html::e($spalte['titel']) ?></h3>
@@ -222,7 +243,7 @@ use Sartu\Services\Websitetexte;
 
 <section class="abschluss" id="bedarfsscheck">
   <div class="bahn">
-    <div class="handlungsfeld">
+    <div class="handlungsfeld hebt">
       <div class="handlungsfeld__text">
         <h2><?= Html::e(T::S10_H2) ?></h2>
         <p class="lede"><?= Html::e(T::S10_TEXT) ?></p>

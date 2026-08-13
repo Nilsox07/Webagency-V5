@@ -68,11 +68,23 @@ $eintrag = static function (string $ziel, string $zeichen, string $wort) use ($p
 
 ?>
 <nav class="rail" aria-label="Ihr Bereich">
-  <?php /* Wortmarke als Text, wie im abgenommenen Entwurf. Das Bildzeichen steht dort, wo
-           `07_MARKE_UND_GESTALTUNG.md` es verlangt — in der Kopfleiste der Website. In der
-           Leiste stuende es auf 21 px Schriftgroesse neben einem Zusatz von 10,5 px und
-           waere ein drittes Element auf engstem Raum. */ ?>
-  <a class="rail-marke" href="/portal">SARTU <em>Ihr Bereich</em></a>
+  <?php /* Das **Logo** statt der getippten Wortmarke — Betreiberentscheidung vom
+           13.08.2026. Bis dahin stand hier `SARTU` als Text; die Logodateien lagen
+           ausgeliefert unter `/assets/bild/` und wurden von keiner Ansicht der Leiste
+           eingebunden.
+
+           Die **dunkle** Fassung: Sie traegt die Wortmarke in Weiss und gehoert auf
+           dunklen Grund. `alt` bleibt der Markenname, nicht „Logo" — Bildbeschreibungen
+           werden vorgelesen.
+
+           Darunter der Bereichsname. **Nicht „Kundenportal".** `10_WEBSITE_SARTU.md` §2
+           und `CLAUDE.md`: „`Portal` ist gestrichen, ersetzt durch `Kundenbereich`", und
+           „nach aussen nie: App, Software, SaaS, Plattform, Tool, Dashboard, System".
+           Die Leiste sieht der Kunde — und sie steht als Aufnahme auf der Website. */ ?>
+  <a class="rail-marke" href="/portal">
+    <img src="/assets/bild/sartu-logo-dunkel.svg" alt="SARTU" width="160" height="30">
+    <em>Kundenbereich</em>
+  </a>
 
 <?php if ($angemeldet): ?>
   <div class="rail-gruppe">

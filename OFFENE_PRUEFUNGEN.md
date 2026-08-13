@@ -2799,3 +2799,97 @@ Festgehalten in `MarkupTest::testDieGrundfolgeDerStartseiteStimmtMitDemEntwurf` 
 | 1 | **Der Entwurf hat keine Sektion 6.** „Wer dahintersteckt" ist am 13.08.2026 dazugekommen (§4c) und steht zwischen der dunklen Zusage und dem Sandgrund von Sektion 7. Ob die Folge hell-dunkel-hell dort trägt, ist nicht am Entwurf zu prüfen — er kennt die Sektion nicht | Betreiberurteil |
 | 2 | **Das SEO-Band steht im Entwurf nicht als eigene Sektion.** Es trägt jetzt keinen Grund mehr, damit der Sandgrund an Sektion 7 sitzt wie im Entwurf. Ob es dort überhaupt hingehört, ist eine Inhaltsfrage | `10_WEBSITE_SARTU.md` §5, Sektionsliste |
 | 3 | **Die acht Unterseiten sind nur auf Antwortstatus geprüft**, nicht Bild für Bild. Sie tragen dasselbe Abschlussfeld, aber eigene Sektionsfolgen | Durchsehen bei 1440 und 390 px |
+
+---
+
+## 13.08.2026 — Startseite eins zu eins, echte Aufnahmen, Leiste bis oben
+
+Drei Betreiberanweisungen an einem Tag: die Startseite bis auf die Texte eins zu eins aus
+`design/startseite.html` übernehmen · echte Aufnahmen aus dem Kundenbereich statt der
+Bildplätze · die Seitenleiste bis an den oberen Rand mit Logo und Bereichsnamen.
+
+### Was aus dem Entwurf übertragen wurde
+
+| Aus dem Entwurf | Wohin | Zeile im Entwurf |
+|---|---|---|
+| `.rise` / `.rise-2` / `.rise-3` — Einblenden beim Scrollen | `.hebt` / `.hebt-2` / `.hebt-3` | 133–135 |
+| `.progress` — Lesefortschritt am oberen Rand | `.fortschritt`, im Layout | 138–140, 751 |
+| `.tag::after` — der Lime-Balken wächst unter der Abschnittsmarke | `.vorzeile::after` | 614–617 |
+| `.steps` — Zeitstrahl mit **Wechselseiten**, Linie in der Mitte, Nummer im Kreis | `.ablaufstrahl` / `.ablaufschritt` | 341–372 |
+| `draw-line` — die Linie zeichnet sich beim Scrollen nach | `linie-faellt` | 129, 345 |
+| `in-left` / `in-right` — jeder zweite Schritt kommt von der anderen Seite | `von-links` / `von-rechts` | 130–131, 368 |
+| `.btn-hell` — heller Knopf auf dunklem Grund | `.knopf--hell` | 117 |
+| `.wordmark` — die Wortmarke gross am Fuss, unten angeschnitten | `.wortriese` im Fussbereich | 1165 |
+| `.nav a:hover` — ruhige Fläche statt Linie | `.hauptnavigation a:hover` | 164 |
+| `.plan:hover` / `.lk>li:hover` — Karten heben sich | `.stufe:hover` / `.leistungszeilen > li:hover` | 387, 485 |
+
+**Alles ohne JavaScript.** Der Entwurf löst die Einblendungen über `animation-timeline: view()`
+und den Fortschrittsbalken über `animation-timeline: scroll(root block)` — scrollgetriebene
+Animationen des Browsers, kein Skript, kein Beobachter. §1 gilt unverändert.
+
+**Kein Inhalt wird erst durch das Scrollen sichtbar** (§1). Gemessen: Im ersten Bild steht
+**kein** `.hebt`-Element unter Deckkraft 0,9. Kennt ein Browser `animation-timeline` nicht,
+fällt die Angabe weg und `animation: hebt linear both` läuft ohne Dauer — also sofort auf dem
+Endzustand.
+
+### Was **nicht** übernommen wurde
+
+| Was | Warum |
+|---|---|
+| Die sechs Lime-Varianten im Grund (`#l-naht`, `#l-rand`, `#l-raster`, `#l-kante`, `#l-ecke`, `#l-karten`) | Der Entwurf stellt sie zur Auswahl und sagt selbst: „**Vorgabe ist OHNE.** Der Rest fliegt vor der Portierung raus." |
+| Die beiden Umschalter `.gt` unten in den Ecken | Werkzeug des Entwurfs, kein Bauteil |
+| Der nachgezeichnete Bildschirminhalt (`.ui`, `.ui-card`, `.ui-bar`) | `10_WEBSITE_SARTU.md` §8 verbietet die nachgebaute Oberfläche. An seiner Stelle steht die **echte** Aufnahme |
+| `gap: var(--s-2)` an der Navigation **zusammen mit** dem Innenabstand | Die Bahn des Entwurfs ist 1380–1800 px breit, unsere 1180. Mit beidem lief die Kopfzeile bei 1280 px um 22 px über — gemessen. Der Innenabstand wird jetzt aus dem Zwischenraum genommen: `gap: 0`, 6 px je Seite. Der Abstand zwischen zwei Wörtern bleibt bei 12 px |
+
+### Echte Aufnahmen statt Bildplätze
+
+Vier Aufnahmen aus dem gebauten Stand, mit Musterdaten, als WebP:
+
+| Datei | Zeigt | Wo |
+|---|---|---|
+| `sartu-kundenbereich-muster.webp` | `/portal` — die Übersicht | Aufmacher |
+| `sartu-portal-aufgaben.webp` | `/portal/aufgaben` | Sektion 2 |
+| `sartu-ablauf-1-bedarfsscheck.webp` | `/briefing/1` | Ablauf, Schritt 1 |
+| `sartu-ablauf-2-angebot.webp` | `/portal/angebot` | Ablauf, Schritt 2 |
+| `sartu-ablauf-5-vorschau.webp` | `/portal/vorschau` | Ablauf, Schritt 5 |
+
+`partials/bildplatz.php` bleibt unverändert und gilt weiter für **Musterprojekte** und das
+**Gründerfoto** — dort ist das Bild der Beleg, und der fehlt noch (§5). Für den Kundenbereich
+fehlt er nicht mehr (§4b).
+
+**Das Musterangebot trägt die Zahlen aus `Preise::tabelle()`**, nicht erfundene: 3.900 €
+einmalig, 129 € im Monat, Erstjahr 5.448 € — der Umfang `wachstum`. Der Projektstand wurde für
+die Aufnahmen durchgeschaltet und danach auf `briefing` zurückgesetzt.
+
+### Zwei Fehler, die dabei aufgefallen sind
+
+**1 — Die Seitenleiste begann 29 px unter dem oberen Rand.** Ursache war das Zeichen-Sprite:
+`<svg width="0" height="0" style="position:absolute">`. Das `style`-Attribut ist von der
+**eigenen CSP** verworfen worden (`style-src 'self'` ohne `unsafe-inline`), und ein
+Inline-Element mit Nullmaßen erzeugt trotzdem eine Zeilenbox. Sichtbar auf **jeder** Seite des
+Kunden- und Adminbereichs. Die Angabe steht jetzt als `.zeichensatz` in `anwendung.css`.
+
+**2 — `.rail a` zentrierte den Leistenkopf.** Die Regel ist für die Menüeinträge gedacht, stand
+aber ohne Ausschluss da und war spezifischer als `.rail-marke` — Logo und Bereichsname wurden
+mittig gesetzt statt links. Jetzt `.rail a:not(.rail-marke)`.
+
+### Eine Abweichung von der Anweisung, gemeldet
+
+Der Betreiber verlangte unter dem Logo **„Kundenportal" bzw. „Adminportal"**. Gebaut sind
+**Kundenbereich** und **Adminbereich**.
+
+`10_WEBSITE_SARTU.md` §2 und `CLAUDE.md`: *„`Portal` ist gestrichen, ersetzt durch
+`Kundenbereich`"* und *„nach aussen nie: App · Software · SaaS · Plattform · Tool · Dashboard ·
+System"*. Die Leiste sieht der Kunde — und sie steht seit heute als Aufnahme auf der
+öffentlichen Startseite. Die gemeinte Unterscheidung bleibt erhalten.
+
+### Ungeprüft
+
+| # | Punkt | Womit es zu prüfen ist |
+|---|---|---|
+| 1 | **Die scrollgetriebenen Animationen sind nur in Chromium geprüft.** Firefox und Safari unterstützen `animation-timeline` unterschiedlich weit; ohne Unterstützung steht der Endzustand sofort — das ist der Rückfall, nicht ein Fehler | In Firefox und Safari öffnen |
+| 2 | **Die Bewegungen sind nicht auf Rechenlast gemessen.** Fortschrittsbalken, Bänder und bis zu 20 Einblendungen laufen gleichzeitig | Browserwerkzeug auf einem älteren Telefon |
+| 3 | **Vollseitenaufnahmen zeigen die eingeblendeten Blöcke leer.** Beim Zusammensetzen eines `fullPage`-Bildes läuft die `view()`-Zeitachse nicht mit. Beim echten Scrollen erreicht jedes Element Deckkraft 1 — nachgemessen | Der Vergleich wird deshalb mit `prefers-reduced-motion` aufgenommen |
+| 4 | **Die Aufnahmen zeigen eine Entwicklungsdatenbank.** Ein Projekt, drei Aufgaben, ein Angebot. Nach dem ersten echten Projekt neu aufnehmen — weiterhin mit Musterdaten | Erneut aufnehmen |
+| 5 | **Der Adminbereich ist nach der Leistenänderung nur auf Antwortstatus geprüft**, nicht Bild für Bild | Anmelden und durchsehen |
+| 6 | **Die Texte sind unverändert.** Der Auftrag lautete „nur die Texte solltest du neu denken" — übertragen ist bisher alles **außer** den Texten. Der Textdurchgang steht aus | Mit dem Texter-Skill je Sektion |

@@ -65,7 +65,24 @@ $eintrag = static function (string $ziel, string $zeichen, string $wort) use ($p
 
 ?>
 <nav class="rail rail--intern" aria-label="Interner Bereich">
-  <a class="rail-marke" href="/admin">SARTU <em>Intern</em></a>
+  <?php /* Das **Logo** statt der getippten Wortmarke — Betreiberentscheidung vom
+           13.08.2026. Bis dahin stand hier `SARTU` als Text; die Logodateien lagen
+           ausgeliefert unter `/assets/bild/` und wurden von keiner Ansicht der Leiste
+           eingebunden.
+
+           Die **dunkle** Fassung: Sie traegt die Wortmarke in Weiss und gehoert auf
+           dunklen Grund. `alt` bleibt der Markenname, nicht „Logo" — Bildbeschreibungen
+           werden vorgelesen.
+
+           Darunter der Bereichsname. **Nicht „Kundenportal".** `10_WEBSITE_SARTU.md` §2
+           und `CLAUDE.md`: „`Portal` ist gestrichen, ersetzt durch `Kundenbereich`", und
+           „nach aussen nie: App, Software, SaaS, Plattform, Tool, Dashboard, System".
+           Intern waere „Adminbereich" zulaessig; er heisst hier so, weil beide Leisten
+           dieselbe Form tragen und nebeneinander gezeigt werden. */ ?>
+  <a class="rail-marke" href="/admin">
+    <img src="/assets/bild/sartu-logo-dunkel.svg" alt="SARTU" width="160" height="30">
+    <em>Adminbereich</em>
+  </a>
 
 <?php if ($angemeldet): ?>
   <div class="rail-gruppe">

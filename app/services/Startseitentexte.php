@@ -172,17 +172,23 @@ final class Startseitentexte
     public static function ablauf(): array
     {
         return [
-            ['titel' => 'Bedarfsscheck', 'bild' => true,
-             'satz'  => 'Wenige Fragen zu Unternehmen, Ziel, Umfang und Domain.'],
-            ['titel' => 'Geprüftes Angebot', 'bild' => true,
-             'satz'  => 'Sie bekommen Umfang, Preis und Zahlungsplan schriftlich.'],
-            ['titel' => 'Ihre Angaben', 'bild' => false,
+            ['titel' => 'Bedarfsscheck',
+             'satz'  => 'Wenige Fragen zu Unternehmen, Ziel, Umfang und Domain.',
+             'bild'  => ['datei' => 'sartu-ablauf-1-bedarfsscheck.webp', 'breite' => 1280, 'hoehe' => 800,
+                         'alt'   => 'Der erste Schritt des Bedarfsschecks: die Fragen zum Unternehmen.']],
+            ['titel' => 'Geprüftes Angebot',
+             'satz'  => 'Sie bekommen Umfang, Preis und Zahlungsplan schriftlich.',
+             'bild'  => ['datei' => 'sartu-ablauf-2-angebot.webp', 'breite' => 1280, 'hoehe' => 800,
+                         'alt'   => 'Das Angebot im Kundenbereich: Nummer, Gültigkeit, empfohlener Umfang und die vorgesehene Seitenstruktur.']],
+            ['titel' => 'Ihre Angaben', 'bild' => null,
              'satz'  => 'Was wir schon wissen, tragen wir ein. Den Rest fragen wir Sie im Kundenbereich.'],
-            ['titel' => 'Produktion', 'bild' => false,
+            ['titel' => 'Produktion', 'bild' => null,
              'satz'  => 'Wir bauen die Website. KI hilft, geprüft und freigegeben wird von uns.'],
-            ['titel' => 'Vorschau und Freigabe', 'bild' => true,
-             'satz'  => 'Sie sehen die fertige Website und sammeln Ihre Änderungen.'],
-            ['titel' => 'Start und Betrieb', 'bild' => false,
+            ['titel' => 'Vorschau und Freigabe',
+             'satz'  => 'Sie sehen die fertige Website und sammeln Ihre Änderungen.',
+             'bild'  => ['datei' => 'sartu-ablauf-5-vorschau.webp', 'breite' => 1280, 'hoehe' => 800,
+                         'alt'   => 'Die Vorschau im Kundenbereich mit dem Weg zur Rückmeldung und zur Freigabe.']],
+            ['titel' => 'Start und Betrieb', 'bild' => null,
              'satz'  => 'Wir schalten live und halten die Seite am Laufen.'],
         ];
     }
