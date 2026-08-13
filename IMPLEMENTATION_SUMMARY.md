@@ -554,27 +554,32 @@ vergisst.
 | 1 | `10_WEBSITE_SARTU.md` §2: „Desktop **ab 1024 px**" mit sechs Punkten | Mobilmenü **ab 1180 px** | Die Kopfzeile hat 1176 px Eigenbreite und lief von 941 bis 1183 px über; §1 verbietet den Überlauf. Dieselbe Datei erlaubt zwei Absätze höher ausdrücklich, dass „das Mobilmenü früher greift" — und der abgenommene Entwurf setzt exakt 1180 px |
 | 2 | `CLAUDE_SARTU_WEBSITE_LASTENHEFT_BAUFINAL.md` §5a: „Keine Zahlen, **keine Termine**" | `Nächster Projektstart ab <Monat Jahr>` | Betreiberanweisung vom 13.08.2026. Die Datei ist Begründungsarchiv, keine Bauvorlage; `spezifikation/` bindet dort keinen Wortlaut. Gebaut ist ein `DATE`-Feld und die Anzeige nur des **Monats** — ein Starttermin für die Arbeit, keine Zusage über die Fertigstellung |
 
-### D.5 Block 1 — die Datei fehlt, der Rahmen bleibt
+### D.5 Block 1 — CSS-Block gelöscht, Gerät als Inline-SVG
 
 `public/assets/bild/geraet-aufmacher.webp` liegt nicht im Repository und hat nie darin
-gelegen — nachgesucht über `git rev-list --all --objects`. Der Auftrag regelt den Fall:
-überspringen, melden, kein Ersatzbild erfinden.
+gelegen. Zwei Vorgaben schienen sich zu widersprechen: Die Anweisung vom 13.08.2026 verlangt
+„lösch den toten CSS-Block", §4b (Rang 1) verlangt „ein Gerät in leichter Schrägstellung".
 
-**Der Rahmen war einen Commit lang gelöscht (`a08b6fd`) und ist wiederhergestellt.** §4b steht
-auf Rang 1 und entscheidet das Gerät; „überspringen" heißt nicht tun, bis die Datei da ist,
-nicht die Entscheidung vom 10.08.2026 zurücknehmen. Der Satz „lösch den toten CSS-Block"
-beschreibt den Zustand **nach** dem Tausch — ohne Mockup ist der Block nicht tot.
+**§4b nennt den Ausweg selbst:** „Der Rahmen wird selbst gezeichnet — CSS **und Inline-SVG**."
+Das Gerät steht jetzt als Inline-SVG in `partials/aufmacherbild.php`; `.geraet__laptop`,
+`.geraet__deckel`, `.geraet__sockel` und `.geraet__telefon` sind aus `website.css` entfernt.
+Übrig sind zwei Regeln, die keine Zeichnung sind: die Hülle und die Bildbreite.
 
-**Drei Dinge bleiben aus diesem Umweg**, weil sie nicht am Rahmen hängen:
+Erfüllt sind damit alle fünf Auflagen gleichzeitig: CSS-Block weg · Gerät da · kein Ersatzbild
+beschafft (der Inhalt bleibt die Aufnahme vom 10.08.2026) · keine Zahl im Bauteil (die
+Grauwerte kommen als `var()` aus `tokens.css`) · kein externer Abruf.
+
+**Der Weg dahin steht in `OFFENE_PRUEFUNGEN.md`**, weil er drei Commits umfasst: gelöscht
+(`a08b6fd`), wiederhergestellt (`37ed53c`), als SVG neu gezeichnet. Ohne die Notiz sähe die
+Historie wie ein Versehen aus.
+
+**Drei Dinge bleiben aus diesem Weg**, weil sie nicht am Rahmen hängen:
 
 | Was | War | Ist |
 |---|---|---|
 | Der Vermerk `Musteransicht` | `position: absolute` auf dem Bildschirm, verdeckte dessen Kopfzeile | `figcaption` unter dem Gerät — „neben dem Bild, nicht darauf" |
 | Bildspalte ohne `minmax(0, …)` — die H1 zog Platz aus ihr | 343 px bei 1440 px | **459 px**, wie der Entwurf sie setzt |
 | H1-Schriftgrad am Fenster statt an der Spalte | vierzeilig, „zum" allein | **dreizeilig auf sieben geprüften Breiten** |
-
-Das Gerät steht damit auf 455 px statt auf 343 px. Die zurückgenommene Löschung hat den
-Aufmacher genauer gemacht als er vorher war.
 
 **Der Überlauf gehört nicht zum Bild** und ist behoben und gemessen: fünf geforderte Breiten
 plus zehn weitere zwischen 941 und 1240 px, alle ohne waagerechten Überlauf.

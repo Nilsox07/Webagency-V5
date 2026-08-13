@@ -2547,67 +2547,83 @@ Preishinweis"*. Er steht jetzt darunter; auf allen anderen Seiten bleibt er, wo 
 Auftrag in `PROMPT_NEUE_SESSION_VERTRAUEN.md`. Grundlage `SARTU_ENTSCHEIDUNGEN_OFFEN.md` §4b
 und §4c, beide Rang 1.
 
-### Block 1 — die Datei fehlt, der Rahmen bleibt
+### Block 1 — das Mockup fehlt, der CSS-Block ist gelöscht, das Gerät steht
 
 `public/assets/bild/geraet-aufmacher.webp` liegt **nicht** im Repository. Nachgesucht am
 13.08.2026 über `git rev-list --all --objects` und `git log --all --diff-filter=A`: Die Datei
-existiert in keinem Commit, keinem Branch und keiner Objektdatenbank. Das einzige verwandte
-Artefakt ist `design/geraet.html`, der CSS-Rahmen vom 10.08.2026.
+existiert in keinem Commit, keinem Branch und keiner Objektdatenbank.
 
-**Der Auftrag regelt den Fall selbst:** „Liegt die Datei nicht im Repo, überspring diesen
-Block und melde es — erfinde kein Ersatzbild."
+### Zwei Vorgaben, die sich zu widersprechen schienen
 
-### Der Rahmen war einen Commit lang gelöscht — und ist wiederhergestellt
+| Woher | Was sie verlangt |
+|---|---|
+| Anweisung vom 13.08.2026 | „Das Bild ersetzt `.geraet__deckel` samt Telefon und Schattenwerk; **lösch den toten CSS-Block**, statt ihn liegen zu lassen." |
+| §4b, **Rang 1** | „Im Aufmacher steht ein **Gerät in leichter Schrägstellung** — Laptop mit angeschnittenem Telefon davor." |
 
-Das gehört hierher, weil es in der Versionsverwaltung steht und sonst wie ein Versehen aussähe.
+Ohne Mockup schien nur eines von beiden zu gehen: Entweder der Block bleibt und die Anweisung
+ist verletzt, oder das Gerät verschwindet und §4b ist verletzt. **Beides ist am 13.08.2026
+einmal ausgeführt worden** — der Verlauf steht unten, weil er in der Versionsverwaltung sichtbar
+ist und sonst wie ein Versehen aussähe.
+
+### Aufgelöst: §4b nennt das Mittel selbst
+
+`SARTU_ENTSCHEIDUNGEN_OFFEN.md` §4b, Zeile 402:
+
+> „Der Rahmen wird **selbst gezeichnet** — CSS **und Inline-SVG**, keine gekaufte oder
+> heruntergeladene Vorlage."
+
+**Das Gerät steht jetzt als Inline-SVG in `partials/aufmacherbild.php`.** Damit ist beides
+erfüllt, ohne dass eine Vorgabe weichen muss:
+
+| Vorgabe | Wie sie erfüllt ist |
+|---|---|
+| „lösch den toten CSS-Block" | `.geraet__laptop`, `.geraet__deckel`, `.geraet__sockel` und `.geraet__telefon` sind aus `website.css` **entfernt**. Übrig sind zwei Regeln, die keine Zeichnung sind: die Hülle und die Bildbreite |
+| §4b, Gerät in Schrägstellung | Laptop als Trapez mit aufgeklappter Basis, angeschnittenes Telefon davor, beide mit der echten Aufnahme |
+| „erfinde kein Ersatzbild" | Kein Bild beschafft. Der Inhalt bleibt `sartu-kundenbereich-muster.webp`, die Aufnahme vom 10.08.2026 |
+| Keine Zahl im Bauteil | Die drei Grauwerte kommen als `var(--geraet-*)` aus `tokens.css` — `var()` gilt im Inline-SVG wie im CSS |
+| Kein externer Abruf | Jede Adresse im SVG zeigt auf das eigene Verzeichnis; der Test prüft das mit einem Muster auf `https?://` |
+
+**Die Schrägstellung ist dabei genauer geworden.** Die alte Fassung drehte ein Rechteck über
+`rotateY(-7deg)`; die Aufnahme kippte mit und wurde an den Rändern unscharf. Jetzt ist der
+Deckel ein Trapez mit kürzerer linker Kante, und die Aufnahme wird auf dieselbe Form
+beschnitten.
+
+### Der Verlauf, damit die Historie lesbar bleibt
 
 | Commit | Was geschah |
 |---|---|
-| `a08b6fd` | Der gezeichnete Rahmen wurde gelöscht — Auslegung: „lösch den toten CSS-Block" gelte auch ohne Ersatzbild |
-| *diese Fassung* | Wiederhergestellt |
-
-**Warum die Löschung falsch war.** `SARTU_ENTSCHEIDUNGEN_OFFEN.md` §4b steht auf **Rang 1**
-und entscheidet: *„Im Aufmacher steht ein **Gerät in leichter Schrägstellung** — Laptop mit
-angeschnittenem Telefon davor."* Ein Aufmacher **ohne** Gerät ist eine Abweichung vom
-abgenommenen Entwurf, und dafür gibt es keine Entscheidung. „Überspringen" heißt: nicht tun,
-bis die Datei da ist — nicht: die Vorgabe vom 10.08.2026 zurücknehmen.
-
-Der Satz „lösch den toten CSS-Block" beschreibt den Zustand **nach** dem Tausch. Ohne Mockup
-ist der Block nicht tot.
+| `a08b6fd` | CSS-Block gelöscht, Gerät entfiel — §4b verletzt |
+| `37ed53c` | Wiederhergestellt — Anweisung verletzt |
+| *diese Fassung* | Gerät als Inline-SVG, CSS-Block gelöscht — beides erfüllt |
 
 `MarkupTest::testDerGeraeterahmenWirdGetauschtSobaldDasMockupVorliegt` hält beide Zustände
-fest, damit weder das eine noch das andere wieder passiert:
+fest, damit keiner der drei Schritte sich wiederholt:
 
 | Zustand | Was der Test verlangt |
 |---|---|
-| Datei fehlt (**jetzt**) | Die vier Regelblöcke **und** die drei `--geraet-*`-Werte stehen vollständig; der Inhalt ist die echte Aufnahme |
-| Datei liegt vor | Beides ist entfernt, und `aufmacherbild.php` bindet das Mockup ein |
-| **immer** | Der Vermerk `Musteransicht` steht als `figcaption` **neben** dem Bild, nie als `position: absolute` darauf |
+| **immer** | Die vier CSS-Regeln bleiben weg · der Vermerk `Musteransicht` steht als `figcaption` neben dem Bild, nie als `position: absolute` darauf |
+| Mockup fehlt (**jetzt**) | Das SVG zeichnet das Gerät · zwei Bildschirme, beide mit der echten Aufnahme · die drei Grauwerte kommen aus `tokens.css` · keine fremde Adresse |
+| Mockup liegt vor | Das SVG entfällt, ein `<img>` tritt an seine Stelle, und die drei Grauwerte verschwinden aus `tokens.css` |
 
-### Zwei Änderungen, die aus der Löschung bleiben
+Beide Richtungen sind ausgeführt worden, nicht behauptet: Mit einer testweise abgelegten Datei
+schlägt der Test fehl und nennt die Stelle. Die Datei wurde danach wieder entfernt.
 
-Sie hängen nicht am Rahmen und sind deshalb nicht mit ihm zurückgenommen worden.
+### Zwei Funde, die der gezeichnete Rahmen verdeckt hatte
 
-**1 — Der Vermerk steht neben dem Bild, nicht darauf.** Angewiesen am 13.08.2026. Er lag als
-`position: absolute` in der linken oberen Ecke des Bildschirms und verdeckte dort die
-Kopfzeile der Aufnahme. Gemessen bei 1440 px: Bildschirm endet bei y = 663, der Vermerk
-beginnt bei y = 702, das Telefon steht bei x = 1168 und überlappt ihn nicht (er endet bei
-x = 940).
-
-**2 — Zwei Funde, die der Rahmen verdeckt hatte.** Er ragte über `margin: 0 -7%` und ein
-Telefon bei `right: -7%` aus seiner Spalte heraus; die Fläche sah dadurch richtig aus, obwohl
-die Spalte es nicht war. Sichtbar wurde es erst in dem einen Commit ohne Rahmen.
+Er ragte über `margin: 0 -7%` und ein Telefon bei `right: -7%` aus seiner Spalte heraus; die
+Fläche sah dadurch richtig aus, obwohl die Spalte es nicht war. Sichtbar wurde es in dem einen
+Commit ohne Rahmen.
 
 | Fund | War | Ist |
 |---|---|---|
 | **Die Bildspalte war ein Viertel zu schmal.** `grid-template-columns: 55fr 45fr` ohne `minmax(0, …)`: Ein Rasterelement hat `min-width: auto` und schrumpft nicht unter die Mindestbreite seines Inhalts — die grosse H1 zog Platz aus der rechten Spalte | **343 px** bei 1440 px | **459 px**, wie `design/startseite.html` Zeile 204 es setzt |
 | **Der Schriftgrad der H1 hing am Fenster statt an der Spalte.** Mit der korrigierten Spalte brach sie vierzeilig um, „zum" allein auf einer Zeile | `--fs-h1`, eine `vw`-Kurve | `clamp(40px, min(11cqw, 8.6vh), 80px)` an einem `container-type: inline-size`, wie Zeile 211 und 230 des Entwurfs |
 
-Der Entwurf begründet den zweiten Punkt selbst und nennt dabei zwei früher gescheiterte
+Der Entwurf begründet den zweiten Punkt selbst und nennt zwei früher gescheiterte
 `vw`-Formeln: *„die Spalte wächst stückweise, weil `--wrap` und `--gut` eigene Knickpunkte
 haben. Eine gerade vw-Kurve kann ihr nicht folgen."*
 
-**Gemessen nach der Änderung** — H1 dreizeilig auf jeder geprüften Breite:
+**Gemessen** — H1 dreizeilig auf jeder geprüften Breite:
 
 | Breite | Schriftgrad | Zeilen |
 |---|---|---|
@@ -2616,9 +2632,6 @@ haben. Eine gerade vw-Kurve kann ihr nicht folgen."*
 | 1024 px | 54,1 px | 3 |
 | 900 · 768 px | 57,6 · 49,2 px | 3 |
 | 390 px | 40,0 px | 3 |
-
-Das Gerät steht damit bei 1440 px auf **455 px** statt auf 343 px — die Löschung hat den
-Aufmacher am Ende genauer gemacht, obwohl sie selbst zurückgenommen wurde.
 
 ### Was von Block 1 ausgeführt wurde: der Überlauf
 
@@ -2703,7 +2716,7 @@ umgeschrieben und nennt §4c samt dem Satz, der die alte Bauform verwirft.
 
 | # | Punkt | Womit es zu prüfen ist |
 |---|---|---|
-| 1 | **Das Mockup fehlt.** Der gezeichnete Rahmen steht deshalb weiter (§4b, Rang 1). Wie das gerenderte Mockup an derselben Stelle wirkt, ist nicht beurteilt | Datei unter `public/assets/bild/geraet-aufmacher.webp` ablegen — `aufmacherbild.php` nimmt sie von selbst, `MarkupTest` erzwingt dann das Löschen des CSS-Blocks — und die fünf Breiten neu messen |
+| 1 | **Das Mockup fehlt.** Das Gerät wird solange als Inline-SVG gezeichnet (§4b). Wie das gerenderte Mockup an derselben Stelle wirkt, ist nicht beurteilt — und ob die SVG-Fassung neben dem abgenommenen Entwurf besteht, ist eine Betreiberfrage, keine Messung | Datei unter `public/assets/bild/geraet-aufmacher.webp` ablegen — `aufmacherbild.php` nimmt sie von selbst, `MarkupTest` erzwingt dann den Wegfall des SVG — und die fünf Breiten neu messen |
 | 2 | **Die Anweisung „häng sie in die Navigation" ist nicht wörtlich umgesetzt.** §2 bindet sechs Navigationspunkte, §2a fünf Fußspalten mit gebundenem Inhalt — und die Kopfzeile trägt gemessen keinen siebten Punkt, ohne dass §1 wieder verletzt wäre. Die Verweise stehen deshalb auf `/leistungen` | Betreiberentscheidung: §2 oder §2a ändern, oder es bei `/leistungen` belassen |
 | 3 | **Der Upload ist nicht über das Adminformular ausgeführt.** Geprüft ist der Dienst über PHPUnit und ein Aufruf als `www-data`; das Formular selbst wurde nicht im Browser abgeschickt | Im Adminbereich anmelden, Bild hochladen, Startseite ansehen |
 | 4 | **Das Gründerbild in der Entwicklungsdatenbank ist eine Attrappe** und liegt bewusst **nicht** im Repository. §5 verbietet einen Platzhalter, der wie ein Foto wirkt — dieses sieht wie eine Attrappe aus und heißt so | Echtes Foto vom Betreiber, dann austauschen |

@@ -261,47 +261,60 @@ final class MarkupTest extends Datenbankfall
         $tokens = (string) file_get_contents(SARTU_WURZEL . '/public/assets/css/tokens.css');
         $bild = (string) file_get_contents(SARTU_WURZEL . '/app/views/partials/aufmacherbild.php');
 
-        $regeln = ['.geraet__laptop', '.geraet__deckel', '.geraet__sockel', '.geraet__telefon'];
+        // 1 — Der CSS-Block ist geloescht und bleibt geloescht. Anweisung vom 13.08.2026:
+        //     „loesch den toten CSS-Block, statt ihn liegen zu lassen."
+        foreach (['.geraet__laptop', '.geraet__deckel', '.geraet__sockel', '.geraet__telefon'] as $regel) {
+            $this->assertStringNotContainsString($regel . ' {', $css,
+                $regel . ' steht wieder in website.css. Das Geraet wird im Inline-SVG gezeichnet, '
+                . 'nicht hier — Anweisung vom 13.08.2026.');
+        }
 
-        // Gilt in beiden Zustaenden: Der Vermerk steht **neben** dem Bild, nicht darauf.
+        // 2 — Der Vermerk steht **neben** dem Bild, nicht darauf. Gilt in jedem Zustand.
         $this->assertStringContainsString('<figcaption class="geraet__marke">', $bild);
         $this->assertSame(1, preg_match('#\.geraet__marke \{(.*?)\}#s', $css, $treffer));
         $this->assertStringNotContainsString('position: absolute', $treffer[1],
             'Der Vermerk liegt wieder auf dem Bild. Angewiesen ist „neben dem Bild, nicht darauf".');
 
         if (!is_file($mockup)) {
-            // Der gezeichnete Rahmen steht **vollstaendig** — §4b, bis das Mockup vorliegt.
-            foreach ($regeln as $regel) {
-                $this->assertStringContainsString($regel . ' {', $css,
-                    $regel . ' fehlt in website.css, und das Mockup liegt nicht vor. §4b haelt '
-                    . 'das Geraet fest, bis es da ist — ein halber Rahmen zeigt eine Luecke.');
-            }
+            // 3 — Ohne Mockup steht das Geraet als Inline-SVG. §4b (Rang 1) verlangt es:
+            //     „ein Geraet in leichter Schraegstellung — Laptop mit angeschnittenem
+            //     Telefon davor", und nennt Inline-SVG ausdruecklich als Mittel.
+            $this->assertStringContainsString('<svg class="geraet__bild"', $bild,
+                'Ohne Mockup zeichnet das Inline-SVG das Geraet. §4b haelt es fest, bis die '
+                . 'gerenderte Datei vorliegt.');
 
-            foreach (['--geraet-rahmen:', '--geraet-sockel:', '--geraet-kerbe:'] as $wert) {
-                $this->assertStringContainsString($wert, $tokens,
-                    $wert . ' fehlt in tokens.css, wird aber von einer Regel gebraucht.');
-            }
-
-            // Kein Ersatzbild: der Inhalt bleibt die echte Aufnahme.
+            // Zwei Bildschirme: Laptop und angeschnittenes Telefon — beide mit der echten
+            // Aufnahme, kein nachgezeichneter Inhalt (§8).
+            $this->assertSame(2, substr_count($bild, '<image href='),
+                'Das Geraet traegt Laptop **und** angeschnittenes Telefon (§4b).');
             $this->assertStringContainsString('sartu-kundenbereich-muster.webp', $bild);
+
+            // Die Grauwerte kommen aus tokens.css, auch im SVG — keine Zahl im Bauteil.
+            foreach (['--geraet-rahmen', '--geraet-sockel', '--geraet-kerbe'] as $wert) {
+                $this->assertStringContainsString('var(' . $wert . ')', $bild,
+                    $wert . ' steht nicht mehr im SVG — dann steht dort eine Zahl.');
+                $this->assertStringContainsString($wert . ':', $tokens,
+                    $wert . ' fehlt in tokens.css, wird aber vom SVG gebraucht.');
+            }
+
+            // Kein externer Abruf: jede Adresse im SVG zeigt auf das eigene Verzeichnis.
+            $this->assertSame(0, preg_match('#href="https?://#', $bild),
+                'Das SVG ruft eine fremde Adresse ab. §1 verbietet jede externe Verbindung.');
 
             return;
         }
 
-        // Ab hier liegt das Mockup vor. Der selbst gezeichnete Rahmen ist damit tot.
-        foreach ($regeln as $regel) {
-            $this->assertStringNotContainsString($regel . ' {', $css,
-                'geraet-aufmacher.webp liegt vor, aber ' . $regel . ' steht noch in website.css. '
-                . 'Der Auftrag vom 13.08.2026: „loesch den toten CSS-Block, statt ihn liegen zu lassen."');
-        }
+        // 4 — Liegt das Mockup, faellt auch das SVG: Rahmen und Aufnahme kommen dann aus
+        //     einer Datei, und zwei Fassungen desselben Geraets waeren zwei Wahrheiten.
+        $this->assertStringNotContainsString('<svg class="geraet__bild"', $bild,
+            'Das Mockup liegt vor, und das SVG zeichnet das Geraet trotzdem noch.');
+        $this->assertStringContainsString('geraet-aufmacher.webp', $bild,
+            'Das Mockup liegt vor und wird nicht eingebunden.');
 
         foreach (['--geraet-rahmen:', '--geraet-sockel:', '--geraet-kerbe:'] as $wert) {
             $this->assertStringNotContainsString($wert, $tokens,
-                $wert . ' steht noch in tokens.css, wird aber von keiner Regel mehr benutzt.');
+                $wert . ' steht noch in tokens.css, wird aber von nichts mehr gebraucht.');
         }
-
-        $this->assertStringContainsString('geraet-aufmacher.webp', $bild,
-            'Das Mockup liegt vor und wird nicht eingebunden.');
     }
 
     public function testDerAufmacherTraegtDieNeunMerkmaleDesEntwurfs(): void
