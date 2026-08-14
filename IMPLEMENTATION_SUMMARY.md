@@ -888,8 +888,12 @@ nennt kein Land von der Sperrliste, auch nicht als Beispiel.
 
 ### Sieben Verschlechterungen, alle gemeldet
 
-`/ratgeber` +715 px · `/preise` +399 px · `/lexikon` +346 px · `/ablauf` +107 px ·
+`/ratgeber` +441 px · `/preise` +399 px · `/lexikon` +235 px · `/ablauf` +107 px ·
 `/kontakt` +26 px bei 1440 (dafür −221 px bei 390) · `/` +36 px bei 390 · **Füllgrad von
 `/leistungen` 25 → 22 %**. Die Rechnung je Zeile steht in `OFFENE_PRUEFUNGEN.md`.
+
+**Zwei dieser Zahlen sind berichtigt.** Der erste Bericht nannte `/ratgeber` mit +715 px und
+`/lexikon` mit +346 px — gemessen vor der letzten Änderung des Laufs. Die Silbentrennung an
+`.leistungszeilen h2` hat beide Übersichten danach verkürzt.
 
 **397 Tests, 13.768 Zusicherungen, grün.**

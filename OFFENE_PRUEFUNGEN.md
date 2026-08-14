@@ -3610,10 +3610,10 @@ seit diesem Lauf zusätzlich **dunkle Bahnen**, **dunkle Felder**, **Bänder**, 
 | `/leistung-wartung` | 4.745 | **4.492** | 5.967 | **5.800** | 0 → **1** | 0 → **2** | 16 → **19** | 263 → 270 |
 | `/leistung-webdesign` | 4.637 | **4.532** | 5.949 | **5.878** | 0 → **1** | 0 → **2** | 19 → **21** | 292 → 306 |
 | `/leistungen` | 6.021 | **5.849** | 9.220 | **8.328** | 0 → **1** | 0 → **2** | 25 → 22 | 794 → **601** |
-| `/lexikon` | 2.721 | 3.067 | 4.395 | 4.792 | 0 → **1** | 0 → **2** | 20 → **23** | 240 → 280 |
+| `/lexikon` | 2.721 | 2.956 | 4.395 | 4.638 | 0 → **1** | 0 → **2** | 20 → **22** | 240 → 280 |
 | `/musterprojekte` | 7.500 | **7.288** | 8.875 | **8.689** | 0 → **1** | 0 → **2** | 24 → 24 | 692 → 698 |
 | `/preise` | 6.080 | 6.479 | 8.557 | 9.002 | 0 → **1** | 0 → **2** | 19 → 19 | 454 → 503 |
-| `/ratgeber` | 3.120 | 3.835 | 4.378 | 5.108 | 0 → **1** | 0 → **2** | 20 → **21** | 237 → 301 |
+| `/ratgeber` | 3.120 | 3.561 | 4.378 | 4.988 | 0 → **1** | 0 → **2** | 20 → 20 | 237 → 301 |
 | `/ueber-uns` | 4.477 | **4.184** | 5.652 | **5.527** | 1 → 1 | 0 → **2** | 22 → 22 | 275 → 282 |
 | `/website-dachdecker` | 7.981 | **7.825** | 11.203 | **11.023** | 0 → **1** | 0 → **2** | 19 → **21** | 854 → 869 |
 | `/website-elektrotechnik` | 8.012 | **7.707** | 11.373 | **11.128** | 0 → **1** | 0 → **2** | 20 → **21** | 867 → 883 |
@@ -3625,8 +3625,8 @@ seit diesem Lauf zusätzlich **dunkle Bahnen**, **dunkle Felder**, **Bänder**, 
 
 | Seite | Was schlechter wurde | Warum |
 |---|---|---|
-| `/ratgeber` | **+715 px bei 1440, +730 px bei 390**, +64 Wörter | Der Übersicht hat der Abschluss gefehlt — sie endete mit der Liste, während jede andere Seite mit dem Handlungsfeld schliesst. Dazu die Zusage. Beides ist Zubau, kein verlorener Abstand |
-| `/lexikon` | **+346 px bei 1440, +397 px bei 390**, +40 Wörter | derselbe Grund |
+| `/ratgeber` | **+441 px bei 1440, +610 px bei 390**, +64 Wörter | Der Übersicht hat der Abschluss gefehlt — sie endete mit der Liste, während jede andere Seite mit dem Handlungsfeld schliesst. Dazu die Zusage. Beides ist Zubau, kein verlorener Abstand |
+| `/lexikon` | **+235 px bei 1440, +243 px bei 390**, +40 Wörter | derselbe Grund |
 | `/preise` | **+399 px bei 1440, +445 px bei 390**, +49 Wörter | Zusage plus der in `17_SEITEN_SARTU.md` §6 gebundene Verweis auf `/foerderung` — `/preise` ist dort als „thematisch bester Ort" benannt |
 | `/ablauf` | **+107 px bei 1440, +178 px bei 390** | die Zusage. Gegengerechnet: Ein doppelter Satz ist entfallen, das sind 3 Wörter mehr statt der 12, die die Zusage bringt |
 | `/leistungen` | **Füllgrad 25 → 22 %** | Die Seite hat 193 Wörter verloren, aber dieselben Abschnittsabstände behalten. Das ist der Preis der Umstellung „der Verteiler verweist" — die Seite ist kürzer und zugleich luftiger |
@@ -3646,4 +3646,5 @@ seit diesem Lauf zusätzlich **dunkle Bahnen**, **dunkle Felder**, **Bänder**, 
 | 6 | **Die Statusspalte auf `/foerderung` steht als `.marken`.** Sie kommt aus einem Wortschatz von fünf Werten, und elf der sechzehn Zeilen tragen „läuft" — in einer Statusspalte richtig, in Fließtext ein Fehler. Die Beschriftungsklasse nimmt sie zugleich aus der Satzanfangsprüfung. **Das ist eine Entscheidung über die Form, keine Umgehung** — die Spalte `Bedingung` daneben bleibt vollständig in der Prüfung | Beim nächsten Textdurchgang gegenlesen |
 | 7 | **Die drei Stufen der Beantragungshilfe sind ohne Partnernamen gebaut.** `FOERDERUNG_KONZEPT.md` §4 nennt Stufe 3 als „Partnerempfehlung"; einen benannten Partner gibt es nicht. Auf der Seite steht deshalb „Machen wir nicht" mit dem Hinweis auf Fördermittelberater und Steuerberater als Gattung | Sobald ein Partner feststeht, die Stufe ergänzen |
 | 8 | **Das Förderfeld im Bedarfsscheck fehlt.** `FOERDERUNG_KONZEPT.md` §3.2 schlägt es vor, §7 führt es als offene Frage 3. Der erste Entwurf der Seite verwies darauf („sagen Sie es im Bedarfsscheck") — ein Satz, der auf ein Feld zeigt, das es nicht gibt. Er steht jetzt als „bei der Anfrage", und das geht über den Rückfrageweg heute schon | Entscheidung über Frage 3, dann Feld in Thema 5 |
-| 9 | **Der Hinweis unter dem Bedarfsscheck-Ergebnis fehlt.** `FOERDERUNG_KONZEPT.md` §3.1 nennt ihn den wirksamsten Platz überhaupt — „dort steht die Zahl". Gebaut ist er nicht; `17_SEITEN_SARTU.md` §2.3 bindet den Bildschirm eng, und ein Zubau dort braucht eine eigene Entscheidung | Betreiberentscheidung über §2.3 |
+| 9 | **Zwei Zahlen im Bericht vom selben Tag waren zu hoch.** Die Tabelle oben ist nach einer Zwischenmessung geschrieben worden; danach hat die Silbentrennung an `.leistungszeilen h2` beide Übersichten verkürzt. Gemeldet standen `/ratgeber` mit +715 px und `/lexikon` mit +346 px, gemessen sind es +441 und +235. **Beide Zeilen sind hier berichtigt**, nicht stillschweigend ersetzt | Nachmessen erst nach der letzten Änderung, nicht davor |
+| 10 | **Der Hinweis unter dem Bedarfsscheck-Ergebnis fehlt.** `FOERDERUNG_KONZEPT.md` §3.1 nennt ihn den wirksamsten Platz überhaupt — „dort steht die Zahl". Gebaut ist er nicht; `17_SEITEN_SARTU.md` §2.3 bindet den Bildschirm eng, und ein Zubau dort braucht eine eigene Entscheidung | Betreiberentscheidung über §2.3 |
