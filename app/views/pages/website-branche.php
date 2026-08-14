@@ -36,19 +36,21 @@ use Sartu\Services\Websitetexte;
  */
 
 ?>
-<section class="aufmacher">
-  <div class="bahn">
-    <h1><?= Html::e((string) $seite['h1']) ?></h1>
-  </div>
-</section>
+<?= Ansicht::teil('partials/seitenaufmacher', [
+    'vorzeile'     => (string) $seite['branche'],
+    'h1'           => (string) $seite['h1'],
+    'vorspann'     => (string) $seite['kurz'],
+    'auftragslage' => $auftragslage,
+    'preishinweis' => $preishinweis,
+    'zweitziel'    => '/preise',
+    'zweittext'    => 'Preise ansehen',
+]) ?>
 
-<section class="abschnitt abschnitt--sand">
-  <div class="bahn schmal">
-    <h2>Kurz gesagt</h2>
-    <p class="lede"><?= Html::e((string) $seite['kurz']) ?></p>
-    <p class="preishinweis"><?= Html::e($preishinweis) ?></p>
-  </div>
-</section>
+<?php /* **`Kurz gesagt` ist der Vorspann des Aufmachers geworden.** Geändert am
+         14.08.2026, aus demselben Grund wie auf den fünf Leistungsseiten: Der Aufmacher trug
+         nur die H1, und der Block darunter sagte in derselben Bildschirmhöhe dasselbe
+         zweimal. Der Wortlaut ist unverändert. Der Preishinweis steht jetzt im Aufmacher,
+         wo er zur Handlung gehört. */ ?>
 
 <section class="abschnitt">
   <div class="bahn">
@@ -62,6 +64,16 @@ use Sartu\Services\Websitetexte;
       </li>
 <?php endforeach; ?>
     </ul>
+  </div>
+</section>
+
+<?php /* Die Zusage — randlos dunkel, ein Satz. Sie steht zwischen dem, was den Betrieb
+         beschäftigt, und dem, was auf die Website gehört: an der Wende von der Lage zur
+         Antwort. Bis zum 14.08.2026 trug keine der drei Branchenseiten einen dunklen
+         Abschnitt — nur weiss und Sand über rund 8.000 px. */ ?>
+<section class="zusage">
+  <div class="bahn">
+    <p><?= Html::e((string) $seite['zusage']) ?></p>
   </div>
 </section>
 

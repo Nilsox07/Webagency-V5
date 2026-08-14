@@ -25,12 +25,14 @@ use Sartu\Services\Websitetexte;
 
 ?>
 <article>
-<section class="aufmacher">
-  <div class="bahn schmal">
-    <h1><?= Html::e((string) $eintrag['begriff']) ?></h1>
-    <p class="lede"><?= Html::e((string) $eintrag['kurz']) ?></p>
-  </div>
-</section>
+<?= Ansicht::teil('partials/seitenaufmacher', [
+    'vorzeile'  => 'Lexikon',
+    'h1'        => (string) $eintrag['begriff'],
+    'vorspann'  => (string) $eintrag['kurz'],
+    'hauptziel' => $eintrag['ziel'],
+    'zweitziel' => '/lexikon',
+    'zweittext' => 'Alle Begriffe',
+]) ?>
 
 <section class="abschnitt">
   <div class="bahn schmal">
@@ -42,14 +44,21 @@ use Sartu\Services\Websitetexte;
   </div>
 </section>
 
-<section class="abschnitt abschnitt--sand">
+<?php /* **Dunkel statt Sand, ab 14.08.2026.** Gemessen davor: sechzehn Unterseiten, null
+         dunkle Abschnitte. Der Wechsel hell-dunkel-hell ist der Rhythmus des Auftritts, und
+         diese Stelle ist die inhaltlich richtige — der typische Fehler und die eigene
+         Antwort darauf sind der Grund, warum der Begriff eine Seite hat.
+
+         **Der Verweis auf die Leistungsseite ist hier entfallen.** Er stand dreimal auf
+         derselben Seite: als Knopf im Aufmacher, hier als Textlink und unten im
+         Abschluss. Der Aufmacher trägt ihn als primäre Handlung. */ ?>
+<section class="abschnitt abschnitt--dunkel">
   <div class="bahn schmal">
     <h2>Der typische Fehler</h2>
     <p><?= Html::e((string) $eintrag['fehler']) ?></p>
 
     <h2>Wie SARTU damit umgeht</h2>
     <p><?= Html::e((string) $eintrag['sartu']) ?></p>
-    <p><a class="textlink" href="<?= Html::e($eintrag['ziel'][0]) ?>"><?= Html::e($eintrag['ziel'][1]) ?> ansehen</a></p>
   </div>
 </section>
 

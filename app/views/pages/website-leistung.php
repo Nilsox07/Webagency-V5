@@ -26,25 +26,23 @@ use Sartu\Services\Websitetexte;
  */
 
 ?>
-<section class="aufmacher">
-  <div class="bahn">
-    <h1><?= Html::e((string) $seite['h1']) ?></h1>
+<?php /* **`Kurz gesagt` ist der Vorspann des Aufmachers geworden, keine eigene Sektion.**
+         Geändert am 14.08.2026. Der Block steht in §10 an zweiter Stelle, unmittelbar nach
+         der H1 — im Aufmacher steht er genau dort, nur ohne die Sandfläche dazwischen. Der
+         Wortlaut ist unverändert; kein Satz ist entfallen.
 
-    <?= Ansicht::teil('partials/handlungsblock', [
-        'auftragslage' => $auftragslage,
-        'preishinweis' => $preishinweis,
-        'zweitziel'    => '/preise',
-        'zweittext'    => 'Preise ansehen',
-    ]) ?>
-  </div>
-</section>
-
-<section class="abschnitt abschnitt--sand">
-  <div class="bahn schmal">
-    <h2>Kurz gesagt</h2>
-    <p class="lede"><?= Html::e((string) $seite['kurz']) ?></p>
-  </div>
-</section>
+         Der Grund ist gemessen: Der Aufmacher trug bis dahin H1 und Handlung in einer
+         Mindesthöhe von 560 px, Füllgrad 16 bis 20 %. Ein Vorspann von zwei bis drei Zeilen
+         gehört dorthin, und `kurz` ist genau das. */ ?>
+<?= Ansicht::teil('partials/seitenaufmacher', [
+    'vorzeile'     => (string) $seite['vorzeile'],
+    'h1'           => (string) $seite['h1'],
+    'vorspann'     => (string) $seite['kurz'],
+    'auftragslage' => $auftragslage,
+    'preishinweis' => $preishinweis,
+    'zweitziel'    => '/preise',
+    'zweittext'    => 'Preise ansehen',
+]) ?>
 
 <section class="abschnitt">
   <div class="bahn">
@@ -93,6 +91,16 @@ use Sartu\Services\Websitetexte;
 <?php foreach ($seite['pflichtsaetze'] as $satz): ?>
     <p class="hervor"><?= Html::e($satz) ?></p>
 <?php endforeach; ?>
+  </div>
+</section>
+
+<?php /* Die Zusage — randlos dunkel, ein Satz. Sie steht zwischen dem, was enthalten ist,
+         und dem, was es kostet: an der Stelle, an der der Leser die Leistung kennt und die
+         Zahl noch nicht. Der Wechsel hell-dunkel-hell gibt der Seite dazu ihren Rhythmus;
+         bis zum 14.08.2026 hatte keine der sechzehn Unterseiten einen dunklen Abschnitt. */ ?>
+<section class="zusage">
+  <div class="bahn">
+    <p><?= Html::e((string) $seite['zusage']) ?></p>
   </div>
 </section>
 

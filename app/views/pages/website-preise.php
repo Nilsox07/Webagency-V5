@@ -25,19 +25,15 @@ use Sartu\Services\Websitetexte;
  */
 
 ?>
-<section class="aufmacher">
-  <div class="bahn">
-    <h1><?= Html::e(T::PREISE_H1) ?></h1>
-    <p class="lede"><?= Html::e(T::PREISE_LEAD) ?></p>
-
-    <?= Ansicht::teil('partials/handlungsblock', [
-        'auftragslage' => $auftragslage,
-        'preishinweis' => $preishinweis,
-        'zweitziel'    => '/ablauf',
-        'zweittext'    => 'Ablauf ansehen',
-    ]) ?>
-  </div>
-</section>
+<?= Ansicht::teil('partials/seitenaufmacher', [
+    'vorzeile'     => 'Preise und Zahlung',
+    'h1'           => T::PREISE_H1,
+    'vorspann'     => T::PREISE_LEAD,
+    'auftragslage' => $auftragslage,
+    'preishinweis' => $preishinweis,
+    'zweitziel'    => '/ablauf',
+    'zweittext'    => 'Ablauf ansehen',
+]) ?>
 
 <section class="abschnitt">
   <div class="bahn">
@@ -86,6 +82,15 @@ use Sartu\Services\Websitetexte;
       <li><?= Html::e($punkt) ?></li>
 <?php endforeach; ?>
     </ul>
+  </div>
+</section>
+
+<?php /* Die Zusage — randlos dunkel, ein Satz. Sie steht unmittelbar nach der
+         Preistabelle: Dort hat der Leser die Zahl gesehen, und hier steht, was sie wert
+         ist. */ ?>
+<section class="zusage">
+  <div class="bahn">
+    <p><?= Html::e(T::PREISE_ZUSAGE) ?></p>
   </div>
 </section>
 
@@ -143,7 +148,20 @@ use Sartu\Services\Websitetexte;
   </div>
 </section>
 
-<section class="abschnitt" id="fragen">
+<?php /* `17_SEITEN_SARTU.md` §6 nennt `/preise` als „thematisch besten Ort" fuer den
+         Verweis auf die Foerderseite — dort steht die Zahl, um die es beim Antrag geht.
+         Die Foerderseite steht **nicht** in der Hauptnavigation; §2 bindet sechs Punkte. */ ?>
+<section class="abschnitt" id="foerderung">
+  <div class="bahn schmal">
+    <h2>Wenn Sie eine Förderung planen.</h2>
+    <p>Gefördert wird in der Regel nicht, was ein Unternehmen darstellt, sondern was seine
+    Abläufe verändert. Wo doch etwas geht, entscheidet die Reihenfolge: erst die Bewilligung,
+    dann Ihr Auftrag.</p>
+    <p><a class="textlink" href="/foerderung">Was in den sechzehn Ländern gilt</a></p>
+  </div>
+</section>
+
+<section class="abschnitt abschnitt--sand" id="fragen">
   <div class="bahn schmal">
     <h2>Häufige Fragen</h2>
     <?= Ansicht::teil('partials/fragenliste', ['fragen' => T::preiseFragen()]) ?>

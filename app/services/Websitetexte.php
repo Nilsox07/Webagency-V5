@@ -99,6 +99,10 @@ final class Websitetexte
                 // die Branchenseiten. Beide zeigen nur aus einem Abschnitt heraus; ohne den
                 // Fusseintrag ist die Seite von jeder anderen Adresse aus unerreichbar.
                 '/musterprojekte' => 'Musterprojekte',
+                // `17_SEITEN_SARTU.md` §6: **nicht in die Hauptnavigation** — §2 bindet sie
+                // auf sechs Punkte. Verlinkt wird `/foerderung` aus `/preise`, dem
+                // Ratgeber-Hub und hier.
+                '/foerderung'     => 'Förderung',
             ],
             'Unternehmen' => [
                 '/ablauf'    => 'Ablauf',

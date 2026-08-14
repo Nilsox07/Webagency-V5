@@ -551,6 +551,50 @@ h1, h2, h3 {
   .aufmacher h1 { font-size: var(--fs-h1); }
 }
 
+/* ---- Aufmacher der Unterseiten ---------------------------
+   Gebaut am 14.08.2026. Gemessen davor bei 1440 px: zwoelf
+   Unterseitenvorlagen trugen `.aufmacher` mit seiner vollen
+   Mindesthoehe, aber nur H1 und Handlung darin — Fuellgrad 16
+   bis 20 %, null Baender, und der erste Bildschirm war eine
+   sehr grosse Ueberschrift in sehr viel Leerraum.
+
+   **Er ist schmaler und flacher als der der Startseite**, und
+   das ist die Rangordnung: Die Startseite traegt den Auftritt,
+   die Unterseite fuehrt in ein Thema. Gleiche Hoehe hiesse
+   gleiches Gewicht.
+   ---------------------------------------------------------- */
+
+.aufmacher--seite {
+  /* Rund die Haelfte der Startseite (dort clamp(560px,79vh,1060px)).
+     Der Anschnitt der naechsten Sektion bleibt damit auf jedem
+     Fenster sichtbar — auf 1440x900 beginnt sie bei 604 px. */
+  min-height: clamp(300px, 42vh, 560px);
+}
+
+/* `.bahn` ist hier ein Flex-Kind. Ohne volle Breite schrumpft sie auf
+   ihren Inhalt, und `margin: 0 auto` setzt sie mittig — der Aufmacher
+   stand dann eingerueckt neben linksbuendigen Brotkrumen. */
+.aufmacher--seite > .bahn { width: 100%; }
+
+.aufmacher__seite {
+  position: relative;
+  z-index: 1;
+}
+
+/* Der Vorspann bleibt bei der Ueberschrift, statt ueber die ganze Bahn
+   zu laufen: 68ch waeren bei 1440 px rund 700 px, und die Zeile risse
+   den Blick vom Knopf weg. Die Ueberschrift darueber darf breiter
+   stehen — sonst bricht sie vierzeilig. */
+.aufmacher--seite .lede { max-width: 56ch; }
+.aufmacher--seite h1 { max-width: 22ch; }
+
+/* Eine Stufe unter der H1 der Startseite. Der Behaelter ist hier die
+   Bahn, nicht die halbe Spalte — dieselbe `cqw`-Formel ergaebe darin
+   den doppelten Grad. */
+.aufmacher--seite h1 { font-size: clamp(30px, min(4.6vw, 6.4vh), 66px); }
+
+.aufmacher--seite .lede { margin-bottom: var(--s-4); }
+
 /* Der Lime-Marker auf dem letzten Sinnabschnitt der H1.
    Lime liegt als Flaeche **hinter** der Schrift, nie als Schriftfarbe
    (Farbsystem Fassung 3). Die Schrift bleibt --ink. */
@@ -951,6 +995,21 @@ h1, h2, h3 {
 }
 
 .leistungszeilen h3 { margin: 0; font-size: var(--fs-copy); line-height: 1.25; }
+
+/* Die beiden Übersichten setzen ihre Eintraege als `h2` — sie sind dort die
+   Gliederung der Seite, nicht die Unterzeile einer Zeile. Damit gilt der grosse
+   Schriftgrad aus `tokens.css` in einer 300 px breiten Karte.
+
+   Gemessen am 14.08.2026 auf `/ratgeber`: „Was kostet eine Firmenwebsite?"
+   brach als `Firmenwebs` / `ite?` mitten im Wort. Die Seite traegt `lang="de"`;
+   `hyphens: auto` setzt die Trennstelle nach den Regeln der Sprache — dieselbe
+   Loesung wie bei `.zusage p`. */
+.leistungszeilen h2 {
+  margin: 0;
+  font-size: var(--fs-h3);
+  line-height: 1.2;
+  hyphens: auto;
+}
 .leistungszeilen p { margin: 0; font-size: var(--fs-small); color: var(--muted); }
 
 .leistungszeilen .marken {

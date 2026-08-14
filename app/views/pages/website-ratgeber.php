@@ -28,16 +28,23 @@ use Sartu\Services\Websitetexte;
 
 ?>
 <article>
-<section class="aufmacher">
-  <div class="bahn schmal">
-    <h1><?= Html::e((string) $artikel['h1']) ?></h1>
-    <p class="lede"><?= Html::e((string) $artikel['kurzantwort']) ?></p>
-    <p class="marken">Stand <?= Html::e(Format::datum(Ratgeber::STAND)) ?></p>
-  </div>
-</section>
+<?= Ansicht::teil('partials/seitenaufmacher', [
+    'vorzeile'  => 'Ratgeber · Stand ' . Format::datum(Ratgeber::STAND),
+    'h1'        => (string) $artikel['h1'],
+    'vorspann'  => (string) $artikel['kurzantwort'],
+    'hauptziel' => $artikel['ziel'],
+    'zweitziel' => '/ratgeber',
+    'zweittext' => 'Alle Beiträge',
+]) ?>
 
+<?php /* **Der letzte Abschnitt steht dunkel, nicht in Sand.** Gemessen am 14.08.2026: Die
+         Artikel wechselten nur zwischen weiss und Sand — über 4.400 px ohne einen einzigen
+         dunklen Block. §7 setzt den letzten Abschnitt je Artikel auf „wie SARTU es löst"
+         beziehungsweise „für wen SARTU nicht passt"; das ist die Stelle, an der der Artikel
+         von der Erklärung zur eigenen Position wechselt, und die trägt das Gewicht. */ ?>
+<?php $letzter = array_key_last($artikel['abschnitte']); ?>
 <?php foreach ($artikel['abschnitte'] as $nummer => $abschnitt): ?>
-<section class="abschnitt<?= $nummer % 2 === 1 ? ' abschnitt--sand' : '' ?>">
+<section class="abschnitt<?= $nummer === $letzter ? ' abschnitt--dunkel' : ($nummer % 2 === 1 ? ' abschnitt--sand' : '') ?>">
   <div class="bahn schmal">
     <h2><?= Html::e($abschnitt['h2']) ?></h2>
 <?php foreach ($abschnitt['absaetze'] as $absatz): ?>

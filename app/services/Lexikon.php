@@ -27,8 +27,19 @@ final class Lexikon
 
     public const HUB_H1 = 'Website-Lexikon';
 
-    public const HUB_INTRO = 'Acht Begriffe, bei denen ein Missverständnis Geld kostet. Jeder '
-        . 'in zwei Sätzen erklärt, mit Beispiel und dem Fehler, der am häufigsten passiert.';
+    public const HUB_INTRO = 'Jeder Begriff in zwei Sätzen erklärt, mit Beispiel und dem '
+        . 'Fehler, der am häufigsten passiert. Wer den Begriff kennt, versteht das Angebot '
+        . 'dazu.';
+
+    /**
+     * Der eine Satz der randlos dunklen Fläche — ergänzt am 14.08.2026.
+     *
+     * **Er ist nicht neu geschrieben, sondern umgezogen.** Der Satz stand bis dahin als
+     * erster Satz von `HUB_INTRO`; dort war er die Auswahlregel aus `17_SEITEN_SARTU.md` §8
+     * („nur Begriffe, bei denen ein Missverständnis Geld kostet") in einem Nebensatz. Als
+     * Zusage steht er da, wo er hingehört — er ist der Grund, warum es die Seite gibt.
+     */
+    public const HUB_ZUSAGE = 'Acht Begriffe, bei denen ein Missverständnis Geld kostet.';
 
     /**
      * @return array<string,array{

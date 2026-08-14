@@ -26,10 +26,21 @@ namespace Sartu\Services;
 final class Leistungsseiten
 {
     /**
+     * ## `vorzeile` und `zusage`, ergänzt am 14.08.2026
+     *
+     * `vorzeile` ist die Monozeile über der Überschrift im Aufmacher. Sie trägt denselben
+     * Namen wie die zugehörige Zeile in `Leistungszeilen` — dieselbe Sache heisst überall
+     * gleich, sonst liest sich der Verweis von `/leistungen` hierher wie ein Themenwechsel.
+     *
+     * `zusage` ist der **eine** Satz der randlos dunklen Fläche. Bis zum 14.08.2026 kam die
+     * Zusage-Form auf keiner der siebzehn Seiten vor; sie ist das stärkste Bauteil des
+     * Auftritts. Der Satz sagt nichts Neues zu — er nimmt den Kern der Seite auf, damit
+     * keine Zusage entsteht, die sonst nirgends gedeckt ist.
+     *
      * @return array<string,array{
-     *     h1:string, titel:string, beschreibung:string, kurz:string,
+     *     h1:string, vorzeile:string, titel:string, beschreibung:string, kurz:string,
      *     fuer_wen:list<string>, enthalten:list<string>, nicht_enthalten:list<string>,
-     *     kosten:string, ablauf:list<string>, abgenommen:list<string>,
+     *     kosten:string, ablauf:list<string>, abgenommen:list<string>, zusage:string,
      *     pflichtsaetze:list<string>, fragen:list<array{frage:string,antwort:string}>
      * }>
      */
@@ -38,6 +49,7 @@ final class Leistungsseiten
         return [
             'webdesign' => [
                 'h1'    => 'Webdesign, das nicht nach Baukasten aussieht.',
+                'vorzeile' => 'Webdesign und Programmierung',
                 'titel' => 'Webdesign für Firmenwebsites ohne WordPress | SARTU',
                 'beschreibung' => 'Individuell programmierte Firmenwebsite ab 1.490 € netto — '
                     . 'ohne WordPress, ohne Baukasten und ohne Erweiterungen, die Sie selbst '
@@ -78,6 +90,8 @@ final class Leistungsseiten
                     'Welche Technik darunter läuft',
                     'Wo die Website liegt',
                 ],
+                'zusage' => 'Ihre Website ist eigener Code — kein Fremdsystem darunter, das '
+                    . 'jemand aktuell halten muss.',
                 'pflichtsaetze' => [],
                 'fragen' => [
                     ['frage'   => 'Bekomme ich einen Entwurf zur Auswahl?',
@@ -95,6 +109,7 @@ final class Leistungsseiten
 
             'texte' => [
                 'h1'    => 'Website-Texte aus Ihren Fakten, nicht aus Floskeln.',
+                'vorzeile' => 'Website-Texte',
                 'titel' => 'Website-Texte schreiben lassen | SARTU',
                 'beschreibung' => 'Sie liefern Stichpunkte und Unterlagen, wir schreiben daraus '
                     . 'die Texte Ihrer Website. Enthalten in jedem Angebot ab 1.490 € netto.',
@@ -131,6 +146,8 @@ final class Leistungsseiten
                     'Wie lang ein Text wird',
                     'Welche Wörter in Titel und Überschrift stehen',
                 ],
+                'zusage' => 'Keine Fachaussage steht auf Ihrer Seite, bevor Sie sie bestätigt '
+                    . 'haben.',
                 'pflichtsaetze' => [
                     'Rechtstexte wie Impressum, Datenschutz und AGB sind nicht enthalten; wir '
                         . 'binden freigegebene Texte technisch ein.',
@@ -150,6 +167,7 @@ final class Leistungsseiten
 
             'seo-lokal' => [
                 'h1'    => 'Gefunden werden — regional und in KI-Antworten.',
+                'vorzeile' => 'SEO-Grundlage und lokale Sichtbarkeit',
                 'titel' => 'SEO-Grundlage und lokale Sichtbarkeit | SARTU',
                 'beschreibung' => 'Jede SARTU-Website startet mit Seitenthemen, Metadaten, '
                     . 'strukturierten Daten und interner Verlinkung. Ohne Rankinggarantie und '
@@ -188,6 +206,8 @@ final class Leistungsseiten
                     'Welche Wörter in Titel und Überschrift stehen',
                     'Welche strukturierten Daten ausgeliefert werden',
                 ],
+                'zusage' => 'Einen Platz in der Trefferliste sichern wir Ihnen nicht zu — '
+                    . 'nur die Grundlage, auf der einer entstehen kann.',
                 'pflichtsaetze' => [
                     'Rankings, Anfragen oder Nennungen in KI-Systemen kann niemand garantieren.',
                     'Wir erstellen keine Ortsseiten, bei denen nur der Stadtname ausgetauscht ist.',
@@ -210,6 +230,7 @@ final class Leistungsseiten
 
             'wartung' => [
                 'h1'    => 'Keine Wartung für Sie.',
+                'vorzeile' => 'Rundum-Schutz',
                 'titel' => 'Rundum-Schutz: Betrieb Ihrer Website | SARTU',
                 'beschreibung' => 'Ab 59 € netto im Monat übernehmen wir Hosting, SSL, tägliche '
                     . 'Sicherungen, Überwachung und technische Aktualisierungen Ihrer Website.',
@@ -251,6 +272,7 @@ final class Leistungsseiten
                     'Wie oft gesichert wird',
                     'Wer bei einer Störung anfasst',
                 ],
+                'zusage' => 'Kein Konto mit Änderungsminuten, das am Monatsende verfällt.',
                 'pflichtsaetze' => [
                     'Der Rundum-Schutz bezahlt Betrieb, Sicherheit und Verantwortung — er ist '
                         . 'keine unbegrenzte Text- oder Design-Flatrate.',
@@ -270,6 +292,7 @@ final class Leistungsseiten
 
             'portal' => [
                 'h1'    => 'Ein Kundenbereich, kein Website-Baukasten.',
+                'vorzeile' => 'Kundenbereich',
                 'titel' => 'Der SARTU-Kundenbereich: Freigaben und Pflege | SARTU',
                 'beschreibung' => 'Angebot, Zahlung, Fragen, Dateien, Domain, Vorschau und '
                     . 'Freigabe liegen an einem Ort. Ohne Abstimmungstermine, ohne E-Mail-Ketten.',
@@ -311,6 +334,7 @@ final class Leistungsseiten
                     'Wie die Vorschau bereitgestellt wird',
                     'Was eine Korrekturrunde umfasst',
                 ],
+                'zusage' => 'Was ansteht und was von Ihnen gebraucht wird, steht jederzeit da.',
                 'pflichtsaetze' => [],
                 'fragen' => [
                     ['frage'   => 'Brauche ich ein Passwort?',

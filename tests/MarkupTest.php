@@ -532,9 +532,16 @@ final class MarkupTest extends Datenbankfall
             }
         }
 
-        // Zehn seit dem 13.08.2026: `/musterprojekte` ist dazugekommen
-        // (`17_SEITEN_SARTU.md` §4a, Block 7 — Übergang zum Bedarfsscheck).
-        $this->assertSame(10, $gefunden, 'Es gibt zehn Seiten mit Abschlussfeld.');
+        /*
+         * Dreizehn seit dem 14.08.2026. Zehn waren es seit dem 13.08.2026
+         * (`/musterprojekte` kam dazu, `17_SEITEN_SARTU.md` §4a Block 7).
+         *
+         * Neu sind `/lexikon`, `/ratgeber` und `/foerderung`. Bei den beiden Übersichten
+         * **hat das Abschlussfeld gefehlt**: Sie endeten mit ihrer Liste, während jede
+         * andere Seite des Auftritts mit dem Handlungsfeld schliesst. `/foerderung` ist neu
+         * gebaut; §6 nennt den Bedarfsscheck als Block 8.
+         */
+        $this->assertSame(13, $gefunden, 'Es gibt dreizehn Seiten mit Abschlussfeld.');
     }
 
     /**

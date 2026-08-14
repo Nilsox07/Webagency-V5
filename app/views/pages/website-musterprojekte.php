@@ -34,14 +34,21 @@ use Sartu\Services\Preisstufen;
  */
 
 ?>
-<section class="aufmacher">
-  <div class="bahn schmal">
-    <h1><?= Html::e(T::H1) ?></h1>
-    <p class="lede"><?= Html::e(T::einleitung()) ?></p>
-  </div>
-</section>
+<?= Ansicht::teil('partials/seitenaufmacher', [
+    'vorzeile'     => 'Musterprojekte',
+    'h1'           => T::H1,
+    'vorspann'     => T::einleitung(),
+    'auftragslage' => $auftragslage,
+    'preishinweis' => '',
+    'zweitziel'    => '/preise',
+    'zweittext'    => 'Preise ansehen',
+]) ?>
 
-<section class="abschnitt abschnitt--sand">
+<?php /* **Dunkel statt Sand, ab 14.08.2026.** Der ehrliche Absatz — warum hier keine
+         Kunden stehen — ist die Stelle, an der die Seite etwas riskiert. Sie trägt das
+         Gewicht des Auftritts und bekommt seine Fläche. Ein eigener Zusagesatz daneben wäre
+         die dritte Fassung derselben Aussage. */ ?>
+<section class="abschnitt abschnitt--dunkel">
   <div class="bahn schmal">
     <h2><?= Html::e(T::WARUM_H2) ?></h2>
 <?php foreach (T::WARUM as $absatz): ?>

@@ -76,6 +76,7 @@ return [
     new Route(Route::BEREICH_OEFFENTLICH, 'GET', '/leistung-wartung', [Website::class, 'wartung']),
     new Route(Route::BEREICH_OEFFENTLICH, 'GET', '/leistung-portal', [Website::class, 'portal']),
     new Route(Route::BEREICH_OEFFENTLICH, 'GET', '/musterprojekte', [Website::class, 'musterprojekte']),
+    new Route(Route::BEREICH_OEFFENTLICH, 'GET', '/foerderung', [Website::class, 'foerderung']),
     new Route(Route::BEREICH_OEFFENTLICH, 'GET', '/ueber-uns', [Website::class, 'ueberUns']),
     // Das Gruenderbild (§4c). Es liegt in der Ablage, nicht unter /public — §11 verlangt
     // das fuer jede hochgeladene Datei. Ausgeliefert wird es deshalb ueber eine Route.

@@ -21,20 +21,20 @@ use Sartu\Services\Websitetexte;
  */
 
 ?>
-<section class="aufmacher">
-  <div class="bahn">
-    <h1><?= Html::e(T::ABLAUF_H1) ?></h1>
-    <p class="lede"><?= Html::e(T::ABLAUF_LEAD) ?></p>
-    <p><?= Html::e(Websitetexte::TROTZDEM_ERREICHBAR) ?></p>
-
-    <?= Ansicht::teil('partials/handlungsblock', [
-        'auftragslage' => $auftragslage,
-        'preishinweis' => $preishinweis,
-        'zweitziel'    => '/preise',
-        'zweittext'    => 'Preise ansehen',
-    ]) ?>
-  </div>
-</section>
+<?php /* **`TROTZDEM_ERREICHBAR` ist hier entfallen.** Er stand unmittelbar unter
+         `ABLAUF_LEAD`, und der Vorspann sagt dasselbe bereits: „Ein Gespräch ist jederzeit
+         möglich, aber nicht Pflicht." Zwei Sätze mit einer Aussage auf demselben Bildschirm.
+         Der Satz selbst bleibt — er steht auf der Startseite in Sektion 2 und auf
+         `/leistung-portal`, jeweils dort, wo der Kundenbereich erklärt wird. */ ?>
+<?= Ansicht::teil('partials/seitenaufmacher', [
+    'vorzeile'     => 'Ablauf',
+    'h1'           => T::ABLAUF_H1,
+    'vorspann'     => T::ABLAUF_LEAD,
+    'auftragslage' => $auftragslage,
+    'preishinweis' => $preishinweis,
+    'zweitziel'    => '/preise',
+    'zweittext'    => 'Preise ansehen',
+]) ?>
 
 <section class="abschnitt abschnitt--sand">
   <div class="bahn">
@@ -114,6 +114,15 @@ use Sartu\Services\Websitetexte;
         </ul>
       </div>
     </div>
+  </div>
+</section>
+
+<?php /* Die Zusage — randlos dunkel, ein Satz. Sie steht unmittelbar nach den beiden Listen:
+         Dort weiss der Leser, wie die Arbeit verteilt ist, und liest hier, wer für das
+         Ergebnis geradesteht. Das ist die Aussage der Seite, nicht eine ihrer Stationen. */ ?>
+<section class="zusage">
+  <div class="bahn">
+    <p><?= Html::e(T::ABLAUF_ZUSAGE) ?></p>
   </div>
 </section>
 

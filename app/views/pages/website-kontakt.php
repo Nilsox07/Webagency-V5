@@ -2,6 +2,7 @@
 
 declare(strict_types=1);
 
+use Sartu\Ansicht;
 use Sartu\Helpers\Csrf;
 use Sartu\Helpers\Html;
 use Sartu\Services\Auftragslage;
@@ -41,25 +42,33 @@ $wert = static fn (string $feld): string => is_string($werte[$feld] ?? null) ? (
 $ersterFehler = array_key_first($fehler);
 
 ?>
-<section class="aufmacher">
+<?php /* **Die zwei Karten sind der Aufmacher geworden.** Geändert am 14.08.2026. Sie
+         trugen genau das, was der Aufmacher jetzt trägt: die primäre Handlung, den zweiten
+         Weg als Textlink und je einen Satz dazu. Beide Sätze stehen unverändert im Vorspann
+         — die drei Minuten und die Antwortfrist sind Zahlen und damit gebunden.
+
+         §11 nennt „zwei Karten, dann Wo wir arbeiten, dann das Formular". Die Reihenfolge
+         der **Inhalte** ist unverändert; nur ihre Form ist die des Aufmachers. Der
+         Widerspruch steht in `OFFENE_PRUEFUNGEN.md`. */ ?>
+<?= Ansicht::teil('partials/seitenaufmacher', [
+    'vorzeile'     => 'Kontakt',
+    'h1'           => T::KONTAKT_H1,
+    'vorspann'     => 'Zwei Wege: die Bedarfseinschätzung mit wenigen Fragen zu Ihrem Betrieb '
+        . 'und einer vorläufigen Empfehlung mit Preis — etwa drei Minuten, unverbindlich. Oder '
+        . 'eine Rückfrage über das Formular; darauf antworten wir schriftlich, in der Regel '
+        . 'innerhalb eines Werktags.',
+    'auftragslage' => $auftragslage,
+    'preishinweis' => '',
+    'zweitziel'    => '#formular',
+    'zweittext'    => 'Zum Formular',
+]) ?>
+
+<?php /* Die Zusage — randlos dunkel, ein Satz. Sie steht zwischen den beiden Wegen im
+         Aufmacher und dem Ortsabschnitt: Wer bis hierher gelesen hat, waegt gerade ab, ob
+         eine Anfrage etwas ausloest. */ ?>
+<section class="zusage">
   <div class="bahn">
-    <h1><?= Html::e(T::KONTAKT_H1) ?></h1>
-
-    <div class="zweispalten">
-      <article class="karte karte--betont">
-        <h2>Websitebedarf prüfen</h2>
-        <p>Wenige Fragen zu Ihrem Betrieb, danach eine vorläufige Empfehlung mit Preis. Etwa
-        drei Minuten, unverbindlich.</p>
-        <p><a class="knopf" href="/briefing"><?= Html::e(Auftragslage::knopf($auftragslage['knopf'] ?? null)) ?></a></p>
-      </article>
-
-      <article class="karte">
-        <h2>Rückfrage stellen</h2>
-        <p>Sie haben eine Frage zu Angebot, Domain oder Ablauf. Wir antworten schriftlich, in
-        der Regel innerhalb eines Werktags.</p>
-        <p><a class="textlink" href="#formular">Zum Formular</a></p>
-      </article>
-    </div>
+    <p><?= Html::e(T::KONTAKT_ZUSAGE) ?></p>
   </div>
 </section>
 

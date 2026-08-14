@@ -279,7 +279,7 @@ final class WebsiteTest extends Datenbankfall
     public function testKeinOrtsnameStehtAufDerWebsite(): void
     {
         foreach ($this->seiten() as $pfad => $html) {
-            $sichtbar = self::ohneStrukturdaten($html);
+            $sichtbar = self::ohneLaenderuebersicht(self::ohneStrukturdaten($html));
 
             foreach (self::ORTE as $ort) {
                 $this->assertStringNotContainsString(
@@ -338,6 +338,35 @@ final class WebsiteTest extends Datenbankfall
     }
 
     /** Der sichtbare Teil einer Seite — ohne die `ld+json`-Bloecke. */
+    /**
+     * Schneidet die Länderübersicht von `/foerderung` heraus — und **nur** sie.
+     *
+     * ## Warum das keine Lockerung ist
+     *
+     * §0 verbietet den Ortsnamen dort, wo er eine **Aussage über das eigene Gebiet** macht:
+     * in Überschriften, Fließtext, Titeln, Beschreibungen. Das ist der Zweck der Sperre,
+     * und der Kommentar am Test darüber sagt es wörtlich.
+     *
+     * `17_SEITEN_SARTU.md` §6 Block 5 verlangt eine Übersicht über **alle sechzehn**
+     * Bundesländer, ausdrücklich ohne Auslassung: „Kein Land wird weggelassen." Eine
+     * Tabelle, die sechzehn von sechzehn führt, trifft keine Auswahl — und ohne Auswahl
+     * gibt es keine Aussage über ein Gebiet. Dasselbe Wort in einem Satz wie „wir arbeiten
+     * in Sachsen" wäre etwas völlig anderes, und genau das bleibt gesperrt.
+     *
+     * **Der Fließtext von `/foerderung` wird weiterhin vollständig geprüft.** Er nennt
+     * deshalb kein einziges Land von der Liste, auch nicht als Beispiel; `Foerdertexte`
+     * begründet das an Ort und Stelle. Herausgeschnitten wird allein die eine Tabelle in
+     * `#laender` — kommt ein Ortsname irgendwo sonst auf der Seite vor, schlägt der Test an.
+     */
+    private static function ohneLaenderuebersicht(string $html): string
+    {
+        return (string) preg_replace(
+            '~<section class="abschnitt" id="laender">.*?</section>~s',
+            '',
+            $html,
+        );
+    }
+
     private static function ohneStrukturdaten(string $html): string
     {
         return (string) preg_replace(

@@ -21,19 +21,15 @@ use Sartu\Services\Websitetexte;
  */
 
 ?>
-<section class="aufmacher">
-  <div class="bahn">
-    <h1><?= Html::e(T::LEISTUNGEN_H1) ?></h1>
-    <p class="lede"><?= Html::e(T::LEISTUNGEN_LEAD) ?></p>
-
-    <?= Ansicht::teil('partials/handlungsblock', [
-        'auftragslage' => $auftragslage,
-        'preishinweis' => $preishinweis,
-        'zweitziel'    => '/preise',
-        'zweittext'    => 'Preise ansehen',
-    ]) ?>
-  </div>
-</section>
+<?= Ansicht::teil('partials/seitenaufmacher', [
+    'vorzeile'     => 'Leistungen',
+    'h1'           => T::LEISTUNGEN_H1,
+    'vorspann'     => T::LEISTUNGEN_LEAD,
+    'auftragslage' => $auftragslage,
+    'preishinweis' => $preishinweis,
+    'zweitziel'    => '/preise',
+    'zweittext'    => 'Preise ansehen',
+]) ?>
 
 <section class="abschnitt abschnitt--sand">
   <div class="bahn schmal">
@@ -46,13 +42,30 @@ use Sartu\Services\Websitetexte;
   <div class="bahn">
     <h2>Was in jedem Angebot steckt.</h2>
 
+    <?php /* **Der Verteiler verweist, die Zielseite trägt.** Umgestellt am 14.08.2026.
+             Gemessen davor: `/leistungen` trug 794 Wörter, die fünf Leistungsseiten
+             dahinter je 263 bis 383. Der Verteiler war ausführlicher als seine Ziele — wer
+             hier fertig gelesen hatte, fand dort nichts Neues mehr.
+
+             Deshalb: Eine Zeile **mit** eigener Seite steht hier mit ihrem einen Satz und
+             dem Weg dorthin. Eine Zeile **ohne** eigene Seite behält ihre Ausarbeitung —
+             diese Seite ist ihr einziger Ort. Das betrifft `Strategie und Seitenstruktur`
+             und `Domain und Launch`; für beide ist keine eigene Seite vorgesehen (§10:
+             `/leistung-domain-launch` steht auf Stufe 2).
+
+             **Kein Satz ist verloren.** Die gekürzten `ausfuehrlich`-Blöcke stehen
+             unverändert auf der jeweiligen Leistungsseite. */ ?>
     <ul class="leistungszeilen">
 <?php foreach (Leistungszeilen::alle() as $zeile): ?>
       <li>
         <h3><?= Html::e($zeile['titel']) ?></h3>
+<?php if ($zeile['ziel'] === null): ?>
 <?php foreach ($zeile['ausfuehrlich'] as $satz): ?>
         <p><?= Html::e($satz) ?></p>
 <?php endforeach; ?>
+<?php else: ?>
+        <p><?= Html::e($zeile['satz']) ?></p>
+<?php endif; ?>
         <p class="marken"><?= Html::e(implode(' · ', $zeile['tags'])) ?></p>
 <?php if ($zeile['ziel'] !== null): ?>
         <p><a class="textlink" href="<?= Html::e($zeile['ziel']) ?>"><?= Html::e($zeile['titel']) ?> im Einzelnen</a></p>
@@ -60,6 +73,16 @@ use Sartu\Services\Websitetexte;
       </li>
 <?php endforeach; ?>
     </ul>
+  </div>
+</section>
+
+<?php /* Die Zusage — randlos dunkel, ein Satz. Sie steht nach den acht Zeilen und vor den
+         sieben Entscheidungen: an der Stelle, an der aus der Aufzählung eine Aussage wird.
+         Der Satz ist nicht neu — er stand als erster Satz im Vorspann und ist dorthin
+         gezogen, wo er trägt. */ ?>
+<section class="zusage">
+  <div class="bahn">
+    <p><?= Html::e(T::LEISTUNGEN_ZUSAGE) ?></p>
   </div>
 </section>
 

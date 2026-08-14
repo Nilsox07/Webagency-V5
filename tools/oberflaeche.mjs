@@ -134,6 +134,96 @@ function messung(fensterbreite) {
     });
   }
 
+  // ---- Dunkle Flaechen: der Wechsel hell-dunkel-hell ist der Rhythmus der Seite.
+  //      Zwei Gattungen, absichtlich getrennt gezaehlt:
+  //      `bahnen`  — randlos dunkel ueber die volle Breite (`.abschnitt--dunkel`, `.zusage`)
+  //      `felder`  — dunkle Flaeche **in** einem hellen Abschnitt (`.handlungsfeld`)
+  const ink = (() => {
+    const probe = document.createElement('span');
+    probe.style.color = getComputedStyle(doc).getPropertyValue('--ink').trim();
+    document.body.appendChild(probe);
+    const wert = getComputedStyle(probe).color;
+    probe.remove();
+    return wert;
+  })();
+
+  const dunkelbahnen = [];
+  const dunkelfelder = [];
+  for (const el of document.querySelectorAll('main *')) {
+    if (getComputedStyle(el).backgroundColor !== ink) continue;
+    const r = el.getBoundingClientRect();
+    if (r.height < 120) continue;
+    const eintrag = {
+      wer: el.tagName.toLowerCase() + '.' + (el.className.baseVal ?? el.className ?? '').toString().trim().split(/\s+/)[0],
+      hoehe: Math.round(r.height),
+    };
+    if (r.width >= fensterbreite * 0.95) dunkelbahnen.push(eintrag);
+    else dunkelfelder.push(eintrag);
+  }
+
+  // ---- Baender: die animierten Diagonalen des Aufmachers.
+  const baender = document.querySelectorAll('.band').length;
+
+  /*
+   * ---- Fuellgrad: welchen Anteil einer Flaeche Text und Bild wirklich einnehmen.
+   *
+   * **Nicht die Summe der Kaesten, sondern ihre Vereinigung.** Verschachtelte Elemente
+   * ueberlappen sich; eine Summe zaehlt denselben Absatz mehrfach und meldet Werte ueber
+   * 100 %. Gerastert wird deshalb in Zellen von 8 px — jede Zelle zaehlt einmal, egal
+   * wie viele Kaesten sie beruehren.
+   *
+   * Gemessen wird an den **Textzeilen** (`Range.getClientRects()`), nicht an ihren
+   * Elternkaesten: Ein Absatz, der eine halbe Zeile fuellt, belegt eine halbe Zeile.
+   * Dazu Bilder, SVG und Bildplaetze.
+   */
+  const RASTER = 8;
+
+  const belegt = (wurzel) => {
+    const kaesten = [];
+    const lauf = document.createTreeWalker(wurzel, NodeFilter.SHOW_TEXT);
+    let knoten;
+    while ((knoten = lauf.nextNode())) {
+      if (!knoten.nodeValue.trim()) continue;
+      const bereich = document.createRange();
+      bereich.selectNodeContents(knoten);
+      for (const r of bereich.getClientRects()) {
+        if (r.width > 0 && r.height > 0) kaesten.push(r);
+      }
+    }
+    for (const el of wurzel.querySelectorAll('img, svg, .bildplatz, .aufnahme')) {
+      const r = el.getBoundingClientRect();
+      if (r.width > 0 && r.height > 0) kaesten.push(r);
+    }
+
+    const zellen = new Set();
+    for (const r of kaesten) {
+      for (let y = Math.floor(r.top / RASTER); y <= Math.floor((r.bottom - 0.01) / RASTER); y++) {
+        for (let x = Math.floor(r.left / RASTER); x <= Math.floor((r.right - 0.01) / RASTER); x++) {
+          zellen.add(x + ':' + y);
+        }
+      }
+    }
+    return zellen.size * RASTER * RASTER;
+  };
+
+  const abschnitte = [];
+  for (const el of document.querySelectorAll('main > *')) {
+    const r = el.getBoundingClientRect();
+    if (r.width <= 0 || r.height <= 0) continue;
+    abschnitte.push({
+      wer: (el.id || el.className.toString().trim().split(/\s+/)[0] || el.tagName.toLowerCase()),
+      hoehe: Math.round(r.height),
+      fuellgrad: Math.round((belegt(el) / (r.width * r.height)) * 100),
+    });
+  }
+
+  const haupt = document.querySelector('main');
+
+  // ---- Wortzahl des sichtbaren Haupttextes, ohne Kopf und Fuss.
+  const woerter = haupt
+    ? (haupt.innerText.trim().match(/[\p{L}\p{N}][\p{L}\p{N}\-’'.,%€]*/gu) ?? []).length
+    : 0;
+
   return {
     hoehe: doc.scrollHeight,
     scrollWidth: doc.scrollWidth,
@@ -143,6 +233,15 @@ function messung(fensterbreite) {
     sprungziele,
     bildplaetze,
     limeflaechen: limeflaechen.sort((a, b) => b.flaeche - a.flaeche).slice(0, 6),
+    dunkelbahnen,
+    dunkelfelder,
+    baender,
+    woerter,
+    fuellgrad: haupt
+      ? Math.round((belegt(haupt) / (haupt.getBoundingClientRect().width
+        * haupt.getBoundingClientRect().height)) * 100)
+      : 0,
+    abschnitte,
   };
 }
 

@@ -93,6 +93,14 @@ final class Firmenseitentexte
     public const KONTAKT_H1 = 'Kontakt zu SARTU.';
 
     /**
+     * Der eine Satz der randlos dunklen Fläche — ergänzt am 14.08.2026.
+     *
+     * Die Antwortfrist steht im Vorspann und ist eine Zahl; sie gehört nicht hierher. Hier
+     * steht, was die Frist wert ist: dass überhaupt jemand antwortet, und zwar ein Mensch.
+     */
+    public const KONTAKT_ZUSAGE = 'Auf jede Rückfrage antwortet ein Mensch.';
+
+    /**
      * §11, Pflichtabschnitt „Wo wir arbeiten".
      *
      * **Die Ortsliste fehlt, und die Reihenfolge ist genau deshalb erhalten geblieben.** §11

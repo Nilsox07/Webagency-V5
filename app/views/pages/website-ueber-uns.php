@@ -20,12 +20,15 @@ use Sartu\Services\Websitetexte;
  */
 
 ?>
-<section class="aufmacher">
-  <div class="bahn schmal">
-    <h1><?= Html::e(T::UEBER_H1) ?></h1>
-    <p class="lede"><?= Html::e(T::UEBER_LEAD) ?></p>
-  </div>
-</section>
+<?= Ansicht::teil('partials/seitenaufmacher', [
+    'vorzeile'     => 'Über SARTU',
+    'h1'           => T::UEBER_H1,
+    'vorspann'     => T::UEBER_LEAD,
+    'auftragslage' => $auftragslage,
+    'preishinweis' => '',
+    'zweitziel'    => '/musterprojekte',
+    'zweittext'    => 'Musterprojekte ansehen',
+]) ?>
 
 <section class="abschnitt">
   <div class="bahn">

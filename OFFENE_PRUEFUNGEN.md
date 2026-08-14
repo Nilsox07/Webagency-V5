@@ -3577,3 +3577,73 @@ Punkt c — „die vier Bildplätze auf auto bekommen ihr Seitenverhältnis". Si
 Lauf vom 13.08.2026 (`data-verhaeltnis` plus je eine CSS-Regel; als `style` wäre es unter der
 eigenen CSP wirkungslos). Gemessen am 14.08.2026: **sieben Bildplätze auf zwei Seiten, keiner
 auf `auto`.** Prüfung 5 nagelt es fest.
+
+---
+
+## 14.08.2026 — die Formsprache der Startseite auf alle Seiten
+
+Gemessen am 14.08.2026 bei 1440 und 390 px, mit `tools/oberflaeche.mjs`. Das Werkzeug zählt
+seit diesem Lauf zusätzlich **dunkle Bahnen**, **dunkle Felder**, **Bänder**, **Füllgrad** und
+**Wörter** — vorher gab es für diese fünf Werte keine Messung, sondern Augenmaß.
+
+### Wie gezählt wird
+
+| Wert | Was gezählt wird |
+|---|---|
+| **dunkel** | randlos dunkle Bahn: Hintergrund `--ink`, mindestens 95 % der Fensterbreite, ab 120 px Höhe |
+| **feld** | dunkle Fläche **in** einem hellen Abschnitt — das Handlungsfeld am Seitenende |
+| **Bänder** | Elemente mit der Klasse `band` im Aufmacher |
+| **Füllgrad** | Anteil von `main`, den Textzeilen und Bilder wirklich belegen. **Vereinigung, nicht Summe** — gerastert in Zellen von 8 px, damit verschachtelte Kästen nicht doppelt zählen |
+
+### Vorher und nachher — alle neunzehn Adressen
+
+| Adresse | 1440 vorher | 1440 nachher | 390 vorher | 390 nachher | dunkel | Bänder | Füllgrad | Wörter |
+|---|---:|---:|---:|---:|---|---|---|---:|
+| `/` | 9.906 | **9.848** | 15.706 | 15.742 | 3 → 3 | 3 → 3 | 28 → 28 | 1.036 → 1.035 |
+| `/ablauf` | 5.832 | 5.939 | 8.318 | 8.496 | 0 → **1** | 0 → **2** | 24 → **25** | 466 → 469 |
+| `/briefing` | 957 | 957 | 1.176 | 1.176 | 0 → 0 | 0 → 0 | 30 → 30 | 76 → 76 |
+| `/foerderung` | — | **8.425** | — | 10.886 | — → **2** | — → **2** | — → 22 | — → **933** |
+| `/kontakt` | 2.463 | 2.489 | 3.421 | **3.200** | 0 → **1** | 0 → **2** | 15 → **17** | 113 → 119 |
+| `/leistung-portal` | 5.413 | **5.251** | 6.987 | **6.852** | 0 → **1** | 0 → **2** | 18 → **20** | 383 → 393 |
+| `/leistung-seo-lokal` | 4.681 | **4.605** | 6.188 | **6.117** | 0 → **1** | 0 → **2** | 20 → **23** | 305 → 325 |
+| `/leistung-texte` | 4.571 | **4.377** | 5.990 | **5.854** | 0 → **1** | 0 → **2** | 19 → **21** | 284 → 294 |
+| `/leistung-wartung` | 4.745 | **4.492** | 5.967 | **5.800** | 0 → **1** | 0 → **2** | 16 → **19** | 263 → 270 |
+| `/leistung-webdesign` | 4.637 | **4.532** | 5.949 | **5.878** | 0 → **1** | 0 → **2** | 19 → **21** | 292 → 306 |
+| `/leistungen` | 6.021 | **5.849** | 9.220 | **8.328** | 0 → **1** | 0 → **2** | 25 → 22 | 794 → **601** |
+| `/lexikon` | 2.721 | 3.067 | 4.395 | 4.792 | 0 → **1** | 0 → **2** | 20 → **23** | 240 → 280 |
+| `/musterprojekte` | 7.500 | **7.288** | 8.875 | **8.689** | 0 → **1** | 0 → **2** | 24 → 24 | 692 → 698 |
+| `/preise` | 6.080 | 6.479 | 8.557 | 9.002 | 0 → **1** | 0 → **2** | 19 → 19 | 454 → 503 |
+| `/ratgeber` | 3.120 | 3.835 | 4.378 | 5.108 | 0 → **1** | 0 → **2** | 20 → **21** | 237 → 301 |
+| `/ueber-uns` | 4.477 | **4.184** | 5.652 | **5.527** | 1 → 1 | 0 → **2** | 22 → 22 | 275 → 282 |
+| `/website-dachdecker` | 7.981 | **7.825** | 11.203 | **11.023** | 0 → **1** | 0 → **2** | 19 → **21** | 854 → 869 |
+| `/website-elektrotechnik` | 8.012 | **7.707** | 11.373 | **11.128** | 0 → **1** | 0 → **2** | 20 → **21** | 867 → 883 |
+| `/website-sanitaer-heizung-klima` | 7.449 | **7.353** | 10.692 | **10.511** | 0 → **1** | 0 → **2** | 20 → **22** | 797 → 814 |
+
+**Dunkle Abschnitte: 1 von 18 Unterseiten → 17 von 18.** Bänder: 0 → 2 auf jeder Unterseite.
+
+### Verschlechterungen — jede einzeln, auch wo sie aufgewogen wird
+
+| Seite | Was schlechter wurde | Warum |
+|---|---|---|
+| `/ratgeber` | **+715 px bei 1440, +730 px bei 390**, +64 Wörter | Der Übersicht hat der Abschluss gefehlt — sie endete mit der Liste, während jede andere Seite mit dem Handlungsfeld schliesst. Dazu die Zusage. Beides ist Zubau, kein verlorener Abstand |
+| `/lexikon` | **+346 px bei 1440, +397 px bei 390**, +40 Wörter | derselbe Grund |
+| `/preise` | **+399 px bei 1440, +445 px bei 390**, +49 Wörter | Zusage plus der in `17_SEITEN_SARTU.md` §6 gebundene Verweis auf `/foerderung` — `/preise` ist dort als „thematisch bester Ort" benannt |
+| `/ablauf` | **+107 px bei 1440, +178 px bei 390** | die Zusage. Gegengerechnet: Ein doppelter Satz ist entfallen, das sind 3 Wörter mehr statt der 12, die die Zusage bringt |
+| `/leistungen` | **Füllgrad 25 → 22 %** | Die Seite hat 193 Wörter verloren, aber dieselben Abschnittsabstände behalten. Das ist der Preis der Umstellung „der Verteiler verweist" — die Seite ist kürzer und zugleich luftiger |
+| `/` | **+36 px bei 390** | Der geänderte Satz in Sektion 3 ist auf 390 px eine Zeile länger |
+| `/kontakt` | **+26 px bei 1440**, +6 Wörter | Bei 390 px ist die Seite dafür **221 px kürzer**: Die zwei Karten sind der Aufmacher geworden und stapeln sich mobil nicht mehr |
+| alle Seiten | **+7 bis +20 Wörter** je Seite | die Zusagesätze. Sie sind neuer Text, auch wo der Satz nur umgezogen ist |
+
+### Ungeprüft und offen
+
+| # | Punkt | Womit es zu prüfen ist |
+|---|---|---|
+| 1 | **`/foerderung` nennt keine Adresse der Förderbanken.** `17_SEITEN_SARTU.md` §6 Block 5 verlangt je Land einen „Link zur Förderbank". In den Unterlagen steht **keine einzige** Adresse — weder in `FOERDERUNG_KONZEPT.md` noch sonstwo. Genannt ist deshalb die Stelle (L-Bank, SAB, IBB …), nicht ihre Adresse. Eine erfundene Adresse führt einen Betrieb, der investieren will, ins Leere | Die sechzehn Adressen an der Primärquelle holen und eintragen |
+| 2 | **Die Sperre in `17_SEITEN_SARTU.md` §6 widerspricht `FOERDERUNG_KONZEPT.md` §4a.** §6 führt „kein Programmname ist in der Primärquelle geprüft"; §4a meldet „alle sechzehn Länder am 09.08.2026 an der Primärquelle geprüft", und `CLAUDE.md` führt es ebenso. Gebaut wurde nach §4a, weil es das jüngere und ausführlichere Ergebnis ist | Die Sperre in §6 streichen oder begründen, warum sie gilt |
+| 3 | **Die Ortssperre ist um eine benannte Ausnahme ergänzt worden.** `WebsiteTest::testKeinOrtsnameStehtAufDerWebsite` schneidet die Länderübersicht auf `/foerderung` heraus — und **nur** sie. Begründung im Test: §0 verbietet den Ortsnamen dort, wo er eine Aussage über das eigene Gebiet macht; eine Tabelle, die sechzehn von sechzehn führt, trifft keine Auswahl. Der Fließtext der Seite nennt kein einziges Land von der Liste, auch nicht als Beispiel | Beim nächsten Durchgang prüfen, ob die Ausnahme eng geblieben ist |
+| 4 | **`/briefing` bekommt keinen dunklen Abschnitt.** Es ist der Einstieg des Bedarfsschecks: ein Bildschirm, eine Handlung, 76 Wörter. Eine dunkle Bahn wäre dort Zierde und stünde zwischen dem Leser und dem Knopf | Betreiberentscheidung, ob der Funneleinstieg die Formsprache mitträgt |
+| 5 | **Punkt c des Auftrags trifft den gebauten Stand nicht.** Gezählt am 14.08.2026: Auf keiner Seite stehen zwei gleichwertige Knöpfe. Die zweite Handlung ist seit dem Bau ein `.textlink`, nicht ein `.knopf` — `partials/handlungsblock` setzt das so. Was es gibt: vier Knöpfe in der Preisleiter auf `/`, `/preise` und den drei Branchenseiten, davon drei in `--ruhig`. Das ist die Preisleiter, nicht die Seitenhandlung | Falls die Preisleiter gemeint war: eigene Entscheidung |
+| 6 | **Die Statusspalte auf `/foerderung` steht als `.marken`.** Sie kommt aus einem Wortschatz von fünf Werten, und elf der sechzehn Zeilen tragen „läuft" — in einer Statusspalte richtig, in Fließtext ein Fehler. Die Beschriftungsklasse nimmt sie zugleich aus der Satzanfangsprüfung. **Das ist eine Entscheidung über die Form, keine Umgehung** — die Spalte `Bedingung` daneben bleibt vollständig in der Prüfung | Beim nächsten Textdurchgang gegenlesen |
+| 7 | **Die drei Stufen der Beantragungshilfe sind ohne Partnernamen gebaut.** `FOERDERUNG_KONZEPT.md` §4 nennt Stufe 3 als „Partnerempfehlung"; einen benannten Partner gibt es nicht. Auf der Seite steht deshalb „Machen wir nicht" mit dem Hinweis auf Fördermittelberater und Steuerberater als Gattung | Sobald ein Partner feststeht, die Stufe ergänzen |
+| 8 | **Das Förderfeld im Bedarfsscheck fehlt.** `FOERDERUNG_KONZEPT.md` §3.2 schlägt es vor, §7 führt es als offene Frage 3. Der erste Entwurf der Seite verwies darauf („sagen Sie es im Bedarfsscheck") — ein Satz, der auf ein Feld zeigt, das es nicht gibt. Er steht jetzt als „bei der Anfrage", und das geht über den Rückfrageweg heute schon | Entscheidung über Frage 3, dann Feld in Thema 5 |
+| 9 | **Der Hinweis unter dem Bedarfsscheck-Ergebnis fehlt.** `FOERDERUNG_KONZEPT.md` §3.1 nennt ihn den wirksamsten Platz überhaupt — „dort steht die Zahl". Gebaut ist er nicht; `17_SEITEN_SARTU.md` §2.3 bindet den Bildschirm eng, und ein Zubau dort braucht eine eigene Entscheidung | Betreiberentscheidung über §2.3 |

@@ -31,6 +31,7 @@ Einzutragen ist entweder `bestätigt` oder ein Änderungsvorschlag mit Begründu
 | `/ueber-uns` | Über SARTU — Festpreis, Kundenbereich, klare Grenzen \| SARTU | Webdesign mit klaren Grenzen, festen Preisen und Verantwortung. | SARTU baut Firmenwebsites zum Festpreis: klarer Ablauf, geführter Kundenbereich, keine WordPress-Pflege und KI-gestützte Produktion mit menschlicher Prüfung. | Über SARTU | |
 | `/kontakt` | Kontakt — Rückfrage oder Bedarf prüfen lassen \| SARTU | Kontakt zu SARTU. | Stellen Sie SARTU eine Rückfrage oder starten Sie den kurzen Bedarfsscheck für Ihre Firmenwebsite. Antwort in der Regel innerhalb eines Werktags. | Kontakt | |
 | `/musterprojekte` | Musterprojekte: drei Betriebe, drei Seitenstrukturen \| SARTU | Drei Musterprojekte, ausgearbeitet statt behauptet. | Drei ausgearbeitete Muster — Malerbetrieb, Physiotherapiepraxis, Arbeitsrechtskanzlei. Ausgangslage, empfohlener Umfang und Seitenstruktur je Fall. Keine Kundenaufträge. | Musterprojekte: drei Betriebe, drei Seitenstrukturen | |
+| `/foerderung` | Förderung für eine Firmenwebsite: was gilt \| SARTU | Gibt es Förderung für eine Firmenwebsite? | Eine reine Firmenwebsite ist in der Regel nicht förderfähig. Was die sechzehn Landesprogramme verlangen, warum der Antrag vor dem Auftrag stehen muss und was Förderung an Zeit kostet. | Förderung für eine Firmenwebsite: was gilt | |
 | `/leistung-webdesign` | Webdesign für Firmenwebsites ohne WordPress \| SARTU | Webdesign, das nicht nach Baukasten aussieht. | Individuell programmierte Firmenwebsite ab 1.490 € netto — ohne WordPress, ohne Baukasten und ohne Erweiterungen, die Sie selbst aktualisieren müssten. | Webdesign für Firmenwebsites ohne WordPress | |
 | `/leistung-texte` | Website-Texte schreiben lassen \| SARTU | Website-Texte aus Ihren Fakten, nicht aus Floskeln. | Sie liefern Stichpunkte und Unterlagen, wir schreiben daraus die Texte Ihrer Website. Enthalten in jedem Angebot ab 1.490 € netto. | Website-Texte schreiben lassen | |
 | `/leistung-seo-lokal` | SEO-Grundlage und lokale Sichtbarkeit \| SARTU | Gefunden werden — regional und in KI-Antworten. | Jede SARTU-Website startet mit Seitenthemen, Metadaten, strukturierten Daten und interner Verlinkung. Ohne Rankinggarantie und ohne dünne Ortsseiten. | SEO-Grundlage und lokale Sichtbarkeit | |
@@ -59,6 +60,6 @@ Einzutragen ist entweder `bestätigt` oder ein Änderungsvorschlag mit Begründu
 
 ## Stand
 
-33 Adressen geprüft, 0 davon mit fehlender Angabe, 2 ohne Antwort 200.
+34 Adressen geprüft, 0 davon mit fehlender Angabe, 2 ohne Antwort 200.
 
 Was §1.1 zusätzlich verlangt und hier fehlt: Nebenbegriffe, Suchintention, SERP-Typen der ersten zehn, Dominanz, verwandte Fragen, Volumen. Sie brauchen Suchergebnisse und ein Volumenwerkzeug; beides steht dieser Umgebung nicht zur Verfügung. **Nichts davon wurde geschätzt.**

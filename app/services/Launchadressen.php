@@ -49,6 +49,9 @@ final class Launchadressen
             // `Alle Musterprojekte ansehen`. Sie steht auf der Stufe der Leistungsseiten:
             // eine vollständige Zielseite, aber kein Einstieg.
             '/musterprojekte' => '0.7',
+            // `16_SEO_GEO_SARTU.md`, ergaenzt am 09.08.2026: Prioritaet 0.9. Die Seite hat
+            // von da an bis zum 14.08.2026 einen 404 geliefert.
+            '/foerderung' => '0.9',
         ];
 
         foreach (array_keys(Leistungsseiten::alle()) as $schluessel) {

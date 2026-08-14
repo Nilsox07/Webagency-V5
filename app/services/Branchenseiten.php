@@ -77,6 +77,9 @@ final class Branchenseiten
                     . 'Heizungstausch, Wartung — beginnt bei 3.900 € netto. Die Fakten liefern '
                     . 'Sie im Bedarfsscheck und in Ihrem Kundenbereich, ohne einen Termin.',
 
+                'zusage' => 'Je Leistung eine eigene Seite — Badsanierung und Heizungstausch sind '
+                    . 'zwei Themen.',
+
                 'probleme' => [
                     ['titel' => 'Badsanierung und Heizungstausch stehen auf derselben Seite',
                      'text'  => 'Eine geplante Badsanierung und ein Heizungsausfall sind zwei '
@@ -183,6 +186,8 @@ final class Branchenseiten
                     . 'Photovoltaik, Ladepunkte, Gewerbe — beginnt bei 3.900 € netto. Die '
                     . 'Fakten liefern Sie im Bedarfsscheck und in Ihrem Kundenbereich, ohne '
                     . 'einen Termin.',
+
+                'zusage' => 'Was Ihre Anlage kann, steht auf der Seite. Nicht nur, was sie kostet.',
 
                 'probleme' => [
                     ['titel' => 'Drei Arbeitsgebiete, eine Seite',
@@ -306,6 +311,9 @@ final class Branchenseiten
                     . 'Betrieb ab 59 € netto im Monat. Eine eigene Seite je Dachart — Steildach, '
                     . 'Flachdach, Abdichtung — beginnt bei 3.900 € netto. Die Fakten liefern Sie '
                     . 'im Bedarfsscheck und in Ihrem Kundenbereich, ohne einen Termin.',
+
+                'zusage' => 'Aufträge und Bewerbungen kommen über dieselbe Website, aber nicht '
+                    . 'über dieselbe Seite.',
 
                 'probleme' => [
                     ['titel' => 'Der Wettbewerb im Umkreis sieht genauso aus',

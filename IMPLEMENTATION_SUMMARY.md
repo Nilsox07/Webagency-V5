@@ -800,3 +800,96 @@ nicht beim Messen; der Test hält jetzt die Mittellinie bei x=463 ± 6 fest.
 **Der Lauf braucht drei Dinge, die keine Fremdumgebung von selbst stellt:** einen laufenden
 Webserver, `NODE_PATH` auf das Verzeichnis mit Playwright und `PHP_CLI_SERVER_WORKERS=8`.
 `php -S` ist einfädig — sechs Browserkontexte gleichzeitig warten gegenseitig auf ihn.
+
+---
+
+## J. Die Formsprache auf alle Seiten — 14.08.2026
+
+Die Startseite hatte eine Gestaltung, die sechzehn Unterseiten nicht hatten. Gemessen bei
+1440 px: **drei dunkle Bahnen und drei Bänder auf `/`, null und null auf allen anderen.**
+
+**Neu:** `app/views/partials/seitenaufmacher.php` · `app/services/Foerderprogramme.php` ·
+`app/services/Foerdertexte.php` · `app/views/pages/website-foerderung.php`.
+`tools/oberflaeche.mjs` misst seit diesem Lauf zusätzlich dunkle Bahnen, dunkle Felder,
+Bänder, Füllgrad und Wörter.
+
+### Befund 1 — der Ablauf stand dreimal
+
+**Die Arbeitsteilung ist jetzt festgelegt und im Code begründet** (`Startseitentexte::ablauf()`):
+
+| Wo | Was dort steht |
+|---|---|
+| Sektion 2, Kundenbereich | **der Ort** — was der Kunde dort tut, elf Punkte, gebunden |
+| Sektion 3, Ablauf | **der Weg** — was an jeder Station herauskommt |
+| `/ablauf` | **die Ausarbeitung** — acht Schritte, Vergleich, Fristen |
+
+Zwei Schritte nannten Handlungen im Kundenbereich und nennen jetzt das Ergebnis der Station.
+Schritt 5 war wörtlich drei der elf Punkte aus Sektion 2. Dazu ist auf `/ablauf` ein Satz
+entfallen, der unmittelbar unter dem Vorspann dasselbe sagte wie dieser.
+
+### Befund 2 — kein Schwarz-Weiss-Wechsel ausserhalb der Startseite
+
+**17 von 18 Unterseiten tragen jetzt einen dunklen Abschnitt**, je an einer inhaltlich
+passenden Stelle. Die Zusage-Form — randlos dunkel, ein Satz — kam auf siebzehn Seiten kein
+einziges Mal vor und trägt jetzt zehn davon.
+
+**Kein Zusagesatz ist frei erfunden.** Vier sind umgezogen, wo derselbe Satz vorher in einem
+Vorspann stand und dort von seinem Nachbarn wiederholt wurde; die übrigen nehmen den Kern der
+Seite auf. Wo ein Abschnitt das Gewicht schon trug, wurde **er** dunkel statt eines neuen
+Satzes daneben: der ehrliche Absatz auf `/musterprojekte`, „der typische Fehler" im Lexikon,
+der letzte Abschnitt jedes Ratgeberartikels, die Absage auf `/foerderung`.
+
+`/briefing` bekommt keinen — ein Bildschirm, eine Handlung, 76 Wörter. Begründung in
+`OFFENE_PRUEFUNGEN.md`.
+
+### Befund 3 — die Unterseiten hatten keinen Aufmacher
+
+`partials/seitenaufmacher` trägt Vorzeile, H1, Vorspann und **eine** primäre Handlung, dazu
+zwei Bänder statt drei — er ist rund halb so hoch wie der der Startseite, und das ist die
+Rangordnung: Gleiche Höhe hiesse gleiches Gewicht.
+
+**Zwölf Vorlagen** nutzen ihn. Ratgeber und Lexikon führen dabei nicht zum Bedarfsscheck,
+sondern auf ihr in `17_SEITEN_SARTU.md` §7 und §8 gebundenes Ziel.
+
+**Zwei Sektionen sind dabei entfallen, nicht dazugekommen:** „Kurz gesagt" auf den fünf
+Leistungsseiten und den drei Branchenseiten ist der Vorspann des Aufmachers geworden — §10
+setzt den Block unmittelbar nach die H1, und genau dort steht er, nur ohne Sandfläche
+dazwischen. Auf `/kontakt` sind die zwei Karten der Aufmacher geworden; beide Sätze stehen
+unverändert im Vorspann.
+
+### Die vier zusätzlichen Punkte
+
+| Punkt | Ergebnis |
+|---|---|
+| **a — der Verteiler war ausführlicher als seine Ziele** | `/leistungen` von **794 auf 601 Wörter**. Zeilen **mit** eigener Seite stehen mit einem Satz und dem Weg dorthin; die zwei Zeilen **ohne** eigene Seite behalten ihre Ausarbeitung — diese Seite ist ihr einziger Ort |
+| **b — `/ratgeber` und `/lexikon` waren weisse Listen** | Liste auf Sand, Zusage dunkel, dazu das Handlungsfeld, **das beiden gefehlt hat** |
+| **c — zwei gleichwertige Knöpfe** | trifft den gebauten Stand nicht: Die zweite Handlung ist seit dem Bau ein `.textlink`. Gezählt in `OFFENE_PRUEFUNGEN.md` |
+| **d, e, f** | am 14.08.2026 im Lauf davor behoben. Nachgemessen: 13 Bildplätze, **keiner** auf `auto`; kein zusammengebauter Satz mehr; das Gerät trägt Basis, Tastenfeld, Leertaste, Trackpad und Vorderkante |
+| **g — `/foerderung` lieferte 404** | **gebaut**, neun Blöcke nach §6, 933 Wörter (gebunden: 900–1.300) |
+
+### `/foerderung`
+
+Sechzehn Länder, **keines weggelassen** — mit Programm, Stelle, Bedingung und einem Stand aus
+vier Stufen. **Keine einzige Summe:** §6 Grenze 1, und `FOERDERUNG_KONZEPT.md` belegt, warum —
+jede in Sekundärquellen geprüfte Zahl war falsch oder veraltet.
+
+Die Seite führt mit der Absage: Eine reine Firmenwebsite ist in der Regel nicht förderfähig.
+Das ist die Berichtigung vom 09.08.2026, und sie steht im dunklen Abschnitt.
+
+**Was fehlt und gemeldet ist:** die Adressen der sechzehn Förderbanken. In den Unterlagen
+steht keine einzige; genannt ist deshalb die Stelle, nicht ihre Adresse.
+
+### Eine Ausnahme an der Ortssperre — eng und begründet
+
+`WebsiteTest::testKeinOrtsnameStehtAufDerWebsite` schneidet die Länderübersicht heraus, und
+**nur** sie. §0 verbietet den Ortsnamen dort, wo er eine Aussage über das eigene Gebiet macht;
+eine Tabelle über sechzehn von sechzehn trifft keine Auswahl. Der Fließtext von `/foerderung`
+nennt kein Land von der Sperrliste, auch nicht als Beispiel.
+
+### Sieben Verschlechterungen, alle gemeldet
+
+`/ratgeber` +715 px · `/preise` +399 px · `/lexikon` +346 px · `/ablauf` +107 px ·
+`/kontakt` +26 px bei 1440 (dafür −221 px bei 390) · `/` +36 px bei 390 · **Füllgrad von
+`/leistungen` 25 → 22 %**. Die Rechnung je Zeile steht in `OFFENE_PRUEFUNGEN.md`.
+
+**397 Tests, 13.768 Zusicherungen, grün.**

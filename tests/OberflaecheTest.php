@@ -71,6 +71,7 @@ final class OberflaecheTest extends TestCase
         '/briefing/ergebnis',
         '/briefing/kontakt',
         '/datenschutz',
+        '/foerderung',
         '/impressum',
         '/kontakt',
         '/leistung-portal',
@@ -94,23 +95,24 @@ final class OberflaecheTest extends TestCase
      * gibt** — je mit Fundstelle und Grund.
      *
      * **Diese Liste ist eine Schuld, kein Freibrief.** Sie steht hier, damit eine fehlende
-     * Seite nicht dasselbe ist wie eine vergessene: `/foerderung` liefert seit dem
-     * 09.08.2026 einen 404 und ist bis zum 14.08.2026 **nie gemeldet worden**, weil niemand
-     * die Adressliste gegen die Spezifikation hielt.
+     * Seite nicht dasselbe ist wie eine vergessene. `/foerderung` hat sie einen Tag lang
+     * geführt: Die Adresse stand seit dem 09.08.2026 mit Priorität 0.9 in der Spezifikation
+     * und lieferte 404, ohne dass es je gemeldet worden wäre. Aufgefallen ist es erst, als
+     * diese Prüfung die Adressliste gegen die Spezifikation hielt — und behoben am Tag
+     * darauf.
      *
      * @var array<string,string>
      */
     private const NOCH_NICHT_GEBAUT = [
-        '/foerderung' => '16_SEO_GEO_SARTU.md, Zeile 112: Priorität 0.9, ergänzt am 09.08.2026. '
-            . 'Der Inhalt hängt an FOERDERUNG_KONZEPT.md („verweisen statt kopieren"); die Seite '
-            . 'ist beauftragt, aber nicht gebaut.',
+        // Leer seit dem 14.08.2026. `/foerderung` stand hier einen Tag lang und ist gebaut:
+        // neun Blöcke nach `17_SEITEN_SARTU.md` §6, sechzehn Länder ohne eine einzige Summe.
     ];
 
     /**
      * Die Obergrenze der Gesamthöhe je Adresse, in Pixeln.
      *
      * **Regel: Unterseiten 6.000 px, Startseite 10.000, mobil bei 390 px höchstens 16.000.**
-     * Vier Adressen liegen darüber und tragen deshalb eine eigene Zeile mit Begründung —
+     * Sieben Adressen liegen darüber und tragen deshalb eine eigene Zeile mit Begründung —
      * genau die Bauform, die der Auftrag verlangt: die Grenze wird nicht angehoben, sie wird
      * begründet.
      *
@@ -133,6 +135,18 @@ final class OberflaecheTest extends TestCase
         // `/preise` und `/leistungen` tragen die vollständige Preistabelle bzw. acht Leistungen.
         '/preise'                         => [6_600, 9_300],
         '/leistungen'                     => [6_500, 10_000],
+        /*
+         * `/foerderung` trägt eine Tabelle über **alle sechzehn** Bundesländer.
+         * `17_SEITEN_SARTU.md` §6 Block 5: „Kein Land wird weggelassen" — und die Bedingung
+         * je Land ist ausdrücklich der Inhalt, nicht Beiwerk („Die Bedingungen sind sogar
+         * der eigentliche Inhalt", `FOERDERUNG_KONZEPT.md` §4a). Sechzehn Zeilen mit je
+         * einem Bedingungssatz sind bei 1440 px rund 2.900 px; darunter liegt die Seite
+         * nicht, ohne dass die Übersicht ihren Zweck verliert.
+         *
+         * Gemessen am 14.08.2026: 8.479 px bei 1440, 10.915 px bei 390 — Füllgrad 22
+         * beziehungsweise 57 %. Kein waagerechter Überlauf bei keiner der sechs Breiten.
+         */
+        '/foerderung'                     => [9_200, 11_800],
     ];
 
     private const REGELHOEHE = [6_000, 16_000];

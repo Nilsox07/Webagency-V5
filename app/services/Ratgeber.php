@@ -55,8 +55,16 @@ final class Ratgeber
     public const HUB_H1 = 'Ratgeber für Firmenwebsites';
 
     public const HUB_INTRO = 'Hier stehen die Fragen, die vor jedem Auftrag kommen — mit '
-        . 'unseren eigenen Zahlen beantwortet. Fremde Preise nennen wir nicht, weil wir sie '
-        . 'nicht kennen.';
+        . 'unseren eigenen Zahlen beantwortet. Jeder Beitrag trägt sein Datum.';
+
+    /**
+     * Der eine Satz der randlos dunklen Fläche — ergänzt am 14.08.2026.
+     *
+     * **Er ist nicht neu geschrieben, sondern umgezogen.** Der Satz stand bis dahin als
+     * dritter Satz von `HUB_INTRO` und war dort eine Fussnote. Er ist die Aussage, die den
+     * Ratgeber von den üblichen Vergleichsseiten trennt.
+     */
+    public const HUB_ZUSAGE = 'Fremde Preise nennen wir nicht, weil wir sie nicht kennen.';
 
     /**
      * @return array<string,array{

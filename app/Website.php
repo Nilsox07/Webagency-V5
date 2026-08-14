@@ -10,6 +10,7 @@ use Sartu\Helpers\Http;
 use Sartu\Services\Auftragslage;
 use Sartu\Services\Branchenseiten;
 use Sartu\Services\Firmenseitentexte;
+use Sartu\Services\Foerdertexte;
 use Sartu\Services\Gruenderangaben;
 use Sartu\Services\Gruenderbild;
 use Sartu\Services\Kontaktanfrage;
@@ -185,6 +186,31 @@ final class Website
             'titel'        => Musterprojektetexte::TITEL,
             'beschreibung' => Musterprojektetexte::BESCHREIBUNG,
             'pfad'         => Musterprojekte::PFAD,
+            'brotkrumen'   => $krumen,
+            'schema'       => Strukturdaten::brotkrumen($krumen),
+        ]);
+    }
+
+    /**
+     * `/foerderung` — `17_SEITEN_SARTU.md` §6, neun Blöcke.
+     *
+     * **Die Adresse steht seit dem 09.08.2026 in `16_SEO_GEO_SARTU.md` mit Priorität 0.9
+     * und lieferte bis zum 14.08.2026 einen 404.** Gemeldet worden ist das nie — erst
+     * `OberflaecheTest` hat die Adressliste gegen die Spezifikation gehalten.
+     *
+     * **Nicht in der Hauptnavigation** (§6): `10_WEBSITE_SARTU.md` §2 bindet sie auf sechs
+     * Punkte, und das ist eine gebundene Zahl.
+     *
+     * @param array<string,string> $parameter
+     */
+    public function foerderung(array $parameter = []): Antwort
+    {
+        $krumen = [[Foerdertexte::PFAD, 'Förderung']];
+
+        return $this->seite('website-foerderung', [
+            'titel'        => Foerdertexte::TITEL,
+            'beschreibung' => Foerdertexte::BESCHREIBUNG,
+            'pfad'         => Foerdertexte::PFAD,
             'brotkrumen'   => $krumen,
             'schema'       => Strukturdaten::brotkrumen($krumen),
         ]);

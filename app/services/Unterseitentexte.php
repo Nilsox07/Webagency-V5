@@ -24,9 +24,17 @@ final class Unterseitentexte
 
     public const LEISTUNGEN_H1 = 'Website, Texte, Sichtbarkeit und Betrieb als ein System.';
 
-    public const LEISTUNGEN_LEAD = 'Sie bekommen kein Bündel einzelner Leistungen. Sie '
-        . 'bekommen ein Ergebnis: eine Website, die Ihr Angebot erklärt und Anfragen '
-        . 'erzeugt. Betrieben wird sie danach von uns.';
+    public const LEISTUNGEN_LEAD = 'Sie bekommen ein Ergebnis: eine Website, die Ihr '
+        . 'Angebot erklärt und Anfragen erzeugt. Betrieben wird sie danach von uns.';
+
+    /**
+     * Der eine Satz der randlos dunklen Fläche — ergänzt am 14.08.2026.
+     *
+     * **Er ist nicht neu geschrieben, sondern umgezogen.** Bis dahin stand er als erster
+     * Satz von `LEISTUNGEN_LEAD`, wo der zweite ihn sofort wiederholte („Sie bekommen kein
+     * Bündel … Sie bekommen ein Ergebnis"). Als Zusage steht die Abgrenzung allein.
+     */
+    public const LEISTUNGEN_ZUSAGE = 'Sie bekommen kein Bündel einzelner Leistungen.';
 
     /** §6 Sektion 2 — das Antwortmodul, 45 Wörter. */
     public const LEISTUNGEN_KURZ = 'SARTU verbindet Strategie, Texte, Design, Programmierung, '
@@ -79,6 +87,14 @@ final class Unterseitentexte
     public const PREISE_LEAD = 'Sie müssen kein Paket auswählen. Die kurze Bedarfseinschätzung '
         . 'zeigt, welcher Umfang wahrscheinlich passt; wir prüfen das Ergebnis persönlich, '
         . 'bevor Sie ein Angebot bekommen.';
+
+    /**
+     * Der eine Satz der randlos dunklen Fläche — ergänzt am 14.08.2026.
+     *
+     * Er wiederholt keine Zahl. Die Zahlen stehen darüber in der Tabelle; hier steht, was
+     * an ihnen verbindlich ist. Das ist die Aussage, um die es auf `/preise` geht.
+     */
+    public const PREISE_ZUSAGE = 'Der Preis steht, bevor Sie sich entscheiden.';
 
     /** §7 Sektion 5 — der Rundum-Schutz, Rahmen zwingend nach §2. */
     public const SCHUTZ_H2 = 'Keine Wartung für Sie.';
@@ -164,6 +180,16 @@ final class Unterseitentexte
     public const ABLAUF_LEAD = 'Standardprojekte laufen bei SARTU über den Kundenbereich. Ein '
         . 'Gespräch ist jederzeit möglich, aber nicht Pflicht: Angebot, Fragen, Zahlungen, '
         . 'Domain, Vorschau und Freigaben liegen dort an einem Ort.';
+
+    /**
+     * Der eine Satz der randlos dunklen Fläche — ergänzt am 14.08.2026.
+     *
+     * Er nennt keine Station des Ablaufs. Die stehen darüber in acht Schritten und in den
+     * beiden Listen; ein Satz, der eine davon wiederholte, wäre die vierte Fassung desselben
+     * Vorgangs. Er nennt, was aus der Arbeitsteilung folgt.
+     */
+    public const ABLAUF_ZUSAGE = 'Sie tragen die Fakten bei. Die Entscheidungen und die '
+        . 'Verantwortung tragen wir.';
 
     /** §8 Sektion 2 — der Vergleich, ohne Prozentangaben. */
     public const VERGLEICH = [

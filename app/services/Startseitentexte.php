@@ -184,6 +184,25 @@ final class Startseitentexte
     /**
      * §5 Sektion 3 — sechs Schritte, je ein Satz.
      *
+     * ## Die Arbeitsteilung mit Sektion 2, festgelegt am 14.08.2026
+     *
+     * Beide dunklen Abschnitte beschrieben denselben Vorgang. Gemessen: **Angebot, Angaben,
+     * Vorschau und Änderungen kamen in beiden vor**, Schritt 5 wörtlich („Ansehen,
+     * Änderungen sammeln, in einem Durchgang schicken" gegen drei Punkte der Liste
+     * darüber). Dazu trägt `/ablauf` dieselben Stationen in acht Schritten.
+     *
+     * Die Teilung läuft jetzt so:
+     *
+     * | Wo | Was dort steht |
+     * |---|---|
+     * | Sektion 2, Kundenbereich | **der Ort** — was Sie dort tun, elf Punkte, gebunden |
+     * | Sektion 3, Ablauf | **der Weg** — was an jeder Station herauskommt |
+     * | `/ablauf` | **die Ausarbeitung** — acht Schritte, Vergleich, Fristen |
+     *
+     * Deshalb nennt hier kein Satz mehr eine Handlung im Kundenbereich. Er nennt das
+     * **Ergebnis** der Station. Wer wissen will, wo er klickt, liest Sektion 2; wer wissen
+     * will, was dabei entsteht, liest diese.
+     *
      * @return list<array{titel:string,satz:string,bild:bool}>
      */
     public static function ablauf(): array
@@ -202,8 +221,11 @@ final class Startseitentexte
              'satz'  => 'Umfang, Preis und Zahlungsplan stehen schriftlich.',
              'bild'  => ['datei' => 'sartu-ablauf-2-angebot.webp', 'breite' => 1280, 'hoehe' => 800,
                          'alt'   => 'Das Angebot im Kundenbereich: Nummer, Gültigkeit, empfohlener Umfang und die vorgesehene Seitenstruktur.']],
+            /* Vorher: „Bekanntes tragen wir ein. Den Rest fragen wir im Kundenbereich."
+               Der zweite Halbsatz erklärte den Kundenbereich ein zweites Mal — Sektion 2
+               darüber sagt genau das, mit elf Punkten. Hier steht jetzt das Ergebnis. */
             ['titel' => 'Ihre Angaben', 'bild' => null,
-             'satz'  => 'Bekanntes tragen wir ein. Den Rest fragen wir im Kundenbereich.'],
+             'satz'  => 'Bekanntes tragen wir ein. Gefragt wird einmal und gesammelt.'],
             /* Sektion 3, Schritt 4 ist die **einzige** Stelle der Startseite, an der der
                KI-Einsatz benannt wird — `10_WEBSITE_SARTU.md` Sektion 3 und `06_RECHT.md`
                („KI wird genutzt, Ergebnisse werden geprüft"). Die Aussage bleibt deshalb
@@ -214,8 +236,11 @@ final class Startseitentexte
             ['titel' => 'Produktion', 'bild' => null,
              'satz'  => 'Gebaut wird bei uns. Beim Entwurf hilft KI; geprüft und '
                 . 'freigegeben wird jede Seite von einem Menschen.'],
+            /* Vorher: „Ansehen, Änderungen sammeln, in einem Durchgang schicken." — das
+               waren wörtlich drei der elf Punkte aus Sektion 2. Jetzt steht dort, was am
+               Ende der Station vorliegt. */
             ['titel' => 'Vorschau und Freigabe', 'bild' => null,
-             'satz'  => 'Ansehen, Änderungen sammeln, in einem Durchgang schicken.'],
+             'satz'  => 'Die Seite steht vollständig, bevor Sie zustimmen.'],
             ['titel' => 'Start und Betrieb', 'bild' => null,
              'satz'  => 'Livegang, danach Betrieb und Pflege durch uns.'],
         ];
