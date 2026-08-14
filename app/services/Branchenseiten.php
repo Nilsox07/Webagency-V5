@@ -79,14 +79,14 @@ final class Branchenseiten
 
                 'probleme' => [
                     ['titel' => 'Badsanierung und Heizungstausch stehen auf derselben Seite',
-                     'text'  => 'Wer eine Badsanierung plant, sucht anders als jemand, dessen '
-                        . 'Heizung ausgefallen ist. Steht beides auf einer Seite, beantwortet '
-                        . 'sie keine der beiden Suchanfragen vollständig — und wird für keine '
-                        . 'von beiden gefunden.'],
+                     'text'  => 'Eine geplante Badsanierung und ein Heizungsausfall sind zwei '
+                        . 'verschiedene Aufträge mit zwei verschiedenen Fragen. Stehen sie auf '
+                        . 'derselben Seite, teilen sie sich eine Überschrift, eine Adresse und '
+                        . 'ein Anfrageformular.'],
                     ['titel' => 'Die Förderfrage kommt in jedem Erstgespräch',
-                     'text'  => 'Wer eine Heizung tauschen lässt, will vorher wissen, was die '
-                        . 'Förderung ausmacht und wer den Antrag stellt. Steht das nirgends auf '
-                        . 'der Website, wird es am Telefon erklärt — jedes Mal neu.'],
+                     'text'  => 'Förderhöhe und Antragsweg erklären Sie am Telefon, in jedem '
+                        . 'Erstgespräch neu. Steht beides auf der Seite, kommt die Anfrage '
+                        . 'schon mit der Antwort.'],
                     ['titel' => 'Der Bedarf ist da, der Absatz nicht',
                      'text'  => 'Über 40 % der Heizungen im Bestand entsprechen nicht dem Stand '
                         . 'der Technik, viele sind über 30 Jahre alt (BDH-Jahresbilanz, Februar '
@@ -144,9 +144,8 @@ final class Branchenseiten
 
                 'fragen' => [
                     ['frage'   => 'Brauche ich für jede Leistung eine eigene Seite?',
-                     'antwort' => 'Wenn Sie für jede gefunden werden wollen, ja. Eine Seite '
-                        . 'beantwortet eine Suchanfrage — Badsanierung und Heizungstausch sind '
-                        . 'zwei.'],
+                     'antwort' => 'Wenn Sie für jede gefunden werden wollen, ja. Je Seite ein '
+                        . 'Thema — Badsanierung und Heizungstausch sind zwei.'],
                     ['frage'   => 'Können Sie die Förderung erklären?',
                      'antwort' => 'Wir schreiben, was Sie uns dazu sagen, und trennen dabei '
                         . 'Ihre Leistung von den Bedingungen des Programms. Eine '
@@ -198,9 +197,8 @@ final class Branchenseiten
                         . 'rückläufige Zahlen in Folge.'],
                     ['titel' => 'Der Kunde vergleicht schärfer',
                      'text'  => '87 % der Betriebe melden preissensiblere Kunden, 74 % '
-                        . 'kritischere (Bitkom 2025, n=504). Wer nur einen Preis sieht, '
-                        . 'vergleicht Preise. Wer sieht, was dafür passiert, vergleicht '
-                        . 'Leistungen.'],
+                        . 'kritischere (Bitkom 2025, n=504). Auf Ihrer Seite steht heute ein '
+                        . 'Preis oder nichts. Was für den Preis passiert, steht nirgends.'],
                     ['titel' => 'Für die Digitalisierung ist keine Zeit',
                      'text'  => '72 % der Betriebe geben an, zu viel zu tun zu haben (Bitkom '
                         . '2025, n=504). Eine Website, die drei Wochen Ihrer Zeit kostet, '
@@ -208,9 +206,9 @@ final class Branchenseiten
                         . 'Kundenbereich, wann es Ihnen passt, und lesen später eine Vorschau — '
                         . 'mehr ist nicht Ihr Anteil.'],
                     ['titel' => 'Die Anmeldung beim Netzbetreiber steht nirgends',
-                     'text'  => 'Wer eine Anlage anmeldet, will drei Dinge wissen: wer den Antrag '
-                        . 'stellt, welche Unterlagen nötig sind, wie lange es dauert. Das '
-                        . 'erklären Sie sonst am Telefon. Jedes Mal dieselben zehn Minuten.'],
+                     'text'  => 'Wer den Antrag stellt, welche Unterlagen nötig sind, wie lange '
+                        . 'es dauert: Das erklären Sie am Telefon. Jedes Mal dieselben zehn '
+                        . 'Minuten.'],
                     ['titel' => 'Der Zählerschrank entscheidet, und niemand weiß das',
                      'text'  => 'Ob eine Wallbox oder ein Speicher überhaupt gehen, hängt am '
                         . 'Zählerschrank und am Hausanschluss. Steht das auf der Seite, kommen '
@@ -235,9 +233,8 @@ final class Branchenseiten
                         . 'wovon er abhängt — Ausrichtung, Verschattung, Dachfläche —, nicht '
                         . 'welchen Sie erreichen.'],
                     ['titel' => 'Netzbetreiber und Anmeldung',
-                     'text'  => 'Wer die Anmeldung übernimmt, ist die häufigste Rückfrage vor '
-                        . 'einem Photovoltaik-Auftrag. Das gehört auf die Seite, nicht ins '
-                        . 'Erstgespräch.'],
+                     'text'  => 'Wer die Anmeldung übernimmt, klären Sie heute im Erstgespräch. '
+                        . 'Auf der Seite steht es einmal und gilt für jede Anfrage.'],
                     ['titel' => 'Preise für Anlagen',
                      'text'  => 'Ein Anlagenpreis ohne Ortstermin ist geraten. Auf der Seite '
                         . 'steht deshalb, wovon er abhängt und was der Ortstermin kostet — '
@@ -321,21 +318,19 @@ final class Branchenseiten
                         . 'Preissteigerung (ZVDH-Steckbrief März 2026). Das ist real weniger '
                         . 'für dieselbe Arbeit.'],
                     ['titel' => 'Das komplette Dach steht nicht auf der Seite',
-                     'text'  => 'Wer ein ganzes Dach vergibt, entscheidet über einen '
-                        . 'fünfstelligen Auftrag. Er will vorher wissen, wie der Aufbau '
-                        . 'aussieht, wie lange es dauert und wer das Gerüst stellt. Steht das '
-                        . 'nicht da, ruft er drei Betriebe an und nimmt den, der zuerst '
-                        . 'erklärt.'],
+                     'text'  => 'Ein ganzes Dach ist ein fünfstelliger Auftrag. Aufbau, Dauer '
+                        . 'und Gerüst erklären Sie heute am Telefon oder beim Ortstermin. Auf '
+                        . 'der Seite steht davon nichts.'],
                     ['titel' => 'Bewerber suchen zuerst die Website',
                      'text'  => 'Die Zahl der gewerblichen Arbeitnehmenden ging 2025 um 1,0 % '
                         . 'zurück (ZVDH-Steckbrief März 2026). Es ist das vierte '
                         . 'Rückgangsjahr in Folge; Ursache ist der Renteneintritt der '
-                        . 'Babyboomer. Wer jemanden sucht, wird zuerst nachgesehen.'],
+                        . 'Babyboomer. Auf Ihrer Seite steht dazu eine E-Mail-Adresse.'],
                     ['titel' => 'Das Gerüst steht in keinem Angebot, aber in jeder Rückfrage',
-                     'text'  => 'Wer ein Dach vergibt, will wissen, ob Gerüst, Entsorgung und '
-                        . 'Anmeldung dabei sind. Das entscheidet über vierstellige Beträge und '
-                        . 'wird trotzdem erst beim Ortstermin geklärt. Steht es auf der Seite, '
-                        . 'kommt die Anfrage schon mit der richtigen Erwartung.'],
+                     'text'  => 'Ob Gerüst, Entsorgung und Anmeldung im Preis stehen, '
+                        . 'entscheidet über vierstellige Beträge — und wird trotzdem erst beim '
+                        . 'Ortstermin geklärt. Steht es auf der Seite, kommt die Anfrage mit '
+                        . 'der richtigen Erwartung.'],
                 ],
 
                 'gehoert_drauf' => [
@@ -389,8 +384,8 @@ final class Branchenseiten
 
                 'fragen' => [
                     ['frage'   => 'Brauche ich einen Bereich für Bewerbungen?',
-                     'antwort' => 'Wenn Sie suchen, ja. Wer sich bewirbt, sieht zuerst auf die '
-                        . 'Website — und findet dort meistens nur eine E-Mail-Adresse.'],
+                     'antwort' => 'Wenn Sie suchen, ja. Eine E-Mail-Adresse im Impressum ist '
+                        . 'keine Stellenseite.'],
                     ['frage'   => 'Was ist mit Bildern von Baustellen?',
                      'antwort' => 'Baustellenbilder zeigen Arbeit, fertige Dächer zeigen das '
                         . 'Ergebnis. Wir nehmen beides, aber das Ergebnis nach vorn.'],
@@ -398,7 +393,7 @@ final class Branchenseiten
                      'antwort' => 'Dann bekommt die Sanierung die Hauptseite und der Neubau eine '
                         . 'Nebenseite. Die Struktur folgt Ihrem Geschäft, nicht der Branche.'],
                     ['frage'   => 'Soll ich Preise für ein Dach angeben?',
-                     'antwort' => 'Nein. Eine Zahl ohne Ortstermin ist geraten, und eine '
+                     'antwort' => 'Nein. Ohne Ortstermin ist jede Zahl geraten, und eine '
                         . 'Preisspanne erzeugt Anfragen, die Sie wieder absagen. Auf die Seite '
                         . 'gehört, wovon der Preis abhängt — Dachform, Fläche, Aufbau, Gerüst.'],
                 ],

@@ -64,9 +64,8 @@ final class Gruenderangaben
     public const MARKIERUNG = '[[FOTO-FEHLT]]';
 
     /** Der Satz neben der Markierung — er sagt, wo die Angaben herkommen. */
-    public const PLATZHALTERSATZ = 'Name, Foto und der Absatz stehen in den Betreiberdaten '
-        . 'unter Einstellungen. Solange eine der drei Angaben fehlt, geht die Seite nicht '
-        . 'produktiv.';
+    public const PLATZHALTERSATZ = 'Einzutragen unter Einstellungen. Ohne alle drei Angaben '
+        . 'geht die Seite nicht produktiv.';
 
     public function __construct(private readonly ?BetreiberdatenSpeicher $betrieb = null)
     {

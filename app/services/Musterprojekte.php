@@ -83,56 +83,44 @@ final class Musterprojekte
                     . 'eigenem Anfrageweg.',
                 'struktur'     => 'Start · vier Leistungsseiten · Über uns · Kontakt.',
                 'liefern'      => 'Leistungsliste, Einzugsgebiet, Fotos eigener Arbeiten.',
-                'warum_nicht_kleiner' => 'Auf einer Seite stünden vier Leistungen '
-                    . 'untereinander. Wer nach einer davon sucht, landet auf einem Absatz '
-                    . 'statt auf einer Seite — und die Suchmaschine hat nur ein Thema zu '
-                    . 'vergeben, nicht vier.',
+                'warum_nicht_kleiner' => 'Start trägt eine Seite. Für vier Leistungen mit je '
+                    . 'eigenen Bildern und eigenem Anfrageweg reicht das nicht, ohne dass drei '
+                    . 'davon zu einem Absatz werden.',
                 'ausfuehrlich' => [
-                    'Ein Malerbetrieb mit zwölf Leuten macht Innenanstrich, Fassade, '
-                        . 'Bodenbeläge und Trockenbau. Auf der alten Seite steht das als '
-                        . 'Aufzählung unter „Leistungen" — vier Zeilen, ein Absatz.',
-                    'Wer nach Fassadensanierung sucht, sucht nach Fassadensanierung und nicht '
-                        . 'nach einem Malerbetrieb. Er landet auf einer Seite, die von vier '
-                        . 'Dingen handelt, und muss selbst herausfinden, ob das dritte davon '
-                        . 'gemeint ist. Eine Suchmaschine hat dasselbe Problem: Sie kann einer '
-                        . 'Seite ein Thema zuordnen, nicht vier.',
-                    'Vier eigene Seiten lösen beides. Jede trägt ihr Thema, ihre Bilder und '
-                        . 'ihren eigenen Anfrageweg — und der Betrieb kann eine davon '
-                        . 'einzeln bewerben, ohne die anderen mitzuschleppen.',
+                    'Zwölf Leute, vier Leistungen: Innenanstrich, Fassade, Bodenbeläge, '
+                        . 'Trockenbau. Auf der alten Seite steht das als Aufzählung unter '
+                        . '„Leistungen" — vier Zeilen, ein Absatz.',
+                    'Je Leistung eine eigene Seite: eigene Überschrift, eigene Adresse, '
+                        . 'eigener Anfrageweg. Fotos einer Fassadensanierung stehen dort, wo es '
+                        . 'um Fassaden geht. Und der Betrieb kann eine Seite einzeln bewerben, '
+                        . 'ohne die anderen mitzuschleppen.',
                 ],
                 'dichte'    => 'compact',
                 'form'      => 'bold',
                 'bewegung'  => 'subtle',
                 'gestaltung' => 'Die Arbeiten sind das Argument: große Flächen, wenig Text. '
-                    . 'Gelesen wird oft mobil auf der Baustelle. Die eine sinnvolle Bewegung '
-                    . 'ist der Vorher-nachher-Wechsel.',
+                    . 'Gelesen wird oft mobil auf der Baustelle. Bewegung gibt es an einer '
+                    . 'Stelle — dem Vorher-nachher-Wechsel.',
             ],
             'physiotherapiepraxis' => [
                 'gattung'      => 'Physiotherapiepraxis',
                 'paket'        => 'start',
-                'ausgangslage' => 'Eine Adresse, feste Zeiten, Terminanfragen laufen übers '
+                'ausgangslage' => 'Ein Standort, feste Sprechzeiten, Termine laufen übers '
                     . 'Telefon.',
-                'empfohlen'    => 'Eine Seite, die Leistung, Zeiten und den Weg zur '
-                    . 'Terminanfrage zusammen trägt.',
-                'struktur'     => 'Eine Seite mit vier Abschnitten: Leistung, Zeiten, Weg, '
+                'empfohlen'    => 'Leistung, Zeiten und der Weg zum Termin auf einer Seite.',
+                'struktur'     => 'Vier Abschnitte auf einer Seite: Leistung, Zeiten, Weg, '
                     . 'Kontakt.',
                 'liefern'      => 'Leistungsspektrum, Öffnungszeiten, Kassenzulassung.',
                 'warum_nicht_kleiner' => 'Kleiner geht nicht — Start ist die erste Stufe. '
-                    . 'Größer wäre falsch: Eine zweite Seite müsste ein zweites Thema haben, '
-                    . 'und das gibt es hier nicht.',
+                    . 'Größer wäre falsch: Für eine zweite Seite bräuchte es ein zweites '
+                    . 'Thema, und das gibt es hier nicht.',
                 'ausfuehrlich' => [
-                    'Eine Praxis mit drei Behandlungsräumen, festen Sprechzeiten und einem '
-                        . 'Einzugsgebiet von wenigen Kilometern. Termine werden angerufen. '
-                        . 'Wer die Praxis sucht, sucht sie meist schon namentlich oder auf '
-                        . 'Empfehlung.',
-                    'Diese Seite muss drei Fragen beantworten und keine vierte: Was wird '
-                        . 'behandelt, wann ist offen, wie komme ich zu einem Termin. Alles '
-                        . 'andere — Team, Geschichte, Philosophie — steht auf solchen Seiten '
-                        . 'meist deshalb, weil eine Seite sonst zu leer aussieht.',
-                    'Deshalb bleibt es bei einer Seite mit vier Abschnitten. Eine zweite '
-                        . 'Seite müsste ein eigenes Thema tragen; hier gäbe es keins, und '
-                        . 'aufgeteilte Öffnungszeiten sind schlechter auffindbar als '
-                        . 'zusammenstehende.',
+                    'Drei Behandlungsräume, feste Sprechzeiten, ein Einzugsgebiet von wenigen '
+                        . 'Kilometern. Termine kommen übers Telefon herein.',
+                    'Drei Fragen sind zu beantworten: Was wird behandelt, wann ist offen, '
+                        . 'wie komme ich zu einem Termin. Dafür reichen vier Abschnitte. Für '
+                        . 'eine zweite Seite bräuchte es ein zweites Thema, und getrennte '
+                        . 'Öffnungszeiten wären schwerer zu finden als zusammenstehende.',
                 ],
                 'dichte'    => 'balanced',
                 'form'      => 'human',
@@ -156,18 +144,14 @@ final class Musterprojekte
                     . 'zwei Einstiege. Hier muss der Arbeitgeber einen anderen Weg finden als '
                     . 'der Arbeitnehmer — und die Kanzlei sucht daneben selbst Personal.',
                 'ausfuehrlich' => [
-                    'Eine Kanzlei mit vier Anwälten, Schwerpunkt Arbeitsrecht. Sie berät '
-                        . 'Arbeitgeber bei Kündigungen und vertritt Arbeitnehmer, die '
-                        . 'gekündigt wurden. Beide sollen sie finden, und keiner der beiden '
-                        . 'soll den Eindruck bekommen, hier sei er auf der falschen Seite.',
-                    'Das ist der Grund, aus dem eine Seite je Leistung hier nicht reicht. Es '
-                        . 'sind nicht vier Leistungen nebeneinander, sondern zwei Wege '
-                        . 'auseinander — jeder mit eigener Sprache, eigenen Beispielen und '
-                        . 'eigenem ersten Schritt.',
-                    'Dazu kommt ein dritter Leser, den die anderen beiden Fälle nicht haben: '
-                        . 'der Bewerber. Kanzleien dieser Größe suchen dauerhaft '
-                        . 'Referendare und Fachangestellte, und eine Karriereseite ohne '
-                        . 'eigene Struktur wird zur Adresse einer Sammelmailbox.',
+                    'Vier Anwältinnen und Anwälte, Schwerpunkt Arbeitsrecht. Beraten werden '
+                        . 'Arbeitgeber bei Kündigungen, vertreten werden Arbeitnehmer, die '
+                        . 'gekündigt wurden. Beide sollen die Kanzlei finden, ohne den Eindruck '
+                        . 'zu bekommen, hier seien sie falsch.',
+                    'Deshalb reicht hier eine Seite je Leistung nicht. Es sind zwei Wege '
+                        . 'auseinander, jeder mit eigener Sprache, eigenen Beispielen und '
+                        . 'eigenem ersten Schritt. Dazu kommt die Karriereseite: Ohne eigene '
+                        . 'Struktur bleibt davon eine Sammelmailbox übrig.',
                 ],
                 'dichte'    => 'editorial',
                 'form'      => 'precise',
@@ -233,7 +217,7 @@ final class Musterprojekte
             return '';
         }
 
-        return 'Die Startseite, sobald das Musterprojekt gebaut ist.';
+        return sprintf('Später die Startseite dieses %s.', $projekt['gattung']);
     }
 
     /** Der Dateiname, den die spätere Aufnahme tragen wird — im Bildplatz sichtbar. */

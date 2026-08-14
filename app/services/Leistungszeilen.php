@@ -24,7 +24,7 @@ final class Leistungszeilen
         return [
             [
                 'titel' => 'Strategie und Seitenstruktur',
-                'satz'  => 'Wir legen fest, welche Seiten Ihr Ziel wirklich brauchen — und welche nicht.',
+                'satz'  => 'Festgelegt wird, welche Seiten Ihr Ziel wirklich brauchen — und welche nicht.',
                 'tags'  => ['Sitemap', 'Nutzerführung', 'Suchintention'],
                 'ziel'  => null,
                 'ausfuehrlich' => [
@@ -38,7 +38,7 @@ final class Leistungszeilen
             ],
             [
                 'titel' => 'Webdesign und Programmierung',
-                'satz'  => 'Individuell aus unserem Designsystem programmiert, ohne WordPress und ohne Baukasten.',
+                'satz'  => 'Aus unserem Designsystem programmiert, ohne WordPress und ohne Baukasten.',
                 'tags'  => ['kein WordPress', 'responsive', 'schnell'],
                 'ziel'  => '/leistung-webdesign',
                 'ausfuehrlich' => [
@@ -51,7 +51,7 @@ final class Leistungszeilen
             ],
             [
                 'titel' => 'Website-Texte',
-                'satz'  => 'Wir schreiben die Texte aus Ihren Fakten und Stichpunkten — Sie liefern keinen fertigen Webtext.',
+                'satz'  => 'Geschrieben aus Ihren Fakten und Stichpunkten — fertigen Webtext liefern Sie nicht.',
                 'tags'  => ['aus Stichpunkten', 'Faktenprüfung'],
                 'ziel'  => '/leistung-texte',
                 'ausfuehrlich' => [
@@ -77,7 +77,7 @@ final class Leistungszeilen
             ],
             [
                 'titel' => 'Lokale Sichtbarkeit',
-                'satz'  => 'Echte Unternehmensdaten statt dünner Ortsseiten mit ausgetauschtem Stadtnamen.',
+                'satz'  => 'Echte Unternehmensdaten statt Ortsseiten mit ausgetauschtem Stadtnamen.',
                 'tags'  => ['Local SEO', 'konsistente Daten'],
                 'ziel'  => '/leistung-seo-lokal',
                 'ausfuehrlich' => [
@@ -89,7 +89,7 @@ final class Leistungszeilen
             ],
             [
                 'titel' => 'Domain und Launch',
-                'satz'  => 'Wir prüfen, verbinden und schalten live — Ihre bestehende E-Mail bleibt dabei erreichbar.',
+                'satz'  => 'Geprüft, verbunden, live geschaltet — Ihre bestehende E-Mail bleibt erreichbar.',
                 'tags'  => ['DNS', 'E-Mail-Schutz', 'Weiterleitungen'],
                 'ziel'  => null,
                 'ausfuehrlich' => [
@@ -102,7 +102,7 @@ final class Leistungszeilen
             ],
             [
                 'titel' => 'Kundenbereich und Freigaben',
-                'satz'  => 'Angebot, Fragen, Vorschau und Rückmeldungen laufen an einem Ort statt in E-Mail-Ketten.',
+                'satz'  => 'Angebot, Fragen, Vorschau und Rückmeldungen an einem Ort statt in E-Mail-Ketten.',
                 'tags'  => ['Fragen', 'Rückmeldung', 'Pflege'],
                 'ziel'  => '/leistung-portal',
                 'ausfuehrlich' => [
@@ -116,7 +116,7 @@ final class Leistungszeilen
             ],
             [
                 'titel' => 'Rundum-Schutz',
-                'satz'  => 'Wir betreiben die Website danach: Hosting, Sicherheit, Sicherungen, Überwachung.',
+                'satz'  => 'Danach der Betrieb: Hosting, Sicherheit, Sicherungen, Überwachung.',
                 'tags'  => ['Betrieb', 'Sicherungen', 'Überwachung'],
                 'ziel'  => '/leistung-wartung',
                 'ausfuehrlich' => [

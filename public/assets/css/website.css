@@ -1166,6 +1166,9 @@ h1, h2, h3 {
 
 .musterfall .musterkarte__umfang { margin-bottom: var(--s-3); }
 
+/* Der eine Satz der Karte — die Ausarbeitung steht auf `/musterprojekte`. */
+.musterkarte__satz { margin: var(--s-2) 0 0; font-size: var(--fs-small); color: var(--muted); }
+
 /* Der Bildplatz sitzt in der Karte und traegt dort keinen eigenen Aussenabstand:
    Die Karte setzt ihre Abstaende ueber `gap`, und zwei Abstandsquellen
    uebereinander ergeben einen doppelten. */

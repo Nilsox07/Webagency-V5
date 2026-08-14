@@ -3355,3 +3355,132 @@ Füllgrad jetzt bei 42 bis 64 % — bei denselben Texten.
 | 4 | **Die mobile Kartendarstellung ist nur in Chromium gesehen.** Die Umstellung von Karte auf Zeile hängt an `@media (max-width: 860px)`; das ist unkritisch, die Lime-Fläche der Empfehlung dort aber nicht mehr vorhanden | In Firefox und Safari öffnen |
 | 5 | **Der Gründerplatzhalter füllt seine Sektion bei 1440 px nur zu 20 %** — die Textseite ist kürzer geworden, die Bildseite trägt unverändert 427 px | Löst sich mit dem echten Foto |
 | 6 | **Gelaufen ist alles gegen MariaDB 10.11**, nicht gegen MySQL 8.4 oder MariaDB 11.4 | Auf der Zielumgebung erneut laufen lassen |
+
+
+---
+
+## 14.08.2026 — Textrunde: Satzanfänge, Dopplung, zwei Regelverstöße
+
+Kein Layout, kein CSS. Angefasst wurde `Startseitentexte`, `Musterprojekte`,
+`Musterprojektetexte`, `Leistungszeilen`, `Branchenseiten` und `Gruenderangaben` — dazu ein
+Bauteil, weil die Arbeitsteilung zwischen Karte und Übersichtsseite verlangt war.
+
+### Der Prüfbericht
+
+**Zwei Zählungen je Seite, und der Unterschied ist der Punkt.** Ein `dt`, ein Knopftext und der
+Pflichthinweis zählen als Satz mit — sie **müssen** aber identisch bleiben (Klasse 1 beim
+Pflichthinweis, Auflage aus Klasse 2 bei den Beschriftungen). Ein Ziel „kein Satzanfang öfter
+als dreimal" kann an ihnen nicht scheitern, ohne dass eine andere Regel bricht.
+
+| Seite | Wörter vorher | nachher | Sätze | versch. Anfänge | 3 häufigste | Prosa: versch. | 3 häufigste (Prosa) | Prosa über 3 |
+|---|---:|---:|---:|---:|---|---:|---|---|
+| `/` | 1.387 | **1.167** | 219 | 147 | Alle 5 · Sie 4 · Kein 4 | 66 | Der 3 · Was 3 · Ein 3 | **keiner** |
+| `/musterprojekte` | 820 | **685** | 93 | 63 | Warum 4 · Sie 4 · Drei 3 | 53 | Später 3 · Vier 3 · Start 3 | **keiner** |
+| `/website-sanitaer-heizung-klima` | 879 | 856 | 126 | 84 | Was 6 · Eine 5 · Wir 4 | 20 | Eine 3 · Wir 2 · Der 2 | **keiner** |
+| `/website-elektrotechnik` | 969 | 951 | 145 | 94 | Wir 6 · Was 6 · Die 5 | 21 | Wir 3 · Eine 2 · Die 2 | **keiner** |
+| `/website-dachdecker` | 968 | 925 | 142 | 97 | Wir 5 · Was 5 · Eine 4 | 21 | Eine 3 · Wir 2 · Die 2 | **keiner** |
+
+**In laufender Prosa erreicht keine der fünf Seiten mehr vier gleiche Satzanfänge.** Über alle
+Textknoten gezählt bleiben Treffer stehen; sie sind unten einzeln aufgeschlüsselt.
+
+**Auf der Startseite:** `Sie` fiel von 14 auf 4, `Wir` von 12 auf unter 4, `Eine` von 6 auf
+unter 4. Auf `/musterprojekte` fiel `Eine` von **10 auf 0**.
+
+### Die Treffer über drei, die stehen bleiben — und warum
+
+| Seite | Anfang | Anzahl | Was es ist |
+|---|---|---:|---|
+| `/` | `Alle` | 5 | dreimal der Pflichthinweis `Alle Preise netto zzgl. …` (**Klasse 1**), dazu die Knöpfe `Alle Leistungen im Überblick` und `Alle Musterprojekte ansehen` (letzterer in §8 **gebunden**) |
+| `/` | `Sie` | 4 | drei davon sind Kalibrierungssätze des Texter-Skills: `Sie liefern die Fakten.` · `Sie müssen nur nicht.` · `Sie wählen kein Paket.` |
+| `/` | `Kein` | 4 | zwei Glieder **eines** Satzes, dazu der Preisstufen-Kicker und ein Vertrauenspunkt |
+| `/musterprojekte` | `Warum` | 4 | dreimal die Beschriftung `Warum diese Stufe und nicht die nächstkleinere`, einmal die H2 |
+| `/musterprojekte` | `Sie` | 4 | dreimal die Beschriftung `Sie liefern` |
+| Branchenseiten | `Was` 5–6 | | die Abschnittsüberschriften `Was … wirklich beschäftigt` · `Was auf so eine Website gehört` · `Was es kostet` — dieselbe Folge auf jeder Branchenseite |
+| Branchenseiten | `Für` 4–5 | | die vier Preisstufen-Kicker, die auf **jeder** Seite mit Preisblock stehen |
+
+**Diese Stellen zu variieren, hieße die Auflage zu brechen, unter der sie überhaupt frei
+formulierbar sind.** Der Texter-Skill hält fest: „Innerhalb einer Fassung identisch. Wer den
+Knopf einmal benennt, benennt ihn überall so."
+
+### Geänderte Beschriftungen: keine
+
+Die Auflage verlangt die Liste im Prüfbericht. Vollständig, über neun Seiten erhoben:
+
+| Beschriftung | Art | Vorkommen |
+|---|---|---:|
+| `Bedarf prüfen lassen` | Knopf | 18 |
+| `Einschätzen lassen` | Knopf | 10 |
+| `Sonderprojekt besprechen` | Knopf | 5 |
+| `Alle Musterprojekte ansehen` · `Ablauf im Detail` · `Den Kundenbereich ansehen` | Knopf | je 1 |
+| `Platz für Ansicht` | Bildplatz | 11 |
+| `Musterprojekt — kein Kundenauftrag` | Fahne (**Klasse 1**) | 6 |
+| `Für ein Angebot` · `Für mehrere Leistungen` · `Für die erste Adresse am Ort` · `Kein Paket, sondern eine Vorprüfung` · `Empfehlung` | Preisstufe | je 5 |
+| `Ausgangslage` · `Empfohlen` · `Seitenstruktur` · `Sie liefern` · `Warum diese Stufe und nicht die nächstkleinere` · `Wie die Seite aussehen wird` | Musterprojekt | je 3 |
+| `Platz für das Foto` | Bildplatz | 2 |
+
+**Keine davon wurde in dieser Runde geändert.** Geändert wurde einmal der Bildplatz-**Satz**
+(nicht seine Beschriftung): aus dreimal `Die spätere Startseite.` wurde je Projekt
+`Später die Startseite dieses Malerbetriebs.` — das nimmt einen vierfachen Satzanfang heraus
+und sagt zugleich mehr.
+
+### Befund 3 — die falsche Behauptung ist raus
+
+> „Eine Suchmaschine hat dasselbe Problem: Sie kann einer Seite ein Thema zuordnen, nicht vier."
+
+Weg, und mit ihr die zweite Fassung derselben Aussage in `warum_nicht_kleiner`:
+„… und die Suchmaschine hat nur ein Thema zu vergeben, nicht vier."
+
+**Der Bestand ist nach derselben Aussage in anderer Formulierung durchsucht worden.** Gefunden
+wurden genau diese zwei Stellen, beide in `Musterprojekte`. Was jetzt dort steht, kommt ohne
+Aussage über Suchmaschinen aus: eigene Überschrift, eigene Adresse, eigener Anfrageweg, eigene
+Bilder, einzeln bewerbbar.
+
+Eine verwandte Stelle steht weiterhin auf `/website-sanitaer-heizung-klima` und ist umformuliert
+statt gestrichen: aus „Eine Seite beantwortet eine Suchanfrage" wurde „Je Seite ein Thema" — das
+beschreibt die **Seitenstruktur**, nicht das Verhalten der Suchmaschine.
+
+### Befund 4 — neun Aussagen über fremdes Kaufverhalten
+
+Regel 0a. Jede Ersetzung verschiebt die Aussage von einem Dritten auf **ihn selbst** oder auf
+die Seite:
+
+| Seite | Weggefallen | Steht jetzt da |
+|---|---|---|
+| SHK | „Wer eine Badsanierung plant, sucht anders als jemand, dessen Heizung ausgefallen ist." | zwei Aufträge teilen sich eine Überschrift, eine Adresse, ein Formular |
+| SHK | „Wer eine Heizung tauschen lässt, will vorher wissen …" | „Förderhöhe und Antragsweg erklären **Sie** am Telefon, in jedem Erstgespräch neu." |
+| Elektro | „Wer nur einen Preis sieht, vergleicht Preise." | „Auf **Ihrer** Seite steht heute ein Preis oder nichts." |
+| Elektro | „Wer eine Anlage anmeldet, will drei Dinge wissen …" | dieselben drei Dinge, aber als das, was **er** am Telefon erklärt |
+| Elektro | „… ist die häufigste Rückfrage vor einem Photovoltaik-Auftrag" (Marktaussage ohne Zählung) | „klären **Sie** heute im Erstgespräch" |
+| Dach | „… ruft er drei Betriebe an und nimmt den, der zuerst erklärt." | „Aufbau, Dauer und Gerüst erklären **Sie** heute am Telefon." |
+| Dach | „Wer jemanden sucht, wird zuerst nachgesehen." | „Auf **Ihrer** Seite steht dazu eine E-Mail-Adresse." |
+| Dach | „Wer ein Dach vergibt, will wissen, ob Gerüst … dabei sind." | „**Ob** Gerüst, Entsorgung und Anmeldung im Preis stehen, entscheidet über vierstellige Beträge." |
+| Dach | „Wer sich bewirbt, sieht zuerst auf die Website — und findet dort **meistens** nur eine E-Mail-Adresse." | „Eine E-Mail-Adresse im Impressum ist keine Stellenseite." |
+
+Dazu auf `/musterprojekte`: „Wer nach Fassadensanierung sucht, sucht nach Fassadensanierung und
+nicht nach einem Malerbetrieb." — ersatzlos, die Begründung trägt ohne sie.
+
+### Befund 2 — die Arbeitsteilung
+
+**Die Karte auf der Startseite zeigt den Fall in einem Satz, die Übersichtsseite trägt die
+Ausarbeitung.** Vorher standen Ausgangslage, Empfohlen, Seitenstruktur und Sie liefern an beiden
+Stellen — 258 Wörter, die zweimal dasselbe sagten.
+
+**Keine Aussage ist verloren:** Empfehlung, Struktur und was der Kunde liefert stehen unverändert
+auf `/musterprojekte`, dort zusätzlich mit „warum diese Stufe" und „wie die Seite aussehen wird".
+
+Auf der Startseite sind außerdem drei echte Dopplungen abgeräumt worden. SEO wurde dort an vier
+Stellen erklärt — im Preisblock, im SEO-Band mit Vorspann **und** drei Spalten, in der
+Leistungsliste und in der FAQ. Der Vorspann zählte auf, was die drei Spalten danach Wort für
+Wort aufteilen; die Aufzählung im Preisblock stand ein zweites Mal daneben.
+
+### Ungeprüft und gerissen
+
+| # | Punkt | Womit es zu prüfen ist |
+|---|---|---|
+| 1 | **Die Startseite bleibt über dem Ziel: 1.167 statt unter 1.100 Wörter.** Von 1.387 kommend sind das −16 %. Die beiden im letzten Lauf gebauten Sektionen tragen rund 190 Wörter; ohne sie läge die Seite bei etwa 975. Die verbleibenden 67 Wörter lassen sich nur noch aus gebundenem Text nehmen — Preismerkmale, die elf Punkte aus §5 Sektion 2, die sechs Einwände aus §5 Sektion 9 | Entscheidung: Ziel anheben oder eine der gebundenen Listen zur Kürzung freigeben |
+| 2 | **`/musterprojekte` unterschreitet jetzt die gebundene Untergrenze.** `17_SEITEN_SARTU.md` §4a bindet **700 bis 1.000 Wörter**; erreicht sind 685. Der Auftrag verlangte unter 700. Rang 1 sticht Rang 4, die Abweichung steht hier statt stillschweigend im Code | §4a auf die neue Untergrenze anpassen oder die Seite wieder über 700 heben |
+| 3 | **Die Musterkarte trägt nur noch eine der vier gebundenen Angaben.** `10_WEBSITE_SARTU.md` §8 bindet je Karte Ausgangslage, empfohlene Lösung, Seitenstruktur und was der Kunde liefert. Der Auftrag verlangte einen Satz und einen Weiterweg | §8 an die Arbeitsteilung anpassen |
+| 4 | **Über alle Textknoten gezählt stehen weiter Anfänge über drei.** Sie sind ausschließlich Pflichthinweis, gebundene Knöpfe und wiederkehrende Beschriftungen; die Tabelle oben führt jeden einzeln | Nur zu lösen, indem die Auflage „innerhalb einer Fassung identisch" fällt |
+| 5 | **Zwei Sätze auf `/musterprojekte` liegen über 20 Wörtern** (24 und 21). Regel 2 erlaubt das mit Begründung: Beide tragen eine Gegenüberstellung, die im kurzen Satz auseinanderfiele | Beim nächsten Durchgang neu ansehen |
+| 6 | **Die Branchenseiten sind nur auf Regel 0a durchgesehen**, nicht auf den vollen Prüfbericht aus `SARTU_TEXTREGELN.md` §2 | Vollständigen Prüfbericht je Branchenseite rechnen |
+| 7 | **Der Vierschritt ist nicht je Abschnitt nachgeprüft.** Geändert wurden einzelne Sätze; ob jeder Abschnitt noch Wiedererkennung, Konsequenz, Auflösung und Beleg in dieser Reihenfolge trägt, ist nicht gezählt | Abschnittsweise gegen den Skill halten |

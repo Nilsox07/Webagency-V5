@@ -129,9 +129,9 @@ final class Startseitentexte
      * Begründung dafür, die Liste nicht zu kürzen — die gehört in den Kommentar unten,
      * nicht auf die Seite. Was der Leser wissen muss, ist, dass die Liste kein Auszug ist.
      */
-    public const S2_ANTWORT = 'Bei SARTU gibt es keine Abstimmungstermine. Alles läuft über '
-        . 'Ihren Kundenbereich. Sie beantworten die Fragen zu Ihrem Betrieb, wann es Ihnen '
-        . 'passt. Diese Liste ist kein Auszug — mehr gibt es dort nicht zu tun.';
+    public const S2_ANTWORT = 'Alles läuft über Ihren Kundenbereich. Fragen zu Ihrem '
+        . 'Betrieb beantworten Sie dort, wann es Ihnen passt. Diese Liste ist kein Auszug — '
+        . 'mehr gibt es nicht zu tun.';
 
     /**
      * §5 Sektion 2 — elf Punkte, nicht vierzehn.
@@ -199,11 +199,11 @@ final class Startseitentexte
             ['titel' => 'Bedarfsscheck', 'bild' => null,
              'satz'  => 'Wenige Fragen zu Unternehmen, Ziel, Umfang und Domain.'],
             ['titel' => 'Geprüftes Angebot',
-             'satz'  => 'Sie bekommen Umfang, Preis und Zahlungsplan schriftlich.',
+             'satz'  => 'Umfang, Preis und Zahlungsplan stehen schriftlich.',
              'bild'  => ['datei' => 'sartu-ablauf-2-angebot.webp', 'breite' => 1280, 'hoehe' => 800,
                          'alt'   => 'Das Angebot im Kundenbereich: Nummer, Gültigkeit, empfohlener Umfang und die vorgesehene Seitenstruktur.']],
             ['titel' => 'Ihre Angaben', 'bild' => null,
-             'satz'  => 'Was wir schon wissen, tragen wir ein. Den Rest fragen wir Sie im Kundenbereich.'],
+             'satz'  => 'Bekanntes tragen wir ein. Den Rest fragen wir im Kundenbereich.'],
             /* Sektion 3, Schritt 4 ist die **einzige** Stelle der Startseite, an der der
                KI-Einsatz benannt wird — `10_WEBSITE_SARTU.md` Sektion 3 und `06_RECHT.md`
                („KI wird genutzt, Ergebnisse werden geprüft"). Die Aussage bleibt deshalb
@@ -212,19 +212,19 @@ final class Startseitentexte
                gemeinsames Subjekt, die klangen wie eine interne Notiz. Jetzt steht dort,
                wobei sie hilft und wer am Ende unterschreibt. */
             ['titel' => 'Produktion', 'bild' => null,
-             'satz'  => 'Wir bauen die Website. Beim Entwurf hilft uns KI; geprüft und '
+             'satz'  => 'Gebaut wird bei uns. Beim Entwurf hilft KI; geprüft und '
                 . 'freigegeben wird jede Seite von einem Menschen.'],
             ['titel' => 'Vorschau und Freigabe', 'bild' => null,
-             'satz'  => 'Sie sehen die fertige Website und sammeln Ihre Änderungen.'],
+             'satz'  => 'Ansehen, Änderungen sammeln, in einem Durchgang schicken.'],
             ['titel' => 'Start und Betrieb', 'bild' => null,
-             'satz'  => 'Wir schalten live und halten die Seite am Laufen.'],
+             'satz'  => 'Livegang, danach Betrieb und Pflege durch uns.'],
         ];
     }
 
     public const S3_IHR_ANTEIL = 'Ihr Anteil: was Ihr Betrieb macht, für wen und in welchem '
         . 'Gebiet. Dazu Bilder und Freigaben.';
 
-    public const S3_UNSER_ANTEIL = 'Unser Anteil: alles andere. Auch die Verantwortung, wenn '
+    public const S3_UNSER_ANTEIL = 'Unser Anteil: alles andere — samt der Verantwortung, wenn '
         . 'etwas nicht funktioniert.';
 
     // -------------------------------------------------------------- 4 Preise
@@ -241,9 +241,9 @@ final class Startseitentexte
      */
     public const S4_SUBLINE = 'Vier Stufen';
 
-    public const S4_EINLEITUNG = 'Sie müssen nicht wissen, wie viele Seiten Sie brauchen. Der '
-        . 'Bedarfsscheck zeigt, welcher Umfang voraussichtlich passt. Wir prüfen das '
-        . 'anschließend selbst nach.';
+    public const S4_EINLEITUNG = 'Wie viele Seiten Sie brauchen, müssen Sie nicht wissen. Der '
+        . 'Bedarfsscheck zeigt, welcher Umfang voraussichtlich passt. Nachgerechnet wird er '
+        . 'anschließend von uns.';
 
     /**
      * §5 Sektion 4, Vorgabe 3 aus dem UX-Audit: die Monatspauschale wird aufgeschlüsselt.
@@ -261,10 +261,15 @@ final class Startseitentexte
         'Kundenbereich',
     ];
 
-    /** §5 Sektion 4, Vorgabe 5: die SEO-Grundlage wird von späterer SEO-Arbeit abgegrenzt. */
-    public const SEO_GRUNDLAGE = 'SEO-Grundlage ab Livegang: Struktur, Titel, Metadaten, '
-        . 'interne Verlinkung, indexierbare Inhalte. Die laufende Weiterentwicklung ist ein '
-        . 'eigenes Thema.';
+    /**
+     * §5 Sektion 4, Vorgabe 5: die SEO-Grundlage wird von späterer SEO-Arbeit abgegrenzt.
+     *
+     * **Die Abgrenzung bleibt, die Aufzählung geht.** Was zur Grundlage gehört, steht zwei
+     * Sektionen weiter unten in drei sortierten Spalten; hier stand es ein zweites Mal als
+     * Reihe. Vorgabe 5 verlangt die Abgrenzung, nicht ihre Wiederholung.
+     */
+    public const SEO_GRUNDLAGE = 'Zum Livegang steht die SEO-Grundlage. Ihr laufender Ausbau '
+        . 'ist ein eigenes Angebot.';
 
     // -------------------------------------------------------------- 5 Die Zusage
 
@@ -274,16 +279,21 @@ final class Startseitentexte
 
     public const S7_H2 = 'Es gibt keine Aufpreisliste.';
 
-    public const S7_EINLEITUNG = 'Das alles steckt in jedem Angebot — Sie stellen es nicht '
-        . 'selbst zusammen und zahlen nichts davon extra. Wir gewichten die Bausteine passend '
-        . 'zu Ihrem Ziel.';
+    public const S7_EINLEITUNG = 'Alles davon steckt in jedem Angebot, nichts kostet extra. '
+        . 'Wie stark die einzelnen Bausteine ausfallen, richtet sich nach Ihrem Ziel.';
 
     public const S7_SEO_H2 = 'Ihre Website ist ab dem ersten Tag für Suchmaschinen vorbereitet.';
 
-    public const S7_SEO_TEXT = 'Jede SARTU-Website startet mit klaren Seitenthemen, sprechenden '
-        . 'Adressen, sauberer interner Verlinkung, Metadaten, strukturierten Daten und einer '
-        . 'soliden Performance-Grundlage. Späterer Ausbau baut auf echten Suchdaten auf — '
-        . 'nicht auf pauschalen SEO-Paketen.';
+    /**
+     * Am 14.08.2026 von 34 auf 20 Wörter gekürzt.
+     *
+     * Der Vorspann zählte sechs Grundlagen auf, die die drei Spalten darunter Wort für Wort
+     * noch einmal aufteilen — dieselbe Aussage zweimal hintereinander. Was er allein trägt,
+     * ist die Abgrenzung nach hinten: dass der Ausbau ein eigenes Thema ist. Die bleibt, die
+     * Aufzählung steht dort, wo sie sortiert ist.
+     */
+    public const S7_SEO_TEXT = 'In jeder Website steckt die Grundlage, fertig zum Livegang. '
+        . 'Was danach kommt, richtet sich nach echten Suchdaten — nicht nach einem SEO-Paket.';
 
     /** @return list<array{titel:string,satz:string}> */
     public static function seoSpalten(): array
@@ -346,39 +356,31 @@ final class Startseitentexte
     {
         return [
             ['frage'   => 'Arbeiten Sie bundesweit?',
-             'antwort' => 'Ja. Weil es keine Abstimmungstermine gibt, spielt die Entfernung '
-                . 'keine Rolle. Der Ablauf ist überall derselbe.'],
+             'antwort' => 'Ja. Ohne Abstimmungstermine spielt die Entfernung keine Rolle.'],
             ['frage'   => 'Muss ich mir selbst ein Paket aussuchen?',
-             'antwort' => 'Nein. Sie beschreiben Ihr Unternehmen und Ihr Ziel; wir empfehlen '
-                . 'genau einen Umfang und begründen ihn. Wenn ein kleinerer reicht, empfehlen '
-                . 'wir den kleineren.'],
+             'antwort' => 'Nein. Reicht die kleinere Stufe, empfehlen wir die kleinere — '
+                . 'mit Begründung.'],
             ['frage'   => 'Schreiben Sie die Texte?',
-             'antwort' => 'Ja. Sie liefern Fakten, Stichpunkte und vorhandene Unterlagen — wir '
-                . 'schreiben daraus die Website-Texte. Erfundene Belege oder ungeprüfte '
-                . 'Fachaussagen gibt es nicht.'],
+             'antwort' => 'Ja, aus Ihren Fakten und Unterlagen. Erfundene Belege oder '
+                . 'ungeprüfte Fachaussagen gibt es nicht.'],
             ['frage'   => 'Warum gibt es keine Liste mit Zusatzoptionen?',
-             'antwort' => 'Weil Zusatzlisten den Preis unklar machen. Ein Standardangebot endet '
-                . 'exakt beim genannten Festpreis. Passt eine Anforderung nicht hinein, '
-                . 'bekommen Sie dafür ein eigenes Angebot mit eigenem Festpreis.'],
+             'antwort' => 'Zusatzlisten machen den Preis unklar. Passt eine Anforderung nicht '
+                . 'in den Festpreis, bekommen Sie dafür ein eigenes Angebot.'],
             ['frage'   => 'Was passiert mit meiner Domain und meinen E-Mail-Adressen?',
-             'antwort' => 'Die Domain gehört Ihnen — auch wenn wir sie technisch verwalten. Vor '
-                . 'jeder Änderung sichern wir Ihre bestehenden Einträge, damit Ihre '
-                . 'E-Mail-Adressen beim Umschalten erreichbar bleiben.'],
+             'antwort' => 'Die Domain gehört Ihnen, auch wenn wir sie technisch verwalten. Vor '
+                . 'jeder Änderung sichern wir Ihre Einträge — die Post kommt weiter an.'],
             ['frage'   => 'Kann ich später selbst etwas ändern?',
-             'antwort' => 'Öffnungszeiten und Kontaktdaten pflegen Sie selbst im Kundenbereich. '
-                . 'Texte, Bilder und Seitenstruktur ändern wir für Sie — schreiben Sie uns '
-                . 'einfach, das ist im Betrieb enthalten.'],
+             'antwort' => 'Öffnungszeiten und Kontaktdaten pflegen Sie selbst. Texte, Bilder '
+                . 'und Struktur ändern wir — im Betrieb enthalten.'],
             ['frage'   => 'Ist SEO enthalten?',
-             'antwort' => 'Die Grundlage ja, ab dem ersten Tag: Seitenthemen, Metadaten, '
-                . 'strukturierte Daten, interne Verlinkung, Ladezeit. Ein späterer Ausbau folgt '
+             'antwort' => 'Ja, die Grundlage — ab dem ersten Tag. Der spätere Ausbau folgt '
                 . 'echten Suchdaten und ist ein eigenes Angebot.'],
             ['frage'   => 'Warum kein WordPress?',
-             'antwort' => 'Weil Sie sich dann um Updates, Plugins und Sicherheitslücken kümmern '
-                . 'müssten. Wir programmieren die Website ohne diese Abhängigkeiten und '
-                . 'betreiben sie selbst.'],
+             'antwort' => 'Updates, Plugins und Sicherheitslücken wären dann Ihre Sache. '
+                . 'Programmiert ohne diese Abhängigkeiten, betrieben von uns.'],
             ['frage'   => 'Können Sie eine bestimmte Google-Position zusichern?',
-             'antwort' => 'Nein, und niemand kann das seriös. Wir bauen das technische und '
-                . 'inhaltliche Fundament und halten es im Betrieb sauber.'],
+             'antwort' => 'Nein, und niemand kann das seriös. Das Fundament bauen wir, '
+                . 'sauber halten es die Updates im Betrieb.'],
         ];
     }
 
@@ -393,8 +395,8 @@ final class Startseitentexte
      * Mensch die Empfehlung nachrechnet, nicht ein Gespräch. Das steht jetzt da.
      */
     public const S10_TEXT = 'Der Bedarfsscheck fragt nicht nach Seitenzahlen, Farben oder '
-        . 'SEO-Stufen. Sie beantworten wenige Fragen zu Ihrem Geschäft und sehen sofort eine '
-        . 'vorläufige Empfehlung mit Preis. Danach rechnen wir sie nach und bestätigen oder '
+        . 'SEO-Stufen. Nach wenigen Fragen zu Ihrem Geschäft steht eine vorläufige '
+        . 'Empfehlung mit Preis da. Danach rechnen wir sie nach und bestätigen oder '
         . 'korrigieren sie im Angebot.';
 
     /** Nur Anzeige, nicht anklickbar — §5 Sektion 10. */

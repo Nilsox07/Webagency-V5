@@ -49,14 +49,16 @@ use Sartu\Services\Musterprojekte;
              weiter unten schon als Ueberschrift. */ ?>
     <p class="musterkarte__umfang"><?= Html::e(Musterprojekte::umfangszeile($schluessel)) ?></p>
 
-    <dl class="musterteile">
-<?php foreach (Musterprojekte::zeilen() as $feld => $beschriftung): ?>
-      <div>
-        <dt><?= Html::e($beschriftung) ?></dt>
-        <dd><?= Html::e((string) $projekt[$feld]) ?></dd>
-      </div>
-<?php endforeach; ?>
-    </dl>
+    <?php /* **Ein Satz je Karte, nicht vier Zeilen** — Arbeitsteilung vom 14.08.2026.
+             Die Karte hier und der Fall auf `/musterprojekte` trugen dieselben vier
+             Angaben; zusammen waren das 258 Woerter, die zweimal dasselbe sagten.
+             Die Karte zeigt jetzt die Ausgangslage und schickt weiter, die
+             Uebersichtsseite traegt die Ausarbeitung. **Keine Aussage ist verloren** —
+             Empfehlung, Struktur und was der Kunde liefert stehen unveraendert dort.
+
+             Das weicht von `10_WEBSITE_SARTU.md` §8 ab, der je Karte vier Angaben
+             bindet. Gemeldet in `OFFENE_PRUEFUNGEN.md`, nicht stillschweigend. */ ?>
+    <p class="musterkarte__satz"><?= Html::e((string) $projekt['ausgangslage']) ?></p>
   </article>
 <?php endforeach; ?>
 </div>

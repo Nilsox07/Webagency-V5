@@ -714,3 +714,26 @@ Gründersektion fällt von 31 auf 20 %, weil die Textseite kürzer wurde und die
 **Zwei Ziele gerissen:** 390 px sollte unter 14.000 (erreicht 16.899), 320 px unter 16.000
 (erreicht 18.941). Die Rechnung steht in `OFFENE_PRUEFUNGEN.md`; der verbleibende Weg wäre ein
 Akkordeon, und das legt Inhalt hinter einen Klick.
+
+---
+
+## H. Textrunde — 14.08.2026
+
+Reine Wortlautrunde. Kein CSS, kein Layout; eine Ausnahme im Markup, weil die
+Arbeitsteilung zwischen Musterkarte und Übersichtsseite sie verlangte.
+
+| Befund | Ergebnis |
+|---|---|
+| **1 — Satzanfänge** | In laufender Prosa erreicht **keine** der fünf geänderten Seiten mehr vier gleiche Anfänge. `Eine` auf `/musterprojekte` von 10 auf 0, `Sie` auf der Startseite von 14 auf 4, `Wir` von 12 auf 3 |
+| **2 — Dopplung** | `/musterprojekte` 820 → **685** Wörter (Ziel erreicht). Startseite 1.387 → **1.167** (Ziel 1.100 **gerissen**, Rechnung in `OFFENE_PRUEFUNGEN.md`) |
+| **3 — falsche Behauptung** | Beide Fassungen der Suchmaschinen-Aussage entfernt. Der Bestand ist nach derselben Aussage in anderer Formulierung durchsucht — zwei Stellen, beide abgeräumt |
+| **4 — Regel 0a** | **Neun** Aussagen über fremdes Kaufverhalten auf den drei Branchenseiten und `/musterprojekte` umgeschrieben. Jede verschiebt die Aussage auf ihn selbst oder auf die Seite |
+
+**Geänderte Beschriftungen: keine.** Die vollständige Liste über neun Seiten steht im
+Prüfbericht — sie belegt, dass Knopftexte, Fahnen und Feldbeschriftungen unverändert einheitlich
+sind.
+
+**Drei Abweichungen von der Spezifikation, alle gemeldet:** `/musterprojekte` unterschreitet mit
+685 Wörtern die in §4a gebundene Untergrenze von 700; die Musterkarte trägt nur noch eine der
+vier in §8 gebundenen Angaben; die Startseite bleibt 67 Wörter über dem Ziel. Rang 1 sticht in
+allen drei Fällen — die Abweichung steht in `OFFENE_PRUEFUNGEN.md`, nicht stillschweigend im Code.
