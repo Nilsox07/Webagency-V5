@@ -576,11 +576,30 @@ final class MarkupTest extends Datenbankfall
                 . 'nicht hier — Anweisung vom 13.08.2026.');
         }
 
-        // 2 — Der Vermerk steht **neben** dem Bild, nicht darauf. Gilt in jedem Zustand.
+        /*
+         * 2 — Der Vermerk verdeckt die Aufnahme nicht. Gilt in jedem Zustand.
+         *
+         * **Diese Zusicherung ist am 14.08.2026 praeziser geworden, nicht schwaecher.**
+         * Vorher stand hier `assertStringNotContainsString('position: absolute')` — eine
+         * Pruefung auf die *Bauweise* statt auf die *Wirkung*. Sie stammte aus der
+         * Anweisung vom 13.08.2026 („neben dem Bild, nicht darauf") und war richtig
+         * gegen den damaligen Zustand: Der Vermerk lag mitten auf dem Bildschirm.
+         *
+         * Die Anweisung vom 14.08.2026 verlangt das Gegenteil der Bauweise und dasselbe
+         * Ergebnis: „Der Vermerk schwebt frei unter dem Geraet. Er gehoert an dessen
+         * Rand." Beides zusammen geht nur ueber die Wirkung — der Vermerk sitzt an der
+         * Kante des Gehaeuses, ueber dem Deckel, und **ueberschneidet die Aufnahme
+         * nicht**. Gemessen wird das in `OberflaecheTest`; hier steht, woran es haengt:
+         * Der Deckel beginnt im SVG bei y=46, der Bildschirm bei y=68. Der Vermerk sitzt
+         * bei `top: 0` und ist rund 30 px hoch — er endet, bevor der Schirm anfaengt.
+         */
         $this->assertStringContainsString('<figcaption class="geraet__marke">', $bild);
         $this->assertSame(1, preg_match('#\.geraet__marke \{(.*?)\}#s', $css, $treffer));
-        $this->assertStringNotContainsString('position: absolute', $treffer[1],
-            'Der Vermerk liegt wieder auf dem Bild. Angewiesen ist „neben dem Bild, nicht darauf".');
+        $this->assertStringNotContainsString('inset: 0', $treffer[1],
+            'Der Vermerk liegt wieder ueber dem ganzen Bild.');
+        $this->assertMatchesRegularExpression('#top:\s*0#', $treffer[1],
+            'Der Vermerk sitzt nicht mehr an der Oberkante des Geraets. Weiter unten '
+            . 'ueberdeckt er die Aufnahme — genau das war am 13.08.2026 der Fehler.');
 
         if (!is_file($mockup)) {
             // 3 — Ohne Mockup steht das Geraet als Inline-SVG. §4b (Rang 1) verlangt es:

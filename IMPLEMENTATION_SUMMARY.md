@@ -737,3 +737,66 @@ sind.
 685 Wörtern die in §4a gebundene Untergrenze von 700; die Musterkarte trägt nur noch eine der
 vier in §8 gebundenen Angaben; die Startseite bleibt 67 Wörter über dem Ziel. Rang 1 sticht in
 allen drei Fällen — die Abweichung steht in `OFFENE_PRUEFUNGEN.md`, nicht stillschweigend im Code.
+
+---
+
+## I. Abnahmeprüfung der Oberfläche — 14.08.2026
+
+**Neu: `tests/OberflaecheTest.php` (zwölf Prüfungen, 1.321 Zusicherungen) und
+`tools/oberflaeche.mjs`.** Der Test ist ab jetzt unantastbar wie `TenantIsolationTest`: nie
+löschen, nie abschwächen, um grün zu werden. Wer eine Grenze reisst, hebt sie nicht an, sondern
+behebt die Ursache — oder trägt eine Begründung daneben ein.
+
+**Warum zwei Dateien.** `oberflaeche.mjs` misst im Browser, `OberflaecheTest.php` bewertet die
+Zahlen. Vier der neun Eigenschaften — Überlauf, Höhe, Sprungabstand, Lime-Fläche — stehen
+nirgends im Markup; sie entstehen erst, wenn ein Browser das CSS anwendet.
+
+| Prüfung | Ergebnis |
+|---|---|
+| 1 — Adressliste vollständig | 24 Adressen, gegen die Routenliste **und** gegen `16_SEO_GEO_SARTU.md` gehalten. `/foerderung` ist als Schuld mit Fundstelle eingetragen |
+| 2 — kein waagerechter Überlauf | **null** bei 1920, 1440, 1024, 768, 390, 320 px über alle achtzehn messbaren Adressen |
+| 3 — Höhe unter der Obergrenze | alle achtzehn darunter; die Startseite mit 94 px Luft (9.906 von 10.000). Sieben Adressen tragen eine eigene Grenze mit Begründung |
+| 4 — Sprungabstand > Kopfhöhe | alle Sprungziele: 125 px Abstand gegen 93–96 px Kopfhöhe |
+| 5 — jeder Bildplatz mit Seitenverhältnis | sieben Bildplätze, keiner auf `auto` |
+| 6 — kein Satzanfang öfter als dreimal | erfüllt in laufender Prosa; Beschriftungen und Pflichthinweise ausgenommen |
+| 7 — keine Auszeichnungsreste | **null** `**`, `##`, `](` im ausgelieferten Text |
+| 8 — keine zusammengebaute Nennung | `sprintf` mit Artikel plus Gattung entfernt; der Test sucht die Fügung im Text |
+| 9 — keine Lime-Fläche über 40.000 px² | grösster Wert 19.760 bei 1440 px. Über alle sechs Breiten von Hand gemessen: 36.675 bei 768 px |
+
+### Die vier offenen Punkte
+
+| Punkt | Ergebnis |
+|---|---|
+| **a — aufgeklappte Basis** | Das SVG trägt jetzt Basis, Tastenfeld (5 × 14), Leertaste, Trackpad, Vorderkante und Griffmulde. Die Anteile stammen aus `design/geraet.html` und sind nicht geschätzt: Tastenfeld 0,102–0,549 der Basistiefe, Trackpad 0,623–0,893, Kante ab 0,949 |
+| **b — Gattung doppelt** | Der Satz steht je Projekt in den Daten (`bildsatz`) statt aus `sprintf` gebaut |
+| **c — Bildplätze auf `auto`** | war bereits am 13.08.2026 behoben; gemessen: keiner auf `auto`. Prüfung 5 nagelt es fest |
+| **d — Vermerk `Musteransicht`** | sitzt an der Oberkante des Gehäuses statt frei darunter. Er bleibt ein `figcaption` — er beschriftet die Aufnahme und wird dort vorgelesen; nur seine Lage ändert sich |
+
+**Die Basis rechnet in PHP, nicht im SVG.** Sie ist ein Trapez — hinten am Scharnier so breit
+wie der Deckel, vorn breiter. Eine Taste als gerades Rechteck darauf steht quer zur Fläche und
+verrät die Zeichnung sofort. `punkt(u, v)` liefert zu jedem Anteil in Breite und Tiefe den Punkt
+auf der Fläche; Tasten, Leertaste, Trackpad und Vorderkante werden damit gebaut.
+
+**Zwei Farbfestlegungen aus dem Entwurf, beide gegen die erste Fassung:** Die Taste ist
+**heller** als die Fuge dazwischen (`#23261f` gegen `#080908`) — umgekehrt verschwindet das
+Tastenfeld im Sockel. Und der Verlauf der Basis fällt **früh** ab statt gleichmässig; ein
+gerader Verlauf hält die obere Hälfte so hell, dass die Tasten darin untergehen.
+
+### Eine bestehende Zusicherung ist geändert worden
+
+`MarkupTest` prüfte, dass `.geraet__marke` **kein** `position: absolute` trägt — aus der
+Anweisung vom 13.08.2026 („neben dem Bild, nicht darauf"). Die Anweisung vom 14.08.2026
+verlangt die entgegengesetzte Bauweise bei gleichem Ergebnis („an dessen Rand"). Geprüft wird
+jetzt die **Wirkung** statt der Bauweise: kein `inset: 0`, und `top: 0`. Begründung und
+Rechnung in `OFFENE_PRUEFUNGEN.md`.
+
+### Zwei eigene Fehler, beide gemeldet
+
+**Die zusammengebaute Nennung** stammt aus meinem Lauf vom 13.08.2026: „Später die Startseite
+dieses Malerbetrieb." **Das Trackpad stand links der Mitte** — mein Fehler in diesem Lauf, mit
+einer Begründung daneben, die nicht stimmte. Aufgefallen ist es beim Ansehen einer Aufnahme,
+nicht beim Messen; der Test hält jetzt die Mittellinie bei x=463 ± 6 fest.
+
+**Der Lauf braucht drei Dinge, die keine Fremdumgebung von selbst stellt:** einen laufenden
+Webserver, `NODE_PATH` auf das Verzeichnis mit Playwright und `PHP_CLI_SERVER_WORKERS=8`.
+`php -S` ist einfädig — sechs Browserkontexte gleichzeitig warten gegenseitig auf ihn.

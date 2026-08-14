@@ -3484,3 +3484,96 @@ Wort aufteilen; die Aufzählung im Preisblock stand ein zweites Mal daneben.
 | 5 | **Zwei Sätze auf `/musterprojekte` liegen über 20 Wörtern** (24 und 21). Regel 2 erlaubt das mit Begründung: Beide tragen eine Gegenüberstellung, die im kurzen Satz auseinanderfiele | Beim nächsten Durchgang neu ansehen |
 | 6 | **Die Branchenseiten sind nur auf Regel 0a durchgesehen**, nicht auf den vollen Prüfbericht aus `SARTU_TEXTREGELN.md` §2 | Vollständigen Prüfbericht je Branchenseite rechnen |
 | 7 | **Der Vierschritt ist nicht je Abschnitt nachgeprüft.** Geändert wurden einzelne Sätze; ob jeder Abschnitt noch Wiedererkennung, Konsequenz, Auflösung und Beleg in dieser Reihenfolge trägt, ist nicht gezählt | Abschnittsweise gegen den Skill halten |
+
+---
+
+## 14.08.2026 — die Oberfläche bekommt eine Abnahmeprüfung
+
+`tests/OberflaecheTest.php`, gebaut nach dem Muster von `TenantIsolationTest`. Er läuft gegen
+den laufenden Webserver, misst im Browser und bewertet die Zahlen in PHP. **Zwölf Prüfungen,
+1.321 Zusicherungen, 20 Sekunden.**
+
+Die Trennung ist Absicht: `tools/oberflaeche.mjs` **misst**, `OberflaecheTest.php` **bewertet**.
+Vier der neun Eigenschaften — Überlauf, Höhe, Sprungabstand, Lime-Fläche — stehen nirgends im
+Markup; sie entstehen erst, wenn ein Browser das CSS anwendet. Ein Test, der sie aus dem HTML
+herleitet, baut die Kaskade nach und übersieht dabei genau die Fehler, die er finden soll.
+
+### Was gemessen wurde — alle achtzehn Adressen mit Layout
+
+| Adresse | 1440 px | Grenze | 390 px | Grenze | grösste Lime-Fläche |
+|---|---:|---:|---:|---:|---:|
+| `/` | 9.906 | 10.000 | 15.706 | 16.000 | 36.675 |
+| `/ablauf` | 5.832 | 6.000 | 8.318 | 16.000 | 18.675 |
+| `/briefing` | 957 | 6.000 | 1.176 | 16.000 | 13.226 |
+| `/kontakt` | 2.463 | 6.000 | 3.421 | 16.000 | 16.652 |
+| `/leistung-portal` | 5.413 | 6.000 | 6.987 | 16.000 | 18.675 |
+| `/leistung-seo-lokal` | 4.681 | 6.000 | 6.188 | 16.000 | 18.675 |
+| `/leistung-texte` | 4.571 | 6.000 | 5.990 | 16.000 | 18.675 |
+| `/leistung-wartung` | 4.745 | 6.000 | 5.967 | 16.000 | 18.675 |
+| `/leistung-webdesign` | 4.637 | 6.000 | 5.949 | 16.000 | 18.675 |
+| `/leistungen` | 6.021 | 6.500 | 9.220 | 10.000 | 18.675 |
+| `/lexikon` | 2.721 | 6.000 | 4.395 | 16.000 | 13.226 |
+| `/musterprojekte` | 7.500 | 8.100 | 8.875 | 9.600 | 18.675 |
+| `/preise` | 6.080 | 6.600 | 8.557 | 9.300 | 36.675 |
+| `/ratgeber` | 3.120 | 6.000 | 4.378 | 16.000 | 13.226 |
+| `/ueber-uns` | 4.477 | 6.000 | 5.652 | 16.000 | 18.675 |
+| `/website-dachdecker` | 7.981 | 8.600 | 11.203 | 12.100 | 36.675 |
+| `/website-elektrotechnik` | 8.012 | 8.600 | 11.373 | 12.100 | 36.675 |
+| `/website-sanitaer-heizung-klima` | 7.449 | 8.600 | 10.692 | 12.100 | 36.675 |
+
+Waagerechter Überlauf: **null** bei allen sechs Breiten und allen achtzehn Adressen.
+Bildplätze ohne Seitenverhältnis: **null**. Auszeichnungsreste im Text: **null**.
+
+### Vier Punkte, an denen die Prüfung eng steht
+
+| # | Punkt | Womit es zu prüfen ist |
+|---|---|---|
+| 1 | **Die Startseite hat 94 px Luft.** 9.906 gegen 10.000 — ein zusätzlicher Absatz reisst die Grenze. Das ist gewollt eng: Der Auftrag setzt 10.000, und die Grenze wird nicht angehoben. Wer die Seite ergänzt, muss an anderer Stelle Höhe abbauen | Beim nächsten Zubau zuerst messen, dann schreiben |
+| 2 | **Die grösste Lime-Fläche liegt bei 92 % der Obergrenze.** 36.675 von 40.000 Quadratpixeln, gemessen bei 768 px auf `/`, `/preise` und den drei Branchenseiten. Bei 1440 px sind es 19.760 — die Fläche wächst, weil der Block dort einspaltig wird | Beim nächsten Eingriff am Preisblock nachmessen |
+| 3 | **`/foerderung` fehlt.** `16_SEO_GEO_SARTU.md` Zeile 112 führt sie mit Priorität 0.9, ergänzt am 09.08.2026; sie liefert 404. **Sie ist bis zum 14.08.2026 nie gemeldet worden**, weil niemand die Adressliste gegen die Spezifikation hielt. Der Inhalt hängt an `FOERDERUNG_KONZEPT.md` („verweisen statt kopieren") | Die Seite bauen — oder die Adresse aus `16_SEO_GEO_SARTU.md` streichen |
+| 4 | **Sieben Adressen tragen eine eigene Höhengrenze über der Regelhöhe von 6.000 px**, je mit einer Zeile Begründung im Test. Das ist die vom Auftrag verlangte Bauform — die Grenze wird begründet, nicht angehoben. Es bleibt trotzdem eine Abweichung von der Regel | Entscheidung, ob die Regelhöhe für Branchenseiten anzuheben ist |
+
+### Was der Test nicht prüft
+
+| # | Punkt | Womit es zu prüfen ist |
+|---|---|---|
+| 5 | **Der Test braucht einen laufenden Webserver, `NODE_PATH` und `PHP_CLI_SERVER_WORKERS=8`.** Ohne die drei bricht er mit einer eigenen Meldung ab, statt grün durchzulaufen — aber er läuft in keiner Fremdumgebung, die das nicht stellt. `php -S` ist einfädig: Sechs Browserkontexte gleichzeitig warten gegenseitig auf ihn | Vor dem ersten Fremdlauf einen Startvorspann bauen, der den Server selbst hochfährt |
+| 6 | **Prüfung 6 zählt Satzanfänge in laufender Prosa**, nicht über alle Textknoten. Beschriftungen, Knöpfe, Überschriften und Aufzählungspunkte sind ausgenommen — sie müssen innerhalb einer Fassung identisch bleiben und würden die Zählung sonst zwangsläufig reissen. Dieselbe Grenze wie in der Textrunde vom selben Tag | Nur zu lösen, indem die Auflage „innerhalb einer Fassung identisch" fällt |
+| 7 | **Prüfung 9 misst Lime nur bei 1440 px.** Die 36.675 Quadratpixel aus Punkt 2 stammen aus einer Handmessung über alle sechs Breiten, nicht aus dem Test. Bei 768 px liegt die Fläche höher als bei 1440 | Die Prüfung über alle Breiten führen — sie würde heute mit 36.675 gegen 40.000 noch bestehen |
+| 8 | **Sechs Adressen liefern ohne Vorbedingung kein Layout** und werden deshalb nicht gemessen: `/agb`, `/impressum`, `/datenschutz` (Rechtstext nicht freigegeben) sowie die drei Bedarfsscheck-Folgeseiten (ohne Sitzung 303). Sie bleiben in Prüfung 1 — sie sind bekannt, nicht vergessen. **Wer eine Adresse dort einträgt, um eine gerissene Grenze loszuwerden, umgeht den Test** | Die drei Rechtstexte nach der Freigabe erneut messen |
+
+### Eine bestehende Zusicherung ist geändert worden — und warum das keine Abschwächung ist
+
+`MarkupTest::testGeraeterahmen` prüfte bis heute, dass `.geraet__marke` **kein**
+`position: absolute` trägt. Diese Zusicherung stammt aus der Anweisung vom 13.08.2026 („neben
+dem Bild, nicht darauf") und war gegen den damaligen Zustand richtig: Der Vermerk lag mitten auf
+dem Bildschirm.
+
+Die Anweisung vom 14.08.2026 verlangt die **entgegengesetzte Bauweise** bei **gleichem
+Ergebnis**: „Der Vermerk schwebt frei unter dem Gerät. Er gehört an dessen Rand."
+
+Beides zusammen geht nur über die Wirkung. Geprüft wird jetzt: kein `inset: 0` (der Vermerk
+liegt nicht über dem ganzen Bild) und `top: 0` (er sitzt an der Oberkante). Der Deckel beginnt
+im SVG bei y=46, der Bildschirm bei y=68, der Vermerk ist rund 30 px hoch — er endet, bevor der
+Schirm anfängt. **Die Prüfung ist präziser geworden, nicht nachgiebiger:** Sie hält jetzt die
+Lage fest statt der Bauweise, und sie fällt weiterhin, sobald der Vermerk nach unten wandert.
+
+### Zwei eigene Fehler, beide aus vorangegangenen Läufen
+
+- **Die zusammengebaute Nennung** in `Musterprojekte::bildsatz()` — `sprintf('Später die
+  Startseite dieses %s.', $gattung)` ergab „dieses Malerbetrieb", „dieses
+  Physiotherapiepraxis", „dieses Arbeitsrechtskanzlei". Der Fehler stammt aus meinem eigenen
+  Lauf vom 13.08.2026. Der Satz steht jetzt je Projekt in den Daten; Prüfung 8 hält es fest und
+  sucht darüber hinaus im ausgelieferten Text nach jeder Fügung aus Artikel und Gattungswort.
+- **Das Trackpad stand links der Mitte** — mein Fehler in diesem Lauf, mit einer Begründung
+  daneben, die nicht stimmte („das Telefon verdeckt die rechte Vorderfläche"). Nachgerechnet:
+  Das Telefon beginnt bei x=756, die rechte Kante des mittigen Trackpads liegt bei x≈575.
+  `design/geraet.html` setzt `margin: 16px auto 0`. Aufgefallen ist es erst beim Ansehen einer
+  Aufnahme, nicht beim Messen — der Test hält jetzt die Mittellinie bei x=463 ± 6 fest.
+
+### Ein Punkt des Auftrags war schon behoben
+
+Punkt c — „die vier Bildplätze auf auto bekommen ihr Seitenverhältnis". Sie tragen es seit dem
+Lauf vom 13.08.2026 (`data-verhaeltnis` plus je eine CSS-Regel; als `style` wäre es unter der
+eigenen CSP wirkungslos). Gemessen am 14.08.2026: **sieben Bildplätze auf zwei Seiten, keiner
+auf `auto`.** Prüfung 5 nagelt es fest.

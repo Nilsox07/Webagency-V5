@@ -68,7 +68,8 @@ final class Musterprojekte
      *
      * @return array<string,array{
      *     gattung:string, paket:string, ausgangslage:string, empfohlen:string,
-     *     struktur:string, liefern:string, warum_nicht_kleiner:string, ausfuehrlich:list<string>,
+     *     struktur:string, liefern:string, bildsatz:string, warum_nicht_kleiner:string,
+     *     ausfuehrlich:list<string>,
      *     dichte:string, form:string, bewegung:string, gestaltung:string
      * }>
      */
@@ -83,6 +84,7 @@ final class Musterprojekte
                     . 'eigenem Anfrageweg.',
                 'struktur'     => 'Start · vier Leistungsseiten · Über uns · Kontakt.',
                 'liefern'      => 'Leistungsliste, Einzugsgebiet, Fotos eigener Arbeiten.',
+                'bildsatz'     => 'Später die Startseite mit den vier Leistungsseiten.',
                 'warum_nicht_kleiner' => 'Start trägt eine Seite. Für vier Leistungen mit je '
                     . 'eigenen Bildern und eigenem Anfrageweg reicht das nicht, ohne dass drei '
                     . 'davon zu einem Absatz werden.',
@@ -111,6 +113,7 @@ final class Musterprojekte
                 'struktur'     => 'Vier Abschnitte auf einer Seite: Leistung, Zeiten, Weg, '
                     . 'Kontakt.',
                 'liefern'      => 'Leistungsspektrum, Öffnungszeiten, Kassenzulassung.',
+                'bildsatz'     => 'Später die Startseite mit Leistung, Zeiten und Terminweg.',
                 'warum_nicht_kleiner' => 'Kleiner geht nicht — Start ist die erste Stufe. '
                     . 'Größer wäre falsch: Für eine zweite Seite bräuchte es ein zweites '
                     . 'Thema, und das gibt es hier nicht.',
@@ -140,6 +143,7 @@ final class Musterprojekte
                     . 'Karriere · Kontakt.',
                 'liefern'      => 'Tätigkeitsschwerpunkte, Werdegang je Person, '
                     . 'Pflichtangaben der Kammer.',
+                'bildsatz'     => 'Später die Startseite mit den beiden Einstiegen.',
                 'warum_nicht_kleiner' => 'Wachstum trägt eine Seite je Leistung, aber keine '
                     . 'zwei Einstiege. Hier muss der Arbeitgeber einen anderen Weg finden als '
                     . 'der Arbeitnehmer — und die Kanzlei sucht daneben selbst Personal.',
@@ -211,13 +215,7 @@ final class Musterprojekte
      */
     public static function bildsatz(string $schluessel): string
     {
-        $projekt = self::alle()[$schluessel] ?? null;
-
-        if ($projekt === null) {
-            return '';
-        }
-
-        return sprintf('Später die Startseite dieses %s.', $projekt['gattung']);
+        return (string) (self::alle()[$schluessel]['bildsatz'] ?? '');
     }
 
     /** Der Dateiname, den die spätere Aufnahme tragen wird — im Bildplatz sichtbar. */

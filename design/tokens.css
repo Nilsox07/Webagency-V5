@@ -83,6 +83,16 @@
   --geraet-rahmen:#2a2419;   /* Sockel des Laptops, oben */
   --geraet-sockel:#1a1610;   /* Sockel des Laptops, unten */
   --geraet-kerbe:#0d0b08;    /* die Kerbe an der Vorderkante */
+  /* Tastenfeld und Trackpad — `design/geraet.html` nennt sie als Teil des groessten
+     Einzeleffekts: „Fehlt die Basis, sieht das Geraet aus wie ein Bildschirm auf einem
+     Stiel."
+
+     **Die Taste ist HELLER als die Fuge dazwischen, nicht dunkler.** Der Entwurf setzt
+     `repeating-linear-gradient(90deg, #23261f 0 2.9%, #080908 2.9% 3.55%)` — die
+     Tastenflaeche #23261f, der Spalt #080908. Der erste Bau hatte es umgekehrt, und
+     das Tastenfeld verschwand im Sockel. */
+  --geraet-taste:#2b2e26;
+  --geraet-trackpad:#24271f;
 
   /* ---- Radien -------------------------------------------- */
   /* --rk skaliert die gesamte Formsprache auf einmal.

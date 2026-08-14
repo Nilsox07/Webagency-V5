@@ -1400,7 +1400,6 @@ h1, h2, h3 {
   /* Das Geraet fuellt seine Spalte. Im Entwurf steht es in der 45-fr-Spalte und
      reicht bis an deren Kante; enger gesetzt wirkt es wie ein Beiwerk. */
   width: 100%;
-  padding-bottom: var(--s-4);
 }
 
 /* Gilt fuer beide Faelle — das SVG und das gerenderte Mockup. */
@@ -1421,9 +1420,22 @@ h1, h2, h3 {
    Diese Aenderung bleibt, auch nachdem der Geraeterahmen wiederhergestellt
    wurde — sie haengt nicht am Rahmen, sondern an der Frage, ob der Vermerk
    die Aufnahme verdeckt. */
+/* **Der Vermerk sitzt am Rand des Geraets, nicht frei darunter.**
+   `design/geraet.html` setzt ihn als `.marke` absolut an die obere linke Ecke von
+   `.geraete`. Als `figcaption` unter der Zeichnung schwebte er ohne Bezug im Raum —
+   dreimal beanstandet. Er bleibt ein `figcaption`, weil er die Aufnahme beschriftet
+   und dort auch vorgelesen wird; nur seine Lage aendert sich.
+
+   `top: 0` statt der negativen Verschiebung des Entwurfs: Das SVG traegt oben
+   46 Einheiten Luft ueber dem Deckel, der Vermerk liegt damit auf der Kante des
+   Gehaeuses statt darueber. */
 .geraet__marke {
+  position: absolute;
+  left: 0;
+  top: 0;
+  z-index: 2;
   display: inline-block;
-  margin: var(--s-2) 0 0;
+  margin: 0;
   padding: var(--s-1) var(--s-2);
   border: 1px solid var(--line);
   border-radius: var(--r-pill);
