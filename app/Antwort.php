@@ -21,10 +21,55 @@ final class Antwort
     ) {
     }
 
-    /** @param array<string,string> $kopfzeilen */
+    /**
+     * @param array<string,string> $kopfzeilen
+     *
+     * **`+` behält den linken Schlüssel.** Ein `Content-Type` in `$kopfzeilen` gewinnt
+     * deshalb **nicht** — er wird stillschweigend verworfen. Das ist hier gewollt (eine
+     * HTML-Antwort ist HTML), und `datei()`, `bild()`, `xml()` und `klartext()` bestehen
+     * genau deswegen als eigene Fabriken.
+     *
+     * Am 15.08.2026 gemessen, was passiert, wenn man es doch versucht: `sitemap.xml`,
+     * `robots.txt` und `llms.txt` gingen als `text/html` hinaus, weil sie `html()` mit
+     * einer abweichenden Kopfzeile aufriefen. Eine als HTML ausgelieferte Sitemap liest
+     * kein Suchdienst als Sitemap.
+     */
     public static function html(string $rumpf, int $status = 200, array $kopfzeilen = []): self
     {
         return new self($status, ['Content-Type' => 'text/html; charset=utf-8'] + $kopfzeilen, $rumpf);
+    }
+
+    /**
+     * XML für Maschinen — `sitemap.xml`.
+     *
+     * Eigene Fabrik statt `html()` mit anderer Kopfzeile: siehe dort. `nosniff` gehört
+     * dazu, damit der Browser den Typ nicht doch errät.
+     *
+     * @param array<string,string> $kopfzeilen
+     */
+    public static function xml(string $rumpf, array $kopfzeilen = []): self
+    {
+        return new self(200, [
+            'Content-Type'           => 'application/xml; charset=utf-8',
+            'X-Content-Type-Options' => 'nosniff',
+        ] + $kopfzeilen, $rumpf);
+    }
+
+    /**
+     * Reiner Text als **Seite** — `robots.txt`, `llms.txt`.
+     *
+     * Getrennt von `text()`: Jene ist die Antwort an den Zahlungsdienst und trägt einen
+     * Statuscode als eigentliche Nachricht. Diese liefert eine Datei aus, die ein Crawler
+     * abholt, und darf deshalb zwischengespeichert werden.
+     *
+     * @param array<string,string> $kopfzeilen
+     */
+    public static function klartext(string $rumpf, array $kopfzeilen = []): self
+    {
+        return new self(200, [
+            'Content-Type'           => 'text/plain; charset=utf-8',
+            'X-Content-Type-Options' => 'nosniff',
+        ] + $kopfzeilen, $rumpf);
     }
 
     /**

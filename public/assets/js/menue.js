@@ -67,8 +67,26 @@
     }
   });
 
+  /*
+   * Der Klick daneben braucht eine echte Flaeche. `!menue.contains(ziel)` allein konnte nie
+   * zutreffen: Das offene Blatt liegt mit `inset: 0` ueber dem Fenster und ist ein Kind des
+   * `details` — jeder Klick fiel innerhalb (15.08.2026). `.menue__hinterlegung` traegt die
+   * Flaeche jetzt; `contains` bleibt fuer breite Fenster.
+   */
   document.addEventListener('click', function (ereignis) {
-    if (menue.open && !menue.contains(ereignis.target)) {
+    if (!menue.open) {
+      return;
+    }
+
+    var ziel = ereignis.target;
+
+    if (ziel instanceof Element && ziel.hasAttribute('data-hinterlegung')) {
+      zu();
+
+      return;
+    }
+
+    if (!menue.contains(ziel)) {
       zu();
     }
   });

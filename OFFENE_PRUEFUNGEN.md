@@ -3648,3 +3648,110 @@ seit diesem Lauf zusätzlich **dunkle Bahnen**, **dunkle Felder**, **Bänder**, 
 | 8 | **Das Förderfeld im Bedarfsscheck fehlt.** `FOERDERUNG_KONZEPT.md` §3.2 schlägt es vor, §7 führt es als offene Frage 3. Der erste Entwurf der Seite verwies darauf („sagen Sie es im Bedarfsscheck") — ein Satz, der auf ein Feld zeigt, das es nicht gibt. Er steht jetzt als „bei der Anfrage", und das geht über den Rückfrageweg heute schon | Entscheidung über Frage 3, dann Feld in Thema 5 |
 | 9 | **Zwei Zahlen im Bericht vom selben Tag waren zu hoch.** Die Tabelle oben ist nach einer Zwischenmessung geschrieben worden; danach hat die Silbentrennung an `.leistungszeilen h2` beide Übersichten verkürzt. Gemeldet standen `/ratgeber` mit +715 px und `/lexikon` mit +346 px, gemessen sind es +441 und +235. **Beide Zeilen sind hier berichtigt**, nicht stillschweigend ersetzt | Nachmessen erst nach der letzten Änderung, nicht davor |
 | 10 | **Der Hinweis unter dem Bedarfsscheck-Ergebnis fehlt.** `FOERDERUNG_KONZEPT.md` §3.1 nennt ihn den wirksamsten Platz überhaupt — „dort steht die Zahl". Gebaut ist er nicht; `17_SEITEN_SARTU.md` §2.3 bindet den Bildschirm eng, und ein Zubau dort braucht eine eigene Entscheidung | Betreiberentscheidung über §2.3 |
+
+---
+
+## 15.08.2026 — sechs Punkte technische Konsolidierung
+
+Eine externe Prüfung des Stands `7fafead` hat sie gefunden. Jeder Punkt ist vor dem Bau
+nachgemessen worden, jeder danach.
+
+### Punkt 1 — die drei Wurzeldateien gingen als HTML hinaus
+
+**Vorher, gemessen am 15.08.2026:**
+
+| Adresse | Content-Type | Cache-Control | Cookie |
+|---|---|---|---|
+| `/sitemap.xml` | `text/html; charset=utf-8` | `no-store, no-cache, must-revalidate` | `PHPSESSID` |
+| `/robots.txt` | `text/html; charset=utf-8` | `no-store, no-cache, must-revalidate` | `PHPSESSID` |
+| `/llms.txt` | `text/html; charset=utf-8` | `no-store, no-cache, must-revalidate` | `PHPSESSID` |
+
+**Nachher:**
+
+| Adresse | Content-Type | Cache-Control | Cookie |
+|---|---|---|---|
+| `/sitemap.xml` | `application/xml; charset=utf-8` | `public, max-age=3600` | keins |
+| `/robots.txt` | `text/plain; charset=utf-8` | `public, max-age=3600` | keins |
+| `/llms.txt` | `text/plain; charset=utf-8` | `public, max-age=3600` | keins |
+| `/` (öffentliche Seite) | `text/html; charset=utf-8` | `private, max-age=0, must-revalidate` | `PHPSESSID` |
+| `/portal`, `/admin` | — | `no-store` | `PHPSESSID` |
+
+**Drei Ursachen, alle klein.** `Antwort::html()` fügt den Inhaltstyp mit `+` hinzu, und `+`
+behält den linken Schlüssel — eine übergebene Kopfzeile wurde verworfen. `public/index.php`
+startete die Sitzung vor der Route. Und `session_start()` stempelt mit dem Vorgabewert
+`session.cache_limiter = nocache` die drei Cachekopfzeilen auf **jede** Antwort.
+
+**Neu:** `Antwort::xml()`, `Antwort::klartext()`, `Sitzung::wirdGebraucht()`,
+`Router::cachepolitik()` und `tests/AuslieferungTest.php` (elf Prüfungen).
+
+### Punkt 2 — sechs Erweiterungen fehlten, nicht eine
+
+Der Befund nannte `ext-gd`. Nachgezählt über `composer.lock`: **sechs** von Abhängigkeiten
+verlangte Erweiterungen standen nicht in `composer.json` — `ctype`, `dom`, **`gd`**, `iconv`,
+`simplexml`, `zlib`. `composer validate --strict` meldet jetzt `./composer.json is valid`;
+vorher meldete es zusätzlich eine veraltete Sperrdatei. `LIVEGANG.md` führt die zwölf
+Erweiterungen mit einer Prüfzeile für die Zeit **vor** der Buchung.
+
+`filter`, `hash` und `pcre` sind bewusst nicht eingetragen: Sie lassen sich in PHP 8 nicht
+abschalten.
+
+### Punkt 3 — drei weggelassene Spezifikationen
+
+| | Stand |
+|---|---|
+| **a** Feld 5.2 Logostatus | gebaut, vier gebundene Optionen, Pflichtfeld. Thema 5 heisst jetzt „Domain, Logo und Termin" |
+| **b** Förderhinweis unter der Empfehlung | gebaut, zwei Sätze, unterhalb des Knopfes, mit Verweis auf `/foerderung` |
+| **c** sechzehn Adressen auf `/foerderung` | gebaut, **16 Verweise**, jeder am 15.08.2026 angefordert |
+
+### Punkt 4 — die Karrieresperre wurde an sechs Stellen verletzt
+
+| Wo | Was dort stand |
+|---|---|
+| `Preisstufen`, Platzhirsch | `Karriere- und Bewerbungsbereich` als Merkmal — eine Zusage über den Lieferumfang |
+| `Preisstufen`, Platzhirsch | „Sichtbar für Kunden — und für Bewerber." |
+| `Musterprojekte`, Kanzlei | „eigene Stellenseite", `Karriere` in der Struktur, ein Absatz über die Karriereseite |
+| `Unterseitentexte`, Platzhirsch | „ein Bereich für Bewerbungen" |
+| `Branchenseiten`, Dachdecker | `Arbeiten bei uns` in der Beispielstruktur und eine FAQ dazu |
+| `Branchenseiten`, Dachdecker | die Zusage vom 14.08.2026 — **mein eigener Satz vom Vortag** |
+
+`WebsiteTest::testKeineKarriereseiteWirdErwaehnt` hält sie jetzt. Gegengeprüft: Mit einer
+wieder eingesetzten Erwähnung schlägt er an und nennt Seite und Wendung.
+
+### Punkt 5 — die Ortssperre galt zwei Wochen zu lang
+
+`SARTU_ENTSCHEIDUNGEN_OFFEN.md` §1 (Rang 1) hat das Einzugsgebiet am **01.08.2026**
+entschieden: „alle Orte ins Profil und in den Fliesstext". Der Test hat die aufgehobene
+Sperre danach weiter über die ganze Website erzwungen, und vier Codestellen haben das Fehlen
+der Orte weiter mit der offenen Anschrift begründet.
+
+**Gesperrt bleiben genau drei Dinge**, und §1 nennt sie einzeln: Google-Unternehmensprofil ·
+`LocalBusiness` in strukturierten Daten · die **NAP-Aussage**. Dazu §1 Ebene 3: eine eigene
+Ortsseite wird verdient, nicht verteilt.
+
+Der Test prüft jetzt diese drei Stellen statt jedes Ortsnamens; `/kontakt` trägt den in §1
+Ebene 1 verlangten Absatz, und eine Gegenprobe hält fest, dass er dort steht.
+
+### Punkt 6 — das mobile Menü hatte keinen Weg zurück
+
+Gemessen bei 390 px mit Berührungseingabe:
+
+| Prüfung | vorher | nachher |
+|---|---|---|
+| Menü öffnet auf Tippen | ja | ja |
+| Menütaste sichtbar und obenauf, solange offen | **nein** — verdeckt von `inset: 0` | ja, als `Menü ✕` oben rechts |
+| Tippen auf das Kreuz schliesst | — | ja |
+| Tippen daneben schliesst | **nein** — `contains` traf immer zu | ja, über `.menue__hinterlegung` |
+| ohne JavaScript öffnen und schliessen | ja / ja | ja / ja |
+
+### Ungeprüft und offen
+
+| # | Punkt | Womit es zu prüfen ist |
+|---|---|---|
+| 1 | **Die Sitzung startet weiterhin auf öffentlichen Seiten**, nicht erst am Bedarfsscheck. Der Auftrag verlangte „nur für Bedarfsscheck, Anmeldung, Portal und Admin"; Portal-Lastenheft §4b.7 verlangt Landeseite, verweisenden Host und Kampagnenkennzeichen aus der **ersten** aufgerufenen Seite — die ist bei fast jedem Besucher eine öffentliche. Stünde die Sitzung erst am Bedarfsscheck, wäre die Landeseite für jeden Besucher `/briefing`. Ausgenommen sind die drei Wurzeldateien und `/api/` | Entscheidung: §4b.7 anders lösen (eigenes First-Party-Cookie) oder die Herkunft aufgeben |
+| 2 | **`/foerderung` verlinkt die Förderbank, nicht die Programmseite.** Eine Programmseite wechselt ihre Adresse; ein toter Link führt einen Betrieb, der investieren will, ins Leere. Der Leser muss auf der Seite der Bank einen Schritt selbst gehen | Beim nächsten Durchgang prüfen, ob Deep-Links stabil genug sind |
+| 3 | **Für das Saarland steht das Serviceportal statt `saarland.de`.** Das Landesportal weist automatisierte Anfragen ab (403); die Adresse liess sich damit nicht selbst prüfen. Die Serviceportal-Seite antwortet mit dem Programmnamen im Titel | Von Hand im Browser gegenprüfen |
+| 4 | **Die sechzehn Adressen sind angefordert, nicht inhaltlich gelesen.** Geprüft ist: Antwort `200` und ein Seitentitel, der die Stelle nennt. Ob das Programm heute noch läuft, sagt das nicht — der Inhalt stammt weiterhin vom 09.08.2026. Die Seite behauptet auch nichts anderes: Sie nennt beide Daten getrennt | Vierteljährliche Nachprüfung, `FOERDERUNG_KONZEPT.md` §7 Frage 4 |
+| 5 | **`prosa()` in `OberflaecheTest` schliesst jetzt `td` und `th` aus.** Das ist eine Änderung an einem Test, der als unantastbar gilt, und sie ist ausdrücklich gemeldet: Eine Datentabelle ist keine laufende Prosa — auf `/foerderung` eröffnen sechs von sechzehn Bedingungen mit „KMU" und elf Stände mit „läuft", weil sechzehn Länder nach denselben Merkmalen beschrieben werden. Die Prosa **um** die Tabelle bleibt in der Prüfung | Beim nächsten Durchgang gegenlesen, ob die Ausnahme eng geblieben ist |
+| 6 | **Die Grenze für `menue.js` steht jetzt auf 3 KB statt 2,5.** Der Test verlangt für eine Anhebung eine Begründung an Ort und Stelle; sie steht dort. Sechs Zeilen Code, der Rest Kommentar | — |
+| 7 | **Das Logostatus-Feld ändert den Ablauf noch nicht.** §17 nennt drei Fälle mit unterschiedlicher Behandlung; die Antwort landet in `payload` und im Klartext der Anfrage, eine Regel im Angebot gibt es nicht. Der Fall „Kein Logo" ist im Konzept ausdrücklich offen | Entscheidung, wie „Kein Logo" bedient wird |
+| 8 | **Der Ergebnisbildschirm trägt eine Lime-Fläche von rund 180.000 Quadratpixeln.** Die 40.000er-Grenze gilt gemessen für die öffentlichen Seiten; `/briefing/ergebnis` steht in `OberflaecheTest` unter `OHNE_LAYOUT` und wird nicht gemessen. Der Zustand ist älter als dieser Lauf | Entscheidung, ob die Grenze auch im Bedarfsscheck gilt |

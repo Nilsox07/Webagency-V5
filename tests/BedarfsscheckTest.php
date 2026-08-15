@@ -52,6 +52,7 @@ final class BedarfsscheckTest extends Datenbankfall
         ],
         5 => [
             'domainstatus'     => 'vorhanden',
+            'logostatus'       => 'datei',
             'fester_termin'    => 'nein',
             'termin_datum'     => '',
             'nicht_uebersehen' => '',

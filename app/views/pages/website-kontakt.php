@@ -76,6 +76,12 @@ $ersterFehler = array_key_first($fehler);
   <div class="bahn schmal">
     <h2><?= Html::e(T::WO_H2) ?></h2>
     <p class="lede"><?= Html::e(T::WO_TEXT) ?></p>
+    <?php /* §1 Ebene 1 (Rang 1, 01.08.2026): „`/kontakt` und die Dresden-Seite: ein Absatz,
+             der die Orte namentlich nennt — und den Satz, dass bundesweit gearbeitet wird."
+             Der Satz steht darüber und zuerst; §1 verbietet ausdrücklich „nur im Raum
+             Dresden". Gebaut am 15.08.2026 — bis dahin sperrte der Code jeden Ortsnamen mit
+             einer Begründung, die seit dem 01.08.2026 nicht mehr galt. */ ?>
+    <p><?= Html::e(T::WO_EINZUGSGEBIET) ?></p>
     <p><?= Html::e(T::WO_ZUSATZ) ?></p>
   </div>
 </section>

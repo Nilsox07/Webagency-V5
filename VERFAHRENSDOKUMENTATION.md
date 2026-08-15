@@ -165,6 +165,21 @@ seine Existenz.
 **Zugang zum internen Bereich** verlangt Passwort (Argon2id) **und** einen Zeitcode (TOTP).
 Die zweite Stufe ist auch in der Entwicklung nicht abschaltbar.
 
+**Belegseiten werden nirgends zwischengespeichert.** Jede Antwort aus Kundenbereich, internem
+Bereich und `/api/` trägt `Cache-Control: no-store` — kein Browser, kein Proxy und kein
+vorgeschalteter Zwischenspeicher darf eine Rechnung oder einen Beleg ablegen. Öffentliche
+Seiten tragen `private, max-age=0, must-revalidate`: Sie führen ein Sitzungscookie und dürfen
+deshalb ebenfalls nicht in einen **gemeinsamen** Zwischenspeicher. Nur `robots.txt`,
+`sitemap.xml` und `llms.txt` sind `public` — sie tragen weder Cookie noch personenbezogene
+Angabe.
+
+> **Seit dem 15.08.2026 ist das eine Entscheidung, vorher war es eine Nebenwirkung.**
+> `session_start()` stempelte mit dem Vorgabewert `session.cache_limiter = nocache` auf jede
+> Antwort `no-store` — auch auf `robots.txt`. Das Ergebnis war richtig und der Weg dorthin
+> nicht nachvollziehbar: Wer den Sitzungsstart verschob, hätte die Sperre unbemerkt verloren.
+> Jetzt setzt `Router::cachepolitik()` sie je Bereich, und `tests/AuslieferungTest.php` prüft
+> sie.
+
 > **`/storage/betrieb` ist keine Belegablage.** Seit dem 13.08.2026 liegt dort **eine** Datei:
 > das Bild der Person hinter SARTU, das der Betreiber im internen Bereich hochlädt und das die
 > öffentliche Website anzeigt. Es ist kein Beleg, unterliegt keiner Aufbewahrungsfrist und
@@ -250,6 +265,7 @@ ist einem Commit mit Begründung zugeordnet. Für den Prüfer die Stationen des 
 | 09.08.2026 | Zahlungsabgleich über einen Webhook mit serverseitigem Abruf und Idempotenz über `payment_events` |
 | 09.08.2026 | Belegabruf für Kunde und Betreiber, Belegversand per Mail, Übergabe an den Steuerberater |
 | 13.08.2026 | **Am Belegfluss nichts.** Ergänzt wurde `/storage/betrieb` für ein Bild der öffentlichen Website — kein Beleg, keine Frist, keine Prüfsumme. Aufgeführt, damit das zweite Verzeichnis in `/storage` erklärt ist |
+| 15.08.2026 | **Am Belegfluss nichts.** Die Cachepolitik ist von einer Nebenwirkung des Sitzungsstarts zu einer Regel je Bereich geworden: `no-store` für Kundenbereich, internen Bereich und `/api/`, geprüft in `AuslieferungTest`. Der ausgelieferte Zustand ändert sich für Belege nicht |
 
 **Vor diesem Datum** gab es keine Belegerzeugung: Rechnungen bestanden aus Datenbankzeilen und
 einer Anzeige im Kundenbereich, die Nummer wurde von Hand eingetragen, und der Zahlungsstatus

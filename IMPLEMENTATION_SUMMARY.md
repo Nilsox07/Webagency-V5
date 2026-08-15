@@ -897,3 +897,51 @@ nennt kein Land von der Sperrliste, auch nicht als Beispiel.
 `.leistungszeilen h2` hat beide Übersichten danach verkürzt.
 
 **397 Tests, 13.768 Zusicherungen, grün.**
+
+---
+
+## K. Technische Konsolidierung — 15.08.2026
+
+Sechs Punkte aus einer externen Prüfung des Stands `7fafead`. Kein Layout, keine Texte ausser
+den in der Spezifikation genannten.
+
+| Punkt | Ergebnis |
+|---|---|
+| **1 HTTP-Auslieferung** | `Antwort::xml()` und `::klartext()`, `Sitzung::wirdGebraucht()`, `Router::cachepolitik()`. Die drei Wurzeldateien gehen mit eigenem Inhaltstyp, ohne Cookie und mit `public, max-age=3600` hinaus. Öffentliche Seiten tragen `private, max-age=0, must-revalidate` statt `no-store`. **Neu:** `tests/AuslieferungTest.php` |
+| **2 Installation** | Sechs fehlende Erweiterungen eingetragen, nicht eine: `ctype`, `dom`, `gd`, `iconv`, `simplexml`, `zlib`. `composer validate --strict` ist grün, `LIVEGANG.md` führt die zwölf mit einer Prüfzeile |
+| **3a Logostatus** | Feld 5.2 gebaut, vier gebundene Optionen, Pflichtfeld. Thema 5 heisst „Domain, Logo und Termin" |
+| **3b Förderhinweis** | Zwei Sätze unter dem Knopf der Empfehlung, mit Verweis auf `/foerderung`. Keine Summe, keine Quote, kein Bundesland, keine Zusage |
+| **3c sechzehn Verweise** | Jede Adresse am 15.08.2026 angefordert; fünfzehn antworten mit einem Titel, der die Förderbank nennt, für das Saarland das Serviceportal mit dem Programmnamen |
+| **4 Karrieresperre** | Sechs Verstösse entfernt, ein Test hält sie. Gegengeprüft: Mit einer wieder eingesetzten Erwähnung schlägt er an |
+| **5 Ortsnennung** | Der Test prüft die drei wirklich gesperrten Stellen statt jedes Ortsnamens. `/kontakt` trägt den Absatz aus §1 Ebene 1 |
+| **6 mobiles Menü** | Sichtbares `Menü ✕` über dem Blatt, echte Hinterlegungsfläche für den Klick daneben. Vier Wege geprüft, auch ohne JavaScript |
+
+### Was der Befund unterschätzt hat
+
+**Punkt 2 nannte eine Erweiterung, es waren sechs.** Am teuersten wäre `gd` gewesen —
+`setasign/fpdf` zieht es über `horstoeko/zugferd` ein, und ohne die Erweiterung bricht ein
+frisches `composer install` auf dem Zielserver ab. In der Entwicklung fällt das nie auf: Der
+Container hat alle zwölf. `AuslieferungTest` gleicht `composer.lock` jetzt gegen
+`composer.json` ab.
+
+**Punkt 4 nannte fünf Quellen, es waren sechs Stellen** — und eine davon war mein eigener
+Satz vom Vortag: die Zusage auf der Dachdeckerseite, am 14.08.2026 geschrieben, kündigte eine
+getrennte Seite für Bewerbungen an.
+
+### Drei Abweichungen von der Anweisung, alle begründet
+
+**Die Sitzung startet weiterhin auf öffentlichen Seiten.** Der Auftrag verlangte „nur für
+Bedarfsscheck, Anmeldung, Portal und Admin"; Portal-Lastenheft §4b.7 verlangt die Herkunft aus
+der **ersten** aufgerufenen Seite. Beides zusammen geht nicht — ohne Sitzung auf der
+Startseite stünde als Landeseite für jeden Besucher `/briefing`. Ausgenommen sind die drei
+Wurzeldateien und `/api/`; damit ist der gemessene Fehler behoben.
+
+**`/foerderung` verlinkt die Förderbank, nicht die Programmseite.** Programmseiten wechseln
+ihre Adresse — vier von sechzehn Programmen standen in Sekundärübersichten als aktiv und sind
+es nicht.
+
+**`prosa()` in `OberflaecheTest` schliesst jetzt `td` und `th` aus.** Eine Änderung an einem
+Test, der als unantastbar gilt: Eine Datentabelle ist keine laufende Prosa, und die
+Begründung steht im Test. Die Prosa **um** die Tabelle bleibt vollständig in der Prüfung.
+
+**411 Tests, 15.776 Zusicherungen, grün.**

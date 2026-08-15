@@ -249,7 +249,7 @@ final class WebsiteTest extends Datenbankfall
         }
     }
 
-    // ---------------------------------------------------------------- §0 Ortssperre
+    // ------------------------------------------------------- §1 die drei gesperrten Stellen
 
     /** Die Orte aus `SARTU_ENTSCHEIDUNGEN_OFFEN.md` §1, Einzugsgebiet. */
     private const ORTE = ['Dresden', 'Meißen', 'Radebeul', 'Coswig', 'Radeberg', 'Pirna',
@@ -257,37 +257,72 @@ final class WebsiteTest extends Datenbankfall
         'Sachsen'];
 
     /**
-     * §0 und §17: Kein Ortsname erscheint **im sichtbaren Text**, solange
-     * `[GESCHAEFTSADRESSE_STATUS]` offen ist.
+     * Was von der Ortssperre wirklich übrig ist — umgestellt am 15.08.2026.
      *
-     * ## Was sich am 13.08.2026 geändert hat — und was nicht
+     * ## Der Test hat zwei Wochen lang das Falsche geprüft
      *
-     * `SARTU_ENTSCHEIDUNGEN_OFFEN.md` §4c (Rang 1) liefert `LocalBusiness` aus, sobald
-     * Straße, PLZ und Ort in `operator_settings` stehen. Damit steht der Ort der
-     * Geschäftsadresse in den strukturierten Daten — und der Test schlug an.
+     * Bis hierher stand an dieser Stelle „**kein** Ortsname im sichtbaren Text, solange
+     * `[GESCHAEFTSADRESSE_STATUS]` offen ist" — über die ganze Website. Das war bis zum
+     * 31.07.2026 richtig.
      *
-     * **Er wird nicht abgeschwächt, sondern getrennt.** §0 verbietet den Ortsnamen dort, wo
-     * er eine Aussage über das Einzugsgebiet macht: in Überschriften, Fließtext, Titeln,
-     * Beschreibungen. Die Geschäftsadresse in `LocalBusiness` ist etwas anderes — sie ist
-     * dieselbe Angabe, die im Impressum ohnehin Pflicht ist, und sie kommt aus den
-     * Betreiberdaten statt aus dem Quelltext.
+     * **Am 01.08.2026 hat der Betreiber es aufgehoben** (`SARTU_ENTSCHEIDUNGEN_OFFEN.md` §1,
+     * Rang 1): Einzugsgebiet „**entschieden** — alle Orte ins Profil und in den Fliesstext",
+     * und für `/kontakt` ausdrücklich „ein Absatz, der die Orte namentlich nennt". Der Test
+     * hat die aufgehobene Sperre danach weiter erzwungen; der Code hat das Fehlen der Orte
+     * weiter mit der offenen Anschrift begründet.
      *
-     * Der sichtbare Text wird deshalb weiterhin **vollständig** geprüft. Neu ist nur, dass
-     * der eine `ld+json`-Block vorher herausgeschnitten wird — und der zweite Test unten
-     * nagelt fest, dass dort auch wirklich nur die Adresse steht.
+     * ## Gesperrt bleiben genau drei Dinge — §1 nennt sie einzeln
+     *
+     * | Was | Warum |
+     * |---|---|
+     * | Google-Unternehmensprofil | braucht eine prüfbare Anschrift. Kein Code hier |
+     * | `LocalBusiness` in strukturierten Daten | §4c liefert es aus, sobald Strasse, PLZ und Ort in `operator_settings` stehen — der Test darunter nagelt fest, dass der Ortsname dort **nur** im Adressblock steht |
+     * | **NAP-Aussage** | eine Anschrift im sichtbaren Text. Das prüft dieser Test |
+     *
+     * Dazu die vierte Grenze aus §1 Ebene 3: **eine eigene Ortsseite wird verdient, nicht
+     * verteilt.** Sie entsteht erst, wenn die Search Console für den Ort Impressionen zeigt
+     * **und** es dort einen Kunden mit freigegebener Fallstudie gibt. Beides liegt nicht vor.
      */
-    public function testKeinOrtsnameStehtAufDerWebsite(): void
+    public function testKeineAnschriftStehtImSichtbarenText(): void
     {
         foreach ($this->seiten() as $pfad => $html) {
-            $sichtbar = self::ohneLaenderuebersicht(self::ohneStrukturdaten($html));
+            $sichtbar = self::ohneStrukturdaten($html);
 
+            /*
+             * Eine Anschrift erkennt man an der Postleitzahl neben dem Ort, nicht am Ort
+             * allein. Gesucht wird deshalb das Muster „fünf Ziffern, dann ein Ortsname" —
+             * genau die Form, in der eine NAP-Angabe auftritt.
+             */
             foreach (self::ORTE as $ort) {
-                $this->assertStringNotContainsString(
-                    $ort,
-                    $sichtbar,
-                    $pfad . ' nennt „' . $ort . '", obwohl die Standortentscheidung offen ist (§0).',
-                );
+                $this->assertSame(0, preg_match('/\b\d{5}\s+' . preg_quote($ort, '/') . '\b/u', $sichtbar),
+                    $pfad . ' nennt eine Anschrift in ' . $ort . '. Die NAP-Aussage ist '
+                    . 'gesperrt, solange `[GESCHAEFTSADRESSE_STATUS]` offen ist (§1).');
             }
+
+            $this->assertStringNotContainsString('Straße 1', $sichtbar,
+                $pfad . ' zeigt eine Platzhalteranschrift.');
+        }
+    }
+
+    /**
+     * Die Gegenprobe: `/kontakt` **nennt** die Orte, und den Satz über bundesweite Arbeit.
+     *
+     * Ohne sie liesse sich die alte Sperre stillschweigend weiterführen, indem niemand die
+     * Orte einbaut. §1 Ebene 1 verlangt beides an dieser Stelle, und die Reihenfolge ist
+     * gebunden: „Sitz im Raum Dresden nennen, **Arbeitsgebiet bundesweit**. Nicht ‚nur im
+     * Raum Dresden'."
+     */
+    public function testKontaktNenntDasEinzugsgebietUndDieBundesweiteArbeit(): void
+    {
+        $html = (string) $this->router()->behandeln('GET', '/kontakt')->rumpf;
+
+        $this->assertStringContainsString('Bundesweit', $html,
+            '/kontakt sagt nicht, dass bundesweit gearbeitet wird (§1 Ebene 1).');
+
+        foreach (['Dresden', 'Meißen', 'Bautzen', 'Sebnitz'] as $ort) {
+            $this->assertStringContainsString($ort, $html,
+                '/kontakt nennt ' . $ort . ' nicht. §1 Ebene 1 verlangt den Absatz mit den '
+                . 'Ortsnamen — seit dem 01.08.2026 entschieden.');
         }
     }
 
@@ -338,35 +373,6 @@ final class WebsiteTest extends Datenbankfall
     }
 
     /** Der sichtbare Teil einer Seite — ohne die `ld+json`-Bloecke. */
-    /**
-     * Schneidet die Länderübersicht von `/foerderung` heraus — und **nur** sie.
-     *
-     * ## Warum das keine Lockerung ist
-     *
-     * §0 verbietet den Ortsnamen dort, wo er eine **Aussage über das eigene Gebiet** macht:
-     * in Überschriften, Fließtext, Titeln, Beschreibungen. Das ist der Zweck der Sperre,
-     * und der Kommentar am Test darüber sagt es wörtlich.
-     *
-     * `17_SEITEN_SARTU.md` §6 Block 5 verlangt eine Übersicht über **alle sechzehn**
-     * Bundesländer, ausdrücklich ohne Auslassung: „Kein Land wird weggelassen." Eine
-     * Tabelle, die sechzehn von sechzehn führt, trifft keine Auswahl — und ohne Auswahl
-     * gibt es keine Aussage über ein Gebiet. Dasselbe Wort in einem Satz wie „wir arbeiten
-     * in Sachsen" wäre etwas völlig anderes, und genau das bleibt gesperrt.
-     *
-     * **Der Fließtext von `/foerderung` wird weiterhin vollständig geprüft.** Er nennt
-     * deshalb kein einziges Land von der Liste, auch nicht als Beispiel; `Foerdertexte`
-     * begründet das an Ort und Stelle. Herausgeschnitten wird allein die eine Tabelle in
-     * `#laender` — kommt ein Ortsname irgendwo sonst auf der Seite vor, schlägt der Test an.
-     */
-    private static function ohneLaenderuebersicht(string $html): string
-    {
-        return (string) preg_replace(
-            '~<section class="abschnitt" id="laender">.*?</section>~s',
-            '',
-            $html,
-        );
-    }
-
     private static function ohneStrukturdaten(string $html): string
     {
         return (string) preg_replace(
@@ -395,9 +401,32 @@ final class WebsiteTest extends Datenbankfall
         return $rest;
     }
 
-    /** §17: keine Ortsseite in der produktiven Veröffentlichung, auch nicht unverlinkt. */
+    /**
+     * §1 Ebene 3: Es gibt keine eigene Ortsseite, solange das Tor nicht offen ist.
+     *
+     * **Erweitert am 15.08.2026 von drei Pfaden auf die ganze Routenliste.** Vorher standen
+     * hier `/webdesign-dresden`, `/webdesign-meissen` und `/webdesign-pirna` — drei Adressen,
+     * die nie gebaut werden sollten. Eine vierte hätte niemand bemerkt.
+     *
+     * `/webdesign-dresden` ist in §1 Ebene 2 als **die** Regionsseite vorgesehen und bleibt
+     * trotzdem abwesend: Ebene 3 verlangt Impressionen in der Search Console **und** einen
+     * Kunden mit freigegebener Fallstudie. Ohne beides wäre sie eine Seite, die sich nur
+     * durch einen Ortsnamen von anderen unterscheidet — der Doorway-Tatbestand aus §16a.
+     */
     public function testEsGibtKeineOrtsseite(): void
     {
+        foreach ($this->router()->routen() as $route) {
+            foreach (self::ORTE as $ort) {
+                $this->assertStringNotContainsString(
+                    mb_strtolower($ort),
+                    mb_strtolower($route->pfad),
+                    'Die Route ' . $route->pfad . ' ist eine Ortsseite. §1 Ebene 3: Sie wird '
+                    . 'verdient, nicht verteilt — Impressionen **und** eine freigegebene '
+                    . 'Fallstudie, beides liegt nicht vor.',
+                );
+            }
+        }
+
         foreach (['/webdesign-dresden', '/webdesign-meissen', '/webdesign-pirna'] as $pfad) {
             $this->assertSame(404, $this->router()->behandeln('GET', $pfad)->status, $pfad);
         }
@@ -835,10 +864,17 @@ final class WebsiteTest extends Datenbankfall
         // `details` auch `Esc` und den Klick daneben nicht liefert — beides verlangt §3.
         // Aus einer Ergänzung wurden vier. Die Grenze wandert mit dem Auftrag mit, nicht mit
         // dem Bedarf: Wer sie das nächste Mal anhebt, begründet das hier.
+        //
+        // **Angehoben auf 3 KB am 15.08.2026, und hier ist die Begründung.** Der Klick
+        // daneben war bis dahin eine Zeile ohne Wirkung: Das offene Blatt liegt mit
+        // `inset: 0` über dem Fenster und ist ein Kind des `details`, `contains` traf
+        // deshalb immer zu. Die Reparatur ist eine Abfrage auf `data-hinterlegung` — sechs
+        // Zeilen Code. Der Rest des Zuwachses ist der Kommentar davor, und der ist der
+        // Grund, warum niemand die Zeile beim nächsten Mal wieder als Ballast entfernt.
         $skript = SARTU_WURZEL . '/public/assets/js/menue.js';
 
         $this->assertFileExists($skript);
-        $this->assertLessThan(2560, filesize($skript), 'menue.js ist über 2,5 KB gewachsen.');
+        $this->assertLessThan(3072, filesize($skript), 'menue.js ist über 3 KB gewachsen.');
     }
 
     // ---------------------------------------------------------------- Hilfsmittel
@@ -865,6 +901,82 @@ final class WebsiteTest extends Datenbankfall
      *
      * @return array<string,string>
      */
+    // ---------------------------------------------------------------- §7b Karrieresperre
+
+    /**
+     * Die Wendungen, die eine Karriere- oder Stellenseite benennen.
+     *
+     * **Nicht das Wort `Bewerbung`.** `SARTU_ENTSCHEIDUNGEN_OFFEN.md` §7b sperrt die
+     * **Seite**, nicht das Thema: Lesart A — ein Bewerbungsformular als eines von mehreren
+     * Conversion-Modulen — steht im Masterkonzept und ist ausdrücklich **nicht** gesperrt.
+     * Der Bedarfsscheck fragt deshalb weiterhin nach „Normale Anfrage oder Bewerbung über
+     * ein Formular"; das ist eine gebundene Option aus `17_SEITEN_SARTU.md` §2.2 Feld 4.1
+     * und benennt keine Seite.
+     *
+     * @var list<string>
+     */
+    private const KARRIERE = ['Karriere', 'Stellenseite', 'Stellenanzeige', 'Karriereseite',
+        'Arbeiten bei uns', 'Bereich für Bewerbungen', 'Bewerbungsbereich'];
+
+    /**
+     * §7b (Rang 1): keine Karriere- oder Stellenseite, solange die Entscheidung offen ist.
+     *
+     * > „Solange das offen ist, wird auf keiner Website- und keiner Branchenseite eine
+     * > Karriere- oder Stellenseite erwähnt, angekündigt oder verlinkt."
+     *
+     * ## Was am 15.08.2026 dagegen verstiess
+     *
+     * | Wo | Was dort stand |
+     * |---|---|
+     * | `Preisstufen`, Platzhirsch | `Karriere- und Bewerbungsbereich` als **Merkmal** — eine Zusage über den Lieferumfang |
+     * | `Preisstufen`, Platzhirsch | „Sichtbar für Kunden — und für Bewerber." |
+     * | `Musterprojekte`, Kanzlei | „eigene Stellenseite", die Struktur mit `Karriere`, ein Absatz über die Karriereseite |
+     * | `Unterseitentexte`, Platzhirsch | „ein Bereich für Bewerbungen" |
+     * | `Branchenseiten`, Dachdecker | `Arbeiten bei uns` in der Beispielstruktur, eine FAQ dazu, und die Zusage vom 14.08.2026 |
+     *
+     * **Sechs Stellen, keine davon gemeldet.** Eine Sperre auf Rang 1, die niemand prüft, ist
+     * eine Notiz — deshalb dieser Test. Er fällt, sobald eine Erwähnung zurückkommt; das ist
+     * der Zweck. Wird Lesart A oder B bestätigt, wird **er** geändert, nicht umgangen.
+     */
+    public function testKeineKarriereseiteWirdErwaehnt(): void
+    {
+        foreach ($this->seiten() as $pfad => $html) {
+            $sichtbar = self::ohneStrukturdaten($html);
+
+            foreach (self::KARRIERE as $wendung) {
+                $this->assertStringNotContainsString($wendung, $sichtbar,
+                    $pfad . ' nennt „' . $wendung . '". §7b (Rang 1) sperrt jede Erwähnung '
+                    . 'einer Karriere- oder Stellenseite, bis Lesart A oder B bestätigt ist.');
+            }
+        }
+    }
+
+    /**
+     * Die Gegenprobe: Der Bedarfsscheck fragt weiterhin nach einem Bewerbungsformular.
+     *
+     * Ohne sie liesse sich die Sperre erfüllen, indem man das Thema ganz aus dem
+     * Bedarfsscheck nimmt — und damit eine gebundene Option aus `17_SEITEN_SARTU.md` §2.2
+     * Feld 4.1 verlöre. Gesperrt ist die Seite, nicht die Funktion.
+     */
+    public function testDerBedarfsscheckFragtWeiterhinNachEinemBewerbungsformular(): void
+    {
+        $gefunden = false;
+
+        foreach (\Sartu\Services\Bedarfsscheck::themen() as $thema) {
+            foreach ($thema['felder'] as $feld) {
+                foreach ((array) ($feld['optionen'] ?? []) as $text) {
+                    if (str_contains((string) $text, 'Bewerbung über ein Formular')) {
+                        $gefunden = true;
+                    }
+                }
+            }
+        }
+
+        $this->assertTrue($gefunden, 'Die gebundene Option „Normale Anfrage oder Bewerbung '
+            . 'über ein Formular" fehlt im Bedarfsscheck. §7b sperrt die Karriereseite, nicht '
+            . 'das Formular.');
+    }
+
     private function seiten(): array
     {
         $seiten = [];

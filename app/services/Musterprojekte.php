@@ -137,10 +137,16 @@ final class Musterprojekte
                 'paket'        => 'platzhirsch',
                 'ausgangslage' => 'Zwei Zielgruppen mit gegensätzlichem Anliegen: Arbeitgeber '
                     . 'und Arbeitnehmer.',
+                /* **Die Stellenseite ist hier entfallen** — `SARTU_ENTSCHEIDUNGEN_OFFEN.md`
+                   §7b (Rang 1): „Solange das offen ist, wird auf keiner Website- und keiner
+                   Branchenseite eine Karriere- oder Stellenseite erwähnt, angekündigt oder
+                   verlinkt." Der Fall trägt auch ohne sie: Zwei Zielgruppen mit
+                   gegensätzlichem Anliegen sind die Begründung für Platzhirsch, die
+                   Stellenseite war das dritte Argument. */
                 'empfohlen'    => 'Getrennte Wege je Zielgruppe, Vertrauen über Personen und '
-                    . 'Ablauf, eigene Stellenseite.',
+                    . 'Ablauf.',
                 'struktur'     => 'Start · je Rechtsgebiet eine Seite · Team · Ablauf · '
-                    . 'Karriere · Kontakt.',
+                    . 'Kontakt.',
                 'liefern'      => 'Tätigkeitsschwerpunkte, Werdegang je Person, '
                     . 'Pflichtangaben der Kammer.',
                 'bildsatz'     => 'Später die Startseite mit den beiden Einstiegen.',
@@ -154,8 +160,8 @@ final class Musterprojekte
                         . 'zu bekommen, hier seien sie falsch.',
                     'Deshalb reicht hier eine Seite je Leistung nicht. Es sind zwei Wege '
                         . 'auseinander, jeder mit eigener Sprache, eigenen Beispielen und '
-                        . 'eigenem ersten Schritt. Dazu kommt die Karriereseite: Ohne eigene '
-                        . 'Struktur bleibt davon eine Sammelmailbox übrig.',
+                        . 'eigenem ersten Schritt. Ohne diese Trennung landet der eine '
+                        . 'Anfragende dort, wo der andere abgeholt werden sollte.',
                 ],
                 'dichte'    => 'editorial',
                 'form'      => 'precise',

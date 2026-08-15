@@ -370,6 +370,7 @@ final class AnfragelisteTest extends Datenbankfall
             'umfangssignale'     => ['mehrere_leistungen', 'mehrere_regionen', 'recruiting'],
             'sonderfunktionen'   => ['formular'],
             'domainstatus'       => 'vorhanden',
+            'logostatus'         => 'datei',
             'fester_termin'      => 'nein',
         ] + $zusatz;
 

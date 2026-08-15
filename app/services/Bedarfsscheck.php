@@ -197,7 +197,7 @@ final class Bedarfsscheck
                 ],
             ],
             5 => [
-                'titel'  => 'Domain und Termin',
+                'titel'  => 'Domain, Logo und Termin',
                 'felder' => [
                     [
                         'name'     => 'domainstatus',
@@ -209,6 +209,40 @@ final class Bedarfsscheck
                             'vorhanden' => 'Domain vorhanden',
                             'neu'       => 'Neue Domain nötig',
                             'unsicher'  => 'Bin unsicher',
+                        ],
+                    ],
+                    /*
+                     * **Feld 5.2, gebaut am 15.08.2026.** `17_SEITEN_SARTU.md` Zeile 219
+                     * führt es seit dem 09.08.2026 als Pflichtfeld mit vier gebundenen
+                     * Optionen; gebaut war es nie und gemeldet auch nicht.
+                     *
+                     * **Warum es vor das Angebot gehört und nicht in den Kundenbereich:**
+                     * Zwischen Bedarfsscheck und Kundenbereich liegt der Festpreis. Die drei
+                     * Fälle werden unterschiedlich behandelt — Datei: nichts weiter, Upload
+                     * im Kundenbereich · nur gedruckt oder als Foto: Aufbereitung, im Paket
+                     * enthalten (`03_KUNDENPRODUKT.md`) · kein Logo: der Neuentwurf ist
+                     * **nicht** Teil des Angebots. Wer das erst nach dem Angebot erfährt,
+                     * hat den Preis für etwas anderes genannt.
+                     *
+                     * Der Hilfetext sagt den dritten Fall vorher, nicht hinterher. Wie
+                     * dieser Fall bedient wird, ist offen — das steht in
+                     * `OFFENE_PRUEFUNGEN.md` und **nicht** auf dem Bildschirm: Ein offener
+                     * Punkt ist keine Auskunft an den Kunden.
+                     */
+                    [
+                        'name'     => 'logostatus',
+                        'label'    => 'Haben Sie ein Logo?',
+                        'art'      => 'radio',
+                        'pflicht'  => true,
+                        'fehler'   => 'Bitte wählen Sie eine Antwort.',
+                        'hilfe'    => 'Ein vorhandenes Logo bereiten wir auf, wenn es nur '
+                            . 'gedruckt oder als Foto vorliegt. Ein neues Logo zu entwerfen '
+                            . 'gehört nicht zum Angebot.',
+                        'optionen' => [
+                            'datei'    => 'Logo vorhanden, als Datei',
+                            'gedruckt' => 'Logo vorhanden, aber nur gedruckt oder als Foto',
+                            'keines'   => 'Kein Logo',
+                            'unsicher' => 'Bin unsicher',
                         ],
                     ],
                     [

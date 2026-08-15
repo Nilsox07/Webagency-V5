@@ -27,17 +27,20 @@ namespace Sartu\Services;
  * Maßangabe, Fundort und Veröffentlichungssperre ist keiner — er sagt, was fehlt, wo es
  * einzutragen ist und dass ohne es nichts hinausgeht.
  *
- * ## Ein Ortsname fehlt, und das ist kein Versehen
+ * ## Warum die Startseite keinen Ortsnamen trägt — berichtigt am 15.08.2026
  *
- * §5 Sektion 9, Frage 1 nennt im Lastenheft „Unser Sitz ist im Raum Dresden". §0 desselben
- * Dokuments verbietet **Ortsnamen im Fließtext**, solange `[GESCHAEFTSADRESSE_STATUS]` in
- * `SARTU_ENTSCHEIDUNGEN_OFFEN.md` §1 auf `offen` steht — und das tut es. Nach der Rangfolge
- * in `UEBERGABE_DATEILISTE.md` steht diese Datei auf Rang 1, das Website-Lastenheft auf
- * Rang 5. Die Sperre gewinnt.
+ * **Die frühere Begründung stimmt nicht mehr.** Hier stand, §0 verbiete Ortsnamen im
+ * Fliesstext, solange `[GESCHAEFTSADRESSE_STATUS]` offen sei. Das galt bis zum 31.07.2026;
+ * am 01.08.2026 hat der Betreiber das Einzugsgebiet entschieden — „alle Orte ins Profil und
+ * in den Fliesstext" (`SARTU_ENTSCHEIDUNGEN_OFFEN.md` §1, Rang 1). Gesperrt bleiben nur drei
+ * Dinge, und der Fliesstext gehört nicht dazu.
  *
- * **Die Aussage bleibt trotzdem vollständig:** Die Antwort trägt die Reichweite („bundesweit")
- * und die Begründung („keine Abstimmungstermine"). Nur der Ortsname fehlt. Der Wortlaut ist
- * Klasse 2 — Aussage gebunden, Formulierung frei.
+ * Der Ortsname fehlt hier trotzdem, und jetzt aus einem anderen Grund: §1 Ebene 1 nennt
+ * **`/kontakt` und die Regionsseite** als die Orte, an denen der Absatz steht. Die Startseite
+ * ist keine von beiden, und ihre Antwort auf Frage 1 trägt die Aussage vollständig —
+ * Reichweite („bundesweit") und Begründung („keine Abstimmungstermine"). Ein Ortsname
+ * daneben würde die Reichweite verengen, und §1 verbietet ausdrücklich „nur im Raum
+ * Dresden".
  */
 final class Startseitentexte
 {
@@ -372,8 +375,9 @@ final class Startseitentexte
      * §5 Sektion 9 — die Einwände, in dieser Reihenfolge.
      *
      * Frage 1 steht bewusst zuerst: Sie entscheidet, ob der Leser sich überhaupt
-     * angesprochen fühlt. Der Ortsname aus dem Lastenheft fehlt — Begründung im
-     * Klassenkommentar oben.
+     * angesprochen fühlt. Der Ortsname aus dem Lastenheft fehlt; die Begründung steht im
+     * Klassenkommentar oben und ist am 15.08.2026 berichtigt worden — nicht die Sperre hält
+     * ihn fern, sondern die Reichweite der Aussage.
      *
      * @return list<array{frage:string,antwort:string}>
      */

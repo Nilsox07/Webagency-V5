@@ -999,7 +999,7 @@ final class MarkupTest extends Datenbankfall
             2 => ['hauptziel' => 'anfragen', 'zielgruppe' => 'privatkunden'],
             3 => ['umfangssignale' => [\Sartu\Services\Empfehlung::SIGNAL_HAUPTANGEBOT]],
             4 => ['sonderfunktionen' => [\Sartu\Services\Empfehlung::GATE_FORMULAR]],
-            5 => ['domainstatus' => 'vorhanden', 'fester_termin' => 'nein'],
+            5 => ['domainstatus' => 'vorhanden', 'logostatus' => 'datei', 'fester_termin' => 'nein'],
         ];
 
         $seiten = ['GET /briefing' => $router->behandeln('GET', '/briefing')->rumpf];
@@ -1057,6 +1057,7 @@ final class MarkupTest extends Datenbankfall
             'umfangssignale'     => ['hauptangebot'],
             'sonderfunktionen'   => ['formular'],
             'domainstatus'       => 'vorhanden',
+            'logostatus'         => 'datei',
             'fester_termin'      => 'nein',
         ], [], '203.0.113.9');
 

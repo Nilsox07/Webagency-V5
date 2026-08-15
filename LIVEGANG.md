@@ -35,7 +35,23 @@ kein TLS, keinen Cron und keinen Mailversand — und damit nichts zu prüfen.
 
 Die Anwendung braucht:
 
-- PHP 8.3 oder neuer, mit `pdo_mysql`, `sodium`, `mbstring`, `intl`, `fileinfo`, `openssl`
+- PHP 8.3 oder neuer mit **zwölf Erweiterungen**: `pdo_mysql` · `sodium` · `mbstring` ·
+  `intl` · `fileinfo` · `openssl` · `ctype` · `dom` · `gd` · `iconv` · `simplexml` · `zlib`
+
+  > **Sechs davon standen bis zum 15.08.2026 weder hier noch in `composer.json`**, obwohl
+  > Abhängigkeiten sie verlangen. Am teuersten wäre `gd` gewesen: `setasign/fpdf` — über
+  > `horstoeko/zugferd` eingezogen — führt es als Pflicht, und ohne die Erweiterung bricht
+  > ein frisches `composer install` auf dem Zielserver ab. Der Fehler wäre erst beim Livegang
+  > aufgetreten, nicht in der Entwicklung: Der Container hat alle zwölf.
+  >
+  > Prüfen lässt sich das in einer Zeile, **bevor** gebucht wird:
+  >
+  > ```bash
+  > php -r 'foreach (["pdo_mysql","sodium","mbstring","intl","fileinfo","openssl","ctype","dom","gd","iconv","simplexml","zlib"] as $e) { printf("%-10s %s\n", $e, extension_loaded($e) ? "ok" : "FEHLT"); }'
+  > ```
+  >
+  > `composer validate --strict` hält den Abgleich zwischen `composer.json` und der
+  > Sperrdatei fest; die Erweiterungsliste selbst prüft es nicht.
 - MySQL 8 oder MariaDB 10.6 oder neuer
 - einen Datenbankbenutzer, der **Trigger anlegen darf** — siehe unten
 - einen Cron-Eintrag

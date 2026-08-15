@@ -312,8 +312,9 @@ final class Branchenseiten
                     . 'Flachdach, Abdichtung — beginnt bei 3.900 € netto. Die Fakten liefern Sie '
                     . 'im Bedarfsscheck und in Ihrem Kundenbereich, ohne einen Termin.',
 
-                'zusage' => 'Aufträge und Bewerbungen kommen über dieselbe Website, aber nicht '
-                    . 'über dieselbe Seite.',
+                // §7b (Rang 1): Der Satz vom 14.08.2026 kündigte eine getrennte Seite für
+                // Bewerbungen an. Er ist ersetzt, nicht gestrichen — die Zusage bleibt.
+                'zusage' => 'Was Sie am Telefon erklären müssen, gehört auf die Seite.',
 
                 'probleme' => [
                     ['titel' => 'Der Wettbewerb im Umkreis sieht genauso aus',
@@ -384,16 +385,20 @@ final class Branchenseiten
                         'Flachdach und Abdichtung',
                         'Dachsanierung und Dämmung',
                         'Über den Betrieb',
-                        'Arbeiten bei uns',
+                        // §7b (Rang 1): keine Karriere- oder Stellenseite in einer
+                        // Beispielstruktur — eine Beispielstruktur ist eine Ankündigung.
                         'Kontakt',
                         'Impressum',
                     ],
                 ],
 
                 'fragen' => [
-                    ['frage'   => 'Brauche ich einen Bereich für Bewerbungen?',
-                     'antwort' => 'Wenn Sie suchen, ja. Eine E-Mail-Adresse im Impressum ist '
-                        . 'keine Stellenseite.'],
+                    // §7b (Rang 1): Die Frage nach einem Bewerbungsbereich ist entfallen —
+                    // sie ist die Ankündigung in Frageform. Sie kommt zurück, sobald Lesart A
+                    // oder B bestätigt ist.
+                    ['frage'   => 'Zeigen Sie auch Preise auf der Seite?',
+                     'antwort' => 'Ihre Preise entscheiden Sie. Unsere stehen auf /preise, '
+                        . 'vollständig und ohne Anfrage.'],
                     ['frage'   => 'Was ist mit Bildern von Baustellen?',
                      'antwort' => 'Baustellenbilder zeigen Arbeit, fertige Dächer zeigen das '
                         . 'Ergebnis. Wir nehmen beides, aber das Ergebnis nach vorn.'],

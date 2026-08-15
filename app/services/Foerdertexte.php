@@ -22,13 +22,14 @@ namespace Sartu\Services;
  * **keine Rechtsberatung** · **keine Angstmache**. Sie sind der Grund, warum hier keine
  * Summe steht, obwohl `FOERDERUNG_KONZEPT.md` alle sechzehn kennt.
  *
- * ## Die Ortssperre und die sechzehn Länder
+ * ## Warum der Fliesstext kein einzelnes Land nennt
  *
- * `SARTU_ENTSCHEIDUNGEN_OFFEN.md` §0 verbietet jeden Ortsnamen im sichtbaren Text, solange
- * `[GESCHAEFTSADRESSE_STATUS]` offen ist — `Sachsen` steht auf der Liste. **Im Fliesstext
- * dieser Seite kommt das Land deshalb nicht vor**, auch nicht als Beispiel: Ein einzeln
- * genanntes Land liest sich als Aussage über das eigene Gebiet. In der Übersicht steht es
- * als eine von sechzehn Zeilen — und sechzehn von sechzehn sind keine Auswahl.
+ * **Nicht wegen einer Sperre** — die frühere Begründung an dieser Stelle berief sich auf §0
+ * und war schon am 14.08.2026 überholt; §1 gibt Ortsnamen im Fliesstext seit dem 01.08.2026
+ * frei. Der Grund ist ein anderer: Ein einzeln herausgegriffenes Land liest sich als Aussage
+ * über das eigene Arbeitsgebiet, und `FOERDERUNG_KONZEPT.md` §7 hat am 09.08.2026
+ * **bundesweit** entschieden. In der Übersicht steht jedes Land — sechzehn von sechzehn sind
+ * keine Auswahl.
  */
 final class Foerdertexte
 {
@@ -41,6 +42,20 @@ final class Foerdertexte
         . 'muss und was Förderung an Zeit kostet.';
 
     public const H1 = 'Gibt es Förderung für eine Firmenwebsite?';
+
+    /**
+     * Der Förderhinweis unter der Empfehlung — `17_SEITEN_SARTU.md` §2.3.
+     *
+     * **Zwei Sätze, das ist die gebundene Obergrenze.** Die vier Grenzen derselben Stelle:
+     * keine Summe, keine Förderquote, kein Bundesland, keine Zusage. Und ausdrücklich
+     * **nicht** nahelegen, Förderung sei der Regelfall — nach der Recherche vom 09.08.2026
+     * ist sie es nicht.
+     *
+     * Der zweite Satz ist der eigentliche Zweck: Wer erst nach der Beauftragung von der
+     * Förderung erfährt, verliert den Anspruch.
+     */
+    public const HINWEIS_ERGEBNIS = 'Eine Förderung greift nur in bestimmten Fällen. Wenn '
+        . 'Sie eine planen, muss der Antrag vor der Beauftragung gestellt sein.';
 
     public const VORZEILE = 'Förderung';
 

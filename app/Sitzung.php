@@ -19,11 +19,56 @@ final class Sitzung
     public const ORGANISATION      = 'organization_id';
     public const TOTP_BESTAETIGT   = 'totp_bestaetigt_am';
 
+    /**
+     * Adressen, die **ohne** Sitzung ausgeliefert werden — gemessen am 15.08.2026.
+     *
+     * Bis dahin startete `public/index.php` die Sitzung vor der Route. Ergebnis: `robots.txt`
+     * trug ein `PHPSESSID`-Cookie und `Cache-Control: no-store`. Ein Crawler bekommt damit
+     * bei jedem Abruf ein Cookie gesetzt und darf die Datei nie zwischenspeichern.
+     *
+     * **Warum nur diese drei und nicht „nur Bedarfsscheck, Anmeldung, Portal und Admin".**
+     * Portal-Lastenheft §4b.7 verlangt Landeseite, verweisenden Host und Kampagnenkennzeichen
+     * aus der Adresse der **ersten** aufgerufenen Seite. `Herkunft::merken()` schreibt sie
+     * beim ersten Aufruf in die Sitzung. Startete sie erst am Bedarfsscheck, stünde dort als
+     * Landeseite `/briefing` — für jeden Besucher, und genau davor warnt der Kommentar an
+     * `Herkunft`. Die Abweichung von der Anweisung steht in `OFFENE_PRUEFUNGEN.md`.
+     *
+     * Ausgenommen sind deshalb die Adressen, die **keine** Person abruft: die drei
+     * Wurzeldateien für Suchdienste. Der Zahlungs-Webhook unter `/api/` steht ebenfalls
+     * hier — ein fremder Server hat keine Sitzung und soll keine bekommen.
+     *
+     * @var list<string>
+     */
+    public const OHNE_SITZUNG = ['/sitemap.xml', '/robots.txt', '/llms.txt'];
+
+    /** Ein Pfad unter diesem Präfix bekommt ebenfalls keine Sitzung. */
+    public const OHNE_SITZUNG_PRAEFIX = '/api/';
+
+    /** Braucht dieser Pfad eine Sitzung? */
+    public static function wirdGebraucht(string $pfad): bool
+    {
+        return !in_array($pfad, self::OHNE_SITZUNG, true)
+            && !str_starts_with($pfad, self::OHNE_SITZUNG_PRAEFIX);
+    }
+
     public static function starten(): void
     {
         if (session_status() === PHP_SESSION_ACTIVE) {
             return;
         }
+
+        /*
+         * **PHP stempelt sonst `no-store` auf jede Antwort.** Der Vorgabewert von
+         * `session.cache_limiter` ist `nocache`; `session_start()` setzt damit
+         * `Expires: Thu, 19 Nov 1981`, `Cache-Control: no-store, no-cache,
+         * must-revalidate` und `Pragma: no-cache` — auf **jede** Seite, auch auf die
+         * öffentliche Startseite.
+         *
+         * Leer gesetzt schweigt PHP, und die Cachepolitik entscheidet der Router je
+         * Bereich. Das ist keine Lockerung: Angemeldete Bereiche bekommen dort weiterhin
+         * `no-store`, und zwar ausdrücklich statt als Nebenwirkung.
+         */
+        session_cache_limiter('');
 
         // §3 Regel 6. secure gilt ueberall ausser lokal — dort gibt es kein TLS,
         // und ein Cookie, das nie gesendet wird, macht die Anmeldung unbenutzbar.

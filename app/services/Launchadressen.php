@@ -20,7 +20,7 @@ namespace Sartu\Services;
  * | `/briefing/1` … `/briefing/n` | §16: `noindex`. Sie stehen deshalb weder in der Sitemap noch in dieser Liste |
  * | `/agb` | §14: „Nur live und verlinkt, wenn anwaltlich final. Sonst gar nicht verlinken und `noindex`." Der Text steht auf `entwurf` |
  * | Danke-Seiten, 404 | §16: `noindex` |
- * | Jede Ortsseite | §17: „**Keine** Ortsseite in der produktiven Veröffentlichung — auch nicht als unverlinkter Entwurf", solange `[GESCHAEFTSADRESSE_STATUS]` offen ist |
+ * | Jede Ortsseite | §17: „**Keine** Ortsseite in der produktiven Veröffentlichung — auch nicht als unverlinkter Entwurf". **Der Grund ist seit dem 01.08.2026 ein anderer** als hier bis zum 15.08.2026 stand: nicht die offene Anschrift, sondern `SARTU_ENTSCHEIDUNGEN_OFFEN.md` §1 Ebene 3 — eine Ortsseite wird **verdient**: Impressionen in der Search Console **und** ein Kunde mit freigegebener Fallstudie. Beides liegt nicht vor |
  *
  * ## `/impressum` und `/datenschutz` stehen drin, obwohl sie zurzeit 404 liefern
  *

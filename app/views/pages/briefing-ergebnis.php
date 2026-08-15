@@ -71,3 +71,21 @@ if ($preise !== null) {
   <a class="knopf" href="/briefing/kontakt">Empfehlung unverbindlich prüfen lassen</a>
   <a class="knopf knopf--ruhig" href="/briefing/<?= Html::e((string) \Sartu\Services\Bedarfsscheck::SCHRITTE) ?>">Angaben ändern</a>
 </div>
+
+<?php /* **Der Förderhinweis — `17_SEITEN_SARTU.md` §2.3, ergänzt am 09.08.2026, gebaut am
+         15.08.2026.** Er stand seit über einer Woche verbindlich in der Spezifikation und
+         war nie gebaut und nie gemeldet.
+
+         **Er ist keine Werbung, sondern Sorgfalt.** Ein Förderantrag muss vor
+         Vorhabensbeginn gestellt sein. Wer hier weiterklickt, annimmt und erst danach von
+         der Förderung erfährt, **verliert den Anspruch — durch unseren eigenen Ablauf.**
+
+         Die vier Grenzen aus §2.3 sind eingehalten: keine Summe, keine Quote, kein
+         Bundesland, keine Zusage. Kein Konjunktiv, der nach Versprechen klingt — „greift nur
+         in bestimmten Fällen" ist die Aussage der Recherche vom 09.08.2026, nicht ihre
+         Abschwächung.
+
+         **Unterhalb des Knopfes und eine Stufe kleiner**, damit er den Pflichthinweis
+         darüber nicht verdrängt: `.fussnote` ist dieselbe Stufe, die jener trägt. */ ?>
+<p class="fussnote"><?= Html::e(\Sartu\Services\Foerdertexte::HINWEIS_ERGEBNIS) ?>
+  <a href="<?= Html::e(\Sartu\Services\Foerdertexte::PFAD) ?>">Was zur Förderung gilt</a>.</p>

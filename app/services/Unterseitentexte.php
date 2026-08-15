@@ -50,8 +50,9 @@ final class Unterseitentexte
                 . 'Ein Thema, eine Zielgruppe.',
             'wachstum' => 'Je Leistung eine eigene Seite mit eigenem Text und eigenem '
                 . 'Seitenthema. Damit beantwortet jede Seite genau eine Suchanfrage.',
-            'platzhirsch' => 'Zusätzlich Seiten je Ort und ein Bereich für Bewerbungen. Der '
-                . 'Betrieb ist damit für Kunden und für Bewerber auffindbar.',
+            // §7b (Rang 1): kein Bereich für Bewerbungen, solange die Entscheidung offen ist.
+            'platzhirsch' => 'Zusätzlich eine eigene Seite je Ort. Der Betrieb ist damit dort '
+                . 'auffindbar, wo er tatsächlich arbeitet.',
             'sonderprojekt' => 'Umfang nach technischer Vorprüfung. Wir sagen ab, wenn wir das '
                 . 'Ergebnis nicht verantworten können.',
         ];

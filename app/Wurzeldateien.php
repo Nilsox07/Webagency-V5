@@ -53,7 +53,7 @@ final class Wurzeldateien
 
         $zeilen[] = '</urlset>';
 
-        return Antwort::html(implode("\n", $zeilen) . "\n", 200, ['Content-Type' => 'application/xml; charset=utf-8']);
+        return Antwort::xml(implode("\n", $zeilen) . "\n");
     }
 
     /** @param array<string,string> $parameter */
@@ -73,7 +73,7 @@ final class Wurzeldateien
             . "Allow: /briefing$\n\n"
             . 'Sitemap: ' . $basis . "/sitemap.xml\n";
 
-        return Antwort::html($text, 200, ['Content-Type' => 'text/plain; charset=utf-8']);
+        return Antwort::klartext($text);
     }
 
     /** @param array<string,string> $parameter */
@@ -106,7 +106,7 @@ final class Wurzeldateien
             $text .= '- ' . $basis . $pfad . "\n";
         }
 
-        return Antwort::html($text, 200, ['Content-Type' => 'text/plain; charset=utf-8']);
+        return Antwort::klartext($text);
     }
 
     private static function euro(int $cent): string

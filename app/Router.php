@@ -61,7 +61,41 @@ final class Router
         // nicht aus einer Steuerung — siehe `Ansicht::$pfad`.
         Ansicht::pfadSetzen($pfad);
 
-        return $this->sicherheitskopfzeilen($this->abwickeln($methode, $pfad));
+        return $this->sicherheitskopfzeilen($this->abwickeln($methode, $pfad))
+            ->mitKopfzeilen(['Cache-Control' => $this->cachepolitik($methode, $pfad)]);
+    }
+
+    /**
+     * Die Cachepolitik je Antwort — gebaut am 15.08.2026.
+     *
+     * ## Warum es sie vorher nicht gab
+     *
+     * `session_start()` stempelte `Cache-Control: no-store, no-cache, must-revalidate`
+     * auf **jede** Antwort — der Vorgabewert von `session.cache_limiter` ist `nocache`.
+     * Das galt für die Startseite ebenso wie für `robots.txt`. `Sitzung::starten()` setzt
+     * den Wert jetzt leer; entschieden wird hier.
+     *
+     * ## Die drei Stufen
+     *
+     * | Wo | Was | Warum |
+     * |---|---|---|
+     * | die drei Wurzeldateien | `public, max-age=3600` | Sie tragen kein Cookie und keine persönliche Angabe. Ein Crawler soll sie zwischenspeichern dürfen |
+     * | öffentliche GET-Seiten | `private, max-age=0, must-revalidate` | Sie tragen ein Sitzungscookie und dürfen deshalb **nicht** in einen gemeinsamen Zwischenspeicher. `max-age=0` heisst „nachfragen", nicht „nie speichern" — der Browser darf mit `304` antworten |
+     * | alles andere | `no-store` | Portal, Admin, `/api/` und jedes `POST`. Dort steht in der Antwort, was nur diese eine Person sehen darf |
+     */
+    private function cachepolitik(string $methode, string $pfad): string
+    {
+        if (in_array($pfad, Sitzung::OHNE_SITZUNG, true)) {
+            return 'public, max-age=3600';
+        }
+
+        $route = ($this->finden(strtoupper($methode), $pfad)['route'] ?? null);
+
+        if (strtoupper($methode) === 'GET' && $route?->bereich === Route::BEREICH_OEFFENTLICH) {
+            return 'private, max-age=0, must-revalidate';
+        }
+
+        return 'no-store';
     }
 
     private function abwickeln(string $methode, string $pfad): Antwort

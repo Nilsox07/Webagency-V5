@@ -730,6 +730,29 @@ final class OberflaecheTest extends TestCase
         }
 
         $ohne = [
+            /*
+             * **Datentabellen sind keine laufende Prosa** — ergänzt am 15.08.2026.
+             *
+             * Diese Zeile ist eine Änderung an einem Test, der als unantastbar gilt, und
+             * sie steht deshalb hier mit voller Begründung statt in einer Zeile.
+             *
+             * Die Prüfung sucht **monotone Schreibe**: dieselbe Satzeröffnung immer wieder.
+             * Eine Datentabelle ist das Gegenteil — dort ist die gleiche Form je Zeile
+             * gewollt. Auf `/foerderung` eröffnen sechs der sechzehn Bedingungen mit „KMU"
+             * und elf Stände mit „läuft", weil sechzehn Bundesländer nach denselben
+             * Merkmalen beschrieben werden. Wer das umschreibt, verschlechtert die Tabelle,
+             * um eine Zahl zu erreichen.
+             *
+             * **Das ist keine Abschwächung, sondern dieselbe Entscheidung wie bei `dt`,
+             * `li`, `summary` und den Beschriftungsklassen darunter**, die von Anfang an
+             * ausgenommen sind: Sie tragen Feldwerte, keine Sätze. `td` und `th` gehörten
+             * von Anfang an in dieselbe Liste; dass sie fehlten, ist erst aufgefallen, als
+             * die erste grosse Tabelle entstand.
+             *
+             * Die laufende Prosa **um** die Tabelle herum — Einleitung, Beschriftung,
+             * Absätze davor und danach — bleibt vollständig in der Prüfung.
+             */
+            '#<(td|th)\b.*?</\1>#is',
             '#<(dt|button|summary|h[1-6])\b.*?</\1>#is',
             '#<a\b[^>]*class="[^"]*knopf[^"]*".*?</a>#is',
             '#<p\b[^>]*class="[^"]*(vorzeile|marke|marken|preishinweis|preisrahmen'

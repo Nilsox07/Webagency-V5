@@ -103,15 +103,16 @@ final class Firmenseitentexte
     /**
      * §11, Pflichtabschnitt „Wo wir arbeiten".
      *
-     * **Die Ortsliste fehlt, und die Reihenfolge ist genau deshalb erhalten geblieben.** §11
-     * schreibt vor: „erst bundesweit, dann der Umkreis. Umgekehrt liest ein Betrieb aus
-     * Kassel ‚Dresden' und geht." Der erste Teil steht hier vollständig.
+     * **Die Reihenfolge ist gebunden:** §11 schreibt vor „erst bundesweit, dann der
+     * Umkreis. Umgekehrt liest ein Betrieb aus Kassel ‚Dresden' und geht." `WO_TEXT` trägt
+     * den ersten Teil, `WO_EINZUGSGEBIET` darunter den zweiten.
      *
-     * Der zweite Teil — Sitz und Umkreisliste — ist gesperrt: §0 verbietet Ortsnamen im
-     * Fließtext, solange `[GESCHAEFTSADRESSE_STATUS]` auf `offen` steht, und
-     * `SARTU_ENTSCHEIDUNGEN_OFFEN.md` steht in der Rangfolge über dem Website-Lastenheft.
-     * Die Sperre nennt als Zweck ausdrücklich den Kartenbereich — und der ist ohne
-     * entschiedene Adresse ohnehin nicht zu haben.
+     * **Der zweite Teil hat bis zum 15.08.2026 gefehlt**, mit einer Begründung, die seit dem
+     * 01.08.2026 nicht mehr galt: §0 sperre Ortsnamen im Fliesstext. Der Betreiber hat das
+     * an jenem Tag entschieden — „alle Orte ins Profil und in den Fliesstext", und für
+     * `/kontakt` ausdrücklich „ein Absatz, der die Orte namentlich nennt". Gesperrt bleiben
+     * Google-Unternehmensprofil, `LocalBusiness` und die NAP-Aussage; eine Anschrift steht
+     * hier nach wie vor nicht.
      */
     public const WO_H2 = 'Wo wir arbeiten';
 
@@ -120,4 +121,31 @@ final class Firmenseitentexte
 
     public const WO_ZUSATZ = 'Auf Wunsch sprechen wir per Video oder kommen zu Ihnen. Nötig ist '
         . 'weder das eine noch das andere.';
+
+    /**
+     * Das Einzugsgebiet mit Ortsnamen — `SARTU_ENTSCHEIDUNGEN_OFFEN.md` §1, Ebene 1.
+     *
+     * ## Warum er bis zum 15.08.2026 fehlte
+     *
+     * §0 sperrte jeden Ortsnamen im sichtbaren Text, solange `[GESCHAEFTSADRESSE_STATUS]`
+     * offen ist. **Am 01.08.2026 hat der Betreiber das für den Fliesstext aufgehoben:**
+     * „alle Orte ins Profil und in den Fliesstext", und ausdrücklich „`/kontakt` und die
+     * Dresden-Seite: ein Absatz, der die Orte namentlich nennt — und den Satz, dass
+     * bundesweit gearbeitet wird". Gesperrt blieben nur drei Dinge, und sie sind alle drei
+     * benannt: Google-Unternehmensprofil, `LocalBusiness` und die NAP-Aussage.
+     *
+     * Der Code hat die alte Sperre danach zwei Wochen weiter begründet.
+     *
+     * ## Die Reihenfolge ist nicht beliebig
+     *
+     * §1: „Sitz im Raum Dresden nennen, **Arbeitsgebiet bundesweit**. Nicht ‚nur im Raum
+     * Dresden'." `WO_TEXT` steht deshalb davor und sagt zuerst „Bundesweit"; dieser Absatz
+     * ergänzt den Sitz, er ersetzt ihn nicht.
+     *
+     * **Keine Anschrift.** Sitz heisst hier Region, nicht Strasse — die Anschrift ist
+     * weiterhin offen, und eine NAP-Aussage bleibt gesperrt.
+     */
+    public const WO_EINZUGSGEBIET = 'Unser Sitz liegt im Raum Dresden. Häufig arbeiten wir '
+        . 'für Betriebe in Meißen, Radebeul, Coswig, Radeberg, Freital, Heidenau, Pirna, '
+        . 'Dippoldiswalde, Bischofswerda, Bautzen und Sebnitz — nötig ist die Nähe nicht.';
 }

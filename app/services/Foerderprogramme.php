@@ -21,11 +21,17 @@ namespace Sartu\Services;
  * Summen**." Die Beträge stehen im Konzept zur internen Orientierung; auf der Kundenseite
  * verfallen sie und werden dann gegen SARTU zitiert.
  *
- * **Keine Adressen der Förderbanken.** Der Aufbau verlangt einen Link je Land. In den
- * Unterlagen steht **keine einzige** Adresse — weder in `FOERDERUNG_KONZEPT.md` noch
- * sonstwo im Bestand. Eine erfundene Adresse führt einen Betrieb, der gerade investieren
- * will, ins Leere; das ist schlimmer als eine fehlende. Genannt wird deshalb die **Stelle**,
- * bei der der Antrag läuft. Der fehlende Link steht in `OFFENE_PRUEFUNGEN.md`.
+ * **Die Adressen — nachgetragen am 15.08.2026.** Der Aufbau verlangt seit dem 09.08.2026
+ * einen Link je Land; in den Unterlagen stand keine einzige Adresse, und die erste Fassung
+ * dieser Datei nannte deshalb nur die Stelle. Das war zu wenig: `FOERDERUNG_KONZEPT.md`
+ * legt **„verweisen statt kopieren"** fest, und der Verweis **ist** das Konzept — vier von
+ * sechzehn Programmen waren in Sekundärübersichten als aktiv geführt und sind es nicht.
+ * Eine Übersicht ohne Weg zur Quelle ist selbst eine Sekundärübersicht.
+ *
+ * Jede der sechzehn Adressen ist am 15.08.2026 angefordert worden und hat mit einem Titel
+ * geantwortet, der die Stelle nennt. Verlinkt ist die **Förderbank**, nicht die
+ * Programmseite: Programmseiten wechseln ihre Adresse, und ein toter Link führt einen
+ * Betrieb, der gerade investieren will, ins Leere.
  *
  * **Keine interne Einschätzung.** `FOERDERUNG_KONZEPT.md` führt vier Länder, in denen ein
  * SARTU-Vorhaben intern als unwahrscheinlich gilt. Ausdrücklich: „auf `/foerderung` steht sie
@@ -40,6 +46,20 @@ final class Foerderprogramme
      * Förderübersicht ohne Datum ist eine Übersicht, deren Alter niemand kennt.
      */
     public const GEPRUEFT_AM = '2026-08-09';
+
+    /**
+     * Der Tag, an dem **jede der sechzehn Adressen** angefordert wurde — 15.08.2026.
+     *
+     * Getrennt von `GEPRUEFT_AM`, weil es zwei verschiedene Prüfungen sind: Dort wurde der
+     * **Inhalt** an der Primärquelle geprüft, hier ist die **Adresse** angefordert worden
+     * und hat mit einem Titel geantwortet, der die Stelle nennt. Eine Adresse, die heute
+     * antwortet, sagt nichts darüber, ob das Programm heute noch läuft.
+     *
+     * Fünfzehn Adressen antworteten mit `200` und einem Titel, der die Förderbank nennt.
+     * `saarland.de` weist automatisierte Anfragen ab; für das Saarland steht deshalb die
+     * Seite des Serviceportals, die mit dem Programmnamen im Titel antwortet.
+     */
+    public const LINKS_GEPRUEFT_AM = '2026-08-15';
 
     /**
      * Die vier Statusstufen — `FOERDERUNG_KONZEPT.md` §4a, „Vier Statusarten, nicht zwei".
@@ -63,7 +83,7 @@ final class Foerderprogramme
      * Eine frühere Fassung des Konzepts liess vier Länder ausscheiden; der Betreiber hat das
      * am 09.08.2026 zurückgenommen — die Bedingung je Land ist der eigentliche Inhalt.
      *
-     * @return list<array{land:string,kuerzel:string,programm:string,stelle:string,bedingung:string,status:string}>
+     * @return list<array{land:string,kuerzel:string,programm:string,stelle:string,bedingung:string,status:string,quelle:string}>
      */
     public static function alle(): array
     {
@@ -71,12 +91,14 @@ final class Foerderprogramme
             ['kuerzel' => 'BW', 'land' => 'Baden-Württemberg',
              'programm' => 'Digitalisierungsprämie Plus', 'stelle' => 'L-Bank',
              'status' => 'laeuft',
+             'quelle' => 'https://www.l-bank.de/',
              'bedingung' => 'Gewerbliche Unternehmen und Freiberufler bis 500 Beschäftigte. '
                 . 'Investition im Land. Sperrfrist ein Jahr nach einer vorigen Förderung.'],
 
             ['kuerzel' => 'BY', 'land' => 'Bayern',
              'programm' => 'Digitalbonus Standard und Plus', 'stelle' => 'Bezirksregierungen',
              'status' => 'laeuft',
+             'quelle' => 'https://www.digitalbonus.bayern/',
              'bedingung' => 'Kleine Unternehmen der gewerblichen Wirtschaft unter 50 '
                 . 'Beschäftigten, Sitz in Bayern. Antrag vor Beginn. Standard-Websites und '
                 . 'Suchmaschinenoptimierung sind ausdrücklich ausgeschlossen.'],
@@ -84,6 +106,7 @@ final class Foerderprogramme
             ['kuerzel' => 'BE', 'land' => 'Berlin',
              'programm' => 'Transfer BONUS', 'stelle' => 'IBB',
              'status' => 'laeuft',
+             'quelle' => 'https://www.ibb.de/',
              'bedingung' => 'Technologieorientierte KMU oder Vorhaben mit ausgeprägtem '
                 . 'Technologiebezug. Die Digitalprämie Berlin ist seit Ende 2023 nicht mehr '
                 . 'beantragbar.'],
@@ -91,12 +114,14 @@ final class Foerderprogramme
             ['kuerzel' => 'BB', 'land' => 'Brandenburg',
              'programm' => 'BIG-Digital', 'stelle' => 'ILB',
              'status' => 'laeuft',
+             'quelle' => 'https://www.ilb.de/',
              'bedingung' => 'KMU einschliesslich Handwerk. Gefördert wird die Analyse '
                 . 'betrieblicher Abläufe auf Innovationspotenziale. Antrag vor Beginn.'],
 
             ['kuerzel' => 'HB', 'land' => 'Bremen',
              'programm' => 'Digitaler Mittelstand KI', 'stelle' => 'BAB',
              'status' => 'laeuft',
+             'quelle' => 'https://www.bab-bremen.de/',
              'bedingung' => 'KMU und Soloselbstständige im Haupterwerb mit Sitz oder '
                 . 'Betriebsstätte im Land Bremen. Schwerpunkt KI, automatisierte Prozesse, '
                 . 'Cybersicherheit. Bearbeitung in Eingangsreihenfolge.'],
@@ -104,6 +129,7 @@ final class Foerderprogramme
             ['kuerzel' => 'HH', 'land' => 'Hamburg',
              'programm' => 'Hamburg-Kredit Digital', 'stelle' => 'IFB',
              'status' => 'laeuft',
+             'quelle' => 'https://www.ifbhh.de/',
              'bedingung' => 'KMU nach EU-Definition mit Sitz oder Betriebsstätte in Hamburg. '
                 . 'Es ist ein Darlehen mit Tilgungszuschuss, beantragt über die Hausbank, mit '
                 . 'einer Mindesthöhe.'],
@@ -111,40 +137,47 @@ final class Foerderprogramme
             ['kuerzel' => 'HE', 'land' => 'Hessen',
              'programm' => 'DIGI-Zuschuss', 'stelle' => 'WIBank',
              'status' => 'beendet',
+             'quelle' => 'https://www.wibank.de/',
              'bedingung' => 'Im Juni 2026 beendet, keine weiteren Aufrufe.'],
 
             ['kuerzel' => 'MV', 'land' => 'Mecklenburg-Vorpommern',
              'programm' => 'Digitalisierungsförderung Mittelstand', 'stelle' => 'TBI',
              'status' => 'laeuft',
+             'quelle' => 'https://www.tbi-mv.de/',
              'bedingung' => 'KMU unter 100 Beschäftigten aus Produktion, Handwerk oder '
                 . 'Tourismus. Betriebsstätte im Land, Vorhaben überwiegend im Land.'],
 
             ['kuerzel' => 'NI', 'land' => 'Niedersachsen',
              'programm' => 'Digitalbonus.Niedersachsen – innovativ', 'stelle' => 'NBank',
              'status' => 'beendet',
+             'quelle' => 'https://www.nbank.de/',
              'bedingung' => 'Ausgelaufen.'],
 
             ['kuerzel' => 'NW', 'land' => 'Nordrhein-Westfalen',
              'programm' => 'MID — Digitalisierung, Digitale Sicherheit, AssistentIn',
              'stelle' => 'Land Nordrhein-Westfalen', 'status' => 'laeuft',
+             'quelle' => 'https://www.mittelstand-innovativ-digital.nrw/',
              'bedingung' => 'Kleinst-, kleine und mittlere Unternehmen im Land. '
                 . 'Gutscheinsystem — eingelöst wird er bei externen Fachleuten.'],
 
             ['kuerzel' => 'RP', 'land' => 'Rheinland-Pfalz',
              'programm' => 'DigiBoost, Beratungsprogramm, IBI-EFRE', 'stelle' => 'ISB',
              'status' => 'ohneumsetzung',
+             'quelle' => 'https://www.isb.rlp.de/',
              'bedingung' => 'Kleine und mittlere gewerbliche Unternehmen mit Sitz im Land. '
                 . 'Ein Sachverständiger beurteilt die Eignung im Antragsverfahren.'],
 
             ['kuerzel' => 'SL', 'land' => 'Saarland',
              'programm' => 'DigitalInvest KMU Basis und Plus', 'stelle' => 'nFMI-Portal',
              'status' => 'laeuft',
+             'quelle' => 'https://service.saarland.de/sldlp/detail?pstId=106303047',
              'bedingung' => 'KMU mit Sitz oder Betriebsstätte im Saarland. Die Plus-Variante '
                 . 'verlangt besonderen Innovationsgehalt.'],
 
             ['kuerzel' => 'SN', 'land' => 'Sachsen',
              'programm' => 'Digitalisierung in KMU (EFRE)', 'stelle' => 'SAB',
              'status' => 'laeuft',
+             'quelle' => 'https://www.sab.sachsen.de/',
              'bedingung' => 'Kleinstunternehmen, KMU und Angehörige der freien Berufe mit '
                 . 'Betriebsstätte in Sachsen. Zwölf Monate ohne Verlängerung, Start nicht vor '
                 . 'der Bestätigung. Websites ohne Geschäftsintegration sind ausgeschlossen.'],
@@ -152,12 +185,14 @@ final class Foerderprogramme
             ['kuerzel' => 'ST', 'land' => 'Sachsen-Anhalt',
              'programm' => 'DIGITAL INNOVATION', 'stelle' => 'IB Sachsen-Anhalt',
              'status' => 'aufruf',
+             'quelle' => 'https://www.ib-sachsen-anhalt.de/',
              'bedingung' => 'KMU mit Sitz oder Betriebsstätte im Land. Innovationsgehalt ist '
                 . 'zwingend. Seit dem 15.07.2026 Direktantrag mit Mindestpunktzahl.'],
 
             ['kuerzel' => 'SH', 'land' => 'Schleswig-Holstein',
              'programm' => 'DKU — Digitalisierungsmassnahmen in kleinen Unternehmen',
              'stelle' => 'IB.SH', 'status' => 'laeuft',
+             'quelle' => 'https://www.ib-sh.de/',
              'bedingung' => 'Kleine Unternehmen. Gefördert werden Vorhaben, die in einem '
                 . 'schriftlichen Beratungsbericht Lösungen erarbeiten. Richtlinie vom '
                 . '05.06.2026, befristet bis 30.06.2027.'],
@@ -165,6 +200,7 @@ final class Foerderprogramme
             ['kuerzel' => 'TH', 'land' => 'Thüringen',
              'programm' => 'Digitalbonus', 'stelle' => 'TAB',
              'status' => 'erschoepft',
+             'quelle' => 'https://www.aufbaubank.de/',
              'bedingung' => 'Mittel erschöpft, eine Neuauflage ist nicht geplant.'],
         ];
     }

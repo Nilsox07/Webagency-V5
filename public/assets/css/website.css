@@ -200,14 +200,76 @@ main :target {
 .menue[open] .menue__blatt {
   position: fixed;
   inset: 0;
-  background: var(--cream);
-  padding: var(--s-6) var(--gut);
   overflow-y: auto;
   z-index: 30;
+}
+
+/* **Die Hinterlegung traegt die Flaeche, nicht das Blatt.** Geaendert am 15.08.2026:
+   Vorher lag der Grund auf dem Blatt selbst, und ein Klick daneben traf immer das
+   `details` — der Aussenklick konnte nicht greifen. Jetzt gibt es ein Element unter dem
+   Inhalt, auf das er faellt; `menue.js` erkennt es an `data-hinterlegung`.
+
+   Sie ist deckend, nicht durchscheinend: Der Entwurf setzt das offene Menue als volle
+   Flaeche in `--cream`, nicht als Schleier ueber der Seite. */
+.menue__hinterlegung {
+  position: absolute;
+  inset: 0;
+  background: var(--cream);
+}
+
+/* **Der Inhalt endet mit dem letzten Punkt, er fuellt das Fenster nicht.** Gemessen am
+   15.08.2026: Mit `min-height: 100%` lag er ueber der ganzen Hinterlegung, und ein Tipp
+   traf nie die Flaeche darunter — der Aussenklick blieb wirkungslos, obwohl es die Flaeche
+   jetzt gab. Sichtbar aendert das nichts: Die Hinterlegung ist deckend und liegt weiterhin
+   ueber dem ganzen Fenster. Nur der Bereich unter dem letzten Punkt ist wieder „daneben". */
+.menue__inhalt {
+  position: relative;
+  z-index: 1;
+  padding: var(--s-6) var(--gut);
   display: flex;
   flex-direction: column;
   gap: var(--s-4);
 }
+
+/* **Das offene `summary` liegt ueber dem Blatt.** Ohne diese Regel verschwand die
+   Menuetaste unter der Flaeche: Bei 390 px lag das Blatt mit `inset: 0` ueber Logo und
+   Taste, und ein Finger fand keinen Weg zurueck. `Esc` half nur an der Tastatur.
+
+   z-index 31 statt 30 — eine Stufe ueber dem Blatt, das die Flaeche traegt. */
+.menue[open] > summary {
+  position: fixed;
+  top: var(--s-3);
+  right: var(--gut);
+  z-index: 31;
+  background: var(--cream);
+  gap: var(--s-2);
+}
+
+/* Das Kreuz erscheint erst im offenen Zustand. Es ist Zierde — `aria-hidden` im Markup —
+   und aus zwei Strichen gebaut, ohne neue Form und ohne Zeichensatz. */
+.menue__kreuz { display: none; }
+
+.menue[open] > summary .menue__kreuz {
+  display: inline-block;
+  position: relative;
+  width: 14px;
+  height: 14px;
+}
+
+.menue__kreuz::before,
+.menue__kreuz::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 50%;
+  width: 100%;
+  height: 2px;
+  border-radius: var(--r-pill);
+  background: var(--ink);
+}
+
+.menue__kreuz::before { transform: rotate(45deg); }
+.menue__kreuz::after  { transform: rotate(-45deg); }
 
 .menue__blatt ul {
   display: flex;

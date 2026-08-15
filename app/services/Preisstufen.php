@@ -65,12 +65,17 @@ final class Preisstufen
             ],
             'platzhirsch' => [
                 'kicker'   => 'Für die erste Adresse am Ort',
-                'satz'     => 'Sichtbar für Kunden — und für Bewerber.',
+                /* **Zwei Zeilen entfallen, `SARTU_ENTSCHEIDUNGEN_OFFEN.md` §7b (Rang 1).**
+                   Der Satz nannte Bewerber als zweite Zielgruppe der Stufe, das Merkmal nannte
+                   den Bereich als Lieferbestandteil — beides ist eine Ankündigung, und §7b
+                   verbietet sie, solange Lesart A oder B nicht bestätigt ist. Ein Merkmal in
+                   der Preisleiter ist eine Zusage über den Lieferumfang; sie darf nicht auf
+                   einer offenen Entscheidung stehen. */
+                'satz'     => 'Sichtbar an mehreren Orten, mit eigener Seite je Leistung.',
                 'merkmale' => [
                     'bis zu 16 Seiten, rund 6.500 Wörter',
                     '2 Korrekturrunden',
                     'eigene Seite je Leistung und Ort',
-                    'Karriere- und Bewerbungsbereich',
                 ],
                 'knopf'      => Auftragslage::KNOPF,
                 'empfehlung' => true,

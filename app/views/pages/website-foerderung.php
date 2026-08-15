@@ -73,8 +73,14 @@ use Sartu\Services\Websitetexte;
   <div class="bahn">
     <h2><?= Html::e(T::LAENDER_H2) ?></h2>
     <p class="lede"><?= Html::e(T::LAENDER_EINLEITUNG) ?></p>
-    <p class="marken">Alle Angaben an der Quelle geprüft am
-      <?= Html::e(Format::datum(Foerderprogramme::GEPRUEFT_AM)) ?>.</p>
+    <?php /* **Zwei Daten, nicht eines.** Der Inhalt ist am 09.08.2026 an der Primärquelle
+             geprüft worden, die sechzehn Adressen am 15.08.2026 angefordert. Das sind zwei
+             verschiedene Aussagen, und die Seite behauptet keine, die sie nicht belegt: Eine
+             Adresse, die heute antwortet, sagt nichts darüber, ob das Programm heute noch
+             läuft. */ ?>
+    <p class="marken">Inhalt an der Quelle geprüft am
+      <?= Html::e(Format::datum(Foerderprogramme::GEPRUEFT_AM)) ?>, Verweise zuletzt
+      angefordert am <?= Html::e(Format::datum(Foerderprogramme::LINKS_GEPRUEFT_AM)) ?>.</p>
 
     <div class="tabellenrolle">
       <table class="zahlentabelle">
@@ -93,7 +99,14 @@ use Sartu\Services\Websitetexte;
           <tr>
             <th scope="row"><?= Html::e($programm['land']) ?></th>
             <td><?= Html::e($programm['programm']) ?></td>
-            <td><?= Html::e($programm['stelle']) ?></td>
+            <?php /* **Der Verweis ist der Kern der Übersicht, nicht ihre Zugabe.**
+                     `FOERDERUNG_KONZEPT.md`: verweisen statt kopieren. Vier von sechzehn
+                     Programmen standen in Sekundärübersichten als aktiv und sind es nicht —
+                     wer keinen Weg zur Quelle anbietet, ist selbst eine Sekundärübersicht.
+
+                     `rel="noopener"` ohne `target`: Der Verweis öffnet im selben Fenster.
+                     Ein erzwungenes neues Fenster nimmt dem Leser die Zurück-Taste. */ ?>
+            <td><a href="<?= Html::e($programm['quelle']) ?>" rel="noopener nofollow"><?= Html::e($programm['stelle']) ?></a></td>
             <td><?= Html::e($programm['bedingung']) ?></td>
             <?php /* **Der Stand ist eine Beschriftung, kein Satz.** Er kommt aus einem
                      festen Wortschatz von fünf Werten (`Foerderprogramme::STATUS`), und elf
