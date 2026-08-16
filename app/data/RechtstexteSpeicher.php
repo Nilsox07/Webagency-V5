@@ -117,6 +117,29 @@ final class RechtstexteSpeicher
         return is_array($zeile) ? $zeile : null;
     }
 
+    /**
+     * Die laufende Fassung eines Rechtstextes — oder `null`, wenn es ihn noch nicht gibt.
+     *
+     * Gebraucht beim Anlegen einer Anfrage: `spezifikation/09_ANFRAGEEINGANG.md` §4 verlangt,
+     * dass festgehalten wird, **dass** und **wann** bestätigt wurde. Ohne die Fassung sagt
+     * ein Zeitstempel nur, wann jemand einen Haken gesetzt hat, nicht wovor er stand.
+     *
+     * **Ohne Zustandsfilter, mit Absicht:** Solange kein Datenschutztext freigegeben ist —
+     * und das ist der heutige Stand, kein Modell darf `freigegeben` setzen —, gäbe
+     * `oeffentlich()` immer `null` zurück. Dann stünde in jeder Anfrage „keine Fassung", und
+     * der Nachweis wäre wertlos, sobald der Text freigegeben wird. Festgehalten wird deshalb
+     * die Fassung, **die zum Zeitpunkt der Anfrage im Haus war**.
+     */
+    public function fassung(string $slug): ?int
+    {
+        $anweisung = $this->pdo()->prepare('SELECT version FROM legal_texts WHERE slug = ?');
+        $anweisung->execute([$slug]);
+
+        $wert = $anweisung->fetchColumn();
+
+        return $wert === false || $wert === null ? null : (int) $wert;
+    }
+
     /** @return list<array<string,mixed>> */
     public function alleIntern(): array
     {

@@ -237,6 +237,52 @@ VERÖFFENTLICHEN`. Der Vermerk wird erst nach der Freigabe entfernt, und zwar vo
 
 ---
 
+## 2a. Der Pflichthaken vor dem Absenden — **OFFEN, vorgelegt 16.08.2026**
+
+**Was gefragt ist:** Darf der Bedarfsscheck das Absenden weiterhin davon abhängig machen, dass
+der Interessent einen Haken bei den Datenschutzhinweisen setzt?
+
+**Warum das überhaupt gefragt wird.** Wer ein Angebot anfordert, löst damit eine Verarbeitung
+aus, die Art. 6 Abs. 1 lit. b DSGVO trägt — vorvertragliche Maßnahme auf Anfrage der betroffenen
+Person. Eine Einwilligung daneben ist dann nicht die zweite Absicherung, für die man sie hält:
+Sie ist jederzeit widerrufbar, sie muss freiwillig sein, und ein Haken, ohne den das Formular
+nicht abgeht, ist der Musterfall des **nicht freiwilligen** Hakens. Ein Pflichthaken kann die
+Rechtslage also verschlechtern statt verbessern.
+
+**Was dagegen spricht, ihn einfach zu entfernen — drei gebundene Stellen:**
+
+| Stelle | Rang | Was dort steht |
+|---|---|---|
+| `spezifikation/09_ANFRAGEEINGANG.md` §4b.2 | 4 | `privacy_confirmed` „muss `true` sein" |
+| `spezifikation/15_TESTFAELLE.md`, Fall 35 | 4 | `privacy_confirmed = false` ⇒ Schritt erneut anzeigen, **kein** Lead |
+| `migrations/009_leads.sql` | — | `CHECK (b2b_confirmed = 1 AND privacy_confirmed = 1)` |
+
+Eine Migration wird nie geändert, nur ergänzt. Ein `DROP CONSTRAINT` wäre technisch möglich und
+inhaltlich eine Entscheidung — **die hier niemand treffen darf.**
+
+**Was am 16.08.2026 gebaut wurde, ohne die Frage zu beantworten:**
+
+- Der Haken **bleibt** Voraussetzung. Weder Spezifikation noch Testfall noch Bedingung wurden
+  angefasst
+- Die Beschriftung sagt weiter *„Ich habe die Datenschutzhinweise gelesen"* — eine
+  **Kenntnisnahme**, keine Einwilligungserklärung. Das Wort „Einwilligung" steht nirgends in
+  der Oberfläche
+- Neu: `leads.privacy_text_version` und `leads.privacy_confirmed_at` (Migration 040). Damit ist
+  belegbar, **wovor** jemand stand und **wann** — bisher stand nur, *dass*
+- `spezifikation/09_ANFRAGEEINGANG.md` §4 nennt die Bestätigung an einer Stelle „Einwilligung".
+  **Das ist eine Bezeichnung, keine Rechtsgrundlage** — der Widerspruch ist hier gemeldet und
+  wird nicht stillschweigend aufgelöst
+
+**Wer entscheidet:** dieselbe anwaltliche Prüfung wie in §2. Die Frage gehört zum
+Datenschutztext, nicht daneben.
+
+**Was die Entscheidung auslöst, falls der Haken fällt:** eine neue Migration, die
+`chk_leads_bestaetigungen` auf `b2b_confirmed` verkürzt · Fall 35 in `15_TESTFAELLE.md` ·
+`AnfrageService::pflichtfelderPruefen` und `Kontaktanfrage` · beide Formularansichten. **Vier
+Stellen, eine Entscheidung** — deshalb steht sie hier und nicht im Code.
+
+---
+
 ## 3. Designrichtung — **ENTSCHIEDEN 01.08.2026**
 
 > **Der Betreiber hat das Artefakt vom 30.07.2026 als verbindlich bestätigt.** Damit ist das

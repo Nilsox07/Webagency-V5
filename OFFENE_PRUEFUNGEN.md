@@ -3755,3 +3755,45 @@ Gemessen bei 390 px mit Berührungseingabe:
 | 6 | **Die Grenze für `menue.js` steht jetzt auf 3 KB statt 2,5.** Der Test verlangt für eine Anhebung eine Begründung an Ort und Stelle; sie steht dort. Sechs Zeilen Code, der Rest Kommentar | — |
 | 7 | **Das Logostatus-Feld ändert den Ablauf noch nicht.** §17 nennt drei Fälle mit unterschiedlicher Behandlung; die Antwort landet in `payload` und im Klartext der Anfrage, eine Regel im Angebot gibt es nicht. Der Fall „Kein Logo" ist im Konzept ausdrücklich offen | Entscheidung, wie „Kein Logo" bedient wird |
 | 8 | **Der Ergebnisbildschirm trägt eine Lime-Fläche von rund 180.000 Quadratpixeln.** Die 40.000er-Grenze gilt gemessen für die öffentlichen Seiten; `/briefing/ergebnis` steht in `OberflaecheTest` unter `OHNE_LAYOUT` und wird nicht gemessen. Der Zustand ist älter als dieser Lauf | Entscheidung, ob die Grenze auch im Bedarfsscheck gilt |
+
+---
+
+## 16.08.2026 — Seitengattungen, Sitzungsentscheidung, Datenverzeichnis
+
+**Ausgangsstand:** `541cbf9` auf `claude/sartu-concept-review-pdhb5t`.
+**Volle Suite:** 413 Tests, 15.884 Zusicherungen, grün — Oberflächenmessung mit Chromium
+eingeschlossen.
+
+### Was gemessen wurde
+
+| Prüfung | vorher | nachher |
+|---|---|---|
+| Cookie auf `/`, `/preise`, `/ratgeber`, `/lexikon`, `/leistung-*`, `/musterprojekte`, `/ueber-uns`, `/ablauf`, `/foerderung`, `/impressum`, `/datenschutz`, `/agb` | **je eines** | keines |
+| Cookie auf `/briefing`, `/kontakt`, drei Branchenseiten | eines | eines — begründet und namentlich im Test |
+| `Cache-Control` öffentliche Leseseite | `no-store` | `public, max-age=3600` |
+| `Cache-Control` bei `404` auf öffentlicher Route (`/agb`) | `public, max-age=3600` | `no-store` |
+| `Permissions-Policy` | fehlte | in jeder Antwort |
+| `session.use_strict_mode` | Vorgabe `0` | `1` |
+| Lime-Fläche `/briefing/ergebnis` bei 390 px | rund 180.000 px² | 27.234 px² |
+| Grösste Lime-Fläche `/briefing/ergebnis`, alle sechs Breiten | ungemessen | 23.419 bis 29.041 px² — Grenze 40.000 |
+| Überlauf auf allen vier Bedarfsscheck-Bildschirmen, sechs Breiten | ungemessen | 0 px |
+| Von der Abnahmeprüfung gemessene Adressen | 21 | 24 |
+| Tiefster Kontrast im Farbsystem | 6,42 : 1 (dokumentiert, warme Reihe) | 6,16 : 1 (gemessen, `tokens.css`) |
+| Rohe Farbwerte in `website.css` | 6 aus der warmen Reihe | 0 |
+
+Punkt 1 und Punkt 8 der Liste vom 15.08.2026 sind damit erledigt: Die Sitzung startet nicht mehr
+auf Leseseiten, und die Lime-Fläche des Ergebnisbildschirms liegt unter der Grenze.
+
+### Ungeprüft und offen
+
+| # | Punkt | Womit es zu prüfen ist |
+|---|---|---|
+| 1 | **Der Pflichthaken „Datenschutzhinweise gelesen" bleibt Voraussetzung des Absendens.** Der Auftrag verlangte, ihn durch einen sichtbaren, nicht blockierenden Hinweis zu ersetzen. Dagegen stehen `spezifikation/09_ANFRAGEEINGANG.md` §4b.2, Testfall 35 und `CHECK (b2b_confirmed = 1 AND privacy_confirmed = 1)` aus Migration 009 — drei gebundene Stellen. **Nicht entschieden, sondern vorgelegt:** `SARTU_ENTSCHEIDUNGEN_OFFEN.md` §2a | Anwaltliche Prüfung, zusammen mit dem Datenschutztext |
+| 2 | **`audit_events` lässt sich nicht löschen** (Trigger aus Migration 005 und 006). Wie sich das zu einem Löschbegehren nach Art. 17 DSGVO verhält, ist eine Rechtsfrage, keine technische | Anwaltliche Prüfung |
+| 3 | **Kein Auftragsverarbeitungsvertrag** für den Mailversand und für Mollie. Der Mailanbieter ist zudem noch nicht ausgewählt (`SARTU_ENTSCHEIDUNGEN_OFFEN.md` §4) | Entscheidung, dann Vertrag |
+| 4 | **Die drei Branchenseiten setzen ein Cookie**, weil sie den Bedarfsscheck als Formular einbetten. Ersetzt man das Formular durch einen Verweis auf `/briefing`, fallen drei Cookies weg — das ändert aber den Einstieg, den §10a beschreibt | Entscheidung: eingebettetes Formular oder Verweis |
+| 5 | **`DATENVERZEICHNIS.md` ist aus Schema und Code erhoben, nicht juristisch geprüft.** Rechtsgrundlagen stehen bewusst nicht darin. Es ist die Grundlage für einen Datenschutztext, nicht der Text | Anwaltliche Prüfung |
+| 6 | **Die W-IdNr. ist im Impressum-Entwurf nur als Hinweis vermerkt.** Ob SARTU eine hat und ob sie genannt werden muss, ist offen; § 5 DDG verlangt sie „soweit vorhanden" | Betreiberangabe, dann anwaltliche Prüfung |
+| 7 | **Migration 040 ist gegen MariaDB 10.11 in diesem Container gelaufen**, nicht gegen MySQL 8.4 und nicht gegen MariaDB 11.4. `ADD COLUMN … AFTER` ist in beiden Standard, aber ausgeführt ist es nur hier | Lauf gegen beide Zielversionen |
+| 8 | **Anfragen aus der Zeit vor Migration 040 tragen weder Zeitpunkt noch Textfassung.** Sie zeigen `Noch nicht hinterlegt`. Ein nachträgliches Füllen wäre eine Behauptung über einen Vorgang, bei dem niemand dabei war | — |
+| 9 | **Der Bedarfsscheck steht ab sofort *in* der Abnahmeprüfung.** `/briefing/ergebnis`, `/briefing/kontakt` und `/briefing/danke` standen in `OberflaecheTest::OHNE_LAYOUT`, weil ein direkter Aufruf mit `303` antwortet — `tools/oberflaeche.mjs` läuft die Strecke jetzt aus. Offen bleibt, dass die Messung dafür Formulare **generisch** ausfüllt (erste Auswahl je Frage): Eine künftige Frage mit einer Bedingung, die daraus nicht erfüllbar ist, lässt den Vorlauf stehenbleiben statt anschlagen | Beim nächsten Durchgang prüfen, ob der Vorlauf noch bis `/briefing/ergebnis` durchläuft |

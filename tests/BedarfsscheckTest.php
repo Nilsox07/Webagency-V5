@@ -275,6 +275,47 @@ final class BedarfsscheckTest extends Datenbankfall
         }
     }
 
+    /**
+     * §4: „Gespeichert wird, **dass** und **wann**" — und wovor der Absender stand.
+     *
+     * Bis zum 16.08.2026 stand nur das *Dass* in der Datenbank. Ein Haken ohne Zeitstempel und
+     * ohne Textfassung belegt nichts: Er sagt, dass irgendwann irgendetwas bestätigt wurde.
+     *
+     * Der Test prüft beides einzeln, weil beide Spalten NULL zulassen — ein stiller Ausfall
+     * einer der zwei Schreibstellen bliebe sonst unbemerkt.
+     */
+    public function testDieKenntnisnahmeWirdMitZeitpunktUndTextfassungFestgehalten(): void
+    {
+        $fassung = (int) $this->pdo
+            ->query("SELECT version FROM legal_texts WHERE slug = 'datenschutz'")
+            ->fetchColumn();
+
+        $dienst = new AnfrageService(null, new Ratenbegrenzung($this->arbeitsverzeichnis));
+        $dienst->anlegen($this->rohdaten(), [], '198.51.100.9');
+
+        $lead = $this->einzigerLead();
+
+        $this->assertSame(1, (int) $lead['privacy_confirmed']);
+
+        $this->assertNotNull(
+            $lead['privacy_confirmed_at'],
+            'Ohne Zeitpunkt ist die Bestätigung kein Nachweis, sondern ein Haken.',
+        );
+
+        // UTC und keine Serverzeit — dieselbe Regel wie bei jedem anderen Zeitstempel.
+        $this->assertLessThanOrEqual(
+            60,
+            abs(time() - strtotime((string) $lead['privacy_confirmed_at'] . ' UTC')),
+            'Der Zeitstempel steht nicht in UTC oder ist nicht der Zeitpunkt der Anfrage.',
+        );
+
+        $this->assertSame(
+            $fassung,
+            (int) $lead['privacy_text_version'],
+            'Festgehalten wird die Fassung, die zum Zeitpunkt der Anfrage im Haus war.',
+        );
+    }
+
     /** Fall 36 — Formulardaten über 64 KB werden abgewiesen. */
     public function testZuGrosseFormulardatenWerdenAbgewiesen(): void
     {

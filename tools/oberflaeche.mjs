@@ -258,14 +258,149 @@ function messung(fensterbreite) {
  * haengt, er bricht nicht ab. Sechs Kontexte nacheinander messen dasselbe in rund einer
  * Minute.
  */
+/**
+ * ## Der Bedarfsscheck laesst sich nicht anfahren, er muss durchlaufen werden
+ *
+ * `/briefing/ergebnis`, `/briefing/kontakt` und `/briefing/danke` antworten auf einen direkten
+ * Aufruf mit `303` auf den Einstieg. Sie standen deshalb in `OberflaecheTest::OHNE_LAYOUT` und
+ * **wurden nie gemessen** — ausgerechnet die drei Bildschirme, die eine Anfrage entstehen
+ * lassen. Der Ergebnisbildschirm trug dadurch monatelang eine Lime-Flaeche von rund
+ * 180.000 Quadratpixeln, ohne dass die Abnahmepruefung etwas davon wusste.
+ *
+ * Diese Funktion fuellt die Strecke aus und laesst die Sitzung in dem Zustand zurueck, in dem
+ * die drei Seiten wirklich ausgeliefert werden.
+ *
+ * **Sie fuellt generisch, nicht nach Drehbuch:** erste Auswahl je Frage, Pflichtfelder mit
+ * plausiblem Text, Haken gesetzt. Ein Drehbuch mit festen Feldnamen waere bei der naechsten
+ * Frage veraltet und wuerde still danebengreifen.
+ */
+async function funnelDurchlaufen(seite, basis) {
+  await seite.goto(basis + '/briefing', { waitUntil: 'load', timeout: 20000 });
+  await abschicken(seite);
+
+  // Fuenf Themen. Die Schranke steht bei acht: Wer eine sechste Seite einhaengt, soll eine
+  // Messung bekommen und keine Endlosschleife.
+  for (let i = 0; i < 8; i++) {
+    if (!/^\/briefing\/\d+$/.test(new URL(seite.url()).pathname)) break;
+    await fuellen(seite);
+    await abschicken(seite);
+  }
+}
+
+/** Erste Auswahl je Frage, Pflichtfelder gefuellt, Haken gesetzt. */
+async function fuellen(seite) {
+  await seite.evaluate(() => {
+    const gesehen = new Set();
+
+    for (const el of document.querySelectorAll('input[type=radio]')) {
+      if (gesehen.has(el.name)) continue;
+      gesehen.add(el.name);
+      el.checked = true;
+    }
+
+    /*
+     * **Nur der erste Haken je Gruppe.** Alle zu setzen sah harmlos aus und lief in eine
+     * Sperre: Schritt 3 fuehrt „Nichts davon" als Auswahl, die sich mit keiner anderen
+     * verbindet — der Server wies ab, die Adresse blieb stehen, und der Lauf drehte sich,
+     * bis die Zeitgrenze griff. Gemessen am 16.08.2026.
+     */
+    const gruppen = new Set();
+
+    for (const el of document.querySelectorAll('input[type=checkbox]')) {
+      // Der Honigtopf bleibt leer — hier soll nichts abgewiesen werden.
+      if (el.name.startsWith('hp_')) continue;
+
+      const gruppe = el.closest('fieldset') ?? el.closest('.frage') ?? el.form;
+      if (gruppen.has(gruppe)) continue;
+      gruppen.add(gruppe);
+      el.checked = true;
+    }
+
+    for (const el of document.querySelectorAll('select')) {
+      const wahl = [...el.options].find((o) => o.value !== '');
+      if (wahl) el.value = wahl.value;
+    }
+
+    const texte = {
+      first_name: 'Erika', last_name: 'Mustermann', company: 'Mustermann Sanitär GmbH',
+      email: 'anfrage@example.org', phone: '0351 1234567',
+    };
+
+    for (const el of document.querySelectorAll('input[type=text], input[type=email], input[type=tel], textarea')) {
+      if (el.name.startsWith('hp_') || el.value !== '') continue;
+      el.value = texte[el.name] ?? 'Angabe für die Messung';
+    }
+  });
+}
+
+/** Absenden und auf die naechste Seite warten. */
+async function abschicken(seite) {
+  const vorher = seite.url();
+
+  await seite.click('form button[type=submit]');
+
+  try {
+    await seite.waitForURL((u) => u.toString() !== vorher, { timeout: 15000 });
+  } catch (fehler) {
+    // Bleibt die Adresse gleich, hat der Server das Formular zurueckgewiesen. Der Aufrufer
+    // merkt das daran, dass der Pfad kein Schritt mehr ist — und bricht ab, statt zu haengen.
+  }
+
+  await seite.waitForLoadState('load');
+}
+
+/**
+ * Was vor einer Adresse geschehen muss, damit sie ueberhaupt ausgeliefert wird.
+ *
+ * `/briefing/danke` verlangt zusaetzlich eine abgeschickte Anfrage. Damit die Messung dabei
+ * **keinen** Datensatz anlegt, wird der Honigtopf gefuellt: §4b.2 fuehrt einen so erkannten
+ * Versuch stillschweigend auf die Danke-Seite, ohne zu speichern. Genau der Zustand, der
+ * gemessen werden soll — und kein Eintrag in `leads`.
+ */
+const VORLAUF = {
+  '/briefing/ergebnis': strecke,
+  '/briefing/kontakt': strecke,
+  '/briefing/danke': async (seite, basis, zustand) => {
+    await strecke(seite, basis, zustand);
+    await seite.goto(basis + '/briefing/kontakt', { waitUntil: 'load', timeout: 20000 });
+    await fuellen(seite);
+    await seite.evaluate(() => {
+      const topf = document.querySelector('input[name^=hp_]');
+      if (topf) topf.value = 'gefüllt für die Messung — §4b.2 verwirft still';
+    });
+    await abschicken(seite);
+
+    // Das Absenden verwirft den Zwischenstand (§9.5b). Wer danach wieder auf `ergebnis`
+    // will, muss die Strecke erneut laufen.
+    zustand.komplett = false;
+  },
+};
+
+/**
+ * Die Strecke **einmal je Browserkontext**, nicht einmal je Adresse.
+ *
+ * `ergebnis` und `kontakt` sind reine GET-Aufrufe und lassen den Zwischenstand stehen. Wer
+ * die Strecke fuer beide getrennt durchlaeuft, verdreifacht die Messdauer ohne Gewinn —
+ * gemessen: der Lauf ueber vier Adressen lief in fuenf Minuten nicht durch.
+ */
+async function strecke(seite, basis, zustand) {
+  if (zustand.komplett) return;
+
+  await funnelDurchlaufen(seite, basis);
+  zustand.komplett = true;
+}
+
 const ergebnis = {};
 for (const pfad of pfade) ergebnis[pfad] = { breiten: {}, status: 0 };
 
 for (const breite of BREITEN) {
   await (async () => {
   const seite = await browser.newPage({ viewport: { width: breite, height: 900 }, reducedMotion: 'reduce' });
+  const zustand = { komplett: false };
 
   for (const pfad of pfade) {
+    if (VORLAUF[pfad]) await VORLAUF[pfad](seite, basis, zustand);
+
     const antwort = await seite.goto(basis + pfad, { waitUntil: 'load', timeout: 20000 });
 
     /*

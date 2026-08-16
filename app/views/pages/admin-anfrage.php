@@ -60,6 +60,23 @@ $herkunft = [
     <li><span>Kennzeichen</span><span><?= Html::e(Empfehlung::ampelName((string) $anfrage['flag'])) ?></span></li>
     <li><span>Zustand</span><span><?= Html::e(AdminAnfragen::ZUSTANDS_BESCHRIFTUNGEN[(string) $anfrage['status']] ?? (string) $anfrage['status']) ?></span></li>
     <li><span>Löschdatum</span><span><?= Html::e(Format::datum((string) $anfrage['delete_after'])) ?></span></li>
+    <?php /*
+      Der Nachweis der Kenntnisnahme. `spezifikation/09_ANFRAGEEINGANG.md` §4 verlangt
+      „dass und wann"; bis zum 16.08.2026 stand nur das Dass in der Datenbank. Anfragen aus
+      der Zeit davor tragen keine Angabe und zeigen deshalb `Noch nicht hinterlegt` — eine
+      nachtraeglich gefuellte Spalte waere eine Behauptung ueber einen Vorgang, bei dem
+      niemand dabei war.
+    */ ?>
+    <li><span>Datenschutzhinweise gelesen</span><span><?= Html::e(
+        $anfrage['privacy_confirmed_at'] === null
+            ? Format::LEER
+            : Format::datumZeit((string) $anfrage['privacy_confirmed_at'])
+    ) ?></span></li>
+    <li><span>Bestätigte Textfassung</span><span><?= Html::e(
+        $anfrage['privacy_text_version'] === null
+            ? Format::LEER
+            : 'Fassung ' . (int) $anfrage['privacy_text_version']
+    ) ?></span></li>
   </ul>
 </div>
 

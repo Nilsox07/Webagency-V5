@@ -140,6 +140,10 @@ final class AnfrageService
             'status'               => 'neu',
             'b2b_confirmed'        => 1,
             'privacy_confirmed'    => 1,
+            // §4: „Gespeichert wird, **dass** und **wann**." Das Wann stand bis zum
+            // 16.08.2026 nirgends, die bestätigte Textfassung ebenfalls nicht.
+            'privacy_text_version' => $this->datenschutzfassung(),
+            'privacy_confirmed_at' => $jetzt->format('Y-m-d H:i:s'),
             'source_ip'            => $ip,
             'branche_vorbelegt'    => self::textOderNull($eingabe, 'branche_vorbelegt'),
             'self_reported_source' => self::textOderNull($eingabe, 'self_reported_source'),
@@ -268,5 +272,22 @@ final class AnfrageService
     private function begrenzung(): Ratenbegrenzung
     {
         return $this->begrenzung ?? new Ratenbegrenzung();
+    }
+
+    /**
+     * Die Fassung des Datenschutztextes, die zum Zeitpunkt der Anfrage im Haus war.
+     *
+     * Ein Fehler beim Lesen darf die Anfrage **nicht** verhindern: Der Interessent hat seine
+     * Angaben gemacht, der Nachweis ist eine Nebenpflicht. Fehlt die Fassung, steht `null` in
+     * der Spalte, und der Adminbereich zeigt `Noch nicht hinterlegt` — sichtbar fehlend ist
+     * besser als eine verlorene Anfrage.
+     */
+    private function datenschutzfassung(): ?int
+    {
+        try {
+            return (new \Sartu\Data\RechtstexteSpeicher())->fassung('datenschutz');
+        } catch (\Throwable) {
+            return null;
+        }
     }
 }

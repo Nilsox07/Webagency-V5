@@ -61,8 +61,11 @@ final class Router
         // nicht aus einer Steuerung — siehe `Ansicht::$pfad`.
         Ansicht::pfadSetzen($pfad);
 
-        return $this->sicherheitskopfzeilen($this->abwickeln($methode, $pfad))
-            ->mitKopfzeilen(['Cache-Control' => $this->cachepolitik($methode, $pfad)]);
+        $antwort = $this->sicherheitskopfzeilen($this->abwickeln($methode, $pfad));
+
+        return $antwort->mitKopfzeilen([
+            'Cache-Control' => $this->cachepolitik($methode, $pfad, $antwort->status),
+        ]);
     }
 
     /**
@@ -112,8 +115,20 @@ final class Router
      * mit drei Pfaden, und jede andere öffentliche Seite bekam `private` — weil jede eine
      * Sitzung hatte. Jetzt entscheidet dieselbe Angabe beides, und eine neue Leseseite ist
      * von sich aus zwischenspeicherbar.
+     *
+     * ## Warum der Status mitentscheidet — gemessen am 16.08.2026
+     *
+     * `/agb` hat eine Route und lieferte trotzdem `404`, weil noch kein Rechtstext
+     * freigegeben ist. Die Politik sah nur die Route und stempelte
+     * `public, max-age=3600` auf diese Absage. **Damit hätte ein Zwischenspeicher die
+     * Seite nach der Freigabe bis zu einer Stunde weiter als „gibt es nicht" ausgeliefert
+     * — an dem Tag, an dem sie am dringendsten gebraucht wird.**
+     *
+     * Dieselbe Falle steckt in jeder Weiterleitung und in jeder Fehlerseite: Ihr Status
+     * hängt am Zustand, nicht am Pfad. Zwischengespeichert wird deshalb nur, was
+     * tatsächlich `200` ist.
      */
-    private function cachepolitik(string $methode, string $pfad): string
+    private function cachepolitik(string $methode, string $pfad, int $status = 200): string
     {
         $route = ($this->finden(strtoupper($methode), $pfad)['route'] ?? null);
 
@@ -122,9 +137,13 @@ final class Router
             return 'no-store';
         }
 
-        return $this->brauchtSitzung($route)
-            ? 'private, max-age=0, must-revalidate'
-            : 'public, max-age=3600';
+        if ($this->brauchtSitzung($route)) {
+            return 'private, max-age=0, must-revalidate';
+        }
+
+        return $status === 200
+            ? 'public, max-age=3600'
+            : 'no-store';
     }
 
     private function abwickeln(string $methode, string $pfad): Antwort

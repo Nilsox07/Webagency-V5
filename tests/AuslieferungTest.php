@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Sartu\Tests;
 
 use PHPUnit\Framework\TestCase;
+use Sartu\Router;
 use Sartu\Antwort;
 use Sartu\Sitzung;
 
@@ -234,6 +235,35 @@ final class AuslieferungTest extends TestCase
             $wert = $this->eine($pfad, 'cache-control');
 
             $this->assertStringContainsString('private', $wert, $pfad . ': ' . $wert);
+        }
+    }
+
+    /**
+     * Eine Absage wird nicht zwischengespeichert, auch nicht auf einer cookiefreien Route.
+     *
+     * `/agb` hat eine öffentliche Route und liefert trotzdem `404`, solange kein Rechtstext
+     * freigegeben ist. Bis zum 16.08.2026 stempelte die Cachepolitik `public, max-age=3600`
+     * darauf — **ein Zwischenspeicher hätte die Absage nach der Freigabe bis zu einer Stunde
+     * weiter ausgeliefert.** Der Status hängt am Zustand, nicht am Pfad; deshalb prüft die
+     * Politik ihn mit.
+     */
+    public function testEineAbsageWirdNichtZwischengespeichert(): void
+    {
+        $router = new Router(require SARTU_WURZEL . '/app/routes.php');
+
+        foreach (['/agb', '/ratgeber/gibt-es-nicht', '/diese-seite-gibt-es-nicht'] as $pfad) {
+            $antwort = $router->behandeln('GET', $pfad);
+
+            if ($antwort->status === 200) {
+                continue;
+            }
+
+            $this->assertStringNotContainsString(
+                'public',
+                (string) ($antwort->kopfzeilen['Cache-Control'] ?? ''),
+                $pfad . ' antwortet mit ' . $antwort->status
+                . ' und darf trotzdem in einen gemeinsamen Zwischenspeicher.',
+            );
         }
     }
 

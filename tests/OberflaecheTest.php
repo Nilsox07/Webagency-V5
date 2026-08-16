@@ -171,13 +171,21 @@ final class OberflaecheTest extends TestCase
             . 'nicht freigegeben ist. Die Startsperre haelt die Veroeffentlichung ohnehin an.',
         '/datenschutz'        => 'Wie `/agb`: liefert 404, solange `legal_texts.datenschutz` '
             . 'nicht freigegeben ist. Die Startsperre haelt die Veroeffentlichung ohnehin an.',
-        '/briefing/danke'     => 'Leitet ohne abgeschlossenen Bedarfsscheck auf den Einstieg '
-            . 'zurück (303). Ohne Sitzung gibt es die Seite nicht.',
-        '/briefing/ergebnis'  => 'Wie `/briefing/danke`: leitet ohne laufende Sitzung auf den '
-            . 'Einstieg zurueck. Die Strecke wird von `BedarfsscheckTest` durchlaufen.',
-        '/briefing/kontakt'   => 'Wie `/briefing/danke`: leitet ohne laufende Sitzung auf den '
-            . 'Einstieg zurueck. Die Strecke wird von `BedarfsscheckTest` durchlaufen.',
     ];
+
+    /*
+     * **Die drei Bedarfsscheck-Bildschirme standen bis zum 16.08.2026 hier — zu Unrecht.**
+     *
+     * Die Begruendung lautete: „Leitet ohne laufende Sitzung auf den Einstieg zurueck (303)."
+     * Das stimmte und war trotzdem der falsche Schluss. Ausgerechnet die drei Seiten, an denen
+     * eine Anfrage entsteht, wurden nie gemessen — und der Ergebnisbildschirm trug dadurch
+     * monatelang eine Lime-Flaeche von rund 180.000 Quadratpixeln, die keine Pruefung sah.
+     *
+     * `tools/oberflaeche.mjs` laeuft die Strecke jetzt aus, statt sie anzufahren. Fuer
+     * `/briefing/danke` wird der Honigtopf gefuellt: §4b.2 fuehrt einen so erkannten Versuch
+     * stillschweigend auf die Danke-Seite, **ohne** einen Datensatz anzulegen. Die Messung
+     * sieht denselben Bildschirm wie ein Mensch und hinterlaesst keine Anfrage.
+     */
 
     /**
      * Die Adressen, an denen wirklich gemessen wird.

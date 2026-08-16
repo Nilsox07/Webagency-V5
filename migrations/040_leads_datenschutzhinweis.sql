@@ -1,0 +1,35 @@
+-- `leads.privacy_text_version` und `leads.privacy_confirmed_at` — welcher Datenschutztext
+-- bestaetigt wurde und wann.
+--
+-- Quelle: `spezifikation/09_ANFRAGEEINGANG.md` §4: „Gespeichert wird, **dass** und **wann**".
+-- Das **Dass** stand seit A1 in `privacy_confirmed`. Das **Wann** stand nirgends, und
+-- **welcher Text** bestaetigt wurde, ebenfalls nicht.
+--
+-- ## Warum das Wann nicht aus created_at ableitbar ist
+--
+-- `created_at` ist der Zeitpunkt des Datenbankschreibens, `submitted_at` der des Absendens.
+-- Beide sind heute gleich, weil die Anfrage in einem Zug entsteht. Das ist eine Eigenschaft
+-- des heutigen Ablaufs, keine Zusage. Wer die Bestaetigung spaeter belegen muss, braucht ein
+-- Feld, das genau das bedeutet und nichts anderes — sonst belegt er einen Schreibvorgang.
+--
+-- ## Warum die Textfassung dazugehoert
+--
+-- `legal_texts.version` zaehlt jede Aenderung am Datenschutztext hoch. Ohne die Fassung sagt
+-- eine Bestaetigung nur, dass irgendwann irgendetwas bestaetigt wurde. Mit der Fassung sagt
+-- sie, **was**. Das ist der Unterschied zwischen einem Nachweis und einem Haken.
+--
+-- ## Beide Spalten sind NULL-faehig, und das ist Absicht
+--
+-- Vorhandene Zeilen aus A1 haben weder das eine noch das andere. Ein Vorgabewert waere hier
+-- eine Erfindung: Er wuerde behaupten, alle Altanfragen haetten Fassung 1 zu ihrem
+-- Anlagezeitpunkt bestaetigt. Ob das stimmt, weiss diese Migration nicht.
+-- Der Adminbereich zeigt fuer solche Zeilen `Noch nicht hinterlegt`.
+--
+-- Ein NOT NULL waere zusaetzlich der falsche Zwang: Ob die Bestaetigung ueberhaupt
+-- Voraussetzung der Anfrage bleiben darf, ist eine **offene Rechtsfrage** — sie steht in
+-- `OFFENE_PRUEFUNGEN.md` und in `SARTU_ENTSCHEIDUNGEN_OFFEN.md`. Eine Spalte, die die
+-- Bestaetigung erzwingt, wuerde diese Entscheidung vorwegnehmen. `chk_leads_bestaetigungen`
+-- aus 009 bleibt unveraendert bestehen; **diese Migration lockert nichts.**
+ALTER TABLE leads
+  ADD COLUMN privacy_text_version INT NULL AFTER privacy_confirmed,
+  ADD COLUMN privacy_confirmed_at DATETIME NULL AFTER privacy_text_version;
