@@ -279,6 +279,72 @@ main :target {
 
 .menue__blatt a { font-size: var(--fs-lede); color: var(--text); }
 
+/* ============================================================
+   Dokumentgattung — Impressum, Datenschutz, AGB
+
+   Gebaut am 16.08.2026. Die drei Rechtstexte liefen bis dahin
+   ueber das Systemlayout: keine Marke, keine Navigation, eine
+   46-rem-Spalte, eine Fusszeile aus zwei Verweisen.
+
+   **Keine Verkaufsflaeche.** Kein Aufmacher, kein Handlungsfeld,
+   kein Bedarfsscheck-Knopf. Wer ein Impressum liest, sucht eine
+   Angabe, kein Angebot.
+   ============================================================ */
+
+.dokument {
+  padding-top: var(--s-5);
+  padding-bottom: var(--s-7);
+}
+
+/* 68 Zeichen: die Lesespalte, die der Auftrag mit „etwa 65 bis
+   75" beschreibt. Fliesstext wird nicht zentriert — die Spalte
+   sitzt links in der Bahn, wie jeder andere Satz auch. */
+.dokument__satz > * { max-width: 68ch; }
+
+.dokument__satz h1 { max-width: 20ch; }
+
+.dokument__stand {
+  font-family: var(--font-mono);
+  font-size: var(--fs-mono);
+  letter-spacing: var(--ls-mono);
+  text-transform: uppercase;
+  color: var(--label);
+  margin-bottom: var(--s-4);
+}
+
+/* Die Abschnittsmarken. Sie entstehen erst ab sechs Abschnitten
+   — bei einem Impressum mit sechsen stehen sie im Weg, bei einer
+   Datenschutzerklaerung mit dreissig sind sie der einzige Weg zur
+   gesuchten Angabe. */
+.dokument__marken {
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+  padding: var(--s-3) 0;
+  margin-bottom: var(--s-5);
+}
+
+.dokument__marken ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(16rem, 1fr));
+  gap: var(--s-1) var(--s-3);
+  font-size: var(--fs-small);
+}
+
+.dokument__satz h2 {
+  margin-top: var(--s-5);
+  padding-top: var(--s-3);
+  border-top: 1px solid var(--line);
+}
+
+.dokument__satz h3 { margin-top: var(--s-4); }
+
+/* Sprungziele der Marken: unter die klebende Kopfzeile, nicht
+   dahinter. Dieselbe Variable wie ueberall. */
+.dokument__satz [id] { scroll-margin-top: var(--sprungabstand); }
+
 /* ---- Brotkrumen ------------------------------------------ */
 
 .brotkrumen { padding-top: var(--s-3); }
@@ -876,21 +942,36 @@ h1, h2, h3 {
 .stufe--empfehlung {
   background: var(--ink);
   border-color: var(--ink);
-  color: var(--paper-dark, #e9e3d6);
+  color: var(--paper);
   box-shadow: var(--shadow-lift);
   margin: -40px 0;
   padding-top: calc(clamp(24px, 2.6vw, 34px) + 30px);
   padding-bottom: calc(clamp(24px, 2.6vw, 34px) + 30px);
 }
 
+/* Bis 16.08.2026 standen hier sechs Rohwerte aus der warmen Reihe vom 30.07.2026
+   (#e9e3d6 · #f8f3e8 · #cbc4b6 · #c3bcae · #ded7c9 · #332d24). Zwei Fehler in einem:
+   eine Zahl im Bauteil, wo eine Variable existiert — und dazu eine Zahl aus einer
+   Farbreihe, die seit dem 02.08.2026 abgeloest ist. Auf dem heutigen Grund sassen
+   sie als einzige warme Flaeche im ganzen Auftritt.
+
+   Ersetzt durch die Token, die `.abschnitt--dunkel` schon benutzt. Gemessen auf
+   --ink: --paper 18,82:1 (vorher 14,72 bis 17,01), --label-dark 7,11:1 (vorher
+   9,97 bis 10,85), --line-dark als Kante.
+
+   **Eine Abstufung faellt weg, gemeldet, nicht verrechnet:** Der Entwurf trennte
+   Liste (#ded7c9) und Satz (#cbc4b6) um zwei Helligkeitsstufen. Beide Stufen haben
+   kein Token. Statt zwei zu erfinden, tragen Liste und Titel jetzt --paper, Satz
+   und Preiszusatz --label-dark. Der Preiszusatz verliert dabei 2,86 Punkte Kontrast
+   (9,97 auf 7,11) und bleibt deutlich ueber AA. */
 .stufe--empfehlung h3,
-.stufe--empfehlung .preis { color: #f8f3e8; }
-.stufe--empfehlung .stufe__satz { color: #cbc4b6; }
+.stufe--empfehlung .preis { color: var(--paper); }
+.stufe--empfehlung .stufe__satz { color: var(--label-dark); }
 .stufe--empfehlung .stufe__kicker { color: var(--label-dark); }
-.stufe--empfehlung .preis small { color: #c3bcae; }
+.stufe--empfehlung .preis small { color: var(--label-dark); }
 .stufe--empfehlung .stufe__liste,
-.stufe--empfehlung .stufe__liste li { border-color: #332d24; }
-.stufe--empfehlung .stufe__liste li { color: #ded7c9; }
+.stufe--empfehlung .stufe__liste li { border-color: var(--line-dark); }
+.stufe--empfehlung .stufe__liste li { color: var(--paper); }
 .stufe--empfehlung .stufe__liste li::before { background: var(--lime); }
 
 /* Das Badge sitzt auf der Oberkante, nicht in der Karte — sonst kostet es

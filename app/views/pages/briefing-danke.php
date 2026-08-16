@@ -14,6 +14,7 @@ declare(strict_types=1);
  */
 
 ?>
+<div class="bahn funnelbahn">
 <h1>Danke — wir haben Ihre Angaben.</h1>
 
 <p>Wir prüfen Ihre Anfrage persönlich und melden uns schriftlich, in der Regel innerhalb eines
@@ -21,3 +22,5 @@ Werktags. Wenn etwas unklar ist, stellen wir genau eine gebündelte Rückfrage.<
 
 <p>Danach erhalten Sie ein Angebot mit Empfehlung, Seitenstruktur, Festpreis, Zahlungsplan und
 Zeitrahmen.</p>
+
+</div>

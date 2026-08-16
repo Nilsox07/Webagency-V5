@@ -26,6 +26,7 @@ $vertrauenspunkte = [
 ];
 
 ?>
+<div class="bahn funnelbahn">
 <p class="vorzeile">Handwerk · Praxen · Kanzleien · Ladengeschäfte</p>
 <h1>Welche Website passt zu Ihrem Unternehmen?</h1>
 
@@ -50,3 +51,5 @@ mit Preis.</p>
 <p class="fussnote">Sprechen können Sie trotzdem mit uns. Schreiben Sie an
   <a href="mailto:<?= Html::e($kontaktweg) ?>"><?= Html::e($kontaktweg) ?></a>.</p>
 <?php endif; ?>
+
+</div>

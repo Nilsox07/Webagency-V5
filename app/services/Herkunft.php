@@ -7,10 +7,35 @@ namespace Sartu\Services;
 /**
  * Herkunft einer Anfrage — Portal-Lastenheft §4b.7.
  *
- * **Der Punkt, an dem es sonst schiefgeht:** Die Kennzeichen stehen in der Adresse der
- * **ersten** aufgerufenen Seite. Bis der Bedarfsscheck abgeschickt wird, sind sie längst
- * weg. Sie werden deshalb beim ersten Seitenaufruf in die Sitzung geschrieben und erst beim
- * Anlegen des `lead` übernommen (Testfall 40a).
+ * ## Was sich am 16.08.2026 geändert hat — und warum
+ *
+ * Bis dahin schrieb `merken()` Landeseite, verweisenden Host, UTM-Werte und Klickkennung
+ * beim **ersten** Seitenaufruf in die Sitzung. Das war fachlich das Richtige und
+ * datenschutzrechtlich der teuerste Satz der ganzen Anwendung: Er war der **einzige** Grund,
+ * warum jede öffentliche Leseseite ein Sitzungscookie setzen musste.
+ *
+ * § 25 Abs. 2 Nr. 2 TDDDG erlaubt die Speicherung auf dem Endgerät ohne Einwilligung nur,
+ * soweit sie für einen vom Nutzer **ausdrücklich gewünschten Dienst** unbedingt erforderlich
+ * ist. Eine Zuordnung, die SARTU nützt und dem Besucher nicht, ist keiner. Die Alternative
+ * wäre eine Einwilligungslösung mit Ablehnen, Widerruf und Versionierung gewesen — für eine
+ * Angabe, die niemand vermisst, der sie nicht bekommt.
+ *
+ * **Erfasst wird deshalb erst, was beim Start des Bedarfsschecks vorliegt.** Konkret:
+ *
+ * | Feld | vorher | jetzt |
+ * |---|---|---|
+ * | `landing_page` | die erste Seite des Besuchs | `/briefing` — der Einstieg in den Scheck |
+ * | `referrer_host` | der Host, der auf die erste Seite verwies | der Host, der auf `/briefing` verwies. Bei einem Klick von der eigenen Startseite ist das die eigene Domain, und dann steht dort nichts |
+ * | `utm_*`, `click_id` | von der ersten Seite | nur, wenn sie an `/briefing` hängen |
+ *
+ * **Was das kostet:** Wer mit `?utm_source=…` auf der Startseite landet und erst danach zum
+ * Bedarfsscheck klickt, kommt ohne Kampagnenangabe an. Das ist der bewusst in Kauf genommene
+ * Verlust. Die Gegenrechnung: `Bedarfsscheck::HERKUNFTSANGABEN` fragt im letzten Schritt
+ * freiwillig „Wie sind Sie auf uns aufmerksam geworden?" — eine selbst berichtete Angabe,
+ * die kein Cookie braucht und die der Besucher kennt.
+ *
+ * Will der Betreiber die seitenübergreifende Zuordnung zurück, ist das eine neue
+ * Geschäftsentscheidung **mit** Einwilligungslösung, nicht eine Zeile Code.
  *
  * **Datensparsam, first-party:** `landing_page` nur der Pfad, `referrer_host` nur der
  * Hostname. Eine vollständige Adresse kann Suchbegriffe oder Kennungen enthalten — die
@@ -28,10 +53,10 @@ final class Herkunft
     private const MAX_LAENGE = 100;
 
     /**
-     * Beim ERSTEN Seitenaufruf merken — danach nie wieder überschreiben.
+     * Beim Start des Bedarfsschecks merken — danach nie wieder überschreiben.
      *
-     * Ohne diese Bedingung würde jeder weitere Aufruf die Herkunft ersetzen, und am Ende
-     * stünde dort die letzte Seite vor dem Absenden statt der ersten.
+     * Die Bedingung bleibt: Ohne sie ersetzte jeder weitere Schritt die Herkunft, und am
+     * Ende stünde dort `/briefing/5` statt des Einstiegs.
      *
      * @param array<string,mixed> $abfrage  $_GET
      * @param array<string,mixed> $server   $_SERVER

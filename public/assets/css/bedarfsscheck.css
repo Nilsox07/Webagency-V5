@@ -1,0 +1,367 @@
+/* ============================================================
+   SARTU — der Bedarfsscheck, die transaktionale Seitengattung
+
+   Reihenfolge der Einbindung: tokens.css, anwendung.css,
+   website.css, diese Datei. **Keine zweite Tokendatei.** Jede
+   Farbe, jeder Radius und jeder Abstand kommt aus `tokens.css`;
+   eine geschriebene Zahl ausserhalb der vier erlaubten
+   Haltepunkte ist ein Abgabefehler.
+
+   ## Warum es diese Datei gibt
+
+   `anwendung.css` ist trotz seines Namens die **gemeinsame
+   Grundlage** — Grundschrift, Knopf, Feld, Fokus, Meldung; das
+   Website-Layout bindet es ebenso ein. Bis zum 16.08.2026 war es
+   fuer den Bedarfsscheck aber auch das **einzige** Bauteil-CSS,
+   und damit trug er den Zuschnitt der internen Bildschirme.
+   Daraus entstand auf `/briefing/ergebnis`:
+
+   | Was | Gemessen |
+   |---|---|
+   | Textspalte | 46 rem, mittig, in sehr viel leerer Flaeche |
+   | Preisblock | `--lime-soft` ueber die volle Spaltenbreite, rund 180.000 px² |
+   | Fakten | drei weisse Rundpillen fuer `1 Seite`, `1 Korrekturrunde`, `Schutz S` |
+   | Handlung | ein Knopf plus eine graue Knopfpille daneben |
+
+   Die oeffentliche Obergrenze fuer eine zusammenhaengende
+   Lime-Flaeche ist 40.000 px² (`SARTU_ENTSCHEIDUNGEN_OFFEN.md`
+   §3, Farbsystem Fassung 3). Der Bildschirm entging der Messung
+   nur, weil er ohne Sitzung umleitet.
+
+   ## Die Regel, an der jede Form hier gemessen wird
+
+   Pille = Handlung, Status, Filter, Kategorie.
+   Karte  = eigenstaendiges Objekt, Auswahl, echter Vergleich.
+   Lime   = Handlung, aktiver Zustand, kleine Markierung.
+   Alles andere ist Linie, Abstand und Beschriftung.
+   ============================================================ */
+
+/* ---- Rahmen: Kopf, Flaeche, Fuss -------------------------- */
+
+.funnelseite { background: var(--cream); }
+
+/* Der Kopf traegt die Marke und **einen** Weg zurueck. Keine
+   Navigation: Wer den Scheck begonnen hat, soll ihn zu Ende
+   fuehren koennen, und sieben Punkte daneben sind sieben
+   Ausstiege. */
+.funnelkopf {
+  border-bottom: 1px solid var(--line);
+  background: var(--paper);
+}
+
+.funnelkopf__reihe {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--s-3);
+  padding-top: var(--s-3);
+  padding-bottom: var(--s-3);
+}
+
+.funnelflaeche {
+  padding-top: var(--s-5);
+  padding-bottom: var(--s-6);
+}
+
+/* Der Satzspiegel des Funnels. **Nicht `.schmal`** — das sind
+   46 rem und damit die Insel, die den Befund ausgeloest hat.
+   Die Bahn traegt `--wrap`; der Inhalt sitzt asymmetrisch
+   darin, so wie auf der Startseite. */
+.funnelbahn > * { max-width: 68ch; }
+
+.funnelbahn h1 { max-width: 22ch; }
+
+/* ---- Fortschritt ----------------------------------------- */
+
+/* Eine Zeile, eine Linie. **Keine fuenf Pillen** — der
+   Fortschritt ist eine Angabe und keine Auswahl; runde Marken
+   sehen aus wie eine Navigation, die es nicht gibt. */
+.funnelschritt {
+  display: flex;
+  align-items: center;
+  gap: var(--s-3);
+  margin: 0 0 var(--s-4);
+  max-width: none;
+}
+
+.funnelschritt__wort {
+  font-family: var(--font-mono);
+  font-size: var(--fs-mono);
+  letter-spacing: var(--ls-mono);
+  text-transform: uppercase;
+  color: var(--label);
+  white-space: nowrap;
+}
+
+.funnelschritt__balken {
+  position: relative;
+  flex: 1;
+  height: 2px;
+  background: var(--line);
+  border-radius: var(--r-pill);
+  overflow: hidden;
+}
+
+/* Der gefuellte Teil. Die Breite kommt als `data-anteil`, nicht
+   als `style`: Die eigene CSP fuehrt `style-src 'self'` ohne
+   `unsafe-inline`, ein Inline-Attribut waere wirkungslos. */
+.funnelschritt__balken::before {
+  content: "";
+  position: absolute;
+  inset: 0 auto 0 0;
+  background: var(--ink);
+}
+
+.funnelschritt__balken[data-anteil="1"]::before { width: 20%; }
+.funnelschritt__balken[data-anteil="2"]::before { width: 40%; }
+.funnelschritt__balken[data-anteil="3"]::before { width: 60%; }
+.funnelschritt__balken[data-anteil="4"]::before { width: 80%; }
+.funnelschritt__balken[data-anteil="5"]::before { width: 100%; }
+
+/* ---- Fuss ------------------------------------------------- */
+
+.funnelfuss {
+  border-top: 1px solid var(--line);
+  padding-top: var(--s-4);
+  padding-bottom: var(--s-5);
+  font-size: var(--fs-small);
+  color: var(--muted);
+}
+
+.funnelfuss__reihe {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: var(--s-2) var(--s-4);
+}
+
+.funnelfuss p { margin: 0; }
+
+.funnelfuss__hinweis { max-width: 62ch; }
+
+/* ============================================================
+   Der Ergebnisbildschirm — §9.3
+   ============================================================ */
+
+/* Zweispaltig und asymmetrisch: links die Entscheidung, rechts
+   das Datenblatt. `minmax(0, …)` und nicht `1.4fr .6fr` — ein
+   Rasterelement hat `min-width: auto` und schrumpft sonst nicht
+   unter die Mindestbreite seines Inhalts. Derselbe Fehler hatte
+   am 13.08.2026 die Bildspalte des Aufmachers um ein Viertel
+   verengt. */
+.ergebnis {
+  display: grid;
+  grid-template-columns: minmax(0, 62fr) minmax(0, 38fr);
+  gap: var(--s-5) var(--s-5);
+  align-items: start;
+}
+
+.ergebnis__entscheidung > * { max-width: 62ch; }
+
+.ergebnis__entscheidung h1 {
+  font-size: clamp(30px, min(4.2vw, 6vh), 58px);
+  line-height: var(--lh-head);
+  letter-spacing: var(--ls-h1);
+  font-weight: var(--fw-head);
+  margin-top: 0;
+}
+
+.ergebnis__grund { margin-bottom: var(--s-1); }
+
+/* Die Begruendung als Aufzaehlung mit Strich, nicht als Chipwand.
+   Dieselbe Form wie die Vertrauenszeile der Startseite. */
+.ergebnis__gruende {
+  list-style: none;
+  margin: 0 0 var(--s-4);
+  padding: 0;
+  display: grid;
+  gap: var(--s-1);
+}
+
+.ergebnis__gruende li {
+  position: relative;
+  padding-left: var(--s-3);
+}
+
+.ergebnis__gruende li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: .72em;
+  width: 10px;
+  height: 2px;
+  background: var(--ink);
+  opacity: .34;
+}
+
+/* ---- Das Datenblatt --------------------------------------- */
+
+/* Dunkel, weil es die Entscheidung traegt — nicht, weil eine
+   Messzahl eine dunkle Flaeche verlangt. **Kein Lime**: Die
+   Empfehlung ist kein Knopf, und die hervorgehobene Stufe der
+   oeffentlichen Preistabelle sieht anders aus, weil dort noch
+   etwas zu waehlen ist. Hier nicht. */
+.datenblatt {
+  background: var(--ink);
+  color: var(--paper);
+  border-radius: var(--r-l);
+  padding: var(--s-4);
+  box-shadow: var(--shadow-lift);
+}
+
+.datenblatt p { margin: 0; }
+
+.datenblatt__marke {
+  font-family: var(--font-mono);
+  font-size: var(--fs-mono);
+  letter-spacing: var(--ls-mono);
+  text-transform: uppercase;
+  color: var(--label-dark);
+}
+
+.datenblatt__paket {
+  font-size: var(--fs-h2);
+  line-height: var(--lh-head);
+  letter-spacing: var(--ls-head);
+  font-weight: var(--fw-head);
+  margin-top: var(--s-1) !important;
+}
+
+/* Der Preis ist die Zahl, um die es geht — eine Stufe unter der
+   Ueberschrift daneben, damit beide zusammen gelesen werden. */
+.datenblatt__preis {
+  font-size: var(--fs-lede);
+  line-height: var(--lh-lede);
+  margin-top: var(--s-3) !important;
+}
+
+.datenblatt__jahr {
+  font-size: var(--fs-small);
+  color: var(--label-dark);
+  margin-top: var(--s-1) !important;
+}
+
+/* Beschriftung und Wert sind ein Paar, kein Aufzaehlungspunkt —
+   deshalb `dl`. Die Linie dazwischen ersetzt die Pille: Sie
+   gliedert, ohne einen Behaelter zu bauen. */
+.datenblatt__zeilen {
+  margin: var(--s-4) 0 0;
+  display: grid;
+}
+
+.datenblatt__zeilen > div {
+  display: flex;
+  justify-content: space-between;
+  gap: var(--s-3);
+  padding: var(--s-2) 0;
+  border-top: 1px solid var(--line-dark);
+}
+
+.datenblatt__zeilen dt {
+  font-family: var(--font-mono);
+  font-size: var(--fs-mono);
+  letter-spacing: var(--ls-mono);
+  text-transform: uppercase;
+  color: var(--label-dark);
+  white-space: nowrap;
+}
+
+.datenblatt__zeilen dd {
+  margin: 0;
+  font-size: var(--fs-small);
+  text-align: right;
+}
+
+/* ---- Handlung und Randnotiz ------------------------------- */
+
+/* Die Handlungsgruppe steht **unter der Entscheidung**, nicht
+   unter beiden Spalten. `1 / -1` war der erste Bau, und er riss
+   bei 1440 px eine leere Flaeche von rund 250 px zwischen den
+   Begruendungssatz und den Knopf: Das Datenblatt rechts ist
+   hoeher als der Text links, und eine gespannte Zeile wartet auf
+   die laengere Spalte.
+
+   In Spalte 1 folgt der Knopf dem Satz, den er beantwortet. */
+.ergebnis__handlung {
+  grid-column: 1;
+  max-width: 62ch;
+}
+
+.ergebnis__knoepfe {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--s-3);
+  margin: 0 0 var(--s-3);
+}
+
+/* Die Randnotiz: abgesetzt durch eine Linie, eine Stufe kleiner.
+   §2.3 verlangt, dass sie den Pflichthinweis darueber nicht
+   verdraengt. */
+.randnotiz {
+  margin-top: var(--s-3);
+  padding-top: var(--s-2);
+  border-top: 1px solid var(--line);
+  font-size: var(--fs-small);
+  color: var(--muted);
+  max-width: 62ch;
+}
+
+/* ---- Einspaltig ------------------------------------------- */
+
+/* Unter 900 px ist die Reihenfolge die des Lesens: Ergebnis,
+   Begruendung, Preis, Datenzeilen, Handlung, Hinweis. Das
+   Datenblatt rutscht dabei unter die Begruendung, nicht ueber
+   die Ueberschrift. */
+@media (max-width: 900px) {
+  .ergebnis { grid-template-columns: 1fr; }
+
+  .datenblatt { padding: var(--s-3); }
+
+  .ergebnis__entscheidung h1 { font-size: var(--fs-h1); }
+}
+
+/* ============================================================
+   Formularseiten des Schecks
+   ============================================================ */
+
+/* Eine Auswahl ist eine Zeile, kein Kaestchen in einer
+   Kartenwand. Rahmen und Radius bleiben — sie machen die
+   Trefferflaeche sichtbar, und das ist eine Aufgabe. */
+.funnelbahn .wahl li {
+  border-color: var(--line);
+  background: var(--paper);
+}
+
+.funnelbahn .wahl li:focus-within {
+  border-color: var(--ink);
+  box-shadow: inset 0 0 0 1px var(--ink);
+}
+
+/* Der Einstieg: die Vertrauenspunkte als Zeilen mit Strich,
+   nicht als Pillenreihe. Dieselbe Form wie im Aufmacher der
+   Startseite — Wiedererkennung ohne kopierte Dekoration. */
+.funnelbahn .punkte {
+  display: grid;
+  gap: var(--s-1);
+}
+
+.funnelbahn .punkte li {
+  position: relative;
+  background: none;
+  border: 0;
+  border-radius: 0;
+  padding: 0 0 0 var(--s-3);
+  font-size: var(--fs-copy);
+}
+
+.funnelbahn .punkte li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: .72em;
+  width: 10px;
+  height: 2px;
+  background: var(--ink);
+  opacity: .34;
+}

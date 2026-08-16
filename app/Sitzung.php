@@ -20,40 +20,40 @@ final class Sitzung
     public const TOTP_BESTAETIGT   = 'totp_bestaetigt_am';
 
     /**
-     * Adressen, die **ohne** Sitzung ausgeliefert werden — gemessen am 15.08.2026.
+     * **Wer die Sitzung startet, entscheidet der Router an der Route** — seit 16.08.2026.
      *
-     * Bis dahin startete `public/index.php` die Sitzung vor der Route. Ergebnis: `robots.txt`
-     * trug ein `PHPSESSID`-Cookie und `Cache-Control: no-store`. Ein Crawler bekommt damit
-     * bei jedem Abruf ein Cookie gesetzt und darf die Datei nie zwischenspeichern.
+     * Hier stand bis dahin `OHNE_SITZUNG`: eine Negativliste aus drei Wurzeldateien und
+     * `/api/`. Alles andere bekam eine Sitzung, auch jede Leseseite. Die Liste ist ersetzt
+     * durch `Route::$sitzung` und `Router::brauchtSitzung()` — eine Positiventscheidung, bei
+     * der eine neue Leseseite von sich aus cookiefrei ist.
      *
-     * **Warum nur diese drei und nicht „nur Bedarfsscheck, Anmeldung, Portal und Admin".**
-     * Portal-Lastenheft §4b.7 verlangt Landeseite, verweisenden Host und Kampagnenkennzeichen
-     * aus der Adresse der **ersten** aufgerufenen Seite. `Herkunft::merken()` schreibt sie
-     * beim ersten Aufruf in die Sitzung. Startete sie erst am Bedarfsscheck, stünde dort als
-     * Landeseite `/briefing` — für jeden Besucher, und genau davor warnt der Kommentar an
-     * `Herkunft`. Die Abweichung von der Anweisung steht in `OFFENE_PRUEFUNGEN.md`.
-     *
-     * Ausgenommen sind deshalb die Adressen, die **keine** Person abruft: die drei
-     * Wurzeldateien für Suchdienste. Der Zahlungs-Webhook unter `/api/` steht ebenfalls
-     * hier — ein fremder Server hat keine Sitzung und soll keine bekommen.
-     *
-     * @var list<string>
+     * § 25 Abs. 2 Nr. 2 TDDDG ist der Grund: Die Speicherung auf dem Endgerät ist ohne
+     * Einwilligung nur zulässig, soweit sie für einen ausdrücklich gewünschten Dienst
+     * unbedingt erforderlich ist.
      */
-    public const OHNE_SITZUNG = ['/sitemap.xml', '/robots.txt', '/llms.txt'];
-
-    /** Ein Pfad unter diesem Präfix bekommt ebenfalls keine Sitzung. */
-    public const OHNE_SITZUNG_PRAEFIX = '/api/';
-
-    /** Braucht dieser Pfad eine Sitzung? */
-    public static function wirdGebraucht(string $pfad): bool
-    {
-        return !in_array($pfad, self::OHNE_SITZUNG, true)
-            && !str_starts_with($pfad, self::OHNE_SITZUNG_PRAEFIX);
-    }
-
     public static function starten(): void
     {
         if (session_status() === PHP_SESSION_ACTIVE) {
+            return;
+        }
+
+        /*
+         * **Auf der Befehlszeile gibt es niemanden, dem ein Cookie gehören könnte.**
+         *
+         * Der Testlauf ruft `Router::behandeln()` direkt auf und legt vorher an, was in der
+         * Sitzung stehen soll — angemeldeter Benutzer, Zwischenstand des Bedarfsschecks,
+         * CSRF-Token. `session_start()` **ersetzt** `$_SESSION` durch den Inhalt der
+         * Sitzungsdatei und würde genau das verwerfen.
+         *
+         * Bis zum 16.08.2026 stellte sich die Frage nicht: Die Sitzung startete in
+         * `public/index.php`, und die läuft im Test nicht. Seit der Start an der Route hängt,
+         * läuft er auch im Test — deshalb diese Zeile.
+         *
+         * **Sie schwächt nichts ab.** Über den Webserver ist `PHP_SAPI` `cli-server`,
+         * `apache2handler`, `fpm-fcgi` oder `cgi-fcgi` — nie `cli`. `AuslieferungTest` misst
+         * die Cookies deshalb über HTTP und nicht über den Router.
+         */
+        if (PHP_SAPI === 'cli') {
             return;
         }
 
@@ -69,6 +69,20 @@ final class Sitzung
          * `no-store`, und zwar ausdrücklich statt als Nebenwirkung.
          */
         session_cache_limiter('');
+
+        /*
+         * **`use_strict_mode` gegen untergeschobene Sitzungskennungen** — gesetzt am
+         * 16.08.2026.
+         *
+         * Ohne diese Zeile übernimmt PHP eine Kennung, die im Cookie steht, auch wenn es
+         * dazu keine Sitzung gibt. Wer einem Opfer vorher `PHPSESSID=abc` unterschiebt,
+         * kennt nach dessen Anmeldung eine gültige Kennung. `session_regenerate_id(true)`
+         * bei der Anmeldung fängt den Regelfall ab; diese Zeile schliesst das Fenster davor.
+         *
+         * `php.ini` setzt den Wert seit PHP 7.1 nicht von sich aus — die Voreinstellung ist
+         * `0`, und darauf darf sich der Code nicht verlassen.
+         */
+        ini_set('session.use_strict_mode', '1');
 
         // §3 Regel 6. secure gilt ueberall ausser lokal — dort gibt es kein TLS,
         // und ein Cookie, das nie gesendet wird, macht die Anmeldung unbenutzbar.

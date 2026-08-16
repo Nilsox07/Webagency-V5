@@ -9,36 +9,29 @@ declare(strict_types=1);
 
 use Sartu\Helpers\Http;
 use Sartu\Router;
-use Sartu\Services\Herkunft;
-use Sartu\Sitzung;
 
 $wurzel = require dirname(__DIR__) . '/app/bootstrap.php';
 
-$pfad = Http::pfad();
-
 /*
- * **Nicht jede Adresse bekommt eine Sitzung** — geändert am 15.08.2026.
+ * **Hier startet keine Sitzung mehr** — geändert am 16.08.2026.
  *
- * Bis dahin stand hier ein unbedingtes `Sitzung::starten()`. Gemessen: `robots.txt`,
- * `sitemap.xml` und `llms.txt` gingen mit `Set-Cookie: PHPSESSID` und `Cache-Control:
- * no-store` hinaus. Ein Suchdienst bekommt damit bei jedem Abruf ein Cookie und darf die
- * Datei nie zwischenspeichern.
+ * Bis zum 15.08.2026 stand hier ein unbedingtes `Sitzung::starten()`, danach eines mit einer
+ * Negativliste aus drei Wurzeldateien. In beiden Fassungen setzte jede öffentliche HTML-Seite
+ * ein `PHPSESSID`-Cookie — die Startseite, `/preise`, das Impressum.
  *
- * Welche Adressen ohne auskommen und warum es **nicht** nur Bedarfsscheck, Anmeldung,
- * Portal und Admin sind, steht an `Sitzung::OHNE_SITZUNG` — Kurzfassung: §4b.7 braucht die
- * **erste** aufgerufene Seite, und die ist bei den meisten Besuchern eine öffentliche.
+ * § 25 Abs. 2 Nr. 2 TDDDG erlaubt die Speicherung auf dem Endgerät ohne Einwilligung nur,
+ * soweit sie für einen **ausdrücklich gewünschten Dienst** unbedingt erforderlich ist. Eine
+ * Leseseite ist keiner. Die Entscheidung steht deshalb jetzt an der Route (`Route::$sitzung`)
+ * und wird im Router getroffen, sobald bekannt ist, welche Route gemeint ist.
+ *
+ * **`Herkunft::merken()` ist damit ebenfalls hier verschwunden.** Es brauchte die Sitzung auf
+ * der ersten aufgerufenen Seite und war der einzige Grund, warum eine Leseseite eine bekam.
+ * Aufgerufen wird es jetzt beim Start des Bedarfsschecks; was das an Zuordnung kostet, steht
+ * im Kopf von `Herkunft`.
  */
-if (Sitzung::wirdGebraucht($pfad)) {
-    Sitzung::starten();
-
-    // Portal-Lastenheft §4b.7: Landeseite, verweisender Host und die Kampagnenkennzeichen
-    // stehen in der Adresse der ERSTEN aufgerufenen Seite. Wer sie erst beim Absenden des
-    // Bedarfsschecks ausliest, liest nichts mehr. `merken()` schreibt nur beim ersten Aufruf.
-    Herkunft::merken($_GET, $_SERVER);
-}
 
 $routen = require $wurzel . '/app/routes.php';
 
 (new Router($routen))
-    ->behandeln(Http::methode(), $pfad)
+    ->behandeln(Http::methode(), Http::pfad())
     ->senden();

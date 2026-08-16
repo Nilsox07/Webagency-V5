@@ -72,22 +72,47 @@ final class MarkupTest extends Datenbankfall
         $this->assertGreaterThan(0, $geprueft, 'Es wurde keine Überschrift geprüft.');
     }
 
-    /** Jede Seite deklariert Deutsch und bindet tokens.css vor dem Bauteil-CSS ein. */
+    /**
+     * Jede Seite deklariert Deutsch und bindet `tokens.css` **vor** jedem Bauteil-CSS ein.
+     *
+     * ## Warum die Liste der Bauteil-Stylesheets seit dem 16.08.2026 drei Namen hat
+     *
+     * Es gibt vier Seitengattungen und drei Bauteil-Stylesheets: `website.css` für
+     * Marketing- und Dokumentseiten, `anwendung.css` für Kundenbereich, Adminbereich und
+     * Systemseiten, `bedarfsscheck.css` zusätzlich für die Funnelstrecke. Vorher stand hier
+     * allein `anwendung.css` — damals lief auch der Bedarfsscheck darüber.
+     *
+     * **Geprüft wird die Reihenfolge, nicht welches der drei es ist.** `tokens.css` trägt
+     * jede Farbe, jeden Radius und jede Abstandsstufe; steht ein Bauteil davor, gewinnt es
+     * gegen die Werte, die entschieden wurden.
+     */
     public function testJedeSeiteIstDeutschUndBindetDieGestaltungswerteZuerstEin(): void
     {
+        $bauteile = ['/assets/css/anwendung.css', '/assets/css/website.css',
+            '/assets/css/bedarfsscheck.css'];
+
         foreach ($this->seiten() as $bezeichnung => $html) {
             $this->assertStringContainsString('<html lang="de">', $html, $bezeichnung);
 
             $tokens = strpos($html, '/assets/css/tokens.css');
-            $bauteil = strpos($html, '/assets/css/anwendung.css');
-
             $this->assertIsInt($tokens, $bezeichnung . ': tokens.css fehlt.');
-            $this->assertIsInt($bauteil, $bezeichnung . ': anwendung.css fehlt.');
-            $this->assertLessThan(
-                $bauteil,
-                $tokens,
-                $bezeichnung . ': tokens.css muss vor jedem Bauteil-CSS stehen.'
-            );
+
+            $gefunden = 0;
+
+            foreach ($bauteile as $bauteil) {
+                $stelle = strpos($html, $bauteil);
+
+                if ($stelle === false) {
+                    continue;
+                }
+
+                ++$gefunden;
+                $this->assertLessThan($stelle, $tokens,
+                    $bezeichnung . ': tokens.css muss vor ' . $bauteil . ' stehen.');
+            }
+
+            $this->assertGreaterThan(0, $gefunden,
+                $bezeichnung . ': keins der drei Bauteil-Stylesheets ist eingebunden.');
         }
     }
 

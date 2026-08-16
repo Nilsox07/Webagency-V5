@@ -54,7 +54,17 @@ final class BedarfsscheckSteuerung
     /** @param array<string,string> $parameter */
     public function einstieg(array $parameter = []): Antwort
     {
-        return Antwort::html(Ansicht::seite('oeffentlich', 'briefing-start', [
+        /*
+         * **Hier wird die Herkunft gemerkt, nicht mehr auf jeder Seite** (16.08.2026).
+         *
+         * Der Einstieg in den Bedarfsscheck ist der Punkt, an dem der Besucher einen Dienst
+         * ausdrücklich wünscht — und damit der früheste, an dem eine Sitzung nach § 25
+         * TDDDG ohne Einwilligung zulässig ist. Was vorher passiert ist, weiss SARTU von da
+         * an nicht mehr; die Begründung steht im Kopf von `Herkunft`.
+         */
+        Herkunft::merken($_GET, $_SERVER);
+
+        return Antwort::html(Ansicht::seite('funnel', 'briefing-start', [
             'titel'        => 'Bedarf prüfen lassen — unverbindliche Empfehlung',
             'beschreibung' => 'Beantworten Sie wenige Fragen zu Ihrem Unternehmen und sehen Sie sofort '
                 . 'eine vorläufige Empfehlung mit Festpreis. Unverbindlich, ohne Termin, in etwa drei Minuten.',
@@ -148,7 +158,7 @@ final class BedarfsscheckSteuerung
 
         $empfehlung = self::empfehlung(BedarfsscheckSitzung::antworten());
 
-        return Antwort::html(Ansicht::seite('oeffentlich', 'briefing-ergebnis', [
+        return Antwort::html(Ansicht::seite('funnel', 'briefing-ergebnis', [
             'titel'   => 'Ihre vorläufige Empfehlung',
             'noindex' => true,
             'text'    => Empfehlungstext::fuer(
@@ -222,7 +232,7 @@ final class BedarfsscheckSteuerung
             return Antwort::weiter('/briefing', 303);
         }
 
-        return Antwort::html(Ansicht::seite('oeffentlich', 'briefing-danke', [
+        return Antwort::html(Ansicht::seite('funnel', 'briefing-danke', [
             'titel'   => 'Danke — wir haben Ihre Angaben',
             'noindex' => true,
         ]));
@@ -233,10 +243,14 @@ final class BedarfsscheckSteuerung
     /** @param array<string,mixed> $werte @param array<string,string> $fehler */
     private function schrittSeite(int $nummer, array $werte, array $fehler): Antwort
     {
-        return Antwort::html(Ansicht::seite('oeffentlich', 'briefing-schritt', [
+        return Antwort::html(Ansicht::seite('funnel', 'briefing-schritt', [
             'titel'   => Bedarfsscheck::thema($nummer)['titel'],
             'noindex' => true,
             'nummer'  => $nummer,
+            // Fuer die Fortschrittszeile im Layout — sie steht dort und nicht in der
+            // Ansicht, weil jede Funnelseite sie traegt.
+            'schritt'  => $nummer,
+            'schritte' => Bedarfsscheck::SCHRITTE,
             'thema'   => Bedarfsscheck::thema($nummer),
             'werte'   => $werte,
             'fehler'  => $fehler,
@@ -246,7 +260,7 @@ final class BedarfsscheckSteuerung
     /** @param array<string,mixed> $werte @param array<string,string> $fehler */
     private function kontaktSeite(array $werte, array $fehler, ?string $meldung): Antwort
     {
-        return Antwort::html(Ansicht::seite('oeffentlich', 'briefing-kontakt', [
+        return Antwort::html(Ansicht::seite('funnel', 'briefing-kontakt', [
             'titel'      => 'Ihre Kontaktdaten',
             'noindex'    => true,
             'werte'      => $werte,

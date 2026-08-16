@@ -66,7 +66,32 @@ final class Router
     }
 
     /**
-     * Die Cachepolitik je Antwort — gebaut am 15.08.2026.
+     * Braucht diese Route eine Sitzung? Die drei Gründe stehen an `abwickeln()`.
+     *
+     * **Der Zahlungs-Webhook bekommt trotz `POST` keine.** Er trägt `ohneCsrf`, weil ein
+     * fremder Server kein Token haben kann — und aus demselben Grund braucht er keine
+     * Sitzung. Eine anzulegen hiesse, für jeden Aufruf des Zahlungsdienstes eine Datei im
+     * Sitzungsverzeichnis zu schreiben, die nie jemand liest.
+     */
+    private function brauchtSitzung(Route $route): bool
+    {
+        if ($route->sitzung) {
+            return true;
+        }
+
+        if ($route->methode === 'POST' && !$route->ohneCsrf) {
+            return true;
+        }
+
+        return in_array(
+            $route->bereich,
+            [Route::BEREICH_PORTAL, Route::BEREICH_ADMIN],
+            true,
+        );
+    }
+
+    /**
+     * Die Cachepolitik je Antwort — gebaut am 15.08.2026, geschärft am 16.08.2026.
      *
      * ## Warum es sie vorher nicht gab
      *
@@ -75,27 +100,31 @@ final class Router
      * Das galt für die Startseite ebenso wie für `robots.txt`. `Sitzung::starten()` setzt
      * den Wert jetzt leer; entschieden wird hier.
      *
-     * ## Die drei Stufen
+     * ## Die drei Stufen — jetzt an der Sitzung, nicht an einer Pfadliste
      *
      * | Wo | Was | Warum |
      * |---|---|---|
-     * | die drei Wurzeldateien | `public, max-age=3600` | Sie tragen kein Cookie und keine persönliche Angabe. Ein Crawler soll sie zwischenspeichern dürfen |
-     * | öffentliche GET-Seiten | `private, max-age=0, must-revalidate` | Sie tragen ein Sitzungscookie und dürfen deshalb **nicht** in einen gemeinsamen Zwischenspeicher. `max-age=0` heisst „nachfragen", nicht „nie speichern" — der Browser darf mit `304` antworten |
-     * | alles andere | `no-store` | Portal, Admin, `/api/` und jedes `POST`. Dort steht in der Antwort, was nur diese eine Person sehen darf |
+     * | öffentliche GET-Route **ohne** Sitzung | `public, max-age=3600` | Sie trägt kein Cookie und keine persönliche Angabe. Ein Zwischenspeicher darf sie halten — und genau das ist der Gewinn daraus, dass sie cookiefrei ist |
+     * | öffentliche GET-Route **mit** Sitzung | `private, max-age=0, must-revalidate` | `/briefing`, `/kontakt`. Sie tragen ein Sitzungscookie und dürfen deshalb in keinen gemeinsamen Zwischenspeicher |
+     * | alles andere | `no-store` | Kundenbereich, Adminbereich, `/api/`, jedes `POST` und jede Antwort ohne Route (404). Dort steht, was nur eine Person sehen darf |
+     *
+     * **Der Unterschied zur Fassung vom 15.08.2026:** Damals stand `public` an einer Liste
+     * mit drei Pfaden, und jede andere öffentliche Seite bekam `private` — weil jede eine
+     * Sitzung hatte. Jetzt entscheidet dieselbe Angabe beides, und eine neue Leseseite ist
+     * von sich aus zwischenspeicherbar.
      */
     private function cachepolitik(string $methode, string $pfad): string
     {
-        if (in_array($pfad, Sitzung::OHNE_SITZUNG, true)) {
-            return 'public, max-age=3600';
-        }
-
         $route = ($this->finden(strtoupper($methode), $pfad)['route'] ?? null);
 
-        if (strtoupper($methode) === 'GET' && $route?->bereich === Route::BEREICH_OEFFENTLICH) {
-            return 'private, max-age=0, must-revalidate';
+        if ($route === null || strtoupper($methode) !== 'GET'
+            || $route->bereich !== Route::BEREICH_OEFFENTLICH) {
+            return 'no-store';
         }
 
-        return 'no-store';
+        return $this->brauchtSitzung($route)
+            ? 'private, max-age=0, must-revalidate'
+            : 'public, max-age=3600';
     }
 
     private function abwickeln(string $methode, string $pfad): Antwort
@@ -106,6 +135,31 @@ final class Router
         $route = $treffer['route'] ?? null;
         $parameter = $treffer['parameter'] ?? [];
         $bereich = $route?->bereich ?? Route::BEREICH_OEFFENTLICH;
+
+        /*
+         * **Die Sitzung beginnt hier, nicht in `public/index.php`** — geändert am
+         * 16.08.2026.
+         *
+         * Vorher startete der Einstieg sie vor der Route, und jede öffentliche Seite setzte
+         * `PHPSESSID`. § 25 Abs. 2 Nr. 2 TDDDG erlaubt die Speicherung ohne Einwilligung
+         * nur, „soweit sie unbedingt erforderlich ist, damit der Anbieter eines
+         * Telemediendienstes einen vom Nutzer ausdrücklich gewünschten Dienst zur Verfügung
+         * stellen kann". Eine Leseseite ist kein solcher Dienst.
+         *
+         * **Drei Gründe, aus denen eine Route eine Sitzung bekommt** — sonst keine:
+         *
+         * | Grund | Wo |
+         * |---|---|
+         * | `sitzung: true` an der Route | Bedarfsscheck, `/kontakt` (Formular mit Token) |
+         * | jedes `POST` ausser dem Zahlungs-Webhook | der CSRF-Schutz braucht sie |
+         * | Kundenbereich, Adminbereich, Ersteinrichtung | dort gibt es eine Anmeldung |
+         *
+         * Ein `404` bekommt keine. Das ist beabsichtigt: Wer eine Adresse errät, die es
+         * nicht gibt, bekommt kein Cookie.
+         */
+        if ($route !== null && $this->brauchtSitzung($route)) {
+            Sitzung::starten();
+        }
 
         // 1. Wartungsmodus (§1.5a)
         if ($this->wartungsmodus()->aktiv()
@@ -318,6 +372,22 @@ final class Router
                 . "img-src 'self' data:; font-src 'self'; connect-src 'self'; form-action 'self'; "
                 . "frame-ancestors 'none'; base-uri 'self'; object-src 'none'",
             'X-Content-Type-Options'    => 'nosniff',
+            /*
+             * **Was die Seite nicht braucht, darf sie nicht anfordern** — ergänzt am
+             * 16.08.2026.
+             *
+             * SARTU nutzt weder Kamera noch Mikrofon noch Standort, und es gibt kein
+             * Bezahlfenster im Browser: Der Zahlungsweg läuft über eine Weiterleitung zum
+             * Dienst. Eine leere Erlaubnisliste sperrt die Schnittstellen für das Dokument
+             * **und** für jeden eingebetteten Rahmen — auch für einen, der über eine
+             * Sicherheitslücke hineinkäme.
+             *
+             * `interest-cohort` steht bewusst nicht dabei: Die Kennung ist zurückgezogen,
+             * und eine Kopfzeile gegen etwas, das es nicht mehr gibt, ist Zierde.
+             */
+            'Permissions-Policy'        => 'camera=(), microphone=(), geolocation=(), '
+                . 'payment=(), usb=(), midi=(), magnetometer=(), gyroscope=(), '
+                . 'accelerometer=(), display-capture=()',
             'Referrer-Policy'           => 'strict-origin-when-cross-origin',
             'X-Frame-Options'           => 'DENY',
             'Cross-Origin-Opener-Policy' => 'same-origin',

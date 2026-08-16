@@ -23,7 +23,9 @@ use Sartu\Services\Bedarfsscheck;
 $ersterFehler = array_key_first($fehler);
 
 ?>
-<p class="vorzeile">Thema <?= Html::e((string) $nummer) ?> von <?= Html::e((string) Bedarfsscheck::SCHRITTE) ?></p>
+<?php /* Die Fortschrittszeile steht seit dem 16.08.2026 im Layout `funnel` — sie gehört
+         jeder Seite der Strecke und nicht dieser einen. Der Wortlaut ist unverändert. */ ?>
+<div class="bahn funnelbahn">
 <h1><?= Html::e((string) $thema['titel']) ?></h1>
 
 <form method="post" action="/briefing/<?= Html::e((string) $nummer) ?>">
@@ -52,3 +54,4 @@ $ersterFehler = array_key_first($fehler);
 </form>
 
 <p class="fussnote">Ihre Angaben bleiben 24 Stunden gespeichert. Sie können später fortsetzen.</p>
+</div>

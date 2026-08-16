@@ -31,6 +31,7 @@ $wert = static fn (string $feld): string => is_string($werte[$feld] ?? null) ? (
 $ersterFehler = array_key_first($fehler);
 
 ?>
+<div class="bahn funnelbahn">
 <p class="vorzeile">Letzter Schritt</p>
 <h1>Wohin sollen wir das geprüfte Angebot schicken?</h1>
 
@@ -167,3 +168,5 @@ $ersterFehler = array_key_first($fehler);
 
 <p class="fussnote">Wir prüfen Ihre Anfrage persönlich. Verbindlich ist erst das von SARTU
 geprüfte Angebot.</p>
+
+</div>

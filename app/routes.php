@@ -51,14 +51,22 @@ return [
     // Die Reihenfolge ist hier nicht beliebig: `finden()` nimmt den ERSTEN passenden
     // Eintrag, und `/briefing/{nummer}` wuerde auch auf `/briefing/ergebnis` passen. Die
     // festen Pfade stehen deshalb vor dem Muster.
-    new Route(Route::BEREICH_OEFFENTLICH, 'GET', '/briefing', [BedarfsscheckSteuerung::class, 'einstieg']),
-    new Route(Route::BEREICH_OEFFENTLICH, 'POST', '/briefing/start', [BedarfsscheckSteuerung::class, 'starten']),
-    new Route(Route::BEREICH_OEFFENTLICH, 'GET', '/briefing/ergebnis', [BedarfsscheckSteuerung::class, 'ergebnis']),
-    new Route(Route::BEREICH_OEFFENTLICH, 'GET', '/briefing/kontakt', [BedarfsscheckSteuerung::class, 'kontakt']),
-    new Route(Route::BEREICH_OEFFENTLICH, 'POST', '/briefing/absenden', [BedarfsscheckSteuerung::class, 'absenden']),
-    new Route(Route::BEREICH_OEFFENTLICH, 'GET', '/briefing/danke', [BedarfsscheckSteuerung::class, 'danke']),
-    new Route(Route::BEREICH_OEFFENTLICH, 'GET', '/briefing/{nummer}', [BedarfsscheckSteuerung::class, 'schritt']),
-    new Route(Route::BEREICH_OEFFENTLICH, 'POST', '/briefing/{nummer}', [BedarfsscheckSteuerung::class, 'schrittSpeichern']),
+    //
+    // **`sitzung: true` an jeder Bedarfsscheckroute.** Der Zwischenstand lebt 24 Stunden in
+    // der Sitzung (§9), und jedes Formular braucht ein CSRF-Token. Das ist die Speicherung,
+    // die § 25 Abs. 2 Nr. 2 TDDDG als „unbedingt erforderlich fuer den ausdruecklich
+    // gewuenschten Dienst" traegt — der Besucher hat den Bedarfsscheck begonnen.
+    //
+    // **`/briefing` selbst traegt sie auch.** Die Seite zeigt ein Formular mit CSRF-Token;
+    // ohne Sitzung gaebe es kein Token, und der erste Klick liefe in einen 419er.
+    new Route(Route::BEREICH_OEFFENTLICH, 'GET', '/briefing', [BedarfsscheckSteuerung::class, 'einstieg'], sitzung: true),
+    new Route(Route::BEREICH_OEFFENTLICH, 'POST', '/briefing/start', [BedarfsscheckSteuerung::class, 'starten'], sitzung: true),
+    new Route(Route::BEREICH_OEFFENTLICH, 'GET', '/briefing/ergebnis', [BedarfsscheckSteuerung::class, 'ergebnis'], sitzung: true),
+    new Route(Route::BEREICH_OEFFENTLICH, 'GET', '/briefing/kontakt', [BedarfsscheckSteuerung::class, 'kontakt'], sitzung: true),
+    new Route(Route::BEREICH_OEFFENTLICH, 'POST', '/briefing/absenden', [BedarfsscheckSteuerung::class, 'absenden'], sitzung: true),
+    new Route(Route::BEREICH_OEFFENTLICH, 'GET', '/briefing/danke', [BedarfsscheckSteuerung::class, 'danke'], sitzung: true),
+    new Route(Route::BEREICH_OEFFENTLICH, 'GET', '/briefing/{nummer}', [BedarfsscheckSteuerung::class, 'schritt'], sitzung: true),
+    new Route(Route::BEREICH_OEFFENTLICH, 'POST', '/briefing/{nummer}', [BedarfsscheckSteuerung::class, 'schrittSpeichern'], sitzung: true),
 
     // ---------------------------------------------------------- oeffentliche Website (Stufe B)
     new Route(Route::BEREICH_OEFFENTLICH, 'GET', '/', [Website::class, 'start']),
@@ -81,12 +89,19 @@ return [
     // Das Gruenderbild (§4c). Es liegt in der Ablage, nicht unter /public — §11 verlangt
     // das fuer jede hochgeladene Datei. Ausgeliefert wird es deshalb ueber eine Route.
     new Route(Route::BEREICH_OEFFENTLICH, 'GET', '/bild/gruender', [Website::class, 'gruenderbild']),
-    new Route(Route::BEREICH_OEFFENTLICH, 'GET', '/kontakt', [Website::class, 'kontakt']),
+    // **`/kontakt` traegt als einzige Marketingseite eine Sitzung.** Sie zeigt das
+    // Rueckfrageformular, und dessen CSRF-Token braucht eine. Jede andere oeffentliche Seite
+    // ist eine Leseseite und bleibt cookiefrei — `AuslieferungTest` haelt beides fest.
+    new Route(Route::BEREICH_OEFFENTLICH, 'GET', '/kontakt', [Website::class, 'kontakt'], sitzung: true),
     new Route(Route::BEREICH_OEFFENTLICH, 'POST', '/kontakt', [Website::class, 'kontaktSenden']),
     // Branchenseiten, Welle 1 (§10a). Vollstaendige Zielseiten mit eingebettetem Konfigurator.
-    new Route(Route::BEREICH_OEFFENTLICH, 'GET', '/website-sanitaer-heizung-klima', [Website::class, 'shk']),
-    new Route(Route::BEREICH_OEFFENTLICH, 'GET', '/website-elektrotechnik', [Website::class, 'elektro']),
-    new Route(Route::BEREICH_OEFFENTLICH, 'GET', '/website-dachdecker', [Website::class, 'dachdecker']),
+    // **Die drei Branchenseiten tragen eine Sitzung.** §10a bettet den Bedarfsscheck als
+    // Formular ein („Es ist derselbe Endpunkt wie überall"), und dessen CSRF-Token braucht
+    // eine. Ohne sie bricht die Seite mit „CSRF-Token ohne Sitzungsspeicher angefordert" ab
+    // — gemessen am 16.08.2026, als die Sitzung von der Seite an die Route wanderte.
+    new Route(Route::BEREICH_OEFFENTLICH, 'GET', '/website-sanitaer-heizung-klima', [Website::class, 'shk'], sitzung: true),
+    new Route(Route::BEREICH_OEFFENTLICH, 'GET', '/website-elektrotechnik', [Website::class, 'elektro'], sitzung: true),
+    new Route(Route::BEREICH_OEFFENTLICH, 'GET', '/website-dachdecker', [Website::class, 'dachdecker'], sitzung: true),
     // Ratgeber und Lexikon (§11a, §12, §13). Feste Pfade vor dem Muster.
     new Route(Route::BEREICH_OEFFENTLICH, 'GET', '/ratgeber', [Website::class, 'ratgeber']),
     new Route(Route::BEREICH_OEFFENTLICH, 'GET', '/ratgeber/{schluessel}', [Website::class, 'ratgeberArtikel']),

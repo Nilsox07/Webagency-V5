@@ -51,6 +51,28 @@ final class Route
          * `TenantIsolationTest` haelt fest, dass es bei genau einer bleibt.
          */
         public readonly bool $ohneCsrf = false,
+        /**
+         * **Braucht diese Route eine Sitzung?** Vorgabe: nein.
+         *
+         * ## Warum als Positiventscheidung je Route
+         *
+         * Bis zum 16.08.2026 entschied eine Negativliste `Sitzung::OHNE_SITZUNG` mit drei
+         * Wurzeldateien und `/api/`. Alles andere bekam eine Sitzung — auch die Startseite,
+         * `/preise` und jede Rechtsseite. Gemessen: `Set-Cookie: PHPSESSID` auf jeder
+         * öffentlichen Seite.
+         *
+         * **§ 25 TDDDG erlaubt die Speicherung auf dem Endgerät ohne Einwilligung nur,
+         * soweit sie für den vom Nutzer ausdrücklich gewünschten Dienst unbedingt
+         * erforderlich ist.** Eine Leseseite braucht keine Sitzung; ein Formular mit
+         * CSRF-Schutz braucht eine. Der Unterschied gehört deshalb an die Route und nicht in
+         * eine Liste von Ausnahmen: Eine neue Leseseite ist damit von sich aus cookiefrei,
+         * und eine neue Formularroute muss die Sitzung ausdrücklich anfordern.
+         *
+         * **Jedes `POST` bekommt sie unabhängig davon**, weil der CSRF-Schutz sie braucht —
+         * ausgenommen der Zahlungs-Webhook, der `ohneCsrf` trägt. Das entscheidet der
+         * Router, nicht diese Angabe.
+         */
+        public readonly bool $sitzung = false,
     ) {
     }
 

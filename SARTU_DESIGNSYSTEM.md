@@ -14,46 +14,74 @@ Vom Betreiber am 01.08.2026 als **verbindliche Richtung** bestätigt.
 
 ## 1. Die drei Farben
 
-| Rolle | Wert | Wofür |
-|---|---|---|
-| **Creme** | `#f4efe5` | Seitengrund |
-| **Papier** | `#fbf8f2` | erhöhte Flächen — Karten, Chips, Zeilen |
-| **Tinte** | `#14110d` | Schrift und dunkle Abschnitte |
-| **Lime** | `#a3e635` | **der einzige Akzent** |
-| Sand | `#e8dfcd` | ruhige Füllfläche |
-| Linie | `#ddd4c4` hell · `#332d24` dunkel | Kanten |
+> **Berichtigt am 16.08.2026.** Bis dahin stand hier die **warme Reihe vom 30.07.2026**
+> (`Creme #f4efe5`, `Papier #fbf8f2`, `Sand #e8dfcd`, `Linie #ddd4c4`). Sie ist seit dem
+> 02.08.2026 abgelöst: `design/startseite.html` und `design/portalkonzept.html` führen beide
+> die **kühlen Neutralen**, `design/tokens.css` hat sie am 09.08.2026 übernommen. Diese Datei
+> war die letzte Stelle mit den alten Werten — sie hätte jeden, der hier statt in `tokens.css`
+> nachschlägt, in die abgelöste Fassung geführt. **Die Werte unten stammen aus `tokens.css`;
+> es wird keine dritte Fassung erfunden.** Die Lime-Reihe und Tinte sind unverändert; sie sind
+> in `SARTU_ENTSCHEIDUNGEN_OFFEN.md` (Rang 1) gebunden, die Neutralen dort ausdrücklich nicht.
+>
+> **Die alten Werte stehen nur noch als Streichung hier**, damit ein Fund im Verlauf zuzuordnen
+> ist — nicht als Alternative.
+
+| Rolle | Wert | Token | Wofür |
+|---|---|---|---|
+| **Grund** | `#f6f6f4` | `--cream` | Seitengrund. Der Name blieb, der Wert ist kein Creme mehr, sondern Papier |
+| **Weiß** | `#ffffff` | `--paper` | erhöhte Flächen — Karten, Zeilen |
+| **Tinte** | `#14110d` | `--ink` | Schrift und dunkle Abschnitte |
+| **Lime** | `#a3e635` | `--lime` | **der einzige Akzent** |
+| Sand | `#eaeae6` | `--sand` | ruhige Füllfläche |
+| Linie | `#dfdfda` hell · `#2e302e` dunkel | `--line` · `--line-dark` | Kanten |
+
+`--cream` und `--paper` heißen weiter so, obwohl beide Werte kühl sind. **Umbenannt wird nicht:**
+`portalkonzept.html` nennt dieselbe Fläche `--papier` und `--weiss`, `startseite.html` nennt sie
+`--cream` und `--paper`. Zwei Namen für denselben Wert sind erträglich, zwei Werte hinter
+demselben Namen nicht.
 
 ### Die Lime-Regel — nachgemessen
+
+Gemessen am 16.08.2026 gegen die Werte aus `design/tokens.css`, nach WCAG 2.x
+(Relativhelligkeit, sRGB).
 
 | Kombination | Kontrast | Erlaubt |
 |---|---|---|
 | Tinte **auf** Lime-Fläche | **12,48 : 1** | ✓ |
 | Lime als **Schrift** auf Tinte | **12,48 : 1** | ✓ |
-| Lime als **Schrift** auf Creme | **1,32 : 1** | ✗ **nie** |
+| Lime als **Schrift** auf dem Grund | **1,39 : 1** | ✗ **nie** |
 
-**Lime ist Flächenfarbe.** Auf hellem Grund darf sie nie Schrift tragen — 1,32 : 1 ist unlesbar,
+**Lime ist Flächenfarbe.** Auf hellem Grund darf sie nie Schrift tragen — 1,39 : 1 ist unlesbar,
 nicht grenzwertig. Auf dunklen Abschnitten ist sie als Schriftfarbe zulässig.
 
+Gegen den abgelösten Grund `#f4efe5` waren es 1,32 : 1. **Die Zahl ändert sich mit dem Grund,
+das Verbot nicht** — der neue, hellere Grund macht es sogar eine Spur schlimmer.
+
 **Jede Lime-Fläche auf hellem Grund braucht 1 px `--line` als Kante.** Ohne Kante verschwimmt sie
-mit Creme.
+mit dem Grund.
 
 ### Alle übrigen Paarungen, gemessen
 
-| Paarung | Kontrast |
-|---|---|
-| Fließtext auf Papier | 15,60 : 1 |
-| Hell auf Tinte | 15,57 : 1 |
-| Fließtext auf Creme | 14,43 : 1 |
-| Tinte auf Sand | 14,22 : 1 |
-| Fließtext dunkler Abschnitt | 9,97 : 1 |
-| Gedämpft auf Papier | 8,67 : 1 |
-| Gedämpft auf Creme | 8,02 : 1 |
-| Label auf Papier | 6,94 : 1 |
-| Label auf Tinte | 6,91 : 1 |
-| Label auf Creme | 6,42 : 1 |
+| Paarung | Farbwerte | Kontrast |
+|---|---|---|
+| Hell auf Tinte | `#f6f6f4` auf `#14110d` | 17,39 : 1 |
+| Fließtext auf Weiß | `#1f2120` auf `#ffffff` | 16,20 : 1 |
+| Tinte auf Sand | `#14110d` auf `#eaeae6` | 15,60 : 1 |
+| Fließtext auf dem Grund | `#1f2120` auf `#f6f6f4` | 14,97 : 1 |
+| Fließtext dunkler Abschnitt | `#f6f6f4` auf `#222322` | 14,58 : 1 |
+| Gedämpft auf Weiß | `#4a4d4b` auf `#ffffff` | 8,56 : 1 |
+| Gedämpft auf dem Grund | `#4a4d4b` auf `#f6f6f4` | 7,91 : 1 |
+| Label dunkel auf Tinte | `#9ca09d` auf `#14110d` | 7,11 : 1 |
+| Label auf Weiß | `#5a5d5b` auf `#ffffff` | 6,66 : 1 |
+| Label auf dem Grund | `#5a5d5b` auf `#f6f6f4` | 6,16 : 1 |
 
-**Der niedrigste Wert im ganzen System ist 6,42 : 1.** AA verlangt 4,5 : 1 für Fließtext. Das
+**Der niedrigste Wert im ganzen System ist 6,16 : 1.** AA verlangt 4,5 : 1 für Fließtext. Das
 System hat also überall Reserve — auch dort, wo später jemand eine Schriftgröße ändert.
+
+Der Tiefstwert ist gegenüber der warmen Reihe von 6,42 : 1 auf 6,16 : 1 **gesunken**: Der neue
+Grund ist heller, das Label unverändert. **Das ist eine Verschlechterung um 0,26 Punkte, gemeldet,
+nicht verrechnet.** Sie bleibt weit über AA und ist die Folge einer Entscheidung vom 02.08.2026,
+nicht dieses Laufs.
 
 ---
 
@@ -97,7 +125,7 @@ Rundung an einer Abschnittskante ist ungewöhnlich weich. Sie steckte nie in der
 |---|---|
 | **Monospace-Versalie, 0,14 em gesperrt** | jede Abschnittsmarke, jeder Chip, jede Rechtszeile |
 | **Lime als Fläche mit 1-px-Kante** | jeder Hauptknopf, jede Markierung |
-| **Creme statt Weiß** | der gesamte Grund |
+| **Gedeckter Grund statt Weiß** (`--cream` `#f6f6f4`) | der gesamte Grund |
 | **Überschriften mit Gewicht 650 und −0,025 em** | jede Überschrift |
 
 **Keine davon ist eine Form.** Genau deshalb kann keine ein Blattproblem bekommen.
@@ -167,11 +195,11 @@ immer sichtbar. Genau deshalb wurde diese Technik gewählt.
 | **Zweitknopf** | durchsichtig · 1,5 px Tinte-Rahmen · bei `:hover` Tinte-Fläche |
 | **Verweis im Text** | Lime-Balken unter der Zeile, wächst bei `:hover` auf volle Höhe. **Nie farbige Schrift** |
 | **Fokus** | Doppelring: 2 px Tinte innen, 4 px Lime außen. Sichtbar auf jedem Grund |
-| **Chip** | Papier · `--r-pill` · Monospace 12,5 px Versalien |
+| **Chip** | `--paper` · `--r-pill` · Monospace 12,5 px Versalien |
 | **Abschnittsmarke** | **nur** das Monospace-Label. Kein Punkt, kein Zeichen davor |
-| **Karte** | Papier · 1 px `--line` · `--r-l` |
-| **Hervorgehobene Karte** | Tinte-Fläche · `--r-l` · `--shadow-lift` |
-| **Dunkler Abschnitt** | Tinte · Text `#efe9dd` · Fließtext `#c3bcae` · obere Kante `--r-xl` |
+| **Karte** | `--paper` · 1 px `--line` · `--r-l` |
+| **Hervorgehobene Karte** | `--ink`-Fläche · `--r-l` · `--shadow-lift` |
+| **Dunkler Abschnitt** | `--ink` · Text `--paper` · zweite Ebene `--label-dark` · Kante `--line-dark` · obere Rundung `--r-xl`. Die beiden Rohwerte des Entwurfs (`#efe9dd`, `#c3bcae`) sind warm und **abgelöst** |
 | **Bildplatz ohne Bild** | 2 px gestrichelt, beschriftet, **nie leerer Rahmen** (Design-Briefing §4a) |
 
 ---

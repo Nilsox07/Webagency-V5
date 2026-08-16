@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Sartu;
 
 use Sartu\Data\RechtstexteSpeicher;
+use Sartu\Helpers\Format;
 
 /**
  * Die oeffentlich erreichbaren Seiten, die A0 braucht.
@@ -55,10 +56,27 @@ final class OeffentlicheSeiten
             return Antwort::nichtGefunden();
         }
 
-        return Antwort::html(Ansicht::seite('oeffentlich', 'rechtstext', [
+        /*
+         * **Layout `dokument`, nicht `oeffentlich`** — geändert am 16.08.2026.
+         *
+         * `oeffentlich` ist das Gerüst der Systemseiten: keine Marke, keine Navigation, eine
+         * 46-rem-Spalte, eine Fusszeile aus zwei Verweisen. Ein Impressum, das nicht
+         * erkennbar zur Website gehört, erfüllt § 5 DDG schlechter, als es könnte — die
+         * Angaben müssen „leicht erkennbar, unmittelbar erreichbar und ständig verfügbar"
+         * sein, und dazu gehört, dass der Leser sieht, wessen Impressum er liest.
+         *
+         * **Der Änderungsstand kommt aus `updated_at`**, nicht aus dem Text. Eine
+         * Datumsangabe im Rumpf müsste jemand bei jeder Änderung von Hand nachziehen — und
+         * ein falscher Stand unter einem Rechtstext ist schlimmer als keiner.
+         */
+        return Antwort::html(Ansicht::seite('dokument', 'rechtstext', [
             'titel'        => RechtstexteSpeicher::beschriftung($slug),
             'beschriftung' => RechtstexteSpeicher::beschriftung($slug),
             'rumpf'        => (string) $text['body'],
+            'stand'        => isset($text['updated_at'])
+                ? Format::datum((string) $text['updated_at'])
+                : null,
+            'pfad'         => '/' . $slug,
         ]));
     }
 

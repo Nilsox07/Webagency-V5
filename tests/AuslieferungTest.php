@@ -117,18 +117,85 @@ final class AuslieferungTest extends TestCase
     }
 
     /**
-     * Eine öffentliche Seite bekommt weiterhin eine Sitzung.
+     * **Keine normale öffentliche Seite setzt ein Cookie** — die Gegenprobe über die
+     * vollständige Routenliste.
      *
-     * **Das ist kein Widerspruch, sondern die Bedingung.** Portal-Lastenheft §4b.7 verlangt
-     * Landeseite, verweisenden Host und Kampagnenkennzeichen aus der **ersten** aufgerufenen
-     * Seite. Die ist bei fast jedem Besucher eine öffentliche — ohne Sitzung dort stünde
-     * später als Landeseite `/briefing`.
+     * ## Was hier bis zum 16.08.2026 stand — und warum es falsch war
+     *
+     * An dieser Stelle prüfte ein Test, dass die Startseite eine Sitzung **bekommt**. Die
+     * Begründung war Portal-Lastenheft §4b.7: `Herkunft::merken()` braucht Landeseite und
+     * Kampagnenkennzeichen der ersten aufgerufenen Seite.
+     *
+     * **Das war eine technische Notwendigkeit, aber keine rechtliche Rechtfertigung.**
+     * § 25 Abs. 2 Nr. 2 TDDDG erlaubt die Speicherung auf dem Endgerät ohne Einwilligung
+     * nur, „soweit sie unbedingt erforderlich ist, damit der Anbieter … einen vom Nutzer
+     * ausdrücklich gewünschten Dienst zur Verfügung stellen kann". Eine Zuordnung, die dem
+     * Anbieter nützt und dem Besucher nicht, ist kein solcher Dienst. Die
+     * seitenübergreifende Zuordnung ist deshalb aufgegeben; erfasst wird ab dem Einstieg in
+     * den Bedarfsscheck.
+     *
+     * ## Die Ausnahmen sind zwei, und sie stehen hier namentlich
+     *
+     * | Adresse | Warum sie eine Sitzung bekommt |
+     * |---|---|
+     * | `/briefing` und die ganze Strecke | Zwischenstand über 24 Stunden und ein CSRF-Token je Formular |
+     * | `/kontakt` | zeigt das Rückfrageformular; ohne Sitzung kein Token |
+     * | die drei Branchenseiten | §10a bettet den Bedarfsscheck als Formular ein — derselbe Endpunkt, dasselbe Token |
+     *
+     * `/briefing/ergebnis`, `/briefing/kontakt` und `/briefing/danke` gehören zur Strecke.
+     * Sie leiten ohne Zwischenstand auf den Einstieg zurück — und **auch die Umleitung**
+     * setzt das Cookie, weil sie ohne Sitzung nicht wüsste, dass es keinen Zwischenstand
+     * gibt.
+     *
+     * Wer eine dritte hinzufügt, trägt sie hier ein **und** begründet sie. Ein stiller
+     * Zuwachs ist genau das, was diese Prüfung verhindern soll.
      */
-    public function testEineOeffentlicheSeiteBekommtEineSitzung(): void
+    public function testKeineNormaleOeffentlicheSeiteSetztEinCookie(): void
     {
-        $this->assertArrayHasKey('set-cookie', $this->kopfzeilen('/'),
-            'Die Startseite legt keine Sitzung mehr an. §4b.7 kann die Herkunft dann nicht '
-            . 'mehr beim ersten Aufruf merken.');
+        $mitSitzung = ['/briefing', '/briefing/ergebnis', '/briefing/kontakt',
+            '/briefing/danke', '/kontakt',
+            '/website-sanitaer-heizung-klima', '/website-elektrotechnik', '/website-dachdecker'];
+        $geprueft = 0;
+
+        foreach ($this->oeffentlicheGetPfade() as $pfad) {
+            $kopfzeilen = $this->kopfzeilen($pfad);
+            ++$geprueft;
+
+            if (in_array($pfad, $mitSitzung, true)) {
+                $this->assertArrayHasKey('set-cookie', $kopfzeilen,
+                    $pfad . ' braucht eine Sitzung (Formular mit CSRF-Token) und bekommt keine.');
+
+                continue;
+            }
+
+            $this->assertArrayNotHasKey('set-cookie', $kopfzeilen,
+                $pfad . ' setzt ein Cookie. § 25 Abs. 2 Nr. 2 TDDDG trägt das nur für einen '
+                . 'ausdrücklich gewünschten Dienst — eine Leseseite ist keiner. Wenn die '
+                . 'Adresse wirklich eine Sitzung braucht, gehört sie in die Liste oben, mit '
+                . 'Grund.');
+        }
+
+        $this->assertGreaterThan(20, $geprueft, 'Die Routenliste ist zu klein — wird sie gelesen?');
+    }
+
+    /**
+     * Das Sitzungscookie trägt die drei Schutzangaben.
+     *
+     * `HttpOnly` gegen Auslesen per Skript, `SameSite=Lax` gegen das Mitschicken bei fremden
+     * Formularen. `Secure` fehlt **lokal absichtlich**: Ohne TLS würde der Browser das
+     * Cookie nie senden, und die Anmeldung wäre unbenutzbar. In Produktion setzt
+     * `Sitzung::starten()` es.
+     */
+    public function testDasSitzungscookieIstAbgesichert(): void
+    {
+        $kopfzeilen = $this->kopfzeilen('/briefing');
+
+        $this->assertArrayHasKey('set-cookie', $kopfzeilen);
+        $cookie = $kopfzeilen['set-cookie'][0];
+
+        $this->assertStringContainsString('HttpOnly', $cookie);
+        $this->assertStringContainsString('SameSite=Lax', $cookie);
+        $this->assertStringStartsWith('PHPSESSID=', $cookie);
     }
 
     // ---------------------------------------------------------------- Cachepolitik
@@ -147,20 +214,27 @@ final class AuslieferungTest extends TestCase
     }
 
     /**
-     * Eine öffentliche Seite ist `private`, nicht `no-store` und nicht `public`.
+     * Die Cachepolitik folgt der Sitzung, nicht einer Pfadliste.
      *
-     * Sie trägt ein Sitzungscookie und darf deshalb in keinen gemeinsamen Zwischenspeicher.
-     * `max-age=0` heisst „nachfragen", nicht „nie speichern" — der Browser darf mit `304`
-     * antworten.
+     * | Seite | erwartet | warum |
+     * |---|---|---|
+     * | cookiefreie öffentliche Seite | `public` | Sie trägt nichts Persönliches. Ein Zwischenspeicher darf sie halten — das ist der Gewinn daraus, dass sie cookiefrei ist |
+     * | `/briefing`, `/kontakt` | `private` | Sie tragen ein Sitzungscookie und dürfen in keinen **gemeinsamen** Zwischenspeicher |
      */
-    public function testEineOeffentlicheSeiteIstPrivatZwischenspeicherbar(): void
+    public function testDieCachepolitikFolgtDerSitzung(): void
     {
-        $wert = $this->eine('/', 'cache-control');
+        foreach (['/', '/preise', '/ratgeber'] as $pfad) {
+            $wert = $this->eine($pfad, 'cache-control');
 
-        $this->assertStringContainsString('private', $wert, 'Cache-Control: ' . $wert);
-        $this->assertStringNotContainsString('no-store', $wert,
-            'Die Startseite trägt weiterhin `no-store`. Das kam von `session_start()`; '
-            . '`Sitzung::starten()` setzt `session_cache_limiter` seit dem 15.08.2026 leer.');
+            $this->assertStringContainsString('public', $wert, $pfad . ': ' . $wert);
+            $this->assertStringNotContainsString('no-store', $wert, $pfad . ': ' . $wert);
+        }
+
+        foreach (['/briefing', '/kontakt'] as $pfad) {
+            $wert = $this->eine($pfad, 'cache-control');
+
+            $this->assertStringContainsString('private', $wert, $pfad . ': ' . $wert);
+        }
     }
 
     /** Was hinter einer Anmeldung liegt, wird nicht zwischengespeichert. */
@@ -249,18 +323,32 @@ final class AuslieferungTest extends TestCase
         }
     }
 
-    /** Die Liste der sitzungsfreien Adressen ist die, die der Kommentar beschreibt. */
-    public function testDieSitzungsfreienAdressenSindDieDreiWurzeldateienUndApi(): void
+    /**
+     * Jede öffentliche GET-Route ohne Platzhalter — aus `app/routes.php`, nicht aus einer
+     * Kopie davon.
+     *
+     * Eine Kopie liefe auseinander, und dann prüfte der Test sich selbst.
+     *
+     * @return list<string>
+     */
+    private function oeffentlicheGetPfade(): array
     {
-        foreach (array_keys(self::WURZELDATEIEN) as $pfad) {
-            $this->assertFalse(Sitzung::wirdGebraucht($pfad), $pfad . ' braucht keine Sitzung.');
+        /** @var list<\Sartu\Route> $routen */
+        $routen = require SARTU_WURZEL . '/app/routes.php';
+        $pfade = [];
+
+        foreach ($routen as $route) {
+            if ($route->bereich !== \Sartu\Route::BEREICH_OEFFENTLICH || $route->methode !== 'GET') {
+                continue;
+            }
+
+            if (str_contains($route->pfad, '{')) {
+                continue;
+            }
+
+            $pfade[] = $route->pfad;
         }
 
-        $this->assertFalse(Sitzung::wirdGebraucht('/api/zahlung/webhook'),
-            'Ein fremder Server hat keine Sitzung und soll keine bekommen.');
-
-        foreach (['/', '/preise', '/briefing', '/portal', '/admin'] as $pfad) {
-            $this->assertTrue(Sitzung::wirdGebraucht($pfad), $pfad . ' braucht eine Sitzung.');
-        }
+        return $pfade;
     }
 }
