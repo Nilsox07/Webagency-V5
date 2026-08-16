@@ -3797,3 +3797,24 @@ auf Leseseiten, und die Lime-Fläche des Ergebnisbildschirms liegt unter der Gre
 | 7 | **Migration 040 ist gegen MariaDB 10.11 in diesem Container gelaufen**, nicht gegen MySQL 8.4 und nicht gegen MariaDB 11.4. `ADD COLUMN … AFTER` ist in beiden Standard, aber ausgeführt ist es nur hier | Lauf gegen beide Zielversionen |
 | 8 | **Anfragen aus der Zeit vor Migration 040 tragen weder Zeitpunkt noch Textfassung.** Sie zeigen `Noch nicht hinterlegt`. Ein nachträgliches Füllen wäre eine Behauptung über einen Vorgang, bei dem niemand dabei war | — |
 | 9 | **Der Bedarfsscheck steht ab sofort *in* der Abnahmeprüfung.** `/briefing/ergebnis`, `/briefing/kontakt` und `/briefing/danke` standen in `OberflaecheTest::OHNE_LAYOUT`, weil ein direkter Aufruf mit `303` antwortet — `tools/oberflaeche.mjs` läuft die Strecke jetzt aus. Offen bleibt, dass die Messung dafür Formulare **generisch** ausfüllt (erste Auswahl je Frage): Eine künftige Frage mit einer Bedingung, die daraus nicht erfüllbar ist, lässt den Vorlauf stehenbleiben statt anschlagen | Beim nächsten Durchgang prüfen, ob der Vorlauf noch bis `/briefing/ergebnis` durchläuft |
+
+### Nachgetragen am 16.08.2026, nach den Bildschirmfotos
+
+| Was | vorher | nachher |
+|---|---|---|
+| Leerraum zwischen Begründung und Handlung auf `/briefing/ergebnis`, 1440 px | **271 px** | 0 px |
+| Höhe `/briefing/ergebnis`, 1440 px | 1046 px | 900 px |
+| Fussbereich auf `/briefing/danke` | auf halber Höhe, darunter 450 px leer | am unteren Rand |
+
+**Was ausdrücklich *nicht* geändert wurde:** Der Auftrag verlangte, `/briefing/danke` als
+„echten Abschluss" auszubauen. `spezifikation/17_SEITEN_SARTU.md` §2.7 bindet die Seite auf
+**drei Sätze** und schliesst „kein weiteres Angebot, kein Upsell, **keine Zusatz-CTA**"
+ausdrücklich aus. Ein Abschlussknopf wäre eine Zusatz-CTA. Geändert wurde deshalb nur, was
+Gestaltung ist und keine Aussage: Der Fuss sitzt jetzt unten, statt mitten auf der Seite zu
+enden. **Der Widerspruch ist gemeldet, nicht aufgelöst.**
+
+**Ohne Befund geprüft:** Die Statusmarken in Kunden- und Adminbereich (`\.marke[data-stand]`)
+unterscheiden bereits über Fläche und Kante statt über Farbe — kein Rot, kein Gelb, das Wort
+steht daneben. Die Marketingseiten benutzen den allgemeinen `karte`-Baustein an **null**
+Stellen; alle 107 Vorkommen liegen in Ersteinrichtung, Kunden- und Adminbereich, wo eine Karte
+die richtige Form ist.

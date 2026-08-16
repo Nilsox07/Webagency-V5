@@ -38,7 +38,20 @@
 
 /* ---- Rahmen: Kopf, Flaeche, Fuss -------------------------- */
 
-.funnelseite { background: var(--cream); }
+/* Der Fuss sitzt unten, auch wenn der Inhalt kurz ist.
+   Gemessen am 16.08.2026 auf `/briefing/danke`: Die Seite traegt nach
+   `17_SEITEN_SARTU.md` §2.7 **drei Saetze** — der Fuss stand danach auf halber
+   Hoehe, darunter 450 px leere Flaeche. Das liest sich als abgebrochene Seite,
+   obwohl sie vollstaendig ist. Der kurze Text ist Vorgabe, die Platzierung war
+   es nicht. */
+.funnelseite {
+  background: var(--cream);
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+}
+
+.funnelseite .funnelflaeche { flex: 1 0 auto; }
 
 /* Der Kopf traegt die Marke und **einen** Weg zurueck. Keine
    Navigation: Wer den Scheck begonnen hat, soll ihn zu Ende
@@ -281,9 +294,30 @@
    hoeher als der Text links, und eine gespannte Zeile wartet auf
    die laengere Spalte.
 
-   In Spalte 1 folgt der Knopf dem Satz, den er beantwortet. */
+   In Spalte 1 folgt der Knopf dem Satz, den er beantwortet.
+
+   **Nachgebessert am 16.08.2026, gemessen bei 1440 px:** `grid-column: 1`
+   allein reichte nicht. Bei automatischer Platzierung steht das Datenblatt
+   in Zeile 1 Spalte 2, und diese Zeile ist so hoch wie ihr hoechstes
+   Element — das Datenblatt. Der Knopf in Zeile 2 begann deshalb erst
+   unterhalb des Datenblatts: **271 px Leerraum** zwischen dem Satz und der
+   Handlung, die er ankuendigt.
+
+   Die Zeilen werden jetzt ausdruecklich vergeben, und das Datenblatt
+   spannt ueber beide. Es traegt damit keine Zeilenhoehe mehr bei. */
+.ergebnis__entscheidung {
+  grid-column: 1;
+  grid-row: 1;
+}
+
+.ergebnis > .datenblatt {
+  grid-column: 2;
+  grid-row: 1 / span 2;
+}
+
 .ergebnis__handlung {
   grid-column: 1;
+  grid-row: 2;
   max-width: 62ch;
 }
 
@@ -315,6 +349,15 @@
    die Ueberschrift. */
 @media (max-width: 900px) {
   .ergebnis { grid-template-columns: 1fr; }
+
+  /* Einspaltig entscheidet die Reihenfolge im Markup, nicht das Raster.
+     Die ausdrueckliche Platzierung von oben wuerde sie ueberschreiben. */
+  .ergebnis__entscheidung,
+  .ergebnis > .datenblatt,
+  .ergebnis__handlung {
+    grid-column: auto;
+    grid-row: auto;
+  }
 
   .datenblatt { padding: var(--s-3); }
 
